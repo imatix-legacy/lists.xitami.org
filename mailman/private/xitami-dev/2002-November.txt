@@ -1,0 +1,201 @@
+From xitami-dev@lists.xitami.org  Tue Nov  5 10:10:33 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Tue, 05 Nov 2002 20:10:33 +1000
+Subject: [Xitami-Dev] How to build a spam filter?
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <3DA9B5AE.28454.2F6A0DFD@localhost>
+Message-ID: <3DC79919.354D73E2@ob-wan.com>
+
+Pieter,
+
+F:\RealiBase>build
+Installing Boom into c:\imatix...
+Creating c:\imatix\bin\setvars.bat...
+Installing Htmlpp into c:\imatix...
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Installing Gaggle into c:\imatix...
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+Studio\VC98.
+Please set MSVCDir environment variable to VC98 directory.
+
+Absolute paths to the compiler? You really do know better than that.
+
+Rob Judd
+
+
+> We have packaged all our open source tools into RealiBase, which is
+> our base package for realtime software (hence the name).  Xitami is
+> separately packaged.
+> 
+> I've put the current build of RealiBase up on imatix.com, at:
+>    http://imatix.com/pub/rbase_1_0_src.zip for Windows
+> and
+>    http://imatix.com/pub/rbase_1_0_src.tar.gz for Unix
+> 
+> We will start automating this update, and probably use Sourceforge
+> for downloads.
+> 
+> To build from the source package you need Linux and gcc, or Windows
+> 2000 and MSVC.  If you want to use other compilers on Windows, you
+> will need to add support into the c.bat file before building.
+> 
+> To build, unzip the source package and run the build.bat or build.sh
+> script.  This builds and installs into the default installation path,
+> which is c:\imatix on Windows and /usr/local/imatix on Unix.  In both
+> cases make sure you have write access to these directories.  You can
+> install into another location by setting the IBASE variable first.
+
+From xitami-dev@lists.xitami.org  Tue Nov  5 15:36:01 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Tue, 5 Nov 2002 16:36:01 +0100
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <3DC79919.354D73E2@ob-wan.com>
+Message-ID: <3DC7F371.23753.53E6B72F@localhost>
+
+Rob Judd <judd@ob-wan.com> wrote:
+
+
+> Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+> Studio\VC98.
+> Please set MSVCDir environment variable to VC98 directory.
+> Absolute paths to the compiler? You really do know better than that.
+
+If you do not define the MSVCDir variable, Base won't be able to use 
+the MSVC compiler from the command line.  It does look for it, but 
+not too hard.
+
+We had to take out support for other Win32 compilers from the 
+compilation script (c.bat) because this support was broken in about 
+20 places.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Tue Nov  5 16:59:49 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Wed, 06 Nov 2002 02:59:49 +1000
+Subject: [Xitami-Dev] How to build a spam filter?
+References: <3DC7F371.23753.53E6B72F@localhost>
+Message-ID: <3DC7F905.DF853C03@ob-wan.com>
+
+Pieter,
+
+This variable must be peculiar to MSVC 6, since I've never come across
+it. I don't blame you for dropping the other compilers, most were unable
+to compile this stuff any longer without a lot of work.
+
+It compiles OK with MSVC 5 but complains a little about some switches
+used.
+
+Rob
+
+
+Pieter Hintjens wrote:
+> 
+> Rob Judd <judd@ob-wan.com> wrote:
+> 
+> > Cannot find MSVC compiler in C:\Program Files\Microsoft Visual
+> > Studio\VC98.
+> > Please set MSVCDir environment variable to VC98 directory.
+> > Absolute paths to the compiler? You really do know better than that.
+> 
+> If you do not define the MSVCDir variable, Base won't be able to use
+> the MSVC compiler from the command line.  It does look for it, but
+> not too hard.
+> 
+> We had to take out support for other Win32 compilers from the
+> compilation script (c.bat) because this support was broken in about
+> 20 places.
+> 
+> -
+> Pieter Hintjens
+> iMatix Corporation
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Sat Nov 30 03:11:06 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Sat, 30 Nov 2002 14:11:06 +1100
+Subject: [Xitami-Dev] favicon.ico
+Message-ID: <3DE82C4A.6211DDC3@ob-wan.com>
+
+Hi guys,
+
+If you've seen your server logs filling with requests for this file,
+it's only IE 5 looking for an icon to associate with links to your site.
+You have the following choices as to what you should do about it:
+
+1. Block requests for the file in your firewall
+
+2. Install a virus called favicon.ico to crash IE 5 :)
+   See http://www.magnux.com/~flaviovs/sec/favicon/privacy.html
+
+3. Play Microsoft's silly little game and install an icon
+
+If you decide to go #3 you'll need to add the following to xitami.cfg in
+the image MIME types section:
+
+    ico=image/x-icon
+
+Then create a 16x16 16-colour icon and link it from your site's header
+template (you're still handwriting html? shame!) thusly:
+
+<LINK REL="SHORTCUT ICON" href="/path/foo.ico">
+
+Icon editors are a dime a dozen, or you can do it online at
+http://www.favicon.co.uk
+
+Cheers!
+
+Rob Judd
+http://www.ob-wan.com
+
+From xitami-dev@lists.xitami.org  Sat Nov 30 04:09:44 2002
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Fri, 29 Nov 2002 20:09:44 -0800
+Subject: [Xitami-Dev] Isapid. I cannot get upload to PHP  to work.
+Message-ID: <5.1.1.6.0.20021129200500.030845f0@mail.brd.com>
+
+Hi folks:
+
+I wonder what to do. I am running ISAPID with xitami and it works great
+running the PHP4ISAPI.dll module.
+
+Except  that I cannot get it to upload a file. Xitami with plain PHP.EXE works
+fine, but when I try to use ISAPID.EXE I get gibberish instead of the 
+uploaded file.
+
+Anything I can do to correct the problem? I use forms that are
+multipart/form data. The rest of the fields except the uploaded file come
+OK.
+
+Regards,
+
+George
+
+
+

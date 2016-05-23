@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007745.html">
+   <LINK REL="Next"  HREF="007746.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>Michael Gibbons</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To="
+       TITLE="[Xitami] Multi server issue">MGibbons at uxbridgecollege.ac.uk
+       </A><BR>
+    <I>Thu Mar 20 16:50:50 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007745.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007746.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7749">[ date ]</a>
+              <a href="thread.html#7749">[ thread ]</a>
+              <a href="subject.html#7749">[ subject ]</a>
+              <a href="author.html#7749">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi I have a simular&#160; question, i am using Xitami to host domain names for friends and family, i register each TLD with an ISP and list my names servers, what i would like to do is to be able to have sub domains or child domain from my server, do i need to create them on the apache module or in my dns module, each time i do it, i just can't seem to get it to work. Does anyone have any idea on how i can get it to work.
+&#160;
+&#160;
+Regards
+Michael
+
+  _____  
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A> on behalf of M. Jason Smiley
+Sent: Thu 3/20/2008 3:22 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Multi server issue
+
+
+
+if you can't use virtual hosts... can you use a different port (ie. port 81
+for your test server)?
+
+i have never tried to install xitami with 1 nic, 2 ip's, and 2 xitami
+servers so i don't have an answer to your real question.
+
+what is your specific reason for not being able to run a virtual host???
+
+
+
+----- Original Message -----
+From: &quot;R O&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;
+To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Thursday, March 20, 2008 1:10 AM
+Subject: Re: [Xitami] Multi server issue
+
+
+
+Yea yeah...I know.&#160; And thanks for the sarcasm.&#160; I have a very specific
+
+instance where I can't use the Virtual Server feature.&#160; So Xitami binds to
+
+port 80 for all IPs on the NIC then even though the server is only
+
+responding to requests on one IP?&#160; Technically, you don't bind to port 80 on
+
+a NIC, you bind to port 80 on an IP address.&#160; So a second IP address should
+
+have its own available port 80.&#160; I know Apache and others can have servers
+
+running on port 80 of each IP on the NIC.&#160; I could have sworn Xitami was
+
+only binding to one IPs port 80.
+
+Hmmm..I do have multiple NICs.&#160; But
+that means I need a second uplink port
+at my ISP - that will cost extra.
+Crap!
+
+
+Russel P. Olinger
+&#160;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+&gt;<i> Date: Wed, 19 Mar 2008 23:49:23 -0500
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">magus1011 at gmail.com</A>
+</I>&gt;<i> Subject: Re: [Xitami] Multi server issue
+</I>&gt;<i>
+</I>&gt;<i> R O wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have two instances of Xitami running, one for production and the other
+</I>&gt;<i> &gt; for testing.&#160; Both servers are running on the same system but on
+</I>&gt;<i> &gt; different IP addresses (on the same NIC).&#160;&#160; However, the test server
+</I>&gt;<i> &gt; refuses to start on port 80...any other port it works OR if I comment
+</I>&gt;<i> &gt; out the &quot;Portbase=0&quot; the service will start up without an error but I am
+</I>&gt;<i> &gt; not able to get to the base page.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Each server is assigned to its own IP address, but both IP addresses
+</I>&gt;<i> &gt; reside on the same NIC of the server.&#160; I don't recall having this
+</I>&gt;<i> &gt; problem in the past as I have done production and test versions of
+</I>&gt;<i> &gt; Xitami at the same time, each using different IP addresses that were on
+</I>&gt;<i> &gt; the same NIC.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; In this case though, I actually need to turn the test server into a
+</I>&gt;<i> &gt; second production server and need it to run on port 80.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Heres the base config of each
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /xitamiproduction/xiwinnt.exe
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160; defaults.cfg
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ip address: 192.168.1.10
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; portbase=0
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; service-name=Xitami Prodcution
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /xitamitest/xiwinnt.exe
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160; defaults.cfg
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ip address: 192.168.1.11
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; portbase=0
+</I>&gt;<i> &gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; service-name=Xitami Test
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; If I comment out portbase=0 on the test server the service will start up
+</I>&gt;<i> &gt; but nothing will respond to port 80 at <A HREF="http://192.168.1.11.&#160;">http://192.168.1.11.&#160;</A> However, if
+</I>&gt;<i> &gt; I don't comment out portbase=0 the service won't even start up.&#160; If I
+</I>&gt;<i> &gt; change the portbase to &quot;portbase=2&quot; then the service will start up and
+</I>&gt;<i> &gt; the pages are accessible on <A HREF="http://192.168.1.11:82">http://192.168.1.11:82</A> .&#160; But I need this
+</I>&gt;<i> &gt; test server to be up and running on port 80.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Anyone have any ideas as to what is going on?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Russel P. Olinger
+</I>&gt;<i> &gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ------------------------------------------------------------------------
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i> For the moment addresses don't matter. You have one NIC. It has one Port
+</I>&gt;<i> 80. If one Xitami server is listening on it then the other Xitami server
+</I>&gt;<i> can't listen on it. Simple?
+</I>&gt;<i>
+</I>&gt;<i> So how do you get past this? Just run one Xitami server. But that leaves
+</I>&gt;<i> you with the problem of only being able to serve one web site and you
+</I>&gt;<i> want to serve two web sites, a live system and a test system. What to
+</I>&gt;<i> do, what to do?
+</I>&gt;<i>
+</I>&gt;<i> Enter our saviour Virtual Hosts! How to do this is detailed in the
+</I>&gt;<i> configuration section of the documentation which can be reached at
+</I>&gt;<i> <A HREF="http://&lt;your">http://&lt;your</A> IP address or domain name here&gt;/xitami or, if your Xitami
+</I>&gt;<i> is correctly set up at <A HREF="http://127.0.0.1/">http://127.0.0.1/</A>
+</I>&gt;<i>
+</I>&gt;<i> I hope this helps. 8=))
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Best regards,
+</I>&gt;<i> Magus1011.
+</I>&gt;<i>
+</I>&gt;<i> That's the problem with science. You've got a bunch of empiricists
+</I>&gt;<i> trying to describe things of unimaginable wonder.
+</I>&gt;<i>&#160;&#160; - Calvin
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+--------------------------------------------------------------------------------
+
+
+&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+&#160;
+Please consider the environment before printing this E-mail. Think Before You Print!
+&#160;
+London's Top College - Uxbridge College achieved the highest success rate* in London out of 38 further education colleges for 16-18 year old students on long qualifications in 2005/06.
+(*FE Institution level Success Rate Report 2005/06 - Learning and Skills Council)
+&#160;
+Disclaimer:
+&quot;The information or opinions in this message (including any attachments) are those of the author and are not necessarily those of Uxbridge College, which disclaims responsibility for loss or damage arising from its use to the maximum extent permitted by law.&#160;E-mail messages sometimes go astray. This message is sent in confidence for the addressee only.&#160;It may contain confidential or sensitive information.&#160;The contents are not to be disclosed to anyone other than the addressee.&#160;Unauthorised recipients are requested to preserve this confidentiality and to advise the originator immediately and to delete the message without copying, altering or disclosing its contents.&#160;E-mails to or from Uxbridge College may be monitored by the College in accordance with its current policy.&quot;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/ms-tnef
+Size: 12824 bytes
+Desc: not available
+Url : <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080320/000a98f9/attachment.bin">http://lists.xitami.org/pipermail/xitami/attachments/20080320/000a98f9/attachment.bin</A> 
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007745.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007746.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7749">[ date ]</a>
+              <a href="thread.html#7749">[ thread ]</a>
+              <a href="subject.html#7749">[ subject ]</a>
+              <a href="author.html#7749">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

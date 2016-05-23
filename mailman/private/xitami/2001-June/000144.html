@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: Access Log
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000142.html">
+   <LINK REL="Next"  HREF="000159.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: Access Log
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: Access Log">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 11 Jun 2001 15:57:28 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000142.html">[Xitami] Access Log
+</A></li>
+        <LI> Next message: <A HREF="000159.html">[Xitami] Access Log
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#144">[ date ]</a>
+              <a href="thread.html#144">[ thread ]</a>
+              <a href="subject.html#144">[ subject ]</a>
+              <a href="author.html#144">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yep, I got hit with these a couple of weeks ago too.
+
+209.250.128.133 - - [08/Jun/2001:10:14:18 -0500] &quot;GET 
+/scripts/..%c0%af../winnt/system32/cmd.exe?/c+dir+c: HTTP/1.0&quot; 404 0
+
+209.250.128.133 - - [08/Jun/2001:10:14:19 -0500] &quot;GET 
+/msadc/..%e0%80%af../..%e0%80%af../..%e0%80%af../winnt/system32/cmd.exe?/c+dir+c: 
+HTTP/1.0&quot; 404 0
+
+ From what I can tell, I think someone tried to use holes in
+either MS Personal Web Server or IIS to exploit your server.
+I'd guess IIS, since they tried to run a command using the
+interpreter located in c:\winnt, meaning you were running
+Windows 2000 or NT.
+
+61.139.59.73 - - [08/Jun/2001:16:38:03 -0500] &quot;GET <A HREF="http://www.yahoo.com/">http://www.yahoo.com/</A> 
+HTTP/1.1&quot; 404 0
+
+I bet some script was just looking to see if you were running
+a web server; if you have a telnet server installed on your
+machine, try telnetting into port 80, and type:
+GET <A HREF="http://www.yahoo.com">http://www.yahoo.com</A>
+with two CRLFs after it.  This should produce the same error
+as this one in your access.log.
+
+And as for the last one, I have no clue, sorry.
+
+Whatever you come up with, I'd be interested to hear about.
+Also, everything I said above is just guesses; corrections
+and clarifications would be welcome from anyone.
+
+-Dan Orzechowski
+<A HREF="mailto:xbonesgt@cc.gatech.edu">xbonesgt@cc.gatech.edu</A>
+<A HREF="http://xbones.resnet.gatech.edu">http://xbones.resnet.gatech.edu</A>
+O is for OLIVE, run through with an awl.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000142.html">[Xitami] Access Log
+</A></li>
+	<LI> Next message: <A HREF="000159.html">[Xitami] Access Log
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#144">[ date ]</a>
+              <a href="thread.html#144">[ thread ]</a>
+              <a href="subject.html#144">[ subject ]</a>
+              <a href="author.html#144">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

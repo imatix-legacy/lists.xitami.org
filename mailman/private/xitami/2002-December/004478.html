@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] FTP problem with LF versus CRLF in ASCII files
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004474.html">
+   <LINK REL="Next"  HREF="004477.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] FTP problem with LF versus CRLF in ASCII files
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] FTP problem with LF versus CRLF in ASCII files">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 13 Dec 2002 12:45:04 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004474.html">[Xitami] FTP problem with LF versus CRLF in ASCII files
+</A></li>
+        <LI> Next message: <A HREF="004477.html">[Xitami] Re: RedirectPermenant?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4478">[ date ]</a>
+              <a href="thread.html#4478">[ thread ]</a>
+              <a href="subject.html#4478">[ subject ]</a>
+              <a href="author.html#4478">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> But I still need Xitami to put CRLF instead of LF.  How do I change that ?
+</I>
+FTP has two modes: Text and Binary.
+
+In Binary, the file on the server is the same as the file on the
+client. Exact copy.
+
+In Text, the FTP process &quot;helpfully&quot; translates line-breaks from the
+source machine's convention to the destination machine's convention.
+&gt;<i>From your description, you are sending files from DOS(Win) to Unix.
+</I>DOS uses CRLF, Unix expects LF, so a Text-mode FTP transfer will
+convert the line-breaks.
+
+In any decent FTP client, you can specify the mode before you start
+the transfer. command &quot;bin&quot; or &quot;mode bin&quot; on dumb-terminal FTP
+programs, a check-box in WS-FTP and MacFetch and other good FTP
+clients. If you use MS IE as an FTP client, you probably are stuck
+with what MS IE/ Windows thinks is best for you.
+
+FTP servers and clients default to Text mode. In the dumb ones, you
+have to remember to set BIN mode before you transfer. Smart ones
+have &quot;Auto-Guess&quot; (based on extension or heuristics) and usually you
+can set them to default to Binary on ALL transfers.
+
+If I upload from DOS to unix and plan to use vi to edit the file on
+the unix box, I'll use the Text Mode. At least back in 1981, the
+port of vi that I used was not happy with CRLF files unless I
+invoked some options. (I bet that's been improved.)
+
+But in almost all cases, I do all my editing on the DOS/Win box, and
+the unix box is just storage. In that case, I use BIN mode, so when
+I send the file up and take it back down, it comes back the same.
+(In theory FTP Text both up and down will also convert-convert and
+come back the same, but often not.) That also avoids thinking about
+what files are text: my way, ALL files are &quot;binary&quot; and handled
+without translation.
+
+&gt;<i> Please answer my question even if the answer is as dull as :
+</I>&gt;<i> &quot;Well, change your ftp server.&quot;
+</I>
+Well no, that won't help. ALL standard FTP servers must support Text
+mode and default to that. Perhaps you could find one that doesn't.
+And perhaps if your FTP server runs on DOS/Win it will keep the same
+line-breaks. (Though I think some FTP servers &quot;assume&quot; that
+server-stored files should be in unix format.)
+
+I would say: change your Editor (or whatever is saying it &quot;must&quot;
+have CRLF). Any decent text editor will swallow any of the
+line-break conventions: DOS, unix, Mac, and optionally save in any
+of those formats. On Winders I like UltraEdit, though I have used a
+1984 DOS text editor.
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004474.html">[Xitami] FTP problem with LF versus CRLF in ASCII files
+</A></li>
+	<LI> Next message: <A HREF="004477.html">[Xitami] Re: RedirectPermenant?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4478">[ date ]</a>
+              <a href="thread.html#4478">[ thread ]</a>
+              <a href="subject.html#4478">[ subject ]</a>
+              <a href="author.html#4478">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

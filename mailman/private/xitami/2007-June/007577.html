@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20PHP%20problems&In-Reply-To=5BA6EC56479B8F49AB43C808445E031E993127%40sbsserver.tiltrac.local">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007579.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP problems</H1>
+    <B>R O</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20PHP%20problems&In-Reply-To=5BA6EC56479B8F49AB43C808445E031E993127%40sbsserver.tiltrac.local"
+       TITLE="[Xitami] PHP problems">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Thu Jun 14 20:13:42 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007579.html">[Xitami] PHP problems
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7577">[ date ]</a>
+              <a href="thread.html#7577">[ thread ]</a>
+              <a href="subject.html#7577">[ subject ]</a>
+              <a href="author.html#7577">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+ok, got it all to work.  Turns out those errors indicated that I had to 
+different versions of PHP files installed in the same directory.  
+uninstalled and deleted the php files and directories, reinstalled and now 
+it works.
+
+Though the newer versions of PHP 4.3.11 puts the php.ini file in the 
+c:\winnt directory - looks a heck of a lot cleaner and smaller than previous 
+versions of php.
+
+-R
+
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+
+
+
+
+&gt;<i>From: &quot;Brian Kowald&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">bkowald at synergybroadcast.com</A>&gt;
+</I>&gt;<i>Reply-To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] PHP problems
+</I>&gt;<i>Date: Thu, 14 Jun 2007 11:46:27 -0500
+</I>&gt;<i>
+</I>&gt;<i>Did you try enabling debuging and looking at the logs under
+</I>&gt;<i>c:\xitami\logs?
+</I>&gt;<i>
+</I>&gt;<i>In xitami.cfg set
+</I>&gt;<i>debug=1
+</I>&gt;<i>
+</I>&gt;<i>Then look at (you guess it) debug.log
+</I>&gt;<i>
+</I>&gt;<i>For the filter did you try TWO slashes? (probably grasping at straw
+</I>&gt;<i>here)
+</I>&gt;<i>.php=c:\\php\\php.exe
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Can you run your php scrips from a command prompt? This would indicate
+</I>&gt;<i>if your php.exe is good.
+</I>&gt;<i>php  phptest.php
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Brian
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>-----Original Message-----
+</I>&gt;<i>From: Russel Olinger [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>]
+</I>&gt;<i>Sent: Thursday, June 14, 2007 10:38 AM
+</I>&gt;<i>To: Xitami Users General Discussion
+</I>&gt;<i>Subject: Re: [Xitami] PHP problems
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I ran two seperate scripts, both with the same outcome.
+</I>&gt;<i>
+</I>&gt;<i>First:  /phptest.php
+</I>&gt;<i>&lt;?php
+</I>&gt;<i>    phpinfo();
+</I>&gt;<i>?&gt;
+</I>&gt;<i>
+</I>&gt;<i>second: /php/testpage.php
+</I>&gt;<i>&lt;?php
+</I>&gt;<i>$section1= &quot;Test Page&quot;;
+</I>&gt;<i>$i = 1;
+</I>&gt;<i>echo &quot;$section1&quot; . &quot;$i&quot;;
+</I>&gt;<i>?&gt;
+</I>&gt;<i>
+</I>&gt;<i>So, I know the scripts aren't the problem, what else could I look at?
+</I>&gt;<i>Beyond what I have done below I haven't been able to find any references
+</I>&gt;<i>to
+</I>&gt;<i>other configurations that I need to be aware of.
+</I>&gt;<i>
+</I>&gt;<i>Server win2003, windows file association &quot;php = c:\php\php.exe&quot; Xitami
+</I>&gt;<i>runs in &quot;d:\xitami&quot;  (v2.4d9) Xitami Filter &quot;.php = c:\php\php.exe&quot;
+</I>&gt;<i>(v4.3.11) Xitami Mime &quot;Php=application/x-httpd-php c:\php\php.ini :
+</I>&gt;<i>&quot;cgi.force_redirect = 0 ;&quot; c:\php\php.ini-dist : &quot;cgi.force_redirect = 0
+</I>&gt;<i>;&quot;
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;Francis Turner&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">francis.turner at gmail.com</A>&gt;
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Thursday, June 14, 2007 2:27 AM
+</I>&gt;<i>Subject: Re: [Xitami] PHP problems
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; That error is basically that PHP or something is going into an
+</I>&gt;<i> &gt; infinite loop and not returning
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 6/14/07, R O &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt; Oh, and the error I do get from the server in the browser is:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &quot;This server is currently overloaded - please try again later &quot;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;I don't use php much and last I recall it was working.  Trying to
+</I>&gt;<i> &gt;&gt; &gt;implement
+</I>&gt;<i> &gt;&gt; &gt;a new script and php isn't working at all.
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;Windows Server 2003
+</I>&gt;<i> &gt;&gt; &gt;Xitami v2.4d9  (In the defaults.cfg file)
+</I>&gt;<i> &gt;&gt; &gt;      * filter : .php=c:\php\php.exe (even tried / slashes and in
+</I>&gt;<i> &gt;&gt; &gt;quotes
+</I>&gt;<i> &gt;&gt; &gt;&quot;c:\php\php.exe&quot;)
+</I>&gt;<i> &gt;&gt; &gt;      * mime : Php=application/x-httpd-php
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;PHP 4.3.11 (in php.ini and php.ini-dist)
+</I>&gt;<i> &gt;&gt; &gt;      * cgi.force_redirect  = 0 ;
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;And I have restarted Xitami after each change.  No matter what I do
+</I>&gt;<i> &gt;&gt; &gt;it won't execute the simple test.php file
+</I>&gt;<i> &gt;&gt; &gt;&lt;?php
+</I>&gt;<i> &gt;&gt; &gt;   phpinfo();
+</I>&gt;<i> &gt;&gt; &gt;?&gt;
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;What am I doing wrong or what more could I look at?
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;Thanks all.
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;Russel P. Olinger
+</I>&gt;<i> &gt;&gt; &gt;(310) 466-3399
+</I>&gt;<i> &gt;&gt; &gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;
+</I>&gt;<i> &gt;&gt; &gt;--
+</I>&gt;<i> &gt;&gt; &gt;Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; &gt;To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; <A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+</I>&gt;<i> &gt; Faber's Fourth Law:
+</I>&gt;<i> &gt;  Necessity is the mother of strange bedfellows.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007579.html">[Xitami] PHP problems
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7577">[ date ]</a>
+              <a href="thread.html#7577">[ thread ]</a>
+              <a href="subject.html#7577">[ subject ]</a>
+              <a href="author.html#7577">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

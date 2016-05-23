@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002224.html">
+   <LINK REL="Next"  HREF="002223.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 31 Jan 2002 07:57:32 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002224.html">[Xitami] Associating .cgi with python
+</A></li>
+        <LI> Next message: <A HREF="002223.html">[Xitami] FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2222">[ date ]</a>
+              <a href="thread.html#2222">[ thread ]</a>
+              <a href="subject.html#2222">[ subject ]</a>
+              <a href="author.html#2222">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;006701c1a9f5$d41f3060$<A HREF="mailto:6401a8c0@vance">6401a8c0@vance</A>&gt; &quot;Vance Forste&quot; writes:
+
+&gt;<i> Actually the documentaion does claim to support passive mode but I have
+</I>&gt;<i> tried it on a few versions and none of them work using passive mode... As a
+</I>&gt;<i> matter of fact I get an Invalid command response from it....
+</I>&gt;<i> 
+</I>&gt;<i> &lt;clip&gt;
+</I>&gt;<i> ftp&gt; PASV
+</I>&gt;<i> Invalid command.
+</I>&gt;<i> &lt;/clip&gt;
+</I>&gt;<i> Go figure...
+</I>
+Doh!
+
+PASV (and all those other &quot;four-letter&quot; commands, like USER) are the
+commands used over the sockets connection between the FTP client and the
+FTP server.  Few FTP clients will accept such commands at their user CLI.
+These commands are what actually /constitute/ the protocol itself.
+
+Some FTP clients will recognize a QUOTE command, which can push a
+complete File Transfer Protocol (guess why I wrote that in full) command
+over to the server for execution.
+
+Anyway, the long and short of it is that to take advantage of an FTP
+server, like Xitami, which supports &quot;passive FTP&quot; requires that you have
+a client that utilizes passive FTP.  
+
+I don't know, for instance, whether the command-line client included in
+Windoze uses it: that code (as can be seen by extracting the Copyright
+string from the executable) is based upon old BSD code of 1983 vintage.
+Is that what you were using above, generating the &quot;ftp&gt; &quot; prompt?
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002224.html">[Xitami] Associating .cgi with python
+</A></li>
+	<LI> Next message: <A HREF="002223.html">[Xitami] FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2222">[ date ]</a>
+              <a href="thread.html#2222">[ thread ]</a>
+              <a href="subject.html#2222">[ subject ]</a>
+              <a href="author.html#2222">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

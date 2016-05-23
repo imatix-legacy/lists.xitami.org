@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Bad termination..
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000808.html">
+   <LINK REL="Next"  HREF="000811.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Bad termination..
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Bad termination..">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 27 Aug 2001 21:37:55 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000808.html">[Xitami] Server works on my comptuer, but no one elses
+</A></li>
+        <LI> Next message: <A HREF="000811.html">[Xitami] CGI program can't call FindWindow() ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#810">[ date ]</a>
+              <a href="thread.html#810">[ thread ]</a>
+              <a href="subject.html#810">[ subject ]</a>
+              <a href="author.html#810">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3B7EE9E5.FE4371B8@esite-me.net">3B7EE9E5.FE4371B8@esite-me.net</A>&gt;, Dan Fisher writes:
+&gt;&gt;<i> &gt;Also, I have noticed lately that when I make a change to Xitami,
+</I>&gt;&gt;<i> &gt;terminate and attempt to restart, it complains that the port is already
+</I>&gt;&gt;<i> &gt;in use.  I have to reboot the machine to get to work again.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> [need to wait for connection closing timeout: netstat -nr tells you
+</I>&gt;&gt;<i> if this is happening]
+</I>&gt;<i>
+</I>&gt;<i>Yes, it does show up as CLOSE_WAIT.  Is there any other way to speed up
+</I>&gt;<i>the closing?  
+</I>
+Alas, no.  It's the TCP/IP timeout.
+
+However it only occurs (in my experience) if there are
+_open_connections_ at the time that you close Xitami down; if there are
+no open connections, then there's nothing to have to go through the
+timeout.
+
+So if you have the time to do it, checking for open connections 
+(netstat -nr, look for connected type messages on that port), before
+closing Xitami may make it easier to restart.
+
+We'll keep this issue in mind; it maybe that there's an issue with the
+way it's telling the OS &quot;hey, it's okay to let the program restart
+automatically&quot; under some operating systems.  (Xitami does try to do
+this, and it's definitely working under Linux.)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000808.html">[Xitami] Server works on my comptuer, but no one elses
+</A></li>
+	<LI> Next message: <A HREF="000811.html">[Xitami] CGI program can't call FindWindow() ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#810">[ date ]</a>
+              <a href="thread.html#810">[ thread ]</a>
+              <a href="subject.html#810">[ subject ]</a>
+              <a href="author.html#810">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

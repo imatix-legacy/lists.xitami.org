@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Not seeing FORM POST fields
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000752.html">
+   <LINK REL="Next"  HREF="000756.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Not seeing FORM POST fields
+   </H1>
+    <B>Neville Franks
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Not seeing FORM POST fields">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 19 Aug 2001 08:33:43 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000752.html">[Xitami] Not seeing FORM POST fields
+</A></li>
+        <LI> Next message: <A HREF="000756.html">Re[2]: [Xitami] Not seeing FORM POST fields
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#754">[ date ]</a>
+              <a href="thread.html#754">[ thread ]</a>
+              <a href="subject.html#754">[ subject ]</a>
+              <a href="author.html#754">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Thomas,
+
+Sunday, August 19, 2001, 7:48:26 AM, you wrote:
+
+TJH&gt; At 07:17 AM 8/19/01 +1000, Neville Franks writeth:
+&gt;&gt;<i>I've installed Xitami and PHP4 on a Windows 2000 box and everything is
+</I>&gt;&gt;<i>working fine except I can't see an FORM POST fields in the PHP script.
+</I>&gt;&gt;<i>ie. When Submit is pressed the field values are all empty when the PHP
+</I>&gt;&gt;<i>script processes it.
+</I>
+TJH&gt; I never liked this about PHP (or at least I could never figure it out), but
+TJH&gt; the HTTP_POST_VARS hash is a bit strange.  Basically, your variables are
+TJH&gt; converted from the hash into normal variables:
+
+TJH&gt; phpinfo() shows something like this -
+TJH&gt; HTTP_POST_VARS[&quot;MyVariable&quot;] = MyValue
+TJH&gt; MyVariable = MyValue
+
+TJH&gt; Referencing it like this doesn't work as expected:
+TJH&gt; if ($HTTP_POST_VARS[&quot;MyVariable&quot;] == &quot;MyValue&quot;)
+TJH&gt; {
+TJH&gt; }
+
+TJH&gt; However, referencing it like this does:
+TJH&gt; if ($MyVariable == &quot;MyValue&quot;)
+TJH&gt; {
+TJH&gt; }
+
+The PHP code I'm try to get working is w-agora www.w-agora.net and it
+uses the if ($MyVariable == &quot;MyValue&quot;)syntax. As you probably know
+this is controlled by: register_globals=On in php.ini
+
+I also tried: if (isSet($HTTP_POST_VARS[&quot;do_setup&quot;])) which doesn't
+work.
+
+There was an earlier post to the mail list by &quot;Richard Blazek&quot;
+&lt;<A HREF="mailto:rwb@altavista.net">rwb@altavista.net</A>&gt; who indicated he had this problem on W2K, but W98
+worked fine. I've not tried W98 yet.
+
+I am an absolute newbie at PHP however, but I'm reasonably sure I have
+everything setup correctly.
+
+&gt;&gt;<i>I've searched the archives and have seen a few other people mention
+</I>&gt;&gt;<i>this problem but haven't seen any solutions posted. I've waisted best
+</I>&gt;&gt;<i>part of a day on this and it is driving me nuts. Xitami looks good,
+</I>&gt;&gt;<i>but if I can't get this resolved quickly I guess I'll move to Apache.
+</I>
+TJH&gt; Apache is horribly unstable under Windows with PHP (especially with
+TJH&gt; mod-ssl).  I wasted an entire week re-building that piece of junk from
+TJH&gt; scratch using every option possible (I personally would write my own web
+TJH&gt; server if I had a choice between that and Apache - it's a good thing Xitami
+TJH&gt; exists).  Just thought you would like a heads-up.
+
+I'm only using this on a PC for development. If its a little flaky I
+can cope. The real thing runs on my Web server which is a Unix box
+running Apache. 
+
+&gt;&gt;<i>On another note why haven't the Archived Mailing lists been updated
+</I>&gt;&gt;<i>for many months?
+</I>
+TJH&gt; Check the headers of this post for links to the new archives.
+
+Can't work out what you mean here?
+
+TJH&gt; Hope this helps!
+
+Nope, but I greatly appreciate your reply none the less.
+
+
+TJH&gt;            Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+TJH&gt; Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+TJH&gt;                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+TJH&gt; --
+TJH&gt; Xitami Users Mailing List -- For Xitami support
+TJH&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+-- 
+Best Regards,
+  Neville Franks, Author of ED for Windows - the programmers editor, an indispensable tool for great software development.
+  <A HREF="http://www.getsoft.com">http://www.getsoft.com</A> Version 4.01 just released, with a C++ Class View that actually works.
+  mailto:<A HREF="mailto:readonly@getsoft.com">readonly@getsoft.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000752.html">[Xitami] Not seeing FORM POST fields
+</A></li>
+	<LI> Next message: <A HREF="000756.html">Re[2]: [Xitami] Not seeing FORM POST fields
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#754">[ date ]</a>
+              <a href="thread.html#754">[ thread ]</a>
+              <a href="subject.html#754">[ subject ]</a>
+              <a href="author.html#754">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

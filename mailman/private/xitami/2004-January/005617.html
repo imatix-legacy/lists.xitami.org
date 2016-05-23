@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running server through a router
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005616.html">
+   <LINK REL="Next"  HREF="005618.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running server through a router
+   </H1>
+    <B>Real Martel
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Running server through a router">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 31 Dec 2003 19:19:09 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005616.html">[Xitami] Running server through a router
+</A></li>
+        <LI> Next message: <A HREF="005618.html">[Xitami] Running server through a router
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5617">[ date ]</a>
+              <a href="thread.html#5617">[ thread ]</a>
+              <a href="subject.html#5617">[ subject ]</a>
+              <a href="author.html#5617">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+--Boundary_(ID_DIN3deeMOceEDyNs80NBcQ)
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+Hi Steve,
+
+Maybe it would be best to really understand what your router does for you.
+I'm not familiar with the Linksys, I personally have D-Link. So details may
+vary, but the jist of the story should be fairly familiar.  I am, by no
+means, an expert, but here's my take on it.
+
+When someone sends a request to your domain name, say www.mydomain.com, it
+really goes to an IP number, connected to the internet, say, 24.86.62.150
+(don't try this address, I just made it up). Now, that would be, in our
+example, the IP address of your router.
+
+What your router does with that request, is that it looks up in its list of
+information to see if the requests for the port specified should be
+redirected somewhere. So let's assume this was a webpage request, on port
+80. Your router needs to know to which computer to forward that request. So
+say it goes to your computer at 192.168.0.121. The router will take that ip
+packet, and forward it to that &quot;behind the wall&quot; address to be dealt with.
+
+What you need to tell your router, is that whenever there is a packet coming
+in for port 80 (the standard port for web servers), it needs to be forwarded
+to 192.168.0.121 (or whichever LAN IP number your computer has.
+
+I hope this is helping you.
+
+Cheers,
+
+Real Martel
+
+  -----Original Message-----
+  From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Steven L. Haas
+  Sent: Wednesday, December 31, 2003 7:00 PM
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+  Subject: Re: [Xitami] Running server through a router
+
+
+  Thanks... I'm sorry to be an uninformed newbie &amp; keep asking questions,
+but would it be possible for you to explain to me how to do this, or what I
+should do exactly?  I understand computers &amp; the internet fairly well, but
+I'm pretty new to networking.  I found a place in my router's configuration
+page to forward ports, etc., but I don't know what I'm doing once I get
+there.  I also dont know how to assign an internal IP address, or what to do
+with it once that's been done.
+
+  Thanks again for the help,
+  Steve
+    ----- Original Message -----
+    From: Day Tooley
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+    Sent: Wednesday, December 31, 2003 12:30 PM
+    Subject: Re: [Xitami] Running server through a router
+
+
+    Looks like you will need to port-forward port 80 in your router to your
+Windows hosting machine.  Also, you will need to permanently assign an
+internal IP address to your hosting machine.
+
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Day Tooley
+    <A HREF="mailto:Webfoot@EasyStreet.com">Webfoot@EasyStreet.com</A>
+
+    When the game is over, both the king and the pawn are put into the same
+box.
+
+
+      ----- Original Message -----
+      From: Steven L. Haas
+      To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+      Sent: Wednesday, December 31, 2003 7:00 AM
+      Subject: [Xitami] Running server through a router
+
+
+      I am trying to run the Xitami web server on my WIndows XP machine that
+is connected to the internet via a cable modem (RoadRunner/Motorola
+Surboard).  The internet connection is split amongst 2 computers using a
+Linksys router.  When I start the web server everything seems fine, but when
+I try to access the web page I have loaded on the server by connecting to my
+internet connection's (cable modem) IP address, I am directed to the
+router's configuration page.  This also happens when the server is turned
+off, so it's not a big suprise.  What is odd is that when I try to connect
+to the router's config page by entering the router's default IP address into
+IE, I am not taken to the config page as usual, but I'm instead directed to
+the web page I have installed on the Xitami web server.  When the web server
+is turned off I go straight to the config page as expected.  It seems like
+somehow the router's IP is bouncing me back from the router to the computer
+with the server installed, and the cable modem's (internet connection) IP is
+forwarding straight to the router and never reaching the computer with the
+server installed.  I assume this is a relatively simple fix for any of you
+that are knowledgeable with networks, but I can't figure out what to do to
+fix this &amp; make it work with my set up.  I also cant run the server and a
+file sharing program like KazaA or WinMX.  Is there a way to allow for these
+programs and the server to all run together harmoniously?  Thanks in advance
+for any help, and I apologize if this question has already been beaten to
+death.
+
+      Steve
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.557 / Virus Database: 349 - Release Date: 12/30/03
+
+--Boundary_(ID_DIN3deeMOceEDyNs80NBcQ)
+Content-type: text/html; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+&lt;META content=&quot;MSHTML 6.00.2800.1276&quot; name=GENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=#ffffff&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;Hi 
+Steve,&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;Maybe 
+it would be best to really understand what your router does for you.&amp;nbsp; I'm 
+not familiar with the Linksys, I personally have D-Link. So details may vary, 
+but the jist of the story should be fairly familiar.&amp;nbsp; I am, by no means, an 
+expert, but here's my take on it.&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;When 
+someone sends a request to your domain name, say &lt;/FONT&gt;&lt;A 
+href=&quot;<A HREF="http://www.mydomain.com"">http://www.mydomain.com&quot;</A>&gt;&lt;FONT face=Arial 
+size=2&gt;www.mydomain.com&lt;/FONT&gt;&lt;/A&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;,&amp;nbsp;&lt;/FONT&gt;&lt;/SPAN&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial 
+color=#0000ff size=2&gt;it really goes to an IP number, connected to the internet, 
+say, 24.86.62.150 (don't try this address, I just made it up). Now, that would 
+be, in our example, the IP address of your router. &lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;What 
+your router does with that request, is that it looks up in its list of 
+information to see if the requests for the port specified should be redirected 
+somewhere. So let's assume this was a webpage request, on port 80. Your router 
+needs to know to which computer to forward that request. So say it goes to your 
+computer at 192.168.0.121. The router will take that ip packet, and forward it 
+to that &quot;behind the wall&quot; address to be dealt with.&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;What 
+you need to tell your router, is that whenever there is a packet coming in for 
+port 80 (the standard port for web servers), it needs to be forwarded to 
+192.168.0.121 (or whichever LAN IP number your computer has.&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;I hope 
+this is helping you.&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;Cheers,&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;Real 
+Martel&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=040381302-01012004&gt;&lt;FONT face=Arial color=#0000ff 
+size=2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=ltr 
+style=&quot;PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #0000ff 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV class=OutlookMessageHeader dir=ltr align=left&gt;&lt;FONT face=Tahoma 
+  size=2&gt;-----Original Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt; 
+  <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]&lt;B&gt;On 
+  Behalf Of &lt;/B&gt;Steven L. Haas&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, December 31, 2003 7:00 
+  PM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt; <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] 
+  Running server through a router&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Thanks... I'm sorry to be an uninformed newbie 
+  &amp;amp; keep asking questions, but would it be possible for you to explain to me 
+  how to do this, or what I should do exactly?&amp;nbsp; I understand computers 
+  &amp;amp; the internet fairly well, but I'm pretty new to networking.&amp;nbsp; I 
+  found a place in my router's configuration page to forward ports, etc., but I 
+  don't know what I'm doing once I get there.&amp;nbsp; I also dont know how to 
+  assign an internal IP address, or what to do with it once that's been 
+  done.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Thanks again for the help,&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Steve&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=ltr 
+  style=&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+    &lt;DIV 
+    style=&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: black&quot;&gt;&lt;B&gt;From:&lt;/B&gt; 
+    &lt;A title=<A HREF="mailto:webfoot@easystreet.com">webfoot@easystreet.com</A> href=&quot;mailto:<A HREF="mailto:webfoot@easystreet.com">webfoot@easystreet.com</A>&quot;&gt;Day 
+    Tooley&lt;/A&gt; &lt;/DIV&gt;
+    &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A title=<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> 
+    href=&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; &lt;/DIV&gt;
+    &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, December 31, 2003 
+    12:30 PM&lt;/DIV&gt;
+    &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] Running server 
+    through a router&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;&lt;/FONT&gt;&lt;FONT face=Arial 
+    color=#0000ff size=2&gt;&lt;/FONT&gt;&lt;FONT face=Arial color=#0000ff 
+    size=2&gt;&lt;/FONT&gt;&lt;BR&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Looks like you will need to port-forward port 
+    80 in your router to your Windows hosting machine.&amp;nbsp; Also, you will need 
+    to permanently assign an internal IP address to your hosting 
+    machine.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;&lt;/FONT&gt;&lt;FONT face=Arial 
+    color=#0000ff size=2&gt;&lt;/FONT&gt;&lt;FONT face=Arial color=#0000ff 
+    size=2&gt;&lt;/FONT&gt;&lt;BR&gt;~~~~~~~~~~~~~~~~~~~~~~~~~~~&lt;BR&gt;Day Tooley&lt;BR&gt;&lt;A 
+    href=&quot;mailto:<A HREF="mailto:Webfoot@EasyStreet.com">Webfoot@EasyStreet.com</A>&quot;&gt;<A HREF="mailto:Webfoot@EasyStreet.com">Webfoot@EasyStreet.com</A>&lt;/A&gt;&lt;/DIV&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;When the game is over, both the king and the pawn are put into the same 
+    box.&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=Arial color=#0000ff size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;BLOCKQUOTE dir=ltr 
+    style=&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+      &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+      &lt;DIV 
+      style=&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: black&quot;&gt;&lt;B&gt;From:&lt;/B&gt; 
+      &lt;A title=<A HREF="mailto:slhaas99@hotmail.com">slhaas99@hotmail.com</A> href=&quot;mailto:<A HREF="mailto:slhaas99@hotmail.com">slhaas99@hotmail.com</A>&quot;&gt;Steven L. 
+      Haas&lt;/A&gt; &lt;/DIV&gt;
+      &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A title=<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> 
+      href=&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; &lt;/DIV&gt;
+      &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, December 31, 2003 
+      7:00 AM&lt;/DIV&gt;
+      &lt;DIV style=&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] Running server 
+      through a router&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;I am trying to run the Xitami web server on 
+      my WIndows XP machine that is connected to the internet via a cable modem 
+      (RoadRunner/Motorola Surboard).&amp;nbsp; The internet connection is split 
+      amongst 2 computers using a Linksys router.&amp;nbsp; When I start the web 
+      server everything seems fine, but when I try to access the web page I have 
+      loaded on the server by connecting to my internet connection's (cable 
+      modem) IP address, I am directed to the router's configuration page.&amp;nbsp; 
+      This also happens when the server is turned off, so it's not a big 
+      suprise.&amp;nbsp; What is odd is that when I try to connect to the router's 
+      config page by entering the router's default IP address into IE, I am not 
+      taken to the config page as usual, but I'm instead directed to the web 
+      page I have installed on the Xitami web server.&amp;nbsp; When the web server 
+      is turned off I go straight to the config page as expected.&amp;nbsp; It seems 
+      like somehow the router's IP is bouncing me back from the router to the 
+      computer with the server installed, and the cable modem's (internet 
+      connection) IP is forwarding straight to the router and never reaching the 
+      computer with the server installed.&amp;nbsp; I assume this is a 
+      relatively&amp;nbsp;simple fix for any of you that are knowledgeable with 
+      networks, but I can't figure out what to do to fix this&amp;nbsp;&amp;amp; make it 
+      work with my set up.&amp;nbsp; I also cant run the server and a file sharing 
+      program like KazaA or WinMX.&amp;nbsp; Is there a way to allow for these 
+      programs and the server to all run together harmoniously?&amp;nbsp; Thanks in 
+      advance for any help, and I apologize if this question has already been 
+      beaten to death.&lt;/FONT&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT face=Arial 
+size=2&gt;Steve&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+--Boundary_(ID_DIN3deeMOceEDyNs80NBcQ)--
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005616.html">[Xitami] Running server through a router
+</A></li>
+	<LI> Next message: <A HREF="005618.html">[Xitami] Running server through a router
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5617">[ date ]</a>
+              <a href="thread.html#5617">[ thread ]</a>
+              <a href="subject.html#5617">[ subject ]</a>
+              <a href="author.html#5617">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

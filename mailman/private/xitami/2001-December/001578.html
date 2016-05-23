@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami and basic
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001582.html">
+   <LINK REL="Next"  HREF="001579.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami and basic
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami and basic">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 02 Dec 2001 12:34:22 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001582.html">[Xitami] somebody using visual basic out there?
+</A></li>
+        <LI> Next message: <A HREF="001579.html">[Xitami] Xitami and basic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1578">[ date ]</a>
+              <a href="thread.html#1578">[ thread ]</a>
+              <a href="subject.html#1578">[ subject ]</a>
+              <a href="author.html#1578">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+--=====================_508377870==_.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+Hello from Belgium
+
+Thank you all for your replies (to the list and to me personally).
+I will definitely try power basic from powerbasic.com (the console version) 
+since i don't need an interface when sending html output to another 
+computer. _visual_ basic is too much for me.
+
+
+I will define my problem more specifically:
+The company i work for has an internet printer (Remote Internet Printing). 
+It reads it's mail via pop-3 like an ordinary mail client and prints it 
+out. It works perfectly for text documents.
+
+The printer can also print postscript files, but it can't handle mime. A 
+postcript file attached to a message is mime-encoded, but the printer can't 
+decode it (and there is no upgrade). Printing postcript to the LAN printer 
+is OK (windows file and printer sharing).
+
+
+So i want to get the postcript file from the remote user using http
+Once the file is on the server computer i can do anything to adapt the 
+message to the printer standards and send it without mime to the printer 
+mailbox.
+
+I tried following html to send a sample file
+&lt;html&gt;&lt;body&gt;
+
+    &lt;form ACTION=&quot;/cgi-bin/env.exe&quot; method=&quot;POST&quot;&gt;
+       &lt;input type=file name=&quot;123.txt&quot;&gt;&lt;br&gt;
+       &lt;input type=submit value=&quot;Send&quot;&gt;
+    &lt;/form&gt;
+
+&lt;/body&gt;&lt;/html&gt;
+
+env.exe simply sends the environment and other input files back to the browser.
+
+What i get on the server is the name of the file, but not the content itself!
+Is there something wrong with the html (i don't think so)?
+
+That's what the back-end program receives from Xitami (the environment).
+CGI_STDERR=cgierr.log
+CGI_STDOUT=C:\WINDOWS\TEMP\pipe0353.cgo
+CGI_STDIN=C:\WINDOWS\TEMP\pipe0353.cgi
+QUERY_STRING=123.txt=C%3A%5Clog.txt
+CGI_URL=/cgi-bin
+CGI_ROOT=C:\XITAMI\cgi-bin
+DOCUMENT_ROOT=\\src\public\marc\uploads
+PATH_TRANSLATED=\\src\public\marc\uploads
+PATH_INFO=
+REMOTE_ADDR=217.136.228.83
+REMOTE_HOST=217.136.228.83
+REMOTE_USER=-
+CONTENT_LENGTH=22
+CONTENT_TYPE=application/x-www-form-urlencoded
+SCRIPT_NAME=\cgi-bin\env.exe
+SCRIPT_PATH=cgi-bin
+REQUEST_METHOD=POST
+GATEWAY_INTERFACE=CGI/1.1
+SERVER_PROTOCOL=HTTP/1.0
+SERVER_PORT=80
+SERVER_URL=<A HREF="http://web.verfaillie.com/">http://web.verfaillie.com/</A>
+SERVER_NAME=web.verfaillie.com
+SERVER_VERSION=2.4d6
+SERVER_SOFTWARE=Xitami
+FORM_123_TXT=C:\log.txt
+
+
+The following line is the content of the CGI_STDIN file:
+123.txt=C%3A%5Clog.txt
+
+
+It's actually the same as the QUERY_STRING
+Where can i find the file that (probably?) was send by the browser?
+
+I don't know if the problem is html-related (wrong coding of html), 
+xitami-related (some incorrect configuration) or visual basic related 
+(can't get all the data from xitami)
+
+
+Thank you very much !
+
+
+Marc
+
+----------&lt;Mailserver VERFAILLIE BAUWENS&gt;----------
+Alle uitgaande mails gecontroleerd op virussen door onze mailserver.
+Virusdefinities dagelijks aangepast.
+De postmaster, &lt;<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>&gt;
+--=====================_508377870==_.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+&lt;html&gt;
+Hello from Belgium&lt;br&gt;
+&lt;br&gt;
+Thank you all for your replies (to the list and to me personally).&lt;br&gt;
+I will definitely try power basic from powerbasic.com (the console
+version) since i don't need an interface when sending html output to
+another computer. _visual_ basic is too much for me.&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+I will define my problem more specifically:&lt;br&gt;
+The company i work for has an internet printer (Remote Internet
+Printing). It reads it's mail via pop-3 like an ordinary mail client and
+prints it out. It works perfectly for text documents.&lt;br&gt;
+&lt;br&gt;
+The printer can also print postscript files, but it can't handle mime. A
+postcript file attached to a message is mime-encoded, but the printer
+can't decode it (and there is no upgrade). Printing postcript to the LAN
+printer is OK (windows file and printer sharing).&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+So i want to get the postcript file from the remote user using http&lt;br&gt;
+Once the file is on the server computer i can do anything to adapt the
+message to the printer standards and send it without mime to the printer
+mailbox.&lt;br&gt;
+&lt;br&gt;
+I tried following html to send a sample file&lt;br&gt;
+&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&lt;br&gt;
+&lt;br&gt;
+&amp;nbsp;&amp;nbsp; &amp;lt;form ACTION=&amp;quot;/cgi-bin/env.exe&amp;quot;
+method=&amp;quot;POST&amp;quot;&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;lt;input type=file
+name=&amp;quot;123.txt&amp;quot;&amp;gt;&amp;lt;br&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;lt;input type=submit
+value=&amp;quot;Send&amp;quot;&amp;gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp; &amp;lt;/form&amp;gt;&lt;br&gt;
+&lt;br&gt;
+&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;br&gt;
+&lt;br&gt;
+env.exe simply sends the environment and other input files back to the
+browser.&lt;br&gt;
+&lt;br&gt;
+What i get on the server is the name of the file, but not the content
+itself!&lt;br&gt;
+Is there something wrong with the html (i don't think so)?&lt;br&gt;
+&lt;br&gt;
+That's what the back-end program receives from Xitami (the
+environment).&lt;br&gt;
+&lt;font face=&quot;Courier New, Courier&quot;&gt;CGI_STDERR=cgierr.log&lt;br&gt;
+CGI_STDOUT=C:\WINDOWS\TEMP\pipe0353.cgo&lt;br&gt;
+CGI_STDIN=C:\WINDOWS\TEMP\pipe0353.cgi&lt;br&gt;
+QUERY_STRING=123.txt=C%3A%5Clog.txt&lt;br&gt;
+CGI_URL=/cgi-bin&lt;br&gt;
+CGI_ROOT=C:\XITAMI\cgi-bin&lt;br&gt;
+DOCUMENT_ROOT=\\src\public\marc\uploads&lt;br&gt;
+PATH_TRANSLATED=\\src\public\marc\uploads&lt;br&gt;
+PATH_INFO=&lt;br&gt;
+REMOTE_ADDR=217.136.228.83&lt;br&gt;
+REMOTE_HOST=217.136.228.83&lt;br&gt;
+REMOTE_USER=-&lt;br&gt;
+CONTENT_LENGTH=22&lt;br&gt;
+CONTENT_TYPE=application/x-www-form-urlencoded&lt;br&gt;
+SCRIPT_NAME=\cgi-bin\env.exe&lt;br&gt;
+SCRIPT_PATH=cgi-bin&lt;br&gt;
+REQUEST_METHOD=POST&lt;br&gt;
+GATEWAY_INTERFACE=CGI/1.1&lt;br&gt;
+SERVER_PROTOCOL=HTTP/1.0&lt;br&gt;
+SERVER_PORT=80&lt;br&gt;
+SERVER_URL=<A HREF="http://web.verfaillie.com/<br">http://web.verfaillie.com/&lt;br</A>&gt;
+SERVER_NAME=web.verfaillie.com&lt;br&gt;
+SERVER_VERSION=2.4d6&lt;br&gt;
+SERVER_SOFTWARE=Xitami&lt;br&gt;
+FORM_123_TXT=C:\log.txt&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;/font&gt;The following line is the content of the CGI_STDIN file:&lt;br&gt;
+123.txt=C%3A%5Clog.txt&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+It's actually the same as the QUERY_STRING&lt;br&gt;
+Where can i find the file that (probably?) was send by the browser?&lt;br&gt;
+&lt;br&gt;
+I don't know if the problem is html-related (wrong coding of html),
+xitami-related (some incorrect configuration) or visual basic related
+(can't get all the data from xitami)&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+Thank you very much !&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+Marc&lt;br&gt;
+&lt;/html&gt;
+
+&lt;html&gt;
+&lt;br&gt;
+----------&lt;Mailserver VERFAILLIE BAUWENS&gt;----------&lt;br&gt;
+Alle uitgaande mails gecontroleerd op virussen door onze mailserver.&lt;br&gt;
+Virusdefinities dagelijks aangepast.&lt;br&gt;
+De postmaster, &lt;<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>&gt;&lt;br&gt;
+&lt;br&gt;
+&lt;/html&gt;
+
+--=====================_508377870==_.ALT--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001582.html">[Xitami] somebody using visual basic out there?
+</A></li>
+	<LI> Next message: <A HREF="001579.html">[Xitami] Xitami and basic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1578">[ date ]</a>
+              <a href="thread.html#1578">[ thread ]</a>
+              <a href="subject.html#1578">[ subject ]</a>
+              <a href="author.html#1578">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with refresh with php and phpbb
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005312.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with refresh with php and phpbb
+   </H1>
+    <B>Alejandro Martinis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problem with refresh with php and phpbb">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 6 Sep 2003 18:03:49 -0300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005312.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5313">[ date ]</a>
+              <a href="thread.html#5313">[ thread ]</a>
+              <a href="subject.html#5313">[ subject ]</a>
+              <a href="author.html#5313">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tom:
+
+For some reason your server refuses my message, so I am writing again to the
+list.
+
+Regarding the code
+
+ &lt;?php
+ header (&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;); // Date in the past
+ header (&quot;Last-Modified: &quot; . gmdate(&quot;D, d M Y H:i:s&quot;) . &quot; GMT&quot;);
+ header (&quot;Cache-Control: no-cache, must-revalidate&quot;); // HTTP/1.1
+ header (&quot;Pragma: no-cache&quot;); // HTTP/1.0
+
+It MUST be the very first thing written to the page, otherwise you will get
+a &quot;header already written&quot; error, so it is a good practice to put it right
+up at the beginning of the code.
+If you haven't written the program, (and by the way I don't know the
+application you mention ) you could try looking at the page name that is
+being cached and not refreshed, and edit the corresponding php file and add
+these lines at the very top.
+
+You would not need to add this to php files that only do internal
+calculations or otherwise are not involved in any html output.
+
+Now, if you suspect that there is more than one file involved in the
+creation of the page, I would suggest you add it to every php file that
+generates html content, since it should not affect the performance of the
+application.
+
+You're welcome to post any other question just as each of us is. Let me know
+how it went.
+
+Take care and good luck,
+
+Alejandro.
+
+
+
+
+
+
+
+
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.515 / Virus Database: 313 - Release Date: 1/09/2003
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005312.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5313">[ date ]</a>
+              <a href="thread.html#5313">[ thread ]</a>
+              <a href="subject.html#5313">[ subject ]</a>
+              <a href="author.html#5313">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

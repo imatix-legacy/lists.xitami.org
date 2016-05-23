@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami FTP port.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005899.html">
+   <LINK REL="Next"  HREF="005901.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami FTP port.
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami FTP port.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 May 2004 18:30:09 +0100 (BST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005899.html">[Xitami] HELP!
+</A></li>
+        <LI> Next message: <A HREF="005901.html">Fw: [Xitami] Re: Xitami Help - Michael
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5900">[ date ]</a>
+              <a href="thread.html#5900">[ thread ]</a>
+              <a href="subject.html#5900">[ subject ]</a>
+              <a href="author.html#5900">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;051020041639.7881.409FB03C000836C600001EC92160376021FFCC9891909=
+<A HREF="mailto:398@att.net">398@att.net</A>&gt;
+   <A HREF="mailto:jglong3@att.net">jglong3@att.net</A> writes:
+
+&gt;<i> The following was listed at IANA for ports 20 and 21;
+</I>&gt;<i>=20
+</I>&gt;<i>       ftp-data         20/tcp    File Transfer [Default Data]
+</I>&gt;<i>       ftp-data         20/udp    File Transfer [Default Data]
+</I>&gt;<i>       ftp              21/tcp    File Transfer [Control]
+</I>&gt;<i>       ftp              21/udp    File Transfer [Control]
+</I>&gt;<i>=20
+</I>&gt;<i> Please forgive me, the last time I worked with any level of protocol
+</I>&gt;<i> was a long time ago (circa &quot;IBM BI-SYNC&quot; and previous).
+</I>&gt;<i>=20
+</I>&gt;<i> It does look like port 21 is to logon with username:password control
+</I>&gt;<i> (authentication???) and that 20 would be the up/down load of files(???).
+</I>&gt;<i>=20
+</I>&gt;<i>=20
+</I>&gt;<i>         1. Is this the meaning for port 20 and 21?=20
+</I>
+Yes: port 21 is used for control connections (of course, the originating
+FTP client can use anything it likes).  Port 20 is used, by an FTP
+server, for uploaded [i.e. PUT] data; in the full protocol, downloaded
+[i.e. GET] data is sent TO whichever port the client has negotiated with
+a PORT command, from port 20 on the server.
+
+&gt;<i>         2. If so and port 20 is used by Xitami should it=20
+</I>&gt;<i>            be discussed in the documentation?
+</I>
+Why should it?  Port 20/21 is part and parcel of FTP, which was
+standardized in RFC-765 way back in June of 1980.
+
+It's only things like firewalls and NATted routers which cause difficulty
+with this standard, and it is in that area that further documentation
+ought to be expected.
+
+RFC-765 includes a rather useful bit of &quot;ASCII Art&quot;:
+
+                                            -------------
+                                            |/---------\|
+                                            ||   User  ||    --------
+                                            ||Interface|&lt;---&gt;| User |
+                                            |\----:----/|    --------
+                  ----------                |     V     |
+                  |/------\|  FTP Commands  |/---------\|
+                  ||Server|&lt;----------------&gt;|   User  ||
+                  ||  PI  ||   FTP Replies  ||    PI   ||
+                  |\--:---/|                |\----:----/|
+                  |   V    |                |     V     |
+      --------    |/------\|      Data      |/---------\|    --------
+      | File |&lt;---&gt;|Server|&lt;----------------&gt;|  User   |&lt;---&gt;| File |
+      |System|    || DTP  ||   Connection   ||   DTP   ||    |System|
+      --------    |\------/|                |\---------/|    --------
+                  ----------                -------------
+
+                  Server-FTP                   User-FTP
+
+      NOTES: 1. The data connection may be used in either direction.
+             2. The data connection need not exist all of the time.
+
+                      Figure 1  Model for FTP Use
+
+PI =3D Protocol Interpreter; DTP =3D Data Transfer Port.
+
+--=20
+   fix (vb.): 1. to paper over, obscure, hide from public view; 2. to
+   work around, in a way that produces unintended consequences that are
+   worse than the original problem.  Usage: &quot;Windows ME fixes many of the
+   shortcomings of Windows 98 SE&quot;.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005899.html">[Xitami] HELP!
+</A></li>
+	<LI> Next message: <A HREF="005901.html">Fw: [Xitami] Re: Xitami Help - Michael
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5900">[ date ]</a>
+              <a href="thread.html#5900">[ thread ]</a>
+              <a href="subject.html#5900">[ subject ]</a>
+              <a href="author.html#5900">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

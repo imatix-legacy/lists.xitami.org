@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Zitami ALWAYS timesout
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Zitami%20ALWAYS%20timesout&In-Reply-To=BLU121-W874614A98B5B7C128F4E78D420%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007875.html">
+   <LINK REL="Next"  HREF="007876.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Zitami ALWAYS timesout</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Zitami%20ALWAYS%20timesout&In-Reply-To=BLU121-W874614A98B5B7C128F4E78D420%40phx.gbl"
+       TITLE="[Xitami] Zitami ALWAYS timesout">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Oct  1 22:53:09 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007875.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+        <LI>Next message: <A HREF="007876.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7874">[ date ]</a>
+              <a href="thread.html#7874">[ thread ]</a>
+              <a href="subject.html#7874">[ subject ]</a>
+              <a href="author.html#7874">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Possibly a MSSQL problem then....
+
+
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">uwe.k at hotmail.de</A>
+To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+Date: Wed, 1 Oct 2008 22:34:39 +0200
+Subject: Re: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+Hi first of all thank you for fast responding
+
+--Under Xitami's CGI section is the &quot;
+Timeout for CGI programs:&quot;...  - I did that, with values from 90 to 6000 seconds
+--&quot;Server Keep Alive Connections&quot; - will try that, but since there is only one connection...
+
+The problem is that Xitami not seemed to be interested in my settings, the original timout is 60 seconds and I never reached that.
+
+again, thanks
+
+   Uwe
+
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+Date: Wed, 1 Oct 2008 13:17:56 -0700
+Subject: Re: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+
+Under Xitami's CGI section is the &quot;
+Timeout for CGI programs:&quot;...if you extend that out to 60 or 90 seconds that should be sufficient for you.  Most of scripts work in under 10 seconds from the DB query...but I do have a few, mostly administrative, that take up to 3 minutes.  
+
+The other setting &quot;check cgi processes every&quot; : x milliseconds could be set lower too, but that increases cpu processing.  Another place to increase timers is with &quot;Server Keep Alive Connections&quot;...if you increase the amount allowed and the actual timeout, it may help speed things up for repetitive queries.  but again, anytime you increase numbers you increase memory and cpu usage.
+
+And lastly, you can always speed Xitami up by making it &quot;Turbo&quot;...but that doesn't necessarily mean it will speed your DB queries up on large searches.
+
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">uwe.k at hotmail.de</A>
+To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+Date: Wed, 1 Oct 2008 21:54:45 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+Hi there
+
+I got a problem with a script that queryes a big database and it seem's that the script always runs in a timeout, 
+also I never received any msg about that. 
+
+Tryed the webform the normal way and tryed AJAX -style, 
+also tryed sleep(45) instead of the query... ( sleep(25) works, (30) sometimes )
+
+The query needs about 40 seconds to complete in MS SQL Server Manager and 
+Xitami always returns just the HTML-parts before that query.
+
+I set the timeout in Xitami to 6000 and that one in php.ini to the same value, still w/o any success.
+
+working on that since days now, would be nice if someone can help me... ?
+
+Xitami 2.5 Port 88  /  IIS6 Port 80
+PHP 5
+Win IE / FireFox
+MSSQL Server 2005   (no timeout)
+
+
+
+
+Zeigen Sie es Ihren Freunden! Erstellen  Sie kostenlos Fotoalben und Diashows in Ihrem Space!
+
+
+Messenger Online Treff: Spontan chatten, &#252;ber Hobbies reden, sofort Spass haben? Jetzt klicken!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20081001/c6809ca9/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20081001/c6809ca9/attachment.htm</A> 
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007875.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+	<LI>Next message: <A HREF="007876.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7874">[ date ]</a>
+              <a href="thread.html#7874">[ thread ]</a>
+              <a href="subject.html#7874">[ subject ]</a>
+              <a href="author.html#7874">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

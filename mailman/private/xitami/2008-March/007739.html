@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007738.html">
+   <LINK REL="Next"  HREF="007740.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>R O</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To="
+       TITLE="[Xitami] Multi server issue">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Thu Mar 20 04:56:27 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007738.html">[Xitami] ASP and Xitami
+</A></li>
+        <LI>Next message: <A HREF="007740.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7739">[ date ]</a>
+              <a href="thread.html#7739">[ thread ]</a>
+              <a href="subject.html#7739">[ subject ]</a>
+              <a href="author.html#7739">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+I have two instances of Xitami running, one for production and the other for testing.  Both servers are running on the same system but on different IP addresses (on the same NIC).   However, the test server refuses to start on port 80...any other port it works OR if I comment out the &quot;Portbase=0&quot; the service will start up without an error but I am not able to get to the base page.
+
+Each server is assigned to its own IP address, but both IP addresses reside on the same NIC of the server.  I don't recall having this problem in the past as I have done production and test versions of Xitami at the same time, each using different IP addresses that were on the same NIC.
+
+In this case though, I actually need to turn the test server into a second production server and need it to run on port 80.
+
+Heres the base config of each
+
+/xitamiproduction/xiwinnt.exe
+     defaults.cfg
+          ip address: 192.168.1.10
+          portbase=0
+          service-name=Xitami Prodcution
+
+/xitamitest/xiwinnt.exe
+     defaults.cfg
+          ip address: 192.168.1.11
+          portbase=0
+          service-name=Xitami Test
+
+If I comment out portbase=0 on the test server the service will start up but nothing will respond to port 80 at <A HREF="http://192.168.1.11.">http://192.168.1.11.</A>  However, if I don't comment out portbase=0 the service won't even start up.  If I change the portbase to &quot;portbase=2&quot; then the service will start up and the pages are accessible on <A HREF="http://192.168.1.11:82">http://192.168.1.11:82</A> .  But I need this test server to be up and running on port 80.
+
+Anyone have any ideas as to what is going on?
+
+Russel P. Olinger 
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080319/6e2b7408/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080319/6e2b7408/attachment.htm</A> 
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007738.html">[Xitami] ASP and Xitami
+</A></li>
+	<LI>Next message: <A HREF="007740.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7739">[ date ]</a>
+              <a href="thread.html#7739">[ thread ]</a>
+              <a href="subject.html#7739">[ subject ]</a>
+              <a href="author.html#7739">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

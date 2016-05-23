@@ -1,0 +1,1019 @@
+From rolinger1 at hotmail.com  Thu Jun 14 02:22:17 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Wed, 13 Jun 2007 17:22:17 -0700
+Subject: [Xitami] PHP problems
+In-Reply-To: <464032AA.16153.4CF09@localhost>
+Message-ID: <BAY105-F16DD428753C2EDAA2AEB35F81F0@phx.gbl>
+
+
+I don't use php much and last I recall it was working.  Trying to implement 
+a new script and php isn't working at all.
+
+Windows Server 2003
+Xitami v2.4d9  (In the defaults.cfg file)
+     * filter : .php=c:\php\php.exe (even tried / slashes and in quotes 
+"c:\php\php.exe")
+     * mime : Php=application/x-httpd-php
+
+PHP 4.3.11 (in php.ini and php.ini-dist)
+     * cgi.force_redirect  = 0 ;
+
+And I have restarted Xitami after each change.  No matter what I do it won't 
+execute the simple test.php file
+<?php
+  phpinfo();
+?>
+
+What am I doing wrong or what more could I look at?
+
+Thanks all.
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+From rolinger1 at hotmail.com  Thu Jun 14 02:23:38 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Wed, 13 Jun 2007 17:23:38 -0700
+Subject: [Xitami] PHP problems
+In-Reply-To: <BAY105-F16DD428753C2EDAA2AEB35F81F0@phx.gbl>
+Message-ID: <BAY105-F24FADE307FCE8CA5607E25F81F0@phx.gbl>
+
+Oh, and the error I do get from the server in the browser is:
+
+"This server is currently overloaded - please try again later "
+
+>
+>I don't use php much and last I recall it was working.  Trying to implement
+>a new script and php isn't working at all.
+>
+>Windows Server 2003
+>Xitami v2.4d9  (In the defaults.cfg file)
+>      * filter : .php=c:\php\php.exe (even tried / slashes and in quotes
+>"c:\php\php.exe")
+>      * mime : Php=application/x-httpd-php
+>
+>PHP 4.3.11 (in php.ini and php.ini-dist)
+>      * cgi.force_redirect  = 0 ;
+>
+>And I have restarted Xitami after each change.  No matter what I do it 
+>won't
+>execute the simple test.php file
+><?php
+>   phpinfo();
+>?>
+>
+>What am I doing wrong or what more could I look at?
+>
+>Thanks all.
+>
+>
+>Russel P. Olinger
+>(310) 466-3399
+>rolinger1 at hotmail.com
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From francis.turner at gmail.com  Thu Jun 14 11:27:01 2007
+From: francis.turner at gmail.com (Francis Turner)
+Date: Thu, 14 Jun 2007 11:27:01 +0200
+Subject: [Xitami] PHP problems
+In-Reply-To: <BAY105-F24FADE307FCE8CA5607E25F81F0@phx.gbl>
+References: <BAY105-F16DD428753C2EDAA2AEB35F81F0@phx.gbl>
+	<BAY105-F24FADE307FCE8CA5607E25F81F0@phx.gbl>
+Message-ID: <f83609d50706140227h2335333dpd63bdccc1d58afec@mail.gmail.com>
+
+That error is basically that PHP or something is going into an
+infinite loop and not returning
+
+On 6/14/07, R O <rolinger1 at hotmail.com> wrote:
+> Oh, and the error I do get from the server in the browser is:
+>
+> "This server is currently overloaded - please try again later "
+>
+> >
+> >I don't use php much and last I recall it was working.  Trying to implement
+> >a new script and php isn't working at all.
+> >
+> >Windows Server 2003
+> >Xitami v2.4d9  (In the defaults.cfg file)
+> >      * filter : .php=c:\php\php.exe (even tried / slashes and in quotes
+> >"c:\php\php.exe")
+> >      * mime : Php=application/x-httpd-php
+> >
+> >PHP 4.3.11 (in php.ini and php.ini-dist)
+> >      * cgi.force_redirect  = 0 ;
+> >
+> >And I have restarted Xitami after each change.  No matter what I do it
+> >won't
+> >execute the simple test.php file
+> ><?php
+> >   phpinfo();
+> >?>
+> >
+> >What am I doing wrong or what more could I look at?
+> >
+> >Thanks all.
+> >
+> >
+> >Russel P. Olinger
+> >(310) 466-3399
+> >rolinger1 at hotmail.com
+> >
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From xitami at pastryworld.ca  Thu Jun 14 17:10:29 2007
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Thu, 14 Jun 2007 09:10:29 -0600
+Subject: [Xitami] PHP problems
+In-Reply-To: <BAY105-F16DD428753C2EDAA2AEB35F81F0@phx.gbl>
+References: <464032AA.16153.4CF09@localhost>
+Message-ID: <46710605.22137.32C823@localhost>
+
+Hi Russel,
+
+shown below, is it exactly as you have it in your .cfg file ? I have a few php things going, but 
+they are working just fine. No hick-ups. Below are my cfg entries, copied & pasted
+
+[Filter]
+    .php = "D:/PHP/php.exe"
+
+[Mime]
+    Php = "application/x-httpd-php"
+
+
+Johannes
+
+
+> 
+> I don't use php much and last I recall it was working.  Trying to implement 
+> a new script and php isn't working at all.
+> 
+> Windows Server 2003
+> Xitami v2.4d9  (In the defaults.cfg file)
+>      * filter : .php=c:\php\php.exe (even tried / slashes and in quotes 
+> "c:\php\php.exe")
+>      * mime : Php=application/x-httpd-php
+> 
+> PHP 4.3.11 (in php.ini and php.ini-dist)
+>      * cgi.force_redirect  = 0 ;
+> 
+> And I have restarted Xitami after each change.  No matter what I do it won't 
+> execute the simple test.php file
+> <?php
+>   phpinfo();
+> ?>
+> 
+> What am I doing wrong or what more could I look at?
+> 
+> Thanks all.
+> 
+> 
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1 at hotmail.com
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+
+From rolinger1 at hotmail.com  Thu Jun 14 17:38:19 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu, 14 Jun 2007 08:38:19 -0700
+Subject: [Xitami] PHP problems
+References: <BAY105-F16DD428753C2EDAA2AEB35F81F0@phx.gbl><BAY105-F24FADE307FCE8CA5607E25F81F0@phx.gbl>
+	<f83609d50706140227h2335333dpd63bdccc1d58afec@mail.gmail.com>
+Message-ID: <BAY105-DAV4DF2C2B0C6088CFE6F689F81F0@phx.gbl>
+
+I ran two seperate scripts, both with the same outcome.
+
+First:  /phptest.php
+<?php
+   phpinfo();
+?>
+
+second: /php/testpage.php
+<?php
+$section1= "Test Page";
+$i = 1;
+echo "$section1" . "$i";
+?>
+
+So, I know the scripts aren't the problem, what else could I look at? 
+Beyond what I have done below I haven't been able to find any references to 
+other configurations that I need to be aware of.
+
+Server win2003, windows file association "php = c:\php\php.exe"
+Xitami runs in "d:\xitami"  (v2.4d9)
+Xitami Filter ".php = c:\php\php.exe"  (v4.3.11)
+Xitami Mime "Php=application/x-httpd-php
+c:\php\php.ini : "cgi.force_redirect = 0 ;"
+c:\php\php.ini-dist : "cgi.force_redirect = 0 ;"
+
+----- Original Message ----- 
+From: "Francis Turner" <francis.turner at gmail.com>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Thursday, June 14, 2007 2:27 AM
+Subject: Re: [Xitami] PHP problems
+
+
+> That error is basically that PHP or something is going into an
+> infinite loop and not returning
+>
+> On 6/14/07, R O <rolinger1 at hotmail.com> wrote:
+>> Oh, and the error I do get from the server in the browser is:
+>>
+>> "This server is currently overloaded - please try again later "
+>>
+>> >
+>> >I don't use php much and last I recall it was working.  Trying to 
+>> >implement
+>> >a new script and php isn't working at all.
+>> >
+>> >Windows Server 2003
+>> >Xitami v2.4d9  (In the defaults.cfg file)
+>> >      * filter : .php=c:\php\php.exe (even tried / slashes and in quotes
+>> >"c:\php\php.exe")
+>> >      * mime : Php=application/x-httpd-php
+>> >
+>> >PHP 4.3.11 (in php.ini and php.ini-dist)
+>> >      * cgi.force_redirect  = 0 ;
+>> >
+>> >And I have restarted Xitami after each change.  No matter what I do it
+>> >won't
+>> >execute the simple test.php file
+>> ><?php
+>> >   phpinfo();
+>> >?>
+>> >
+>> >What am I doing wrong or what more could I look at?
+>> >
+>> >Thanks all.
+>> >
+>> >
+>> >Russel P. Olinger
+>> >(310) 466-3399
+>> >rolinger1 at hotmail.com
+>> >
+>> >
+>> >
+>> >--
+>> >Xitami Users Mailing List -- For Xitami support
+>> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>
+>
+> -- 
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>  Necessity is the mother of strange bedfellows.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From bkowald at synergybroadcast.com  Thu Jun 14 18:46:27 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Thu, 14 Jun 2007 11:46:27 -0500
+Subject: [Xitami] PHP problems
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E993127@sbsserver.tiltrac.local>
+
+Did you try enabling debuging and looking at the logs under
+c:\xitami\logs?
+
+In xitami.cfg set
+debug=1
+
+Then look at (you guess it) debug.log
+
+For the filter did you try TWO slashes? (probably grasping at straw
+here)
+.php=c:\\php\\php.exe
+
+
+Can you run your php scrips from a command prompt? This would indicate
+if your php.exe is good.
+php  phptest.php
+
+
+
+Brian
+
+
+-----Original Message-----
+From: Russel Olinger [mailto:rolinger1 at hotmail.com] 
+Sent: Thursday, June 14, 2007 10:38 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] PHP problems
+
+
+I ran two seperate scripts, both with the same outcome.
+
+First:  /phptest.php
+<?php
+   phpinfo();
+?>
+
+second: /php/testpage.php
+<?php
+$section1= "Test Page";
+$i = 1;
+echo "$section1" . "$i";
+?>
+
+So, I know the scripts aren't the problem, what else could I look at? 
+Beyond what I have done below I haven't been able to find any references
+to 
+other configurations that I need to be aware of.
+
+Server win2003, windows file association "php = c:\php\php.exe" Xitami
+runs in "d:\xitami"  (v2.4d9) Xitami Filter ".php = c:\php\php.exe"
+(v4.3.11) Xitami Mime "Php=application/x-httpd-php c:\php\php.ini :
+"cgi.force_redirect = 0 ;" c:\php\php.ini-dist : "cgi.force_redirect = 0
+;"
+
+----- Original Message ----- 
+From: "Francis Turner" <francis.turner at gmail.com>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Thursday, June 14, 2007 2:27 AM
+Subject: Re: [Xitami] PHP problems
+
+
+> That error is basically that PHP or something is going into an 
+> infinite loop and not returning
+>
+> On 6/14/07, R O <rolinger1 at hotmail.com> wrote:
+>> Oh, and the error I do get from the server in the browser is:
+>>
+>> "This server is currently overloaded - please try again later "
+>>
+>> >
+>> >I don't use php much and last I recall it was working.  Trying to
+>> >implement
+>> >a new script and php isn't working at all.
+>> >
+>> >Windows Server 2003
+>> >Xitami v2.4d9  (In the defaults.cfg file)
+>> >      * filter : .php=c:\php\php.exe (even tried / slashes and in 
+>> >quotes
+>> >"c:\php\php.exe")
+>> >      * mime : Php=application/x-httpd-php
+>> >
+>> >PHP 4.3.11 (in php.ini and php.ini-dist)
+>> >      * cgi.force_redirect  = 0 ;
+>> >
+>> >And I have restarted Xitami after each change.  No matter what I do 
+>> >it won't execute the simple test.php file
+>> ><?php
+>> >   phpinfo();
+>> >?>
+>> >
+>> >What am I doing wrong or what more could I look at?
+>> >
+>> >Thanks all.
+>> >
+>> >
+>> >Russel P. Olinger
+>> >(310) 466-3399
+>> >rolinger1 at hotmail.com
+>> >
+>> >
+>> >
+>> >--
+>> >Xitami Users Mailing List -- For Xitami support
+>> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>
+>
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>  Necessity is the mother of strange bedfellows.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From rolinger1 at hotmail.com  Thu Jun 14 20:13:42 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Thu, 14 Jun 2007 11:13:42 -0700
+Subject: [Xitami] PHP problems
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031E993127@sbsserver.tiltrac.local>
+Message-ID: <BAY105-F135BA1571481494F7B4B5EF81F0@phx.gbl>
+
+
+ok, got it all to work.  Turns out those errors indicated that I had to 
+different versions of PHP files installed in the same directory.  
+uninstalled and deleted the php files and directories, reinstalled and now 
+it works.
+
+Though the newer versions of PHP 4.3.11 puts the php.ini file in the 
+c:\winnt directory - looks a heck of a lot cleaner and smaller than previous 
+versions of php.
+
+-R
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+
+
+>From: "Brian Kowald" <bkowald at synergybroadcast.com>
+>Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+>To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+>Subject: Re: [Xitami] PHP problems
+>Date: Thu, 14 Jun 2007 11:46:27 -0500
+>
+>Did you try enabling debuging and looking at the logs under
+>c:\xitami\logs?
+>
+>In xitami.cfg set
+>debug=1
+>
+>Then look at (you guess it) debug.log
+>
+>For the filter did you try TWO slashes? (probably grasping at straw
+>here)
+>.php=c:\\php\\php.exe
+>
+>
+>Can you run your php scrips from a command prompt? This would indicate
+>if your php.exe is good.
+>php  phptest.php
+>
+>
+>
+>Brian
+>
+>
+>-----Original Message-----
+>From: Russel Olinger [mailto:rolinger1 at hotmail.com]
+>Sent: Thursday, June 14, 2007 10:38 AM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] PHP problems
+>
+>
+>I ran two seperate scripts, both with the same outcome.
+>
+>First:  /phptest.php
+><?php
+>    phpinfo();
+>?>
+>
+>second: /php/testpage.php
+><?php
+>$section1= "Test Page";
+>$i = 1;
+>echo "$section1" . "$i";
+>?>
+>
+>So, I know the scripts aren't the problem, what else could I look at?
+>Beyond what I have done below I haven't been able to find any references
+>to
+>other configurations that I need to be aware of.
+>
+>Server win2003, windows file association "php = c:\php\php.exe" Xitami
+>runs in "d:\xitami"  (v2.4d9) Xitami Filter ".php = c:\php\php.exe"
+>(v4.3.11) Xitami Mime "Php=application/x-httpd-php c:\php\php.ini :
+>"cgi.force_redirect = 0 ;" c:\php\php.ini-dist : "cgi.force_redirect = 0
+>;"
+>
+>----- Original Message -----
+>From: "Francis Turner" <francis.turner at gmail.com>
+>To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+>Sent: Thursday, June 14, 2007 2:27 AM
+>Subject: Re: [Xitami] PHP problems
+>
+>
+> > That error is basically that PHP or something is going into an
+> > infinite loop and not returning
+> >
+> > On 6/14/07, R O <rolinger1 at hotmail.com> wrote:
+> >> Oh, and the error I do get from the server in the browser is:
+> >>
+> >> "This server is currently overloaded - please try again later "
+> >>
+> >> >
+> >> >I don't use php much and last I recall it was working.  Trying to
+> >> >implement
+> >> >a new script and php isn't working at all.
+> >> >
+> >> >Windows Server 2003
+> >> >Xitami v2.4d9  (In the defaults.cfg file)
+> >> >      * filter : .php=c:\php\php.exe (even tried / slashes and in
+> >> >quotes
+> >> >"c:\php\php.exe")
+> >> >      * mime : Php=application/x-httpd-php
+> >> >
+> >> >PHP 4.3.11 (in php.ini and php.ini-dist)
+> >> >      * cgi.force_redirect  = 0 ;
+> >> >
+> >> >And I have restarted Xitami after each change.  No matter what I do
+> >> >it won't execute the simple test.php file
+> >> ><?php
+> >> >   phpinfo();
+> >> >?>
+> >> >
+> >> >What am I doing wrong or what more could I look at?
+> >> >
+> >> >Thanks all.
+> >> >
+> >> >
+> >> >Russel P. Olinger
+> >> >(310) 466-3399
+> >> >rolinger1 at hotmail.com
+> >> >
+> >> >
+> >> >
+> >> >--
+> >> >Xitami Users Mailing List -- For Xitami support
+> >> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>
+> >>
+> >>
+> >> --
+> >> Xitami Users Mailing List -- For Xitami support
+> >> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>
+> >
+> >
+> > --
+> > http://www.di2.nu/blog.htm
+> > Faber's Fourth Law:
+> >  Necessity is the mother of strange bedfellows.
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From rolinger1 at hotmail.com  Thu Jun 14 19:46:45 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Thu, 14 Jun 2007 10:46:45 -0700
+Subject: [Xitami] PHP problems
+In-Reply-To: <46710605.22137.32C823@localhost>
+Message-ID: <BAY105-F2895E725E093114E993BFFF81F0@phx.gbl>
+
+
+Johannes:
+
+What version of php are you running...the difference between 4.x and 5.x 
+(that I have read) is that the in 4.x : .php = c:\php\php.exe ...and in 5.x 
+: .php = "c:/php/php.exe" - forward/backslashes and quotes are required for 
+php 5.x - thats what I have read - either way though it doesn't make a 
+difference on my install.
+
+-R
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+
+
+>From: "Johannes Prost" <xitami at pastryworld.ca>
+>Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+>To: Xitami Users General Discussion <xitami at lists.xitami.org>
+>Subject: Re: [Xitami] PHP problems
+>Date: Thu, 14 Jun 2007 09:10:29 -0600
+>
+>Hi Russel,
+>
+>shown below, is it exactly as you have it in your .cfg file ? I have a few 
+>php things going, but
+>they are working just fine. No hick-ups. Below are my cfg entries, copied & 
+>pasted
+>
+>[Filter]
+>     .php = "D:/PHP/php.exe"
+>
+>[Mime]
+>     Php = "application/x-httpd-php"
+>
+>
+>Johannes
+>
+>
+> >
+> > I don't use php much and last I recall it was working.  Trying to 
+>implement
+> > a new script and php isn't working at all.
+> >
+> > Windows Server 2003
+> > Xitami v2.4d9  (In the defaults.cfg file)
+> >      * filter : .php=c:\php\php.exe (even tried / slashes and in quotes
+> > "c:\php\php.exe")
+> >      * mime : Php=application/x-httpd-php
+> >
+> > PHP 4.3.11 (in php.ini and php.ini-dist)
+> >      * cgi.force_redirect  = 0 ;
+> >
+> > And I have restarted Xitami after each change.  No matter what I do it 
+>won't
+> > execute the simple test.php file
+> > <?php
+> >   phpinfo();
+> > ?>
+> >
+> > What am I doing wrong or what more could I look at?
+> >
+> > Thanks all.
+> >
+> >
+> > Russel P. Olinger
+> > (310) 466-3399
+> > rolinger1 at hotmail.com
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>Johannes
+>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From rolinger1 at hotmail.com  Thu Jun 14 19:55:53 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Thu, 14 Jun 2007 10:55:53 -0700
+Subject: [Xitami] PHP problems
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031E993127@sbsserver.tiltrac.local>
+Message-ID: <BAY105-F18E969A060FD8123874E65F81F0@phx.gbl>
+
+
+Interesting, when I run from the command line:
+
+c:\php\php d:\xitami\htdocs\phptest.php  - the following occurs:
+
+1.  A windows pup up warning message appears (like a javascript "alert()"), 
+and gives the below message
+
+PHP Warning:  Unknown(): mhash: Unable to initialize module
+Module compiled with module API=20010901, debug=0, thread-safety=1
+PHP    compiled with module API=20020429, debug=0, thread-safety=1
+These options need to match
+
+2.  Then when I click OK in the popup warning window, the following happens 
+in the command prompt:
+
+PHP Warning:  Unknown(): mhash: Unable to initialize module
+Module compiled with module API=20010901, debug=0, thread-safety=1
+PHP    compiled with module API=20020429, debug=0, thread-safety=1
+These options need to match
+in Unknown on line 0
+Content-type: text/html
+X-Powered-By: PHP/4.3.11
+
+... and then the script executes.
+
+I am guessing that when Xitami tries to execute the php script, this warning 
+message is somehow popping up in the background and because it never gets 
+clicked "OK" the script/server just eventually times out with a 502 error 
+"server temp overloaded".
+
+Does anyone know what this is or how to fix it?
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+
+
+>From: "Brian Kowald" <bkowald at synergybroadcast.com>
+>Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+>To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+>Subject: Re: [Xitami] PHP problems
+>Date: Thu, 14 Jun 2007 11:46:27 -0500
+>
+>Did you try enabling debuging and looking at the logs under
+>c:\xitami\logs?
+>
+>In xitami.cfg set
+>debug=1
+>
+>Then look at (you guess it) debug.log
+>
+>For the filter did you try TWO slashes? (probably grasping at straw
+>here)
+>.php=c:\\php\\php.exe
+>
+>
+>Can you run your php scrips from a command prompt? This would indicate
+>if your php.exe is good.
+>php  phptest.php
+>
+>
+>
+>Brian
+>
+>
+>-----Original Message-----
+>From: Russel Olinger [mailto:rolinger1 at hotmail.com]
+>Sent: Thursday, June 14, 2007 10:38 AM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] PHP problems
+>
+>
+>I ran two seperate scripts, both with the same outcome.
+>
+>First:  /phptest.php
+><?php
+>    phpinfo();
+>?>
+>
+>second: /php/testpage.php
+><?php
+>$section1= "Test Page";
+>$i = 1;
+>echo "$section1" . "$i";
+>?>
+>
+>So, I know the scripts aren't the problem, what else could I look at?
+>Beyond what I have done below I haven't been able to find any references
+>to
+>other configurations that I need to be aware of.
+>
+>Server win2003, windows file association "php = c:\php\php.exe" Xitami
+>runs in "d:\xitami"  (v2.4d9) Xitami Filter ".php = c:\php\php.exe"
+>(v4.3.11) Xitami Mime "Php=application/x-httpd-php c:\php\php.ini :
+>"cgi.force_redirect = 0 ;" c:\php\php.ini-dist : "cgi.force_redirect = 0
+>;"
+>
+>----- Original Message -----
+>From: "Francis Turner" <francis.turner at gmail.com>
+>To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+>Sent: Thursday, June 14, 2007 2:27 AM
+>Subject: Re: [Xitami] PHP problems
+>
+>
+> > That error is basically that PHP or something is going into an
+> > infinite loop and not returning
+> >
+> > On 6/14/07, R O <rolinger1 at hotmail.com> wrote:
+> >> Oh, and the error I do get from the server in the browser is:
+> >>
+> >> "This server is currently overloaded - please try again later "
+> >>
+> >> >
+> >> >I don't use php much and last I recall it was working.  Trying to
+> >> >implement
+> >> >a new script and php isn't working at all.
+> >> >
+> >> >Windows Server 2003
+> >> >Xitami v2.4d9  (In the defaults.cfg file)
+> >> >      * filter : .php=c:\php\php.exe (even tried / slashes and in
+> >> >quotes
+> >> >"c:\php\php.exe")
+> >> >      * mime : Php=application/x-httpd-php
+> >> >
+> >> >PHP 4.3.11 (in php.ini and php.ini-dist)
+> >> >      * cgi.force_redirect  = 0 ;
+> >> >
+> >> >And I have restarted Xitami after each change.  No matter what I do
+> >> >it won't execute the simple test.php file
+> >> ><?php
+> >> >   phpinfo();
+> >> >?>
+> >> >
+> >> >What am I doing wrong or what more could I look at?
+> >> >
+> >> >Thanks all.
+> >> >
+> >> >
+> >> >Russel P. Olinger
+> >> >(310) 466-3399
+> >> >rolinger1 at hotmail.com
+> >> >
+> >> >
+> >> >
+> >> >--
+> >> >Xitami Users Mailing List -- For Xitami support
+> >> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>
+> >>
+> >>
+> >> --
+> >> Xitami Users Mailing List -- For Xitami support
+> >> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>
+> >
+> >
+> > --
+> > http://www.di2.nu/blog.htm
+> > Faber's Fourth Law:
+> >  Necessity is the mother of strange bedfellows.
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami at pastryworld.ca  Thu Jun 14 20:38:46 2007
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Thu, 14 Jun 2007 12:38:46 -0600
+Subject: [Xitami] PHP problems
+In-Reply-To: <BAY105-F2895E725E093114E993BFFF81F0@phx.gbl>
+References: <46710605.22137.32C823@localhost>
+Message-ID: <467136D6.4793.F17895@localhost>
+
+I am running still 4.3.11
+
+> 
+> Johannes:
+> 
+> What version of php are you running...the difference between 4.x and 5.x 
+> (that I have read) is that the in 4.x : .php = c:\php\php.exe ...and in 5.x 
+> : .php = "c:/php/php.exe" - forward/backslashes and quotes are required for 
+> php 5.x - thats what I have read - either way though it doesn't make a 
+> difference on my install.
+> 
+> -R
+> 
+> 
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1 at hotmail.com
+> 
+> 
+> 
+> 
+> 
+> >From: "Johannes Prost" <xitami at pastryworld.ca>
+> >Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> >To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> >Subject: Re: [Xitami] PHP problems
+> >Date: Thu, 14 Jun 2007 09:10:29 -0600
+> >
+> >Hi Russel,
+> >
+> >shown below, is it exactly as you have it in your .cfg file ? I have a few 
+> >php things going, but
+> >they are working just fine. No hick-ups. Below are my cfg entries, copied & 
+> >pasted
+> >
+> >[Filter]
+> >     .php = "D:/PHP/php.exe"
+> >
+> >[Mime]
+> >     Php = "application/x-httpd-php"
+> >
+> >
+> >Johannes
+> >
+> >
+> > >
+> > > I don't use php much and last I recall it was working.  Trying to 
+> >implement
+> > > a new script and php isn't working at all.
+> > >
+> > > Windows Server 2003
+> > > Xitami v2.4d9  (In the defaults.cfg file)
+> > >      * filter : .php=c:\php\php.exe (even tried / slashes and in quotes
+> > > "c:\php\php.exe")
+> > >      * mime : Php=application/x-httpd-php
+> > >
+> > > PHP 4.3.11 (in php.ini and php.ini-dist)
+> > >      * cgi.force_redirect  = 0 ;
+> > >
+> > > And I have restarted Xitami after each change.  No matter what I do it 
+> >won't
+> > > execute the simple test.php file
+> > > <?php
+> > >   phpinfo();
+> > > ?>
+> > >
+> > > What am I doing wrong or what more could I look at?
+> > >
+> > > Thanks all.
+> > >
+> > >
+> > > Russel P. Olinger
+> > > (310) 466-3399
+> > > rolinger1 at hotmail.com
+> > >
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >Johannes
+> >
+> >
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] supervisor agent and logs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000600.html">
+   <LINK REL="Next"  HREF="000603.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] supervisor agent and logs
+   </H1>
+    <B>Michael S. Kazarin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] supervisor agent and logs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 7 Aug 2001 11:30:47 +0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000600.html">[Xitami] supervisor agent and logs
+</A></li>
+        <LI> Next message: <A HREF="000603.html">[Xitami] php3 to php4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#602">[ date ]</a>
+              <a href="thread.html#602">[ thread ]</a>
+              <a href="subject.html#602">[ subject ]</a>
+              <a href="author.html#602">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ewen wrote:
+|<i> You might be better working with it, to tell it not to remove log files
+</I>|<i> as often.  You can configure the log rotation and how long they're kept
+</I>|<i> in the Xitami configuration file as well.
+</I>
+How do I actually do that? I have my logs cycled daily, so there is a file
+for each day.
+But how can I tell it to keep more than 14 of them, i. e. more than two
+weeks of logs.
+I have this set up in config:
+
+[Accesslog]
+    enabled=1
+    filename=haccess.log
+    local=1
+    format=CLFX
+    custom=
+    translate=0
+    cycle=daily
+    cycle-how=rename
+    cycle-time=00:00
+    cycle-day=0
+    cycle-size=0
+    cycle-lines=0
+    cycle-arg=ha%yy%mm%dd.log
+
+I understand that I could have run a batch file to archive logs or move them
+to another location so they won't get deleted, but I wouldn't like to for
+specific reasons.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000600.html">[Xitami] supervisor agent and logs
+</A></li>
+	<LI> Next message: <A HREF="000603.html">[Xitami] php3 to php4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#602">[ date ]</a>
+              <a href="thread.html#602">[ thread ]</a>
+              <a href="subject.html#602">[ subject ]</a>
+              <a href="author.html#602">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

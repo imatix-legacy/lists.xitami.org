@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] New to Xitami &amp; running xbase++ CGI's
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005097.html">
+   <LINK REL="Next"  HREF="005102.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] New to Xitami &amp; running xbase++ CGI's
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] New to Xitami &amp; running xbase++ CGI's">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 2 Jun 2003 14:03:20 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005097.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+        <LI> Next message: <A HREF="005102.html">[Xitami] what's this?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5099">[ date ]</a>
+              <a href="thread.html#5099">[ thread ]</a>
+              <a href="subject.html#5099">[ subject ]</a>
+              <a href="author.html#5099">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+ As you pointed out, only exe's get run, but the key to getting IIS to accept an exe is a little 16k dll that acts as a 'thunking' layer. The dll is named the same as its larger exe brother..call the dll in the script and the exe is run, which in turn returns the page. I realize now that this applies only for IIS. I had used o'Reilly in the distant past [ and may have to use it again ??] and it recognized the the .exe extension. Xitami appears to make a leap of faith that this is a script [ given the cg-bin in the tag ]
+
+ What I've tried is to NOT use the dll extension and call the exe directly..but use just the file name instead. cgi-bin/MZload1 with no file extension. I get a blank page returned. Look on the bright side at least it found something this time out, and judging by the brief delay it looks as if something is being run.
+
+ Brent
+
+&gt;<i> 
+</I>&gt;<i> From: &quot;Jeff Hamblin&quot; &lt;<A HREF="mailto:jphamblin@cox.net">jphamblin@cox.net</A>&gt;
+</I>&gt;<i> Date: 2003/06/02 Mon AM 11:41:39 EDT
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Subject: Re: Re: [Xitami] New to Xitami &amp; running xbase++ CGI's
+</I>&gt;<i> 
+</I>&gt;<i> From: &lt;<A HREF="mailto:brent.mawhinney@rogers.com">brent.mawhinney@rogers.com</A>&gt;
+</I>&gt;<i> &gt; Thanks. File received, loaded and run succussfully.
+</I>&gt;<i> &gt;  So I guess the issue isn't the mapping but some other setting.
+</I>&gt;<i> &gt;  I attempted to run my dll [ which is uspposed to call the exe ].
+</I>&gt;<i> &gt; MZLOAD1.dll and I receive a windows warning 'You area
+</I>&gt;<i> &gt; attempting to open a file of type &quot;Application Extension&quot; dll '
+</I>&gt;<i> &gt; and suggests that running a file of this type may be harmful
+</I>&gt;<i> &gt; etc. Its as if its trying to download the dll instaed of running
+</I>&gt;<i> &gt; it the same way IIS used to.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> 
+</I>&gt;<i> CGI runs executable files -- not DLLs. DLLs are not directly
+</I>&gt;<i> executable. As the name infers, they are Dynamic Link
+</I>&gt;<i> Libraries that are used by applications.
+</I>&gt;<i> 
+</I>&gt;<i> Your DLL is likely an
+</I>&gt;<i> ISAPI DLL designed to work with IIS. This has some performance
+</I>&gt;<i> benefits since the DLL is loaded once by the IIS exe into
+</I>&gt;<i> its memory space, whereas CGI exes must run-execute-close
+</I>&gt;<i> each time they are needed.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Further, a CGI exe must
+</I>&gt;<i> conform to the input/output requirements of CGI.
+</I>&gt;<i> Try calling your exe directly.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005097.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+	<LI> Next message: <A HREF="005102.html">[Xitami] what's this?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5099">[ date ]</a>
+              <a href="thread.html#5099">[ thread ]</a>
+              <a href="subject.html#5099">[ subject ]</a>
+              <a href="author.html#5099">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

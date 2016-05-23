@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI won't get data from another page?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002390.html">
+   <LINK REL="Next"  HREF="002385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI won't get data from another page?
+   </H1>
+    <B>Edward Willliams
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI won't get data from another page?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 14 Feb 2002 07:59:04 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002390.html">[Xitami] SSI won't get data from another page?
+</A></li>
+        <LI> Next message: <A HREF="002385.html">[Xitami] Firewall Problems, can't get a list
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2426">[ date ]</a>
+              <a href="thread.html#2426">[ thread ]</a>
+              <a href="subject.html#2426">[ subject ]</a>
+              <a href="author.html#2426">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You can't call a page from an other server using ssi but yo can use an
+iframe or java script.
+
+if you want to use these contact me and I'll walk you through it and show
+you how.
+
+Edward - <A HREF="mailto:EdwardWilliams@nettaxi.com">EdwardWilliams@nettaxi.com</A>
+
+
+----- Original Message -----
+From: &quot;Matt Fontaine&quot; &lt;<A HREF="mailto:Fontaine@Purdue.edu">Fontaine@Purdue.edu</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Wednesday, February 13, 2002 12:59 PM
+Subject: RE: [Xitami] SSI won't get data from another page?
+
+
+:<i>
+</I>:<i>
+</I>:<i> That didn't work - How can I specify to pull the text file from another
+</I>web
+:<i> server?  It's not stored on this machine.  AFter I modify perlssi to do
+</I>what
+:<i> I think needs to be done, do I have to complie it or re-start the server
+</I>or
+:<i> anything like that to get it to be read?  I am very sure that it is not
+</I>:<i> being used right now, even though I have made changes to it.
+</I>:<i>
+</I>:<i> -----Original Message-----
+</I>:<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>:<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Edward Willliams
+</I>:<i> Sent: Wednesday, February 13, 2002 8:12 AM
+</I>:<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>:<i> Subject: Re: [Xitami] SSI won't get data from another page?
+</I>:<i>
+</I>:<i> Try This
+</I>:<i>
+</I>:<i> &lt;!-- #include virtual=&quot;/MyUserName/updates.txt&quot;  --&gt;
+</I>:<i> or
+</I>:<i> &lt;!-- #include virtual=&quot;/updates.txt&quot;  --&gt;
+</I>:<i>
+</I>:<i>
+</I>:<i> ----- Original Message -----
+</I>:<i> From: &quot;Matt Fontaine&quot; &lt;<A HREF="mailto:Fontaine@Purdue.edu">Fontaine@Purdue.edu</A>&gt;
+</I>:<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>:<i> Sent: Wednesday, February 13, 2002 1:56 AM
+</I>:<i> Subject: [Xitami] SSI won't get data from another page?
+</I>:<i>
+</I>:<i>
+</I>:<i> : Hello -
+</I>:<i> : I am trying to use SSI to get data from a text file that is not local.
+</I>I
+:<i> : used the syntax &lt;!--#include
+</I>:<i> : virtual=&quot;<A HREF="http://OtherServerHere/~MyUserName/updates.txt"">http://OtherServerHere/~MyUserName/updates.txt&quot;</A> --&gt;
+</I>:<i> :
+</I>:<i> : This does not seem to work, however I know the server is parsing the
+</I>page
+:<i> : because if I use a reference to a file inside my DocRoot Folder, it
+</I>shows
+:<i> up
+</I>:<i> : correctly.
+</I>:<i> :
+</I>:<i> : I have tried changing the perlssi script in the program root to force
+</I>:<i> : $DOCPATH = '<A HREF="http://OtherServerHere/~MyUserName/';">http://OtherServerHere/~MyUserName/';</A> and using simply
+</I>:<i> : &quot;/updates.txt&quot; in the Include line of the shtml page, but it is almost
+</I>as
+:<i> : though perlssi is not even used, it still will open local files if a
+</I>file
+:<i> : exists.  There is no error if it does not exist.  I even set up a filter
+</I>:<i> for
+</I>:<i> : .shtml to use perlssi
+</I>:<i> :
+</I>:<i> :
+</I>:<i> : How can I make this work?
+</I>:<i> :
+</I>:<i> : Also - I do have access to the update.txt file via a H: Drive Mapping,
+</I>but
+:<i> : can't seem to get it to work with Include File either.
+</I>:<i> :  Any Suggestions?
+</I>:<i> :
+</I>:<i> : Thanks!
+</I>:<i> : -Matt Fontaine
+</I>:<i> : <A HREF="mailto:Fontaine@Purdue.edu">Fontaine@Purdue.edu</A>
+</I>:<i> :
+</I>:<i> :
+</I>:<i> : --
+</I>:<i> : Xitami Users Mailing List -- For Xitami support
+</I>:<i> : To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>:<i>
+</I>:<i>
+</I>:<i> --
+</I>:<i> Xitami Users Mailing List -- For Xitami support
+</I>:<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>:<i> ---
+</I>:<i> Incoming mail is certified Virus Free at cary-e-023.resnet.purdue.edu.
+</I>:<i> Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+</I>:<i> Version: 6.0.323 / Virus Database: 180 - Release Date: 2/8/02
+</I>:<i>
+</I>:<i>
+</I>:<i> --
+</I>:<i> Xitami Users Mailing List -- For Xitami support
+</I>:<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002390.html">[Xitami] SSI won't get data from another page?
+</A></li>
+	<LI> Next message: <A HREF="002385.html">[Xitami] Firewall Problems, can't get a list
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2426">[ date ]</a>
+              <a href="thread.html#2426">[ thread ]</a>
+              <a href="subject.html#2426">[ subject ]</a>
+              <a href="author.html#2426">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

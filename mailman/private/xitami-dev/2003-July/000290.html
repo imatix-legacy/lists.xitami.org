@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000288.html">
+   <LINK REL="Next"  HREF="000289.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+   </H1>
+    <B>Rafael Cano Pérez
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] SMT 3.0 sockets on Windows XP fail">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Fri, 18 Jul 2003 17:18:59 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000288.html">[Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+</A></li>
+        <LI> Next message: <A HREF="000289.html">[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#290">[ date ]</a>
+              <a href="thread.html#290">[ thread ]</a>
+              <a href="subject.html#290">[ subject ]</a>
+              <a href="author.html#290">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01C34D3F.E9A8DD50
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+
+ Hi.
+
+ I think I've been able to build a thread safe multithreaded DLL
+ version of SFL, by using the Storage-Class attribute,
+
+ __declspec(thread) TYPE globalvariable;
+
+ for the global variables, and using the function,
+
+ _beginthread(..)
+
+ instead of=20
+
+ CreateThread()
+
+ for creating the threads that access SFL functions.
+
+ Kind regards.  Rafael Cano P=E9rez. Okhtor Labs.
+     =20
+
+-----Mensaje original-----
+De: <A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>]En nombre de Rafael Cano =
+P=E9rez
+Enviado el: jueves, 17 de julio de 2003 13:41
+Para: Xitami devel (E-mail)
+Asunto: [Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+
+
+
+ Hi.
+
+ Has anyone been able to use the SMTSOCK from SMT 3.0
+ ( as it comes in realibase 1.0 ) in Windows XP?
+
+ In www.imatix.com, they state that you need Windows 2000,=20
+ and indeed it works under win2k, but I don=B4t understand
+ why it does not under WinXP.
+
+ Previous versions of SMT, 2.0 as in Xitami 2.4d9 and 2.5b5,
+ work on all win32 platforms.
+
+ How safe is SFL as to build (and use!!) a multithreaded DLL?
+
+ Regards.
+
+
+
+=20
+   Rafael Cano P=E9rez,  Okhtor Labs, S.L.
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+
+------_=_NextPart_001_01C34D3F.E9A8DD50
+Content-Type: application/ms-tnef;
+	name=&quot;winmail.dat&quot;
+Content-Transfer-Encoding: base64
+
+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
+8xABAAAAdAAAAFIARQAlADMAQQAgAFsAWABpAHQAYQBtAGkALQBEAGUAdgBdACAAUwBNAFQAIAAz
+AC4AMAAgAHMAbwBjAGsAZQB0AHMAIABvAG4AIABXAGkAbgBkAG8AdwBzACAAWABQACAAZgBhAGkA
+bAAuAEUATQBMAAAACwD2EAAAAABAAAcwkMCi6T9NwwFAAAgw0Ba16T9NwwEDAN4/r28AAAMA8T8K
+DAAAHgD4PwEAAAASAAAAUmFmYWVsIENhbm8gUOlyZXoAAAACAfk/AQAAAGYAAAAAAAAA3KdAyMBC
+EBq0uQgAKy/hggEAAAAAAAAAL089T0tIVE9SIExBQlMvT1U9RklSU1QgQURNSU5JU1RSQVRJVkUg
+R1JPVVAvQ049UkVDSVBJRU5UUy9DTj1SQUZBRUwuQ0FOTwAAAB4A+j8BAAAAFQAAAFN5c3RlbSBB
+ZG1pbmlzdHJhdG9yAAAAAAIB+z8BAAAAHgAAAAAAAADcp0DIwEIQGrS5CAArL+GCAQAAAAAAAAAu
+AAAAAwAZQAAAAAADABpAAAAAAB4AMEABAAAADAAAAFJBRkFFTC5DQU5PAB4AMUABAAAADAAAAFJB
+RkFFTC5DQU5PAB4AOEABAAAADAAAAFJBRkFFTC5DQU5PAB4AOUABAAAAAgAAAC4AAAADAAlZAQAA
+AAsAZoEIIAYAAAAAAMAAAAAAAABGAAAAAA6FAAAAAAAAAwB+gQggBgAAAAAAwAAAAAAAAEYAAAAA
+UoUAAHN5AQAeAH+BCCAGAAAAAADAAAAAAAAARgAAAABUhQAAAQAAAAQAAAA5LjAAAwDCgQggBgAA
+AAAAwAAAAAAAAEYAAAAAAYUAAAAAAAALAMeBCCAGAAAAAADAAAAAAAAARgAAAAADhQAAAAAAAAMA
+zIEIIAYAAAAAAMAAAAAAAABGAAAAABGFAAAAAAAAAwDRgQggBgAAAAAAwAAAAAAAAEYAAAAAEIUA
+AAAAAAADANiBCCAGAAAAAADAAAAAAAAARgAAAAAYhQAAAAAAAAsAWYIIIAYAAAAAAMAAAAAAAABG
+AAAAAAaFAAAAAAAACwApAAAAAAALACMAAAAAAAMABhCyqRl7AwAHEMkDAAADABAQAAAAAAMAERAA
+AAAAHgAIEAEAAABlAAAASElJVEhJTktJVkVCRUVOQUJMRVRPQlVJTERBVEhSRUFEU0FGRU1VTFRJ
+VEhSRUFERURETExWRVJTSU9OT0ZTRkwsQllVU0lOR1RIRVNUT1JBR0UtQ0xBU1NBVFRSSUJVVEUs
+RAAAAAACAX8AAQAAADsAAAA8OTMwN0M5MzE5Q0Q3MUE0OTlFRERBNDczOUY0QzgwQzgwMTBENjRA
+b2x4Y2hnLm9raHRvci5uZXQ+AACDfQ==
+
+------_=_NextPart_001_01C34D3F.E9A8DD50--
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000288.html">[Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+</A></li>
+	<LI> Next message: <A HREF="000289.html">[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#290">[ date ]</a>
+              <a href="thread.html#290">[ thread ]</a>
+              <a href="subject.html#290">[ subject ]</a>
+              <a href="author.html#290">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FW: Website using Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002005.html">
+   <LINK REL="Next"  HREF="002049.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FW: Website using Xitami
+   </H1>
+    <B>Keresztfalvi Laszlo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FW: Website using Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 14 Jan 2002 10:27:42 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002005.html">[Xitami] FW: Website using Xitami
+</A></li>
+        <LI> Next message: <A HREF="002049.html">[Xitami] FW: Website using Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2048">[ date ]</a>
+              <a href="thread.html#2048">[ thread ]</a>
+              <a href="subject.html#2048">[ subject ]</a>
+              <a href="author.html#2048">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jan 10, 2002 at 04:13:30PM +0100, Francis Turner wrote:
+&gt;<i> First a default page which gets redirected to index.html (ignore the .1 
+</I>&gt;<i> thats caused by the fact I had an index.html in the wget diretory)
+</I>&gt;<i> 
+</I>&gt;<i> C:\temp\wget&gt;wget <A HREF="http://www.hanleytime.com/">http://www.hanleytime.com/</A>
+</I>&gt;<i> --15:24:41--  <A HREF="http://www.hanleytime.com/">http://www.hanleytime.com/</A>
+</I>&gt;<i>           =&gt; `index.html.1'
+</I>&gt;<i> Connecting to www.hanleytime.com:80... connected!
+</I>&gt;<i> HTTP request sent, awaiting response... 200 OK
+</I>&gt;<i> Length: 1,979 [text/html]
+</I>&gt;<i> 
+</I>&gt;<i>    0K                                                         0% @   
+</I>&gt;<i> 0.00 B/s
+</I>&gt;<i> 
+</I>&gt;<i> 15:27:38 (0.00 B/s) - Read error at byte 0/1979 (No such file or 
+</I>&gt;<i> directory). Ret
+</I>&gt;<i> rying.
+</I>&gt;<i> ..
+</I>&gt;<i> ^C
+</I>
+Intresting! Where did it know from that the file length will be 1979?
+I've got this (debug enabled trace with wget):
+
+&gt;<i>wget -d www.hanleytime.com
+</I>DEBUG output created by Wget 1.7 on linux-gnu.
+
+parseurl (&quot;www.hanleytime.com&quot;) -&gt; host www.hanleytime.com -&gt; opath  -&gt;
+dir  -&gt; file  -&gt; ndir
+newpath: /
+--10:21:28--  <A HREF="http://www.hanleytime.com/">http://www.hanleytime.com/</A>
+           =&gt; `index.html'
+Connecting to www.hanleytime.com:80... Caching www.hanleytime.com &lt;-&gt;
+216.175.64.191
+Created fd 3.
+connected!
+---request begin---
+GET / HTTP/1.0
+User-Agent: Wget/1.7
+Host: www.hanleytime.com
+Accept: */*
+Connection: Keep-Alive
+
+---request end---
+HTTP request sent, awaiting response... HTTP/1.0 200 Ok
+Server: Xitami
+Content-Type: text/html
+Content-Length: 3376
+Last-Modified: Fri, 11 Jan 2002 01:00:48 GMT
+Connection: Keep-Alive
+Keep-Alive: timeout=30, max=25
+
+
+Found www.hanleytime.com in host_name_address_map: 216.175.64.191
+Registered fd 3 for persistent reuse.
+Length: 3,376 [text/html]
+
+    0K
+
+
+... still waiting :)
+
+The current DNS record is:
+www.hanleytime.com      A       216.175.64.191
+
+So I get connected, Xitami knows the file's type, timestamp and length.
+But why is it neither sent nor read error stated?
+
+Hope this helps,
+Laszlo
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002005.html">[Xitami] FW: Website using Xitami
+</A></li>
+	<LI> Next message: <A HREF="002049.html">[Xitami] FW: Website using Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2048">[ date ]</a>
+              <a href="thread.html#2048">[ thread ]</a>
+              <a href="subject.html#2048">[ subject ]</a>
+              <a href="author.html#2048">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

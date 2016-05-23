@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Console.log msgs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000744.html">
+   <LINK REL="Next"  HREF="000746.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Console.log msgs
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Console.log msgs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 18 Aug 2001 13:18:26 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000744.html">[Xitami] xitami aborts
+</A></li>
+        <LI> Next message: <A HREF="000746.html">[Xitami] hiding *.js code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#745">[ date ]</a>
+              <a href="thread.html#745">[ thread ]</a>
+              <a href="subject.html#745">[ subject ]</a>
+              <a href="author.html#745">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;000201c126ae$3b7a99a0$<A HREF="mailto:0300a8c0@cashmachine.atl.mindspring.com">0300a8c0@cashmachine.atl.mindspring.com</A>&gt;, &quot;Ted Heske&quot; writes:
+&gt;&gt;<i> Is it likely that your machine 192.168.0.2 accessed your Xitami server?
+</I>&gt;<i>
+</I>&gt;<i>I do access the server from its host machine, but for maintenance only (I
+</I>&gt;<i>log into the web admin tool).  I test my website by accessing from a
+</I>&gt;<i>different machine with a different IP address.  I looked up www.isi.edu and
+</I>&gt;<i>their IP address is nothing like 192.x.x.x (it's 128.x.x.x).  
+</I>
+192.168.xx.xx is an address range reserved for private internal networks.  
+As a public service isi.edu (and ep.net, it seems) offer a
+DNS-of-last-resort for 192.168.xx.xx to help avoid long timeouts for
+people who are using those addresses internally, but haven't configured
+their network properly:
+
+bash-2.05$  nslookup -type=NS 168.192.in-addr.arpa
+Server:  localhost.panix.com
+Address:  127.0.0.1
+
+Non-authoritative answer:
+168.192.in-addr.arpa    nameserver = BLACKHOLE.EP.NET
+168.192.in-addr.arpa    nameserver = BLACKHOLE.ISI.EDU
+
+Authoritative answers can be found from:
+BLACKHOLE.EP.NET        internet address = 198.32.1.116
+BLACKHOLE.ISI.EDU       internet address = 128.9.64.26
+
+If you are using RFC1918 addresses internally you should at least put
+these addresses into the hosts file on each machine, and preferably you
+should provide your own authoritive records to your local DNS server for
+the RFC1918 addresses you are using, so that the &quot;default&quot; ones provided
+as a public service by isi.edu and ep.net aren't touched.
+
+&gt;<i>When does the RDNS feature actually try to translate addresses?  I see no 
+</I>&gt;<i>evidence that it has looked up any other addresses in the past and my 
+</I>&gt;<i>server gets accessed all the time.
+</I>
+If you have enabled RDNS translation, Xitami will try to look up the IP
+addresses of machines that connect to your webserver before it writes
+out the log entries.  Generally this will work, and the entries will be
+logged after a short delay.
+
+In this instance because you're using RFC1918 addresses without setting
+up proper DNS records, and for some reason Xitami has taken a disliking
+to the &quot;default&quot; ones (perhaps because they weren't what it expected to
+hear back), you're getting error messages logged because Xitami is
+having problems dealing with those ones.
+
+Either set up the correct DNS records locally, or turn off RDNS in
+Xitami (and, eg, resovle the addresses later, or not at all), or ignore
+the messages for now.
+
+&gt;<i>I do get lots of script errors while using the web admin tool so maybe 
+</I>&gt;<i>I shouldn't be using this version.   
+</I>
+What webbrowser are you using?  The webadmin portion was last updated
+quite a while ago, and it's possible that it is not quite compatible
+with the Javascript expected by some newer browsers.  You can turn the
+Javascript off in the web based admin, and it'll basically work without
+it, although occassionally you have to click on more &quot;go&quot; like buttons.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000744.html">[Xitami] xitami aborts
+</A></li>
+	<LI> Next message: <A HREF="000746.html">[Xitami] hiding *.js code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#745">[ date ]</a>
+              <a href="thread.html#745">[ thread ]</a>
+              <a href="subject.html#745">[ subject ]</a>
+              <a href="author.html#745">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP , data mode not working
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006532.html">
+   <LINK REL="Next"  HREF="006535.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP , data mode not working
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP , data mode not working">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 17 Feb 2005 08:27:35 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006532.html">[Xitami] FTP , data mode not working
+</A></li>
+        <LI> Next message: <A HREF="006535.html">[Xitami] FTP , data mode not working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6534">[ date ]</a>
+              <a href="thread.html#6534">[ thread ]</a>
+              <a href="subject.html#6534">[ subject ]</a>
+              <a href="author.html#6534">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+
+
+Am 16 Feb 2005 um 22:17 hat d calif geschrieben:
+
+&gt;<i> Newbie can't get FTP working
+</I>&gt;<i> * I have read through the archieves but can't see to find a conclusive 
+</I>&gt;<i> answer to my problem.
+</I>&gt;<i> Works locally, on 2nd computer through router with WAN IP.
+</I>&gt;<i> But remote friend can only log in, but NOT see directories/folders/files.
+</I>&gt;<i> 
+</I>&gt;<i> My setup:
+</I>&gt;<i> Xitami:  v 2.5c2
+</I>&gt;<i> Win98se
+</I>&gt;<i> Router: Dlink DI-604 (NAT)
+</I>&gt;<i> DSL / Dynamic IP
+</I>&gt;<i> Base Port: 8000
+</I>&gt;<i> HTTP Port: 8080
+</I>&gt;<i> FTP: cmd : 8021
+</I>&gt;<i> Router Firewall open ports:
+</I>&gt;<i> Public 8021=8021 Private
+</I>&gt;<i> Public 8020=8020 Private
+</I>&gt;<i> Public 8080=8080 Private
+</I>
+I have the same router model, so here is my setup and some questions
+
+1. Do you need another portbase ?
+2. do you have setup a dns record for ftp.your site.com ?
+3. do you have turned on the ftp server in the advanced tab and forwarded to the 
+machines ip ? You ONLY need to enable the ftp server, no messing around with port 20
+4. you don't need to open / close in the firewall section of the router; the ports for the ftp 
+server or configured through enabling the pre configured ftp server
+5. if you enabled the ftp server, did you check the schedule settings ?
+
+Those are some things to test and if you still have some questions, just ask.
+
+&gt;<i> 
+</I>&gt;<i> Attempted several things:  *every changed was followed by testing both local 
+</I>&gt;<i> and remote client.
+</I>&gt;<i> Both passive and active.
+</I>&gt;<i> Tried opening up a range of ports starting at 8020.  (My friend's FTP client
+</I>&gt;<i> kept try ports above 8020, i.e. 8024, 8025, 8023.
+</I>&gt;<i> 
+</I>&gt;<i> ipaddress = &quot;192.168.0.102&quot; (was in the default.cfg) change it to ipaddress 
+</I>&gt;<i> = &quot;*&quot;
+</I>&gt;<i> 
+</I>&gt;<i> Tried to force the External IP
+</I>&gt;<i> force-ip = &quot;1&quot;
+</I>&gt;<i> passiveip = &quot;main IP address&quot;  (then changed it to external IP and tested)
+</I>&gt;<i> 
+</I>&gt;<i> We managed ONE successful remote complete connection.
+</I>&gt;<i> 1st friend set his client: &quot;Force Server IP for PASV mode&quot;
+</I>&gt;<i> friends FTP client had a &quot;NOTE: Useful for servers with NAT/Non-Routable IP&quot;
+</I>&gt;<i> * We couldn't get a 2nd complete on connection, because his client kept 
+</I>&gt;<i> trying a different data port each time, at the time only Server Firewall 
+</I>&gt;<i> ports 8020 and 8021 were open.  We ran out of time and couldn't continue 
+</I>&gt;<i> testing.
+</I>&gt;<i> 
+</I>&gt;<i> One potential problem is the following line in the his client log:
+</I>&gt;<i> friends client log during successful connection, including login, seeing 
+</I>&gt;<i> directories, and downloaded 10 files.
+</I>&gt;<i> ..............
+</I>&gt;<i> 227 Entering Passive Mode (192,168,0,102,38,192)
+</I>&gt;<i>     Opening data connection IP: 64.172.148.182 PORT: 9920.
+</I>&gt;<i>     LIST -aL
+</I>&gt;<i> 150 Preparing to transfer binary file
+</I>&gt;<i>     128 bytes received successfully. (128 B/s) (00:00:01).
+</I>&gt;<i> .............
+</I>&gt;<i> code 227 shows the local IP, I had removed all IP's from the default.cfg.
+</I>&gt;<i> We saw the local IP every time there was a connection and login, but again 
+</I>&gt;<i> could not see directories/folders/files.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+Johannes
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006532.html">[Xitami] FTP , data mode not working
+</A></li>
+	<LI> Next message: <A HREF="006535.html">[Xitami] FTP , data mode not working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6534">[ date ]</a>
+              <a href="thread.html#6534">[ thread ]</a>
+              <a href="subject.html#6534">[ subject ]</a>
+              <a href="author.html#6534">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

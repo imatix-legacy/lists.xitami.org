@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] $PHP_SELF variable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001410.html">
+   <LINK REL="Next"  HREF="001427.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] $PHP_SELF variable
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] $PHP_SELF variable">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 13 Nov 2001 21:17:34 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001410.html">[Xitami] $PHP_SELF variable
+</A></li>
+        <LI> Next message: <A HREF="001427.html">Re[2]: [Xitami] $PHP_SELF variable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1419">[ date ]</a>
+              <a href="thread.html#1419">[ thread ]</a>
+              <a href="subject.html#1419">[ subject ]</a>
+              <a href="author.html#1419">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  describe this a little more in detail to me? Not on the list but in private?
+</I>
+I'm not being secretive--- I just don't have my notes handy. It
+is a fairly common issue here so (now that I am at the machine
+with my hacks) I will reply here. 
+
+In Defaults.cfg: 
+
+ [Filter]
+    .php=C:/php/patchphp.bat
+
+patchphp.bat is: 
+
+ @set path_translated=%1
+ @C:\php\php.exe
+
+Notes: 
+
+When Xitami sees a &quot;.php&quot; file, it calls the BAT file which sets
+the environment variable and then calls PHP.exe. 
+
+I found this was needed for PHP 4, was not needed for PHP 3. 
+
+If you use other extensions for PHP scripts, you will need more
+entries in Defaults.cfg.
+
+The &quot;@&quot; prevents DOS from writing to output. (I hate to do that,
+but DOS's gibberish confuses things.)
+
+Forward/slash in Xitami config files; back\slash in DOS. (Both
+places *may* work the other way... but this is the preferred
+syntax for unix-think Xitami and DOS-think Windows.)
+
+I assume &quot;C:&quot; drive and the customary installation directories.
+Adapt to your situation. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001410.html">[Xitami] $PHP_SELF variable
+</A></li>
+	<LI> Next message: <A HREF="001427.html">Re[2]: [Xitami] $PHP_SELF variable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1419">[ date ]</a>
+              <a href="thread.html#1419">[ thread ]</a>
+              <a href="subject.html#1419">[ subject ]</a>
+              <a href="author.html#1419">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

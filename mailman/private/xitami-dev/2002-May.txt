@@ -1,0 +1,1520 @@
+From xitami-dev@lists.xitami.org  Fri May  3 15:35:29 2002
+From: xitami-dev@lists.xitami.org (Phillip Wee)
+Date: Fri, 3 May 2002 22:35:29 +0800
+Subject: [Xitami-Dev] Configure gnujsp with servletrunner in xitami
+Message-ID: <200205031426.QAA10146@sxpublic.nxrda.imatix.net>
+
+Hi!
+
+Has anybody tried installing/configuring GNUJSP 1.01 with conacom servletrunner 0.9 (http://www.conacom.de) under Xitami 2.5b5 for Win9x? I have JDK v1.3.1.
+
+Please help!  I was able to get the servletrunner to work but not gnujsp. The error returned was "class not found: org.gjt.jsp.JspServlet".
+
+Thanks a lot!!
+Phil
+
+__________________________________
+www.edsamail.com
+
+From xitami-dev@lists.xitami.org  Mon May  6 13:52:26 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 6 May 2002 14:52:26 +0200
+Subject: [Xitami-Dev] iMatix source archives off-line
+Message-ID: <3CD698AA.10356.617CC0A@localhost>
+
+Folks,
+
+For those of you who have been accessing the iMatix source archives 
+via CVS, the good news is we are reorganising everything to make it 
+much easier to download and build Xitami from source.
+
+The bad news is that while this process is underway, the CVS is off-
+line.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Mon May  6 17:41:44 2002
+From: xitami-dev@lists.xitami.org (Ender Erbey)
+Date: Mon, 6 May 2002 18:41:44 +0200
+Subject: [Xitami-Dev] Configure gnujsp with servletrunner in xitami
+References: <200205031426.QAA10146@sxpublic.nxrda.imatix.net>
+Message-ID: <004b01c1f51c$e8262d30$0701a8c0@ender>
+
+Hi
+
+We did not test GNUJSP 1.01 with Conacom servlet runner yet.  But first
+thing  you need to check is whether you add required libraries to classpath
+in runner.cmd or not.
+
+Ender ERBEY
+Conacom GmbH
+
+----- Original Message -----
+From: "Phillip Wee" <philwee@edsamail.com.ph>
+To: <xitami-dev@lists.xitami.org>
+Sent: Friday, May 03, 2002 4:35 PM
+Subject: [Xitami-Dev] Configure gnujsp with servletrunner in xitami
+
+
+> Hi!
+>
+> Has anybody tried installing/configuring GNUJSP 1.01 with conacom
+servletrunner 0.9 (http://www.conacom.de) under Xitami 2.5b5 for Win9x? I
+have JDK v1.3.1.
+>
+> Please help!  I was able to get the servletrunner to work but not gnujsp.
+The error returned was "class not found: org.gjt.jsp.JspServlet".
+>
+> Thanks a lot!!
+> Phil
+>
+> __________________________________
+> www.edsamail.com
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+
+
+From xitami-dev@lists.xitami.org  Tue May  7 11:09:22 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Tue, 7 May 2002 06:09:22 -0400
+Subject: [Xitami-Dev] iMatix source archives off-line
+In-Reply-To: <3CD698AA.10356.617CC0A@localhost>
+References: <3CD698AA.10356.617CC0A@localhost>
+Message-ID: <200205070609390.SM00591@there>
+
+> For those of you who have been accessing the iMatix source archives
+> via CVS, the good news is we are reorganising everything to make it
+> much easier to download and build Xitami from source.
+
+Will Open Kernel be updated as well?
+
+From xitami-dev@lists.xitami.org  Tue May  7 16:43:41 2002
+From: xitami-dev@lists.xitami.org (Phillip Wee)
+Date: Tue, 7 May 2002 23:43:41 +0800
+Subject: [Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami
+Message-ID: <200205071534.RAA12043@sxpublic.nxrda.imatix.net>
+
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: text/plain
+
+Hi!
+
+Here's my setup:
+OS:  Win98
+Xitami path:  c:\xitami
+JDK path:  c:\jdk1.3.1_02
+Conacom servlet runner path:  c:\xitami\java
+gnujsp jar path:  c:\xitami\java\gnujsp-1.0.1\lib
+
+I renamed the ff CMD files to BAT files for Windows compatibility:
+1) runner.cmd -> runner.bat
+2) restart.cmd -> restart.bat
+3) stop.cmd -> stop.bat
+
+The servlet runner .ini and .bat files, and also servlet.properties,  are placed in c:\xitami\java.
+
+I modified runner.ini such that:
+1) sessionmanagerconfig=mem_sessionmgr.ini
+2) servlet_cfg=servlet.ini
+3) locale=en,US
+
+I created servlet.ini, which is patterned from sv_demo.ini.
+
+I created servlet.properties, patterned from sv_demo.properties.
+
+The classpath (this should all be in one line) in runner.bat and servlet.properties is:
+.;/xitami/java/runner.jar;/xitami/java/javax.jar;
+/xitami/java/gnujsp-1.0.1/lib/gnujsp10test.jar;
+/xitami/java/gnujsp-1.0.1/lib/openxml-1.2-w3c.jar;
+/xitami/java/gnujsp-1.0.1/lib/servlet-2.0-plus.jar
+
+The conacom test servlet (net.conacom.servletrunner.util.TestServlet)  runs OK.
+The gnujsp test servlet (org.gjt.jsp.test.GNUJSPTestServlet) runs OK.
+The gnujsp servlet (org.gjt.jsp.JspServlet) returned an init() error, logged in srvl_20020507.log.  It appears that the settings in servlet.properties were not read, and defaults were assumed by the gnujsp servlet.
+
+I'm attaching the config files together with this post. Please reply if you have any questions.
+
+BTW, gnujsp can be freely downloaded in
+    http://www.klomp.org/gnujsp/.
+
+Thanks for your help!
+Phil
+
+
+xitami-dev@lists.xitami.org wrote:
+
+>Hi
+>
+>We did not test GNUJSP 1.01 with Conacom servlet runner yet.  But first
+>thing  you need to check is whether you add required libraries to classpath
+>in runner.cmd or not.
+>
+>Ender ERBEY
+>Conacom GmbH
+>
+
+
+__________________________________
+www.edsamail.com
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name="runner.ini"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename="runner.ini"
+
+Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0NCiMgTFJXUA0KIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0NCiMgdGhlIGRlZmF1bHQgTFJXUC1ob3N0IHRvIGNvbm5l
+Y3QNCmRlZmF1bHRfaG9zdD0xMjcuMC4wLjENCg0KIyB0aGUgZGVmYXVsdCBMUldQLXBvcnQg
+dG8gY29ubmVjdA0KZGVmYXVsdF9wb3J0PTgxDQoNCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIExPR0ZJTEUNCiMtLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+DQojIHBhdGggdG8gdGhlIGxvZ2ZpbGUgZGlyZWN0b3J5DQpsb2dmaWxlX3BhdGg9Li8NCg0K
+IyBwcmFlZml4IGZvciB0aGUgbG9nZmlsZSAoZWcuIFNSVkxfLi4uLikNCmxvZ2ZpbGVfcHJh
+ZWZpeD1zcnZsXw0KDQojIHN1ZmZpeCBmb3IgdGhlIGxvZ2ZpbGUgKGVoLiAuTE9HKQ0KbG9n
+ZmlsZV9zdWZmaXg9LmxvZw0KDQojIHdoaWNoIG91dHB1dCB0byBsb2cgPw0KIyBEID0gRGVi
+dWcNCiMgIyA9IEluZm9ybWF0aW9uYWwNCiMgISA9IFdhcm5pbmdzDQojID8gPSBFcnJvcnMN
+CiMgUyA9IGxvZ291dHB1dCBkb25lIGJ5IHRoZSBzZXJ2bGV0DQojIEMgPSBsb2dvdXRwdXQg
+ZG9uZSBieSB0aGUgY2xhc3Nsb2FkZXINCiEgbG9nZmlsZV9vcHRpb25zPUQjIT9TQw0KbG9n
+ZmlsZV9vcHRpb25zPSE/Uw0KDQojIGZvcm1hdCBvZiB0aGUgZGF0ZSBpbiB0aGUgbG9nZmls
+ZSAoc2VlOiBqYXZhLnRleHQuU2ltcGxlRGF0ZUZvcm1hdCkNCiMgZGVmYXVsdCA9IGRkLk1N
+Lnl5eXkgKGdlcm1hbiBmb3JtYXQpDQohIGxvZ2ZpbGVfZGF0ZWZvcm1hdD15eXl5L01NL2Rk
+DQoNCiMgZm9ybWF0IG9mIHRoZSB0aW1lIGluIHRoZSBsb2dmaWxlICAoc2VlOiBqYXZhLnRl
+eHQuU2ltcGxlRGF0ZUZvcm1hdCkNCiMgZGVmYXVsdCA9IEhILm1tLnNzIChnZXJtYW4gZm9y
+bWF0KQ0KISBsb2dmaWxlX2RhdGVmb3JtYXQ9SEg6bW06c3MNCg0KIy0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiMgU0VTU0lP
+Tk1BTkFHRVINCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tDQojIHRoZSBjb25maWd1cmF0aW9uLWZpbGUgZm9yIHRoZSBzZXNz
+aW9ubWFuYWdlcg0KIyBpZiBvbW1pdHRlZCwgZGVmYXVsdHMgYW5kIHRoZSBtZW1vcnktc2Vz
+c2lvbm1hbmFnZXIgaXMgdXNlZA0KISBzZXNzaW9ubWFuYWdlcmNvbmZpZz1tZW1fc2Vzc2lv
+bm1nci5pbmkNCiEgc2Vzc2lvbm1hbmFnZXJjb25maWc9ZmlsZV9zZXNzaW9ubWdyLmluaQ0K
+c2Vzc2lvbm1hbmFnZXJjb25maWc9bWVtX3Nlc3Npb25tZ3IuaW5pDQoNCiMtLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIFNF
+UlZMRVRTIEFORCBDT05GSUdVUkFUSU9ODQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KI3NlcnZsZXRfY2ZnPXN2X2RlbW8u
+aW5pDQohIHNlcnZsZXRfY2ZnPWFqcC5pbmkNCnNlcnZsZXRfY2ZnPXNlcnZsZXQuaW5pDQoN
+CiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tDQojIFJFTU9URSBBQ0NFU1MNCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIHRoZSBJUCB0byBiaW5kIHRoZSBz
+ZXJ2ZXIgZm9yIHJlbW90ZSBhY2Nlc3MNCiMgZGVmYXVsdCA9IDEyNy4wLjAuMQ0KIyBhbiBl
+bXB0eSBzdHJpbmcgZGVuaWVzIHRoZSBzdGFydCBvZiB0aGUgY29tbXVuaWNhdGlvbiBzZXJ2
+ZXJ0aHJlYWQNCiEgcmVtb3RlX2JpbmRfaXA9DQohIHJlbW90ZV9iaW5kX2lwPTEyNy4wLjAu
+MQ0KDQojIHRoZSBwb3J0IGZvciB0aGUgc2VydmVyDQojIGRlZmF1bHQgPSAxMzMgKHN0YXRp
+c3RpY3MgcG9ydCkNCiEgcmVtb3RlX2JpbmRfcG9ydD0xMzMNCg0KIyB0aGUgcmVtb3RlIElQ
+cyBvciBob3N0cyB3aGljaCBjYW4gY29ubmVjdA0KIyBtdWx0aXBsZSBkb21haW5zIG9yIElQ
+cyBhcmUgc2VwYXJhdGVkIGJ5IGNvbW1hDQojIGRlZmF1bHQgPSAxMjcuMC4wLjENCiNyZW1v
+dGVfaG9zdHM9MTI3LjAuMC4xLCouY29uYWNvbS5kZQ0KDQojIHRoZSB1c2VybmFtZQ0KIyBk
+ZWZhdWx0ID0gKG5vIHVzZXJuYW1lIG5lZWRlZCkNCiEgcmVtb3RlX3VzZXI9dGVzdHVzZXIN
+Cg0KIyB0aGUgYWNjZXNzIHBhc3N3b3JkDQojIGRlZmF1bHQgPSAobm8gcGFzc3dvcmQgbmVl
+ZGVkKQ0KISByZW1vdGVfcGFzcz10ZXN0cGFzc3dvcmQNCg0KIyBhbGxvdyByZW1vdGUgcmVz
+dGFydCA/DQojIGRlZmF1bHQgPSAwICg9bm90IGFsbG93ZWQsIDE9YWxsb3dlZCkNCnJlbW90
+ZV9yZXN0YXJ0PTENCg0KIyBhbGxvdyByZW1vdGUgc2h1dGRvd24gPw0KIyBkZWZhdWx0ID0g
+MCAoPW5vdCBhbGxvd2VkLCAxPWFsbG93ZWQpDQpyZW1vdGVfc2h1dGRvd249MQ0KDQojLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQ0KIyBNSVNDLg0KIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0NCiMgdGltZSBhZnRlciB3aGljaCB0aGUgcnVubmVyIHNob3Vs
+ZCBjaGVjayBpZiB0aGUgZmlsZXMNCiMgJ3Jlc3RhcnQnIG9yICdzaHV0ZG93bicgZXhpc3Rz
+Lg0KIyBkZWZhdWx0ID0gMTAwMCBtaWxpc2Vjb25kcw0KISBzZW1hcGhvcmVjaGVjaz0xMDAw
+DQoNCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tDQojIFRST1VCTEVTSE9PVElORyAvIERFQlVHR0lORw0KIy0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiMgc2V0
+IGFub3RoZXIgbGFuZ3VhZ2UgLyBsb2NhbGUgPw0KIyB0aGlzIHN0cmluZyBpcyBwYXNzZWQg
+dG8gJ25ldyBMb2NhbGUocGFydDEscGFydDJbLHBhcnQzXSknDQojIGRlZmF1bHQgPSAnJyAo
+c2VlIGphdmEudXRpbC5Mb2NhbGUpDQohIGxvY2FsZT1kZSxERQ0KbG9jYWxlPWVuLFVTDQoN
+CiMgcnVuIGZpbmFsaXphdGlvbiBvbiBleGl0IC8gcmVzdGFydCA/ICgwPWZhbHNlLzE9dHJ1
+ZSkNCiMgZGVmYXVsdCA9IDANCiEgZmluYWxpemF0aW9uPTENCg0KIyBydW4gZmluYWxpemVy
+cyBvbiBleGl0ID8NCiMgZGVmYXVsdCA9IDANCiEgcnVuZmluYWxpemVyc29uZXhpdD0xDQo=
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name="servlet.ini"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename="servlet.ini"
+
+IyBzdGFydHN0cmluZyB3aGljaCBkZWZpbmVzIHRoZSBzZXJ2bGV0Lg0KIw0KIyBwYXR0ZXJu
+ZWQgZnJvbSBzdl9kZW1vLmluaQ0KI3NlcnZsZXRpZGVudGlmaWVyID0gL2dudWpzcA0KI2Ns
+YXNzID0gbmV0LmNvbmFjb20uc2VydmxldHJ1bm5lci51dGlsLlRlc3RTZXJ2bGV0DQojY2xh
+c3MgPSBvcmcuZ2p0LmpzcC50ZXN0LkdOVUpTUFRlc3RTZXJ2bGV0DQpjbGFzcyA9IG9yZy5n
+anQuanNwLkpzcFNlcnZsZXQNCiNjb25maWcgPSBzZXJ2bGV0LnByb3BlcnRpZXMNCg==
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name="runner.bat"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename="runner.bat"
+
+QGVjaG8gb2ZmDQpqYXZhIC1jcCAuO3J1bm5lci5qYXI7amF2YXguamFyOy4vZ251anNwLTEu
+MC4xL2xpYi9nbnVqc3AxMHRlc3QuamFyOy4vZ251anNwLTEuMC4xL2xpYi9vcGVueG1sLTEu
+Mi13M2MuamFyOy4vZ251anNwLTEuMC4xL2xpYi9zZXJ2bGV0LTIuMC1wbHVzLmphciBuZXQu
+Y29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uUnVubmVyDQpleGl0DQo=
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name="servlet.properties"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename="servlet.properties"
+
+IyBHTlVKU1AgDQpzZXJ2bGV0LmdudWpzcC5jb2RlPW9yZy5nanQuanNwLkpzcFNlcnZsZXQg
+DQpzZXJ2bGV0LmdudWpzcC5pbml0QXJncz1zY3JhdGNoZGlyPWpzcHJlcG9zaXRvcnkNCnNl
+cnZsZXQuZ251anNwLmluaXRBcmdzPWpzZXJ2PXRydWUNCnNlcnZsZXQuZ251anNwLmluaXRB
+cmdzPWtlZXBKYXZhPXRydWUNCnNlcnZsZXQuZ251anNwLmluaXRBcmdzPWRlYnVnPXRydWUN
+CnNlcnZsZXQuZ251anNwLmluaXRBcmdzPXBhdGhkZWJ1Zz10cnVlDQpzZXJ2bGV0LmdudWpz
+cC5pbml0QXJncz1jaGVja2NsYXNzPXRydWUNCg0Kc2VydmxldC5nbnVqc3AuaW5pdEFyZ3M9
+Y29tcGlsZXI9amF2YWMgLWNsYXNzcGF0aCAlc2NyYXRjaGRpciU7Li9nbnVqc3AtMS4wLjEv
+bGliL2dudWpzcDEwdGVzdC5qYXI7Li9nbnVqc3AtMS4wLjEvbGliL29wZW54bWwtMS4yLXcz
+Yy5qYXI7Li9nbnVqc3AtMS4wLjEvbGliL3NlcnZsZXQtMi4wLXBsdXMuamFyIC1kICVzY3Jh
+dGNoZGlyJSAtZGVwcmVjYXRpb24gJXNvdXJjZSUNCg0Kc2VydmxldC5nbnVqc3AuYWxpYXNl
+cz0qLmpzcCANCg0Kc2VydmxldC5nbnVqc3AucHJlbG9hZD10cnVlDQpzZXJ2bGV0cy5zdGFy
+dHVwPWdudWpzcCANCiMNCg0KI3NlcnZsZXQuZ251anNwdGVzdHNlcnZsZXQuY29kZT1vcmcu
+Z2p0LmpzcC50ZXN0LkdOVUpTUFRlc3RTZXJ2bGV0DQojc2VydmxldHMuc3RhcnR1cD1nbnVq
+c3B0ZXN0c2VydmxldA0KIA0K
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name="srvl_20020507.log"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename="srvl_20020507.log"
+
+MDcuMDUuMjAwMiAyMy4zNy4wMC4wMzcwIFMgJy9zZXJ2bGV0WzEvMV0nIG9yZy5nanQuanNw
+LkpzcFNlcnZsZXQ6IGluaXQNCjA3LjA1LjIwMDIgMjMuMzcuMDAuMDQ4MCBTICcvc2Vydmxl
+dFsxLzFdJyBvcmcuZ2p0LmpzcC5Kc3BTZXJ2bGV0OiBHTlVKU1A6IGNvdWxkIG5vdCBjcmVh
+dGUgJ0M6XFhpdGFtaVxqYXZhJw0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2
+bGV0WzEvMV0nIFVuYWJsZSB0byBjYWxsIC5pbml0KCkgb2Ygb3JnLmdqdC5qc3AuSnNwU2Vy
+dmxldA0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0nIDo6amF2
+YXguc2VydmxldC5TZXJ2bGV0RXhjZXB0aW9uOiBHTlVKU1A6IGNvdWxkIG5vdCBjcmVhdGUg
+c2NyYXRjaERpcg0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0n
+IDo6YXQgb3JnLmdqdC5qc3AuSnNwU2VydmxldC5pbml0KEpzcFNlcnZsZXQuamF2YTozMDIp
+DQowNy4wNS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRbMS8xXScgOjphdCBuZXQu
+Y29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uU2VydmxldEluc3RhbmNlLmluaXQoU2Vydmxl
+dEluc3RhbmNlLmphdmEpDQowNy4wNS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRb
+MS8xXScgOjphdCBuZXQuY29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uU2VydmxldEluc3Rh
+bmNlLjxpbml0PihTZXJ2bGV0SW5zdGFuY2UuamF2YSkNCjA3LjA1LjIwMDIgMjMuMzcuMDAu
+MDQ4MCA/ICcvc2VydmxldFsxLzFdJyA6OmF0IG5ldC5jb25hY29tLnNlcnZsZXRydW5uZXIu
+bWFpbi5TZXJ2bGV0Q29udGFpbmVyLnN0YXJ0SW5zdGFuY2UoU2VydmxldENvbnRhaW5lci5q
+YXZhKQ0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0nIDo6YXQg
+bmV0LmNvbmFjb20uc2VydmxldHJ1bm5lci5tYWluLlNlcnZsZXRDb250YWluZXIuaW5pdChT
+ZXJ2bGV0Q29udGFpbmVyLmphdmEpDQowNy4wNS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3Nl
+cnZsZXRbMS8xXScgOjphdCBuZXQuY29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uU2Vydmxl
+dENvbnRhaW5lci48aW5pdD4oU2VydmxldENvbnRhaW5lci5qYXZhKQ0KMDcuMDUuMjAwMiAy
+My4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0nIDo6YXQgbmV0LmNvbmFjb20uc2Vydmxl
+dHJ1bm5lci5tYWluLlJ1bm5lci5jcmVhdGVDb250YWluZXIoUnVubmVyLmphdmEpDQowNy4w
+NS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRbMS8xXScgOjphdCBuZXQuY29uYWNv
+bS5zZXJ2bGV0cnVubmVyLm1haW4uUnVubmVyLmluaXQoUnVubmVyLmphdmEpDQowNy4wNS4y
+MDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRbMS8xXScgOjphdCBuZXQuY29uYWNvbS5z
+ZXJ2bGV0cnVubmVyLm1haW4uUnVubmVyLjxpbml0PihSdW5uZXIuamF2YSkNCjA3LjA1LjIw
+MDIgMjMuMzcuMDAuMDQ4MCA/ICcvc2VydmxldFsxLzFdJyA6OmF0IG5ldC5jb25hY29tLnNl
+cnZsZXRydW5uZXIubWFpbi5SdW5uZXIubWFpbihSdW5uZXIuamF2YSkNCjA3LjA1LjIwMDIg
+MjMuMzcuMDAuMDY1MCBTICcvc2VydmxldFsxLzFdJyBvcmcuZ2p0LmpzcC5Kc3BTZXJ2bGV0
+OiBkZXN0cm95DQo=
+----=_N7RbkVloYCJPsFz4gzCw--
+
+
+From xitami-dev@lists.xitami.org  Wed May  8 09:27:08 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Wed, 08 May 2002 09:27:08 +0100 (MEZ)
+Subject: [Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami
+In-Reply-To: <200205071534.RAA12043@sxpublic.nxrda.imatix.net>
+Message-ID: <200205080727.JAA27904@sxpublic.nxrda.imatix.net>
+
+On Tue, 7 May 2002 23:43:41 +0800, Phillip Wee wrote:
+
+hi phillip,
+
+> It appears that the settings in servlet.properties were not 
+> read, and defaults were assumed by the gnujsp servlet.
+
+yes, there is the problem. our servletrunner doesn't use the
+"blah.blah.parameter" (which is a nice idea but practically
+useless).
+
+your servlet.ini should contain "config = servlet.properties"
+(without quotes) and servlet.properties should contain
+
+scratchdir=c:\\somewhere\\mytempdir\\
+debug=true
+
+to get an idea what is parsed and what not.
+
+if it doesn't help i will setup GNUJSP for further testing.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Wed May  8 10:19:12 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Wed, 08 May 2002 10:19:12 +0100 (MEZ)
+Subject: [Xitami-Dev] Servletrunner 0.9 rc5
+Message-ID: <200205080819.KAA28903@sxpublic.nxrda.imatix.net>
+
+rc5 should be the last version before the final release (as rc4,
+rc3, ... :-))
+
+its more stable and faster than rc3.
+
+fixes:
+------
+
+the classloader now shows a correct errormessage when subclasses
+cannot be loaded. 
+
+the classloader doesn't crash if the classpath is invalid
+(typically when using single slashes instead of \\ on DOS
+filesystems like windows or os/2)
+
+again bugfixing in sendRedirect()
+
+additions:
+----------
+
+RunnerClassLoader#getResourceAsStream()
+
+ServletContext#getResourceAsStream(), see implementation notes
+
+logfile_remove_classname removes the classname from the logfile
+when using GenericServlet#log(...)
+
+the path of "srvl_config" is now automatically added to
+logfile_path and classpath - we can use one servletrunner for
+multiple sites now.
+
+http://runner.conacom.de/downloads.html
+
+feedback is welcome.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Wed May  8 15:41:18 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Wed, 8 May 2002 10:41:18 -0400
+Subject: [Xitami-Dev] One small question........
+Message-ID: <OF5CD5304B.F4646B9B-ON85256BB3.0050182D@hud.gov>
+
+Hi,
+     I am trying to work with a development server that has xitami web
+server installed by someone else. It seem that the server side JavaScript
+is not working. I am not even sure how to debug this problem. Can someone
+please help me what I need to have on the server in order for me to be able
+to do some server side JavaScript. Or give me web link where I can find
+some detailed information on this subject.
+
+Thanks.
+Manu Krishnan.
+
+
+
+From xitami-dev@lists.xitami.org  Sat May 11 17:34:17 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Sat, 11 May 2002 17:34:17 +0100 (MEZ)
+Subject: [Xitami-Dev] runner rc6
+Message-ID: <200205111535.RAA08718@sxpublic.nxrda.imatix.net>
+
+tomorrow i will release a larger application to the public which
+runs on the servletrunner and i think a lot of people in germany
+will try it.
+
+(http://www.conacom.de/babbelfisch.html , not finished but
+working)
+
+good stresstest of our new server :-)
+
+during the development of this application, i found some ugly
+bugs.
+
+my co-worker ender is trying to bring GNUJSP and the xitami
+servletrunner together.
+
+11.05.02 v0.9-rc6
+ loadFromStream(..) gots file-formatted string instead of 
+ the original classname, which causes troubles on some JVMs.
+
+ FileSessionmanager: fixed a bug in an errormessage.
+ ServletConfig_Impl returns NULL on unknown parameters now 
+ (according to the specs).
+ 
+ Container-Messages during startup are in the logContext of 
+ the container now.
+ 
+ If a separate logfile is used, the context-root is prepended 
+ to the logfile_path now.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Sun May 12 20:11:36 2002
+From: xitami-dev@lists.xitami.org (Bernd Hanses)
+Date: Sun, 12 May 2002 21:11:36 +0200
+Subject: [Xitami-Dev] all servlets fail
+Message-ID: <3CDEBE68.3E704BCD@t-online.de>
+
+Hello,
+
+I have problems with the servletrunner.
+All servlets I start, terminate with an error messages.
+Also ready servlets picked up from the net fail.
+Therefore I assume that I make some type of user error, but I
+have no idea what this might be.
+
+Here the screen from the servlet-runner.
+If someone has an idea what might be wrong, please send me an answer:
+-------------------------------------------------------------------------
+
+Xitami Web Server v2.4d9 (c) 1991-99 iMatix
+Xitami is free software and comes with ABSOLUTELY NO WARRANTY.
+You may redistribute this software under certain conditions;
+read the file LICENSE.TXT for details. Run 'xitami -h' for help.
+
+2002/05/12 20:22:07: xilrwp: ready for LRWP connections on port 81
+2002/05/12 20:22:07: smthttp: preparing for connections on port 80
+2002/05/12 20:22:07: smthttp: ready for HTTP connections on port 80
+2002/05/12 20:22:07: smthttp: accepting connections on 127.0.0.1
+2002/05/12 20:22:07: smthttp: accepting connections on 127.0.0.1
+2002/05/12 20:22:07: smtftpc: preparing for connections on port 21
+2002/05/12 20:22:07: smtftpc: ready for FTP connections on port 21
+2002/05/12 20:55:38: xilrwp: Peer servlet/hello_2 connected for <any>
+host
+2002/05/12 20:55:38: xilrwp: Peer servlet/hello1 connected for <any>
+host
+2002/05/12 20:55:38: xilrwp: Peer servlet/HelloWWW connected for <any>
+host
+2002/05/12 20:55:38: xilrwp: Peer servlet/zipservlet connected for <any>
+host
+
+2002/05/12 20:57:44: xilrwp: error on socket: WSAECONNRESET
+2002/05/12 20:57:44: xilrwp: App servlet/hello_2 on <any> terminating
+2002/05/12 20:57:44: xilrwp: error on socket: WSAECONNRESET
+2002/05/12 20:57:44: xilrwp: App servlet/hello1 on <any> terminating
+2002/05/12 20:57:44: xilrwp: error on socket: WSAECONNRESET
+2002/05/12 20:57:44: xilrwp: App servlet/HelloWWW on <any> terminating
+2002/05/12 20:57:44: xilrwp: error on socket: WSAECONNRESET
+2002/05/12 20:57:44: xilrwp: App servlet/zipservlet on <any> terminating
+
+---------------------------------------------------------------------------------
+
+Thanks,
+Bernd Hanses ( bhanses@t-online.de )
+
+
+
+From xitami-dev@lists.xitami.org  Mon May 13 09:23:02 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Mon, 13 May 2002 09:23:02 +0100 (MEZ)
+Subject: [Xitami-Dev] all servlets fail
+In-Reply-To: <3CDEBE68.3E704BCD@t-online.de>
+Message-ID: <200205130724.JAA16044@sxpublic.nxrda.imatix.net>
+
+On Sun, 12 May 2002 21:11:36 +0200, Bernd Hanses wrote:
+
+> I have problems with the servletrunner.
+> All servlets I start, terminate with an error messages.
+
+if you start the servletrunner "out of the box": can you connect
+to the /demo servlet ?
+
+i need also the errormessage from the runner itself
+(debug-output also if possible).
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Mon May 13 08:56:09 2002
+From: xitami-dev@lists.xitami.org (Jonathan)
+Date: Mon, 13 May 2002 09:56:09 +0200
+Subject: [Xitami-Dev] runner rc6
+In-Reply-To: <200205111535.RAA08718@sxpublic.nxrda.imatix.net>
+Message-ID: <000b01c1fa53$a608aae0$52c0a8c0@JONATHAN>
+
+http://runner.conacom.de/ server seems to be down to me ...
+
+Bye
+Jonathan
+
+
+
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org] On Behalf Of bernd hohmann
+Sent: sabato 11 maggio 2002 18.34
+To: xitami-dev@lists.xitami.org; xitami@lists.xitami.org
+Subject: [Xitami-Dev] runner rc6
+
+
+tomorrow i will release a larger application to the public which runs on
+the servletrunner and i think a lot of people in germany will try it.
+
+(http://www.conacom.de/babbelfisch.html , not finished but
+working)
+
+good stresstest of our new server :-)
+
+during the development of this application, i found some ugly bugs.
+
+my co-worker ender is trying to bring GNUJSP and the xitami
+servletrunner together.
+
+11.05.02 v0.9-rc6
+ loadFromStream(..) gots file-formatted string instead of 
+ the original classname, which causes troubles on some JVMs.
+
+ FileSessionmanager: fixed a bug in an errormessage.  ServletConfig_Impl
+returns NULL on unknown parameters now 
+ (according to the specs).
+ 
+ Container-Messages during startup are in the logContext of 
+ the container now.
+ 
+ If a separate logfile is used, the context-root is prepended 
+ to the logfile_path now.
+
+bernd
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Mon May 13 10:00:05 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Mon, 13 May 2002 10:00:05 +0100 (MEZ)
+Subject: [Xitami-Dev] runner rc6
+In-Reply-To: <000b01c1fa53$a608aae0$52c0a8c0@JONATHAN>
+Message-ID: <200205130800.KAA16810@sxpublic.nxrda.imatix.net>
+
+On Mon, 13 May 2002 09:56:09 +0200, Jonathan wrote:
+
+> http://runner.conacom.de/ server seems to be down to me ...
+
+can you do a ping and tell me which IP adress is accessed ? (the
+server moved to a different location last week, maybe your
+machine tries to access the old one).
+
+bernd
+
+
+
+
+
+From xitami-dev@lists.xitami.org  Mon May 13 09:11:42 2002
+From: xitami-dev@lists.xitami.org (Jonathan)
+Date: Mon, 13 May 2002 10:11:42 +0200
+Subject: [Xitami-Dev] runner rc6
+In-Reply-To: <200205130800.KAA16810@sxpublic.nxrda.imatix.net>
+Message-ID: <000c01c1fa55$d3eccc00$52c0a8c0@JONATHAN>
+
+Can't even do a ping : "Ping request could not find host"
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org] On Behalf Of bernd hohmann
+Sent: lunedì 13 maggio 2002 11.00
+To: xitami-dev@lists.xitami.org
+Subject: RE: [Xitami-Dev] runner rc6
+
+
+On Mon, 13 May 2002 09:56:09 +0200, Jonathan wrote:
+
+> http://runner.conacom.de/ server seems to be down to me ...
+
+can you do a ping and tell me which IP adress is accessed ? (the server
+moved to a different location last week, maybe your machine tries to
+access the old one).
+
+bernd
+
+
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Mon May 13 10:18:49 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Mon, 13 May 2002 10:18:49 +0100 (MEZ)
+Subject: [Xitami-Dev] runner rc6
+In-Reply-To: <000c01c1fa55$d3eccc00$52c0a8c0@JONATHAN>
+Message-ID: <200205130819.KAA17345@sxpublic.nxrda.imatix.net>
+
+On Mon, 13 May 2002 10:11:42 +0200, Jonathan wrote:
+
+> Can't even do a ping : "Ping request could not find host"
+
+restart your nameserver. i tried a traceroute from canada and
+its ok.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Tue May 14 13:51:43 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Tue, 14 May 2002 13:51:43 +0100 (MEZ)
+Subject: [Xitami-Dev] runner v0.9 rc8
+Message-ID: <200205141152.NAA15255@sxpublic.nxrda.imatix.net>
+
+i finally managed it to get the versionnumbers of the zip-file,
+the internal version and the downloadpage synchron. RC8 is the
+current version, RC7 was an internal release.
+
+- fixed bug in logfile (date/time format)
+
+- experimental support for ServletContext#getResource(...)
+
+- some methods of HttpServletRequest returning a platform
+specific path now (sometimes we got a mixture of / and \)
+
+- instead of defining a config-file
+(config=c:\\somewhere\\config.ini) we can add also
+"config.variable=value" in servlet.ini (the servlet will see it
+as "variable=value" after calling .init(..)
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Tue May 14 19:41:17 2002
+From: xitami-dev@lists.xitami.org (Bernd Hanses)
+Date: Tue, 14 May 2002 20:41:17 +0200
+Subject: [Xitami-Dev] all servlets fail
+References: <200205130724.JAA16044@sxpublic.nxrda.imatix.net>
+Message-ID: <3CE15A4D.992190C0@t-online.de>
+
+Hello Bernd,
+
+I have the feeling you are talking about another servletrunner than I
+have. I have the package downloaded from
+http://www.imatix.co.nz/lrwp/servletrunner-beta-0.2.zip
+There is no demo servlet.
+Is this the wrong package?
+
+Kind regards,
+Bernd Hanses
+
+bernd hohmann wrote:
+
+> On Sun, 12 May 2002 21:11:36 +0200, Bernd Hanses wrote:
+>
+> > I have problems with the servletrunner.
+> > All servlets I start, terminate with an error messages.
+>
+> if you start the servletrunner "out of the box": can you connect
+> to the /demo servlet ?
+>
+> i need also the errormessage from the runner itself
+> (debug-output also if possible).
+>
+> bernd
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Wed May 15 09:43:16 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Wed, 15 May 2002 09:43:16 +0100 (MEZ)
+Subject: [Xitami-Dev] all servlets fail
+In-Reply-To: <3CE15A4D.992190C0@t-online.de>
+Message-ID: <200205150743.JAA04183@sxpublic.nxrda.imatix.net>
+
+On Tue, 14 May 2002 20:41:17 +0200, Bernd Hanses wrote:
+
+> I have the feeling you are talking about another servletrunner than I
+> have. I have the package downloaded from
+> http://www.imatix.co.nz/lrwp/servletrunner-beta-0.2.zip
+
+uh, this is Ewens old implementation. a masterpiece of code but
+never finished and debugged (there was an internal beta 3 which
+fixes the worsest things). 
+
+after a while we decided to write a new servletrunner from
+scratch, incoperating the best of Ewens and my ideas.
+
+> There is no demo servlet.
+> Is this the wrong package?
+
+try http://runner.conacom.de
+
+auchbernd
+
+
+
+From xitami-dev@lists.xitami.org  Thu May 16 15:10:46 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Thu, 16 May 2002 15:10:46 +0100 (MEZ)
+Subject: [Xitami-Dev] Sokrates Runner rc9
+Message-ID: <200205161311.PAA01893@sxpublic.nxrda.imatix.net>
+
+ok, this should be the last one before GA :-)
+
+16.05.02 0.9-rc-9
+ServletContext#getMimeType(): default is
+"application/octet-stream" now
+
+Runner: the first commandline parameter is accepted as
+config-file (default: runner.ini)
+
+ServletInstance: creation of the instance, calling .init(...),
+.service(...) and .destroy() are monitored. If the action
+doesn't finishes after a given time, the call will be
+interrupted (monitor_* parameters in the servlet configuration).
+
+http://runner.conacom.de
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Thu May 16 16:39:38 2002
+From: xitami-dev@lists.xitami.org (Bernd Hanses)
+Date: Thu, 16 May 2002 17:39:38 +0200
+Subject: [Xitami-Dev] all servlets fail
+References: <200205150743.JAA04183@sxpublic.nxrda.imatix.net>
+Message-ID: <3CE3D2BA.AF5C91BF@t-online.de>
+
+Hello Bernd,
+
+thanks for your hint to Conacom.
+I have downloaded the package. Now I have a little trouble with the
+installation. Is there somewhere some explanation to see where the
+code has to be installed and what are the next steps?
+
+Thanks Bernd Hanses
+
+bernd hohmann wrote:
+
+> try http://runner.conacom.de
+
+
+From xitami-dev@lists.xitami.org  Thu May 16 21:56:21 2002
+From: xitami-dev@lists.xitami.org (mail.earthlink.net)
+Date: Thu, 16 May 2002 13:56:21 -0700
+Subject: [Xitami-Dev] a small question...
+In-Reply-To: <OF5CD5304B.F4646B9B-ON85256BB3.0050182D@hud.gov>
+Message-ID: <002301c1fd1c$22788580$0301a8c0@Mesa.com>
+
+Hi,
+
+I'm looking to get a better understanding of the Xitami application. Can
+anyone tell me if there's an esay way to disable the HHTP portion of the
+app, leaving just the FTP portion...
+
+A quick perusal of the code seems to indicate that the FTP/HTTP portions are
+closely coupled...
+
+Thanks in advance!
+
+Bruce Douglas
+bedouglas@earthlink.net
+
+
+
+
+From xitami-dev@lists.xitami.org  Thu May 16 22:17:36 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Fri, 17 May 2002 09:17:36 +1200
+Subject: [Xitami-Dev] a small question...
+In-Reply-To: Message from "mail.earthlink.net" <bedouglas@earthlink.net>
+ of "Thu, 16 May 2002 13:56:21 MST." <002301c1fd1c$22788580$0301a8c0@Mesa.com>
+Message-ID: <20020516211736.42ACAAE8F2@basilica.la.naos.co.nz>
+
+In message <002301c1fd1c$22788580$0301a8c0@Mesa.com>, "mail.earthlink.net" writes:
+>I'm looking to get a better understanding of the Xitami application. Can
+>anyone tell me if there's an esay way to disable the HHTP portion of the
+>app, leaving just the FTP portion...
+
+No, and that doesn't make any sense at all.  Xitami is a _web_server_
+that happens to have a built in FTP module as a handy extra for simple
+FTP needs.
+
+If you just want a FTP server, then use a dedicated FTP server :-)
+
+Ewen
+
+PS: It might be nice from a programming view if they were less tightly 
+    coupled, but alas it's not to be.
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Thu May 16 23:05:13 2002
+From: xitami-dev@lists.xitami.org (mail.earthlink.net)
+Date: Thu, 16 May 2002 15:05:13 -0700
+Subject: [Xitami-Dev] a small question...
+In-Reply-To: <20020516211736.42ACAAE8F2@basilica.la.naos.co.nz>
+Message-ID: <002901c1fd25$c1aea4f0$0301a8c0@Mesa.com>
+
+Arrgh!!!
+
+Then you have confirmed what I suspected!!! I was hoping that I might be
+able to use the app as a singular FTP server!!!
+
+
+Thanks
+
+Bruce Douglas
+bedouglas@earthlink.net
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of Ewen McNeill
+Sent: Thursday, May 16, 2002 2:18 PM
+To: xitami-dev@lists.xitami.org
+Subject: Re: [Xitami-Dev] a small question...
+
+
+In message <002301c1fd1c$22788580$0301a8c0@Mesa.com>, "mail.earthlink.net"
+writes:
+>I'm looking to get a better understanding of the Xitami application. Can
+>anyone tell me if there's an esay way to disable the HHTP portion of the
+>app, leaving just the FTP portion...
+
+No, and that doesn't make any sense at all.  Xitami is a _web_server_
+that happens to have a built in FTP module as a handy extra for simple
+FTP needs.
+
+If you just want a FTP server, then use a dedicated FTP server :-)
+
+Ewen
+
+PS: It might be nice from a programming view if they were less tightly
+    coupled, but alas it's not to be.
+
+--
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Fri May 17 11:14:33 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Fri, 17 May 2002 11:14:33 +0100 (MEZ)
+Subject: [Xitami-Dev] all servlets fail
+In-Reply-To: <3CE3D2BA.AF5C91BF@t-online.de>
+Message-ID: <200205170915.LAA22394@sxpublic.nxrda.imatix.net>
+
+On Thu, 16 May 2002 17:39:38 +0200, Bernd Hanses wrote:
+
+> I have downloaded the package. Now I have a little trouble with the
+> installation. Is there somewhere some explanation to see where the
+> code has to be installed and what are the next steps?
+
+there is usually no trouble. start xitami, rename the runner.cmd
+to runner.bat (if you're using windows). edit the batch if
+needed. start the batch, point your browser to
+http://127.0.0.1/demo
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Sat May 18 17:15:46 2002
+From: xitami-dev@lists.xitami.org (Cory Cone)
+Date: Sat, 18 May 2002 10:15:46 -0600
+Subject: [Xitami-Dev] Bandwidth...
+Message-ID: <003101c1fe87$45a277c0$0600a8c0@sk.sympatico.ca>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_002E_01C1FE54.FA04A180
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I was wondering if anyone knows a way with Xitami to limit the bandwidth =
+a site can use, you know like the monthley transfer rate could be set to =
+1GB or 500MB...Anyone know how to do this?
+
+------=_NextPart_000_002E_01C1FE54.FA04A180
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content=3D"text/html; charset=3Diso-8859-1" =
+http-equiv=3DContent-Type>
+<META content=3D"MSHTML 5.00.2614.3500" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I was wondering if anyone knows a way =
+with Xitami=20
+to limit the bandwidth a site can use, you know like the monthley =
+transfer rate=20
+could be set to 1GB or 500MB...Anyone know how to do=20
+this?</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_002E_01C1FE54.FA04A180--
+
+
+
+From xitami-dev@lists.xitami.org  Sat May 18 21:42:24 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sun, 19 May 2002 08:42:24 +1200
+Subject: [Xitami-Dev] Bandwidth...
+In-Reply-To: Message from "Cory Cone" <homeiss@ffilms.net>
+ of "Sat, 18 May 2002 10:15:46 CST." <003101c1fe87$45a277c0$0600a8c0@sk.sympatico.ca>
+Message-ID: <20020518204224.25704AE5AA@basilica.la.naos.co.nz>
+
+In message <003101c1fe87$45a277c0$0600a8c0@sk.sympatico.ca>, "Cory Cone" writes:
+>I was wondering if anyone knows a way with Xitami to limit the bandwidth 
+>a site can use, you know like the monthley transfer rate could be set to 
+>1GB or 500MB...Anyone know how to do this?
+
+The Xitami 2.5 beta can "shape" the bandwidth used to limit it to a
+certain rate per second.  But Xitami doesn't have a way of limiting the
+bandwidth used over a longer period of time, unless you simply slow
+everything down so that the most it could send out in a month would be
+500MB or so.  (If you did that it'd always be very slow...)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Sat May 18 21:45:13 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Sat, 18 May 2002 16:45:13 EDT
+Subject: [Xitami-Dev] Bandwidth...
+Message-ID: <1ba.115975e.2a181759@aol.com>
+
+--part1_1ba.115975e.2a181759_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+This is what you do.  Write a small application that opens a log file, reads 
+in data from stdin, spits it back out to stdout, and then adds the log file's 
+value with the # of bytes that was just streamed through the app.  then, in 
+the xitami controls, set common web file types to run through that app.  
+that's the best solution i can come up with.
+
+--part1_1ba.115975e.2a181759_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">This is what you do.&nbsp; Write a small application that opens a log file, reads in data from stdin, spits it back out to stdout, and then adds the log file's value with the # of bytes that was just streamed through the app.&nbsp; then, in the xitami controls, set common web file types to run through that app.&nbsp; that's the best solution i can come up with.</FONT></HTML>
+
+--part1_1ba.115975e.2a181759_boundary--
+
+From xitami-dev@lists.xitami.org  Sat May 18 21:55:04 2002
+From: xitami-dev@lists.xitami.org (Cory Cone)
+Date: Sat, 18 May 2002 14:55:04 -0600
+Subject: [Xitami-Dev] Bandwidth...
+References: <1ba.115975e.2a181759@aol.com>
+Message-ID: <000d01c1feae$4afddbc0$0600a8c0@sk.sympatico.ca>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_000A_01C1FE7B.FE8D7340
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I can't write programs so do you know where I could get one that would =
+do what you said below?
+
+Thanks
+  ----- Original Message -----=20
+  From: TonicPeddler@aol.com=20
+  To: xitami-dev@lists.xitami.org=20
+  Sent: Saturday, May 18, 2002 2:45 PM
+  Subject: Re: [Xitami-Dev] Bandwidth...=20
+
+
+  This is what you do.  Write a small application that opens a log file, =
+reads in data from stdin, spits it back out to stdout, and then adds the =
+log file's value with the # of bytes that was just streamed through the =
+app.  then, in the xitami controls, set common web file types to run =
+through that app.  that's the best solution i can come up with.=20
+
+------=_NextPart_000_000A_01C1FE7B.FE8D7340
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content=3D"text/html; charset=3Diso-8859-1" =
+http-equiv=3DContent-Type>
+<META content=3D"MSHTML 5.00.2614.3500" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I can't write programs so do you know =
+where I could=20
+get one that would do what you said below?</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Thanks</FONT></DIV>
+<BLOCKQUOTE=20
+style=3D"BORDER-LEFT: #000000 2px solid; MARGIN-LEFT: 5px; MARGIN-RIGHT: =
+0px; PADDING-LEFT: 5px; PADDING-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A href=3D"mailto:TonicPeddler@aol.com"=20
+  title=3DTonicPeddler@aol.com>TonicPeddler@aol.com</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A=20
+  href=3D"mailto:xitami-dev@lists.xitami.org"=20
+  title=3Dxitami-dev@lists.xitami.org>xitami-dev@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Saturday, May 18, 2002 =
+2:45=20
+PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> Re: [Xitami-Dev] =
+Bandwidth...=20
+  </DIV>
+  <DIV><BR></DIV><FONT face=3Darial,helvetica><FONT face=3DArial =
+lang=3D0 size=3D2=20
+  FAMILY=3D"SANSSERIF">This is what you do.&nbsp; Write a small =
+application that=20
+  opens a log file, reads in data from stdin, spits it back out to =
+stdout, and=20
+  then adds the log file's value with the # of bytes that was just =
+streamed=20
+  through the app.&nbsp; then, in the xitami controls, set common web =
+file types=20
+  to run through that app.&nbsp; that's the best solution i can come up=20
+  with.</FONT> </FONT></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_000A_01C1FE7B.FE8D7340--
+
+
+
+From xitami-dev@lists.xitami.org  Sat May 18 21:56:23 2002
+From: xitami-dev@lists.xitami.org (Cory Cone)
+Date: Sat, 18 May 2002 14:56:23 -0600
+Subject: [Xitami-Dev] Bandwidth...
+References: <1ba.115975e.2a181759@aol.com>
+Message-ID: <001f01c1feae$79d74440$0600a8c0@sk.sympatico.ca>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_001C_01C1FE7C.2D886D80
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Oh yah, it would have to be for linux.
+  ----- Original Message -----=20
+  From: TonicPeddler@aol.com=20
+  To: xitami-dev@lists.xitami.org=20
+  Sent: Saturday, May 18, 2002 2:45 PM
+  Subject: Re: [Xitami-Dev] Bandwidth...=20
+
+
+  This is what you do.  Write a small application that opens a log file, =
+reads in data from stdin, spits it back out to stdout, and then adds the =
+log file's value with the # of bytes that was just streamed through the =
+app.  then, in the xitami controls, set common web file types to run =
+through that app.  that's the best solution i can come up with.=20
+
+------=_NextPart_000_001C_01C1FE7C.2D886D80
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content=3D"text/html; charset=3Diso-8859-1" =
+http-equiv=3DContent-Type>
+<META content=3D"MSHTML 5.00.2614.3500" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Oh yah, it would have to be for =
+linux.</FONT></DIV>
+<BLOCKQUOTE=20
+style=3D"BORDER-LEFT: #000000 2px solid; MARGIN-LEFT: 5px; MARGIN-RIGHT: =
+0px; PADDING-LEFT: 5px; PADDING-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A href=3D"mailto:TonicPeddler@aol.com"=20
+  title=3DTonicPeddler@aol.com>TonicPeddler@aol.com</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A=20
+  href=3D"mailto:xitami-dev@lists.xitami.org"=20
+  title=3Dxitami-dev@lists.xitami.org>xitami-dev@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Saturday, May 18, 2002 =
+2:45=20
+PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> Re: [Xitami-Dev] =
+Bandwidth...=20
+  </DIV>
+  <DIV><BR></DIV><FONT face=3Darial,helvetica><FONT face=3DArial =
+lang=3D0 size=3D2=20
+  FAMILY=3D"SANSSERIF">This is what you do.&nbsp; Write a small =
+application that=20
+  opens a log file, reads in data from stdin, spits it back out to =
+stdout, and=20
+  then adds the log file's value with the # of bytes that was just =
+streamed=20
+  through the app.&nbsp; then, in the xitami controls, set common web =
+file types=20
+  to run through that app.&nbsp; that's the best solution i can come up=20
+  with.</FONT> </FONT></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_001C_01C1FE7C.2D886D80--
+
+
+
+From xitami-dev@lists.xitami.org  Tue May 21 17:30:46 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Tue, 21 May 2002 17:30:46 +0100 (MEZ)
+Subject: [Xitami-Dev] Sokrates 1.0 GA
+Message-ID: <200205211531.RAA24392@sxpublic.nxrda.imatix.net>
+
+Hi,
+
+after 2 month development, 9 betas and 10 release candidates
+we're proud to announce:
+
+1.0 of Sokrates, the servletrunner for Xitami is GA.
+
+latest fixes:
+
+- .getRequestURI() works now.
+
+- HttpServletRequest will return attributes for upper case (like
+USER_AGENT) and mixed case (User-Agent)
+
+- .getRealPath(...) of ServletContext is working now.
+
+- added monitoring of ServletContext to testservlet
+
+- fixed minor issues in MonitoredExecution
+
+http://runner.conacom.de
+
+have fun !
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Wed May 22 19:48:33 2002
+From: xitami-dev@lists.xitami.org (Bernd Hanses)
+Date: Wed, 22 May 2002 20:48:33 +0200
+Subject: [Xitami-Dev] all servlets fail
+References: <200205170915.LAA22394@sxpublic.nxrda.imatix.net>
+Message-ID: <3CEBE801.989C32B@t-online.de>
+
+Hell Bernd,
+
+thanks for the explanation. It works perfect. It seem that the solution
+was
+to simple. I am used to life with more complicated installations.
+One last question:
+  In the demo servlet under 'binaries' it says "you should see a picture
+here".
+  I don't see a picture and in the source code I saw that a
+"testimage.jpg" should
+  be returned. Where should this picture be? Where can I place an own
+  picture?
+
+Regards
+Bernd Hanses
+
+bernd hohmann wrote:
+
+> On Thu, 16 May 2002 17:39:38 +0200, Bernd Hanses wrote:
+> there is usually no trouble. start xitami, rename the runner.cmd
+> to runner.bat (if you're using windows). edit the batch if
+> needed. start the batch, point your browser to
+> http://127.0.0.1/demo
+>
+> bernd
+
+
+From xitami-dev@lists.xitami.org  Thu May 23 09:40:23 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Thu, 23 May 2002 09:40:23 +0100 (MEZ)
+Subject: [Xitami-Dev] all servlets fail
+In-Reply-To: <3CEBE801.989C32B@t-online.de>
+Message-ID: <200205230740.JAA01651@sxpublic.nxrda.imatix.net>
+
+On Wed, 22 May 2002 20:48:33 +0200, Bernd Hanses wrote:
+
+> One last question:
+> In the demo servlet under 'binaries' it says "you should see 
+> a picture here".
+
+shit. i forgot to put it into the distribution. will send you by
+email.
+
+bernd
+
+
+
+
+From xitami-dev@lists.xitami.org  Fri May 24 16:10:48 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Fri, 24 May 2002 16:10:48 +0100 (MEZ)
+Subject: [Xitami-Dev] Sokrates: Weekend update
+Message-ID: <200205241411.QAA01822@sxpublic.nxrda.imatix.net>
+
+v1.1 is released (unfortunately i forgot to update the internal
+version number so it displays still 1.0)
+
+the best one is: when using getResourceAsStream(..) the
+servletrunner will try the current web/html-directory first,
+then the container classpath, then the system classpath.
+
+RunnerClassLoader: webdir is added to the classpath
+(ServetContext)
+RunnerClassLoader: closing open zipfiles on .dispose();
+RunnerClassLoader: fixed getResource(..),
+getResourceAsStream(..)
+RunnerClassLoader: getResource(..) and getResourceAsStream(..)
+are removing leading / from the file now.
+Sessioncookie expiry time according to sessionmanager timeout
+LogContext#writeMessage(Throwable)
+MonitoredException returns Rootcause for ServletException 
+Minor Fixes in the LogWriter
+
+http://runner.conacom.de
+
+bernd
+
+
+
+
+
+From xitami-dev@lists.xitami.org  Mon May 27 14:37:39 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Mon, 27 May 2002 14:37:39 +0100 (MEZ)
+Subject: [Xitami-Dev] SERVER_PORT
+Message-ID: <200205271238.OAA09024@sxpublic.nxrda.imatix.net>
+
+hi,
+
+i'm a little bit confused. the CGI environment variable
+SERVER_PORT should return the port where the http server is
+listening.
+
+but at least I get always 0 (in the current beta using LRWP).
+
+why ?
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Tue May 28 01:01:09 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Mon, 27 May 2002 20:01:09 EDT
+Subject: [Xitami-Dev] SERVER_PORT
+Message-ID: <1b8.17b3bfd.2a2422c5@aol.com>
+
+--part1_1b8.17b3bfd.2a2422c5_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+it's been my experience that the real port xitami uses for http is whatever 
+you set it to, +80.  if you check your xitami config you'll likely see that 
+your http server is set to port 0, and actually works on port 80.  it's very 
+strange.  all that I know for sure, is that one day, my xitami stopped 
+working, i tried everything, changed this setting to 80 (which previously had 
+yielded only working http on port 160) and everything worked again
+
+--part1_1b8.17b3bfd.2a2422c5_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">it's been my experience that the real port xitami uses for http is whatever you set it to, +80.&nbsp; if you check your xitami config you'll likely see that your http server is set to port 0, and actually works on port 80.&nbsp; it's very strange.&nbsp; all that I know for sure, is that one day, my xitami stopped working, i tried everything, changed this setting to 80 (which previously had yielded only working http on port 160) and everything worked again</FONT></HTML>
+
+--part1_1b8.17b3bfd.2a2422c5_boundary--
+
+From xitami-dev@lists.xitami.org  Tue May 28 15:20:49 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Tue, 28 May 2002 10:20:49 EDT
+Subject: [Xitami-Dev] Customizing Xitami Directory Listings
+Message-ID: <10c.1275faf9.2a24ec41@aol.com>
+
+--part1_10c.1275faf9.2a24ec41_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Is there a way to customize the way that xitami lists directory contents?  
+For instance, what information about the files it make available to the 
+viewer, like date of last modification, file size, things like that?  Is 
+there an easy way to point xitami to a cgi application to handle directory 
+listings?
+
+--part1_10c.1275faf9.2a24ec41_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Is there a way to customize the way that xitami lists directory contents?&nbsp; For instance, what information about the files it make available to the viewer, like date of last modification, file size, things like that?&nbsp; Is there an easy way to point xitami to a cgi application to handle directory listings?</FONT></HTML>
+
+--part1_10c.1275faf9.2a24ec41_boundary--
+
+From xitami-dev@lists.xitami.org  Wed May 29 12:37:54 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Wed, 29 May 2002 12:37:54 +0100 (MEZ)
+Subject: [Xitami-Dev] SERVER_PORT
+In-Reply-To: <1b8.17b3bfd.2a2422c5@aol.com>
+Message-ID: <200205291038.MAA25727@sxpublic.nxrda.imatix.net>
+
+On Mon, 27 May 2002 20:01:09 EDT, TonicPeddler@aol.com wrote:
+
+> it's been my experience that the real port xitami uses for http is whatever 
+> you set it to, +80.  if you check your xitami config you'll likely see that 
+> your http server is set to port 0, and actually works on port 80.  it's very 
+> strange.
+
+i moved the portbase to 10080 and checked SERVER_PORT - its
+still 0 .
+
+ok, another debug session.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Wed May 29 11:47:56 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Wed, 29 May 2002 06:47:56 EDT
+Subject: [Xitami-Dev] SERVER_PORT
+Message-ID: <1e.28c86dd2.2a260bdc@aol.com>
+
+--part1_1e.28c86dd2.2a260bdc_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Try to shut down xitami, edit this line in xitami.cfg and then run xitami 
+again:
+    portbase=0                          #   e.g. 5000 for port 5080
+
+--part1_1e.28c86dd2.2a260bdc_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Try to shut down xitami, edit this line in xitami.cfg and then run xitami again:<BR>
+&nbsp;&nbsp;&nbsp; portbase=0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #&nbsp;&nbsp; e.g. 5000 for port 5080</FONT></HTML>
+
+--part1_1e.28c86dd2.2a260bdc_boundary--
+
+From xitami-dev@lists.xitami.org  Wed May 29 11:48:53 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Wed, 29 May 2002 06:48:53 EDT
+Subject: [Xitami-Dev] SERVER_PORT
+Message-ID: <ab.1c9e2d51.2a260c15@aol.com>
+
+--part1_ab.1c9e2d51.2a260c15_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Also, could you show your code for accessing that environment variable, you 
+might be doing it wrong.
+
+--part1_ab.1c9e2d51.2a260c15_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Also, could you show your code for accessing that environment variable, you might be doing it wrong.</FONT></HTML>
+
+--part1_ab.1c9e2d51.2a260c15_boundary--
+
+From xitami-dev@lists.xitami.org  Wed May 29 13:38:06 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Wed, 29 May 2002 13:38:06 +0100 (MEZ)
+Subject: [Xitami-Dev] SERVER_PORT
+In-Reply-To: <ab.1c9e2d51.2a260c15@aol.com>
+Message-ID: <200205291138.NAA26988@sxpublic.nxrda.imatix.net>
+
+On Wed, 29 May 2002 06:48:53 EDT, TonicPeddler@aol.com wrote:
+
+> Also, could you show your code for accessing that environment variable, you 
+> might be doing it wrong.
+
+you should trust an old programmer ;-)
+
+the problem is in xitami 2.5b4 and b5 (not in d9/d10 !)
+
+smthttpl.c around line 2581 has to be patched like this:
+
+    /*  Format port number as a string                          
+            */
+    if (p_http-> ssl_connection)
+//      sprintf (port_name, "%d", p_http-> port); 29.05.02 ho:
+        sprintf (port_name, "%d", p_http-> ssl_port);
+    else
+//      sprintf (port_name, "%d", p_http-> ssl_port); 29.05.02
+ho:
+        sprintf (port_name, "%d", p_http-> port);
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Thu May 30 21:41:03 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 30 May 2002 22:41:03 +0200
+Subject: [Xitami-Dev] Customizing Xitami Directory Listings
+In-Reply-To: Message from TonicPeddler@aol.com
+ of "Tue, 28 May 2002 10:20:49 EDT." <10c.1275faf9.2a24ec41@aol.com>
+Message-ID: <20020530204103.A6E3CAEA9D@basilica.la.naos.co.nz>
+
+In message <10c.1275faf9.2a24ec41@aol.com>, TonicPeddler@aol.com writes:
+>Is there a way to customize the way that xitami lists directory contents?  
+>For instance, what information about the files it make available to the 
+>viewer, like date of last modification, file size, things like that?  Is 
+>there an easy way to point xitami to a cgi application to handle directory 
+>listings?
+
+If you are using the Xitami 2.5 beta, then you can customise the GSL
+script that generates the directory listing, in the templates directory.
+
+If you are using the release 2.4 version then unfortunately it's a fixed
+format.  The cloest thing you could do would be to create index.html
+files, or use something like PHP and set index.php as the default
+document for the directory.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Fri May 31 08:47:37 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Fri, 31 May 2002 03:47:37 EDT
+Subject: [Xitami-Dev] Customizing Xitami Directory Listings
+Message-ID: <68.20d76607.2a288499@aol.com>
+
+--part1_68.20d76607.2a288499_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Sounds like just the feature i'm lookin for, thanks for the news
+
+--part1_68.20d76607.2a288499_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Sounds like just the feature i'm lookin for, thanks for the news</FONT></HTML>
+
+--part1_68.20d76607.2a288499_boundary--
+

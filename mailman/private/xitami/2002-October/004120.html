@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP anyone?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004119.html">
+   <LINK REL="Next"  HREF="004123.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP anyone?
+   </H1>
+    <B>Paul N Shortis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP anyone?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 16 Oct 2002 09:52:11 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004119.html">[Xitami] FTP and Windows XP
+</A></li>
+        <LI> Next message: <A HREF="004123.html">[Xitami] FTP and Windows XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4120">[ date ]</a>
+              <a href="thread.html#4120">[ thread ]</a>
+              <a href="subject.html#4120">[ subject ]</a>
+              <a href="author.html#4120">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+I have used sessions with Xitami without any problems. Since you can see the
+session cookie value it would appear that Xitami and the browser are doing their
+job, so you would appear to have a PHP or coding problem.
+
+I have always named my sessions, never used the default session name. It would
+appear that although you have a cookie named PHPSESSID session_start() isn't
+using 'PHPSESSID' for it's session name. Try using the function
+
+     session_name('YOUR_SESSSION_NAME');      // make up your own session name
+obviously
+
+before each call to session_start() to force your own session cookie name.
+
+Best of luck, Paul
+
+
+
+
+
+&quot;Stephen Edmonds&quot; &lt;<A HREF="mailto:stephen.edmonds5@btinternet.com">stephen.edmonds5@btinternet.com</A>&gt; on 16/10/2002 01:51:37 AM
+
+Please respond to <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+To:   <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+cc:    (bcc: Paul N Shortis/Roads/QMR/Au)
+Subject:  [Xitami] PHP anyone?
+
+
+
+If you know much about PHP, read below. Else wise, ignore this and go have a
+cup of nice hot tea/coffee :-)
+
+The problem is my sessions don't work properly... the ID is stored and saved
+in the cookie fine, and the PHP script can even acces the Session ID value
+in the cookie. However, when you call session_start(); it mearly creates a
+new session/session ID instead of resuming.
+I can pass on the session id using
+$target = &quot;<A HREF="http://url.com?".CID;">http://url.com?&quot;.CID;</A>
+header( &quot;Location: $target&quot; );
+but obviously doing that is not what I want to do for every page/link. I
+wrote a script to test the session function. The sessions are set in a
+script using session_register() and the variables are stored perfectly fine
+in the session folder, even the session ID's match with the output of CID.
+
+The Code:
+print &quot;Session ID = &quot;.session_id().&quot;&lt;br&gt;&quot;;
+print &quot;Searching for cookie ID ( $_ENV[COOKIE] ) &lt;br&gt;&quot;;
+
+Firstly, I called the code before session_start(); just to see what happens.
+It returns:
+
+Session ID =
+Searching for cookie ID ( PHPSESSID=7c7b9b50c724fc18c59c436d78b4992d )
+
+Remember, thats before I call session_start();
+However, Exactly the same code used after session_start(); returns something
+different...
+
+Session ID = e6c9f37a45808b552b8f04ee06968d42
+Searching for cookie ID ( PHPSESSID=7c7b9b50c724fc18c59c436d78b4992d )
+
+So, as you can see, Session_Start(); has actually started a NEW session
+rather than the old session refered to in the session cookie. This is most
+annoying... and I have no idea what could be causing it.
+
+Thank you for your time. I hope I have explained it fairly well...
+
+Stephen
+
+[Web Server Details]
+Platform - Windows XP (Admin Account)
+Server - Xitami
+
+[PHP.INI File]
+
+register_globals = On
+
+ [Session]
+session.save_handler = files
+session.save_path = C:\server\PHP\sessiondata    ; argument passed to
+save_handler
+session.use_cookies = 1
+session.name = PHPSESSID
+session.auto_start = 0
+session.cookie_lifetime = 1800
+session.cookie_path = /
+session.cookie_domain =
+session.serialize_handler = php
+session.gc_probability = 1
+session.gc_maxlifetime = 1800
+session.referer_check =
+session.entropy_length = 0
+session.entropy_file =
+;session.entropy_length = 16 (Yes, they are commented out ; in php.ini)
+;session.entropy_file = /dev/urandom (Yes, they are commented out ; in
+php.ini)
+session.cache_limiter = nocache
+session.cache_expire = 180
+session.use_trans_sid = 0
+url_rewriter.tags = &quot;a=href,area=href,frame=src,input=src,form=fakeentry
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+
+
+
+
+
+************************************************************
+Opinions contained in this e-mail do not necessarily reflect
+the opinions of the Queensland Department of Main Roads,
+Queensland Transport or National Transport Secretariat, or
+endorsed organisations utilising the same infrastructure.
+If you have received this electronic mail message in error,
+please immediately notify the sender and delete the message
+from your computer.
+************************************************************
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004119.html">[Xitami] FTP and Windows XP
+</A></li>
+	<LI> Next message: <A HREF="004123.html">[Xitami] FTP and Windows XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4120">[ date ]</a>
+              <a href="thread.html#4120">[ thread ]</a>
+              <a href="subject.html#4120">[ subject ]</a>
+              <a href="author.html#4120">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

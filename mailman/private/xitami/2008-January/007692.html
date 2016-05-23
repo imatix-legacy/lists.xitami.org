@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20Alias%20and%20Dynamic%20URL%20conversion%20-%20IT%20WORKS%21&In-Reply-To=BAY105-DAV54A780615DCA861863829F8490%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007690.html">
+   <LINK REL="Next"  HREF="007697.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!</H1>
+    <B>Francis Turner</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20Alias%20and%20Dynamic%20URL%20conversion%20-%20IT%20WORKS%21&In-Reply-To=BAY105-DAV54A780615DCA861863829F8490%40phx.gbl"
+       TITLE="[Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!">francis.turner at gmail.com
+       </A><BR>
+    <I>Wed Jan  9 22:52:07 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007690.html">[Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!
+</A></li>
+        <LI>Next message: <A HREF="007697.html">[Xitami] filters in puppylinux or any linux.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7692">[ date ]</a>
+              <a href="thread.html#7692">[ thread ]</a>
+              <a href="subject.html#7692">[ subject ]</a>
+              <a href="author.html#7692">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>much better than the GSL I just suggested on the other post...
+
+On Jan 9, 2008 8:23 AM, Russel Olinger &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Woohooo...ok.  Apache uses mod_perl and mod_rewrite to convert dynamic URLs
+</I>&gt;<i> to static ones, but no such luck using it with Xitami.  However, you can use
+</I>&gt;<i> Xitami's CGI Alias' to do the trick.  Some of you might have known this or
+</I>&gt;<i> have figured it out previously - if so, then excuse my enthusiasm.  But if
+</I>&gt;<i> not, then read on below to learn how to do it.
+</I>&gt;<i>
+</I>&gt;<i> This is technique is very very helpful for those who are interested in
+</I>&gt;<i> making their websites as Search Enginer Crawler friendly as possible....of
+</I>&gt;<i> all the SEO reading I have done indicates that crawlers indexing sites do
+</I>&gt;<i> not look favorably on dynamic URLs and give higher priority and
+</I>&gt;<i> consideration to static URLs - thus better ranking, higher and more frequent
+</I>&gt;<i> crawl rates.
+</I>&gt;<i>
+</I>&gt;<i> I needed to do this because I have over 700,000 pages of content that
+</I>&gt;<i> fluctuates daily and Google wasn't getting past about 24,000 indexed pages
+</I>&gt;<i> while MSN and Yahoo were barely crawling/indexing my site at all.  80% of
+</I>&gt;<i> those looking at my site to help me figure out why my numbers were so low
+</I>&gt;<i> all pointed to my extensive dynamic URLs as being a big part of the problem.
+</I>&gt;<i>
+</I>&gt;<i> =========
+</I>&gt;<i> A typical Dynamic URL:
+</I>&gt;<i>     www.example.com/cgi-bin/foo.pl?id=12345&amp;var1=100&amp;var2=Hello Everyone
+</I>&gt;<i>
+</I>&gt;<i> In what ever script you use to generate the above URL you can easily create
+</I>&gt;<i> that URL and then spit it out as a static URL
+</I>&gt;<i>
+</I>&gt;<i> Static URL: www.example.com/foo/12345/100/hello everyone/
+</I>&gt;<i> OR: Static URL: www.example.com/foo/id_12345/var1_100/var2_Hello Everyone
+</I>&gt;<i>
+</I>&gt;<i> Then using Xitami's CGI Alias section create the following kind of alias
+</I>&gt;<i> link:
+</I>&gt;<i>
+</I>&gt;<i> /foo = /xitami/cgi-bin/foo.pl
+</I>&gt;<i>
+</I>&gt;<i> Xitami requires that /foo be the beginning of the URL...and anytime it sees
+</I>&gt;<i> /foo at the beginning, regardless of what follows it, Xitami will execute
+</I>&gt;<i> the associated script...in this case: /xitami/cgi-bin/foo.pl
+</I>&gt;<i>
+</I>&gt;<i> Then in the actual foo.pl script you would simply need to grab the
+</I>&gt;<i> $ENV{'PATH_INFO'} and parse it....conveniently, PATH_INFO from the above
+</I>&gt;<i> static examples would be everything AFTER /foo/
+</I>&gt;<i>
+</I>&gt;<i> Testing a simple perl script for foo.pl
+</I>&gt;<i>
+</I>&gt;<i> #!/perl/bin/perl
+</I>&gt;<i> @getVars = split(/\//,$ENV{'PATH_INFO'}) ;
+</I>&gt;<i> print &quot;\<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">n at getVars</A>&quot; ;
+</I>&gt;<i>
+</I>&gt;<i> #### Example 1 Returns:
+</I>&gt;<i> 12345
+</I>&gt;<i> 100
+</I>&gt;<i> Hello Everyone
+</I>&gt;<i>
+</I>&gt;<i> ### Example 2 Returns:
+</I>&gt;<i> id_12345
+</I>&gt;<i> var1_100
+</I>&gt;<i> var2_Hello Everyone
+</I>&gt;<i>
+</I>&gt;<i> This in example 1 you would need to know the exact order of your parsed
+</I>&gt;<i> variables, but in example 2 you can include the var names as part of the
+</I>&gt;<i> variable value...I prefer the second method because then you can order your
+</I>&gt;<i> variables in any order and add as many as you want without worry of having
+</I>&gt;<i> to always know the order or worry that you didn't account for every variable
+</I>&gt;<i> needed.
+</I>&gt;<i>
+</I>&gt;<i> Anyway...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007690.html">[Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!
+</A></li>
+	<LI>Next message: <A HREF="007697.html">[Xitami] filters in puppylinux or any linux.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7692">[ date ]</a>
+              <a href="thread.html#7692">[ thread ]</a>
+              <a href="subject.html#7692">[ subject ]</a>
+              <a href="author.html#7692">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

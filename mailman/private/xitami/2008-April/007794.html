@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Small modification to ISAPI support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007793.html">
+   <LINK REL="Next"  HREF="007795.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Small modification to ISAPI support</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To="
+       TITLE="[Xitami] Small modification to ISAPI support">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Apr 30 18:30:52 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007793.html">[Xitami] Small modification to ISAPI support
+</A></li>
+        <LI>Next message: <A HREF="007795.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7794">[ date ]</a>
+              <a href="thread.html#7794">[ thread ]</a>
+              <a href="subject.html#7794">[ subject ]</a>
+              <a href="author.html#7794">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+JLIST:  Could you explain that a bit more?  I get the gist of it but I 
+assume you are also compiling our own Xitami and are able to modify the 
+source.  For us non-compiled users I am not certain we can use that method.
+
+So instead, I do my own version of URL rewrites through Xitami's CGI 
+aliasing.  It works just fine and still provides you with all the necessary 
+PATH_INFO and perl $ENV of the alias - not of the actual called script
+
+Example:
+/showArticle    /cgi-bin/postShow.pl
+
+A URL example would be:
+<A HREF="http://www.foo.com/showArticle/cars/classic/1965-Convertable-Corvette_12345.html">http://www.foo.com/showArticle/cars/classic/1965-Convertable-Corvette_12345.html</A>
+
+/showArticle calls the &quot;/cgi-bin/poswShow.pl&quot; script, in the script I parse 
+the PATH_INFO environment variable to grab all the necessary ID info about 
+the URL to call up the correct article.  In this case, &quot;cars&quot; and &quot;classic&quot; 
+translate to category and forum IDs, then grab the actual article ID &quot;12345&quot; 
+to call it up to the user.  Using the CGI alias method, the PATH_INFO 
+environment variable is conveniently everything AFTER the /showArticle 
+alias.
+
+So PATH_INFO = /cars/classic/1965-Convertable-Corvette_12345.html
+Parse everything on &quot;/&quot; into an array: @array = split(/\//,$PATH_INFO)
+SPLICE the first empty element: splice @array,
+Then split the last element for the article ID, the text of irrelevant, its 
+only good for SEO stuff: @idInfo = split(/_/,$array[2]) ;
+Remove the &quot;.html&quot; : $articleID = $idInfo[1] =~ s/\.html//;
+
+Since I have never used Apache's mod_rewrite I don't know how much more 
+laborious the above method is...but its really not that difficult, each 
+script has to be slightly customized and you have to know what each part of 
+the URL stands for, but if you logically plan it out you can achieve the 
+whole thing pretty easy using just one called function to parse all your 
+vars for you.  It also requires that for every script you want to do URL 
+rewrites on, you must add a unique CGI alias for it.
+
+Hope it helps.
+
+----- Original Message ----- 
+From: &quot;JLIST&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">jlist9 at gmail.com</A>&gt;
+To: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Xitami at lists.xitami.org</A>&gt;
+Sent: Tuesday, April 29, 2008 11:34 PM
+Subject: [Xitami] Small modification to ISAPI support
+
+
+&gt;<i> Among other things, Xitami's lack of URL rewriting feature
+</I>&gt;<i> bothers me. So I made a couple of small changes to the ISAPI
+</I>&gt;<i> add-on, basically adding a -i/-I option to show index.dll. When
+</I>&gt;<i> no DLL file name is given in the URL, index.dll is used instead.
+</I>&gt;<i> This makes it possible to have URLs like <A HREF="http://domain/register,">http://domain/register,</A>
+</I>&gt;<i> instead of <A HREF="http://domain/isapi_exe/register.dll">http://domain/isapi_exe/register.dll</A>
+</I>&gt;<i>
+</I>&gt;<i> 127a128
+</I>&gt;&gt;<i>     show_index     = FALSE;               /* Use index.dll if dll isn't 
+</I>&gt;&gt;<i> in url */
+</I>&gt;<i> 346a348,350
+</I>&gt;&gt;<i>                 case 'I':               /* Alway unload ON 
+</I>&gt;&gt;<i> */
+</I>&gt;&gt;<i>                 case 'i':
+</I>&gt;&gt;<i>                     show_index = TRUE;      break;
+</I>&gt;<i> 599a604,605
+</I>&gt;&gt;<i>     static char index[] = &quot;index.dll&quot;;
+</I>&gt;&gt;<i>
+</I>&gt;<i> 608a615,617
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>     if (show_index &amp;&amp; (!strstr(path_info, &quot;.dll&quot;)))
+</I>&gt;&gt;<i>         path_info = index;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007793.html">[Xitami] Small modification to ISAPI support
+</A></li>
+	<LI>Next message: <A HREF="007795.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7794">[ date ]</a>
+              <a href="thread.html#7794">[ thread ]</a>
+              <a href="subject.html#7794">[ subject ]</a>
+              <a href="author.html#7794">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

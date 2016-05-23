@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] xitami aborts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000743.html">
+   <LINK REL="Next"  HREF="000745.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] xitami aborts
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] xitami aborts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 18 Aug 2001 13:09:33 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000743.html">[Xitami] Console.log msgs
+</A></li>
+        <LI> Next message: <A HREF="000745.html">[Xitami] Console.log msgs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#744">[ date ]</a>
+              <a href="thread.html#744">[ thread ]</a>
+              <a href="subject.html#744">[ subject ]</a>
+              <a href="author.html#744">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:EX-20010816-171855-0001@exchange.fiserv-missive1.fiserv.net">EX-20010816-171855-0001@exchange.fiserv-missive1.fiserv.net</A>&gt;, &quot;Bowde
+n, Russell&quot; writes:
+&gt;<i>This is my first posting here.  I've been running Xitami with LRWP for about 2 
+</I>&gt;<i>years on a private network doing transaction processing on Unixware 7.1, 
+</I>&gt;<i>currently averaging about 4000 transactions per hour.  My problem is that 
+</I>&gt;<i>the Xitami process just disappears now and then.  
+</I>
+:<i>-(
+</I>
+These sorts of problems are generally caused by a bug in the software
+(ie, Xitami), where it doesn't handle something properly and either
+crashes on the spot, or messes something else up causing a crash later.
+
+I see you are running Xitami 2.5b4 -- this is a beta test version.  It's
+still in beta testing because of issues like this (and because no one
+has had time to go through and make it properly robust).  While there is
+a 2.5b5 out, the changes between 2.5b4 and 2.5b5 are Windows-related
+(for the device name denial-of-service security issue), so are unlikely
+to make much difference for you.
+
+&gt;<i>Sometimes (but not always) Xitami leaves behind a memtrace.lst.  
+</I>&gt;<i>Here's the front of one of them:
+</I>
+memtrace.lst is Xitami's list of memory that it knows that it's
+allocated, but doesn't have any record of cleaning up properly.
+Generally this means that it's exited improperly (without going through
+the full close down cycle), but you know that already :-)
+
+If your application will work with Xitam 2.4d9 (the current stable
+release) you might want to consider using that.  It's known to be more
+stable than the beta test version, and possibly it might avoid your
+problem too.
+
+You might also want to check the console logs (Xitami, and where ever
+you directed stdout/stderr of the Xitami software) to see if there are
+any further details on why it chose to exit.  Typically if it encounters
+an internal error it does indicate waht it was doing at the time.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000743.html">[Xitami] Console.log msgs
+</A></li>
+	<LI> Next message: <A HREF="000745.html">[Xitami] Console.log msgs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#744">[ date ]</a>
+              <a href="thread.html#744">[ thread ]</a>
+              <a href="subject.html#744">[ subject ]</a>
+              <a href="author.html#744">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

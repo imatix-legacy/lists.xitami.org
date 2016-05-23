@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] upload
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000700.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] upload
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] upload">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Aug 2001 20:54:24 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000700.html">[Xitami] upload
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#701">[ date ]</a>
+              <a href="thread.html#701">[ thread ]</a>
+              <a href="subject.html#701">[ subject ]</a>
+              <a href="author.html#701">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3B78D8AE.5A458481@sovik.no">3B78D8AE.5A458481@sovik.no</A>&gt;, Andreas Zieritz writes:
+&gt;<i>My specific problem is that, after compiling the program and copying the
+</I>&gt;<i>configuration file to the /cgi-bin directory I am constantly getting a
+</I>&gt;<i>'I could not open the configuration file' error. The upload.cfg has
+</I>&gt;<i>664-rights in the /cgi-bin directory.
+</I>
+Your CGI script and Xitami differ as to their idea of what the current
+directory should be when the cgi script is run, and your CGI script is
+using a relative path.  
+
+By default Xitami sets the current directory to the CGI directory when
+running CGI scripts; but it seems that your CGI script expects something
+else.
+
+You can either change your CGI script to have a full path, or change its
+assumption about what the current directory will be, or change what
+Xitami sets the current directory to when running CGI scripts ([CGI]
+workdir).
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000700.html">[Xitami] upload
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#701">[ date ]</a>
+              <a href="thread.html#701">[ thread ]</a>
+              <a href="subject.html#701">[ subject ]</a>
+              <a href="author.html#701">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

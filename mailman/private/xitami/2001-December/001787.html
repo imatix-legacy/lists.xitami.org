@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] BUG - uppercase subdirs of an Alias - potenial NULL pointer assignemnt
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001784.html">
+   <LINK REL="Next"  HREF="001788.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] BUG - uppercase subdirs of an Alias - potenial NULL pointer assignemnt
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] BUG - uppercase subdirs of an Alias - potenial NULL pointer assignemnt">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 19 Dec 2001 18:32:47 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001784.html">[Xitami] Directory Listing
+</A></li>
+        <LI> Next message: <A HREF="001788.html">[Xitami] BUG - uppercase subdirs of an Alias - potenial NULL pointer assignemnt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1787">[ date ]</a>
+              <a href="thread.html#1787">[ thread ]</a>
+              <a href="subject.html#1787">[ subject ]</a>
+              <a href="author.html#1787">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Just found a lovely bug.
+
+I have (for test purposes!) within my defaults.cfg an alias line
+usrlocal = &quot;/usr/local&quot;
+
+(Xitami is installed and runing in /usr/local/xitami-25b5)
+
+I also have a subdirectory from /usr/local/xitami-25b5/webpages called 
+UPPERCASE
+
+<A HREF="http://computer/UPPERCASE/">http://computer/UPPERCASE/</A> works and returns the directory contents
+<A HREF="http://computer/usrlocal/xitami-25b5/webpages/">http://computer/usrlocal/xitami-25b5/webpages/</A> works and gives the home page
+<A HREF="http://computer/usrlocal/xitami-25b5/webpages/UPPERCASE/">http://computer/usrlocal/xitami-25b5/webpages/UPPERCASE/</A> gives a 404
+
+The same applies to ftp aliases since they also call the same routine 
+(see below)! but if ftproot is set to /usr/local/ for a user then that 
+user can go to <A HREF="ftp://computer/xitami-25b5/webpages/UPPERCASE/">ftp://computer/xitami-25b5/webpages/UPPERCASE/</A> just fine
+
+It looks like this is because the http_match_alias () routine in 
+smthttpd.c lowercases the buffer for comparison and then returns as the 
+ value of char **base the lowercased remainder of the url not the 
+equivalent untoughed raminder of the url.
+
+I think the fix would be to keep track of the offset and return that 
+instead which means that base would have to be changed from a char** to 
+an int *. Alternatively you could set base to &amp;uri[slash-buffer] 
+(??should be &amp;uri[slash-buffer-1] if the leading / is absent??)
+
+In looking at this code I think I also see a potential null pointer 
+assignment (I think it never actually occurs because this routine is 
+always called with a parameter for base) but there seems to be no check 
+to see whetehr base == NULL before assigning *base to buffer at line 832 
+although there is such a check for line 851
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001784.html">[Xitami] Directory Listing
+</A></li>
+	<LI> Next message: <A HREF="001788.html">[Xitami] BUG - uppercase subdirs of an Alias - potenial NULL pointer assignemnt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1787">[ date ]</a>
+              <a href="thread.html#1787">[ thread ]</a>
+              <a href="subject.html#1787">[ subject ]</a>
+              <a href="author.html#1787">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

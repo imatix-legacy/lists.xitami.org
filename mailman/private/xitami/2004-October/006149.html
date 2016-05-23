@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP Data Socket Issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006153.html">
+   <LINK REL="Next"  HREF="006154.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP Data Socket Issue
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP Data Socket Issue">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 8 Oct 2004 19:41:00 +0100 (BST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006153.html">[Xitami] &lt;aol&gt;Me too!&lt;/aol&gt;
+</A></li>
+        <LI> Next message: <A HREF="006154.html">[Xitami] Re: Xitami digest, Vol 1 #957 - 10 msgs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6149">[ date ]</a>
+              <a href="thread.html#6149">[ thread ]</a>
+              <a href="subject.html#6149">[ subject ]</a>
+              <a href="author.html#6149">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:JCEKKKLCIKDJFAMJJNJMCEEBCBAA.rvanroy@woodhouse.com">JCEKKKLCIKDJFAMJJNJMCEEBCBAA.rvanroy@woodhouse.com</A>&gt;
+   &quot;Rick VanRoy&quot; writes:
+
+&gt;<i> This is a multi-part message in MIME format.
+</I>
+PLEASE don't do this: whilst other recipients of your e-mails /might/
+like them to arrivein both plain ASCII and also in pidgin-HTML, the
+latter has no place on any mailing list (or newsgroup).
+
+Find the setting in your mailer which says &quot;only send HTML mail to
+addressees known to like it&quot; (or whatever the wording).
+
+&gt;<i> When attempting to connect to my FTP server, I can connect up to the welcome
+</I>&gt;<i> screen, but the data socket won't connect.  I have shifted my http port base
+</I>&gt;<i> to 2030, and that works fine.  That should make the FTP port shift to 2051,
+</I>&gt;<i> and the data socket to 2050.  Since the server is behind a NAT router
+</I>&gt;<i> firewall, I should only need ports 2110, 2050, and 2051 open on the firewall
+</I>&gt;<i> for all of it to work.  Still, I cannot get the data socket to go, even
+</I>&gt;<i> using PASV.  I have even set the server to DMZ so all ports were available,
+</I>&gt;<i> and it still won't work.  I'm at a loss.  Any Ideas?  I'm running v2.5b6
+</I>
+You seem to be arithmetically challenged.  The WKP (well-known ports) for
+HTTP, FTP control, and FTP data are, respectively, 80, 21, and 20.
+
+So if you add 1950 to shift the web server port up to 2030, then the FTP
+ports will be at 1971 &amp; 1970, and not at 2051/2050.
+
+So what's 2110?  Aha!  I had misunderstood; you have added an OFFSET of
+2030, not &quot;shifted the http port&quot; to 2030.  OK, so the FTP ports ought to
+be at 2051/2050 as you say.  This wasn't exactly crystal clear.
+
+Let's clarify: from the outside, anyone can connect to port 2051 and log
+in to the ftpd?  You are behind a firewall, yes?  Is the FTP client
+computer also behind a firewall?  There are always potentially problems
+with the FTP data port if there are two firewalls involved.  In the non-
+PASV case, the client will connect to port 20 to PUT data, but will use a
+PORT command to tell the server whereabout to connect its port 20 to GET
+a file; the client's firewall then needs to open that port, because in
+non-passive mode, the server is the initiator of such data transfers.
+
+If, OTOH, one uses PASV, then the server's firewall needs to allow
+connections from the client to port 20 from any arbitrary socket for a
+GET operation.
+
+I believe you are saying that the FTP data port is not working on GET
+(and LIST) operations, true?  To try to localize things, what happens if
+you try a PUT operation?
+
+&gt;<i> ------=_NextPart_001_0003_01C4AC89.37063FF0
+</I>&gt;<i> Content-Type: text/html;
+</I>&gt;<i> 	charset=&quot;iso-8859-1&quot;
+</I>&gt;<i> Content-Transfer-Encoding: quoted-printable
+</I>&gt;<i> 
+</I>&gt;<i> &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+</I>
+[HTML &quot;duplicate&quot; snipped]
+
+&gt;<i> ------=_NextPart_001_0003_01C4AC89.37063FF0--
+</I>&gt;<i> 
+</I>&gt;<i> ------=_NextPart_000_0002_01C4AC89.37063FF0
+</I>&gt;<i> Content-Type: image/gif;
+</I>&gt;<i> 	name=&quot;TechTool.gif&quot;
+</I>&gt;<i> Content-Transfer-Encoding: base64
+</I>&gt;<i> Content-ID: &lt;<A HREF="mailto:100370721@07102004-1274">100370721@07102004-1274</A>&gt;
+</I>&gt;<i> 
+</I>&gt;<i> R0lGODlhQQByAPcAAAAAADMzM2ZmZpmZmcDAwAAAAAAAAAAAAPB0AQBMAE0AAABNABoAAAAMF1AA
+</I>
+[errm, what are these 40-ish lines of rubbish doing here?]
+
+
+Note to list administrator: I thought the list blocked ALL binary
+attachments?  If not, why not?
+
+-- 
+Brian {Hamilton Kelly}                                     <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+   &quot;I don't use Linux. I prefer to use an OS supported by a large multi-
+   national vendor, with a good office suite, excellent network/internet
+   software and decent hardware support.&quot;
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006153.html">[Xitami] &lt;aol&gt;Me too!&lt;/aol&gt;
+</A></li>
+	<LI> Next message: <A HREF="006154.html">[Xitami] Re: Xitami digest, Vol 1 #957 - 10 msgs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6149">[ date ]</a>
+              <a href="thread.html#6149">[ thread ]</a>
+              <a href="subject.html#6149">[ subject ]</a>
+              <a href="author.html#6149">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

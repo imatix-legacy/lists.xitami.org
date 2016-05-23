@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] building os2 production release...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000008.html">
+   <LINK REL="Next"  HREF="000009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] building os2 production release...
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] building os2 production release...">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 07 Jun 2001 20:39:01 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000008.html">[Xitami-Dev] LRWP: Name length limitations ?
+</A></li>
+        <LI> Next message: <A HREF="000009.html">[Xitami-Dev] building os2 production release...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200106070806.KAA30403@sxpublic.nxrda.imatix.com">200106070806.KAA30403@sxpublic.nxrda.imatix.com</A>&gt;, &quot;bernd hohmann&quot; wr
+ites:
+&gt;<i>after finally finding a link386.exe (didn't installed it) i get a lot of 
+</I>&gt;<i>link errors building beta4 as production release (crt0 and other stuff). 
+</I>&gt;<i>debug and standard are ok (using the linker from the EMX package). 
+</I>&gt;<i>are there special environment variables for link386.exe ?
+</I>
+It's been quite a while since I've done this, but as I recall it, the
+debug and standard versions build a.out (COFF) executables, which then
+have an EMX header applied to them, and pretty much everything is done
+with the EMX tools.
+
+The production version builds .obj/.lib files, and is linked through the
+EMX front end to link386.  Certainly you can't link using link386
+directly, unless you supply all the arguments that the EMX front end
+would supply.
+
+As far as I remember the c.cmd script has the logic needed to do this
+providing all the objects are build in production mode, the libraries
+built in production mode, and you link in production mode.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000008.html">[Xitami-Dev] LRWP: Name length limitations ?
+</A></li>
+	<LI> Next message: <A HREF="000009.html">[Xitami-Dev] building os2 production release...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Streaming Video
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003054.html">
+   <LINK REL="Next"  HREF="003056.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Streaming Video
+   </H1>
+    <B>Gregory Hart
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Streaming Video">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Apr 2002 18:15:22 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003054.html">[Xitami] Streaming Video
+</A></li>
+        <LI> Next message: <A HREF="003056.html">[Xitami] Streaming Video
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3055">[ date ]</a>
+              <a href="thread.html#3055">[ thread ]</a>
+              <a href="subject.html#3055">[ subject ]</a>
+              <a href="author.html#3055">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I quickly tested it and this should work:
+
+#!/usr/local/bin/perl
+
+$forminfo = $ENV{'QUERY_STRING'};
+$forminfo =~ s/%([0-9a-fA-F][0-9a-fA-F])/pack(&quot;C&quot;, hex($1))/eg;
+
+print &quot;Content-type: audio/mpeg\n\n&quot;;
+print &quot;$forminfo\n&quot;;
+
+Just call the script like this: script.pl?<A HREF="http://www.domain.com/audio_file.mp3.">http://www.domain.com/audio_file.mp3.</A> If you want a video file, just change the content
+type to video/mpeg.
+-Greg
+
+----- Original Message -----
+From: Michael &lt;<A HREF="mailto:michael@alft.net">michael@alft.net</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, April 25, 2002 5:49 PM
+Subject: Re: [Xitami] Streaming Video
+
+
+On 25 Apr 2002 at 17:23, Gregory Hart wrote:
+
+&gt;<i> You could also use the object tag in HTML and put it into a web page
+</I>&gt;<i> that way. If you could get me more information on specifically what
+</I>&gt;<i> type of video file it is and if you want to display it in a different
+</I>&gt;<i> program or on a web page, I'd be able to help you more. -Greg
+</I>
+We were just wondering about this very subject today.   Do you
+have a script that streams mpeg files?
+
+~Michael
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003054.html">[Xitami] Streaming Video
+</A></li>
+	<LI> Next message: <A HREF="003056.html">[Xitami] Streaming Video
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3055">[ date ]</a>
+              <a href="thread.html#3055">[ thread ]</a>
+              <a href="subject.html#3055">[ subject ]</a>
+              <a href="author.html#3055">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000233.html">
+   <LINK REL="Next"  HREF="000234.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 25 Jun 2001 22:03:06 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000233.html">[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+</A></li>
+        <LI> Next message: <A HREF="000234.html">[Xitami] Newbie can't setup virtual hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#238">[ date ]</a>
+              <a href="thread.html#238">[ thread ]</a>
+              <a href="subject.html#238">[ subject ]</a>
+              <a href="author.html#238">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:42702@dsl.co.uk">42702@dsl.co.uk</A>&gt;, Brian {Hamilton Kelly} writes:
+&gt;<i>AIUI, under Linux, creating a separate execution thread is almost as
+</I>&gt;<i>costly as forking another process, so programs tend to do the latter
+</I>&gt;<i>rather than the former.  In contrast under OS/2, spawning a thread is a
+</I>&gt;<i>very cheap operation, so multi-threaded programs are more common.
+</I>
+Under Linux creating a new process (with fork()) is almost as cheap as
+creating a new thread -- which is what you said, but the emphasis is
+that creating a new process is cheap.  (Starting a new program in that
+process costs more; more like starting a new process in OS/2.)
+
+Traditionally unix does not have threads, and even those unixes that do,
+do not have them in a widely portable fashion.  So processes tend to get
+used instead.
+
+However as I said, Xitami tries to buck this trend and be single
+threaded, single process -- which has its advantages and disadvantages.
+
+All that said, I'm puzzled what could be causing your problem on a SMP
+machine, which is fixed by running it on a single processor, if it isn't
+a threading issue.  
+
+Can you tell me what build flags you used to build Xitami?  And which
+version of the compiler and build environment?
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000233.html">[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+</A></li>
+	<LI> Next message: <A HREF="000234.html">[Xitami] Newbie can't setup virtual hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#238">[ date ]</a>
+              <a href="thread.html#238">[ thread ]</a>
+              <a href="subject.html#238">[ subject ]</a>
+              <a href="author.html#238">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

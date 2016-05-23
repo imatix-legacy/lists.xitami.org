@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Newbie question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003722.html">
+   <LINK REL="Next"  HREF="003724.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Newbie question
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Newbie question">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 26 Jul 2002 11:57:03 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003722.html">[Xitami] Newbie question
+</A></li>
+        <LI> Next message: <A HREF="003724.html">[Xitami] Newbie question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3723">[ date ]</a>
+              <a href="thread.html#3723">[ thread ]</a>
+              <a href="subject.html#3723">[ subject ]</a>
+              <a href="author.html#3723">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+--------------030007090306010706080102
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+just fun wrote:
+
+&gt;<i>Thanks Garry,
+</I>&gt;<i>
+</I>&gt;<i>Is that the only way? company doesn't encourage frame
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>The only other way is to run the servlets direct from Xitami using the 
+servlet runner at <A HREF="http://runner.conacom.de">http://runner.conacom.de</A>
+
+If you do a web redirect then the browser will show the URI of the new 
+location unless you use a frame.
+
+If you want to do frames/redirects then you can do it server side 
+insetad of client side using GSL / XML if you have xitami 2.5b5.
+
+The enclosed script will do this and shoud be self explanatory
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+--------------030007090306010706080102
+Content-Type: text/plain;
+ name=&quot;relo.gsl&quot;
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename=&quot;relo.gsl&quot;
+
+.-----------------------------------------------------------------------------
+.-
+.-  Relocator
+.-
+.-  Written:  2001/12/12  Francis Turner
+.-  Modified: 2002/07/26  Francis Turner
+.-
+.-  Redirects you to another port on the same server. Either as a redirect or
+.-  as an embedded frame. You can call it in 2 ways: either call direct 
+.-    relo.gsl?p=PPP&amp;m=C&amp;t=TTT
+.-    where PPP is the port for the redirect
+.-    C is either an R for redirect or an F for frame
+.-    TTT is a title used to give the frame mode a title. It is ignored in R mode
+.-  or use as the script for a service.xml script
+.-    e.g. a SWAT service redirector would look like
+.-    &lt;RELO SCRIPT='/relo.gsl'&gt;
+.-      &lt;SERVICE NAME='Swat' PORT='901' MODE='FRAME'/&gt;
+.-    &lt;/RELO&gt;
+.-
+.-  Modification allows you to do redrects to remote servers too using 
+.-  either relo.gsl?u=URI&amp;m=C&amp;t=TTT or 
+.-    &lt;RELO SCRIPT='/relo.gsl'&gt;
+.-      &lt;SERVICE NAME='Remote Server' MODE='FRAME'
+.-        URI='<A HREF="http://remote.example.com/path/to/somewhere.html'">http://remote.example.com/path/to/somewhere.html'</A> /&gt;
+.-    &lt;/RELO&gt;
+.-  Note that the direct call method will not cope well with URIs that have 
+.-  their own query strings (i.e. URIs of the form <A HREF="http://some/where?query">http://some/where?query</A> )
+.-
+.-----------------------------------------------------------------------------
+&lt;HTML&gt;&lt;HEAD&gt;
+.- 
+.- First deal with the case when called from XXX.xml
+.- 
+.if filename &lt;&gt; script
+.  for service
+.    mode ?= 'r'
+.    port ?= 80
+.    name ?= &quot;Relo &quot;+ port 
+.    if (substr(mode,0,1,) = &quot;f&quot;) | (substr(mode,0,,1) = &quot;F&quot;)
+&lt;TITLE&gt;$(name:)&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;FRAMESET cols=&quot;*&quot;&gt;
+.      if defined(uri)
+  &lt;FRAME name=&quot;In&quot; src=&quot;$(uri:)&quot;&gt;
+.      else
+  &lt;FRAME name=&quot;In&quot; src=&quot;<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(port:)/&quot;&gt;
+.      endif
+  &lt;NOFRAMES&gt;
+  &lt;H1&gt;Sorry!&lt;/H1&gt;
+  &lt;H3&gt;This page must be viewed by a browser that is capable of viewing frames.&lt;/H3&gt;
+  &lt;/NOFRAMES&gt;
+&lt;/FRAMESET&gt;&lt;/HTML&gt;
+.    else
+.      if defined(uri)
+  &lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; URL=$(uri:)&quot;&gt;&lt;/HEAD&gt;
+.      else
+  &lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(port:)/&quot;&gt;&lt;/HEAD&gt;
+.      endif
+  &lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.-  &lt;BODY&gt;$(port?:)=$(name?:)=$(mode?:)-$(substr(mode,0,,1):)
+.- &lt;/BODY&gt;&lt;/HTML&gt;
+.    endif
+.  endfor
+.- 
+.- Now deal with the case when called direct as relo.gsl?p=PPP&amp;m=C&amp;t=TTT
+.- 
+.elsif defined(p)
+.  m ?= 'r'
+.  if substr(m,0,1,) = 'r'
+&lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(p:)/&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.  else
+.    t ?= &quot;Relo &quot;+p
+&lt;TITLE&gt;$(t:)&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;FRAMESET cols=&quot;*&quot;&gt;
+  &lt;FRAME name=&quot;In&quot; src=&quot;<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(p:)/&quot;&gt;
+  &lt;NOFRAMES&gt;
+  &lt;H1&gt;Sorry!&lt;/H1&gt;
+  &lt;H3&gt;This page must be viewed by a browser that is capable of viewing frames.&lt;/H3&gt;
+  &lt;/NOFRAMES&gt;
+&lt;/FRAMESET&gt;&lt;/HTML&gt;
+.  endif
+.- 
+.- Now deal with the case when called direct as relo.gsl?u=URI&amp;m=C&amp;t=TTT
+.- 
+.elsif defined(u)
+.  m ?= 'r'
+.  if substr(m,0,1,) = 'r'
+&lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; URL=$(u:)&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.  else
+.    t ?= &quot;Relo &quot;+u
+&lt;TITLE&gt;$(t:)&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;FRAMESET cols=&quot;*&quot;&gt;
+  &lt;FRAME name=&quot;In&quot; src=&quot;$(u:)&quot;&gt;
+  &lt;NOFRAMES&gt;
+  &lt;H1&gt;Sorry!&lt;/H1&gt;
+  &lt;H3&gt;This page must be viewed by a browser that is capable of viewing frames.&lt;/H3&gt;
+  &lt;/NOFRAMES&gt;
+&lt;/FRAMESET&gt;&lt;/HTML&gt;
+.  endif
+.else
+&lt;/HEAD&gt;&lt;BODY&gt;Bad Boy&lt;/BODY&gt;&lt;/HTML&gt;
+.endif
+
+--------------030007090306010706080102--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003722.html">[Xitami] Newbie question
+</A></li>
+	<LI> Next message: <A HREF="003724.html">[Xitami] Newbie question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3723">[ date ]</a>
+              <a href="thread.html#3723">[ thread ]</a>
+              <a href="subject.html#3723">[ subject ]</a>
+              <a href="author.html#3723">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

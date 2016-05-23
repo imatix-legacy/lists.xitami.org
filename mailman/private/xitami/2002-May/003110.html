@@ -1,0 +1,532 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Virtual Hosts doesn't start.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003109.html">
+   <LINK REL="Next"  HREF="003118.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Virtual Hosts doesn't start.
+   </H1>
+    <B>Nico Berg
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Virtual Hosts doesn't start.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 2 May 2002 15:05:57 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003109.html">[Xitami] Virtual Hosts doesn't start.
+</A></li>
+        <LI> Next message: <A HREF="003118.html">[Xitami] Virtual Hosts doesn't start.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3110">[ date ]</a>
+              <a href="thread.html#3110">[ thread ]</a>
+              <a href="subject.html#3110">[ subject ]</a>
+              <a href="author.html#3110">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0044_01C1F1EA.DD1CFBB0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: 7bit
+
+I don't know anymore, trying to get this working but no result on 1 full day
+doing nothing else but searching for a sollution. That's why I send the most
+info I could find.
+
+Please help me,
+Nico Berg
+---------------defaults.cfg---------------------
+#*END
+
+[Ftp]
+    Enabled = &quot;0&quot;
+
+[Security]
+    Filename = &quot;defaults.aut&quot;
+
+[Server]
+    Debug = &quot;1&quot;
+    Ipaddress = &quot;10.0.0.150&quot;
+
+[Virtual-hosts]
+    Gandalf.xs4all.nl = &quot;gandalf.cfg&quot;
+---------------1ste VHost---------------------
+#*END
+
+[Accesslog]
+    Filename = &quot;gandalf.log&quot;
+
+[Security]
+    Filename = &quot;gandalf.aut&quot;
+
+[Server]
+    ipaddress=213.84.46.144
+    Cgi-bin = &quot;cgi-bin&quot;
+    Webpages = &quot;gandalf.xs4all.nl&quot;
+
+[Wsx]
+    Setup = &quot;&quot;
+-------------debud.log------------------------
+2002/05/02 14:38:37: - loading config data from gandalf.cfg
+2002/05/02 14:38:37:  - rootdir=gandalf.xs4all.nl, cgi-bin=cgi-bin
+2002/05/02 14:38:37: - loading password data from: gandalf.aut
+-------------xitami.log------------------------
+[Server]
+    webpages=./webpages
+    cgi-bin=./cgi-bin
+    cgi-url=/cgi-bin
+    refresh=60
+    debug=0
+    debug-dir=debug
+    temp-dir=temp
+    log-dir=./logs
+    header-dir=./headers
+    limit=0
+    pipe=
+    pipedef=pipedef.xml
+    background=0
+    autostart=0
+    recover=0
+    dirsort=n
+    dir-script=templates/httpdir.gsl
+    supervisor=0
+    keep-alive=1
+    keep-alive-max=50
+    timeout=30
+    default1=index.htm
+    default2=default.htm
+    cache-defaults=1
+    use-error-script=0
+    error-script=templates/errors.gsl
+    error-header=@errors/header.htm
+    error-footer=@errors/footer.htm
+    text-400=@errors/text-400.htm
+    text-401=@errors/text-401.htm
+    text-402=@errors/text-402.htm
+    text-403=@errors/text-403.htm
+    text-404=@errors/text-404.htm
+    text-412=@errors/text-412.htm
+    text-413=@errors/text-413.htm
+    text-500=@errors/text-500.htm
+    text-501=@errors/text-501.htm
+    text-502=@errors/text-502.htm
+    priority=1
+    ipaddress=*
+    portbase=0
+    base-host=basehost.cfg
+    hostname=
+    defaults=defaults.cfg
+[Alias]
+[Virtual-Hosts]
+[Filter]
+[Cgi]
+    enabled=1
+    workdir=-
+    wildcard=0
+    timeout=60
+    monitor=200
+    dirlist=0
+    msdos-style=0
+    debug=0
+    stdio=1
+    mixed-url=1
+    errlog=cgierr.log
+    environment=1
+    passargs=0
+    http-fields=1
+    http-prefix=HTTP_
+    form-fields=1
+    form-prefix=FORM_
+    form-query=0
+[Cgi-Environment]
+[Cgi-Alias]
+[Ssi]
+    enabled=1
+    timefmt=%A, %d-%b-%y %H:%M:%S %Z
+    sizefmt=bytes
+    timeout=30
+    errmsg=&lt;p&gt;[xitami SSI: %s]
+    exec=0
+[Security]
+    filename=xitami.aut
+    password-case=1
+    dirlist=1
+    admin=1
+    superuser=
+    safepaths=1
+    webmask=*
+    setuid=0
+    setuid-user=nobody
+    setuid-group=nogroup
+    cgi-username=
+    cgi-password=
+    cgi-groupname=
+[Serverlog]
+    enabled=1
+    filename=xitami.log
+    cycle=daily
+    cycle-how=rename
+    cycle-time=00:00
+    cycle-day=0
+    cycle-size=0
+    cycle-lines=0
+    cycle-arg=xi%yy%mm%dd.log
+[Accesslog]
+    enabled=1
+    filename=access.log
+    local=1
+    format=CLFX
+    custom=
+    translate=0
+    cycle=daily
+    cycle-how=rename
+    cycle-time=00:00
+    cycle-day=0
+    cycle-size=0
+    cycle-lines=0
+    cycle-arg=ac%yy%mm%dd.log
+[Errorlog]
+    enabled=1
+    filename=errors.log
+    local=1
+    format=CLFX
+    custom=
+    translate=0
+    cycle=daily
+    cycle-how=rename
+    cycle-time=00:00
+    cycle-day=0
+    cycle-size=0
+    cycle-lines=0
+    cycle-arg=er%yy%mm%dd.log
+[Ddns]
+    enabled=0
+    filename=ddnsdef.xml
+    refresh=3600
+    service=localhost
+    domain=-
+    username=-
+    password=-
+[Rdns]
+    primary-server=127.0.0.1
+    secondary-server=
+    recurse-lookups=1
+    debug=0
+[Mime]
+    default=*/*
+    .=text/plain
+    etx=text/x-setext
+    htm=text/html
+    html=text/html
+    htp=text/html
+    rtx=text/richtext
+    tsv=text/tab-separated-values
+    txt=text/plain
+    fh=image/x-freehand
+    fh4=image/x-freehand
+    fh5=image/x-freehand
+    fh7=image/x-freehand
+    fhc=image/x-freehand
+    gif=image/gif
+    ief=image/ief
+    jpe=image/jpeg
+    jpeg=image/jpeg
+    jpg=image/jpeg
+    pbm=image/x-portable-bitmap
+    pgm=image/x-portable-graymap
+    png=image/png
+    pnm=image/x-portable-anymap
+    ppm=image/x-portable-pixmap
+    ras=image/x-cmu-raster
+    rgb=image/x-rgb
+    tif=image/tiff
+    tiff=image/tiff
+    xbm=image/x-xbitmap
+    xpm=image/x-xpixmap
+    xwd=image/x-xwindowdump
+    avi=video/msvideo
+    mov=video/quicktime
+    movie=video/x-sgi-movie
+    mpe=video/mpeg
+    mpeg=video/mpeg
+    mpg=video/mpeg
+    qt=video/quicktime
+    qtv=video/quicktime
+    aif=audio/x-aiff
+    aifc=audio/x-aiff
+    aiff=audio/x-aiff
+    au=audio/basic
+    m3u=audio/mpegurl
+    mid=audio/midi
+    mp3=audio/mpeg
+    mp3url=audio/mpegurl
+    ra=audio/x-realaudio
+    ram=audio/x-pn-realaudio
+    rm=audio/x-pn-realaudio
+    rmi=audio/midi
+    rpm=audio/x-pn-realaudio-plugin
+    snd=audio/basic
+    wav=audio/wav
+    aab=application/x-authorware-bin
+    aam=application/x-authorware-map
+    aas=application/x-authorware-seg
+    ai=application/postscript
+    bcpio=application/x-bcpio
+    bin=application/octet-stream
+    cdf=application/x-netcdf
+    cpio=application/x-cpio
+    csh=application/x-csh
+    dcr=application/x-director
+    dir=application/x-director
+    doc=application/msword
+    dvi=application/x-dvi
+    dxr=application/x-director
+    eps=application/postscript
+    exe=application/octet-stream
+    gtar=application/x-gtar
+    gz=application/x-gzip
+    hdf=application/x-hdf
+    jar=application/java-archive
+    js=application/x-javascript
+    latex=application/x-latex
+    ltx=application/x-latex
+    lzh=application/x-lzh
+    man=application/x-troff-man
+    me=application/x-troff-me
+    ms=application/x-troff-ms
+    nc=application/x-netcdf
+    oda=application/oda
+    pdf=application/pdf
+    ps=application/postscript
+    roff=application/x-troff
+    rtf=application/rtf
+    sh=application/x-sh
+    shar=application/x-shar
+    spl=application/futuresplash
+    src=application/x-wais-source
+    sv4cpio=application/x-sv4cpio
+    sv4crc=application/x-sv4crc
+    swf=application/x-shockwave-flash
+    t=application/x-troff
+    tar=application/tar
+    tcl=application/x-tcl
+    tex=application/x-tex
+    texi=application/x-texinfo
+    texinfo=application/x-texinfo
+    tgz=application/x-gzip
+    tr=application/x-troff
+    txi=application/x-texinfo
+    ustar=application/x-ustar
+    zip=application/zip
+    wrl=x-world/x-vrml
+    wrz=x-world/x-vrml
+[Console]
+    startup=1
+    refresh=0
+    rate=10
+    capture=1
+    filename=console.log
+    append=0
+    javascript=1
+    large-icons=1
+[Win32]
+    16bit-cgi=0
+    secure=0
+    service-name=Xitami
+    service-text=Xitami Web Server
+[Wsx]
+    .gsl=xixxml
+    .map=xiimap
+    .shtm=xixssi
+    .shtml=xixssi
+    .ssi=xixssi
+    .xml=xixxml
+    admin=xiadmin
+    error=xierror
+[Ftp]
+    enabled=1
+    root=./ftproot
+    port=21
+    timeout=300
+    limit=25
+    pipe=
+    user-file=ftpusers.aut
+    directory-file=ftpdirs.aut
+    dirsort=n
+    message-script=templates/ftpmesg.gsl
+    welcome=@ftphello.txt
+    signoff=@ftpadios.txt
+    login-text=@ftplogin.txt
+    user-at-host=1
+    email-check=0
+    http-aliases=0
+    soft-quota=2.5
+    hard-quota=5
+    webmask=*
+    password-case=1
+    data-port=200
+    force-ip=0
+    ipaddress=*
+[Ftp-Alias]
+[Ftplog]
+    enabled=1
+    filename=access.log
+    local=1
+    format=CLFX
+    custom=
+    translate=0
+    cycle=daily
+    cycle-how=rename
+    cycle-time=00:00
+    cycle-day=0
+    cycle-size=0
+    cycle-lines=0
+    cycle-arg=ac%yy%mm%dd.log
+[Ftperrlog]
+    enabled=1
+    filename=errors.log
+    local=1
+    format=CLFX
+    custom=
+    translate=0
+    cycle=daily
+    cycle-how=rename
+    cycle-time=00:00
+    cycle-day=0
+    cycle-size=0
+    cycle-lines=0
+    cycle-arg=er%yy%mm%dd.log
+[Lrwp]
+    enabled=1
+    port=81
+    webmask=local
+    allow-all=1
+[Lrwp-Application]
+[Ssl-Http]
+    enabled=1
+    config-file=sslhttp.cfs
+
+------=_NextPart_000_0044_01C1F1EA.DD1CFBB0
+Content-Type: application/ms-tnef;
+	name=&quot;winmail.dat&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename=&quot;winmail.dat&quot;
+
+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
+
+------=_NextPart_000_0044_01C1F1EA.DD1CFBB0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003109.html">[Xitami] Virtual Hosts doesn't start.
+</A></li>
+	<LI> Next message: <A HREF="003118.html">[Xitami] Virtual Hosts doesn't start.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3110">[ date ]</a>
+              <a href="thread.html#3110">[ thread ]</a>
+              <a href="subject.html#3110">[ subject ]</a>
+              <a href="author.html#3110">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

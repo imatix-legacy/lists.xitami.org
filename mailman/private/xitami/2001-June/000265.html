@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Screen Resolution...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000269.html">
+   <LINK REL="Next"  HREF="000436.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Screen Resolution...
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Screen Resolution...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 28 Jun 2001 23:47:11 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000269.html">[Xitami] why doesn't it work?
+</A></li>
+        <LI> Next message: <A HREF="000436.html">[Xitami] Screen Resolution...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#265">[ date ]</a>
+              <a href="thread.html#265">[ thread ]</a>
+              <a href="subject.html#265">[ subject ]</a>
+              <a href="author.html#265">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>As I was playing around with IE, I noticed that the headers contain some
+extremely useful data that my CGI-based applications could use.  I have
+this interesting idea that Xitami could do something horribly non-standard
+and pass all of the headers onto my CGI (filter) through another
+environment variable.  Here is what I propose:
+
+1)  Create a configuration file option to turn on/off the COMPLETE_HEADERS
+environment variable.
+2)  During runtime, if the environment variable option is on, then the
+COMPLETE_HEADERS variable is created.  Xitami stores the headers into the
+environment variable as a zero-terminated URL encoded string.
+
+Of particular interest to me (and probably a few others) are the headers:
+
+UA-pixels: 1152x864
+UA-color: color16
+UA-OS: Windows NT
+UA-CPU: x86
+
+Now, I could use JavaScript to do what I want on the client end of things,
+but it would be nice to just grab and parse the headers for the information
+I need rather than play with cookies (we all know how much we love cookies
+:<i>)) or other similar mechanism (cookies are easier).  The only problem with
+</I>both methods is that the user might turn the headers off.  It doesn't
+matter, except that the server-side method is a lot easier to code than the
+cookie or JavaScript methods.
+
+Just an idea...
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000269.html">[Xitami] why doesn't it work?
+</A></li>
+	<LI> Next message: <A HREF="000436.html">[Xitami] Screen Resolution...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#265">[ date ]</a>
+              <a href="thread.html#265">[ thread ]</a>
+              <a href="subject.html#265">[ subject ]</a>
+              <a href="author.html#265">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

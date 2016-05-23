@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI arguments passing (newbee question)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002987.html">
+   <LINK REL="Next"  HREF="002999.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI arguments passing (newbee question)
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI arguments passing (newbee question)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 18 Apr 2002 08:42:49 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002987.html">[Xitami] Server Overlaod, Turbo! and Logs...
+</A></li>
+        <LI> Next message: <A HREF="002999.html">[Xitami] CGI arguments passing (newbee question)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2990">[ date ]</a>
+              <a href="thread.html#2990">[ thread ]</a>
+              <a href="subject.html#2990">[ subject ]</a>
+              <a href="author.html#2990">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:NGBBJAFHALILDOAFEDNAEEDJCAAA.egbert@familie-egberts.tk">NGBBJAFHALILDOAFEDNAEEDJCAAA.egbert@familie-egberts.tk</A>&gt;, &quot;E. Egberts&quot; writes:
+&gt;<i>I'm trying to implement a couple of Perl scripts which expect their
+</I>&gt;<i>arguments in the $ARGV array. Can I configure the Xitami web server (version
+</I>&gt;<i>2.4d9) such that arguments are passed through this array in stead of the CGI
+</I>&gt;<i>envirionment variable QUERY_STRING?
+</I>
+Set [CGI] passargs=1.  It's set to 0 by default, because there are
+security risks in passing anything that comes in the query string on the
+command line (eg, on some OS certain arguments can be used to run
+another command).  Xitami tries to defend against some of the more
+obvious ones, but by no means are we certain that it's secure.
+
+If you don't want to set that option, I'd suggest either a wrapper
+program to pull query string apart, check the arguments, and then run
+the other program; or use a different CGI script that parses
+QUERY_STRING as per the CGI spec.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002987.html">[Xitami] Server Overlaod, Turbo! and Logs...
+</A></li>
+	<LI> Next message: <A HREF="002999.html">[Xitami] CGI arguments passing (newbee question)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2990">[ date ]</a>
+              <a href="thread.html#2990">[ thread ]</a>
+              <a href="subject.html#2990">[ subject ]</a>
+              <a href="author.html#2990">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

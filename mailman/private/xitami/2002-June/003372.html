@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] DNS and VHosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003367.html">
+   <LINK REL="Next"  HREF="003370.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] DNS and VHosting
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] DNS and VHosting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 11 Jun 2002 11:22:12 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003367.html">[Xitami] Xitami 2.5 production release...when?
+</A></li>
+        <LI> Next message: <A HREF="003370.html">[Xitami] Xitami 2.5 production release...when?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3372">[ date ]</a>
+              <a href="thread.html#3372">[ thread ]</a>
+              <a href="subject.html#3372">[ subject ]</a>
+              <a href="author.html#3372">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_015F_01C2113A.3BC1B0C0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+MessageI am running NT4.0, it has a built in DNS Server, otherwise you =
+will have to find a 3rd party server software.  I am going to be =
+upgrading to Win2000 Server, it too, has a built in DNS Server.
+
+When using the Configure VHost Option off the main menu - two of the =
+first options off the first screen are:
+    Select IP address: All Addresses (recommended)    //////// &lt;- Use =
+this option
+    OR, Enter DNS Host Name: __www.domain1.com______  //////&lt;-- type in =
+the full DNS name of the machine
+
+Then in your DNS server:
+1. Create the Primary Zone for domain1.com
+2. Add a forward (A) record only for the above name:
+        www.domain1.com     A    192.168.10.10  /////( or whatever the =
+IP address of your machine is)
+
+    ///// Be careful it doesn't auto create the PTR record, most DNS =
+programs off the ability NOT to create the PTR record, but by default it =
+will.
+3.  Contact your ISP and let them know you are adding a new primary =
+Domain and they will need to pull secondary records from your Primary =
+DNS server.
+
+Can't be any more specific than that....
+good luck.
+
+  ----- Original Message -----=20
+  From: Kieran Mullen=20
+  To: 'Russel Olinger'=20
+  Sent: Tuesday, June 11, 2002 8:20 AM
+  Subject: RE: [Xitami] DNS and VHosting
+
+
+  Good morning,
+  =20
+  What do you use to run your DNS?
+  =20
+  How exactly do you configure Xitami for virtual hosting?  I didn't see =
+it in the directions but perhaps I missed it and it really is straight =
+forward.
+  =20
+  Thanks
+  =20
+  Kieran Mullen
+    -----Original Message-----
+    From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> =
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>] On Behalf Of Russel Olinger
+    Sent: Tuesday, June 11, 2002 2:32 AM
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+    Subject: Re: [Xitami] DNS and VHosting
+
+
+    hhhhmmmm, well I was expecting to get help on my issue - not give =
+help on my issue.  But oh well.  Basically I collocate my server at an =
+ISP.  My server has 4 IP addresses:=20
+    =20
+    .42 =3D Primary Server address, Primary DNS address
+    .43 =3D All domains use this address as the email server
+    .44 =3D All domains use this address as the web address
+    .45 =3D All domains use this address as the FTP address
+
+    Because I host my own DNS I can add as many domains as I want.  My =
+provider simply does secondary DNS.  Each domain only has 3 address: www =
+(.44), ftp (.45), mail (.43).  My suggestion to you is to host your own =
+DNS and have your ISP host secondary - that way you can host as many =
+domains as you need.  You probably only get 1 IP address via your DSL =
+line - but you can still setup everything I listed above on the same IP =
+address (I just happen to have 4 IP addresses, so I decided to use them =
+all)
+
+    When hosting your own DNS - remember that each IP address can only =
+have ONE reverse (PTR) record - that is IP to DNS name.  But you can =
+assign as many names to an IP address, aka, a forward (A) record.
+
+    Example:, assuming domain1 is the primary domain of the server
+    Forward Zone:
+        www.domain1.com    A    192.168.10.10
+        www.domain2.com    A    192.168.10.10
+        www.domain3.com    A    192.168.10.10
+        ...
+        ...
+        www.domain100.com    A    192.168.10.10
+
+    Reverse Zone:
+        192.168.10.10    PTR    www.domain1.com
+
+
+    If you are unable to host your own DNS then I recommend you view the =
+previous postings with subject line: DNS
+    &lt;snip&gt; Quoting Greg Hart:
+    DNS
+    &gt;&gt;For DNS, try zoneedit.com, which is free for the first 5 domains, =
+or try the Dynamic DNS service list from=20
+    &gt;&gt; <A HREF="http://directupdate.net/links.html">http://directupdate.net/links.html</A> You can also search for 'free =
+DNS' on the internet.
+    &gt;&gt;-Greg
+
+    &lt;snip&gt;
+
+    So, your provider allows you to host 6 domains, the above will allow =
+at least 5 more. =20
+
+    NOW, if someone could answer my question I would be pleased as =
+punch.
+
+    -Russel
+
+    ----- Original Message -----=20
+      From: Studio 4=20
+      To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+      Sent: Monday, June 10, 2002 11:03 PM
+      Subject: RE: [Xitami] DNS and VHosting
+
+
+      Hi Russell,
+      =20
+      Your message intrigues me. I run Xitami Pro and host about 6 =
+sites, 4 of them my own. I am on a DSL line and the company I have it =
+through will not let me have any more. Mabry I am wet behind the ears ( =
+I am when it comes to computers) but are you having several different =
+domaine names on the same IP addresses? If I am wrong. please let me =
+know, and If you are, will you tell me how it is done? but in plain =
+language.=20
+      =20
+      Karsten
+        -----Original Message-----
+        From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> =
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Russel Olinger
+        Sent: Monday, June 10, 2002 6:43 PM
+        To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+        Subject: [Xitami] DNS and VHosting
+
+
+
+
+        I am hosting about 10 different domains via DNS virtual hosting.
+
+        All my sites work properly.  However, several of the sites send =
+auto-emails from forms and so forth.  When the email comes in, the =
+Header info shows the email coming from a different web server.
+
+        Is there anyway to get the header info, using Xitami or DNS, =
+that can get the correct DNS name. =20
+        =20
+        Example:
+        in-addr.arpa file:=20
+        66.172.2.44    PTR    www.kdralumni.com
+        66.172.2.44    PTR    www.swellegantvintage.com
+        66.172.2.44    PTR    www.carpe-dm.com
+        66.172.2.44    PTR    www.ripandburn.com
+
+        The script I am running for the auto email comes from the =
+www.carpe-dm.com site, however, the email header shows the site that =
+connected to the mail server was: www.kdralumni.com .   Technically, you =
+are only supposed to have one PTR record for an IP address (in this =
+case, it was using the first one in the list), you can have many A =
+records though.
+
+        Once I deleted the PTR record for kdraumni.com then the email =
+header showed the connecting machine as the next one in the list: =
+www.swellegantvintage.com machine.  Is there another way of doing this =
+or tricking the email server so no matter which site generates the form =
+and subsequent email that it reflects the correct DNS name (site name) =
+that it came from?
+
+        -Thanx in advance.
+
+
+
+------=_NextPart_000_015F_01C2113A.3BC1B0C0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;Message&lt;/TITLE&gt;
+&lt;META content=3D&quot;text/html; charset=3Diso-8859-1&quot; =
+http-equiv=3DContent-Type&gt;
+&lt;META content=3D&quot;MSHTML 5.00.3315.2870&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am running NT4.0, it has a built in =
+DNS Server,=20
+otherwise you will have to find a 3rd party server software.&amp;nbsp; I am =
+going to=20
+be upgrading to Win2000 Server, it too, has a built in DNS =
+Server.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;When using the Configure VHost Option =
+off the main=20
+menu - two of the first options off the first screen are:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Select IP=20
+address:&amp;nbsp;All&amp;nbsp;Addresses (recommended)&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+//////// &amp;lt;-=20
+Use this option&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; OR, Enter DNS Host =
+Name:=20
+__www.domain1.com______&amp;nbsp; //////&amp;lt;-- type in the full DNS name of =
+the=20
+machine&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Then in your DNS server:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;1. Create the Primary Zone for=20
+domain1.com&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;2.&amp;nbsp;Add a forward (A) record only =
+for the above=20
+name:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&lt;A=20
+href=3D&quot;<A HREF="http://www.domain1.com"">http://www.domain1.com&quot;</A>&gt;www.domain1.com&lt;/A&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+A&amp;nbsp;&amp;nbsp;&amp;nbsp; 192.168.10.10&amp;nbsp; /////( or whatever the IP =
+address of=20
+your machine is)&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; ///// Be careful it =
+doesn't auto=20
+create the PTR record, most DNS programs off the ability NOT to create =
+the PTR=20
+record, but by default it will.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;3.&amp;nbsp; Contact your ISP and let them =
+know you are=20
+adding a new primary Domain and they will need to pull secondary records =
+from=20
+your Primary DNS server.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Can't be any more specific than=20
+that....&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;good luck.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;BORDER-LEFT: #000000 2px solid; MARGIN-LEFT: 5px; MARGIN-RIGHT: =
+0px; PADDING-LEFT: 5px; PADDING-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A href=3D&quot;mailto:<A HREF="mailto:kieranmullen@instantnetworks.net">kieranmullen@instantnetworks.net</A>&quot;=20
+  title=<A HREF="mailto:3Dkieranmullen@instantnetworks.net">3Dkieranmullen@instantnetworks.net</A>&gt;Kieran Mullen&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A=20
+  href=3D&quot;mailto:<A HREF="mailto:rolinger@airpower.net">rolinger@airpower.net</A>&quot; =
+title=<A HREF="mailto:3Drolinger@airpower.net">3Drolinger@airpower.net</A>&gt;'Russel=20
+  Olinger'&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Tuesday, June 11, 2002 =
+8:20=20
+AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; RE: [Xitami] DNS and=20
+  VHosting&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN =
+class=3D456111915-11062002&gt;Good=20
+  morning,&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN=20
+  class=3D456111915-11062002&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN =
+class=3D456111915-11062002&gt;What=20
+  do you use to run your DNS?&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN=20
+  class=3D456111915-11062002&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN =
+class=3D456111915-11062002&gt;How=20
+  exactly do you configure Xitami for virtual hosting?&amp;nbsp; I didn't =
+see it in=20
+  the directions but perhaps I missed it and it really is straight=20
+  forward.&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN=20
+  class=3D456111915-11062002&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN=20
+  class=3D456111915-11062002&gt;Thanks&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN=20
+  class=3D456111915-11062002&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT color=3D#0000ff face=3DArial size=3D2&gt;&lt;SPAN=20
+  class=3D456111915-11062002&gt;Kieran Mullen&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=3Dltr style=3D&quot;MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV&gt;&lt;/DIV&gt;
+    &lt;DIV align=3Dleft class=3DOutlookMessageHeader dir=3Dltr =
+lang=3Den-us&gt;&lt;FONT=20
+    face=3DTahoma size=3D2&gt;-----Original Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt; &lt;A =
+
+    =
+href=3D&quot;mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami-admin@lists.xitami.o">xitami-admin@lists.xitami.o</A>=
+rg&lt;/A&gt;=20
+    [&lt;A=20
+    =
+href=3D&quot;mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>&quot;&gt;mailto:<A HREF="mailto:xitami-admin@lists.x">xitami-admin@lists.x</A>=
+itami.org&lt;/A&gt;]=20
+    &lt;B&gt;On Behalf Of &lt;/B&gt;Russel Olinger&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt; Tuesday, June 11, =
+2002=20
+    2:32 AM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt; <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: =
+
+    [Xitami] DNS and VHosting&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;hhhhmmmm, well I was expecting to =
+get help on=20
+    my issue - not give help on my issue.&amp;nbsp; But oh well.&amp;nbsp; =
+Basically I=20
+    collocate my server at an ISP.&amp;nbsp; My server has 4 IP addresses:=20
+    &lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;.42 =3D Primary Server address, =
+Primary DNS=20
+    address&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;.43 =3D All domains use this =
+address as the email=20
+    server&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;.44 =3D All domains use this =
+address as the web=20
+    address&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;.45 =3D All domains use this =
+address as the FTP=20
+    address&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Because I host my own DNS I can add =
+as many=20
+    domains as I want.&amp;nbsp; My provider simply does secondary =
+DNS.&amp;nbsp; Each=20
+    domain only has 3 address: www (.44), ftp (.45), mail (.43).&amp;nbsp; =
+My=20
+    suggestion to you is to host your own DNS and have your ISP host =
+secondary -=20
+    that way you can host as many domains as you need.&amp;nbsp; You =
+probably only=20
+    get 1 IP address via your DSL line - but you can still setup =
+everything I=20
+    listed above on the same IP address (I just happen to have 4 IP =
+addresses,=20
+    so I decided to use them all)&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;When hosting your own DNS - =
+remember that each=20
+    IP address can only have ONE reverse (PTR) record - that is IP to =
+DNS=20
+    name.&amp;nbsp; But you can assign as many names to an IP address, aka, =
+a=20
+    forward (A) record.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Example:, assuming domain1 is the =
+primary=20
+    domain of the server&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Forward Zone:&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;A=20
+    =
+href=3D&quot;<A HREF="http://www.domain1.com&nbsp;"">http://www.domain1.com&amp;nbsp;&quot;</A>&gt;www.domain1.com&amp;nbsp;&lt;/A&gt;&amp;nbsp;&amp;nbs=
+p;=20
+    A&amp;nbsp;&amp;nbsp;&amp;nbsp; 192.168.10.10&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+    =
+href=3D&quot;<A HREF="http://www.domain2.com"">http://www.domain2.com&quot;</A>&gt;www.domain2.com&lt;/A&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+    A&amp;nbsp;&amp;nbsp;&amp;nbsp; 192.168.10.10&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+    =
+href=3D&quot;<A HREF="http://www.domain3.com"">http://www.domain3.com&quot;</A>&gt;www.domain3.com&lt;/A&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+    A&amp;nbsp;&amp;nbsp;&amp;nbsp; 192.168.10.10&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; ...&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; ...&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+    =
+href=3D&quot;<A HREF="http://www.domain100.com"">http://www.domain100.com&quot;</A>&gt;www.domain100.com&lt;/A&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=
+=20
+    A&amp;nbsp;&amp;nbsp;&amp;nbsp; 192.168.10.10&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Reverse Zone:&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+    192.168.10.10&amp;nbsp;&amp;nbsp;&amp;nbsp; PTR&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+    href=3D&quot;<A HREF="http://www.domain1.com"">http://www.domain1.com&quot;</A>&gt;www.domain1.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;If you are unable to host your own =
+DNS then I=20
+    recommend you view the previous postings with subject line: =
+DNS&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;lt;snip&amp;gt; Quoting Greg =
+Hart:&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;DNS&lt;BR&gt;&amp;gt;&amp;gt;&lt;FONT face=3DArial =
+size=3D2&gt;For DNS,=20
+    try zoneedit.com, which is free for the first 5&amp;nbsp;domains, or try =
+the=20
+    Dynamic DNS service list from &lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;gt;&amp;gt; &lt;/FONT&gt;&lt;FONT face=3DArial =
+size=3D2&gt;&lt;FONT=20
+    face=3DArial size=3D2&gt;&lt;A=20
+    =
+href=3D&quot;<A HREF="http://directupdate.net/links.html"">http://directupdate.net/links.html&quot;</A>&gt;<A HREF="http://directupdate.net/links=">http://directupdate.net/links=</A>
+.html&lt;/A&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;FONT=20
+    face=3DArial size=3D2&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;You can also =
+search for=20
+    'free DNS' on the internet.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;gt;&amp;gt;-Greg&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;lt;snip&amp;gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;So, your provider allows you to host 6 domains, the above will =
+allow at=20
+    least 5 more.&amp;nbsp; &lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;NOW, if someone could answer my question I would be pleased as=20
+    punch.&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;-Russel&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;/FONT&gt;----- Original Message ----- &lt;/DIV&gt;
+    &lt;BLOCKQUOTE dir=3Dltr=20
+    style=3D&quot;BORDER-LEFT: #000000 2px solid; MARGIN-LEFT: 5px; =
+MARGIN-RIGHT: 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 0px&quot;&gt;
+      &lt;DIV=20
+      style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+      &lt;A href=3D&quot;mailto:<A HREF="mailto:studio4@weddingbells.net">studio4@weddingbells.net</A>&quot;=20
+      title=<A HREF="mailto:3Dstudio4@weddingbells.net">3Dstudio4@weddingbells.net</A>&gt;Studio 4&lt;/A&gt; &lt;/DIV&gt;
+      &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A=20
+      href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;=20
+      title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; &lt;/DIV&gt;
+      &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Monday, June 10, 2002 =
+11:03=20
+      PM&lt;/DIV&gt;
+      &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; RE: [Xitami] DNS =
+and=20
+      VHosting&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;SPAN class=3D968595505-11062002&gt;&lt;FONT color=3D#0000ff =
+face=3DArial=20
+      size=3D2&gt;Hi Russell,&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;SPAN class=3D968595505-11062002&gt;&lt;FONT color=3D#0000ff =
+face=3DArial=20
+      size=3D2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;SPAN class=3D968595505-11062002&gt;&lt;FONT color=3D#0000ff =
+face=3DArial=20
+      size=3D2&gt;Your message intrigues me. I run Xitami Pro and host =
+about 6 sites,=20
+      4 of them my own. I am on a DSL line and the company I have it =
+through=20
+      will not let me have any more. Mabry I am wet behind the ears ( I =
+am when=20
+      it comes to computers) but are you having several different =
+domaine names=20
+      on the same IP addresses? If I am wrong. please let me know, and =
+If you=20
+      are, will you tell me how it is done? but in plain language.=20
+      &lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;SPAN class=3D968595505-11062002&gt;&lt;FONT color=3D#0000ff =
+face=3DArial=20
+      size=3D2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;SPAN class=3D968595505-11062002&gt;&lt;FONT color=3D#0000ff =
+face=3DArial=20
+      size=3D2&gt;Karsten&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+      &lt;BLOCKQUOTE dir=3Dltr style=3D&quot;MARGIN-RIGHT: 0px&quot;&gt;
+        &lt;DIV align=3Dleft class=3DOutlookMessageHeader dir=3Dltr&gt;&lt;FONT =
+face=3DTahoma=20
+        size=3D2&gt;-----Original Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt;=20
+        <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>=20
+        [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]&lt;B&gt;On Behalf Of &lt;/B&gt;Russel =
+
+        Olinger&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt; Monday, June 10, 2002 6:43 =
+PM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt;=20
+        <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] DNS and=20
+        VHosting&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am hosting about 10 different =
+domains via=20
+        DNS virtual hosting.&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;All my sites work =
+properly.&amp;nbsp; However,=20
+        several of the sites send auto-emails from forms and so =
+forth.&amp;nbsp;=20
+        When the email comes in, the Header info shows the email coming =
+from a=20
+        different web server.&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Is there anyway to get the =
+header info,=20
+        using Xitami or DNS, that can get the correct DNS name.&amp;nbsp;=20
+        &lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Example:&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;in-addr.arpa file: =
+&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+        PTR&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+        =
+href=3D&quot;<A HREF="http://www.kdralumni.com"">http://www.kdralumni.com&quot;</A>&gt;www.kdralumni.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+        PTR&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+        =
+href=3D&quot;<A HREF="http://www.swellegantvintage.com"">http://www.swellegantvintage.com&quot;</A>&gt;www.swellegantvintage.com&lt;/A&gt;&lt;/=
+FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+        PTR&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+        =
+href=3D&quot;<A HREF="http://www.carpe-dm.com"">http://www.carpe-dm.com&quot;</A>&gt;www.carpe-dm.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+        PTR&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;A=20
+        =
+href=3D&quot;<A HREF="http://www.ripandburn.com"">http://www.ripandburn.com&quot;</A>&gt;www.ripandburn.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;The script I am running for the =
+auto email=20
+        comes from the &lt;A =
+href=3D&quot;<A HREF="http://www.carpe-dm.com"">http://www.carpe-dm.com&quot;</A>&gt;www.carpe-dm.com&lt;/A&gt;=20
+        site, however, the email header shows the site that connected to =
+the=20
+        mail server was: &lt;A=20
+        href=3D&quot;<A HREF="http://www.kdralumni.com"">http://www.kdralumni.com&quot;</A>&gt;www.kdralumni.com&lt;/A&gt; =
+.&amp;nbsp;&amp;nbsp;=20
+        Technically, you are only supposed to have one PTR record for an =
+IP=20
+        address (in this case, it was using the first one in the list), =
+you can=20
+        have many A records though.&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Once I deleted the PTR record =
+for=20
+        kdraumni.com then the email header showed the connecting machine =
+as the=20
+        next one in the list: &lt;A=20
+        =
+href=3D&quot;<A HREF="http://www.swellegantvintage.comarpe-dm.com"">http://www.swellegantvintage.comarpe-dm.com&quot;</A>&gt;www.swellegantvintag=
+e.com&lt;/A&gt;=20
+        machine.&amp;nbsp; Is there another way of doing this or tricking =
+the email=20
+        server so no matter which site generates the form and subsequent =
+email=20
+        that it reflects the correct DNS name (site name) that it came=20
+        from?&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;-Thanx in advance.&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+        =
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BO=
+DY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_015F_01C2113A.3BC1B0C0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003367.html">[Xitami] Xitami 2.5 production release...when?
+</A></li>
+	<LI> Next message: <A HREF="003370.html">[Xitami] Xitami 2.5 production release...when?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3372">[ date ]</a>
+              <a href="thread.html#3372">[ thread ]</a>
+              <a href="subject.html#3372">[ subject ]</a>
+              <a href="author.html#3372">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

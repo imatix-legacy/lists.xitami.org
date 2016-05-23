@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] A newbie question....
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20A%20newbie%20question....&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007263.html">
+   <LINK REL="Next"  HREF="007265.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] A newbie question....</H1>
+    <B>Richard.Copits at bwc.state.oh.us</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20A%20newbie%20question....&In-Reply-To="
+       TITLE="[Xitami] A newbie question....">Richard.Copits at bwc.state.oh.us
+       </A><BR>
+    <I>Mon Apr 10 17:35:04 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007263.html">[Xitami] Perl/cgi/php
+</A></li>
+        <LI>Next message: <A HREF="007265.html">[Xitami] Check out my new profile
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7264">[ date ]</a>
+              <a href="thread.html#7264">[ thread ]</a>
+              <a href="subject.html#7264">[ subject ]</a>
+              <a href="author.html#7264">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yep, works fine now. It was a coding issue and I'm all set. Thanks for
+the help and suggestions!! 
+
+
+ 
+&quot;The three men I admire most are Curly, Larry and Moe&quot;
+ 
+                                                              Meat Loaf
+ 
+
+-----Original Message-----
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Francis Turner
+Sent: Thursday, April 06, 2006 4:35 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] A newbie question....
+
+the spawning of a second window makes me wonder whether you are
+running the perl script direct or calling it from soemthign else (a
+batch file?).
+
+I've done a lot of troubleshooting in my time and this dounds like a
+case where the best approach is to start with a known working script
+(e.g. my example.cgi)  and pasteing in ever larger portions of your
+non-working script until the &quot;doh&quot;/&quot;eureka&quot; moment (depending on your
+mood) strikes and you see where the problem is
+
+On 4/5/06, <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Richard.Copits at bwc.state.oh.us</A>
+&lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Richard.Copits at bwc.state.oh.us</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Thank you! The example that you gave worked as did the examples on the
+</I>&gt;<i> page that you recommended.
+</I>&gt;<i> It's now obvious that the problem is in the code in the program so I
+</I>&gt;<i> need to start digging in that.
+</I>&gt;<i> I really appreciate your suggestions and help in narrowing down the
+</I>&gt;<i> problem area!!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Francis Turner
+</I>&gt;<i> Sent: Wednesday, April 05, 2006 3:28 AM
+</I>&gt;<i> To: Xitami Users General Discussion
+</I>&gt;<i> Subject: Re: [Xitami] A newbie question....
+</I>&gt;<i>
+</I>&gt;<i> OK you have a problem with perl being called by Xitami. Perl should
+</I>&gt;<i> not be opening a comand prompt window. I've never seen this behaviour
+</I>&gt;<i> so I'm not completely clear why it is doing so but I repeat my
+</I>&gt;<i> suggestion to try and run some perl simpler CGI scripts and see if
+</I>&gt;<i> they do the same thing.
+</I>&gt;<i>
+</I>&gt;<i> E.g. create a file called example.cgi in your cgi/bin directory with
+</I>&gt;<i> the following contents and see if <A HREF="http://localhost/cgi-bin/example.cgi">http://localhost/cgi-bin/example.cgi</A>
+</I>&gt;<i> produces displayable HTML or a blank screen
+</I>&gt;<i> ------- start of example.cgi ---
+</I>&gt;<i> #!/usr/local/bin/perl
+</I>&gt;<i>
+</I>&gt;<i> use CGI qw(:standard);
+</I>&gt;<i>
+</I>&gt;<i> print header;
+</I>&gt;<i> print start_html('A Simple Example'),
+</I>&gt;<i>     h1('A Simple Example'),end_html;
+</I>&gt;<i> ------- end of example.cgi ---
+</I>&gt;<i>
+</I>&gt;<i> (note this file works on my Xitami/Windows/Perl setup just fine).
+</I>&gt;<i>
+</I>&gt;<i> If it does the same thing (window/blank html) then we probably need a
+</I>&gt;<i> dump of your environment to figure out what is going wrong ...
+</I>&gt;<i>
+</I>&gt;<i> On 4/4/06, <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Richard.Copits at bwc.state.oh.us</A>
+</I>&gt;<i> &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Richard.Copits at bwc.state.oh.us</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; It's a Perl script that creates several directories and also
+</I>produces
+&gt;<i> &gt; output which I want to show up in a browser. When I run it under
+</I>DOS,
+&gt;<i> &gt; the directories get created and it runs and displays the HTML code
+</I>in
+&gt;<i> &gt; the DOS window. When I try to run it in the browser window by using
+</I>&gt;<i> &gt; &quot;<A HREF="http://localhost/xitami/cgi-bin/auction.pl&quot;">http://localhost/xitami/cgi-bin/auction.pl&quot;</A> it pops up a dos
+</I>window,
+&gt;<i> &gt; the code sort of flashes by and the dos window closes. It's as
+</I>though
+&gt;<i> &gt; the HTML code somehow never &quot;calls&quot; or gets &quot;piped into&quot; the browser
+</I>&gt;<i> so
+</I>&gt;<i> &gt; that it runs in the browser. When I run the code on a Unix/Apache
+</I>&gt;<i> system
+</I>&gt;<i> &gt; on my ISP it works fine. I just can't seem to get the output of the
+</I>&gt;<i> PERL
+</I>&gt;<i> &gt; program (the HTML code..) to show up in the browser. I'm new at this
+</I>&gt;<i> and
+</I>&gt;<i> &gt; I think I'm missing a step somewhere with getting it to run on a W2k
+</I>&gt;<i> &gt; system...  I've read as much as I can find on this problem but
+</I>nothing
+&gt;<i> &gt; seems to address what I need to do. Perl works, the admin console
+</I>says
+&gt;<i> &gt; Xitami is working, but I cant' get the output to show up in my
+</I>&gt;<i> &gt; browser....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i> &gt; [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Francis Turner
+</I>&gt;<i> &gt; Sent: Tuesday, April 04, 2006 4:04 PM
+</I>&gt;<i> &gt; To: Xitami Users General Discussion
+</I>&gt;<i> &gt; Subject: Re: [Xitami] A newbie question....
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Without a touch more information - e.g.the perl script or critical
+</I>&gt;<i> &gt; portions of it - its going to be hard to answer your question.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; My on;y other suggestion would be to try running one the the CGI.pm
+</I>&gt;<i> &gt; example scripts -
+</I>&gt;<i> &gt; <A HREF="http://search.cpan.org/src/LDS/CGI.pm-3.17/examples/index.html">http://search.cpan.org/src/LDS/CGI.pm-3.17/examples/index.html</A> - and
+</I>&gt;<i> &gt; see if it works as it should.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Francis
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 4/4/06, <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Richard.Copits at bwc.state.oh.us</A>
+</I>&gt;<i> &gt; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">Richard.Copits at bwc.state.oh.us</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I have just downloaded xitami and gotten it configured - I hope
+</I>&gt;<i> &gt; correctly -
+</I>&gt;<i> &gt; &gt; on my W2K professional system. I've installed PERL as well. I put
+</I>a
+&gt;<i> &gt; PERL
+</I>&gt;<i> &gt; &gt; .PL in c:\xitami\cgi-bin and tried running it by using my IE
+</I>browser
+&gt;<i> &gt; to run
+</I>&gt;<i> &gt; &gt; it.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I'm sure the program runs as it creates three directories like
+</I>it's
+&gt;<i> &gt; supposed
+</I>&gt;<i> &gt; &gt; to, but I can't get the HTML to display the web page that it
+</I>&gt;<i> produces.
+</I>&gt;<i> &gt; Am I
+</I>&gt;<i> &gt; &gt; doing something wrong or ???
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Thank you for any suggestions on what I should be looking for/at.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Portions of this message may be confidential under an exemption to
+</I>&gt;<i> &gt; Ohio's
+</I>&gt;<i> &gt; &gt; public records law or under a legal privilege. If you have
+</I>received
+&gt;<i> &gt; this
+</I>&gt;<i> &gt; &gt; message in error or due to an unauthorized transmission or
+</I>&gt;<i> &gt; interception,
+</I>&gt;<i> &gt; &gt; please delete all copies from your system without disclosing,
+</I>&gt;<i> copying,
+</I>&gt;<i> &gt; or
+</I>&gt;<i> &gt; &gt; transmitting this message.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe:
+</I>&gt;<i> &gt; &gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; <A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+</I>&gt;<i> &gt; Faber's Fourth Law:
+</I>&gt;<i> &gt;   Necessity is the mother of strange bedfellows.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Portions of this message may be confidential under an exemption to
+</I>&gt;<i> Ohio's public records law or under a legal privilege. If you have
+</I>&gt;<i> received this message in error or due to an unauthorized transmission
+</I>or
+&gt;<i> interception, please delete all copies from your system without
+</I>&gt;<i> disclosing, copying, or transmitting this message.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> <A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+</I>&gt;<i> Faber's Fourth Law:
+</I>&gt;<i>   Necessity is the mother of strange bedfellows.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Portions of this message may be confidential under an exemption to
+</I>Ohio's public records law or under a legal privilege. If you have
+received this message in error or due to an unauthorized transmission or
+interception, please delete all copies from your system without
+disclosing, copying, or transmitting this message.
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+Portions of this message may be confidential under an exemption to Ohio's public records law or under a legal privilege. If you have received this message in error or due to an unauthorized transmission or interception, please delete all copies from your system without disclosing, copying, or transmitting this message.
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007263.html">[Xitami] Perl/cgi/php
+</A></li>
+	<LI>Next message: <A HREF="007265.html">[Xitami] Check out my new profile
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7264">[ date ]</a>
+              <a href="thread.html#7264">[ thread ]</a>
+              <a href="subject.html#7264">[ subject ]</a>
+              <a href="author.html#7264">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

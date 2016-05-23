@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Windows client: opening non-standard ports
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005162.html">
+   <LINK REL="Next"  HREF="005163.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Windows client: opening non-standard ports
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Windows client: opening non-standard ports">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 26 Jun 2003 13:30:17 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005162.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+        <LI> Next message: <A HREF="005163.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5161">[ date ]</a>
+              <a href="thread.html#5161">[ thread ]</a>
+              <a href="subject.html#5161">[ subject ]</a>
+              <a href="author.html#5161">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 06:42 PM 6/26/2003 +0200, Marc Doigny writeth:
+&gt;<i>At 15:24 26/06/03, you wrote:
+</I>&gt;&gt;<i>At 10:27 AM 6/26/2003 +0200, Marc Doigny writeth:
+</I>&gt;&gt;<i> &gt;Hello !
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;I know port 119 is used for news.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>If you know this, why are you using that port?  I made specific note of it
+</I>&gt;&gt;<i>and suggested using a different port altogether...but that seems
+</I>&gt;&gt;<i>unacceptable to you for some reason that I'd like to know.
+</I>&gt;<i>
+</I>&gt;<i>Our ISP only makes the standard internet ports available.
+</I>&gt;<i>That is: 25, 80, 119, ...
+</I>&gt;<i>Only 119 is left over.
+</I>&gt;<i>Port 80 is used for our normal webserver, port 119 is used for a limited 
+</I>&gt;<i>group of users.
+</I>
+Ahh...that helps answer a few things.  There are two solutions to this
+problem that make sense and one that might work:
+
+1)  Get a different ISP (probably the better route).
+2)  Get another static IP Address with a different domain from your ISP.
+3)  Ask your ISP to open a specific port for you (not likely to happen, but
+worth asking about).
+
+&gt;<i>I'm not a firewall specialist, but how could a request from Netscape be let 
+</I>&gt;<i>through, and a request by IE blocked? (Using the same computer)
+</I>&gt;<i>After upgrading from IE 4.0 to IE 6.0 the request was also blocked.
+</I>&gt;<i>So i assume it's a Internet explorer thing.
+</I>
+Upgrading IE from 4.0 to 6.0 also applies kernel-level and driver patches
+to the Windows OS itself...I've fixed several machines with this approach
+that had viruses on them (I removed the viruses first, of course, but this
+fixed the collateral damage).  So, when I say it has to do with HINTERNET,
+that is the communication mechanism IE uses.  Mozilla/Netscape uses normal
+socket communications...hence, it works and IE doesn't.  The HINTERNET
+library, during the upgrade process to IE 6.0 probably got replaced with
+something &quot;better&quot; that breaks the communication with your server by
+sending a NEWS request instead of an HTTP request.  I originally suggested
+dropping the firewall temporarily so that you could see the exact packets
+coming through in case some packets were being malformed by HINTERNET (most
+decent firewalls usually drop malformed packets).
+
+&gt;&gt;<i> &gt;For now i suggest users to use Netscape. For now the site is only for a
+</I>&gt;&gt;<i> &gt;limited user group.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Well, you will be continuing to limit your user group if you force them to
+</I>&gt;&gt;<i>use older versions of IE or use Mozilla/Netscrape.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt;I'm looking for some register fix to allow IE to connect.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>This is probably the best way to lose users/customers...tell them they have
+</I>&gt;&gt;<i>to modify the Windows registry to visit your site.
+</I>&gt;<i>
+</I>&gt;<i>I'm not afraid of losing users ... there are very captive indeed: the 
+</I>&gt;<i>server is used by our sales representatives to get some (private) 
+</I>&gt;<i>informations from our site when there are on location or at home.
+</I>&gt;<i>They are all used to IE and don't quite like netscape...
+</I>
+Then enable them to use IE without requiring them to make changes to their
+OS.  Besides, Netscape hasn't been usable since v3.0 (IMO).
+
+&gt;<i>Having to use port 119 is a good thing (no virus of other malevolent user 
+</I>&gt;<i>is actually trying to connect)...
+</I>
+That may be true right now.  However, port scanners will eventually see
+that 119 is open and discover that it isn't a news server running, but a
+rogue HTTP server...then you will have serious security and data integrity
+problems if the data is worth getting at and manipulating.
+
+&gt;<i>I'm not used that the correspondents completely understand my questions 
+</I>&gt;<i>from the first run (english is my 3rd language), so i tried again from the 
+</I>&gt;<i>beginning. Maybe i didn't made it clear enough that it is just some sort of 
+</I>&gt;<i>communication between &quot;registered&quot; users who don't mind that i mix with 
+</I>&gt;<i>their computer's registry.
+</I>
+Trust me, they DO mind and they probably talk behind your back as well if
+you consistently require them to do such things to use your system like
+edit their Windows registry.  Your job should be to make sure they can
+_EASILY_ do whatever they need to do...even if it takes more money, effort,
+and time on YOUR behalf to make it easier for _THEM_.  Enough of this part
+of the discussion, your attitude about your own salespeople/registered
+users/etc. says to me that you really don't care about them...let alone
+your real customers.  If you aren't willing to go out of the way for your
+internal people, how much more does that apply to those who are external!
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005162.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+	<LI> Next message: <A HREF="005163.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5161">[ date ]</a>
+              <a href="thread.html#5161">[ thread ]</a>
+              <a href="subject.html#5161">[ subject ]</a>
+              <a href="author.html#5161">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

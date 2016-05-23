@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Linksys Router and Xitami HTTP RESOLVED
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002283.html">
+   <LINK REL="Next"  HREF="002277.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Linksys Router and Xitami HTTP RESOLVED
+   </H1>
+    <B>Mike McDaniel
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Linksys Router and Xitami HTTP RESOLVED">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 5 Feb 2002 18:47:28 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002283.html">[Xitami] Linksys Router and Xitami
+</A></li>
+        <LI> Next message: <A HREF="002277.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2272">[ date ]</a>
+              <a href="thread.html#2272">[ thread ]</a>
+              <a href="subject.html#2272">[ subject ]</a>
+              <a href="author.html#2272">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_004D_01C1AE75.8F4190D0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Thanks for everyone's support.  Many good thinks came out of this =
+thread, and I must give credit to Jeff Hamplin for the final winning =
+moves. He said to resolve the situation where an ISP is blocking port 80 =
+(and they are at some RR locations, not all) the thing that's needed is =
+to first set the base port for Xitami's HTTP to 9000. This will in =
+effect make the port for HTTP be 9080 as Xitami adds 80 to your entry in =
+that field. Notice it is by default a 0. Then add a forward to the =
+router for 9080. Lastly, FTP always worked right from the start as RR =
+was not blocking that. However when you tell Xitami to use 9000, you are =
+also without knowing it telling Xitami the FTP port is 9021. You can =
+enter an FTP port of -8979 to put your FTP port back to 21 and keep web =
+at 9080. This is done by manually editing the Xitami default.cfg file =
+and adding an entry:
+
+[FTP]
+   Port=3D-8979
+
+That should be -8979  -- a negative number. 9000-8979=3D21
+
+
+Thus users will still be able to access FTP the usual way, however for =
+HTTP there is the requirement now to add the port to the URL
+
+<A HREF="http://mikemcdaniel.dynu.com:9080">http://mikemcdaniel.dynu.com:9080</A>
+
+<A HREF="ftp://mikemcdaniel.dynu.com">ftp://mikemcdaniel.dynu.com</A>
+
+Again, thanks for everyone's help.=20
+
+
+
+
+
+
+
+------=_NextPart_000_004D_01C1AE75.8F4190D0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2712.300&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thanks for everyone's support.&amp;nbsp; =
+Many good=20
+thinks came out of this thread, and I must give credit to Jeff Hamplin =
+for the=20
+final winning moves. He said to resolve the situation where an ISP is =
+blocking=20
+port 80 (and they are at some RR locations, not all) the thing that's =
+needed is=20
+to first set the base port for Xitami's HTTP to 9000. This will in =
+effect make=20
+the port for HTTP be 9080 as Xitami adds 80 to your entry in that field. =
+Notice=20
+it is by default a 0. Then add a forward to the router for 9080. Lastly, =
+FTP=20
+always worked right from the start as RR was not blocking that. However =
+when you=20
+tell Xitami to use 9000, you are also without knowing it telling Xitami =
+the FTP=20
+port is 9021. &lt;FONT face=3D&quot;Times New Roman&quot; size=3D3&gt;You can enter an =
+FTP port of=20
+-8979 to put your FTP port back to 21 and keep web at 9080. This is done =
+by=20
+manually editing the Xitami default.cfg file and adding an=20
+entry:&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3DArial =
+size=3D2&gt;&lt;/FONT&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3D&quot;Times New Roman&quot;=20
+size=3D3&gt;&lt;EM&gt;[FTP]&lt;/EM&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3D&quot;Times New Roman&quot;=20
+size=3D3&gt;&lt;EM&gt;&amp;nbsp;&amp;nbsp; Port=3D-8979&lt;/EM&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3D&quot;Times New Roman&quot; =
+size=3D3&gt;That should be=20
+-8979&amp;nbsp; -- a negative number. 9000-8979=3D21&lt;/FONT&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thus users will still be able to access =
+FTP the=20
+usual way, however for HTTP there is the requirement now to add the port =
+to the=20
+URL&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;A=20
+href=3D&quot;<A HREF="http://mikemcdaniel.dynu.com:9080"">http://mikemcdaniel.dynu.com:9080&quot;</A>&gt;<A HREF="http://mikemcdaniel.dynu.com:9=">http://mikemcdaniel.dynu.com:9=</A>
+080&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;ftp&lt;A=20
+href=3D&quot;<A HREF="ftp://mikemcdaniel.dynu.com"">ftp://mikemcdaniel.dynu.com&quot;</A>&gt;://mikemcdaniel.dynu.com&lt;/A&gt;&lt;/FONT&gt;&lt;=
+/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Again, thanks for everyone's help. =
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3DArial =
+size=3D2&gt;&lt;/FONT&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3D&quot;Times New Roman&quot;=20
+size=3D3&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_004D_01C1AE75.8F4190D0--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002283.html">[Xitami] Linksys Router and Xitami
+</A></li>
+	<LI> Next message: <A HREF="002277.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2272">[ date ]</a>
+              <a href="thread.html#2272">[ thread ]</a>
+              <a href="subject.html#2272">[ subject ]</a>
+              <a href="author.html#2272">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

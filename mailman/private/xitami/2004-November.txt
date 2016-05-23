@@ -1,0 +1,2807 @@
+From xitami@lists.xitami.org  Mon Nov  1 22:10:41 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Mon, 01 Nov 2004 17:10:41 -0500
+Subject: [Xitami] SSI crash under WinXP
+In-Reply-To: <4648cce504103012362374cdfa@mail.gmail.com>
+References: <4648cce5041030090225023fd9@mail.gmail.com> <4648cce5041029142147d84b33@mail.gmail.com>
+ <3.0.6.32.20041030110504.009f61b0@mail.shininglightpro.com> <4648cce5041030090225023fd9@mail.gmail.com>
+Message-ID: <3.0.6.32.20041101171041.009f3bf0@mail.shininglightpro.com>
+
+At 02:36 PM 10/30/2004 -0500, Gord Tanner writeth:
+>I include the section of code from xixssi.c surrounding line 570. (and
+>attach the whole file)
+>I don't know much C,
+
+But I do.  That's why I asked you to post the source.
+
+>Also, this is the exact SSI command that causes the failure.
+><!--#include file="../cgi-bin/last_post.txt" -->
+>
+>If I change it to:
+>
+><!--#include file="last_post.txt" -->
+>
+>and make sure the last_post.txt file is located in the webroot
+>directory, it no longer causes a crash, but it doesn't include the
+>file.
+>
+>/*****************************   OPEN SSI FILE
+*****************************/
+>
+>MODULE open_ssi_file (THREAD *thread)
+>{
+>    time_t
+>        file_time;
+>        
+>    tcb = thread-> tcb;                 /*  Point to thread's context
+  */
+>
+>    ASSERT (tcb-> file_name);                          <<<----------- 
+>Line 570  ----------------
+
+This will fire if "file_name" in the tcb is NULL.
+
+What happens if you use:
+
+<!--#include file="..\cgi-bin\last_post.txt" -->
+or
+<!--#include file="..\\cgi-bin\\last_post.txt" -->
+or
+<!--#include file="/cgi-bin/last_post.txt" -->
+or
+<!--#include file="\cgi-bin\last_post.txt" -->
+or
+<!--#include file="\\cgi-bin\\last_post.txt" -->
+
+Instead?
+
+The information you gave here says that the real error is somewhere up the
+stack and may have something to do with the relative path information (..)
+and/or the forward or backslash.  You may be able to hack around the bug by
+using one of the options above, switching to absolute paths, or something
+equivalent.
+
+>    /* Check if file is not already open
+  */
+>    if (sym_get_value (tcb-> open_file, tcb-> file_name, NULL) != NULL)
+
+This is where the crash will likely happen.  sym_get_value will likely try
+to dereference file_name, which is NULL, and throw the exception all the
+way back to the OS, where the kernel will kill the program that tried to
+blue-screen the OS.  If running as a NT service, the NT service manager
+will note that Xitami stopped/died and restart it automatically up to 3
+times in any session.
+
+If it doesn't crash here, then fopen() will surely crash.  I've not seen a
+library implementation that defended against NULL filenames.
+
+What I was doing above is having you try different combinations of file
+names as a workaround to ultimately get tcb->file_name to not be NULL and
+therefore not crash in this function.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+
+
+From xitami@lists.xitami.org  Tue Nov  2 20:41:08 2004
+From: xitami@lists.xitami.org (Gord Tanner)
+Date: Tue, 2 Nov 2004 14:41:08 -0600
+Subject: [Xitami] SSI crash under WinXP
+In-Reply-To: <3.0.6.32.20041101171041.009f3bf0@mail.shininglightpro.com>
+References: <4648cce5041029142147d84b33@mail.gmail.com>
+ <3.0.6.32.20041030110504.009f61b0@mail.shininglightpro.com>
+ <4648cce5041030090225023fd9@mail.gmail.com>
+ <4648cce504103012362374cdfa@mail.gmail.com>
+ <3.0.6.32.20041101171041.009f3bf0@mail.shininglightpro.com>
+Message-ID: <4648cce50411021241672ec689@mail.gmail.com>
+
+Thomas,
+
+Thanks much.  It indeed has to do with the relative path (..) 
+Whenever that is not present in the path to the document, it doesn't
+crash.  But it also doesn't include the file. That's if I use:
+
+#Include file="etc.".  
+
+However, if I use: 
+
+#include virtual="etc."
+
+everything is hunky dory, even WITH the relative "../cgi-bin/etc.". 
+This isn't how SSI works under Apache on FreeBSD, which is how my
+website is actually hosted.  I just use the Xitami for offline
+development.  Any speculation from anyone familiar with perlssi as to
+why the different syntax?
+ 
+Thanks for responding, and pointing me in the right direction.
+
+Gord Tanner
+The Royal Liechtenstein Theatre Company
+http://rltc.ca
+
+
+From xitami@lists.xitami.org  Wed Nov  3 07:55:17 2004
+From: xitami@lists.xitami.org (Joseph Tam)
+Date: Tue, 2 Nov 2004 23:55:17 -0800 (PST)
+Subject: [Xitami] Quick question
+Message-ID: <20041103075517.72406.qmail@web53601.mail.yahoo.com>
+
+Hi,
+For some reason, when someone tries to download one of
+my files, (80MB), the file transfer stops after a
+seemingly random amount of time.  I can't see what is
+happening from the debug logs, but when it is accessed
+the log says timeout=300.
+Thanks for the help,
+Joey
+
+
+		
+__________________________________ 
+Do you Yahoo!? 
+Check out the new Yahoo! Front Page. 
+www.yahoo.com 
+ 
+
+
+From xitami@lists.xitami.org  Thu Nov  4 16:36:25 2004
+From: xitami@lists.xitami.org (Adam Schroeder)
+Date: Thu, 4 Nov 2004 11:36:25 -0500
+Subject: [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+Message-ID: <001001c4c28c$6cd70f60$c800140a@bigmamma>
+
+Hi,
+
+I've read through the FAQ and help, but I can't figure out how to make use 
+of the Pipe settings to limit bandwidth.
+
+I want to limit the bandwidth so I can see how my project will run over 
+various connections.  When I try to select an HTTP throttle pipe from the 
+configuration screen it never saves my selection.  Ideally I would like to 
+limit it even further then 32k.
+
+I am not worried about segmenting the bandwidth among sites,  a global 
+setting will work fine for me.
+
+I imagine this is pretty simple to do, once you know the right steps to 
+take. If anyone could provide me those steps I would really appreciate it.
+
+I am on an XP machine.  Running Xitami 2.5c2
+
+
+Thanks for your time,
+Adam
+
+
+From xitami@lists.xitami.org  Thu Nov  4 21:15:27 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Thu, 04 Nov 2004 15:15:27 -0600
+Subject: [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+In-Reply-To: <001001c4c28c$6cd70f60$c800140a@bigmamma>
+Message-ID: <418A478F.19951.1892FDE@localhost>
+
+Hello Adam,
+
+I haven't done that, but I would try to edit the default.cfg directly. Here the section out of the 
+xitami.cfg.
+
+#   Specifies the HTTP throttle pipe. With a throttle pipe you can
+#   restrict the throughput of a website to some fixed maximum, e.g.
+#   64Kbps. This can be useful if several websites share a single
+#   line, and you need to share this on a quality-of-service basis.
+#   The HTTP throttle pipe is applied to all download and upload
+#   requests to the website. You can apply a throttle pipe to the
+#   entire HTTP server or to specific virtual hosts. Pipes are defined
+#   in the XML file 'pipedef.xml'. You can edit this file to add new
+#   pipes; Xitami reloads this automatically after a short delay. Each
+#   pipe is defined as several 'instances', which are simply
+#   individual pipes that share the same characteristics. For example,
+#   the default pipedef.xml file defines several pipes with a 64Kbps
+#   throughput. These are individual instances of a 64Kpbs pipe. All
+#   transfers that use a specific pipe instance share the bandwidth of
+#   that pipe instance.
+
+    pipe=
+
+#   Specifies the throttle pipe definition file. This is an XML file
+#   that follows a specific format - look at pipedef.xml for an
+#   explanation. If you define your own throttle pipes, it's a good
+#   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+#   and then change that. This avoids unpleasant surprises when you
+#   upgrade your Xitami version. Note that we may change the format of
+#   the pipe definition file in the future.
+
+    pipedef=pipedef.xml
+
+If you want to make changes to that, make them in your default.cfg. After editing and the saving 
+the default.cfg the changes should take affect. I experienced similar problems when working with 
+the "admin gui" and just edited the file and the settings did take effect.
+
+
+
+Am 4 Nov 2004 um 11:36 hat Adam Schroeder geschrieben:
+
+> Hi,
+> 
+> I've read through the FAQ and help, but I can't figure out how to make use 
+> of the Pipe settings to limit bandwidth.
+> 
+> I want to limit the bandwidth so I can see how my project will run over 
+> various connections.  When I try to select an HTTP throttle pipe from the 
+> configuration screen it never saves my selection.  Ideally I would like to 
+> limit it even further then 32k.
+> 
+> I am not worried about segmenting the bandwidth among sites,  a global 
+> setting will work fine for me.
+> 
+> I imagine this is pretty simple to do, once you know the right steps to 
+> take. If anyone could provide me those steps I would really appreciate it.
+> 
+> I am on an XP machine.  Running Xitami 2.5c2
+> 
+> 
+> Thanks for your time,
+> Adam
+> 
+
+
+
+#   Specifies the HTTP throttle pipe. With a throttle pipe you can
+#   restrict the throughput of a website to some fixed maximum, e.g.
+#   64Kbps. This can be useful if several websites share a single
+#   line, and you need to share this on a quality-of-service basis.
+#   The HTTP throttle pipe is applied to all download and upload
+#   requests to the website. You can apply a throttle pipe to the
+#   entire HTTP server or to specific virtual hosts. Pipes are defined
+#   in the XML file 'pipedef.xml'. You can edit this file to add new
+#   pipes; Xitami reloads this automatically after a short delay. Each
+#   pipe is defined as several 'instances', which are simply
+#   individual pipes that share the same characteristics. For example,
+#   the default pipedef.xml file defines several pipes with a 64Kbps
+#   throughput. These are individual instances of a 64Kpbs pipe. All
+#   transfers that use a specific pipe instance share the bandwidth of
+#   that pipe instance.
+
+    pipe=
+
+#   Specifies the throttle pipe definition file. This is an XML file
+#   that follows a specific format - look at pipedef.xml for an
+#   explanation. If you define your own throttle pipes, it's a good
+#   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+#   and then change that. This avoids unpleasant surprises when you
+#   upgrade your Xitami version. Note that we may change the format of
+#   the pipe definition file in the future.
+
+    pipedef=pipedef.xmlJohannes
+
+-----------------------
+Johannes Prost
+xitami@pastryworld.ca
+
+
+
+
+From xitami@lists.xitami.org  Thu Nov  4 21:48:30 2004
+From: xitami@lists.xitami.org (Adam Schroeder)
+Date: Thu, 4 Nov 2004 16:48:30 -0500
+Subject: [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+References: <418A478F.19951.1892FDE@localhost>
+Message-ID: <002801c4c2b8$064431c0$c800140a@bigmamma>
+
+Thanks Johannes!
+
+That did it.  I was actually playing around with configuration files 
+previously but I didn't get the right syntax.
+
+After several tries I stumbled upong the correct syntax.
+
+The correct syntax is
+   pipe = "32k pipe"  #basically the instance name defined in the XML with 
+quotes around it.
+
+Thanks for your help!
+
+Adam
+
+----- Original Message ----- 
+From: "Johannes Prost" <xitami@pastryworld.ca>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, November 04, 2004 4:15 PM
+Subject: Re: [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+
+
+>
+> Hello Adam,
+>
+> I haven't done that, but I would try to edit the default.cfg directly. 
+> Here the section out of the
+> xitami.cfg.
+>
+> #   Specifies the HTTP throttle pipe. With a throttle pipe you can
+> #   restrict the throughput of a website to some fixed maximum, e.g.
+> #   64Kbps. This can be useful if several websites share a single
+> #   line, and you need to share this on a quality-of-service basis.
+> #   The HTTP throttle pipe is applied to all download and upload
+> #   requests to the website. You can apply a throttle pipe to the
+> #   entire HTTP server or to specific virtual hosts. Pipes are defined
+> #   in the XML file 'pipedef.xml'. You can edit this file to add new
+> #   pipes; Xitami reloads this automatically after a short delay. Each
+> #   pipe is defined as several 'instances', which are simply
+> #   individual pipes that share the same characteristics. For example,
+> #   the default pipedef.xml file defines several pipes with a 64Kbps
+> #   throughput. These are individual instances of a 64Kpbs pipe. All
+> #   transfers that use a specific pipe instance share the bandwidth of
+> #   that pipe instance.
+>
+>    pipe=
+>
+> #   Specifies the throttle pipe definition file. This is an XML file
+> #   that follows a specific format - look at pipedef.xml for an
+> #   explanation. If you define your own throttle pipes, it's a good
+> #   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+> #   and then change that. This avoids unpleasant surprises when you
+> #   upgrade your Xitami version. Note that we may change the format of
+> #   the pipe definition file in the future.
+>
+>    pipedef=pipedef.xml
+>
+> If you want to make changes to that, make them in your default.cfg. After 
+> editing and the saving
+> the default.cfg the changes should take affect. I experienced similar 
+> problems when working with
+> the "admin gui" and just edited the file and the settings did take effect.
+>
+>
+>
+> Am 4 Nov 2004 um 11:36 hat Adam Schroeder geschrieben:
+>
+>> Hi,
+>>
+>> I've read through the FAQ and help, but I can't figure out how to make 
+>> use
+>> of the Pipe settings to limit bandwidth.
+>>
+>> I want to limit the bandwidth so I can see how my project will run over
+>> various connections.  When I try to select an HTTP throttle pipe from the
+>> configuration screen it never saves my selection.  Ideally I would like 
+>> to
+>> limit it even further then 32k.
+>>
+>> I am not worried about segmenting the bandwidth among sites,  a global
+>> setting will work fine for me.
+>>
+>> I imagine this is pretty simple to do, once you know the right steps to
+>> take. If anyone could provide me those steps I would really appreciate 
+>> it.
+>>
+>> I am on an XP machine.  Running Xitami 2.5c2
+>>
+>>
+>> Thanks for your time,
+>> Adam
+>>
+>
+>
+>
+> #   Specifies the HTTP throttle pipe. With a throttle pipe you can
+> #   restrict the throughput of a website to some fixed maximum, e.g.
+> #   64Kbps. This can be useful if several websites share a single
+> #   line, and you need to share this on a quality-of-service basis.
+> #   The HTTP throttle pipe is applied to all download and upload
+> #   requests to the website. You can apply a throttle pipe to the
+> #   entire HTTP server or to specific virtual hosts. Pipes are defined
+> #   in the XML file 'pipedef.xml'. You can edit this file to add new
+> #   pipes; Xitami reloads this automatically after a short delay. Each
+> #   pipe is defined as several 'instances', which are simply
+> #   individual pipes that share the same characteristics. For example,
+> #   the default pipedef.xml file defines several pipes with a 64Kbps
+> #   throughput. These are individual instances of a 64Kpbs pipe. All
+> #   transfers that use a specific pipe instance share the bandwidth of
+> #   that pipe instance.
+>
+>    pipe=
+>
+> #   Specifies the throttle pipe definition file. This is an XML file
+> #   that follows a specific format - look at pipedef.xml for an
+> #   explanation. If you define your own throttle pipes, it's a good
+> #   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+> #   and then change that. This avoids unpleasant surprises when you
+> #   upgrade your Xitami version. Note that we may change the format of
+> #   the pipe definition file in the future.
+>
+>    pipedef=pipedef.xmlJohannes
+>
+> -----------------------
+> Johannes Prost
+> xitami@pastryworld.ca
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+From xitami@lists.xitami.org  Thu Nov  4 22:38:27 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Thu, 04 Nov 2004 16:38:27 -0600
+Subject: [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+In-Reply-To: <002801c4c2b8$064431c0$c800140a@bigmamma>
+Message-ID: <418A5B03.20526.1D52BE6@localhost>
+
+No problem at all !!
+That's where the list comes into play :) :)
+
+Johannes
+
+
+Am 4 Nov 2004 um 16:48 hat Adam Schroeder geschrieben:
+
+> Thanks Johannes!
+> 
+> That did it.  I was actually playing around with configuration files 
+> previously but I didn't get the right syntax.
+> 
+> After several tries I stumbled upong the correct syntax.
+> 
+> The correct syntax is
+>    pipe = "32k pipe"  #basically the instance name defined in the XML with 
+> quotes around it.
+> 
+> Thanks for your help!
+> 
+> Adam
+> 
+> ----- Original Message ----- 
+> From: "Johannes Prost" <xitami@pastryworld.ca>
+> To: <xitami@lists.xitami.org>
+> Sent: Thursday, November 04, 2004 4:15 PM
+> Subject: Re: [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+> 
+> 
+> >
+> > Hello Adam,
+> >
+> > I haven't done that, but I would try to edit the default.cfg directly. 
+> > Here the section out of the
+> > xitami.cfg.
+> >
+> > #   Specifies the HTTP throttle pipe. With a throttle pipe you can
+> > #   restrict the throughput of a website to some fixed maximum, e.g.
+> > #   64Kbps. This can be useful if several websites share a single
+> > #   line, and you need to share this on a quality-of-service basis.
+> > #   The HTTP throttle pipe is applied to all download and upload
+> > #   requests to the website. You can apply a throttle pipe to the
+> > #   entire HTTP server or to specific virtual hosts. Pipes are defined
+> > #   in the XML file 'pipedef.xml'. You can edit this file to add new
+> > #   pipes; Xitami reloads this automatically after a short delay. Each
+> > #   pipe is defined as several 'instances', which are simply
+> > #   individual pipes that share the same characteristics. For example,
+> > #   the default pipedef.xml file defines several pipes with a 64Kbps
+> > #   throughput. These are individual instances of a 64Kpbs pipe. All
+> > #   transfers that use a specific pipe instance share the bandwidth of
+> > #   that pipe instance.
+> >
+> >    pipe=
+> >
+> > #   Specifies the throttle pipe definition file. This is an XML file
+> > #   that follows a specific format - look at pipedef.xml for an
+> > #   explanation. If you define your own throttle pipes, it's a good
+> > #   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+> > #   and then change that. This avoids unpleasant surprises when you
+> > #   upgrade your Xitami version. Note that we may change the format of
+> > #   the pipe definition file in the future.
+> >
+> >    pipedef=pipedef.xml
+> >
+> > If you want to make changes to that, make them in your default.cfg. After 
+> > editing and the saving
+> > the default.cfg the changes should take affect. I experienced similar 
+> > problems when working with
+> > the "admin gui" and just edited the file and the settings did take effect.
+> >
+> >
+> >
+> > Am 4 Nov 2004 um 11:36 hat Adam Schroeder geschrieben:
+> >
+> >> Hi,
+> >>
+> >> I've read through the FAQ and help, but I can't figure out how to make 
+> >> use
+> >> of the Pipe settings to limit bandwidth.
+> >>
+> >> I want to limit the bandwidth so I can see how my project will run over
+> >> various connections.  When I try to select an HTTP throttle pipe from the
+> >> configuration screen it never saves my selection.  Ideally I would like 
+> >> to
+> >> limit it even further then 32k.
+> >>
+> >> I am not worried about segmenting the bandwidth among sites,  a global
+> >> setting will work fine for me.
+> >>
+> >> I imagine this is pretty simple to do, once you know the right steps to
+> >> take. If anyone could provide me those steps I would really appreciate 
+> >> it.
+> >>
+> >> I am on an XP machine.  Running Xitami 2.5c2
+> >>
+> >>
+> >> Thanks for your time,
+> >> Adam
+> >>
+> >
+> >
+> >
+> > #   Specifies the HTTP throttle pipe. With a throttle pipe you can
+> > #   restrict the throughput of a website to some fixed maximum, e.g.
+> > #   64Kbps. This can be useful if several websites share a single
+> > #   line, and you need to share this on a quality-of-service basis.
+> > #   The HTTP throttle pipe is applied to all download and upload
+> > #   requests to the website. You can apply a throttle pipe to the
+> > #   entire HTTP server or to specific virtual hosts. Pipes are defined
+> > #   in the XML file 'pipedef.xml'. You can edit this file to add new
+> > #   pipes; Xitami reloads this automatically after a short delay. Each
+> > #   pipe is defined as several 'instances', which are simply
+> > #   individual pipes that share the same characteristics. For example,
+> > #   the default pipedef.xml file defines several pipes with a 64Kbps
+> > #   throughput. These are individual instances of a 64Kpbs pipe. All
+> > #   transfers that use a specific pipe instance share the bandwidth of
+> > #   that pipe instance.
+> >
+> >    pipe=
+> >
+> > #   Specifies the throttle pipe definition file. This is an XML file
+> > #   that follows a specific format - look at pipedef.xml for an
+> > #   explanation. If you define your own throttle pipes, it's a good
+> > #   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+> > #   and then change that. This avoids unpleasant surprises when you
+> > #   upgrade your Xitami version. Note that we may change the format of
+> > #   the pipe definition file in the future.
+> >
+> >    pipedef=pipedef.xmlJohannes
+> >
+> > -----------------------
+> > Johannes Prost
+> > xitami@pastryworld.ca
+> >
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Thu Nov  4 20:19:48 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Thu, 04 Nov 2004 20:19:48 +0000
+Subject: [Xitami] =?iso-8859-1?B?Q2lhbGlzIC0gZXJlY3Rpb24gaW4gMTUgbWludXRlcw==?=
+Message-ID: <311001c4c2ab$88f61287$3d95612c@access-one.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_9EA488F1.FD4BDC52
+Content-Type: multipart/alternative;
+    boundary="----=_NextPart_001_0001_90F68D2E.FE60026B"
+
+
+------=_NextPart_001_0001_90F68D2E.FE60026B
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 7bit
+
+Hard & stable erections
+Starts working within 15 minutes
+Longer effects
+No prescription required
+
+CIALIS:
+http://www.tetramed.biz
+
+Choose the manufacturer you trust!
+Discreet shipping worldwide
+
+
+_________________________________________________________________________
+To change your mail preferences, go here: http://www.tetramed.biz/uns.htm
+_________________________________________________________________________
+
+
+------=_NextPart_001_0001_90F68D2E.FE60026B
+Content-Type: text/html; charset=iso-8859-1
+Content-Transfer-Encoding: 7bit
+
+<body>
+<html>
+<CENTER>
+<TABLE cellSpacing=0 cellPadding=0 width=600 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <P>
+Full & rock hard erections<br>
+Starts working within 15 minutes<br>
+Longer lasting effects<br>
+No prescription asked<br><br>
+
+CIALIS:<br>
+<a href="http://www.tetramed.biz">http://www.tetramed.biz</a><br><br>
+
+Choose the manufacturer you can trust!<br>
+Prompt shipping to any location<br><br><br>
+
+
+_________________________________________________________________________<br>
+To be taken out, go here: <a href="http://www.tetramed.biz/uns.htm">http://www.tetramed.biz/uns.htm</a><br>
+_________________________________________________________________________
+
+</P></TD></TR></TBODY></TABLE></CENTER></BODY></HTML>
+
+
+------=_NextPart_001_0001_90F68D2E.FE60026B--
+
+
+
+------=_NextPart_000_0000_9EA488F1.FD4BDC52--
+ 
+
+
+From xitami@lists.xitami.org  Tue Nov  9 12:17:33 2004
+From: xitami@lists.xitami.org (admin)
+Date: Tue, 09 Nov 2004 05:17:33 -0700
+Subject: [Xitami] Log file errors
+In-Reply-To: <20041103075517.72406.qmail@web53601.mail.yahoo.com>
+Message-ID: <5.1.1.6.0.20041109051558.00b2fae8@mail.mrjdesign.com>
+
+I have just noticed a weird event in the log file tracking on Xitami 2.5
+
+I am completely missing log files for all days between Oct. 17 through Oct. 21
+Has this happened to anyone else and what caused it???
+
+Thanks.
+
+
+
+From xitami@lists.xitami.org  Tue Nov  9 14:39:57 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Tue, 09 Nov 2004 08:39:57 -0600
+Subject: [Xitami] Log file errors
+In-Reply-To: <5.1.1.6.0.20041109051558.00b2fae8@mail.mrjdesign.com>
+References: <20041103075517.72406.qmail@web53601.mail.yahoo.com>
+Message-ID: <4190825D.12553.533152B@localhost>
+
+Didn't happen here, but can't tell you what caused this. Sorry.
+
+Johannes
+
+Am 9 Nov 2004 um 5:17 hat admin geschrieben:
+
+> I have just noticed a weird event in the log file tracking on Xitami 2.5
+> 
+> I am completely missing log files for all days between Oct. 17 through Oct. 21
+> Has this happened to anyone else and what caused it???
+> 
+> Thanks.
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Tue Nov  9 15:18:17 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 09 Nov 2004 10:18:17 -0500
+Subject: [Xitami] Log file errors
+In-Reply-To: <5.1.1.6.0.20041109051558.00b2fae8@mail.mrjdesign.com>
+References: <20041103075517.72406.qmail@web53601.mail.yahoo.com>
+Message-ID: <3.0.6.32.20041109101817.00a796c0@mail.shininglightpro.com>
+
+At 05:17 AM 11/9/2004 -0700, admin writeth:
+>I have just noticed a weird event in the log file tracking on Xitami 2.5
+>
+>I am completely missing log files for all days between Oct. 17 through
+Oct. 21
+>Has this happened to anyone else and what caused it???
+>
+>Thanks.
+
+Try checking Oct. 16th's or Oct. 22's logs.  I haven't seen Xitami fail to
+log information, but I have seen it fail to roll over the logs to the next
+day and accumulate 5-10 days worth before realizing it needs to roll over.
+I'm pretty sure those logs should be somewhere...
+
+My best guess (without looking at source code), the logs fail to roll over
+when there is activity on the server at the exact moment the logs should
+roll over - so the date never gets calculated to indicate a new file and
+the current file just expands until the next day.  A DoS of sorts might be
+able to be performed indirectly by forcibly expanding the logs every day
+using a remote attack client.  When someone goes to open the logs with
+something other than a 'tail'-like tool, it could drag RAM to a minimum and
+CPU utilization to 100%.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Wed Nov 10 18:08:58 2004
+From: xitami@lists.xitami.org (admin)
+Date: Wed, 10 Nov 2004 11:08:58 -0700
+Subject: [Xitami] Log file errors
+In-Reply-To: <3.0.6.32.20041109101817.00a796c0@mail.shininglightpro.com>
+References: <5.1.1.6.0.20041109051558.00b2fae8@mail.mrjdesign.com>
+ <20041103075517.72406.qmail@web53601.mail.yahoo.com>
+Message-ID: <5.1.1.6.0.20041110110753.00b2fb80@mail.mrjdesign.com>
+
+I think it's perhaps caused by a simple slow reaction in Xitami when the 
+load is a bit upped on the server.
+I have several days worth which roll over several times a day and then days 
+that don't get their own log files so that would explain it.
+
+Thanks.
+
+
+At 10:18 AM 11/9/2004 -0500, you wrote:
+>At 05:17 AM 11/9/2004 -0700, admin writeth:
+> >I have just noticed a weird event in the log file tracking on Xitami 2.5
+> >
+> >I am completely missing log files for all days between Oct. 17 through
+>Oct. 21
+> >Has this happened to anyone else and what caused it???
+> >
+> >Thanks.
+>
+>Try checking Oct. 16th's or Oct. 22's logs.  I haven't seen Xitami fail to
+>log information, but I have seen it fail to roll over the logs to the next
+>day and accumulate 5-10 days worth before realizing it needs to roll over.
+>I'm pretty sure those logs should be somewhere...
+>
+>My best guess (without looking at source code), the logs fail to roll over
+>when there is activity on the server at the exact moment the logs should
+>roll over - so the date never gets calculated to indicate a new file and
+>the current file just expands until the next day.  A DoS of sorts might be
+>able to be performed indirectly by forcibly expanding the logs every day
+>using a remote attack client.  When someone goes to open the logs with
+>something other than a 'tail'-like tool, it could drag RAM to a minimum and
+>CPU utilization to 100%.
+>
+>
+>Thomas J. Hruska
+>Shining Light Productions
+>http://www.slproweb.com/
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Sat Nov 13 17:08:58 2004
+From: xitami@lists.xitami.org (LJK)
+Date: Sat, 13 Nov 2004 11:08:58 -0600
+Subject: [Xitami] Suddenly - no CGI's
+Message-ID: <000c01c4c9a3$7c2b4800$e3f69f04@MRDEMANDO>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0009_01C4C971.2C194EC0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi -
+I've been using Xitami 2.5b4 on xp for several months now to test cgi =
+scripts
+locally before uploading them to my webhosts' servers.
+
+But after a three month hiatus, I returned to test and found an error
+message, instead -
+Cannot create CGI process - program not found
+which is odd, because I can run the testcgi.exe with no problems.
+
+Yes, the Path to Perl has remained the same...any clues as to what's
+going on, here?  My Perl installation is also intact; I've got no idea!
+
+Thanks,
+El
+------=_NextPart_000_0009_01C4C971.2C194EC0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1106" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Hi -</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>I've been using Xitami 2.5b4 on xp for =
+several=20
+months now to test cgi scripts</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>locally before uploading them to my =
+webhosts'=20
+servers.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>But after a three month hiatus, I =
+returned to test=20
+and found an error</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>message, instead -</FONT></DIV>
+<DIV><!--StartFragment -->
+<H4><A name=3DTOC71>Cannot create CGI process - program not =
+found</A></H4>
+<DIV><FONT face=3DArial size=3D2>which is odd, because I can run the =
+testcgi.exe=20
+with no problems.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Yes, the Path to Perl has remained the =
+same...any=20
+clues as to what's</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>going on, here?&nbsp; My Perl =
+installation is also=20
+intact; I've got no idea!</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Thanks,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>El</FONT></DIV></DIV></BODY></HTML>
+
+------=_NextPart_000_0009_01C4C971.2C194EC0--
+
+
+From xitami@lists.xitami.org  Sat Nov 13 17:20:50 2004
+From: xitami@lists.xitami.org (Reply_To)
+Date: Sat, 13 Nov 2004 11:20:50 -0600
+Subject: [Xitami] Suddenly - no CGI's
+In-Reply-To: <000c01c4c9a3$7c2b4800$e3f69f04@MRDEMANDO>
+Message-ID: <BDBB9E91.F622%reply@qwest.net>
+
+El,
+
+I checked your site (elsite.us) and and the guest book seems OK. Is
+this the site in question?
+
+http://elsite.us/scgi-bin/guestbook/guestbook.cgi?mode=view
+
+> Hi -
+> I've been using Xitami 2.5b4 on xp for several months now to test cgi
+> scripts locally before uploading them to my webhosts' servers.
+> 
+> But after a three month hiatus, I returned to test and found an error
+> message, instead -
+> Cannot create CGI process - program not found
+> which is odd, because I can run the testcgi.exe with no problems.
+> 
+> Yes, the Path to Perl has remained the same...any clues as to what's
+> going on, here?  My Perl installation is also intact; I've got no idea!
+> 
+> Thanks,
+> El
+
+
+From xitami@lists.xitami.org  Sun Nov 14 07:23:07 2004
+From: xitami@lists.xitami.org (LJK)
+Date: Sun, 14 Nov 2004 01:23:07 -0600
+Subject: [Xitami] Suddenly, no CGI's II
+Message-ID: <000001c4ca71$80df75a0$924e9e04@MRDEMANDO>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0005_01C4C9E8.7ECF0A70
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi -
+Actually, no.
+
+As I'd mentioned, I only use Xitami to test scripts *locally*
+before uploading them to another server.
+
+I can no longer run .cgi's from Xitami - on my computer.
+[That was an older, and much-used script you saw there...]
+
+Thanks,
+El
+------=_NextPart_000_0005_01C4C9E8.7ECF0A70
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1106" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Hi -</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Actually, no.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>As I'd mentioned, I only use Xitami to =
+test scripts=20
+*locally*</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>before uploading them to another=20
+server.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>I can no longer run .cgi's from Xitami =
+- on my=20
+computer.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>[That was an older, and much-used =
+script you saw=20
+there...]</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Thanks,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>El</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0005_01C4C9E8.7ECF0A70--
+
+
+From xitami@lists.xitami.org  Sun Nov 14 20:56:17 2004
+From: xitami@lists.xitami.org (Dario B.)
+Date: Sun, 14 Nov 2004 21:56:17 +0100
+Subject: [Xitami] Suddenly, no CGI's II
+References: <000001c4ca71$80df75a0$924e9e04@MRDEMANDO>
+Message-ID: <002201c4ca8c$63500fc0$fc825e3e@Annamaria>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_001F_01C4CA94.C44F5300
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Have you tried launching the script outside xitami from the command =
+prompt and to see the output? maybe it will help you to know what's =
+wrong
+
+Dario B.
+  ----- Original Message -----=20
+  From: LJK=20
+  To: xitami@lists.xitami.org=20
+  Sent: Sunday, November 14, 2004 8:23 AM
+  Subject: [Xitami] Suddenly, no CGI's II
+
+
+  Hi -
+  Actually, no.
+
+  As I'd mentioned, I only use Xitami to test scripts *locally*
+  before uploading them to another server.
+
+  I can no longer run .cgi's from Xitami - on my computer.
+  [That was an older, and much-used script you saw there...]
+
+  Thanks,
+  El
+------=_NextPart_000_001F_01C4CA94.C44F5300
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1476" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Have you tried launching the script =
+outside xitami=20
+from the command prompt and to see the output? maybe it will help you to =
+know=20
+what's wrong</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Dario B.</FONT></DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Del@elsite.us href=3D"mailto:el@elsite.us">LJK</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Sunday, November 14, 2004 =
+8:23=20
+  AM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Suddenly, no =
+CGI's=20
+  II</DIV>
+  <DIV><BR></DIV>
+  <DIV><FONT face=3DArial size=3D2>Hi -</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>Actually, no.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>As I'd mentioned, I only use Xitami =
+to test=20
+  scripts *locally*</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>before uploading them to another=20
+  server.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>I can no longer run .cgi's from =
+Xitami - on my=20
+  computer.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>[That was an older, and much-used =
+script you saw=20
+  there...]</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Thanks,</FONT></DIV>
+  <DIV><FONT face=3DArial =
+size=3D2>El</FONT></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_001F_01C4CA94.C44F5300--
+
+
+From xitami@lists.xitami.org  Sat Nov 20 18:06:40 2004
+From: xitami@lists.xitami.org (Steve Adams)
+Date: Sat, 20 Nov 2004 13:06:40 -0500
+Subject: [Xitami] Cognos ReportNet
+Message-ID: <419F87B0.9040801@ascinet.com>
+
+Has anyone gotten Xitami to work with Cognos ReportNet?  I have both 
+installed, but when I try to start up ReportNet, I get
+
+
+  Internal error: your request was unsuccessful
+  Cannot create CGI process - program not found
+
+
+The last entry in access.log shows
+
+127.0.0.1 - - [20/Nov/2004:13:05:08 -0500] "GET 
+/crn/cgi-bin/cognos.cgi?b_action
+=xts.run&m=portal/main.xts HTTP/1.1" 500 262210 "" "Mozilla/5.0 
+(Windows; U; Win
+dows NT 5.0; en-US; rv:1.7.3) Gecko/20040910"
+
+
+
+From xitami@lists.xitami.org  Sat Nov 20 22:20:39 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Sat, 20 Nov 2004 22:20:39 +0000
+Subject: [Xitami] ftp issues(I'm Stumped)
+Message-ID: <20041120222039.KJCT1463.out003.verizon.net@outgoing.verizon.net>
+
+I recently helped a friend install Xitami 2.5c2 on a pc running XP. Everything was working perfectly until yesterday. Users trying to connect to his ftp service are presented with this error:
+
+Connecting to 83.70.231.6:21
+Connected to 83.70.231.6:21 in 0.170244 seconds, Waiting for Server Response
+
+Failed to receive response after connect
+Host type (1): Automatic Detect
+
+I double checked his network and router configuration. Everything is ok there. He can access the http and ftp servers locally. It's just access from the net that is receiving the error. After prodding him a little further it turns out he enabled XP's built in firewall(not sure why he did this, his router uses NAT) right before his server went south. Ah, hah, I figured, easy fix. He insists on keeping his firewall enabled, so I had him configure it
+to allow HTTP an FTP to no avail. After that failed I had him disable the firewall, still nothing. Users are still receiving the same error. I was positive XP's firewall was the issue. Does anyone know what could be causing this. I've been using xitami for four years on my own machine, but in no way claim to be an expert. I'm stumped. 
+
+Thanks in advance for any help! 
+
+
+From xitami@lists.xitami.org  Sun Nov 21 23:54:13 2004
+From: xitami@lists.xitami.org (admin)
+Date: Sun, 21 Nov 2004 16:54:13 -0700
+Subject: [Xitami] ftp issues(I'm Stumped)
+In-Reply-To: <20041120222039.KJCT1463.out003.verizon.net@outgoing.verizo
+ n.net>
+Message-ID: <5.1.1.6.0.20041121165052.00b2eb10@mail.mrjdesign.com>
+
+I would recommend your friend dumps the XP firewall and installs Zonealarm 
+instead.
+Zonealarm claims it's not made for servers but in fact it works just fine.
+It is on top of that a build of outpost for linux somehow as it reports 
+itself to be the same.
+
+Now, for the configuration, go into Advanced and allow odd servers to run 
+under high security,
+and then specify that port 80 and other standard access rights are ok. Then 
+you should be set.
+
+XP's firewall has little to no ability to specify any distinct settings and 
+if it's only SP 1 then it's pretty much not worth anything anyway.
+I had a few guys compare security on firewalls and it took them about 10 
+minutes to get through all standard Windows firewalls but a NAT is 
+something different.
+It can be broken but will take them 4 - 6 hours and is so much easier to 
+detect.
+
+
+
+At 10:20 PM 11/20/2004 +0000, you wrote:
+>I recently helped a friend install Xitami 2.5c2 on a pc running XP. 
+>Everything was working perfectly until yesterday. Users trying to connect 
+>to his ftp service are presented with this error:
+>
+>Connecting to 83.70.231.6:21
+>Connected to 83.70.231.6:21 in 0.170244 seconds, Waiting for Server Response
+>
+>Failed to receive response after connect
+>Host type (1): Automatic Detect
+>
+>I double checked his network and router configuration. Everything is ok 
+>there. He can access the http and ftp servers locally. It's just access 
+>from the net that is receiving the error. After prodding him a little 
+>further it turns out he enabled XP's built in firewall(not sure why he did 
+>this, his router uses NAT) right before his server went south. Ah, hah, I 
+>figured, easy fix. He insists on keeping his firewall enabled, so I had 
+>him configure it
+>to allow HTTP an FTP to no avail. After that failed I had him disable the 
+>firewall, still nothing. Users are still receiving the same error. I was 
+>positive XP's firewall was the issue. Does anyone know what could be 
+>causing this. I've been using xitami for four years on my own machine, but 
+>in no way claim to be an expert. I'm stumped.
+>
+>Thanks in advance for any help!
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Sun Nov 21 06:28:11 2004
+From: xitami@lists.xitami.org (LJK)
+Date: Sun, 21 Nov 2004 00:28:11 -0600
+Subject: [Xitami] No CGI's
+Message-ID: <000001c4cf93$4c887550$9f279e04@MRDEMANDO>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0005_01C4CF60.FB323C40
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi -
+Yes, I've run the same scripts from other programs like
+Crimson Editor and Cgi Test in order to make sure it
+wasn't the script, itself.  Plus, some of these were old
+stand-by's that have worked in the past...
+
+All looks okay in the default.config file as for settings,
+my Perl installation and !# shebang are pointing correctly -
+it's just that Xitami "Cannot create the cgi process" anymore!
+
+[Which makes no sense since cgitest.exe runs just fine.]
+
+Any other ideas / suggestions?
+Do I smell a re-install on the horizon :- [  ?
+-El
+------=_NextPart_000_0005_01C4CF60.FB323C40
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1106" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Hi -</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Yes, I've run the same scripts from =
+other programs=20
+like</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Crimson Editor and Cgi Test in order to =
+make sure=20
+it</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>wasn't the script, itself.&nbsp; Plus, =
+some of=20
+these were old</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>stand-by's that have worked in the=20
+past...</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>All looks okay in the default.config =
+file as for=20
+settings,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>my Perl installation and !# shebang are =
+pointing=20
+correctly -</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>it's just that Xitami "Cannot create =
+the cgi=20
+process" anymore!</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>[Which makes no sense since cgitest.exe =
+runs just=20
+fine.]</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Any other ideas / =
+suggestions?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Do I smell a re-install on the horizon =
+:- [&nbsp;=20
+?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>-El</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0005_01C4CF60.FB323C40--
+
+
+
+From xitami@lists.xitami.org  Mon Nov 22 06:59:26 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Mon, 22 Nov 2004 6:59:26 +0000
+Subject: [Xitami] ftp issues(I'm Stumped)
+Message-ID: <20041122065927.QIFO1365.out004.verizon.net@outgoing.verizon.net>
+
+Thanks for the help! 
+
+I'm not sure how he did it or why, but he deleted his ftproot directory along with a few others. Unfortunately he's 2,000 miles
+away so it took all day to figure it out. Just when I had given up
+the statement, "could this have anything to do with it?" appeared on
+my screen. Ahhhh, shoot me.
+
+So now the connection issue is solved. Somewhere along the way his NAT config must of went sour though. I can connect to Xitami without any issues. I get the normal welcome screen, 
+but as soon as Xitami switches the data connection port to 200 it 
+hangs. I'm assuming we need to create a pinhole through his router
+to open 200. I'm curious to know why it worked fine for two weeks 
+with the current config, but now all of sudden it's blocked.
+
+Anyway, thanks again for the help! It's really appreciated!
+> 
+> From: admin <admin@mrjdesign.com>
+> Date: 2004/11/21 Sun PM 11:54:13 GMT
+> To: xitami@lists.xitami.org
+> Subject: Re: [Xitami] ftp issues(I'm Stumped)
+> 
+> I would recommend your friend dumps the XP firewall and installs Zonealarm 
+> instead.
+> Zonealarm claims it's not made for servers but in fact it works just fine.
+> It is on top of that a build of outpost for linux somehow as it reports 
+> itself to be the same.
+> 
+> Now, for the configuration, go into Advanced and allow odd servers to run 
+> under high security,
+> and then specify that port 80 and other standard access rights are ok. Then 
+> you should be set.
+> 
+> XP's firewall has little to no ability to specify any distinct settings and 
+> if it's only SP 1 then it's pretty much not worth anything anyway.
+> I had a few guys compare security on firewalls and it took them about 10 
+> minutes to get through all standard Windows firewalls but a NAT is 
+> something different.
+> It can be broken but will take them 4 - 6 hours and is so much easier to 
+> detect.
+> 
+>
+
+
+From xitami@lists.xitami.org  Mon Nov 22 12:58:45 2004
+From: xitami@lists.xitami.org (Bill Warren)
+Date: Mon, 22 Nov 2004 07:58:45 -0500
+Subject: [Xitami] http problem
+Message-ID: <001c01c4d093$003500a0$6501a8c0@wgw1>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0019_01C4D069.1719D950
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+hi,
+
+i'm sure this is very simple...but :(  i have xitami running as a =
+webserver on my home server.  no problems there.   i have a default =
+webpage, and a few folders under \xitami\webpages.  I'd like to navigate =
+to them via http:  and see the contents, so there is no .html file =
+there.  But, when i navigate to it...i.e.  =
+http://www.xxxxxx.com/files/apps....it doesn't show anything.  i know it =
+sees the location because when i put in a wrong path, for example app =
+instead of apps, it gives me page not found.  i'm figuring this is a =
+permissions issue.  can anyone help?
+
+thanks,
+bill w.
+------=_NextPart_000_0019_01C4D069.1719D950
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2900.2180" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>
+<DIV><FONT face=3DArial size=3D2>hi,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>i'm sure this is very simple...but =
+:(&nbsp; i have=20
+xitami running as a webserver on my home server.&nbsp; no problems=20
+there.&nbsp;&nbsp; i have a default webpage, and a few folders under=20
+\xitami\webpages.&nbsp; I'd like to navigate to them via http:&nbsp; and =
+see the=20
+contents, so there is no .html file there.&nbsp; But, when i navigate to =
+
+it...i.e.&nbsp; <A=20
+href=3D"http://www.xxxxxx.com/files/apps....it">http://www.xxxxxx.com/fil=
+es/apps....it</A>=20
+doesn't show anything.&nbsp; i know it sees the location because when i =
+put in a=20
+wrong path, for example app instead of apps, it gives me page not =
+found.&nbsp;=20
+i'm figuring this is a permissions issue.&nbsp; can anyone =
+help?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>thanks,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>bill =
+w.</FONT></DIV></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0019_01C4D069.1719D950--
+
+
+From xitami@lists.xitami.org  Mon Nov 22 15:54:27 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Mon, 22 Nov 2004 10:54:27 -0500
+Subject: [Xitami] pipes0000.flt
+In-Reply-To: <001c01c4d093$003500a0$6501a8c0@wgw1>
+Message-ID: <NFBBKNGGELNPLMHPBOCEKEFEEJAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0006_01C4D081.A30774F0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+I have Xitami running on a win2kpro pc, and recently I discoverd thousands
+of pipexxxx.flt files in my temp directory. Basically 1 file for each page
+visited. It appears to only happen with PHP pages and not HTML pages. Here
+is what I have ruled out.
+
+I haver ruled out
+html pages
+cookies
+MySQL
+anything in domain.cfg
+I didn't see anything in the php.ini
+
+I creates a incremental file for each page visited.
+
+So does Xitami have anything to do with creating a temp file called
+pipe0001.flt   that's FLT. Which looks to me to be a filter file.
+At the moment I have created a batch file to delete *.flt but I would rather
+whatever creates it to either not create it or remove it when it's done.
+
+Thanks
+Ron
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+------=_NextPart_000_0006_01C4D081.A30774F0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1476" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>I have=20
+Xitami running on a win2kpro pc, and recently I discoverd thousands of=20
+pipexxxx.flt files in my temp directory. Basically 1 file for each page =
+visited.=20
+It appears to only happen with PHP pages and not HTML pages. Here is =
+what I have=20
+ruled out.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>I=20
+haver ruled out</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>html=20
+pages</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>cookies</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>MySQL</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>anything in domain.cfg</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>I=20
+didn't see anything in the php.ini</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>I=20
+creates a incremental file for each page visited. </FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>So=20
+does Xitami have anything to do with creating a temp file called=20
+pipe0001.flt&nbsp;&nbsp; that's FLT. Which looks to me to be a filter=20
+file.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>At the=20
+moment I have created a batch file to delete *.flt but I would rather =
+whatever=20
+creates it to either not&nbsp;create it or remove it when it's=20
+done.&nbsp;</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Thanks</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Ron</FONT></SPAN></DIV>
+<DIV><SPAN class=3D801084515-22112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV></BODY></HTML>
+
+------=_NextPart_000_0006_01C4D081.A30774F0--
+
+
+From xitami@lists.xitami.org  Mon Nov 22 19:10:48 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Mon, 22 Nov 2004 19:10:48 +0000
+Subject: [Xitami] http problem
+Message-ID: <20041122191048.CQFK1463.out003.verizon.net@outgoing.verizon.net>
+
+Go into your WBA, look under the security section. Make sure you have allow directory listings checked. 
+
+
+> 
+> From: "Bill Warren" <wgwarren@adelphia.net>
+> Date: 2004/11/22 Mon PM 12:58:45 GMT
+> To: <xitami@lists.xitami.org>
+> Subject: [Xitami] http problem
+> 
+> hi,
+> 
+> i'm sure this is very simple...but :(  i have xitami running as a webserver on my home server.  no problems there.   i have a default webpage, and a few folders under \xitami\webpages.  I'd like to navigate to them via http:  and see the contents, so there is no .html file there.  But, when i navigate to it...i.e.  http://www.xxxxxx.com/files/apps....it doesn't show anything.  i know it sees the location because when i put in a wrong path, for example app instead of apps, it gives me page not found.  i'm figuring this is a permissions issue.  can anyone help?
+> 
+> thanks,
+> bill w.
+> 
+
+
+From xitami@lists.xitami.org  Mon Nov 22 19:19:11 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Mon, 22 Nov 2004 14:19:11 -0500
+Subject: [Xitami] pipes0000.flt
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEKEFEEJAA.ron@miplanet.net>
+References: <001c01c4d093$003500a0$6501a8c0@wgw1>
+Message-ID: <3.0.6.32.20041122141911.00a47ad0@mail.shininglightpro.com>
+
+At 10:54 AM 11/22/2004 -0500, Ron Ackerman writeth:
+>I have Xitami running on a win2kpro pc, and recently I discoverd thousands
+of pipexxxx.flt files in my temp directory. Basically 1 file for each page
+visited. It appears to only happen with PHP pages and not HTML pages. Here
+is what I have ruled out.
+>  
+>I haver ruled out
+>html pages
+>cookies
+>MySQL
+>anything in domain.cfg
+>I didn't see anything in the php.ini
+>  
+>I creates a incremental file for each page visited. 
+>  
+>So does Xitami have anything to do with creating a temp file called
+pipe0001.flt   that's FLT. Which looks to me to be a filter file.
+>At the moment I have created a batch file to delete *.flt but I would
+rather whatever creates it to either not create it or remove it when it's
+done. 
+>  
+>Thanks
+>Ron
+
+Yes.  Xitami uses a temporary file for the output from PHP or any other
+filter application (Nuclear Vision, Perl, ColdFusion, counter programs,
+etc.).  Here is how it works behind the scenes:
+
+1)  Create a new temporary file with a FLT extension (flt = filter - you
+should be able to see the relationship between the INI configuration
+section called [filters] and the file extension FLT).
+2)  If it is a POST request, create another temporary file that contains
+the POST request data.
+3)  Start the application (e.g. php.exe) with output piped to the temporary
+file (and an optional input file pipe).
+4)  Wait for the application to finish.  If it times out, it may not get to
+the next two steps.
+5)  Open the file and dump the contents to the web client (e.g. IE,
+Mozilla, Firefox).
+6)  Once the dump is complete, close the file and delete it.
+
+It is possible to get FLT files to stick around beyond their appropriate
+lifetime by writing scripts that timeout or during a DoS of the CGI filters
+(just sending 60 requests per second or so might be able to do that -
+Xitami gets "confused" with that rate of page requests).  They could be a
+security risk for SSL-enabled connections if you display the credit card
+information back to the user and other people have access to the system as
+the information will be saved to the hard drive temporarily.  This isn't
+meant to scare you - I'm just providing a few friendly heads-up tips.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Mon Nov 22 19:34:03 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Mon, 22 Nov 2004 14:34:03 -0500
+Subject: [Xitami] ftp issues(I'm Stumped)
+In-Reply-To: <5.1.1.6.0.20041121165052.00b2eb10@mail.mrjdesign.com>
+References: <20041120222039.KJCT1463.out003.verizon.net@outgoing.verizo n.net>
+Message-ID: <3.0.6.32.20041122143403.00a3d100@mail.shininglightpro.com>
+
+At 04:54 PM 11/21/2004 -0700, admin writeth:
+>I would recommend your friend dumps the XP firewall and installs Zonealarm 
+>instead.
+>Zonealarm claims it's not made for servers but in fact it works just fine.
+>It is on top of that a build of outpost for linux somehow as it reports 
+>itself to be the same.
+>
+>Now, for the configuration, go into Advanced and allow odd servers to run 
+>under high security,
+>and then specify that port 80 and other standard access rights are ok. Then 
+>you should be set.
+>
+>XP's firewall has little to no ability to specify any distinct settings and 
+>if it's only SP 1 then it's pretty much not worth anything anyway.
+>I had a few guys compare security on firewalls and it took them about 10 
+>minutes to get through all standard Windows firewalls but a NAT is 
+>something different.
+>It can be broken but will take them 4 - 6 hours and is so much easier to 
+>detect.
+
+Wouldn't a hardware router be better?  It doubles as a firewall and adds an
+extra layer that doesn't have a visible OS under it.  I've been under the
+general impression that software-based firewalls only somewhat work, but
+I've not heard of anyone with a hardware router and a solidly closed
+network (i.e. only port 80 open on the outside) having problems.  I tried
+ZoneAlarm out myself once and wasn't too impressed (it worked, but it
+wasn't easy to use), but that was two years ago.  I don't know why, but I
+feel "safer" with a fairly decent, web configurable hardware router than
+sitting directly on the Internet hoping everything on the software firewall
+works fine.  I'm probably being confidently geeky because shiny hardware is
+supposed to be impressive.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Mon Nov 22 19:33:54 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Mon, 22 Nov 2004 14:33:54 -0500
+Subject: [Xitami] pipes0000.flt
+In-Reply-To: <3.0.6.32.20041122141911.00a47ad0@mail.shininglightpro.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCECEFGEJAA.ron@miplanet.net>
+
+Good info, now how do I fix it?
+It is leaving every page visited in the pipexxxx.flt temp file on the
+server. Is this a problem with Xitami or PHP?
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Thomas J. Hruska
+Sent: Monday, November 22, 2004 2:19 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] pipes0000.flt
+
+
+At 10:54 AM 11/22/2004 -0500, Ron Ackerman writeth:
+>I have Xitami running on a win2kpro pc, and recently I discoverd thousands
+of pipexxxx.flt files in my temp directory. Basically 1 file for each page
+visited. It appears to only happen with PHP pages and not HTML pages. Here
+is what I have ruled out.
+>
+>I haver ruled out
+>html pages
+>cookies
+>MySQL
+>anything in domain.cfg
+>I didn't see anything in the php.ini
+>
+>I creates a incremental file for each page visited.
+>
+>So does Xitami have anything to do with creating a temp file called
+pipe0001.flt   that's FLT. Which looks to me to be a filter file.
+>At the moment I have created a batch file to delete *.flt but I would
+rather whatever creates it to either not create it or remove it when it's
+done.
+>
+>Thanks
+>Ron
+
+Yes.  Xitami uses a temporary file for the output from PHP or any other
+filter application (Nuclear Vision, Perl, ColdFusion, counter programs,
+etc.).  Here is how it works behind the scenes:
+
+1)  Create a new temporary file with a FLT extension (flt = filter - you
+should be able to see the relationship between the INI configuration
+section called [filters] and the file extension FLT).
+2)  If it is a POST request, create another temporary file that contains
+the POST request data.
+3)  Start the application (e.g. php.exe) with output piped to the temporary
+file (and an optional input file pipe).
+4)  Wait for the application to finish.  If it times out, it may not get to
+the next two steps.
+5)  Open the file and dump the contents to the web client (e.g. IE,
+Mozilla, Firefox).
+6)  Once the dump is complete, close the file and delete it.
+
+It is possible to get FLT files to stick around beyond their appropriate
+lifetime by writing scripts that timeout or during a DoS of the CGI filters
+(just sending 60 requests per second or so might be able to do that -
+Xitami gets "confused" with that rate of page requests).  They could be a
+security risk for SSL-enabled connections if you display the credit card
+information back to the user and other people have access to the system as
+the information will be saved to the hard drive temporarily.  This isn't
+meant to scare you - I'm just providing a few friendly heads-up tips.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+---
+Incoming mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+
+From xitami@lists.xitami.org  Mon Nov 22 20:13:31 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Mon, 22 Nov 2004 15:13:31 -0500
+Subject: [Xitami] pipes0000.flt
+In-Reply-To: <NFBBKNGGELNPLMHPBOCECEFGEJAA.ron@miplanet.net>
+References: <3.0.6.32.20041122141911.00a47ad0@mail.shininglightpro.com>
+Message-ID: <3.0.6.32.20041122151331.00a30980@mail.shininglightpro.com>
+
+At 02:33 PM 11/22/2004 -0500, Ron Ackerman writeth:
+>Good info, now how do I fix it?
+
+It really depends on your setup.  It sounds like you might have a really
+complex setup, so it might help to try something simple first like a simple
+PHP page that does nothing but spit back an '<? echo "hi\n"; ?>' to the
+client.  The next thing I would do is take the server off the Internet for
+a minute or two to try the same tests locally to rule out a bunch of people
+just requesting pages.  If you have a really high-volume site that can't go
+down, that's probably your problem and you can't do much about it unless
+you want to learn C/C++ and edit the source code.  I'm pretty sure Xitami
+will simply overwrite the FLT files when it loops back around to
+pipe0000.flt.  If you want, you can always set up some script that
+regularly goes through the directory and cleans out the FLT files.
+NT-based OSes will stop the process when you hit a file in use.
+
+>It is leaving every page visited in the pipexxxx.flt temp file on the
+>server. Is this a problem with Xitami or PHP?
+
+This is likely a Xitami issue except for if you have long-running PHP
+processes (30 seconds or more).  If PHP did this, you would hear everyone
+hollering about it on Slashdot.
+
+One question that just popped into my head:  Did you accidentally turn on
+the "log CGI page requests" option in the configuration?  I seem to recall
+that the option keeps around the FLT files in that case and seems to be
+what you are describing.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Mon Nov 22 20:39:53 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Mon, 22 Nov 2004 15:39:53 -0500
+Subject: [Xitami] pipes0000.flt
+In-Reply-To: <3.0.6.32.20041122151331.00a30980@mail.shininglightpro.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEIEFHEJAA.ron@miplanet.net>
+
+I've tried a very short php file and id dosn't seem to make a difference on
+the size. I do have sites that get quite a bit of traffic especially when
+the spiders hit it. No I don't know C/C++ so I will just do a batch file
+activated by WinCron for now. But I think this is something that should be
+addressed by someone who can fix Xitami. Since each pipexxxx.flt is between
+15 and 30kb I now understand why I kept seeing my drive fill up considering
+in the time it took me to write this it used 1mb of drive space.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Thomas J. Hruska
+Sent: Monday, November 22, 2004 3:14 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] pipes0000.flt
+
+
+At 02:33 PM 11/22/2004 -0500, Ron Ackerman writeth:
+>Good info, now how do I fix it?
+
+It really depends on your setup.  It sounds like you might have a really
+complex setup, so it might help to try something simple first like a simple
+PHP page that does nothing but spit back an '<? echo "hi\n"; ?>' to the
+client.  The next thing I would do is take the server off the Internet for
+a minute or two to try the same tests locally to rule out a bunch of people
+just requesting pages.  If you have a really high-volume site that can't go
+down, that's probably your problem and you can't do much about it unless
+you want to learn C/C++ and edit the source code.  I'm pretty sure Xitami
+will simply overwrite the FLT files when it loops back around to
+pipe0000.flt.  If you want, you can always set up some script that
+regularly goes through the directory and cleans out the FLT files.
+NT-based OSes will stop the process when you hit a file in use.
+
+>It is leaving every page visited in the pipexxxx.flt temp file on the
+>server. Is this a problem with Xitami or PHP?
+
+This is likely a Xitami issue except for if you have long-running PHP
+processes (30 seconds or more).  If PHP did this, you would hear everyone
+hollering about it on Slashdot.
+
+One question that just popped into my head:  Did you accidentally turn on
+the "log CGI page requests" option in the configuration?  I seem to recall
+that the option keeps around the FLT files in that case and seems to be
+what you are describing.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+---
+Incoming mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+
+From xitami@lists.xitami.org  Tue Nov 23 06:00:51 2004
+From: xitami@lists.xitami.org (admin)
+Date: Mon, 22 Nov 2004 23:00:51 -0700
+Subject: [Xitami] ftp issues(I'm Stumped)
+In-Reply-To: <3.0.6.32.20041122143403.00a3d100@mail.shininglightpro.com>
+References: <5.1.1.6.0.20041121165052.00b2eb10@mail.mrjdesign.com>
+ <20041120222039.KJCT1463.out003.verizon.net@outgoing.verizo n.net>
+Message-ID: <5.1.1.6.0.20041122230013.00b2ec40@mail.mrjdesign.com>
+
+I totally agree so I run both but I'm a bit paranoid too :) /*grin
+
+
+>Wouldn't a hardware router be better?  It doubles as a firewall and adds an
+>extra layer that doesn't have a visible OS under it.  I've been under the
+>general impression that software-based firewalls only somewhat work, but
+>I've not heard of anyone with a hardware router and a solidly closed
+>network (i.e. only port 80 open on the outside) having problems.  I tried
+>ZoneAlarm out myself once and wasn't too impressed (it worked, but it
+>wasn't easy to use), but that was two years ago.  I don't know why, but I
+>feel "safer" with a fairly decent, web configurable hardware router than
+>sitting directly on the Internet hoping everything on the software firewall
+>works fine.  I'm probably being confidently geeky because shiny hardware is
+>supposed to be impressive.
+>
+>
+>Thomas J. Hruska
+>Shining Light Productions
+>http://www.slproweb.com/
+
+
+
+From xitami@lists.xitami.org  Wed Nov 24 13:15:18 2004
+From: xitami@lists.xitami.org (Bimal Poudel)
+Date: Wed, 24 Nov 2004 05:15:18 -0800 (PST)
+Subject: [Xitami] (no subject)
+Message-ID: <20041124131519.50788395F@sitemail.everyone.net>
+
+<html><body><P><FONT face="Arial, Helvetica, sans-serif" size=2>Hi,</FONT></P>
+<P><FONT face="Arial, Helvetica, sans-serif" size=2>I have a trouble of xitami under windows XP. In the windows 98, same problem could be solved by adding the Dial-up Network Adapter, with the TCP/IP.</FONT></P>
+<P><FONT face=Arial size=2>Please Help me.</FONT></P><br>&nbsp;<br><hr>Get your very own .FM, .AM or .TV Domain Name! Search and find your perfect web address. GoTo: http://www.dot.fm<br></body></html>
+
+
+From xitami@lists.xitami.org  Wed Nov 24 14:24:52 2004
+From: xitami@lists.xitami.org (Bill Warren)
+Date: Wed, 24 Nov 2004 09:24:52 -0500
+Subject: [Xitami] (no subject)
+References: <20041124131519.50788395F@sitemail.everyone.net>
+Message-ID: <000101c4d234$84b0d410$6501a8c0@wgw1>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0007_01C4D207.73E77850
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+what is the problem? =20
+  ----- Original Message -----=20
+  From: Bimal Poudel=20
+  To: xitami@lists.xitami.org=20
+  Sent: Wednesday, November 24, 2004 8:15 AM
+  Subject: [Xitami] (no subject)
+
+
+  Hi,
+
+  I have a trouble of xitami under windows XP. In the windows 98, same =
+problem could be solved by adding the Dial-up Network Adapter, with the =
+TCP/IP.
+
+  Please Help me.
+
+
+  =20
+
+-------------------------------------------------------------------------=
+-----
+  Get your very own .FM, .AM or .TV Domain Name! Search and find your =
+perfect web address. GoTo: http://www.dot.fm
+  -- Xitami Users Mailing List -- For Xitami support To unsubscribe: =
+http://lists.xitami.org/mailman/listinfo/xitami
+------=_NextPart_000_0007_01C4D207.73E77850
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2900.2180" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>what is the problem?&nbsp; =
+</FONT></DIV>
+<BLOCKQUOTE=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dbimal@radio.fm href=3D"mailto:bimal@radio.fm">Bimal =
+Poudel</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Wednesday, November 24, =
+2004 8:15=20
+  AM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] (no =
+subject)</DIV>
+  <DIV><BR></DIV>
+  <P><FONT face=3D"Arial, Helvetica, sans-serif" size=3D2>Hi,</FONT></P>
+  <P><FONT face=3D"Arial, Helvetica, sans-serif" size=3D2>I have a =
+trouble of xitami=20
+  under windows XP. In the windows 98, same problem could be solved by =
+adding=20
+  the Dial-up Network Adapter, with the TCP/IP.</FONT></P>
+  <P><FONT face=3DArial size=3D2>Please Help =
+me.</FONT></P><BR>&nbsp;<BR>
+  <HR>
+  Get your very own .FM, .AM or .TV Domain Name! Search and find your =
+perfect=20
+  web address. GoTo: <A =
+href=3D"http://www.dot.fm">http://www.dot.fm</A><BR>--=20
+  Xitami Users Mailing List -- For Xitami support To unsubscribe:=20
+  =
+http://lists.xitami.org/mailman/listinfo/xitami</BLOCKQUOTE></BODY></HTML=
+>
+
+------=_NextPart_000_0007_01C4D207.73E77850--
+
+
+From xitami@lists.xitami.org  Wed Nov 24 17:20:23 2004
+From: xitami@lists.xitami.org (Bee Aware Computers)
+Date: Wed, 24 Nov 2004 12:20:23 -0500
+Subject: [Xitami] (no subject)
+In-Reply-To: <20041124131519.50788395F@sitemail.everyone.net>
+Message-ID: <001001c4d249$e1bbbfc0$9a325a45@hblr>
+
+This is a multi-part message in MIME format.
+
+
+------=_NextPart_000_0011_01C4D21F.F8E5B7C0
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+Can you enlighten us on the actual problem?
+ 
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org] On Behalf Of Bimal Poudel
+Sent: Wednesday, November 24, 2004 8:15 AM
+To: xitami@lists.xitami.org
+Subject: [Xitami] (no subject)
+ 
+Hi,
+I have a trouble of xitami under windows XP. In the windows 98, same
+problem could be solved by adding the Dial-up Network Adapter, with the
+TCP/IP.
+Please Help me.
+
+ 
+  _____  
+
+Get your very own .FM, .AM or .TV Domain Name! Search and find your
+perfect web address. GoTo: http://www.dot.fm
+-- Xitami Users Mailing List -- For Xitami support To unsubscribe:
+http://lists.xitami.org/mailman/listinfo/xitami
+
+------=_NextPart_000_0011_01C4D21F.F8E5B7C0
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" =
+xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:st1=3D"urn:schemas-microsoft-com:office:smarttags" =
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+
+
+<meta name=3DProgId content=3DWord.Document>
+<meta name=3DGenerator content=3D"Microsoft Word 10">
+<meta name=3DOriginator content=3D"Microsoft Word 10">
+<link rel=3DFile-List href=3D"cid:filelist.xml@01C4D21F.F8A8AEC0">
+<link rel=3DEdit-Time-Data href=3D"cid:editdata.mso@01C4D21F.F8A8AEC0">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]--><o:SmartTagType
+ namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags" =
+name=3D"time"/>
+<o:SmartTagType =
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"
+ name=3D"date"/>
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:EnvelopeVis/>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]>
+<style>
+st1\:*{behavior:url(#default#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	mso-style-noshow:yes;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:navy;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */=20
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+</head>
+
+<body lang=3DEN-US link=3Dblue vlink=3Dpurple =
+style=3D'tab-interval:.5in'>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;font-family:Arial;color:navy'>Can you enlighten us on the actual
+problem?<o:p></o:p></span></font></p>
+
+<div>
+
+<p class=3DMsoNormal><font size=3D3 color=3Dnavy face=3D"Times New =
+Roman"><span
+style=3D'font-size:12.0pt;color:navy;mso-no-proof:yes'>&nbsp;</span></fon=
+t><o:p></o:p></p>
+
+</div>
+
+<p class=3DMsoNormal style=3D'margin-left:.5in'><font size=3D2 =
+face=3DTahoma><span
+style=3D'font-size:10.0pt;font-family:Tahoma'>-----Original =
+Message-----<br>
+<b><span style=3D'font-weight:bold'>From:</span></b>
+xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org] =
+<b><span
+style=3D'font-weight:bold'>On Behalf Of </span></b>Bimal Poudel<br>
+<b><span style=3D'font-weight:bold'>Sent:</span></b> =
+</span></font><st1:date
+Month=3D"11" Day=3D"24" Year=3D"2004"><font size=3D2 face=3DTahoma><span
+ style=3D'font-size:10.0pt;font-family:Tahoma'>Wednesday, November 24, =
+2004</span></font></st1:date><font
+size=3D2 face=3DTahoma><span =
+style=3D'font-size:10.0pt;font-family:Tahoma'> </span></font><st1:time
+Hour=3D"8" Minute=3D"15"><font size=3D2 face=3DTahoma><span =
+style=3D'font-size:10.0pt;
+ font-family:Tahoma'>8:15 AM</span></font></st1:time><font size=3D2 =
+face=3DTahoma><span
+style=3D'font-size:10.0pt;font-family:Tahoma'><br>
+<b><span style=3D'font-weight:bold'>To:</span></b> =
+xitami@lists.xitami.org<br>
+<b><span style=3D'font-weight:bold'>Subject:</span></b> [Xitami] (no =
+subject)</span></font></p>
+
+<p class=3DMsoNormal style=3D'margin-left:.5in'><font size=3D3 =
+face=3D"Times New Roman"><span
+style=3D'font-size:12.0pt'><o:p>&nbsp;</o:p></span></font></p>
+
+<p style=3D'margin-left:.5in'><font size=3D2 face=3DArial><span =
+style=3D'font-size:
+10.0pt;font-family:Arial'>Hi,</span></font><o:p></o:p></p>
+
+<p style=3D'margin-left:.5in'><font size=3D2 face=3DArial><span =
+style=3D'font-size:
+10.0pt;font-family:Arial'>I have a trouble of xitami under windows XP. =
+In the
+windows 98, same problem could be solved by adding the Dial-up Network =
+Adapter,
+with the TCP/IP.</span></font><o:p></o:p></p>
+
+<p style=3D'margin-left:.5in'><font size=3D2 face=3DArial><span =
+style=3D'font-size:
+10.0pt;font-family:Arial'>Please Help me.</span></font><o:p></o:p></p>
+
+<p class=3DMsoNormal style=3D'margin-left:.5in'><font size=3D3 =
+face=3D"Times New Roman"><span
+style=3D'font-size:12.0pt'><br>
+&nbsp;<o:p></o:p></span></font></p>
+
+<div class=3DMsoNormal align=3Dcenter =
+style=3D'margin-left:.5in;text-align:center'><font
+size=3D3 face=3D"Times New Roman"><span style=3D'font-size:12.0pt'>
+
+<hr size=3D2 width=3D"100%" align=3Dcenter>
+
+</span></font></div>
+
+<p class=3DMsoNormal style=3D'margin-left:.5in'><font size=3D3 =
+face=3D"Times New Roman"><span
+style=3D'font-size:12.0pt'>Get your very own .FM, .AM or .TV Domain =
+Name! Search
+and find your perfect web address. GoTo: =
+http://www.dot.fm<o:p></o:p></span></font></p>
+
+</div>
+
+</body>
+
+</html>
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+------=_NextPart_000_0011_01C4D21F.F8E5B7C0--
+
+
+From xitami@lists.xitami.org  Wed Nov 24 23:40:21 2004
+From: xitami@lists.xitami.org (Jonathan)
+Date: Wed, 24 Nov 2004 17:40:21 -0600
+Subject: [Xitami] Linksys router
+References: <001001c4d249$e1bbbfc0$9a325a45@hblr>
+Message-ID: <BAY14-DAV13DE7B3DFE80561C51E81AD6B80@phx.gbl>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0007_01C4D24C.ABE64980
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+All,
+
+I need help setting up my server with my Linksys router, can anyone =
+help?
+
+And also what is the website address of the entire archive of Xitami =
+list help topics, thanks.
+
+Jonathan 
+------=_NextPart_000_0007_01C4D24C.ABE64980
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns=3D"http://www.w3.org/TR/REC-html40" xmlns:v =3D=20
+"urn:schemas-microsoft-com:vml" xmlns:o =3D=20
+"urn:schemas-microsoft-com:office:office" xmlns:w =3D=20
+"urn:schemas-microsoft-com:office:word" xmlns:st1 =3D=20
+"urn:schemas-microsoft-com:office:smarttags"><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3DWord.Document name=3DProgId>
+<META content=3D"MSHTML 6.00.2900.2180" name=3DGENERATOR>
+<META content=3D"Microsoft Word 10" name=3DOriginator><LINK=20
+href=3D"cid:filelist.xml@01C4D21F.F8A8AEC0" rel=3DFile-List><LINK=20
+href=3D"cid:editdata.mso@01C4D21F.F8A8AEC0" rel=3DEdit-Time-Data><!--[if =
+!mso]>
+<STYLE>v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+o\:* {
+	BEHAVIOR: url(#default#VML)
+}
+w\:* {
+	BEHAVIOR: url(#default#VML)
+}
+shape {
+	BEHAVIOR: url(#default#VML)
+}
+</STYLE>
+<![endif]--><o:SmartTagType name=3D"time"=20
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"></o:SmartTagT=
+ype><o:SmartTagType=20
+name=3D"date"=20
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"></o:SmartTagT=
+ype><!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:EnvelopeVis/>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]>
+<STYLE>
+st1\:*{behavior:url(#default#ieooui) }
+</STYLE>
+<![endif]-->
+<STYLE>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	mso-style-noshow:yes;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:navy;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</STYLE>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */=20
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--></HEAD>
+<BODY lang=3DEN-US style=3D"tab-interval: .5in" vLink=3Dpurple =
+link=3Dblue=20
+bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>All,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>I need help setting up my server with =
+my Linksys=20
+router, can anyone help?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>And also what is the website address of =
+the entire=20
+archive of Xitami list help topics, thanks.</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3DArial =
+size=3D2>Jonathan</FONT>&nbsp;</DIV></BODY></HTML>
+
+------=_NextPart_000_0007_01C4D24C.ABE64980--
+
+
+From xitami@lists.xitami.org  Thu Nov 25 04:28:46 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Wed, 24 Nov 2004 23:28:46 -0500
+Subject: [Xitami] Linksys router
+In-Reply-To: <BAY14-DAV13DE7B3DFE80561C51E81AD6B80@phx.gbl>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEGFEJAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0002_01C4D27D.585384F0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Here is a website that can help you with a linksys router
+http://www.linksys.com/tech_helper/intro.html It shouldn't be any different
+whether you have a PC or a Server.
+
+
+  -----Original Message-----
+  From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Jonathan
+  Sent: Wednesday, November 24, 2004 6:40 PM
+  To: xitami@lists.xitami.org
+  Subject: [Xitami] Linksys router
+
+
+  All,
+
+  I need help setting up my server with my Linksys router, can anyone help?
+
+  And also what is the website address of the entire archive of Xitami list
+help topics, thanks.
+
+  Jonathan
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+------=_NextPart_000_0002_01C4D27D.585384F0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns=3D"http://www.w3.org/TR/REC-html40" xmlns:v =3D=20
+"urn:schemas-microsoft-com:vml" xmlns:o =3D=20
+"urn:schemas-microsoft-com:office:office" xmlns:w =3D=20
+"urn:schemas-microsoft-com:office:word" xmlns:st1 =3D=20
+"urn:schemas-microsoft-com:office:smarttags"><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3DWord.Document name=3DProgId>
+<META content=3D"MSHTML 6.00.2800.1476" name=3DGENERATOR>
+<META content=3D"Microsoft Word 10" name=3DOriginator><LINK=20
+href=3D"cid:filelist.xml@01C4D21F.F8A8AEC0" rel=3DFile-List><LINK=20
+href=3D"cid:editdata.mso@01C4D21F.F8A8AEC0" rel=3DEdit-Time-Data><!--[if =
+!mso]>
+<STYLE>v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+o\:* {
+	BEHAVIOR: url(#default#VML)
+}
+w\:* {
+	BEHAVIOR: url(#default#VML)
+}
+shape {
+	BEHAVIOR: url(#default#VML)
+}
+</STYLE>
+<![endif]--><o:SmartTagType=20
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"=20
+name=3D"time"></o:SmartTagType><o:SmartTagType=20
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"=20
+name=3D"date"></o:SmartTagType><!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:EnvelopeVis/>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]>
+<STYLE>
+st1\:*{behavior:url(#default#ieooui) }
+</STYLE>
+<![endif]-->
+<STYLE>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	mso-style-noshow:yes;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:navy;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</STYLE>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */=20
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--></HEAD>
+<BODY lang=3DEN-US style=3D"tab-interval: .5in" vLink=3Dpurple =
+link=3Dblue=20
+bgColor=3D#ffffff>
+<DIV><SPAN class=3D912292704-25112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>Here=20
+is a website that can help you with a linksys router <A=20
+href=3D"http://www.linksys.com/tech_helper/intro.html">http://www.linksys=
+.com/tech_helper/intro.html</A>&nbsp;It=20
+shouldn't be any different whether you have a PC or a Server.=20
+</FONT></SPAN></DIV>
+<DIV><SPAN class=3D912292704-25112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D912292704-25112004><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+  Behalf Of </B>Jonathan<BR><B>Sent:</B> Wednesday, November 24, 2004 =
+6:40=20
+  PM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> [Xitami] =
+Linksys=20
+  router<BR><BR></FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>All,</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>I need help setting up my server with =
+my Linksys=20
+  router, can anyone help?</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>And also what is the website address =
+of the=20
+  entire archive of Xitami list help topics, thanks.</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial=20
+size=3D2>Jonathan</FONT>&nbsp;</DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0002_01C4D27D.585384F0--
+
+
+From xitami@lists.xitami.org  Thu Nov 25 04:36:03 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Wed, 24 Nov 2004 23:36:03 -0500
+Subject: [Xitami] Linksys router
+In-Reply-To: <BAY14-DAV13DE7B3DFE80561C51E81AD6B80@phx.gbl>
+Message-ID: <NFBBKNGGELNPLMHPBOCEIEGFEJAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0006_01C4D27E.5CDCE830
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Here is the archive which I got off of the Xitami main page.
+http://xitami.ec-computers.net/
+  -----Original Message-----
+  From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Jonathan
+  Sent: Wednesday, November 24, 2004 6:40 PM
+  To: xitami@lists.xitami.org
+  Subject: [Xitami] Linksys router
+
+
+  All,
+
+  I need help setting up my server with my Linksys router, can anyone help?
+
+  And also what is the website address of the entire archive of Xitami list
+help topics, thanks.
+
+  Jonathan
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.799 / Virus Database: 543 - Release Date: 11/19/2004
+
+------=_NextPart_000_0006_01C4D27E.5CDCE830
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns=3D"http://www.w3.org/TR/REC-html40" xmlns:v =3D=20
+"urn:schemas-microsoft-com:vml" xmlns:o =3D=20
+"urn:schemas-microsoft-com:office:office" xmlns:w =3D=20
+"urn:schemas-microsoft-com:office:word" xmlns:st1 =3D=20
+"urn:schemas-microsoft-com:office:smarttags"><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3DWord.Document name=3DProgId>
+<META content=3D"MSHTML 6.00.2800.1476" name=3DGENERATOR>
+<META content=3D"Microsoft Word 10" name=3DOriginator><LINK=20
+href=3D"cid:filelist.xml@01C4D21F.F8A8AEC0" rel=3DFile-List><LINK=20
+href=3D"cid:editdata.mso@01C4D21F.F8A8AEC0" rel=3DEdit-Time-Data><!--[if =
+!mso]>
+<STYLE>v\:* {
+	BEHAVIOR: url(#default#VML)
+}
+o\:* {
+	BEHAVIOR: url(#default#VML)
+}
+w\:* {
+	BEHAVIOR: url(#default#VML)
+}
+shape {
+	BEHAVIOR: url(#default#VML)
+}
+</STYLE>
+<![endif]--><o:SmartTagType=20
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"=20
+name=3D"time"></o:SmartTagType><o:SmartTagType=20
+namespaceuri=3D"urn:schemas-microsoft-com:office:smarttags"=20
+name=3D"date"></o:SmartTagType><!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:EnvelopeVis/>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if !mso]>
+<STYLE>
+st1\:*{behavior:url(#default#ieooui) }
+</STYLE>
+<![endif]-->
+<STYLE>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:1627421319 -2147483648 8 0 66047 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.EmailStyle18
+	{mso-style-type:personal-reply;
+	mso-style-noshow:yes;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:navy;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</STYLE>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */=20
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]--></HEAD>
+<BODY lang=3DEN-US style=3D"tab-interval: .5in" vLink=3Dpurple =
+link=3Dblue=20
+bgColor=3D#ffffff>
+<DIV><SPAN class=3D352363504-25112004><FONT face=3DArial color=3D#0000ff =
+size=3D2>Here=20
+is the archive which I got off of the Xitami main page. <A=20
+href=3D"http://xitami.ec-computers.net/">http://xitami.ec-computers.net/<=
+/A></FONT></SPAN></DIV>
+<BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+  Behalf Of </B>Jonathan<BR><B>Sent:</B> Wednesday, November 24, 2004 =
+6:40=20
+  PM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> [Xitami] =
+Linksys=20
+  router<BR><BR></FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>All,</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>I need help setting up my server with =
+my Linksys=20
+  router, can anyone help?</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>And also what is the website address =
+of the=20
+  entire archive of Xitami list help topics, thanks.</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial=20
+size=3D2>Jonathan</FONT>&nbsp;</DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0006_01C4D27E.5CDCE830--
+
+
+From xitami@lists.xitami.org  Thu Nov 25 05:31:47 2004
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 25 Nov 2004 18:31:47 +1300
+Subject: [Xitami] Linksys router
+In-Reply-To: Message from "Ron Ackerman" <ron@miplanet.net>
+ of "Wed, 24 Nov 2004 23:36:03 CDT." <NFBBKNGGELNPLMHPBOCEIEGFEJAA.ron@miplanet.net>
+Message-ID: <20041125053147.CA33F3C48BA7@basilica.la.naos.co.nz>
+
+In message <NFBBKNGGELNPLMHPBOCEIEGFEJAA.ron@miplanet.net>, "Ron Ackerman" writes:
+>Here is the archive which I got off of the Xitami main page.
+>http://xitami.ec-computers.net/
+
+Unfortunately that is rather out of date -- it has the archives from
+1997 through mid-2001 when the list was hosted there.
+
+The archives since then are at:
+
+http://lists.xitami.org/pipermail/xitami/
+
+linked from:
+
+http://lists.xitami.org/mailman/listinfo/xitami
+
+which is on the bottom of each post to teh list.
+
+Ewen
+
+

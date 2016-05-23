@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Building Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005844.html">
+   <LINK REL="Next"  HREF="005845.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Building Xitami
+   </H1>
+    <B>Elliott Potter
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Building Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 1 May 2004 13:27:29 -0500 (EST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005844.html">[Xitami] Building Xitami
+</A></li>
+        <LI> Next message: <A HREF="005845.html">[Xitami] Building Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5848">[ date ]</a>
+              <a href="thread.html#5848">[ thread ]</a>
+              <a href="subject.html#5848">[ subject ]</a>
+              <a href="author.html#5848">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 1 May 2004, Pieter Hintjens wrote:
+
+&gt;<i> On 01/05/04 14:48, <A HREF="mailto:jp@manninghammills.org">jp@manninghammills.org</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; On Sat, May 01, 2004 at 01:40:39AM -0500, Elliott Potter wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; They apparently didn't actually try to build the newer versions of
+</I>&gt;<i> &gt; &gt; Xitami before they slapped them on the web site.  You can get &quot;c&quot; (c.bat
+</I>&gt;<i> &gt; &gt; on Windows I think) from 2.4d9 and it appears to work fine.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I don't see any way to get this version.
+</I>&gt;<i>
+</I>&gt;<i> Actually we do build Xitami.  The problem is that the
+</I>&gt;<i>
+</I>
+To make xitami 2.5c1 compile on Linux (downloaded from
+<A HREF="http://www.xitami.com/xiopen_2_5_src.tar.gz">http://www.xitami.com/xiopen_2_5_src.tar.gz</A>)
+
+I had to find the &quot;c&quot; file from a previous release (2.4d9), and put it
+in every subdirectory, edit the &quot;boomake&quot; file in every subdirectory to
+remove the COPTS= line (this caused problems on bash; not necessarily a
+problem for everyone), then make the following change:
+
+&gt;<i> diff -Naur current/smt/smthttpl.c patched/smt/smthttpl.c
+</I>&gt;<i> --- current/smt/smthttpl.c	2003-12-05 07:09:22.000000000 -0500
+</I>&gt;<i> +++ patched/smt/smthttpl.c	2004-03-24 17:12:05.000000000 -0500
+</I>&gt;<i> @@ -1641,10 +1641,12 @@
+</I>&gt;<i>      switch (p_http-&gt; response)
+</I>&gt;<i>        {
+</I>&gt;<i>          case HTTP_RESPONSE_OK:
+</I>&gt;<i> -            if (p_http-&gt; transaction == TRANSACTION_CGI
+</I>&gt;<i> -            ||  p_http-&gt; transaction == TRANSACTION_WSX)
+</I>&gt;<i> -            ||  p_http-&gt; transaction == TRANSACTION_FILTER)
+</I>&gt;<i> -                put_dynamic_headers (p_http, header);
+</I>&gt;<i> +            if (p_http-&gt; transaction == TRANSACTION_CGI
+</I>&gt;<i> +            || p_http-&gt; transaction == TRANSACTION_WSX
+</I>&gt;<i> +            || p_http-&gt; transaction == TRANSACTION_FILTER)
+</I>&gt;<i> +                {
+</I>&gt;<i> +                put_dynamic_headers (p_http, header);
+</I>&gt;<i> +                }
+</I>&gt;<i>              else
+</I>&gt;<i>                {
+</I>&gt;<i>                  get_file_properties (p_http);
+</I>
+
+
+After this, xitami compiled for me, but wouldn't work with php.  I sent
+mail to the list describing the php problem on Friday, 26 Mar 2004 but
+got no reply, so I set xitami aside and started using lighttpd, which
+isn't nearly as flexible as xitami but has the advantage that it serves
+my dynamic pages.
+
+I'd much rather use xitami, because I like the way it handles virtual
+hosting, but I can't make it go and wasn't able to get any support, and
+I just don't have time to sit and fiddle with it.
+--
+Elliott
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005844.html">[Xitami] Building Xitami
+</A></li>
+	<LI> Next message: <A HREF="005845.html">[Xitami] Building Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5848">[ date ]</a>
+              <a href="thread.html#5848">[ thread ]</a>
+              <a href="subject.html#5848">[ subject ]</a>
+              <a href="author.html#5848">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] vhost frustrations
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002239.html">
+   <LINK REL="Next"  HREF="002249.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] vhost frustrations
+   </H1>
+    <B>Mike
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] vhost frustrations">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 3 Feb 2002 01:59:49 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002239.html">[Xitami] VH WBA no accesss
+</A></li>
+        <LI> Next message: <A HREF="002249.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2243">[ date ]</a>
+              <a href="thread.html#2243">[ thread ]</a>
+              <a href="subject.html#2243">[ subject ]</a>
+              <a href="author.html#2243">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Gentlemen,
+
+I have gone through the configs pages, the vhost pages, the faq, xitami
+archives and global net searches, as well as debug reporting, trying to get
+the limited /setup vhwba to access a test vhost and have failed with every
+attempt now for days.  Does this function even  work?
+
+I'm running 2.5b4, DSL pppoe, through a lynksys router through IE5.5 with
+http/1.1 enabled.
+This is a dynamic IP.  DNS is functioning and I update the dns reflection
+through a ddns client.  The translation to the server for typical HTTP and
+FTP access has worked fine, with ftp directed explicitly to the site sub
+directory, below webpages.
+
+For this mail, I refer to a fictitious address being
+<A HREF="http://www.hysted.mine.nu">http://www.hysted.mine.nu</A> as my host url.
+
+During vhost wizard creation, I have allowed the default dns to be acquired
+for the &quot;Or, enter DNS host name&quot; field with the profile hostname as
+&quot;vhost1&quot; .cfg
+
+Webpage root directory was explicit from drive root, using forward slash
+method to /vhost1
+FTP was set explicit from drive root, using forward slash method to /vhost1
+
+VH WBA is checked to indicate use of the limited WBA
+
+And user id as &quot;vh1user&quot; and password as &quot;vh1pass&quot;
+
+The &quot;create&quot; was confirmed and the server restarted, just to be sure.
+
+In the resultant profile under vhost, security, passwords, I select the
+/setup protected uri and instead of &quot;vh1user&quot; and &quot;vh1pass&quot;, I have &quot;admin&quot;
+and &quot;-&quot;.  So I figure this is to avoid &quot;defaults&quot; in administration
+profiles.
+
+
+I convert the user from &quot;admin&quot; to &quot;vh1user&quot; and the password from &quot;-&quot; to
+&quot;vh1pass&quot;
+I exit through consecutive &quot;saves&quot;, restart the server, and check the cfg
+and aut files next, they follow here:
+
+
+vhost1.cfg
+-----------------------
+#*END
+
+[Accesslog]
+    Filename = &quot;vhost1.log&quot;
+
+[Ftp]
+    Root = &quot;c:/program files/xitami/webpages/vhost1&quot;
+
+[Security]
+    Filename = &quot;vhost1.aut&quot;
+
+[Server]
+    Webpages = &quot;c:/program files/xitami/webpages/vhost1&quot;
+
+[Wsx]
+    Admin = &quot;&quot;
+____________________________
+
+
+vhost1.aut
+----------
+#*END
+
+[/admin]
+    Admin = &quot;-&quot;
+
+[/setup]
+    Vh1user = &quot;vh1pass&quot;
+______________________________
+
+As far as I can see, I should be able to hit this vhost from the browser in
+the /setup realm using
+
+<A HREF="http://www.vh1user@vhost1.hysted.mine.nu/setup">http://www.vh1user@vhost1.hysted.mine.nu/setup</A>
+
+I expect to see an authentication show up under &quot;/setup&quot; realm where
+&quot;vh1user&quot; and &quot;vh1pass&quot; will enable the limited VH WBA.
+
+I get back IE5's 404 page cannot be found
+
+I try to hit <A HREF="http://www.hysted.mine.nu./vhost1/">http://www.hysted.mine.nu./vhost1/</A> and I get the /vhost1/
+directory...no problem
+
+I try <A HREF="http://www.hysted.mine.nu./vhost1/setup">http://www.hysted.mine.nu./vhost1/setup</A> and I get the IE5 404 cannot
+be found again.
+
+I setup the server to log debug files, empty the log files and repeat the
+call to <A HREF="http://www.vh1user@vhost1.hysted.mine.nu/setup">http://www.vh1user@vhost1.hysted.mine.nu/setup</A>
+I cycle the logs immediately and check the debug files:
+
+/debug/header.log
+------------------
+HTTP/1.1 404 Not found
+Server: Xitami
+Date: Sun, 03 Feb 2002 06:51:49 GMT
+Content-length: 117
+Content-type: text/html
+
+&lt;HTML&gt;&lt;TITLE&gt;Error&lt;/TITLE&gt;&lt;BODY&gt;&lt;H1&gt;
+
+The URL you asked for does not exist on this website
+
+&lt;/H1&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+HTTP/1.1 200 Ok
+Server: Xitami
+Date: Sun, 03 Feb 2002 06:52:30 GMT
+Connection: Keep-alive
+Keep-alive: timeout=30, max=50
+Content-length: 5327
+Content-type: text/html
+_____________________________________
+
+
+
+/debug/request.log
+------------------
+GET /setup HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 5.5; Windows 98)
+Host: vhost1.hysted.mine.nu
+Connection: Keep-Alive
+
+POST /admin?4F896E56 HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*
+Referer: <A HREF="http://192.168.1.2/admin?4F89695D">http://192.168.1.2/admin?4F89695D</A>
+Accept-Language: en-us
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 5.5; Windows 98)
+Host: 192.168.1.2
+Content-Length: 17
+Connection: Keep-Alive
+Cache-Control: no-cache
+Authorization: Basic b25jYWxsaW5jOjAxMTM1OA==
+_________________________________________________
+
+The error and access logs show the same basically.  The post is present,
+then the failed get.
+
+Oddly, when I hit the same url with <A HREF="http://www.hysted.mine.nu./vhost1/admin,">http://www.hysted.mine.nu./vhost1/admin,</A>
+It hits the &quot;admin&quot; realm and awaits authentication, which is disabled of
+course.
+
+Can anybody help with this?  I've been trying for over a week with other
+various configurations and I'm getting exasperated.
+
+Thank you in advance.
+Mike
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002239.html">[Xitami] VH WBA no accesss
+</A></li>
+	<LI> Next message: <A HREF="002249.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2243">[ date ]</a>
+              <a href="thread.html#2243">[ thread ]</a>
+              <a href="subject.html#2243">[ subject ]</a>
+              <a href="author.html#2243">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

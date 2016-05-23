@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> /Spam/ [Xitami] Xitami performance regarding directory
+ structures
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006777.html">
+   <LINK REL="Next"  HREF="006787.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>/Spam/ [Xitami] Xitami performance regarding directory
+ structures
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="/Spam/ [Xitami] Xitami performance regarding directory
+ structures">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Jun 2005 11:28:02 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006777.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+        <LI> Next message: <A HREF="006787.html">/Spam/ [Xitami] Xitami performance regarding directory  structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6785">[ date ]</a>
+              <a href="thread.html#6785">[ thread ]</a>
+              <a href="subject.html#6785">[ subject ]</a>
+              <a href="author.html#6785">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello !
+
+There are no limitations on the number of files a directory can hold.
+Windows is very fast at accessing files.
+I've done some testing with directories containing 20.000 files, any file 
+can always be retrieved in less than 500 ms (PIII 600MHz with windows 2000 
+server)
+
+The problem will not be the amount of files but the expected traffic 
+(photos are typically very large).
+
+It's important that the drive is defragmented every week or so.
+Begin with a clean, formatted disk (best NOT to use the windows system disk).
+Check that the MFT (master file table) is not fragmented (this can only be 
+archieved by using a newly formatted disk or partition). The MFT contains 
+all the links to the files, and it's important that this file does not 
+become fragmented, as a defragmenter is not able to defragment it.
+Use a second disk and not a partition, this will ensure fast access.
+And use at least 512 MB of ram (windows will use part of it to store the 
+file list).
+
+If you have more than 10.000 effective users (with some 100 users online at 
+any moment), you should consider professional solutions like load 
+balancing, cluster systems, fail over, ....
+
+Xitami on itself is as good as the underlying OS. Don't use the included 
+FTP server with high volume transfers as it is not very stable under heavy 
+load (it's fine for small files). Xitami itself is very stable, typically 
+running for months and not needing any reboot. For such a demanding 
+application, don't install anything else on the server, and stop most 
+windows services.
+
+Don't use the indexing service, switch the 8.3 naming off, don't use 
+compression, ...
+Dynamic disks are not better than basic disks when it comes to speed (You 
+only should use dynamic disks if you plan to use partitions spanning 
+multiples disk, that's the only reason for using dd)
+A raid 01 is a good thing too for your data disk.
+
+
+marc
+
+
+
+
+At 05:02 8/06/05, you wrote:
+&gt;<i>I am running W2K Server (NTFS) and I have done some research concerning 
+</I>&gt;<i>directory limitations within the W2K environment and now I am looking for 
+</I>&gt;<i>potential limitations with Xitami.  My server will host potentially 10s of 
+</I>&gt;<i>thousands  of users.
+</I>
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------- 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006777.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+	<LI> Next message: <A HREF="006787.html">/Spam/ [Xitami] Xitami performance regarding directory  structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6785">[ date ]</a>
+              <a href="thread.html#6785">[ thread ]</a>
+              <a href="subject.html#6785">[ subject ]</a>
+              <a href="author.html#6785">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

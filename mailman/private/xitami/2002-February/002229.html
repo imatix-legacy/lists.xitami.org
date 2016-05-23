@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] vhost FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002228.html">
+   <LINK REL="Next"  HREF="002230.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] vhost FTP
+   </H1>
+    <B>Mike Wilson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] vhost FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 31 Jan 2002 21:19:58 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002228.html">[Xitami] Xitami 2.4 d9 NT service issues
+</A></li>
+        <LI> Next message: <A HREF="002230.html">[Xitami] vhost FTP SOLVED
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2229">[ date ]</a>
+              <a href="thread.html#2229">[ thread ]</a>
+              <a href="subject.html#2229">[ subject ]</a>
+              <a href="author.html#2229">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_00F0_01C1AA9D.090B2FC0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Ok...first newbie issue for me..
+
+ver. 2.5b4
+Win98 environment
+DSL, dynaminc IP with DNS update, lyksys router, ports to server forward =
+and working
+
+Xitami established fine out of the box, web-admin no problem and served =
+a site by just dropping the folder into the &quot;webpages&quot; directory.  FTP =
+came on fine referring to the standard dirctories and cgi's run fine =
+with no issues.  All seems well, let's try the vhost wizzard and see if =
+we can offer a user to ftp into the vhost. =20
+
+Check the docs, faq on xitami site, 42 says...=20
+
+-------------------------------------------------------------------------=
+-------
+
+42: I want each user to have FTP access to their personal web pages =20
+
+You do not need aliases. Simply assign each user a subdirectory of the =
+webpages directory, then specify this directory as their FTP home =
+directory (using a full path).=20
+
+
+
+-------------------------------------------------------------------------=
+-------
+
+
+I crank up the vhost wizzard and set the FTP root to point absolute to =
+the subdirectory &quot;web5&quot;, which in turn has been pointed to generate =
+under &quot;webpages&quot;.  I hit the &quot;create&quot; button and bingo, it's all there.  =
+I call up the vhost administrator and can see the references and the =
+permissions appear as I would expect.
+
+                            web5 - FTP User Profiles=20
+
+      User name: Password: Login directory: Permissions: Space used =
+(Mb): Number of files:=20
+      admin admin c:\program files\xitami\webpages\web5/ * 0 0=20
+      anonymous  * c:\program files\xitami\webpages\web5/pub/ G 0 0=20
+      ftp  * c:\program files\xitami\webpages\web5/pub/ G 0 0=20
+      guest    c:\program files\xitami\webpages\web5/guest/ G 0 0=20
+      upload  upload c:\program files\xitami\webpages\web5/upload/ P 0 0 =
+
+
+
+
+
+So I fire up the FTPclient and point to www.XXX.XXX/web5, logging =
+admin/admin and I end up at  the FTP root whith Pub, Guest and Upload.
+
+So I try reauthenticating into upload, using upload/upload, send a file, =
+hoping it routes to web5, but it lands in upload.
+
+Have I missunderstood what FAQ 42 is trying to tell me?  Can someone =
+please embarass me?
+
+
+
+------=_NextPart_000_00F0_01C1AA9D.090B2FC0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4807.2300&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Ok...first newbie issue for =
+me..&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;ver. 2.5b4&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Win98 environment&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;DSL, dynaminc IP with DNS update, =
+lyksys router,=20
+ports to server&amp;nbsp;forward and working&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami&amp;nbsp;established&amp;nbsp;fine out =
+of the box,=20
+web-admin no problem&amp;nbsp;and served a site by just dropping the=20
+folder&amp;nbsp;into the &quot;webpages&quot; directory.&amp;nbsp; FTP came on fine =
+referring to=20
+the standard dirctories and cgi's run fine with no issues.&amp;nbsp; All =
+seems well,=20
+let's try&amp;nbsp;the vhost&amp;nbsp;wizzard and see if we can offer a user to =
+ftp into=20
+the vhost.&amp;nbsp; &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Check the docs, faq on xitami site, 42 =
+says...=20
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;B&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;HR&gt;
+&lt;/FONT&gt;&lt;/B&gt;&lt;/DIV&gt;
+&lt;P&gt;&lt;B&gt;&lt;FONT face=3DArial size=3D2&gt;42: I want each user to have FTP =
+access to their=20
+personal web pages&lt;/FONT&gt;&lt;/B&gt;&lt;A name=3Di_42&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&lt;/FONT&gt;&lt;/A&gt;&lt;FONT face=3DArial size=3D2&gt; &lt;/FONT&gt;
+&lt;P&gt;&lt;FONT face=3DArial size=3D2&gt;You do not need aliases. Simply assign =
+each user a=20
+subdirectory of the webpages directory, then specify this directory as =
+their FTP=20
+home directory (using a full path). &lt;/FONT&gt;&lt;/P&gt;
+&lt;P&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;HR&gt;
+&lt;/FONT&gt;
+&lt;P&gt;&lt;/P&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I crank up the vhost wizzard and set =
+the FTP root=20
+to point absolute to the subdirectory &quot;web5&quot;, which in turn has been =
+pointed to=20
+generate under &quot;webpages&quot;.&amp;nbsp; I hit the &quot;create&quot; button and bingo, =
+it's all=20
+there.&amp;nbsp; I call up the vhost administrator and can see the =
+references and=20
+the permissions appear as I would expect.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D4&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&amp;nbsp;&amp;nbsp;&amp;nbsp; web5=20
+- FTP User Profiles &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;TABLE cellSpacing=3D0 cellPadding=3D0 width=3D&quot;90%&quot;&gt;
+  &lt;TBODY&gt;
+  &lt;TR&gt;
+    &lt;TH vAlign=3Dtop align=3Dmiddle&gt;User name:&lt;/TH&gt;
+    &lt;TH vAlign=3Dtop align=3Dmiddle&gt;Password:&lt;/TH&gt;
+    &lt;TH vAlign=3Dtop align=3Dmiddle&gt;Login directory:&lt;/TH&gt;
+    &lt;TH vAlign=3Dtop align=3Dmiddle&gt;Permissions:&lt;/TH&gt;
+    &lt;TH vAlign=3Dtop align=3Dmiddle&gt;Space used (Mb):&lt;/TH&gt;
+    &lt;TH vAlign=3Dtop align=3Dmiddle&gt;Number of files:&lt;/TH&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;&lt;A =
+href=3D&quot;javascript:submit('~C7.0')&quot;&gt;&lt;FONT=20
+      color=3D#000000&gt;admin&lt;/FONT&gt;&lt;/A&gt;&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;admin&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;c:\program =
+files\xitami\webpages\web5/&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;*&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;&lt;/TR&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;&lt;A =
+href=3D&quot;javascript:submit('~C7.1')&quot;&gt;&lt;FONT=20
+      color=3D#000000&gt;anonymous&lt;/FONT&gt;&lt;/A&gt; &lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;*&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;c:\program =
+files\xitami\webpages\web5/pub/&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;G&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;&lt;/TR&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;&lt;A =
+href=3D&quot;javascript:submit('~C7.2')&quot;&gt;&lt;FONT=20
+      color=3D#000000&gt;ftp&lt;/FONT&gt;&lt;/A&gt; &lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;*&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;c:\program =
+files\xitami\webpages\web5/pub/&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;G&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;&lt;/TR&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;&lt;A =
+href=3D&quot;javascript:submit('~C7.3')&quot;&gt;&lt;FONT=20
+      color=3D#000000&gt;guest&lt;/FONT&gt;&lt;/A&gt; &lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;&amp;nbsp;&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;c:\program =
+files\xitami\webpages\web5/guest/&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;G&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;&lt;/TR&gt;&lt;/TR&gt;
+  &lt;TR&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;&lt;A =
+href=3D&quot;javascript:submit('~C7.4')&quot;&gt;&lt;FONT=20
+      color=3D#000000&gt;upload&lt;/FONT&gt;&lt;/A&gt; &lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;upload&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;c:\program =
+files\xitami\webpages\web5/upload/&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;P&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;
+    &lt;TD vAlign=3Dtop align=3Dleft&gt;0&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;So I fire up the FTPclient and point to =
+&lt;A=20
+href=3D&quot;<A HREF="http://www.XXX.XXX/web5"">http://www.XXX.XXX/web5&quot;</A>&gt;&lt;FONT =
+color=3D#000000&gt;www.XXX.XXX/web5&lt;/FONT&gt;&lt;/A&gt;,=20
+logging&amp;nbsp;admin/admin&amp;nbsp;and I end up at&amp;nbsp; the FTP root whith =
+Pub,=20
+Guest and Upload.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;So I try reauthenticating into upload, =
+using=20
+upload/upload, send a file, hoping it routes to web5, but it lands in=20
+upload.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#800000 size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#800000 size=3D2&gt;Have I missunderstood =
+what FAQ 42 is=20
+trying to tell me?&amp;nbsp; Can someone please embarass me?&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_00F0_01C1AA9D.090B2FC0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002228.html">[Xitami] Xitami 2.4 d9 NT service issues
+</A></li>
+	<LI> Next message: <A HREF="002230.html">[Xitami] vhost FTP SOLVED
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2229">[ date ]</a>
+              <a href="thread.html#2229">[ thread ]</a>
+              <a href="subject.html#2229">[ subject ]</a>
+              <a href="author.html#2229">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

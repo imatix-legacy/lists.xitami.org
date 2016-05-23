@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami DOS reported, fixed
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="006053.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami DOS reported, fixed
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami DOS reported, fixed">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 02 Aug 2004 19:37:55 +0000</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="006053.html">[Xitami] new American 2004,medicine,physicians directoty 7,000 hospitals,25,000 nursing homes and 400,000 doctors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6052">[ date ]</a>
+              <a href="thread.html#6052">[ thread ]</a>
+              <a href="subject.html#6052">[ subject ]</a>
+              <a href="author.html#6052">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Pieter,
+
+Sorry to bother you on this subject.
+
+At this time I have not updated to the corrected Xitami version for the reported Denial of Service. I am using Xitami V2.5b4 and using the test code reported with the use of nc.exe and the DOS does not occur using Xitami V2.5b4.  (??)
+
+At the time Xitami V2.5b4 was down loaded I did not down load the source code for 
+V2.5b4, so I cannot look at the routine http_parse_header (*,*) to see if the problem exists. 
+
+I am curious if this version of Xitami is ok in the routine http_parse_header (*,*) or is it some Xitami DEFAULT management setting I set to make it work????
+
+
+The only change to the Xitami DEFAULT management settings was to add a few web page descriptions in Virtual Hosts and to require passwords for all users of FTP. All entries for web pages in Virtual Hosts as well as DEFAULTS are set as:
+
+        Password file: BLANK   - blank to disable password protection  
+        Case-sensitive passwords?     YES
+        Allow directory lists?         NO
+        Allow web-based admin?        YES
+        IP address mask:*             - eg. 111.222.333.*  
+        Superuser password:           - gives FULL ACCESS to ALL RESOURCES  
+
+
+Here is what happens when the TEST.BAT is used with the string DOS (with no :):
+
+    If the IP address of the Xitami server is used 
+    to execute TEST.BAT errors are reported, and if 
+    a web page is used the text of that page is 
+    returned, as expected. And, the Xitami V2.5b4 
+    server continues to run as expected by providing web 
+    pages to a client browser and the cpu utilization 
+    at the Xitami Server remains at or &lt;1% during 
+    idle times. I am using a test server so it can 
+    be controlled with respect to other browser accesses. 
+
+The following are the outputs from the Xitami Server when TEST.BAT is executed with the ip address of the Xitami Server:
+
+   C:\JLong\NetCat&gt;test 10.10.10.2 80
+   HTTP/1.1 403 Forbidden
+   Server: Xitami
+   Date: Thu, 29 Jul 2004 17:09:06 GMT
+   Content-length: 111
+   Content-type: text/html
+   
+   &lt;HTML&gt;&lt;TITLE&gt;Error&lt;/TITLE&gt;&lt;BODY&gt;&lt;H1&gt;
+   
+   You are not authorised to access this resource
+
+   &lt;/H1&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+   
+   C:\JLong\NetCat&gt;
+
+
+Thanks for your help, time and advise!!! :) :)
+
+Jerry
+
+&gt;<i>.
+</I>&gt;<i>.
+</I>&gt;<i>.
+</I>&gt;<i> 
+</I>&gt;<i> The denial of service is this: a malformed header (without the ':') causes the 
+</I>&gt;<i> server to enter an endless loop. 
+</I>&gt;<i> 
+</I>&gt;<i> This DOS affects all versions of Xitami. For those building from source, the 
+</I>&gt;<i> affected file is smthttpl.c, and the patch is in the function 
+</I>&gt;<i> http_parse_header: 
+</I>&gt;<i> 
+</I>&gt;<i> char * 
+</I>&gt;<i> http_parse_header (HTTP_CONTEXT *p_http, char *header) 
+</I>&gt;<i> { 
+</I>&gt;<i> ... 
+</I>&gt;<i> while (header &amp;&amp; *header &amp;&amp; *header != '\r') { 
+</I>&gt;<i> ... 
+</I>&gt;<i> } 
+</I>&gt;<i> ++ else 
+</I>&gt;<i> ++ break; 
+</I>&gt;<i> } 
+</I>&gt;<i> return (header); 
+</I>&gt;<i> } 
+</I>&gt;<i> Pieter Hintjens 
+</I>&gt;<i> iMatix Corporation 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="006053.html">[Xitami] new American 2004,medicine,physicians directoty 7,000 hospitals,25,000 nursing homes and 400,000 doctors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6052">[ date ]</a>
+              <a href="thread.html#6052">[ thread ]</a>
+              <a href="subject.html#6052">[ subject ]</a>
+              <a href="author.html#6052">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

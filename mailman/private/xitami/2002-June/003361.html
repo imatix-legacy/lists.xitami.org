@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Error log shows hacking attempts?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003355.html">
+   <LINK REL="Next"  HREF="003409.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Error log shows hacking attempts?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Error log shows hacking attempts?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 11 Jun 2002 12:44:31 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003355.html">[Xitami] Error log shows hacking attempts?
+</A></li>
+        <LI> Next message: <A HREF="003409.html">[Xitami] Error log shows hacking attempts?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3361">[ date ]</a>
+              <a href="thread.html#3361">[ thread ]</a>
+              <a href="subject.html#3361">[ subject ]</a>
+              <a href="author.html#3361">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> GET /scripts/..%252f../winnt/system32/cmd.exe?/c+dir
+</I>
+This is an attempt to exploit a bug in MS IIS webserver. The syntax
+is incorrect and should be refused (and Xitami refuses it without
+any problem). In unpatched IIS, it runs the NT-DOS command-line
+processor and allows arbitrary commands to be run. &quot;dir&quot; is an
+innocent command, but if they get a response to that you may expect
+a hacker to come back and try something malicious.
+
+However, network owners are now doing scans like this. Today my
+bosses are throwing a few dozen such &quot;hack attacks&quot; against all
+machines on campus, and will notify owners if they see trouble. So
+it may be your &quot;friends at the ISP&quot; rather than hackers.
+
+&gt;<i> GET /default.ida?NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN......
+</I>
+This is CodeRed or Nimda. These send a very-long request. A proper
+piece of software will either take the whole thing or truncate it
+and refuse it. In unpatched MS IIS, the gibberish at the end
+overflows data space into code space, overwrites part of the
+program, and infects it with the virus (that gibberish is Intel CPU
+machine code). This attack is very specific to IIS: the same code
+injected into any other software would not do what was planned, and
+generally causes lockup or crash. In Xitami, the buffer does not
+overflow and it simply logs the request and the fact that it didn't
+make sense.
+
+&gt;<i> the reason why I am occasionally coming home to find my Xitami
+</I>&gt;<i> with an internal error that requires a restart?
+</I>
+No. As long as you have enough disk space for all the crap that
+piles up in logs these days, Xitami is not bothered by any of the
+crack-attacks shown in your logs. Say what version of Xitami (please
+do NOT say &quot;latest version&quot;!!!) and what Windows or other O/S you
+run it on.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003355.html">[Xitami] Error log shows hacking attempts?
+</A></li>
+	<LI> Next message: <A HREF="003409.html">[Xitami] Error log shows hacking attempts?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3361">[ date ]</a>
+              <a href="thread.html#3361">[ thread ]</a>
+              <a href="subject.html#3361">[ subject ]</a>
+              <a href="author.html#3361">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

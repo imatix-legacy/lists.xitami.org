@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FW: Website using Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001998.html">
+   <LINK REL="Next"  HREF="002048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FW: Website using Xitami
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FW: Website using Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 10 Jan 2002 16:13:30 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001998.html">[Xitami] FW: Website using Xitami
+</A></li>
+        <LI> Next message: <A HREF="002048.html">[Xitami] FW: Website using Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2005">[ date ]</a>
+              <a href="thread.html#2005">[ thread ]</a>
+              <a href="subject.html#2005">[ subject ]</a>
+              <a href="author.html#2005">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Spyman wrote:
+
+&gt;<i>I was using Zonealarm but Mindspring gave me a free copy of Norton Personal
+</I>&gt;<i>Firewall. I also think that I should have a firewall. I only uninstalled it
+</I>&gt;<i>the once to see if it made a difference.
+</I>&gt;<i>
+</I>&gt;<i>Is there a way to find out if port 80 is blocked with the ISP? Is this
+</I>&gt;<i>something I can ask them? The only thing about this question is that some
+</I>&gt;<i>people can get in every time.
+</I>&gt;<i>
+</I>&gt;<i>I haven't tried to redirect it to another port such as 4080, which I can do
+</I>&gt;<i>through the router setup and Xitami.
+</I>&gt;<i>
+</I>&gt;<i>I only run Xitami without any of the addons. The family tree software spits
+</I>&gt;<i>out the webpages so I can copy them into the webpages directory and have
+</I>&gt;<i>them available.
+</I>&gt;<i>
+</I>I just tried to access your site using wget (a CLI program to get 
+webpages). Got some interesting results, whihc also partially appear in 
+my browser (Mozilla).
+
+First a default page which gets redirected to index.html (ignore the .1 
+thats caused by the fact I had an index.html in the wget diretory)
+
+C:\temp\wget&gt;wget <A HREF="http://www.hanleytime.com/">http://www.hanleytime.com/</A>
+--15:24:41--  <A HREF="http://www.hanleytime.com/">http://www.hanleytime.com/</A>
+           =&gt; `index.html.1'
+Connecting to www.hanleytime.com:80... connected!
+HTTP request sent, awaiting response... 200 OK
+Length: 1,979 [text/html]
+
+    0K                                                         0% @   
+0.00 B/s
+
+15:27:38 (0.00 B/s) - Read error at byte 0/1979 (No such file or 
+directory). Ret
+rying.
+..
+^C
+
+Now an attempt to get a non existant page - standard Xitami error returned
+
+C:\temp\wget&gt;wget <A HREF="http://www.hanleytime.com/index1.html">http://www.hanleytime.com/index1.html</A>
+--15:27:59--  <A HREF="http://www.hanleytime.com/index1.html">http://www.hanleytime.com/index1.html</A>
+           =&gt; `index1.html'
+Connecting to www.hanleytime.com:80... connected!
+HTTP request sent, awaiting response... 404 Not Found
+15:27:59 ERROR 404: Not Found.
+
+Now an attempt to get a page that exists but with no redirect.
+C:\temp\wget&gt;wget <A HREF="http://www.hanleytime.com/index.html">http://www.hanleytime.com/index.html</A>
+--15:28:03--  <A HREF="http://www.hanleytime.com/index.html">http://www.hanleytime.com/index.html</A>
+           =&gt; `index.html.2'
+Connecting to www.hanleytime.com:80... connected!
+HTTP request sent, awaiting response... 200 OK
+Length: 1,979 [text/html]
+
+    0K                                                         0% @   
+0.00 B/s
+
+15:28:07 (0.00 B/s) - Read error at byte 0/1979 (No such file or 
+directory). Ret
+rying.
+
+On the other hand even my browser can download 
+<A HREF="http://www.hanleytime.com/images/">http://www.hanleytime.com/images/</A> and get a webpage with the contents of 
+your images subdirectory AND I can also download and view 
+<A HREF="http://www.hanleytime.com/images/buttons.gif">http://www.hanleytime.com/images/buttons.gif</A> so it looks like the 
+problem is somehow related to .html pages.
+
+Using a really basic perl script that uses IO::Socket, what happens is 
+that the socket gets closed abruptly after the header is sent. This 
+looks like a OS problem where Xitami is for some reason not able to open 
+the file to read it because the error pages are correctly downloaded 
+although I suppose it could be a router problem. Given that I can 
+download images though I'm really confused
+
+I probably of limited use for testing since I have to go through a proxy 
+or 2 to get on the internet so its hard for me to tell exactly what is 
+going on...
+
+Francis
+PS late breaking news. I just tried to download a different image 
+(<A HREF="http://www.hanleytime.com/images/xitami1.gif">http://www.hanleytime.com/images/xitami1.gif</A>) and it has stalled.
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001998.html">[Xitami] FW: Website using Xitami
+</A></li>
+	<LI> Next message: <A HREF="002048.html">[Xitami] FW: Website using Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2005">[ date ]</a>
+              <a href="thread.html#2005">[ thread ]</a>
+              <a href="subject.html#2005">[ subject ]</a>
+              <a href="author.html#2005">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

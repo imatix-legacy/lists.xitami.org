@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] want virtual host to point to an executable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004576.html">
+   <LINK REL="Next"  HREF="004578.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] want virtual host to point to an executable
+   </H1>
+    <B>Ayhan Tuncer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] want virtual host to point to an executable">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 30 Dec 2002 15:10:39 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004576.html">[Xitami] want virtual host to point to an executable
+</A></li>
+        <LI> Next message: <A HREF="004578.html">[Xitami] want virtual host to point to an executable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4577">[ date ]</a>
+              <a href="thread.html#4577">[ thread ]</a>
+              <a href="subject.html#4577">[ subject ]</a>
+              <a href="author.html#4577">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Marc Doigny wrote:
+&gt;<i> 
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; It works, but i still need a method to get rid of the '?'
+</I>&gt;<i> &gt; &gt; adsl (fixed ip): &lt;<A HREF="http://web.verfaillie.com/invasion">http://web.verfaillie.com/invasion</A>&gt;
+</I>&gt;<i> &gt; &gt; cable: &lt;<A HREF="http://web.verfaillie.be/?invasion">http://web.verfaillie.be/?invasion</A>&gt;
+</I>&gt;<i> &gt; &gt; (same directory, different servers, for some sort of load balancing between
+</I>&gt;<i> &gt; &gt; adsl and cable)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I'm not sure I understand you correctly. Do you wish to redirect a
+</I>&gt;<i> &gt;certain document
+</I>&gt;<i> &gt;to a certain other server/document and again other documents to other
+</I>&gt;<i> &gt;server/document123
+</I>&gt;<i> &gt;or are all the requests regardless of requested document to be
+</I>&gt;<i> &gt;redirected to the same url?
+</I>
+&gt;<i> These are two servers, one connected to a adsl connection with fixed ip,
+</I>&gt;<i> the other is a server connected to a cable network without fixed ip.
+</I>&gt;<i> Both servers are using the same directories for the files to be served (not
+</I>&gt;<i> for the config of course).
+</I>&gt;<i> The adsl connection is always online but slow, the cable is faster but has
+</I>&gt;<i> no fixed ip.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;What does the query string parameter &quot;invasion&quot; represent? does the cgi
+</I>&gt;<i> &gt;executable
+</I>&gt;<i> &gt;have to use this parameter to put together the new url it will redirect
+</I>&gt;<i> &gt;the user to?
+</I>
+&gt;<i> invasion is the name of a directory.
+</I>&gt;<i> The redirect executable gets the ip address of the cable server and creates
+</I>&gt;<i> a page containing
+</I>&gt;<i> 
+</I>&gt;<i>     STDOUT &quot;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv='refresh' content='0; url=<A HREF="http://";">http://&quot;;</A>
+</I>&gt;<i>     STDOUT ipaddress$;
+</I>&gt;<i>     STDOUT &quot;:20800/&quot;;
+</I>&gt;<i>     STDOUT ENVIRON$(&quot;QUERY_STRING&quot;);
+</I>&gt;<i>     STDOUT &quot;'&gt;&lt;/head&gt;&lt;/html&gt;&quot;;
+</I>&gt;<i> 
+</I>
+&gt;<i> The query string is what the executable gets from Xitami and is what follow
+</I>&gt;<i> the question mark in a normal request. (The example given above is a
+</I>&gt;<i> working one)
+</I>&gt;<i> 
+</I>&gt;<i> It is possible to create one executable for each directory to be served,
+</I>&gt;<i> but if there is a different way to do that, i would prefer it.
+</I>&gt;<i> 
+</I>&gt;<i> Marc
+</I>
+
+If you want to avoid cgi-aliases
+the user would have to type in the addressbar: 
+<A HREF="http://server/executable/parameter">http://server/executable/parameter</A>
+and the ENVIRON$(&quot;PATH_INFO&quot;) would give you    /parameter   .
+
+You could not avoid an extra directory there because there is no such
+thing as a
+null &quot;&quot;.exe . You definitely need a script name with or without
+extension.
+User would get a 404 if only  <A HREF="http://server/parameter">http://server/parameter</A> .
+
+The above doesn't look like Perl but I suppose it would be so:
+
+    STDOUT &quot;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv='refresh' content='0;
+url=<A HREF="http://";">http://&quot;;</A>
+    STDOUT ipaddress$;
+    STDOUT &quot;:20800&quot;;                   # No slash at end
+    STDOUT &quot;/&quot;;                        # optional
+    STDOUT executable$&quot;;               # optional
+    STDOUT ENVIRON$(&quot;PATH_INFO&quot;);      # Has a slash at beg.
+    STDOUT &quot;'&gt;&lt;/head&gt;&lt;/html&gt;&quot;;
+
+
+Another alternative for creating one executable per directory=parameter
+could 
+be this:
+
+DomainDefaults.cfg:  ( no cgi-bin alias but script=document alias )
+
+[Cgi-alias]
+    Parameter1=C:/Xitami/DomainCgi-bin/executable.exe
+    Parameter2=C:/Xitami/DomainCgi-bin/executable.exe
+    Parameter3=C:/Xitami/DomainCgi-bin/executable.exe
+
+and script:
+
+    STDOUT &quot;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv='refresh' content='0;
+url=<A HREF="http://";">http://&quot;;</A>
+    STDOUT ipaddress$;
+    STDOUT &quot;:20800&quot;;                   # No slash at end
+    STDOUT ENVIRON$(&quot;SCRIPT_NAME&quot;);    # Has a slash at beg and will
+give
+    STDOUT &quot;'&gt;&lt;/head&gt;&lt;/html&gt;&quot;;         # the alias path - no slash at
+end
+
+
+I do not use this alias example for a parameter via the script name but 
+you might perhaps find it workable.
+
+Ayhan Tuncer
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004576.html">[Xitami] want virtual host to point to an executable
+</A></li>
+	<LI> Next message: <A HREF="004578.html">[Xitami] want virtual host to point to an executable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4577">[ date ]</a>
+              <a href="thread.html#4577">[ thread ]</a>
+              <a href="subject.html#4577">[ subject ]</a>
+              <a href="author.html#4577">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

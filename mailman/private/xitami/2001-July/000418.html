@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] POST troubles (longish)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000417.html">
+   <LINK REL="Next"  HREF="000419.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] POST troubles (longish)
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] POST troubles (longish)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 15 Jul 2001 21:08:57 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000417.html">[Xitami] Windows ME Enq.
+</A></li>
+        <LI> Next message: <A HREF="000419.html">[Xitami] Locking with cgi's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:01C10BA4.D1051D80.boyan@sanbolic.com">01C10BA4.D1051D80.boyan@sanbolic.com</A>&gt;, Boyan Brezinsky writes:
+&gt;<i>Here is the story. Yesterday downloaded dcl - a project tracking system 
+</I>&gt;<i>written in PHP. At startup you have to login, supplying username and 
+</I>&gt;<i>password.  [Get 404 error when use Login]
+</I>
+There's two things that could be generating the 404: Xitami and PHP.
+I can't remember off hand if Xitami logs a 404 only when it generates
+it, or when that's the code it's going to return (which a CGI/filter can
+supply).
+
+Since the request/debug log entries you supply don't match up with the
+times in the other snippets you supply, it's hard to know exactly what
+is going on.
+
+However I'd definitely suggest (a) looking for messages in cgierr.log,
+and (b) adding something to the PHP so you can tell if it is being run.
+The fact that Xitami seems to be trying to transfer .flt files (filter
+files), suggests that something must have generated those files to
+transfer.
+
+You might also want to enable [cgi] debug=1 (which controls filtering
+too) and let it preserve the filter files (normally they are removed
+after being sent).  Then you can check the contents of those to see if
+it is PHP that is writing the 404 error (or indeed if it is writing
+anything).
+
+Given that you seem to have a working PHP setup in general (since some
+of your other PHP works) I suspect that looking closely at what the
+problem PHP script is doing/trying to do has to be your next step.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000417.html">[Xitami] Windows ME Enq.
+</A></li>
+	<LI> Next message: <A HREF="000419.html">[Xitami] Locking with cgi's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

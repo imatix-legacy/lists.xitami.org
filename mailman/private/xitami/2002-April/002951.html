@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami aborts on UnixWare
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002945.html">
+   <LINK REL="Next"  HREF="002946.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami aborts on UnixWare
+   </H1>
+    <B>Bowden, Russell
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami aborts on UnixWare">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 11 Apr 2002 11:32:07 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002945.html">[Xitami] Security, Counters, and CGI
+</A></li>
+        <LI> Next message: <A HREF="002946.html">[Xitami] hack attack or just ignorance?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2951">[ date ]</a>
+              <a href="thread.html#2951">[ thread ]</a>
+              <a href="subject.html#2951">[ subject ]</a>
+              <a href="author.html#2951">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Xitami aborts frequently (sometimes after a few minutes, sometimes after a few hours) on UnixWare 7.1.1.  I posted about this several months ago and Ewen suggested trying dbx on the core dumps to look at the stack, etc.  I tried this ('debug' now instead of dbx) and didn't see anything that looked useful to me.  Now I am running 2.5b5 on one port and 2.4d9 on another port (same machine), and each gets around 10000 transactions per hour.  The problem has gotten much worse as the load increased.  And often when one Xitami dies the other one dies, so I think it may be some kind of threshold in UnixWare.  But sometimes it happens at 3 a.m. when there is practically no activity at all.  All these transactions go through an LRWP processing module, with 25 copies of the module attached to each Xitami.  Below is debug info from a 2.5b5 core dump:
+
+
+Warning: No debugging information in Xitami
+Core image of Xitami (process p1) created
+CORE FILE [_kill]
+Signal: sigabrt
+        0xbffa1e8c (_kill+12:)          jb      +0x67e &lt;bffa2510&gt; [ _cerror ]
+debug&gt; ps
+Program    ID         Pid Thread State          Function   Location       Comman
+d
+*xitami    p1          -1     -1 Core           _kill      0xbffa1e8c     ./xita
+mi -b 5800
+debug&gt; t
+Stack Trace for p1, Program xitami
+*[0] _kill(0x5994, 0x6) [0xbffa1e8c]
+ [1] abort(presumed: 0x8047b08, 0x8074768, 0x80ba618)   [0xbffd69ca]
+ [2] sys_assert(0x80ba618, 0x11d)       [0x80a45dc]
+ [3] terminate_the_thread(0x8170710)    [0x8074763]
+ [4] execute_thread(0x8170710)  [0x805b008]
+ [5] smt_exec_step(presumed: 0x8047b6c, 0x804ae86, 0x8047b8c)   [0x805aa1a]
+ [6] smt_exec_full(presumed: 0x8047b8c, 0x80bd394, 0x8047b9c)   [0x805a9f0]
+ [7] main(0x3, 0x8047b8c, 0x8047b9c)    [0x804ae81]
+ [8] _start()   [0x804a5ac]
+debug&gt; regs
+Register Contents for p1, program xitami
+%eax    0x00000000      %ecx    0x0007d030      %edx    0xbff90aa0
+%ebx    0xbfffdc4c      %esp    0x08047ab8      %ebp    0x08047af8
+%esi    0x081293a0      %edi    0x08170710      %eip    0xbffa1e8c
+%eflags 0x00000206      %cs     0x00000017      %ss     0x0000001f
+%ds     0x0000001f      %es     0x0000001f      %fs     0x00000000
+%gs     0x00000000      %fpsw   0xffff0000      %fpcw   0xffff137f
+%fpip   0xbffa47fa      %fpdp   0x080478e8
+%st0 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st1 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st2 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st3 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st4 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st5 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st6 [ EMPTY ] 0x4003 b000 0000 0000 0000 ==    22
+%st7 [ EMPTY ] 0x4001 a000 0000 0000 0000 ==    5
+debug&gt; q
+
+
+
+
+This is one from 2.4d9:
+
+************************ core.20475 *****************************
+Warning: No debugging information in xitami
+Core image of xitami (process p1) created
+CORE FILE [_kill]
+Signal: sigabrt
+        0xbffa1e8c (_kill+12:)          jb      +0x67e &lt;bffa2510&gt; [ _cerror ]
+debug&gt; ps
+Program    ID         Pid Thread State          Function   Location       Comman
+d
+*xitami    p1          -1     -1 Core           _kill      0xbffa1e8c     ./xita
+mi -b 5900
+debug&gt; t
+Stack Trace for p1, Program xitami
+*[0] _kill(0x4ffb, 0x6) [0xbffa1e8c]
+ [1] abort(0x80d16ac, 0x80d16ac, 0x808f610, 0x808e2c8, 0x11d, 0x80d169c)       [
+0xbffd69ca]
+ [2] sys_assert(0x808e2c8, 0x11d)       [0x8089dad]
+ [3] terminate_the_thread(0x8116c38)    [0x806abda]
+ [4] execute_thread(0x8116c38)  [0x8057812]
+ [5] smt_exec_step(presumed: 0x804a852, 0x80d8d30, 0x80d2bf8)   [0x80571a5]
+ [6] smt_exec_full(presumed: 0x80d8d30, 0x80d2bf8, 0x80d2c48)   [0x8057180]
+ [7] main(0x3, 0x8047b8c, 0x8047b9c)    [0x804a84d]
+ [8] _start()   [0x804a53c]
+debug&gt; regs
+Register Contents for p1, program xitami
+%eax    0x00000000      %ecx    0x0007d030      %edx    0xbff90aa0
+%ebx    0xbfffdc4c      %esp    0x08047a8c      %ebp    0x080c21ec
+%esi    0x080c8a34      %edi    0x00000000      %eip    0xbffa1e8c
+%eflags 0x00000202      %cs     0x00000017      %ss     0x0000001f
+%ds     0x0000001f      %es     0x0000001f      %fs     0x00000000
+%gs     0x00000000      %fpsw   0xffff0000      %fpcw   0xffff137f
+%fpip   0xbffa47fa      %fpdp   0x080478c8
+%st0 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st1 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st2 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st3 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st4 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st5 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st6 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st7 [ EMPTY ] 0x4001 8000 0000 0000 0000 ==    4
+debug&gt; q
+
+
+This is what I usually get (2.4d9):
+
+************************ core.22523 *****************************
+Warning: No debugging information in xitami
+Core image of xitami (process p1) created
+CORE FILE [_kill]
+Signal: sigabrt
+        0xbffa1e8c (_kill+12:)          jb      +0x67e &lt;bffa2510&gt; [ _cerror ]
+debug&gt; ps
+Program    ID         Pid Thread State          Function   Location       Comman
+d
+*xitami    p1          -1     -1 Core           _kill      0xbffa1e8c     ./xita
+mi -b 5900
+debug&gt; t
+Stack Trace for p1, Program xitami
+*[0] _kill(0x57fb, 0x6) [0xbffa1e8c]
+ [1] abort(0x80d17ac, 0x80d17ac, 0x808f3e0, 0x808f3f0, 0x80d16ac, 0x808f3c0, 0x8
+0d16ac, 0x808f394, 0x808b3a8, 0xd0, 0x80d169c)  [0xbffd69ca]
+ [2] mem_assert_(0x808b3a8, 0xd0, 0x80d21a0, 0x80d8d30, 0x80d2bf8, 0x80d2c48)  [
+0x8084555]
+ [3] main(0x3, 0x8047b8c, 0x8047b9c)    [0x804a86d]
+ [4] _start()   [0x804a53c]
+debug&gt; regs
+Register Contents for p1, program xitami
+%eax    0x00000000      %ecx    0x0007d030      %edx    0xbff90aa0
+%ebx    0xbfffdc4c      %esp    0x08047ab0      %ebp    0x00000001
+%esi    0x00000003      %edi    0x00000000      %eip    0xbffa1e8c
+%eflags 0x00000212      %cs     0x00000017      %ss     0x0000001f
+%ds     0x0000001f      %es     0x0000001f      %fs     0x00000000
+%gs     0x00000000      %fpsw   0xffff0000      %fpcw   0xffff137f
+%fpip   0xbffa47fa      %fpdp   0x080478c8
+%st0 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st1 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st2 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st3 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st4 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st5 [ EMPTY ] 0x0000 0000 0000 0000 0000 ==    0
+%st6 [ EMPTY ] 0x4003 b000 0000 0000 0000 ==    22
+%st7 [ EMPTY ] 0x4000 c000 0000 0000 0000 ==    3
+debug&gt; q
+
+********************************
+
+
+Any help or suggestions would be greatly appreciated.
+
+Russell
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002945.html">[Xitami] Security, Counters, and CGI
+</A></li>
+	<LI> Next message: <A HREF="002946.html">[Xitami] hack attack or just ignorance?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2951">[ date ]</a>
+              <a href="thread.html#2951">[ thread ]</a>
+              <a href="subject.html#2951">[ subject ]</a>
+              <a href="author.html#2951">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

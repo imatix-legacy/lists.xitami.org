@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Linksys Router and Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002288.html">
+   <LINK REL="Next"  HREF="002298.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Linksys Router and Xitami
+   </H1>
+    <B>Control-Freak
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Linksys Router and Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 6 Feb 2002 11:57:01 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002288.html">[Xitami] Linksys Router and Xitami
+</A></li>
+        <LI> Next message: <A HREF="002298.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2297">[ date ]</a>
+              <a href="thread.html#2297">[ thread ]</a>
+              <a href="subject.html#2297">[ subject ]</a>
+              <a href="author.html#2297">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_006F_01C1AF05.63337AE0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&gt;<i>I just contacted RoadRunner and they said, no they don't block port 80, =
+</I>but residential accounts don't permit web servers. &gt;So, don't know if =
+I'm getting the straight answer or not. Can't tell if I should beleive =
+them or not.
+
+
+
+I am also on Road Runner (Central Florida).  They told me they block =
+port 80 nationwide.  I was never able to get port 80 to work.  =
+Fortunately the tech I spoke with also runs a server from his home, and =
+told me it could be done which made me persistant enough to find =
+available ports.
+
+I use dns2go ( www.dns2go.com - its free) handle my dynamic ip adress.  =
+In the dns2go client, under the Service Settings tab, I checked =
+&quot;Redirect web requests (with a www prefix)&quot; and picked &quot;To my current IP =
+address ont port:&quot; and set it to 6080.
+
+Then I edited my defaults.cfg file in my xitami directory to say:
+
+#  Created at installation time
+#
+!  Loading defaults.cfg file...
+[Server]
+priority=3D1
+portbase=3D6000
+background=3D1
+[FTP]
+port=3D-5979
+dataport=3D5800
+user-file=3Dftpusers.aut
+directory-file=3Dftpdirs.aut
+[Security]
+filename=3Ddefaults.aut
+
+[Filter]
+-php=3Dc:\PHP\php.exe
+
+The stuff that matters is:
+
+[Server]
+portbase=3D6000  This sets the web server port to 6080 which is where =
+dns2go directs it.
+
+[FTP]
+port=3D-5979    This brings the FTP server port back down to 21 (make =
+sure to use -5979) as portbase is an offset (+80) for all ports
+data-port=3D5800  this is actually a mistake, but it works for now.  I =
+shoulda used -5800 cause my intent was to bring the FTP data port down =
+to 200.  I have issues where some people have trouble connecting with =
+FTP client software, but everyone can connect and log-in with IE, so I =
+leave it alone out of laziness.  I found out later that xitami being set =
+to data-port 200 was actually a type-o in the xitami.cfg file in my =
+particular release.  It should start at 20.  So this should actually be =
+set to -5980, then it should work with all FTP clients.
+
+What this does:
+dns2go forwards all www prefixed web requests to port 6080 so my url is =
+still www.mydomain.com but, since www.prefixes are forwarded to that =
+port my FTP address is just <A HREF="ftp://mydomin.com=20">ftp://mydomin.com=20</A>
+
+I really don't think you are ever gonna get port 80 to work on Road =
+Runner. =20
+
+I also set up www.mydomain.dns2go.com (which is free too) to get =
+everything working until all the dns servers pointed to dns2go so that =
+www.mydomain.com would work.
+
+Good Luck,
+
+Jay Aldrich
+
+
+------=_NextPart_000_006F_01C1AF05.63337AE0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2600.0&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;gt;I just&amp;nbsp;contacted RoadRunner =
+and they said,=20
+no they don't block port 80, but residential accounts don't permit web =
+servers.=20
+&amp;gt;<i>So, don't know if I'm getting the straight answer or not. Can't tell =
+</I>if I=20
+should beleive them or not.&lt;/FONT&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am also on Road Runner (Central =
+Florida).&amp;nbsp;=20
+They told me they block port 80 nationwide.&amp;nbsp; I was never able to =
+get port=20
+80 to work.&amp;nbsp; Fortunately the tech I spoke with also runs a server =
+from his=20
+home,&amp;nbsp;and told me it could be done which made me persistant enough =
+to find=20
+available ports.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I&amp;nbsp;use dns2go&amp;nbsp;( &lt;A=20
+href=3D&quot;<A HREF="http://www.dns2go.com"">http://www.dns2go.com&quot;</A>&gt;www.dns2go.com&lt;/A&gt;&amp;nbsp;- its =
+free)&amp;nbsp;handle my=20
+dynamic ip adress.&amp;nbsp; In the dns2go client, under the Service =
+Settings tab, I=20
+checked &quot;Redirect web requests (with a www prefix)&quot; and picked &quot;To my =
+current IP=20
+address ont port:&quot; and set it to 6080.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Then I&amp;nbsp;edited my&amp;nbsp;defaults.cfg =
+file in my=20
+xitami directory to say:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#&amp;nbsp; Created at installation =
+time&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;!&amp;nbsp; Loading defaults.cfg =
+file...&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[Server]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;priority=3D1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;portbase=3D6000&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;background=3D1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[FTP]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;port=3D-5979&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;dataport=3D5800&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;user-file=3Dftpusers.aut&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;directory-file=3Dftpdirs.aut&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[Security]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;filename=3Ddefaults.aut&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[Filter]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;-php=3Dc:\PHP\php.exe&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;The stuff that matters is:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[Server]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;portbase=3D6000&amp;nbsp; &lt;/FONT&gt;&lt;FONT =
+face=3DArial=20
+size=3D2&gt;This sets the&amp;nbsp;web server&amp;nbsp;port to 6080 which is where =
+dns2go=20
+directs it.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[FTP]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;port=3D-5979&amp;nbsp;&amp;nbsp;&amp;nbsp; This =
+brings the FTP=20
+server port back down to 21 (make sure to use -5979) as portbase is an =
+offset=20
+(+80)&amp;nbsp;for all ports&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;data-port=3D5800&amp;nbsp; this is actually =
+a mistake,=20
+but it works for now.&amp;nbsp; I shoulda used -5800 cause my intent was to =
+bring=20
+the FTP data port down to 200.&amp;nbsp; I have issues where some people =
+have=20
+trouble connecting with FTP client software, but everyone can connect =
+and log-in=20
+with IE, so I leave it alone out of laziness.&amp;nbsp; I found out later =
+that=20
+xitami being set to data-port 200 was actually a type-o in the =
+xitami.cfg file=20
+in my particular release.&amp;nbsp; It should start at 20.&amp;nbsp; So this =
+should=20
+actually be set to -5980, then it should work with all FTP =
+clients.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;What this does:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;dns2go forwards all www prefixed web =
+requests to=20
+port 6080 so my url is still &lt;A=20
+href=3D&quot;<A HREF="http://www.mydomain.com"">http://www.mydomain.com&quot;</A>&gt;www.mydomain.com&lt;/A&gt;&amp;nbsp;but, since &lt;A =
+
+href=3D&quot;<A HREF="http://www.prefixes"">http://www.prefixes&quot;</A>&gt;www.prefixes&lt;/A&gt; are forwarded to that port =
+my FTP=20
+address is just &lt;A href=3D&quot;<A HREF="ftp://mydomin.com"">ftp://mydomin.com&quot;</A>&gt;<A HREF="ftp://mydomin.com</A">ftp://mydomin.com&lt;/A</A>&gt; =
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I really don't think you are ever gonna =
+get port 80=20
+to work on Road Runner.&amp;nbsp; &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I also set up &lt;A=20
+href=3D&quot;<A HREF="http://www.mydomain.dns2go.com"">http://www.mydomain.dns2go.com&quot;</A>&gt;www.mydomain.dns2go.com&lt;/A&gt; =
+(which is free=20
+too) to get everything working until all the dns servers pointed to =
+dns2go so=20
+that &lt;A href=3D&quot;<A HREF="http://www.mydomain.com"">http://www.mydomain.com&quot;</A>&gt;www.mydomain.com&lt;/A&gt; would=20
+work.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Good Luck,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Jay Aldrich&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;&lt;FONT=20
+  face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_006F_01C1AF05.63337AE0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002288.html">[Xitami] Linksys Router and Xitami
+</A></li>
+	<LI> Next message: <A HREF="002298.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2297">[ date ]</a>
+              <a href="thread.html#2297">[ thread ]</a>
+              <a href="subject.html#2297">[ subject ]</a>
+              <a href="author.html#2297">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

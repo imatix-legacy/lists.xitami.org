@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] :: denial of service ::
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006222.html">
+   <LINK REL="Next"  HREF="006239.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] :: denial of service ::
+   </H1>
+    <B>Alex Barna
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] :: denial of service ::">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 25 Oct 2004 13:54:25 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006222.html">[Xitami] :: denial of service ::
+</A></li>
+        <LI> Next message: <A HREF="006239.html">[Xitami] :: denial of service ::
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6224">[ date ]</a>
+              <a href="thread.html#6224">[ thread ]</a>
+              <a href="subject.html#6224">[ subject ]</a>
+              <a href="author.html#6224">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ron,
+
+Ron Ackerman wrote:
+&gt;<i> 
+</I>&gt;<i> I get lockups almost daily, just sitting there running the webserver. I even
+</I>&gt;<i> bought a auto rebooter for when it stops responding for 3 minutes it will
+</I>&gt;<i> reboot the machine. I've wondered if it might be a hardware problem and I
+</I>&gt;<i> think you answered that for me as YES! I suspect I may have a bad memory
+</I>&gt;<i> module but had to rule out software TCP/IP and Xitami hits.
+</I>&gt;<i>
+</I>&gt;<i> Ask a hardware guy and he will say it's a software problem, ask a software
+</I>&gt;<i> guy and he will say it's a hardware problem. Who's corret???
+</I>&gt;<i> 
+</I>&gt;<i> Ron
+</I>
+Belarc Advisor can probably answer your hardware vs. software question.
+<A HREF="http://www.belarc.com/free_download.html">http://www.belarc.com/free_download.html</A>
+
+I have been both a hardware &amp; software guy since the late 70's &amp; I learned with
+a M$ OS it is best to look at software conflicts first &amp; then look for hardware
+problems.
+
+Xitami will try to serve up all page requests &amp; the only time it will cause a
+problem is if it tries to serve more pages at a time than the OS can handle. 
+
+If you are having crashes with just Xitami running make sure windows isn't
+running something else in the background &amp; decrease the number of connections
+Xitami will serve.
+
+Alex
+
+--
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Alex Barna
+</I>&gt;<i> Sent: Monday, October 25, 2004 12:07 PM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] :: denial of service ::
+</I>&gt;<i> 
+</I>&gt;<i> Hi Merilene,
+</I>&gt;<i> 
+</I>&gt;<i> &quot;Merilene M. Murphy&quot; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; HELP HELP HELP
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; recently, i don't know why either, i've been receiving hits to my
+</I>&gt;<i> &gt; xitami server and it seems for the purpose
+</I>&gt;<i> &gt; of crashing it. i mean these hits are
+</I>&gt;<i> &gt; coming in by the second. usually at hit 861, service will freeze
+</I>&gt;<i> &gt; win98se sith blue screen. i am using xitami v 2.4d9 on win98se (don't
+</I>&gt;<i> &gt; laugh).
+</I>&gt;<i> 
+</I>&gt;<i> I ran the same combination for 4 years with no major problems. Never had a
+</I>&gt;<i> blue screen caused by Xitami even with many attacks. I often got thousands 
+</I>&gt;<i> of hits a day on that system. :)
+</I>&gt;<i> 
+</I>&gt;<i> Look in the log folder C:\Xitami\Logs  You will find ac------.log &amp; an
+</I>&gt;<i> er------.log.  ------ being the date. These files can be opened with 
+</I>&gt;<i> notepad &amp; will tell you what is causing the problem.
+</I>&gt;<i> 
+</I>&gt;<i> The log file should show if there were any dos requests.
+</I>&gt;<i> The error file should tell you what happened at that time.
+</I>&gt;<i> 
+</I>&gt;<i> IMO, the win98se crash could have been caused by to many users at one time
+</I>&gt;<i> for your system to handle. I believe the default number of users for that
+</I>&gt;<i> version of Xitami is 10 &amp; that may be to many for your system. 
+</I>&gt;<i> Try resetting defaults.cfg
+</I>&gt;<i> [Server]
+</I>&gt;<i>     Limit = &quot;10&quot;  to 5 &amp; see if you still have problems
+</I>&gt;<i> 
+</I>&gt;<i> &gt; i am wondering has anyone figured out a script that will
+</I>&gt;<i> &gt; reset xitami hits automatically, to counter the malicious hits coming
+</I>&gt;<i> &gt; through?
+</I>&gt;<i> 
+</I>&gt;<i> The number of hits doesn't make any difference. The problem is when there
+</I>&gt;<i> are to
+</I>&gt;<i> many people trying to get into your computer at the same time.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; [p.s. - i have downloaded 2.5c2 from xitami.com but did not see the
+</I>&gt;<i> &gt; install file. i'm so busy on other projects, i can't get it to work
+</I>&gt;<i> &gt; right now.]
+</I>&gt;<i> 
+</I>&gt;<i> Just unzip it to a new folder in C:\Xitami252 &amp; copy the existing website
+</I>&gt;<i> folder
+</I>&gt;<i> the new folder. When you are sure you have everything working you can remove
+</I>&gt;<i> the
+</I>&gt;<i> old version.
+</I>&gt;<i> 
+</I>&gt;<i> Alex,
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006222.html">[Xitami] :: denial of service ::
+</A></li>
+	<LI> Next message: <A HREF="006239.html">[Xitami] :: denial of service ::
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6224">[ date ]</a>
+              <a href="thread.html#6224">[ thread ]</a>
+              <a href="subject.html#6224">[ subject ]</a>
+              <a href="author.html#6224">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

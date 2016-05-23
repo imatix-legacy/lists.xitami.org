@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI trouble - identical cfg - different execution
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20trouble%20-%20identical%20cfg%20-%20different%20execution&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007152.html">
+   <LINK REL="Next"  HREF="007153.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI trouble - identical cfg - different execution</H1>
+    <B>MRJ InfoTech Admin</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20trouble%20-%20identical%20cfg%20-%20different%20execution&In-Reply-To="
+       TITLE="[Xitami] CGI trouble - identical cfg - different execution">admin at mrjdesign.net
+       </A><BR>
+    <I>Mon Feb 20 19:31:35 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007152.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+        <LI>Next message: <A HREF="007153.html">[Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7157">[ date ]</a>
+              <a href="thread.html#7157">[ thread ]</a>
+              <a href="subject.html#7157">[ subject ]</a>
+              <a href="author.html#7157">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 13:43 15/02/2006, you wrote:
+&gt;<i>All you have written below is a little complicated to understand. I
+</I>&gt;<i>don't write in VB for example, I write in Perl.
+</I>&gt;<i>
+</I>&gt;<i>And I haven't been able to understand why the NICs influence what
+</I>&gt;<i>happens  and how the IP is a problem. Unless you have assigned
+</I>&gt;<i>independent config files and disabled cgi in each and everyone of these
+</I>&gt;<i>problem IPs you mention, the IP should not matter. A referrer is a
+</I>&gt;<i>referrer, a simple url, no matter which IP or domain it is located on.
+</I>&gt;<i>
+</I>&gt;<i>1) I have not been able to find a Std. windows error #13 Type error. The
+</I>&gt;<i>ones I know have three digits. Eg: Error Code 121.
+</I>&gt;<i>What does the #13 Type error say?
+</I>
+Error #13 is MS Error for type casting in VB.
+Basically it should only appear if you try to set a Long value to a 
+Double or a Long to a String
+You should be able to pass anything to a Variant in VB since it's 
+accepting anything but not even that worked.
+
+&gt;<i>3) If CGI is enabled on all of the 10 different domain configurations,
+</I>&gt;<i>the http-referer and the remote-addr fields are on the environment hash
+</I>&gt;<i>by default (environment=0). You do not have to set the environment to 1
+</I>&gt;<i>in config to have them on the hash.
+</I>
+The CGI_Referer is a function in the CGI itself that picks up on the 
+servers values.
+It works fine and can catch it, except when it started thinking there 
+was a type error for some very odd reason.
+The only thing I could not understand in this type problem was why it 
+works fine on the development machine but not the server and I 
+manually checked all config files to validate they are identical indeed.
+
+&gt;<i>4) The http-referer will exist in the environment hash, only if there
+</I>&gt;<i>actually was a referrer (a mouse click on a link or a submit button on a
+</I>&gt;<i>real page bringing the user to your url). If the url was typed into the
+</I>&gt;<i>address bar of the browser, there will be no http-referer. Then your
+</I>&gt;<i>program  can not read it then from the environment hash.
+</I>
+True, which is quite ok.
+Youre not supposed to be able to type in the URL directly nor link 
+from a URL outside the domains path to the cgi I wrote.
+When that happens it will refer the user back to the index page and 
+require they come in the &quot;assigned and controlled way&quot;
+
+
+&gt;<i>5) Did you print out the environment hash to yourself, under the
+</I>&gt;<i>conditions that the error occurs in your browser? What do the fields
+</I>&gt;<i>say? Which IP do you appear to have when the error occurs? What does the
+</I>&gt;<i>http-referer say? What does your program do with this information? In
+</I>&gt;<i>which line of your program does the problem happen? Is your test logic
+</I>&gt;<i>entirely correct?
+</I>
+The logic of the testing seems OK.
+What in fact happens the way it is setup is as follows
+
+
+Xitami controls the servers and assign all domains to listen to all 
+incoming IP's
+
+DNS on the other hand refers all but one of my domains to the primary 
+IP number.
+The last one, which is the largest one, with most hits, get assigned WWW and
+*.Sitename.com access through both IP numbers on the box.
+
+In this way it servers as a load balancing.
+
+The problem is that this will also affect the CGI's on the site as 
+the site can internally call itself by the following means
+
+www.Sitename.com
+sitename.com
+##.##.##.1
+##.##.##.2
+
+and all are valid CGI_Referer
+
+This is where it confuses the CGI and the Xitami server but this is 
+controlled by the DNS in the end.
+
+I will see if I cant work around this in a bit different way and if I 
+find a good solution I might post a message to
+the board about it too if someone else would like to have a solution like this.
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007152.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+	<LI>Next message: <A HREF="007153.html">[Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7157">[ date ]</a>
+              <a href="thread.html#7157">[ thread ]</a>
+              <a href="subject.html#7157">[ subject ]</a>
+              <a href="author.html#7157">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Small modification to ISAPI support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007797.html">
+   <LINK REL="Next"  HREF="007799.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Small modification to ISAPI support</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To="
+       TITLE="[Xitami] Small modification to ISAPI support">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Apr 30 22:51:58 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007797.html">[Xitami] Small modification to ISAPI support
+</A></li>
+        <LI>Next message: <A HREF="007799.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7798">[ date ]</a>
+              <a href="thread.html#7798">[ thread ]</a>
+              <a href="subject.html#7798">[ subject ]</a>
+              <a href="author.html#7798">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ah very cool...others might want to comment on the state/health of the LRWP 
+module in Xitami.  Recently it was discovered that there is a bug in both 
+the LRWP and FTP modules that prevents a user from launching two seperate 
+instances of Xitami at the same time.  In the second instance of Xitami you 
+must disable both LRWP and FTP as well as change their default ports to 
+something different than the ones being used in the first instance of 
+Xitami.  Everyone recommends that you disable the FTP anyway...it never 
+worked well to begin with...but the multi-instance LRWP bug hopefully 
+doesn't interfere with any of the ISAPI stuff you are attempting to do.
+
+If you get this ISAPI to work with Xitami def let me know...I would be 
+highly interested in getting it to work on mine server, however, I am a tad 
+put off by having to convert all my perl to some other language - mostly 
+because I don't know the other languages.  Even PHP on Xitami is a CGI 
+process - not even true PHP.  I have always been aware of the CGI 
+performance issue and have always wanted Xitami to support alternative 
+methods - even pure PHP would be great.  But Xitami development stopped 
+several years ago and even though we loyal Xitami users have tried to get 
+iMatix to pick it up again it just hasn't panned out.
+
+-Russel
+----- Original Message ----- 
+From: &quot;JLIST&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">jlist9 at gmail.com</A>&gt;
+To: &quot;Russel Olinger&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;
+Cc: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Wednesday, April 30, 2008 1:13 PM
+Subject: Re[4]: [Xitami] Small modification to ISAPI support
+
+
+&gt;<i> Hello Russel,
+</I>&gt;<i>
+</I>&gt;&gt;<i> In the defaults.cfg file add a filter extension ...
+</I>&gt;<i>
+</I>&gt;<i> I'll try this and report back. Thanks for the suggestion.
+</I>&gt;<i>
+</I>&gt;&gt;<i> How much faster is ISAPI versus CGI - and what language are the dll's
+</I>&gt;&gt;<i> written in?  At least for me, this method you have described is new to 
+</I>&gt;&gt;<i> me.
+</I>&gt;<i>
+</I>&gt;<i> ISAPI is very fast because it'll be just a function call in the same
+</I>&gt;<i> Win32 process. Howerver, running ISAPI on Xitami has the overhead of
+</I>&gt;<i> going through LRWP, which should still be fairly fast. All the
+</I>&gt;<i> approaches (ISAPI, apache modules, LRWP, FastCGI, SCGI, AJP13) avoid
+</I>&gt;<i> the overhead of starting a new process (in the CGI's case) and the
+</I>&gt;<i> time the process needs for initialization. I don't have the numbers
+</I>&gt;<i> but you should be able to find some numbers on the Net. The idea is
+</I>&gt;<i> the same for LWRP/FCGI/SCGI/AJP, which is to use a long running
+</I>&gt;<i> process.
+</I>&gt;<i>
+</I>&gt;<i> I think you can write the DLL in any language that can be used to
+</I>&gt;<i> write a DLL. I use VC++ or Delphi. This is another reason why ISAPI
+</I>&gt;<i> is faster - the DLLs are usually written in compiled languages.
+</I>&gt;<i>
+</I>&gt;<i> If xitami becomes my main server for Windows (I'm still evaluating),
+</I>&gt;<i> I think I'll also use Python to write some LRWP. I've verified that
+</I>&gt;<i> the Python module works. They'll usually still be much faster than
+</I>&gt;<i> CGIs because the time it takes to process the request are much
+</I>&gt;<i> shorter than the time for Windows to start a process. It takes time
+</I>&gt;<i> and it taxes the server quite a bit to start processes. That's why
+</I>&gt;<i> I generally stay away from CGI.
+</I>&gt;<i>
+</I>&gt;<i> But I still miss FastCGI/SCGI a lot because, other than the advantages
+</I>&gt;<i> that FastCGI has, I have developed some code that run as FCGI/SCGI
+</I>&gt;<i> and there are a lot of web development frameworks that support these 
+</I>&gt;<i> protocols.
+</I>&gt;<i> I think it would be a great idea for xitami to support FCGI/SCGI.
+</I>&gt;<i>
+</I>&gt;<i> Jack
+</I>&gt;<i>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007797.html">[Xitami] Small modification to ISAPI support
+</A></li>
+	<LI>Next message: <A HREF="007799.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7798">[ date ]</a>
+              <a href="thread.html#7798">[ thread ]</a>
+              <a href="subject.html#7798">[ subject ]</a>
+              <a href="author.html#7798">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

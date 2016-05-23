@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] LRWP Error Response
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="000128.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] LRWP Error Response
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] LRWP Error Response">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Sun, 07 Apr 2002 20:03:16 +1200</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="000128.html">[Xitami-Dev] LRWP Error Response
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200203181438.PAA16469@sxpublic.nxrda.imatix.net">200203181438.PAA16469@sxpublic.nxrda.imatix.net</A>&gt;, &quot;bernd hohmann&quot; writes:
+&gt;<i>what is the proposed error-response for xitami and LRWP 2.0 ?
+</I>&gt;<i>as far as i understand Ewens implementation the implementation
+</I>&gt;<i>returns a buffer with 1024 bytes length starting with
+</I>&gt;<i>&quot;REJECTED+delimiter&quot; following the errormessage and i have to
+</I>&gt;<i>check, if there is a second delimitier after the message itself.
+</I>
+I assume you're talking about at the signon phase. 
+
+In LRWP1.0 the response would be ERROR (IIRC), with no terminator.
+
+In LRWP2.0 as far as I recall the idea was that it'd send REJECTED, a
+terminator character (0xFF), and then an error message, and then another
+terminator.
+
+There's no fixed length blocks (those are just buffers in the program,
+and not all of them will be sent if they're not needed).
+
+&gt;<i>it no delimiter was found i can fetch another 1024 byte block.
+</I>&gt;<i>can i rely on 1024 byte sized buffers ?
+</I>
+&gt;<i>From a receiving point of view, you need to keep receiving (in LRWP2.0)
+</I>until you've received the two terminators, and then extract the error
+message.  If you don't want the error message you can just close the
+connection of course.
+
+Reading (with Java, I'm guessing) into 1024-byte buffers should be okay;
+it should return you what is available, and you can then check to see if
+it's complete or not.
+
+FWIW, the iMatix ServletRunner (0.3 beta) has Java implementation code 
+to handle this (LRWP_2_0_WebServerConnection.java) which AFAIK will work.  
+You might want to at least look through what that does to understand how
+the protocol is handled.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="000128.html">[Xitami-Dev] LRWP Error Response
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

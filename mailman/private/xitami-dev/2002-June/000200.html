@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] read_TCP returns 0 instead of -1
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000198.html">
+   <LINK REL="Next"  HREF="000201.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] read_TCP returns 0 instead of -1
+   </H1>
+    <B>Rafael Cano Pérez
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] read_TCP returns 0 instead of -1">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Fri, 7 Jun 2002 16:40:00 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000198.html">[Xitami-Dev] Mutiple copies of xitami
+</A></li>
+        <LI> Next message: <A HREF="000201.html">[Xitami-Dev] Sokrates 1.3 - Weekend release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#200">[ date ]</a>
+              <a href="thread.html#200">[ thread ]</a>
+              <a href="subject.html#200">[ subject ]</a>
+              <a href="author.html#200">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Hello Imatix.
+
+ I am using lrwplib.c for a prototype LRWP application,
+ wich will be later implementing the LRWP via an
+ SMT agent.
+
+ In read_full_TCP() in lrwplib.c, after calling
+ read_TCP() reads the return code, and compares
+ it to SOCKET_ERROR for errors. This macro
+ is defined in sfl.h as -1, but when the socket is
+ closed, for example when xitami is closed, read_TCP
+ returns 0, making any application based on lrwplib.c
+ go into an infinite loop.
+ Changing the test against 0
+ ...
+ if (chunkLen == 0)
+  return SOCKET_ERROR;
+ ...
+
+ fixes the error.
+
+ A bug in sfl.h, lrwplib.c or read_TCP() ??
+
+ I'm thinking of writing an ISAPI dll that
+ accepts LRWP2 connections and acts as the
+ LRWP agent in Xitami. Is this already available?
+ ( I know there is the other way round, LRWP client
+  calling ISAPI.dll ).
+
+ Kind regards.
+
+   Rafael Cano Pérez
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000198.html">[Xitami-Dev] Mutiple copies of xitami
+</A></li>
+	<LI> Next message: <A HREF="000201.html">[Xitami-Dev] Sokrates 1.3 - Weekend release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#200">[ date ]</a>
+              <a href="thread.html#200">[ thread ]</a>
+              <a href="subject.html#200">[ subject ]</a>
+              <a href="author.html#200">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

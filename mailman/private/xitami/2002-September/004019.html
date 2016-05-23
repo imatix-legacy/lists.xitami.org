@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004012.html">
+   <LINK REL="Next"  HREF="004021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Peter van der Goes
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 24 Sep 2002 08:23:10 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004012.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004021.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4019">[ date ]</a>
+              <a href="thread.html#4019">[ thread ]</a>
+              <a href="subject.html#4019">[ subject ]</a>
+              <a href="author.html#4019">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks very much for that information, Paul. Now I know it's not the
+manually-created cgi-bin.
+As a further confusing factor, I found a CGI script that generates HTML form
+objects, asks the user to enter info, then displays the results. This works
+fine in my setup:
+
+#!C:\perl\bin\perl.exe
+
+use CGI qw(:standard);
+
+print header;
+print start_html('A Simple Example'),
+    h1('A Simple Example'),
+    start_form,
+    &quot;What's your name? &quot;,textfield('name'),
+    p,
+    &quot;What's the combination?&quot;,
+    p,
+    checkbox_group(-name=&gt;'words',
+     -values=&gt;['eenie','meenie','minie','moe'],
+     -defaults=&gt;['eenie','minie']),
+    p,
+    &quot;What's your favorite color? &quot;,
+    popup_menu(-name=&gt;'color',
+        -values=&gt;['red','green','blue','chartreuse']),
+    p,
+    submit,
+    end_form,
+    hr;
+
+if (param()) {
+    print
+ &quot;Your name is &quot;,em(param('name')),
+ p,
+ &quot;The keywords are: &quot;,em(join(&quot;, &quot;,param('words'))),
+ p,
+ &quot;Your favorite color is &quot;,em(param('color')),
+ hr;
+}
+print end_html;
+
+As far as not seeing anything out of whack, join the club 8).
+ As I type this, I'm downloading an alternative browser to try, but am not
+optimistic it will make any difference. I'm beginning to think about
+networking settings and what, if anything, there might cause the output from
+a CGI (or .pl) script) not to appear in the browser. It seems (to my
+simplistic way of thinking) that the output cannot find its way back to the
+browser when a script is called from a HTML page? As I find no messages in
+the cgierr or error logs, I am (at this stage) assuming the script is run.
+
+----- Original Message -----
+From: &quot;Paul Reid&quot; &lt;<A HREF="mailto:preid@rci.rutgers.edu">preid@rci.rutgers.edu</A>&gt;
+To: &quot;Peter van der Goes&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, September 23, 2002 9:49 AM
+Subject: Re: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+
+
+&gt;<i> &gt;  I find a bit strange about the Xitami install is that no cgi-bin
+</I>&gt;<i> &gt; directory is created by the install. I have to make one myself. Is
+</I>&gt;<i> &gt; this normal?
+</I>&gt;<i>
+</I>&gt;<i> Yes.
+</I>&gt;<i>
+</I>&gt;<i> Find a very old copy of Xitami, it creates a cgi-bin and drops a
+</I>&gt;<i> sample file that prints the environment.
+</I>&gt;<i>
+</I>&gt;<i> That sample script could be considered a security risk, so they took
+</I>&gt;<i> it out of the system. The next time they built the archive, their
+</I>&gt;<i> clever tool noticed that the cgi-bin directory was empty, and didn't
+</I>&gt;<i> include it in the distribution.
+</I>&gt;<i>
+</I>&gt;<i> I've looked at the rest of the thread and do not see why it isn't
+</I>&gt;<i> working. Since non-Form scripts work, we know Perl is being found.
+</I>&gt;<i>
+</I>&gt;<i>  -PRR
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004012.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004021.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4019">[ date ]</a>
+              <a href="thread.html#4019">[ thread ]</a>
+              <a href="subject.html#4019">[ subject ]</a>
+              <a href="author.html#4019">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

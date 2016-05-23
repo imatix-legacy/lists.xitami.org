@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Dynamic IP... is anyone else using it?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001426.html">
+   <LINK REL="Next"  HREF="001420.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Dynamic IP... is anyone else using it?
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Dynamic IP... is anyone else using it?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 13 Nov 2001 10:15:55 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001426.html">[Xitami] Dynamic IP... is anyone else using it? --&gt; PASV FTP fails inbound through NAT
+</A></li>
+        <LI> Next message: <A HREF="001420.html">[Xitami] Dynamic IP... is anyone else using it?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1413">[ date ]</a>
+              <a href="thread.html#1413">[ thread ]</a>
+              <a href="subject.html#1413">[ subject ]</a>
+              <a href="author.html#1413">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think what you have is an FTP client problem related to Network 
+Address Translation (NAT). It is not a DDNS problem a Xitami problem as 
+it will occur with other FTP servers.
+
+Try getting a remote machine to run a very simple client (e.g. the CLI 
+ftp client included with windows 9x). It should have no problem, whereas 
+the funky GUI client may fail. I have seen this behavious with Netscape 
+4.x and believe it also occurs with other clients. The problem is this:
+
+Netscape's FTP client issues a command (SYST I think) to the FTP server 
+to tell it what IP address it has and then tries to connect to that IP 
+address for future connections. This is stupid because the FTP cleint 
+already has an IP address that works. Of course this IP address is 
+embedded within the message so the NAT s/w on the router doesn't modify it.
+
+The way to check this is (assuming the simple DOS ftp worked) is to look 
+and see if the GUI client does a SYST command or not and what the 
+response is.
+
+Francis
+
+Carl J. Elitz wrote:
+
+&gt;<i>The only feature I have not been able to implement with Xitami using the TZO
+</I>&gt;<i>client is FTP. I was trying to get the integrated DDNS function in Xitami to
+</I>&gt;<i>work only because I thought it might resolve my FTP problem. Perhaps my real
+</I>&gt;<i>problem with FTP is that I am also behind a router? Any help you could give
+</I>&gt;<i>me with that issue, Stephen, -or anyone else-, would be greatly appreciated.
+</I>&gt;<i>
+</I>&gt;<i>ROUTER ISSUE:
+</I>&gt;<i>
+</I>&gt;<i>My machine, like Stephen's machine, is part of a netork, but only a small
+</I>&gt;<i>one consisting of my machine and another machine used to play occassional
+</I>&gt;<i>two-player games. All unsolicited internet traffic is routed to my main
+</I>&gt;<i>machine - as determined by a setting in the router software. Can anyone
+</I>&gt;<i>suggest a reason why the Xitami web server works to serve web pages to
+</I>&gt;<i>people outside my network, but won't work to serve FTP? The TZO tech support
+</I>&gt;<i>people have been nice, but unable to help with this, suggesting that the
+</I>&gt;<i>problem may be my Xitami settings. They say that their FTP client keeps
+</I>&gt;<i>getting 192.168.1.2 as my machine's IP address (my machine's local IP) when
+</I>&gt;<i>they hit my site (when the TZO client is running), instead of the dynamic
+</I>&gt;<i>address assigned by my ISP.
+</I>&gt;<i>
+</I>&gt;<i>I have read everything I can about my router, but have found no obvious
+</I>&gt;<i>settings which would tell it to treat FTP traffic in a certain way. The
+</I>&gt;<i>router is a 3Com router and is configured via a web page interface, so the
+</I>&gt;<i>emphasis of the router software is on keeping things simple. I was concerned
+</I>&gt;<i>that the router wasn't designed to do what I'm doing in mind, but the good
+</I>&gt;<i>news is that I have found that I can telnet to my router's IP address, and
+</I>&gt;<i>that there are many &quot;unimplemented&quot; text commands that can change the
+</I>&gt;<i>router's settings, if necessary. I would obviously rather run just Xitami if
+</I>&gt;<i>possible, rather than Xitami and the TZO client.
+</I>&gt;<i>
+</I>&gt;<i>DDNS ISSUE:
+</I>&gt;<i>
+</I>&gt;<i>The router may be the ultimate solution to my problem, but even so, it does
+</I>&gt;<i>not explain why the Xitami DDNS feature is not working with TZO, or explain
+</I>&gt;<i>the rather cryptic error messages I am getting from Xitami. I am still
+</I>&gt;<i>curious about that. I don't think this feature is well implemented.
+</I>&gt;<i>
+</I>&gt;<i>DNS SERVER:
+</I>&gt;<i>
+</I>&gt;<i>Thanks, Stephen, for the suggestion about <A HREF="http://www.jhsoft.com/.">http://www.jhsoft.com/.</A> I reviewed
+</I>&gt;<i>the pages there, but don't think this is an issue for me. As I understand
+</I>&gt;<i>it, a DNS server would be something I would be interested in if I had a lot
+</I>&gt;<i>of machines on my side of the router, right? My current network setting in
+</I>&gt;<i>Windows ME is &quot;DNS disabled.&quot;
+</I>&gt;<i>
+</I>&gt;<i>TESTING MY OWN WEB PAGE/FTP PAGE:
+</I>&gt;<i>
+</I>&gt;<i>Finally, someone told me that, because I was behind a router, I simply
+</I>&gt;<i>cannot visit my own machine through the internet. In other words, although I
+</I>&gt;<i>can hit <A HREF="http://192.168.1.2">http://192.168.1.2</A> or &quot;trick&quot; my machine into taking me to my own
+</I>&gt;<i>web page by mapping my domain to this IP through the &quot;hosts&quot; file, there is
+</I>&gt;<i>no way for me to test my site as people on the other side of the router
+</I>&gt;<i>would see it. This has been very frustrating because Xitami works
+</I>&gt;<i>beautifully on this side of the router. It's only when I get involved in the
+</I>&gt;<i>dynamic IP stuff that things don't work.
+</I>&gt;<i>
+</I>&gt;<i>I've been playing with this for more than 3 weeks now with almost no luck.
+</I>&gt;<i>It's been really frustrating, so I REALLY appreciate any help I get on this.
+</I>&gt;<i>The thing that has me most confused is that the Web pages serve, the FTP
+</I>&gt;<i>won't. What gives?
+</I>&gt;<i>
+</I>&gt;<i>Thanks.
+</I>&gt;<i>
+</I>
+
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001426.html">[Xitami] Dynamic IP... is anyone else using it? --&gt; PASV FTP fails inbound through NAT
+</A></li>
+	<LI> Next message: <A HREF="001420.html">[Xitami] Dynamic IP... is anyone else using it?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1413">[ date ]</a>
+              <a href="thread.html#1413">[ thread ]</a>
+              <a href="subject.html#1413">[ subject ]</a>
+              <a href="author.html#1413">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

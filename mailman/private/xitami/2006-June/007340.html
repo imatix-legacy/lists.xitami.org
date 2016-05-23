@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] LRWP, CGI and HTTP_REFERER
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20LRWP%2C%20CGI%20and%20HTTP_REFERER&In-Reply-To=449F2103.1060605%40comcast.net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007339.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] LRWP, CGI and HTTP_REFERER</H1>
+    <B>John Torrance</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20LRWP%2C%20CGI%20and%20HTTP_REFERER&In-Reply-To=449F2103.1060605%40comcast.net"
+       TITLE="[Xitami] LRWP, CGI and HTTP_REFERER">j.torrance at earthlink.net
+       </A><BR>
+    <I>Mon Jun 26 02:55:50 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007339.html">[Xitami] LRWP, CGI and HTTP_REFERER
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7340">[ date ]</a>
+              <a href="thread.html#7340">[ thread ]</a>
+              <a href="subject.html#7340">[ subject ]</a>
+              <a href="author.html#7340">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Wow, thanks!  I was completely stumped by this about 6 months ago.    I 
+have since moved my site to an Apache host since it outgrew my 
+DSL/Desktop setup, and that host was passing the complete Referer, but I 
+still host a few of my sites on my own machine so this may come in handy 
+some day.
+
+John
+
+
+Paul Osze wrote:
+
+&gt;<i> Okay, looks like I answered my own question.
+</I>&gt;<i>
+</I>&gt;<i> Xitami does not pass the query string portion of http-referer by design.
+</I>&gt;<i>
+</I>&gt;<i> From smt/smthttpl.c:
+</I>&gt;<i>
+</I>&gt;<i>            /*  It's possible that the Referer: field contains an URL
+</I>&gt;<i>             *  followed by ? and a whole long argument...  We don't want
+</I>&gt;<i>             *  that stuff.  Get rid of it.  (But save it all first.)
+</I>&gt;<i>             */
+</I>&gt;<i>            if (streq (header_name, &quot;referer&quot;)) {
+</I>&gt;<i>                mem_strfree (&amp;p_http-&gt; referrer);
+</I>&gt;<i>                p_http-&gt; referrer = mem_strdup (header_value);
+</I>&gt;<i>                if (strchr (header_value, '?') != NULL)
+</I>&gt;<i>                    *strchr (header_value, '?') = '\0';
+</I>&gt;<i>            }
+</I>&gt;<i>
+</I>&gt;<i> To fix this, I just commented out the stripping statement and recompiled:
+</I>&gt;<i>
+</I>&gt;<i>            /*  It's possible that the Referer: field contains an URL
+</I>&gt;<i>             *  followed by ? and a whole long argument...  We don't want
+</I>&gt;<i>             *  that stuff.  Get rid of it.  (But save it all first.)
+</I>&gt;<i>             */
+</I>&gt;<i>            if (streq (header_name, &quot;referer&quot;)) {
+</I>&gt;<i>                mem_strfree (&amp;p_http-&gt; referrer);
+</I>&gt;<i>                p_http-&gt; referrer = mem_strdup (header_value);
+</I>&gt;<i>               /*
+</I>&gt;<i>                if (strchr (header_value, '?') != NULL)
+</I>&gt;<i>                    *strchr (header_value, '?') = '\0';
+</I>&gt;<i>               */
+</I>&gt;<i>            }
+</I>&gt;<i>
+</I>&gt;<i> Do this, and you'll be able to get the full HTTP-REFERER url in CGI, 
+</I>&gt;<i> PHP, LRWP, etc.
+</I>&gt;<i>
+</I>&gt;<i> Hope this helps anyone else who's been stumped by this.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007339.html">[Xitami] LRWP, CGI and HTTP_REFERER
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7340">[ date ]</a>
+              <a href="thread.html#7340">[ thread ]</a>
+              <a href="subject.html#7340">[ subject ]</a>
+              <a href="author.html#7340">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

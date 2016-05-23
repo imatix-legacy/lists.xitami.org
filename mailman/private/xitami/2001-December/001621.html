@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001617.html">
+   <LINK REL="Next"  HREF="001623.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] (no subject)
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] (no subject)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 06 Dec 2001 08:48:10 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001617.html">[Xitami] (no subject)
+</A></li>
+        <LI> Next message: <A HREF="001623.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1621">[ date ]</a>
+              <a href="thread.html#1621">[ thread ]</a>
+              <a href="subject.html#1621">[ subject ]</a>
+              <a href="author.html#1621">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;002d01c17d4d$a9d66b40$<A HREF="mailto:0ddcf4d0@dds.davidge.com">0ddcf4d0@dds.davidge.com</A>&gt;, &quot;Erik A.&quot; writes:
+&gt;<i>My TCP/IP is installed on the machine, but i keep getting that message that
+</I>&gt;<i>says:
+</I>&gt;<i>Could not open HTTP port 80-Port is already used by another server
+</I>&gt;<i>(WSAEADDRINUSE).
+</I>
+In that case there is probably another HTTP server running -- perhaps
+IIS if you are using Windows.  (All sorts of things install bits of IIS
+because they think you need it :-( )
+
+&gt;<i>From a shell prompt do:
+</I>
+netstat -na
+
+and look for a &quot;...:80...... LISTEN&quot; line; if you see one (before
+starting Xitami) then you've definitely got another webserver running.
+In which case look at the task list for likely suspects.
+
+If you don't want to stop the other server, you can run Xitmai on 
+another port with:
+
+xitami -b BASE
+
+where base is the number to _offset_ all the Xitami ports by, eg:
+
+xitami -b 5000
+
+makes the HTTP port 5080, so you need to use URLs like:
+
+<A HREF="http://localhost:5080/....">http://localhost:5080/....</A>
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001617.html">[Xitami] (no subject)
+</A></li>
+	<LI> Next message: <A HREF="001623.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1621">[ date ]</a>
+              <a href="thread.html#1621">[ thread ]</a>
+              <a href="subject.html#1621">[ subject ]</a>
+              <a href="author.html#1621">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

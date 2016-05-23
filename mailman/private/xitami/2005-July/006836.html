@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ftp ports
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006838.html">
+   <LINK REL="Next"  HREF="006839.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ftp ports
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ftp ports">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 04 Jul 2005 17:52:35 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006838.html">[Xitami] What is up with this
+</A></li>
+        <LI> Next message: <A HREF="006839.html">[Xitami] ftp ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6836">[ date ]</a>
+              <a href="thread.html#6836">[ thread ]</a>
+              <a href="subject.html#6836">[ subject ]</a>
+              <a href="author.html#6836">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 16:32 4/07/05, you wrote:
+&gt;<i>Hi Layne,
+</I>&gt;<i>
+</I>&gt;<i>you have to enable passive connections in your ftp client. In addition, 
+</I>&gt;<i>you have to force
+</I>&gt;<i>xitami to use the interface ,on which the ftp server is listening, to use 
+</I>&gt;<i>for the passive
+</I>&gt;<i>connections. Take a look at the xitami.cfg for the section.It's easy to 
+</I>&gt;<i>find and to
+</I>&gt;<i>configure in the default.cfg.
+</I>
+
+Hello !
+
+If the configuration worked before changing the server, you should be able 
+to use the normal ftp (not passive mode). In normal mode, the server 
+connects to the client for the data channel (directory listings and file 
+transfers). It's a client's problem if the DATA connection could not be 
+etablished. Its strange that a server firewall would block outgoing 
+connections...
+
+
+In passive mode, the server tells the client which DATA port it will be 
+listening. This range of ports must be opened on the server firewall (the 
+ftp server generally rotates through a range of ports to avoid connecting 
+to a port that's just being closed).
+The default port is 200. You will need to open all ports in the range 200 
+to ??? (each PORT command will use another port). There is a PORT for each 
+file transfered and each directory listed.
+
+marc
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------- 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006838.html">[Xitami] What is up with this
+</A></li>
+	<LI> Next message: <A HREF="006839.html">[Xitami] ftp ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6836">[ date ]</a>
+              <a href="thread.html#6836">[ thread ]</a>
+              <a href="subject.html#6836">[ subject ]</a>
+              <a href="author.html#6836">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

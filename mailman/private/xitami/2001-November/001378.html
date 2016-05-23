@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Upload scripts on Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001377.html">
+   <LINK REL="Next"  HREF="001383.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Upload scripts on Xitami
+   </H1>
+    <B>Priyo Chatterjee
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Upload scripts on Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 9 Nov 2001 00:29:15 -0800 (PST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001377.html">[Xitami] SSI and site down
+</A></li>
+        <LI> Next message: <A HREF="001383.html">[Xitami] Upload scripts on Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1378">[ date ]</a>
+              <a href="thread.html#1378">[ thread ]</a>
+              <a href="subject.html#1378">[ subject ]</a>
+              <a href="author.html#1378">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Rob,
+
+Thanks a lot for the script. Unfortunately, I'm having
+problems making it work. First of, how do I do a chmod
+on Xitami on WindowsXP -- I know how to do it on Unix.
+
+Thanks.
+
+Priyo
+
+
+
+--- rob tromp &lt;<A HREF="mailto:tromp@tromp.cx">tromp@tromp.cx</A>&gt; wrote:
+&gt;<i> Yes....
+</I>&gt;<i> 
+</I>&gt;<i> Her it is, it is rather basic, but it will work. You
+</I>&gt;<i> can modify and give it
+</I>&gt;<i> a cosmetic facelift.
+</I>&gt;<i> After sending the file, the file is diplayed. If you
+</I>&gt;<i> don't want this to
+</I>&gt;<i> happen, modify the .class
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> Rob
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &lt;html&gt;
+</I>&gt;<i> 	&lt;head&gt;
+</I>&gt;<i> 		&lt;title&gt;Upload&lt;/title&gt;
+</I>&gt;<i> 	&lt;/head&gt;
+</I>&gt;<i> &lt;body&gt;
+</I>&gt;<i> 
+</I>&gt;<i> &lt;?
+</I>&gt;<i> require(&quot;fileupload.class&quot;);
+</I>&gt;<i> 
+</I>&gt;<i> #--------------------------------#
+</I>&gt;<i> # Variables
+</I>&gt;<i> #--------------------------------#
+</I>&gt;<i> 
+</I>&gt;<i> // The path to the directory where you want the
+</I>&gt;<i> // uploaded files to be saved. This MUST end with a
+</I>&gt;<i> // trailing slash unless you use $PATH = &quot;&quot;; to
+</I>&gt;<i> // upload to the current directory. Whatever
+</I>&gt;<i> directory
+</I>&gt;<i> // you choose, please chmod 777 that directory.
+</I>&gt;<i> 
+</I>&gt;<i> 	$PATH = &quot;./images/&quot;;
+</I>&gt;<i> 
+</I>&gt;<i> // The name of the file field in your form.
+</I>&gt;<i> 
+</I>&gt;<i> 	$FILENAME = &quot;userfile&quot;;
+</I>&gt;<i> 
+</I>&gt;<i> // ACCEPT mode - if you only want to accept
+</I>&gt;<i> // a certain type of file.
+</I>&gt;<i> // possible file types that PHP recognizes includes:
+</I>&gt;<i> //
+</I>&gt;<i> // OPTIONS INCLUDE:
+</I>&gt;<i> //  text/plain
+</I>&gt;<i> //  image/gif
+</I>&gt;<i> //  image/jpeg
+</I>&gt;<i> //  image/png
+</I>&gt;<i> 
+</I>&gt;<i> 	$ACCEPT = &quot;&quot;;
+</I>&gt;<i> 
+</I>&gt;<i> // If no extension is supplied, and the browser or
+</I>&gt;<i> PHP
+</I>&gt;<i> // can not figure out what type of file it is, you
+</I>&gt;<i> can
+</I>&gt;<i> // add a default extension - like &quot;.jpg&quot; or &quot;.txt&quot;
+</I>&gt;<i> 
+</I>&gt;<i> 	$EXTENSION = &quot;&quot;;
+</I>&gt;<i> 
+</I>&gt;<i> // SAVE_MODE: if your are attempting to upload
+</I>&gt;<i> // a file with the same name as another file in the
+</I>&gt;<i> // $PATH directory
+</I>&gt;<i> //
+</I>&gt;<i> // OPTIONS:
+</I>&gt;<i> //   1 = overwrite mode
+</I>&gt;<i> //   2 = create new with incremental extention
+</I>&gt;<i> //   3= do nothing if exists, highest protection
+</I>&gt;<i> 
+</I>&gt;<i> 	$SAVE_MODE = 1;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> #--------------------------------#
+</I>&gt;<i> # PHP
+</I>&gt;<i> #--------------------------------#
+</I>&gt;<i> 
+</I>&gt;<i> function print_file($file, $type, $mode) {
+</I>&gt;<i> 	if($file) {
+</I>&gt;<i> 		if(ereg(&quot;image&quot;, $type)) {
+</I>&gt;<i> 			echo &quot;&lt;img src=\&quot;&quot; . $file . &quot;\&quot; border=\&quot;0\&quot;
+</I>&gt;<i> alt=\&quot;\&quot;&gt;&quot;;
+</I>&gt;<i> 		}
+</I>&gt;<i> 		else {
+</I>&gt;<i> 			$userfile = fopen($file, &quot;r&quot;);
+</I>&gt;<i> 			while(!feof($userfile)) {
+</I>&gt;<i> 				$line = fgets($userfile, 255);
+</I>&gt;<i> 				switch($mode){
+</I>&gt;<i> 					case 1:
+</I>&gt;<i> 						echo $line;
+</I>&gt;<i> 						break;
+</I>&gt;<i> 					case 2:
+</I>&gt;<i> 						echo nl2br(ereg_replace(&quot;\t&quot;,
+</I>&gt;<i> &quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;,
+</I>&gt;<i> htmlentities($line)));
+</I>&gt;<i> 						break;
+</I>&gt;<i> 				}
+</I>&gt;<i> 			}
+</I>&gt;<i> 		}
+</I>&gt;<i> 	}
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> $upload = new uploader;
+</I>&gt;<i> $upload-&gt;max_filesize(500000);
+</I>&gt;<i> 
+</I>&gt;<i> if($upload-&gt;upload(&quot;$FILENAME&quot;, &quot;$ACCEPT&quot;,
+</I>&gt;<i> &quot;$EXTENSION&quot;)) {
+</I>&gt;<i> 	while(list($key, $var) = each($upload-&gt;file)){
+</I>&gt;<i> 		echo $key . &quot; = &quot; . $var . &quot;&lt;br&gt;&quot;;
+</I>&gt;<i> 	}
+</I>&gt;<i> 	if($upload-&gt;save_file(&quot;$PATH&quot;, $SAVE_MODE)) {
+</I>&gt;<i> 		print(&quot;&lt;p&gt;Saved as: &quot; . $upload-&gt;new_file .
+</I>&gt;<i> &quot;&lt;p&gt;&quot;);
+</I>&gt;<i> 		print_file($upload-&gt;new_file,
+</I>&gt;<i> $upload-&gt;file[&quot;type&quot;], 2);
+</I>&gt;<i> 	}
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> if($upload-&gt;errors) {
+</I>&gt;<i> 	while(list($key, $var) = each($upload-&gt;errors)){
+</I>&gt;<i> 		echo &quot;&lt;p&gt;&quot; . $var . &quot;&lt;br&gt;&quot;;
+</I>&gt;<i> 	}
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> if ($NEW_NAME) {
+</I>&gt;<i> 	print(&quot;&lt;p&gt;Name of sent file:
+</I>&gt;<i> &lt;b&gt;$NEW_NAME&lt;/b&gt;&lt;/p&gt;&quot;);
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> #--------------------------------#
+</I>&gt;<i> # HTML FORM
+</I>&gt;<i> #--------------------------------#
+</I>&gt;<i> ?&gt;
+</I>&gt;<i> 
+</I>&gt;<i> 	&lt;form enctype=&quot;multipart/form-data&quot;
+</I>&gt;<i> action=&quot;&lt;?print($PHP_SELF);?&gt;&quot;
+</I>&gt;<i> method=&quot;POST&quot;&gt;
+</I>&gt;<i> 		&lt;input type=&quot;hidden&quot; name=&quot;MAX_FILE_SIZE&quot;
+</I>&gt;<i> value=&quot;100000&quot;&gt;Send this file:
+</I>&gt;<i> 		&lt;input name=&quot;userfile&quot; type=&quot;file&quot;&gt;
+</I>&gt;<i> 		&lt;input type=&quot;submit&quot; value=&quot;SEND&quot;&gt;
+</I>&gt;<i> 	&lt;/form&gt;
+</I>&gt;<i> 	&lt;hr&gt;
+</I>&gt;<i> 	[ &lt;a href=&quot;../index.html&quot;&gt;Home&lt;/a&gt; ]
+</I>&gt;<i> &lt;?
+</I>&gt;<i> 	if ($ACCEPT) {
+</I>&gt;<i> 		print(&quot; [ This form only accepts &lt;b&gt;&quot; . $ACCEPT .
+</I>&gt;<i> &quot;&lt;/b&gt; files ] \n&quot;);
+</I>&gt;<i> 	}
+</I>&gt;<i> ?&gt;
+</I>&gt;<i> 
+</I>&gt;<i> &lt;/body&gt;
+</I>&gt;<i> &lt;/html&gt;
+</I>&gt;<i> 
+</I>&gt;<i> &gt; -----Oorspronkelijk bericht-----
+</I>&gt;<i> &gt; Van: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]Namens Priyo
+</I>&gt;<i> Chatterjee
+</I>&gt;<i> &gt; Verzonden: woensdag 31 oktober 2001 18:32
+</I>&gt;<i> &gt; Aan: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt; Onderwerp: [Xitami] Upload scripts on Xitami
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hi,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Does anybody have a file upload script which will
+</I>&gt;<i> work
+</I>&gt;<i> &gt; on Xitami.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks much.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Priyo
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; __________________________________________________
+</I>&gt;<i> &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; Make a great connection at Yahoo! Personals.
+</I>&gt;<i> &gt; <A HREF="http://personals.yahoo.com">http://personals.yahoo.com</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe:
+</I>&gt;<i> <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>
+&gt;<i> ATTACHMENT part 2 application/octet-stream
+</I>name=fileupload.class
+
+
+
+__________________________________________________
+Do You Yahoo!?
+Everything you'll ever need on one web page from News and Sport to Email and Music Charts
+<A HREF="http://uk.my.yahoo.com">http://uk.my.yahoo.com</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001377.html">[Xitami] SSI and site down
+</A></li>
+	<LI> Next message: <A HREF="001383.html">[Xitami] Upload scripts on Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1378">[ date ]</a>
+              <a href="thread.html#1378">[ thread ]</a>
+              <a href="subject.html#1378">[ subject ]</a>
+              <a href="author.html#1378">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Small modification to ISAPI support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007792.html">
+   <LINK REL="Next"  HREF="007794.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Small modification to ISAPI support</H1>
+    <B>JLIST</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To="
+       TITLE="[Xitami] Small modification to ISAPI support">jlist9 at gmail.com
+       </A><BR>
+    <I>Wed Apr 30 08:34:06 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007792.html">[Xitami] xitami docs page returns 404
+</A></li>
+        <LI>Next message: <A HREF="007794.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7793">[ date ]</a>
+              <a href="thread.html#7793">[ thread ]</a>
+              <a href="subject.html#7793">[ subject ]</a>
+              <a href="author.html#7793">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Among other things, Xitami's lack of URL rewriting feature
+bothers me. So I made a couple of small changes to the ISAPI
+add-on, basically adding a -i/-I option to show index.dll. When
+no DLL file name is given in the URL, index.dll is used instead.
+This makes it possible to have URLs like <A HREF="http://domain/register,">http://domain/register,</A>
+instead of <A HREF="http://domain/isapi_exe/register.dll">http://domain/isapi_exe/register.dll</A>
+
+127a128
+&gt;<i>     show_index     = FALSE;               /* Use index.dll if dll isn't in url */
+</I>346a348,350
+&gt;<i>                 case 'I':               /* Alway unload ON                   */
+</I>&gt;<i>                 case 'i':
+</I>&gt;<i>                     show_index = TRUE;      break;
+</I>599a604,605
+&gt;<i>     static char index[] = &quot;index.dll&quot;;
+</I>&gt;<i> 
+</I>608a615,617
+&gt;<i> 
+</I>&gt;<i>     if (show_index &amp;&amp; (!strstr(path_info, &quot;.dll&quot;)))
+</I>&gt;<i>         path_info = index;
+</I>
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007792.html">[Xitami] xitami docs page returns 404
+</A></li>
+	<LI>Next message: <A HREF="007794.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7793">[ date ]</a>
+              <a href="thread.html#7793">[ thread ]</a>
+              <a href="subject.html#7793">[ subject ]</a>
+              <a href="author.html#7793">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

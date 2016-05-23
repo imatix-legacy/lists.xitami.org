@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000208.html">
+   <LINK REL="Next"  HREF="000210.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+   </H1>
+    <B>Fabien Royer
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Wed, 12 Jun 2002 11:18:24 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000208.html">[Xitami-Dev] read_TCP returns 0 instead of -1
+</A></li>
+        <LI> Next message: <A HREF="000210.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a
+ nyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#209">[ date ]</a>
+              <a href="thread.html#209">[ thread ]</a>
+              <a href="subject.html#209">[ subject ]</a>
+              <a href="author.html#209">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+&gt;<i>From: Rafael Cano Pérez &lt;<A HREF="mailto:rafael.cano@o-labs.com">rafael.cano@o-labs.com</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: RE: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support 
+</I>&gt;<i>anyone?
+</I>&gt;<i>Date: Wed, 12 Jun 2002 09:48:45 +0200
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  Hi.
+</I>&gt;<i>
+</I>&gt;<i>  LRWP is a protocol, and has nothing to do with
+</I>&gt;<i>  SFL, as a C callable library. All that has to be
+</I>&gt;<i>  done is open a socket, read from and write to it.
+</I>&gt;<i>  How you reach the WINSOCK library its not relevant.
+</I>
+That's my point exactly.
+That's why SFL should not be involved in the LRWP C lib. You'd think that 
+this could have been done the first time around ;-)
+
+&gt;<i>  By the way, what do you mean SFL requires single
+</I>&gt;<i>  threading?, I think it all depends how you build
+</I>&gt;<i>  it, to which specific libc library you link it to
+</I>&gt;<i>  resolve the basic WIN32 API functions, SFL calls.
+</I>
+Not quite. Building SFL (and the other Xitami libs) with the  multithreaded 
+C runtime libs under Windows ends up affecting Xitami negatively (dies after 
+a few seconds or so).
+
+&gt;<i>  Has any one thought of building specifications
+</I>&gt;<i>  for a LRWP 3, with compression and encryption?
+</I>
+I use zlib for the compression and BlowFish for encryption. But I have kept 
+these layers separate from LRWP itself. It makes things a lot cleaner to 
+reuse.
+
+Anyways, I end up writing a C++ version of LRWP in about a day with a few 
+performance optimizations regarding memory allocation and the ability to 
+save posted data to disk.
+
+Regards,
+Fabien.
+
+&gt;<i>  Regards,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  I miss Liberetto.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>    Rafael Cano Pérez
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>-----Mensaje original-----
+</I>&gt;<i>De: <A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>
+</I>&gt;<i>[mailto:<A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>]En nombre de Fabien Royer
+</I>&gt;<i>Enviado el: martes, 11 de junio de 2002 23:14
+</I>&gt;<i>Para: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i>Asunto: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support
+</I>&gt;<i>anyone?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Hi there,
+</I>&gt;<i>
+</I>&gt;<i>I am just about to re-write a C++ version of the LRWP C library (out of
+</I>&gt;<i>frustration), capable of supporting multithreaded operations (under Windows
+</I>&gt;<i>for now).
+</I>&gt;<i>
+</I>&gt;<i>Before re-inventing the wheel, I'd like to know if someone has already done
+</I>&gt;<i>this? A quick Google search came out with nothing on the subject.
+</I>&gt;<i>
+</I>&gt;<i>IMHO, the fact that the current implementation of the LRWP C lib is bound 
+</I>&gt;<i>to
+</I>&gt;<i>SFL (which requires single threading) is a mistake. While SFL makes perfect
+</I>&gt;<i>sense in the context of the architecture of Xitami, LRWP as a protocol
+</I>&gt;<i>should be designed with applications in mind and therefore should be
+</I>&gt;<i>agnostic to threading issues. This limitation is probably what has been
+</I>&gt;<i>holding LRWP back from being more popular (compared to FastCGI for
+</I>&gt;<i>instance).
+</I>&gt;<i>
+</I>&gt;<i>Don't get me wrong. I *love* Xitami and how it is put together.
+</I>&gt;<i>
+</I>&gt;<i>Regards,
+</I>&gt;<i>Fabien.
+</I>&gt;<i>
+</I>&gt;<i>_________________________________________________________________
+</I>&gt;<i>Get your FREE download of MSN Explorer at <A HREF="http://explorer.msn.com/intl.asp.">http://explorer.msn.com/intl.asp.</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>
+
+
+
+_________________________________________________________________
+MSN Photos is the easiest way to share and print your photos: 
+<A HREF="http://photos.msn.com/support/worldwide.aspx">http://photos.msn.com/support/worldwide.aspx</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000208.html">[Xitami-Dev] read_TCP returns 0 instead of -1
+</A></li>
+	<LI> Next message: <A HREF="000210.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a
+ nyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#209">[ date ]</a>
+              <a href="thread.html#209">[ thread ]</a>
+              <a href="subject.html#209">[ subject ]</a>
+              <a href="author.html#209">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

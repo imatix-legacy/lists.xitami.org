@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Maybe solution for interrupted download of long files on slow connection after 32k (or multiples)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006077.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Maybe solution for interrupted download of long files on slow connection after 32k (or multiples)
+   </H1>
+    <B>Dario B.
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Maybe solution for interrupted download of long files on slow connection after 32k (or multiples)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 30 Aug 2004 13:43:52 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006077.html">[Xitami] protected directories not accessible with SSL
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6076">[ date ]</a>
+              <a href="thread.html#6076">[ thread ]</a>
+              <a href="subject.html#6076">[ subject ]</a>
+              <a href="author.html#6076">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>With the last versions of xitami I noticed that on slow connections
+(dial-up) it often happens that the connection breaks and there is a socket
+error; even downloading Xitami i had to use getright because of the
+disconections.
+
+I tried to solve this recompiling with Borland C++ builder (it was
+difficoult... some things was quite tricky to make it work... lots of
+warnings and some errors... but I did it somehow).
+
+I think it's some timeout error on writing on the socket: if I understood
+how it works, when a file is uploaded is divided in segments and uploaded,
+and there is a timeout for every segment to be sent. The size of the segment
+is in the file &quot;smttran.c&quot;, the &quot;var&quot; name is &quot;BUFFERSIZE&quot; and is initially
+set to 32768L, (32k), the timeout is specified in &quot;smtsock.c&quot; and is named
+&quot;WRITE_TIMEOUT&quot; and is set to 10 (seconds); this means that if you can get
+more than 32k in 10 sec (&gt;3.2kbyte/sec) everything should be ok, otherwise
+the socket &quot;thinks&quot; he isn't able to send data. I tried lowering BUFFERSIZE
+to 4096 (4k) and WRITE_TIMEOUT to 60 sec (it makes about 70 bytes/sec should
+be enough!) and it seems to work.
+
+I hope at Imatix try this so, if it works, everyone can use it.
+
+Dario B.
+
+(sorry for my english, I'm Italian)
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006077.html">[Xitami] protected directories not accessible with SSL
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6076">[ date ]</a>
+              <a href="thread.html#6076">[ thread ]</a>
+              <a href="subject.html#6076">[ subject ]</a>
+              <a href="author.html#6076">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

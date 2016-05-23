@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Talking about FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003266.html">
+   <LINK REL="Next"  HREF="003278.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Talking about FTP
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Talking about FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 28 May 2002 14:02:34 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003266.html">[Xitami] Talking about FTP
+</A></li>
+        <LI> Next message: <A HREF="003278.html">[Xitami] Talking about FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3264">[ date ]</a>
+              <a href="thread.html#3264">[ thread ]</a>
+              <a href="subject.html#3264">[ subject ]</a>
+              <a href="author.html#3264">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Gunnar Swan wrote:
+&gt;<i> 
+</I>&gt;<i> Am I hearing you guys say that the client FTP can dictate the ports that the server uses for FTP ?
+</I>
+No.  You keep asking questions about &quot;assigning&quot; ports and PASV &quot;mode&quot;. 
+PASV is an FTP command - not a mode.
+
+If you'd refer to RFC1579, it would become more clear.  You first need some
+knowlege about how FTP works.  Different firewalls are different also as far
+as the firewalling rulesets and how they deny or reject packets - you should
+refer to your firewall documentation.
+
+It's impossible to try and figure out what ports the FTP server will need to
+do it's data transfer and then attempt to open those ports in the firewall
+because the firewall would look like a sieve.  That's why the PASV command
+is normally by an FTP client to get thru a firewall (causes data to be
+transfered on the connection port), however, you must make sure your FTP
+server properly implements the PASV command first - some do not.  It also
+makes a difference whether or not your FTP server is on a DMZ or a private
+network, and whether on not it's IP address is private or public.  With more
+advanced firewalls, like Dachstein LEAF, you can do FTP transfers to a
+privately addressed server behind the firewall, WITHOUT having to use the
+PASV command.  That's one of the reasons I install Dachstein LEAF (Linux
+Embedded Appliance Firewall) routers for all my clients.  If you're using
+one of the cheap cable/DSL routers that are available commercially for
+firewalling a home/small business network, you're pretty much on your own,
+as these routers have only very limited port forwarding capability,
+extremely limited DMZ support, and the firewalling ruleset is very, very
+basic.  This is not a cut and dried issue, as there are many variables with
+different FTP server/client/firewall combinations.
+-- 
+Chris Olson
+System Administrator
+AST Communications     <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+Linux Support          <A HREF="http://linux.astcomm.net">http://linux.astcomm.net</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003266.html">[Xitami] Talking about FTP
+</A></li>
+	<LI> Next message: <A HREF="003278.html">[Xitami] Talking about FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3264">[ date ]</a>
+              <a href="thread.html#3264">[ thread ]</a>
+              <a href="subject.html#3264">[ subject ]</a>
+              <a href="author.html#3264">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

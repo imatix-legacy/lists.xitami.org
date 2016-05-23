@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] How do i run a virtual host?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001549.html">
+   <LINK REL="Next"  HREF="001551.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] How do i run a virtual host?
+   </H1>
+    <B>Craig Morrison
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] How do i run a virtual host?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 29 Nov 2001 22:15:10 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001549.html">[Xitami] How do i run a virtual host?
+</A></li>
+        <LI> Next message: <A HREF="001551.html">SV: [Xitami] How do i run a virtual host?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1550">[ date ]</a>
+              <a href="thread.html#1550">[ thread ]</a>
+              <a href="subject.html#1550">[ subject ]</a>
+              <a href="author.html#1550">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Jeff Toycen wrote:
+&gt;<i> 
+</I>&gt;<i> Id like to hear about them as well as I had little success myself ..
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> Subject: [Xitami] How do i run a virtual host?
+</I>&gt;<i> 
+</I>&gt;<i> OK, i'm trying to run a virtual host so that i can run two webpages off
+</I>&gt;<i> of
+</I>&gt;<i> one IP.  I can't find out how though.
+</I>
+The short version. :-)
+
+If you want to run two or more virtual-hosts off of a single IP address you
+are going to have to use name based v-hosts. It is really a lot more simple
+than it seems.
+
+The first thing you need to do is create a configuration file for each v-host.
+The easiest way to think about the configuration for each v-host is that the
+configuration file is a defaults.cfg for _each_ host. Then in your
+defaults.cfg you put a pointer/reference for the v-host configuration to that
+file.
+
+I'm going to use one.domain.com and two.domain.com in this example. The
+_bare_minimum_ CFG file for each v-host is below:
+
+---one.domain.com.cfg--start--
+#*END
+
+[Server]
+    Defaults=defaults.cfg
+    Webpages=one
+    Hostname=one.domain.com
+---one.domain.com.cfg--end--
+
+---two.domain.com.cfg--start--
+#*END
+
+[Server]
+    Defaults=defaults.cfg
+    Webpages=two
+    Hostname=two.domain.com
+---two.domain.com.cfg--end--
+
+Then in your defaults.cfg you'll need to add the [Virtual-hosts] section (note
+the spacing at the beginning of each line):
+
+--
+[Virtual-hosts]
+    One.domain.com=one.domain.com.cfg
+    Two.domain.com=two.domain.com.cfg
+--
+
+The web files for one.domain.com would go in \xitami\webpages\one and for
+two.domain.com in \xitami\webpages\two.
+
+You'll also want to look into creating a basehost.cfg, which can be found in
+the documentation here:
+
+  <A HREF="http://localhost/xitami/index8.htm">http://localhost/xitami/index8.htm</A>
+
+Good luck! I hope this helps.
+
+Xitami excels at name based virtual hosting. I'm running over 25 (at last
+count) here with _zero_ problems what so ever.
+
+-- 
+
+Craig Morrison
+  MTS Professional @ <A HREF="http://www.mtsprofessional.com/">http://www.mtsprofessional.com/</A>
+  A Win32 Email server that works for _you_.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001549.html">[Xitami] How do i run a virtual host?
+</A></li>
+	<LI> Next message: <A HREF="001551.html">SV: [Xitami] How do i run a virtual host?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1550">[ date ]</a>
+              <a href="thread.html#1550">[ thread ]</a>
+              <a href="subject.html#1550">[ subject ]</a>
+              <a href="author.html#1550">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

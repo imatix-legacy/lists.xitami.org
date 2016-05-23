@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami and PHP - revisited
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003461.html">
+   <LINK REL="Next"  HREF="003477.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami and PHP - revisited
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami and PHP - revisited">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 Jun 2002 14:06:00 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003461.html">[Xitami] Xitami and PHP - revisited
+</A></li>
+        <LI> Next message: <A HREF="003477.html">[Xitami] Xitami and PHP - revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3474">[ date ]</a>
+              <a href="thread.html#3474">[ thread ]</a>
+              <a href="subject.html#3474">[ subject ]</a>
+              <a href="author.html#3474">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 10:26 PM 6/20/2002 -0700, Liz Marr writeth:
+&gt;<i>More errors - this time from attempting to run Squirrel Mail the same way.
+</I> Maybe 
+&gt;<i>some of these will ring a bell with a more experienced user.  One thing
+</I>that I have 
+&gt;<i>done is to move the Squirrel Mail directory under the PHP directory (I had
+</I>it off 
+&gt;<i>elsewhere before)  It looks like I need to either create a directory
+</I>called TMP or 
+&gt;<i>tell the scripts to use a different directory.
+</I>&gt;<i>
+</I>&gt;<i>Warning: open(/tmp\sess_18ba7237a4d01d6fe12ca7773ffa4091, O_RDWR) 
+</I>&gt;<i>failed: No such file or directory (2) in
+</I>C:\PHP\squirrelmail\functions\gettext.php on 
+&gt;<i>line 24
+</I>
+Well, yeah that will happen if your PHP.INI file is configured incorrectly.
+ If you look on line 24 of 'C:\PHP\squirrelmail\functions\gettext.php', you
+see that 'session_register('gettext_php_loaded');' is the function call on
+that line.
+
+Going to www.php.net, you can find out that session_register() starts a new
+session and adds a variable/string/whatnot to the session.  Based on this
+it should be seen that session_register can't create a new file called
+'/tmp\sess_18ba7237a4d01d6fe12ca7773ffa4091' because:
+
+1)  This isn't *NIX (duh).
+2)  There is no '/tmp' directory on the local machine.
+3)  No filesystem on the face of this planet (AFAIK) fully accepts
+mixed-slash notation.
+4)  Your PHP.INI file is configured incorrectly for session management.
+
+The solution to this problem is to fix the session management issues:
+
+1)  Create a directory called 'C:\TEMP' on the local machine (name it
+whatever you want).
+2)  Locate 'session.save_path = /tmp' in the PHP.INI file and change it to
+'session.save_path = c:\temp'.
+
+Try SquirrelMail again.  It should work this time (provided that you have
+run the config.pl tool and configured it properly).
+
+I have no idea why you put SquirrelMail with PHP as the root directory.
+There is no need for that since it will work fine even under a Xitami VHost.
+
+In the future, you should note that this list is for Xitami-specific
+issues.  PHP issues should be directed elsewhere.  At this point, PHP is
+working fine with Xitami, and so any issues with SquirrelMail/PHP should be
+directed at the appropriate locations.
+
+BTW, PHP is working fine on my machine with SquirrelMail via XiFusion v2.6.
+ So, there is probably something wrong with your setup if you can't get
+XiFusion and PHP to work together.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003461.html">[Xitami] Xitami and PHP - revisited
+</A></li>
+	<LI> Next message: <A HREF="003477.html">[Xitami] Xitami and PHP - revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3474">[ date ]</a>
+              <a href="thread.html#3474">[ thread ]</a>
+              <a href="subject.html#3474">[ subject ]</a>
+              <a href="author.html#3474">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

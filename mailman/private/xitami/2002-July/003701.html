@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP and FW-1
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003700.html">
+   <LINK REL="Next"  HREF="003702.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP and FW-1
+   </H1>
+    <B>ian
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP and FW-1">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 18 Jul 2002 13:55:57 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003700.html">[Xitami] FTP and FW-1
+</A></li>
+        <LI> Next message: <A HREF="003702.html">[Xitami] cgi-perl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3701">[ date ]</a>
+              <a href="thread.html#3701">[ thread ]</a>
+              <a href="subject.html#3701">[ subject ]</a>
+              <a href="author.html#3701">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>If you want to diagnose connection problems with your FTP server, you 
+should be looking at your FW logs not the output of your FTP server. 
+The logs will tell you more about what is going on and will show 
+accepted and dropped packets.
+
+FWIW: FW1 can handle passive connections just fine. Checkpoint has 
+inspect code built in for the ftp service and can open the correct 
+dynamic ports for each session.
+
+There is a bug/limitation in earlier versions (even 4.1) of Checkpoint 
+where the passive sessions for multiple files can eventually start 
+running into the listed ports - then FW1 thinks that the dynamic port 
+requests are invalid and will close the session. This only seems to 
+happen with certain combinations of clients/servers and where they 
+decide to start opening dynamic ports... just thought I would mention 
+it, I don't use Xitami's ftp server, I got bit a long time ago by it 
+and I have never forgiven it! I use ServU and have never had an issue 
+and all my traffic goes through a Checkpoint FW.
+
+More help for Checkpoint can be found either at their knowledge base or 
+you can find a lot of great information at www.phoneboy.com
+
+-Ian
+
+-----Original Message-----
+From: &quot;Fabien Royer&quot; &lt;<A HREF="mailto:fabien_royer@hotmail.com">fabien_royer@hotmail.com</A>&gt;
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Date: Thu, 18 Jul 2002 13:03:21 -0400
+Subject: Re: [Xitami] FTP and FW-1
+
+&gt;<i> Greg,
+</I>&gt;<i> 
+</I>&gt;<i> Your data channel is never being established because FW-1 is not
+</I>&gt;<i> letting the 
+</I>&gt;<i> FTP server through to connect back to your client.
+</I>&gt;<i> 
+</I>&gt;<i> You can usually get around this problem by using your FTP client in
+</I>&gt;<i> passive 
+</I>&gt;<i> mode, where the client initiates both command and data channels with
+</I>&gt;<i> the FTP 
+</I>&gt;<i> server. However, this is going to require Firewall-1 to be configured
+</I>&gt;<i> to let 
+</I>&gt;<i> a range of ports open to the FTP server.
+</I>&gt;<i> 
+</I>&gt;<i> While this is not a problem with a NAT-ted setup, you may encounter 
+</I>&gt;<i> &quot;political&quot; management resistance ;-)
+</I>&gt;<i> 
+</I>&gt;<i> I hope this helps.
+</I>&gt;<i> 
+</I>&gt;<i> Regards,
+</I>&gt;<i> Fabien.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;From: Greg Blake &lt;<A HREF="mailto:greg@healthgate.com">greg@healthgate.com</A>&gt;
+</I>&gt;<i> &gt;Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;To: &quot;'<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>'&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt;Subject: [Xitami] FTP and FW-1
+</I>&gt;<i> &gt;Date: Thu, 18 Jul 2002 12:08:18 -0400
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I'm trying to ftp to Xitami through a Firewall-1 box.  We're using
+</I>&gt;<i> NAT.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;When I connect It looks something like this:
+</I>&gt;<i> &gt;230 User greg logged-in
+</I>&gt;<i> &gt;Remote system type is Windows.
+</I>&gt;<i> &gt;ftp&gt; ls
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;200 Command okay
+</I>&gt;<i> &gt;200 Command okay
+</I>&gt;<i> &gt;ftp&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;It appears that the data connection isn't being made correctly. 
+</I>&gt;<i> What is 
+</I>&gt;<i> &gt;odd
+</I>&gt;<i> &gt;is that if I set up IIS ftp everything works fine connecting through
+</I>&gt;<i> the
+</I>&gt;<i> &gt;firewall.  I'm wondering if there is some configuration option in
+</I>&gt;<i> Xitami 
+</I>&gt;<i> &gt;I'm
+</I>&gt;<i> &gt;missing or something.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Hoping this makes sense to someone...
+</I>&gt;<i> &gt;gregory
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;--
+</I>&gt;<i> &gt;Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> _________________________________________________________________
+</I>&gt;<i> MSN Photos is the easiest way to share and print your photos: 
+</I>&gt;<i> <A HREF="http://photos.msn.com/support/worldwide.aspx">http://photos.msn.com/support/worldwide.aspx</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003700.html">[Xitami] FTP and FW-1
+</A></li>
+	<LI> Next message: <A HREF="003702.html">[Xitami] cgi-perl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3701">[ date ]</a>
+              <a href="thread.html#3701">[ thread ]</a>
+              <a href="subject.html#3701">[ subject ]</a>
+              <a href="author.html#3701">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

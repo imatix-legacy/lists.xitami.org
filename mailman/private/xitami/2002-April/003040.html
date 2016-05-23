@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Yet Another VH Problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003039.html">
+   <LINK REL="Next"  HREF="003042.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Yet Another VH Problem
+   </H1>
+    <B>Steve Shervais
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Yet Another VH Problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 23 Apr 2002 13:24:14 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003039.html">[Xitami] PHP 4.0.2+ $PHP_SELF empty
+</A></li>
+        <LI> Next message: <A HREF="003042.html">[Xitami] Yet Another VH Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3040">[ date ]</a>
+              <a href="thread.html#3040">[ thread ]</a>
+              <a href="subject.html#3040">[ subject ]</a>
+              <a href="author.html#3040">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am running a student webserver under Xitami v2.5b4 on an old Win95 box.
+Works fine.
+
+Recently, I tried setting up virtual hosts (using the wizard, mostly) for
+different teams, and trying to give each team their own logs, so they can
+see what their errors look like.  Xitami created the logs for me
+(teamXX.log, teamXXerr.log), and in the correct directory.  However, none of
+the logs has any entries -- all the information is going into the default
+logs under C:\Xitami.  This seems to be because Xitami is ignoring the VH
+entries and using the defaults.  Here are the contents of defaults.cfg, a
+team config file, and an extract from debug.
+
+In defaults.cfg I have:
+[Virtual-hosts]
+    Eaglebay.ewu.edu/teamXX = &quot;teamXX.cfg&quot;
+----------------------------------------------
+In teamXX.cfg I have:
+#*END
+
+[Accesslog]
+    Filename = &quot;C:/Xitami/webpages/teamXX/logs/teamXX.log&quot;
+    enabled=1
+
+[Errorlog]
+    Filename = &quot;C:/Xitami/webpages/teamXX/logs/teamXXErr.log&quot;
+    enabled=1
+
+[Ftp]
+    Root = &quot;C:/Xitami/webpages/teamXX&quot;
+
+[Server]
+    Defaults=&quot;defaults.cfg&quot;
+    Cgi-bin = &quot;C:/Xitami/webpages/teamXX/cgi-bin&quot;
+    Webpages = &quot;C:/Xitami/webpages/teamXX&quot;
+    Hostname=&quot;eaglebay.ewu.edu&quot;
+----------------------------------------------
+In debug I see:
+2002/04/23 13:12:06: Looking for VH using Host value: eaglebay.ewu.edu
+2002/04/23 13:12:06:  - looking for VH using IP address: 146.187.25.27
+2002/04/23 13:12:06: - using default virtual host values
+
+So, any obvious errors? Any recommendations?
+
+Regards,
+Steve Shervais
+
+Assistant Professor, MIS              You think because you understand one
+CBPA/AIS KG 316                       you must understand two,
+Eastern Washington University      because one and one makes two.
+Cheney, Washington 99004          But you must also understand and.
+
+ (509) 359-4280 (v)                            Wheatly, quoting Meadows,
+ (509) 359-4656 (f)                              quoting old Sufi saying.
+
+ <A HREF="mailto:sshervais@mail.ewu.edu">sshervais@mail.ewu.edu</A>
+ <A HREF="mailto:shervais@acm.org">shervais@acm.org</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003039.html">[Xitami] PHP 4.0.2+ $PHP_SELF empty
+</A></li>
+	<LI> Next message: <A HREF="003042.html">[Xitami] Yet Another VH Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3040">[ date ]</a>
+              <a href="thread.html#3040">[ thread ]</a>
+              <a href="subject.html#3040">[ subject ]</a>
+              <a href="author.html#3040">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

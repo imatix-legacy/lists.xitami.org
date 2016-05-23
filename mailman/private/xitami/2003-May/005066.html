@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Persistent CGI, anyone interested ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005064.html">
+   <LINK REL="Next"  HREF="005067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Persistent CGI, anyone interested ?
+   </H1>
+    <B>Marcio Marchini
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Persistent CGI, anyone interested ?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 26 May 2003 14:55:04 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005064.html">[Xitami] Javascript problem
+</A></li>
+        <LI> Next message: <A HREF="005067.html">[Xitami] reverse-dns logging ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5066">[ date ]</a>
+              <a href="thread.html#5066">[ thread ]</a>
+              <a href="subject.html#5066">[ subject ]</a>
+              <a href="author.html#5066">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+	As some of you know, if you want a web app integrated with your web server you
+have to either make it into a CGI program that is loaded/unloaded everytime your
+URL is hit, or you must have a persistent (always running) server that sits
+behind Xitami (or Apache) so that this process is sped up.
+
+	As you know, doing this under Apache is specific to Apache, and doing this for
+Xitami is specific to Xitami too (LRWP). If you use Java servlets then you are
+fine because both Apache and Xitami can run servlets in a persistent manner (the
+Sokrates folks have implemented the LRWP for you).
+
+	Now, if you want to do something in another language (say Python) and want to
+have the interpreter pre-loaded and already running, a portable alternative
+would be Fast CGI
+(<A HREF="http://www.fastcgi.com/devkit/doc/fastcgi-whitepaper/fastcgi.htm">http://www.fastcgi.com/devkit/doc/fastcgi-whitepaper/fastcgi.htm</A>), but that
+involves supporting their protocol too, which is not super simple.
+
+
+	What I did was a portable, small executable, that implements a persistent CGI
+in the simplest possible way. You use it like this:
+
+	<A HREF="http://localhost/cgi-bin/pcgi">http://localhost/cgi-bin/pcgi</A>
+
+
+	The executable is launched, and it reads a cfg file that tells what host &amp; port
+the actual server is running. Then it forwards all the CGI environment variables
+to it, and waits for bytes from it and forwards these to the original requestor.
+So, it acts like a middle-man. Like this:
+
+
+   HTTP          +-------------+
++---------------+
+&lt;--------------&gt; | web server  | &lt;---&gt; (pcgi is exec'ed) &lt;----&gt; |  your server
+|<i>
+</I>                 +-------------+
++---------------+
+
+
+
+	The idea is that pcgi is a lot faster to launch for every URL that is
+requested, at least faster than your whole web app. That is so because pcgi.exe
+is just 58KB. So, this allows it to be loaded fast, and then you can have your
+persistent server always running, behind either Apache or Xitami.
+
+	Anyway, if you are interested in using this please contact me. The source code
+is Open Source, and compiles under Linux, Windows, etc. In fact it will compiler
+under all platforms supported by SmartEiffel
+<A HREF="http://smarteiffel.loria.fr/index.html">http://smarteiffel.loria.fr/index.html</A>
+
+	Here's an example output of a persistent web app that simply echo's the env
+vars back, if you use the URL <A HREF="http://localhost/cgi-bin/pcgi?foo=bar">http://localhost/cgi-bin/pcgi?foo=bar</A>
+
+
+AUTH_TYPE=
+CONTENT_LENGTH=0
+CONTENT_TYPE=
+GATEWAY_INTERFACE=CGI/1.1
+HTTP_ACCEPT=*/*
+HTTP_REFERER=
+HTTP_USER_AGENT=Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Q312461;
+YComp 5.0.0.0; .NET CLR 1.0.3705)
+PATH_INFO=
+PATH_TRANSLATED=C:/Xitami/webpages
+QUERY_STRING=foo=bar
+REMOTE_ADDR=127.0.0.1
+REMOTE_HOST=127.0.0.1
+REMOTE_USER=
+REMOTE_IDENT=
+REQUEST_METHOD=GET
+SCRIPT_NAME=/cgi-bin/pcgi
+SERVER_NAME=localhost
+SERVER_PORT=0
+SERVER_PROTOCOL=HTTP/1.1
+SERVER_SOFTWARE=Xitami
+
+
+
+marcio
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005064.html">[Xitami] Javascript problem
+</A></li>
+	<LI> Next message: <A HREF="005067.html">[Xitami] reverse-dns logging ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5066">[ date ]</a>
+              <a href="thread.html#5066">[ thread ]</a>
+              <a href="subject.html#5066">[ subject ]</a>
+              <a href="author.html#5066">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

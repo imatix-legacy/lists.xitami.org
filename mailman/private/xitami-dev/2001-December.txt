@@ -1,0 +1,164 @@
+From xitami-dev@lists.xitami.org  Fri Dec  7 03:55:03 2001
+From: xitami-dev@lists.xitami.org (Herbert Prince)
+Date: Thu, 6 Dec 2001 22:55:03 -0500
+Subject: [Xitami-Dev] how do i set cookies.
+References: <NEBBLBEBKMFIDNHOMMNFIEJNEAAA.kwo@internet-shop.net>
+Message-ID: <00ab01c17ed2$f5304da0$a0309ad8@idirect.com>
+
+hi, list
+I have a problem setting cookies with this server using perl. I am getting
+the cook echoing on the top of my html page.
+thank, Herbert
+----- Original Message -----
+From: "Kristofer Wolff" <kwo@internet-shop.net>
+To: <xitami-dev@lists.xitami.org>
+Sent: Friday, November 23, 2001 4:31 AM
+Subject: [Xitami-Dev] hello // beginner
+
+
+> hi list,
+>
+> wow it is alive !
+>
+>
+> a question, in what lang in the source code ? what the hack is that ?
+>
+> how can i modyfy it ? what do i need on a nt-box ?
+>
+>
+> thanx kris
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Fri Dec  7 15:02:16 2001
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Fri, 7 Dec 2001 10:02:16 EST
+Subject: [Xitami-Dev] how do i set cookies.
+Message-ID: <178.5626ff.294233f8@aol.com>
+
+>I have a problem setting cookies with this server using perl. I am getting
+>the cook echoing on the top of my html page.
+
+in PHP the cookie has to be set before ANY html is sent to page.
+e.g. the very first thing in document is the cookie.
+
+-ski
+
+From xitami-dev@lists.xitami.org  Mon Dec 10 07:07:13 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 10 Dec 2001 20:07:13 +1300
+Subject: [Xitami-Dev] 16 bit LRWP
+In-Reply-To: Message from Richard Plinston <riplin@Azonic.co.nz>
+ of "Fri, 23 Nov 2001 11:19:33 -0000." <3BFE30C5.EC66358F@Azonic.co.nz>
+Message-ID: <200112100707.UAA00710@pagoda.in.naos.co.nz>
+
+In message <3BFE30C5.EC66358F@Azonic.co.nz>, Richard Plinston writes:
+>Ewen McNeill wrote:
+>> The list still works, but it's very very quiet.  
+>
+>I have a requirement to use LRWP from a 16 bit CGI program to Xitami
+>under Windows 98.
+
+The trickest thing here will be having access to TCP/IP networking from
+the 16-bit program, as much of the Windows WinSock is only 32-bit IIRC.
+
+(Basically LRWP works as a simple TCP/IP protocol which passes over the
+CGI environment for the request, and waits for the CGI result to be
+passed back.)
+
+I'm not aware of anyone who has tried to do what you're suggesting, but
+providing you can find a way to make TCP/IP networking calls from your
+code (or from some sort of interface to your code) it should work.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Mon Dec 10 07:09:41 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 10 Dec 2001 20:09:41 +1300
+Subject: [Xitami-Dev] hello // beginner
+In-Reply-To: Message from "Kristofer Wolff" <kwo@internet-shop.net>
+ of "Fri, 23 Nov 2001 09:31:24 -0000." <NEBBLBEBKMFIDNHOMMNFIEJNEAAA.kwo@internet-shop.net>
+Message-ID: <200112100709.UAA00783@pagoda.in.naos.co.nz>
+
+In message <NEBBLBEBKMFIDNHOMMNFIEJNEAAA.kwo@internet-shop.net>, "Kristofer Wolf
+f" writes:
+>a question, in what lang in the source code ? what the hack is that ? 
+
+The source to Xitami is written in C, and it makes use of some libraries
+that iMatix developed, as well as state machines using a program called
+"libero" that iMatix developed.  You can download all the bits you need
+from http://www.xitami.com/ for the source, and http://www.imatix.com/
+for some of the extra tools.
+
+>how can i modyfy it ? what do i need on a nt-box ? 
+
+You'll need a C compiler (plus the bits you can download).  Microsoft
+Visual C is the one we tend to use, and I think there are even some MSVC
+projects for building Xitami in the latest source release.  Other C
+compilers will _probably_ work but haven't been tested as much, so there
+might be minor issues.  (If you do find any of these issues, please let
+us know.)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Wed Dec 12 13:16:45 2001
+From: xitami-dev@lists.xitami.org (AO)
+Date: Wed, 12 Dec 2001 14:16:45 +0100
+Subject: [Xitami-Dev] memtrace file clogging system up?
+Message-ID: <17122790551.20011212141645@gzo.dk>
+
+Hi xitami-dev
+
+A couble of time have I tried to get my Xitami installation
+drive filled totally up by a file called
+memtrace.[something] I cant remember the extension, since i
+had to remove the file in order to get anyting to work. It
+seems to be some kind of debugging info or something...
+
+Anyone know about this?
+  
+-- 
+Regards
+
+Anders
+
+
+From xitami-dev@lists.xitami.org  Thu Dec 13 04:05:42 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 13 Dec 2001 17:05:42 +1300
+Subject: [Xitami-Dev] memtrace file clogging system up?
+In-Reply-To: Message from AO <ao@gzo.dk>
+ of "Wed, 12 Dec 2001 14:16:45 BST." <17122790551.20011212141645@gzo.dk>
+Message-ID: <200112130405.RAA28663@pagoda.in.naos.co.nz>
+
+In message <17122790551.20011212141645@gzo.dk>, AO writes:
+>A couble of time have I tried to get my Xitami installation
+>drive filled totally up by a file called
+>memtrace.[something] I cant remember the extension, since i
+>had to remove the file in order to get anyting to work. It
+>seems to be some kind of debugging info or something...
+
+Yeah, memtrace.lst is written when the server stops without freeing up
+all the memory it allocates -- as a debugging aid.
+
+Usually the file should be pretty small (10KB or so at worst); if you
+get an "infinite" length file (ie, bigger than 1-2MB), then chances are
+the memory has become corrupted for some reason, so that the list of
+"allocated memory blocks" goes around in a loop, and the file repeats
+the same information over and over again.  This is a bug too, but
+perhaps not the best way to tell you about it :-)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+

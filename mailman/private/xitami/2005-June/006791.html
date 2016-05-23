@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami performance regarding directory structures
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006789.html">
+   <LINK REL="Next"  HREF="006792.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami performance regarding directory structures
+   </H1>
+    <B>Gene Angel
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami performance regarding directory structures">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Jun 2005 23:26:26 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006789.html">/Spam/ [Xitami] Xitami performance regarding directory
+ structures
+</A></li>
+        <LI> Next message: <A HREF="006792.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6791">[ date ]</a>
+              <a href="thread.html#6791">[ thread ]</a>
+              <a href="subject.html#6791">[ subject ]</a>
+              <a href="author.html#6791">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>RPO wrote:
+
+&gt;<i> I am running W2K Server (NTFS) and I have done some research 
+</I>&gt;<i> concerning directory limitations within the W2K environment and now I 
+</I>&gt;<i> am looking for potential limitations with Xitami.  My server will host 
+</I>&gt;<i> potentially 10s of thousands  of users.  Each user will have the 
+</I>&gt;<i> ability to create their own photo albums and then have photo books 
+</I>&gt;<i> within each album.  From a storage standpoint each user will have 
+</I>&gt;<i> their own user directory, that user directory will hold from 1 to 15 
+</I>&gt;<i> sub directories that will represent the photo albums.  Then each photo 
+</I>&gt;<i> album directory will have from 1 to 15 photo book albums.  Sorry for 
+</I>&gt;<i> the extensive path below put I wanted to give an accurate 
+</I>&gt;<i> representation of what I am looking to do.  The directory tree will 
+</I>&gt;<i> look like this (each numbered directory, ie: 1000, 2000 - will hold up 
+</I>&gt;<i> to 1000 user directories each).  The things I am considering are 
+</I>&gt;<i> sub-directory limitations per parent directory and performance issues 
+</I>&gt;<i> for Windows considering the directory structure and then ultimately 
+</I>&gt;<i> Xitami's performance handling the directory structure.  Comments?!
+</I>&gt;<i>  
+</I>&gt;<i> This is the only info I found pertaining to NTFS limitations: 
+</I>&gt;<i> <A HREF="http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en-us/Default.asp?url=/resources/documentation/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp">http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en-us/Default.asp?url=/resources/documentation/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp</A> but 
+</I>&gt;<i> I am uncertain if I fully understand its implications.
+</I>&gt;<i>  
+</I>&gt;<i> xitami
+</I>&gt;<i>      - webpages
+</I>&gt;<i>           - albums
+</I>&gt;<i>                - 1000
+</I>&gt;<i>                     - user1
+</I>&gt;<i>                          - photoAlbum1
+</I>&gt;<i>                               -photoAlbum1_book1
+</I>&gt;<i>                               -photoAlbum1_book2
+</I>&gt;<i>                          - photoAlbum2
+</I>&gt;<i>                               -photoAlbum2_book1
+</I>&gt;<i>                               -photoAlbum2_book2
+</I>&gt;<i>                     - user2
+</I>&gt;<i>                          - photoAlbum1
+</I>&gt;<i>                               -photoAlbum1_book1
+</I>&gt;<i>                               -photoAlbum1_book2
+</I>&gt;<i>                          - photoAlbum2
+</I>&gt;<i>                               -photoAlbum2_book1
+</I>&gt;<i>                               -photoAlbum2_book2
+</I>&gt;<i>                     - user3
+</I>&gt;<i>                     ...
+</I>&gt;<i>                     - user1000
+</I>&gt;<i>                - 2000
+</I>&gt;<i>                     - user1001
+</I>&gt;<i>                          - photoAlbum1
+</I>&gt;<i>                               -photoAlbum1_book1
+</I>&gt;<i>                               -photoAlbum1_book2
+</I>&gt;<i>                          - photoAlbum2
+</I>&gt;<i>                               -photoAlbum2_book1
+</I>&gt;<i>                               -photoAlbum2_book2
+</I>&gt;<i>                     - user1002
+</I>&gt;<i>                          - photoAlbum1
+</I>&gt;<i>                               -photoAlbum1_book1
+</I>&gt;<i>                               -photoAlbum1_book2
+</I>&gt;<i>                          - photoAlbum2
+</I>&gt;<i>                               -photoAlbum2_book1
+</I>&gt;<i>                               -photoAlbum2_book2
+</I>&gt;<i>                     - user1003
+</I>&gt;<i>                     ...
+</I>&gt;<i>                     - user2000
+</I>&gt;<i>                - 3000
+</I>&gt;<i>                - 4000
+</I>&gt;<i>                - 5000 (5,000 users)
+</I>&gt;<i>                ..
+</I>&gt;<i>                ..
+</I>&gt;<i>                - 100000 (100,000 users)
+</I>&gt;<i>                ..
+</I>&gt;<i>                ..
+</I>&gt;<i>                - 1000000 (1 million users)
+</I>
+
+I hold  alot of users/folders under Win2k3 NTFS.  NTFS uses a btree (I 
+believe) so it's pretty good on bulky directories.  You can increase 
+performance two ways through windows.  Use a directory tree index scheme 
+to limit your folder/files per directory or (and I think the bigest 
+performance gain for you) would be windows disk Cache.  Windows disk 
+cache comes from &quot;unused&quot; memory so the more free memory you got the 
+more file/directory tables will be able to be held in memory.  This lets 
+the system bypass hard drive tables and access directly from RAM which 
+is much faster.  My main server has 1 gig of ram and I will upgrade it 
+to 2 before long.  Win2k3 also has faster file access then win2k.
+
+  Gene
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006789.html">/Spam/ [Xitami] Xitami performance regarding directory
+ structures
+</A></li>
+	<LI> Next message: <A HREF="006792.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6791">[ date ]</a>
+              <a href="thread.html#6791">[ thread ]</a>
+              <a href="subject.html#6791">[ subject ]</a>
+              <a href="author.html#6791">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how to configure alias
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001335.html">
+   <LINK REL="Next"  HREF="001337.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how to configure alias
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how to configure alias">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 06 Nov 2001 15:56:28 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001335.html">[Xitami] how to configure alias
+</A></li>
+        <LI> Next message: <A HREF="001337.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1336">[ date ]</a>
+              <a href="thread.html#1336">[ thread ]</a>
+              <a href="subject.html#1336">[ subject ]</a>
+              <a href="author.html#1336">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I'm testing things localy on my pc not on the host server and when I go
+</I>&gt;<i> insert an imasge from the image folder it goes back 3 levels as so
+</I>&gt;<i> &lt;IMG SRC=&quot;../../../images/bevel_bg.jpg&quot; BORDER=&quot;0&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;40&quot;
+</I>&gt;<i> ALIGN=&quot;bottom&quot; ALT=&quot;&quot;&gt;
+</I>&gt;<i> now al I want is to confige the alias to read any images from this folder on
+</I>&gt;<i> my c:drive
+</I>&gt;<i> is this correct if not can you give the correct configuration
+</I>&gt;<i> images=c:\images\        <A HREF="http://127.0.0.1/c:/images/.gif/.jpg./.png">http://127.0.0.1/c:/images/.gif/.jpg./.png</A>
+</I>
+If you're running Xitami on your PC, that *is* the host server. Your web 
+browser (Internet Explorer, Netscape, whatever) doesn't read from the disk 
+itself if you're testing your site through Xitami - all it knows about your 
+site is what Xitami tells it.
+
+If you set an alias like 
+
+[Alias]
+images=c:\images
+
+then, for example, going to the URL <A HREF="http://127.0.0.1/images/bevel_bg.jpg">http://127.0.0.1/images/bevel_bg.jpg</A> 
+will get you the contents of the file 'c:\images\bevel_bg.jpg'. (* footnote)
+
+In general, an alias like
+
+[Alias]
+aliased/server/path=c:\real\path\on\disk
+
+will map the URL 
+<A HREF="http://127.0.0.1/aliased/server/path/somefolder/somefile.ext">http://127.0.0.1/aliased/server/path/somefolder/somefile.ext</A>
+to the real file 
+c:\real\path\on\disk\somefolder\somefile.ext
+(I hope you can see where the the components of this path come from).
+
+It sounds as though your HTML writing software is getting its relative 
+paths wrong, or making big assumptions about how your real disk filesystem 
+maps to the server's &quot;virtual filesystem&quot;. If the current working directory 
+is '/cgi-bin', which it is for these scripts, your web browser *can't* go 
+up 3 levels, because as far as it can see there's only one level to go up 
+through (it goes up one level to '/', then can't see any further).
+
+If you have an alias like the one above you can use an image with a tag like
+
+&lt;img src=&quot;../images/bevel.jpg&quot; alt=&quot;&quot;&gt;
+
+which your web browser will expand to
+<A HREF="http://127.0.0.1/cgi-bin/../images/bevel.jpg">http://127.0.0.1/cgi-bin/../images/bevel.jpg</A>
+then contract to
+<A HREF="http://127.0.0.1/images/bevel.jpg">http://127.0.0.1/images/bevel.jpg</A>
+before it sends 
+the request.
+
+It may be better to use an absolute path like
+
+&lt;img src=&quot;/images/bevel.jpg&quot; alt=&quot;&quot;&gt; (this one is probably better),
+
+which your web browser will expand to <A HREF="http://127.0.0.1/images/bevel.jpg">http://127.0.0.1/images/bevel.jpg</A> 
+before it sends the request.
+
+It's impossible to go up 3 levels because your browser doesn't know there's 
+anything above the root, so it won't send a request which goes above /; and 
+because, for security reasons, Xitami won't send files from outside the 
+webpages root, unless it's been told to do so by an alias. This is to 
+prevent arbitrary users doing things like sending a request for something 
+like <A HREF="http://127.0.0.1/../../windows/system/user.dat">http://127.0.0.1/../../windows/system/user.dat</A> and getting half your 
+Registry.
+
+
+*: Xitami assumes your 'images' directory contains the icons which come 
+with it (this isn't great design IMO, but that's how it works). If you want 
+directory listings to look right, you might need to copy the images from 
+c:\xitami\webpages\images (or wherever you have Xitami installed) into the 
+folder which will be accessible as <A HREF="http://127.0.0.1/images/">http://127.0.0.1/images/</A> (e.g. 
+c:\images).
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001335.html">[Xitami] how to configure alias
+</A></li>
+	<LI> Next message: <A HREF="001337.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1336">[ date ]</a>
+              <a href="thread.html#1336">[ thread ]</a>
+              <a href="subject.html#1336">[ subject ]</a>
+              <a href="author.html#1336">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

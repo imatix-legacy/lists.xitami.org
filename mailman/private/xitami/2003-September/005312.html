@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with refresh with php and phpbb
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005317.html">
+   <LINK REL="Next"  HREF="005314.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with refresh with php and phpbb
+   </H1>
+    <B>Alejandro Martinis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problem with refresh with php and phpbb">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 6 Sep 2003 10:35:56 -0300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005317.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+        <LI> Next message: <A HREF="005314.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5312">[ date ]</a>
+              <a href="thread.html#5312">[ thread ]</a>
+              <a href="subject.html#5312">[ subject ]</a>
+              <a href="author.html#5312">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tom
+
+I did experience your same problem. I was able to fix it, though, explictly
+requesting to have the page reloaded from the server ignoring any cached
+information. That I did using the header function right at the very start of
+the php code.
+&lt;?php
+header (&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;); // Date in the past
+ header (&quot;Last-Modified: &quot; . gmdate(&quot;D, d M Y H:i:s&quot;) . &quot; GMT&quot;);
+ header (&quot;Cache-Control: no-cache, must-revalidate&quot;); // HTTP/1.1
+ header (&quot;Pragma: no-cache&quot;); // HTTP/1.0
+
+Hope this helps.
+
+Alejandro
+
+----- Original Message -----
+From: Tom Ringate &lt;<A HREF="mailto:tringate@tampabay.rr.com">tringate@tampabay.rr.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, September 05, 2003 7:45 PM
+Subject: [Xitami] Problem with refresh with php and phpbb
+
+
+&gt;<i> The other problem I am having is much more serious. For some reason once a
+</I>&gt;<i> page is displayed, I can never refresh it unless I clear the cache in my
+</I>
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.510 / Virus Database: 307 - Release Date: 14/08/2003
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005317.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+	<LI> Next message: <A HREF="005314.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5312">[ date ]</a>
+              <a href="thread.html#5312">[ thread ]</a>
+              <a href="subject.html#5312">[ subject ]</a>
+              <a href="author.html#5312">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

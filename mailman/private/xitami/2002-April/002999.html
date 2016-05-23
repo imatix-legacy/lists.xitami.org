@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI arguments passing (newbee question)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002990.html">
+   <LINK REL="Next"  HREF="002992.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI arguments passing (newbee question)
+   </H1>
+    <B>E. Egberts
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI arguments passing (newbee question)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 18 Apr 2002 02:13:00 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002990.html">[Xitami] CGI arguments passing (newbee question)
+</A></li>
+        <LI> Next message: <A HREF="002992.html">[Xitami] W2K Xitami 2.4d9 crash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2999">[ date ]</a>
+              <a href="thread.html#2999">[ thread ]</a>
+              <a href="subject.html#2999">[ subject ]</a>
+              <a href="author.html#2999">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ewen,
+thanks for your reaction, it indeed solved this issue!
+
+When the particular script runs, it should however produce a simple text in
+the browser but a download action is initiated in stead. The actual outcome
+is what I expect.
+
+The pipexxxx.cgo file lookes like this:
+
+	Content-type: text/plain
+	Pragma: no-cache
+	Cache-control: no-cache
+	Expires: Mon, 28 Apr 1997 00:01:00 -0500
+
+	c0=42
+	vr=99AX
+
+I have seen it working correctly but apparently I have changed something in
+the configuration but I don't know what!
+And I hope you can help me out again.
+
+Thanks
+
+
+
+-----Oorspronkelijk bericht-----
+Van: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]Namens Ewen McNeill
+Verzonden: woensdag 17 april 2002 22:43
+Aan: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Onderwerp: Re: [Xitami] CGI arguments passing (newbee question)
+
+
+In message &lt;<A HREF="mailto:NGBBJAFHALILDOAFEDNAEEDJCAAA.egbert@familie-egberts.tk">NGBBJAFHALILDOAFEDNAEEDJCAAA.egbert@familie-egberts.tk</A>&gt;, &quot;E.
+Egberts&quot; writes:
+&gt;<i>I'm trying to implement a couple of Perl scripts which expect their
+</I>&gt;<i>arguments in the $ARGV array. Can I configure the Xitami web server
+</I>(version
+&gt;<i>2.4d9) such that arguments are passed through this array in stead of the
+</I>CGI
+&gt;<i>envirionment variable QUERY_STRING?
+</I>
+Set [CGI] passargs=1.  It's set to 0 by default, because there are
+security risks in passing anything that comes in the query string on the
+command line (eg, on some OS certain arguments can be used to run
+another command).  Xitami tries to defend against some of the more
+obvious ones, but by no means are we certain that it's secure.
+
+If you don't want to set that option, I'd suggest either a wrapper
+program to pull query string apart, check the arguments, and then run
+the other program; or use a different CGI script that parses
+QUERY_STRING as per the CGI spec.
+
+Ewen
+
+--
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002990.html">[Xitami] CGI arguments passing (newbee question)
+</A></li>
+	<LI> Next message: <A HREF="002992.html">[Xitami] W2K Xitami 2.4d9 crash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2999">[ date ]</a>
+              <a href="thread.html#2999">[ thread ]</a>
+              <a href="subject.html#2999">[ subject ]</a>
+              <a href="author.html#2999">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

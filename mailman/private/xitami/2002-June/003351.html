@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] DNS and VHosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003344.html">
+   <LINK REL="Next"  HREF="003345.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] DNS and VHosting
+   </H1>
+    <B>RPO
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] DNS and VHosting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Jun 2002 18:35:17 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003344.html">[Xitami] Talking about FTP
+</A></li>
+        <LI> Next message: <A HREF="003345.html">[Xitami] DNS and VHosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3351">[ date ]</a>
+              <a href="thread.html#3351">[ thread ]</a>
+              <a href="subject.html#3351">[ subject ]</a>
+              <a href="author.html#3351">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0085_01C210AD.91298840
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+I am hosting about 10 different domains via DNS virtual hosting.
+
+All my sites work properly.  However, several of the sites send =
+auto-emails from forms and so forth.  When the email comes in, the =
+Header info shows the email coming from a different web server.
+
+Is there anyway to get the header info, using Xitami or DNS, that can =
+get the correct DNS name. =20
+
+Example:
+in-addr.arpa file:=20
+66.172.2.44    PTR    www.kdralumni.com
+66.172.2.44    PTR    www.swellegantvintage.com
+66.172.2.44    PTR    www.carpe-dm.com
+66.172.2.44    PTR    www.ripandburn.com
+
+The script I am running for the auto email comes from the =
+www.carpe-dm.com site, however, the email header shows the site that =
+connected to the mail server was: www.kdralumni.com .   Technically, you =
+are only supposed to have one PTR record for an IP address (in this =
+case, it was using the first one in the list), you can have many A =
+records though.
+
+Once I deleted the PTR record for kdraumni.com then the email header =
+showed the connecting machine as the next one in the list: =
+www.swellegantvintage.com machine.  Is there another way of doing this =
+or tricking the email server so no matter which site generates the form =
+and subsequent email that it reflects the correct DNS name (site name) =
+that it came from?
+
+-Thanx in advance.
+
+
+
+------=_NextPart_000_0085_01C210AD.91298840
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content=3D&quot;text/html; charset=3Diso-8859-1&quot; =
+http-equiv=3DContent-Type&gt;
+&lt;META content=3D&quot;MSHTML 5.00.3315.2870&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am hosting about 10 different domains =
+via DNS=20
+virtual hosting.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;All my sites work properly.&amp;nbsp; =
+However, several=20
+of the sites send auto-emails from forms and so forth.&amp;nbsp; When the =
+email=20
+comes in, the Header info shows the email coming from a different web=20
+server.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Is there anyway to get the header info, =
+using=20
+Xitami or DNS, that can get the correct DNS name.&amp;nbsp; &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Example:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;in-addr.arpa file: &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+PTR&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&lt;A href=3D&quot;<A HREF="http://www.kdralumni.com"">http://www.kdralumni.com&quot;</A>&gt;www.kdralumni.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+PTR&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&lt;A=20
+href=3D&quot;<A HREF="http://www.swellegantvintage.com"">http://www.swellegantvintage.com&quot;</A>&gt;www.swellegantvintage.com&lt;/A&gt;&lt;/=
+FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+PTR&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&lt;A href=3D&quot;<A HREF="http://www.carpe-dm.com"">http://www.carpe-dm.com&quot;</A>&gt;www.carpe-dm.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;66.172.2.44&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+PTR&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&lt;A =
+href=3D&quot;<A HREF="http://www.ripandburn.com"">http://www.ripandburn.com&quot;</A>&gt;www.ripandburn.com&lt;/A&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;The script I am running for the auto =
+email comes=20
+from the &lt;A href=3D&quot;<A HREF="http://www.carpe-dm.com"">http://www.carpe-dm.com&quot;</A>&gt;www.carpe-dm.com&lt;/A&gt; site, =
+however,=20
+the email header shows the site that connected to the mail server was: =
+&lt;A=20
+href=3D&quot;<A HREF="http://www.kdralumni.com"">http://www.kdralumni.com&quot;</A>&gt;www.kdralumni.com&lt;/A&gt; .&amp;nbsp;&amp;nbsp; =
+Technically,=20
+you are only supposed to have one PTR record for an IP address (in this =
+case, it=20
+was using the first one in the list), you can have many A records=20
+though.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Once I deleted the PTR record for =
+kdraumni.com then=20
+the email header showed the connecting machine as the next one in the =
+list: &lt;A=20
+href=3D&quot;<A HREF="http://www.swellegantvintage.comarpe-dm.com"">http://www.swellegantvintage.comarpe-dm.com&quot;</A>&gt;www.swellegantvintag=
+e.com&lt;/A&gt;=20
+machine.&amp;nbsp; Is there another way of doing this or tricking the email =
+server=20
+so no matter which site generates the form and subsequent email that it =
+reflects=20
+the correct DNS name (site name) that it came from?&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;-Thanx in advance.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0085_01C210AD.91298840--
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003344.html">[Xitami] Talking about FTP
+</A></li>
+	<LI> Next message: <A HREF="003345.html">[Xitami] DNS and VHosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3351">[ date ]</a>
+              <a href="thread.html#3351">[ thread ]</a>
+              <a href="subject.html#3351">[ subject ]</a>
+              <a href="author.html#3351">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

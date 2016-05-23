@@ -1,0 +1,567 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] #exec
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001631.html">
+   <LINK REL="Next"  HREF="001634.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] #exec
+   </H1>
+    <B>Marcio Marchini
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] #exec">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 5 Dec 2001 22:56:32 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001631.html">[Xitami] #exec
+</A></li>
+        <LI> Next message: <A HREF="001634.html">[Xitami] #exec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1632">[ date ]</a>
+              <a href="thread.html#1632">[ thread ]</a>
+              <a href="subject.html#1632">[ subject ]</a>
+              <a href="author.html#1632">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0003_01C17DE0.14F1ECF0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: 7bit
+
+Interesting... Mine reads like this:
+
+      Aliases Errors SSI MIMEs WSX Filters DDNS Advanced  Server Vhosts CGI
+Security Logging FTP
+
+
+
+The same screen says I have Xitami v2.5b1 even though I downloaded the b4.
+
+You shouild tweak c:\xitami\defaults.cfg, based on c:\xitami\xitami.cfg.
+Don't change c:\xitami\xitami.cfg
+
+This is what I have in mine, for example:
+
+
+[Cgi]
+    Dirlist = &quot;1&quot;
+    Form-query = &quot;1&quot;
+
+[Filter]
+    .php = &quot;c:\\php\\php.exe&quot;
+    .php3 = &quot;c:\\php\\php.exe&quot;
+    .pl = &quot;c:\\perl\\bin\\perl.exe&quot;
+
+[Mime]
+.php=application/x-httpd-php
+.php3=application/x-httpd-php3
+.pl=application/x-httpd-perl
+
+
+[Ftp]
+    Enabled = &quot;0&quot;
+
+[Security]
+    Filename = &quot;defaults.aut&quot;
+
+[Server]
+    Autostart = &quot;1&quot;
+    Priority = &quot;2&quot;
+    Recover = &quot;1&quot;
+
+[Win32]
+    16bit-cgi = &quot;1&quot;
+
+
+    And this is what you can override in it about SSI: (note the exec=0 by
+default)
+
+
+#   ------------------------------------------------------------------------
+-
+#   SSI configuration section
+#
+#   This section controls Xitami's built-in server-side includes (SSI)
+#   handling.
+
+[Ssi]
+#   Lets you enable/disable SSI handling.
+
+    enabled=1
+
+#   Specifies the format for times shown by SSI pages.
+
+    timefmt=%A, %d-%b-%y %H:%M:%S %Z
+
+#   Specifies whether size should be shown as bytes or as
+#   abbreviations (Kb, Mg). Anything other than the string &quot;bytes&quot; is
+#   taken to mean that sizes are shown as abbreviations.
+
+    sizefmt=bytes
+
+#   The timeout for CGI programs called from the SSI agent.
+
+    timeout=30
+
+#   Error message shown when an SSI command fails. The %s symbol is
+#   replaced by the cause of the problem.
+
+    errmsg=&lt;p&gt;[xitami SSI: %s]
+
+#   If 1, allows CGIs to be executed using the #exec command. Since
+#   this is a security weakness, this option is switched-off by
+#   default.
+
+    exec=0
+
+
+marcio
+  -----Original Message-----
+  From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of <A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>
+  Sent: December 5, 2001 10:07 PM
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+  Subject: Re: [Xitami] #exec
+
+
+  Ok Marcio, I have followed your directions.  The configuration screen does
+not have SSI on it anywhere.  The toolbar at the top reads:
+
+  Errors  WSX  Filters  Aliases Vhosts CGI Security Logging FTP MIME.
+
+  I looked in each one of these and there are no settings for SSI.  I am
+using the Windows version if that makes a difference.  I'm not afraid of
+directly editing files if I know which one(s) to edit, but I would prefer
+the interface if it was available.
+
+  --Joe
+    ----- Original Message -----
+    From: Marcio Marchini
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+    Sent: Wednesday, December 05, 2001 8:52 PM
+    Subject: RE: [Xitami] #exec
+
+
+    1) use the web interface as I said, don't play with individual files
+    2) follow the links as I said, you will end up in the SSI config screen.
+you will click on &quot;Configuration&quot; on the 1st screen, and then on SSI on the
+2nd screen (text toolbar at the top)
+
+    The impression I get from your message is that you did not get to the
+SSI screen in your web browser.
+
+    marcio
+      -----Original Message-----
+      From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of <A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>
+      Sent: December 5, 2001 6:39 PM
+      To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+      Subject: Re: [Xitami] #exec
+
+
+      Thanks for the reply.  I don't have any settings for SSI.  Is there an
+.ini file setting I should use, or is this setting on someplace other than
+the main Configuration screen?
+
+      I'm running version 2.4d9
+
+      --
+      Joe
+        ----- Original Message -----
+        From: Marcio Marchini
+        To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+        Sent: Wednesday, December 05, 2001 8:33 AM
+        Subject: RE: [Xitami] #exec
+
+
+        <A HREF="http://localhost/admin">http://localhost/admin</A>
+
+        Click Configuration
+
+        Click SSI
+
+        Make sure SSI is enabled.
+
+        marcio
+
+          -----Original Message-----
+          From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of <A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>
+          Sent: December 4, 2001 11:39 PM
+          To: Imatix
+          Subject: [Xitami] #exec
+
+
+          I am trying to use an HTML tag such as:
+&lt;!--#EXEC=/CGI/WHATever....--&gt;   I have been told that I need to &quot;turn on&quot;
+the #exec feature in my web server.  I have poured through the xitami
+documentation as well as I can, but I don't see where/how I turn this on so
+I can use the #exec command.
+
+          Any help?
+
+          TIA!
+          --Joe
+
+------=_NextPart_000_0003_01C17DE0.14F1ECF0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2600.0&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;SPAN class=3D751075003-06122001&gt;&lt;FONT face=3DArial color=3D#0000ff =
+
+size=3D2&gt;Interesting... Mine reads like this:&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=3D751075003-06122001&gt;&lt;FONT face=3DArial color=3D#0000ff =
+
+size=3D2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;&lt;SPAN class=3D751075003-06122001&gt;
+&lt;DIV&gt;
+&lt;TABLE cellSpacing=3D0 cellPadding=3D0 width=3D&quot;100%&quot;&gt;
+  &lt;TBODY&gt;
+  &lt;TR&gt;
+    &lt;TD align=3Dleft&gt;&lt;FONT size=3D-1&gt;&lt;A=20
+      href=3D&quot;javascript:subconf('~A2.0','')&quot;&gt;Aliases&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A23.0','')&quot;&gt;Errors&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A60.0','')&quot;&gt;SSI&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A38.0','')&quot;&gt;MIMEs&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A66.0','')&quot;&gt;WSX&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A26.0','')&quot;&gt;Filters&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A13.0','')&quot;&gt;DDNS&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A1.0','')&quot;&gt;Advanced&lt;/A&gt; &lt;/FONT&gt;
+    &lt;TD align=3Dright&gt;&lt;FONT size=3D-1&gt;&lt;EM&gt;Server&lt;/EM&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A64.0','')&quot;&gt;Vhosts&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A5.0','')&quot;&gt;CGI&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A50.0','')&quot;&gt;Security&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A35.0','')&quot;&gt;Logging&lt;/A&gt; &lt;A=20
+      href=3D&quot;javascript:subconf('~A28.0','')&quot;&gt;FTP&lt;/A&gt;=20
+&lt;/FONT&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN class=3D751075003-06122001&gt;The same screen =
+says I have=20
+&lt;/SPAN&gt;Xitami v2.5b1&amp;nbsp;&lt;SPAN class=3D751075003-06122001&gt;even though I =
+
+downloaded the b4.&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN =
+class=3D751075003-06122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN class=3D751075003-06122001&gt;You shouild tweak=20
+c:\xitami\defaults.cfg, based on c:\xitami\xitami.cfg. Don't change=20
+c:\xitami\xitami.cfg&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN =
+class=3D751075003-06122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN class=3D751075003-06122001&gt;This is what I have =
+in mine,=20
+for example:&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN =
+class=3D751075003-06122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;SPAN=20
+class=3D751075003-06122001&gt;
+&lt;DIV&gt;&lt;BR&gt;&lt;FONT size=3D2&gt;[Cgi]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Dirlist =3D=20
+&quot;1&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Form-query =3D &quot;1&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;[Filter]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; .php =3D=20
+&quot;c:\\php\\php.exe&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; .php3 =3D=20
+&quot;c:\\php\\php.exe&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; .pl =3D=20
+&quot;c:\\perl\\bin\\perl.exe&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;[Mime] &lt;BR&gt;.php=3Dapplication/x-httpd-php=20
+&lt;BR&gt;.php3=3Dapplication/x-httpd-php3 &lt;BR&gt;.pl=3Dapplication/x-httpd-perl=20
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;BR&gt;&lt;FONT size=3D2&gt;[Ftp]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Enabled =3D =
+&quot;0&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;[Security]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Filename =3D=20
+&quot;defaults.aut&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;[Server]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Autostart =3D=20
+&quot;1&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Priority =3D &quot;2&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Recover =
+=3D=20
+&quot;1&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;[Win32]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; 16bit-cgi =3D =
+&quot;1&quot;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+class=3D751075003-06122001&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; And this is what you can =
+override in=20
+it about SSI: (note the exec=3D0 by default)&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+class=3D751075003-06122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;#&amp;nbsp;&amp;nbsp;=20
+-------------------------------------------------------------------------=
+&lt;BR&gt;#&amp;nbsp;&amp;nbsp;=20
+SSI configuration section&lt;BR&gt;#&lt;BR&gt;#&amp;nbsp;&amp;nbsp; This section controls =
+Xitami's=20
+built-in server-side includes (SSI) &lt;BR&gt;#&amp;nbsp;&amp;nbsp; handling. =
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;[Ssi]&lt;BR&gt;#&amp;nbsp;&amp;nbsp; =
+Lets you=20
+enable/disable SSI handling. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+enabled=3D1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;#&amp;nbsp;&amp;nbsp; Specifies =
+the format=20
+for times shown by SSI pages. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+timefmt=3D%A,=20
+%d-%b-%y %H:%M:%S %Z&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;#&amp;nbsp;&amp;nbsp; Specifies =
+whether size=20
+should be shown as bytes or as &lt;BR&gt;#&amp;nbsp;&amp;nbsp; abbreviations (Kb, Mg). =
+
+Anything other than the string &quot;bytes&quot; is &lt;BR&gt;#&amp;nbsp;&amp;nbsp; taken to =
+mean that=20
+sizes are shown as abbreviations. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+sizefmt=3Dbytes&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;#&amp;nbsp;&amp;nbsp; The =
+timeout for CGI=20
+programs called from the SSI agent. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+timeout=3D30&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;#&amp;nbsp;&amp;nbsp; Error =
+message shown=20
+when an SSI command fails. The %s symbol is &lt;BR&gt;#&amp;nbsp;&amp;nbsp; replaced =
+by the=20
+cause of the problem. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+errmsg=3D&amp;lt;p&amp;gt;[xitami SSI: %s]&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;#&amp;nbsp;&amp;nbsp; If 1, =
+allows CGIs to be=20
+executed using the #exec command. Since &lt;BR&gt;#&amp;nbsp;&amp;nbsp; this is a =
+security=20
+weakness, this option is switched-off by &lt;BR&gt;#&amp;nbsp;&amp;nbsp; default.=20
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+exec=3D0&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/SPAN&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;SPAN=20
+class=3D751075003-06122001&gt;marcio&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/SPAN&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #0000ff 2px =
+solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV class=3DOutlookMessageHeader&gt;&lt;FONT size=3D2&gt;-----Original=20
+  Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt; <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>=20
+  [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]&lt;B&gt;On Behalf Of&lt;/B&gt;=20
+  <A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt; December 5, 2001 10:07 =
+PM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt;=20
+  <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami]=20
+  #exec&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;Ok Marcio, I have followed your directions.&amp;nbsp; =
+The=20
+  configuration screen does not have SSI on it anywhere.&amp;nbsp; The =
+toolbar at=20
+  the top reads:&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;Errors&amp;nbsp; WSX&amp;nbsp; Filters&amp;nbsp; Aliases =
+Vhosts CGI=20
+  Security Logging FTP MIME.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;I looked in each one of these and there are no =
+settings for=20
+  SSI.&amp;nbsp; I am using the Windows version if that makes a =
+difference.&amp;nbsp;=20
+  I'm not afraid of directly editing files if I know which one(s) to =
+edit, but I=20
+  would prefer the interface if it was available.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT size=3D2&gt;--Joe&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=3Dltr=20
+  style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+    &lt;DIV=20
+    style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+    &lt;A title=<A HREF="mailto:3Dmqm@magma.ca">3Dmqm@magma.ca</A> href=3D&quot;mailto:<A HREF="mailto:mqm@magma.ca">mqm@magma.ca</A>&quot;&gt;Marcio =
+Marchini&lt;/A&gt; &lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+    href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, December 05, =
+2001 8:52=20
+    PM&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; RE: [Xitami] =
+#exec&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN =
+class=3D775574702-06122001&gt;1)=20
+    use the web interface as I said, don't play with individual=20
+    files&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN =
+class=3D775574702-06122001&gt;2)=20
+    follow the links as I said, you will end up in the SSI config =
+screen. you=20
+    will click on &quot;Configuration&quot; on the 1st screen, and then on SSI on =
+the 2nd=20
+    screen (text toolbar at the top)&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+    class=3D775574702-06122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+    class=3D775574702-06122001&gt;The impression I get from your message is =
+that you=20
+    did not get to the SSI screen in your web =
+browser.&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+    class=3D775574702-06122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+    class=3D775574702-06122001&gt;marcio&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;BLOCKQUOTE dir=3Dltr=20
+    style=3D&quot;PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #0000ff =
+2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+      &lt;DIV class=3DOutlookMessageHeader&gt;&lt;FONT face=3D&quot;Times New Roman&quot;=20
+      size=3D2&gt;-----Original Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt;=20
+      <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> =
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]&lt;B&gt;On=20
+      Behalf Of&lt;/B&gt; <A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt; December 5, 2001 =
+6:39=20
+      PM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt; <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: =
+[Xitami]=20
+      #exec&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT size=3D2&gt;Thanks for the reply.&amp;nbsp; I don't have any =
+settings=20
+      for SSI.&amp;nbsp; Is there an .ini file setting I should use, or is =
+this=20
+      setting on someplace other than the main Configuration=20
+screen?&lt;/FONT&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT size=3D2&gt;I'm running version 2.4d9&lt;/FONT&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT size=3D2&gt;--&lt;/FONT&gt;&lt;/DIV&gt;
+      &lt;DIV&gt;&lt;FONT size=3D2&gt;Joe&lt;/FONT&gt;&lt;/DIV&gt;
+      &lt;BLOCKQUOTE dir=3Dltr=20
+      style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+        &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- =
+&lt;/DIV&gt;
+        &lt;DIV=20
+        style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+        &lt;A title=<A HREF="mailto:3Dmqm@magma.ca">3Dmqm@magma.ca</A> href=3D&quot;mailto:<A HREF="mailto:mqm@magma.ca">mqm@magma.ca</A>&quot;&gt;Marcio =
+Marchini&lt;/A&gt;=20
+        &lt;/DIV&gt;
+        &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A=20
+        title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+        =
+href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+        &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, December =
+05, 2001=20
+        8:33 AM&lt;/DIV&gt;
+        &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; RE: [Xitami] =
+#exec&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff =
+size=3D2&gt;&lt;/FONT&gt;&lt;BR&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;A=20
+        =
+href=3D&quot;<A HREF="http://localhost/admin"">http://localhost/admin&quot;</A>&gt;<A HREF="http://localhost/admin</A">http://localhost/admin&lt;/A</A>&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;Click =
+Configuration&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;Click SSI&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;Make sure SSI is =
+enabled.&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;marcio&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+        &lt;DIV&gt;&lt;FONT face=3DArial color=3D#0000ff size=3D2&gt;&lt;SPAN=20
+        class=3D793432914-05122001&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+        &lt;BLOCKQUOTE dir=3Dltr=20
+        style=3D&quot;PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: =
+#0000ff 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+          &lt;DIV class=3DOutlookMessageHeader&gt;&lt;FONT face=3D&quot;Times New =
+Roman&quot;=20
+          size=3D2&gt;-----Original Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt; &lt;A=20
+          =
+href=3D&quot;mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami-admin@lists.xitami.o">xitami-admin@lists.xitami.o</A>=
+rg&lt;/A&gt;=20
+          [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]&lt;B&gt;On Behalf Of&lt;/B&gt; &lt;A=20
+          =
+href=3D&quot;mailto:<A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>&quot;&gt;<A HREF="mailto:Joe@ByrneWorld.com">Joe@ByrneWorld.com</A>&lt;/A&gt;&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt;=
+=20
+          December 4, 2001 11:39 PM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt; =
+Imatix&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt;=20
+          [Xitami] #exec&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+          &lt;DIV&gt;&lt;FONT size=3D2&gt;I am trying to use an HTML tag such =
+as:&amp;nbsp;=20
+          &amp;lt;!--#EXEC=3D/CGI/WHATever....--&amp;gt;&amp;nbsp;&amp;nbsp; I have been =
+told that=20
+          I need to &quot;turn on&quot; the #exec feature in my web server.&amp;nbsp; =
+I have=20
+          poured through the xitami documentation as well as I can, but =
+I don't=20
+          see where/how I turn this on so I can use the #exec=20
+          command.&lt;/FONT&gt;&lt;/DIV&gt;
+          &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+          &lt;DIV&gt;&lt;FONT size=3D2&gt;Any help?&lt;/FONT&gt;&lt;/DIV&gt;
+          &lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+          &lt;DIV&gt;&lt;FONT size=3D2&gt;TIA!&lt;/FONT&gt;&lt;/DIV&gt;
+          &lt;DIV&gt;&lt;FONT=20
+  =
+size=3D2&gt;--Joe&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCK=
+QUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0003_01C17DE0.14F1ECF0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001631.html">[Xitami] #exec
+</A></li>
+	<LI> Next message: <A HREF="001634.html">[Xitami] #exec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1632">[ date ]</a>
+              <a href="thread.html#1632">[ thread ]</a>
+              <a href="subject.html#1632">[ subject ]</a>
+              <a href="author.html#1632">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

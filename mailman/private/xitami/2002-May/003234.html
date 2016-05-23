@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] local IP v. domain
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003233.html">
+   <LINK REL="Next"  HREF="003235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] local IP v. domain
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] local IP v. domain">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 24 May 2002 00:04:25 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003233.html">[Xitami] DNS Server
+</A></li>
+        <LI> Next message: <A HREF="003235.html">[Xitami] local IP v. domain
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3234">[ date ]</a>
+              <a href="thread.html#3234">[ thread ]</a>
+              <a href="subject.html#3234">[ subject ]</a>
+              <a href="author.html#3234">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:MABBILGNLFGMJIPJLFFKAEIACCAA.bronder@attbi.com">MABBILGNLFGMJIPJLFFKAEIACCAA.bronder@attbi.com</A>&gt;
+   &quot;Michael Bronder&quot; writes:
+
+&gt;<i> My server is also my work station, on a home network behind a netgear
+</I>&gt;<i> firewall/router.  From any point behind the firewall I need to type in or
+</I>&gt;<i> refer to the local ip address to test scripts or access html pages.  NAT is
+</I>&gt;<i> setup to direct port 80 calls to the webserver...
+</I>&gt;<i> 
+</I>&gt;<i> Is there anyway I can set things up so I can write my perl scripts refering
+</I>&gt;<i> to the actual domain of my site and have them work behind the firewall?  Or,
+</I>&gt;<i> more simply, for me to type www.archaetext.com into a browser v. the local
+</I>&gt;<i> IP address?
+</I>
+Have you thought about running a caching DNS server inside the firewall,
+and letting all the machines on your LAN use this for their queries?  It
+could then be authoritative for your local internal &quot;domain&quot;; and
+requests to resolve an address outside that domain would be passed by the
+named to your ISP's (or other) name server, through use of a &quot;forwarders&quot;
+line in the configuration file.
+
+That's how I run here: my (this) OS/2 machine is also the NAT router for
+the LAN, and runs BIND.  The latter is authoritative for dsl.co.uk, and
+answers local queries; anything else is passed on to my ISP's name
+servers.  I can get away with this arrangement because so far as the
+outside world is concerned, there are only MX records for dsl.co.uk,
+which route incoming mail to my ISP's relays which delivers them to me
+(by SMTP).  (There's also an entry for www.dsl.co.uk, which is hosted by
+my ISP, since I'm only on an ISDN dial-up.)
+
+Incidentally, if adopting this approach, be sure to read what Albitz &amp;
+Liu have to say about running such a system: it's probably also covered,
+at least in part, by Bellovin &amp; Chadwick in their book on firewalls,
+since it's an approach often used on large &quot;intranets&quot; behind a firewall.
+In particular, it's a very good idea to have at least two duplicate
+forwarders lines, both pointing to the same name servers at one's ISP.
+This tends to facilitate getting a response from an external server
+before local machines' resolvers decide that it's an &quot;unknown domain&quot;.
+
+&gt;<i> ------=_NextPart_000_0000_01C1FCFD.9255B360
+</I>&gt;<i> Content-Type: text/html;
+</I>&gt;<i> 	charset=&quot;Windows-1252&quot;
+</I>&gt;<i> Content-Transfer-Encoding: quoted-printable
+</I>&gt;<i> 
+</I>&gt;<i> &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+</I>
+Please don't dual-post in both ASCII and HTML.  The latter provides no
+more information than the plain ASCII, but occupies (on average) 200% of
+extra space.
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003233.html">[Xitami] DNS Server
+</A></li>
+	<LI> Next message: <A HREF="003235.html">[Xitami] local IP v. domain
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3234">[ date ]</a>
+              <a href="thread.html#3234">[ thread ]</a>
+              <a href="subject.html#3234">[ subject ]</a>
+              <a href="author.html#3234">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

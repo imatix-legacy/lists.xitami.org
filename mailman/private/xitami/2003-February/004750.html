@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] A little off-topic but....
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004749.html">
+   <LINK REL="Next"  HREF="004754.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] A little off-topic but....
+   </H1>
+    <B>TW
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] A little off-topic but....">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 23 Feb 2003 13:05:34 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004749.html">[Xitami] A little off-topic but....
+</A></li>
+        <LI> Next message: <A HREF="004754.html">[Xitami] A little off-topic but....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4750">[ date ]</a>
+              <a href="thread.html#4750">[ thread ]</a>
+              <a href="subject.html#4750">[ subject ]</a>
+              <a href="author.html#4750">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hi,
+
+afaik things go like this:
+
+&gt;<i>I have no problem using the 1.0 spec, but I don't know how! So, I changed 
+</I>&gt;<i>all the header commands to
+</I>&gt;<i>a full URL.
+</I>
+That's the correct thing to do. It's up to the client and not up to the 
+server to suggest the protocol version to use. They both agree on the 
+latest protocol they both understand if not (_both_) are setup to do different.
+HTTP/1.1 (RFC 2616) requires a full URI for redirection. If a redirect 
+occurs, the client receives a HTTP status response of 302 (Found) instead 
+of the usual 200 (OK). Check your Webserver-Logs to see that.
+
+BTW, even HTTP/1.0 (RFC 1945) already required a full URI for the Location 
+field too.
+
+So, by definition of RFC 2616, a compliant client receives 302, and checks 
+the location field for an absolute URI. A client _can_ additionally 
+implement detection of relative URIs, but the info provider (you) cannot 
+rely on it.
+
+&gt;<i>Does anyone have any idea where and if I can change to the HTTP/1.0. 
+</I>&gt;<i>specification? Also, since I
+</I>&gt;<i>use SSL on one subdomain, doesn't SSL require the 1.1 specification?
+</I>
+For test purposes you can try to fetch a redirecting resource on the 
+command line via Telnet and GET / HTTP/1.0 or try to find a very old 
+browser for testing.
+
+I was wondering myself why a lot of php scripts found on the net make use 
+of relative URIs in the location header-field, despite the respective 
+specifications. Didn't really figure out, but came to think that earlier 
+php-versions probably _translated_ relative URIs to absolute URIs before 
+returning them to the client. Newer versions (of php) maybe don't do it 
+anymore to give more transparency to the redirection process.
+
+Concerning the SSL question, I think SSL doesn't have anything to do with 
+HTTP. SSL is not &quot;layered&quot; upon HTTP but very low level on tcp/ip.
+
+Hope this helps.
+tony
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004749.html">[Xitami] A little off-topic but....
+</A></li>
+	<LI> Next message: <A HREF="004754.html">[Xitami] A little off-topic but....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4750">[ date ]</a>
+              <a href="thread.html#4750">[ thread ]</a>
+              <a href="subject.html#4750">[ subject ]</a>
+              <a href="author.html#4750">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] want virtual host to point to an executable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004574.html">
+   <LINK REL="Next"  HREF="004576.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] want virtual host to point to an executable
+   </H1>
+    <B>Ayhan Tuncer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] want virtual host to point to an executable">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 30 Dec 2002 13:35:41 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004574.html">[Xitami] want virtual host to point to an executable
+</A></li>
+        <LI> Next message: <A HREF="004576.html">[Xitami] want virtual host to point to an executable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4575">[ date ]</a>
+              <a href="thread.html#4575">[ thread ]</a>
+              <a href="subject.html#4575">[ subject ]</a>
+              <a href="author.html#4575">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Marc Doigny wrote:
+&gt;<i> 
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Marc Doigny wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Hello !
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; i have a virtual host and wish to point directly to a executable.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; That is: instead of having to enter
+</I>&gt;<i> &gt; &gt; <A HREF="http://my.server.be/redirect?xxx">http://my.server.be/redirect?xxx</A>
+</I>&gt;<i> &gt; &gt; (redirect is an executable that points to a cable server (no fixed ip))
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; i would like something like
+</I>&gt;<i> &gt; &gt; <A HREF="http://my.server.be/xxx">http://my.server.be/xxx</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; That is the content of the specific cfg file for that VH:
+</I>&gt;<i> &gt; &gt; [Server]
+</I>&gt;<i> &gt; &gt;      Cgi-bin=webpages/verfaillie.be
+</I>&gt;<i> &gt; &gt;      Cgi-url=/
+</I>&gt;<i> &gt; &gt;      Default2=index.html
+</I>&gt;<i> &gt; &gt;      Webpages=webpages/verfaillie.be
+</I>&gt;<i> &gt; &gt; (the root dir is the executable directory and contains only one file,
+</I>&gt;<i> &gt; &gt; redirect.exe)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I believe naming your executable to the default1 page or vv should work.
+</I>&gt;<i> &gt;It works on win32 for me through a cgi-alias but that should not be
+</I>&gt;<i> &gt;imperative.
+</I>&gt;<i> 
+</I>&gt;<i> It works, but i still need a method to get rid of the '?'
+</I>&gt;<i> adsl (fixed ip): &lt;<A HREF="http://web.verfaillie.com/invasion">http://web.verfaillie.com/invasion</A>&gt;
+</I>&gt;<i> cable: &lt;<A HREF="http://web.verfaillie.be/?invasion">http://web.verfaillie.be/?invasion</A>&gt;
+</I>&gt;<i> (same directory, different servers, for some sort of load balancing between
+</I>&gt;<i> adsl and cable)
+</I>
+I'm not sure I understand you correctly. Do you wish to redirect a
+certain document
+to a certain other server/document and again other documents to other
+server/document123
+or are all the requests regardless of requested document to be
+redirected to the same url?
+
+What does the query string parameter &quot;invasion&quot; represent? does the cgi
+executable
+have to use this parameter to put together the new url it will redirect
+the user to?
+
+If latter, you would need to remove the .exe extension from your
+executable just as if it
+were a directory and pick up the &quot;invasion&quot; from the environment extra
+path info.
+So you would have to alter the way your executable processes the
+parameter. 
+Alternatively you could copy your executable as many times as there are 
+?invasion -type parameters and rename all these identical executables to
+these
+specific parameters without the .exe extension - so that they would be
+individual 
+documents.
+
+It all depends on how you are to use the parameter &quot;invasion&quot;.
+
+I hope the above helps.
+
+Ayhan Tuncer
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004574.html">[Xitami] want virtual host to point to an executable
+</A></li>
+	<LI> Next message: <A HREF="004576.html">[Xitami] want virtual host to point to an executable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4575">[ date ]</a>
+              <a href="thread.html#4575">[ thread ]</a>
+              <a href="subject.html#4575">[ subject ]</a>
+              <a href="author.html#4575">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

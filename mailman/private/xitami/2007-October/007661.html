@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Memory allocation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=BAY105-DAV12A35B0049FDC13413F203F8A00%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007660.html">
+   <LINK REL="Next"  HREF="007662.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Memory allocation</H1>
+    <B>Paul Reid</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=BAY105-DAV12A35B0049FDC13413F203F8A00%40phx.gbl"
+       TITLE="[Xitami] Memory allocation">preid at rci.rutgers.edu
+       </A><BR>
+    <I>Sat Oct 13 08:04:40 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007660.html">[Xitami] Memory allocation
+</A></li>
+        <LI>Next message: <A HREF="007662.html">[Xitami] Memory allocation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7661">[ date ]</a>
+              <a href="thread.html#7661">[ thread ]</a>
+              <a href="subject.html#7661">[ subject ]</a>
+              <a href="author.html#7661">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> &gt; let Windows determine its own virtual memory or should I just
+set it 10Gb?
+
+Ideally, if speed matters, you NEVER want to swap. Physical drives are 
+1,000 times slower than DRAM. If you catch it touching the drive for 
+swap, and speed is money, buy it more RAM. So the size of the swap space 
+does not matter.
+
+You do need swap space &quot;in case&quot; some app goes off the rails and starts 
+allocating infinite memory. But a big swap space just leaves it swapping 
+many seconds longer before the crash. You want a small swap space so 
+that when the memory allocator sees it is in trouble, it has a little 
+headroom for its error processes. A Gig or three seems plenty. I thought 
+64MB was enough to make some RAM space for the error handlers to throw a 
+mystery message before the machine just got stuck.
+
+ &gt; I wish there was a way to completely dedicate, within Windows, 
+physical ram to specific apps.
+
+Either it gets the memory it wants, or it doesn't. If Xitami can't get 
+its modest memory needs, then one of the monster svchost.exe processes 
+is sure to fail a malloc just about the same time, and the whole box 
+goes down. Either you have enough, or you don't.
+
+ &gt; soooo many people have said on many many occasions not to use Xitami 
+for production.
+
+Who? Why? Anyway &quot;they&quot; also said that about Win-Apache for many years, 
+it was official project policy. In fact both servers seem to be more 
+stable than Windows, and a clean installation of Win Server O/S is the 
+next best thing to a stripped unix or OS/2.
+
+Are you the guy with the enormous real-estate database? Some projects 
+like eBay or Amazon or WayBack are simply too much for any one machine. 
+Distributed and cluster work is mature stuff; fortunately I never needed 
+to look into it for my modest needs. You may be near that point.
+
+  -PRR
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007660.html">[Xitami] Memory allocation
+</A></li>
+	<LI>Next message: <A HREF="007662.html">[Xitami] Memory allocation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7661">[ date ]</a>
+              <a href="thread.html#7661">[ thread ]</a>
+              <a href="subject.html#7661">[ subject ]</a>
+              <a href="author.html#7661">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

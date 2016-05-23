@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Possible race condition in Xitami's temporary files module
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003226.html">
+   <LINK REL="Next"  HREF="003233.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Possible race condition in Xitami's temporary files module
+   </H1>
+    <B>Dmitry Isakbayev
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Possible race condition in Xitami's temporary files module">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 23 May 2002 18:26:34 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003226.html">[Xitami] Core Dumping?
+</A></li>
+        <LI> Next message: <A HREF="003233.html">[Xitami] DNS Server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3227">[ date ]</a>
+              <a href="thread.html#3227">[ thread ]</a>
+              <a href="subject.html#3227">[ subject ]</a>
+              <a href="author.html#3227">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Even,
+
+I have followed your recommendation and everything works as expected for as
+long as the size of BIG_RESPONSE stays under (2^16).  However, when that
+threshold is exceeded something breaks.  In my use case, LRWP sometimes
+generates 65,838 bytes of data.  When this happens, Xitami sends only few
+packets of that response back to the client.  Is it possible that 65,838
+byte value somewhere overflows a 16-bit buffer?  Could you point me to the
+right direction?
+Regards,
+
+Dmitry
+
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:ewen@naos.co.nz">ewen@naos.co.nz</A> [mailto:<A HREF="mailto:ewen@naos.co.nz">ewen@naos.co.nz</A>]On Behalf Of Ewen McNeill
+</I>&gt;<i> Sent: Sunday, April 07, 2002 4:08 AM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Cc: Dmitry Isakbayev
+</I>&gt;<i> Subject: Re: [Xitami] Possible race condition in Xitami's temporary
+</I>&gt;<i> files module
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> In message &lt;<A HREF="mailto:NEBBIJGPHKNLMOCJIHFJIEIDDAAA.dmitry@transnexus.com">NEBBIJGPHKNLMOCJIHFJIEIDDAAA.dmitry@transnexus.com</A>&gt;,
+</I>&gt;<i> &quot;Dmitry Isakbayev&quot; writes:
+</I>&gt;<i> &gt;If there might be a bug in the way Xitami handles temporary
+</I>&gt;<i> files, how can
+</I>&gt;<i> &gt;we avoid using them?
+</I>&gt;<i>
+</I>&gt;<i> If you can recompile Xitami for your platform, and are willing to spare
+</I>&gt;<i> some memory, then you can change the constant that triggers when a LRWP
+</I>&gt;<i> response will be spooled to disk.  The relevant compile time constant is
+</I>&gt;<i> BIG_RESPONSE_LEN in xilrwp.c; the default setting is 16384, ie 16KB.  If
+</I>&gt;<i> you make this, say, 1048576, then up to 1MB will be held in memory.  (If
+</I>&gt;<i> you're server is busy and sending a lot of large responses, then
+</I>&gt;<i> obviously you'll need to have a lot of memory available.)
+</I>&gt;<i>
+</I>&gt;<i> &gt;How can I learn more about the way Xitami uses temporary files
+</I>&gt;<i> and generates
+</I>&gt;<i> &gt;temporary file names?
+</I>&gt;<i>
+</I>&gt;<i> Unfortunately the only real documentation for this internal stuff is the
+</I>&gt;<i> source code.  Most of it is smthttpl.c IIRC, although the main control
+</I>&gt;<i> logic is in smthttp.c, and the thread of execution pops in and out
+</I>&gt;<i> between the two of them.
+</I>&gt;<i>
+</I>&gt;<i> For LRWPs the main thing to remember is that once the response is
+</I>&gt;<i> received from the LRWP program it's basically treated like a CGI
+</I>&gt;<i> response.  (The same is true for filter responses BTW.)
+</I>&gt;<i>
+</I>&gt;<i> The temporary files are created in smthttpl.c in the CGI case, and
+</I>&gt;<i> xilrwp.c in the LRWP case.
+</I>&gt;<i>
+</I>&gt;<i> Ewen
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003226.html">[Xitami] Core Dumping?
+</A></li>
+	<LI> Next message: <A HREF="003233.html">[Xitami] DNS Server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3227">[ date ]</a>
+              <a href="thread.html#3227">[ thread ]</a>
+              <a href="subject.html#3227">[ subject ]</a>
+              <a href="author.html#3227">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

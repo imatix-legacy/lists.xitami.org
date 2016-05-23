@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] sub-domains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004013.html">
+   <LINK REL="Next"  HREF="004015.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] sub-domains
+   </H1>
+    <B>James T
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] sub-domains">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 23 Sep 2002 21:22:33 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004013.html">[Xitami] sub-domains
+</A></li>
+        <LI> Next message: <A HREF="004015.html">[Xitami] lrwp test program and QNX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4014">[ date ]</a>
+              <a href="thread.html#4014">[ thread ]</a>
+              <a href="subject.html#4014">[ subject ]</a>
+              <a href="author.html#4014">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael I think this is what your looking for to set the path to the web
+page of the subdomain
+
+
+When you set-up a virtual host, you will generally want to use a specific
+directory for the web pages, CGI scripts, password file, and log files. (You
+can also share these in any way you need to.) You can also configure options
+such as the HTTP error messages, timeouts, security, and so on.
+
+To define these, you specify a configuration file per virtual host. The
+virtual host configuration inherits all definitions from defaults.cfg (and
+xitami.cfg). You need only define those options that are specific to the
+virtual host. If the HTTP request refers to a host name or IP address that
+has not been configured as a virtual host, the request is handled by the
+base host. To configure the base host, create a file called 'basehost.cfg'.
+You can change this name in the defaults.cfg file server:base-host option.
+
+This is a typical configuration for a site with several virtual hosts:
+
+[Server]
+    webpages=websites/hostx/webpages
+    cgi-bin=websites/hostx/cgi-bin
+
+Some of the options in the [Server] apply to the entire server globally, and
+are not taken from the virtual host configuration file: background,
+customise, debug, limit, portbase, and refresh.
+
+----- Original Message -----
+From: &quot;Michael Bronder&quot; &lt;<A HREF="mailto:bronder@attbi.com">bronder@attbi.com</A>&gt;
+To: &quot;<A HREF="mailto:Xitami@Lists.">Xitami@Lists.</A> Xitami. Org (E-mail)&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, September 23, 2002 6:40 PM
+Subject: [Xitami] sub-domains
+
+
+&gt;<i> hi all,
+</I>&gt;<i>
+</I>&gt;<i> I'm wondering what the best way is to crete &quot;sub-domains.&quot;  that is, I
+</I>have
+&gt;<i> my DNS acount pointing www.domain.com and *.domain.com to my xitami server
+</I>&gt;<i> now which then points to the default home page for my sight.  cool.
+</I>&gt;<i>
+</I>&gt;<i> but how do I then point subdomain.domain.com to a different web page on my
+</I>&gt;<i> server?
+</I>&gt;<i>
+</I>&gt;<i> Is this the same as setting virtual hosts?
+</I>&gt;<i>
+</I>&gt;<i> thanks,
+</I>&gt;<i>
+</I>&gt;<i> mb
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.391 / Virus Database: 222 - Release Date: 9/19/2002
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004013.html">[Xitami] sub-domains
+</A></li>
+	<LI> Next message: <A HREF="004015.html">[Xitami] lrwp test program and QNX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4014">[ date ]</a>
+              <a href="thread.html#4014">[ thread ]</a>
+              <a href="subject.html#4014">[ subject ]</a>
+              <a href="author.html#4014">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

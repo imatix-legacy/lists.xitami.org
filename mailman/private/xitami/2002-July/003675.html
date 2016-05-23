@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003672.html">
+   <LINK REL="Next"  HREF="003676.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] (no subject)
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] (no subject)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 15 Jul 2002 18:52:41 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003672.html">[Xitami] Elementary PHP/mySQL
+</A></li>
+        <LI> Next message: <A HREF="003676.html">[Xitami] Elementary PHP/mySQL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3675">[ date ]</a>
+              <a href="thread.html#3675">[ thread ]</a>
+              <a href="subject.html#3675">[ subject ]</a>
+              <a href="author.html#3675">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:OE64XqtFpsTfQqfJD9w0000b271@hotmail.com">OE64XqtFpsTfQqfJD9w0000b271@hotmail.com</A>&gt;
+   &quot;Neco Computers&quot; writes:
+&gt;<i> &gt; What is that best way to send E-mail through CGI Perl scripts, using
+</I>&gt;<i> Xitami? Also if you
+</I>&gt;<i> &gt; can supply some Perl Syntax for doing so. I am use to UNIX, and I'm not
+</I>&gt;<i> sure how to do
+</I>&gt;<i> &gt; this on a Windows server.
+</I>&gt;<i> 
+</I>&gt;<i> You can use sockets to send email:
+</I>&gt;<i> 
+</I>&gt;<i>   use Net::SMTP;
+</I>&gt;<i>    my $smtp = Net::SMTP-&gt;new($smtp_server, Debug =&gt; 0) || die &quot;unable to
+</I>&gt;<i> create Net::SMTP object $smtp_server.&quot;;
+</I>&gt;<i>    $smtp-&gt;mail($Webmaster);
+</I>
+Hmm; interesting.  Presumably the mail() function issues an SMTP &quot;MAIL
+FROM: &lt;$Webmaster&gt;&quot; and awaits a positive response?  What happens if it
+gets a temporary (or permanent) error response?
+
+&gt;<i>    $smtp-&gt;to($Email);
+</I>
+and then a &quot;RCPT TO: &lt;$Email&gt;&quot;.  Again, there are various legitimate
+responses to this, and only a few of them indicate success.
+
+&gt;<i>    $smtp-&gt;data();
+</I>
+followed by a &quot;DATA&quot; command.  What happens to the script if any of these
+operations encounter a non-success response from the remote SMTP server?
+
+&gt;<i>    $smtp-&gt;datasend(&quot;From: $Webmaster\n&quot;);
+</I>&gt;<i>    $smtp-&gt;datasend(&quot;Subject: $subject\n&quot;);
+</I>&gt;<i>    $smtp-&gt;datasend(&quot;\n&quot;);
+</I>
+OK, that's two header lines, and the blank line that separates the header
+from the body.  Does Net::SMTP automatically insert such (nowadays
+mandatory under RFC-2822) headers as &quot;Date:&quot;?
+
+&gt;<i>    $smtp-&gt;datasend($message);
+</I>
+Presumably the datasend() function is capable of sending the embedded
+newslines?
+
+&gt;<i>    $smtp-&gt;dataend();
+</I>
+which presumably sends the &quot;.&quot; on a line of its own, to terminate the
+DATA transfer.
+
+What happens if the remote end fails to accept the message at this point?
+RFC-2821 makes it quite clear that unless the SMTP client has received a
+&quot;success&quot; code following the end of that part of the exchange, it must
+NOT assume that the mail has been successfully sent, and undertake to
+requeue it in some fashion.
+
+&gt;<i>    $smtp-&gt;quit();
+</I>
+It strikes me that all these functions should return error conditions,
+and the script be written to handle such errors gracefully.  Did the
+author assume that a mail transfer will always execute without error?
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003672.html">[Xitami] Elementary PHP/mySQL
+</A></li>
+	<LI> Next message: <A HREF="003676.html">[Xitami] Elementary PHP/mySQL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3675">[ date ]</a>
+              <a href="thread.html#3675">[ thread ]</a>
+              <a href="subject.html#3675">[ subject ]</a>
+              <a href="author.html#3675">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

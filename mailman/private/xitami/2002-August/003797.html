@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Overhead of GSL vs JSP vs CGI vs SSI?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003794.html">
+   <LINK REL="Next"  HREF="003799.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Overhead of GSL vs JSP vs CGI vs SSI?
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Overhead of GSL vs JSP vs CGI vs SSI?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 07 Aug 2002 11:01:01 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003794.html">[Xitami] RE:  bat file
+</A></li>
+        <LI> Next message: <A HREF="003799.html">[Xitami] Need some software/Xitami advice.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3797">[ date ]</a>
+              <a href="thread.html#3797">[ thread ]</a>
+              <a href="subject.html#3797">[ subject ]</a>
+              <a href="author.html#3797">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is particularly directed at the imatix people on the list
+
+I am in the process of developing something where I have some 
+semi-dynamic content and I'm wondering what is the best way to handle it.
+
+Essentially the pages I wish my users to see have static decorative bits 
+(layout stylesheets etc) common to all pages, a part which is created 
+once and then stored and some other bits which may change on a daily 
+basis. As I see it there are three number of ways to combine the static, 
+semi-static and dynamic bits into one page and I wonder which is the 
+best for a Xitami server?
+
+As I see it these are my choices:
+Firstly I can serve up the pages using an external CGI app
+Secondly I can use GSL to combine various XML pages and static content
+Thirdly I can use SSI.
+Fourthly I can use LRWP and the Sokrates JSP stuff
+
+SSI is probably the least flexible because I have to keep the formatting 
+of the original page and there may be cases where I wish to redisplay 
+the data a different way. On the other hand xitami's CGI handling is not 
+exactly its best part so I'm leaning away from a pure CGI version as we 
+move to production. I'm interested in JSP but Java in general is not the 
+worlds best performer so that option is also not that promising. Finally 
+therefore there is the GSL option where I can use an interpreted script 
+to combine things.
+
+It seems to me that GSL and SSI are implemented in a similar fashion by 
+Xitami and thus - assuming the script is fairly clean and tidy - GSL 
+should perform almost as well as SSI but allow for a lot more 
+flexibility? Is this the case? and is this going to be faster than a 
+(compiled) external CGI program? I think it should be because as I 
+uderstand it the server does not have to load XIXSSI and XIXXML whereas 
+it does have to load the external CGI app, but I'd appreciate 
+confirmation. Also given that the required actions are pretty straight 
+forward am I wrong to fear the JSP alternative? When I run the JSP it 
+seems to take up a lot of memory compared to xitami (but thats Java for 
+you) but is it goign to be slower too? It seems to be a lot more complex 
+but maybe it isn't? Also I now that Xitami's SSI has a bug in terms of 
+the maximum page size it will deliver, does GSL suffer from the same 
+problem? The external GSLGEN.exe doesn't seem to.
+
+Any help or thoughts appreciated
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003794.html">[Xitami] RE:  bat file
+</A></li>
+	<LI> Next message: <A HREF="003799.html">[Xitami] Need some software/Xitami advice.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3797">[ date ]</a>
+              <a href="thread.html#3797">[ thread ]</a>
+              <a href="subject.html#3797">[ subject ]</a>
+              <a href="author.html#3797">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

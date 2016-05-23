@@ -1,0 +1,3160 @@
+From Toni at Gaia-Enterprises.org  Fri Apr  6 22:13:31 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Fri Apr  6 22:14:08 2007
+Subject: [Xitami] Port 80 mystery
+Message-ID: <4616A9EB.5020206@Gaia-Enterprises.org>
+
+I have just installed Xitami but when I try to start it, I get a message 
+saying that Port 80 is not available because it is being used by another 
+server.  I don't have a clue what it is, and doing searches for "server" 
+and "localhost" only turn up Xitami stuff.  Can't find anything else 
+that looks like a server to me.  There must be a way to look up 
+something in the system that will tell what is using Port 80 but I don't 
+know what it is.  The only idea I have is that I might have installed 
+something with Dreamweaver as a test site a long time ago.  Can anyone help?
+
+Toni
+
+
+From jsmiley at rcolmstead.com  Fri Apr  6 22:23:46 2007
+From: jsmiley at rcolmstead.com (M. Jason Smiley)
+Date: Fri Apr  6 22:23:59 2007
+Subject: [Xitami] Port 80 mystery
+References: <4616A9EB.5020206@Gaia-Enterprises.org>
+Message-ID: <034001c77889$7a710b70$c128a8c0@rcolmstead.com>
+
+is this on a windows box? my guess is that you have iis running already. 
+turn that off in services.
+
+
+----- Original Message ----- 
+From: "Toni McConnel" <Toni@Gaia-Enterprises.org>
+To: <xitami@lists.xitami.org>
+Sent: Friday, April 06, 2007 4:13 PM
+Subject: [Xitami] Port 80 mystery
+
+
+>I have just installed Xitami but when I try to start it, I get a message 
+>saying that Port 80 is not available because it is being used by another 
+>server.  I don't have a clue what it is, and doing searches for "server" 
+>and "localhost" only turn up Xitami stuff.  Can't find anything else that 
+>looks like a server to me.  There must be a way to look up something in the 
+>system that will tell what is using Port 80 but I don't know what it is. 
+>The only idea I have is that I might have installed something with 
+>Dreamweaver as a test site a long time ago.  Can anyone help?
+>
+> Toni
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+From magus1011ca at yahoo.ca  Fri Apr  6 22:47:16 2007
+From: magus1011ca at yahoo.ca (Magus)
+Date: Fri Apr  6 22:47:35 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <4616A9EB.5020206@Gaia-Enterprises.org>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>
+Message-ID: <1729152432.20070406154716@yahoo.ca>
+
+Hello Toni,
+
+Friday, April 6, 2007, 3:13:31 PM, you wrote:
+
+> I have just installed Xitami but when I try to start it, I get a message
+> saying that Port 80 is not available because it is being used by another
+> server.  I don't have a clue what it is, and doing searches for "server"
+> and "localhost" only turn up Xitami stuff.  Can't find anything else 
+> that looks like a server to me.  There must be a way to look up 
+> something in the system that will tell what is using Port 80 but I don't
+> know what it is.  The only idea I have is that I might have installed 
+> something with Dreamweaver as a test site a long time ago.  Can anyone help?
+
+> Toni
+
+
+
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Try netstat /? for more info on netstat. You should find the command
+you need there assuming you're running XP.
+
+-- 
+Best regards,
+ Magus
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 02:26:40 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 02:27:23 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <1729152432.20070406154716@yahoo.ca>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>
+	<1729152432.20070406154716@yahoo.ca>
+Message-ID: <4616E540.50508@Gaia-Enterprises.org>
+
+Hi, Magus...
+
+  Netstat is SO COOL!  Using netstat -b, it showed me the executables 
+that are using ports.  Now my problem is that I'm not sure which number 
+is the port number.  Is that PID?  Local Address?  Foreign address?  All 
+the numbers have four digits; I think I remember that anything that has 
+80 or 81 as last two digits is port 80, is that correct?  So I saw that 
+Foldershare, MS's web-based service for syncing documents between 
+computers, showed 2280 so I closed it.  When that didn't solve the 
+problem I uninstalled Foldershare completely and restarted the computer, 
+and STILL I get the same message.  Now only thunderbird and google 
+notify are using ports and  none of the numbers end in 80 or 81. 
+
+In Xitami's FAQ it says that the port for Xitami can be changed by 
+creating a file default.cfg and designating a different port.  So I can 
+try that but I'd rather identify what is tying up port 80 because it 
+bothers me not to know.
+Toni
+
+Magus wrote:
+> Hello Toni,
+>
+> Friday, April 6, 2007, 3:13:31 PM, you wrote:
+>
+>   
+>> I have just installed Xitami but when I try to start it, I get a message
+>> saying that Port 80 is not available because it is being used by another
+>> server.  I don't have a clue what it is, and doing searches for "server"
+>> and "localhost" only turn up Xitami stuff.  Can't find anything else 
+>> that looks like a server to me.  There must be a way to look up 
+>> something in the system that will tell what is using Port 80 but I don't
+>> know what it is.  The only idea I have is that I might have installed 
+>> something with Dreamweaver as a test site a long time ago.  Can anyone help?
+>>     
+>
+>   
+>> Toni
+>>     
+>
+>
+>
+>   
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>     
+>
+> Try netstat /? for more info on netstat. You should find the command
+> you need there assuming you're running XP.
+>
+>   
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 02:47:50 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 02:48:30 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <1109043225.20070406185046@yahoo.ca>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>
+	<1729152432.20070406154716@yahoo.ca>
+	<4616CF51.8050209@OldWomanWalking.com>
+	<1109043225.20070406185046@yahoo.ca>
+Message-ID: <4616EA36.9080904@Gaia-Enterprises.org>
+
+I'm running xp.  I think you sent this before getting my later message, 
+but you've given me next steps and these details are extremely helpful.  
+I'll go do these pending your next.  This is a great learning experience 
+for me, by the way, and your help is much appreciated.
+
+Toni
+
+
+
+Magus wrote:
+> Hello Toni,
+>
+> Friday, April 6, 2007, 5:53:05 PM, you wrote:
+>
+>   
+>> Hi, Magus....
+>>     
+>
+>   
+>> I have almost no experience using command prompt.  When I open it, it 
+>> comes up with the My Documents directory and I've forgotten how I get 
+>> out of that back to the C: prompt.  ???
+>>     
+>
+> Okay. First which version of Windows are you running? Windows 1.0,
+> 2.0, 3.0, 3.1, 3.11, 95, 98, ME, NT (3&4), 2000, XP, Server 2003, or
+> Vista? They _all_ have a "My Documents" directory.
+>
+> To Change Directories you use the CD command. To change from My
+> Documents to C:\ you would type "CD \" (without the quotes) since My
+> Documents is usually (not always, but usually) on the C: drive. You
+> don't need to CD out of "My Documents" to use netstat or, in general
+> any of the built in Windows command line programs in XP, other
+> versions of Windows are another story though.
+>
+> At the command prompt just type "netstat /?" to learn what options to
+> the netstat commands are available. In XP you can also click on
+> "Start" then on "Help and Support" and then type "netstat" in the
+> "Search" box to learn what options are available. In general you will
+> want the "-a" option. This will display a long list of all (hence -a)
+> the connections and ports that are active. The listing will look
+> something like this:
+>
+> C:\Documents and Settings\Magus>netstat -a
+>
+> Active Connections
+>
+>   Proto  Local Address          Foreign Address        State
+>   TCP    brewhau:ftp            brewhau:0              LISTENING
+>   TCP    brewhau:http           brewhau:0              LISTENING
+>   TCP    brewhau:81             brewhau:0              LISTENING
+>   TCP    brewhau:epmap          brewhau:0              LISTENING
+>   TCP    brewhau:microsoft-ds   brewhau:0              LISTENING
+>   TCP    brewhau:1035           brewhau:0              LISTENING
+>   TCP    brewhau:1801           brewhau:0              LISTENING
+>   TCP    brewhau:2103           brewhau:0              LISTENING
+>   TCP    brewhau:2105           brewhau:0              LISTENING
+>   TCP    brewhau:2107           brewhau:0              LISTENING
+>   TCP    brewhau:33178          brewhau:0              LISTENING
+>   TCP    brewhau:smtp           brewhau:0              LISTENING
+>   TCP    brewhau:pop3           brewhau:0              LISTENING
+>   TCP    brewhau:1040           brewhau:0              LISTENING
+>   TCP    brewhau:3968           localhost:3969         ESTABLISHED
+>   TCP    brewhau:3969           localhost:3968         ESTABLISHED
+>   TCP    brewhau:10110          brewhau:0              LISTENING
+>   TCP    brewhau:32025          brewhau:0              LISTENING
+>   TCP    brewhau:32026          brewhau:0              LISTENING
+>   TCP    brewhau:32027          brewhau:0              LISTENING
+>   TCP    brewhau:32028          brewhau:0              LISTENING
+>   TCP    brewhau:32110          brewhau:0              LISTENING
+>   TCP    brewhau:32111          brewhau:0              LISTENING
+>   TCP    brewhau:32112          brewhau:0              LISTENING
+>   TCP    brewhau:32113          brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:4347           ip72-192-172-173.sd.sd.cox.net:41056  ESTABLISHED
+>   TCP    brewhau:4355           85-210-133-230.dsl.pipex.com:3443  ESTABLISHED
+>   TCP    brewhau:4391           dyn-dsl-mb-66-79-240-80.nexicom.net:26936  ESTABLISHED
+>   TCP    brewhau:33178          c-24-11-180-122.hsd1.mi.comcast.net:58334  ESTABLISHED
+>   TCP    brewhau:33178          173.79.broadband4.iol.cz:1054  ESTABLISHED
+>   TCP    brewhau:33178          rev-88-157-67-150.tvtel.pt:4976  ESTABLISHED
+>   TCP    brewhau:33178          91.140.143.31:2247     ESTABLISHED
+>   TCP    brewhau:33178          125-238-123-105.broadband-telecom.global-gateway.net.nz:1650  ESTABLISHED
+>   TCP    brewhau:33178          20119180154.user.veloxzone.com.br:3276  ESTABLISHED
+>   TCP    brewhau:33178          NTL208H101-78-30.nt.net:2825  ESTABLISHED
+>   TCP    brewhau:33178          pool.dsl.166.042.cvinternet.net:2433  ESTABLISHED
+>   UDP    brewhau:microsoft-ds   *:*
+>   UDP    brewhau:isakmp         *:*
+>   UDP    brewhau:1033           *:*
+>   UDP    brewhau:1044           *:*
+>   UDP    brewhau:1057           *:*
+>   UDP    brewhau:1089           *:*
+>   UDP    brewhau:ms-sql-m       *:*
+>   UDP    brewhau:3527           *:*
+>   UDP    brewhau:4040           *:*
+>   UDP    brewhau:4335           *:*
+>   UDP    brewhau:4500           *:*
+>   UDP    brewhau:33178          *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:1036           *:*
+>   UDP    brewhau:1631           *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>
+> C:\Documents and Settings\Magus
+>
+> which is an example from my system. Yours should be somewhat shorter.
+> 8=))
+>
+> The important part is usually near the top in the column "Local
+> Address". It will read something like "<your computer's name>:http" or
+> "<your computers name>:80". In the listing above, brewhau is my
+> systems name and the important line is the one with "brewhau:http" in
+> it. If you see either of these lines then you likely have PWS or
+> Personal Web Server running. This is installed without your permission
+> or knowledge on all versions of Windows from 98 and up when you
+> install Windows.
+>
+> Without knowing which version of Windows you are running I can't help
+> much more than this because how you turn off PWS depends on which
+> version of Windows you are running. It would help me greatly to help
+> you if you could type the following lines at the command prompt:
+>
+> netstat -a >temp.txt
+> ver >>temp.txt
+>
+> then send me the contents of the newly created temp.txt file.
+>
+>   
+
+From shinelight at shininglightpro.com  Sat Apr  7 03:39:51 2007
+From: shinelight at shininglightpro.com (Thomas J. Hruska)
+Date: Sat Apr  7 03:40:46 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <4616E540.50508@Gaia-Enterprises.org>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>	<1729152432.20070406154716@yahoo.ca>
+	<4616E540.50508@Gaia-Enterprises.org>
+Message-ID: <4616F667.2040409@shininglightpro.com>
+
+Toni McConnel wrote:
+> Hi, Magus...
+> 
+>  Netstat is SO COOL!  Using netstat -b, it showed me the executables 
+> that are using ports.  Now my problem is that I'm not sure which number 
+> is the port number.  Is that PID?  Local Address?  Foreign address?  All 
+> the numbers have four digits; I think I remember that anything that has 
+> 80 or 81 as last two digits is port 80, is that correct?  So I saw that 
+> Foldershare, MS's web-based service for syncing documents between 
+> computers, showed 2280 so I closed it.  When that didn't solve the 
+> problem I uninstalled Foldershare completely and restarted the computer, 
+> and STILL I get the same message.  Now only thunderbird and google 
+> notify are using ports and  none of the numbers end in 80 or 81.
+> In Xitami's FAQ it says that the port for Xitami can be changed by 
+> creating a file default.cfg and designating a different port.  So I can 
+> try that but I'd rather identify what is tying up port 80 because it 
+> bothers me not to know.
+> Toni
+
+Search for each executable name listed for what it is and what it does. 
+  Local address is the one that should specify the port.
+
+netstat -a -b
+
+Gives much more information.  It also takes a while.
+
+You're looking for the Local Address that shows:
+
+TCP  YourComputerName:80  YourComputerName:0  LISTENING  SomeProcessID
+[ExeFileInTaskManager]
+
+Search Google to see what that EXE is.  Actually, you should know what 
+ALL the executables currently running on your system do.  Searching 
+Google turns up the results for everything usually with significant details.
+
+-- 
+Thomas Hruska
+Shining Light Productions
+
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 03:58:08 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 03:58:44 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <1109043225.20070406185046@yahoo.ca>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>
+	<1729152432.20070406154716@yahoo.ca>
+	<4616CF51.8050209@OldWomanWalking.com>
+	<1109043225.20070406185046@yahoo.ca>
+Message-ID: <4616FAB0.4010603@Gaia-Enterprises.org>
+
+Here's the temp.txt stuff:
+
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    LULU:1140              localhost:1141         ESTABLISHED
+  TCP    LULU:1141              localhost:1140         ESTABLISHED
+
+Microsoft Windows XP [Version 5.1.2600]
+
+
+Magus wrote:
+> Hello Toni,
+>
+> Friday, April 6, 2007, 5:53:05 PM, you wrote:
+>
+>   
+>> Hi, Magus....
+>>     
+>
+>   
+>> I have almost no experience using command prompt.  When I open it, it 
+>> comes up with the My Documents directory and I've forgotten how I get 
+>> out of that back to the C: prompt.  ???
+>>     
+>
+> Okay. First which version of Windows are you running? Windows 1.0,
+> 2.0, 3.0, 3.1, 3.11, 95, 98, ME, NT (3&4), 2000, XP, Server 2003, or
+> Vista? They _all_ have a "My Documents" directory.
+>
+> To Change Directories you use the CD command. To change from My
+> Documents to C:\ you would type "CD \" (without the quotes) since My
+> Documents is usually (not always, but usually) on the C: drive. You
+> don't need to CD out of "My Documents" to use netstat or, in general
+> any of the built in Windows command line programs in XP, other
+> versions of Windows are another story though.
+>
+> At the command prompt just type "netstat /?" to learn what options to
+> the netstat commands are available. In XP you can also click on
+> "Start" then on "Help and Support" and then type "netstat" in the
+> "Search" box to learn what options are available. In general you will
+> want the "-a" option. This will display a long list of all (hence -a)
+> the connections and ports that are active. The listing will look
+> something like this:
+>
+> C:\Documents and Settings\Magus>netstat -a
+>
+> Active Connections
+>
+>   Proto  Local Address          Foreign Address        State
+>   TCP    brewhau:ftp            brewhau:0              LISTENING
+>   TCP    brewhau:http           brewhau:0              LISTENING
+>   TCP    brewhau:81             brewhau:0              LISTENING
+>   TCP    brewhau:epmap          brewhau:0              LISTENING
+>   TCP    brewhau:microsoft-ds   brewhau:0              LISTENING
+>   TCP    brewhau:1035           brewhau:0              LISTENING
+>   TCP    brewhau:1801           brewhau:0              LISTENING
+>   TCP    brewhau:2103           brewhau:0              LISTENING
+>   TCP    brewhau:2105           brewhau:0              LISTENING
+>   TCP    brewhau:2107           brewhau:0              LISTENING
+>   TCP    brewhau:33178          brewhau:0              LISTENING
+>   TCP    brewhau:smtp           brewhau:0              LISTENING
+>   TCP    brewhau:pop3           brewhau:0              LISTENING
+>   TCP    brewhau:1040           brewhau:0              LISTENING
+>   TCP    brewhau:3968           localhost:3969         ESTABLISHED
+>   TCP    brewhau:3969           localhost:3968         ESTABLISHED
+>   TCP    brewhau:10110          brewhau:0              LISTENING
+>   TCP    brewhau:32025          brewhau:0              LISTENING
+>   TCP    brewhau:32026          brewhau:0              LISTENING
+>   TCP    brewhau:32027          brewhau:0              LISTENING
+>   TCP    brewhau:32028          brewhau:0              LISTENING
+>   TCP    brewhau:32110          brewhau:0              LISTENING
+>   TCP    brewhau:32111          brewhau:0              LISTENING
+>   TCP    brewhau:32112          brewhau:0              LISTENING
+>   TCP    brewhau:32113          brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:4347           ip72-192-172-173.sd.sd.cox.net:41056  ESTABLISHED
+>   TCP    brewhau:4355           85-210-133-230.dsl.pipex.com:3443  ESTABLISHED
+>   TCP    brewhau:4391           dyn-dsl-mb-66-79-240-80.nexicom.net:26936  ESTABLISHED
+>   TCP    brewhau:33178          c-24-11-180-122.hsd1.mi.comcast.net:58334  ESTABLISHED
+>   TCP    brewhau:33178          173.79.broadband4.iol.cz:1054  ESTABLISHED
+>   TCP    brewhau:33178          rev-88-157-67-150.tvtel.pt:4976  ESTABLISHED
+>   TCP    brewhau:33178          91.140.143.31:2247     ESTABLISHED
+>   TCP    brewhau:33178          125-238-123-105.broadband-telecom.global-gateway.net.nz:1650  ESTABLISHED
+>   TCP    brewhau:33178          20119180154.user.veloxzone.com.br:3276  ESTABLISHED
+>   TCP    brewhau:33178          NTL208H101-78-30.nt.net:2825  ESTABLISHED
+>   TCP    brewhau:33178          pool.dsl.166.042.cvinternet.net:2433  ESTABLISHED
+>   UDP    brewhau:microsoft-ds   *:*
+>   UDP    brewhau:isakmp         *:*
+>   UDP    brewhau:1033           *:*
+>   UDP    brewhau:1044           *:*
+>   UDP    brewhau:1057           *:*
+>   UDP    brewhau:1089           *:*
+>   UDP    brewhau:ms-sql-m       *:*
+>   UDP    brewhau:3527           *:*
+>   UDP    brewhau:4040           *:*
+>   UDP    brewhau:4335           *:*
+>   UDP    brewhau:4500           *:*
+>   UDP    brewhau:33178          *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:1036           *:*
+>   UDP    brewhau:1631           *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>
+> C:\Documents and Settings\Magus
+>
+> which is an example from my system. Yours should be somewhat shorter.
+> 8=))
+>
+> The important part is usually near the top in the column "Local
+> Address". It will read something like "<your computer's name>:http" or
+> "<your computers name>:80". In the listing above, brewhau is my
+> systems name and the important line is the one with "brewhau:http" in
+> it. If you see either of these lines then you likely have PWS or
+> Personal Web Server running. This is installed without your permission
+> or knowledge on all versions of Windows from 98 and up when you
+> install Windows.
+>
+> Without knowing which version of Windows you are running I can't help
+> much more than this because how you turn off PWS depends on which
+> version of Windows you are running. It would help me greatly to help
+> you if you could type the following lines at the command prompt:
+>
+> netstat -a >temp.txt
+> ver >>temp.txt
+>
+> then send me the contents of the newly created temp.txt file.
+>
+>   
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 04:10:06 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 04:10:40 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <1109043225.20070406185046@yahoo.ca>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>	<1729152432.20070406154716@yahoo.ca>	<4616CF51.8050209@OldWomanWalking.com>	<1109043225.20070406185046@yahoo.ca>
+Message-ID: <4616FD7E.7030302@Gaia-Enterprises.org>
+
+Here's the temp.txt stuff:
+
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    LULU:1140              localhost:1141         ESTABLISHED
+  TCP    LULU:1141              localhost:1140         ESTABLISHED
+
+Microsoft Windows XP [Version 5.1.2600]
+
+
+Magus wrote:
+> Hello Toni,
+>
+> Friday, April 6, 2007, 5:53:05 PM, you wrote:
+>
+>   
+>> Hi, Magus....
+>>     
+>
+>   
+>> I have almost no experience using command prompt.  When I open it, it 
+>> comes up with the My Documents directory and I've forgotten how I get 
+>> out of that back to the C: prompt.  ???
+>>     
+>
+> Okay. First which version of Windows are you running? Windows 1.0,
+> 2.0, 3.0, 3.1, 3.11, 95, 98, ME, NT (3&4), 2000, XP, Server 2003, or
+> Vista? They _all_ have a "My Documents" directory.
+>
+> To Change Directories you use the CD command. To change from My
+> Documents to C:\ you would type "CD \" (without the quotes) since My
+> Documents is usually (not always, but usually) on the C: drive. You
+> don't need to CD out of "My Documents" to use netstat or, in general
+> any of the built in Windows command line programs in XP, other
+> versions of Windows are another story though.
+>
+> At the command prompt just type "netstat /?" to learn what options to
+> the netstat commands are available. In XP you can also click on
+> "Start" then on "Help and Support" and then type "netstat" in the
+> "Search" box to learn what options are available. In general you will
+> want the "-a" option. This will display a long list of all (hence -a)
+> the connections and ports that are active. The listing will look
+> something like this:
+>
+> C:\Documents and Settings\Magus>netstat -a
+>
+> Active Connections
+>
+>   Proto  Local Address          Foreign Address        State
+>   TCP    brewhau:ftp            brewhau:0              LISTENING
+>   TCP    brewhau:http           brewhau:0              LISTENING
+>   TCP    brewhau:81             brewhau:0              LISTENING
+>   TCP    brewhau:epmap          brewhau:0              LISTENING
+>   TCP    brewhau:microsoft-ds   brewhau:0              LISTENING
+>   TCP    brewhau:1035           brewhau:0              LISTENING
+>   TCP    brewhau:1801           brewhau:0              LISTENING
+>   TCP    brewhau:2103           brewhau:0              LISTENING
+>   TCP    brewhau:2105           brewhau:0              LISTENING
+>   TCP    brewhau:2107           brewhau:0              LISTENING
+>   TCP    brewhau:33178          brewhau:0              LISTENING
+>   TCP    brewhau:smtp           brewhau:0              LISTENING
+>   TCP    brewhau:pop3           brewhau:0              LISTENING
+>   TCP    brewhau:1040           brewhau:0              LISTENING
+>   TCP    brewhau:3968           localhost:3969         ESTABLISHED
+>   TCP    brewhau:3969           localhost:3968         ESTABLISHED
+>   TCP    brewhau:10110          brewhau:0              LISTENING
+>   TCP    brewhau:32025          brewhau:0              LISTENING
+>   TCP    brewhau:32026          brewhau:0              LISTENING
+>   TCP    brewhau:32027          brewhau:0              LISTENING
+>   TCP    brewhau:32028          brewhau:0              LISTENING
+>   TCP    brewhau:32110          brewhau:0              LISTENING
+>   TCP    brewhau:32111          brewhau:0              LISTENING
+>   TCP    brewhau:32112          brewhau:0              LISTENING
+>   TCP    brewhau:32113          brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:4347           ip72-192-172-173.sd.sd.cox.net:41056  ESTABLISHED
+>   TCP    brewhau:4355           85-210-133-230.dsl.pipex.com:3443  ESTABLISHED
+>   TCP    brewhau:4391           dyn-dsl-mb-66-79-240-80.nexicom.net:26936  ESTABLISHED
+>   TCP    brewhau:33178          c-24-11-180-122.hsd1.mi.comcast.net:58334  ESTABLISHED
+>   TCP    brewhau:33178          173.79.broadband4.iol.cz:1054  ESTABLISHED
+>   TCP    brewhau:33178          rev-88-157-67-150.tvtel.pt:4976  ESTABLISHED
+>   TCP    brewhau:33178          91.140.143.31:2247     ESTABLISHED
+>   TCP    brewhau:33178          125-238-123-105.broadband-telecom.global-gateway.net.nz:1650  ESTABLISHED
+>   TCP    brewhau:33178          20119180154.user.veloxzone.com.br:3276  ESTABLISHED
+>   TCP    brewhau:33178          NTL208H101-78-30.nt.net:2825  ESTABLISHED
+>   TCP    brewhau:33178          pool.dsl.166.042.cvinternet.net:2433  ESTABLISHED
+>   UDP    brewhau:microsoft-ds   *:*
+>   UDP    brewhau:isakmp         *:*
+>   UDP    brewhau:1033           *:*
+>   UDP    brewhau:1044           *:*
+>   UDP    brewhau:1057           *:*
+>   UDP    brewhau:1089           *:*
+>   UDP    brewhau:ms-sql-m       *:*
+>   UDP    brewhau:3527           *:*
+>   UDP    brewhau:4040           *:*
+>   UDP    brewhau:4335           *:*
+>   UDP    brewhau:4500           *:*
+>   UDP    brewhau:33178          *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:1036           *:*
+>   UDP    brewhau:1631           *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>
+> C:\Documents and Settings\Magus
+>
+> which is an example from my system. Yours should be somewhat shorter.
+> 8=))
+>
+> The important part is usually near the top in the column "Local
+> Address". It will read something like "<your computer's name>:http" or
+> "<your computers name>:80". In the listing above, brewhau is my
+> systems name and the important line is the one with "brewhau:http" in
+> it. If you see either of these lines then you likely have PWS or
+> Personal Web Server running. This is installed without your permission
+> or knowledge on all versions of Windows from 98 and up when you
+> install Windows.
+>
+> Without knowing which version of Windows you are running I can't help
+> much more than this because how you turn off PWS depends on which
+> version of Windows you are running. It would help me greatly to help
+> you if you could type the following lines at the command prompt:
+>
+> netstat -a >temp.txt
+> ver >>temp.txt
+>
+> then send me the contents of the newly created temp.txt file.
+>
+>   
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 04:14:53 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 04:15:30 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <1109043225.20070406185046@yahoo.ca>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>	<1729152432.20070406154716@yahoo.ca>	<4616CF51.8050209@OldWomanWalking.com>	<1109043225.20070406185046@yahoo.ca>
+Message-ID: <4616FE9D.4010800@Gaia-Enterprises.org>
+
+Hi, Thomas...
+
+Here's what I just sent Magus.  I just don't see any port 80 in there.  ????
+
+Here's the stuff that came up with netstat -a -b.  I don't see anything 
+but mysql server -- is that the problem?  Or am I missing something?
+
+
+Active Connections
+
+   Proto  Local Address          Foreign Address        State           PID
+   TCP    LULU:microsoft-ds      LULU:0                 LISTENING       4
+   [System]
+
+   TCP    LULU:netbios-ssn       LULU:0                 LISTENING       4
+   [System]
+
+   TCP    LULU:1140              localhost:1141         ESTABLISHED     3748
+   [thunderbird.exe]
+
+   TCP    LULU:1141              localhost:1140         ESTABLISHED     3748
+   [thunderbird.exe]
+
+   TCP    LULU:1338              64.124.109.201.t426.aws.com:http 
+ESTABLISHED     2488
+   [Weather.exe]
+
+   UDP    LULU:1027              *:*                                    1336
+   C:\WINDOWS\system32\mswsock.dll
+   c:\windows\system32\WS2_32.dll
+   c:\windows\system32\DNSAPI.dll
+   c:\windows\system32\dnsrslvr.dll
+   C:\WINDOWS\system32\RPCRT4.dll
+   [svchost.exe]
+
+   UDP    LULU:ms-sql-m          *:*                                    720
+   [sqlservr.exe]
+
+   UDP    LULU:3456              *:*                                    356
+   [inetinfo.exe]
+
+   UDP    LULU:isakmp            *:*                                    816
+   [lsass.exe]
+
+   UDP    LULU:4500              *:*                                    816
+   [lsass.exe]
+
+   UDP    LULU:microsoft-ds      *:*                                    4
+   [System]
+
+   UDP    LULU:1030              *:*                                    1336
+   C:\WINDOWS\system32\mswsock.dll
+   c:\windows\system32\WS2_32.dll
+   c:\windows\system32\DNSAPI.dll
+   c:\windows\system32\dnsrslvr.dll
+   C:\WINDOWS\system32\RPCRT4.dll
+   [svchost.exe]
+
+   UDP    LULU:ntp               *:*                                    1180
+   c:\windows\system32\WS2_32.dll
+   c:\windows\system32\w32time.dll
+   ntdll.dll
+   C:\WINDOWS\system32\kernel32.dll
+   [svchost.exe]
+
+   UDP    LULU:1052              *:*                                    2780
+   [Swift To-Do List.exe]
+
+   UDP    LULU:1055              *:*                                    2488
+   [Weather.exe]
+
+   UDP    LULU:1026              *:*                                    2352
+   [gnotify.exe]
+
+   UDP    LULU:1033              *:*                                    280
+   [Explorer.EXE]
+
+   UDP    LULU:1900              *:*                                    1416
+   c:\windows\system32\WS2_32.dll
+   c:\windows\system32\ssdpsrv.dll
+   ntdll.dll
+   C:\WINDOWS\system32\kernel32.dll
+   [svchost.exe]
+
+   UDP    LULU:netbios-dgm       *:*                                    4
+   [System]
+
+   UDP    LULU:netbios-ns        *:*                                    4
+   [System]
+
+   UDP    LULU:1900              *:*                                    1416
+   c:\windows\system32\WS2_32.dll
+   c:\windows\system32\ssdpsrv.dll
+   ntdll.dll
+   C:\WINDOWS\system32\kernel32.dll
+   [svchost.exe]
+
+   UDP    LULU:ntp               *:*                                    1180
+   c:\windows\system32\WS2_32.dll
+   c:\windows\system32\w32time.dll
+   ntdll.dll
+   C:\WINDOWS\system32\kernel32.dll
+   [svchost.exe]
+
+
+Microsoft Windows XP [Version 5.1.2600]
+
+
+
+
+
+
+
+Here's the temp.txt stuff:
+
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    LULU:1140              localhost:1141         ESTABLISHED
+  TCP    LULU:1141              localhost:1140         ESTABLISHED
+
+Microsoft Windows XP [Version 5.1.2600]
+
+
+Magus wrote:
+> Hello Toni,
+>
+> Friday, April 6, 2007, 5:53:05 PM, you wrote:
+>
+>   
+>> Hi, Magus....
+>>     
+>
+>   
+>> I have almost no experience using command prompt.  When I open it, it 
+>> comes up with the My Documents directory and I've forgotten how I get 
+>> out of that back to the C: prompt.  ???
+>>     
+>
+> Okay. First which version of Windows are you running? Windows 1.0,
+> 2.0, 3.0, 3.1, 3.11, 95, 98, ME, NT (3&4), 2000, XP, Server 2003, or
+> Vista? They _all_ have a "My Documents" directory.
+>
+> To Change Directories you use the CD command. To change from My
+> Documents to C:\ you would type "CD \" (without the quotes) since My
+> Documents is usually (not always, but usually) on the C: drive. You
+> don't need to CD out of "My Documents" to use netstat or, in general
+> any of the built in Windows command line programs in XP, other
+> versions of Windows are another story though.
+>
+> At the command prompt just type "netstat /?" to learn what options to
+> the netstat commands are available. In XP you can also click on
+> "Start" then on "Help and Support" and then type "netstat" in the
+> "Search" box to learn what options are available. In general you will
+> want the "-a" option. This will display a long list of all (hence -a)
+> the connections and ports that are active. The listing will look
+> something like this:
+>
+> C:\Documents and Settings\Magus>netstat -a
+>
+> Active Connections
+>
+>   Proto  Local Address          Foreign Address        State
+>   TCP    brewhau:ftp            brewhau:0              LISTENING
+>   TCP    brewhau:http           brewhau:0              LISTENING
+>   TCP    brewhau:81             brewhau:0              LISTENING
+>   TCP    brewhau:epmap          brewhau:0              LISTENING
+>   TCP    brewhau:microsoft-ds   brewhau:0              LISTENING
+>   TCP    brewhau:1035           brewhau:0              LISTENING
+>   TCP    brewhau:1801           brewhau:0              LISTENING
+>   TCP    brewhau:2103           brewhau:0              LISTENING
+>   TCP    brewhau:2105           brewhau:0              LISTENING
+>   TCP    brewhau:2107           brewhau:0              LISTENING
+>   TCP    brewhau:33178          brewhau:0              LISTENING
+>   TCP    brewhau:smtp           brewhau:0              LISTENING
+>   TCP    brewhau:pop3           brewhau:0              LISTENING
+>   TCP    brewhau:1040           brewhau:0              LISTENING
+>   TCP    brewhau:3968           localhost:3969         ESTABLISHED
+>   TCP    brewhau:3969           localhost:3968         ESTABLISHED
+>   TCP    brewhau:10110          brewhau:0              LISTENING
+>   TCP    brewhau:32025          brewhau:0              LISTENING
+>   TCP    brewhau:32026          brewhau:0              LISTENING
+>   TCP    brewhau:32027          brewhau:0              LISTENING
+>   TCP    brewhau:32028          brewhau:0              LISTENING
+>   TCP    brewhau:32110          brewhau:0              LISTENING
+>   TCP    brewhau:32111          brewhau:0              LISTENING
+>   TCP    brewhau:32112          brewhau:0              LISTENING
+>   TCP    brewhau:32113          brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:netbios-ssn    brewhau:0              LISTENING
+>   TCP    brewhau:4347           ip72-192-172-173.sd.sd.cox.net:41056  ESTABLISHED
+>   TCP    brewhau:4355           85-210-133-230.dsl.pipex.com:3443  ESTABLISHED
+>   TCP    brewhau:4391           dyn-dsl-mb-66-79-240-80.nexicom.net:26936  ESTABLISHED
+>   TCP    brewhau:33178          c-24-11-180-122.hsd1.mi.comcast.net:58334  ESTABLISHED
+>   TCP    brewhau:33178          173.79.broadband4.iol.cz:1054  ESTABLISHED
+>   TCP    brewhau:33178          rev-88-157-67-150.tvtel.pt:4976  ESTABLISHED
+>   TCP    brewhau:33178          91.140.143.31:2247     ESTABLISHED
+>   TCP    brewhau:33178          125-238-123-105.broadband-telecom.global-gateway.net.nz:1650  ESTABLISHED
+>   TCP    brewhau:33178          20119180154.user.veloxzone.com.br:3276  ESTABLISHED
+>   TCP    brewhau:33178          NTL208H101-78-30.nt.net:2825  ESTABLISHED
+>   TCP    brewhau:33178          pool.dsl.166.042.cvinternet.net:2433  ESTABLISHED
+>   UDP    brewhau:microsoft-ds   *:*
+>   UDP    brewhau:isakmp         *:*
+>   UDP    brewhau:1033           *:*
+>   UDP    brewhau:1044           *:*
+>   UDP    brewhau:1057           *:*
+>   UDP    brewhau:1089           *:*
+>   UDP    brewhau:ms-sql-m       *:*
+>   UDP    brewhau:3527           *:*
+>   UDP    brewhau:4040           *:*
+>   UDP    brewhau:4335           *:*
+>   UDP    brewhau:4500           *:*
+>   UDP    brewhau:33178          *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:1036           *:*
+>   UDP    brewhau:1631           *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:netbios-ns     *:*
+>   UDP    brewhau:netbios-dgm    *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>   UDP    brewhau:ntp            *:*
+>   UDP    brewhau:router         *:*
+>   UDP    brewhau:1900           *:*
+>
+> C:\Documents and Settings\Magus
+>
+> which is an example from my system. Yours should be somewhat shorter.
+> 8=))
+>
+> The important part is usually near the top in the column "Local
+> Address". It will read something like "<your computer's name>:http" or
+> "<your computers name>:80". In the listing above, brewhau is my
+> systems name and the important line is the one with "brewhau:http" in
+> it. If you see either of these lines then you likely have PWS or
+> Personal Web Server running. This is installed without your permission
+> or knowledge on all versions of Windows from 98 and up when you
+> install Windows.
+>
+> Without knowing which version of Windows you are running I can't help
+> much more than this because how you turn off PWS depends on which
+> version of Windows you are running. It would help me greatly to help
+> you if you could type the following lines at the command prompt:
+>
+> netstat -a >temp.txt
+> ver >>temp.txt
+>
+> then send me the contents of the newly created temp.txt file.
+>
+>   
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 04:19:07 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 04:19:42 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <4616F667.2040409@shininglightpro.com>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>	<1729152432.20070406154716@yahoo.ca>	<4616E540.50508@Gaia-Enterprises.org>
+	<4616F667.2040409@shininglightpro.com>
+Message-ID: <4616FF9B.9070901@Gaia-Enterprises.org>
+
+I shudda included this before -- part of the error message is 
+(WDAEADDRINUSE).  I assumed it was just the system's language for saying 
+the port is in use but maybe it means something more specific?
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 04:52:26 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 04:53:03 2007
+Subject: [Xitami] Port 80 mystery
+In-Reply-To: <034001c77889$7a710b70$c128a8c0@rcolmstead.com>
+References: <4616A9EB.5020206@Gaia-Enterprises.org>
+	<034001c77889$7a710b70$c128a8c0@rcolmstead.com>
+Message-ID: <4617076A.9030308@Gaia-Enterprises.org>
+
+Jason, I didn't see your message for hours because Thunderbird tagged it 
+as junk and it sat in the Junk mailbox until I checked it this evening, 
+and guess what!  You're right!  Xitami is now running.  Thanks!
+
+However, when I turned off IIS I got a message box telling me that it 
+would also turn off SMTP services, so we'll see if I can send this email.
+
+Thanks to Magus and Thomas, too, for trying to help.  Although they 
+hadn't got to this answer yet, following their suggestions taught me a 
+lot of stuff I needed to learn, so your time wasn't wasted!
+
+Toni
+
+M. Jason Smiley wrote:
+> is this on a windows box? my guess is that you have iis running 
+> already. turn that off in services.
+>
+>
+> ----- Original Message ----- From: "Toni McConnel" 
+> <Toni@Gaia-Enterprises.org>
+> To: <xitami@lists.xitami.org>
+> Sent: Friday, April 06, 2007 4:13 PM
+> Subject: [Xitami] Port 80 mystery
+>
+>
+>> I have just installed Xitami but when I try to start it, I get a 
+>> message saying that Port 80 is not available because it is being used 
+>> by another server.  I don't have a clue what it is, and doing 
+>> searches for "server" and "localhost" only turn up Xitami stuff.  
+>> Can't find anything else that looks like a server to me.  There must 
+>> be a way to look up something in the system that will tell what is 
+>> using Port 80 but I don't know what it is. The only idea I have is 
+>> that I might have installed something with Dreamweaver as a test site 
+>> a long time ago.  Can anyone help?
+>>
+>> Toni
+>>
+>>
+>>
+>> -- 
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>
+>
+> -- 
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 05:06:59 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 05:07:35 2007
+Subject: [Xitami] Next question: edit .aut file
+Message-ID: <46170AD3.5090601@Gaia-Enterprises.org>
+
+Now I can't log in to Xitami admin because I don't know what password is 
+in the xitami.aut file, and I don't know how to read it (hate parading 
+my ignorance like this but....).  I tried opening it in notepad but that 
+didn't work.  How do I do this?
+
+Toni
+
+From rickhead at gmail.com  Sat Apr  7 05:43:41 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Sat Apr  7 05:43:52 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <46170AD3.5090601@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+Message-ID: <11689a700704062043m17a9274rbce22e5032204a92@mail.gmail.com>
+
+If Xitami refuses to let you into the browser based configuration then you
+have to make some changes in the authorization configuration files.
+
+Change to c:\xitami and use Notepad to create two files:
+
+   1. defaults.cfg:
+
+   [Security]
+       filename=defaults.aut
+
+   2. defaults.aut:
+
+   [/Admin]
+       admin=verysecret
+
+
+
+Now use userid 'admin' and password 'verysecret'. (From the Xitami 'FAQ.')
+
+Stop Xitami and then restart it so that it reads your changes.
+
+~clipped from:
+   http://www.scrounge.org/cgi.htm
+
+
+On 4/7/07, Toni McConnel <Toni@gaia-enterprises.org> wrote:
+>
+> Now I can't log in to Xitami admin because I don't know what password is
+> in the xitami.aut file, and I don't know how to read it (hate parading
+> my ignorance like this but....).  I tried opening it in notepad but that
+> didn't work.  How do I do this?
+>
+> Toni
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20070407/1367aee2/attachment.html
+From xitami at pastryworld.ca  Sat Apr  7 05:44:04 2007
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Sat Apr  7 05:44:38 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <46170AD3.5090601@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+Message-ID: <.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+
+Toni,
+
+create a new file default.aut with notepad. When saving in notepad, put
+this in the box "default.aut."  The " will prevent windows to add the
+default .txt file extension to the file. In this way it is not a .txt file
+Put this in the file
+
+[/admin]
+    your username here = "your password here"
+    Webmask = "192.168.100.*"
+
+Replace 'your username here' with your username and 'your password here'
+with your password. Please leave the " around the password
+And the above IP range change with yours. This tells xitami which IP range
+or even only one single IP if you wish, will be allowed to use for
+webaccess to the admin area. I liked more reading and configuring with the
+files itself.
+
+And If you make changes to the configuration file, please make a new one.
+DON'T change xitami.cfg, make a new defaults.cfg which contains your
+customized settings.
+
+Take the time to read the xitami.cfg file and you will learn most of the
+handling/working of xitami.
+
+Johannes
+
+
+> Now I can't log in to Xitami admin because I don't know what password is
+> in the xitami.aut file, and I don't know how to read it (hate parading
+> my ignorance like this but....).  I tried opening it in notepad but that
+> didn't work.  How do I do this?
+>
+> Toni
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 06:53:04 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 06:53:40 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+Message-ID: <461723B0.9090402@Gaia-Enterprises.org>
+
+I was not successful logging in using either this method from Johannes 
+nor the one in the FAQ (which I had missed somehow and Rick told me 
+about).  I have checked and doublechecked to be sure I entered 
+everything correctly, for both techniques.  ???  I see only one thing 
+that might make a difference.  My Xitami start window has TWO IP 
+addresses, 198... and 127....  Both bring up the Xitami welcome page in 
+the browser.  Does this change the way I need to set up the defaults.aut 
+file?  I even tried using a different browser.
+
+
+
+Johannes Prost wrote:
+> Toni,
+>
+> create a new file default.aut with notepad. When saving in notepad, put
+> this in the box "default.aut."  The " will prevent windows to add the
+> default .txt file extension to the file. In this way it is not a .txt file
+> Put this in the file
+>
+> [/admin]
+>     your username here = "your password here"
+>     Webmask = "192.168.100.*"
+>
+> Replace 'your username here' with your username and 'your password here'
+> with your password. Please leave the " around the password
+> And the above IP range change with yours. This tells xitami which IP range
+> or even only one single IP if you wish, will be allowed to use for
+> webaccess to the admin area. I liked more reading and configuring with the
+> files itself.
+>
+> And If you make changes to the configuration file, please make a new one.
+> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+> customized settings.
+>
+> Take the time to read the xitami.cfg file and you will learn most of the
+> handling/working of xitami.
+>
+> Johannes
+>
+>
+>   
+>> Now I can't log in to Xitami admin because I don't know what password is
+>> in the xitami.aut file, and I don't know how to read it (hate parading
+>> my ignorance like this but....).  I tried opening it in notepad but that
+>> didn't work.  How do I do this?
+>>
+>> Toni
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>     
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>   
+
+From thingieStuff at gamebox.net  Fri Apr  6 15:49:15 2007
+From: thingieStuff at gamebox.net (B.P.)
+Date: Sat Apr  7 09:12:57 2007
+Subject: [Xitami] LRWP problem
+Message-ID: <000701c77852$5dccc220$1f0a6552@lbd>
+
+Hi all,
+
+Has anyone tried to make a LRWP client in PERL?
+I don't know what I'm doing wrong, but I can't seem to get any response from
+the LRWP agent when my script is connecting :
+
+---- start of script ----
+# name of the server extension programme (accessible with
+http://localhost/test)
+$nameLRWP = 'test';
+
+push @INC, 'G:/Prog/perl';
+use IO::Socket::INET;
+
+# launch TCP connection
+$canalLRWP = IO::Socket::INET->new('PeerAddr', '127.0.0.1', 'PeerPort',
+'81', 'Proto', 'tcp');
+$canalLRWP->connected() or die 'can\'t connect!';
+
+binmode($canalLRWP);
+$canalLRWP->autoflush(1);
+
+# send the startup string
+print $canalLRWP "$nomLRWP\xFF\xFF";
+
+# echo back (to STDOUT) whatever was read from socket, and output a simple
+message to the LRWP agent
+while($request = <$canalLRWP>)
+{
+print "Request :\n$request\n";
+print $canalLRWP '000000009', 'All right';
+}
+
+# close the socket
+$canalLRWP->shutdown(2);
+---- end of script ----
+
+
+In the DOS32 console window, XITAMI tells me that the connection was
+successful (xilrwp: Peer test connected for <any> host), but no answer on
+the socket (should be "OK" or "ERROR ..."). Besides, even a simple HTML form
+cannot seem to POST its data to my program. It seems the whole thing can't
+get past that OK/ERROR part of the protocol.
+
+Any clue anyone?
+Thanks
+
+Bruno
+
+From thingieStuff at gamebox.net  Fri Apr  6 20:56:59 2007
+From: thingieStuff at gamebox.net (B.P.)
+Date: Sat Apr  7 14:20:42 2007
+Subject: [Xitami] LRWP problem (no more)
+Message-ID: <001301c7787d$5b1fbc00$230a6552@lbd>
+
+My bad. I stumbled upon the testlrwp.pl file in an old Xitami install (in
+the addons directory) and tested it with no problem. It appears my problem
+has nothing to do with the Xitami LRWP agent but rather with my own lackings
+about how the <> operator works in PERL. <> reads in data up to the input
+record separator ($/), which is usually \n or \r\n. Because communications
+between a LRWP programme and the LRWP agent don't use any string terminator
+character, I assume my script waited indefinitely for a \n to show up on the
+socket after receiving the status message (OK or ERROR...). That's why the
+Xitami team used sysread instead, in the LRWP test file.
+
+All is well, then. Have a nice day, people.
+
+Bruno
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20070406/e7bd5c6c/attachment.htm
+From xitami at pastryworld.ca  Sat Apr  7 19:30:43 2007
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Sat Apr  7 19:31:28 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <461723B0.9090402@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+	<461723B0.9090402@Gaia-Enterprises.org>
+Message-ID: <.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+
+Toni,
+
+as Rick mentioned, you have to create the defaults.cfg file with the
+reference to defaults.aut . I actually forgot about this, as I am no
+longer using xitami activially. Please check your files and entries.
+You should be able to call xitami in the browser with http://youriphere/admin
+
+This should bring up the username/password window
+
+Johannes
+
+
+> I was not successful logging in using either this method from Johannes
+> nor the one in the FAQ (which I had missed somehow and Rick told me
+> about).  I have checked and doublechecked to be sure I entered
+> everything correctly, for both techniques.  ???  I see only one thing
+> that might make a difference.  My Xitami start window has TWO IP
+> addresses, 198... and 127....  Both bring up the Xitami welcome page in
+> the browser.  Does this change the way I need to set up the defaults.aut
+> file?  I even tried using a different browser.
+>
+>
+>
+> Johannes Prost wrote:
+>> Toni,
+>>
+>> create a new file default.aut with notepad. When saving in notepad, put
+>> this in the box "default.aut."  The " will prevent windows to add the
+>> default .txt file extension to the file. In this way it is not a .txt
+>> file
+>> Put this in the file
+>>
+>> [/admin]
+>>     your username here = "your password here"
+>>     Webmask = "192.168.100.*"
+>>
+>> Replace 'your username here' with your username and 'your password here'
+>> with your password. Please leave the " around the password
+>> And the above IP range change with yours. This tells xitami which IP
+>> range
+>> or even only one single IP if you wish, will be allowed to use for
+>> webaccess to the admin area. I liked more reading and configuring with
+>> the
+>> files itself.
+>>
+>> And If you make changes to the configuration file, please make a new
+>> one.
+>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>> customized settings.
+>>
+>> Take the time to read the xitami.cfg file and you will learn most of the
+>> handling/working of xitami.
+>>
+>> Johannes
+>>
+>>
+>>
+>>> Now I can't log in to Xitami admin because I don't know what password
+>>> is
+>>> in the xitami.aut file, and I don't know how to read it (hate parading
+>>> my ignorance like this but....).  I tried opening it in notepad but
+>>> that
+>>> didn't work.  How do I do this?
+>>>
+>>> Toni
+>>>
+>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 20:57:04 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 20:57:45 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>
+	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+Message-ID: <4617E980.4090000@Gaia-Enterprises.org>
+
+Hi, Johannes...
+Yes, I did create both the cfg and the aut files.  I realized that I 
+need both even though you didn't mention the aut file specifically.  
+I've been going through this over and over this morning and just can't 
+find anything wrong, the username/password window DOES come up but it 
+just doesn't accept the ID and password I set up, whether I use admin 
+and verysecret from the faq, or my own.  I feel sure the two files need 
+to go in same directory as xitami.cfg, right? I am wondering if 
+something is missing in the installation of Xitami, any other things I 
+might need on my system.  When I received this message from you I was 
+reading through documentation but haven't come across anything yet.  It 
+appears I only need to decompress the zip file and put the folder on my 
+c: drive.  It doesn't appear to install anything in registry, is that 
+right?  Have been wondering about that.
+
+I appreciate your help.
+
+Toni
+
+Johannes Prost wrote:
+> Toni,
+>
+> as Rick mentioned, you have to create the defaults.cfg file with the
+> reference to defaults.aut . I actually forgot about this, as I am no
+> longer using xitami activially. Please check your files and entries.
+> You should be able to call xitami in the browser with http://youriphere/admin
+>
+> This should bring up the username/password window
+>
+> Johannes
+>
+>
+>   
+>> I was not successful logging in using either this method from Johannes
+>> nor the one in the FAQ (which I had missed somehow and Rick told me
+>> about).  I have checked and doublechecked to be sure I entered
+>> everything correctly, for both techniques.  ???  I see only one thing
+>> that might make a difference.  My Xitami start window has TWO IP
+>> addresses, 198... and 127....  Both bring up the Xitami welcome page in
+>> the browser.  Does this change the way I need to set up the defaults.aut
+>> file?  I even tried using a different browser.
+>>
+>>
+>>
+>> Johannes Prost wrote:
+>>     
+>>> Toni,
+>>>
+>>> create a new file default.aut with notepad. When saving in notepad, put
+>>> this in the box "default.aut."  The " will prevent windows to add the
+>>> default .txt file extension to the file. In this way it is not a .txt
+>>> file
+>>> Put this in the file
+>>>
+>>> [/admin]
+>>>     your username here = "your password here"
+>>>     Webmask = "192.168.100.*"
+>>>
+>>> Replace 'your username here' with your username and 'your password here'
+>>> with your password. Please leave the " around the password
+>>> And the above IP range change with yours. This tells xitami which IP
+>>> range
+>>> or even only one single IP if you wish, will be allowed to use for
+>>> webaccess to the admin area. I liked more reading and configuring with
+>>> the
+>>> files itself.
+>>>
+>>> And If you make changes to the configuration file, please make a new
+>>> one.
+>>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>>> customized settings.
+>>>
+>>> Take the time to read the xitami.cfg file and you will learn most of the
+>>> handling/working of xitami.
+>>>
+>>> Johannes
+>>>
+>>>
+>>>
+>>>       
+>>>> Now I can't log in to Xitami admin because I don't know what password
+>>>> is
+>>>> in the xitami.aut file, and I don't know how to read it (hate parading
+>>>> my ignorance like this but....).  I tried opening it in notepad but
+>>>> that
+>>>> didn't work.  How do I do this?
+>>>>
+>>>> Toni
+>>>>
+>>>>
+>>>> --
+>>>> Xitami Users Mailing List -- For Xitami support
+>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>         
+>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>>
+>>>       
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>     
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>   
+
+From xitami at pastryworld.ca  Sat Apr  7 22:01:57 2007
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Sat Apr  7 22:02:47 2007
+Subject: [nonspam] Re: [Xitami] Next question: edit .aut file
+In-Reply-To: <4617E980.4090000@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>
+	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+	<4617E980.4090000@Gaia-Enterprises.org>
+Message-ID: <.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+
+
+Toni,
+
+correct, both files go in the same directory and because the
+username/password box is coming up the setup is correct. You MUST have
+something wrong with the username password entries. That is the only spot
+I can think of.
+
+Johannes
+
+> Hi, Johannes...
+> Yes, I did create both the cfg and the aut files.  I realized that I
+> need both even though you didn't mention the aut file specifically.
+> I've been going through this over and over this morning and just can't
+> find anything wrong, the username/password window DOES come up but it
+> just doesn't accept the ID and password I set up, whether I use admin
+> and verysecret from the faq, or my own.  I feel sure the two files need
+> to go in same directory as xitami.cfg, right? I am wondering if
+> something is missing in the installation of Xitami, any other things I
+> might need on my system.  When I received this message from you I was
+> reading through documentation but haven't come across anything yet.  It
+> appears I only need to decompress the zip file and put the folder on my
+> c: drive.  It doesn't appear to install anything in registry, is that
+> right?  Have been wondering about that.
+>
+> I appreciate your help.
+>
+> Toni
+>
+> Johannes Prost wrote:
+>> Toni,
+>>
+>> as Rick mentioned, you have to create the defaults.cfg file with the
+>> reference to defaults.aut . I actually forgot about this, as I am no
+>> longer using xitami activially. Please check your files and entries.
+>> You should be able to call xitami in the browser with
+>> http://youriphere/admin
+>>
+>> This should bring up the username/password window
+>>
+>> Johannes
+>>
+>>
+>>
+>>> I was not successful logging in using either this method from Johannes
+>>> nor the one in the FAQ (which I had missed somehow and Rick told me
+>>> about).  I have checked and doublechecked to be sure I entered
+>>> everything correctly, for both techniques.  ???  I see only one thing
+>>> that might make a difference.  My Xitami start window has TWO IP
+>>> addresses, 198... and 127....  Both bring up the Xitami welcome page in
+>>> the browser.  Does this change the way I need to set up the
+>>> defaults.aut
+>>> file?  I even tried using a different browser.
+>>>
+>>>
+>>>
+>>> Johannes Prost wrote:
+>>>
+>>>> Toni,
+>>>>
+>>>> create a new file default.aut with notepad. When saving in notepad,
+>>>> put
+>>>> this in the box "default.aut."  The " will prevent windows to add the
+>>>> default .txt file extension to the file. In this way it is not a .txt
+>>>> file
+>>>> Put this in the file
+>>>>
+>>>> [/admin]
+>>>>     your username here = "your password here"
+>>>>     Webmask = "192.168.100.*"
+>>>>
+>>>> Replace 'your username here' with your username and 'your password
+>>>> here'
+>>>> with your password. Please leave the " around the password
+>>>> And the above IP range change with yours. This tells xitami which IP
+>>>> range
+>>>> or even only one single IP if you wish, will be allowed to use for
+>>>> webaccess to the admin area. I liked more reading and configuring with
+>>>> the
+>>>> files itself.
+>>>>
+>>>> And If you make changes to the configuration file, please make a new
+>>>> one.
+>>>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>>>> customized settings.
+>>>>
+>>>> Take the time to read the xitami.cfg file and you will learn most of
+>>>> the
+>>>> handling/working of xitami.
+>>>>
+>>>> Johannes
+>>>>
+>>>>
+>>>>
+>>>>
+>>>>> Now I can't log in to Xitami admin because I don't know what password
+>>>>> is
+>>>>> in the xitami.aut file, and I don't know how to read it (hate
+>>>>> parading
+>>>>> my ignorance like this but....).  I tried opening it in notepad but
+>>>>> that
+>>>>> didn't work.  How do I do this?
+>>>>>
+>>>>> Toni
+>>>>>
+>>>>>
+>>>>> --
+>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>
+>>>>>
+>>>>>
+>>>>
+>>>> --
+>>>> Xitami Users Mailing List -- For Xitami support
+>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>
+>>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From Toni at Gaia-Enterprises.org  Sat Apr  7 22:32:03 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sat Apr  7 22:32:45 2007
+Subject: [nonspam] Re: [Xitami] Next question: edit .aut file
+In-Reply-To: <.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>	<4617E980.4090000@Gaia-Enterprises.org>
+	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+Message-ID: <4617FFC3.20003@Gaia-Enterprises.org>
+
+Well, I cut and pasted from FAQ, so I don't think the username password 
+entries can be wrong.  Did the same thing with your suggestions, and 
+with Rick's.  And Notepad has four different options for encoding when 
+saving; I saved in all four (ANSI, Unicode, etc.).  Stumped.  I even 
+totally reinstalled Xitami.  I'm out of things to try. 
+Long experience as a computer user tells me that when the answer 
+emerges, it will be something maddeningly simple.  Sigh.
+Toni
+
+Johannes Prost wrote:
+> Toni,
+>
+> correct, both files go in the same directory and because the
+> username/password box is coming up the setup is correct. You MUST have
+> something wrong with the username password entries. That is the only spot
+> I can think of.
+>
+> Johannes
+>
+>   
+>> Hi, Johannes...
+>> Yes, I did create both the cfg and the aut files.  I realized that I
+>> need both even though you didn't mention the aut file specifically.
+>> I've been going through this over and over this morning and just can't
+>> find anything wrong, the username/password window DOES come up but it
+>> just doesn't accept the ID and password I set up, whether I use admin
+>> and verysecret from the faq, or my own.  I feel sure the two files need
+>> to go in same directory as xitami.cfg, right? I am wondering if
+>> something is missing in the installation of Xitami, any other things I
+>> might need on my system.  When I received this message from you I was
+>> reading through documentation but haven't come across anything yet.  It
+>> appears I only need to decompress the zip file and put the folder on my
+>> c: drive.  It doesn't appear to install anything in registry, is that
+>> right?  Have been wondering about that.
+>>
+>> I appreciate your help.
+>>
+>> Toni
+>>
+>> Johannes Prost wrote:
+>>     
+>>> Toni,
+>>>
+>>> as Rick mentioned, you have to create the defaults.cfg file with the
+>>> reference to defaults.aut . I actually forgot about this, as I am no
+>>> longer using xitami activially. Please check your files and entries.
+>>> You should be able to call xitami in the browser with
+>>> http://youriphere/admin
+>>>
+>>> This should bring up the username/password window
+>>>
+>>> Johannes
+>>>
+>>>
+>>>
+>>>       
+>>>> I was not successful logging in using either this method from Johannes
+>>>> nor the one in the FAQ (which I had missed somehow and Rick told me
+>>>> about).  I have checked and doublechecked to be sure I entered
+>>>> everything correctly, for both techniques.  ???  I see only one thing
+>>>> that might make a difference.  My Xitami start window has TWO IP
+>>>> addresses, 198... and 127....  Both bring up the Xitami welcome page in
+>>>> the browser.  Does this change the way I need to set up the
+>>>> defaults.aut
+>>>> file?  I even tried using a different browser.
+>>>>
+>>>>
+>>>>
+>>>> Johannes Prost wrote:
+>>>>
+>>>>         
+>>>>> Toni,
+>>>>>
+>>>>> create a new file default.aut with notepad. When saving in notepad,
+>>>>> put
+>>>>> this in the box "default.aut."  The " will prevent windows to add the
+>>>>> default .txt file extension to the file. In this way it is not a .txt
+>>>>> file
+>>>>> Put this in the file
+>>>>>
+>>>>> [/admin]
+>>>>>     your username here = "your password here"
+>>>>>     Webmask = "192.168.100.*"
+>>>>>
+>>>>> Replace 'your username here' with your username and 'your password
+>>>>> here'
+>>>>> with your password. Please leave the " around the password
+>>>>> And the above IP range change with yours. This tells xitami which IP
+>>>>> range
+>>>>> or even only one single IP if you wish, will be allowed to use for
+>>>>> webaccess to the admin area. I liked more reading and configuring with
+>>>>> the
+>>>>> files itself.
+>>>>>
+>>>>> And If you make changes to the configuration file, please make a new
+>>>>> one.
+>>>>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>>>>> customized settings.
+>>>>>
+>>>>> Take the time to read the xitami.cfg file and you will learn most of
+>>>>> the
+>>>>> handling/working of xitami.
+>>>>>
+>>>>> Johannes
+>>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>>>           
+>>>>>> Now I can't log in to Xitami admin because I don't know what password
+>>>>>> is
+>>>>>> in the xitami.aut file, and I don't know how to read it (hate
+>>>>>> parading
+>>>>>> my ignorance like this but....).  I tried opening it in notepad but
+>>>>>> that
+>>>>>> didn't work.  How do I do this?
+>>>>>>
+>>>>>> Toni
+>>>>>>
+>>>>>>
+>>>>>> --
+>>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>             
+>>>>> --
+>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>>>           
+>>>> --
+>>>> Xitami Users Mailing List -- For Xitami support
+>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>         
+>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>>
+>>>       
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>     
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>   
+
+From xitami at pastryworld.ca  Sat Apr  7 22:57:45 2007
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Sat Apr  7 22:58:25 2007
+Subject: [nonspam] Re: [nonspam] Re: [Xitami] Next question: edit .aut file
+In-Reply-To: <4617FFC3.20003@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>	<4617E980.4090000@Gaia-Enterprises.org>
+	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+	<4617FFC3.20003@Gaia-Enterprises.org>
+Message-ID: <.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>
+
+I guess it's time you just show us your files by marking the password /
+username with xxxx
+Did you write correct the .aut file in your .cfg file ? Can you check that ?
+
+
+
+> Well, I cut and pasted from FAQ, so I don't think the username password
+> entries can be wrong.  Did the same thing with your suggestions, and
+> with Rick's.  And Notepad has four different options for encoding when
+> saving; I saved in all four (ANSI, Unicode, etc.).  Stumped.  I even
+> totally reinstalled Xitami.  I'm out of things to try.
+> Long experience as a computer user tells me that when the answer
+> emerges, it will be something maddeningly simple.  Sigh.
+> Toni
+>
+> Johannes Prost wrote:
+>> Toni,
+>>
+>> correct, both files go in the same directory and because the
+>> username/password box is coming up the setup is correct. You MUST have
+>> something wrong with the username password entries. That is the only
+>> spot
+>> I can think of.
+>>
+>> Johannes
+>>
+>>
+>>> Hi, Johannes...
+>>> Yes, I did create both the cfg and the aut files.  I realized that I
+>>> need both even though you didn't mention the aut file specifically.
+>>> I've been going through this over and over this morning and just can't
+>>> find anything wrong, the username/password window DOES come up but it
+>>> just doesn't accept the ID and password I set up, whether I use admin
+>>> and verysecret from the faq, or my own.  I feel sure the two files need
+>>> to go in same directory as xitami.cfg, right? I am wondering if
+>>> something is missing in the installation of Xitami, any other things I
+>>> might need on my system.  When I received this message from you I was
+>>> reading through documentation but haven't come across anything yet.  It
+>>> appears I only need to decompress the zip file and put the folder on my
+>>> c: drive.  It doesn't appear to install anything in registry, is that
+>>> right?  Have been wondering about that.
+>>>
+>>> I appreciate your help.
+>>>
+>>> Toni
+>>>
+>>> Johannes Prost wrote:
+>>>
+>>>> Toni,
+>>>>
+>>>> as Rick mentioned, you have to create the defaults.cfg file with the
+>>>> reference to defaults.aut . I actually forgot about this, as I am no
+>>>> longer using xitami activially. Please check your files and entries.
+>>>> You should be able to call xitami in the browser with
+>>>> http://youriphere/admin
+>>>>
+>>>> This should bring up the username/password window
+>>>>
+>>>> Johannes
+>>>>
+>>>>
+>>>>
+>>>>
+>>>>> I was not successful logging in using either this method from
+>>>>> Johannes
+>>>>> nor the one in the FAQ (which I had missed somehow and Rick told me
+>>>>> about).  I have checked and doublechecked to be sure I entered
+>>>>> everything correctly, for both techniques.  ???  I see only one thing
+>>>>> that might make a difference.  My Xitami start window has TWO IP
+>>>>> addresses, 198... and 127....  Both bring up the Xitami welcome page
+>>>>> in
+>>>>> the browser.  Does this change the way I need to set up the
+>>>>> defaults.aut
+>>>>> file?  I even tried using a different browser.
+>>>>>
+>>>>>
+>>>>>
+>>>>> Johannes Prost wrote:
+>>>>>
+>>>>>
+>>>>>> Toni,
+>>>>>>
+>>>>>> create a new file default.aut with notepad. When saving in notepad,
+>>>>>> put
+>>>>>> this in the box "default.aut."  The " will prevent windows to add
+>>>>>> the
+>>>>>> default .txt file extension to the file. In this way it is not a
+>>>>>> .txt
+>>>>>> file
+>>>>>> Put this in the file
+>>>>>>
+>>>>>> [/admin]
+>>>>>>     your username here = "your password here"
+>>>>>>     Webmask = "192.168.100.*"
+>>>>>>
+>>>>>> Replace 'your username here' with your username and 'your password
+>>>>>> here'
+>>>>>> with your password. Please leave the " around the password
+>>>>>> And the above IP range change with yours. This tells xitami which IP
+>>>>>> range
+>>>>>> or even only one single IP if you wish, will be allowed to use for
+>>>>>> webaccess to the admin area. I liked more reading and configuring
+>>>>>> with
+>>>>>> the
+>>>>>> files itself.
+>>>>>>
+>>>>>> And If you make changes to the configuration file, please make a new
+>>>>>> one.
+>>>>>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>>>>>> customized settings.
+>>>>>>
+>>>>>> Take the time to read the xitami.cfg file and you will learn most of
+>>>>>> the
+>>>>>> handling/working of xitami.
+>>>>>>
+>>>>>> Johannes
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>> Now I can't log in to Xitami admin because I don't know what
+>>>>>>> password
+>>>>>>> is
+>>>>>>> in the xitami.aut file, and I don't know how to read it (hate
+>>>>>>> parading
+>>>>>>> my ignorance like this but....).  I tried opening it in notepad but
+>>>>>>> that
+>>>>>>> didn't work.  How do I do this?
+>>>>>>>
+>>>>>>> Toni
+>>>>>>>
+>>>>>>>
+>>>>>>> --
+>>>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>> --
+>>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>> --
+>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>
+>>>>>
+>>>>>
+>>>>
+>>>> --
+>>>> Xitami Users Mailing List -- For Xitami support
+>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>
+>>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From Toni at Gaia-Enterprises.org  Sun Apr  8 02:50:07 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sun Apr  8 02:51:22 2007
+Subject: [nonspam] Re: [nonspam] Re: [Xitami] Next question: edit .aut file
+In-Reply-To: <.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>	<4617E980.4090000@Gaia-Enterprises.org>	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>	<4617FFC3.20003@Gaia-Enterprises.org>
+	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>
+Message-ID: <46183C3F.9080805@Gaia-Enterprises.org>
+
+Johannes, I appreciate your hanging in there with me on this, but as I
+said in last message, I don't see how the files can be wrong when I cut
+and pasted from FAQ and have checked and rechecked innumerable times.
+But because you asked for it, here they are (I have substituted the
+sample ID and password from the FAQ for my own):
+
+The defaults.aut file:
+[/Admin]
+   admin=verysecret
+
+The defaults.cfg file:
+[Security]
+    filename=defaults.aut
+
+Toni
+
+Johannes Prost wrote:
+> I guess it's time you just show us your files by marking the password /
+> username with xxxx
+> Did you write correct the .aut file in your .cfg file ? Can you check that ?
+>
+>
+>
+>   
+>> Well, I cut and pasted from FAQ, so I don't think the username password
+>> entries can be wrong.  Did the same thing with your suggestions, and
+>> with Rick's.  And Notepad has four different options for encoding when
+>> saving; I saved in all four (ANSI, Unicode, etc.).  Stumped.  I even
+>> totally reinstalled Xitami.  I'm out of things to try.
+>> Long experience as a computer user tells me that when the answer
+>> emerges, it will be something maddeningly simple.  Sigh.
+>> Toni
+>>
+>> Johannes Prost wrote:
+>>     
+>>> Toni,
+>>>
+>>> correct, both files go in the same directory and because the
+>>> username/password box is coming up the setup is correct. You MUST have
+>>> something wrong with the username password entries. That is the only
+>>> spot
+>>> I can think of.
+>>>
+>>> Johannes
+>>>
+>>>
+>>>       
+>>>> Hi, Johannes...
+>>>> Yes, I did create both the cfg and the aut files.  I realized that I
+>>>> need both even though you didn't mention the aut file specifically.
+>>>> I've been going through this over and over this morning and just can't
+>>>> find anything wrong, the username/password window DOES come up but it
+>>>> just doesn't accept the ID and password I set up, whether I use admin
+>>>> and verysecret from the faq, or my own.  I feel sure the two files need
+>>>> to go in same directory as xitami.cfg, right? I am wondering if
+>>>> something is missing in the installation of Xitami, any other things I
+>>>> might need on my system.  When I received this message from you I was
+>>>> reading through documentation but haven't come across anything yet.  It
+>>>> appears I only need to decompress the zip file and put the folder on my
+>>>> c: drive.  It doesn't appear to install anything in registry, is that
+>>>> right?  Have been wondering about that.
+>>>>
+>>>> I appreciate your help.
+>>>>
+>>>> Toni
+>>>>
+>>>> Johannes Prost wrote:
+>>>>
+>>>>         
+>>>>> Toni,
+>>>>>
+>>>>> as Rick mentioned, you have to create the defaults.cfg file with the
+>>>>> reference to defaults.aut . I actually forgot about this, as I am no
+>>>>> longer using xitami activially. Please check your files and entries.
+>>>>> You should be able to call xitami in the browser with
+>>>>> http://youriphere/admin
+>>>>>
+>>>>> This should bring up the username/password window
+>>>>>
+>>>>> Johannes
+>>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>>>           
+>>>>>> I was not successful logging in using either this method from
+>>>>>> Johannes
+>>>>>> nor the one in the FAQ (which I had missed somehow and Rick told me
+>>>>>> about).  I have checked and doublechecked to be sure I entered
+>>>>>> everything correctly, for both techniques.  ???  I see only one thing
+>>>>>> that might make a difference.  My Xitami start window has TWO IP
+>>>>>> addresses, 198... and 127....  Both bring up the Xitami welcome page
+>>>>>> in
+>>>>>> the browser.  Does this change the way I need to set up the
+>>>>>> defaults.aut
+>>>>>> file?  I even tried using a different browser.
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>> Johannes Prost wrote:
+>>>>>>
+>>>>>>
+>>>>>>             
+>>>>>>> Toni,
+>>>>>>>
+>>>>>>> create a new file default.aut with notepad. When saving in notepad,
+>>>>>>> put
+>>>>>>> this in the box "default.aut."  The " will prevent windows to add
+>>>>>>> the
+>>>>>>> default .txt file extension to the file. In this way it is not a
+>>>>>>> .txt
+>>>>>>> file
+>>>>>>> Put this in the file
+>>>>>>>
+>>>>>>> [/admin]
+>>>>>>>     your username here = "your password here"
+>>>>>>>     Webmask = "192.168.100.*"
+>>>>>>>
+>>>>>>> Replace 'your username here' with your username and 'your password
+>>>>>>> here'
+>>>>>>> with your password. Please leave the " around the password
+>>>>>>> And the above IP range change with yours. This tells xitami which IP
+>>>>>>> range
+>>>>>>> or even only one single IP if you wish, will be allowed to use for
+>>>>>>> webaccess to the admin area. I liked more reading and configuring
+>>>>>>> with
+>>>>>>> the
+>>>>>>> files itself.
+>>>>>>>
+>>>>>>> And If you make changes to the configuration file, please make a new
+>>>>>>> one.
+>>>>>>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>>>>>>> customized settings.
+>>>>>>>
+>>>>>>> Take the time to read the xitami.cfg file and you will learn most of
+>>>>>>> the
+>>>>>>> handling/working of xitami.
+>>>>>>>
+>>>>>>> Johannes
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>               
+>>>>>>>> Now I can't log in to Xitami admin because I don't know what
+>>>>>>>> password
+>>>>>>>> is
+>>>>>>>> in the xitami.aut file, and I don't know how to read it (hate
+>>>>>>>> parading
+>>>>>>>> my ignorance like this but....).  I tried opening it in notepad but
+>>>>>>>> that
+>>>>>>>> didn't work.  How do I do this?
+>>>>>>>>
+>>>>>>>> Toni
+>>>>>>>>
+>>>>>>>>
+>>>>>>>> --
+>>>>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>                 
+>>>>>>> --
+>>>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>>               
+>>>>>> --
+>>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>             
+>>>>> --
+>>>>> Xitami Users Mailing List -- For Xitami support
+>>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>>
+>>>>>
+>>>>>
+>>>>>
+>>>>>           
+>>>> --
+>>>> Xitami Users Mailing List -- For Xitami support
+>>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>         
+>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>>
+>>>       
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>     
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>   
+
+From magus1011ca at yahoo.ca  Sun Apr  8 04:25:04 2007
+From: magus1011ca at yahoo.ca (Magus)
+Date: Sun Apr  8 04:25:55 2007
+Subject: [nonspam] Re: [nonspam] Re: [Xitami] Next question: edit .aut
+	file
+In-Reply-To: <46183C3F.9080805@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+	<461723B0.9090402@Gaia-Enterprises.org>
+	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+	<4617E980.4090000@Gaia-Enterprises.org>
+	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+	<4617FFC3.20003@Gaia-Enterprises.org>
+	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>
+	<46183C3F.9080805@Gaia-Enterprises.org>
+Message-ID: <29440210.20070407212504@yahoo.ca>
+
+Hello Toni,
+
+Saturday, April 7, 2007, 7:50:07 PM, you wrote:
+
+> Johannes, I appreciate your hanging in there with me on this, but as I
+> said in last message, I don't see how the files can be wrong when I cut
+> and pasted from FAQ and have checked and rechecked innumerable times.
+> But because you asked for it, here they are (I have substituted the
+> sample ID and password from the FAQ for my own):
+
+> The defaults.aut file:
+> [/Admin]
+>    admin=verysecret
+
+> The defaults.cfg file:
+> [Security]
+>     filename=defaults.aut
+
+> Toni
+
+> Johannes Prost wrote:
+>> I guess it's time you just show us your files by marking the password /
+>> username with xxxx
+>> Did you write correct the .aut file in your .cfg file ? Can you check that ?
+>>
+>>
+>>
+>>   
+>>> Well, I cut and pasted from FAQ, so I don't think the username password
+>>> entries can be wrong.  Did the same thing with your suggestions, and
+>>> with Rick's.  And Notepad has four different options for encoding when
+>>> saving; I saved in all four (ANSI, Unicode, etc.).  Stumped.  I even
+>>> totally reinstalled Xitami.  I'm out of things to try.
+>>> Long experience as a computer user tells me that when the answer
+>>> emerges, it will be something maddeningly simple.  Sigh.
+>>> Toni
+>>>
+>>> Johannes Prost wrote:
+>>>     
+>>>> Toni,
+>>>>
+>>>> correct, both files go in the same directory and because the
+>>>> username/password box is coming up the setup is correct. You MUST have
+>>>> something wrong with the username password entries. That is the only
+>>>> spot
+>>>> I can think of.
+>>>>
+>>>> Johannes
+>>>>
+>>>>
+>>>>       
+>>>>> Hi, Johannes...
+>>>>> Yes, I did create both the cfg and the aut files.  I realized that I
+>>>>> need both even though you didn't mention the aut file specifically.
+>>>>> I've been going through this over and over this morning and just can't
+>>>>> find anything wrong, the username/password window DOES come up but it
+>>>>> just doesn't accept the ID and password I set up, whether I use admin
+>>>>> and verysecret from the faq, or my own.  I feel sure the two files need
+>>>>> to go in same directory as xitami.cfg, right? I am wondering if
+>>>>> something is missing in the installation of Xitami, any other things I
+>>>>> might need on my system.  When I received this message from you I was
+>>>>> reading through documentation but haven't come across anything yet.  It
+>>>>> appears I only need to decompress the zip file and put the folder on my
+>>>>> c: drive.  It doesn't appear to install anything in registry, is that
+>>>>> right?  Have been wondering about that.
+>>>>>
+>>>>> I appreciate your help.
+>>>>>
+>>>>> Toni
+>>>>>
+>>>>> Johannes Prost wrote:
+>>>>>
+>>>>>         
+>>>>>> Toni,
+>>>>>>
+>>>>>> as Rick mentioned, you have to create the defaults.cfg file with the
+>>>>>> reference to defaults.aut . I actually forgot about this, as I am no
+>>>>>> longer using xitami activially. Please check your files and entries.
+>>>>>> You should be able to call xitami in the browser with
+>>>>>> http://youriphere/admin
+>>>>>>
+>>>>>> This should bring up the username/password window
+>>>>>>
+>>>>>> Johannes
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>
+>>>>>>           
+>>>>>>> I was not successful logging in using either this method from
+>>>>>>> Johannes
+>>>>>>> nor the one in the FAQ (which I had missed somehow and Rick told me
+>>>>>>> about).  I have checked and doublechecked to be sure I entered
+>>>>>>> everything correctly, for both techniques.  ???  I see only one thing
+>>>>>>> that might make a difference.  My Xitami start window has TWO IP
+>>>>>>> addresses, 198... and 127....  Both bring up the Xitami welcome page
+>>>>>>> in
+>>>>>>> the browser.  Does this change the way I need to set up the
+>>>>>>> defaults.aut
+>>>>>>> file?  I even tried using a different browser.
+>>>>>>>
+>>>>>>>
+>>>>>>>
+>>>>>>> Johannes Prost wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>>             
+>>>>>>>> Toni,
+>>>>>>>>
+>>>>>>>> create a new file default.aut with notepad. When saving in notepad,
+>>>>>>>> put
+>>>>>>>> this in the box "default.aut."  The " will prevent windows to add
+>>>>>>>> the
+>>>>>>>> default .txt file extension to the file. In this way it is not a
+>>>>>>>> .txt
+>>>>>>>> file
+>>>>>>>> Put this in the file
+>>>>>>>>
+>>>>>>>> [/admin]
+>>>>>>>>     your username here = "your password here"
+>>>>>>>>     Webmask = "192.168.100.*"
+>>>>>>>>
+>>>>>>>> Replace 'your username here' with your username and 'your password
+>>>>>>>> here'
+>>>>>>>> with your password. Please leave the " around the password
+>>>>>>>> And the above IP range change with yours. This tells xitami which IP
+>>>>>>>> range
+>>>>>>>> or even only one single IP if you wish, will be allowed to use for
+>>>>>>>> webaccess to the admin area. I liked more reading and configuring
+>>>>>>>> with
+>>>>>>>> the
+>>>>>>>> files itself.
+>>>>>>>>
+>>>>>>>> And If you make changes to the configuration file, please make a new
+>>>>>>>> one.
+>>>>>>>> DON'T change xitami.cfg, make a new defaults.cfg which contains your
+>>>>>>>> customized settings.
+>>>>>>>>
+>>>>>>>> Take the time to read the xitami.cfg file and you will learn most of
+>>>>>>>> the
+>>>>>>>> handling/working of xitami.
+>>>>>>>>
+>>>>>>>> Johannes
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>
+>>>>>>>>               
+>>>>>>>>> Now I can't log in to Xitami admin because I don't know what
+>>>>>>>>> password
+>>>>>>>>> is
+>>>>>>>>> in the xitami.aut file, and I don't know how to read it (hate
+>>>>>>>>> parading
+>>>>>>>>> my ignorance like this but....).  I tried opening it in notepad but
+>>>>>>>>> that
+>>>>>>>>> didn't work.  How do I do this?
+>>>>>>>>>
+>>>>>>>>> Toni
+
+FWIW here's my defaults.cfg security entry:
+
+[Security]
+    Filename = "defaults.aut"
+
+Here's what I would use in defaults.aut:
+
+[/Admin]
+    admin=verysecret
+
+Also check xitami.cfg, not defaults.cfg, to make certain that in the
+[Security] section you have: admin=1 and not admin=0. If I remember
+the source code correctly the admin item is only good in xitami.cfg.
+
+The only other things I can think of are silly errors, remember that
+the case of admin doesn't matter when you type it into the User Name
+box but that case for the password _does_ matter when you type it into
+the Password box in the Prompt window.
+
+Also the top line of the Prompt window should read 'Enter username and
+password for "/admin" at http://127.0.0.1' if you type
+"http://127.0.0.1/admin" into the location bar of your browser. If you
+type in some address other than 127.0.0.1 for your Xitami server such as
+'http://brewhau.dyndns.tv/' then that address should be substituted
+for the http://127.0.0.1 in the top line of the Prompt window.
+
+I hope this helps.
+
+-- 
+Best regards,
+ Magus
+
+From rickhead at gmail.com  Sun Apr  8 04:45:20 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Sun Apr  8 04:45:26 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <46183C3F.9080805@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+	<461723B0.9090402@Gaia-Enterprises.org>
+	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+	<4617E980.4090000@Gaia-Enterprises.org>
+	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+	<4617FFC3.20003@Gaia-Enterprises.org>
+	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>
+	<46183C3F.9080805@Gaia-Enterprises.org>
+Message-ID: <11689a700704071945w6f00a9f3ra3d6cb0d6336185f@mail.gmail.com>
+
+hi toni,
+
+i just took a look at my own files to compare...
+you might want to try writing it out like this (with spaces and quotes) to
+see if it betters your mileage.
+
+[/admin]
+    Admin = "verysecret"
+
+&
+
+[Security]
+    Filename = "defaults.aut"
+
+
+and remember to restart xitami immediately after making these edits.
+
+rick
+
+
+On 4/7/07, Toni McConnel <Toni@gaia-enterprises.org> wrote:
+>
+> Johannes, I appreciate your hanging in there with me on this, but as I
+> said in last message, I don't see how the files can be wrong when I cut
+> and pasted from FAQ and have checked and rechecked innumerable times.
+> But because you asked for it, here they are (I have substituted the
+> sample ID and password from the FAQ for my own):
+>
+> The defaults.aut file:
+> [/Admin]
+>   admin=verysecret
+>
+> The defaults.cfg file:
+> [Security]
+>    filename=defaults.aut
+>
+> Toni
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20070407/631d7b4c/attachment.html
+From Toni at Gaia-Enterprises.org  Sun Apr  8 05:03:19 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sun Apr  8 05:04:01 2007
+Subject: [Xitami] Check list
+In-Reply-To: <29440210.20070407212504@yahoo.ca>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>	<4617E980.4090000@Gaia-Enterprises.org>	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>	<4617FFC3.20003@Gaia-Enterprises.org>	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>	<46183C3F.9080805@Gaia-Enterprises.org>
+	<29440210.20070407212504@yahoo.ca>
+Message-ID: <46185B77.7060303@Gaia-Enterprises.org>
+
+Hi, Magus,
+
+OK, I checked xitami.cfg and admin does =1. I put the defaults.aut file in quotes as you suggest. I am always conscious of case when entering passwords, so that isn't a problem either.  I checked the top of the prompt window and it does say "http://127.0.0.1". Unfortunately, still nothing.
+
+What just popped into my mind is that I might have a corrupted download of Xitami.  This happens often enough that I should have thought of it sooner.  So next thing I'll do (but probably tomorrow) is trash the whole thing and redownload.  It's gotta be something like that because I AIN'T DOIN' NOTHIN' WRONG that I can see, and I have been diligent in searching for mistakes as well as taking everyone's suggestions. I'll report back when I have done that.  
+
+This is making me crazy and it's nice to have folks on this list trying to help, makes it a little less crazy-making.
+
+Toni
+
+ 
+
+From Toni at Gaia-Enterprises.org  Sun Apr  8 06:46:55 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sun Apr  8 06:47:37 2007
+Subject: [Xitami] Next question: edit .aut file
+In-Reply-To: <11689a700704071945w6f00a9f3ra3d6cb0d6336185f@mail.gmail.com>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>	<4617E980.4090000@Gaia-Enterprises.org>	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>	<4617FFC3.20003@Gaia-Enterprises.org>	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>	<46183C3F.9080805@Gaia-Enterprises.org>
+	<11689a700704071945w6f00a9f3ra3d6cb0d6336185f@mail.gmail.com>
+Message-ID: <461873BF.2060404@Gaia-Enterprises.org>
+
+Hi, Rick....
+
+Nope.  Didn't work.  By the time you read this, you will seen my message 
+to Magus saying I'm gonna try redownloading tomorrow (Sunday), that I am 
+wondering if I got a corrupted download.  This is too crazy, I have done 
+everything right with great care.  So that's what occurred to me 
+tonight.  I'll report back after I've done that.
+
+toni
+
+Rick Headly wrote:
+> hi toni,
+>  
+> i just took a look at my own files to compare...
+> you might want to try writing it out like this (with spaces and 
+> quotes) to see if it betters your mileage.
+>  
+> [/admin]
+>     Admin = "verysecret"
+>  
+> &
+>  
+> [Security]
+>     Filename = "defaults.aut"
+>  
+>  
+> and remember to restart xitami immediately after making these edits.
+>  
+> rick
+>
+>
+> On 4/7/07, *Toni McConnel* <Toni@gaia-enterprises.org 
+> <mailto:Toni@gaia-enterprises.org>> wrote:
+>
+>     Johannes, I appreciate your hanging in there with me on this, but as I
+>     said in last message, I don't see how the files can be wrong when
+>     I cut
+>     and pasted from FAQ and have checked and rechecked innumerable times.
+>     But because you asked for it, here they are (I have substituted the
+>     sample ID and password from the FAQ for my own):
+>
+>     The defaults.aut file:
+>     [/Admin]
+>       admin=verysecret
+>
+>     The defaults.cfg file:
+>     [Security]
+>        filename=defaults.aut
+>
+>     Toni
+>
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From magus1011ca at yahoo.ca  Sun Apr  8 12:52:20 2007
+From: magus1011ca at yahoo.ca (Magus)
+Date: Sun Apr  8 12:52:23 2007
+Subject: [Xitami] Check list
+In-Reply-To: <46185B77.7060303@Gaia-Enterprises.org>
+References: <46170AD3.5090601@Gaia-Enterprises.org>
+	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>
+	<461723B0.9090402@Gaia-Enterprises.org>
+	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>
+	<4617E980.4090000@Gaia-Enterprises.org>
+	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>
+	<4617FFC3.20003@Gaia-Enterprises.org>
+	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>
+	<46183C3F.9080805@Gaia-Enterprises.org>
+	<29440210.20070407212504@yahoo.ca>
+	<46185B77.7060303@Gaia-Enterprises.org>
+Message-ID: <363067463.20070408055220@yahoo.ca>
+
+Hello Toni,
+
+Saturday, April 7, 2007, 10:03:19 PM, you wrote:
+
+> Hi, Magus,
+
+> OK, I checked xitami.cfg and admin does =1. I put the defaults.aut
+> file in quotes as you suggest. I am always conscious of case when
+> entering passwords, so that isn't a problem either. I checked the
+> top of the prompt window and it does say "http://127.0.0.1".
+> Unfortunately, still nothing.
+
+> What just popped into my mind is that I might have a corrupted
+> download of Xitami.  This happens often enough that I should have
+> thought of it sooner.  So next thing I'll do (but probably tomorrow)
+> is trash the whole thing and redownload.  It's gotta be something
+> like that because I AIN'T DOIN' NOTHIN' WRONG that I can see, and I
+> have been diligent in searching for mistakes as well as taking
+> everyone's suggestions. I'll report back when I have done that.  
+
+> This is making me crazy and it's nice to have folks on this list
+> trying to help, makes it a little less crazy-making.
+
+> Toni
+
+You're not the only one this is making crazy Toni, it's not doing all
+that much for my sanity level either. 8=))
+
+How do you propose to check whether or not your download is corrupted?
+
+May I suggest that if you are using Firefox 1.5.xx to download the
+installation archive (zip file) with, that you obtain mdhashtool from
+http://mdhashtool.mozdev.org/installation.html and install it to
+Firefox 1.5.xx. If you are not using Firefox 1.5.xx then I suggest you
+use md5sums from http://www.pc-tools.net/win32/md5sums/ Either tool
+will let you generate a MD5 hash (checksum) from the file you
+download. Follow the instructions for installing md5sums into the Send
+To menu. I find md5sums a handy little free tool beaten only by
+mdhashtool since mdhashtool allows both MD5 checksums, which are known
+to be able to be compromised and SHA1 checksums which have not yet
+been shown to be able to be compromised.
+
+Next you need a md5 checksum to compare to. Since the author of Xitami
+does not provide one, my reference version of Xitami 2.5c2 has the md5
+checksum of 6e1e8c7499a3142498069cea49882f7b.
+
+I generated this checksum by downloading the source code, compiling it
+and archiving the result with WinZip. Next I downloaded a copy of
+xiopen_2_5.zip. Then I ran a MD5 checksum on both. The results were
+identical. I then individually compared the compiled files and the
+downloaded files with Windiff. No differences were found. Both the
+compiled and downloaded versions were run and provided identical
+results. I therefor conclude that the above checksum is highly likely
+to be correct.
+
+-- 
+Best regards,
+ Magus
+
+From Toni at Gaia-Enterprises.org  Sun Apr  8 16:45:01 2007
+From: Toni at Gaia-Enterprises.org (Toni McConnel)
+Date: Sun Apr  8 16:45:45 2007
+Subject: [Xitami] I'm up and running, but not with 2.5
+In-Reply-To: <363067463.20070408055220@yahoo.ca>
+References: <46170AD3.5090601@Gaia-Enterprises.org>	<.24.72.112.29.1175917444.squirrel@webmail.pastryworld.ca>	<461723B0.9090402@Gaia-Enterprises.org>	<.24.72.112.29.1175967043.squirrel@webmail.pastryworld.ca>	<4617E980.4090000@Gaia-Enterprises.org>	<.24.72.112.29.1175976117.squirrel@webmail.pastryworld.ca>	<4617FFC3.20003@Gaia-Enterprises.org>	<.24.72.112.29.1175979465.squirrel@webmail.pastryworld.ca>	<46183C3F.9080805@Gaia-Enterprises.org>	<29440210.20070407212504@yahoo.ca>	<46185B77.7060303@Gaia-Enterprises.org>
+	<363067463.20070408055220@yahoo.ca>
+Message-ID: <4618FFED.1010906@Gaia-Enterprises.org>
+
+Hi, Magus
+
+The big news is, this morning I installed a different version of Xitami 
+and had NO TROUBLE logging in to web-based admin with my ID and 
+password.  I got this version with Web Hosting Kit Pro, but when I 
+realized that the version of Xitami provided is not current (it's 
+2.4d9), and the instructions for using MyDomain.com are useless because 
+MyDomain.com has completely revised their interface, that's when I 
+decided to trash it and start over by downloading Xitami 2.5 directly 
+from Xitami site.  So current status is that I am up and running with 
+Xitami, but not the latest version.  I am NOT abandoning efforts to run 
+2.5, I will continue to try to get it to work.
+
+You asked how I determine if a download is corrupted.  I have a much 
+simpler way than the way you suggest.  I simply trash the current 
+installation, download again, and if the problem disappears, 
+voila--strongly suggests my first installation was corrupted.  Not very 
+techie, but hey, it works for me.  8=).  Diagnosis by cure. 
+
+However, I AM using Firefox 1.5, and will take your suggestion to 
+download mdhashtool, and will use it as you suggest simply because this 
+is something else for me to learn.  You're gonna make a techie out of 
+this ol' gal yet, Magus. 
+
+By the way, I also checked Zone Alarm to see if it was interfering 
+somehow, but it seems to be OK with Xitami 2.5, which I put in Zone 
+Alarm's Trusted Zone.
+
+Toni
+
+Magus wrote:
+> Hello Toni,
+>
+> Saturday, April 7, 2007, 10:03:19 PM, you wrote:
+>
+>   
+>> Hi, Magus,
+>>     
+>
+>   
+>> OK, I checked xitami.cfg and admin does =1. I put the defaults.aut
+>> file in quotes as you suggest. I am always conscious of case when
+>> entering passwords, so that isn't a problem either. I checked the
+>> top of the prompt window and it does say "http://127.0.0.1".
+>> Unfortunately, still nothing.
+>>     
+>
+>   
+>> What just popped into my mind is that I might have a corrupted
+>> download of Xitami.  This happens often enough that I should have
+>> thought of it sooner.  So next thing I'll do (but probably tomorrow)
+>> is trash the whole thing and redownload.  It's gotta be something
+>> like that because I AIN'T DOIN' NOTHIN' WRONG that I can see, and I
+>> have been diligent in searching for mistakes as well as taking
+>> everyone's suggestions. I'll report back when I have done that.  
+>>     
+>
+>   
+>> This is making me crazy and it's nice to have folks on this list
+>> trying to help, makes it a little less crazy-making.
+>>     
+>
+>   
+>> Toni
+>>     
+>
+> You're not the only one this is making crazy Toni, it's not doing all
+> that much for my sanity level either. 8=))
+>
+> How do you propose to check whether or not your download is corrupted?
+>
+> May I suggest that if you are using Firefox 1.5.xx to download the
+> installation archive (zip file) with, that you obtain mdhashtool from
+> http://mdhashtool.mozdev.org/installation.html and install it to
+> Firefox 1.5.xx. If you are not using Firefox 1.5.xx then I suggest you
+> use md5sums from http://www.pc-tools.net/win32/md5sums/ Either tool
+> will let you generate a MD5 hash (checksum) from the file you
+> download. Follow the instructions for installing md5sums into the Send
+> To menu. I find md5sums a handy little free tool beaten only by
+> mdhashtool since mdhashtool allows both MD5 checksums, which are known
+> to be able to be compromised and SHA1 checksums which have not yet
+> been shown to be able to be compromised.
+>
+> Next you need a md5 checksum to compare to. Since the author of Xitami
+> does not provide one, my reference version of Xitami 2.5c2 has the md5
+> checksum of 6e1e8c7499a3142498069cea49882f7b.
+>
+> I generated this checksum by downloading the source code, compiling it
+> and archiving the result with WinZip. Next I downloaded a copy of
+> xiopen_2_5.zip. Then I ran a MD5 checksum on both. The results were
+> identical. I then individually compared the compiled files and the
+> downloaded files with Windiff. No differences were found. Both the
+> compiled and downloaded versions were run and provided identical
+> results. I therefor conclude that the above checksum is highly likely
+> to be correct.
+>
+>   
+
+From g.ward at ns.sympatico.ca  Fri Apr 20 01:53:02 2007
+From: g.ward at ns.sympatico.ca (g.ward@ns.sympatico.ca)
+Date: Fri Apr 20 01:53:18 2007
+Subject: [Xitami] From My Crash-Log
+Message-ID: <20070419235302.QBOT1625.simmts5-srv.bellnexxia.net@smtp8.sympatico.ca>
+
+I've been running Xitami/2.5c2 on a stand-alone WinXP-Pro(SP2) machine, "trouble free" for ages.  It's a very lean machine, with no extraneous software installed, that usually runs very well, and hadn't experienced a crash for at least six months prior to April 6.
+
+Since April 6 however, I've experienced six Xitami crashes.  A clip from the crash-log is pasted below.
+
+========================================
+
+06/Apr/2007:06:08:49 -0400 Xitami/2.5c2
+Abort at smttime:Generate-Response-Events:expire old requests (Expect-Event, Timer-Event)
+11/Apr/2007:04:05:54 -0400 Xitami/2.5c2
+Abort at smttime:Generate-Response-Events:expire old requests (Expect-Event, Timer-Event)
+12/Apr/2007:16:32:00 -0400 Xitami/2.5c2
+Abort at smthttp:Make-Directory-Listing: (Have-Default, Not-Found-Event)
+12/Apr/2007:17:16:52 -0400 Xitami/2.5c2
+Abort at smthttp:Load-Virtual-Hosts: (After-Init, Master-Event)
+17/Apr/2007:16:33:53 -0400 Xitami/2.5c2
+Abort at smtsock:Send-Timeout-Event-To-Self: (Getting-Event, No-Activity-Event)
+19/Apr/2007:17:19:36 -0400 Xitami/2.5c2
+Abort at smtsock:Send-Timeout-Event-To-Self: (Getting-Event, No-Activity-Event)
+
+========================================
+
+I'm wondering if any of you might know what's causing this... and perhaps suggest a tweak that might help make it go away.
+
+Between the point of good and bad, nothing on the machine or Xitami-configuration has changed... other than the addition of the usual Windows patches.
+
+Personally, I think this "may" have something to do with the Windows (DST) time-zone patch KB931836... which I believe was applied on March 18, but have no idea how I'd go about working around that.
+
+Any suggestions would be kindly appreciated.
+
+Glenn
+
+
+From bkowald at synergybroadcast.com  Fri Apr 20 16:42:35 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Fri Apr 20 15:42:49 2007
+Subject: [Xitami] Xitami freezes after several hours
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E992CF2@sbsserver.tiltrac.local>
+
+Hi, Have been using xitami for years with an LRWP processes. Out of
+dozens of sites, xitami freezes at one. When the browser makes a
+request, it hangs for a long time. I have seen it come back and start
+responding again after a very long time, say maybe 15 minutes. Usually
+by then somebody has noticed that its down and has restarted the server.
+All sites have 2.4d9 installed on them and I tried 2.4d11 with the same
+results.
+
+Its not hanging on an LRWP request. It hangs on just serving up a static
+webpage. In the access log, I can see the request to get the page, then
+some graphics on the page, but it all gets back to the browser.
+
+This happens after the server has been running awhile, approximately 4-8
+hours.
+
+Does anyone have any idea what it could be, or what I could look at next
+to diagnose it?
+
+Thanks,
+Brian
+
+From ph at imatix.com  Fri Apr 20 15:55:40 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Fri Apr 20 15:55:45 2007
+Subject: [Xitami] Xitami freezes after several hours
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031E992CF2@sbsserver.tiltrac.local>
+References: <5BA6EC56479B8F49AB43C808445E031E992CF2@sbsserver.tiltrac.local>
+Message-ID: <5821ea240704200655s4cc0207v546da0a9d87305b6@mail.gmail.com>
+
+On 4/20/07, Brian Kowald <bkowald@synergybroadcast.com> wrote:
+
+> Its not hanging on an LRWP request. It hangs on just serving up a static
+> webpage. In the access log, I can see the request to get the page, then
+> some graphics on the page, but it all gets back to the browser.
+
+Are the static files on a networked drive?
+
+-Pieter
+
+From bkowald at synergybroadcast.com  Fri Apr 20 17:09:01 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Fri Apr 20 16:09:11 2007
+Subject: [Xitami] Xitami freezes after several hours
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E992CF4@sbsserver.tiltrac.local>
+
+No, they are on a local drive, in c:\xitami\webpages
+
+-----Original Message-----
+From: Pieter Hintjens [mailto:ph@imatix.com] 
+Sent: Friday, April 20, 2007 8:56 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami freezes after several hours
+
+
+On 4/20/07, Brian Kowald <bkowald@synergybroadcast.com> wrote:
+
+> Its not hanging on an LRWP request. It hangs on just serving up a 
+> static webpage. In the access log, I can see the request to get the 
+> page, then some graphics on the page, but it all gets back to the 
+> browser.
+
+Are the static files on a networked drive?
+
+-Pieter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From ph at imatix.com  Fri Apr 20 16:15:27 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Fri Apr 20 16:15:31 2007
+Subject: [Xitami] Xitami freezes after several hours
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031E992CF4@sbsserver.tiltrac.local>
+References: <5BA6EC56479B8F49AB43C808445E031E992CF4@sbsserver.tiltrac.local>
+Message-ID: <5821ea240704200715i5512f081te76c4526fb6676dc@mail.gmail.com>
+
+On 4/20/07, Brian Kowald <bkowald@synergybroadcast.com> wrote:
+
+> No, they are on a local drive, in c:\xitami\webpages
+
+Since it's always happening on the same machine, I'd suspect either
+interference from another process, or hardware issues.  When Xitami
+blocks, pull up the task manager and see what is going on.
+
+-Pieter
+
+From bkowald at synergybroadcast.com  Fri Apr 20 23:02:09 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Fri Apr 20 22:02:26 2007
+Subject: [Xitami] Xitami freezes after several hours
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E992CF8@sbsserver.tiltrac.local>
+
+After running 6 hours or so, it hung up today. In task manager there is
+nothing out of line that I can see. Hardly any cpu in use (4-8%) Xitami
+is using 0. There is 211 meg of memory avaialble. Xisrv32.exe is using
+2,785k of memory, 83 handles, 3 threads, 0 user objects. 705 IO reads
+for 1,723,515 bytes, 259 IO writes for 130,967 bytes. The IO numbers
+aren't changing.
+
+Brian
+
+
+-----Original Message-----
+From: Pieter Hintjens [mailto:ph@imatix.com] 
+Sent: Friday, April 20, 2007 9:15 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami freezes after several hours
+
+
+On 4/20/07, Brian Kowald <bkowald@synergybroadcast.com> wrote:
+
+> No, they are on a local drive, in c:\xitami\webpages
+
+Since it's always happening on the same machine, I'd suspect either
+interference from another process, or hardware issues.  When Xitami
+blocks, pull up the task manager and see what is going on.
+
+-Pieter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From bkowald at synergybroadcast.com  Fri Apr 20 23:06:21 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Fri Apr 20 22:06:36 2007
+Subject: [Xitami] Xitami freezes after several hours
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E992CF9@sbsserver.tiltrac.local>
+
+Ok, this may be a clue. I was getting ready to stop and restart the
+service using the control panel applet and as soon as I opened it - you
+guessed it - xitami took off. I noticed it because I had a browser page
+waiting on a response the whole time I was looking at it. As soon as I
+opened the control panel applet, the page completed loading.
+
+Brian
+
+
+-----Original Message-----
+From: Brian Kowald 
+Sent: Friday, April 20, 2007 4:02 PM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Xitami freezes after several hours
+
+
+After running 6 hours or so, it hung up today. In task manager there is
+nothing out of line that I can see. Hardly any cpu in use (4-8%) Xitami
+is using 0. There is 211 meg of memory avaialble. Xisrv32.exe is using
+2,785k of memory, 83 handles, 3 threads, 0 user objects. 705 IO reads
+for 1,723,515 bytes, 259 IO writes for 130,967 bytes. The IO numbers
+aren't changing.
+
+Brian
+
+
+-----Original Message-----
+From: Pieter Hintjens [mailto:ph@imatix.com] 
+Sent: Friday, April 20, 2007 9:15 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami freezes after several hours
+
+
+On 4/20/07, Brian Kowald <bkowald@synergybroadcast.com> wrote:
+
+> No, they are on a local drive, in c:\xitami\webpages
+
+Since it's always happening on the same machine, I'd suspect either
+interference from another process, or hardware issues.  When Xitami
+blocks, pull up the task manager and see what is going on.
+
+-Pieter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From shinelight at shininglightpro.com  Fri Apr 20 22:16:33 2007
+From: shinelight at shininglightpro.com (Thomas J. Hruska)
+Date: Fri Apr 20 22:18:01 2007
+Subject: [Xitami] Xitami freezes after several hours
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031E992CF9@sbsserver.tiltrac.local>
+References: <5BA6EC56479B8F49AB43C808445E031E992CF9@sbsserver.tiltrac.local>
+Message-ID: <46291FA1.1020309@shininglightpro.com>
+
+Brian Kowald wrote:
+> Ok, this may be a clue. I was getting ready to stop and restart the
+> service using the control panel applet and as soon as I opened it - you
+> guessed it - xitami took off. I noticed it because I had a browser page
+> waiting on a response the whole time I was looking at it. As soon as I
+> opened the control panel applet, the page completed loading.
+> 
+> Brian
+> 
+> 
+> -----Original Message-----
+> From: Brian Kowald 
+> Sent: Friday, April 20, 2007 4:02 PM
+> To: Xitami Users General Discussion
+> Subject: RE: [Xitami] Xitami freezes after several hours
+> 
+> 
+> After running 6 hours or so, it hung up today. In task manager there is
+> nothing out of line that I can see. Hardly any cpu in use (4-8%) Xitami
+> is using 0. There is 211 meg of memory avaialble. Xisrv32.exe is using
+> 2,785k of memory, 83 handles, 3 threads, 0 user objects. 705 IO reads
+> for 1,723,515 bytes, 259 IO writes for 130,967 bytes. The IO numbers
+> aren't changing.
+> 
+> Brian
+
+That might have been a cached page from the browser cache.  IE will do 
+that - other browsers might too.
+
+Does your computer, by any chance, sleep/hibernate?  Check your "Power 
+Management" settings and see if any components go to sleep after a set 
+amount of time.  Check your screensaver settings as well.
+
+-- 
+Thomas Hruska
+Shining Light Productions
+
+
+From bkowald at synergybroadcast.com  Sat Apr 21 17:18:33 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Sat Apr 21 16:19:10 2007
+Subject: [Xitami] Xitami freezes after several hours
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E992CFC@sbsserver.tiltrac.local>
+
+It did it again! I opened a browser and it hung waiting for the
+response. As soon as I opened the control panel applet, the page loaded.
+I'm going to leave the applet open for a while and see what happens.
+
+As for power options the computer is set to always keep disk and monitor
+power on. The screen saver is set to go to a blank screen after 1 minute
+and prompt for a password to come out of it. The LAN card has no "power
+saving" options checked.
+
+Thanks for the suggestions,
+Brian
+
+
+
+
+-----Original Message-----
+From: Thomas J. Hruska [mailto:shinelight@shininglightpro.com] 
+Sent: Friday, April 20, 2007 3:17 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami freezes after several hours
+
+
+Brian Kowald wrote:
+> Ok, this may be a clue. I was getting ready to stop and restart the 
+> service using the control panel applet and as soon as I opened it - 
+> you guessed it - xitami took off. I noticed it because I had a browser
+
+> page waiting on a response the whole time I was looking at it. As soon
+
+> as I opened the control panel applet, the page completed loading.
+> 
+> Brian
+> 
+> 
+> -----Original Message-----
+> From: Brian Kowald
+> Sent: Friday, April 20, 2007 4:02 PM
+> To: Xitami Users General Discussion
+> Subject: RE: [Xitami] Xitami freezes after several hours
+> 
+> 
+> After running 6 hours or so, it hung up today. In task manager there 
+> is nothing out of line that I can see. Hardly any cpu in use (4-8%) 
+> Xitami is using 0. There is 211 meg of memory avaialble. Xisrv32.exe 
+> is using 2,785k of memory, 83 handles, 3 threads, 0 user objects. 705 
+> IO reads for 1,723,515 bytes, 259 IO writes for 130,967 bytes. The IO 
+> numbers aren't changing.
+> 
+> Brian
+
+That might have been a cached page from the browser cache.  IE will do 
+that - other browsers might too.
+
+Does your computer, by any chance, sleep/hibernate?  Check your "Power 
+Management" settings and see if any components go to sleep after a set 
+amount of time.  Check your screensaver settings as well.
+
+-- 
+Thomas Hruska
+Shining Light Productions
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+

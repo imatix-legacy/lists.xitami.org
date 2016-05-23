@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Stopping%20and%20restarting%20%28or%20resetting%29%20%0A%09Xitamiwithperl&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007074.html">
+   <LINK REL="Next"  HREF="007081.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl</H1>
+    <B>MRJ InfoTech Admin</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Stopping%20and%20restarting%20%28or%20resetting%29%20%0A%09Xitamiwithperl&In-Reply-To="
+       TITLE="[Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl">admin at mrjdesign.net
+       </A><BR>
+    <I>Sun Jan  8 02:34:53 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007074.html">[Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+</A></li>
+        <LI>Next message: <A HREF="007081.html">[Xitami] Xitami Setup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7080">[ date ]</a>
+              <a href="thread.html#7080">[ thread ]</a>
+              <a href="subject.html#7080">[ subject ]</a>
+              <a href="author.html#7080">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i>- either your CGI either goes directly and reboots the PC if on Win, and
+</I>&gt;<i>   Xitami is killed/can start up auto after reboot,
+</I>&gt;<i>
+</I>&gt;<i>- or the perl CGI would say something like:
+</I>
+The CGI would reboot the system using the following windows API
+'This works in VB 5 and 6, havn't tried 4 but should work if you have an 
+old compiler.
+
+'In general section
+Const EWX_LOGOFF = 0
+Const EWX_SHUTDOWN = 1
+Const EWX_REBOOT = 2
+Const EWX_FORCE = 4
+Private Declare Function ExitWindowsEx Lib &quot;user32&quot; (ByVal uFlags As Long, 
+ByVal dwReserved As Long) As Long
+
+Sub Main()
+     'reboot the computer
+     ret&amp; = ExitWindowsEx(EWX_FORCE Or EWX_REBOOT, 0)
+End Sub
+
+
+
+&gt;<i>   exec( halting_and_starting_executable() );
+</I>
+I wouldn't know cause I don't do Perl at all.
+
+
+&gt;<i>   and the exec'ed process would not self-destroy after Xitami halt
+</I>&gt;<i>   when Xitami kills all executing CGI's because an exec'ed process is
+</I>&gt;<i>not
+</I>&gt;<i>   a process dependent on the lifespan of the launcher of itself?
+</I>
+Of course it's killed.
+It kills the server even in this case but you could just as well create an 
+application that will initiate a set order of actions by an ini file or 
+registry entries after rebooting again to do what you want it to do...
+
+Say for instance according to the following scheme...
+
+
+1) save params desired to a ini file
+2) Execute the reboot by force, make sure your app is in the startup list 
+for HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+3) On run , read the saved params in the ini file and do what you want it 
+to do...
+4) Restart the Xitami by using WindowsProc or ShellExec API for instance...
+
+It's all fairly basic stuff once you get used to it.
+I am sure you can do it the open source way too and even use VBScript or 
+JScript on your server can to do it.
+
+I just find Perl to &quot;un-readable&quot; to deal with myself and I prefer to stick 
+with the VB way of controlling my machines
+It's also fairly simple to re-write and alter shoul dyou want to add or 
+change something later on.
+
+Then again, to all their favourite flavor I guess (^^)
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060108/f5364872/attachment.html">http://lists.imatix.org/pipermail/xitami/attachments/20060108/f5364872/attachment.html</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007074.html">[Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+</A></li>
+	<LI>Next message: <A HREF="007081.html">[Xitami] Xitami Setup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7080">[ date ]</a>
+              <a href="thread.html#7080">[ thread ]</a>
+              <a href="subject.html#7080">[ subject ]</a>
+              <a href="author.html#7080">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

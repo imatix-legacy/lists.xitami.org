@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] running cgi on xitami problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006717.html">
+   <LINK REL="Next"  HREF="006718.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] running cgi on xitami problem
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] running cgi on xitami problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 09 May 2005 08:34:14 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006717.html">[Xitami] running cgi on xitami problem
+</A></li>
+        <LI> Next message: <A HREF="006718.html">[Xitami] Page detection and reporting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6720">[ date ]</a>
+              <a href="thread.html#6720">[ thread ]</a>
+              <a href="subject.html#6720">[ subject ]</a>
+              <a href="author.html#6720">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 05:04 7/05/05, you wrote:
+&gt;<i>Hello All,
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I like to run xitami as a service while I don't have to log onto the machine
+</I>&gt;<i>( power outage...power back on = xitami back on).
+</I>&gt;<i>Has anyone running xitami as a service with xigui32 and srvany ? Haven't 
+</I>&gt;<i>tried it yet.
+</I>&gt;<i>
+</I>&gt;<i>Johannes
+</I>
+
+I don't have any problem running gap.
+My system is win 2k, running v2.4d9
+and win 98 running v2.4d6
+
+For those interested in solving the problem, here is the source code of the 
+gap utility:
+(PBCC, looks like visual basic without GUI)
+
+Most problems with running cgi applications were caused by incorrect home 
+directory (assuming a running directory), but this is not the case here, 
+there is no file access.
+
+
+DEFINT a-z
+FUNCTION PBMAIN()
+     OPEN ENVIRON$(&quot;CGI_STDOUT&quot;) FOR OUTPUT AS #3
+     a$ = ENVIRON$(&quot;QUERY_STRING&quot;)
+     l = INSTR(a$, &quot;://&quot;)
+     IF l THEN
+         a$ = MID$(a$, l + 3)
+     END IF
+     ip$ = EXTRACT$(a$, &quot;:&quot;)
+     qs$ = &quot;/&quot; + REMAIN$(a$, &quot;/&quot;)
+     ip$ = EXTRACT$(ip$, &quot;/&quot;)
+     po = VAL(REMAIN$(a$, &quot;:&quot;))
+     IF po = 0 THEN
+         po = 80
+     END IF
+     PRINT #3, &quot;&lt;html&gt;&lt;body&gt;Connecting to &lt;strong&gt;&lt;font color=blue&gt;&quot; ip$ 
+&quot;&lt;/font&gt;&lt;/strong&gt; port &lt;font color=red&gt;&lt;strong&gt;&quot;;:
+     PRINT #3, po &quot;&lt;/strong&gt;&lt;/font&gt; query &lt;font color=green&gt;&lt;strong&gt;&quot; qs$ 
+&quot;&lt;/font&gt;&lt;p&gt;&lt;pre&gt;
+     TCP OPEN PORT po AT ip$ AS #2 TIMEOUT 5000
+     IF ERR THEN
+         PRINT #3, ERROR$ + &quot; connecting to server&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&quot;
+         EXIT FUNCTION
+     END IF
+     TCP PRINT #2, &quot;GET &quot; + qs$ + &quot; HTTP/1.0
+     TCP PRINT #2, &quot;Host: &quot; + ip$
+     TCP PRINT #2, &quot;Connection: close&quot;
+     TCP PRINT #2, &quot;User-agent: Grabber 1.0&quot;
+     TCP PRINT #2, &quot;&quot;
+     PRINT #3,
+         DO
+         TCP LINE #2, a$: PRINT #3, a$
+         INCR l
+         IF TRIM$(a$) = &quot;&quot; THEN
+             EXIT LOOP
+         END IF
+     LOOP
+     PRINT #3, &quot;&lt;/strong&gt;&lt;xmp&gt;
+     WHILE NOT ERR
+         TCP LINE #2, a$: PRINT #3, a$
+         l = l + MAX(80, LEN(a$))
+         IF l &gt; 1600 THEN
+             EXIT LOOP
+         END IF
+     WEND
+     TCP CLOSE #2
+     PRINT #3, &quot;&lt;/xmp&gt;&lt;/body&gt;&lt;/html&gt;&quot;
+END FUNCTION
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------- 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006717.html">[Xitami] running cgi on xitami problem
+</A></li>
+	<LI> Next message: <A HREF="006718.html">[Xitami] Page detection and reporting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6720">[ date ]</a>
+              <a href="thread.html#6720">[ thread ]</a>
+              <a href="subject.html#6720">[ subject ]</a>
+              <a href="author.html#6720">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

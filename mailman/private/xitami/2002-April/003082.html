@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL*
+ CGIs)...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003080.html">
+   <LINK REL="Next"  HREF="003083.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL*
+ CGIs)...
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL*
+ CGIs)...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 29 Apr 2002 09:43:02</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003080.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+</A></li>
+        <LI> Next message: <A HREF="003083.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL*  CGIs)...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3082">[ date ]</a>
+              <a href="thread.html#3082">[ thread ]</a>
+              <a href="subject.html#3082">[ subject ]</a>
+              <a href="author.html#3082">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 04:06 PM 4/29/2002 +0200, Francis Turner writeth:
+&gt;<i>Very interesting.
+</I>&gt;<i>
+</I>&gt;<i>I wonder if this explains my persisitant GSL/XML problem(s). Sounds 
+</I>&gt;<i>higly plausible.
+</I>
+Could you elaborate on those problems?  I have seen various, related
+incidents in the past month or so since this issue arose.  The most recent
+one is under Linux with CGIs causing the server to be very unresponsive
+under heavy loads.  There was an earlier one with Win98 crashing on a low
+memory system and many CGIs opening at once.  You get the idea...
+
+&gt;<i>I suppose I'd better look at the source to fiure out how the XML/GSL 
+</I>&gt;<i>stuff differs from an external CGI. It is true that my XML problems have 
+</I>&gt;<i>got worse when I use statements like
+</I>&gt;<i>.xml from &lt;filename&gt;
+</I>&gt;<i>thus requiring more files to be opened at a given moment.
+</I>
+Remember that filters are CGIs in &quot;disguise.&quot;  They have somewhat different
+properties than CGIs, but are basically the same.
+
+Also, unless you have 50-60 simultaneous users on the system using CGIs,
+this problem will go unnoticed.  However, a malicious attacker can easily
+cause a DoS/DDoS with a simple tool that just requests CGI-oriented scripts
+on the remote server to be executed - the server is quickly brought to its
+knees and other users are unable to get webpages (usually the browser
+appears to hang when the server replies with zero bytes of data - a flaw in
+one of the Windows API calls that the browser has little control over).
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003080.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+</A></li>
+	<LI> Next message: <A HREF="003083.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL*  CGIs)...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3082">[ date ]</a>
+              <a href="thread.html#3082">[ thread ]</a>
+              <a href="subject.html#3082">[ subject ]</a>
+              <a href="author.html#3082">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

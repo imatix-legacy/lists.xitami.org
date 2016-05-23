@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] 50+ simultaneous users...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002729.html">
+   <LINK REL="Next"  HREF="002736.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] 50+ simultaneous users...
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] 50+ simultaneous users...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 14 Mar 2002 17:20:48 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002729.html">[Xitami] Tomcat &amp; JSP's (Possible Solutions?)
+</A></li>
+        <LI> Next message: <A HREF="002736.html">[Xitami] simultaneous frames - 50+ simultaneous users...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2733">[ date ]</a>
+              <a href="thread.html#2733">[ thread ]</a>
+              <a href="subject.html#2733">[ subject ]</a>
+              <a href="author.html#2733">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3.0.6.32.20020313225639.00a08b98@shininglightpro.com">3.0.6.32.20020313225639.00a08b98@shininglightpro.com</A>&gt;, &quot;Thomas J. Hr
+uska&quot; writes:
+&gt;<i>Today I have been stress testing Xitami under a very controlled environment
+</I>&gt;<i>with a distributed attack server (DAS) and client (DAC) set [....]
+</I>&gt;<i>
+</I>&gt;<i> [At 10 users log entries are sane]
+</I>&gt;<i>10.5.225.202 - - [13/Mar/2002:00:04:01 -0500] &quot;GET /distattack/dist2.cfm
+</I>&gt;<i>HTTP/1.1&quot; 200 1119
+</I>&gt;<i>10.5.225.202 - - [13/Mar/2002:00:04:03 -0500] &quot;GET /distattack/dist3.cfm
+</I>&gt;<i>HTTP/1.1&quot; 200 8
+</I>&gt;<i>10.5.225.202 - - [13/Mar/2002:00:04:03 -0500] &quot;GET /distattack/dist1.cfm
+</I>&gt;<i>HTTP/1.1&quot; 200 99342
+</I>&gt;<i>
+</I>&gt;<i>These are the correct file sizes for this.  Now, when I attempt to simulate
+</I>&gt;<i>50 simultaneous users, the log file looks like this:
+</I>&gt;<i>
+</I>&gt;<i>10.5.225.202 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist1.cfm
+</I>&gt;<i>HTTP/1.1&quot; 200 2
+</I>&gt;<i>10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist3.cfm
+</I>&gt;<i>HTTP/1.1&quot; 200 2
+</I>
+Without having run into this before myself, my hunch is that there's
+perhaps some race condition in Xitami between when the temporary files
+are read in (from the CGIs), and when the size of the file is recorded.
+In which case this would be most obvious when the load on the machine
+gets fairly high (and 50 simultaneous users all running CGIs at once
+would start to do that).
+
+Is it only the log entries affected?  Or are the results that are sent
+back wrong as well?
+
+These sorts of problems are very time consuming to track down (often
+debugging is a matter of staring at the source code to try to figure out
+what might be causing it, changing something &quot;likely&quot; and trying again).
+
+If anyone else has seen anything similar and/or has any hints about what
+triggers it, it'd be useful to know.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002729.html">[Xitami] Tomcat &amp; JSP's (Possible Solutions?)
+</A></li>
+	<LI> Next message: <A HREF="002736.html">[Xitami] simultaneous frames - 50+ simultaneous users...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2733">[ date ]</a>
+              <a href="thread.html#2733">[ thread ]</a>
+              <a href="subject.html#2733">[ subject ]</a>
+              <a href="author.html#2733">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

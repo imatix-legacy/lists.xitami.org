@@ -1,0 +1,1293 @@
+From xitami-dev@lists.xitami.org  Sun Jul  1 12:26:31 2001
+From: xitami-dev@lists.xitami.org (bro_eht)
+Date: Sun, 1 Jul 2001 12:26:31 +0100
+Subject: [Xitami-Dev] Add-ons help (Isapid.exe}
+Message-ID: <001a01c10220$ad80e840$c78989d4@blop>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0017_01C10229.0F147C40
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+In message <001c01c0c5f3$bd4c6880$dba832d4@blop>, "Richard James" =
+writes:
+>ISAPI Support (beta 1)
+>
+>I downloaded the program from the link=20
+>(http://www.imatix.com/pub/addons/isapi10a.zip)
+>and then installed PWS (Microsoft Personal Webserver I`m assuming).
+>
+>I execute the isapid.exe (from the isapi10a.zip) and try to view the=20
+>testisapi page, All I get is `Page cannot be displayed` message from=20
+>IExplorer.
+
+Unfortunately Internet Explorer's "friendly" error messages obscure what
+really happened.  Could you perhaps try this again with either Xitami's
+debugging mode turned on ([Server] debug=3D1), and then check the debug
+logs to see what Xitami found, or with Internet Explorer's "friendly"
+error messages turned off (so that it shows the error message the server
+sent).
+
+Also remember you need to run Xitami, then run the isapid program to
+"hook in" to Xitami, then try accessing things.
+
+Ewen
+
+--=20
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+------=_NextPart_000_0017_01C10229.0F147C40
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content=3D"text/html; charset=3Diso-8859-1" =
+http-equiv=3DContent-Type>
+<META content=3D"MSHTML 5.00.2614.3500" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>In message=20
+&lt;001c01c0c5f3$bd4c6880$dba832d4@blop&gt;, "Richard James"=20
+writes:<BR>&gt;ISAPI Support (beta 1)<BR>&gt;<BR>&gt;I downloaded the =
+program=20
+from the link <BR>&gt;(<A=20
+href=3D"http://www.imatix.com/pub/addons/isapi10a.zip">http://www.imatix.=
+com/pub/addons/isapi10a.zip</A>)<BR>&gt;and=20
+then installed PWS (Microsoft Personal Webserver I`m =
+assuming).<BR>&gt;<BR>&gt;I=20
+execute the isapid.exe (from the isapi10a.zip) and try to view the=20
+<BR>&gt;testisapi page, All I get is `Page cannot be displayed` message =
+from=20
+<BR>&gt;IExplorer.<BR><BR>Unfortunately Internet Explorer's "friendly" =
+error=20
+messages obscure what<BR>really happened.&nbsp; Could you perhaps try =
+this again=20
+with either Xitami's<BR>debugging mode turned on ([Server] debug=3D1), =
+and then=20
+check the debug<BR>logs to see what Xitami found, or with Internet =
+Explorer's=20
+"friendly"<BR>error messages turned off (so that it shows the error =
+message the=20
+server<BR>sent).<BR><BR>Also remember you need to run Xitami, then run =
+the=20
+isapid program to<BR>"hook in" to Xitami, then try accessing=20
+things.<BR><BR>Ewen<BR><BR>-- <BR>Ewen McNeill, Technical Consultant, =
+iMatix=20
+Corporation&nbsp; <A=20
+href=3D"http://www.imatix.com">www.imatix.com</A><BR><BR>--<BR>Xitami-Dev=
+ --=20
+Xitami Development Mailing List<BR>To unsubscribe: <A=20
+href=3D"http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists=
+.xitami.org/mailman/listinfo/xitami-dev</A></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0017_01C10229.0F147C40--
+
+
+From xitami-dev@lists.xitami.org  Sun Jul  1 13:36:40 2001
+From: xitami-dev@lists.xitami.org (Paul Richards)
+Date: Sun, 1 Jul 2001 13:36:40 +0100
+Subject: [Xitami-Dev] Add-ons help (Isapid.exe}
+In-Reply-To: <001a01c10220$ad80e840$c78989d4@blop>
+Message-ID: <MAEPKOFMKPDCFOHCHFAFAEDKCOAA.paul@grangeway.freeuk.com>
+
+hmm....
+When did the initial comment get posted to the list ?
+
+anyway.....
+
+firstly: the isapi.zip file available from xitami.com is version 11b. So if
+you have a problem you should get the latest file.
+
+when you run isapid.exe you should pass it command line options.
+For example :
+isapid -app isapi_exe
+
+now when you go to the page
+
+http://<xitami>/isapi_exe
+
+You get the follow page :
+<html><header><title>Isapi extension error</title></header>
+<Body><H2>Xitami ISAPI extension error</H2><HR><I>Error on load  (126)
+</I></body></html>
+
+The "error on load" is because the dll file specified i.e. NULL does not
+exist.
+
+To use the testisapi example, you need to connect to
+http://<xitami>/isapi_exe/testisapi.dll
+and this then works correctly.
+
+
+Now....
+
+I'm still trying to work out how directory resolution works in xitami
+For example :
+http://127.0.0.1:8080/isapi_exe///../testisapi.dll displays that url, and
+the testisapi.dll example.
+
+However the url http://127.0.0.1:8080/isapi_exe//../../testisapi.dll
+redirects the user to http://127.0.0.1:8080/testisapi.dll, which then gives
+a 404 response.
+
+Ewen - care to explain how that one works?  ;)
+
+Paul Richards
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of bro_eht
+Sent: 01 July 2001 12:27
+To: xitami-dev@lists.xitami.org
+Subject: Re: [Xitami-Dev] Add-ons help (Isapid.exe}
+
+
+In message <001c01c0c5f3$bd4c6880$dba832d4@blop>, "Richard James" writes:
+>ISAPI Support (beta 1)
+>
+>I downloaded the program from the link
+>(http://www.imatix.com/pub/addons/isapi10a.zip)
+>and then installed PWS (Microsoft Personal Webserver I`m assuming).
+>
+>I execute the isapid.exe (from the isapi10a.zip) and try to view the
+>testisapi page, All I get is `Page cannot be displayed` message from
+>IExplorer.
+
+Unfortunately Internet Explorer's "friendly" error messages obscure what
+really happened.  Could you perhaps try this again with either Xitami's
+debugging mode turned on ([Server] debug=1), and then check the debug
+logs to see what Xitami found, or with Internet Explorer's "friendly"
+error messages turned off (so that it shows the error message the server
+sent).
+
+Also remember you need to run Xitami, then run the isapid program to
+"hook in" to Xitami, then try accessing things.
+
+Ewen
+
+--
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Sun Jul  1 23:47:41 2001
+From: xitami-dev@lists.xitami.org (R James)
+Date: Sun, 1 Jul 2001 23:47:41 +0100
+Subject: [Xitami-Dev] Add-ons help (Isapid.exe}
+References: <MAEPKOFMKPDCFOHCHFAFAEDKCOAA.paul@grangeway.freeuk.com>
+Message-ID: <000b01c1027f$d6fa13e0$918c89d4@blop>
+
+Yes it was a while ago that I posted the original message, but I was getting
+so much email that it must of slipped thru. I only found it because I was
+looking thru it for something else !! Thanks for the help I`ll download the
+lastest version of isapid and see if I can get it working.. You`ve made my
+day, thanks !! :o)
+
+Regards
+ R James
+
+----- Original Message -----
+From: Paul Richards <paul@grangeway.freeuk.com>
+To: <xitami-dev@lists.xitami.org>
+Sent: Sunday, July 01, 2001 1:36 PM
+Subject: RE: [Xitami-Dev] Add-ons help (Isapid.exe}
+
+
+> hmm....
+> When did the initial comment get posted to the list ?
+>
+> anyway.....
+>
+> firstly: the isapi.zip file available from xitami.com is version 11b. So
+if
+> you have a problem you should get the latest file.
+>
+> when you run isapid.exe you should pass it command line options.
+> For example :
+> isapid -app isapi_exe
+>
+> now when you go to the page
+>
+> http://<xitami>/isapi_exe
+>
+> You get the follow page :
+> <html><header><title>Isapi extension error</title></header>
+> <Body><H2>Xitami ISAPI extension error</H2><HR><I>Error on load  (126)
+> </I></body></html>
+>
+> The "error on load" is because the dll file specified i.e. NULL does not
+> exist.
+>
+> To use the testisapi example, you need to connect to
+> http://<xitami>/isapi_exe/testisapi.dll
+> and this then works correctly.
+>
+>
+> Now....
+>
+> I'm still trying to work out how directory resolution works in xitami
+> For example :
+> http://127.0.0.1:8080/isapi_exe///../testisapi.dll displays that url, and
+> the testisapi.dll example.
+>
+> However the url http://127.0.0.1:8080/isapi_exe//../../testisapi.dll
+> redirects the user to http://127.0.0.1:8080/testisapi.dll, which then
+gives
+> a 404 response.
+>
+> Ewen - care to explain how that one works?  ;)
+>
+> Paul Richards
+>
+> -----Original Message-----
+> From: xitami-dev-admin@lists.xitami.org
+> [mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of bro_eht
+> Sent: 01 July 2001 12:27
+> To: xitami-dev@lists.xitami.org
+> Subject: Re: [Xitami-Dev] Add-ons help (Isapid.exe}
+>
+>
+> In message <001c01c0c5f3$bd4c6880$dba832d4@blop>, "Richard James" writes:
+> >ISAPI Support (beta 1)
+> >
+> >I downloaded the program from the link
+> >(http://www.imatix.com/pub/addons/isapi10a.zip)
+> >and then installed PWS (Microsoft Personal Webserver I`m assuming).
+> >
+> >I execute the isapid.exe (from the isapi10a.zip) and try to view the
+> >testisapi page, All I get is `Page cannot be displayed` message from
+> >IExplorer.
+>
+> Unfortunately Internet Explorer's "friendly" error messages obscure what
+> really happened.  Could you perhaps try this again with either Xitami's
+> debugging mode turned on ([Server] debug=1), and then check the debug
+> logs to see what Xitami found, or with Internet Explorer's "friendly"
+> error messages turned off (so that it shows the error message the server
+> sent).
+>
+> Also remember you need to run Xitami, then run the isapid program to
+> "hook in" to Xitami, then try accessing things.
+>
+> Ewen
+>
+> --
+> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+_________________________________________________________
+Do You Yahoo!?
+Get your free @yahoo.com address at http://mail.yahoo.com
+
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 08:56:40 2001
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Tue, 10 Jul 2001 17:56:40 +1000
+Subject: [Xitami-Dev] Houston, we have a problem ...
+Message-ID: <3B4AB538.D06882DD@alphalink.com.au>
+
+Guys,
+
+This one's nasty. Win NT SP6a with all security patches installed.
+Xitami service fails to work, any version. ANY version, I tried 2.3d and
+2.5b4
+
+I believe the troublesome patch is the one related to registry security,
+which I installed after seeing this:
+
+http://grc.com/pw/patchwork.htm
+
+but it may also be related to the Service Pack level. Xitami still works
+from the DOS console, however, so all is not lost.
+
+Rob Judd
+http://judd.ob-wan.com
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 09:04:22 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Tue, 10 Jul 2001 20:04:22 +1200
+Subject: [Xitami-Dev] Houston, we have a problem ...
+In-Reply-To: Message from Rob Judd <judd@alphalink.com.au>
+ of "Tue, 10 Jul 2001 17:56:40 +1000." <3B4AB538.D06882DD@alphalink.com.au>
+Message-ID: <200107100804.UAA05654@pagoda.wgtn.cat-it.co.nz>
+
+In message <3B4AB538.D06882DD@alphalink.com.au>, Rob Judd writes:
+>This one's nasty. Win NT SP6a with all security patches installed.
+>Xitami service fails to work, any version. ANY version, I tried 2.3d and 2.5b4
+
+Have you tried the current 2.4d9 or 2.5b5 builds?  Not that I expect any
+major differences, but it'd be useful to know if those fail too as we've
+got the source for both carefully issolated so we know what is in them.
+
+>I believe the troublesome patch is the one related to registry security,
+
+Okay.  In what way does Xitami fail to work?  Does the service not
+register?  Or does it not start?  Are there any log messages.  If the
+patch is a "registry security" one I could see how registering the
+service might run into problems, but not how some of the other things
+could fail, especially given the console mode still works.
+
+More information/experimentation welcomed.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 09:24:16 2001
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Tue, 10 Jul 2001 18:24:16 +1000
+Subject: [Xitami-Dev] Houston, we have a problem ...
+References: <200107100804.UAA05654@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <3B4ABBB0.7D413736@alphalink.com.au>
+
+Ewen,
+
+Xitami starts fine, but can't be accessed from the internet. I haven't
+tried any later builds because they haven't been available online AFAIK.
+My last view of the download site still listed 2.5b4 as the latest, and
+that was only last week.
+
+Rob
+p.s. I have Xitami running as a service under BeOS now.
+
+
+Ewen McNeill wrote:
+> 
+> In message <3B4AB538.D06882DD@alphalink.com.au>, Rob Judd writes:
+> >This one's nasty. Win NT SP6a with all security patches installed.
+> >Xitami service fails to work, any version. ANY version, I tried 2.3d and 2.5b4
+> 
+> Have you tried the current 2.4d9 or 2.5b5 builds?  Not that I expect any
+> major differences, but it'd be useful to know if those fail too as we've
+> got the source for both carefully issolated so we know what is in them.
+> 
+> >I believe the troublesome patch is the one related to registry security,
+> 
+> Okay.  In what way does Xitami fail to work?  Does the service not
+> register?  Or does it not start?  Are there any log messages.  If the
+> patch is a "registry security" one I could see how registering the
+> service might run into problems, but not how some of the other things
+> could fail, especially given the console mode still works.
+> 
+> More information/experimentation welcomed.
+> 
+> Ewen
+> 
+> --
+> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 09:27:30 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Tue, 10 Jul 2001 20:27:30 +1200
+Subject: [Xitami-Dev] Houston, we have a problem ...
+In-Reply-To: Message from Rob Judd <judd@alphalink.com.au>
+ of "Tue, 10 Jul 2001 18:24:16 +1000." <3B4ABBB0.7D413736@alphalink.com.au>
+Message-ID: <200107100827.UAA06237@pagoda.wgtn.cat-it.co.nz>
+
+In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd writes:
+>Xitami starts fine, but can't be accessed from the internet. I haven't
+>tried any later builds because they haven't been available online AFAIK.
+>My last view of the download site still listed 2.5b4 as the latest, and
+>that was only last week.
+
+The new downloads are only on http://www.xitami.com/.
+
+http://www.imatix.com/ needs a more thorough overview so we haven't
+tried to update that at this stage.
+
+>p.s. I have Xitami running as a service under BeOS now.
+
+Cool stuff.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 09:41:49 2001
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Tue, 10 Jul 2001 18:41:49 +1000
+Subject: [Xitami-Dev] Houston, we have a problem ...
+References: <200107100827.UAA06237@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <3B4ABFCD.4C683A24@alphalink.com.au>
+
+Ewen,
+
+Solved. ZoneAlarm doesn't know about services!!!
+
+I'll report the bug to them.
+
+Grrr.
+
+Rob
+
+
+Ewen McNeill wrote:
+> 
+> In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd writes:
+> >Xitami starts fine, but can't be accessed from the internet. I haven't
+> >tried any later builds because they haven't been available online AFAIK.
+> >My last view of the download site still listed 2.5b4 as the latest, and
+> >that was only last week.
+> 
+> The new downloads are only on http://www.xitami.com/.
+> 
+> http://www.imatix.com/ needs a more thorough overview so we haven't
+> tried to update that at this stage.
+> 
+> >p.s. I have Xitami running as a service under BeOS now.
+> 
+> Cool stuff.
+> 
+> Ewen
+> 
+> --
+> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 21:01:54 2001
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Tue, 10 Jul 2001 13:01:54 -0700
+Subject: [Xitami-Dev] Houston, we have a problem ...
+In-Reply-To: <3B4ABFCD.4C683A24@alphalink.com.au>
+References: <200107100827.UAA06237@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <5.0.2.1.0.20010710125525.027e6030@mail.ntrealtime.com>
+
+My suggestion: Don't use ZoneAlarm for your Xitami server. It's great at 
+your workstation though.
+When I opened ZoneAlarm enough the crackers/hackers came quickly.  I had a 
+far better
+result with Tiny Personal Firewall. It takes a little time to set it up but 
+it can open the link
+just enough for your server to be fully operational, but no more.
+
+George Blat
+
+
+
+At 06:41 PM 7/10/01 +1000, you wrote:
+>Ewen,
+>
+>Solved. ZoneAlarm doesn't know about services!!!
+>
+>I'll report the bug to them.
+>
+>Grrr.
+>
+>Rob
+>
+>
+>Ewen McNeill wrote:
+> >
+> > In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd writes:
+> > >Xitami starts fine, but can't be accessed from the internet. I haven't
+> > >tried any later builds because they haven't been available online AFAIK.
+> > >My last view of the download site still listed 2.5b4 as the latest, and
+> > >that was only last week.
+> >
+> > The new downloads are only on http://www.xitami.com/.
+> >
+> > http://www.imatix.com/ needs a more thorough overview so we haven't
+> > tried to update that at this stage.
+> >
+> > >p.s. I have Xitami running as a service under BeOS now.
+> >
+> > Cool stuff.
+> >
+> > Ewen
+> >
+> > --
+> > Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+> >
+> > --
+> > Xitami-Dev -- Xitami Development Mailing List
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+George Blat
+BRD
+8016 188th SW, Edmonds, WA 98026
+
+phone:  425-775-7475
+fax:    781-998-5940
+
+
+From xitami-dev@lists.xitami.org  Tue Jul 10 21:01:54 2001
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Tue, 10 Jul 2001 13:01:54 -0700
+Subject: [Xitami-Dev] Houston, we have a problem ...
+In-Reply-To: <3B4ABFCD.4C683A24@alphalink.com.au>
+References: <200107100827.UAA06237@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <5.0.2.1.0.20010710125525.027e6030@mail.ntrealtime.com>
+
+My suggestion: Don't use ZoneAlarm for your Xitami server. It's great at 
+your workstation though.
+When I opened ZoneAlarm enough the crackers/hackers came quickly.  I had a 
+far better
+result with Tiny Personal Firewall. It takes a little time to set it up but 
+it can open the link
+just enough for your server to be fully operational, but no more.
+
+George Blat
+
+
+
+At 06:41 PM 7/10/01 +1000, you wrote:
+>Ewen,
+>
+>Solved. ZoneAlarm doesn't know about services!!!
+>
+>I'll report the bug to them.
+>
+>Grrr.
+>
+>Rob
+>
+>
+>Ewen McNeill wrote:
+> >
+> > In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd writes:
+> > >Xitami starts fine, but can't be accessed from the internet. I haven't
+> > >tried any later builds because they haven't been available online AFAIK.
+> > >My last view of the download site still listed 2.5b4 as the latest, and
+> > >that was only last week.
+> >
+> > The new downloads are only on http://www.xitami.com/.
+> >
+> > http://www.imatix.com/ needs a more thorough overview so we haven't
+> > tried to update that at this stage.
+> >
+> > >p.s. I have Xitami running as a service under BeOS now.
+> >
+> > Cool stuff.
+> >
+> > Ewen
+> >
+> > --
+> > Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+> >
+> > --
+> > Xitami-Dev -- Xitami Development Mailing List
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+George Blat
+BRD
+8016 188th SW, Edmonds, WA 98026
+
+phone:  425-775-7475
+fax:    781-998-5940
+
+
+From xitami-dev@lists.xitami.org  Wed Jul 11 14:56:26 2001
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Wed, 11 Jul 2001 08:56:26 EST
+Subject: [Xitami-Dev] Houston, we have a problem ...
+Message-ID: <200107102254.f6AMseS30729@whirlwind.netspace.net.au>
+
+George,
+
+Actually, I eventually got it to work. The trouble is that I have a 
+Linksys router interposed between my PC and the Alcatel ADSL modem, and 
+ZoneAlarm didn't know about the new version of Xitami I just installed. 
+When it got a reply back from my router it was expecting to see a reply 
+from my actual static IP number and panicked.
+
+They didn't build in a proxy setting into the free version, and I don't 
+know if the paid-for one has it either. I got around it by plugging 
+straight into the ADSL line, invoking Xitami, telling ZA that it was OK 
+to let it be a server then going back to the original setup. 
+
+But I will not ever be ONE DAY without a proper firewall again after 
+seeing how many people scan the addresses. See also:
+
+http://judd.ob-wan.com/security.htm
+
+Rob Judd
+
+>My suggestion: Don't use ZoneAlarm for your Xitami server. It's great 
+at 
+>your workstation though.
+>When I opened ZoneAlarm enough the crackers/hackers came quickly.  I 
+had a 
+>far better
+>result with Tiny Personal Firewall. It takes a little time to set it 
+up but 
+>it can open the link
+>just enough for your server to be fully operational, but no more.
+>
+>George Blat
+>
+>
+>
+>At 06:41 PM 7/10/01 +1000, you wrote:
+>>Ewen,
+>>
+>>Solved. ZoneAlarm doesn't know about services!!!
+>>
+>>I'll report the bug to them.
+>>
+>>Grrr.
+>>
+>>Rob
+>>
+>>
+>>Ewen McNeill wrote:
+>> >
+>> > In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd writes:
+>> > >Xitami starts fine, but can't be accessed from the internet. I 
+haven't
+>> > >tried any later builds because they haven't been available online 
+AFAIK.
+>> > >My last view of the download site still listed 2.5b4 as the 
+latest, and
+>> > >that was only last week.
+>> >
+>> > The new downloads are only on http://www.xitami.com/.
+>> >
+>> > http://www.imatix.com/ needs a more thorough overview so we 
+haven't
+>> > tried to update that at this stage.
+>> >
+>> > >p.s. I have Xitami running as a service under BeOS now.
+>> >
+>> > Cool stuff.
+>> >
+>> > Ewen
+>> >
+>> > --
+>> > Ewen McNeill, Technical Consultant, iMatix Corporation  
+www.imatix.com
+>> >
+>> > --
+>> > Xitami-Dev -- Xitami Development Mailing List
+>> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-
+dev
+>>
+>>--
+>>Xitami-Dev -- Xitami Development Mailing List
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>George Blat
+>BRD
+>8016 188th SW, Edmonds, WA 98026
+>
+>phone:  425-775-7475
+>fax:    781-998-5940
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+
+From xitami-dev@lists.xitami.org  Wed Jul 11 00:32:57 2001
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Tue, 10 Jul 2001 16:32:57 -0700
+Subject: [Xitami-Dev] Houston, we have a problem ...
+In-Reply-To: <200107102254.f6AMseS30729@whirlwind.netspace.net.au>
+Message-ID: <5.0.2.1.0.20010710162426.01faf820@mail.ntrealtime.com>
+
+Rob:
+
+I found that when I used ZoneAlarm the crackers were able to plant lots of 
+their stuff
+in my server, I spent a whole week cleaning up "services" that they were 
+able to run
+in my server. Most of these services were normal applications that 
+companies such as
+Compaq use to allow their technical support people to operate as remote 
+control their
+customers' machines to solve problems. Too bad that the "support" was not 
+what I really
+looked forward to. The warez gentlemen were able to stop my server twice, 
+and I had
+to change all my passwords several times.
+
+After I installed Tiny (which like ZoneAlarm is also free) I was able to 
+contain all this
+circus. No more problems since, except seeing all the scanning that is 
+going on and which
+is very worrisome. Seems that in my NT machines the first thing they try is 
+to get into
+Netbios port to get the system to enumerate itself.
+
+Anyway, I am glad everything is working for you.
+
+George
+
+
+At 08:56 AM 7/11/01 -0500, you wrote:
+>George,
+>
+>Actually, I eventually got it to work. The trouble is that I have a
+>Linksys router interposed between my PC and the Alcatel ADSL modem, and
+>ZoneAlarm didn't know about the new version of Xitami I just installed.
+>When it got a reply back from my router it was expecting to see a reply
+>from my actual static IP number and panicked.
+>
+>They didn't build in a proxy setting into the free version, and I don't
+>know if the paid-for one has it either. I got around it by plugging
+>straight into the ADSL line, invoking Xitami, telling ZA that it was OK
+>to let it be a server then going back to the original setup.
+>
+>But I will not ever be ONE DAY without a proper firewall again after
+>seeing how many people scan the addresses. See also:
+>
+>http://judd.ob-wan.com/security.htm
+>
+>Rob Judd
+>
+> >My suggestion: Don't use ZoneAlarm for your Xitami server. It's great
+>at
+> >your workstation though.
+> >When I opened ZoneAlarm enough the crackers/hackers came quickly.  I
+>had a
+> >far better
+> >result with Tiny Personal Firewall. It takes a little time to set it
+>up but
+> >it can open the link
+> >just enough for your server to be fully operational, but no more.
+> >
+> >George Blat
+> >
+> >
+> >
+> >At 06:41 PM 7/10/01 +1000, you wrote:
+> >>Ewen,
+> >>
+> >>Solved. ZoneAlarm doesn't know about services!!!
+> >>
+> >>I'll report the bug to them.
+> >>
+> >>Grrr.
+> >>
+> >>Rob
+> >>
+> >>
+> >>Ewen McNeill wrote:
+> >> >
+> >> > In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd writes:
+> >> > >Xitami starts fine, but can't be accessed from the internet. I
+>haven't
+> >> > >tried any later builds because they haven't been available online
+>AFAIK.
+> >> > >My last view of the download site still listed 2.5b4 as the
+>latest, and
+> >> > >that was only last week.
+> >> >
+> >> > The new downloads are only on http://www.xitami.com/.
+> >> >
+> >> > http://www.imatix.com/ needs a more thorough overview so we
+>haven't
+> >> > tried to update that at this stage.
+> >> >
+> >> > >p.s. I have Xitami running as a service under BeOS now.
+> >> >
+> >> > Cool stuff.
+> >> >
+> >> > Ewen
+> >> >
+> >> > --
+> >> > Ewen McNeill, Technical Consultant, iMatix Corporation
+>www.imatix.com
+> >> >
+> >> > --
+> >> > Xitami-Dev -- Xitami Development Mailing List
+> >> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-
+>dev
+> >>
+> >>--
+> >>Xitami-Dev -- Xitami Development Mailing List
+> >>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+> >
+> >George Blat
+> >BRD
+> >8016 188th SW, Edmonds, WA 98026
+> >
+> >phone:  425-775-7475
+> >fax:    781-998-5940
+> >
+> >
+> >--
+> >Xitami-Dev -- Xitami Development Mailing List
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+> >
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Wed Jul 11 15:48:19 2001
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Wed, 11 Jul 2001 09:48:19 EST
+Subject: [Xitami-Dev] Houston, we have a problem ...
+Message-ID: <200107102346.f6ANkTS38103@whirlwind.netspace.net.au>
+
+George,
+
+When you say "services" I assume you mean that in the NT sense, as a 
+system service. There's a registry patch that makes this impossible, 
+see www.grc.com
+
+I'm currently running the server in the Linksys "DMZ" fully visible, 
+but only while I set up the system. It also has firewall capability, 
+and allows me to open up just the required ports, as you suggested. 
+That's the way I'll be going in the long term. Still testing right now.
+
+Rob
+
+
+>Rob:
+>
+>I found that when I used ZoneAlarm the crackers were able to plant 
+lots of 
+>their stuff
+>in my server, I spent a whole week cleaning up "services" that they 
+were 
+>able to run
+>in my server. Most of these services were normal applications that 
+>companies such as
+>Compaq use to allow their technical support people to operate as 
+remote 
+>control their
+>customers' machines to solve problems. Too bad that the "support" was 
+not 
+>what I really
+>looked forward to. The warez gentlemen were able to stop my server 
+twice, 
+>and I had
+>to change all my passwords several times.
+>
+>After I installed Tiny (which like ZoneAlarm is also free) I was able 
+to 
+>contain all this
+>circus. No more problems since, except seeing all the scanning that is 
+>going on and which
+>is very worrisome. Seems that in my NT machines the first thing they 
+try is 
+>to get into
+>Netbios port to get the system to enumerate itself.
+>
+>Anyway, I am glad everything is working for you.
+>
+>George
+>
+>
+>At 08:56 AM 7/11/01 -0500, you wrote:
+>>George,
+>>
+>>Actually, I eventually got it to work. The trouble is that I have a
+>>Linksys router interposed between my PC and the Alcatel ADSL modem, 
+and
+>>ZoneAlarm didn't know about the new version of Xitami I just 
+installed.
+>>When it got a reply back from my router it was expecting to see a 
+reply
+>>from my actual static IP number and panicked.
+>>
+>>They didn't build in a proxy setting into the free version, and I 
+don't
+>>know if the paid-for one has it either. I got around it by plugging
+>>straight into the ADSL line, invoking Xitami, telling ZA that it was 
+OK
+>>to let it be a server then going back to the original setup.
+>>
+>>But I will not ever be ONE DAY without a proper firewall again after
+>>seeing how many people scan the addresses. See also:
+>>
+>>http://judd.ob-wan.com/security.htm
+>>
+>>Rob Judd
+>>
+>> >My suggestion: Don't use ZoneAlarm for your Xitami server. It's 
+great
+>>at
+>> >your workstation though.
+>> >When I opened ZoneAlarm enough the crackers/hackers came quickly.  
+I
+>>had a
+>> >far better
+>> >result with Tiny Personal Firewall. It takes a little time to set 
+it
+>>up but
+>> >it can open the link
+>> >just enough for your server to be fully operational, but no more.
+>> >
+>> >George Blat
+>> >
+>> >
+>> >
+>> >At 06:41 PM 7/10/01 +1000, you wrote:
+>> >>Ewen,
+>> >>
+>> >>Solved. ZoneAlarm doesn't know about services!!!
+>> >>
+>> >>I'll report the bug to them.
+>> >>
+>> >>Grrr.
+>> >>
+>> >>Rob
+>> >>
+>> >>
+>> >>Ewen McNeill wrote:
+>> >> >
+>> >> > In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd 
+writes:
+>> >> > >Xitami starts fine, but can't be accessed from the internet. I
+>>haven't
+>> >> > >tried any later builds because they haven't been available 
+online
+>>AFAIK.
+>> >> > >My last view of the download site still listed 2.5b4 as the
+>>latest, and
+>> >> > >that was only last week.
+>> >> >
+>> >> > The new downloads are only on http://www.xitami.com/.
+>> >> >
+>> >> > http://www.imatix.com/ needs a more thorough overview so we
+>>haven't
+>> >> > tried to update that at this stage.
+>> >> >
+>> >> > >p.s. I have Xitami running as a service under BeOS now.
+>> >> >
+>> >> > Cool stuff.
+>> >> >
+>> >> > Ewen
+>> >> >
+>> >> > --
+>> >> > Ewen McNeill, Technical Consultant, iMatix Corporation
+>>www.imatix.com
+>> >> >
+>> >> > --
+>> >> > Xitami-Dev -- Xitami Development Mailing List
+>> >> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-
+>>dev
+>> >>
+>> >>--
+>> >>Xitami-Dev -- Xitami Development Mailing List
+>> >>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-
+dev
+>> >
+>> >George Blat
+>> >BRD
+>> >8016 188th SW, Edmonds, WA 98026
+>> >
+>> >phone:  425-775-7475
+>> >fax:    781-998-5940
+>> >
+>> >
+>> >--
+>> >Xitami-Dev -- Xitami Development Mailing List
+>> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>> >
+>>
+>>--
+>>Xitami-Dev -- Xitami Development Mailing List
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+
+From xitami-dev@lists.xitami.org  Wed Jul 11 20:45:45 2001
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Wed, 11 Jul 2001 12:45:45 -0700
+Subject: [Xitami-Dev] Houston, we have a problem ...
+In-Reply-To: <200107102346.f6ANkTS38103@whirlwind.netspace.net.au>
+Message-ID: <5.0.2.1.0.20010711123800.035f1150@mail.ntrealtime.com>
+
+Rob:
+
+Yes, the crackers were planting and running services.
+Thanks for the information. I will go back to check Gibsons's web
+site again.
+
+The ports that the hackers were trying to reach were the
+netbios related ports 134-139. Also there was a lot of action in
+trying to ftp-in their programs. All of that was blocked, I think.
+Of course there is always the chance of them succeeding and
+leaving something inside. One other thing they tried was to use
+Microsoft Messaging and IRC. So their approach was similar but
+not equal to the problems Gibson faced. I cut off all these services
+in the server.
+
+Regards,
+
+
+George
+
+At 09:48 AM 7/11/01 -0500, you wrote:
+>George,
+>
+>When you say "services" I assume you mean that in the NT sense, as a
+>system service. There's a registry patch that makes this impossible,
+>see www.grc.com
+>
+>I'm currently running the server in the Linksys "DMZ" fully visible,
+>but only while I set up the system. It also has firewall capability,
+>and allows me to open up just the required ports, as you suggested.
+>That's the way I'll be going in the long term. Still testing right now.
+>
+>Rob
+>
+>
+> >Rob:
+> >
+> >I found that when I used ZoneAlarm the crackers were able to plant
+>lots of
+> >their stuff
+> >in my server, I spent a whole week cleaning up "services" that they
+>were
+> >able to run
+> >in my server. Most of these services were normal applications that
+> >companies such as
+> >Compaq use to allow their technical support people to operate as
+>remote
+> >control their
+> >customers' machines to solve problems. Too bad that the "support" was
+>not
+> >what I really
+> >looked forward to. The warez gentlemen were able to stop my server
+>twice,
+> >and I had
+> >to change all my passwords several times.
+> >
+> >After I installed Tiny (which like ZoneAlarm is also free) I was able
+>to
+> >contain all this
+> >circus. No more problems since, except seeing all the scanning that is
+> >going on and which
+> >is very worrisome. Seems that in my NT machines the first thing they
+>try is
+> >to get into
+> >Netbios port to get the system to enumerate itself.
+> >
+> >Anyway, I am glad everything is working for you.
+> >
+> >George
+> >
+> >
+> >At 08:56 AM 7/11/01 -0500, you wrote:
+> >>George,
+> >>
+> >>Actually, I eventually got it to work. The trouble is that I have a
+> >>Linksys router interposed between my PC and the Alcatel ADSL modem,
+>and
+> >>ZoneAlarm didn't know about the new version of Xitami I just
+>installed.
+> >>When it got a reply back from my router it was expecting to see a
+>reply
+> >>from my actual static IP number and panicked.
+> >>
+> >>They didn't build in a proxy setting into the free version, and I
+>don't
+> >>know if the paid-for one has it either. I got around it by plugging
+> >>straight into the ADSL line, invoking Xitami, telling ZA that it was
+>OK
+> >>to let it be a server then going back to the original setup.
+> >>
+> >>But I will not ever be ONE DAY without a proper firewall again after
+> >>seeing how many people scan the addresses. See also:
+> >>
+> >>http://judd.ob-wan.com/security.htm
+> >>
+> >>Rob Judd
+> >>
+> >> >My suggestion: Don't use ZoneAlarm for your Xitami server. It's
+>great
+> >>at
+> >> >your workstation though.
+> >> >When I opened ZoneAlarm enough the crackers/hackers came quickly.
+>I
+> >>had a
+> >> >far better
+> >> >result with Tiny Personal Firewall. It takes a little time to set
+>it
+> >>up but
+> >> >it can open the link
+> >> >just enough for your server to be fully operational, but no more.
+> >> >
+> >> >George Blat
+> >> >
+> >> >
+> >> >
+> >> >At 06:41 PM 7/10/01 +1000, you wrote:
+> >> >>Ewen,
+> >> >>
+> >> >>Solved. ZoneAlarm doesn't know about services!!!
+> >> >>
+> >> >>I'll report the bug to them.
+> >> >>
+> >> >>Grrr.
+> >> >>
+> >> >>Rob
+> >> >>
+> >> >>
+> >> >>Ewen McNeill wrote:
+> >> >> >
+> >> >> > In message <3B4ABBB0.7D413736@alphalink.com.au>, Rob Judd
+>writes:
+> >> >> > >Xitami starts fine, but can't be accessed from the internet. I
+> >>haven't
+> >> >> > >tried any later builds because they haven't been available
+>online
+> >>AFAIK.
+> >> >> > >My last view of the download site still listed 2.5b4 as the
+> >>latest, and
+> >> >> > >that was only last week.
+> >> >> >
+> >> >> > The new downloads are only on http://www.xitami.com/.
+> >> >> >
+> >> >> > http://www.imatix.com/ needs a more thorough overview so we
+> >>haven't
+> >> >> > tried to update that at this stage.
+> >> >> >
+> >> >> > >p.s. I have Xitami running as a service under BeOS now.
+> >> >> >
+> >> >> > Cool stuff.
+> >> >> >
+> >> >> > Ewen
+> >> >> >
+> >> >> > --
+> >> >> > Ewen McNeill, Technical Consultant, iMatix Corporation
+> >>www.imatix.com
+> >> >> >
+> >> >> > --
+> >> >> > Xitami-Dev -- Xitami Development Mailing List
+> >> >> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>-
+> >>dev
+> >> >>
+> >> >>--
+> >> >>Xitami-Dev -- Xitami Development Mailing List
+> >> >>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-
+>dev
+> >> >
+> >> >George Blat
+> >> >BRD
+> >> >8016 188th SW, Edmonds, WA 98026
+> >> >
+> >> >phone:  425-775-7475
+> >> >fax:    781-998-5940
+> >> >
+> >> >
+> >> >--
+> >> >Xitami-Dev -- Xitami Development Mailing List
+> >> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+> >> >
+> >>
+> >>--
+> >>Xitami-Dev -- Xitami Development Mailing List
+> >>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+> >
+> >
+> >--
+> >Xitami-Dev -- Xitami Development Mailing List
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+> >
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Thu Jul 12 14:21:12 2001
+From: xitami-dev@lists.xitami.org (Flemming Veggerby)
+Date: Thu, 12 Jul 2001 15:21:12 +0200
+Subject: [Xitami-Dev] Xitami for BeOS
+Message-ID: <NEBBJNPBILLCPIGFCBEDMEDOCBAA.fveggerby@fdf.dk>
+
+HI there.
+
+I've tried the port of Xitami for BeOS. Look good BUT....
+I have some problems:
+FTP hangs when logging on. I've read that the NT version 2.5b4 has the same
+problem.
+Admin-section doesn't work, I believe it's a problem with tha path to
+images, which is acting weird.
+
+Do you have any solutions/ideas????
+
+I've enabled outside admin, and trying to use it from Win98, the reason I
+need it is because the server physically is placed 65 km away, I can
+sometimes load the admin pages on the server, but never from the outside, I
+get login, and it tries to load but can't (hangs). When I load the server it
+says "web server binding to address 127.0.0.1", can this be the problem, the
+rest of the web server is working fine, except sometimes the images is
+missing. The FTP server is enabled and I get Welcome text, logon OK,
+Logintext OK and then ex. CuteFTP says:
+STATUS:>	Login successful
+COMMAND:>	TYPE I
+	200 Command okay
+COMMAND:>	pwd
+	257 "/" is the current directory
+COMMAND:>	TYPE A
+	200 Command okay
+STATUS:>	Retrieving directory listing...
+COMMAND:>	PASV
+	227 Entering Passive Mode (192,168,0,2,0,200)
+COMMAND:>	LIST
+STATUS:>	Connecting data socket...
+	150 Preparing to transfer ASCII file
+	150 Preparing to transfer ASCII file
+	503 'LIST' not valid at this time
+STATUS:>	0 bytes in 90 seconds
+COMMAND:>	ABOR
+STATUS:>	Received 0 bytes, Abnormal termination
+STATUS:>	Trashed response received
+	150 Preparing to transfer ASCII file
+STATUS:>	Trashed response received
+	503 'LIST' not valid at this time
+STATUS:>	Trashed response received
+	503 'ABOR' not valid at this time
+STATUS:>	Trashed response received
+	421 Service not available at present
+STATUS:>	Disconnect: Thursday 00:00:02 07-12-2001
+
+and then I'm stuck. It doesn't matter what user I'm logging on as.
+
+I hope you can make something of this.
+
+
+Flemming Veggerby
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Suspend
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000871.html">
+   <LINK REL="Next"  HREF="000874.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Suspend
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Suspend">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 05 Sep 2001 22:45:59 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000871.html">[Xitami] Suspend
+</A></li>
+        <LI> Next message: <A HREF="000874.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#872">[ date ]</a>
+              <a href="thread.html#872">[ thread ]</a>
+              <a href="subject.html#872">[ subject ]</a>
+              <a href="author.html#872">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;001501c135ed$a4e11420$<A HREF="mailto:86919fc1@ednic">86919fc1@ednic</A>&gt;, Joubin Far writes:
+&gt;<i>I didn´t install IIS-Server but i have installed Visual Studio.net Beta 2.
+</I>
+Ah, that's possibly installed a webserver as part of its test environment.
+
+&gt;<i>[netstat -na shows]
+</I>&gt;<i>TCP        0.0.0.0:21       0.0.0.0       heard
+</I>&gt;<i>TCP        0.0.0.0:25       0.0.0.0       heard
+</I>&gt;<i>TCP        0.0.0.0:80       0.0.0.0       heard
+</I>
+The :80 one is the important one; it's the webserver port (by common
+convention).  So you've definitely got _something_ which is running as a
+webserver.  (And also a FTP server, and also a mail server.)
+
+I believe there are some third party programs which can tell you for a
+given network port, or file, which programs have it open, but off hand I
+don't know of any of them.  (Under linux/unix there is &quot;lsof&quot; (list open
+files) which does this; I'm pretty sure there's a Windows equivilent.)
+
+Failing that, there's two possiblities: 
+1.  Looking in the list of running services and applications (in the
+    task manager) for likely suspects, and try to figure out which one
+    it is.  Anything &quot;information server&quot; or &quot;web server&quot; like is a
+    possibility.  You could try stopping the likely suspects one at a
+    time until you figure out which one it is takes away the &quot;:80&quot;
+    reference in netstat -na.
+
+2.  You could try connecting to the webserver, with, eg, telnet and see
+    if it'll tell you anything about itself.  Eg:
+
+    telnet 127.0.0.1 80
+
+    GET / HTTP/1.0
+
+    (and press return twice)  Often there'll be some sort of Server:
+    line that identifies it, and you might be able to match this up with
+    some program running on your system.
+
+&gt;&gt;<i>All Xitami's ports can be shifted with the portbase option: eg 
+</I>&gt;&gt;<i>&quot;xitami -b 5000&quot; will move all the ports up by 5000, giving 5080 for HTTP
+</I>&gt;<i>
+</I>&gt;<i>By cmd W2K i couldn´t execute &quot;xitami -b 5000&quot; because there isn´t
+</I>&gt;<i>xitami.exe and if i have done with Xiwin32.exe -b 5000
+</I>
+Yup, that was what I meant.  (The name of xitami varies depending on
+which build you have (console, gui window version, NT service, etc), but
+we usually just say &quot;xitami&quot; when we suggest running it.)
+
+Unfortunately it seems that version of Xitami doesn't check for command
+line paramters.  In which case you'll need to create a defaults.cfg file
+(if you don't already have one; add this to the end if you do) which
+says:
+
+[server]
+  portbase=5000
+
+For the builds that support it the &quot;-b&quot; paramter does the same thing for
+a single run.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000871.html">[Xitami] Suspend
+</A></li>
+	<LI> Next message: <A HREF="000874.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#872">[ date ]</a>
+              <a href="thread.html#872">[ thread ]</a>
+              <a href="subject.html#872">[ subject ]</a>
+              <a href="author.html#872">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

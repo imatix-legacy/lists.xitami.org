@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Building Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005857.html">
+   <LINK REL="Next"  HREF="005862.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Building Xitami
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Building Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 3 May 2004 16:13:44 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005857.html">[Xitami] Building Xitami
+</A></li>
+        <LI> Next message: <A HREF="005862.html">[Xitami] Building Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5858">[ date ]</a>
+              <a href="thread.html#5858">[ thread ]</a>
+              <a href="subject.html#5858">[ subject ]</a>
+              <a href="author.html#5858">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, May 03, 2004 at 09:14:50AM -0500, Elliott Potter wrote:
+&gt;<i> &gt; &gt; I found an old c.cmd for OS/2 but when using that I get:-
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [C:\ux2bs\workdir\xiopen]sh boomake build
+</I>&gt;<i> &gt; &gt; Building application...
+</I>&gt;<i> &gt; &gt; Compiling -g.c...
+</I>&gt;<i> &gt; &gt; Incorrect function
+</I>&gt;<i> &gt; &gt; [...]
+</I>&gt;<i> &gt; &gt; A file called -g.lst containing:-
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; gcc: No input files
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; also gets created so I suspect parameters are not getting passed properly
+</I>&gt;<i> &gt; &gt; or something else is missing.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Do I need something called c.conf? If so where do I find an example of
+</I>&gt;<i> &gt; &gt; that?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; In each subdirectory, edit the boomake file and where it says &quot;COPTS=-g&quot;
+</I>&gt;<i> &gt; remove the &quot;-g&quot; so it just says &quot;COPTS=&quot; ... this also happened on my
+</I>&gt;<i> &gt; system (bash).
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> I'll also note that if you want to add compiler flags you can edit the
+</I>&gt;<i> &quot;c&quot; file in each directory and put them in the &quot;CCOPTS&quot; field ... it
+</I>&gt;<i> seems to work OK there.
+</I>
+I have v2.5c1 now. There is only a boomake in the top level directory. 
+When I use it I get:-
+
+
+[C:\ux2bs\workdir\xiopen]sh boomake build 
+Building application...
+Compiling xixlat.c...
+xixlat.c:37: sfl.h: No such file or directory
+xixlat.c:38: smtlib.h: No such file or directory
+xixlat.c:39: smtdefn.h: No such file or directory
+Compiling xitami.c...
+xitami.c:10: smtdefn.h: No such file or directory
+xitami.c:11: smthttpl.h: No such file or directory
+xitami.c:12: xixlog.h: No such file or directory
+Compiling xilite.c...
+xilite.c:10: smtdefn.h: No such file or directory
+xilite.c:11: smthttpl.h: No such file or directory
+xilite.c:12: xixlog.h: No such file or directory
+Compiling xiwtp.c...
+xiwtp.c:10: smtdefn.h: No such file or directory
+xiwtp.c:11: smthttpl.h: No such file or directory
+xiwtp.c:12: xixlog.h: No such file or directory
+Linking xixlat...
+gcc: xixlat.o: No such file or directory
+Linking xitami...
+gcc: xitami.o: No such file or directory
+Linking xilite...
+gcc: xilite.o: No such file or directory
+Linking xiwtp...
+gcc: xiwtp.o: No such file or directory
+
+
+It seems as though the headers are missing.
+
+I'm obviously using the wrong file. Can you give me a URL for the archive 
+you think works?
+
+ 
+
+
+&gt;<i> --
+</I>&gt;<i> Elliott
+</I>
+
+-- 
+John
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005857.html">[Xitami] Building Xitami
+</A></li>
+	<LI> Next message: <A HREF="005862.html">[Xitami] Building Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5858">[ date ]</a>
+              <a href="thread.html#5858">[ thread ]</a>
+              <a href="subject.html#5858">[ subject ]</a>
+              <a href="author.html#5858">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

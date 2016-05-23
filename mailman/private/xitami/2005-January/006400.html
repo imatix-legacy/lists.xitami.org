@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Firewall/Routers &amp; UDP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006399.html">
+   <LINK REL="Next"  HREF="006401.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Firewall/Routers &amp; UDP
+   </H1>
+    <B>Steve Winn
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Firewall/Routers &amp; UDP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 22 Jan 2005 12:53:57 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006399.html">[Xitami] Firewall/Routers &amp; UDP
+</A></li>
+        <LI> Next message: <A HREF="006401.html">[Xitami] Linux build of Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6400">[ date ]</a>
+              <a href="thread.html#6400">[ thread ]</a>
+              <a href="subject.html#6400">[ subject ]</a>
+              <a href="author.html#6400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>TCP port 80 is all that needs to be open for HTTP.
+
+I have not used the Xitami FTP server much, but the following applies to =
+any
+FTP server.
+
+TCP port 21 must be open.
+
+Port 20 is the FTP data port, which is used with an active FTP session. =
+For
+a FTP server it is not necessary to have this open since the server will
+initiate it with an outgoing packet to the client. But, to use active =
+FTP,
+the client must have port 20 open in one way or another.. Usually done =
+by
+port triggering (outbound 21 will trigger inbound 20). If port 20 is not
+open on the client then the client will get an error when they try to =
+send a
+command.
+
+For passive FTP sessions, usually you can specify a range of ports to =
+use.
+For passive FTP to work, the server must have these ports open and
+redirected to the FTP server. For example, you specify that you want =
+passive
+FTP to use ports 13000-13100, so in your firewall you would redirect all =
+100
+ports to your FTP server IP.
+
+UDP ports do not need to be open for HTTP or FTP.
+
+So to summarize, TCP 21 and 80 need to be open. And for passive FTP to =
+work,
+a specified range of ports must be open as well.
+
+I looked at the Xitami configuration screen and did not see any open to
+specify what range to use for passive FTP.. Maybe someone else can =
+enlighten
+us on how Xitami handles that.
+
+Hope this helps.
+
+Steve
+
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> =
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]
+On Behalf Of Rick Headly
+Sent: Saturday, January 22, 2005 11:24 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: [Xitami] Firewall/Routers &amp; UDP
+
+
+Hello,
+
+I've been using Xitami for the past three or four years, both for FTP =
+and
+HTTP purposes.  Throughout this time, I've achieved satisfactory =
+results,
+simply by forwarding ports 21 and 80 [TCP only] from the router to the
+applicable PC, and opening TCP ports 21 and 80 on the software-firewall
+installed to that machine.
+
+What troubles me however, is that I constantly find myself reading posts =
+on
+various message-boards which have been written by people of questionable
+knowledge, and with unknown skill and experience, about the set-up and
+configuration of Xitami and similar web-servers in general.  Quite =
+often,
+they specifically instruct the user to open incoming TCP **AND** UDP =
+ports
+20 (???), 21, and 80... but ALWAYS fail to explain why.
+
+I admit having very little understanding of UDP protocol... and because =
+I
+have very little trust for my information sources, I've refused to open =
+any
+incoming UDP ports (or port 20) for Xitami's use.
+
+Is it wise of me to keep unnecessary ports closed, or am I just being
+paranoid, and robbing myself of true optimization and efficiency?
+
+   Rick
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006399.html">[Xitami] Firewall/Routers &amp; UDP
+</A></li>
+	<LI> Next message: <A HREF="006401.html">[Xitami] Linux build of Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6400">[ date ]</a>
+              <a href="thread.html#6400">[ thread ]</a>
+              <a href="subject.html#6400">[ subject ]</a>
+              <a href="author.html#6400">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

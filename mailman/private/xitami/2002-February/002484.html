@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002456.html">
+   <LINK REL="Next"  HREF="002439.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+   </H1>
+    <B>Alan Lam
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 19 Feb 2002 08:42:19 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002456.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+        <LI> Next message: <A HREF="002439.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2484">[ date ]</a>
+              <a href="thread.html#2484">[ thread ]</a>
+              <a href="subject.html#2484">[ subject ]</a>
+              <a href="author.html#2484">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In article &lt;Rlka6jAzx$<A HREF="mailto:b8EwBY@alan-lam.co.uk">b8EwBY@alan-lam.co.uk</A>&gt;, Alan Lam &lt;<A HREF="mailto:alan@alan-">alan@alan-</A>
+lam.co.uk&gt; writes
+&gt;&gt;<i>check your error.log file, cgierr.log also your phperror.log
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>if you eneabled it and gave it a name in the php.ini file
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>in your AUTOEXEC.BAT add this
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>SET PATH=f:\internet;%PATH%
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>NOTE the use of My documents has been known to give Xitami fits it don't
+</I>&gt;&gt;<i>like spaces :)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>hope this helps
+</I>&gt;<i>
+</I>&gt;<i>To take out spaces
+</I>&gt;<i>I've set up alias
+</I>&gt;<i>temp=c:\temp
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>In autoexec.bat I've added
+</I>&gt;<i>set path=f:\internet\php;%path%
+</I>&gt;<i>
+</I>&gt;<i>I didn't know about the phperror.log. I downloaded the 'big' version of
+</I>&gt;<i>php to have a look at the php.ini file. (I initially had the windows
+</I>&gt;<i>installer version). I found out I can set display error!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>The php.ini in the windows directory is now
+</I>&gt;<i>
+</I>&gt;<i>; php.ini for PEAR tests
+</I>&gt;<i>include_path=..
+</I>&gt;<i>
+</I>&gt;<i>[mail function]
+</I>&gt;<i>SMTP= localhost ; for Win32 only
+</I>&gt;<i>sendmail_from= <A HREF="mailto:me@localhost.com">me@localhost.com</A> ; for Win32 only
+</I>&gt;<i>
+</I>&gt;<i>[Session]
+</I>&gt;<i>session.save_path= F:\Internet\PHP\sessiondata    ; argument passed to
+</I>&gt;<i>save_handler
+</I>&gt;<i>
+</I>&gt;<i>[PHP]
+</I>&gt;<i>error_reporting= E_ALL; display all errors, warnings and notices
+</I>&gt;<i>display_errors = On
+</I>&gt;<i>display_startup_errors = On
+</I>&gt;<i>log_errors = On
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>With a test page
+</I>&gt;<i><A HREF="http://localhost/temp/Test">http://localhost/temp/Test</A> Page.html
+</I>&gt;<i>=&gt;
+</I>&gt;<i><A HREF="http://localhost/temp/Test%20Page.html">http://localhost/temp/Test%20Page.html</A>
+</I>&gt;<i>and pops up fine.
+</I>&gt;<i>
+</I>&gt;<i>With the php page
+</I>&gt;<i>
+</I>&gt;<i>&lt;html&gt;&lt;head&gt;&lt;title&gt;PHP Test&lt;/title&gt;&lt;/head&gt; 
+</I>&gt;<i>&lt;body&gt; 
+</I>&gt;<i>&lt;?php echo &quot;Hello World&lt;P&gt;&quot;; ?&gt; 
+</I>&gt;<i>&lt;/body&gt;&lt;/html&gt; 
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://localhost/temp/phptest.php">http://localhost/temp/phptest.php</A>
+</I>&gt;<i>
+</I>&gt;<i>I see now see (with the help of display_error = on) :-)
+</I>&gt;<i>
+</I>&gt;<i>Fatal error: Unable to open F:/Internet/Xitami/webpages/temp/phptest2.ph
+</I>&gt;<i>p in Unknown on line 0
+</I>
+Oops, that should be phptest.php for the above example. I had two test
+php files and I copied the error message from the second one.
+
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>So ... where and what do I set to get php &amp; xitami talking to each other
+</I>&gt;<i>about the right directory?
+</I>
+Any ideas, anyone?
+
+Thanks
+-- 
+Alan YC Lam  Tonbridge, Kent, UK
+email        <A HREF="mailto:kinesiology@alan-lam.co.uk">kinesiology@alan-lam.co.uk</A>
+www          <A HREF="http://www.alan-lam.co.uk">http://www.alan-lam.co.uk</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002456.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+	<LI> Next message: <A HREF="002439.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2484">[ date ]</a>
+              <a href="thread.html#2484">[ thread ]</a>
+              <a href="subject.html#2484">[ subject ]</a>
+              <a href="author.html#2484">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

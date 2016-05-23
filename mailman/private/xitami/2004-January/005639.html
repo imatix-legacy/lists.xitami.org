@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] virtual host configuration
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005638.html">
+   <LINK REL="Next"  HREF="005640.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] virtual host configuration
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] virtual host configuration">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 17 Jan 2004 08:42:26 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005638.html">[Xitami] virtual host configuration
+</A></li>
+        <LI> Next message: <A HREF="005640.html">[Xitami] virtual host configuration
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5639">[ date ]</a>
+              <a href="thread.html#5639">[ thread ]</a>
+              <a href="subject.html#5639">[ subject ]</a>
+              <a href="author.html#5639">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 23:23 16/01/04, you wrote:
+&gt;<i>Can I host more than one website (different websites) with one IP address?
+</I>&gt;<i>
+</I>
+In your defaults.cfg file (example)
+
+[Virtual-hosts]
+     Mail.verfaillie.com=mail.cfg
+     Shop.verfaillie.be=shop.cfg
+     Shop.verfaillie.com=shop.cfg
+     Web.verfaillie.be=verfa.cfg
+
+
+That's your mail.cfg (complete, example)
+
+[Server]
+     webpages=webpages/mail
+
+[Accesslog]
+     Filename=mail.log
+
+
+When somebody go to mail.verfaillie.com, the mail.cfg is checked, points to 
+the &quot;mail&quot; directory.
+Verify that you have correct DNS pointing to your server for all domains.
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+<A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005638.html">[Xitami] virtual host configuration
+</A></li>
+	<LI> Next message: <A HREF="005640.html">[Xitami] virtual host configuration
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5639">[ date ]</a>
+              <a href="thread.html#5639">[ thread ]</a>
+              <a href="subject.html#5639">[ subject ]</a>
+              <a href="author.html#5639">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,34 @@
+From xitami-dev@lists.xitami.org  Thu Aug 21 09:42:10 2003
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Thu, 21 Aug 2003 10:42:10 +0200
+Subject: [Xitami-Dev] Xitami does not pass PUT request to LRWP
+Message-ID: <9307C9319CD71A499EDDA4739F4C80C8010D6A@olxchg.okhtor.net>
+
+ Hello all.
+
+ I need to have an LRWP application receive PUT requests
+ from an http client that access the LRWP served URI in
+ a Xitami web server.
+
+ Xitami only passes the GET and POST requests.
+
+ I have modified smthttpl.c and smthttp.c on a 2.5b5 release
+ to treat HTTP_METHOD_PUT as HTTP_METHOD_POST.
+
+ It works, but is not a very elegant solution, in that I loose
+ the standard behavior of the HTTP PUT method. Also, I will
+ want to use XitamiPro as a front end, so my solution would
+ not be feasible here.
+
+ Well, my beloved Xitami Development Group, could we have
+ something like a parameter in the [Lrwp] stanza of the
+ xitami.cfg that permits an LRWP application to also
+ handle PUT requests?
+
+ Very kind regards.
+
+
+   Rafael Cano Pérez
+
+
+

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] using cgi with Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005689.html">
+   <LINK REL="Next"  HREF="005692.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] using cgi with Xitami
+   </H1>
+    <B>Murali Suriar
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] using cgi with Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 9 Feb 2004 08:57:15 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005689.html">[Xitami] using cgi with Xitami
+</A></li>
+        <LI> Next message: <A HREF="005692.html">[Xitami] using cgi with Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5690">[ date ]</a>
+              <a href="thread.html#5690">[ thread ]</a>
+              <a href="subject.html#5690">[ subject ]</a>
+              <a href="author.html#5690">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Vera,
+
+VC&gt; I donno how to install anything as a &quot;system service&quot;... I'll hunt the help file
+VC&gt; but if you got time I'd appreciate a dab of tutoring.
+
+Right. So I'm assuming that you're manually running Xitami every time
+you start your PC, or you've put it in your Startup folder?
+
+A quick way to check what services you have installed is to open a
+command prompt window and type 'net start'. This will give you a list
+of all services currently running. 'Xitami Web Server' will be near
+the bottom of the list, if it's there. If it's not, then...
+
+Installing as a system service - off the top of my head:
+
+1) Make sure you're logged in as administrator. (If you only have one
+   user account, then you don't need to worry about this.)
+2) Open a command prompt. (Start -&gt; Run -&gt; cmd.exe)
+3) Navigate to your Xitami install (Usually C:\Xitami)
+4) Type 'xiwinnt -i' (This installs Xitami as a service)
+5) Type 'net start xitami' in the command prompt. (This starts the
+   service - I can't remember if Xitami starts straight after install,
+   but if it does, no problem. It'll just kick up an error saying &quot;The
+   requested service has already been started.&quot;)
+
+Try running your script now. If it doesn't work, you've wasted five
+minutes, and you've eliminated one cause of the error. :)
+
+If it does work, then you'll want to make sure that the Xitami service
+starts up by default. To that end:
+
+1) Right click 'My Computer' and click 'Manage' (The Computer
+   Management window should appear.)
+2) Under 'Services and Applications' in the folder tree on the right,
+   select. 'Services'. (A fat list of services should appear in the
+   main window.)
+3) Scroll down the list until you see 'Xitami Web Server'. Scroll
+   across and see what it's 'Startup type' field is set to. If it says
+   'Automatic', then you're away. If not, right click -&gt; properties,
+   and change it to 'Automatic'. Job done.
+
+Hope this helps. Good luck. :)
+
+-- 
+cheers,
+ Murali                            mailto:<A HREF="mailto:muz@crackaddled.net">muz@crackaddled.net</A>
+ &lt;Muz&gt; &quot;...the complete decimation of the British Isles was caused by
+ a number of factors, but the common consensus among historians is
+ that it was brought about mainly by the inflammatory writings of a
+ mysterious right-wing underground organisation known only as Teh
+ Crosshatch.&quot;
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005689.html">[Xitami] using cgi with Xitami
+</A></li>
+	<LI> Next message: <A HREF="005692.html">[Xitami] using cgi with Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5690">[ date ]</a>
+              <a href="thread.html#5690">[ thread ]</a>
+              <a href="subject.html#5690">[ subject ]</a>
+              <a href="author.html#5690">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP: NT/Xitami Server error.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002531.html">
+   <LINK REL="Next"  HREF="002529.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP: NT/Xitami Server error.
+   </H1>
+    <B>Paul N Shortis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP: NT/Xitami Server error.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 22 Feb 2002 10:46:06 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002531.html">[Xitami] HELP: NT/Xitami Server error.
+</A></li>
+        <LI> Next message: <A HREF="002529.html">[Xitami] HELP: NT/Xitami Server error.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2528">[ date ]</a>
+              <a href="thread.html#2528">[ thread ]</a>
+              <a href="subject.html#2528">[ subject ]</a>
+              <a href="author.html#2528">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--0__=jC3H9RUWByPOqymLSVkBQScyYBgniPU88i8QTXT0H0Nsj7aqPip9HW0X
+Content-type: text/plain; charset=&quot;us-ascii&quot;
+Content-Disposition: inline
+
+
+
+Hi Russel,
+
+I seem to recall having a similar problem some time ago when I was evaluating
+Apache and Xitami on a server that also had IIS installed. You must ensure that
+both IIS and the IIS Admin service are stopped.
+
+My problem turned out to be that another process was already using one of the
+ports required by my Xitami configuration. Try using &quot;netstat -a -n&quot; and
+'netstat -a' to see if something else is already using port 80 etc.
+
+Paul
+
+
+
+
+Well, I completely uninstalled Xitami, removed it as a service, reboot the
+Server and then reinstalled Xitami as a service again.  Still no luck - getting
+the same &quot;Error 2140&quot;.
+
+Does Xitami use any files from the IIS Admin service? or from the FTP publishing
+or the WWW Publishing (all parts of the IIS) - I currently don't have it
+running.  An odd thing did occur: when Xitami didn't start (the first time all
+these problems began), the IIS webserver did start.  Thats never happened before
+- I do know those services were on manual so I am baffled as to how they
+started.
+
+I have done all the basic things and yet I can't get my Xitami service started.
+
+HELP HELP HELP.  Don't know what to do here.
+
+-R
+
+
+  ----- Original Message -----
+  From: garry
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+  Sent: Thursday, February 21, 2002 3:03 PM
+  Subject: Re: [Xitami] HELP: NT/Xitami Server error.
+
+
+  Hi Russell,
+
+  Check the xitami logs and see if there is an error in there.
+
+  Remember that a lot of changes don't take effect till you reboot ...this means
+on a machine that runs for long periods, that changes made last week don't occur
+till this week when you reboot.
+
+  The vitamin log should tell you if there is an xitami start problem and what
+it is.
+
+  Garry Stanley
+
+  Cable.net.nz
+
+  Beta Data Solutions Ltd.
+
+
+************************************************************
+Opinions contained in this e-mail do not necessarily reflect
+the opinions of the Queensland Department of Main Roads,
+Queensland Transport or National Transport Secretariat, or
+endorsed organisations utilising the same infrastructure.
+If you have received this electronic mail message in error,
+please immediately notify the sender and delete the message
+from your computer.
+************************************************************
+
+
+--0__=jC3H9RUWByPOqymLSVkBQScyYBgniPU88i8QTXT0H0Nsj7aqPip9HW0X
+Content-type: text/html; 
+	name=&quot;att1.htm&quot;
+Content-Disposition: attachment; filename=&quot;att1.htm&quot;
+Content-transfer-encoding: base64
+Content-Description: Internet HTML
+
+PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMCBUcmFuc2l0aW9uYWwv
+L0VOIj4NCjxIVE1MPjxIRUFEPg0KPE1FVEEgY29udGVudD0idGV4dC9odG1sOyBjaGFyc2V0PWlz
+by04ODU5LTEiIGh0dHAtZXF1aXY9Q29udGVudC1UeXBlPg0KPE1FVEEgY29udGVudD0iTVNIVE1M
+IDUuMDAuMzMxNS4yODcwIiBuYW1lPUdFTkVSQVRPUj4NCjxTVFlMRT48L1NUWUxFPg0KPC9IRUFE
+Pg0KPEJPRFkgYmdDb2xvcj0jZmZmZmZmPg0KPERJVj48Rk9OVCBmYWNlPUFyaWFsIHNpemU9Mj5X
+ZWxsLCBJIGNvbXBsZXRlbHkgdW5pbnN0YWxsZWQgWGl0YW1pLCByZW1vdmVkIGl0IA0KYXMgYSBz
+ZXJ2aWNlLCByZWJvb3QgdGhlIFNlcnZlciBhbmQgdGhlbiByZWluc3RhbGxlZCBYaXRhbWkgYXMg
+YSBzZXJ2aWNlIA0KYWdhaW4uJm5ic3A7IFN0aWxsIG5vIGx1Y2sgLSBnZXR0aW5nIHRoZSBzYW1l
+ICJFcnJvciAyMTQwIi48L0ZPTlQ+PC9ESVY+DQo8RElWPiZuYnNwOzwvRElWPg0KPERJVj48Rk9O
+VCBmYWNlPUFyaWFsIHNpemU9Mj5Eb2VzIFhpdGFtaSB1c2UgYW55IGZpbGVzIGZyb20gdGhlIElJ
+UyBBZG1pbiANCnNlcnZpY2U/IG9yIGZyb20gdGhlIEZUUCBwdWJsaXNoaW5nIG9yIHRoZSBXV1cg
+UHVibGlzaGluZyAoYWxsIHBhcnRzIG9mIHRoZSBJSVMpIA0KLSBJIGN1cnJlbnRseSBkb24ndCBo
+YXZlIGl0IHJ1bm5pbmcuJm5ic3A7IEFuIG9kZCB0aGluZyBkaWQgb2NjdXI6IHdoZW4gWGl0YW1p
+IA0KZGlkbid0IHN0YXJ0ICh0aGUgZmlyc3QgdGltZSBhbGwgdGhlc2UgcHJvYmxlbXMgYmVnYW4p
+LCB0aGUgSUlTIHdlYnNlcnZlciBkaWQgDQpzdGFydC4mbmJzcDsgVGhhdHMgbmV2ZXIgaGFwcGVu
+ZWQgYmVmb3JlIC0gSSBkbyBrbm93IHRob3NlIHNlcnZpY2VzIHdlcmUgb24gDQptYW51YWwgc28g
+SSBhbSBiYWZmbGVkIGFzIHRvIGhvdyB0aGV5IHN0YXJ0ZWQuPC9GT05UPjwvRElWPg0KPERJVj4m
+bmJzcDs8L0RJVj4NCjxESVY+PEZPTlQgZmFjZT1BcmlhbCBzaXplPTI+SSBoYXZlIGRvbmUgYWxs
+IHRoZSBiYXNpYyB0aGluZ3MgYW5kIHlldCBJIGNhbid0IA0KZ2V0IG15IFhpdGFtaSBzZXJ2aWNl
+IHN0YXJ0ZWQuJm5ic3A7IDwvRk9OVD48L0RJVj4NCjxESVY+Jm5ic3A7PC9ESVY+DQo8RElWPjxG
+T05UIGZhY2U9QXJpYWwgc2l6ZT0yPkhFTFAgSEVMUCBIRUxQLiZuYnNwOyBEb24ndCBrbm93IHdo
+YXQgdG8gZG8gDQpoZXJlLjwvRk9OVD48L0RJVj4NCjxESVY+Jm5ic3A7PC9ESVY+DQo8RElWPjxG
+T05UIGZhY2U9QXJpYWwgc2l6ZT0yPi1SPC9GT05UPjwvRElWPg0KPERJVj4mbmJzcDs8L0RJVj4N
+CjxESVY+Jm5ic3A7PC9ESVY+DQo8QkxPQ0tRVU9URSANCnN0eWxlPSJCT1JERVItTEVGVDogIzAw
+MDAwMCAycHggc29saWQ7IE1BUkdJTi1MRUZUOiA1cHg7IE1BUkdJTi1SSUdIVDogMHB4OyBQQURE
+SU5HLUxFRlQ6IDVweDsgUEFERElORy1SSUdIVDogMHB4Ij4NCiAgPERJViBzdHlsZT0iRk9OVDog
+MTBwdCBhcmlhbCI+LS0tLS0gT3JpZ2luYWwgTWVzc2FnZSAtLS0tLSA8L0RJVj4NCiAgPERJViAN
+CiAgc3R5bGU9IkJBQ0tHUk9VTkQ6ICNlNGU0ZTQ7IEZPTlQ6IDEwcHQgYXJpYWw7IGZvbnQtY29s
+b3I6IGJsYWNrIj48Qj5Gcm9tOjwvQj4gDQogIDxBIGhyZWY9Im1haWx0bzpnYXJyeUBjYWJsZS5u
+ZXQubnoiIHRpdGxlPWdhcnJ5QGNhYmxlLm5ldC5uej5nYXJyeTwvQT4gPC9ESVY+DQogIDxESVYg
+c3R5bGU9IkZPTlQ6IDEwcHQgYXJpYWwiPjxCPlRvOjwvQj4gPEEgDQogIGhyZWY9Im1haWx0bzp4
+aXRhbWlAbGlzdHMueGl0YW1pLm9yZyIgDQogIHRpdGxlPXhpdGFtaUBsaXN0cy54aXRhbWkub3Jn
+PnhpdGFtaUBsaXN0cy54aXRhbWkub3JnPC9BPiA8L0RJVj4NCiAgPERJViBzdHlsZT0iRk9OVDog
+MTBwdCBhcmlhbCI+PEI+U2VudDo8L0I+IFRodXJzZGF5LCBGZWJydWFyeSAyMSwgMjAwMiAzOjAz
+IA0KICBQTTwvRElWPg0KICA8RElWIHN0eWxlPSJGT05UOiAxMHB0IGFyaWFsIj48Qj5TdWJqZWN0
+OjwvQj4gUmU6IFtYaXRhbWldIEhFTFA6IE5UL1hpdGFtaSANCiAgU2VydmVyIGVycm9yLjwvRElW
+Pg0KICA8RElWPjxCUj48L0RJVj4NCiAgPERJVj48Rk9OVCBmYWNlPUFyaWFsIHNpemU9Mj5IaSBS
+dXNzZWxsLDwvRk9OVD48L0RJVj4NCiAgPERJVj48Rk9OVCBmYWNlPUFyaWFsIHNpemU9Mj48L0ZP
+TlQ+Jm5ic3A7PC9ESVY+DQogIDxESVY+PEZPTlQgZmFjZT1BcmlhbCBzaXplPTI+Q2hlY2sgdGhl
+IHhpdGFtaSBsb2dzIGFuZCBzZWUgaWYgdGhlcmUgaXMgYW4gDQogIGVycm9yIGluIHRoZXJlLjwv
+Rk9OVD48L0RJVj4NCiAgPERJVj48Rk9OVCBmYWNlPUFyaWFsIHNpemU9Mj48L0ZPTlQ+Jm5ic3A7
+PC9ESVY+DQogIDxESVY+PEZPTlQgZmFjZT1BcmlhbCBzaXplPTI+UmVtZW1iZXIgdGhhdCBhIGxv
+dCBvZiBjaGFuZ2VzIGRvbid0IHRha2UgZWZmZWN0IA0KICB0aWxsIHlvdSByZWJvb3QgLi4udGhp
+cyBtZWFucyBvbiBhIG1hY2hpbmUgdGhhdCBydW5zIGZvciBsb25nIHBlcmlvZHMsIHRoYXQgDQog
+IGNoYW5nZXMgbWFkZSBsYXN0IHdlZWsgZG9uJ3Qgb2NjdXIgdGlsbCB0aGlzIHdlZWsgd2hlbiB5
+b3UgDQpyZWJvb3QuPC9GT05UPjwvRElWPg0KICA8RElWPjxGT05UIGZhY2U9QXJpYWwgc2l6ZT0y
+PjwvRk9OVD4mbmJzcDs8L0RJVj4NCiAgPERJVj48Rk9OVCBmYWNlPUFyaWFsIHNpemU9Mj5UaGUg
+dml0YW1pbiBsb2cgc2hvdWxkIHRlbGwgeW91IGlmIHRoZXJlIGlzIGFuIA0KICB4aXRhbWkgc3Rh
+cnQgcHJvYmxlbSBhbmQgd2hhdCBpdCBpcy48L0ZPTlQ+PC9ESVY+DQogIDxESVY+PEZPTlQgZmFj
+ZT1BcmlhbCBzaXplPTI+PC9GT05UPiZuYnNwOzwvRElWPg0KICA8RElWPjxGT05UIGZhY2U9QXJp
+YWwgc2l6ZT0yPkdhcnJ5IFN0YW5sZXk8L0ZPTlQ+PC9ESVY+DQogIDxESVY+Jm5ic3A7PC9ESVY+
+DQogIDxESVY+PEZPTlQgZmFjZT1BcmlhbCBzaXplPTI+Q2FibGUubmV0Lm56PC9GT05UPjwvRElW
+Pg0KICA8RElWPiZuYnNwOzwvRElWPg0KICA8RElWPjxGT05UIGZhY2U9QXJpYWwgc2l6ZT0yPkJl
+dGEgRGF0YSBTb2x1dGlvbnMgDQpMdGQuPC9GT05UPjwvRElWPjwvQkxPQ0tRVU9URT48L0JPRFk+
+PC9IVE1MPg0K
+
+--0__=jC3H9RUWByPOqymLSVkBQScyYBgniPU88i8QTXT0H0Nsj7aqPip9HW0X--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002531.html">[Xitami] HELP: NT/Xitami Server error.
+</A></li>
+	<LI> Next message: <A HREF="002529.html">[Xitami] HELP: NT/Xitami Server error.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2528">[ date ]</a>
+              <a href="thread.html#2528">[ thread ]</a>
+              <a href="subject.html#2528">[ subject ]</a>
+              <a href="author.html#2528">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

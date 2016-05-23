@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Add-ons help (Isapid.exe}
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000014.html">
+   <LINK REL="Next"  HREF="000016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Add-ons help (Isapid.exe}
+   </H1>
+    <B>Paul Richards
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Add-ons help (Isapid.exe}">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Sun, 1 Jul 2001 13:36:40 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000014.html">[Xitami-Dev] Add-ons help (Isapid.exe}
+</A></li>
+        <LI> Next message: <A HREF="000016.html">[Xitami-Dev] Add-ons help (Isapid.exe}
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hmm....
+When did the initial comment get posted to the list ?
+
+anyway.....
+
+firstly: the isapi.zip file available from xitami.com is version 11b. So if
+you have a problem you should get the latest file.
+
+when you run isapid.exe you should pass it command line options.
+For example :
+isapid -app isapi_exe
+
+now when you go to the page
+
+<A HREF="http://<xitami">http://&lt;xitami</A>&gt;/isapi_exe
+
+You get the follow page :
+&lt;html&gt;&lt;header&gt;&lt;title&gt;Isapi extension error&lt;/title&gt;&lt;/header&gt;
+&lt;Body&gt;&lt;H2&gt;Xitami ISAPI extension error&lt;/H2&gt;&lt;HR&gt;&lt;I&gt;Error on load  (126)
+&lt;/I&gt;&lt;/body&gt;&lt;/html&gt;
+
+The &quot;error on load&quot; is because the dll file specified i.e. NULL does not
+exist.
+
+To use the testisapi example, you need to connect to
+<A HREF="http://<xitami">http://&lt;xitami</A>&gt;/isapi_exe/testisapi.dll
+and this then works correctly.
+
+
+Now....
+
+I'm still trying to work out how directory resolution works in xitami
+For example :
+<A HREF="http://127.0.0.1:8080/isapi_exe///../testisapi.dll">http://127.0.0.1:8080/isapi_exe///../testisapi.dll</A> displays that url, and
+the testisapi.dll example.
+
+However the url <A HREF="http://127.0.0.1:8080/isapi_exe//../../testisapi.dll">http://127.0.0.1:8080/isapi_exe//../../testisapi.dll</A>
+redirects the user to <A HREF="http://127.0.0.1:8080/testisapi.dll,">http://127.0.0.1:8080/testisapi.dll,</A> which then gives
+a 404 response.
+
+Ewen - care to explain how that one works?  ;)
+
+Paul Richards
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>]On Behalf Of bro_eht
+Sent: 01 July 2001 12:27
+To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+Subject: Re: [Xitami-Dev] Add-ons help (Isapid.exe}
+
+
+In message &lt;001c01c0c5f3$bd4c6880$<A HREF="mailto:dba832d4@blop">dba832d4@blop</A>&gt;, &quot;Richard James&quot; writes:
+&gt;<i>ISAPI Support (beta 1)
+</I>&gt;<i>
+</I>&gt;<i>I downloaded the program from the link
+</I>&gt;<i>(<A HREF="http://www.imatix.com/pub/addons/isapi10a.zip">http://www.imatix.com/pub/addons/isapi10a.zip</A>)
+</I>&gt;<i>and then installed PWS (Microsoft Personal Webserver I`m assuming).
+</I>&gt;<i>
+</I>&gt;<i>I execute the isapid.exe (from the isapi10a.zip) and try to view the
+</I>&gt;<i>testisapi page, All I get is `Page cannot be displayed` message from
+</I>&gt;<i>IExplorer.
+</I>
+Unfortunately Internet Explorer's &quot;friendly&quot; error messages obscure what
+really happened.  Could you perhaps try this again with either Xitami's
+debugging mode turned on ([Server] debug=1), and then check the debug
+logs to see what Xitami found, or with Internet Explorer's &quot;friendly&quot;
+error messages turned off (so that it shows the error message the server
+sent).
+
+Also remember you need to run Xitami, then run the isapid program to
+&quot;hook in&quot; to Xitami, then try accessing things.
+
+Ewen
+
+--
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000014.html">[Xitami-Dev] Add-ons help (Isapid.exe}
+</A></li>
+	<LI> Next message: <A HREF="000016.html">[Xitami-Dev] Add-ons help (Isapid.exe}
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

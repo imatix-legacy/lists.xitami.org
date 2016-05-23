@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] virtual hosts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003692.html">
+   <LINK REL="Next"  HREF="003695.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] virtual hosts
+   </H1>
+    <B>M. Jason Smiley
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] virtual hosts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 17 Jul 2002 10:39:19 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003692.html">[Xitami] virtual hosts
+</A></li>
+        <LI> Next message: <A HREF="003695.html">[Xitami] ISAPI Support (beta 1.1)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3693">[ date ]</a>
+              <a href="thread.html#3693">[ thread ]</a>
+              <a href="subject.html#3693">[ subject ]</a>
+              <a href="author.html#3693">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>you have it the syntax backwords. here's a cut from my default.cfg...
+
+[Virtual-hosts]
+    extranet.rcolmstead.com=extranet.cfg
+    intranet.rcolmstead.com=intranet.cfg
+
+
+which obviouly each points each vhost to their own config file..... this cut
+is from the intranet config....
+
+[Accesslog]
+    Filename=intranet.log
+
+[Security]
+    Admin=0
+    Filename=intranet.aut
+    webmask=192.168.40.*
+
+[Server]
+    Webpages=d:\xitami\webpages
+
+
+
+
+----- Original Message -----
+From: admin
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Sent: Wednesday, July 17, 2002 8:42 AM
+Subject: [Xitami] virtual hosts
+
+
+I need to use some virtual hosts with XITAMI, and i believe that I have done
+everything right.
+
+My question is how the syntax of the Vhost .cfg file has to look like?
+
+I mean it must be something like:
+
+&quot;c:\webpages\site2 = www.site2.com &quot;
+
+help please!
+
+Carlos
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003692.html">[Xitami] virtual hosts
+</A></li>
+	<LI> Next message: <A HREF="003695.html">[Xitami] ISAPI Support (beta 1.1)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3693">[ date ]</a>
+              <a href="thread.html#3693">[ thread ]</a>
+              <a href="subject.html#3693">[ subject ]</a>
+              <a href="author.html#3693">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

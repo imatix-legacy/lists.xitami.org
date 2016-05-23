@@ -1,0 +1,203 @@
+From xitami-dev@lists.xitami.org  Thu Feb 21 19:52:33 2002
+From: xitami-dev@lists.xitami.org (Gary Hartmann)
+Date: Thu, 21 Feb 2002 14:52:33 -0500
+Subject: [Xitami-Dev] 44: In FTP, 'ls' fails from a remote system (it works locally)
+Message-ID: <AAEPIGJGFNAFKCOFPEJPCEIGCCAA.ghartmann@tcs-sec.com>
+
+In the FAQ:
+44: In FTP, 'ls' fails from a remote system (it works locally)
+
+This is probably due to the remote machine being hidden by a router or
+firewall which prevents return connections from the FTP server to the
+client. You should use passive mode for such connections. The next release
+of Xitami handles this situation better, but the basic problem is
+unsolvable; if the client is behind a firewall or router that does not allow
+reverse connections (i.e. server to client) then the default FTP protocol
+does not work correctly.
+__________________________
+
+What release has addressed this issue? Does the Pro version address's the
+issue?
+
+Gary E. Hartmann
+Trusted Computer Solutions
+Work: 703-318-7134 x132
+Cell: 703-216-7029
+E-Mail: ghartmann@tcs-sec.com
+
+
+From xitami-dev@lists.xitami.org  Wed Feb 27 04:04:37 2002
+From: xitami-dev@lists.xitami.org (Lok Yek Soon)
+Date: Wed, 27 Feb 2002 12:04:37 +0800
+Subject: [Xitami-Dev] running Xitami from a CD-ROM?
+Message-ID: <5.1.0.14.0.20020227115837.02d96d58@pop.mail.yahoo.com>
+
+--=======4C113070=======
+Content-Type: text/plain; x-avg-checked=avg-ok-150A3F27; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Is it possible to run Xitami from a CD-ROM without installation?
+
+I'm trying to create a full functionality site with some form of CGI (or 
+PHP or Java etc) programs
+on the CD-ROM. Eg. The web site on the CD-ROM can have a database to store 
+the content and
+a "search engine".
+
+Thanks
+YekSoon
+
+--=======4C113070=======
+Content-Type: text/plain; charset=us-ascii; x-avg=cert; x-avg-checked=avg-ok-150A3F27
+Content-Disposition: inline
+
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.325 / Virus Database: 182 - Release Date: 2/19/2002
+
+--=======4C113070=======--
+
+
+_________________________________________________________
+Do You Yahoo!?
+Get your free @yahoo.com address at http://mail.yahoo.com
+
+
+From xitami-dev@lists.xitami.org  Wed Feb 27 04:44:54 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Wed, 27 Feb 2002 17:44:54 +1300
+Subject: [Xitami-Dev] running Xitami from a CD-ROM?
+In-Reply-To: Message from Lok Yek Soon <slok00@yahoo.com>
+ of "Wed, 27 Feb 2002 12:04:37 +0800." <5.1.0.14.0.20020227115837.02d96d58@pop.mail.yahoo.com>
+Message-ID: <200202270444.RAA13442@pagoda.in.naos.co.nz>
+
+In message <5.1.0.14.0.20020227115837.02d96d58@pop.mail.yahoo.com>, Lok Yek Soon writes:
+>Is it possible to run Xitami from a CD-ROM without installation?
+>
+>I'm trying to create a full functionality site with some form of CGI (or 
+>PHP or Java etc) programs on the CD-ROM. Eg. The web site on the CD-ROM 
+>can have a database to store the content and a "search engine".
+
+In theory it should be possible to run Xitami from a CD-ROM directly,
+although you'd have to configure it to save its log files, etc,
+somewhere else.  Basically Xitami looks for stuff in its own directory
+(typically the current directory when it starts up), and so you should
+be able to configure most things relative to wherever it happens to be.
+
+The tricky thing would be ensuring that Xitami was started from the
+right direction (irrespective of where the CD is mounted, drive letters,
+etc).
+
+I don't know of anyone whose done it, but it doesn't sound _too_
+difficult to do to me.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Wed Feb 27 11:18:42 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Wed, 27 Feb 2002 06:18:42 -0500
+Subject: [Xitami-Dev] running Xitami from a CD-ROM?
+In-Reply-To: <200202270444.RAA13442@pagoda.in.naos.co.nz>
+References: <200202270444.RAA13442@pagoda.in.naos.co.nz>
+Message-ID: <200202270627906.SM00549@there>
+
+> >I'm trying to create a full functionality site with some form of CGI (or
+> >PHP or Java etc) programs on the CD-ROM. Eg. The web site on the CD-ROM
+> >can have a database to store the content and a "search engine".
+
+> I don't know of anyone whose done it, but it doesn't sound _too_
+> difficult to do to me.
+
+I have seen programs that did exactly that in the past.  They where on the 
+now defunct winfiles site.  Might be able to find them on ZDNET now.
+They compiled your site in to a single exec file with seach.
+
+From xitami-dev@lists.xitami.org  Wed Feb 27 11:27:21 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Wed, 27 Feb 2002 06:27:21 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+Message-ID: <200202270627312.SM00549@there>
+
+> Finally, yes, making this all easier to build is on our list of things
+> to do -- pretty high on our list these days :-)
+
+Has it made it to the top of this list yet?
+
+I writing a article for Circuit Cellar Online about State Machine and I 
+wanted to mention OpenKerenel, Xitami, Liberao, et. al. but saying "it is 
+impossible to build from the current cvs" doesn't seem like a good thing, so 
+will probably just not mention them at all.
+
+For any one that wonders what that means:
+
+The tools where build incrementally as the code progressed, regenerating new 
+tools.  cvs has reached the point where it is impossible to build the cvs 
+tree because you need the latests tools, that you can only get and build from 
+cvs.  :-(
+
+There needs to be some kind of boot strapping procedure when you are starting 
+off on a clean system (no tools other than the basics like GCC et.al.).
+
+
+From xitami-dev@lists.xitami.org  Wed Feb 27 11:41:25 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 28 Feb 2002 00:41:25 +1300
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: Message from Bob Paddock <bpaddock@csonline.net>
+ of "Wed, 27 Feb 2002 06:27:21 CDT." <200202270627312.SM00549@there>
+Message-ID: <200202271141.AAA15451@pagoda.in.naos.co.nz>
+
+In message <200202270627312.SM00549@there>, Bob Paddock writes:
+>> Finally, yes, making this all easier to build is on our list of things
+>> to do -- pretty high on our list these days :-)
+>
+>Has it made it to the top of this list yet?
+
+Not really, no.  People keep coming along and wanting to pay us money to
+do things.  How can we refuse?  :-)
+
+>I writing a article for Circuit Cellar Online about State Machine and I 
+>wanted to mention OpenKerenel, Xitami, Liberao, et. al. but saying "it is 
+>impossible to build from the current cvs" doesn't seem like a good thing, so 
+>will probably just not mention them at all.
+
+Libero in particular is basically stable; the version on the iMatix
+website is essentially the same as in CVS, and builds fine with just a
+compiler.  Please mention it in the stuff about state machines; it's a
+very useful tool.  (Indeed libero was what first attracted me to
+iMatix.)
+
+SFL can be built from CVS.  The rest of Open Kernel _can_ be built from
+the combination of CVS and what is on the website (someone challenged me
+to do it, and I proved it could still be done: the major trick is that
+you have to build two versions of SFL (one from the website and one from
+CVS), and two versions of GSL (again the one on the website and the one
+in CVS) to get through the process.  Once you've done it once, you've
+got all the right tools, and it's fine).
+
+>There needs to be some kind of boot strapping procedure when you are starting 
+>off on a clean system (no tools other than the basics like GCC et.al.).
+
+Indeed.  Alas so many things depend on GSL now (including SMT), and the
+current version of GSL depends on SMT.  So building from scratch
+directly from CVS is currently a little tricky.
+
+When ready-to-compile packages are generated for the website obviously
+they'll include all the generated files, which neatly side steps this
+problem.
+
+However the circular build dependencies are causing problems internally
+too, so they are definitely being worked on as time permits.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+

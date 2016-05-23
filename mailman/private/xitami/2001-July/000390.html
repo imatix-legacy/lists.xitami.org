@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] POST troubles (longish)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000389.html">
+   <LINK REL="Next"  HREF="000391.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] POST troubles (longish)
+   </H1>
+    <B>Boyan Brezinsky
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] POST troubles (longish)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 13 Jul 2001 14:05:04 +0300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000389.html">[Xitami] Xitami for BeOS
+</A></li>
+        <LI> Next message: <A HREF="000391.html">[Xitami] lots of .lw
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here is the story. Yesterday downloaded dcl - a project tracking system 
+written in PHP. At startup you have to login, supplying username and 
+password.
+But as long as I click the Login button on the startup screen, I get a 404 
+error.
+The Xitami access log looks like this:
+127.0.0.1 - - [12/Jul/2001:17:06:14 +0200] &quot;POST /login.php3 HTTP/1.1&quot; 404 
+97 &quot;<A HREF="http://localhost/index.php3"">http://localhost/index.php3&quot;</A> &quot;&quot;
+
+As you can see, the index.php3 is the main file with the login screen, 
+which posts the username and the password to login.php3. login.php3 is 
+there, I checked that, even checked the case.
+
+The most curious thing is that a similar system, Keystone, written in PHP 
+as well, works just fine:
+127.0.0.1 - - [12/Jul/2001:17:39:59 +0200] &quot;POST /keystone/nbrowse.php3 
+HTTP/1.1&quot; 200 13095 &quot;<A HREF="http://localhost/keystone/index.php3"">http://localhost/keystone/index.php3&quot;</A> &quot;&quot;
+The only difference between Keystone and dcl that I can see is that 
+Keystone, unlike dcl, doesn't use JavaScript. Otherwise both use &lt;form 
+method=&quot;post&quot; action=&quot;[filename].php3&quot;&gt; &lt;/form&gt;
+
+By the way, I just changed the filename from login.php3 to the_login.php3 - 
+changed it both in the template for the page and on disk, of course. The 
+result is:
+127.0.0.1 - - [13/Jul/2001:13:41:28 +0200] &quot;POST /the_login.php3 HTTP/1.1&quot; 
+404 97 &quot;<A HREF="http://localhost/index.php3"">http://localhost/index.php3&quot;</A> &quot;&quot;
+
+System: Windows 2000 Pro (no SP), Xitami 2.4d9 service, PHP 4.0.4, IE 5.0
+
+Some more logs comparison.
+&gt;<i>From request.log:
+</I>
+POST /the_login.php3 HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, 
+application/vnd.ms-excel, application/msword, image/tiff, */*
+Referer: <A HREF="http://localhost/index.php3">http://localhost/index.php3</A>
+Accept-Language: bg
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)
+Host: localhost
+Content-Length: 44
+Connection: Keep-Alive
+Cookie: DCLINFO
+
+POST /keystone/nbrowse.php3 HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, 
+application/vnd.ms-excel, application/msword, image/tiff, */*
+Referer: <A HREF="http://localhost/keystone/index.php3">http://localhost/keystone/index.php3</A>
+Accept-Language: bg
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)
+Host: localhost
+Content-Length: 27
+Connection: Keep-Alive
+Cookie: DCLINFO
+
+&gt;<i>From debug.log:
+</I>2001/07/13 13:51:01: Resolving URI: /the_login.php3
+2001/07/13 13:51:01: - URL is in webpages directory webpages
+2001/07/13 13:51:01: - URI=/the_login.php3, rootdir=webpages
+2001/07/13 13:51:01: - translated file name: webpages/the_login.php3
+2001/07/13 13:51:01: - request refers to a normal readable file
+2001/07/13 13:51:02: Transfer file=C:\WINNT\TEMP\pipe0002.flt size=97 
+offset=191
+
+2001/07/13 13:52:50: Resolving URI: /keystone/nbrowse.php3
+2001/07/13 13:52:50: - URL is in webpages directory webpages
+2001/07/13 13:52:50: - URI=/keystone/nbrowse.php3, rootdir=webpages
+2001/07/13 13:52:50: - translated file name: webpages/keystone/nbrowse.php3
+2001/07/13 13:52:50: - request refers to a normal readable file
+2001/07/13 13:52:53: Transfer file=C:\WINNT\TEMP\pipe0005.flt size=13095 
+offset=159
+
+I really don't see any differences. So how come one POST works, the other 
+one can't find the file?
+
+
+Any help is greatly appreciated
+Thank you,
+Boyan
+
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000389.html">[Xitami] Xitami for BeOS
+</A></li>
+	<LI> Next message: <A HREF="000391.html">[Xitami] lots of .lw
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

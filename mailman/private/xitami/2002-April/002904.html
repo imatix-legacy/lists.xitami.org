@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Possible race condition in Xitami's temporary files module
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002907.html">
+   <LINK REL="Next"  HREF="002905.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Possible race condition in Xitami's temporary files module
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Possible race condition in Xitami's temporary files module">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 07 Apr 2002 20:08:20 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002907.html">[Xitami] LRWP -- DOS vs Windows Version
+</A></li>
+        <LI> Next message: <A HREF="002905.html">[Xitami] Password timeout?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2904">[ date ]</a>
+              <a href="thread.html#2904">[ thread ]</a>
+              <a href="subject.html#2904">[ subject ]</a>
+              <a href="author.html#2904">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:NEBBIJGPHKNLMOCJIHFJIEIDDAAA.dmitry@transnexus.com">NEBBIJGPHKNLMOCJIHFJIEIDDAAA.dmitry@transnexus.com</A>&gt;, &quot;Dmitry Isakbayev&quot; writes:
+&gt;<i>If there might be a bug in the way Xitami handles temporary files, how can
+</I>&gt;<i>we avoid using them?
+</I>
+If you can recompile Xitami for your platform, and are willing to spare
+some memory, then you can change the constant that triggers when a LRWP
+response will be spooled to disk.  The relevant compile time constant is
+BIG_RESPONSE_LEN in xilrwp.c; the default setting is 16384, ie 16KB.  If
+you make this, say, 1048576, then up to 1MB will be held in memory.  (If
+you're server is busy and sending a lot of large responses, then
+obviously you'll need to have a lot of memory available.)
+
+&gt;<i>How can I learn more about the way Xitami uses temporary files and generates
+</I>&gt;<i>temporary file names?
+</I>
+Unfortunately the only real documentation for this internal stuff is the
+source code.  Most of it is smthttpl.c IIRC, although the main control
+logic is in smthttp.c, and the thread of execution pops in and out
+between the two of them.
+
+For LRWPs the main thing to remember is that once the response is
+received from the LRWP program it's basically treated like a CGI
+response.  (The same is true for filter responses BTW.)
+
+The temporary files are created in smthttpl.c in the CGI case, and
+xilrwp.c in the LRWP case.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002907.html">[Xitami] LRWP -- DOS vs Windows Version
+</A></li>
+	<LI> Next message: <A HREF="002905.html">[Xitami] Password timeout?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2904">[ date ]</a>
+              <a href="thread.html#2904">[ thread ]</a>
+              <a href="subject.html#2904">[ subject ]</a>
+              <a href="author.html#2904">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

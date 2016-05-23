@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] DG perl module
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005605.html">
+   <LINK REL="Next"  HREF="005607.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] DG perl module
+   </H1>
+    <B>Daniel Nowlin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] DG perl module">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 23 Dec 2003 10:21:11 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005605.html">[Xitami] DG perl module
+</A></li>
+        <LI> Next message: <A HREF="005607.html">[Xitami] DG perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5606">[ date ]</a>
+              <a href="thread.html#5606">[ thread ]</a>
+              <a href="subject.html#5606">[ subject ]</a>
+              <a href="author.html#5606">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well I uninstalled the GD package that I installed with ppm3 and installed
+GD with ppm2.  I get the same result.  The GD package fails at line 139.
+This is in the newfromjpeg subroutine on line 3.  This is the code that I am
+using to call GD:
+
+   $width = '96';
+  $pic_tmp = newFromJpeg GD::Image(&quot;$pic_file[$count]&quot;);
+  ($pic_imgW, $pic_imgH) = $pic_tmp-&gt;getBounds();
+  $ratio = ($pic_imgW / $width);
+  $height  = int($pic_imgH/$ratio);
+  $FinalImg = new GD::Image($width,$height);
+
+$FinalImg-&gt;copyResized($pic_tmp,0,0,0,0,$width,$height,$pic_imgW,$pic_imgH);
+
+  binmode STDOUT;
+
+  print &quot;Content-type: image/jpeg; name=\&quot;${file}_thumb\.jpg\&quot;\n&quot;;
+  print &quot;Content-Disposition: inline;
+filename=\&quot;thumb_$pic_file[$count]\.jpg\&quot;\n\n&quot;;
+  print $FinalImg-&gt;jpeg;
+
+What I am attempting is to have GD create a thumbnail image of a jpg
+picture.  Any ideas will be welcomed.
+Dan
+
+----- Original Message ----- 
+From: &quot;Daniel Nowlin&quot; &lt;<A HREF="mailto:nowlind@missouri.edu">nowlind@missouri.edu</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, December 23, 2003 10:04 AM
+Subject: Re: [Xitami] DG perl module
+
+
+&gt;<i> thanks for the info.  I will try to do an un-install and use ppm2.
+</I>&gt;<i> ----- Original Message ----- 
+</I>&gt;<i> From: &quot;Francis Turner&quot; &lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Tuesday, December 23, 2003 2:32 AM
+</I>&gt;<i> Subject: Re: [Xitami] DG perl module
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Daniel Nowlin wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;Has anybody tried to install the perl module called GD?  If so how did
+</I>&gt;<i> you get it installed.  I am running ActiveState perl version 5.8 and I
+</I>have
+&gt;<i> tried the ppm but it does not install.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; Using Activestate perl 5.6.something I have had no problems at all with
+</I>&gt;<i> &gt; installing GD and (getting it to run with Xitami)...  I'm pretty sure I
+</I>&gt;<i> &gt; used the version 2 ppm rather than the ver 3 one that newer activestate
+</I>&gt;<i> &gt; builds tend to make the default.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Francis
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -- 
+</I>&gt;<i> &gt; Your theory of a donut-shaped universe is intriguing, Homer.
+</I>&gt;<i> &gt; I may have to steal it.        -- Prof S. Hawking on the &quot;Simpsons&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005605.html">[Xitami] DG perl module
+</A></li>
+	<LI> Next message: <A HREF="005607.html">[Xitami] DG perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5606">[ date ]</a>
+              <a href="thread.html#5606">[ thread ]</a>
+              <a href="subject.html#5606">[ subject ]</a>
+              <a href="author.html#5606">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

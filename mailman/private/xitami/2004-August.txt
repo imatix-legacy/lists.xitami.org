@@ -1,0 +1,1296 @@
+From xitami@lists.xitami.org  Mon Aug  2 20:37:55 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Mon, 02 Aug 2004 19:37:55 +0000
+Subject: [Xitami] Xitami DOS reported, fixed
+Message-ID: <080220041937.10666.410E9812000D2ED4000029AA2160280741CC090201040906@att.net>
+
+Hello Pieter,
+
+Sorry to bother you on this subject.
+
+At this time I have not updated to the corrected Xitami version for the reported Denial of Service. I am using Xitami V2.5b4 and using the test code reported with the use of nc.exe and the DOS does not occur using Xitami V2.5b4.  (??)
+
+At the time Xitami V2.5b4 was down loaded I did not down load the source code for 
+V2.5b4, so I cannot look at the routine http_parse_header (*,*) to see if the problem exists. 
+
+I am curious if this version of Xitami is ok in the routine http_parse_header (*,*) or is it some Xitami DEFAULT management setting I set to make it work????
+
+
+The only change to the Xitami DEFAULT management settings was to add a few web page descriptions in Virtual Hosts and to require passwords for all users of FTP. All entries for web pages in Virtual Hosts as well as DEFAULTS are set as:
+
+        Password file: BLANK   - blank to disable password protection  
+        Case-sensitive passwords?     YES
+        Allow directory lists?         NO
+        Allow web-based admin?        YES
+        IP address mask:*             - eg. 111.222.333.*  
+        Superuser password:           - gives FULL ACCESS to ALL RESOURCES  
+
+
+Here is what happens when the TEST.BAT is used with the string DOS (with no :):
+
+    If the IP address of the Xitami server is used 
+    to execute TEST.BAT errors are reported, and if 
+    a web page is used the text of that page is 
+    returned, as expected. And, the Xitami V2.5b4 
+    server continues to run as expected by providing web 
+    pages to a client browser and the cpu utilization 
+    at the Xitami Server remains at or <1% during 
+    idle times. I am using a test server so it can 
+    be controlled with respect to other browser accesses. 
+
+The following are the outputs from the Xitami Server when TEST.BAT is executed with the ip address of the Xitami Server:
+
+   C:\JLong\NetCat>test 10.10.10.2 80
+   HTTP/1.1 403 Forbidden
+   Server: Xitami
+   Date: Thu, 29 Jul 2004 17:09:06 GMT
+   Content-length: 111
+   Content-type: text/html
+   
+   <HTML><TITLE>Error</TITLE><BODY><H1>
+   
+   You are not authorised to access this resource
+
+   </H1></BODY></HTML>
+   
+   C:\JLong\NetCat>
+
+
+Thanks for your help, time and advise!!! :) :)
+
+Jerry
+
+>.
+>.
+>.
+> 
+> The denial of service is this: a malformed header (without the ':') causes the 
+> server to enter an endless loop. 
+> 
+> This DOS affects all versions of Xitami. For those building from source, the 
+> affected file is smthttpl.c, and the patch is in the function 
+> http_parse_header: 
+> 
+> char * 
+> http_parse_header (HTTP_CONTEXT *p_http, char *header) 
+> { 
+> ... 
+> while (header && *header && *header != '\r') { 
+> ... 
+> } 
+> ++ else 
+> ++ break; 
+> } 
+> return (header); 
+> } 
+> Pieter Hintjens 
+> iMatix Corporation 
+> 
+> 
+
+
+From xitami@lists.xitami.org  Thu Aug 12 16:45:50 2004
+From: xitami@lists.xitami.org (Lillian Fleming)
+Date: Thu, 12 Aug 2004 13:45:50 -0200
+Subject: [Xitami] new American 2004,medicine,physicians directoty 7,000 hospitals,25,000 nursing homes and 400,000 doctors
+Message-ID: <CEF14D72769E4.CBDAB@64.233.89.34>
+
+----614E0AA6765E772D
+Content-Type: text/html;
+	charset="iso-371F-C"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Untitled Document</title>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859=
+-1">
+</head>
+
+<body>
+<strong><font size=3D"4">The United States Health Care DATABASE </font></s=
+trong> 
+<p>The United States Healthcare Database is a comprehensive <br>
+  NEW product that is offered exclusively on a limited-time <br>
+  basis.This complete database includes all hospitals, <br>
+  HMO's,group medical practices,nursing homes,and <br>
+  physicians in the country.</p>
+<p>In a rapidly-changing industry, current healthcare <br>
+  information is an invaluable resource to businesses and <br>
+  organizations. The United States Healthcare Database <br>
+  includes comprehensive information on more than <strong><font size=3D"4"=
+>7,000 
+  <br>
+  hospitals,25,000 nursing homes and 400,000 doctors not <br>
+  to mention HMOs and Group Medical Practices.</font></strong><br>
+  <br>
+  It is the most extensive and reliable mailing list and <br>
+  database of key decision makers in the health care market. <br>
+  Imagine the increase in marketing and sales effectiveness <br>
+  made possible by targeting the key contacts by name. <br>
+  If reaching the right decision maker is critical to the <br>
+  success of your direct marketing campaigns, then this <br>
+  is the product.</p>
+<p>Each record is indexed by such features as name, address, <br>
+  phone and fax. The database is available in Excel <br>
+  format on CD Rom. It is designed for mailing lists and <br>
+  merges. The data can be selected by state or other <br>
+  criteria such as type of practice. It can be used on an <br>
+  unlimited basis.</p>
+<p>During this introductory offer, the cost of this <br>
+  completely new database (which is available exclusively <br>
+  on CD-Rom) is $575.00 (reg. $1,495). An annual <br>
+  subscription (includes six editions) is available now <br>
+  for $825 (reg. $2,995)</p>
+<p>To order The United States Health Care Database(c), <br>
+  please complete the information below and <br>
+  fax it to this number <strong>1-<font size=3D"4">905-751-0199 (Tel: 905-=
+751-0919).</font></strong></p>
+<p><strong>[ ] I would like to order United States Health Care <br>
+  Database ($575). Please invoice me.</strong></p>
+<p><strong>[ ] I would like an annual subscription <br>
+  (six editions at $825). Please invoice me.</strong></p>
+<p>NAME:</p>
+<p>TITLE:</p>
+<p>ORGANIZATION:</p>
+<p>ADDRESS:</p>
+<p>CITY:</p>
+<p>POSTAL:</p>
+<p>TEL:</p>
+<p>FAX:</p>
+<p>E-MAIL:</p>
+<p>To order The United States Health Care Database(c), <br>
+  please complete the information and <br>
+  fax it to <strong><font size=3D"4"> 1-905-751-0199 (Tel: 1-905-751-0919)=
+</font></strong></p>
+<p>InfoSource Group of Companies is a leading information <br>
+  publishing firm with offices throughout North America <br>
+  and Europe.</p>
+<p>To be removed from the database please follow this link, <br>
+  http://notinuse.biz/takeoff/takeoff.html</p>
+<p><br>
+</p>
+</body>
+</html>
+
+
+----614E0AA6765E772D--
+
+
+From xitami@lists.xitami.org  Fri Aug 13 06:17:31 2004
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Fri, 13 Aug 2004 17:17:31 +1200
+Subject: [Xitami] List administrivia (was new American 2004....)
+In-Reply-To: Message from "Lillian Fleming" <SWMKWSSHXCWX@openlink.com.br>
+ of "Thu, 12 Aug 2004 13:45:50 -0200." <CEF14D72769E4.CBDAB@64.233.89.34>
+Message-ID: <20040813051731.BF0513C2E4B6@basilica.la.naos.co.nz>
+
+In message <CEF14D72769E4.CBDAB@64.233.89.34>, "Lillian Fleming" writes:
+>The United States Health Care DATABASE
+>The United States Healthcare Database is a comprehensive
+>[And more spam]
+
+My apologies.  It appears that I selected the wrong option when telling
+the mailing list software to throw away this message and it ended
+up going through to the mailing list.  (At least half a dozen spam
+messages every day are making it past our spam filters and sit awaiting
+administrative attention like this.)
+
+Sorry,
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+
+From xitami@lists.xitami.org  Fri Aug 13 07:00:51 2004
+From: xitami@lists.xitami.org (Koala)
+Date: Fri, 13 Aug 2004 08:00:51 +0200
+Subject: [Xitami] new American 2004,medicine,physicians directoty 7,000 hospitals,25,000 nursing homes and 400,000 doctors
+References: <CEF14D72769E4.CBDAB@64.233.89.34>
+Message-ID: <001a01c480fa$e3d01220$931bb650@bc>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0017_01C4810B.A6F73A20
+Content-Type: text/plain;charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Untitled DocumentSPAM SUCKS
+ 
+ 
+ --
+ Email.it, the professional e-mail, gratis per te: http://www.email.it/f
+ 
+ Sponsor:
+ Digitalpix stampa le tue migliori foto digitali 
+* su vera carta fotografica professionale.
+ Clicca qui: http://adv.email.it/cgi-bin/foclick.cgi?mid=1532&d=13-8
+------=_NextPart_000_0017_01C4810B.A6F73A20
+Content-Type: text/html;charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Untitled Document</TITLE>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1458" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>SPAM SUCKS</FONT></DIV><BR>
+<br>
+<br><p><font face=3D"Verdana,Arial" size=3D2>----<br>
+Email.it, the professional e-mail, gratis per te:<a href=3Dhttp://www.email.it/cgi-bin/start?sid=3D3 target=3D_blank >clicca=
+ qui</a><br>
+<br>
+Sponsor:<br>
+Acquista ora Email.it Phone Card e comincia a risparmiare sulle tue telefon=
+ate! Clicca e scopri l'offerta<br>
+<a href=3Dhttp://adv.email.it/cgi-bin/foclick.cgi?mid=3D2684&d=3D13-8  targ=
+et=3D_blank >Clicca qui</a></font><br>
+
+<BR></BODY></HTML>
+
+------=_NextPart_000_0017_01C4810B.A6F73A20--
+
+
+From xitami@lists.xitami.org  Wed Aug 18 04:08:13 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Tue, 17 Aug 2004 23:08:13 EDT
+Subject: [Xitami] Getting the FTP side up and running
+Message-ID: <d7.120aa095.2e54221d@aol.com>
+
+-------------------------------1092798493
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+The HTTP side of my site is running just fine, but I am having trouble 
+getting my system configured for FTP. The goal is a plain vanilla anonymous FTP of a 
+pot of files stored in a single directory. 
+
+As just one example, I can put on the files in an FTPROOT directory in the 
+XITAMI folder, but I cannot seem to set the configuration file to look in that 
+directory. I keep getting error messages that say the file cannot be found.
+
+I am sure the answer is quite simple, but would appreciate some insight into 
+what I'm doing wrong.
+
+Ralph
+
+-------------------------------1092798493
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><HEAD>
+<META charset=3DUS-ASCII http-equiv=3DContent-Type content=3D"text/html; cha=
+rset=3DUS-ASCII">
+<META content=3D"MSHTML 6.00.2800.1458" name=3DGENERATOR></HEAD>
+<BODY style=3D"FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #fffff=
+f">
+<DIV>The HTTP side of my site is running just fine, but I am having trouble=20=
+getting my system configured for FTP. The goal is a plain vanilla anonymous=20=
+FTP of a pot of files stored in a single directory. </DIV>
+<DIV>&nbsp;</DIV>
+<DIV>As just one example, I can put on the files in an FTPROOT directory in=20=
+the XITAMI folder, but I cannot seem to set the configuration file to look i=
+n that directory. I keep getting error messages that say the file cannot be=20=
+found.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>I am sure the answer is quite simple, but would appreciate some insight=
+ into what I'm doing wrong.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Ralph</DIV></BODY></HTML>
+
+-------------------------------1092798493--
+
+
+From xitami@lists.xitami.org  Wed Aug 18 19:11:20 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Wed, 18 Aug 2004 12:11:20 -0600
+Subject: [Xitami] Getting the FTP side up and running
+In-Reply-To: <d7.120aa095.2e54221d@aol.com>
+Message-ID: <41234768.1039.11BBBB1@localhost>
+
+Hello Ralph,
+
+can provide more details ; version of xitami ? 
+
+
+Am 17 Aug 2004 um 23:08 hat Gyrobee@aol.com geschrieben:
+
+> The HTTP side of my site is running just fine, but I am having trouble 
+> getting my system configured for FTP. The goal is a plain vanilla anonymous FTP of a 
+> pot of files stored in a single directory. 
+> 
+> As just one example, I can put on the files in an FTPROOT directory in the 
+> XITAMI folder, but I cannot seem to set the configuration file to look in that 
+> directory. I keep getting error messages that say the file cannot be found.
+> 
+> I am sure the answer is quite simple, but would appreciate some insight into 
+> what I'm doing wrong.
+> 
+> Ralph
+> 
+
+
+
+Johannes
+
+-----------------------
+Johannes Prost
+xitami@pastryworld.ca
+
+
+
+
+From xitami@lists.xitami.org  Wed Aug 18 19:51:15 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Wed, 18 Aug 2004 14:51:15 EDT
+Subject: [Xitami] Getting the FTP side up and running
+Message-ID: <67.30e1bc1f.2e54ff23@aol.com>
+
+-------------------------------1092855075
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+The version I am running is 2.5c2 - downloaded a week or so ago. All the HTTP 
+directories are in WEBPAGES in the master XITAMI directory and work just 
+fine. I don't really care where I put the files for FTP downloading - I have tried 
+an FTPROOT directory in the XITAMI folder and also the same directory in the 
+WEBPAGES folder.
+
+In any case, I made the defaults.cfg copy and despite tinkering with the ftp 
+directory in the file, I typically get some version of a "file not found" 
+notice when I try anonymous FTP access. Occasionally I will get a directory 
+listing where the text files suggest that I have ended up in the PULBLIC directory, 
+but that is rare. 
+
+By the way, both HTTP and FTP on the same bunch of files has been working for 
+seven years on an old machine running Microsoft PWS so I know the basic 
+internal lnks are sound. The HTTP side of the site is now much superior to the old 
+one now that I am using Xitami, so it is just a bit frustrating trying to get 
+the FTP elements working. A sample can be found on:
+
+http://taggart.glg.msu.edu/gyro/gbee.htm
+
+If you scrioll down the page, you will find a link to the GYROBEE LOGO - the 
+link points to:
+
+ftp://taggart.glg.msu.edu/gblogo.gif
+
+and would, with the old system, result in the retrieval of the GIF file. All 
+the FTP links are intended to be that simple - just a way to retrieve 
+miscellaneous files that are stored on the system and intended for use by visitors to 
+the site.
+
+Thanks for your reply.....Ralph
+
+-------------------------------1092855075
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><HEAD>
+<META charset=3DUS-ASCII http-equiv=3DContent-Type content=3D"text/html; cha=
+rset=3DUS-ASCII">
+<META content=3D"MSHTML 6.00.2800.1458" name=3DGENERATOR></HEAD>
+<BODY style=3D"FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #fffff=
+f">
+<DIV>The version I am running is 2.5c2 - downloaded a week or so ago. All th=
+e HTTP directories are in WEBPAGES in the master XITAMI directory and work j=
+ust fine. I don't really care where I put the files for FTP downloading - I=20=
+have tried an FTPROOT directory in the XITAMI folder and also the same direc=
+tory in the WEBPAGES folder.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>In any case, I made the defaults.cfg copy and despite tinkering with th=
+e ftp directory in the file, I typically get some version of&nbsp;a "file no=
+t found" notice when I try anonymous FTP access. Occasionally I will get a d=
+irectory listing where the text files suggest that I have ended up in the PU=
+LBLIC directory, but that is rare. </DIV>
+<DIV>&nbsp;</DIV>
+<DIV>By the way, both HTTP and FTP on the same bunch of files has been worki=
+ng for seven years on an old machine running Microsoft PWS so I know the bas=
+ic internal lnks are sound. The HTTP side of the site is now much superior t=
+o the old one now that I am using Xitami, so it is just a bit frustrating tr=
+ying to get the FTP elements working. A sample can be found on:</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><A href=3D"http://taggart.glg.msu.edu/gyro/gbee.htm">http://taggart.glg=
+.msu.edu/gyro/gbee.htm</A></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>If you scrioll down the page, you will find a link to the GYROBEE LOGO=20=
+- the link points to:</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><A href=3D"ftp://taggart.glg.msu.edu/gblogo.gif">ftp://taggart.glg.msu.=
+edu/gblogo.gif</A></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>and would, with the old system, result in the retrieval of the GIF file=
+. All the FTP links are intended to be that simple - just a way to retrieve=20=
+miscellaneous files that are stored on the system and intended for use by vi=
+sitors to the site.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Thanks for your reply.....Ralph</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV></BODY></HTML>
+
+-------------------------------1092855075--
+
+
+From xitami@lists.xitami.org  Wed Aug 18 23:35:15 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Wed, 18 Aug 2004 16:35:15 -0600
+Subject: [Xitami] Getting the FTP side up and running
+In-Reply-To: <67.30e1bc1f.2e54ff23@aol.com>
+Message-ID: <41238543.22796.20D5AA7@localhost>
+
+Hi Ralph,
+
+My system runs with the same version and I'm only just half a year familiar with websites and all 
+that "Stuff". Please excuse me, if I explain this a bit like a newcomer.
+
+It sounds for me that you copied the xitami.cfg to the default.cfg. That is not the way it should 
+be. You create a default.cfg and put in the settings you prefer for YOUR system. Only that, nothing 
+else. Xitami will read first the xitami.cfg and after that the default.cfg and the settings in the 
+default.cfg will override the ones in the xitami.cfg.
+
+I have some directories in the ftproot from xitami and I have no problems to get my files.
+The directories are looking like this:
+
+..\ftproot\directoryname-1
+..\ftproot\directoryname-2
+
+one user can access only one of the two directories with the rights I gave them.
+You are looking for a user "anonymus" create one and as far as I understood, this user should only 
+be able to retrieve files. He will get the right "G" for get.
+
+Your ftpdirs.aut should look now like this
+
+[directoryname-1]
+    anonymus = "G"
+[directoryname-2]
+    anonymus = "G"
+
+make sure that you have one space between = and "G"
+
+and your ftpusers.aut should look like 
+
+[anonymus]
+    Access = "G"
+    Aliases = "0"
+    Hard-quota = ""
+    Password = "anonymus"
+    Pipe = ""
+    Root = "directoryname-1"
+    Soft-quota = ""
+    Use-quotas = "0"
+
+Same thing here with the space. If you like, you can disable the password. If I'm correct, it will 
+look like password = "".
+I don't have anonymus access. 
+
+I hope this will be correct and it is from help for you.
+
+
+Johannes
+
+-----------------------
+Johannes Prost
+xitami@pastryworld.ca
+
+
+
+
+From xitami@lists.xitami.org  Thu Aug 19 00:40:56 2004
+From: xitami@lists.xitami.org (John Jonas)
+Date: Wed, 18 Aug 2004 18:40:56 -0500
+Subject: [Xitami] Where is the list archive?
+In-Reply-To: <41238543.22796.20D5AA7@localhost>
+References: <41238543.22796.20D5AA7@localhost>
+Message-ID: <4123E908.9080709@arbor-freight.com>
+
+Help, I lost the url this mailing list's archive.  I though it was in 
+each month's reminder notice and deleted the message with the url.
+
+It would be nice if there was a link to it at xitami.com, but you can't 
+have everything.
+
+
+
+From xitami@lists.xitami.org  Thu Aug 19 02:41:42 2004
+From: xitami@lists.xitami.org (Michael diLorenzo)
+Date: Wed, 18 Aug 2004 21:41:42 -0400
+Subject: [Xitami] Getting the FTP side up and running
+In-Reply-To: <67.30e1bc1f.2e54ff23@aol.com>
+References: <67.30e1bc1f.2e54ff23@aol.com>
+Message-ID: <opscyhnsefxifng9@mail.nycap.rr.com>
+
+Hi Ralp,
+
+Put this in your ftpusers.aut file:
+
+[Anonymous]
+     access=G
+     password=""
+     root=/xitami/ftproot
+
+And you should be all set to access ../xitami/ftproot and the files  
+therein.
+
+Michael
+
+On Wed, 18 Aug 2004 14:51:15 -0400 (EDT), <Gyrobee@aol.com> wrote:
+
+> The version I am running is 2.5c2 - downloaded a week or so ago. All the  
+> HTTP
+> directories are in WEBPAGES in the master XITAMI directory and work just
+> fine. I don't really care where I put the files for FTP downloading - I  
+> have tried
+> an FTPROOT directory in the XITAMI folder and also the same directory in  
+> the
+> WEBPAGES folder.
+>
+> In any case, I made the defaults.cfg copy and despite tinkering with the  
+> ftp
+> directory in the file, I typically get some version of a "file not found"
+> notice when I try anonymous FTP access. Occasionally I will get a  
+> directory
+> listing where the text files suggest that I have ended up in the PULBLIC  
+> directory,
+> but that is rare.
+>
+> By the way, both HTTP and FTP on the same bunch of files has been  
+> working for
+> seven years on an old machine running Microsoft PWS so I know the basic
+> internal lnks are sound. The HTTP side of the site is now much superior  
+> to the old
+> one now that I am using Xitami, so it is just a bit frustrating trying  
+> to get
+> the FTP elements working. A sample can be found on:
+>
+> http://taggart.glg.msu.edu/gyro/gbee.htm
+>
+> If you scrioll down the page, you will find a link to the GYROBEE LOGO -  
+> the
+> link points to:
+>
+> ftp://taggart.glg.msu.edu/gblogo.gif
+>
+> and would, with the old system, result in the retrieval of the GIF file.  
+> All
+> the FTP links are intended to be that simple - just a way to retrieve
+> miscellaneous files that are stored on the system and intended for use  
+> by visitors to
+> the site.
+>
+> Thanks for your reply.....Ralph
+
+
+
+-- 
+Using M2, Opera's revolutionary e-mail client: http://www.opera.com/m2/
+
+
+From xitami@lists.xitami.org  Wed Aug 18 20:18:45 2004
+From: xitami@lists.xitami.org (Jim Banks)
+Date: Wed, 18 Aug 2004 16:18:45 -0300
+Subject: [Xitami] Getting the FTP side up and running
+In-Reply-To: <67.30e1bc1f.2e54ff23@aol.com>
+Message-ID: <41238165.13650.7B7174@localhost>
+
+You have to change 
+
+ftp://taggart.glg.msu.edu/gblogo.gif
+to 
+
+ftp://taggart.glg.msu.edu/
+
+then you 
+need to go to the main screen of Xitami
+click on configuration
+click on ftp  ---> top right corner
+click on top Define button
+click on new
+fill in information
+make sure you click on save all the way out.
+
+
+
+On 18 Aug 2004 at 14:51, Gyrobee@aol.com wrote:
+
+> 
+> The version I am running is 2.5c2 - downloaded a week or so ago. All the HTTP directories 
+> are in WEBPAGES in the master XITAMI directory and work just fine. I don't really care 
+> where I put the files for FTP downloading - I have tried an FTPROOT directory in the 
+> XITAMI folder and also the same directory in the WEBPAGES folder.
+> 
+> In any case, I made the defaults.cfg copy and despite tinkering with the ftp directory in 
+> the file, I typically get some version ofa "file not found" notice when I try anonymous FTP 
+> access. Occasionally I will get a directory listing where the text files suggest that I have 
+> ended up in the PULBLIC directory, but that is rare. 
+> 
+> By the way, both HTTP and FTP on the same bunch of files has been working for seven years 
+> on an old machine running Microsoft PWS so I know the basic internal lnks are sound. The 
+> HTTP side of the site is now much superior to the old one now that I am using Xitami, so it 
+> is just a bit frustrating trying to get the FTP elements working. A sample can be found on:
+> 
+> http://taggart.glg.msu.edu/gyro/gbee.htm
+> 
+> If you scrioll down the page, you will find a link to the GYROBEE LOGO - the link points to:
+> 
+> ftp://taggart.glg.msu.edu/gblogo.gif
+> 
+> and would, with the old system, result in the retrieval of the GIF file. All the FTP links are 
+> intended to be that simple - just a way to retrieve miscellaneous files that are stored on 
+> the system and intended for use by visitors to the site.
+> 
+> Thanks for your reply.....Ralph
+> 
+> 
+
+
+
+From xitami@lists.xitami.org  Thu Aug 19 15:34:42 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Thu, 19 Aug 2004 10:34:42 -0400
+Subject: [Xitami] Getting the FTP side up and running
+Message-ID: <49E3CC1B.20099369.00180B01@aol.com>
+
+Thanks to all - especially Johannes - who replied with solutions from the simple to complex. The FTP service is now running fine and the solution was simple:
+
+The defaults.cfg file contained just the FTP service data wit this root:
+
+root=/xitami/ftproot
+
+The anonymous section of the ftpusers.aut was modified as follows:
+
+access=G
+password= ""
+root= /xitami/ftproot
+
+For whatever reason, the space after the = in the ftpusers.aut (password and root) file appear to be critical.
+
+Ralph
+
+
+
+From xitami@lists.xitami.org  Thu Aug 19 15:38:36 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Thu, 19 Aug 2004 08:38:36 -0600
+Subject: [Xitami] Getting the FTP side up and running
+In-Reply-To: <49E3CC1B.20099369.00180B01@aol.com>
+Message-ID: <4124670C.22762.F5D59@localhost>
+
+Good morning Ralph,
+
+good to hear it's running.
+
+Johannes
+
+-----------------------
+Johannes Prost
+xitami@pastryworld.ca
+
+
+
+
+From xitami@lists.xitami.org  Thu Aug 19 15:44:22 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Thu, 19 Aug 2004 08:44:22 -0600
+Subject: (Fwd) Re: [Xitami] Where are the Xitami Archives???
+Message-ID: <41246866.5649.14A79A@localhost>
+
+Hi John,
+
+here a forwarded message from the list.
+
+Johannes
+
+
+
+------- Weitergeleitete Nachricht / Forwarded message -------
+Von:            	Ewen McNeill <ewen@imatix.com>
+Betreff:        	Re: [Xitami] Where are the Xitami Archives???
+An:             	xitami@lists.xitami.org
+Antwort an:     	xitami@lists.xitami.org
+	<mailto:xitami-request@lists.xitami.org?subject=3Dsubscribe>
+	<mailto:xitami-request@lists.xitami.org?subject=3Dunsubscribe>
+Datum:   	Thu, 01 Jul 2004 07:11:03 +1200
+
+[ Doppelklick auf diese Zeile zeigt Optionen f=FCr Abo-Liste ] 
+
+In message <BAY13-F109AXaRYBNS00000d873@hotmail.com>, "R O" writes:
+>I want to browse and seach all the emails sent to the Xitami support list=
+ - 
+>are these archived?  If so, how do I get access to them?  Please tell me 
+>there it can be done via a website...
+
+http://lists.xitami.org/pipermail/xitami/
+
+which lies behind the "Xitami Archives" link on:
+
+http://lists.xitami.org/mailman/listinfo/xitami
+
+The latter URL being listed on every single post to the mailing list.
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--- Ende der weitergeleiteten Nachricht / End of forwarded message ---Joha=
+nnes
+
+-----------------------
+Johannes Prost
+xitami@pastryworld.ca
+
+
+
+
+From xitami@lists.xitami.org  Thu Aug 19 08:49:59 2004
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Thu, 19 Aug 2004 08:49:59 +0100 (BST)
+Subject: [Xitami] Getting the FTP side up and running
+Message-ID: <57366@dsl.co.uk>
+
+In message <41238543.22796.20D5AA7@localhost> "Johannes Prost" writes:
+
+[snip]
+
+> one user can access only one of the two directories with the rights I gav=
+e them.
+> You are looking for a user "anonymus" create one and as far as I understo=
+od, this user should only=20
+> be able to retrieve files. He will get the right "G" for get.
+>=20
+> Your ftpdirs.aut should look now like this
+>=20
+> [directoryname-1]
+>     anonymus =3D "G"
+> [directoryname-2]
+>     anonymus =3D "G"
+>=20
+> make sure that you have one space between =3D and "G"
+>=20
+> and your ftpusers.aut should look like=20
+>=20
+> [anonymus]
+>     Access =3D "G"
+>     Aliases =3D "0"
+>     Hard-quota =3D ""
+>     Password =3D "anonymus"
+
+One little point: the "username" for FTP should be spelt properly, as
+"anonymous".  Also, surely there should be no password specified for the
+anonymous FTP client, because the convention is that each user provides
+his/her e-mail address as password.
+
+--=20
+Brian {Hamilton Kelly}                                     bhk@dsl.co.uk
+   "I don't use Linux. I prefer to use an OS supported by a large multi-
+   national vendor, with a good office suite, excellent network/internet
+   software and decent hardware support."
+
+
+From xitami@lists.xitami.org  Thu Aug 19 08:54:36 2004
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Thu, 19 Aug 2004 08:54:36 +0100 (BST)
+Subject: [Xitami] Where is the list archive?
+Message-ID: <57367@dsl.co.uk>
+
+In message <4123E908.9080709@arbor-freight.com> "John Jonas" writes:
+
+> Help, I lost the url this mailing list's archive.  I though it was in 
+> each month's reminder notice and deleted the message with the url.
+
+It's better than that; it's in EVERY message on the list (including the
+one with your query, and in this reply from me).
+
+You're using Mozilla; if you go to the menubar and click on
+View->Show->Headers->All, you will see that one of the headers reads:
+
+    List-Archive: <http://lists.xitami.org/pipermail/xitami/>
+    
+> It would be nice if there was a link to it at xitami.com, but you can't 
+> have everything.
+
+Remembering that the list is hosted by xitami.org and not .com, then
+there might be something in that.
+
+-- 
+Brian {Hamilton Kelly}                                     bhk@dsl.co.uk
+   "I don't use Linux. I prefer to use an OS supported by a large multi-
+   national vendor, with a good office suite, excellent network/internet
+   software and decent hardware support."
+
+
+From xitami@lists.xitami.org  Fri Aug 20 17:03:31 2004
+From: xitami@lists.xitami.org (Martin)
+Date: Fri, 20 Aug 2004 10:03:31 -0600
+Subject: [Xitami] New install
+Message-ID: <GCEEIJDGLHLEKEIMMKLBMEIBCBAA.martmen@iquest.net>
+
+I just installed Xitami and am tring to get to the admin page. I changed the
+following file. xitami.aut
+
+ Admin=
+
+
+ I am assumeing this is where the password goes I left it blank for now.
+
+
+From xitami@lists.xitami.org  Fri Aug 20 16:25:11 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Fri, 20 Aug 2004 09:25:11 -0600
+Subject: [Xitami] New install
+In-Reply-To: <GCEEIJDGLHLEKEIMMKLBMEIBCBAA.martmen@iquest.net>
+Message-ID: <4125C377.17953.38323B@localhost>
+
+Hello Martin,
+
+what does "tring" mean ? But I assume a problem.  Sorry english is not my native language. 
+
+You shouldn't change anything in xitami.cfg and xitami.aut
+Create a file called default.aut and if you have to make changes to xitami make them in xitami.cfg
+
+Regards your admin entry: As I mentioned above, create a file called default.cfg
+Put the folloing in there
+
+[/admin]
+   Your Username = "Your Password"
+
+That is all. Make sure you have a space between = and " 
+Leave the xitami.aut as is. That should do the job and you should be able to open up the GUI from 
+your browser.
+
+
+
+
+
+
+
+Am 20 Aug 2004 um 10:03 hat Martin geschrieben:
+
+> I just installed Xitami and am tring to get to the admin page. I changed the
+> following file. xitami.aut
+> 
+>  Admin=
+> 
+> 
+>  I am assumeing this is where the password goes I left it blank for now.
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+-----------------------
+Johannes Prost
+xitami@pastryworld.ca
+
+
+
+
+From xitami@lists.xitami.org  Sat Aug 21 21:19:26 2004
+From: xitami@lists.xitami.org (Alex Barna)
+Date: Sat, 21 Aug 2004 15:19:26 -0500
+Subject: [Xitami] Add-ons for Xitami
+Message-ID: <4127AE4E.A9850789@mn.rr.com>
+
+On the page at http://www.xitami.com/addons.htm
+
+Under Other Products there is a listing for;
+  PerlChat is a Perl-based chat application, developed using Xitami.
+
+With a link to; http://www.perlchat.dk/html/perlchat.dk/index.html
+
+www.perlchat.dk is not a valid address.
+
+Does anyone know if this program will run on windows XP & what the correct
+address is, or if there is other chat software that works on XP & xitami?
+
+-
+Alex,
+
+
+From xitami@lists.xitami.org  Sat Aug 21 21:23:25 2004
+From: xitami@lists.xitami.org (Reply_To)
+Date: Sat, 21 Aug 2004 15:23:25 -0500
+Subject: [Xitami] Add-ons for Xitami
+In-Reply-To: <4127AE4E.A9850789@mn.rr.com>
+Message-ID: <BD4D196D.E9EE%reply@palaia.com>
+
+http://perlchat.sourceforge.net/
+
+> On the page at http://www.xitami.com/addons.htm
+> 
+> Under Other Products there is a listing for;
+> PerlChat is a Perl-based chat application, developed using Xitami.
+> 
+> With a link to; http://www.perlchat.dk/html/perlchat.dk/index.html
+> 
+> www.perlchat.dk is not a valid address.
+> 
+> Does anyone know if this program will run on windows XP & what the correct
+> address is, or if there is other chat software that works on XP & xitami?
+> 
+> -
+> Alex
+
+
+From xitami@lists.xitami.org  Sat Aug 21 21:30:58 2004
+From: xitami@lists.xitami.org (Reply_To)
+Date: Sat, 21 Aug 2004 15:30:58 -0500
+Subject: [Xitami] Add-ons for Xitami
+In-Reply-To: <4127AE4E.A9850789@mn.rr.com>
+Message-ID: <BD4D1B2A.E9EF%reply@qwest.net>
+
+http://perlchat.sourceforge.net/
+
+> On the page at http://www.xitami.com/addons.htm
+> 
+> Under Other Products there is a listing for;
+> PerlChat is a Perl-based chat application, developed using Xitami.
+> 
+> With a link to; http://www.perlchat.dk/html/perlchat.dk/index.html
+> 
+> www.perlchat.dk is not a valid address.
+> 
+> Does anyone know if this program will run on windows XP & what the correct
+> address is, or if there is other chat software that works on XP & xitami?
+> 
+> -
+> Alex
+
+
+From xitami@lists.xitami.org  Sun Aug 22 23:38:16 2004
+From: xitami@lists.xitami.org (ufonda smith)
+Date: Sun, 22 Aug 2004 16:38:16 -0600
+Subject: [Xitami] Add-ons for Xitami
+Message-ID: <BAY15-F19nPYPyjyNxz00004e75@hotmail.com>
+
+Yes, it works with XP. I run an old VP chat server and it works fine for 
+posting server stats on the what's hot tab
+Tisa
+
+
+>From: Alex Barna <ABARNA@mn.rr.com>
+>Reply-To: xitami@lists.xitami.org
+>To: xitami lists <xitami@lists.xitami.org>
+>Subject: [Xitami] Add-ons for Xitami
+>Date: Sat, 21 Aug 2004 15:19:26 -0500
+>MIME-Version: 1.0
+>Received: from mc5-f35.hotmail.com ([65.54.252.42]) by mc5-s2.hotmail.com 
+>with Microsoft SMTPSVC(5.0.2195.6713); Sat, 21 Aug 2004 13:22:15 -0700
+>Received: from sxpublic.imatix.net ([213.193.162.178]) by 
+>mc5-f35.hotmail.com with Microsoft SMTPSVC(5.0.2195.6824); Sat, 21 Aug 2004 
+>13:22:14 -0700
+>Received: from sxpublic.imatix.net (localhost [127.0.0.1])by 
+>sxpublic.imatix.net (Postfix) with ESMTPid 903091C10AF7; Sat, 21 Aug 2004 
+>22:22:01 +0200 (CEST)
+>Received: from ms-smtp-03.rdc-kc.rr.com (ms-smtp-03.rdc-kc.rr.com 
+>[24.94.166.129])by sxpublic.imatix.net (Postfix) with ESMTP id 
+>B99591C109A9for <xitami@lists.xitami.org>; Sat, 21 Aug 2004 22:21:30 +0200 
+>(CEST)
+>Received: from mn.rr.com (CPE-65-30-225-94.mn.rr.com [65.30.225.94])by 
+>ms-smtp-03.rdc-kc.rr.com (8.12.10/8.12.7) with ESMTP id i7LKLRjE010602for 
+><xitami@lists.xitami.org>; Sat, 21 Aug 2004 15:21:27 -0500 (CDT)
+>X-Message-Info: N4u0pqWW+O1SX/g8ReGzcbn8xd1+THFn55xWYwnI8bo=
+>Delivered-To: xitami@lists.xitami.org
+>Message-ID: <4127AE4E.A9850789@mn.rr.com>
+>Organization: WorldWide_Spam_killers
+>X-Mailer: Mozilla 4.75 [en] (Windows NT 5.0; U)
+>X-Accept-Language: en
+>X-Virus-Scanned: Symantec AntiVirus Scan Engine
+>X-Spam-Checker-Version: SpamAssassin 2.60 (1.212-2003-09-23-exp) on 
+>sxpublic.imatix.net
+>X-Spam-Status: No, hits=0.0 required=5.0 tests=none autolearn=no 
+>version=2.60
+>X-Spam-Level: Errors-To: xitami-admin@lists.xitami.org
+>X-BeenThere: xitami@lists.xitami.org
+>X-Mailman-Version: 2.0.11
+>Precedence: bulk
+>List-Help: <mailto:xitami-request@lists.xitami.org?subject=help>
+>List-Post: <mailto:xitami@lists.xitami.org>
+>List-Subscribe: 
+><http://lists.xitami.org/mailman/listinfo/xitami>,<mailto:xitami-request@lists.xitami.org?subject=subscribe>
+>List-Id: Xitami Users General Discussion <xitami.lists.xitami.org>
+>List-Unsubscribe: 
+><http://lists.xitami.org/mailman/listinfo/xitami>,<mailto:xitami-request@lists.xitami.org?subject=unsubscribe>
+>List-Archive: <http://lists.xitami.org/pipermail/xitami/>
+>Return-Path: xitami-admin@lists.xitami.org
+>X-OriginalArrivalTime: 21 Aug 2004 20:22:14.0979 (UTC) 
+>FILETIME=[8C3F8130:01C487BC]
+>
+>On the page at http://www.xitami.com/addons.htm
+>
+>Under Other Products there is a listing for;
+>   PerlChat is a Perl-based chat application, developed using Xitami.
+>
+>With a link to; http://www.perlchat.dk/html/perlchat.dk/index.html
+>
+>www.perlchat.dk is not a valid address.
+>
+>Does anyone know if this program will run on windows XP & what the correct
+>address is, or if there is other chat software that works on XP & xitami?
+>
+>-
+>Alex,
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+Designer Mail isn't just fun to send, it's fun to receive. Use special 
+stationery, fonts and colors. 
+http://join.msn.com/?pgmarket=en-ca&page=byoa/prem&xAPID=1994&DI=1034&SU=http://hotmail.com/enca&HL=Market_MSNIS_Taglines 
+  Start enjoying all the benefits of MSN® Premium right now and get the 
+first two months FREE*.
+
+
+From xitami@lists.xitami.org  Tue Aug 24 04:25:15 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Mon, 23 Aug 2004 20:25:15 -0700
+Subject: [Xitami] Re: Xitami digest, Vol 1 #931 - 1 msg
+In-Reply-To: <20040818042502.310.85705.Mailman@sxpublic.imatix.net>
+References: <20040818042502.310.85705.Mailman@sxpublic.imatix.net>
+Message-ID: <1093317915.412ab51bab55f@webmail.registerapi.com>
+
+OK great, just name the folder "files" or whatever you like, make sure you have
+the subdir as PUB in ftproot viz. 'xitami/ftproot/pub'. Drag n Drop your public
+file you want accessed into /PUB/
+
+You can go back to your site and paste an ftp link so you dont have to phyically
+type it in your search box each time you would like to test or go to your site;
+send me the home page link or your domain URL and I will try it to see if I can
+logon FTP Anonymous. Xitami runs its FTP server out of the box.
+
+
+Hope this helps out.
+
+J/AN
+
+Quoting xitami-request@lists.xitami.org:
+
+> Send Xitami mailing list submissions to
+> 	xitami@lists.xitami.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+> 	http://lists.xitami.org/mailman/listinfo/xitami
+> or, via email, send a message with subject or body 'help' to
+> 	xitami-request@lists.xitami.org
+>
+> You can reach the person managing the list at
+> 	xitami-admin@lists.xitami.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Xitami digest..."
+>
+>
+> Today's Topics:
+>
+>    1. Getting the FTP side up and running (Gyrobee@aol.com)
+>
+> --__--__--
+>
+> Message: 1
+> From: Gyrobee@aol.com
+> Date: Tue, 17 Aug 2004 23:08:13 EDT
+> To: xitami@lists.xitami.org
+> Subject: [Xitami] Getting the FTP side up and running
+> Reply-To: xitami@lists.xitami.org
+>
+>
+> -------------------------------1092798493
+> Content-Type: text/plain; charset="US-ASCII"
+> Content-Transfer-Encoding: 7bit
+>
+> The HTTP side of my site is running just fine, but I am having trouble
+> getting my system configured for FTP. The goal is a plain vanilla anonymous
+> FTP of a
+> pot of files stored in a single directory.
+>
+> As just one example, I can put on the files in an FTPROOT directory in the
+> XITAMI folder, but I cannot seem to set the configuration file to look in
+> that
+> directory. I keep getting error messages that say the file cannot be found.
+>
+> I am sure the answer is quite simple, but would appreciate some insight into
+> what I'm doing wrong.
+>
+> Ralph
+>
+> -------------------------------1092798493
+> Content-Type: text/html; charset="US-ASCII"
+> Content-Transfer-Encoding: quoted-printable
+>
+> <HTML><HEAD>
+> <META charset=3DUS-ASCII http-equiv=3DContent-Type content=3D"text/html; cha=
+> rset=3DUS-ASCII">
+> <META content=3D"MSHTML 6.00.2800.1458" name=3DGENERATOR></HEAD>
+> <BODY style=3D"FONT-SIZE: 10pt; FONT-FAMILY: Arial; BACKGROUND-COLOR: #fffff=
+> f">
+> <DIV>The HTTP side of my site is running just fine, but I am having
+> trouble=20=
+> getting my system configured for FTP. The goal is a plain vanilla
+> anonymous=20=
+> FTP of a pot of files stored in a single directory. </DIV>
+> <DIV>&nbsp;</DIV>
+> <DIV>As just one example, I can put on the files in an FTPROOT directory
+> in=20=
+> the XITAMI folder, but I cannot seem to set the configuration file to look i=
+> n that directory. I keep getting error messages that say the file cannot
+> be=20=
+> found.</DIV>
+> <DIV>&nbsp;</DIV>
+> <DIV>I am sure the answer is quite simple, but would appreciate some insight=
+>  into what I'm doing wrong.</DIV>
+> <DIV>&nbsp;</DIV>
+> <DIV>Ralph</DIV></BODY></HTML>
+>
+> -------------------------------1092798493--
+>
+>
+>
+> --__--__--
+>
+>
+> --
+> Xitami Users Mailing List -- Digest Version
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> End of Xitami Digest
+>
+
+
+
+
+From xitami@lists.xitami.org  Sat Aug 28 01:34:13 2004
+From: xitami@lists.xitami.org (Josh A)
+Date: Fri, 27 Aug 2004 18:34:13 -0600
+Subject: [Xitami] protected directories not accessible with SSL
+Message-ID: <412FD305.10906@coaxial.ca>
+
+I have recently upgraded from xitami to xitami pro to provide SSL to a 
+customer.
+
+Xitami/Pro v2.4c3 on windoze 2003 enterprise
+
+I have configured sslhttp.cfs and migrated my config files  (only 
+defaults.aut and defaults.cfg - this is a single user / single domain 
+server)
+
+http://domain                                works
+http://domain/private    user:pass   works
+https://domain                              works
+https://domain/private  user:pass    Doesn't work
+
+when trying to access a protected directory (defined in defaults.aut)  
+or even /admin  when using HTTPS, it rejects the credentials, though 
+they are correct and work with non-ssl.
+
+I'm sure there is just some setting I missed, let me know if there is 
+any further info I can provide.
+
+Thanks !!
+Josh
+
+
+
+From xitami@lists.xitami.org  Mon Aug 30 12:43:52 2004
+From: xitami@lists.xitami.org (Dario B.)
+Date: Mon, 30 Aug 2004 13:43:52 +0200
+Subject: [Xitami] Maybe solution for interrupted download of long files on slow connection after 32k (or multiples)
+Message-ID: <000501c48e86$baa083a0$34455e3e@Annamaria>
+
+With the last versions of xitami I noticed that on slow connections
+(dial-up) it often happens that the connection breaks and there is a socket
+error; even downloading Xitami i had to use getright because of the
+disconections.
+
+I tried to solve this recompiling with Borland C++ builder (it was
+difficoult... some things was quite tricky to make it work... lots of
+warnings and some errors... but I did it somehow).
+
+I think it's some timeout error on writing on the socket: if I understood
+how it works, when a file is uploaded is divided in segments and uploaded,
+and there is a timeout for every segment to be sent. The size of the segment
+is in the file "smttran.c", the "var" name is "BUFFERSIZE" and is initially
+set to 32768L, (32k), the timeout is specified in "smtsock.c" and is named
+"WRITE_TIMEOUT" and is set to 10 (seconds); this means that if you can get
+more than 32k in 10 sec (>3.2kbyte/sec) everything should be ok, otherwise
+the socket "thinks" he isn't able to send data. I tried lowering BUFFERSIZE
+to 4096 (4k) and WRITE_TIMEOUT to 60 sec (it makes about 70 bytes/sec should
+be enough!) and it seems to work.
+
+I hope at Imatix try this so, if it works, everyone can use it.
+
+Dario B.
+
+(sorry for my english, I'm Italian)
+
+
+From xitami@lists.xitami.org  Mon Aug 30 19:58:47 2004
+From: xitami@lists.xitami.org (Josh A)
+Date: Mon, 30 Aug 2004 12:58:47 -0600
+Subject: [Xitami] protected directories not accessible with SSL
+In-Reply-To: <412FD305.10906@coaxial.ca>
+References: <412FD305.10906@coaxial.ca>
+Message-ID: <WorldClient-F200408301258.AA58470113@coaxial.ca>
+
+Has anyone else experienced this problem ? 
+
+Does anyone have any ideas as to the cause or solution ?
+
+This list is pretty dead. 
+
+Josh
+
+
+-----Original Message-----
+From: Josh A <beta@coaxial.ca>
+To: xitami@lists.xitami.org
+Date: Fri, 27 Aug 2004 18:34:13 -0600
+Subject: [Xitami] protected directories not accessible with SSL
+
+> I have recently upgraded from xitami to xitami pro to provide SSL to a 
+> customer.
+> 
+> Xitami/Pro v2.4c3 on windoze 2003 enterprise
+> 
+> I have configured sslhttp.cfs and migrated my config files  (only 
+> defaults.aut and defaults.cfg - this is a single user / single domain 
+> server)
+> 
+> http://domain                                works
+> http://domain/private    user:pass   works
+> https://domain                              works
+> https://domain/private  user:pass    Doesn't work
+> 
+> when trying to access a protected directory (defined in defaults.aut)  
+> or even /admin  when using HTTPS, it rejects the credentials, though 
+> they are correct and work with non-ssl.
+> 
+> I'm sure there is just some setting I missed, let me know if there is 
+> any further info I can provide.
+> 
+> Thanks !!
+> Josh
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+

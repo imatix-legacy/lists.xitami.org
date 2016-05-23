@@ -1,0 +1,1412 @@
+From jamesamc at bellsouth.net  Wed Jun  4 06:02:17 2008
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Tue, 03 Jun 2008 22:02:17 -0600
+Subject: [Xitami] runat comand in xitami.
+Message-ID: <484613C9.6020107@bellsouth.net>
+
+Hi All
+
+Dose the "runat server" command work in Xitami? I have an "hta" file 
+that I would like to us to query a "dbf" file. I changed the "<script 
+language="VBScript" >" to "<script language="VBScript" runat="SERVER">" 
+. Ran it in my cgi-bin. That did not work, but no error message was 
+displayed.
+
+Is this an XP problem?
+Is it a Xitami problem?
+Is it a code problem?
+
+What am I doing wrong?
+
+Thanks from Jeff McDonald
+
+From jamesamc at bellsouth.net  Wed Jun  4 06:41:59 2008
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Tue, 03 Jun 2008 22:41:59 -0600
+Subject: [Xitami] basic as a script cgi code
+Message-ID: <48461D17.20603@bellsouth.net>
+
+Hi All
+
+In trying to fix my vbscript problem. I found 2 open source programs 
+that script in basic as a cgi code. Both say they run under windows and 
+Linux.
+
+Webbasic here.: http://www.ddginc-usa.com/webbas.htm
+
+Webbasic said it runs under xitami in both windows and Linux. The 2 file 
+types that it uses are ".b" a ".bas" like file and ".htb" a  html and 
+basic file like an ".asp" page. I would love to see this work. It would 
+make xitami look like it had it's on asp style.
+
+Scriptbasic here.: http://www.scriptbasic.com/html/index.html
+
+Scriptbasic runs ".bas" files and also has an Application Engine. I 
+think the Application Engine may need appachee to work.
+
+Thanks
+Jeff McDonald
+
+From preid at rci.rutgers.edu  Wed Jun  4 23:50:02 2008
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Wed, 04 Jun 2008 17:50:02 -0400
+Subject: [Xitami] basic as a script cgi code
+In-Reply-To: <48461D17.20603@bellsouth.net>
+References: <48461D17.20603@bellsouth.net>
+Message-ID: <48470E0A.9090807@rci.rutgers.edu>
+
+ > basic as a cgi code
+
+ANY DOS/Win program (likewise anything executable under unix) can be run 
+as a CGI.
+
+Most won't do much good/useful stuff; you need to know CLI interface and 
+how to mesh with GCI.
+
+...\Xitami\webpages\xitami\INDEX5.HTM
+
+As noted there, even a dumb old .BAT file can CGI (though this is very 
+awkward because half the BAT syntax overlaps HTML syntax).
+
+My first CGI was a "hello world" BAT file; my second was a 
+QuickBasic-for-DOS "hello world" EXE file. I then coded a whole filter 
+with database lookup in QuickBasic4.5 (for DOS!) running as a CGI.
+
+Some minor hammering because QB does not by default work on streams, 
+also it had a 64K chunk-limit. I found instructions to hack Visual Basic 
+fer Windows (which has larger limits) to omit the GUI and work on 
+streams; that was my main CGI for years. The overhead of calling a 224KB 
+EXE file (which did dumb linear searches in an unindexed datafile) was 
+never a problem even on P-133MHz.
+
+I think my form-submission CGI process is -still- a DOS BAT file calling 
+various mail functions and ECHOing back the confirmation... yeah:
+
+@echo off
+@ mail -s "Form Return" suzie at school.edu <  ~~~ 
+c:\webpages\%FORM_FOLDER%\%FORM_FILENAME%.txt >>mail.logger
+@ type c:\webpages\%FORM_FOLDER%\%FORM_FILENAME%.txt >> ~~~
+c:\webpages\%FORM_FOLDER%\%FORM_FILENAME%.log
+
+Don't over-think, over-design, or get into strange little solutions.
+
+OTOH, unless you are married to BASIC, Perl and PHP run under Xitami. 
+PHP has one function, coded to an Apache quirk/flaw, which bombs under 
+Xitami; otherwise it is sweet. Perl and PHP have library functions which 
+make hard-work in old BASIC too-easy. (VBscript may do more... but then 
+why not go all-the-way and use MS IIS server?)
+
+
+-- 
+Paul Reid
+
+
+From mw at 9000.org  Thu Jun  5 00:15:45 2008
+From: mw at 9000.org (Magnus Wedberg)
+Date: Thu, 05 Jun 2008 00:15:45 +0200
+Subject: [Xitami] basic as a script cgi code
+In-Reply-To: <48470E0A.9090807@rci.rutgers.edu>
+References: <48461D17.20603@bellsouth.net> <48470E0A.9090807@rci.rutgers.edu>
+Message-ID: <48471411.2070504@9000.org>
+
+Paul Reid wrote, On 2008-06-04 23:50:
+>  > basic as a cgi code
+> 
+> ANY DOS/Win program (likewise anything executable under unix) can be run 
+> as a CGI.
+
+...if they write to standard output. Turbo Pascal programs, for example 
+(yeah old), have some own routines for that and cannot be used to run 
+CGI -- they must be wrapped in a batch file (!) for that to work. So, 
+strange workarounds may be needed.
+
+> Don't over-think, over-design, or get into strange little solutions.
+
+At this point in time, CGI and SSIs -- once used most everywhere -- 
+would /be/ the strange little solution. ;-)
+
+> OTOH, unless you are married to BASIC, Perl and PHP run under Xitami. 
+> PHP has one function, coded to an Apache quirk/flaw, which bombs under 
+> Xitami; otherwise it is sweet. Perl and PHP have library functions which 
+> make hard-work in old BASIC too-easy. (VBscript may do more... but then 
+> why not go all-the-way and use MS IIS server?)
+
+Yes, PHP is great, but the overhead of starting up a PHP process for 
+every page reload is /very/ significant. Apache with PHP as a module 
+absolutely smokes Xitami, despite Xitami being much faster for static 
+content.
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From marc at verfaillie.be  Thu Jun  5 08:21:38 2008
+From: marc at verfaillie.be (Marc Doigny)
+Date: Thu, 5 Jun 2008 08:21:38 +0200
+Subject: [Xitami] basic as a script cgi code
+References: <48461D17.20603@bellsouth.net> <48470E0A.9090807@rci.rutgers.edu>
+	<48471411.2070504@9000.org>
+Message-ID: <E5BA630099D7A048B7B4A0AD601A71E1035564@srvsbs.verfaillie.local>
+
+
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Magnus Wedberg
+Sent: donderdag 5 juni 2008 0:16
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] basic as a script cgi code
+
+Paul Reid wrote, On 2008-06-04 23:50:
+>  > basic as a cgi code
+> 
+> ANY DOS/Win program (likewise anything executable under unix) can be
+run 
+> as a CGI.
+
+...if they write to standard output. Turbo Pascal programs, for example 
+(yeah old), have some own routines for that and cannot be used to run 
+CGI -- they must be wrapped in a batch file (!) for that to work. So, 
+strange workarounds may be needed.
+
+Xitami allow input/output files instead of stdin/stdout, making Xitami
+more easy to use than any other webserver. Get the file name via the
+environment: ENVIRON$("CGI_STDIN")
+And basic is not dead, don't focus on old QuickBasic (or visual basic)
+only. Some basic compilers produce very tight code. If you are used to
+program in any basic dialect, go for it!
+
+marc
+
+
+From shands at redlineuk.com  Thu Jun  5 10:12:34 2008
+From: shands at redlineuk.com (Stuart Hands)
+Date: Thu, 5 Jun 2008 09:12:34 +0100
+Subject: [Xitami] basic as a script cgi code
+In-Reply-To: <E5BA630099D7A048B7B4A0AD601A71E1035564@srvsbs.verfaillie.local>
+References: <48461D17.20603@bellsouth.net>
+	<48470E0A.9090807@rci.rutgers.edu><48471411.2070504@9000.org>
+	<E5BA630099D7A048B7B4A0AD601A71E1035564@srvsbs.verfaillie.local>
+Message-ID: <F8C544AD04C84646812543D6FE8F5595@handsfamily.com>
+
+Don't forget Environ("CGI_STDOUT") and Environ("QUERY_STRING")! Checking for
+these at the start of the app is a good indication if it IS being started by
+Xitami as CGI or as an unknowning user!
+
+FWIW, all of my CGI applications are written in VB6 and range from basic
+enquiry forms to fully blown admin panels linking to MySQL databases and
+doing other wizzy stuff that would just be a pain in PHP/Perl/etc. Yea ok,
+the overheads of VB is critised as being heavily "code bloated" - but who
+REALLY cares when your current webservers are dual dual-core Xeon monsters
+with oodles of memory?! I know in the back of my mind that the life of
+Xitami is finite and I really should switch to PHP - but I'm yet to find a
+reason other than this to switch!
+
+A good one for debugging is to create a single BATch file in your cgi-bin
+with a single line:
+
+SET
+
+Returns all the environment variables in one swoop and shows you whats
+available to play with!
+
+Stuart
+
+
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Marc Doigny
+Sent: 05 June 2008 07:22
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] basic as a script cgi code
+
+
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Magnus Wedberg
+Sent: donderdag 5 juni 2008 0:16
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] basic as a script cgi code
+
+Paul Reid wrote, On 2008-06-04 23:50:
+>  > basic as a cgi code
+> 
+> ANY DOS/Win program (likewise anything executable under unix) can be
+run 
+> as a CGI.
+
+...if they write to standard output. Turbo Pascal programs, for example
+(yeah old), have some own routines for that and cannot be used to run CGI --
+they must be wrapped in a batch file (!) for that to work. So, strange
+workarounds may be needed.
+
+Xitami allow input/output files instead of stdin/stdout, making Xitami more
+easy to use than any other webserver. Get the file name via the
+environment: ENVIRON$("CGI_STDIN")
+And basic is not dead, don't focus on old QuickBasic (or visual basic) only.
+Some basic compilers produce very tight code. If you are used to program in
+any basic dialect, go for it!
+
+marc
+
+
+--
+Xitami Users Mailing List -- For Xitami support To unsubscribe:
+http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From dmacias at mail.udg.mx  Thu Jun  5 12:54:49 2008
+From: dmacias at mail.udg.mx (David Arturo Macias Corona)
+Date: Thu, 05 Jun 2008 05:54:49 -0500
+Subject: [Xitami] basic as a script cgi code
+In-Reply-To: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+References: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+Message-ID: <4847C5F9.6060706@mail.udg.mx>
+
+ > FWIW, all of my CGI applications are written in VB6 and range from
+ > basic enquiry forms to fully blown admin panels linking to MySQL
+ > databases and doing other wizzy stuff that would just be a pain
+ > in PHP/Perl/etc.
+
+I made my first CGI program in 1999, using my "first" Web Server Xitami 
+and using Xitami docs to learn.
+The language was Clipper (16 bits) using Xitami in Win98, but shortly 32 
+bits systems (Win2000, .. OS/2) killed this option
+
+Since then Xitami continue as my "development Web server" in daily 
+basis, in Win32, OS/2, Linux
+I continue using Clipper language, but in 32 bits with (x)Harbour in 
+Win32, OS/2, Linux, with support of DBF/CDX/..., Advantage Database 
+Server and MySQL and others
+Same code in any platform
+
+Who need PHP/ASP/Perl/TCL/Delphi/VB/NET/etc ?   :-)
+
+Performance of (x)Harbour with Xitami, Apache, IIS, ..., is excelent
+... and Xitami is fastest/reliable in any case
+
+David Macias
+
+From preid at rci.rutgers.edu  Thu Jun  5 21:45:41 2008
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Thu, 05 Jun 2008 15:45:41 -0400
+Subject: [Xitami] basic as a script cgi code
+In-Reply-To: <48471411.2070504@9000.org>
+References: <48461D17.20603@bellsouth.net> <48470E0A.9090807@rci.rutgers.edu>
+	<48471411.2070504@9000.org>
+Message-ID: <48484265.70207@rci.rutgers.edu>
+
+Magnus, Marc, Stuart, David-
+
+Thanks for your comments and rebuttals, but....
+
+Does anybody have help for Jeff's questions?
+
+-- 
+Paul Reid
+System Administrator
+Music Department
+Mason Gross School of the Arts
+
+From shands at redlineuk.com  Thu Jun  5 23:21:32 2008
+From: shands at redlineuk.com (Stuart Hands)
+Date: Thu, 5 Jun 2008 22:21:32 +0100
+Subject: [Xitami] basic as a script cgi code
+In-Reply-To: <48484265.70207@rci.rutgers.edu>
+References: <48461D17.20603@bellsouth.net>
+	<48470E0A.9090807@rci.rutgers.edu><48471411.2070504@9000.org>
+	<48484265.70207@rci.rutgers.edu>
+Message-ID: <2916FE68B5E14599942FD687765D1D36@handsfamily.com>
+
+You're right Paul! Back on track...
+
+I'm not too sure what Jeff is trying to do though. Going back to the
+original message, I'm guessing your DBF resides on the server and you're
+wanting to query it for the purpose of displaying it's content on your site?
+If this is the case, I think you might be going about it the wrong way:
+
+HTA's were Microsoft's way (starting back in the days of IE5) of turning
+'regular' HTM files into basic client-side applications. As far as I know -
+they're not really used for server-side scripting. MSDN has an interesting
+overview of what HTAs are and why on earth you would want to use them
+located here: http://msdn.microsoft.com/en-us/library/ms536496(VS.85).aspx.
+You may remember that these were all the rage for a while with some vendors
+even using them to create 'wizzy' autorun applications (that suffered from a
+million and one security violations - I wonder why they never took off?!!)
+
+Also, HTA's (whilst strictly speaking are just .html's renamed to .hta) do
+add some additional tag's to the html language. However, it doesn't modify
+existing tags. The <SCRIPT> tag remains unaffected and so doesn't add any
+RUNAT functionality (check out w3schools for a good reference for this tag
+here: http://www.w3schools.com/TAGS/tag_script.asp)
+
+
+I'm guessing though that you've already got a HTA that queries your DBF? If
+so, could you paste the VBScript so that we could take a look? (just
+segments if necessary please!)
+
+Cheers,
+Stuart
+
+
+
+> -----Original Message-----
+> From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of > Paul Reid
+> Sent: 05 June 2008 20:46
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] basic as a script cgi code
+> 
+> Magnus, Marc, Stuart, David-
+>
+> Thanks for your comments and rebuttals, but....
+> 
+> Does anybody have help for Jeff's questions?
+>
+> Paul Reid
+> 
+> 
+> -----Original Message-----
+> From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of > Jeff McDonald
+> Sent: 04 June 2008 06:02 CEST
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] basic as a script cgi code
+> 
+> Hi All
+> 
+> Dose the "runat server" command work in Xitami? I have an "hta" file 
+> that I would like to us to query a "dbf" file. I changed the "<script 
+> language="VBScript" >" to "<script language="VBScript" runat="SERVER">" 
+> . Ran it in my cgi-bin. That did not work, but no error message was 
+> displayed.
+> 
+> Is this an XP problem?
+> Is it a Xitami problem?
+> Is it a code problem?
+> 
+> What am I doing wrong?
+> 
+> Thanks from Jeff McDonald
+
+
+
+From ronackgen01 at bellsouth.net  Thu Jun  5 23:25:10 2008
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Thu, 5 Jun 2008 17:25:10 -0400
+Subject: [Xitami] VISTA
+In-Reply-To: <000501c8c240$9c9057e0$6401a8c0@Gary>
+References: <000501c8c240$9c9057e0$6401a8c0@Gary>
+Message-ID: <006101c8c752$a3229f20$e967dd60$@net>
+
+Well after a few days of fighting, turning off security features, another
+bad hard drive and shear persistence things seem to be running fairly
+smoothly. Xitami still dumps from time to time but Always Up turns it back
+on.  Hard telling what the bad hard drive was causing but dumps seem to
+happen less often.  Funny these drives don't last forever.LOL. I think this
+one goes back to 2003 or farther. 
+
+ 
+
+Anyway back in business,
+
+ 
+
+Cheers,
+
+Ron
+
+ 
+
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of gs
+Sent: Friday, May 30, 2008 6:34 AM
+To: xitami at lists.xitami.org
+Subject: [Xitami] VISTA
+
+ 
+
+I pulled back to version 2.4 and it solved the crash problems I was having
+on VISTA.
+
+The basic problem with VISTA is the security "enhancements".  I have to
+disable most of the new enhancements to use VISTA.
+
+Gary Sandow
+
+No virus found in this incoming message.
+Checked by AVG.
+Version: 8.0.100 / Virus Database: 269.24.4/1473 - Release Date: 5/29/2008
+7:53 PM
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080605/b07b301e/attachment.htm 
+
+From shands at redlineuk.com  Thu Jun  5 23:44:17 2008
+From: shands at redlineuk.com (Stuart Hands)
+Date: Thu, 5 Jun 2008 22:44:17 +0100
+Subject: [Xitami] VISTA
+In-Reply-To: <006101c8c752$a3229f20$e967dd60$@net>
+References: <000501c8c240$9c9057e0$6401a8c0@Gary>
+	<006101c8c752$a3229f20$e967dd60$@net>
+Message-ID: <5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+
+Out of interest, (after suffering myself from Xitami dying every now and
+again under Win2k3 server), have you installed Xitami as a service on this
+box? ("xisrv32 -install"). If so, check the properties of the service
+(funnily enough, Microsoft allowed for the eventuality that services might
+stop responding and die!!). Check out the properties of the Xitiami service
+and look in the 'Recovery' tab. Simply change the First Failure, Second
+Failure and Subsequent Failures to 'Restart Service' (hell - why not?!)
+
+One other thing that helped me an awful lot was the "recover=" parameter in
+xitami.cfg. Not quite sure of the mileage in this one though.
+
+Cheers,
+Stuart
+
+PS. As for dead HD's - you've got yourself a bad one if it's only from 2003!
+Mind you, was there a drive on the market in 2003 big enough to hold a
+minimal fresh install of the heavily code-bloated Vista? Why's it bloated
+you ask? Because it's full of: "Do you want to do this?" "Yes" "Do you
+REALLY want to do this?" "Yes" "Windows thinks this is idea and has stopped
+it anyway" "Darn.."
+
+
+
+
+________________________________
+
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Ron Ackerman
+Sent: 05 June 2008 22:25
+To: 'Xitami Users General Discussion'
+Subject: Re: [Xitami] VISTA
+
+
+
+Well after a few days of fighting, turning off security features, another
+bad hard drive and shear persistence things seem to be running fairly
+smoothly. Xitami still dumps from time to time but Always Up turns it back
+on.  Hard telling what the bad hard drive was causing but dumps seem to
+happen less often.  Funny these drives don't last forever.LOL. I think this
+one goes back to 2003 or farther. 
+
+ 
+
+Anyway back in business,
+
+ 
+
+Cheers,
+
+Ron
+
+ 
+
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of gs
+Sent: Friday, May 30, 2008 6:34 AM
+To: xitami at lists.xitami.org
+Subject: [Xitami] VISTA
+
+ 
+
+I pulled back to version 2.4 and it solved the crash problems I was having
+on VISTA.
+
+The basic problem with VISTA is the security "enhancements".  I have to
+disable most of the new enhancements to use VISTA.
+
+Gary Sandow
+
+No virus found in this incoming message.
+Checked by AVG.
+Version: 8.0.100 / Virus Database: 269.24.4/1473 - Release Date: 5/29/2008
+7:53 PM
+
+
+
+
+From hogan at geeksgalore.ca  Thu Jun  5 23:50:20 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Thu, 05 Jun 2008 17:50:20 -0400
+Subject: [Xitami] VISTA
+In-Reply-To: <5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+References: <000501c8c240$9c9057e0$6401a8c0@Gary>	<006101c8c752$a3229f20$e967dd60$@net>
+	<5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+Message-ID: <48485F9C.4090703@geeksgalore.ca>
+
+I do not get the point?  I have Xitami running flawless on a 98 box and 
+a ubuntu box, never have any problems?????
+
+Stuart Hands wrote:
+> Out of interest, (after suffering myself from Xitami dying every now and
+> again under Win2k3 server), have you installed Xitami as a service on this
+> box? ("xisrv32 -install"). If so, check the properties of the service
+> (funnily enough, Microsoft allowed for the eventuality that services might
+> stop responding and die!!). Check out the properties of the Xitiami service
+> and look in the 'Recovery' tab. Simply change the First Failure, Second
+> Failure and Subsequent Failures to 'Restart Service' (hell - why not?!)
+>
+> One other thing that helped me an awful lot was the "recover=" parameter in
+> xitami.cfg. Not quite sure of the mileage in this one though.
+>
+> Cheers,
+> Stuart
+>
+> PS. As for dead HD's - you've got yourself a bad one if it's only from 2003!
+> Mind you, was there a drive on the market in 2003 big enough to hold a
+> minimal fresh install of the heavily code-bloated Vista? Why's it bloated
+> you ask? Because it's full of: "Do you want to do this?" "Yes" "Do you
+> REALLY want to do this?" "Yes" "Windows thinks this is idea and has stopped
+> it anyway" "Darn.."
+>
+>
+>
+>
+> ________________________________
+>
+> From: xitami-bounces at lists.xitami.org
+> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of Ron Ackerman
+> Sent: 05 June 2008 22:25
+> To: 'Xitami Users General Discussion'
+> Subject: Re: [Xitami] VISTA
+>
+>
+>
+> Well after a few days of fighting, turning off security features, another
+> bad hard drive and shear persistence things seem to be running fairly
+> smoothly. Xitami still dumps from time to time but Always Up turns it back
+> on.  Hard telling what the bad hard drive was causing but dumps seem to
+> happen less often.  Funny these drives don't last forever.LOL. I think this
+> one goes back to 2003 or farther. 
+>
+>  
+>
+> Anyway back in business,
+>
+>  
+>
+> Cheers,
+>
+> Ron
+>
+>  
+>
+> From: xitami-bounces at lists.xitami.org
+> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of gs
+> Sent: Friday, May 30, 2008 6:34 AM
+> To: xitami at lists.xitami.org
+> Subject: [Xitami] VISTA
+>
+>  
+>
+> I pulled back to version 2.4 and it solved the crash problems I was having
+> on VISTA.
+>
+> The basic problem with VISTA is the security "enhancements".  I have to
+> disable most of the new enhancements to use VISTA.
+>
+> Gary Sandow
+>
+> No virus found in this incoming message.
+> Checked by AVG.
+> Version: 8.0.100 / Virus Database: 269.24.4/1473 - Release Date: 5/29/2008
+> 7:53 PM
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>   
+
+
+From rolinger1 at hotmail.com  Fri Jun  6 00:27:48 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu, 5 Jun 2008 15:27:48 -0700
+Subject: [Xitami] VISTA
+References: <000501c8c240$9c9057e0$6401a8c0@Gary><006101c8c752$a3229f20$e967dd60$@net>
+	<5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+Message-ID: <BAY127-DAV5ACA2EA5C7631C60BA605F8B40@phx.gbl>
+
+I am running 2.4d9 on a Windows 2k3 advanced server, prior to that the same 
+version was running on W2K Server - on both OSs I rarely ever encountered 
+Xitami hangs or service reloads.  And most of thhose were the CGI 
+interpreter causing Perl errors (typically due to server load issues) that 
+would knock things off line.
+
+However, I do have the 'auto-restart' option enabled in the Xitami .cfg file 
+and I also have the the Windows Service set to restart in case of a service 
+hang/failure.  But for the most part, my Xitami logs go months before they 
+are recylced due to a service restart.  If anything, the majority of my 
+problems were related to Windows OS itself hanging and causing a system 
+reboot.
+
+-R
+
+----- Original Message ----- 
+From: "Stuart Hands" <shands at redlineuk.com>
+To: "'Xitami Users General Discussion'" <xitami at lists.xitami.org>
+Sent: Thursday, June 05, 2008 2:44 PM
+Subject: Re: [Xitami] VISTA
+
+
+> Out of interest, (after suffering myself from Xitami dying every now and
+> again under Win2k3 server), have you installed Xitami as a service on this
+> box? ("xisrv32 -install"). If so, check the properties of the service
+> (funnily enough, Microsoft allowed for the eventuality that services might
+> stop responding and die!!). Check out the properties of the Xitiami 
+> service
+> and look in the 'Recovery' tab. Simply change the First Failure, Second
+> Failure and Subsequent Failures to 'Restart Service' (hell - why not?!)
+>
+> One other thing that helped me an awful lot was the "recover=" parameter 
+> in
+> xitami.cfg. Not quite sure of the mileage in this one though.
+>
+> Cheers,
+> Stuart
+>
+> PS. As for dead HD's - you've got yourself a bad one if it's only from 
+> 2003!
+> Mind you, was there a drive on the market in 2003 big enough to hold a
+> minimal fresh install of the heavily code-bloated Vista? Why's it bloated
+> you ask? Because it's full of: "Do you want to do this?" "Yes" "Do you
+> REALLY want to do this?" "Yes" "Windows thinks this is idea and has 
+> stopped
+> it anyway" "Darn.."
+>
+>
+>
+>
+> ________________________________
+>
+> From: xitami-bounces at lists.xitami.org
+> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of Ron Ackerman
+> Sent: 05 June 2008 22:25
+> To: 'Xitami Users General Discussion'
+> Subject: Re: [Xitami] VISTA
+>
+>
+>
+> Well after a few days of fighting, turning off security features, another
+> bad hard drive and shear persistence things seem to be running fairly
+> smoothly. Xitami still dumps from time to time but Always Up turns it back
+> on.  Hard telling what the bad hard drive was causing but dumps seem to
+> happen less often.  Funny these drives don't last forever.LOL. I think 
+> this
+> one goes back to 2003 or farther.
+>
+>
+>
+> Anyway back in business,
+>
+>
+>
+> Cheers,
+>
+> Ron
+>
+>
+>
+> From: xitami-bounces at lists.xitami.org
+> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of gs
+> Sent: Friday, May 30, 2008 6:34 AM
+> To: xitami at lists.xitami.org
+> Subject: [Xitami] VISTA
+>
+>
+>
+> I pulled back to version 2.4 and it solved the crash problems I was having
+> on VISTA.
+>
+> The basic problem with VISTA is the security "enhancements".  I have to
+> disable most of the new enhancements to use VISTA.
+>
+> Gary Sandow
+>
+> No virus found in this incoming message.
+> Checked by AVG.
+> Version: 8.0.100 / Virus Database: 269.24.4/1473 - Release Date: 5/29/2008
+> 7:53 PM
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From hogan at geeksgalore.ca  Fri Jun  6 00:33:46 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Thu, 05 Jun 2008 18:33:46 -0400
+Subject: [Xitami] VISTA
+In-Reply-To: <BAY127-DAV5ACA2EA5C7631C60BA605F8B40@phx.gbl>
+References: <000501c8c240$9c9057e0$6401a8c0@Gary><006101c8c752$a3229f20$e967dd60$@net>	<5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+	<BAY127-DAV5ACA2EA5C7631C60BA605F8B40@phx.gbl>
+Message-ID: <484869CA.4090508@geeksgalore.ca>
+
+wish I could help?  Runs flawless here on many flavors???
+I would suggest just running a XP box or a Linux box and dedicate it to 
+the cause.
+
+
+Russel Olinger wrote:
+> I am running 2.4d9 on a Windows 2k3 advanced server, prior to that the same 
+> version was running on W2K Server - on both OSs I rarely ever encountered 
+> Xitami hangs or service reloads.  And most of thhose were the CGI 
+> interpreter causing Perl errors (typically due to server load issues) that 
+> would knock things off line.
+>
+> However, I do have the 'auto-restart' option enabled in the Xitami .cfg file 
+> and I also have the the Windows Service set to restart in case of a service 
+> hang/failure.  But for the most part, my Xitami logs go months before they 
+> are recylced due to a service restart.  If anything, the majority of my 
+> problems were related to Windows OS itself hanging and causing a system 
+> reboot.
+>
+> -R
+>
+> ----- Original Message ----- 
+> From: "Stuart Hands" <shands at redlineuk.com>
+> To: "'Xitami Users General Discussion'" <xitami at lists.xitami.org>
+> Sent: Thursday, June 05, 2008 2:44 PM
+> Subject: Re: [Xitami] VISTA
+>
+>
+>   
+>> Out of interest, (after suffering myself from Xitami dying every now and
+>> again under Win2k3 server), have you installed Xitami as a service on this
+>> box? ("xisrv32 -install"). If so, check the properties of the service
+>> (funnily enough, Microsoft allowed for the eventuality that services might
+>> stop responding and die!!). Check out the properties of the Xitiami 
+>> service
+>> and look in the 'Recovery' tab. Simply change the First Failure, Second
+>> Failure and Subsequent Failures to 'Restart Service' (hell - why not?!)
+>>
+>> One other thing that helped me an awful lot was the "recover=" parameter 
+>> in
+>> xitami.cfg. Not quite sure of the mileage in this one though.
+>>
+>> Cheers,
+>> Stuart
+>>
+>> PS. As for dead HD's - you've got yourself a bad one if it's only from 
+>> 2003!
+>> Mind you, was there a drive on the market in 2003 big enough to hold a
+>> minimal fresh install of the heavily code-bloated Vista? Why's it bloated
+>> you ask? Because it's full of: "Do you want to do this?" "Yes" "Do you
+>> REALLY want to do this?" "Yes" "Windows thinks this is idea and has 
+>> stopped
+>> it anyway" "Darn.."
+>>
+>>
+>>
+>>
+>> ________________________________
+>>
+>> From: xitami-bounces at lists.xitami.org
+>> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of Ron Ackerman
+>> Sent: 05 June 2008 22:25
+>> To: 'Xitami Users General Discussion'
+>> Subject: Re: [Xitami] VISTA
+>>
+>>
+>>
+>> Well after a few days of fighting, turning off security features, another
+>> bad hard drive and shear persistence things seem to be running fairly
+>> smoothly. Xitami still dumps from time to time but Always Up turns it back
+>> on.  Hard telling what the bad hard drive was causing but dumps seem to
+>> happen less often.  Funny these drives don't last forever.LOL. I think 
+>> this
+>> one goes back to 2003 or farther.
+>>
+>>
+>>
+>> Anyway back in business,
+>>
+>>
+>>
+>> Cheers,
+>>
+>> Ron
+>>
+>>
+>>
+>> From: xitami-bounces at lists.xitami.org
+>> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of gs
+>> Sent: Friday, May 30, 2008 6:34 AM
+>> To: xitami at lists.xitami.org
+>> Subject: [Xitami] VISTA
+>>
+>>
+>>
+>> I pulled back to version 2.4 and it solved the crash problems I was having
+>> on VISTA.
+>>
+>> The basic problem with VISTA is the security "enhancements".  I have to
+>>     
+>   
+
+<http://www.clixGalore.com/default.asp>
+
+
+
+From gs at sandow.com  Fri Jun  6 13:24:51 2008
+From: gs at sandow.com (gs)
+Date: Fri, 6 Jun 2008 07:24:51 -0400
+Subject: [Xitami] VISTA, crashes, etc.
+Message-ID: <000b01c8c7c7$effc0730$6401a8c0@Gary>
+
+I have Xitami running on several machines at several locations.  All but one
+are running XP sp2.  The exception is running VISTA.  I get a rare crash at
+all but one site.  That site is the most stable and I don't have a clue why.
+It is running a raid drive array (the only site that does) so that might be
+the reason.
+
+Most of my CGI processes are written in VB 6 sp2.  I do have a few BATs that
+do utility things like back-ups and kick of sessions in a database that
+supports this feature.  All that works exceptionally well.  I use Xitami
+for more than just web sites.  It is the server that puts in nTier in my
+network.  I have my home grown server that operates as a fileserver and I
+use that on ports other than 80.  The reason I use Ximati for a fileserver
+enabler is that some of my user's company policy does not allow a tunnel
+through their firewall for any other port.  Besides, Ximati works so well
+for that it's hard to ignore it.
+
+All the above brings me to my point.  Since an unrecovered crash is so bad
+for me, I just wrote a VB routine to access the site via winhttp ever
+minute.  If it fails to get a response it will become visual, warn the
+person using the machine that it will reboot in 1 minute.  If the user does
+not abort the reboot it reboots and Xitami restarts on the reboot.  I don't
+attempt to clear the error nor restart Xitami, it's just cleaner to reboot.
+I have the option to have it send me a text message to my cell phone to tell
+me.
+
+If anyone would like to have a copy of the VB executablable I'll modify it
+(right now I hardcode the url) so that you can configure it for the url you
+want checked.  Just let me know and I'll do the mod and post it to my
+website.
+
+http://www.sandow.com
+
+Gary Sandow
+813.300.4539
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080606/f59d6b0c/attachment.html 
+
+From gs at sandow.com  Fri Jun  6 14:23:37 2008
+From: gs at sandow.com (gs)
+Date: Fri, 6 Jun 2008 08:23:37 -0400
+Subject: [Xitami] Web Server crashes - selfboot
+Message-ID: <001001c8c7d0$25f5f460$6401a8c0@Gary>
+
+To follow up on my earlier post:  READ THE README file before you install
+this VB routine.
+
+http://www.sandow.com/oe/selfboot.htm
+
+Gary Sandow
+813.300.4539
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080606/de7de457/attachment.htm 
+
+From ronackgen01 at bellsouth.net  Fri Jun  6 17:29:56 2008
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Fri, 6 Jun 2008 11:29:56 -0400
+Subject: [Xitami] VISTA
+In-Reply-To: <5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+References: <000501c8c240$9c9057e0$6401a8c0@Gary>	<006101c8c752$a3229f20$e967dd60$@net>
+	<5A11850922494085A18B30E7B0912FE4@handsfamily.com>
+Message-ID: <008401c8c7ea$2d7339e0$8859ada0$@net>
+
+I'm running the xigui32.exe. I had issues with running it as a service. I
+don't think I have the auto recover option enabled. Maybe that's why others
+don't seem to have a problem. I will check that. 
+
+
+Actually I just looked at the drive and it's a 60gb dated 2001 and all it
+had on it was the web server and everything that went with the web server
+like mySQL, PHP, Webalizer etc. Now I have a 500gb for the main drive, a
+120gb, two 320gb external USB drives and two 320gb Network drives. I
+restored the web server from backup and it's backed up to one of the network
+drives. The 120gb is almost full of...well... JUNK! One of the 320 Network
+drives is almost full of all the backups of the other drives and my wife's
+computer.   
+
+
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Stuart Hands
+Sent: Thursday, June 05, 2008 5:44 PM
+To: 'Xitami Users General Discussion'
+Subject: Re: [Xitami] VISTA
+
+Out of interest, (after suffering myself from Xitami dying every now and
+again under Win2k3 server), have you installed Xitami as a service on this
+box? ("xisrv32 -install"). If so, check the properties of the service
+(funnily enough, Microsoft allowed for the eventuality that services might
+stop responding and die!!). Check out the properties of the Xitiami service
+and look in the 'Recovery' tab. Simply change the First Failure, Second
+Failure and Subsequent Failures to 'Restart Service' (hell - why not?!)
+
+One other thing that helped me an awful lot was the "recover=" parameter in
+xitami.cfg. Not quite sure of the mileage in this one though.
+
+Cheers,
+Stuart
+
+PS. As for dead HD's - you've got yourself a bad one if it's only from 2003!
+Mind you, was there a drive on the market in 2003 big enough to hold a
+minimal fresh install of the heavily code-bloated Vista? Why's it bloated
+you ask? Because it's full of: "Do you want to do this?" "Yes" "Do you
+REALLY want to do this?" "Yes" "Windows thinks this is idea and has stopped
+it anyway" "Darn.."
+
+
+
+
+________________________________
+
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Ron Ackerman
+Sent: 05 June 2008 22:25
+To: 'Xitami Users General Discussion'
+Subject: Re: [Xitami] VISTA
+
+
+
+Well after a few days of fighting, turning off security features, another
+bad hard drive and shear persistence things seem to be running fairly
+smoothly. Xitami still dumps from time to time but Always Up turns it back
+on.  Hard telling what the bad hard drive was causing but dumps seem to
+happen less often.  Funny these drives don't last forever.LOL. I think this
+one goes back to 2003 or farther. 
+
+ 
+
+Anyway back in business,
+
+ 
+
+Cheers,
+
+Ron
+
+ 
+
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of gs
+Sent: Friday, May 30, 2008 6:34 AM
+To: xitami at lists.xitami.org
+Subject: [Xitami] VISTA
+
+ 
+
+I pulled back to version 2.4 and it solved the crash problems I was having
+on VISTA.
+
+The basic problem with VISTA is the security "enhancements".  I have to
+disable most of the new enhancements to use VISTA.
+
+Gary Sandow
+
+No virus found in this incoming message.
+Checked by AVG.
+Version: 8.0.100 / Virus Database: 269.24.4/1473 - Release Date: 5/29/2008
+7:53 PM
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+No virus found in this incoming message.
+Checked by AVG. 
+Version: 8.0.100 / Virus Database: 270.0.0/1485 - Release Date: 6/5/2008
+10:07 AM
+
+
+From rolinger1 at hotmail.com  Fri Jun  6 17:34:32 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Fri, 6 Jun 2008 08:34:32 -0700
+Subject: [Xitami] VISTA, crashes, etc.
+References: <000b01c8c7c7$effc0730$6401a8c0@Gary>
+Message-ID: <BAY127-DAV3C1BC3822596E4A457EA4F8B70@phx.gbl>
+
+VISTA, crashes, etc.What 'user' are you referring to?  The way it reads is that any user accessing the site, the first one to see the message has the option to abort your reboot or allow it to happen...can you clarify that?  That sounds a tad unsecure.
+
+With all that effort, why not just use your script to stop and restart the Xitami service - if it doesn't recover after that, then have the system reboot. 9 out of 10 times, a service restart fixes the problem - its quicker, cleaner and less intrusive.
+
+-R
+
+  ----- Original Message ----- 
+  From: gs 
+  To: xitami at lists.xitami.org 
+  Sent: Friday, June 06, 2008 4:24 AM
+  Subject: [Xitami] VISTA, crashes, etc.
+
+
+  I have Xitami running on several machines at several locations.  All but one are running XP sp2.  The exception is running VISTA.  I get a rare crash at all but one site.  That site is the most stable and I don't have a clue why.  It is running a raid drive array (the only site that does) so that might be the reason.
+
+
+  Most of my CGI processes are written in VB 6 sp2.  I do have a few BATs that do utility things like back-ups and kick of sessions in a database that supports this feature.  All that works exceptionally well.  I use Xitami  for more than just web sites.  It is the server that puts in nTier in my network.  I have my home grown server that operates as a fileserver and I use that on ports other than 80.  The reason I use Ximati for a fileserver enabler is that some of my user's company policy does not allow a tunnel through their firewall for any other port.  Besides, Ximati works so well for that it's hard to ignore it.
+
+  All the above brings me to my point.  Since an unrecovered crash is so bad for me, I just wrote a VB routine to access the site via winhttp ever minute.  If it fails to get a response it will become visual, warn the person using the machine that it will reboot in 1 minute.  If the user does not abort the reboot it reboots and Xitami restarts on the reboot.  I don't attempt to clear the error nor restart Xitami, it's just cleaner to reboot.
+
+  I have the option to have it send me a text message to my cell phone to tell me.
+
+  If anyone would like to have a copy of the VB executablable I'll modify it (right now I hardcode the url) so that you can configure it for the url you want checked.  Just let me know and I'll do the mod and post it to my website.
+
+  http://www.sandow.com
+
+  Gary Sandow
+
+  813.300.4539
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080606/4d834aeb/attachment.htm 
+
+From preid at rci.rutgers.edu  Fri Jun  6 18:10:27 2008
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Fri, 06 Jun 2008 12:10:27 -0400
+Subject: [Xitami] VISTA, crashes, etc.
+In-Reply-To: <BAY127-DAV3C1BC3822596E4A457EA4F8B70@phx.gbl>
+References: <000b01c8c7c7$effc0730$6401a8c0@Gary>
+	<BAY127-DAV3C1BC3822596E4A457EA4F8B70@phx.gbl>
+Message-ID: <48496173.40103@rci.rutgers.edu>
+
+ > The way it reads is that any user accessing the site, the first one 
+to see the message has the option to abort your reboot
+
+"a VB routine to access the site via winhttp ever minute.  If it fails 
+to get a response it will become visual, warn the person using the 
+machine that it will reboot in 1 minute.  If the user does not abort the 
+reboot it reboots and Xitami restarts on the reboot."
+
+Says to me that he runs the webserver in the background on a workstation 
+which may have a colleague *sitting at it*.
+
+Back in the late 1980s, I ran servers in workstations. A 286 can do 
+NetWare 2 and WordStar at the same time. And you could rig it so NW 
+errors did, or did-not, get posted to the screen for the user's 
+attention. At home I often ran Xitami just for local uses.
+
+I suspect that a dedicated machine is usually a better plan than a 
+user-workstation. Users tend to flog windows (yes, and unixes) into a 
+jam once a month, while my server-only machines run many months.
+
+OTOH, if a machine has a regular user, and the power blips or a re-start 
+stalls, the user will do something (kick it, hard restart, or call 
+Gary). One of my low-use unattended machines was down for a day and I 
+didn't know.
+
+ > 9 out of 10 times, a service restart fixes the problem
+
+In NT4 and up, yes, service restart usually clears the problem. (I don't 
+know Vista.)
+
+-- 
+Paul Reid
+
+From rolinger1 at hotmail.com  Fri Jun  6 18:25:06 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Fri, 6 Jun 2008 09:25:06 -0700
+Subject: [Xitami] VISTA, crashes, etc.
+References: <000b01c8c7c7$effc0730$6401a8c0@Gary><BAY127-DAV3C1BC3822596E4A457EA4F8B70@phx.gbl>
+	<48496173.40103@rci.rutgers.edu>
+Message-ID: <BAY127-DAV57D3632DCAAEC95201BA4F8B70@phx.gbl>
+
+You said WordStar - you're my hero.  People often ask me what got me started 
+in computers, and routinely point out my first days on a computer using 
+WordStar.  Most have no idea what it is or what it was.  But I can honestly 
+say that using WordStar (a summer job doing word processing (I could type 
+fast) for a company that took printed federal regulations codes and put them 
+on disk for gov't contractors) got me familiar with keyboard interaction and 
+more importantly a fundamental understanding of coding.  WordStar is almost 
+like HTML in a sense where ".b blah blah blah blah .b" would bold the line 
+(or what ever the syntax was), it was those kind of associations that 
+literally made something in my mind go "click: ah I get it!" and then after 
+that I sought out Pascal to begin teaching myself programming.
+
+18 years later I am an accomplished sr level network engineer, routinely 
+program in JS/PHP/Perl/MySQL etc, run my own web based businesses.  All of 
+which is self taught (as I was a History major in college) and I still smile 
+when some one asks how I got started in computers.  I grin with a bit of 
+fondness as I answer: "WordStar"
+
+ah, the memories.  :-)
+-R
+----- Original Message ----- 
+From: "Paul Reid" <preid at rci.rutgers.edu>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Friday, June 06, 2008 9:10 AM
+Subject: Re: [Xitami] VISTA, crashes, etc.
+
+
+> > The way it reads is that any user accessing the site, the first one
+> to see the message has the option to abort your reboot
+>
+> "a VB routine to access the site via winhttp ever minute.  If it fails
+> to get a response it will become visual, warn the person using the
+> machine that it will reboot in 1 minute.  If the user does not abort the
+> reboot it reboots and Xitami restarts on the reboot."
+>
+> Says to me that he runs the webserver in the background on a workstation
+> which may have a colleague *sitting at it*.
+>
+> Back in the late 1980s, I ran servers in workstations. A 286 can do
+> NetWare 2 and WordStar at the same time. And you could rig it so NW
+> errors did, or did-not, get posted to the screen for the user's
+> attention. At home I often ran Xitami just for local uses.
+>
+> I suspect that a dedicated machine is usually a better plan than a
+> user-workstation. Users tend to flog windows (yes, and unixes) into a
+> jam once a month, while my server-only machines run many months.
+>
+> OTOH, if a machine has a regular user, and the power blips or a re-start
+> stalls, the user will do something (kick it, hard restart, or call
+> Gary). One of my low-use unattended machines was down for a day and I
+> didn't know.
+>
+> > 9 out of 10 times, a service restart fixes the problem
+>
+> In NT4 and up, yes, service restart usually clears the problem. (I don't
+> know Vista.)
+>
+> -- 
+> Paul Reid
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From ibjr at ecvnet.com  Thu Jun  5 21:33:53 2008
+From: ibjr at ecvnet.com (IRJR)
+Date: Thu, 5 Jun 2008 12:33:53 -0700
+Subject: [Xitami] Xitami redirect function
+Message-ID: <002901c8c743$18380580$1401a8c0@p4>
+
+I've been trying to figure out how to use the redirect function as described 
+in the xitami.cfg file, but just do not understand the explanation on how to 
+use it.  Up til now I've been using java to do my redirects, but java seems 
+to have a problem in returning to the previous URL after the redirect.
+So far, I can get Xitami to redirect a page I created in C:\xitami\webpages 
+by creating a [redirect] section to defaults.cfg and adding line to it like 
+so:  /mypage.html = http://www.somewhere.com , but I cannot get it to 
+redirect the same file (mypage.html) if I place it in any other folder or 
+virtual domain. I use a lot of cgi, and do not use php. Can someone give me 
+an example on how this should be done in Xitami? Thanks....... JR 
+
+
+
+From hfufna at tin.it  Sat Jun 14 20:01:50 2008
+From: hfufna at tin.it (GN)
+Date: Sat, 14 Jun 2008 20:01:50 +0200
+Subject: [Xitami]  VISTA, crashes, etc.
+Message-ID: <002501c8ce48$b8a18760$e301a8c0@scaleoj>
+
+>If anyone would like to have a copy of the VB executablable I'll modify it
+>(right now I hardcode the url) so that you can configure it for the url you
+>want checked.  Just let me know and I'll do the mod and post it to my
+>website.
+
+Yes,please.
+I thought to be one of the few still using xitami, at leasr in this part of the world...
+I use DBMax (an xBase dialecr) as scripting language for xitami, and I run xitami on several sites (two are expecially large) since 2001,
+
+Now I moved to Vista, using a virtual machine (VMWare) running XP FLP and I'm QUITE satisfied! It really shines.
+
+Thank you in advance
+
+GN
+Florence - ITALY
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080614/239230c4/attachment.htm 
+
+From gs at sandow.com  Sun Jun 15 13:02:38 2008
+From: gs at sandow.com (gs)
+Date: Sun, 15 Jun 2008 07:02:38 -0400
+Subject: [Xitami] VISTA, crashes, etc.
+In-Reply-To: <002501c8ce48$b8a18760$e301a8c0@scaleoj>
+References: <002501c8ce48$b8a18760$e301a8c0@scaleoj>
+Message-ID: <000401c8ced7$5311dff0$6401a8c0@Gary>
+
+Cannot be downloaded from:
+
+ 
+
+http://www.sandow.com/oe/selfboot.htm
+
+ 
+
+ 
+
+  _____  
+
+From: GN [mailto:hfufna at tin.it] 
+Sent: Saturday, June 14, 2008 2:02 PM
+To: xitami at lists.xitami.org
+Subject: [Xitami] VISTA, crashes, etc.
+
+ 
+
+>If anyone would like to have a copy of the VB executablable I'll modify it
+>(right now I hardcode the url) so that you can configure it for the url you
+>want checked.  Just let me know and I'll do the mod and post it to my
+>website.
+
+ 
+
+Yes,please.
+
+I thought to be one of the few still using xitami, at leasr in this part of
+the world...
+
+I use DBMax (an xBase dialecr) as scripting language for xitami, and I run
+xitami on several sites (two are expecially large) since 2001,
+
+ 
+
+Now I moved to Vista, using a virtual machine (VMWare) running XP FLP and
+I'm QUITE satisfied! It really shines.
+
+ 
+
+Thank you in advance
+
+ 
+
+GN
+
+Florence - ITALY
+
+ 
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080615/4c231368/attachment.htm 
+
+From gs at sandow.com  Mon Jun 16 12:29:23 2008
+From: gs at sandow.com (gs)
+Date: Mon, 16 Jun 2008 06:29:23 -0400
+Subject: [Xitami] VISTA, crashes, etc.
+In-Reply-To: <000401c8ced7$5311dff0$6401a8c0@Gary>
+References: <002501c8ce48$b8a18760$e301a8c0@scaleoj>
+	<000401c8ced7$5311dff0$6401a8c0@Gary>
+Message-ID: <000401c8cf9b$d8e69610$6401a8c0@Gary>
+
+s/b can be downloaded.  I should proof read before clicking SEND.
+
+ 
+
+  _____  
+
+From: gs [mailto:gs at sandow.com] 
+Sent: Sunday, June 15, 2008 7:03 AM
+To: 'Xitami Users General Discussion'
+Subject: Re: [Xitami] VISTA, crashes, etc.
+
+ 
+
+Cannot be downloaded from:
+
+ 
+
+http://www.sandow.com/oe/selfboot.htm
+
+ 
+
+ 
+
+  _____  
+
+From: GN [mailto:hfufna at tin.it] 
+Sent: Saturday, June 14, 2008 2:02 PM
+To: xitami at lists.xitami.org
+Subject: [Xitami] VISTA, crashes, etc.
+
+ 
+
+>If anyone would like to have a copy of the VB executablable I'll modify it
+>(right now I hardcode the url) so that you can configure it for the url you
+>want checked.  Just let me know and I'll do the mod and post it to my
+>website.
+
+ 
+
+Yes,please.
+
+I thought to be one of the few still using xitami, at leasr in this part of
+the world...
+
+I use DBMax (an xBase dialecr) as scripting language for xitami, and I run
+xitami on several sites (two are expecially large) since 2001,
+
+ 
+
+Now I moved to Vista, using a virtual machine (VMWare) running XP FLP and
+I'm QUITE satisfied! It really shines.
+
+ 
+
+Thank you in advance
+
+ 
+
+GN
+
+Florence - ITALY
+
+ 
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080616/3f947f07/attachment.htm 
+

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Xitami Admin access?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004689.html">
+   <LINK REL="Next"  HREF="004675.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Xitami Admin access?
+   </H1>
+    <B>nikiboy
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Xitami Admin access?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 6 Feb 2003 12:27:37 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004689.html">[Xitami] Xitami Admin access?
+</A></li>
+        <LI> Next message: <A HREF="004675.html">[Xitami] Xitami Admin access?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4690">[ date ]</a>
+              <a href="thread.html#4690">[ thread ]</a>
+              <a href="subject.html#4690">[ subject ]</a>
+              <a href="author.html#4690">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OH&gt; I added in the Filter section (xitami.cfg) the following line:
+OH&gt; [Filter]
+OH&gt; .php=d:\php3\php.exe
+
+OH&gt; but the .php pages do not work. 
+
+Try to put testssi.ssi and testssi.inc in this folder and see what happen.
+If it's OK that a problem in the PHP parser differently problem in the
+server.
+
+I have found this error in the 2.4d9 version. The server not correctly
+transmits pathes for filters and scripts you will use aliases.
+
+============= default.ini ==============
+[Alias]
+    /ftp/pub=d:/my.doc/xitami/ftp_root/pub ;path where I put my test.php
+
+[Filter]
+    .php=d:\my.tls\php\php.bat ;that only catches an environment
+
+============= php.bat ==============
+set &gt; env.txt
+
+============= URL ==============
+<A HREF="http://localhost/ftp/pub/test.php">http://localhost/ftp/pub/test.php</A>
+
+============= PHP environment ==============
+DOCUMENT_ROOT=d:/my.doc/xitami/http_root
+PATH_TRANSLATED=d:/my.doc/xitami/http_root/ftp/pub/php.php ;ERROR!!!!!
+
+SCRIPT_NAME=/ftp/pub/php.php
+SCRIPT_PATH=d:/my.doc/xitami/ftp_root/pub
+SERVER_VERSION=2.4d9
+SERVER_SOFTWARE=Xitami
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004689.html">[Xitami] Xitami Admin access?
+</A></li>
+	<LI> Next message: <A HREF="004675.html">[Xitami] Xitami Admin access?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4690">[ date ]</a>
+              <a href="thread.html#4690">[ thread ]</a>
+              <a href="subject.html#4690">[ subject ]</a>
+              <a href="author.html#4690">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

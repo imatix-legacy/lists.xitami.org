@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] W3C Log file format and custom formats
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004466.html">
+   <LINK REL="Next"  HREF="004468.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] W3C Log file format and custom formats
+   </H1>
+    <B>B. Solomon
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] W3C Log file format and custom formats">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 15 Dec 2002 17:38:30 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004466.html">[Xitami] W3C Log file format
+</A></li>
+        <LI> Next message: <A HREF="004468.html">Fwd: Re: [Xitami] virual domain admin issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4486">[ date ]</a>
+              <a href="thread.html#4486">[ thread ]</a>
+              <a href="subject.html#4486">[ subject ]</a>
+              <a href="author.html#4486">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=======48C76AF2=======
+Content-Type: text/plain; x-avg-checked=avg-ok-76BD42CA; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Normally, when I answer my own question, I have a bad habit of not sharing 
+with the list.  Lately, however, it appears that the regular repliers, 
+aren't either.
+
+After playing with several products this is what I have learned:
+
+- 2.4d9 does not support custom log formats.  It's broke.
+- 2.5b5 does.
+- W3C format is IIS's default log format.  There aren't many web server's 
+to-date that can write in W3C format (including Apache) and here's why: The 
+format consists of several lines of comments at the head of each rotated 
+log file, similar to this:
+
+======================
+#Version: 1.0
+#Date: 12-Jan-1996 00:00:00
+#Fields: time cs-method cs-uri
+00:34:23 GET /foo/bar.html
+12:21:16 GET /foo/bar.html
+12:45:52 GET /foo/bar.html
+12:57:34 GET /foo/bar.html
+======================
+
+W3C is IMHO a pretty robust format, but impossible to duplicate.  These 
+comments are critical to understanding the W3C log format; especially 
+#Fields.  The format allows any field, in any order, as long as it's 
+declared at the beginnin of the log file.
+
+2nd reason is, Xitami (and I think Apache, too) don't separate the &quot;method&quot; 
+from the &quot;uri&quot;, where &quot;method&quot; is the &quot;GET&quot; or &quot;POST&quot; part of the request, 
+and the &quot;uri&quot; is the &quot;/foo/bar.html&quot;.  In Xitami it's just $(request) for 
+both concatenated.
+
+More specifically, with W3C you could do:
+=========================
+#Fields: time cs-uri
+00:34:23 /foo/bar.html
+12:21:16 /foo/bar.html
+12:45:52 /foo/bar.html
+=========================
+
+With Xitami you can't:
+$(time) $(request)
+=========================
+00:34:23 GET /foo/bar.html
+12:21:16 GET /foo/bar.html
+12:45:52 GET /foo/bar.html
+=========================
+
+So unless a custom format allows you to place comments at the top, and 
+allow you to separate the &quot;method&quot; from the &quot;uri&quot;, Xitami can't do it.  But 
+don't feel too bad, Apache can't either.
+
+
+Hope this helps anyone else out.
+
+Benjamin Solomon
+<A HREF="mailto:wire@austin.rr.com">wire@austin.rr.com</A>
+
+
+
+At 03:38 PM 12/12/2002, you wrote:
+&gt;<i>Is there a way to have Xitami create logs in the W3C log file format?
+</I>&gt;<i>
+</I>&gt;<i>Or more specifically, I want to separate the cs-method from the URI-stem 
+</I>&gt;<i>and everytime logs are rotated, put about 4 lines of comments in the top 
+</I>&gt;<i>of of the log file.
+</I>&gt;<i>
+</I>&gt;<i>Any way to do this or any plans for Xitami to do this?
+</I>&gt;<i>
+</I>&gt;<i>Benjamin Solomon
+</I>&gt;<i><A HREF="mailto:wire@austin.rr.com">wire@austin.rr.com</A>
+</I>&gt;<i>---
+</I>&gt;<i>Outgoing mail is certified Virus Free.
+</I>&gt;<i>Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+</I>&gt;<i>Version: 6.0.427 / Virus Database: 240 - Release Date: 12/6/2002
+</I>
+--=======48C76AF2=======
+Content-Type: text/plain; charset=us-ascii; x-avg=cert; x-avg-checked=avg-ok-76BD42CA
+Content-Disposition: inline
+
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.427 / Virus Database: 240 - Release Date: 12/6/2002
+
+--=======48C76AF2=======--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004466.html">[Xitami] W3C Log file format
+</A></li>
+	<LI> Next message: <A HREF="004468.html">Fwd: Re: [Xitami] virual domain admin issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4486">[ date ]</a>
+              <a href="thread.html#4486">[ thread ]</a>
+              <a href="subject.html#4486">[ subject ]</a>
+              <a href="author.html#4486">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI Implementation: buggy?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000512.html">
+   <LINK REL="Next"  HREF="000520.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI Implementation: buggy?
+   </H1>
+    <B>Julian Rickards
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI Implementation: buggy?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 26 Jul 2001 16:27:24 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000512.html">[Xitami] Off topic - SSI help wanted
+</A></li>
+        <LI> Next message: <A HREF="000520.html">[Xitami] Re: SSI Implementation: buggy?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#516">[ date ]</a>
+              <a href="thread.html#516">[ thread ]</a>
+              <a href="subject.html#516">[ subject ]</a>
+              <a href="author.html#516">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi:
+
+As some of you may have noticed, I placed an &quot;request for help&quot; in 
+this forum for help with SSI.  I did obtain some help from one person 
+but it did not resolve my problem.
+
+I have reviewed several SSI tutorials from the net but although the 
+set command is not described very often, from the few that I found 
+that described its use, it would appear that I am using it correctly.  I 
+am wondering if Xitami's implementation of SSI is either deficient or 
+has a bug in it.
+
+If I setup a link as follows:
+
+template.shtml?bodytext1.txt
+
+I can display the text after the question mark with the following:
+
+&lt;!--#echo var=&quot;QUERY_STRING&quot; --&gt;
+
+However, I want the QUERY_STRING text, in this case a filename, to 
+be the virtual filename as follows:
+
+&lt;!--#include virtual=&quot;QUERY_STRING&quot; --&gt;
+
+but I get nothing.  I have changed virtual to file but to no avail.  I 
+have used both absolute and relative paths and again, no success.
+
+When my instructor for my webmaster course showed us this trick, 
+he used a slightly different procedure whereby he &quot;set&quot; the contents 
+of a variable to be the QUERY_STRING as follows:
+
+&lt;!--#set var=&quot;bodycontentfile&quot; value=&quot;$QUERY_STRING&quot; --&gt;
+
+but when I try this using Xitami, I get an error that states:
+
+[xitami SSI: Can't open ssi file 
+O:/XITAMI/webpages/cuac/public_html/$QUERY_STRING]
+
+Any suggestions?
+
+Jules
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000512.html">[Xitami] Off topic - SSI help wanted
+</A></li>
+	<LI> Next message: <A HREF="000520.html">[Xitami] Re: SSI Implementation: buggy?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#516">[ date ]</a>
+              <a href="thread.html#516">[ thread ]</a>
+              <a href="subject.html#516">[ subject ]</a>
+              <a href="author.html#516">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

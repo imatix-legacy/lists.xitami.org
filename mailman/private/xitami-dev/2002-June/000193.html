@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] referrer
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000192.html">
+   <LINK REL="Next"  HREF="000194.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] referrer
+   </H1>
+    <B>bernd hohmann
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] referrer">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Mon, 03 Jun 2002 13:54:12 +0100 (MEZ)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000192.html">[Xitami-Dev] Trying to keep SMT and SFL
+</A></li>
+        <LI> Next message: <A HREF="000194.html">[Xitami-Dev] referrer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#193">[ date ]</a>
+              <a href="thread.html#193">[ thread ]</a>
+              <a href="subject.html#193">[ subject ]</a>
+              <a href="author.html#193">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>a user thinks that he has discovered a bug in xitami. i'm
+currently tracking it down but i'm a little bit confused. the
+application is a webmail interface.
+
+what happens ?
+
+1) user presses &quot;delete email&quot;
+
+2) webmail deletes the email and sends a &quot;301 Moved&quot; with a new
+location to the browser
+
+3) the browser requests the new location
+
+4) xitami answers with &quot;200 OK&quot;, but don't send the REFERRER
+field.
+
+5) webmail bumps the user to the login page because of a missing
+referrer.
+
+i have 2.5b5 in the debugger.
+
+neither &quot;put_standard_headers&quot; nor &quot;put_dynamic_headers&quot; are
+dealing with p_http-&gt;referrer.
+
+any hints where to look ?
+
+bernd
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000192.html">[Xitami-Dev] Trying to keep SMT and SFL
+</A></li>
+	<LI> Next message: <A HREF="000194.html">[Xitami-Dev] referrer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#193">[ date ]</a>
+              <a href="thread.html#193">[ thread ]</a>
+              <a href="subject.html#193">[ subject ]</a>
+              <a href="author.html#193">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

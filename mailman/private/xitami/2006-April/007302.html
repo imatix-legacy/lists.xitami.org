@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] thumbs.db
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20thumbs.db&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007298.html">
+   <LINK REL="Next"  HREF="007299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] thumbs.db</H1>
+    <B>rpo</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20thumbs.db&In-Reply-To="
+       TITLE="[Xitami] thumbs.db">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Tue Apr 25 20:08:38 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007298.html">[Xitami] thumbs.db
+</A></li>
+        <LI>Next message: <A HREF="007299.html">[Xitami] thumbs.db
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7302">[ date ]</a>
+              <a href="thread.html#7302">[ thread ]</a>
+              <a href="subject.html#7302">[ subject ]</a>
+              <a href="author.html#7302">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ok, NOW I understand what you are referring to, the first email was a bit vague in the origins of the &quot;thumbs.db&quot; file.  So, the &quot;thumbs.db&quot; file are created locally on the users machine as hidden files and get uploaded during drag/drop FTP sessions and clutter up your server with useless, hidden files.
+
+There are two ways to do this:
+    1.  Filter and prevent &quot;thumbs.db&quot; from being uploaded, this most likely will require another FTP server.  Xitami's FTP server is a) not that reliable b) very outdated c) and doesn't provide you any effective filtering methods and d) is no longer supported.
+    2.  Write an external script (perl/php/asp, etc) that combs your user and/or upload directories to find and delete the thumbs.db file.  Automate the runnning of the script by adding it to your &quot;scheduled task&quot; list.  Depending on the frequency of uploads, or the appearance of the thumbs.db file, I would run it at least once a day around 3am.
+
+Other than that, I am not certain what to suggest.
+
+-R
+
+  ----- Original Message ----- 
+  From: Rick Headly 
+  To: Xitami Users General Discussion 
+  Sent: Tuesday, April 25, 2006 9:01 AM
+  Subject: Re: [Xitami] thumbs.db
+
+
+  hmmm...
+      perhaps i should explain &quot;thumbs.db&quot;, and how (and where) it's originating.
+
+  i'm not sure what version of windows first introduced the thumbnail view of images within win-explorer (as an alternative to standard file icons), but it's this exact feature which creates and makes use of the &quot; thumbs.db&quot; files i describe.
+
+  for example, if you're viewing the contents of a folder in explorer, then reach up to the &quot;view&quot; menu and select &quot;thumbnail&quot;... the icons for all common graphics-types, will instantly become thumbnails-images.  some windows users simply keep their folder-view settings adjusted this way right across the board...  i believe, it may actually be the default folder-view with fresh windows installs.  (it's something that i always turn off immediately) 
+
+  regardless...  the moment that a windows user switches to the thumbnail-view, &quot;thumbs.db&quot; (a hidden system file) gets created within that folder... and acts as a thumbnail cache of sorts, so windows doesn't have to keep re-building the thumbnails each time the folder is viewed. 
+
+  (each and every folder will have it's own &quot;thumbs.db&quot; file, if/when applicable.)
+
+  it means that someone could easily have one folder with five jpeg images in it... and only be able to see a total of 5 files... but in actual fact, there are 6 (if you include the hidden &quot;thumbs.db&quot;).
+
+  if that entire folder (or a select-all of it's contents) is uploaded to my (xitami-only) server via ftp, all six files will transfer during the upload session (&quot;thumbs.db&quot; included)... and not just the 5 which were intended by the user.  these &quot; thumbs.db&quot; files aren't even visible to the user until after they've been uploaded... which causes most of them a great deal of confusion, if and when they are found.
+
+  if a folder is dragged and dropped into an ftp-session, it makes sense to me that all it's contents will be transferred with it, whether some of the file-attributes are set to &quot;hidden&quot; or not.
+
+  this brings me back to my original question actually... because i feel if i had a way to instruct xitami-ftp to simply disallow the upload of any file by the name &quot;thumbs.db&quot;, my problem would instantly be solved. 
+
+  i clearly understand what these files are, and how they are being uploaded by users on my system unintentionally... i just want to firewall them, if that's at all possible.
+
+  sorry if i've bored most of you with my lengthily description... but would really appreciate any advice that anyone here may be able to provide.  
+
+  thanks again,
+
+  rick
+
+   
+  On 4/25/06, RPO &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote: 
+    Interesting problem...are you using Xitami FTP or a different FTP server?  Are you certain this isn't an FTP server issue and not a windows issue?  I know that HTTP file uploading generates temp files in the windows designated temp folder (typicially: c:\temp ) What kind of files are being loaded - images? Does it matter the file type?  Can you force this &quot; thumbs.db&quot; file to a specific location.
+
+    To be honest, I haven't heard of anything like this before, other than the HTTP upload temp files, thus is the reason I think that this is an ftp server issue.
+
+
+    ----- Original Message ----- 
+    From: Rick Headly 
+    To: Xitami Users General Discussion 
+    Sent: Monday, April 24, 2006 6:08 PM
+    Subject: [Xitami] thumbs.db
+
+     
+
+    i have a handful of web-masters on my xitami service (all windows users), who regularly upload entire folder-loads of web-content (drag and drop), to their own 'uniquely assigned' web-space directories, via ftp.
+
+    this all seems to work well, but i'm constantly coming behind them, cleaning up and deleting useless (windows generated) &quot;thumbs.db&quot; files by the hundreds, which are strewn about the entire file-system, in scattered locations throughout.  they are a general nuisance really, and a complete waste of good resources, especially if they wind up getting indexed by search robots.  some robots will continue checking back for &quot; thumbs.db&quot; files repeatedly, even months after they've been deleted.
+
+    because &quot;thumbs.db&quot; is a hidden windows file, most of my users aren't even aware they exist... which makes it extremely difficult for some of them to understand exactly what they are, where they've come from, how they've become mixed with their web-site content, or why their existence so often generates various errors as they attempt to manipulate files on the server. 
+
+     - is there a way to set up a filter in xitami, which will prevent any files by the name of &quot;thumbs.db&quot; from being uploaded?
+
+    and if so:
+
+     - can it be set up to function transparently, so the user is never aware that any filtering or roll-off has taken place?
+
+    an example of such an edit, would be kindly appreciated,
+    thank you.
+
+    rick
+
+
+
+
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060425/b2056211/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20060425/b2056211/attachment.htm</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007298.html">[Xitami] thumbs.db
+</A></li>
+	<LI>Next message: <A HREF="007299.html">[Xitami] thumbs.db
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7302">[ date ]</a>
+              <a href="thread.html#7302">[ thread ]</a>
+              <a href="subject.html#7302">[ subject ]</a>
+              <a href="author.html#7302">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

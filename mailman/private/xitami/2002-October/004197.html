@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Alias not working?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004196.html">
+   <LINK REL="Next"  HREF="004201.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Alias not working?
+   </H1>
+    <B>Alex Frase
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Alias not working?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 29 Oct 2002 15:26:05 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004196.html">[Xitami] Alias not working?
+</A></li>
+        <LI> Next message: <A HREF="004201.html">[Xitami] Alias not working?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4197">[ date ]</a>
+              <a href="thread.html#4197">[ thread ]</a>
+              <a href="subject.html#4197">[ subject ]</a>
+              <a href="author.html#4197">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>For the aliased sites in question, try renaming the index.php file and 
+adding an index.html with some filler comment in it - I bet the alias will 
+start working, and you'll get your filler html file.  If so, I think you're 
+running into the same problem I did - I actually posted this to the list 
+about a week ago, but nobody ever replied.
+
+There appears to be a bug in Xitami that causes aliases and filters to 
+conflict - I also use PHP and tried to set up some aliases, and found that 
+when I accessed a php file via the normal document root it would work, and 
+when I accessed an html file through an alias it would work, but when I 
+tried to access a php file through an alias, it would return nothing.
+
+I downloaded the source package but was unable to fully isolate the bug - 
+all I know is that filters create temporary pipe????.flt files in your 
+system temp folder which contain the parsed output to send to the client, 
+and in the alias case, this file remains empty after the filter program was 
+called.
+
+Interestingly enough, there is actually a comment in the source code in the 
+module that sets up filter-handling that says it doesn't take aliases into 
+account - it would seem the designers already know this is a problem, and 
+just haven't gotten around to fixing it.  So, my advice is to email Xitami's 
+bug report address and ask them to.
+
+Alex
+
+----- Original Message -----
+From: &quot;James Emmrich&quot; &lt;<A HREF="mailto:jemmrich@lwp.ca">jemmrich@lwp.ca</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, October 29, 2002 1:45 PM
+Subject: [Xitami] Alias not working?
+
+Hi folks,
+I'm doing a lot of web development and would like to access any of my
+sites
+without having to change the default path setting everytime. I'm trying to
+use the ALIAS  settings to allow me this feature.
+
+Here is what I have in defaults.cfg:
+
+[Alias]
+    /gsinc/=C:\Websites\New GrainStoves
+    /mxc/=C:\Websites\TransCan\local_website\www_mxc
+[Filter]
+    .php=C:\PHP\php.exe
+[Security]
+    Filename=defaults.aut
+[Server]
+    Debug=1
+    Default1=index.php
+    Default2=index.html
+    Webpages=C:\Websites\
+
+How come I can't access those two sites by: <A HREF="Http://127.0.0.1/gsinc">Http://127.0.0.1/gsinc</A> or
+<A HREF="http://127.0.0.1/mxc">http://127.0.0.1/mxc</A> ?
+
+I'd appreiate any help,
+Thanks,
+James
+
+
+_________________________________________________________________
+Internet access plans that fit your lifestyle -- join MSN. 
+<A HREF="http://resourcecenter.msn.com/access/plans/default.asp">http://resourcecenter.msn.com/access/plans/default.asp</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004196.html">[Xitami] Alias not working?
+</A></li>
+	<LI> Next message: <A HREF="004201.html">[Xitami] Alias not working?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4197">[ date ]</a>
+              <a href="thread.html#4197">[ thread ]</a>
+              <a href="subject.html#4197">[ subject ]</a>
+              <a href="author.html#4197">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

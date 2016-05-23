@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] fresh php pages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003319.html">
+   <LINK REL="Next"  HREF="003306.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] fresh php pages
+   </H1>
+    <B>Trent Reimer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] fresh php pages">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 6 Jun 2002 12:25:56 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003319.html">[Xitami] Xitami Loaded
+</A></li>
+        <LI> Next message: <A HREF="003306.html">[Xitami] Xitami Loaded
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3324">[ date ]</a>
+              <a href="thread.html#3324">[ thread ]</a>
+              <a href="subject.html#3324">[ subject ]</a>
+              <a href="author.html#3324">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is coming well after the subject was introduced but Melle gave me a
+good idea for using PHP with Xitami and I found a way to automate it.
+
+The problem I was having was when the data a php file was changing, if the
+php file itself was not modified the browser would not request a &quot;fresh&quot;
+copy and would still see the old info. But there's an easy work around in
+the php.ini file.
+
+There's a section that looks like this:
+
+ auto_prepend_file =
+ auto_append_file =
+
+where any file you specify can be tacked onto every page. So I put this:
+
+&lt;?php
+
+// this is a prepend which doesn't allow the browser to cache PHP content
+
+header(&quot;Cache-Control: no-store, no-cache, must-revalidate&quot;);
+header(&quot;Cache-Control: post-check=0, pre-check=0&quot;, false);
+
+header(&quot;Pragma:no-cache&quot;); // for http 1.0 browsers
+
+?&gt;
+
+into a file called &quot;prepend.php&quot; and changed the php.ini to
+
+auto_prepend_file = prepend.php
+
+
+now I get the fresh info every call. Thanks to everyone who helped me on
+this one.
+
+Trent
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003319.html">[Xitami] Xitami Loaded
+</A></li>
+	<LI> Next message: <A HREF="003306.html">[Xitami] Xitami Loaded
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3324">[ date ]</a>
+              <a href="thread.html#3324">[ thread ]</a>
+              <a href="subject.html#3324">[ subject ]</a>
+              <a href="author.html#3324">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

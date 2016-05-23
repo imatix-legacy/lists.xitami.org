@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ssi/cgi weirdness
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003276.html">
+   <LINK REL="Next"  HREF="003281.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ssi/cgi weirdness
+   </H1>
+    <B>niall munnelly
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ssi/cgi weirdness">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 31 May 2002 15:30:34 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003276.html">[Xitami] Serving an (un)changed file.
+</A></li>
+        <LI> Next message: <A HREF="003281.html">[Xitami] ssi/cgi weirdness
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3280">[ date ]</a>
+              <a href="thread.html#3280">[ thread ]</a>
+              <a href="subject.html#3280">[ subject ]</a>
+              <a href="author.html#3280">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hello - 
+
+here's me:
+
+Xitami Web Server v2.5b4
+beos r5
+pentium ii 400 mhz
+384 mb ram
+
+
+i ran into a few snags with ssi and cgi stuffs today, maybe someone here can
+help (i'd sure be appreciative)...
+
+i've enabled the #exec function of SSI and it kicks out my little cgi program
+nicely enough:
+
+&lt;!--#exec cgi=&quot;/cgi-bin/nowplaying.cgi&quot;--&gt;
+
+playing now:
+i am spoonbender - mr. knife, miss fork - sender-receiver
+
+
+a duplicate page, using &lt;!--#include virtual=&quot;/cgi-bin/nowplaying.cgi&quot;--&gt;
+instead gives me this:
+
+playing now:
+#!/bin/sh
+
+current=`/boot/home/config/bin/wget -O - -q
+<A HREF="http://radio.vietnambla.com/nowplaying.html`">http://radio.vietnambla.com/nowplaying.html`</A>
+#echo Content-type: text/html
+echo
+echo $(echo $current | sed s/\/\ \-\ /g) echo
+
+
+outputting the actual executable, rather than the expected results.
+
+
+so there's part one.  part two:  
+
+&lt;!--#exec cmd=&quot;ls&quot;--&gt; (just for giggles, pwd doesn't work eother)
+
+yields this in the webpage:
+
+[xitami SSI: syntax error in #echo variable]
+
+
+so, am i missing something here&gt;
+
+thanks in advance....
+
+
+-- 
+yours,
+niall.
+.. .  .   .    .     .       .           .             .                 .
+aleph null.                             a simple insinuation around silence.
+see: <A HREF="http://www.vietnambla.com">http://www.vietnambla.com</A>	        hear: <A HREF="http://radio.vietnambla.com">http://radio.vietnambla.com</A>
+
+.. .bebox.audio. ..
+playing now:  swans - love of life - omniscience
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003276.html">[Xitami] Serving an (un)changed file.
+</A></li>
+	<LI> Next message: <A HREF="003281.html">[Xitami] ssi/cgi weirdness
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3280">[ date ]</a>
+              <a href="thread.html#3280">[ thread ]</a>
+              <a href="subject.html#3280">[ subject ]</a>
+              <a href="author.html#3280">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

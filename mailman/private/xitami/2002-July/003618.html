@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami crashing after FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003617.html">
+   <LINK REL="Next"  HREF="003619.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami crashing after FTP
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami crashing after FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 10 Jul 2002 11:53:44 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003617.html">[Xitami] php
+</A></li>
+        <LI> Next message: <A HREF="003619.html">[Xitami] Sokrates 1.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3618">[ date ]</a>
+              <a href="thread.html#3618">[ thread ]</a>
+              <a href="subject.html#3618">[ subject ]</a>
+              <a href="author.html#3618">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3.0.6.32.20020709090519.00a5c4c8@mail.shininglightpro.com">3.0.6.32.20020709090519.00a5c4c8@mail.shininglightpro.com</A>&gt;, &quot;Thomas 
+J. Hruska&quot; writes:
+&gt;&gt;<i>Clean-memory assertion failed - xitami.c (208)
+</I>&gt;<i>
+</I>&gt;<i>This is (strangely) located at the end of Xitami's execution in main().
+</I>&gt;<i>I'm surprised the program got that far.  However, it is due to Xitami
+</I>&gt;<i>attempting to use or access memory it doesn't own or no longer owns.
+</I>
+FWIW, no, what it means is that the memory usage tracking in the
+library that Xitami uses (SFL) has detected that not all the memory
+allocated has been freed up.  Typically this means that not all the
+&quot;free my memory&quot; logic has been run, which often happens in a crash
+situation.  This is primarily present in the code for the benefit of
+developers, because if not all memory gets given back each time it is
+taken, then eventually the program will take all the memory in the
+system!  (It's enabled in the &quot;user&quot; versions as well to try to catch
+those hard-to-find situations that occur only for real users.)
+
+&gt;&gt;<i>Abnormal program termination
+</I>&gt;<i>
+</I>&gt;<i>It looks like the program exited but then the CPU took over and realized a
+</I>&gt;<i>memory fault took place during the clean-memory scan.
+</I>&gt;<i>
+</I>&gt;&gt;<i>core dumped
+</I>&gt;<i>
+</I>&gt;<i>Hence, the core dump.  So much for avoiding it...
+</I>
+These two are actually _caused_ by the clean memory assertion failing;
+the state of the program in that situation is saved to help in tracking
+down where things might have gone astray.  This is mostly only of use to
+developers though, who can match it up with their source code.
+
+Ewen
+
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003617.html">[Xitami] php
+</A></li>
+	<LI> Next message: <A HREF="003619.html">[Xitami] Sokrates 1.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3618">[ date ]</a>
+              <a href="thread.html#3618">[ thread ]</a>
+              <a href="subject.html#3618">[ subject ]</a>
+              <a href="author.html#3618">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

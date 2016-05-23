@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[3]: [Xitami] Xitami, Perl, and Win2000
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003888.html">
+   <LINK REL="Next"  HREF="003891.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[3]: [Xitami] Xitami, Perl, and Win2000
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[3]: [Xitami] Xitami, Perl, and Win2000">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 23 Aug 2002 12:12:34 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003888.html">Re[2]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+        <LI> Next message: <A HREF="003891.html">Re[3]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3889">[ date ]</a>
+              <a href="thread.html#3889">[ thread ]</a>
+              <a href="subject.html#3889">[ subject ]</a>
+              <a href="author.html#3889">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  one of the scripts I tested asked for the PATH_TRANSLATED to be
+</I>&gt;<i> set properly... I have no idea at the moment what that means,
+</I>
+Don't look for problems until they bite you. Xitami generally sets
+PATH_TRANSLATED to a workable value before calling the script.
+
+Install Xitami. Open <A HREF="http://localhost">http://localhost</A> in a browser on the same
+machine and see if you see &quot;Welcome To Xitami&quot;. Open
+<A HREF="http://localhost/admin,">http://localhost/admin,</A> give the secret word you gave when you
+installed Xitami, and look at the many options. Under Configuration,
+CGI, be sure &quot;CGI Enabled?&quot; is checked. Save back to main Admin
+screen. Under Configuration, MIME, add an entry saying that &quot;.pl&quot; is
+&quot;text/html&quot;. Save back to main Admin screen.
+
+Install Perl.
+
+Create a folder C:\Xitami\cgi-bin
+
+Unpack your script there. Figure out which file is the main script,
+probably with a &quot;/pl&quot; extension. Let us say it is yak.pl
+
+Wait a second. ShoppingCart and MessageBoard scripts are maybe the
+WORST things to start with. First we will just see if Perl works.
+
+Use NotePad to create a file C:\Xitami\cgi-bin\hello.txt The
+contents of that file should be:
+
+#! /fee/foo/perl
+print &quot;Hello, world!&quot;;
+
+Save it, close NotePad, rename the file to &quot;hello.pl&quot;, ignoring
+Windows whining about changing file extensions. (Uh, you really
+should not have Windows &quot;hiding known file extensions&quot;; that is one
+of Gates' dumbest ideas.)
+
+Reboot Windows. There are ways to avoid this, but I think it is best
+when the server isn't in 24/7 heavy duty. Rebooting picks up some
+changes to PATH that Perl added. You can add them manually for one
+boot, but Perl sets it up to be set on every boot, and you may as
+well find out if it worked.
+
+Open a browser to <A HREF="http://localhost/cgi-bin/hello.pl">http://localhost/cgi-bin/hello.pl</A> If all is well,
+you should see &quot;Hello, world!&quot; If not, write back with exactly what
+happens.
+
+With the simple Hello Perl program working, try
+<A HREF="http://localhost/cgi-bin/yak.pl">http://localhost/cgi-bin/yak.pl</A> Maybe it works, maybe it starts in a
+SetUp mode, and maybe it chokes. Write back if it fails, and say
+exactly what happens and which script you are using with a link to a
+website where you got it.
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003888.html">Re[2]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+	<LI> Next message: <A HREF="003891.html">Re[3]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3889">[ date ]</a>
+              <a href="thread.html#3889">[ thread ]</a>
+              <a href="subject.html#3889">[ subject ]</a>
+              <a href="author.html#3889">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

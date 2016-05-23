@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] problem running .pl script
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002652.html">
+   <LINK REL="Next"  HREF="002660.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] problem running .pl script
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] problem running .pl script">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 05 Mar 2002 15:26:37 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002652.html">[Xitami] problem running .pl script
+</A></li>
+        <LI> Next message: <A HREF="002660.html">[Xitami] Using an App  window vs  Win System Tray?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2654">[ date ]</a>
+              <a href="thread.html#2654">[ thread ]</a>
+              <a href="subject.html#2654">[ subject ]</a>
+              <a href="author.html#2654">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE><A HREF="mailto:nico.debackere@axa.be">nico.debackere@axa.be</A> wrote:
+
+&gt;<i>Hi all,  I have a question !  
+</I>&gt;<i>
+</I>&gt;<i>Problem:
+</I>&gt;<i>When I access my start page, that contains a .pl script, I get the download
+</I>&gt;<i>pop-up message, asking me what I want do do with the start.pl script; open
+</I>&gt;<i>this file from its current location or save this file to disk !!  That's not
+</I>&gt;<i>what I want.  
+</I>&gt;<i>
+</I>Xitami will only run scripts in the cgi-bin directory or subdirectories 
+of there. A file in the webpaqges directory is sent to the user ratehr 
+than executed on the webserver.
+
+If you want your default page (i.e. <A HREF="http://my.domain.com/">http://my.domain.com/</A> to run a perl 
+script then you should probably create a redirection html file as 
+default.htm (or index.htm) with contents like:
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; URL=/cgi-bin/myscript.pl&quot;&gt;
+&lt;/head&gt;&lt;/html&gt;
+
+For more advanced users:
+I use a trivial xml / gsl combo because I can redirect all ovber the 
+place with that - it also allows you to use a frameset with 1 frame to 
+hide the new URL and makes it easier to maintain changes.
+
+the gsl file (called relo.gsl) is below
+
+.-----------------------------------------------------------------------------
+.-
+.-  Relocator
+.-
+.-  Written:  2001/12/12  Francis Turner
+.-
+.-  Redirects you to another port on the same server. Either as a 
+redirect or
+.-  as an embedded frame. You can call it in 2 ways: either call direct
+.-    relo.gsl?r=PPP&amp;m=C&amp;t=TTT
+.-    where PPP is the port for the redirect
+.-    C is either an R for redirect or an F for frame
+.-    TTT is a title used to give the frame mode a title. It is ignored 
+in R mode
+.-  or use as the script for a service.xml script
+.-    e.g. a SWAT service redirector would look like
+.-    &lt;RELO SCRIPT='/relo.gsl'&gt;
+.-      &lt;SERVICE NAME='Swat' PORT='901' MODE='FRAME'/&gt;
+.-    &lt;/RELO&gt;
+.-
+.-----------------------------------------------------------------------------
+&lt;HTML&gt;&lt;HEAD&gt;
+.if filename &lt;&gt; script
+.  for service
+.    mode ?= 'r'
+.    if (substr(mode,0,1,) = &quot;f&quot;) | (substr(mode,0,,1) = &quot;F&quot;)
+.      port ?= 80
+.      name ?= &quot;Relo &quot;+ port
+&lt;TITLE&gt;$(name:)&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;FRAMESET cols=&quot;*&quot;&gt;
+  &lt;FRAME name=&quot;In&quot; src=&quot;<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(port:)/&quot;&gt;
+  &lt;NOFRAMES&gt;
+  &lt;H1&gt;Sorry!&lt;/H1&gt;
+  &lt;H3&gt;This page must be viewed by a browser that is capable of viewing 
+frames.&lt;/H3&gt;
+  &lt;/NOFRAMES&gt;
+&lt;/FRAMESET&gt;&lt;/HTML&gt;
+.    else
+  &lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; 
+URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(port:)/&quot;&gt;&lt;/HEAD&gt;
+  &lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.-  &lt;BODY&gt;$(port?:)=$(name?:)=$(mode?:)-$(substr(mode,0,,1):)
+.- &lt;/BODY&gt;&lt;/HTML&gt;
+.    endif
+.  endfor
+.elsif defined(p)
+.  m ?= 'r'
+.  if substr(m,0,1,) = 'r'
+&lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; 
+URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(p:)/&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.  else
+.    .t ?= &quot;Relo &quot;+p
+&lt;TITLE&gt;$(t:)&lt;/TITLE&gt;&lt;/HEAD&gt;
+&lt;FRAMESET cols=&quot;*&quot;&gt;
+  &lt;FRAME name=&quot;In&quot; src=&quot;<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>):$(p:)/&quot;&gt;
+  &lt;NOFRAMES&gt;
+  &lt;H1&gt;Sorry!&lt;/H1&gt;
+  &lt;H3&gt;This page must be viewed by a browser that is capable of viewing 
+frames.&lt;/H3&gt;
+  &lt;/NOFRAMES&gt;
+&lt;/FRAMESET&gt;&lt;/HTML&gt;
+.  endif
+.else
+&lt;/HEAD&gt;&lt;BODY&gt;Bad Boy&lt;/BODY&gt;&lt;/HTML&gt;
+.endif
+
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002652.html">[Xitami] problem running .pl script
+</A></li>
+	<LI> Next message: <A HREF="002660.html">[Xitami] Using an App  window vs  Win System Tray?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2654">[ date ]</a>
+              <a href="thread.html#2654">[ thread ]</a>
+              <a href="subject.html#2654">[ subject ]</a>
+              <a href="author.html#2654">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

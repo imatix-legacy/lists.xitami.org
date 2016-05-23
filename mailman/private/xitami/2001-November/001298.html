@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] memtrace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001297.html">
+   <LINK REL="Next"  HREF="001299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] memtrace
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] memtrace">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 01 Nov 2001 20:27:38 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001297.html">[Xitami] memtrace
+</A></li>
+        <LI> Next message: <A HREF="001299.html">[Xitami] memtrace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1298">[ date ]</a>
+              <a href="thread.html#1298">[ thread ]</a>
+              <a href="subject.html#1298">[ subject ]</a>
+              <a href="author.html#1298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Looking at the source code, it seems to be a debug file the iMatix Standard 
+Function Library generates while exiting if it discovers a memory leak (the 
+programmers at iMatix are very careful about memory leaks, which is 
+probably why Xitami takes up so little memory... many programs leak memory 
+quite badly, which is why you need to restart them and/or Windows so often).
+
+It should never be generated; the fact that it has means something broke. 
+I'm sure it shouldn't be as large as 8GB though... how long had Xitami been 
+running for?
+
+I'm not sure how to avoid it. Creating a read-only file called memtrace.lst 
+might possibly block Xitami from writing it (the name is hard-coded, it 
+won't try other names like it does with the logfiles).
+
+to iMatix programmers
+=====================
+
+Should mem_assert even be enabled in a production build? sflmem.h seems to 
+define it even when DEBUG isn't #defined - shouldn't it be an abort or even 
+a no-op outside debug mode, rather than generating a huge log before it 
+aborts?
+It appears it's only called just before exit, anyway.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001297.html">[Xitami] memtrace
+</A></li>
+	<LI> Next message: <A HREF="001299.html">[Xitami] memtrace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1298">[ date ]</a>
+              <a href="thread.html#1298">[ thread ]</a>
+              <a href="subject.html#1298">[ subject ]</a>
+              <a href="author.html#1298">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

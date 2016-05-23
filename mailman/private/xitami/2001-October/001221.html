@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP and HTTP-PUT filesize problem?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001215.html">
+   <LINK REL="Next"  HREF="001254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP and HTTP-PUT filesize problem?
+   </H1>
+    <B>Fabian Bess
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP and HTTP-PUT filesize problem?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 21 Oct 2001 14:25:12 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001215.html">[Xitami] PHP and HTTP-PUT filesize problem?
+</A></li>
+        <LI> Next message: <A HREF="001254.html">[Xitami] Rename log files: permission denied?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1221">[ date ]</a>
+              <a href="thread.html#1221">[ thread ]</a>
+              <a href="subject.html#1221">[ subject ]</a>
+              <a href="author.html#1221">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--------------090602010106020808060007
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Paul Reid wrote:
+
+&gt;&gt;<i>upload a file via HTTP-PUT. .. Xitami won't let me upload files larger than a couple of KBytes (around 10KB).  my host's Apache-server works 
+</I>&gt;&gt;<i>
+</I>&gt;<i>fine....
+</I>&gt;<i>
+</I>&gt;<i>Guessing in the dark: Is your machine Windows? (What version?) Is the
+</I>&gt;<i>host on unix? NT?
+</I>&gt;<i>
+</I>&gt;<i>A limit like 10K sounds like your script is passing the body of the file
+</I>&gt;<i>through the command line and &quot;environment&quot;. That could be less than 1K
+</I>&gt;<i>in DOS, somewhat bigger in Win9x, very large in WinNT, and large and
+</I>&gt;<i>often essentially unlimited in unix. 
+</I>&gt;<i>
+</I>&gt;<i>I'm not familiar enough with HTTP-PUT or PHP to know how to check or
+</I>&gt;<i>modify that... I'm just hoping this jogs the memory of someone who is
+</I>&gt;<i>more expert in such things. 
+</I>&gt;<i>
+</I>&gt;<i> -PRR
+</I>&gt;<i>
+</I>Sorry, my fault not to mention the OS.
+I'm running WinME (de) and Xitami 2.4d6
+The host on the other side is propably a Linux-system running Apache.
+The PHP version is 4.0.6 on both sides.
+
+As far as I can see the file is not passed through the environment, as a temporary file is created. For debuggin purposes I output the name and path of the temp file and it seems to be complete.
+
+Any more ideas?
+
+Thx
+-- 
+Fabian Bess (<A HREF="mailto:webmaster@tannenhof.de">webmaster@tannenhof.de</A>)
+Webmaster Drogenhilfe Tannenhof Berlin e.V. '<A HREF="http://www.tannenhof.de'">http://www.tannenhof.de'</A>
+
+
+
+--------------090602010106020808060007
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Paul Reid wrote:&lt;br&gt;
+&lt;blockquote type=&quot;cite&quot; cite=&quot;mid:<A HREF="mailto:3BD04A1B.9DBD822A@rci.rutgers.edu">3BD04A1B.9DBD822A@rci.rutgers.edu</A>&quot;&gt;
+  &lt;blockquote type=&quot;cite&quot;&gt;
+    &lt;pre wrap=&quot;&quot;&gt;upload a file via HTTP-PUT. .. Xitami won't let me upload files larger than a couple of KBytes (around 10KB).  my host's Apache-server works &lt;br&gt;&lt;/pre&gt;
+    &lt;/blockquote&gt;
+    &lt;pre wrap=&quot;&quot;&gt;&lt;!----&gt;fine....&lt;br&gt;&lt;br&gt;Guessing in the dark: Is your machine Windows? (What version?) Is the&lt;br&gt;host on unix? NT?&lt;br&gt;&lt;br&gt;A limit like 10K sounds like your script is passing the body of the file&lt;br&gt;through the command line and &quot;environment&quot;. That could be less than 1K&lt;br&gt;in DOS, somewhat bigger in Win9x, very large in WinNT, and large and&lt;br&gt;often essentially unlimited in unix. &lt;br&gt;&lt;br&gt;I'm not familiar enough with HTTP-PUT or PHP to know how to check or&lt;br&gt;modify that... I'm just hoping this jogs the memory of someone who is&lt;br&gt;more expert in such things. &lt;br&gt;&lt;br&gt; -PRR&lt;/pre&gt;
+    &lt;/blockquote&gt;
+    &lt;pre class=&quot;moz-signature&quot; cols=&quot;$mailwrapcol&quot;&gt;Sorry, my fault not to mention the OS.&lt;br&gt;I'm running WinME (de) and Xitami 2.4d6&lt;br&gt;The host on the other side is propably a Linux-system running Apache.&lt;br&gt;The PHP version is 4.0.6 on both sides.&lt;br&gt;&lt;br&gt;As far as I can see the file is not passed through the environment, as a temporary file is created. For debuggin purposes I output the name and path of the temp file and it seems to be complete.&lt;br&gt;&lt;br&gt;Any more ideas?&lt;br&gt;&lt;br&gt;Thx&lt;br&gt;-- 
+Fabian Bess (&lt;a class=&quot;moz-txt-link-abbreviated&quot; href=&quot;mailto:<A HREF="mailto:webmaster@tannenhof.de">webmaster@tannenhof.de</A>&quot;&gt;<A HREF="mailto:webmaster@tannenhof.de">webmaster@tannenhof.de</A>&lt;/a&gt;)
+Webmaster Drogenhilfe Tannenhof Berlin e.V. '&lt;a class=&quot;moz-txt-link-freetext&quot; href=&quot;<A HREF="http://www.tannenhof.de"">http://www.tannenhof.de&quot;</A>&gt;<A HREF="http://www.tannenhof.de</a">http://www.tannenhof.de&lt;/a</A>&gt;'
+&lt;/pre&gt;
+    &lt;br&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+
+--------------090602010106020808060007--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001215.html">[Xitami] PHP and HTTP-PUT filesize problem?
+</A></li>
+	<LI> Next message: <A HREF="001254.html">[Xitami] Rename log files: permission denied?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1221">[ date ]</a>
+              <a href="thread.html#1221">[ thread ]</a>
+              <a href="subject.html#1221">[ subject ]</a>
+              <a href="author.html#1221">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

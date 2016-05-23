@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ftp: revisited
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006475.html">
+   <LINK REL="Next"  HREF="006490.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ftp: revisited
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ftp: revisited">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 03 Feb 2005 16:59:54 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006475.html">[Xitami] ftp: revisited
+</A></li>
+        <LI> Next message: <A HREF="006490.html">[Xitami] ftp: revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6484">[ date ]</a>
+              <a href="thread.html#6484">[ thread ]</a>
+              <a href="subject.html#6484">[ subject ]</a>
+              <a href="author.html#6484">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Alex,
+
+
+Am 2 Feb 2005 um 20:24 hat Alex Barna geschrieben:
+
+&gt;<i> Hi  Johannes,
+</I>&gt;<i> 
+</I>&gt;<i> Johannes Prost wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt;  Hello Alex,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  you need to create 2 files. You can do so through the GUI or just
+</I>&gt;<i> &gt;  edit the file directly. The files are ftpdirs.aut and ftpusers.aut
+</I>&gt;<i> &gt;  In the file ftpdirs.aut you name the directories you want to be
+</I>&gt;<i> &gt;  accessed by ftp or browser from the users you define .
+</I>&gt;<i> &gt;  Here an example entry
+</I>&gt;<i> 
+</I>&gt;<i> &gt;  [../webpages/dirname] username = &quot;*&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  [dirname] username = &quot;P&quot; anonymus = &quot;G&quot; Between the &quot; &quot; you have to
+</I>&gt;<i> &gt;  define the access right. Make sure you have a &quot;space&quot; between = and &quot;
+</I>&gt;<i> &gt;  For anyone to download you can use anonymus = &quot;G&quot; as username and
+</I>&gt;<i> &gt;  user right for this particular directory.
+</I>&gt;<i> 
+</I>&gt;<i> Ok, those files exist. ftpdirs.aut currently reads;
+</I>&gt;<i> []
+</I>&gt;<i>     Admin=*
+</I>&gt;<i> 
+</I>&gt;<i> I just want to use the pub directory &amp;  if I understand what xitami &amp; 
+</I>&gt;<i> you said, if I want to allow uploads to the default <A HREF="ftp://myswbsite">ftp://myswbsite</A>  pub 
+</I>&gt;<i> directory, could I just change ftpdirs.aut to;
+</I>&gt;<i> 
+</I>&gt;<i> [pub]
+</I>&gt;<i>        anonymous= &quot;G&quot;
+</I>&gt;<i> [pub]
+</I>&gt;<i>        username = &quot;GP&quot;
+</I>&gt;<i> 
+</I>&gt;<i> username being the name of the person I want to allow to upload ?  
+</I>&gt;<i> Would I need to add another;
+</I>&gt;<i> 
+</I>&gt;<i> [pub]
+</I>&gt;<i>        username = &quot;GP&quot;
+</I>&gt;<i> 
+</I>&gt;<i> if I were to allow other people to upload.
+</I>
+you have to put every username in there, but you can do that by adding all defined names under the 
+directory like
+[pub]
+     username1 = 
+     username2 =
+
+A tip: I just copied the original files ( both )to a separate folder and edited the ones I created 
+with only those entries I use. 
+
+
+&gt;<i> 
+</I>&gt;<i> &gt;  For the second file ftpusers.aut it would look as follows. In this
+</I>&gt;<i> &gt;  file you define the users right to connect, the root (dir),
+</I>&gt;<i> &gt;  password... Here the sample [username] Access = &quot;P&quot; Aliases = &quot;0&quot;
+</I>&gt;<i> &gt;  Hard-quota = &quot;&quot; Password = &quot;whatever-you-want&quot; Pipe = &quot;&quot; Root =
+</I>&gt;<i> &gt;  &quot;dirname&quot; Soft-quota = &quot;&quot; Use-quotas = &quot;0&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  For your example you would have to create 2 entries for the same
+</I>&gt;<i> &gt;  root; one entry for the user ( username) and one entry for the
+</I>&gt;<i> &gt;  visitors (anonymus) who should be able to ONLY download, as I
+</I>&gt;<i> &gt;  understood correct. For the user Access = &quot;P&quot; For the visitor Access
+</I>&gt;<i> &gt;  = &quot;G&quot; Both entries would have the same root = &quot;dirname&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  The directories which you want to create don't have to be in \ftproot
+</I>&gt;<i> &gt;  . I have, as example, set \webpages with its directories for the
+</I>&gt;<i> &gt;  virtual domains to access by ftp only for myself. If I'm correct,
+</I>&gt;<i> &gt;  xitami finds the way to the correct directory mainly through the
+</I>&gt;<i> &gt;  username / directory entries in ftpdirs.aut
+</I>&gt;<i> 
+</I>&gt;<i> The ftpusers.aut file currently contains;
+</I>&gt;<i> 
+</I>
+same here, copy the original to that folder I mentioned above and start the file only with your 
+entries like the samples in the original what you are showing below.
+&gt;<i> [Admin]
+</I>&gt;<i> access=GPDMR
+</I>&gt;<i> password=-
+</I>&gt;<i> root=&quot;&quot;
+</I>&gt;<i> use-Quotas=0 # Enforce quotas per user
+</I>&gt;<i> 
+</I>&gt;<i> [Anonymous]
+</I>&gt;<i> access=G
+</I>&gt;<i> password=*
+</I>&gt;<i> root=pub
+</I>&gt;<i> 
+</I>&gt;<i> [Ftp]
+</I>&gt;<i> access=G
+</I>&gt;<i> password=*
+</I>&gt;<i> root=pub
+</I>&gt;<i> 
+</I>&gt;<i> [Guest]
+</I>&gt;<i> access=G
+</I>&gt;<i> password=&quot;&quot;
+</I>&gt;<i> root=pub
+</I>&gt;<i> 
+</I>&gt;<i> [Upload]
+</I>&gt;<i> access=P
+</I>&gt;<i> password=xxxxxxxx
+</I>&gt;<i> root=pub
+</I>&gt;<i> use-quotas=0
+</I>&gt;<i> soft-quota=1.0 # Warnings above 4 Mbytes
+</I>&gt;<i> hard-quota=2.0 # Blocks above 5 Mbytes
+</I>
+Is this your username; upload ?
+&gt;<i> 
+</I>&gt;<i> I have no need of upload or download quotas so would I keep that at 0 ?
+</I>
+ here a sample
+       Soft-quota = &quot;&quot;
+       Use-quotas = &quot;0&quot;
+
+&gt;<i> Couldn't I just use this file with the changes I made here to password &amp; 
+</I>&gt;<i> root??
+</I>&gt;<i> 
+</I>You could use that file, but I wouldn't do that. I know to guess a password is hard, 
+but impossible ? I'm using xitami like other people too and we are the good guys, but the bad ones 
+who would know about xitami would be able to start trying  the usernames which are there already. 
+And that's my reason to put only my own entries in the file. They can guess and try and will give 
+up sooner or later. :)
+
+
+&gt;<i> Thanks,
+</I>&gt;<i> Alex,
+</I>&gt;<i> 
+</I>&gt;<i> &gt;  I hope this description is clear enough.If not, let me know and I
+</I>&gt;<i> &gt;  will try to explain it better.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  2 Feb 2005 um 13:11 hat Alex Barna geschrieben:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Windows XP, Xitami 2.5c1 5MBS cable connection.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I haven't used the ftp part of xitami &amp; had it set to o off.. I now
+</I>&gt;<i> &gt; &gt; have a need to use it &amp; need to set it to allow a friend to upload
+</I>&gt;<i> &gt; &gt; a 5mb file so others can download it.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I reset defaults.cfg to, [Ftp] Enabled = &quot;1&quot; &amp; can ftp to my site
+</I>&gt;<i> &gt; &gt; &amp; see this default ftp page:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Index of <A HREF="ftp://xx.xx.xxx.xx/">ftp://xx.xx.xxx.xx/</A> ------------------------- Up to higher
+</I>&gt;<i> &gt; &gt; level directory File: index.htm 1 KB 9/16/2002 12:00:00
+</I>&gt;<i> &gt; &gt; AM File: index.txt 1 KB 9/16/2002 12:00:00 AM
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; What do I need to add so: there is only one directory shown a
+</I>&gt;<i> &gt; &gt; person with a password I give them can upload to this directory
+</I>&gt;<i> &gt; &gt; with an ftp client anyone can download from this directory with a
+</I>&gt;<i> &gt; &gt; browser?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Alex,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Johannes
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+Johannes
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006475.html">[Xitami] ftp: revisited
+</A></li>
+	<LI> Next message: <A HREF="006490.html">[Xitami] ftp: revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6484">[ date ]</a>
+              <a href="thread.html#6484">[ thread ]</a>
+              <a href="subject.html#6484">[ subject ]</a>
+              <a href="author.html#6484">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

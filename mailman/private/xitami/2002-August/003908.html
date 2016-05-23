@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[5]: [Xitami] Xitami, Perl, and Win2000
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003898.html">
+   <LINK REL="Next"  HREF="003909.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[5]: [Xitami] Xitami, Perl, and Win2000
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[5]: [Xitami] Xitami, Perl, and Win2000">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 26 Aug 2002 10:26:31 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003898.html">Re[4]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+        <LI> Next message: <A HREF="003909.html">Re[5]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3908">[ date ]</a>
+              <a href="thread.html#3908">[ thread ]</a>
+              <a href="subject.html#3908">[ subject ]</a>
+              <a href="author.html#3908">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Installed Xitami in c:\archivos de programa\xitami
+</I>
+Arg. Do yourself a favor and put Xitami in C:\Xitami.
+
+&quot;Program Files&quot;, even in Spanish, has spaces in the file
+spacification. While Xitami can work through a file system with
+spaces in file specifications, there are a lot of quirks. The
+easiest answer is to avoid spaces in folder or file names, at least
+at first, so you see it all work.
+
+&gt;<i> this works whatever shebang I use, even if I purposely write a
+</I>&gt;<i> totally incorrect one.
+</I>
+With Xitami-Win, I usually use #! fee/fie/foo/perl. Really.
+
+Windows isn't unix. Normally the shebang would be ignored. This
+would break all unix-inspired Perl scripts. Xitami's clever
+workaround is: if there seems to be a goo-looking shebang, but the
+specific folder isn't found, then it trawls PATH trying to find the
+program. This works on Windows, with the usual Perl setup, without
+forcing you to edit every script or maintain an odd unix-y directory
+on your windows machine.
+
+&gt;<i> Main HTML directory = c:/website
+</I>&gt;<i> Main CGI directory = c:/website/cgi-bin
+</I>
+Usually a BAD idea to have the CGI folder below the public HTML
+folder.
+
+&gt;<i> The Admin script tells me that &quot;The value for the PATH_TRANSLATED
+</I>&gt;<i> environment variable [c:/website] is incorrect.
+</I>
+Yes, that sounds familiar. Try forcing a trailing slash (I think
+Xitami omits it, some popular server adds it, and some scripts
+assume something that isn't clearly specified).
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003898.html">Re[4]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+	<LI> Next message: <A HREF="003909.html">Re[5]: [Xitami] Xitami, Perl, and Win2000
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3908">[ date ]</a>
+              <a href="thread.html#3908">[ thread ]</a>
+              <a href="subject.html#3908">[ subject ]</a>
+              <a href="author.html#3908">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

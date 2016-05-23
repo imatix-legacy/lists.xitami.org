@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami 2.5b4 sends periods as '%2E' in filenames
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000080.html">
+   <LINK REL="Next"  HREF="000083.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami 2.5b4 sends periods as '%2E' in filenames
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami 2.5b4 sends periods as '%2E' in filenames">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 07 Jun 2001 02:58:31 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000080.html">[Xitami] FREEZE WINOLDAP DISPLAYED WIN98
+</A></li>
+        <LI> Next message: <A HREF="000083.html">[Xitami] /../../%20 thing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#81">[ date ]</a>
+              <a href="thread.html#81">[ thread ]</a>
+              <a href="subject.html#81">[ subject ]</a>
+              <a href="author.html#81">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3B150CD6.A420E427@trmail.triumf.ca">3B150CD6.A420E427@trmail.triumf.ca</A>&gt;, &quot;Rod B. Nussbaumer&quot; writes:
+&gt;<i>I've recently upgraded to 2.5b4 on Win95 (!), and now whenever 
+</I>&gt;<i>I try to download files from it using either the FTP server or 
+</I>&gt;<i>using an http: URL, the FTP client or browser sees the download 
+</I>&gt;<i>filename as one long name with the period(s) represented as %2E, 
+</I>
+This happens when downloading a file out of a Xitami-generated directory
+listing?  In which case it sounds like Xitami is being a touch too
+paranoid about escaping the filenames.
+
+You might want to experiment with changing httpdir.gsl; there are two
+versions of each filename passed in: one for display, and one that has
+been &quot;escaped&quot; to solve any problem characters.  The latter is used in
+the URL by default.  You could experiment with changing it to use the
+unescaped name, and see if that avoids your issue.  (It may introduce
+other issues though, especially if you have filenames with spaces in
+them, etc).
+
+I'll put this on the bug list for more investigation.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000080.html">[Xitami] FREEZE WINOLDAP DISPLAYED WIN98
+</A></li>
+	<LI> Next message: <A HREF="000083.html">[Xitami] /../../%20 thing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#81">[ date ]</a>
+              <a href="thread.html#81">[ thread ]</a>
+              <a href="subject.html#81">[ subject ]</a>
+              <a href="author.html#81">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

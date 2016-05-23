@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Bug in HTTP error msg handling? But with &quot;root&quot; change?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005443.html">
+   <LINK REL="Next"  HREF="005445.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Bug in HTTP error msg handling? But with &quot;root&quot; change?
+   </H1>
+    <B>Cav22
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Bug in HTTP error msg handling? But with &quot;root&quot; change?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 27 Oct 2003 17:32:07 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005443.html">[Xitami] Bug in HTTP error msg handling? But with &quot;root&quot; change?
+</A></li>
+        <LI> Next message: <A HREF="005445.html">[Xitami] PHP4 installation problems.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5444">[ date ]</a>
+              <a href="thread.html#5444">[ thread ]</a>
+              <a href="subject.html#5444">[ subject ]</a>
+              <a href="author.html#5444">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am currently running Xitami v2.5b4 and I have no problem with yourthird
+problem u addressed in this email.  I am also using XP mine is Pro version.
+I dont think that shoudl matter though.  I still have yet to try the error
+problems you refered to but will try to check in to those to see if the
+problems occur for me as well.  When changeing your main HTML directory you
+can either enter the complete path to the directory you would like (eg.
+c:/webroot/) or if the directoy exists within the Xitami directory you can
+directly refer to it (eg. if the desired directory is c:\Xitami\webroot the
+Main HTML directory could either be the direct path or ./webroot). I tried
+both of these methods and both worked for me.  Hope this helps somewhat.
+
+Ryan Heaton
+<A HREF="mailto:cav22@cav22.net">cav22@cav22.net</A>
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Todd Greene
+Sent: Monday, October 27, 2003 4:55 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: [Xitami] Bug in HTTP error msg handling? But with &quot;root&quot;
+change?
+
+
+Hi, fellow Xitami users.
+
+I'm a brand spankin' new user of the Xitami web server
+program. After spending about three days surfing for
+information about various HTTP server alternatives
+(and trying out, but quickly dropping, one of them
+other than Xitami), I've been playing with Xitami now
+for the last three days.
+
+I've installed the Windows version (i.e., not console,
+not NT service) on a Windows XP system, and it is
+Xitami v2.5b4 that I'm using.
+
+I will mention these items that I believe are bugs in
+the coding. I say that I believe these are bugs,
+because I've banged my head against the program quite
+a bit and not been able to get it to work the way I
+believe it is supposed to following the documentation
+- but, of course, I could be wrong and the problems
+could simply be due to my own &quot;novicehood&quot; with the
+program.
+
+There are three problems that I will bring up here:
+(1) Setting the &quot;use-error-script&quot; using the
+browser-based configuration screen (for &quot;Errors&quot;), (2)
+Use of the defined error messages (e.g.,
+&quot;@errors/text-404.htm&quot;), and (3) Changing the web
+server &quot;root&quot; from &quot;webpages&quot; to something else.
+
+Here is the problem behavior I have noted:
+
+(1) When you bring up the browser-based Xitami
+Administration screen, then click on Configuration,
+then click on Errors, there is a check box for &quot;Use
+message template script?&quot; I have noted that when I
+check this box, and press the save button, that act of
+saying &quot;Xitami, I want to use the message template
+script&quot; is NOT being saved to the defaults.cfg file.
+Of course, there is a manual work-around for this in
+that you can simply add the following line to the
+[Server] section using your text editor:
+
+   use-error-script = &quot;1&quot;
+
+But this seems to be a clear bug in this version of
+Xitami (v2.5b4), with respect to the browser-based
+configuration screen (but not with the server itself).
+
+Please note that when I set the use-error-script to
+&quot;1&quot; (i.e., turn it on), then the server DOES use the
+template file &quot;errors.gsl&quot;, as it is supposed to.
+
+(2) The documentation (the Configuration page) states,
+and the relevent browser-based Admin screen (Errors)
+implies, that Xitami is supposed to use the files such
+as &quot;@errors/header.htm&quot;, &quot;@errors/text-404.htm&quot;, and
+&quot;@errors/footer.htm&quot; to report errors (when
+&quot;use-error-script&quot; is turned off), but in no case can
+I get this to work. For example, with a 404 error, I
+simply get the default IE Explorer 404 HTTP error
+page. I ever seen the message from the
+&quot;@errors/text-404.htm&quot; file. Again, I don't know
+whether I'm doing something wrong or if this is a bug
+in the program.
+
+(3) I played around a bit with changing the name of
+the root directory for the web server, and I
+discovered that when I did this, then the server DID
+use the specified directory BUT a directory by the
+name of &quot;webpages&quot; (the default) still HAD TO exist or
+the server would claim that the root directory did not
+exist. This seems to me to be a clear bug in the code.
+
+The way I discovered this problem and this behavior is
+that I had configured the server (with the &quot;webpages&quot;
+parameter in the [Server] section) to use a root
+directory named &quot;webroot&quot; and then I directly altered
+the name of the original &quot;webpages&quot; directory itself.
+Thus, a directory named &quot;webpages&quot; did not exist at
+all. The server would then keep telling me that I had
+no home page (a 404 error) even though it clearly DID
+exist (all I had done was changed the name of the
+default root directory to something else and then
+pointed to this new name in the configuration file
+(defaults.cfg). After trying out all kinds of things
+and scratching my head for over an hour I hit on the
+idea of creating a directory with the name &quot;webpages&quot;
+(with absolutely nothing in it), and - ta da! - the
+server worked like a charm, using the &quot;index.html&quot;
+file I had in my &quot;webroot&quot; directory.
+
+Has anyone else had these problems? Have these issues
+been addressed in a newer version of Xitami? Version
+2.5b4 was the latest version that I was able to
+download from the website. As I'm working with Xitami,
+I'm finding that I like this program, and I would like
+to work with anyone I need to to help get the errors
+that I notice fixed.
+
+(FYI, FWIW, I've been a programmer since the late
+1970s, and I've been using C++ for the last 7 years,
+and just recently I've been motivated to dig into
+doing some serious CGI programming using C++ and Perl
+(and perhaps PHP?) for web applications. I use dial-up
+from home, but I need a web server running on my home
+computer to provide myself with a test bed. I have
+also downloaded MySQL and am in the middle of setting
+this up on my home computer. My motivation for this is
+that I've been laid off from the company I worked for,
+in a serious downsizing, and job prospects have been
+bleak, so web apps are something I'm starting to work
+on as a possibility of drumming up some home business
+income.)
+
+Regards,
+Todd S. Greene
+<A HREF="mailto:greeneto@yahoo.com">greeneto@yahoo.com</A>
+
+__________________________________
+Do you Yahoo!?
+Exclusive Video Premiere - Britney Spears
+<A HREF="http://launch.yahoo.com/promos/britneyspears/">http://launch.yahoo.com/promos/britneyspears/</A>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005443.html">[Xitami] Bug in HTTP error msg handling? But with &quot;root&quot; change?
+</A></li>
+	<LI> Next message: <A HREF="005445.html">[Xitami] PHP4 installation problems.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5444">[ date ]</a>
+              <a href="thread.html#5444">[ thread ]</a>
+              <a href="subject.html#5444">[ subject ]</a>
+              <a href="author.html#5444">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

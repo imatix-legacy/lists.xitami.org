@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami on OS X
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004953.html">
+   <LINK REL="Next"  HREF="005023.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami on OS X
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami on OS X">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 30 Apr 2003 18:26:41 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004953.html">[Xitami] Xitami on OS X
+</A></li>
+        <LI> Next message: <A HREF="005023.html">[Xitami] Xitami on OS X
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4954">[ date ]</a>
+              <a href="thread.html#4954">[ thread ]</a>
+              <a href="subject.html#4954">[ subject ]</a>
+              <a href="author.html#4954">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wednesday, April 30, 2003, at 06:09 PM, Chris Olson wrote:
+
+&gt;<i> I've been away from Xitami for awhile in a production environment, but 
+</I>&gt;<i> I generally keep a copy of it running for testing purposes on at least 
+</I>&gt;<i> one machine.  We've now converted all our servers from Linux to OS X 
+</I>&gt;<i> Server on Apple X Serve's.  Has anyone compiled Xitami on OS X yet?  I 
+</I>&gt;<i> briefly tried it, but xibuild halted with some errors.  Rather than 
+</I>&gt;<i> spend a bunch of time researching what needs to be changed on my own, 
+</I>&gt;<i> I thought it might be beneficial to ask first from someone who has 
+</I>&gt;<i> done it, what changes have to be made to the UNIX build file to get it 
+</I>&gt;<i> to compile on OS X or the PowerPC version of Darwin.
+</I>
+If it will help, I sent the output to a text file which is pasted 
+below.  I'm experimenting with the build on a Titanium Powerbook 
+running OS X 10.2.5 Jaguar, compiling from a tcsh shell.  I'm running 
+xibuild under my user login, but su root makes no difference - I get 
+the same output.  As the output notes;
+
+&quot;If the ANSI C compile command is wrong, you will have to modify the
+'c' scripts in these directories:
+     /Users/chris/desktop/xitami-24d9/src/sfl, 
+/Users/chris/desktop/xitami-24d9/src/smt&quot;
+
+however, the gcc C compiler in Darwin/OS X is the same one used in 
+Linux or BSD, so I would assume nothing has to be changed in that 
+respect.
+--
+Chris Olson
+Administrator
+AST Communications,  Inc.      <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+Barron,  WI   USA
+
+
+####################  Begin Paste  #####################
+--------------------------------------------------------------------
+Welcome to the Xitami web server, copyright (c) 1991-99 iMatix.
+This script will compile and link XITAMI, ready for use on this
+Darwin system.  Nothing is installed in any system directories.
+Please confirm this information:
+     System . . . . . .: Darwin
+     ANSI C compiler. .: cc -c  -DDEBUG
+
+If the ANSI C compile command is wrong, you will have to modify the
+'c' scripts in these directories:
+     /Users/chris/desktop/xitami-24d9/src/sfl, 
+/Users/chris/desktop/xitami-24d9/src/smt
+
+If this information looks okay, press [Enter] to build Xitami.
+--------------------------------------------------------------------
+xibuild: Rebuilding the SFL package...
+Building the iMatix Standard Function Library
+Press [Enter] to continue, or Ctrl-C to abort.
+Checking for required files...
+Compiling sflbits...
+prelude.h:626: #error &quot;No definitions for PATH constants&quot;
+cpp-precomp: warning: errors during smart preprocessing, retrying in 
+basic mode
+xibuild: error during compile of SFL - aborted
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004953.html">[Xitami] Xitami on OS X
+</A></li>
+	<LI> Next message: <A HREF="005023.html">[Xitami] Xitami on OS X
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4954">[ date ]</a>
+              <a href="thread.html#4954">[ thread ]</a>
+              <a href="subject.html#4954">[ subject ]</a>
+              <a href="author.html#4954">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

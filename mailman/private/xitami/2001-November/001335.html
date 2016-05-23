@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how to configure alias
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001334.html">
+   <LINK REL="Next"  HREF="001336.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how to configure alias
+   </H1>
+    <B>d.butt
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how to configure alias">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 6 Nov 2001 13:02:37 -0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001334.html">[Xitami] how to configure alias
+</A></li>
+        <LI> Next message: <A HREF="001336.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1335">[ date ]</a>
+              <a href="thread.html#1335">[ thread ]</a>
+              <a href="subject.html#1335">[ subject ]</a>
+              <a href="author.html#1335">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm testing things localy on my pc not on the host server and when I go
+insert an imasge from the image folder it goes back 3 levels as so
+&lt;IMG SRC=&quot;../../../images/bevel_bg.jpg&quot; BORDER=&quot;0&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;40&quot;
+ALIGN=&quot;bottom&quot; ALT=&quot;&quot;&gt;
+now al I want is to confige the alias to read any images from this folder on
+my c:drive
+is this correct if not can you give the correct configuration
+images=c:\images\        <A HREF="http://127.0.0.1/c:/images/.gif/.jpg./.png">http://127.0.0.1/c:/images/.gif/.jpg./.png</A>
+
+
+Dai
+<A HREF="http://www.dezineasite.co.uk">http://www.dezineasite.co.uk</A>
+<A HREF="http://www.crazybiker.f2s.com">http://www.crazybiker.f2s.com</A>
+----- Original Message -----
+From: &quot;Simon McVittie&quot; &lt;<A HREF="mailto:sjm212@hermes.cam.ac.uk">sjm212@hermes.cam.ac.uk</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, November 06, 2001 12:41 PM
+Subject: Re: [Xitami] how to configure alias
+
+
+&gt;<i> &gt; I'm using xitami under win98 and I've been playing with some esp.
+</I>&gt;<i> &gt; scripts <A HREF="http://www.escapade.org">http://www.escapade.org</A>  these scriptslive in the cgi-bin, but
+</I>&gt;<i> &gt; the images live in a directory outside the cgi-bin
+</I>&gt;<i> &gt; <A HREF="http://localhost/cgi-bin/esp.exe?PAGE=abcwebsite2.esp">http://localhost/cgi-bin/esp.exe?PAGE=abcwebsite2.esp</A> like so, but any
+</I>&gt;<i> &gt; images which are part of the script don't show in the browser when
+</I>&gt;<i> &gt; called using relative url's in the script.
+</I>&gt;<i> &gt; E.G. this renders a place holder and no imge in the browser
+</I>&gt;<i> &gt; &lt;IMG SRC=&quot;../../../images/bevel_bg.jpg&quot; BORDER=&quot;0&quot; WIDTH=&quot;150&quot;
+</I>&gt;<i> &gt; HEIGHT=&quot;40&quot; ALIGN=&quot;bottom&quot; ALT=&quot;&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> This URL means &quot;start from the current folder /cgi-bin/ (because the SRC
+</I>&gt;<i> doesn't start with &quot;/&quot;), go up 3 levels (../../../), go into the images/
+</I>&gt;<i> folder, and get bevel_bg.jpg&quot;. You can't go up 3 levels from /cgi-bin/
+</I>&gt;<i> because when you go up 1 level you get to the root folder, /, and you
+</I>can't
+&gt;<i> go up a level again from /; so you certainly can't go up 2 levels!
+</I>&gt;<i>
+</I>&gt;<i> I'd suggest replacing all your image paths with something like
+</I>&gt;<i> SRC=&quot;/espimages/bevel_bg.jpg&quot; which will go to the server root, then go
+</I>&gt;<i> into an espimages/ subfolder, then download bevel_bg.jpg; then put your
+</I>&gt;<i> images in an espimages subfolder of your web pages root (e.g.
+</I>&gt;<i> c:\xitami\webpages\espimages on a default install). (Xitami uses the
+</I>images
+&gt;<i> subdirectory already, for its own built-in images like the directory
+</I>&gt;<i> listing icons)
+</I>&gt;<i>
+</I>&gt;<i> If you insist on using relative URLs, remember that they all have to be
+</I>&gt;<i> relative to where your CGI script is, i.e. relative to the cgi-bin folder.
+</I>&gt;<i>
+</I>&gt;<i> Also remember that they're URLs and not file paths: if your cgi-bin is in
+</I>&gt;<i> c:\xitami\cgi-bin, you can't get to c:\images with ../../images/ - the &quot;up
+</I>&gt;<i> one level&quot; is handled by the user's Web browser, which has no idea where
+</I>&gt;<i> stuff is on your hard disk.
+</I>&gt;<i>
+</I>&gt;<i> I realise this isn't particularly clear, so here's a silly example:
+</I>&gt;<i>
+</I>&gt;<i> Suppose your server is set up with an alias for /docs/, as follows:
+</I>&gt;<i>
+</I>&gt;<i> - / points to c:\xitami\webpages, like the default setup
+</I>&gt;<i> - /cgi-bin/ points to c:\xitami\cgi-bin, again like the default setup
+</I>&gt;<i> - /docs/ points to d:\my documents\public_html
+</I>&gt;<i>
+</I>&gt;<i> Suppose you're looking at this site in a Web browser, and you're looking
+</I>at
+&gt;<i> <A HREF="http://myserver/docs/MyPlanToTakeOverTheWorld.html.">http://myserver/docs/MyPlanToTakeOverTheWorld.html.</A> When you go to this
+</I>&gt;<i> page, Xitami will look up what /docs/ means and return the contents of
+</I>&gt;<i> d:\my documents\public_html\MyPlanToTakeOverTheWorld.html. If this file
+</I>&gt;<i> contains a hyperlink to &quot;../MoreRanting.html&quot;, you might expect that to
+</I>&gt;<i> mean d:\my documents\MoreRanting.html.
+</I>&gt;<i>
+</I>&gt;<i> However, the ../ is resolved by the web browser, not the server. All the
+</I>&gt;<i> web browser knows is that it's at a server called <A HREF="http://myserver,">http://myserver,</A> in a
+</I>&gt;<i> folder called /docs/, looking at HereIsARant.html. So, it takes the
+</I>current
+&gt;<i> folder (/docs/), goes up one level (to /), and downloads MoreRanting.html
+</I>&gt;<i> from that folder - that's <A HREF="http://myserver/MoreRanting.html.">http://myserver/MoreRanting.html.</A>
+</I>&gt;<i>
+</I>&gt;<i> Xitami looks up what / means, looks for a file called MoreRanting.html,
+</I>and
+&gt;<i> dutifully returns c:\xitami\webpages\MoreRanting.html.
+</I>&gt;<i>
+</I>&gt;<i> This is good, because it means there's no way a web browser can get at
+</I>&gt;<i> documents in folders you haven't specifically added to the server. For
+</I>&gt;<i> example, if it worked the way you seem to have assumed, the browser could
+</I>&gt;<i> request <A HREF="http://myserver/../defaults.aut">http://myserver/../defaults.aut</A> and get c:\xitami\defaults.aut.
+</I>&gt;<i> This would be bad, because defaults.aut is a list of usernames and
+</I>&gt;<i> passwords for the password-protected pages on your server, if you have
+</I>&gt;<i> any... don't worry though, this doesn't actually happen.
+</I>&gt;<i>
+</I>&gt;<i> For the same reason, to get a hyperlink to something you've stored in
+</I>&gt;<i> webpages from a script in cgi-bin, you just go &quot;../something&quot; or
+</I>&gt;<i> &quot;/something&quot;, not &quot;../webpages/something&quot; - and to get from webpages to
+</I>&gt;<i> cgi-bin, you just go &quot;cgi-bin&quot; and not &quot;../cgi-bin&quot; (this would make no
+</I>&gt;<i> sense because you're already at the root as far as a web browser is
+</I>&gt;<i> concerned, so you can't go up any further).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001334.html">[Xitami] how to configure alias
+</A></li>
+	<LI> Next message: <A HREF="001336.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1335">[ date ]</a>
+              <a href="thread.html#1335">[ thread ]</a>
+              <a href="subject.html#1335">[ subject ]</a>
+              <a href="author.html#1335">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

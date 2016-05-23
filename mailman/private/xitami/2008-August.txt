@@ -1,0 +1,755 @@
+From wilson at wha.com  Sat Aug  9 13:56:28 2008
+From: wilson at wha.com (Phillip C. Wilson)
+Date: Sat, 9 Aug 2008 07:56:28 -0400
+Subject: [Xitami] CGI header access?
+Message-ID: <LMBBINNEFDDGLLBPAFJDMEEJPIAA.wilson@wha.com>
+
+I've been using Xitami since 2000 and am reluctant to change web servers
+'cause everything has worked perfectly.
+
+I have a CGI exe as my default "page" which builds dynamic pages for me,
+HTML only no HTTP headers.
+
+I want to make a change in that for some domains I want that same CGI to
+issue a 3-line redirection - just issue HTTP headers and no HTML (bringing
+it back to the same server but with a different name and it has to be a 301
+Redirection):
+
+Writeln('HTTP/1.0 301 Moved Permanently');
+Writeln('Location: http://NewDomain.com/page1.htm');
+Writeln('');
+
+Question(s):  Can I simply put this code in the same default CGI?  Do CGIs
+handle headers?  If not, is there another way to issue a redirection? A
+redirection under program control?
+
+Thanks.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080809/fbe9bcfd/attachment.htm 
+
+From francis.turner at gmail.com  Sat Aug  9 14:24:52 2008
+From: francis.turner at gmail.com (Francis Turner)
+Date: Sat, 9 Aug 2008 14:24:52 +0200
+Subject: [Xitami] CGI header access?
+In-Reply-To: <LMBBINNEFDDGLLBPAFJDMEEJPIAA.wilson@wha.com>
+References: <LMBBINNEFDDGLLBPAFJDMEEJPIAA.wilson@wha.com>
+Message-ID: <f83609d50808090524i471b299aka280395f199fe40b@mail.gmail.com>
+
+Quick answer: YES
+
+in fact I tested it and so long as you have not printed ANYTHING
+before the redirect it will work. i.e. starting your CGI function with
+code similar to
+if (domain == "thisdomain.com") {
+print "Status: 301 Moved Permanently\nLocation: http://otherdomain.com/\n\n";
+exit;
+}
+works just fine
+
+On Sat, Aug 9, 2008 at 1:56 PM, Phillip C. Wilson <wilson at wha.com> wrote:
+> I've been using Xitami since 2000 and am reluctant to change web servers
+> 'cause everything has worked perfectly.
+>
+> I have a CGI exe as my default "page" which builds dynamic pages for me,
+> HTML only no HTTP headers.
+>
+> I want to make a change in that for some domains I want that same CGI to
+> issue a 3-line redirection - just issue HTTP headers and no HTML (bringing
+> it back to the same server but with a different name and it has to be a 301
+> Redirection):
+>
+> Writeln('HTTP/1.0 301 Moved Permanently');
+> Writeln('Location: http://NewDomain.com/page1.htm');
+> Writeln('');
+> Question(s):  Can I simply put this code in the same default CGI?  Do CGIs
+> handle headers?  If not, is there another way to issue a redirection? A
+> redirection under program control?
+>
+> Thanks.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+ Necessity is the mother of strange bedfellows.
+
+From wilson at wha.com  Sat Aug  9 19:59:15 2008
+From: wilson at wha.com (Phillip C. Wilson)
+Date: Sat, 9 Aug 2008 13:59:15 -0400
+Subject: [Xitami]  CGI header access?
+Message-ID: <LMBBINNEFDDGLLBPAFJDGEFEPIAA.wilson@wha.com>
+
+Thank you.
+I love those "quick answers", especially when they're "YES"
+It saves so much time to ask before delving into the unknown.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080809/fe4cede9/attachment.htm 
+
+From DKordell at msn.com  Fri Aug 15 04:14:28 2008
+From: DKordell at msn.com (Donna Kordell)
+Date: Thu, 14 Aug 2008 21:14:28 -0500
+Subject: [Xitami] Php problems
+Message-ID: <BAY103-DS5099F2279026298AF08FAD66D0@phx.gbl>
+
+Hello,
+
+I am new here and have very little clue what I am doing. I am basically just trying to get PHP to work on my home computer. I tried unsuccessfully to download apache. Having no other places to turn to, I found xitami. I followed the instruction in the FAQ to install php and they worked, sort of. The code printed out fine in DOS but still wouldn't function in a regular browser window. All the php tags were completely ignored.
+
+Please, I have no idea what I'm doing here. Any advice would be helpful. Thanks in advance.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080814/3b76bc50/attachment.htm 
+
+From bkowald at synergybroadcast.com  Fri Aug 15 04:34:24 2008
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Thu, 14 Aug 2008 20:34:24 -0600
+Subject: [Xitami] Php problems
+Message-ID: <5BA6EC56479B8F49AB43C808445E031ED0F17F@sbsserver.tiltrac.local>
+
+Donna,
+ 
+You should have a php.ini in your php folder.
+Did you copy "php.ini-recomended" to "php.ini" ?
+ 
+In xitami add this line in xitami.cfg or defaults.cfg under the
+[Filters] section
+For php 5:
+    .php = "C:\\php\\php-cgi.exe"
+for php 4:
+    .php = "C:\\php\\php.exe"    
+
+You must set this in php.ini to get output back through the server to
+the browser:
+cgi.force_redirect = 0
+
+make this file and try to access it though a browser:
+Quick test file:
+<?php
+phpinfo();
+?>
+
+Look at cgierr.log in c:\xitami for errors.
+ 
+That should give you some stuff to get going,
+Brian
+ 
+ 
+ 
+
+
+
+-----Original Message-----
+From: Donna Kordell [mailto:DKordell at msn.com] 
+Sent: Thursday, August 14, 2008 10:14 PM
+To: xitami at lists.xitami.org
+Subject: [Xitami] Php problems
+
+
+Hello,
+ 
+I am new here and have very little clue what I am doing. I am basically
+just trying to get PHP to work on my home computer. I tried
+unsuccessfully to download apache. Having no other places to turn to, I
+found xitami. I followed the instruction in the FAQ to install php and
+they worked, sort of. The code printed out fine in DOS but still
+wouldn't function in a regular browser window. All the php tags were
+completely ignored.
+ 
+Please, I have no idea what I'm doing here. Any advice would be helpful.
+Thanks in advance.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080814/f6e7640e/attachment.htm 
+
+From DKordell at msn.com  Fri Aug 15 04:46:30 2008
+From: DKordell at msn.com (Donna Kordell)
+Date: Thu, 14 Aug 2008 21:46:30 -0500
+Subject: [Xitami] Php problems
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031ED0F17F@sbsserver.tiltrac.local>
+References: <5BA6EC56479B8F49AB43C808445E031ED0F17F@sbsserver.tiltrac.local>
+Message-ID: <BAY103-DS3833A2C045FB867DDF11AD66D0@phx.gbl>
+
+MessageI tried everything you said and I still see nothing in the browser. I used the php installer to install php. Should I go back and do it manually?
+  ----- Original Message ----- 
+  From: Brian Kowald<mailto:bkowald at synergybroadcast.com> 
+  To: Xitami Users General Discussion<mailto:xitami at lists.xitami.org> 
+  Sent: Thursday, August 14, 2008 9:34 PM
+  Subject: Re: [Xitami] Php problems
+
+
+  Donna,
+
+  You should have a php.ini in your php folder.
+  Did you copy "php.ini-recomended" to "php.ini" ?
+
+  In xitami add this line in xitami.cfg or defaults.cfg under the [Filters] section
+  For php 5:
+      .php = "C:\\php\\php-cgi.exe"
+  for php 4:
+      .php = "C:\\php\\php.exe"    
+
+  You must set this in php.ini to get output back through the server to the browser:
+  cgi.force_redirect = 0
+
+  make this file and try to access it though a browser:
+  Quick test file:
+  <?php
+  phpinfo();
+  ?>
+
+  Look at cgierr.log in c:\xitami for errors.
+
+  That should give you some stuff to get going,
+  Brian
+
+
+
+
+
+
+
+    -----Original Message-----
+    From: Donna Kordell [mailto:DKordell at msn.com] 
+    Sent: Thursday, August 14, 2008 10:14 PM
+    To: xitami at lists.xitami.org
+    Subject: [Xitami] Php problems
+
+
+    Hello,
+
+    I am new here and have very little clue what I am doing. I am basically just trying to get PHP to work on my home computer. I tried unsuccessfully to download apache. Having no other places to turn to, I found xitami. I followed the instruction in the FAQ to install php and they worked, sort of. The code printed out fine in DOS but still wouldn't function in a regular browser window. All the php tags were completely ignored.
+
+    Please, I have no idea what I'm doing here. Any advice would be helpful. Thanks in advance.
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080814/bc611557/attachment.htm 
+
+From rolinger1 at hotmail.com  Fri Aug 15 06:00:05 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu, 14 Aug 2008 21:00:05 -0700
+Subject: [Xitami] Php problems
+References: <5BA6EC56479B8F49AB43C808445E031ED0F17F@sbsserver.tiltrac.local>
+	<BAY103-DS3833A2C045FB867DDF11AD66D0@phx.gbl>
+Message-ID: <BAY127-DAV112B38790EDBE564D95464F86D0@phx.gbl>
+
+MessageFrom a command prompt have you verify the php script works properly?
+
+When installing PHP there is an option to select which webserver you are installing for and it lists Xitami - make certain you select that.  But what Brian stated below should be sufficient to get things working.
+
+  ----- Original Message ----- 
+  From: Donna Kordell 
+  To: Xitami Users General Discussion 
+  Sent: Thursday, August 14, 2008 7:46 PM
+  Subject: Re: [Xitami] Php problems
+
+
+  I tried everything you said and I still see nothing in the browser. I used the php installer to install php. Should I go back and do it manually?
+    ----- Original Message ----- 
+    From: Brian Kowald 
+    To: Xitami Users General Discussion 
+    Sent: Thursday, August 14, 2008 9:34 PM
+    Subject: Re: [Xitami] Php problems
+
+
+    Donna,
+
+    You should have a php.ini in your php folder.
+    Did you copy "php.ini-recomended" to "php.ini" ?
+
+    In xitami add this line in xitami.cfg or defaults.cfg under the [Filters] section
+    For php 5:
+        .php = "C:\\php\\php-cgi.exe"
+    for php 4:
+        .php = "C:\\php\\php.exe"    
+
+    You must set this in php.ini to get output back through the server to the browser:
+    cgi.force_redirect = 0
+
+    make this file and try to access it though a browser:
+    Quick test file:
+    <?php
+    phpinfo();
+    ?>
+
+    Look at cgierr.log in c:\xitami for errors.
+
+    That should give you some stuff to get going,
+    Brian
+
+
+
+
+
+
+
+      -----Original Message-----
+      From: Donna Kordell [mailto:DKordell at msn.com] 
+      Sent: Thursday, August 14, 2008 10:14 PM
+      To: xitami at lists.xitami.org
+      Subject: [Xitami] Php problems
+
+
+      Hello,
+
+      I am new here and have very little clue what I am doing. I am basically just trying to get PHP to work on my home computer. I tried unsuccessfully to download apache. Having no other places to turn to, I found xitami. I followed the instruction in the FAQ to install php and they worked, sort of. The code printed out fine in DOS but still wouldn't function in a regular browser window. All the php tags were completely ignored.
+
+      Please, I have no idea what I'm doing here. Any advice would be helpful. Thanks in advance.
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080814/924e929a/attachment.htm 
+
+From mrj at 10e12.com  Fri Aug 15 08:59:08 2008
+From: mrj at 10e12.com (MRJ)
+Date: Fri, 15 Aug 2008 07:59:08 +0100
+Subject: [Xitami] Php problems
+In-Reply-To: <BAY127-DAV112B38790EDBE564D95464F86D0@phx.gbl>
+References: <5BA6EC56479B8F49AB43C808445E031ED0F17F@sbsserver.tiltrac.local>	<BAY103-DS3833A2C045FB867DDF11AD66D0@phx.gbl>
+	<BAY127-DAV112B38790EDBE564D95464F86D0@phx.gbl>
+Message-ID: <48A5293C.1080107@10e12.com>
+
+The problem is common.
+You must change the default page section as well.
+
+the proper config is as follows
+
+Skip all they say about PHP-CGI
+
+Use this to make it work..
+
+In defaults.cfg  add the following...
+
+[Filter]
+#   
+-------------------------------------------------------------------------
+.php="c:/php/php.exe"
+
+[Mime]
+    php=application/x-httpd-php
+
+
+Change your default index settings as follows...
+
+    default1=index.php
+    default2=default.php
+    default3=index.htm
+    default4=default.htm
+    default5=index.html
+    default6=default.html
+    default7=404.htm
+
+
+In default setup of PHP 5 on Windows you should be aware of the following.
+
+a)    $_POST[$VarName] WILL NOT WORK
+       $_SESSION[$xVar]  WILL NOT WORK
+
+they are turned off by default and should be so as well since they pose 
+security risks.
+
+b) The workaround for this is included below
+
+(?2008 to myself)
+
+<?php
+/*
+==========================================================================
+A replacement function for $_REQUEST as this does not work at all out of
+the box on XITAMI web server. I was seriously thinking of making it a
+somwhat permanent fixture in my PHP arsenal by adding a $_ infront of
+the name but that would not fly to well in some languages I bet.
+==========================================================================
+Safer Networks Ltd. (c) 2008 - Major Thanks to
+lphuberdeau at phpquebec dot org (21-Aug-2004 05:55)
+for the entry that resolved all my problems in PHP man. 5 chm version
+suggestion in Chapter 4. Dealing with XForms
+==========================================================================
+*/
+function EX_REQUEST($var){
+If ($_SERVER['REQUEST_METHOD']=="GET"){
+    $qstr = $_SERVER['QUERY_STRING'];
+    If ($qstr!=""){
+        parse_str($qstr, $element);
+        $val = $element[$var];
+    }else{
+        $val = NULL;
+    }
+    unset($qstr); //free mem or data you dont want GC to keep
+}else if($_SERVER['REQUEST_METHOD']=="POST"){
+    $fp = fopen( "php://stdin", "r" );
+    $data = "";
+    while(!feof( $fp ) ){
+       $data .= fgets( $fp );
+        }
+    fclose( $fp );
+    if($data!=""){
+        parse_str($data, $element); //printf($data);
+        $val = $element[$var];
+        unset($data); //free mem or data you dont want GC to keep
+    }else{
+        $val = NULL;
+    }
+}else{
+    // DOES NOT SUPPORT PUT OR HEAD AT THIS TIME.
+    // and we cannot return Empty or 0 when nothing was recieved.
+    $val = NULL;
+}
+return $val;
+}
+?>
+SEE&nbsp;SOURCE&nbsp;FOR&nbsp;INFORMATION<HR>
+<?php
+// HOW TO USE THE FUNCTION --------------------
+/* REMOVE LINE 46 AND 66 TO SEE WORKING EXAMPLE
+
+<html><body>
+<form method=post action="x.php" 
+enctype='application/x-www-form-urlencoded'>
+<input type=hidden value=4 name='p'><input type=submit value='post 
+it'></form><br>
+
+<form method=get action="x.php" enctype='application/x-www-form-urlencoded'>
+<input type=hidden value=4 name='p'><input type=submit value='get 
+it'></form><br>
+
+<?php
+  echo "The variable p is detected as having Value: " . ParseReq('p') . 
+"<br>";
+?>
+
+</body></html>
+
+
+*/
+?>
+
+
+
+---
+
+Russel Olinger wrote:
+> From a command prompt have you verify the php script works properly?
+>  
+> When installing PHP there is an option to select which webserver you 
+> are installing for and it lists Xitami - make certain you select 
+> that.  But what Brian stated below should be sufficient to get things 
+> working.
+>  
+>
+>     ----- Original Message -----
+>     *From:* Donna Kordell <mailto:DKordell at msn.com>
+>     *To:* Xitami Users General Discussion
+>     <mailto:xitami at lists.xitami.org>
+>     *Sent:* Thursday, August 14, 2008 7:46 PM
+>     *Subject:* Re: [Xitami] Php problems
+>
+>     I tried everything you said and I still see nothing in the
+>     browser. I used the php installer to install php. Should I go back
+>     and do it manually?
+>
+>         ----- Original Message -----
+>         *From:* Brian Kowald <mailto:bkowald at synergybroadcast.com>
+>         *To:* Xitami Users General Discussion
+>         <mailto:xitami at lists.xitami.org>
+>         *Sent:* Thursday, August 14, 2008 9:34 PM
+>         *Subject:* Re: [Xitami] Php problems
+>
+>         Donna,
+>          
+>         You should have a php.ini in your php folder.
+>         Did you copy "php.ini-recomended" to "php.ini" ?
+>          
+>         In xitami add this line in xitami.cfg or defaults.cfg under
+>         the [Filters] section
+>         For php 5:
+>             .php = "C:\\php\\php-cgi.exe"
+>         for php 4:
+>             .php = "C:\\php\\php.exe"   
+>         You must set this in php.ini to get output back through the
+>         server to the browser:
+>         cgi.force_redirect = 0
+>         make this file and try to access it though a browser:
+>         Quick test file:
+>         <?php
+>         phpinfo();
+>         ?>
+>         Look at cgierr.log in c:\xitami for errors.
+>          
+>         That should give you some stuff to get going,
+>         Brian
+>          
+>          
+>          
+>
+>
+>             -----Original Message-----
+>             *From:* Donna Kordell [mailto:DKordell at msn.com]
+>             *Sent:* Thursday, August 14, 2008 10:14 PM
+>             *To:* xitami at lists.xitami.org
+>             *Subject:* [Xitami] Php problems
+>
+>             Hello,
+>              
+>             I am new here and have very little clue what I am doing. I
+>             am basically just trying to get PHP to work on my home
+>             computer. I tried unsuccessfully to download apache.
+>             Having no other places to turn to, I found xitami. I
+>             followed the instruction in the FAQ to install php and
+>             they worked, sort of. The code printed out fine in DOS but
+>             still wouldn't function in a regular browser window. All
+>             the php tags were completely ignored.
+>              
+>             Please, I have no idea what I'm doing here. Any advice
+>             would be helpful. Thanks in advance.
+>
+>
+>         --
+>         Xitami Users Mailing List -- For Xitami support
+>         To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>     ------------------------------------------------------------------------
+>
+>     --
+>     Xitami Users Mailing List -- For Xitami support
+>     To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Phone: 020 7724 5943
+  Mob:   079 6445 0998
+
+International Callers;
+  Phone: +44 207 724 5943
+  Mob:   +44 796 445 0998
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+From mrj at 10e12.com  Fri Aug 15 09:01:51 2008
+From: mrj at 10e12.com (MRJ)
+Date: Fri, 15 Aug 2008 08:01:51 +0100
+Subject: [Xitami] Php problems
+In-Reply-To: <48A5293C.1080107@10e12.com>
+References: <5BA6EC56479B8F49AB43C808445E031ED0F17F@sbsserver.tiltrac.local>	<BAY103-DS3833A2C045FB867DDF11AD66D0@phx.gbl>	<BAY127-DAV112B38790EDBE564D95464F86D0@phx.gbl>
+	<48A5293C.1080107@10e12.com>
+Message-ID: <48A529DF.20801@10e12.com>
+
+Someone in here said it does work out of the box. but surely did not on 
+my machine.
+I ran the std installer of PHP 5 and use Xitami 2.5 for dev purposes only.
+
+there is a slight error in the solution script you have to change the 
+function name in the calling sample, thats all.
+
+It may work for some, for others not.
+I know my version of the REQUEST_EX will work both on apache and xitami 
+in the same manner.
+
+Good luck.
+Mike
+> In default setup of PHP 5 on Windows you should be aware of the following.
+>
+> a)    $_POST[$VarName] WILL NOT WORK
+>        $_SESSION[$xVar]  WILL NOT WORK
+>   
+
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Phone: 020 7724 5943
+  Mob:   079 6445 0998
+
+International Callers;
+  Phone: +44 207 724 5943
+  Mob:   +44 796 445 0998
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+From hogan at geeksgalore.ca  Fri Aug 15 15:47:14 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Fri, 15 Aug 2008 09:47:14 -0400
+Subject: [Xitami] Php problems
+In-Reply-To: <BAY103-DS5099F2279026298AF08FAD66D0@phx.gbl>
+References: <BAY103-DS5099F2279026298AF08FAD66D0@phx.gbl>
+Message-ID: <48A588E2.1050907@geeksgalore.ca>
+
+google "easyWamp"
+all in one kits will suit your needs perfect
+
+Donna Kordell wrote:
+> Hello,
+>  
+> I am new here and have very little clue what I am doing. I am 
+> basically just trying to get PHP to work on my home computer. I tried 
+> unsuccessfully to download apache. Having no other places to turn to, 
+> I found xitami. I followed the instruction in the FAQ to install php 
+> and they worked, sort of. The code printed out fine in DOS but still 
+> wouldn't function in a regular browser window. All the php tags were 
+> completely ignored.
+>  
+> Please, I have no idea what I'm doing here. Any advice would be 
+> helpful. Thanks in advance.
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-- 
+-- 
+Hogan Courrier
+Geeks Galore Computer Center
+(613) 472-0005
+http://www.geeksgalore.ca
+
+
+From yves.sucaet at usa.net  Tue Aug 26 14:10:46 2008
+From: yves.sucaet at usa.net (Yves Sucaet)
+Date: Tue, 26 Aug 2008 07:10:46 -0500
+Subject: [Xitami] Xitami / XP / PHP / MySQL installation tutorial
+References: <020701c8dd0d$bd4be480$fcfea8c0@runner>
+Message-ID: <002501c90774$c8b86be0$7f01a8c0@rincewind>
+
+Hello,
+
+We recently ran a training session in New Mexico for PHP and MySQL programming. We used Xitami as a webserver. We put up a guided tutorial on how to install the combination XP / Xitami / PHP and MySQL that may be useful for other people, as well. The site is available at:
+
+http://lab.bcb.iastate.edu/training/webdev/nmsu/prereq.htm
+
+Feel free to link to this resource from your own pages,
+
+HTH,
+
+Yves Sucaet
+BCBLab account manager
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080826/19d2e93c/attachment.htm 
+
+From ph at imatix.com  Tue Aug 26 23:34:26 2008
+From: ph at imatix.com (Pieter Hintjens)
+Date: Tue, 26 Aug 2008 23:34:26 +0200
+Subject: [Xitami] Xitami / XP / PHP / MySQL installation tutorial
+In-Reply-To: <002501c90774$c8b86be0$7f01a8c0@rincewind>
+References: <020701c8dd0d$bd4be480$fcfea8c0@runner>
+	<002501c90774$c8b86be0$7f01a8c0@rincewind>
+Message-ID: <5821ea240808261434va4abd37id0d11013d0f53c0a@mail.gmail.com>
+
+On Tue, Aug 26, 2008 at 2:10 PM, Yves Sucaet <yves.sucaet at usa.net> wrote:
+
+> We recently ran a training session in New Mexico for PHP and MySQL
+> programming. We used Xitami as a webserver. We put up a guided tutorial on
+> how to install the combination XP / Xitami / PHP and MySQL that may be
+> useful for other people, as well. The site is available at:
+>
+> http://lab.bcb.iastate.edu/training/webdev/nmsu/prereq.htm
+
+It looks great!
+
+There is a Xitami wiki at http://xitami.wikidot.com/, you can register
+and add a link to your tutorial if you want.
+
+-Pieter
+

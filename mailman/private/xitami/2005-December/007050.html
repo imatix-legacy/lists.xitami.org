@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Error in CGI execution
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Error%20in%20CGI%20execution&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007049.html">
+   <LINK REL="Next"  HREF="007051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Error in CGI execution</H1>
+    <B>Tom Moore</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Error%20in%20CGI%20execution&In-Reply-To="
+       TITLE="[Xitami] Error in CGI execution">tmoore1008 at yahoo.com
+       </A><BR>
+    <I>Thu Dec 22 07:02:33 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007049.html">[Xitami] ftp: change file attributes
+</A></li>
+        <LI>Next message: <A HREF="007051.html">[Xitami] enable HTTP PUT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7050">[ date ]</a>
+              <a href="thread.html#7050">[ thread ]</a>
+              <a href="subject.html#7050">[ subject ]</a>
+              <a href="author.html#7050">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Can anyone assist with getting the SSI exec command to
+work? I have Ximati/2.5c2 installed on a Windows XP
+Home laptop.
+
+Xitami returns the following, with no additional
+information that I can find in the log files:
+[xitami SSI: Error in CGI execution]
+
+CGI works.
+
+The following SSI commands work:
+&lt;!--#include file=&quot;...&quot;--&gt;
+&lt;!--#include virtual=&quot;...&quot;--&gt;
+
+The following so far do not work (the ssi:exec option
+*is* enabled):
+&lt;!--#exec cgi=&quot;...&quot;--&gt;
+&lt;!--#exec cmd=&quot;...&quot;--&gt;
+
+For the purposes of this question I have, after much
+failed trial and error toggling various CGI and SSI
+options, reverted back to a clean &quot;out-of-the-box&quot;
+install:
+
+	Application directory is: C:\Program
+Files\xitami-25\app (location of xigui32.exe)
+	Web directory is: C:\Program
+Files\xitami-25\app\webpages (location of testssi.ssi
+and testssi.inc)
+	Cgi-bin directory is: C:\Program
+Files\xitami-25\app\cgi-bin 
+
+The &quot;out-of-the-box&quot; [Cgi] and [Ssi] settings in the
+xitami.cfg file (straight out of the xiopen_2_5.zip
+file) are:
+
+[Cgi]
+    enabled=1
+    workdir=-
+    wildcard=0
+    timeout=60
+    monitor=200
+    dirlist=0
+    msdos-style=0
+    debug=0
+    stdio=1
+    mixed-url=1
+    errlog=cgierr.log
+    environment=1
+    passargs=0
+    http-fields=1
+    http-prefix=HTTP_
+    form-fields=1
+    form-prefix=FORM_
+    form-query=0
+
+[Ssi]
+    enabled=1
+    timefmt=%A, %d-%b-%y %H:%M:%S %Z
+    sizefmt=bytes
+    timeout=30
+    errmsg=&lt;p&gt;[xitami SSI: %s]
+    exec=0
+
+Before making any changes, I've opened testssi.ssi
+(which &quot;includes&quot;s testssi.inc, which &quot;exec&quot;s
+testcgi.exe) in my browser and Xitami returns:
+[xitami SSI: #exec command not permitted for security
+reasons;]
+
+I've then made two changes. First, I've set the
+xitami.cfg ssi:exec option:
+
+[Ssi]
+    exec=1
+
+...and Xitami returns:
+[xitami SSI: ]
+
+Next, I've dropped a testcgi.exe into C:\Program
+Files\xitami-25\app\cgi-bin, and arrive at the error
+in question--so it's definitely finding the CGI
+executable: 
+[xitami SSI: Error in CGI execution]
+
+For the record, testcgi.exe works when called
+directly, as follows, from either the command line or
+the browser:
+C:\Program Files\xitami-25\app\cgi-bin&gt;testcgi.exe
+<A HREF="http://127.0.0.1/cgi-bin/testcgi.exe?arguments">http://127.0.0.1/cgi-bin/testcgi.exe?arguments</A>
+
+I've also tried unsuccessfully to invoke a simple .bat
+file (C:\Program
+Files\xitami-25\app\cgi-bin\helloworld.bat):
+@echo off
+echo content-type: text/html
+type newline.txt
+echo hello world
+
+...via the following SSI exec:
+&lt;!--#exec cgi=&quot;/cgi-bin/helloworld.bat&quot;--&gt;
+
+Regards,
+Tom Moore
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam
+protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+<A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A> 
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007049.html">[Xitami] ftp: change file attributes
+</A></li>
+	<LI>Next message: <A HREF="007051.html">[Xitami] enable HTTP PUT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7050">[ date ]</a>
+              <a href="thread.html#7050">[ thread ]</a>
+              <a href="subject.html#7050">[ subject ]</a>
+              <a href="author.html#7050">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

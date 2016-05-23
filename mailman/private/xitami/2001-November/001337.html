@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how to configure alias
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001336.html">
+   <LINK REL="Next"  HREF="001338.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how to configure alias
+   </H1>
+    <B>d.butt
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how to configure alias">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 6 Nov 2001 16:54:56 -0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001336.html">[Xitami] how to configure alias
+</A></li>
+        <LI> Next message: <A HREF="001338.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1337">[ date ]</a>
+              <a href="thread.html#1337">[ thread ]</a>
+              <a href="subject.html#1337">[ subject ]</a>
+              <a href="author.html#1337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Based on the info below is it possible for you to send me the paths that I
+put in both alias boxes so that when I insert an image &lt;IMG
+SRC=&quot;../../../images/masthead.gif&quot; BORDER=&quot;0&quot; WIDTH=&quot;600&quot; HEIGHT=&quot;100&quot;
+ALIGN=&quot;bottom&quot; ALT=&quot;&quot;&gt;it will work
+
+C:\Xitami\cgi-bin\esp-pages  This is the path to the folder which holds the
+files
+
+C:\images  this is the path to the images folder
+Dai
+<A HREF="http://www.dezineasite.co.uk">http://www.dezineasite.co.uk</A>
+<A HREF="http://www.crazybiker.f2s.com">http://www.crazybiker.f2s.com</A>
+----- Original Message -----
+From: &quot;Simon McVittie&quot; &lt;<A HREF="mailto:smcv@pseudorandom.co.uk">smcv@pseudorandom.co.uk</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, November 06, 2001 3:56 PM
+Subject: Re: [Xitami] how to configure alias
+
+
+&gt;<i> &gt; I'm testing things localy on my pc not on the host server and when I go
+</I>&gt;<i> &gt; insert an imasge from the image folder it goes back 3 levels as so
+</I>&gt;<i> &gt; &lt;IMG SRC=&quot;../../../images/bevel_bg.jpg&quot; BORDER=&quot;0&quot; WIDTH=&quot;150&quot;
+</I>HEIGHT=&quot;40&quot;
+&gt;<i> &gt; ALIGN=&quot;bottom&quot; ALT=&quot;&quot;&gt;
+</I>&gt;<i> &gt; now al I want is to confige the alias to read any images from this
+</I>folder on
+&gt;<i> &gt; my c:drive
+</I>&gt;<i> &gt; is this correct if not can you give the correct configuration
+</I>&gt;<i> &gt; images=c:\images\        <A HREF="http://127.0.0.1/c:/images/.gif/.jpg./.png">http://127.0.0.1/c:/images/.gif/.jpg./.png</A>
+</I>&gt;<i>
+</I>&gt;<i> If you're running Xitami on your PC, that *is* the host server. Your web
+</I>&gt;<i> browser (Internet Explorer, Netscape, whatever) doesn't read from the disk
+</I>&gt;<i> itself if you're testing your site through Xitami - all it knows about
+</I>your
+&gt;<i> site is what Xitami tells it.
+</I>&gt;<i>
+</I>&gt;<i> If you set an alias like
+</I>&gt;<i>
+</I>&gt;<i> [Alias]
+</I>&gt;<i> images=c:\images
+</I>&gt;<i>
+</I>&gt;<i> then, for example, going to the URL <A HREF="http://127.0.0.1/images/bevel_bg.jpg">http://127.0.0.1/images/bevel_bg.jpg</A>
+</I>&gt;<i> will get you the contents of the file 'c:\images\bevel_bg.jpg'. (*
+</I>footnote)
+&gt;<i>
+</I>&gt;<i> In general, an alias like
+</I>&gt;<i>
+</I>&gt;<i> [Alias]
+</I>&gt;<i> aliased/server/path=c:\real\path\on\disk
+</I>&gt;<i>
+</I>&gt;<i> will map the URL
+</I>&gt;<i> <A HREF="http://127.0.0.1/aliased/server/path/somefolder/somefile.ext">http://127.0.0.1/aliased/server/path/somefolder/somefile.ext</A>
+</I>&gt;<i> to the real file
+</I>&gt;<i> c:\real\path\on\disk\somefolder\somefile.ext
+</I>&gt;<i> (I hope you can see where the the components of this path come from).
+</I>&gt;<i>
+</I>&gt;<i> It sounds as though your HTML writing software is getting its relative
+</I>&gt;<i> paths wrong, or making big assumptions about how your real disk filesystem
+</I>&gt;<i> maps to the server's &quot;virtual filesystem&quot;. If the current working
+</I>directory
+&gt;<i> is '/cgi-bin', which it is for these scripts, your web browser *can't* go
+</I>&gt;<i> up 3 levels, because as far as it can see there's only one level to go up
+</I>&gt;<i> through (it goes up one level to '/', then can't see any further).
+</I>&gt;<i>
+</I>&gt;<i> If you have an alias like the one above you can use an image with a tag
+</I>like
+&gt;<i>
+</I>&gt;<i> &lt;img src=&quot;../images/bevel.jpg&quot; alt=&quot;&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> which your web browser will expand to
+</I>&gt;<i> <A HREF="http://127.0.0.1/cgi-bin/../images/bevel.jpg">http://127.0.0.1/cgi-bin/../images/bevel.jpg</A>
+</I>&gt;<i> then contract to
+</I>&gt;<i> <A HREF="http://127.0.0.1/images/bevel.jpg">http://127.0.0.1/images/bevel.jpg</A>
+</I>&gt;<i> before it sends
+</I>&gt;<i> the request.
+</I>&gt;<i>
+</I>&gt;<i> It may be better to use an absolute path like
+</I>&gt;<i>
+</I>&gt;<i> &lt;img src=&quot;/images/bevel.jpg&quot; alt=&quot;&quot;&gt; (this one is probably better),
+</I>&gt;<i>
+</I>&gt;<i> which your web browser will expand to <A HREF="http://127.0.0.1/images/bevel.jpg">http://127.0.0.1/images/bevel.jpg</A>
+</I>&gt;<i> before it sends the request.
+</I>&gt;<i>
+</I>&gt;<i> It's impossible to go up 3 levels because your browser doesn't know
+</I>there's
+&gt;<i> anything above the root, so it won't send a request which goes above /;
+</I>and
+&gt;<i> because, for security reasons, Xitami won't send files from outside the
+</I>&gt;<i> webpages root, unless it's been told to do so by an alias. This is to
+</I>&gt;<i> prevent arbitrary users doing things like sending a request for something
+</I>&gt;<i> like <A HREF="http://127.0.0.1/../../windows/system/user.dat">http://127.0.0.1/../../windows/system/user.dat</A> and getting half your
+</I>&gt;<i> Registry.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> *: Xitami assumes your 'images' directory contains the icons which come
+</I>&gt;<i> with it (this isn't great design IMO, but that's how it works). If you
+</I>want
+&gt;<i> directory listings to look right, you might need to copy the images from
+</I>&gt;<i> c:\xitami\webpages\images (or wherever you have Xitami installed) into the
+</I>&gt;<i> folder which will be accessible as <A HREF="http://127.0.0.1/images/">http://127.0.0.1/images/</A> (e.g.
+</I>&gt;<i> c:\images).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001336.html">[Xitami] how to configure alias
+</A></li>
+	<LI> Next message: <A HREF="001338.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1337">[ date ]</a>
+              <a href="thread.html#1337">[ thread ]</a>
+              <a href="subject.html#1337">[ subject ]</a>
+              <a href="author.html#1337">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

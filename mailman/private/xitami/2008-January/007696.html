@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Dynamic URL converstion to static URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Dynamic%20URL%20converstion%20to%20static%20URLs&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007695.html">
+   <LINK REL="Next"  HREF="007689.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Dynamic URL converstion to static URLs</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Dynamic%20URL%20converstion%20to%20static%20URLs&In-Reply-To="
+       TITLE="[Xitami] Dynamic URL converstion to static URLs">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Sun Jan 13 17:35:54 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007695.html">[Xitami] Dynamic URL converstion to static URLs
+</A></li>
+        <LI>Next message: <A HREF="007689.html">[Xitami] Alias configs?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7696">[ date ]</a>
+              <a href="thread.html#7696">[ thread ]</a>
+              <a href="subject.html#7696">[ subject ]</a>
+              <a href="author.html#7696">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I discovered you can also set your default page to &quot;/&quot;
+
+And then create a cgi alias for
+     &quot;/&quot; = /xitami/cgi-bin/somescript.pl
+You can then use the secondary and teriary default fields for other static 
+pages such as &quot;index.html&quot; or &quot;defualt.html&quot;
+
+This will allow your landing page to a be a cgi/perl script in a central 
+directory without having to create a filter for script extensions to work 
+out side of your cgi directory.  Previously I had a &quot;foo.pl&quot; perl script in 
+my root htdocs directory (/xitami/htdocs) and then had &quot;foo.pl&quot; as my 
+default page - I needed a filter binding *.pl = /perl/bin/perl to execute my 
+landing page....this posed a few maintenance and security problems.
+
+However, the about &quot;/&quot; method also seems to hide directory listings of URL 
+directories that do not have a default page.  Though the files in URL 
+directories are still individually accessable, the directory is no longer 
+viewable as a file/folder listing. This is a great way to protect 
+directories from being viewed as file listings if a default page doesn't 
+exist in that folder.
+
+I have not found any downsides to this method...anyone else used/seen it 
+before to comment on it?
+
+With out any default page in the URL directories:
+IE: www.foo.com/images/bar/helloworld.jpg - would still show the image in 
+the browser
+but : www.foo.com/images or www.foo.com/images/bar  would only yeild the 
+following results
+
+File list of /images///////////////////////
+directory
+Name                Size         Last 
+Modified--------------------------------------------------------------------------------/images/////////////////////////
+and
+
+File list of /images/bar//////////////////////
+directory
+Name                Size         Last 
+Modified--------------------------------------------------------------------------------/images/bar////////////////////////
+----- Original Message ----- 
+From: &quot;General&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ronackgen01 at bellsouth.net</A>&gt;
+To: &quot;'Xitami Users General Discussion'&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Sunday, January 13, 2008 8:16 AM
+Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+
+
+&gt;<i> Yeah whatever, I misspoke! It's the Web Server that does it but the 
+</I>&gt;<i> browser
+</I>&gt;<i> translates it. You can tell Xitami which file to use by default whether it
+</I>&gt;<i> be index.htm,html,php or default.htm,html,php. I expect you could even use
+</I>&gt;<i> start.xxx if you wanted. I haven't tried it though.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for clarifying for me.
+</I>&gt;<i>
+</I>&gt;<i> Ron
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Paul Reid
+</I>&gt;<i> Sent: Saturday, January 12, 2008 8:28 PM
+</I>&gt;<i> To: Xitami Users General Discussion
+</I>&gt;<i> Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+</I>&gt;<i>
+</I>&gt;&gt;<i> <A HREF="http://www.causewaylighting.com/bulbs">http://www.causewaylighting.com/bulbs</A>
+</I>&gt;&gt;<i> or
+</I>&gt;&gt;<i> <A HREF="http://www.causewaylighting.com/bulbs/index.php">http://www.causewaylighting.com/bulbs/index.php</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Since most browsers if not all browsers assume index.php you can usually
+</I>&gt;&gt;<i> leave it off.
+</I>&gt;<i>
+</I>&gt;<i> The browser assumes no such thing.
+</I>&gt;<i>
+</I>&gt;<i> The web-server has a default action if a URL points to a Directory
+</I>&gt;<i> instead of a File.
+</I>&gt;<i>
+</I>&gt;<i> Xitami comes pre-loaded to look for the usual default.htm and index.html.
+</I>&gt;<i>
+</I>&gt;<i> You can add index.php to that list.
+</I>&gt;<i>
+</I>&gt;<i> Then a call for &quot;../bulbs/&quot; (a directory) is fulfilled with
+</I>&gt;<i> &quot;../bulbs/default.htm&quot; or whatever action you have set up.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> No virus found in this incoming message.
+</I>&gt;<i> Checked by AVG Free Edition.
+</I>&gt;<i> Version: 7.5.516 / Virus Database: 269.19.1/1220 - Release Date: 1/11/2008
+</I>&gt;<i> 6:09 PM
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007695.html">[Xitami] Dynamic URL converstion to static URLs
+</A></li>
+	<LI>Next message: <A HREF="007689.html">[Xitami] Alias configs?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7696">[ date ]</a>
+              <a href="thread.html#7696">[ thread ]</a>
+              <a href="subject.html#7696">[ subject ]</a>
+              <a href="author.html#7696">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

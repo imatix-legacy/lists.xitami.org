@@ -1,0 +1,1578 @@
+From xitami-dev@lists.xitami.org  Tue Apr  5 20:36:19 2005
+From: xitami-dev@lists.xitami.org (Jack)
+Date: Tue, 5 Apr 2005 15:36:19 -0400
+Subject: [Xitami-Dev] Read query string from LRWP
+Message-ID: <285602928.20050405153619@softhome.net>
+
+Hello all,
+
+I'm new to Xitami and LRWP.
+
+I ran the sample LRWP code and it works well.
+However, it doesn't show how to get the QUERY_STRING.
+I suppose I can get it from lrwp.cgi so I tried:
+
+  sym_get_value(lrwp.cgi, "QUERY_STRING", "default_string")
+
+but it always returns "default_string". Can anyone give me
+a hint or point me to docs showing how to get the URL from
+the symbol table?
+
+-- 
+Best regards,
+Jack
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 04:44:25 2005
+From: xitami-dev@lists.xitami.org (Jack)
+Date: Tue, 5 Apr 2005 23:44:25 -0400
+Subject: [Xitami-Dev] How to build Xitami on Linux
+Message-ID: <144303607.20050405234425@softhome.net>
+
+Hello all,
+
+I can not find xibuild in 2.4d11 and 2.5c2.
+boomake returns lots of lots of errors:
+
+  "c: command not found"
+
+It seems to be looking for "c" as the compiler
+while I have gcc as the C compiler.
+
+Anyone has some tips how I can build the package?
+The documentation seem to be out-dated.
+
+-- 
+Thanks,
+Jack
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 10:39:12 2005
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Wed, 06 Apr 2005 19:39:12 +1000
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <144303607.20050405234425@softhome.net>
+References: <144303607.20050405234425@softhome.net>
+Message-ID: <4253AE40.9040201@ob-wan.com>
+
+Jack,
+
+Sure you don't have the windows version of the sources?
+
+Rob
+
+Jack wrote:
+
+>Hello all,
+>
+>I can not find xibuild in 2.4d11 and 2.5c2.
+>boomake returns lots of lots of errors:
+>
+>  "c: command not found"
+>
+>It seems to be looking for "c" as the compiler
+>while I have gcc as the C compiler.
+>
+>Anyone has some tips how I can build the package?
+>The documentation seem to be out-dated.
+>
+>  
+>
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 15:57:36 2005
+From: xitami-dev@lists.xitami.org (Jack)
+Date: Wed, 6 Apr 2005 10:57:36 -0400
+Subject: Re[2]: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <4253AE40.9040201@ob-wan.com>
+References: <144303607.20050405234425@softhome.net>
+ <4253AE40.9040201@ob-wan.com>
+Message-ID: <121767128.20050406105736@softhome.net>
+
+Hello Rob,
+
+I do and I can build the Windows version ok.
+Now I want to build it on Linux (the server platform
+that we'll be using) but don't know how to get over
+the "c: command not found" problem. I searched the
+list archive and found that this issue had been raised
+many times but I didn't find any answers or fixes...
+I really hope IMatix can fix the source code package.
+
+-- 
+Best regards,
+Jack
+
+Wednesday, April 6, 2005, 5:39:12 AM, you wrote:
+
+RJ> Jack,
+
+RJ> Sure you don't have the windows version of the sources?
+
+RJ> Rob
+
+RJ> Jack wrote:
+
+>>Hello all,
+>>
+>>I can not find xibuild in 2.4d11 and 2.5c2.
+>>boomake returns lots of lots of errors:
+>>
+>>  "c: command not found"
+>>
+>>It seems to be looking for "c" as the compiler
+>>while I have gcc as the C compiler.
+>>
+>>Anyone has some tips how I can build the package?
+>>The documentation seem to be out-dated.
+>>
+>>  
+>>
+
+
+RJ> --
+RJ> Xitami-Dev -- Xitami Development Mailing List
+RJ> To unsubscribe:
+RJ> http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 16:07:37 2005
+From: xitami-dev@lists.xitami.org (Joe Saunders)
+Date: Wed, 6 Apr 2005 08:07:37 -0700 (PDT)
+Subject: Re[2]: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: 6667
+Message-ID: <20050406150737.58234.qmail@web41522.mail.yahoo.com>
+
+Jack,
+
+Im interested in the fix for the linux build too...
+Keep me in the loop...
+
+-Joe
+--- Jack <jlist@softhome.net> wrote:
+> Hello Rob,
+> 
+> I do and I can build the Windows version ok.
+> Now I want to build it on Linux (the server platform
+> that we'll be using) but don't know how to get over
+> the "c: command not found" problem. I searched the
+> list archive and found that this issue had been
+> raised
+> many times but I didn't find any answers or fixes...
+> I really hope IMatix can fix the source code
+> package.
+> 
+> -- 
+> Best regards,
+> Jack
+> 
+> Wednesday, April 6, 2005, 5:39:12 AM, you wrote:
+> 
+> RJ> Jack,
+> 
+> RJ> Sure you don't have the windows version of the
+> sources?
+> 
+> RJ> Rob
+> 
+> RJ> Jack wrote:
+> 
+> >>Hello all,
+> >>
+> >>I can not find xibuild in 2.4d11 and 2.5c2.
+> >>boomake returns lots of lots of errors:
+> >>
+> >>  "c: command not found"
+> >>
+> >>It seems to be looking for "c" as the compiler
+> >>while I have gcc as the C compiler.
+> >>
+> >>Anyone has some tips how I can build the package?
+> >>The documentation seem to be out-dated.
+> >>
+> >>  
+> >>
+> 
+> 
+> RJ> --
+> RJ> Xitami-Dev -- Xitami Development Mailing List
+> RJ> To unsubscribe:
+> RJ>
+> http://lists.xitami.org/mailman/listinfo/xitami-dev
+> 
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami-dev
+> 
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 17:00:33 2005
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Thu, 07 Apr 2005 02:00:33 +1000
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <121767128.20050406105736@softhome.net>
+References: <144303607.20050405234425@softhome.net> <4253AE40.9040201@ob-wan.com> <121767128.20050406105736@softhome.net>
+Message-ID: <425407A1.1090201@ob-wan.com>
+
+Hi Jack,
+
+Last build I used was 2.5b4 and I managed to build it fine under BeOS. 
+That was 2001 so unless iMatix have done something utterly stupid since 
+then it should work. There was a separate source package for Linux at 
+that time but I see it's all one kit now. Maybe Ewen has been fiddling 
+again.
+
+Anyone at iMatix actually reading this group any more?
+
+Rob
+
+
+Jack wrote:
+
+>Hello Rob,
+>
+>I do and I can build the Windows version ok.
+>Now I want to build it on Linux (the server platform
+>that we'll be using) but don't know how to get over
+>the "c: command not found" problem. I searched the
+>list archive and found that this issue had been raised
+>many times but I didn't find any answers or fixes...
+>I really hope IMatix can fix the source code package.
+>
+>  
+>
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 17:02:55 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Wed, 6 Apr 2005 17:02:55 +0100
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <425407A1.1090201@ob-wan.com>
+References: <144303607.20050405234425@softhome.net> <121767128.20050406105736@softhome.net> <425407A1.1090201@ob-wan.com>
+Message-ID: <200504061802.55057.ph@imatix.com>
+
+On 06/04/2005 06:00 pm, Rob Judd wrote:
+
+> Last build I used was 2.5b4 and I managed to build it fine under BeOS.
+> That was 2001 so unless iMatix have done something utterly stupid since
+> then it should work. There was a separate source package for Linux at
+> that time but I see it's all one kit now. Maybe Ewen has been fiddling
+> again.
+>
+> Anyone at iMatix actually reading this group any more?
+
+Of course. :-)
+
+We do so many utterly stupid things it's hard to keep track.  Perhaps BeOS 
+support was one of those things we cleaned-up since 2001.  (That's a 
+euphemism for "wtf is this, I'm deleting it...")
+
+... Just did a quick scan of the code.  Xitami 2.4 has no BeOS support.  2.5 
+does.  The RealiBase 'c' script (which does the compilation) does.  
+
+So it should all be fine.
+
+Cheers,
+
+Pieter Hintjens
+iMatix
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 17:52:31 2005
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Thu, 07 Apr 2005 02:52:31 +1000
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <200504061802.55057.ph@imatix.com>
+References: <144303607.20050405234425@softhome.net> <121767128.20050406105736@softhome.net> <425407A1.1090201@ob-wan.com> <200504061802.55057.ph@imatix.com>
+Message-ID: <425413CF.5050505@ob-wan.com>
+
+Pieter Hintjens wrote:
+
+>On 06/04/2005 06:00 pm, Rob Judd wrote:
+>
+>  
+>
+>>Last build I used was 2.5b4 and I managed to build it fine under BeOS.
+>>That was 2001 so unless iMatix have done something utterly stupid since
+>>then it should work. There was a separate source package for Linux at
+>>that time but I see it's all one kit now. Maybe Ewen has been fiddling
+>>again.
+>>
+>>Anyone at iMatix actually reading this group any more?
+>>    
+>>
+>
+>Of course. :-)
+>
+>We do so many utterly stupid things it's hard to keep track.  Perhaps BeOS 
+>support was one of those things we cleaned-up since 2001.  (That's a 
+>euphemism for "wtf is this, I'm deleting it...")
+>
+>... Just did a quick scan of the code.  Xitami 2.4 has no BeOS support.  2.5 
+>does.  The RealiBase 'c' script (which does the compilation) does.  
+>
+>So it should all be fine.
+>
+>Cheers,
+>
+>Pieter Hintjens
+>iMatix
+>  
+>
+Hi Pieter,
+
+Nice to see you. The enquiry was actually about Linux support, not BeOS. 
+But I guess you're fairly busy as usual, and didn't read the whole 
+message. The more things change the more they remain the same, eh?
+
+Rob
+[Doing utterly stupid things in the Southern hemisphere, to ensure 
+there's enough of it to go around.]
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 18:26:07 2005
+From: xitami-dev@lists.xitami.org (Jack)
+Date: Wed, 6 Apr 2005 13:26:07 -0400
+Subject: Re[2]: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <200504061802.55057.ph@imatix.com>
+References: <144303607.20050405234425@softhome.net>
+ <121767128.20050406105736@softhome.net> <425407A1.1090201@ob-wan.com>
+ <200504061802.55057.ph@imatix.com>
+Message-ID: <1354749449.20050406132607@softhome.net>
+
+Hello Pieter,
+
+Great! Any chance for Xitami team to fix the Linux build issue?
+The issues are obvious if you try it :) To name a few:
+- Doc still says xibuild
+- missing "c" script when running build.sh or boomake
+- A few directories mentioned in build.sh do not exist in the
+  source package.
+
+A few more questions:
+
+- LRWP addon is not in either 2.4d11 or 2.5c2 source tree.
+  Any reason that it was removed?
+
+- Any plan for Xitami to support HTTP/1.1?
+
+-- 
+Best regards,
+Jack
+
+Wednesday, April 6, 2005, 12:02:55 PM, you wrote:
+
+PH> On 06/04/2005 06:00 pm, Rob Judd wrote:
+
+>> Last build I used was 2.5b4 and I managed to build it fine under BeOS.
+>> That was 2001 so unless iMatix have done something utterly stupid since
+>> then it should work. There was a separate source package for Linux at
+>> that time but I see it's all one kit now. Maybe Ewen has been fiddling
+>> again.
+>>
+>> Anyone at iMatix actually reading this group any more?
+
+PH> Of course. :-)
+
+PH> We do so many utterly stupid things it's hard to keep track.  Perhaps BeOS
+PH> support was one of those things we cleaned-up since 2001.  (That's a
+PH> euphemism for "wtf is this, I'm deleting it...")
+
+PH> ... Just did a quick scan of the code.  Xitami 2.4 has no BeOS support.  2.5
+PH> does.  The RealiBase 'c' script (which does the compilation) does.
+
+PH> So it should all be fine.
+
+PH> Cheers,
+
+PH> Pieter Hintjens
+PH> iMatix
+
+
+PH> --
+PH> Xitami-Dev -- Xitami Development Mailing List
+PH> To unsubscribe:
+PH> http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 20:39:47 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Wed, 6 Apr 2005 20:39:47 +0100
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <425413CF.5050505@ob-wan.com>
+References: <144303607.20050405234425@softhome.net> <200504061802.55057.ph@imatix.com> <425413CF.5050505@ob-wan.com>
+Message-ID: <200504062139.47340.ph@imatix.com>
+
+On 06/04/2005 06:52 pm, Rob Judd wrote:
+
+> Nice to see you. The enquiry was actually about Linux support, not BeOS.
+> But I guess you're fairly busy as usual, and didn't read the whole
+> message. The more things change the more they remain the same, eh?
+
+Nothing like firing off a sensible answer to the wrong question.  There is, on 
+the xitami.com download page, a Linux source package.  There is also a 
+Windows source package.
+
+-Pieter
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 20:43:56 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Wed, 6 Apr 2005 20:43:56 +0100
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <1354749449.20050406132607@softhome.net>
+References: <144303607.20050405234425@softhome.net> <200504061802.55057.ph@imatix.com> <1354749449.20050406132607@softhome.net>
+Message-ID: <200504062143.56724.ph@imatix.com>
+
+--Boundary-00=_8vDVC4DHMA4HLif
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+On 06/04/2005 07:26 pm, Jack wrote:
+
+> - Doc still says xibuild
+
+The doc is unlikely to be modified.  I'll note the other issues and try to 
+find time to make fixes.  HTTP/1.1 is partially supported in 2.5, but I don't 
+think we're going to modify that.  Xitami is pretty much a frozen project.
+
+> - missing "c" script when running build.sh or boomake
+
+You can download & install RealiBase (which also provides some tools you may 
+need if you ever modify Xitami).  It contains the 'c' script.  I've also 
+attached it.
+
+-Pieter
+
+--Boundary-00=_8vDVC4DHMA4HLif
+Content-Type: application/x-shellscript;
+  name="c"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="c"
+
+#! /bin/sh
+#
+#   c - C compile command
+#
+#   Copyright (c) 1991-2003 iMatix Corporation
+#
+#   Syntax:     c filename...     Compile ANSI C program(s)
+#               c -c filename...  (Backwards compatible: compile C programs)
+#               c -l main...      Compile and link main program(s)
+#               c -L main...      Link main program(s), no compile
+#               c -S              Report detected system name
+#               c -C              Report C compiler command syntax
+#               c -r lib file...  Replace object file(s) into library
+#                 -li path        Local include path, additional to INCDIR
+#                 -ll path        Local library path, additional to LIBDIR
+#                 -g              Compile and link with debug information
+#                 -v              Be verbose
+#                 -q              Be quiet
+#                 -<xxxx>         Arbitrary switch passed to compiler/linker
+#
+#   Requires:   Bourne shell
+#   Usage:      Compiles a subroutine or compiles/links a main program.
+#
+#               The following variables can be set to control the program:
+#                   CCDEFINES     Options required for ANSI C compilation
+#                   CCLIBS        Options required for ANSI C linking
+#                   INCDIR        Directory to search for include files
+#                   LIBDIR        Directory to search for libraries
+#
+#   When using iMatix boom, will read the current debug/release setting
+#   from the file 'boomconf' in the current directory.
+#
+#   ------------------ GPL Licensed Source Code ------------------
+#   iMatix makes this software available under the GNU General
+#   Public License (GPL) license for open source projects.  For
+#   details of the GPL license please see www.gnu.org or read the
+#   file license.gpl provided in this package.
+#   
+#   This program is free software; you can redistribute it and/or
+#   modify it under the terms of the GNU General Public License as
+#   published by the Free Software Foundation; either version 2 of
+#   the License, or (at your option) any later version.
+#   
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#   
+#   You should have received a copy of the GNU General Public
+#   License along with this program in the file 'license.gpl'; if
+#   not, write to the Free Software Foundation, Inc., 59 Temple
+#   Place - Suite 330, Boston, MA 02111-1307, USA.
+#
+#   You can also license this software under iMatix's General Terms
+#   of Business (GTB) for commercial projects.  If you have not
+#   explicitly licensed this software under the iMatix GTB you may
+#   only use it under the terms of the GNU General Public License.
+#
+#   For more information, send an email to info@imatix.com.
+#   --------------------------------------------------------------
+#----------------------------------------------------------------------------
+
+#   If not already known, detect UNIX system type.  This algorithm returns
+#   one of these system names, as far as we know at present:
+#
+#       AIX      APOLLO   A/UX     BSD/OS    FreeBSD   HP-UX    IRIX
+#       Linux    NCR      NetBSD   OpenBSD   NEXT      OSF1     SCO
+#       Pyramid  SunOS    ULTRIX   UnixWare  Generic   SINIX-N  BeOS
+#
+#   Sets the variable UTYPE to one of the UNIX system names above, and
+#   CCOPTS to the appropriate compiler options for ANSI C compilation.
+
+if [ -z "$UTYPE" ]; then
+    UTYPE=Generic                       #   Default system name
+    if [ -s /usr/bin/uname       ]; then UTYPE=`/usr/bin/uname`; fi
+    if [ -s /bin/uname           ]; then UTYPE=`/bin/uname`;     fi
+
+    case "$UTYPE" in CYGWIN*)            UTYPE=CYGWIN;;  esac
+
+    if [ -s /usr/apollo/bin      ]; then UTYPE=APOLLO;   fi
+    if [ -s /usr/bin/ncrm        ]; then UTYPE=NCR;      fi
+    if [ -s /usr/bin/swconfig    ]; then UTYPE=SCO;      fi
+    if [ -s /usr/lib/NextStep/software_version ]; \
+                                    then UTYPE=NEXT;     fi
+    if [ "$UTYPE" = "SMP_DC.OSx" ]; then UTYPE=Pyramid;  fi
+    if [ -d /var/sadm/pkg/UnixWare ]; \
+                                    then UTYPE=UnixWare; fi
+    if [ -n "$COMSPEC" -o -n "$OS2_SHELL" ]; \
+                                    then UTYPE=OS/2;     fi
+    if [ -s /bin/msysinfo        ]; then UTYPE=MinGW;    fi
+fi
+
+#   Set specific system compiler options and other flags
+#   CCNAME      Name of compiler
+#   CCOPTS      Compiler options, except -c
+#   LINKTYPE    One of (before, after, gnu)
+#   RANLIB      Use ranlib command to reindex library; else use 'ar rs'
+#   NICE        nice command to use
+#
+#   CCOPTS has no sensible default; so has to be either set by the
+#   general configuration variables, or detected based on system type
+#   and compiler.  If CCOPTS is set, we assume the other values are
+#   set or the defaults are correct.
+#
+#   NOTE: CCNAME default is set below these checks, so that we can test
+#   on CCNAME when setting CCOPTS, and/or set CCNAME and CCOPTS together.
+#
+RANLIB="${RANLIB:-0}"               #   By default, "ar rs" is used
+LINKTYPE="${LINKPATH:-after}"       #   By default, accept '-lsfl... -L.'
+NICE="nice"                         #   Be nice to other users
+
+if [ -z "$CCOPTS" ]; then
+    if [ "$UTYPE" = "AIX" ]; then
+        STDLIBS="-lm"
+        CCOPTS=""
+        CCNODEBUG="-O"
+
+    elif [ "$UTYPE" = "BSD/OS" ]; then
+        STDLIBS="-lm"
+        CCOPTS="-Dbsd"
+        CCNODEBUG="-O"
+        RANLIB=1
+
+    elif [ "$UTYPE" = "FreeBSD" ]; then
+        STDLIBS="-lm"
+        CCOPTS="-Wall"
+        CCNODEBUG="-O2"
+        CCNAME="${CCNAME:-gcc}"             #   Use gcc if not set
+        RANLIB=1
+        LINKTYPE=gnu
+
+    elif [ "$UTYPE" = "NetBSD"  \
+        -o "$UTYPE" = "OpenBSD" ]; then     #   NetBSD/OpenBSD do not use GNU ld
+        STDLIBS="-lm"
+        CCOPTS="-Wall"
+        CCNODEBUG="-O2"
+        CCNAME="${CCNAME:-gcc}"             #   Use gcc if not set
+        RANLIB=1
+
+    elif [ "$UTYPE" = "HP-UX" ]; then
+        STDLIBS="-lm"
+        CCOPTS="-Ae -D_HPUX_SOURCE"         #   May need -Aa
+        CCNODEBUG="-O"
+        LINKTYPE=before
+
+    elif [ "$UTYPE" = "Linux" ]; then
+        STDLIBS="-lm"
+        CCNAME="${CCNAME:-gcc}"             #   Use gcc if not set
+        CCOPTS="-Wall -pthread -D_GNU_SOURCE -D_REENTRANT -D_LARGEFILE64_SOURCE"
+        CCNODEBUG="-O2"
+        LINKTYPE=gnu
+
+    elif [ "$UTYPE" = "CYGWIN" ]; then
+        STDLIBS="-lm"
+        CCNAME="${CCNAME:-gcc}"             #   Use gcc if not set
+        CCOPTS="-Wall"
+        CCNODEBUG="-O2"
+        LINKTYPE=gnu
+
+    elif [ "$UTYPE" = "SCO" ]; then
+        CCOPTS="-Dsco"                      #   -O switch can cause problems
+        CCNODEBUG=""
+        LINKTYPE=before
+        STDLIBS="-lsocket -lm"
+
+    elif [ "$UTYPE" = "SunOS" ]; then
+        # -lrt required for (at least) nanosleep and sched_yield.
+        # -lsendfile provides sendfilev
+        STDLIBS="-lm -lsocket -lnsl -lrt -lsendfile -lphread"
+        RELEASE=`uname -r`
+        MAJOR=`expr "$RELEASE" : '\([0-9]*\)\.'`
+        MINOR=`expr "$RELEASE" : "$MAJOR\\.\\([0-9]*\\)"`
+        if [ "$MAJOR" -gt 5 -o \( "$MAJOR" -eq 5 -a "$MINOR" -gt 1 \) ] ; then
+            CCOPTS="-g -Xa -DSYSV"
+            CCNODEBUG=""
+        else
+            CCOPTS="-Xa "
+            CCNODEBUG="-O"
+        fi
+        LINKTYPE=before
+        RANLIB=1
+
+    elif [ "$UTYPE" = "OSF1" ]; then
+        STDLIBS="-lm"
+        CCOPTS="-fast -std1 -w0"
+        CCNODEBUG="-O4"
+
+    elif [ "$UTYPE" = "UnixWare" ]; then
+        STDLIBS="-lm -lsocket -lnsl"
+
+    elif [ "$UTYPE" = "QNX" ]; then
+        STDLIBS="-lm -lsocket"
+        CCOPTS="-Oil"
+        CCNODEBUG=""
+
+    elif [ "$UTYPE" = "SINIX-N" ]; then
+        STDLIBS="-lm"
+        CCOPTS="-WO"
+        CCNODEBUG=""
+
+    elif [ "$UTYPE" = "BeOS" ]; then
+        STDLIBS="-lm"
+        CCNAME="${CCNAME:-gcc}"             #   Use gcc if not set
+        NICE=""
+        CCOPTS="-Wall"
+        CCNODEBUG="-O2"
+
+    elif [ "$CCNAME" = "gcc" ]; then
+        STDLIBS="-lm -lsocket -lnsl"
+        CCOPTS="-Wall"
+        CCNODEBUG="-O2"
+
+    elif [ "$UTYPE" = "MinGW" ]; then
+        NICE=""
+        STDLIBS=""
+        CCNAME="${CCNAME:-gcc}"
+        CCDEBUG="-ggbd3"
+        CCNODEBUG="-s -O2"
+    fi
+fi
+
+# Set compiler to default (cc) if not set already
+# And patch together the CC options and defines into one variable
+#
+CCNAME="${CCNAME:-cc}"
+CCOPTS="$CCOPTS $CCDEFINES"
+
+#   Parse command line arguments, figure out what we are doing
+#   (Parsing is currently fairly simplistic, and depends on ordering
+#   of flags.  Could be improved later if required.)
+#
+#   Set default values for compile & link options
+BOOM_MODEL="${BOOM_MODEL:-release}"
+test -f ./boomconf && . ./boomconf
+if [ /$BOOM_MODEL/ = /release/ ]; then
+    DEBUG=no
+else
+    DEBUG=yes
+fi
+LINKUP=no
+COMPILE=yes
+VERBOSE=${VERBOSE:-no}
+QUIET=${QUIET:-no}                  #   Default is non-verbose messages
+LOCALLIBDIR=.                       #   By default, search current directory twice
+
+#   Process switches in no particular order until there are none left
+while true; do
+    #   -v means verbose reports
+    if [ /$1/ = /-v/ ]; then
+        VERBOSE=yes
+        shift
+
+    #   -q means quiet
+    elif [ /$1/ = /-q/ ]; then
+        QUIET=yes
+        shift
+
+    #   -g means compile/link with debugging symbols
+    elif [ /$1/ = /-g/ ]; then
+        DEBUG=yes
+        shift
+
+    #   -S means report detected system type
+    elif [ /$1/ = /-S/ ]; then
+        echo "$UTYPE"
+        exit
+
+    #   -C means report compiler syntax type
+    elif [ /$1/ = /-C/ ]; then
+        echo "$CCNAME -c -I$INCDIR $CCOPTS"
+        exit
+
+    #   -c means compile the object -- we were going to do that anyway,
+    #   but this ensures backwards compatibility
+    elif [ /$1/ = /-c/ ]; then
+        shift
+
+    #   -r means replace object file into library
+    #   The RANLIB symbol should be set to 1 if 'ar rs' does not work.
+    elif [ /$1/ = /-r/ ]; then
+        LIBRARY=$2
+        LIBNAME=`echo $LIBRARY | cut -d"." -f1`
+        shift; shift
+    
+        for i in $*; do
+            shift
+            OBJECT=`echo $i | cut -d"." -f1`.o
+
+            TRACE="Replacing object $OBJECT in library $LIBRARY"
+            if [ "$RANLIB" = "1" ]; then
+                COMMAND="ar r $LIBNAME.a $OBJECT"
+            else
+                COMMAND="ar rs $LIBNAME.a $OBJECT"
+            fi
+            if [ "$QUIET" = "no" ]; then
+                if [ "$VERBOSE" = "no" ]; then
+                    echo "$TRACE..."
+                else
+                    echo "$TRACE ($COMMAND)..."
+                fi
+            fi
+            if [ ! -z "$CCTRACE" ]; then
+                echo "$TRACE (COMMAND)">>$CCTRACE
+            fi
+            $COMMAND
+
+            #   Run ranlib if necessary
+            if [ "$RANLIB" = "1" ]; then
+                ranlib $LIBNAME.a
+            fi
+        done
+        exit 
+
+    #   Compile/link main if -l is first argument
+    elif [ /$1/ = /-l/ ]; then
+        LINKUP=yes
+        shift
+
+    #   Link main if -L is first argument (assumed to already be compiled)
+    elif [ /$1/ = /-L/ ]; then
+        LINKUP=yes
+        COMPILE=no
+        shift
+
+    #   -li means use local include path as well as INCDIR
+    elif [ /$1/ = /-li/ ]; then
+        CCOPTS="-I$2 $CCOPTS"
+        shift; shift
+
+    #   -ll means use local library path as well as LIBDIR
+    elif [ /$1/ = /-ll/ ]; then
+        LOCALLIBDIR=$2
+        shift; shift
+
+    elif [ /`echo $1 | cut -c1`/ = /-/ ]; then
+        EXTRA="$EXTRA $1"
+        shift
+
+    else
+        break       #   Not a switch
+    fi
+done
+
+#   If we will be linking, then build list of libraries to link with.
+
+if [ "$LINKUP" = "yes" -o /$1/ = // ]; then
+    LIBLIST=""
+    for LIBRARY in lib*.a $LOCALLIBDIR/lib*.a $LIBDIR/lib*.a; do
+        if [ ! -f $LIBRARY ]; then
+            continue
+        fi
+        #   Pull out the xxx from libxxx.a (or similar)
+        LIBNAME=`basename $LIBRARY | sed -e 's/^...\([^\.]*\)\..*$/\1/'`
+        LIBLIST="$LIBLIST -l$LIBNAME"
+    done
+    LIBLIST="$LIBLIST $STDLIBS $CCLIBS"
+fi
+
+if [ "$DEBUG" = "yes" ]; then
+    CCOPTS="-g -DDEBUG $CCDEBUG $CCOPTS"
+else
+    CCOPTS="$CCNODEBUG $CCOPTS"
+fi
+
+CCOPTS="$EXTRA $CCOPTS"
+#   Show help if no arguments
+if [ /$1/ = // ]; then
+    echo "Detected system=$UTYPE, compiles with:"
+    echo "     $CCNAME -c -I$INCDIR $CCOPTS"
+    echo "Syntax: c filename...    Compile ANSI C program(s)"
+    echo "        c -c filename... Compile ANSI C programs(s)"
+    echo "        c -l main...     Compile and link main program(s)"
+    echo "        c -L main...     Link main(s) with" ${LIBLIST-"no libraries"}
+    echo "        c -S             Report detected system name"
+    echo "        c -C             Report C compiler command syntax"
+    echo "        c -r lib file    Replace file into specified library"
+    echo "          -li path       Local include path, additional to INCDIR"
+    echo "          -ll path       Local library path, additional to LIBDIR"
+    echo "          -g             Compile and link with debug information"
+    echo "          -v             Be verbose"
+    echo "          -q             Be quiet"
+    echo "          -<xxxx>        Arbitrary switch passed to compiler/linker"
+    exit
+fi
+
+#   Compile and maybe link each filename on the command line
+for i in $*; do
+    shift
+    FILENAME=`echo $i | cut -d"." -f1`
+
+    #   Compile, if required
+    if [ "$COMPILE" = "yes" -o ! -f $FILENAME.o ]; then
+        if [ -f $FILENAME.o ]; then
+            rm $FILENAME.o
+        fi
+
+        TRACE="Compiling $FILENAME"
+        COMMAND="$CCNAME -c $CCOPTS -I$INCDIR $FILENAME.c"
+        if [ "$QUIET" = "no" ]; then
+            if [ "$VERBOSE" = "no" ]; then
+                echo "$TRACE..."
+            else
+                echo "$TRACE ($COMMAND)..."
+            fi
+        fi
+        if [ ! -z "$CCTRACE" ]; then
+            echo "$TRACE (COMMAND)">>$CCTRACE
+        fi
+
+        $NICE $COMMAND 2> $FILENAME.lst
+
+        #   Show listing and abort if there was a compile error
+        if [ $? -eq 0 ]; then
+            cat $FILENAME.lst
+            rm  $FILENAME.lst
+        else
+            cat $FILENAME.lst
+            if [ ! -z "$CCTRACE" ]; then
+                cat $FILENAME.lst >>$CCTRACE
+            fi
+            exit 1
+        fi
+    fi
+
+    #   If okay, link if required
+    if [ "$LINKUP" = "yes" ]; then
+        TRACE="Linking $FILENAME"
+        COMMAND="$CCNAME $CCOPTS $FILENAME.o -o $FILENAME"
+
+	case "$LINKTYPE" in
+	    gnu)
+		COMMAND="$COMMAND -Wl,--start-group $LIBLIST -Wl,--end-group -L. -L$LOCALLIBDIR -L$LIBDIR $STDLIBS"
+		;;
+	    before)
+		COMMAND="$COMMAND -L. -L$LOCALLIBDIR -L$LIBDIR $LIBLIST $LIBLIST $STDLIBS"
+		;;
+	    after)
+		COMMAND="$COMMAND $LIBLIST $LIBLIST -L. -L$LOCALLIBDIR -L$LIBDIR $STDLIBS"
+		;;
+	esac
+        
+	if [ "$QUIET" = "no" ]; then
+            if [ "$VERBOSE" = "no" ]; then
+                echo "$TRACE..."
+            else
+                echo "$TRACE ($COMMAND)..."
+            fi
+        fi
+        if [ ! -z "$CCTRACE" ]; then
+            echo "$TRACE (COMMAND)">>$CCTRACE
+        fi
+
+        $NICE $COMMAND 2> $FILENAME.lst
+
+        #   Show listing and abort if there was a link error
+        if [ $? -eq 0 ]; then
+            cat $FILENAME.lst
+            rm  $FILENAME.lst
+        else
+            cat $FILENAME.lst
+            if [ ! -z "$CCTRACE" ]; then
+                cat $FILENAME.lst >>$CCTRACE
+            fi
+            exit 1
+        fi
+    fi
+done
+
+
+--Boundary-00=_8vDVC4DHMA4HLif
+Content-Type: text/plain;
+  charset="iso-8859-1";
+  name="c.bat"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="c.bat"
+
+@echo off
+:-
+:-  c.bat - Compile ANSI C program (MSVC multiplatform)
+:-
+:-  Copyright (c) 1991-2005 iMatix Corporation
+:-
+:-  ------------------ GPL Licensed Source Code ------------------
+:-  iMatix makes this software available under the GNU General
+:-  Public License (GPL) license for open source projects.  For
+:-  details of the GPL license please see www.gnu.org or read the
+:-  file license.gpl provided in this package.
+:-
+:-  This program is free software; you can redistribute it and/or
+:-  modify it under the terms of the GNU General Public License as
+:-  published by the Free Software Foundation; either version 2 of
+:-  the License, or (at your option) any later version.
+:-
+:-  This program is distributed in the hope that it will be useful,
+:-  but WITHOUT ANY WARRANTY; without even the implied warranty of
+:-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+:-  GNU General Public License for more details.
+:-
+:-  You should have received a copy of the GNU General Public
+:-  License along with this program in the file 'license.gpl'; if
+:-  not, write to the Free Software Foundation, Inc., 59 Temple
+:-  Place - Suite 330, Boston, MA 02111-1307, USA.
+:-
+:-  You can also license this software under iMatix's General Terms
+:-  of Business (GTB) for commercial projects.  If you have not
+:-  explicitly licensed this software under the iMatix GTB you may
+:-  only use it under the terms of the GNU General Public License.
+:-
+:-  For more information, send an email to info@imatix.com.
+:-  --------------------------------------------------------------
+
+goto init
+:help
+echo.
+echo  C script - iMatix C compile script for Windows/DOS - v2.0
+echo.
+echo  Syntax of script:
+echo  c filename...     Compile ANSI C program(s)
+echo  c -c filename...  (Backwards compatible: compile C programs)
+echo  c -l main...      Compile and link main program(s)
+echo  c -L main...      Link main program(s), no compile
+echo  c -C              Report C compiler command syntax
+echo  c -r lib file...  Replace object file(s) into library
+echo    -li path        Local include path, additional to INCDIR
+echo    -ll path        Local library path, additional to LIBDIR
+echo    -g              Compile and link with debug information
+echo    -v              (First arg prefix to above): be verbose
+echo    -q              (First arg prefix to above): be quiet
+echo.
+echo  The current version of the script supports MSVC only.  Support for
+echo  other compilers will be added back in as this script stabilises.
+echo.
+echo  You can optionally set these environment variables:
+echo  CCNAME    - compiler name, default is msvc
+echo  INCDIR    - directory containing user include files, if defined
+echo  LIBDIR    - directory containing user libraries, if defined
+echo  CCDEFINES - options required for ANSI C compilation
+echo.
+echo  When using iMatix boom, will read the current debug/release setting
+echo  from the file 'boomconf.bat' in the current directory.
+goto err_exit
+
+:-
+:-  Clean-up symbols and directory
+:-
+:init
+    setlocal
+    if exist *.map del *.map
+    if "%BOOM_MODEL%"=="" set BOOM_MODEL=release
+    if exist boomconf.bat call boomconf
+
+:-
+:-  Parse command line
+:-
+    set _QUIET=0
+    set _VERBOSE=0
+    set _COMPILE=1
+    set _REPLACE=0
+    set _LINK=0
+    set _SYNTAX=0
+    if "%BOOM_MODEL%"=="release" (
+        set _DEBUG=0
+    ) else (
+        set _DEBUG=1
+    )
+    if "%1"==""   goto help
+
+:do_switch
+    if "%1"=="-q"  set _QUIET=1
+    if "%1"=="-q"  goto shift_switch
+    if "%1"=="-v"  set _VERBOSE=1
+    if "%1"=="-v"  goto shift_switch
+    if "%1"=="-g"  set _DEBUG=1
+    if "%1"=="-g"  goto shift_switch
+    if "%1"=="-C"  set _SYNTAX=1
+    if "%1"=="-C"  goto shift_switch
+    if "%1"=="-c"  goto shift_switch
+    if "%1"=="-r"  goto preplace
+    if "%1"=="-l"  goto pclink
+    if "%1"=="-L"  goto plink
+    if "%1"=="-ll" goto locallib
+    if "%1"=="-li" goto localinc
+    goto ready
+
+:shift_switch
+    shift
+    goto do_switch
+
+:locallib
+    set _LOCALLIBDIR=%2
+    shift
+    shift
+    goto do_switch
+
+:localinc
+    set _LOCALINCDIR=%2
+    shift
+    shift
+    goto do_switch
+
+:-  Compile and link main programs
+:pclink
+    set _LINK=1
+    shift
+    if "%1"=="" goto help
+    rem %1 is now first program to compile and link
+    goto ready
+
+:-  Link main programs without compilation
+:plink
+    set _LINK=1
+    set _COMPILE=0
+    shift
+    if "%1"=="" goto help
+    rem %1 is now first program to link
+    goto ready
+
+:-  Replace compiled programs into library
+:preplace
+    set _COMPILE=0
+    set _REPLACE=1
+    shift
+    if "%1"=="" goto help
+    set _LIB=%1
+    shift
+    if "%1"=="" goto help
+    rem %1 is now first file to replace into _LIB
+    goto ready
+
+:-
+:-  Determine compiler name and location, and directories to use
+:-
+:ready
+    if "%CCNAME%"==""     goto msvc_init
+    if "%CCNAME%"=="msvc" goto msvc_init
+    echo Unknown compiler '%CCNAME%' defined - aborting
+    goto err_exit
+
+:-
+:-  MS Visual C/C++
+:-  For MSVC to work from the command line, the vcvars32.bat script must be used.
+:-  This overrides any settings made to the CCDIR variable.
+:-
+:msvc_init
+    if exist "%MSVCDir%\bin\cl.exe" goto msvc_go
+    echo You have either not installed MSVC, or not configured it correctly.
+    echo During installation, make sure you register the environment variables
+    echo needed for command-line use of the compiler.  Check the vcvars32.bat
+    echo script for correctness.  In a console box, the MSVCDir variable must
+    echo point correctly to the MSVC application directory.  You can set this
+    echo in the system environment variables, or autoexec.bat.
+    goto err_exit
+:msvc_go
+    set CCDIR=%MSVCDir%
+
+    :-  Prepare commands for compilation, replacement, and linking
+    set CCOPTS=%CCDEFINES%
+    if defined _LOCALINCDIR set CCOPTS=%CCOPTS% /I"%_LOCALINCDIR%"
+    if defined INCDIR       set CCOPTS=%CCOPTS% /I"%INCDIR%"
+    set CCOPTS=%CCOPTS% /I"%CCDIR%\include"
+    set _CC="%CCDIR%\bin\cl"   /nologo /c /W3 /D"WIN32" %CCOPTS%
+    set _LR="%CCDIR%\bin\lib"  /nologo 
+    set _LL="%CCDIR%\bin\link" /nologo /stack:128000 /subsystem:CONSOLE /opt:NOREF /incremental:NO
+    if %_DEBUG%==1 set _CC=%_CC% /MTd /GZ /Z7 /D"DEBUG" /Od
+    if %_DEBUG%==1 set _LL=%_LL% /DEBUG
+    if %_DEBUG%==0 set _CC=%_CC% /MT /Og
+    if defined VS71COMNTOOLS (
+        set _CCLIBDIR=
+        set _CC=%_CC% /Y-
+    ) else (
+        set _LR=%_LR% /libpath="%CCDIR%\lib"
+        set _LL=%_LL% /libpath="%CCDIR%\lib"
+        if %_DEBUG%==1 set _LL=%_LL% /PDB:NONE
+        set _CCLIBDIR="%CCDIR%\lib\"
+    )
+
+    :-  Build link library list
+    rem>library.lst
+    :-  List all local libraries first
+    for %%a in (*.lib) do echo %%a>>library.lst
+    :-  List libraries in _LOCALLIBDIR if defined
+    if defined _LOCALLIBDIR for %%a in (%_LOCALLIBDIR%\*.lib) do echo %%a>>library.lst
+    :-  List libraries in LIBDIR if defined
+    if defined LIBDIR for %%a in (%LIBDIR%\*.lib) do echo %%a>>library.lst
+    :-  List standard MSVC libraries needed for console programs
+    if %_DEBUG%==1 (
+        echo %_CCLIBDIR%libcmtd.lib   >>library.lst
+        echo %_CCLIBDIR%libcpmtd.lib  >>library.lst
+    ) else (
+        echo %_CCLIBDIR%libcmt.lib   >>library.lst
+        echo %_CCLIBDIR%libcpmt.lib  >>library.lst
+    )
+    echo %_CCLIBDIR%ws2_32.lib   >>library.lst
+    echo %_CCLIBDIR%kernel32.lib >>library.lst
+    echo %_CCLIBDIR%user32.lib   >>library.lst
+    echo %_CCLIBDIR%gdi32.lib    >>library.lst
+    echo %_CCLIBDIR%comdlg32.lib >>library.lst
+    echo %_CCLIBDIR%advapi32.lib >>library.lst
+    echo %_CCLIBDIR%netapi32.lib >>library.lst
+    echo %_CCLIBDIR%shell32.lib  >>library.lst
+    echo %_CCLIBDIR%odbc32.lib   >>library.lst
+    echo %_CCLIBDIR%user32.lib   >>library.lst
+    echo %_CCLIBDIR%wsock32.lib  >>library.lst
+    echo %_CCLIBDIR%winmm.lib    >>library.lst
+    echo %_CCLIBDIR%oldnames.lib >>library.lst
+    echo %_CCLIBDIR%mpr.lib      >>library.lst
+    echo %_CCLIBDIR%uuid.lib     >>library.lst
+    if %_SYNTAX%==1 goto msvc_syntax
+
+:msvc_next
+    if "%1"=="" goto exit
+
+:msvc_compile
+    if %_COMPILE%==0 goto msvc_replace
+
+    set _FILE=%1
+    if exist %_FILE%.c set _FILE=%_FILE%.c
+    if not exist %_FILE% goto err_nf
+    if %_QUIET%==0   echo Compiling %_FILE%...
+    if %_VERBOSE%==1 echo (%_CC% %_FILE%)
+    %_CC% %_FILE%
+    if errorlevel 1 goto err_compile
+
+:msvc_replace
+    if %_REPLACE%==0 goto msvc_link
+
+    if exist %_LIB%.lib set _LIB=%_LIB%.lib
+    set _FILE=%1
+    if exist %_FILE%.obj set _FILE=%_FILE%.obj
+    if not exist %_FILE% goto err_nf
+    if %_VERBOSE%==1 echo Replacing %_FILE% into %_LIB%...
+    if %_VERBOSE%==1 echo (%_LR% %_LIB% %_FILE%)
+    if     exist %_LIB% %_LR%      %_LIB% %_FILE% >nul
+    if not exist %_LIB% %_LR% /out:%_LIB% %_FILE% >nul
+
+:msvc_link
+    if %_LINK%==0 goto msvc_done
+    
+    set _FILE=%1
+    if exist %_FILE%.obj set _FILE=%_FILE%.obj
+    if not exist %_FILE% goto err_nf
+    if %_QUIET%==0   echo Linking %_FILE%...
+    if %_VERBOSE%==1 echo (%_LL% %_FILE%)
+    %_LL% %_FILE% @library.lst
+    if errorlevel 1 goto err_link
+    if exist %1.map del %1.map
+    if exist %1.exp del %1.exp
+
+:msvc_done
+    shift
+    goto msvc_next
+
+:msvc_syntax
+    if %_SYNTAX%==0 goto msvc_done
+
+    echo Compiling using MS Visual C/C++ in %CCDIR%
+    echo Compiler: %_CC%
+    echo Library:  %_LR%
+    echo Linker:   %_LL% with these libraries
+    type library.lst
+    goto exit
+    
+:err_compile
+    echo Compile errors in %1
+    goto err_exit
+
+:err_link
+    echo Link errors in %1
+    goto err_exit
+
+:err_nf
+    echo %_FILE% not found
+    goto err_exit
+
+:err_exit
+    if exist library.lst del library.lst
+    if exist c.lst       del c.lst
+    endlocal
+    exit /b 1
+
+:exit
+    if exist library.lst del library.lst
+    if exist c.lst       del c.lst
+    endlocal
+
+
+--Boundary-00=_8vDVC4DHMA4HLif--
+
+
+From xitami-dev@lists.xitami.org  Wed Apr  6 22:35:01 2005
+From: xitami-dev@lists.xitami.org (Kris Beazley)
+Date: Wed, 06 Apr 2005 17:35:01 -0400
+Subject: [Xitami-Dev] How to build Xitami on Linux
+Message-ID: <BAY1-F36892FDE8CDBDDDB5A1AAFA03D0@phx.gbl>
+
+Yes the source for Linux needs real ibase.. to build then xitami can be 
+unzip into the appropriate director  i believe 
+/usr/share/local/imatrix/app/xitami < . Both sources lack c.bat only the old 
+xitami BONE off bebits.com has c.bat included.  You can drop c.bat into 
+/usr/bin and then build.
+
+Too bad xitami is a frozen project.  I have used xitami since 2000 and 
+probably before then too.  I find it preferably better for small hosting 
+companies like myself.
+
+Sincerely
+Jon Beazley, aka ablyss
+
+
+
+From xitami-dev@lists.xitami.org  Thu Apr  7 08:39:02 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Thu, 7 Apr 2005 08:39:02 +0100
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <BAY1-F36892FDE8CDBDDDB5A1AAFA03D0@phx.gbl>
+References: <BAY1-F36892FDE8CDBDDDB5A1AAFA03D0@phx.gbl>
+Message-ID: <200504070939.02495.ph@imatix.com>
+
+On 06/04/2005 11:35 pm, Kris Beazley wrote:
+
+> Too bad xitami is a frozen project.  I have used xitami since 2000 and
+> probably before then too.  I find it preferably better for small hosting
+> companies like myself.
+
+It's a long and complex story but mainly, Xitami was very intense work, and 
+hard to combine with normal lives.
+
+We do have vague plans to eventually rebuild Xitami on top of the new 
+technical platforms we've been developing the last years - e.g. a new SMT 
+which is about twice as fast and a little more stable.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+From xitami-dev@lists.xitami.org  Thu Apr  7 11:26:40 2005
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Thu, 7 Apr 2005 12:26:40 +0200
+Subject: [Xitami-Dev] How to build Xitami on Linux
+Message-ID: <C943964F1F62154C8D1F4DB780E23816029DEF@mail.okhtor.com>
+
+Hi
+
+> We do have vague plans to eventually rebuild Xitami on top of the new=20
+> technical platforms we've been developing the last years - e.g. a new =
+SMT=20
+> which is about twice as fast and a little more stable.
+
+ Pieter, when will we have access to the new SMT??
+
+ Very kind regards.
+
+ Rafael Cano
+
+From xitami-dev@lists.xitami.org  Thu Apr  7 11:38:47 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Thu, 7 Apr 2005 11:38:47 +0100
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <C943964F1F62154C8D1F4DB780E23816029DEF@mail.okhtor.com>
+References: <C943964F1F62154C8D1F4DB780E23816029DEF@mail.okhtor.com>
+Message-ID: <200504071238.47183.ph@imatix.com>
+
+On 07/04/2005 12:26 pm, Rafael Cano P=E9rez wrote:
+
+>  Pieter, when will we have access to the new SMT??
+
+Well, it's a long story.  We've been doing a *lot* of code generation these=
+=20
+last years, developing GSL and frameworks around that.  We now write our C=
+=20
+code using a kind of XML class language called iCL (iMatix Class Language).=
+ =20
+SMT (now in version 4.2) is built on that.  We don't use Libero anymore, bu=
+t=20
+XML-based state machine designs. =20
+
+If you have looked at Boom, you will see where we were with this technology=
+=20
+about 2 years ago.  It's improved a lot since then.  It's become very meta,=
+=20
+with code generators building code generators, and so on.  Software nanotec=
+h,=20
+kind of.
+
+The result is something called "Base/2" (we dropped the unfortunate "Reali"=
+=20
+prefix).
+
+Base/2 is still being developed, quite aggressively, since we are using it =
+for=20
+a large custom project.  By the end of this year we hope to have rewritten=
+=20
+everything in the old realibase (Base/1) that we still use - boom, gsl, etc=
+=2E =20
+SFL is being partly replaced by the Apache Runtime, partly rewritten as iCL=
+=20
+classes.  Htmlpp and Libero will be retired.
+
+At that stage we will have the tools we need to do a refresh of Xitami.  Pa=
+rt=20
+of what we're making may possibly include an HTTP server, which would look=
+=20
+remarkably like Xitami, rewritten from the ground up.
+
+So the planning for releasing the new Base/2, which will include SMT, GSL,=
+=20
+iCL, etc. is around the end of this year.
+
+If you really want a version before then, ask me and we can arrange somethi=
+ng. =20
+Base/2 is GPL'd with a commercial opt-out as usual.
+
+=2DPieter Hintjens
+iMatix Corporation
+
+
+From xitami-dev@lists.xitami.org  Thu Apr  7 12:14:15 2005
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Thu, 7 Apr 2005 13:14:15 +0200
+Subject: [Xitami-Dev] How to build Xitami on Linux
+Message-ID: <C943964F1F62154C8D1F4DB780E23816029DF0@mail.okhtor.com>
+
+ Hi Pieter.
+
+> Base/2 is still being developed, quite aggressively, since we are =
+using it for=20
+> a large custom project.  By the end of this year we hope to have =
+rewritten=20
+> everything in the old realibase (Base/1) that we still use - boom, =
+gsl, etc. =20
+> SFL is being partly replaced by the Apache Runtime, partly rewritten =
+as iCL=20
+> classes.  Htmlpp and Libero will be retired.
+
+ I currently use SFL, my "SFL extensions", which is mainly new
+ C functions in the area of XML, a simplified SQLite layer API,=20
+ OLWUI, which is a set of C functions that map to javascript=20
+ functions that I use in all my HTML UI.
+ I use the SMTSock and Timer agents from SMT ( the one in realibase 1 )
+ I code all in C, with libero diagrams for my SMT dialogs and web UI =
+descriptions.
+
+ So, if I migrate to BASE/2, what can I keep from my current developemnt
+ environment.
+
+ I target both WIN32 (WIN64) and Linux.
+
+
+
+> If you really want a version before then, ask me and we can arrange =
+something. =20
+> Base/2 is GPL'd with a commercial opt-out as usual.
+
+ Sure I do.
+
+
+
+
+
+
+ Very kind regards.
+
+ Rafael Cano P=E9rez
+
+
+
+
+ P.D. When is the next release
+ of Liberetto's sense of humor ? ;-)
+
+
+
+ =20
+
+
+From xitami-dev@lists.xitami.org  Thu Apr  7 15:28:09 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Thu, 7 Apr 2005 15:28:09 +0100
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <C943964F1F62154C8D1F4DB780E23816029DF0@mail.okhtor.com>
+References: <C943964F1F62154C8D1F4DB780E23816029DF0@mail.okhtor.com>
+Message-ID: <200504071628.09683.ph@imatix.com>
+
+(This email was sent but appears to have vanished somewhere, so here is a=20
+duplicate)...
+
+On 07/04/2005 01:14 pm, Rafael Cano P=E9rez wrote:
+
+> =A0So, if I migrate to BASE/2, what can I keep from my current developemnt
+> =A0environment.
+
+You can continue to work with smt/3 (from base/1), the library and header f=
+ile=20
+have been renamed to allow it to live together with smt/4. Moving your work=
+=20
+onto base/2 will be quite interesting - it's a totally new platform and not=
+=20
+yet fully documented. =A0There are examples and you may find that smt/4 is=
+=20
+rather easier to work with. =A0E.g. your code and dialog are in a single fi=
+le.
+
+> =A0I target both WIN32 (WIN64) and Linux.
+
+So do we, no problems there.
+
+> =A0P.D. When is the next release
+> =A0of Liberetto's sense of humor ? ;-)
+
+Ah, yes... the good old days. =A0I suppose these days it'd have to be a blo=
+g or=20
+something nasty like that.
+
+Anyhow. =A0http://imatix.net/pub is where you want to go.
+
+Regards,
+Pieter Hintjens
+iMatix Corporation
+
+
+From xitami-dev@lists.xitami.org  Fri Apr 22 18:43:42 2005
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Fri, 22 Apr 2005 13:43:42 -0400
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <200504070939.02495.ph@imatix.com>
+Message-ID: <OFD3C88F8A.4A9B8B2E-ON85256FEB.006124FA-85256FEB.006162C9@nucorsteel.com>
+
+This is a multipart message in MIME format.
+--=_alternative 006162C785256FEB_=
+Content-Type: text/plain; charset="US-ASCII"
+
+xitami-dev-admin@lists.xitami.org wrote on 04/07/2005 03:39:02 AM:
+
+> It's a long and complex story but mainly, Xitami was very intense work, 
+and 
+> hard to combine with normal lives.
+> 
+> We do have vague plans to eventually rebuild Xitami on top of the new 
+> technical platforms we've been developing the last years - e.g. a new 
+SMT 
+> which is about twice as fast and a little more stable.
+> 
+
+Pieter,
+
+Do you have plans to keep LRWP (or some sort of equivalent peer process 
+technology) in the new version?
+I've been using Xitami/LRWP combination for the last several years and am 
+quite happy with it.
+
+Alex
+--=_alternative 006162C785256FEB_=
+Content-Type: text/html; charset="US-ASCII"
+
+
+<br><font size=2><tt>xitami-dev-admin@lists.xitami.org wrote on 04/07/2005
+03:39:02 AM:<br>
+<br>
+&gt; It's a long and complex story but mainly, Xitami was very intense
+work, and <br>
+&gt; hard to combine with normal lives.<br>
+&gt; <br>
+&gt; We do have vague plans to eventually rebuild Xitami on top of the
+new <br>
+&gt; technical platforms we've been developing the last years - e.g. a
+new SMT <br>
+&gt; which is about twice as fast and a little more stable.<br>
+&gt; <br>
+</tt></font>
+<br><font size=2><tt>Pieter,</tt></font>
+<br>
+<br><font size=2><tt>Do you have plans to keep LRWP (or some sort of equivalent
+peer process technology) in the new version?</tt></font>
+<br><font size=2><tt>I've been using Xitami/LRWP combination for the last
+several years and am quite happy with it.</tt></font>
+<br>
+<br><font size=2><tt>Alex</tt></font>
+--=_alternative 006162C785256FEB_=--
+
+From xitami-dev@lists.xitami.org  Mon Apr 25 09:13:03 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 25 Apr 2005 10:13:03 +0200
+Subject: [Xitami-Dev] How to build Xitami on Linux
+In-Reply-To: <OFD3C88F8A.4A9B8B2E-ON85256FEB.006124FA-85256FEB.006162C9@nucorsteel.com>
+References: <OFD3C88F8A.4A9B8B2E-ON85256FEB.006124FA-85256FEB.006162C9@nucorsteel.com>
+Message-ID: <200504251013.03289.ph@imatix.com>
+
+On 22/04/2005 07:43 pm, FabijanicA@nucorsteel.com wrote:
+
+> Do you have plans to keep LRWP (or some sort of equivalent peer process
+> technology) in the new version?
+> I've been using Xitami/LRWP combination for the last several years and am
+> quite happy with it.
+
+Of course.  LRWP is a very nice protocol and used by many people.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+From xitami-dev@lists.xitami.org  Wed Apr 27 14:50:02 2005
+From: xitami-dev@lists.xitami.org (Maurilio Longo)
+Date: Wed, 27 Apr 2005 15:50:02 +0200
+Subject: [Xitami-Dev] building on OS/2
+Message-ID: <426F988A.FF778F1@libero.it>
+
+Hi all,
+
+I've sent a message on the user list reguarding the building of xitami 2.5c2
+on OS/2, do I have to cross-post or is that copy enough :) to get going?
+
+regards.
+
+--
+ __________
+|  |  | |__| Maurilio Longo
+|_|_|_|____| farmaconsult s.r.l.
+
+
+

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Bug: SSI Includes aren't recursive
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001101.html">
+   <LINK REL="Next"  HREF="001128.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Bug: SSI Includes aren't recursive
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Bug: SSI Includes aren't recursive">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 05 Oct 2001 14:50:39 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001101.html">[Xitami] 'ddnsdef.xml' is not readable
+</A></li>
+        <LI> Next message: <A HREF="001128.html">[Xitami] Bug: SSI Includes aren't recursive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1102">[ date ]</a>
+              <a href="thread.html#1102">[ thread ]</a>
+              <a href="subject.html#1102">[ subject ]</a>
+              <a href="author.html#1102">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3BA9B55F.7000108@freesbee.fr">3BA9B55F.7000108@freesbee.fr</A>&gt;, Francis Turner writes:
+&gt;<i>I just noticed that the SSI include tag (e.g. the one on the testssi 
+</I>&gt;<i>page &lt;!--#include file=&quot;testssi.inc&quot;--&gt;) cuases the rest of the 
+</I>&gt;<i>including document (e.g. testssi.ssi) after the tag not to get delivered 
+</I>&gt;<i>if the included document itself uses SSI as the example include does.
+</I>
+The problem is actually with any recursive use of SSI -- there's an
+&quot;off-by-one&quot; issue which means that Xitami was storing an
+end-of-document marker before the next bit of included SSI, and hence
+running into problems.
+
+This is fixed in our version in CVS
+(see <A HREF="http://cvs.imatix.com/cgi-bin/viewcvs/">http://cvs.imatix.com/cgi-bin/viewcvs/</A>)
+but not in any of the binaries that have been built.
+
+&gt;<i>Also in the process of debugging and playing I noticed that Xitami has a 
+</I>&gt;<i>limit on files with SSI includes of about 35,000+ bytes (one file 
+</I>&gt;<i>displayed upto the 35922nd byte, another upto the 35553rd) and any data 
+</I>&gt;<i>thereafter is abruptly truncated. 
+</I>
+I think this has also been reported, and I think it may have been fixed
+in the version in CVS.
+
+Thanks for the reports.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001101.html">[Xitami] 'ddnsdef.xml' is not readable
+</A></li>
+	<LI> Next message: <A HREF="001128.html">[Xitami] Bug: SSI Includes aren't recursive
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1102">[ date ]</a>
+              <a href="thread.html#1102">[ thread ]</a>
+              <a href="subject.html#1102">[ subject ]</a>
+              <a href="author.html#1102">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

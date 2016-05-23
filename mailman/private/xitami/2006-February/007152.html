@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI trouble - identical cfg - different execution
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20trouble%20-%20identical%20cfg%20-%20different%20execution&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007151.html">
+   <LINK REL="Next"  HREF="007157.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI trouble - identical cfg - different execution</H1>
+    <B>Ayhan Tuncer</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20trouble%20-%20identical%20cfg%20-%20different%20execution&In-Reply-To="
+       TITLE="[Xitami] CGI trouble - identical cfg - different execution">tuncer at dalan.com.tr
+       </A><BR>
+    <I>Wed Feb 15 14:43:16 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007151.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+        <LI>Next message: <A HREF="007157.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7152">[ date ]</a>
+              <a href="thread.html#7152">[ thread ]</a>
+              <a href="subject.html#7152">[ subject ]</a>
+              <a href="author.html#7152">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>All you have written below is a little complicated to understand. I
+don't write in VB for example, I write in Perl. 
+
+And I haven't been able to understand why the NICs influence what
+happens  and how the IP is a problem. Unless you have assigned
+independent config files and disabled cgi in each and everyone of these
+problem IPs you mention, the IP should not matter. A referrer is a
+referrer, a simple url, no matter which IP or domain it is located on.
+
+1) I have not been able to find a Std. windows error #13 Type error. The
+ones I know have three digits. Eg: Error Code 121.
+What does the #13 Type error say? 
+
+3) If CGI is enabled on all of the 10 different domain configurations,
+the http-referer and the remote-addr fields are on the environment hash
+by default (environment=0). You do not have to set the environment to 1
+in config to have them on the hash. 
+
+4) The http-referer will exist in the environment hash, only if there
+actually was a referrer (a mouse click on a link or a submit button on a
+real page bringing the user to your url). If the url was typed into the
+address bar of the browser, there will be no http-referer. Then your
+program  can not read it then from the environment hash.
+
+5) Did you print out the environment hash to yourself, under the
+conditions that the error occurs in your browser? What do the fields
+say? Which IP do you appear to have when the error occurs? What does the
+http-referer say? What does your program do with this information? In
+which line of your program does the problem happen? Is your test logic
+entirely correct?
+
+Ayhan
+
+- - -
+
+
+Sent: Tuesday, February 14, 2006 4:40 PM
+
+What I was looking more or less to do, is adding a way to monitor 
+A) who the requesting IP is, and block them on the fly if they hit to
+hard or to frequent 
+B) to log the incoming IP to verify at the same time if the CGI referer
+is local or from an
+outside source, in which case I can refuse connections and send them to
+the primary 
+access page, routing all traffic from the own web site to access the
+page in question.
+
+The later I will likely have to do using a simple JavaScript testing the
+referer vs. the document.domain property.
+
+
+
+At 07:14 13/02/2006, you wrote:
+
+
+	I hope someone can remark on the real causes/solutions you are
+looking
+	for. 
+
+	
+	Sent: Sunday, February 12, 2006 1:53 PM
+	
+	Further, VERY odd behaviors are now noted in this execution.	
+	I loaded the entire load of data for testing over to the server
+machines	root directory.
+	Now, it is loaded in to the default directory of Xitami,
+bypassing any
+	virtual host paths and so on.
+	This in it self should not have any bearing on the serving of
+pages, let
+	alone the execution of the very same code.
+	
+	After all I can easily pull the same information in a JS page or
+similar
+	script without any issues.
+	
+	However, to further complicate the issue.
+	
+	The server box is running through dual NICs
+	
+	Assume for the sake of conversation that I have a 
+	
+	<A HREF="http://localhost">http://localhost</A> &lt;<A HREF="http://localhost/">http://localhost/</A>&gt;  &lt;<A HREF="http://localhost/">http://localhost/</A> &gt;
+which is 127.0.0.1
+	
+	Then I have two (2) IP addresses which are public (Static) to
+the
+	internet 
+	
+	10.0.0.99 and 10.0.0.98
+	
+	(of course these are fictitious and should be (83.###.#.##) and
+	something else but it's an example)
+	
+	When I execute the CGI on 127.0.0.1/MyPage.htm and send the call
+by a
+	simple GET to the CGI-BIN the code works perfectly!
+	Not a single fault anywhere to be seen.
+	
+	When I execute the code on 10.0.0.99 it bumps me around saying,
+I
+	executed from a non permissable CGI_Referer
+	HA... the code actually works.
+	
+	I wrote a thing that disallows cross linking from other domains
+so you
+	can't run the cgi embedded in an other web site and call my
+pages from
+	the other site.
+	
+	Then, thinking logically...
+	
+	If the 10.0.0.99 page is disallowed, the page will thereby
+assume it
+	self as running on 10.0.0.98 in this case, 
+	so the thread in Xitami actually waking up to the call to the
+page is
+	located on the other IP.
+	
+	I opened a page in 10.0.0.98/MyPage.htm instead and executed the
+click
+	by doing a Get for the page
+	
+	myCGI.exe?Param1=0&amp;Param2=6574&amp;Param3=9&amp;ParamText=
+	
+	is now returning the same goofball errors as before.
+	
+	Previously noted above, everything picks up correctly, and is
+collected
+	as should be.
+	In this case, when being on the correct IP and all, the cgi
+doesn't even
+	allow me to get CG_Referer as a string.
+	Nor CG_RemoteAddr or any other data.
+	
+	So in conclusion.
+	
+	1) I have to remove my IP blocking system and open up for cross
+linking
+	or I have to find a way to allow two or more CGI_Referer values
+to
+	enable this security feature when running Xitami on dual NIC's	
+	
+	
+	At 07:31 12/02/2006, you wrote:
+	
+	
+	        the workstation works fine
+	        
+	        the server station does NOT.
+	        
+	        Std. windows error #13 Type error.
+	        
+	        I pass a internal call in the cgi called CGI_UserAgent
+which
+	supposedly returns the browser data.
+	        
+	        It works just fine on the workstation, AND on the server
+in an
+	other cgi I wrote using the same bas file.
+	        
+	        It does not in this but gives me this error.
+	        
+	        I rem the line, recompile and try again.
+	        
+	        Then I get a problem in the very next line, saying the
+same
+	thing for CGI_RemoteAddress
+	        which is just getting the visitors IP address in a
+string.
+	        
+	        This too, works in another cgi on both machines, but not
+in this
+	one on the server.
+	        
+	        For reference, the CGI's use standard I/O calls and work
+just ok
+	in all other cases.
+	        
+	
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007151.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+	<LI>Next message: <A HREF="007157.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7152">[ date ]</a>
+              <a href="thread.html#7152">[ thread ]</a>
+              <a href="subject.html#7152">[ subject ]</a>
+              <a href="author.html#7152">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

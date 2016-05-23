@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami performance regarding directory structures
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006796.html">
+   <LINK REL="Next"  HREF="006778.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami performance regarding directory structures
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami performance regarding directory structures">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 10 Jun 2005 08:25:29 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006796.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+        <LI> Next message: <A HREF="006778.html">[Xitami] log analysis
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6798">[ date ]</a>
+              <a href="thread.html#6798">[ thread ]</a>
+              <a href="subject.html#6798">[ subject ]</a>
+              <a href="author.html#6798">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 17:42 9/06/05, you wrote:
+&gt;<i>To sum everyone's comments up:
+</I>&gt;<i>     1.  NTFS has no limits to the amount of folders and files any given
+</I>&gt;<i>directory can have.
+</I>&gt;<i>                 - ???  Does XP have the 4 billion issue or is that NTFS?  If
+</I>&gt;<i>NTFS than W2K Server will have the problem too, correct?
+</I>
+
+If you plan to put 4 billion files on one drive, you should first check 
+it's capacity ;)
+
+Besides, if you want to provide services to such a huge number of 
+customers, you should use other systems.
+
+Some questions that needs adressing:
+How will the user registration be done?
+Directing one user to it's directory?
+Checking it's used disk space?
+You need a very good scripting language, at least ISAPI or fastCGI
+
+What is the purpose of the whole thing?
+Some sort of file repository (unfrequent access) of picture sharing (bursty 
+activity after return from vacation) ???
+
+Suppose you have 10.000 users, with maximum 100 users online at any moment 
+(the maximal load to ensure fast response).
+Each user has 10 directories containing 100 files, total 1000 files/user
+Each file is 250.000 bytes in size (my camera creates 2MB images)
+Each user will need 250.000.000 bytes, or 250MB.
+Your 10.000 users will need 2.500GB of storage.
+
+You are in need of a very professional package with clustered servers, NAS, 
+redundancy, load balancing, ...
+Xitami (and to a lesser extend Windows) is not able to provide this.
+
+marc
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------- 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006796.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+	<LI> Next message: <A HREF="006778.html">[Xitami] log analysis
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6798">[ date ]</a>
+              <a href="thread.html#6798">[ thread ]</a>
+              <a href="subject.html#6798">[ subject ]</a>
+              <a href="author.html#6798">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

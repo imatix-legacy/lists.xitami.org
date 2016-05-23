@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI problem....
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006324.html">
+   <LINK REL="Next"  HREF="006325.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI problem....
+   </H1>
+    <B>Bill Warren
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI problem....">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 31 Dec 2004 12:05:12 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006324.html">[Xitami] SSI problem....
+</A></li>
+        <LI> Next message: <A HREF="006325.html">[Xitami] FTP and XP Pro Security Set Up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6337">[ date ]</a>
+              <a href="thread.html#6337">[ thread ]</a>
+              <a href="subject.html#6337">[ subject ]</a>
+              <a href="author.html#6337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_000B_01C4EF30.FB769DA0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+i suggest using KeyFocus for a free webserver alternative.  I like it =
+better frankly.  :)
+  ----- Original Message -----=20
+  From: Stephen S. Disbrow=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Tuesday, December 21, 2004 11:42 PM
+  Subject: [Xitami] SSI problem....
+
+
+  Hello,
+
+          I changed my default1 entry to point to index.shtml which is =
+as follows;
+  &lt;html&gt;
+  &lt;head&gt;
+  &lt;title&gt;OUR FAMILY&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body Text=3D#ffffff bgcolor=3D&quot;#000000&quot;&gt;
+  &lt;CENTER&gt;
+  &lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+  &lt;H1&gt;
+  &lt;MARQUEE&gt;This page is under construction.&lt;/MARQUEE&gt;
+  &lt;/H1&gt;
+  &lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+  &lt;!--#INCLUDE VIRTUAL=3D&quot;cgi-bin/time.pl&quot;--&gt;
+  &lt;/CENTER&gt;
+  &lt;/body&gt;
+  &lt;/HTML&gt;
+
+
+  &lt;/html&gt;
+
+  I placed my perl in cgi-bin time.pl it looks as follows;
+  #! /usr/bin/perl
+
+  $ENV{&quot;TZ&quot;} =3D &quot;EST5EDT&quot;;
+  ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =3D =
+localtime(time);
+  if ($hour &gt;  12)
+  {
+   $hour =3D $hour - 12;
+   $ind =3D &quot;PM&quot;;
+  }
+  elsif ($hour =3D=3D 12)
+  {
+   $ind =3D &quot;PM&quot;;
+  }
+  elsif ($hour =3D=3D 0)
+  {
+   $hour =3D 12;
+   $ind =3D &quot;AM&quot;;
+  }
+  else
+  {
+   $ind =3D &quot;AM&quot;;
+  }
+  =
+$day=3D(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday)[$wday];=
+
+  =
+$month=3D(January,February,March,April,May,June,July,August,September,Oct=
+ober,November,December)[$mon];
+  print &quot;Content-type: text/html\n\n&quot;;
+  printf (&quot;%s %s %02d %4d, %02d:%02d %2s&quot;, $day, $month, $mday, =
+(1900+$year), $hour, $min, $ind);
+
+  exit 0;
+
+  The problem is when  I attempt to open the page as localhost the =
+system seems to hang for a long period of time I don't know what is =
+wrong if anyone could tell me what's wrong I'd really appreciate it. I =
+run the same shtml doc and cgi on a apache web server and it works =
+perfect. Any help would really be appreciated.
+  I am running on WinXPHome  xitami-25 version as a =
+service(xisrv32.exe);
+
+  Thank You,
+
+  Stephen S. Disbrow
+
+  Stephen S. Disbrow
+
+------=_NextPart_000_000B_01C4EF30.FB769DA0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2900.2180&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;i suggest using KeyFocus for a free =
+webserver=20
+alternative.&amp;nbsp; I like it better frankly.&amp;nbsp; :)&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dstevedis@optonline.net">3Dstevedis@optonline.net</A> =
+href=3D&quot;mailto:<A HREF="mailto:stevedis@optonline.net">stevedis@optonline.net</A>&quot;&gt;Stephen=20
+  S. Disbrow&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Tuesday, December 21, =
+2004 11:42=20
+  PM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] SSI =
+problem....&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Hello,&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; I changed my default1 entry =
+to=20
+  point to index.shtml which is as follows;&lt;/DIV&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;&amp;lt;html&amp;gt;&lt;BR&gt;&amp;lt;head&amp;gt;&lt;BR&gt;&amp;lt;title&amp;gt;OUR=20
+  FAMILY&amp;lt;/title&amp;gt;&lt;BR&gt;&amp;lt;/head&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;lt;body Text=3D#ffffff=20
+  =
+bgcolor=3D&quot;#000000&quot;&amp;gt;&lt;BR&gt;&amp;lt;CENTER&amp;gt;&lt;BR&gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;g=
+t;&lt;BR&gt;&amp;lt;H1&amp;gt;&lt;BR&gt;&amp;lt;MARQUEE&amp;gt;This=20
+  page is under=20
+  =
+construction.&amp;lt;/MARQUEE&amp;gt;&lt;BR&gt;&amp;lt;/H1&amp;gt;&lt;BR&gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;gt;&amp;lt;B=
+R&amp;gt;&lt;BR&gt;&amp;lt;!--#INCLUDE=20
+  =
+VIRTUAL=3D&quot;cgi-bin/time.pl&quot;--&amp;gt;&lt;BR&gt;&amp;lt;/CENTER&amp;gt;&lt;BR&gt;&amp;lt;/body&amp;gt;&lt;BR&gt;=
+&amp;lt;/HTML&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;
+  &lt;DIV&gt;&lt;BR&gt;&amp;lt;/html&amp;gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/FONT&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I placed my perl in cgi-bin time.pl =
+it looks as=20
+  follows;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#! /usr/bin/perl&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;$ENV{&quot;TZ&quot;} =3D=20
+  &quot;EST5EDT&quot;;&lt;BR&gt;($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+=3D=20
+  localtime(time);&lt;BR&gt;if ($hour &amp;gt;&amp;nbsp; 12)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$hour =3D =
+$hour -=20
+  12;&lt;BR&gt;&amp;nbsp;$ind =3D &quot;PM&quot;;&lt;BR&gt;}&lt;BR&gt;elsif ($hour =3D=3D =
+12)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$ind =3D=20
+  &quot;PM&quot;;&lt;BR&gt;}&lt;BR&gt;elsif ($hour =3D=3D 0)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$hour =3D =
+12;&lt;BR&gt;&amp;nbsp;$ind =3D=20
+  &quot;AM&quot;;&lt;BR&gt;}&lt;BR&gt;else&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$ind =3D=20
+  =
+&quot;AM&quot;;&lt;BR&gt;}&lt;BR&gt;$day=3D(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Sat=
+urday)[$wday];&lt;BR&gt;$month=3D(January,February,March,April,May,June,July,Au=
+gust,September,October,November,December)[$mon];&lt;BR&gt;print=20
+  &quot;Content-type: text/html\n\n&quot;;&lt;BR&gt;printf (&quot;%s %s %02d %4d, %02d:%02d =
+%2s&quot;,=20
+  $day, $month, $mday, (1900+$year), $hour, $min, $ind);&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;exit 0;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;The problem is when&amp;nbsp; I attempt =
+to open the=20
+  page as localhost the system seems to hang for a long period of time I =
+don't=20
+  know what is wrong if anyone could tell me what's wrong I'd really =
+appreciate=20
+  it. I run the same shtml doc and cgi on a apache web server and it =
+works=20
+  perfect. Any help would really be appreciated.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am running on WinXPHome =
+&amp;nbsp;xitami-25 version=20
+  as a service(xisrv32.exe);&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thank You,&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Stephen S. Disbrow&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Stephen S.=20
+Disbrow&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_000B_01C4EF30.FB769DA0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006324.html">[Xitami] SSI problem....
+</A></li>
+	<LI> Next message: <A HREF="006325.html">[Xitami] FTP and XP Pro Security Set Up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6337">[ date ]</a>
+              <a href="thread.html#6337">[ thread ]</a>
+              <a href="subject.html#6337">[ subject ]</a>
+              <a href="author.html#6337">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

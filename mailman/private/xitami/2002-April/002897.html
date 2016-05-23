@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Server Being Flooded
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002910.html">
+   <LINK REL="Next"  HREF="003072.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Server Being Flooded
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Server Being Flooded">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 07 Apr 2002 19:41:10 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002910.html">[Xitami] xirtual hosts
+</A></li>
+        <LI> Next message: <A HREF="003072.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2897">[ date ]</a>
+              <a href="thread.html#2897">[ thread ]</a>
+              <a href="subject.html#2897">[ subject ]</a>
+              <a href="author.html#2897">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;002801c1d849$75fe5920$<A HREF="mailto:0200a8c0@geh">0200a8c0@geh</A>&gt;, &quot;Gregory Hart&quot; writes:
+&gt;<i>    My server is being flooded with cgi requests. When I have about 60
+</I>&gt;<i>active connections, my computer crashes because Xitami is not able to
+</I>&gt;<i>completely close all the perl windows. How can I get Xitami to send a 413
+</I>&gt;<i>(This server cannot handle your request) or a 502 (This server is currently
+</I>&gt;<i>overloaded - please try again later) when it has more than 5 active
+</I>&gt;<i>connections? Thanks.
+</I>
+Xitami will do this automatically when the CGIs take &quot;too long&quot; to run;
+but there's no way to configure it so that, eg, 5 simultaneous
+connections will cause the &quot;try again later&quot; type message.
+
+You might want to reduce the [CGI] Timeout value in this situation, so
+that more of the CGIs are cancelled quickly and a server overloaded
+message sent.  However it's not a perfect fix because all the CGIs will
+still be launched.  
+
+You might also want to consider something like LRWP instead of CGIs, as
+it's able to answer requests quicker (much much less startup overhead).
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002910.html">[Xitami] xirtual hosts
+</A></li>
+	<LI> Next message: <A HREF="003072.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2897">[ date ]</a>
+              <a href="thread.html#2897">[ thread ]</a>
+              <a href="subject.html#2897">[ subject ]</a>
+              <a href="author.html#2897">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

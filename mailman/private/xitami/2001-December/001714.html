@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Emulating Apache directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001684.html">
+   <LINK REL="Next"  HREF="001729.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Emulating Apache directories
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Emulating Apache directories">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Dec 2001 13:17:33 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001684.html">[Xitami] Emulating Apache directories
+</A></li>
+        <LI> Next message: <A HREF="001729.html">[Xitami] Emulating Apache directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1714">[ date ]</a>
+              <a href="thread.html#1714">[ thread ]</a>
+              <a href="subject.html#1714">[ subject ]</a>
+              <a href="author.html#1714">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ewen McNeill wrote:
+
+&gt;<i>
+</I>&gt;<i>You are right that smthttpl.c:http_list_directory() is what is creating
+</I>&gt;<i>the directory (as an XML tree).  One of the things that it should also
+</I>&gt;<i>add to the XML is the path to the actual directory on disk, since it
+</I>&gt;<i>obviously needs to know this while it is preparing the list of files,
+</I>&gt;<i>and it would be useful to the GSL script outputting the directory.  The
+</I>&gt;<i>directory path is, I think, in p_http-&gt; file_name, so adding an
+</I>&gt;<i>attribute with that value into the top level of the XML would be useful,
+</I>&gt;<i>called perhaps &quot;path_on_disk&quot;.
+</I>&gt;<i>
+</I>I suggest &quot;phyical_path&quot;. Also note that due to some cunning code 
+reusing p_http-&gt;file_name as a place to store the temporary outfile name 
+you will have to do this before you create the tempfile at line 2198!
+
+I will build a unix(linux actually) version to verify that it works over 
+the next couple of days - but I don't yet a Win32 compiler so I can't do 
+win32.
+
+Francis
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001684.html">[Xitami] Emulating Apache directories
+</A></li>
+	<LI> Next message: <A HREF="001729.html">[Xitami] Emulating Apache directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1714">[ date ]</a>
+              <a href="thread.html#1714">[ thread ]</a>
+              <a href="subject.html#1714">[ subject ]</a>
+              <a href="author.html#1714">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

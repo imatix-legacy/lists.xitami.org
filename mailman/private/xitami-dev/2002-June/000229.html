@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Large Volume File Transfer
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000228.html">
+   <LINK REL="Next"  HREF="000230.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Large Volume File Transfer
+   </H1>
+    <B>Rafael Cano Perez
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Large Volume File Transfer">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Fri, 14 Jun 2002 09:39:20 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000228.html">[Xitami-Dev] Large Volume File Transfer
+</A></li>
+        <LI> Next message: <A HREF="000230.html">[Xitami-Dev] Large Volume File Transfer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#229">[ date ]</a>
+              <a href="thread.html#229">[ thread ]</a>
+              <a href="subject.html#229">[ subject ]</a>
+              <a href="author.html#229">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Hi Kimman,
+
+ I think HTTP would be a better protocol to use,
+ if only for the benefit of using LRWP to receive data
+ behind a standard xitami or an &quot;HTTPS&quot; xitamipro, and
+ the functions available in SFL.
+
+ This would allow you to prototype with a stand alone
+ LRWP executable before going into a full SMT Agent/Application.
+
+ Besides, the meta information that you could put in
+ an HTTP header, would be useful for your routing
+ algorithms on the receiving site.
+
+ It would also allow the end users scanning the documents
+ to easily send them via an HTML form.
+
+ Regards
+
+
+
+   Rafael Cano Perez
+
+
+-----Mensaje original-----
+De: <A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>]En nombre de Kimman
+Balakrishnan
+Enviado el: viernes, 14 de junio de 2002 08:33
+Para: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+Asunto: [Xitami-Dev] Large Volume File Transfer
+
+
+Hello all
+
+Our application area is document imaging including production environments.
+
+With the growing trend towards offshore processing, we now are faced with
+customers
+scanning on-site and then transferring files to an offshore server. The
+quantum of
+data could be anywhere from 500 MB per day to a few GB. Some of the
+customers have
+dedicated 'pipes' which have to be used. Typically there is a dedicated pipe
+to a
+US HQ and then one or more dedicated pipes to offshore servers. This implies
+a
+multi-step transfer. And to complicate things a little more, there can be
+time
+slots for the use of the pipes for these transfers.
+
+It seems like we could build this using the SMT architecture.
+
+At the originating site, we have a FTP client - this could be built as an
+SMT
+agent.  Happily the FTP RFC includes state diagrams and should make writing
+the
+agent relatively easier.
+
+At all other sites we have a Xitami webserver with the FTP agent running. If
+the
+server is an 'intermediate' site, the server includes the FTP client agent
+as well.
+Once a 'set' of files are recd by the server, a message is sent to the FTP
+client
+agent to initiate the transfer to the next server. Each 'set' is a batch of
+images
+with a control file - the onward sending starts only when the 'set' is
+complete -
+this validation is specific to our context.
+
+The FTP client configuration will include :
+
+a. the alternate routes available for transfer - this would be in the
+intermediate
+sites.
+b. the number of simultaneous transfers that can be initiated
+c. TCP/IP configuration to ensure max throughput - I have found some
+articles on
+the TCP/IP configuration for these kind of large transfers
+
+Comments and suggestions are invited.
+
+Kimman Balakrishnan
+Imaging Solutions Pvt Ltd
+
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000228.html">[Xitami-Dev] Large Volume File Transfer
+</A></li>
+	<LI> Next message: <A HREF="000230.html">[Xitami-Dev] Large Volume File Transfer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#229">[ date ]</a>
+              <a href="thread.html#229">[ thread ]</a>
+              <a href="subject.html#229">[ subject ]</a>
+              <a href="author.html#229">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

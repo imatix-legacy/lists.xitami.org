@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Change of architecture in SMT@CVS ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000105.html">
+   <LINK REL="Next"  HREF="000109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Change of architecture in SMT@CVS ?
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Change of architecture in SMT@CVS ?">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Mon, 21 Jan 2002 18:12:28 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000105.html">[Xitami-Dev] Change of architecture in SMT@CVS ?
+</A></li>
+        <LI> Next message: <A HREF="000109.html">[Xitami-Dev] Re: Change of architecture in SMT@CVS ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#107">[ date ]</a>
+              <a href="thread.html#107">[ thread ]</a>
+              <a href="subject.html#107">[ subject ]</a>
+              <a href="author.html#107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Rafael Cano Pérez &lt;<A HREF="mailto:rafael.cano@o-labs.com">rafael.cano@o-labs.com</A>&gt; wrote:
+
+&gt;<i>  I see changes in the SMT source code in CVS
+</I>&gt;<i>  with some functionality missing, like sendfmt() is not
+</I>&gt;<i>  longer in smtlib.c and some defines, specially
+</I>&gt;<i>  for the SMTSOCK messages for exdr functions,
+</I>&gt;<i>  like SMT_SOCK_READ etc, that is giving me
+</I>&gt;<i>  a lot of problems with my own SMT agents.
+</I>
+We have -- as you see -- been working on SMT despite the apparent 
+silence over the last year or two.  smtsock and smttime no longer 
+exist.  Their functions are now carried out inside the kernel itself. 
+ This change allowed us to improve signal handling and certain stress 
+conditions.  There have been many other small changes but overall the 
+architecture is still the same.
+
+However, you'll need to modify your code for talking to smtsock and 
+smttime.  I'm not sure why sendfmt disappeared but there is probably 
+a good reason for it.  In any case the CVS version is stable.  
+
+I'll get someone to post a summary of the changes and how to convert 
+your SMT agents.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000105.html">[Xitami-Dev] Change of architecture in SMT@CVS ?
+</A></li>
+	<LI> Next message: <A HREF="000109.html">[Xitami-Dev] Re: Change of architecture in SMT@CVS ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#107">[ date ]</a>
+              <a href="thread.html#107">[ thread ]</a>
+              <a href="subject.html#107">[ subject ]</a>
+              <a href="author.html#107">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

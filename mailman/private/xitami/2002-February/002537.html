@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Linux/Xitami in boot up
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002536.html">
+   <LINK REL="Next"  HREF="002549.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Linux/Xitami in boot up
+   </H1>
+    <B>Bob Paddock
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Linux/Xitami in boot up">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 22 Feb 2002 05:57:54 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002536.html">[Xitami] Linux/Xitami in boot up
+</A></li>
+        <LI> Next message: <A HREF="002549.html">[Xitami] Linux/Xitami in boot up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2537">[ date ]</a>
+              <a href="thread.html#2537">[ thread ]</a>
+              <a href="subject.html#2537">[ subject ]</a>
+              <a href="author.html#2537">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Friday 22 February 2002 03:24 am, you wrote:
+&gt;<i> How can I run Xitami in a boot up time with init-script? My system is
+</I>&gt;<i> Mandrake 8.1. Xitami is installed in /var/xitami.
+</I>
+This is what I did for my Mandrake 8.1 system,
+put this in /etc/rc.d/rc.local:
+
+echo &quot;Starting xitami&quot;
+/var/xitami/xitami -s -w /var/xitami
+#Syntax: xitami [options...]
+#Options:
+#  -w directory     Working directory for server
+#  -r directory     Root directory for web pages (webpages)
+#  -c directory     Directory for CGI programs (cgi-bin)
+#  -b portbase      Shift HTTP port 80 by this value.  E.g. to run
+#                   Xitami on port 5080, do 'xitami -b 5000'
+#  -f directory     Root directory for FTP files (webpages)
+#  -q               Quiet mode: no messages
+#  -s               Server mode: run as background job
+#  -S               Console mode: run as foreground job
+#  -t               Trace all socket i/o operations to log file
+#  -v               Show Xitami version information
+#  -h               Show summary of command-line options
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002536.html">[Xitami] Linux/Xitami in boot up
+</A></li>
+	<LI> Next message: <A HREF="002549.html">[Xitami] Linux/Xitami in boot up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2537">[ date ]</a>
+              <a href="thread.html#2537">[ thread ]</a>
+              <a href="subject.html#2537">[ subject ]</a>
+              <a href="author.html#2537">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

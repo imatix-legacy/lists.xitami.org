@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] SMT Agents
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000009.html">
+   <LINK REL="Next"  HREF="000012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] SMT Agents
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] SMT Agents">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Sat, 09 Jun 2001 01:24:41 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000009.html">[Xitami-Dev] building os2 production release...
+</A></li>
+        <LI> Next message: <A HREF="000012.html">[Xitami-Dev] Add-ons Isapi
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3.0.1.32.20010323111246.00a1dac0@dnai.com">3.0.1.32.20010323111246.00a1dac0@dnai.com</A>&gt;, Shivakumar Gopalakrishna
+n writes:
+&gt;<i>I think we have been teased about GSLgen3 long enough. 
+</I>&gt;<i>Any ideas of posting the pre-pre-alpha version to some iMatix diehard fans
+</I>&gt;<i>only site?
+</I>
+For the &quot;diehard fans only&quot;, they can get it from CVS.  ViewCVS will let
+you look at what is there:
+
+<A HREF="http://cvs.imatix.com./cgi-bin/viewcvs/">http://cvs.imatix.com./cgi-bin/viewcvs/</A>
+
+Our public CVS archive is in the middle of a rearrangement at present,
+so it's a bit messy (eg, there are multiple names for many things: the
+shorter ones are the newer ones).
+
+The modules you need are &quot;sfl&quot;, &quot;smt&quot;, and &quot;gsl&quot;.  The GSL there is GSL3.
+
+There are brief details on how to get a (read only) copy from CVS on
+that webpage, as well as the ability to navigate the archive.
+
+&gt;<i>Also from the postings it appears that GSLgen is not meant to be used
+</I>&gt;<i>for dynamic HTML generation. What would you suggest for XML-&gt; HTML ? There
+</I>&gt;<i>are many XSLT but XSL is not as easy to learn as GSL and less powerful 
+</I>&gt;<i>than GSL (IMHO). Any suggestions?
+</I>
+Personally I'd tend to use GSL for dynamic XML -&gt; HTML conversion for
+relatively small things; and I'd tend to avoid on-the-fly conversion of
+anything large (irrespective of technology) because it takes too long.
+GSL3 in the Xitami in CVS is somewhat better for on-the-fly conversion
+because it's a SMT-agent itself, and so can be multithreaded with other
+things.  (The GSL2 in Xitami 2.5b5 has to run to completion before
+anything else can be done.)  (Note however that the GSL3/Xitami
+interface is still in a state of flux and not entirely debugged.)
+
+As you say XSLT is more difficult to learn than GSL, and from what I've
+seen to date, not really any faster to write/use than GSL.  So I don't
+think there's all that much advantage in learning it just to do dynamic
+XML-&gt;HTML conversions if you already know GSL.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000009.html">[Xitami-Dev] building os2 production release...
+</A></li>
+	<LI> Next message: <A HREF="000012.html">[Xitami-Dev] Add-ons Isapi
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#11">[ date ]</a>
+              <a href="thread.html#11">[ thread ]</a>
+              <a href="subject.html#11">[ subject ]</a>
+              <a href="author.html#11">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: Xitami Help
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005894.html">
+   <LINK REL="Next"  HREF="005896.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: Xitami Help
+   </H1>
+    <B>Jill Douglas
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: Xitami Help">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 May 2004 08:44:18 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005894.html">[Xitami] Re: Xitami Help
+</A></li>
+        <LI> Next message: <A HREF="005896.html">[Xitami] HELP!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5895">[ date ]</a>
+              <a href="thread.html#5895">[ thread ]</a>
+              <a href="subject.html#5895">[ subject ]</a>
+              <a href="author.html#5895">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael,
+
+Oh my gosh!  Thank you so so much, it all works now!!!  I am overwhelmed,
+this is just fantastic!!!!  Finally, it's all working and you've helped to
+do all of that.  Thank you thank you thank you!!!
+
+Jill
+
+
+----- Original Message -----
+From: &quot;Michael diLorenzo&quot; &lt;<A HREF="mailto:mdilore1@nycap.rr.com">mdilore1@nycap.rr.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, May 10, 2004 12:13 AM
+Subject: Re: [Xitami] Re: Xitami Help
+
+
+Hi Jill,
+
+It looks like each site is &quot;working,&quot; as long as you go into the directory
+for each site.  What you need to do is tell Xitami, &quot;hey, if someone gets
+here by using www.boatsafe.ca, then send them to this folder.  If they get
+here using www.twochickies.ca, then send them to this folder,&quot; etc.
+
+That's easy to do.  What you will do is create a text file called
+&quot;defaults.cfg&quot; in your Xitami folder, and you will create a .cfg file for
+each of your hosts.
+
+When Xitami starts, it loads a configuration file called Xitami.cfg.  You
+might want to take a look at it sometime, it is very self-explanitory.
+After Xitami loads this file, it looks for a file called defaults.cfg, and
+if it exists, it will &quot;override&quot; any setting in xitami.cfg with what's in
+defaults.cfg.  This is a good thing, because you probably shouldn't ever
+change xitami.cfg.  If you need to make changes to Xitami's configuration,
+it's a good idea to put them in defaults.cfg.
+
+So.....In your &quot;defaults.cfg&quot; file, put the following:
+
+
+[Virtual Hosts]
+   www.boatsafe.ca = &quot;boatsafe.cfg&quot;
+
+
+You're telling Xitami that you host a site called www.boatsafe.ca, and the
+instructions for delivering that page can be found in the file called
+boatsafe.cfg.  Of course, you can make that filename anything you want,
+but it's a good idea to give it a name that makes sense.  :-)
+
+So now, when someone visits your site via www.boatsafe.ca, Xitami will
+know that it needs to refer to boatsafe.cfg to get instructions on how to
+deliver that page.  That means we need a boatsafe.cfg!
+
+Create a file called &quot;boatsafe.cfg&quot; in your Xitami folder.  In that file,
+put the following:
+
+[Server]
+   webpages = &quot;./boatsafe&quot;
+
+Here, you're telling Xitami that the files for your boatsafe pages can be
+found in a particular location.  I'm assuming that your web page directory
+is &quot;under&quot; your Xitami directory.  If not, just put the complete path to
+your boatsafe pages there.
+
+That should do it for boatsafe.  If you would like to &quot;point&quot; your other
+sites, just add lines to the default.cfg file, and create the appropriate
+.cfg files that point to the appropriate directories.  For example, if you
+were hosting twochickies too, your defaults.cfg would look something like:
+
+[Virtual Hosts]
+   www.boatsafe.ca = &quot;boatsafe.cfg&quot;
+   www.twochickies.ca = &quot;twochickies.cfg&quot;
+
+and you would create twochickies.cfg to look like this:
+
+[Server]
+   webpages = &quot;./twochickies&quot;
+
+That's all there is to it!  There is a lot of information that you can put
+in these .cfg files to make Xitami act different ways when folks visit
+different sites for you.  Keep working at it!  Xitami is a GREAT server,
+it kicks Apache's butt.  :-)
+
+Oh, one more thing:  In your defaults.cfg file, you REALLY should add:
+
+[Security]
+   dirlist = &quot;0&quot;
+
+That way, no one will be able to get the directory list that Xitami is
+delivering now, even if you DON'T have default pages.  Never a good idea
+to deliver a directory listing of your computer.
+
+Good luck!  If you need any more help, just ask.  :-)
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005894.html">[Xitami] Re: Xitami Help
+</A></li>
+	<LI> Next message: <A HREF="005896.html">[Xitami] HELP!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5895">[ date ]</a>
+              <a href="thread.html#5895">[ thread ]</a>
+              <a href="subject.html#5895">[ subject ]</a>
+              <a href="author.html#5895">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

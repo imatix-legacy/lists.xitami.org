@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Dynamic URL converstion to static URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Dynamic%20URL%20converstion%20to%20static%20URLs&In-Reply-To=f83609d50801091350r674b568cg4e383c6cd568be93%40mail.gmail.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007691.html">
+   <LINK REL="Next"  HREF="007694.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Dynamic URL converstion to static URLs</H1>
+    <B>General</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Dynamic%20URL%20converstion%20to%20static%20URLs&In-Reply-To=f83609d50801091350r674b568cg4e383c6cd568be93%40mail.gmail.com"
+       TITLE="[Xitami] Dynamic URL converstion to static URLs">ronackgen01 at bellsouth.net
+       </A><BR>
+    <I>Sat Jan 12 17:17:33 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007691.html">[Xitami] Dynamic URL converstion to static URLs
+</A></li>
+        <LI>Next message: <A HREF="007694.html">[Xitami] Dynamic URL converstion to static URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7693">[ date ]</a>
+              <a href="thread.html#7693">[ thread ]</a>
+              <a href="subject.html#7693">[ subject ]</a>
+              <a href="author.html#7693">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>However doing a 404 redirect may prove to be no good in terms of SEO because
+some search engines penalize for 404 redirects, especially Google. I found
+doing a simple PHP redirect to work out better for me. I use it on all my
+PHP CMS sites, use it as a sitemap and have a shorturl redirect site like
+TinyURL. 
+
+I call the script shorturl and it can be generated very easy with a PHP
+script. It can take something like 
+
+<A HREF="http://www.causewaylighting.com/index.php?topic=bulbs_&amp;menu=bulbs_">http://www.causewaylighting.com/index.php?topic=bulbs_&amp;menu=bulbs_</A>
+
+and rewrite it to this
+
+<A HREF="http://www.causewaylighting.com/surl/bulbs.php">http://www.causewaylighting.com/surl/bulbs.php</A>
+
+Here is the PHP script that I use
+
+&lt;?php
+$shorturl =
+'<A HREF="http://www.causewaylighting.com/index.php?topic=bulbs_&amp;menu=bulbs_';">http://www.causewaylighting.com/index.php?topic=bulbs_&amp;menu=bulbs_';</A>
+header(&quot;Location: $shorturl&quot;);
+?&gt;
+
+I also have a modified version that instead of creating a specific page name
+it creates a directory with one file index.php so then the rewrite would be.
+
+<A HREF="http://www.causewaylighting.com/bulbs">http://www.causewaylighting.com/bulbs</A>
+or 
+<A HREF="http://www.causewaylighting.com/bulbs/index.php">http://www.causewaylighting.com/bulbs/index.php</A>
+
+Since most browsers if not all browsers assume index.php you can usually
+leave it off.
+
+Also some CMS's actually provide their own version of rewrite. I'm pretty
+sure Geeklog does and maybe NukePHP.
+
+Ron
+
+-----Original Message-----
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Francis Turner
+Sent: Wednesday, January 09, 2008 4:51 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+
+Actually assuming the use of Xitami 2.5 with GSL working then the 404
+rewrite is extremely possible because - assuming there is as
+reasonable rule - then conversion of the old URL to the new one within
+the error page is quite possible This allows you to say &quot;ooops moved
+here&quot; and auto move it via a meta http redirect
+
+GSL is a somewhat limited scripting langauge but entirely adequate for
+this sort of job assuming the conversion rule is well known and easy
+to use. You may even be able to figure out how t make Xitami generate
+moved rather than 404 messages although I never figured that out.
+
+On Jan 8, 2008 9:32 PM, Magnus Wedberg &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">mw at 9000.org</A>&gt; wrote:
+&gt;<i> One option would be to just use the 404 page for
+</I>&gt;<i> everything (don't laugh!), handling your own internal redirects, but if
+</I>&gt;<i> I am not mistaken Xitami doesn't allow scripting in error pages (my
+</I>&gt;<i> memory is a little sketchy here but I'm pretty sure I have tried such
+</I>&gt;<i> things).
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Magnus Wedberg
+</I>&gt;<i> <A HREF="http://www.magnuswedberg.com/">http://www.magnuswedberg.com/</A>
+</I>&gt;<i> mw AT 9000.org
+</I>&gt;<i> Warning! Objects in viewfinder may be closer than they appear.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition. 
+Version: 7.5.516 / Virus Database: 269.17.13/1214 - Release Date: 1/8/2008
+1:38 PM
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007691.html">[Xitami] Dynamic URL converstion to static URLs
+</A></li>
+	<LI>Next message: <A HREF="007694.html">[Xitami] Dynamic URL converstion to static URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7693">[ date ]</a>
+              <a href="thread.html#7693">[ thread ]</a>
+              <a href="subject.html#7693">[ subject ]</a>
+              <a href="author.html#7693">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

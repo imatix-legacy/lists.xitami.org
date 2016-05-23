@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami and dns2go
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003399.html">
+   <LINK REL="Next"  HREF="003404.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami and dns2go
+   </H1>
+    <B>Control-Freak
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami and dns2go">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 14 Jun 2002 23:45:59 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003399.html">[Xitami] Xitami and dns2go
+</A></li>
+        <LI> Next message: <A HREF="003404.html">[Xitami] Xitami and dns2go
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3402">[ date ]</a>
+              <a href="thread.html#3402">[ thread ]</a>
+              <a href="subject.html#3402">[ subject ]</a>
+              <a href="author.html#3402">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I use dns2go and xitami.  Most residential ISPs block port 80, so no one
+outside your local ISP &quot;hub&quot; of computers can access your domain on a
+standard HTTP port.
+
+If you can connect to your domain using your domain name locally, then your
+domain provider points to Deerfield's servers, so thats all fine.  But if
+you can't get in from &quot;outside&quot;, you need to set your portbase to a value of
+like 5920 to get Xitami to work on port 6000 (5920+80) (or whatever works
+with your ISP - might take some experimentation).
+
+In the dns2go client, you need to goto the service settings tab, and on the
+&quot;apply the following settings when I am:&quot; pull-down, select online.
+
+Then check the box next to &quot;Redirect web requests (with a www prefix)&quot;
+
+then check the radio button that says &quot;To my current IP address on port&quot; and
+then  put in your portbase value + 80 (6000 as shown above).  If you need to
+know how to get your FTP port back down to 20, read the defaults.cfg file
+carefully.  It works similar to portbase - just use a negative number to
+bring it back down.
+
+Restart Xitami
+
+Disconnect then reconnect the dns2go client.
+
+Now everyone should hopefully be able to connect to your ISP using
+www.yourdomain.com.  But, remember that the www. is now crucial in order for
+dns2go to know to portforward the HTTP request.  <A HREF="http://yourdomain.com">http://yourdomain.com</A> will
+result in an attempt to connect at port 80, so it will not work.
+
+Hope that helps.  You'll need to do a little more if you still need Xitami's
+FTP services.  Maybe not -  FTP might work fine at port 5940 on your ISP.
+
+P.S. For FTP, use <A HREF="ftp://yourdomain.com">ftp://yourdomain.com</A>  not <A HREF="ftp://www.yourdomain.com">ftp://www.yourdomain.com</A> or
+dns2go will try and portforward the FTP request.
+
+Good Luck,
+
+- Jay Aldrich
+
+
+----- Original Message -----
+From: &quot;Robert J. DeMartini&quot; &lt;<A HREF="mailto:robdemartini@mindspring.com">robdemartini@mindspring.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, June 14, 2002 7:54 PM
+Subject: [Xitami] Xitami and dns2go
+
+
+&gt;<i> I'm currently using dns2go to route my dynamic ip into a single domain
+</I>name
+&gt;<i> (i.e. the IP address changes but the domain name insures the site is
+</I>found).
+&gt;<i> Currently I cannot get Xitami to work. I can see the site on my local
+</I>system
+&gt;<i> but the outside world cannot get in. I was hoping someone else had a
+</I>similar
+&gt;<i> circumstance and could offer a solution.
+</I>&gt;<i>
+</I>&gt;<i> Right now I'm using a program called, &quot;TheServer&quot; and it works fine, but
+</I>&gt;<i> lacks any type of server depth. The interesting part is that server lets
+</I>&gt;<i> traffic in no problem... so I know it's possible it's just probably a
+</I>&gt;<i> setting I am overlooking.
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i>
+</I>&gt;<i> Robert
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003399.html">[Xitami] Xitami and dns2go
+</A></li>
+	<LI> Next message: <A HREF="003404.html">[Xitami] Xitami and dns2go
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3402">[ date ]</a>
+              <a href="thread.html#3402">[ thread ]</a>
+              <a href="subject.html#3402">[ subject ]</a>
+              <a href="author.html#3402">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

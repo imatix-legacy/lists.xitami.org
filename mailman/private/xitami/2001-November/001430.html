@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: XML crash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001429.html">
+   <LINK REL="Next"  HREF="001431.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: XML crash
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: XML crash">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 15 Nov 2001 21:31:25 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001429.html">[Xitami] XML crash
+</A></li>
+        <LI> Next message: <A HREF="001431.html">[Xitami] XML crash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1430">[ date ]</a>
+              <a href="thread.html#1430">[ thread ]</a>
+              <a href="subject.html#1430">[ subject ]</a>
+              <a href="author.html#1430">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Francis Turner wrote:
+
+&gt;<i> Got the following crash.log just now.
+</I>&gt;<i>
+</I>&gt;<i> 15/Nov/2001:21:19:45 +0100 Xitami v2.5b5
+</I>&gt;<i> Abort at xixxml:4: (2, 7)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Can anyone explain what it means? And what I can do to stop it?
+</I>&gt;<i>
+</I>&gt;<i> Xitami 2.5b5 Running on Win2k Sp1
+</I>&gt;<i>
+</I>&gt;<i> Francis
+</I>&gt;<i>
+</I>Figured out that the offending line was a GSL line that said
+&lt;A href='/discussion/$(name)/index.xml' TITLE='Click 
+Here'&gt;&lt;h2&gt;$(Title)&lt;/h2&gt;&lt;/a&gt; 
+
+If I remove the TITLE='...' and have
+&lt;A href='/discussion/$(name)/index.xml'&gt;&lt;h2&gt;$(Title)&lt;/h2&gt;&lt;/a&gt; 
+it works no problem at all!
+
+The only thing I can think of is that I have a XML object with an 
+attribute the same  name as a HTML tag causes trouble...
+
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001429.html">[Xitami] XML crash
+</A></li>
+	<LI> Next message: <A HREF="001431.html">[Xitami] XML crash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1430">[ date ]</a>
+              <a href="thread.html#1430">[ thread ]</a>
+              <a href="subject.html#1430">[ subject ]</a>
+              <a href="author.html#1430">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

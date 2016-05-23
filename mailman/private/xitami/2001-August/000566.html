@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] upload
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000565.html">
+   <LINK REL="Next"  HREF="000567.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] upload
+   </H1>
+    <B>Joseph Saunders
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] upload">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 3 Aug 2001 08:53:41 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000565.html">[Xitami] upload
+</A></li>
+        <LI> Next message: <A HREF="000567.html">[Xitami] SSI and Python
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#566">[ date ]</a>
+              <a href="thread.html#566">[ thread ]</a>
+              <a href="subject.html#566">[ subject ]</a>
+              <a href="author.html#566">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There are perl scripts available for uploading via http.
+
+Heres an example:
+
+NAME
+       FileUpload - Module for HTTP File Uploading.
+
+TEST
+       <A HREF="http://www.tneoh.zoneit.com/perl/FileUpload/form.html">http://www.tneoh.zoneit.com/perl/FileUpload/form.html</A>
+
+SYNOPSIS
+	 use strict;
+	 use FileUpload;
+	 use CGI qw(-private_tempfiles :standard);
+	 use vars qw($q $fu);
+
+	 $q = new CGI;
+	 $fu = new FileUpload($cgi-&gt;param('ufile'));
+
+	 # The uploaded file's size.
+	 $size = $fu-&gt;size;
+
+	 # Get the filename.
+	 $filename = $fu-&gt;orig_filename;
+
+	 # Get the full path of the file.
+	 # eg result: C:\test.html
+	 $filepath = $fu-&gt;orig_filepath;
+
+	 # Get the characters allowed.
+	 @chararr = $fu-&gt;allow_char;
+
+	 # Add the characters allowed.
+	 @chararr = $fu-&gt;allow_char('char1', 'char2');
+
+	 # Get the extensions not allowed.
+	 @extarr = $fu-&gt;deny_ext;
+
+	 # Add the extensions not allowed.
+	 @extarr = $fu-&gt;deny_ext('cgi', 'shtml');
+
+	 # Save the uploaded file as the original filename.
+	 $byteswritten = $fu-&gt;save;
+
+	 # Save the uploaded file by using &quot;newfilename&quot;.
+	 $byteswritten = $fu-&gt;save_as(&quot;newfilename&quot;);
+
+	 # Get the filehandle's current position.
+	 $pos = $fu-&gt;get_pos;
+
+	 # Set the filehandle position.
+	 $fu-&gt;set_pos($newpos);
+
+	 # Read a line.
+	 $aline = $fu-&gt;get_line;
+
+	 # Read many lines.
+	 @lines = $fu-&gt;get_lines;
+
+DESCRIPTION
+       This module helps you to process uploaded file easier.
+
+       new UPLOADEDFILE
+	   UPLOADEDFILE is the value returned by CGI-&gt;param() for
+	   the uploaded file.
+
+       allow_char CHAR1, [CHAR2...]
+	   CHAR1, [CHAR2...] are the characters that allowed for
+	   the saved filename.	Defaults are &quot;\w&quot;, &quot;\-&quot; and &quot;\.&quot;.
+	   This is using regular expression's pattern match, so
+	   please check &quot;perldoc perlre&quot; for more details of
+	   patterns defined.  Returns the array of the characters
+	   allowed.
+
+       deny_ext EXT1, [EXT2...]
+	   EXT1, [EXT2...] are the extensions that the saved
+	   filename can not end with. Returns the array of the
+	   extensions not allowed.
+
+       get_line
+	   Read a line from the uploaded file.
+
+       get_lines
+	   Read multiple lines from the uploaded file.	Returns
+	   an array of strings.
+
+       get_pos
+	   Returns the current position for uploaded file's
+	   FILEHANDLE.
+
+       orig_filename
+	   Returns the original filename string.
+
+       orig_filepath
+	   Returns the filepath string, eg result: C:\test.html.
+
+       save
+	   Save the uploaded file as the original filename.
+	   Returns the number of bytes actually wrote, or undef
+	   if there was an error.
+
+       save_as NEWFILEPATH
+	   Save the uploaded file to the NEWFILEPATH.  Returns
+	   the number of bytes actually wrote, or undef if there
+	   was an error.
+
+       set_pos POSITION
+	   Set the current position of filehandle to POSITION.
+	   Returns 1 upon success, 0 otherwise.
+
+       size
+	   Returns the size of the uploaded file upon success,
+	   undef otherwise.
+
+CHANGES
+       0.01 -&gt; 0.02    orig_filename() returns a wrong filename.
+
+       0.02 -&gt; 0.03   save_as() use read() now instead of
+       sysread() to solve some reading errors.
+
+       0.03 -&gt; 0.04   Call the binmode() when we read and write
+       for files in Win32 platforms.
+
+DOWNLOAD
+       <A HREF="http://www.tneoh.zoneit.com/perl/FileUpload/download/">http://www.tneoh.zoneit.com/perl/FileUpload/download/</A>
+
+AUTHOR
+       Simon Tneoh Chee-Boon   <A HREF="mailto:tneohcb@pc.jaring.my">tneohcb@pc.jaring.my</A>
+
+       Copyright (c) 2000 Simon Tneoh Chee-Boon. All rights
+       reserved.  This program is free software; you can
+       redistribute it and/or modify it under the same terms as
+       Perl itself.
+
+SEE ALSO
+       CGI, IO::Handle and IO::File
+
+-----Original Message-----
+From: Andreas Zieritz [mailto:<A HREF="mailto:zieritz@sovik.no">zieritz@sovik.no</A>]
+Sent: Friday, August 03, 2001 4:26 AM
+To: Xitami
+Subject: [Xitami] upload
+
+
+I'm running Xitami as an http and ftp server on Linux.
+
+Currently I'm using ftp for uploading things on it, but due to a
+firewall problem some of our customers can't do upload. If someone could
+give me a clue how to use http for upload I would very much appreciate
+that.
+
+Thank you in advance...
+
+--
+Servus,
+ Andreas
+
+------------------------
+Andreas Zieritz
+Siviling. Svein Sovik AS
+Fantoftveien 42
+N-5072 Bergen
+<A HREF="http://www.sovik.no">http://www.sovik.no</A>
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000565.html">[Xitami] upload
+</A></li>
+	<LI> Next message: <A HREF="000567.html">[Xitami] SSI and Python
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#566">[ date ]</a>
+              <a href="thread.html#566">[ thread ]</a>
+              <a href="subject.html#566">[ subject ]</a>
+              <a href="author.html#566">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

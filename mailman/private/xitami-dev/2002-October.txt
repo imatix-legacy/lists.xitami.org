@@ -1,0 +1,798 @@
+From xitami-dev@lists.xitami.org  Sun Oct 13 13:52:01 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sun, 13 Oct 2002 08:52:01 -0400
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+Message-ID: <200210130852.01716.bpaddock@csonline.net>
+
+Long ago I asked these questions and received these answers here on the list:
+
+Fri, 11 Jan 2002 10:23:36 +0100, Pieter Hintjens wrote:
+
+>> Before I go reinventing the wheel has any one here done any thing 
+>> with POP3 & SFL/SMT?
+
+>Yes, we have a POP3 client written with SMT/SFL.  Let me just check 
+>that it's actually in the public CVS... okay, it's not, so we'll put 
+>it there and you can access it later from: 
+
+ >   http://cvs.imatix.com./cgi-bin/viewcvs/
+
+Fri, 11 Jan 2002 16:38:55 +0100, Pieter Hintjens wrote:
+
+>Just FYI, there are now two new agents in the SMT library: smtpop3 
+>and smtsmtp, plus two matching test programs.  These agents provide 
+>multithread POP3 and SMTP access.  All comments welcome!
+
+I know that CVS has been turned off.
+
+I would like to procede with trying to write a spam filter with SFL/SMT.
+
+The one that diverted me for all of these months was http://mailfilter.sf.net/ 
+.  Which I still see as a very nice package.  However it has become so 
+intangled in the GNU way of ./configure needed things like Flex, Bison, 
+ad-infinitum to do a simple C++ compile, that it has literally become 
+impossible for it to be built on some systems (like mine).
+
+Getting 100+ spams per day is good motivation.  :-)
+
+I know there are other spam filters out there, but none that I've found that 
+will work on both Windows and Linux, with the same configuration file.   I 
+know I can run code under Cygwin to solve the problem (like Mailfilter) but 
+it is much slower than native code.
+
+My question is can I get the newer POP3 / SMTP code now?
+
+On Saturday 19 January 2002 10:27 pm, Ewen McNeill wrote:
+
+> Finally, yes, making this all easier to build is on our list of things
+> to do -- pretty high on our list these days :-)
+
+After 10 months has it made the top of the list yet?  The circular build 
+problems are the reason I gave up on SFL/SMT for a while.  Now I wish I had 
+stuck with my original plan for my spam filter.
+
+Unlike a web server (Xitami), or biz. apps. (STEP), every one needs a spam 
+filter these days.  Look at this project as good marketing for you and yours.  
+:-)
+
+This is the concept, taken largely from Mailfilter:
+
+There is a single configuration file.
+
+It contains the following sections:
+
+1) Server info (Where do I get the mail from).
+Encrypted passwords (not plan text), a frequent request on the Mailfilter 
+list.
+
+2) My address list.  If the message is not sent To/Cc: one of these addresses 
+it is deleted as spam.  Mailfilter has such a feature but it is hard to set 
+up.
+
+3) List of addresses to allow mail from unconditionally (never delete it).
+
+4) List of addresses/subjects/headers to deny mail from unconditionally 
+(delete it).  #3 over rides #4.  To save time processing stops at the first 
+matching rule.
+
+5) Some day (in other words I don't know how right now), allow AND/OR/IF type 
+logic to the rules.  Anyone here have any suggestions?
+
+#6) As much as practical keep the configuration file compatible with 
+mailfilter.
+
+Assume all of the above are using Regular Expressions for matching, unless 
+some one here has a better idea.
+
+Only the headers are read on the server (POP3: TOP x 0), never the text of the 
+message, for speed reasons.  You can not delete a message based on its 
+message content.
+
+Unlike the current version of Mailfilter this would be a two pass system, to 
+gain speed.  Normal pass, typically run in a Cron job, identifies the spams, 
+but does not delete them.  This keeps the message pointers from being 
+renumbers, so that you don't have to do a complete rescan each time.  When 
+you actually pick up the mail the messages are really deleted before 
+importing them to your mail client (different command line option)
+
+Subtitlies learned from experience:  
+ Subjects needed to be normalized before trying to match.
+   Subject: Viagra should be the same as these:
+   Subject V I A G R A
+   Subject V#$#I.A#G@R!A
+
+ Very complex regular expressions break the standard GNU RE library randomly, 
+and unpredictably (internal stack over flow?), so don't use it.
+  
+  RE matching seems like it would be right up the ally of SMT.  Is there such 
+a SMT RE library? 
+
+ If not use this RE library:  http://www.ddj.com/articles/2001/0110/
+
+If there is a need for I18N issues, stay away from GetText (Mailfilters 
+downfall because of all of the build issues), and use 
+http://www-124.ibm.com/icu/ .
+
+ Need to have option of case/or no case sensitivity in rule matching.
+
+Examples:
+
+  From: johndoe@x.com
+  To:  MyAddress@here.com
+  Subject: Buy your Viagra here.
+
+ Message is deleted because subject Viagra is considered spam per #4 above.
+
+  From: MyWife@home.com
+  To:  MyAddress@here.com
+  Subject: Bring home some Viagra tonight.
+
+  Message is kept because it is from my wife, and I won't be spending time 
+working on this spam filter code tonight.  :-) #3
+
+  From: johndoe@x.com
+  To:  IhaveNoClue@WhoThisIs.com
+  Subject: Bring home some Viagra tonight.
+
+ Message is deleted because it is not To/Cc: one of my addresses (#2), and not 
+#3.
+
+How do we get there?
+
+-- 
+      http://www.unusualresearch.com/ http://www.bpaddock.com/
+
+
+From xitami-dev@lists.xitami.org  Sun Oct 13 17:04:30 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Sun, 13 Oct 2002 18:04:30 +0200
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <200210130852.01716.bpaddock@csonline.net>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+Message-ID: <3DA9B5AE.28454.2F6A0DFD@localhost>
+
+Bob Paddock <bpaddock@csonline.net> wrote:
+
+> Long ago I asked these questions and received these answers here on
+> the list...
+
+We turned off the CVS because it was almost impossible to construct 
+SFL/SMT from it.
+
+In the meantime, we've continued to work on our tools and things are 
+looking up.
+
+I think the idea of a portable spam filter is a really good idea.  
+But then I love the idea of portable software in general.  I have to 
+say that we've been using SpamAssassin at iMatix, and it works 
+exceedingly well.
+
+We have packaged all our open source tools into RealiBase, which is 
+our base package for realtime software (hence the name).  Xitami is 
+separately packaged.
+
+I've put the current build of RealiBase up on imatix.com, at:
+   http://imatix.com/pub/rbase_1_0_src.zip for Windows
+and 
+   http://imatix.com/pub/rbase_1_0_src.tar.gz for Unix
+
+We will start automating this update, and probably use Sourceforge 
+for downloads.
+
+To build from the source package you need Linux and gcc, or Windows 
+2000 and MSVC.  If you want to use other compilers on Windows, you 
+will need to add support into the c.bat file before building.
+
+To build, unzip the source package and run the build.bat or build.sh 
+script.  This builds and installs into the default installation path, 
+which is c:\imatix on Windows and /usr/local/imatix on Unix.  In both 
+cases make sure you have write access to these directories.  You can 
+install into another location by setting the IBASE variable first.
+
+e.g. to build and install into a user directory on Linux:
+
+   export IBASE=~HOME/base
+   sh ./build.sh
+
+Next, what is in RealiBase?
+
+ - SFL, SMT, Libero, Htmlpp
+ - Gaggle, a group of miscellaneous tools
+ - Zlib, PCRE, two packages we use in GSL
+ - Gurudoc, our replacement for htmlpp, still in progress
+ - GSL/3.0
+
+Of which, the last is probably the most interesting.  This is the 
+first release of GSL/3.0 to the world.
+
+Now to your question about POP3/SMTP.  The SFL functions did not work 
+very well in previous releases.  We've improved them considerably, 
+but they remain single-threaded and thus not ideal for volume use.  
+We have built SMTP and POP3 agents in SMT, which are more interesting.
+
+But, the most interesting possibility of all is to use GSL.  We have 
+integrated PCRE (the Perl Compatible Regular Expression Library) and 
+GSL/3 now makes it easy to extend the language by adding extensions 
+like this (we also added zipfile functions from zlib).
+
+GSL can script SMT agents.  This means that you could probably use 
+GSL to build the spam agent, at least to prototype it.  You can 
+define your spam filter lists as XML files, of course.  You can even 
+multithread GSL scripts, to - e.g. - clean-up multiple POP3 boxes in 
+parallel.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+
+From xitami-dev@lists.xitami.org  Sun Oct 13 17:48:58 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sun, 13 Oct 2002 12:48:58 -0400
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <3DA9B5AE.28454.2F6A0DFD@localhost>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <3DA9B5AE.28454.2F6A0DFD@localhost>
+Message-ID: <200210131248.58479.bpaddock@csonline.net>
+
+> say that we've been using SpamAssassin at iMatix
+
+I'll take a look at it.  No need to reinvent the wheel if it does what I need.
+
+> We have packaged all our open source tools into RealiBase, which is
+> our base package for realtime software (hence the name).  Xitami is
+> separately packaged.
+
+Does this replace OpenKernel?
+
+> I've put the current build of RealiBase up on imatix.com, at:
+>    http://imatix.com/pub/rbase_1_0_src.zip for Windows
+> and
+>    http://imatix.com/pub/rbase_1_0_src.tar.gz for Unix
+
+Great, downloading them now.  THANK YOU.
+
+> To build from the source package you need Linux and gcc, or Windows
+> 2000 and MSVC.  If you want to use other compilers on Windows, you
+> will need to add support into the c.bat file before building.
+
+http://www.digitalmars.com/ would be a good one to support.
+
+One thing we obviously have a philosophical disagreement on is using the words 
+'Realtime' and 'Windows' together.  :-)  My current project at work is a 
+power control for a several hundred ton machine.  I'm dealing in micro 
+seconds.  Now that is 'Realtime'.
+
+> Next, what is in RealiBase?
+>
+>  - SFL, SMT, Libero, Htmlpp
+
+BTW, http://htmlpp.org is dead, as that is one of the links I just looked at 
+on your site.
+
+>  - Gurudoc, our replacement for htmlpp, still in progress
+
+I use Genpage old and crude by todays standard but I've not found any thing 
+else that has the features that I need.  Mostly the glossary and template 
+concept so I can build multiple sites with different look out of the same 
+content files.
+
+http://www.adebaumann.com/genpage/
+
+Hopfully Gurudoc can incoperate some of those concepts.
+
+> GSL can script SMT agents.  This means that you could probably use
+> GSL to build the spam agent, at least to prototype it.  You can
+> define your spam filter lists as XML files, of course.  You can even
+> multithread GSL scripts, to - e.g. - clean-up multiple POP3 boxes in
+> parallel.
+
+I'll try to give it a shot when ever thing is available.
+
+-- 
+      http://www.unusualresearch.com/ http://www.bpaddock.com/
+
+
+
+From xitami-dev@lists.xitami.org  Mon Oct 14 08:27:18 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Mon, 14 Oct 2002 17:27:18 +1000
+Subject: [Xitami-Dev] How to build a spam filter?
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <3DA9B5AE.28454.2F6A0DFD@localhost> <200210131248.58479.bpaddock@csonline.net>
+Message-ID: <3DAA71D6.4AA344FD@ob-wan.com>
+
+Bob,
+
+I like the Organisation line in your emails, "Mostly via piles". That's
+what you get for sitting in front of a computer too long, I guess.
+
+Kris de Vos sends his regards.
+
+Rob
+(still reading after all these years)
+
+
+Bob Paddock wrote:
+> 
+> > say that we've been using SpamAssassin at iMatix
+> 
+> I'll take a look at it.  No need to reinvent the wheel if it does what I need.
+> 
+> > We have packaged all our open source tools into RealiBase, which is
+> > our base package for realtime software (hence the name).  Xitami is
+> > separately packaged.
+> 
+> Does this replace OpenKernel?
+> 
+> > I've put the current build of RealiBase up on imatix.com, at:
+> >    http://imatix.com/pub/rbase_1_0_src.zip for Windows
+> > and
+> >    http://imatix.com/pub/rbase_1_0_src.tar.gz for Unix
+> 
+> Great, downloading them now.  THANK YOU.
+> 
+> > To build from the source package you need Linux and gcc, or Windows
+> > 2000 and MSVC.  If you want to use other compilers on Windows, you
+> > will need to add support into the c.bat file before building.
+> 
+> http://www.digitalmars.com/ would be a good one to support.
+> 
+> One thing we obviously have a philosophical disagreement on is using the words
+> 'Realtime' and 'Windows' together.  :-)  My current project at work is a
+> power control for a several hundred ton machine.  I'm dealing in micro
+> seconds.  Now that is 'Realtime'.
+> 
+> > Next, what is in RealiBase?
+> >
+> >  - SFL, SMT, Libero, Htmlpp
+> 
+> BTW, http://htmlpp.org is dead, as that is one of the links I just looked at
+> on your site.
+> 
+> >  - Gurudoc, our replacement for htmlpp, still in progress
+> 
+> I use Genpage old and crude by todays standard but I've not found any thing
+> else that has the features that I need.  Mostly the glossary and template
+> concept so I can build multiple sites with different look out of the same
+> content files.
+> 
+> http://www.adebaumann.com/genpage/
+> 
+> Hopfully Gurudoc can incoperate some of those concepts.
+> 
+> > GSL can script SMT agents.  This means that you could probably use
+> > GSL to build the spam agent, at least to prototype it.  You can
+> > define your spam filter lists as XML files, of course.  You can even
+> > multithread GSL scripts, to - e.g. - clean-up multiple POP3 boxes in
+> > parallel.
+> 
+> I'll try to give it a shot when ever thing is available.
+> 
+> --
+>       http://www.unusualresearch.com/ http://www.bpaddock.com/
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Mon Oct 14 10:10:35 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 14 Oct 2002 11:10:35 +0200
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <200210131248.58479.bpaddock@csonline.net>
+References: <3DA9B5AE.28454.2F6A0DFD@localhost>
+Message-ID: <3DAAA62B.22263.33157528@localhost>
+
+Bob Paddock <bpaddock@csonline.net> wrote:
+
+> > We have packaged all our open source tools into RealiBase, which is
+> > our base package for realtime software (hence the name).  Xitami is
+> > separately packaged.
+> 
+> Does this replace OpenKernel?
+
+Yes.  No-one seemed to like the name "OpenKernel".
+
+> BTW, http://htmlpp.org is dead, as that is one of the links I just
+> looked at on your site.
+
+Htmlpp.org was one more dotcom victim, but we've fixed it to point 
+back to imatix.com for now.
+> 
+> >  - Gurudoc, our replacement for htmlpp, still in progress
+> 
+> I use Genpage old and crude by todays standard but I've not found any
+> thing else that has the features that I need.  Mostly the glossary and
+> template concept so I can build multiple sites with different look out
+> of the same content files.
+
+Gurudoc does not have a glossary function but it turns simple text 
+into different formats under control of cusomisable style templates, 
+which is what we needed.  Our goal is to use this for all our 
+documentation web sites.  
+
+-
+Pieter Hintjens
+iMatix Corporation
+ 
+
+
+
+From xitami-dev@lists.xitami.org  Mon Oct 14 10:32:28 2002
+From: xitami-dev@lists.xitami.org (Keresztfalvi Laszlo)
+Date: Mon, 14 Oct 2002 11:32:28 +0200
+Subject: [Xitami-Dev] SFL thread-safety and Java SMT
+In-Reply-To: <3DA9B5AE.28454.2F6A0DFD@localhost>; from ph@imatix.com on Sun, Oct 13, 2002 at 06:04:30PM +0200
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <200210130852.01716.bpaddock@csonline.net> <3DA9B5AE.28454.2F6A0DFD@localhost>
+Message-ID: <20021014113228.E26744@jupiter.s>
+
+On Sun, Oct 13, 2002 at 06:04:30PM +0200, Pieter Hintjens wrote:
+> The SFL functions did not work very well in previous releases.  We've
+> improved them considerably, but they remain single-threaded and thus not
+> ideal for volume use.
+
+Hello,
+
+Is there any effort to make SFL thread safe? 
+
+Maybe, I'll do it sometime if no one else :) because I just love SMT but it
+cannot use the power of multi-processors which is the default way to
+increase server capacity (eg. web or other service-like). And, as one of my
+pal says, it "linearizes" the program which means it serves the requests in
+order of arrival but with threads requests would see an "equally
+distributed" ;) response delay instead of that related to actual queue
+position... OR, you (the programmer) must unroll every for() into 
+event_send(myself)..
+
+Enough comments :) Actually, I pick up with QpThread C++ lib portable to win
+and unix. It has safe queue support inside. So, I play with the thougths to
+build an SMT like AGENT set primarily with net and timer support but all
+thread being a real thread or can be a real thread, using safe queues. Oh
+yeah, I know it is lots of work.. but sometimes it may pay.. :)
+
+
+Further back, I made a Java SMT but without standard agents (I was no more
+time). Somebody interested? It works with Java 1.2 or 1.3.0 as far as I
+remember. I may provide it "as is" to anybody but it may require some review
+before "official" use (actually I have no time to do this).
+
+Regards,
+Laszlo
+
+
+
+
+
+From xitami-dev@lists.xitami.org  Mon Oct 14 11:01:59 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Mon, 14 Oct 2002 06:01:59 -0400
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <3DAAA62B.22263.33157528@localhost>
+References: <3DA9B5AE.28454.2F6A0DFD@localhost> <3DAAA62B.22263.33157528@localhost>
+Message-ID: <200210140601.59479.bpaddock@csonline.net>
+
+> Gurudoc does not have a glossary function but it turns simple text
+> into different formats under control of cusomisable style templates,
+> which is what we needed.  Our goal is to use this for all our
+> documentation web sites.
+
+The goal of the glossary is to contain all of the inter-page links and 
+external URL's.  It works like a table of macros that get expanded.
+
+For a real example I have two different servers that use different styles of 
+page counters, but other wise the page is the same.
+
+So at the end of the single content page these macros get expanded by looking 
+up in the glossary file what needs to happen:
+
+<%COUNTER_TEXT%>
+
+<%COUNTER_URL%>
+
+Maybe there is some similar concept in what you have under a different name.
+
+The build process controls which glossary gets used.
+
+Same concept applies to internal URL's, same page content may appear in a 
+different place on a different server.  So when you go to move a page you 
+only change the glossary.  You don't have to go mucking through all of the 
+content files to make sure you didn't miss one when you moved it.
+
+
+
+From xitami-dev@lists.xitami.org  Mon Oct 14 11:13:08 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Mon, 14 Oct 2002 06:13:08 -0400
+Subject: [Xitami-Dev] SFL thread-safety and Java SMT
+In-Reply-To: <20021014113228.E26744@jupiter.s>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <3DA9B5AE.28454.2F6A0DFD@localhost> <20021014113228.E26744@jupiter.s>
+Message-ID: <200210140613.08942.bpaddock@csonline.net>
+
+> Maybe, I'll do it sometime if no one else :) because I just love SMT but it
+> cannot use the power of multi-processors which is the default way to
+> increase server capacity (eg. web or other service-like).
+
+One way to do multi-server load balancing is at the DNS level.
+Take a look at the links here: http://www.djbdns.org/
+
+Not as much fun as your own SMT code... :-)
+
+
+
+From xitami-dev@lists.xitami.org  Mon Oct 14 11:19:17 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Mon, 14 Oct 2002 06:19:17 -0400
+Subject: [Xitami-Dev] How to build a spam filter?
+In-Reply-To: <3DAA71D6.4AA344FD@ob-wan.com>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <200210131248.58479.bpaddock@csonline.net> <3DAA71D6.4AA344FD@ob-wan.com>
+Message-ID: <200210140619.17073.bpaddock@csonline.net>
+
+> I like the Organisation line in your emails, "Mostly via piles". That's
+> what you get for sitting in front of a computer too long, I guess.
+
+That came from seeing some one else's that said "Organization: Mediocre at 
+best".
+
+Actually I keep things very well organized in the filing cabinets.  With 
+AT&T's DjVu technology I've been getting more of it scanned for faster look 
+up.
+
+If any one here does lots of rendering of page scans you need DjVu.
+
+http://www.djvuzone.org/
+
+> (still reading after all these years)
+
+I'm still writting.  Time to retire?
+
+-- 
+      http://www.unusualresearch.com/ http://www.bpaddock.com/
+
+
+From xitami-dev@lists.xitami.org  Tue Oct 15 11:34:48 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Tue, 15 Oct 2002 12:34:48 +0200
+Subject: [Xitami-Dev] SFL thread-safety and Java SMT
+In-Reply-To: <20021014113228.E26744@jupiter.s>
+References: <3DA9B5AE.28454.2F6A0DFD@localhost>; from ph@imatix.com on Sun, Oct 13, 2002 at 06:04:30PM +0200
+Message-ID: <3DAC0B68.11835.3888EC59@localhost>
+
+Keresztfalvi Laszlo <kereszt@iname.com> wrote:
+
+> Is there any effort to make SFL thread safe? 
+
+We started on this.  This is a list of the SFL modules that have been 
+made thread-safe:
+
+sflcons
+sflconv
+sflcvbs
+sflcvsb
+sflcvsd
+sflcvts
+sfldate
+sflenv 
+sflexdr
+sflhttp
+sfllang
+sfllbuf
+sfllist
+sflmail
+sflmath
+sflmem 
+sflsyst
+
+> Maybe, I'll do it sometime if no one else :) because I just love SMT
+> but it cannot use the power of multi-processors which is the default
+> way to increase server capacity (eg. web or other service-like). And,
+> as one of my pal says, it "linearizes" the program which means it
+> serves the requests in order of arrival but with threads requests
+> would see an "equally distributed" ;) response delay instead of that
+> related to actual queue position... OR, you (the programmer) must
+> unroll every for() into event_send(myself)..
+
+As soon as you use multiple processes, you can benefit from multiple 
+processors and less FIFO behaviour.  This is the idea behind WTP, the 
+web transaction protocol included in Studio (now part of Xitami).  
+We've never found the FIFO behaviour of SMT to be problematic since 
+heavy work (in our business, anyhow) inevitably consists of database 
+access, and this inevitably requires external processes managed by 
+something like WTP.
+
+> Further back, I made a Java SMT but without standard agents (I was no
+> more time). Somebody interested? It works with Java 1.2 or 1.3.0 as
+> far as I remember. I may provide it "as is" to anybody but it may
+> require some review before "official" use (actually I have no time to
+> do this).
+
+What did you have in mind when you made this?  We built SMT mainly to 
+allow us to develop fast servers, and C was the obvious choice for 
+this.  But sometimes I regret not having used C++, since it would 
+have allowed us to make the SMT abstraction much cleaner.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Tue Oct 15 12:22:08 2002
+From: xitami-dev@lists.xitami.org (Keresztfalvi Laszlo)
+Date: Tue, 15 Oct 2002 13:22:08 +0200
+Subject: [Xitami-Dev] SFL thread-safety and Java SMT
+In-Reply-To: <3DAC0B68.11835.3888EC59@localhost>; from ph@imatix.com on Tue, Oct 15, 2002 at 12:34:48PM +0200
+References: <3DA9B5AE.28454.2F6A0DFD@localhost>; <20021014113228.E26744@jupiter.s> <3DAC0B68.11835.3888EC59@localhost>
+Message-ID: <20021015132208.H26744@jupiter.s>
+
+On Tue, Oct 15, 2002 at 12:34:48PM +0200, Pieter Hintjens wrote:
+> We started on this.  This is a list of the SFL modules that have been 
+> made thread-safe:
+Good news! I hardly wait for sock :)
+
+> We've never found the FIFO behaviour of SMT to be problematic since 
+> heavy work (in our business, anyhow) inevitably consists of database 
+Sure. I'm a SMT lover and I use it where possible so in my work too.
+Unfortunately ;) my workpals don't want to change their mind and coding
+scheme. Biggest difficulty for them to keep in mind to unroll the long loops
+(I understand that this is uncomfortable) and to establish inter-process
+data exchange to execute a simple sql query while it is really simple in eg.
+Windows C++. This is mostly the problem. OTOH, inter-process communication
+in a server means more fd (in case of a portable solution) for the entry
+process. LB dns could be a solution but then it is not enough to buy procs
+but at least net cards and IP addresses too. Never mind, just thoughts.
+
+> What did you have in mind when you made this?  We built SMT mainly to 
+Nothing special ;) It was a try at the company to build multi platform
+solutions in Java on Call Center or CRM fields with some inspiration from
+another Java based solution. Then, I mentioned this SMT strategy. That's
+all. We are now on M$ with C++ because of the small-medium target sector and
+promotion opportunities...
+ 
+> this.  But sometimes I regret not having used C++, since it would 
+> have allowed us to make the SMT abstraction much cleaner.
+.. And yes, I made this part of the development on C++ class and native win
+thread base with Libero code generation. Because of the above reasons, no
+SFL and SMT used. This is actually a framework and others code applications
+with further tools for web forms and DB handling.
+
+I would be very happy to tell more about this framework and improvments but
+you know.. it's not only my business.. :(
+
+Regards,
+Laszlo
+
+PS: I believe this FSM approach must become an industry standard to develop
+trustable, stable software. Object oriented solutions are good in design but
+lock and race conditions can mess them up. However, FSM is still a kind of
+object but always know where it is and what should come next. /Me/ ;)
+
+ 
+
+From xitami-dev@lists.xitami.org  Wed Oct 16 11:16:37 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Wed, 16 Oct 2002 12:16:37 +0200
+Subject: [Xitami-Dev] SFL thread-safety and Java SMT
+In-Reply-To: <20021015132208.H26744@jupiter.s>
+References: <3DAC0B68.11835.3888EC59@localhost>; from ph@imatix.com on Tue, Oct 15, 2002 at 12:34:48PM +0200
+Message-ID: <3DAD58A5.30557.3D9EA0DC@localhost>
+
+Keresztfalvi Laszlo <kereszt@iname.com> wrote:
+
+> I believe this FSM approach must become an industry standard to
+> develop trustable, stable software...
+
+Me and my colleagues have been using Libero and similar tools for 
+about 15 years and two big themes emerge:
+
+1. Software built around human-readable FSMs is always significantly 
+easier to maintain, modify, and understand than either OO or 
+procedural code, written by the same people.  This is because FSMs 
+are excellent at abstracting and eliminating complexity from a design.
+
+2. Most people *hate* learning the methodology.  This is because 
+people often hate making the effort of abstracting and eliminating 
+complexity.  :)
+
+So, I believe that the approach will remain in a niche for the last 
+reason.  But we're very happy with SMT - it forms the basis for much 
+of the custom work we do for customers.  And so, we will continue to 
+develop and support it.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Mon Oct 21 19:51:03 2002
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Mon, 21 Oct 2002 11:51:03 -0700 (PDT)
+Subject: [Xitami-Dev] Re: SFL thread-safety and Java SMT
+In-Reply-To: <200210171002.g9HA2gVN012395@sxpublic.nxrda.imatix.net>
+Message-ID: <20021021185103.63472.qmail@web13407.mail.yahoo.com>
+
+> Keresztfalvi Laszlo <kereszt@iname.com> wrote:
+> 
+> > I believe this FSM approach must become an
+> industry standard to
+> > develop trustable, stable software...
+> 
+> Me and my colleagues have been using Libero and
+> similar tools for 
+> about 15 years and two big themes emerge:
+> 
+> 1. Software built around human-readable FSMs is
+> always significantly 
+> easier to maintain, modify, and understand than
+> either OO or 
+> procedural code, written by the same people.  This
+> is because FSMs 
+> are excellent at abstracting and eliminating
+> complexity from a design.
+> 
+> 2. Most people *hate* learning the methodology. 
+> This is because 
+> people often hate making the effort of abstracting
+> and eliminating 
+> complexity.  :)
+> 
+
+Hi All
+
+I am reading a book called Design Patterns in
+Communications Software. And guess what they say about
+developing real time , ultra reliable, communications
+software.
+
+1) Do not use processes
+2) Run to completion 
+3) Fresh work before stale (LIFO) [ I am sure that can
+be easily done in SMT]
+
+I have not read the whole book but I am sure that I
+will discover more Patterns that are already used in
+SMT.
+
+What I think is needed for SMT to become popular is a
+good book. I have read Jim Coplien's book on Advanced
+C++, where I knew that what he was saying made sense
+but it was really difficult to use. Then came the
+Design Patterns book by GoF, and things were much
+clearer and finally understood the concepts that Mr.
+Coplien was trying to express. Similarly what SMT
+needs is a good book with simple examples at the start
+and finally ending in Basic Introduction to Xitami
+where it all ties together. Chapters on adapting SMT
+to Windows Messaging Model with sample code and Simple
+Database access through SMT is a must.
+
+Easy to use Object Oriented Interface would be great.
+[ I am sure that if Pieter would guide us in
+converting the SMT code into C++ iteratively, we would
+all volunteer for the effort]
+
+Just my opinion
+
+Shivakumar Gopalakrishnan
+
+
+From xitami-dev@lists.xitami.org  Thu Oct 24 09:15:31 2002
+From: xitami-dev@lists.xitami.org (Henric Westegren)
+Date: Thu, 24 Oct 2002 10:15:31 +0200
+Subject: [Xitami-Dev] Release notes concerning version 24d10 Pro
+Message-ID: <007f01c27b35$85da13e0$ef2e0cc1@ad.bossmedia.se>
+
+Hi,
+
+I´m looking for 24d10 Pro release notes which upgrad files:
+
+xiprocpl.cpl
+xiprogui.exe
+xiprosrv.exe
+
+\Westa
+
+

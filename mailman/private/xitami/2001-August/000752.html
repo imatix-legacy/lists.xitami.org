@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Not seeing FORM POST fields
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000751.html">
+   <LINK REL="Next"  HREF="000754.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Not seeing FORM POST fields
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Not seeing FORM POST fields">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 18 Aug 2001 16:48:26 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000751.html">[Xitami] Not seeing FORM POST fields
+</A></li>
+        <LI> Next message: <A HREF="000754.html">Re[2]: [Xitami] Not seeing FORM POST fields
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#752">[ date ]</a>
+              <a href="thread.html#752">[ thread ]</a>
+              <a href="subject.html#752">[ subject ]</a>
+              <a href="author.html#752">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 07:17 AM 8/19/01 +1000, Neville Franks writeth:
+&gt;<i>I've installed Xitami and PHP4 on a Windows 2000 box and everything is
+</I>&gt;<i>working fine except I can't see an FORM POST fields in the PHP script.
+</I>&gt;<i>ie. When Submit is pressed the field values are all empty when the PHP
+</I>&gt;<i>script processes it.
+</I>
+I never liked this about PHP (or at least I could never figure it out), but
+the HTTP_POST_VARS hash is a bit strange.  Basically, your variables are
+converted from the hash into normal variables:
+
+phpinfo() shows something like this -
+HTTP_POST_VARS[&quot;MyVariable&quot;] = MyValue
+MyVariable = MyValue
+
+Referencing it like this doesn't work as expected:
+if ($HTTP_POST_VARS[&quot;MyVariable&quot;] == &quot;MyValue&quot;)
+{
+}
+
+However, referencing it like this does:
+if ($MyVariable == &quot;MyValue&quot;)
+{
+}
+
+&gt;<i>I've searched the archives and have seen a few other people mention
+</I>&gt;<i>this problem but haven't seen any solutions posted. I've waisted best
+</I>&gt;<i>part of a day on this and it is driving me nuts. Xitami looks good,
+</I>&gt;<i>but if I can't get this resolved quickly I guess I'll move to Apache.
+</I>
+Apache is horribly unstable under Windows with PHP (especially with
+mod-ssl).  I wasted an entire week re-building that piece of junk from
+scratch using every option possible (I personally would write my own web
+server if I had a choice between that and Apache - it's a good thing Xitami
+exists).  Just thought you would like a heads-up.
+
+&gt;<i>On another note why haven't the Archived Mailing lists been updated
+</I>&gt;<i>for many months?
+</I>
+Check the headers of this post for links to the new archives.
+
+Hope this helps!
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000751.html">[Xitami] Not seeing FORM POST fields
+</A></li>
+	<LI> Next message: <A HREF="000754.html">Re[2]: [Xitami] Not seeing FORM POST fields
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#752">[ date ]</a>
+              <a href="thread.html#752">[ thread ]</a>
+              <a href="subject.html#752">[ subject ]</a>
+              <a href="author.html#752">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

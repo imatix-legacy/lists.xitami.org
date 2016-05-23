@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Console.log msgs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000725.html">
+   <LINK REL="Next"  HREF="000729.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Console.log msgs
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Console.log msgs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 16 Aug 2001 17:56:21 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000725.html">[Xitami] Console.log msgs
+</A></li>
+        <LI> Next message: <A HREF="000729.html">[Xitami] Console.log msgs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#726">[ date ]</a>
+              <a href="thread.html#726">[ thread ]</a>
+              <a href="subject.html#726">[ subject ]</a>
+              <a href="author.html#726">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> who 192.168.0.2 is. ... That is an internal LAN address of the machine
+</I>that xitami is running on.
+
+Duh! That's right, that range is often used for internal private IP
+numbers, normally won't pass through routers, and certainly won't pass
+from USC to you (unless you are on the USC campus). So the apparent
+connection to USC is bogus. (I wonder how much excess load their DNS
+server gets for overlapping a private range.)
+
+Is it likely that your machine 192.168.0.2 accessed your Xitami server?
+If so, and if RDNS has gotten enabled, all is OK. The bogus attempt to
+ask USC for DNS look-up on your private-range IP number is awkward, but
+I'm sure they are used to it. (Maybe that's why &quot;packet size error&quot;:
+maybe when their machine sees a bogus private-IP look-up, they drop the
+connection ASAP.) You could run your own inside DNS server that handled
+inside queries in the 192.168.0.XXX range and passed others to an
+outside DNS server, but that's a lot of work just to avoid entries in
+the console log. 
+
+&gt;<i> Does this mean they are looking me up?  
+</I>
+No, that would be logged in your DNS server's logs. And it sounds like
+you don't run your own DNS.
+
+Anyway, since it is appearing in Xitami's console, it means Xitami is
+looking-up 192.168.0.2. Which probably means you have RDNS enabled. 
+
+If you basically don't want RDNS (you normally don't): In the web-admin
+screen, Logging, just above &quot;Debug reverse DNS queries&quot;,  look at
+&quot;Translate IP addresses?&quot;. You probably want this NOT checked. Below
+that, &quot;DNS servers - primary[secondary]:&quot; you probably do NOT want this
+to be a real DNS server (the default 127.0.0.1 is bogus and should foil 
+all RDNS). 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000725.html">[Xitami] Console.log msgs
+</A></li>
+	<LI> Next message: <A HREF="000729.html">[Xitami] Console.log msgs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#726">[ date ]</a>
+              <a href="thread.html#726">[ thread ]</a>
+              <a href="subject.html#726">[ subject ]</a>
+              <a href="author.html#726">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Denial of Service Attacks?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002980.html">
+   <LINK REL="Next"  HREF="002983.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Denial of Service Attacks?
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Denial of Service Attacks?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 17 Apr 2002 13:20:48 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002980.html">[Xitami] Denial of Service Attacks?
+</A></li>
+        <LI> Next message: <A HREF="002983.html">[Xitami] Changing web page filesize limit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2989">[ date ]</a>
+              <a href="thread.html#2989">[ thread ]</a>
+              <a href="subject.html#2989">[ subject ]</a>
+              <a href="author.html#2989">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The most sophisticated type of attack is a Smurf DoS.  To Smurf is to change
+the source IP address of every out going packet and then hit someones server
+with hundreds or thousands of packets per second.    When someone is
+Smurfing you, its nearly impossible to track them down because every packet
+has a false source address, and each false address is different from the
+previous one.  The most common form of a Smurf DoS is a &quot;Syn&quot; attack.
+
+A &quot;syn&quot; is a tcp packet one computer sends to another to initiate a
+communication of some sort, the recipient computer gets the &quot;syn&quot;, checks
+the source address of that syn and then responds with an &quot;ack&quot; (ack =
+acknowledgement), completing the handshake and then both computers start
+talking and listening to each other.  However, years ago, most computers
+only had a buffer to handle up to, maybe, 200 &quot;syn&quot;s per second.  So,
+hackers would Smurf hundreds of &quot;syn&quot;s to a server.  The server would get so
+busy handling false &quot;syn&quot;s that it would never really have enough time to
+handle real requests - thus, effectively shutting down the server or more
+importantly, it gets denied the ability to communicate its services.
+
+In recent years, patches and software developers increased the buffer size
+that handled the syns into the thousands, and then they started creating
+individual buffers for specific sockets on servers.  Typical services that
+always needed to be running were ports: 23, 25, 69, 80, 110 (probably a few
+others) - those ports received their own buffers that could handle thousands
+per second while all other ports shared the one main buffer.
+
+And to be honest, I don't know what has been done over the last year or two
+to combat SYN attacks.  I do know though, years ago, the Principal Engineer
+for MCI wrote a program that used the OSPF Spanning tree algorithm to
+back-track smurf attacks.  But it only worked on an ATM backbone because ATM
+has the ability, at Layer 2, to check sourcing of incoming packets via PVCs.
+The program would start at the Victims router and then login into every
+router that connected directly to that one router.  The program would find
+the next router traffic was coming through, then login to that router and
+perform the same process until eventually, the program reached the source
+router.  The source router could be a edge router talking to another
+backbone (like Sprint, UUNET, BBN Planet, ANS, etc) or the source router
+could be a router that connected to a smaller downstream Tier 2 provider
+(regional ISPs) OR the router could be a directly connected customer.  The
+only power MCI had was over its directly connected customers and then they
+would shut down that customers link until that customer found who the
+internal user was that was responsible for the attack.
+
+Anyway, as you read in earlier responses to this thread, there are all new
+kinds of DoS attacks these days.  The key to avoid being attacked is: don't
+piss anyone off, don't be a mega company with mega dollars, never claim your
+site is hack-proof free, don't try to impress the world, don't release
+shitty software - oh yeah, and don't have any computers on the internet.
+
+-R
+
+----- Original Message -----
+From: &quot;AOK Lansing&quot; &lt;<A HREF="mailto:aoklans@tir.com">aoklans@tir.com</A>&gt;
+To: &quot;Xitami Web Server&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, April 16, 2002 6:23 AM
+Subject: [Xitami] Denial of Service Attacks?
+
+
+&gt;<i> Please excuse my ignorance. Can someone please explain exactly what a
+</I>Denial
+&gt;<i> of Service attack is and how I can determine if someone has is trying to
+</I>&gt;<i> send one to my Xitami server?
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i> Bob Hiller
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002980.html">[Xitami] Denial of Service Attacks?
+</A></li>
+	<LI> Next message: <A HREF="002983.html">[Xitami] Changing web page filesize limit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2989">[ date ]</a>
+              <a href="thread.html#2989">[ thread ]</a>
+              <a href="subject.html#2989">[ subject ]</a>
+              <a href="author.html#2989">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Fwd: minty Xitami]
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000925.html">
+   <LINK REL="Next"  HREF="000928.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Fwd: minty Xitami]
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Fwd: minty Xitami]">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 19 Sep 2001 03:23:55 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000925.html">[Xitami] &quot;GET /scripts/.......
+</A></li>
+        <LI> Next message: <A HREF="000928.html">[Xitami] Redirecting a web site
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#927">[ date ]</a>
+              <a href="thread.html#927">[ thread ]</a>
+              <a href="subject.html#927">[ subject ]</a>
+              <a href="author.html#927">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This message din't appear on the list so I'm resending
+
+-------- Original Message --------
+Subject: minty Xitami
+Date: Mon, 17 Sep 2001 09:21:25 +0200
+From: Francis Turner &lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+To: Xitami list &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+
+All,
+
+A while back I raised a bug (Ewen I hope you've noted it) that Xitami's
+WBA admin section doesn't work with Netscape6.x / Mozilla browsers. This
+is a trivial thing to fix and I have been running a patched .exe with
+the the fix for a while to verify that my change doesn't break anything
+critical...
+
+Details of the bug (to remind)
+It seems that the word &quot;arguments&quot; is now a reserved word and not
+available as a variable name anymore. Unfortunately the WBA pages all
+use arguments as a variable name passing information to the hidden
+fields in the form (functions submit and subconf). Changing the variable
+name in both functions to anything other that &quot;arguments&quot; means the
+pages now work correctly.
+
+The fix therefore was to change all occurences of the word in Javascript
+to something else - I did a one letter change of the relevant occurences
+of &quot;aguments&quot; to &quot;argumints&quot; (hence the subject line) using perl.
+
+The following lines get changed (note they appear in every web page -
+and ...value = arguments; one appears twice / page)
+function submit(arguments) {
+function subconf(arguments,message) {
+        document.forms[0].jsaction.value = arguments;
+to
+function submit(argumints) {
+function subconf(argumints,message) {
+        document.forms[0].jsaction.value = argumints;
+respectively.
+
+I could probably modify the source but I don't have a compiler handy to
+verify that the mod works and I don't know how to submit changes back
+(send to Ewen?), though I have no doubt that a similar change to  but I
+can tell anyone else who cares what to do to patch the .exe using some
+pretty trivial perl
+
+Francis
+
+PS I did 2 runs one for s/\(arguments/\(argumints/ and one for
+s/arguments;/argumints;/ as it seemed easier than figuringout the magic
+RE that would do both at once.
+PSS If you want to modify the source the files to change are the
+xiadm*.h files which define the webpages as arrays called of
+xiadm*_blocks. You will need to change the lines below - again I'd
+suggest keeping the variable name the same length to avoid confusion and
+unfortunately &quot;arguments&quot; runs over 2 lines in some places so clever
+perl options will be needed to do autoreplaces...
+
+    'o', 'n', 32, 's', 'u', 'b', 'm', 'i', 't', '(', 'a', 'r', 'g', 'u',
+    'm', 'e', 'n', 't', 's', ')', 32, '{', 10, 10, 32, 32, 32, 32, 'd',
+
+    'v', 'a', 'l', 'u', 'e', 32, '=', 32, 'a', 'r', 'g', 'u', 'm', 'e',
+    'n', 't', 's', ';', 10, 10, 32, 32, 32, 32, 'd', 'o', 'c', 'u', 'm',
+
+    'n', 'f', '(', 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', 's', ',',
+
+    'e', 32, '=', 32, 'a', 'r', 'g', 'u', 'm', 'e', 'n', 't', 's', ';',
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000925.html">[Xitami] &quot;GET /scripts/.......
+</A></li>
+	<LI> Next message: <A HREF="000928.html">[Xitami] Redirecting a web site
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#927">[ date ]</a>
+              <a href="thread.html#927">[ thread ]</a>
+              <a href="subject.html#927">[ subject ]</a>
+              <a href="author.html#927">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

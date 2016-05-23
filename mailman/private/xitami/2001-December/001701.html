@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] gslgen &amp; xitami &amp; errors
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001700.html">
+   <LINK REL="Next"  HREF="001702.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] gslgen &amp; xitami &amp; errors
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] gslgen &amp; xitami &amp; errors">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Dec 2001 21:14:46 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001700.html">[Xitami] simple cgi question
+</A></li>
+        <LI> Next message: <A HREF="001702.html">[Xitami] [Security]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1701">[ date ]</a>
+              <a href="thread.html#1701">[ thread ]</a>
+              <a href="subject.html#1701">[ subject ]</a>
+              <a href="author.html#1701">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3BD82542.2090505@freesbee.fr">3BD82542.2090505@freesbee.fr</A>&gt;, Francis Turner writes:
+&gt;<i>But there are times when I'd like to abort the file and return an error. 
+</I>&gt;<i>Is it possible to return HTTP error codes? And if so is it also possible 
+</I>&gt;<i>to redirect people using a 302 return?
+</I>
+In theory this should work, _providing_ the HTTP headers come at the
+very beginning.  The output of GSL is handled basically the same way as
+a CGI's output in Xitami, and that means that some reparsing of headers
+is done, so you should be able to output them _at_the_beginning_ and
+have it work. 
+
+Of course this means that you've got to figure out early on in your GSL
+script (before outputting anything) if you want to give up and return an
+error/redirect.
+
+The solution you found (of using a meta-refresh) will work, but it's not
+quite as tidy as a proper redirect for some things.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001700.html">[Xitami] simple cgi question
+</A></li>
+	<LI> Next message: <A HREF="001702.html">[Xitami] [Security]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1701">[ date ]</a>
+              <a href="thread.html#1701">[ thread ]</a>
+              <a href="subject.html#1701">[ subject ]</a>
+              <a href="author.html#1701">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

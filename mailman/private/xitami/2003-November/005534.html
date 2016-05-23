@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: HTTP_REFERER
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005536.html">
+   <LINK REL="Next"  HREF="005537.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: HTTP_REFERER
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: HTTP_REFERER">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 18 Nov 2003 08:01:57 +0000 (GMT)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005536.html">[Xitami] Re: HTTP_REFERER
+</A></li>
+        <LI> Next message: <A HREF="005537.html">[Xitami] FW: [SA10275] Xitami POST Request Infinite Loop Denial of Service Vulnerability
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5534">[ date ]</a>
+              <a href="thread.html#5534">[ thread ]</a>
+              <a href="subject.html#5534">[ subject ]</a>
+              <a href="author.html#5534">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;002001c3ad95$d9e98cc0$<A HREF="mailto:6ba43b44@sthlke01.fl.comcast.net">6ba43b44@sthlke01.fl.comcast.net</A>&gt;
+   &quot;samnbotskull&quot; writes:
+&gt;<i> Thanks Marc, I got as far in my testing but it still isn't a perfect
+</I>&gt;<i> solution.
+</I>&gt;<i> 
+</I>&gt;<i> I have a page <A HREF="http://localhost/index.cgi?page=map">http://localhost/index.cgi?page=map</A>
+</I>
+No you don't; the &quot;page&quot; is immutable: it is the document whose URI is
+&lt;<A HREF="http://localhost/index.cgi">http://localhost/index.cgi</A>&gt;.  That is, and must, remain as the only
+correct content for HTTP_REFERER.
+
+&gt;<i> From that page, I click
+</I>&gt;<i> <A HREF="http://localhost/index.cgi?page=map&action=travel&map=1&cor=1,4">http://localhost/index.cgi?page=map&amp;action=travel&amp;map=1&amp;cor=1,4</A>
+</I>&gt;<i> 
+</I>&gt;<i> My resulting $ENV hash produces
+</I>&gt;<i> 
+</I>&gt;<i> QUERY_STRING =&gt; page=map&amp;action=travel&amp;map=1&amp;cor=?286,265
+</I>&gt;<i> HTTP_REFERER =&gt; <A HREF="http://localhost/index.cgi">http://localhost/index.cgi</A>
+</I>
+Which is what I would expect.
+
+&gt;<i> When what I really want is <A HREF="http://localhost/index.cgi?page=map">http://localhost/index.cgi?page=map</A>
+</I>&gt;<i> 
+</I>&gt;<i> Now I can easily parse the string in Perl, but that's not the issue.
+</I>&gt;<i> Eventually I want to run these scripts on a non-Xitami server and I want to
+</I>&gt;<i> do it &quot;the right way&quot;. I've used Apache in the past and HTTP_REFERER would
+</I>&gt;<i> give me what I am here looking for. 
+</I>
+It did?  I'm surprised; I cannot find any examples in any RFCs that
+include anything after the path part of the URI.
+
+Sorry I can't help you towards your goal; merely pointing out that your
+goal might well not be attainable.
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them&quot;.
+                                              George Macaulay Trevelyan, 1919
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005536.html">[Xitami] Re: HTTP_REFERER
+</A></li>
+	<LI> Next message: <A HREF="005537.html">[Xitami] FW: [SA10275] Xitami POST Request Infinite Loop Denial of Service Vulnerability
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5534">[ date ]</a>
+              <a href="thread.html#5534">[ thread ]</a>
+              <a href="subject.html#5534">[ subject ]</a>
+              <a href="author.html#5534">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

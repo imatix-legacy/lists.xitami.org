@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP-passive mode
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001091.html">
+   <LINK REL="Next"  HREF="001096.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP-passive mode
+   </H1>
+    <B>Andreas Zieritz
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP-passive mode">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 04 Oct 2001 08:23:11 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001091.html">[Xitami] FTP-passive mode
+</A></li>
+        <LI> Next message: <A HREF="001096.html">[Xitami] Schemas?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1094">[ date ]</a>
+              <a href="thread.html#1094">[ thread ]</a>
+              <a href="subject.html#1094">[ subject ]</a>
+              <a href="author.html#1094">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ewen McNeill wrote:
+
+&gt;<i> In message &lt;<A HREF="mailto:3BBB0C12.FC98DF56@sovik.no">3BBB0C12.FC98DF56@sovik.no</A>&gt;, Andreas Zieritz writes:
+</I>&gt;<i> &gt;We have moved our Xitami Webserver behind a firewall (see
+</I>&gt;<i> &gt;www.smoothwall.org) and we do have some troubles with the FTP part. What
+</I>&gt;<i> &gt;we have found out is that some FTP clients do have a problem in
+</I>&gt;<i> &gt;establishing a communication with the Xitami server. FTP-clients
+</I>&gt;<i> &gt;operating in passive mode are not experiencing these problems.
+</I>&gt;<i> &gt;We have opened ports 20 and 21 on the firewall. Are there any other
+</I>&gt;<i> &gt;ports that should be open?  Any hints concerning passive mode?
+</I>&gt;<i>
+</I>&gt;<i> I'm a little puzzled as to what your problem is; you say &quot;FTP-clients
+</I>&gt;<i> operating in pasive mode are not experiencing these problems&quot;, but also
+</I>&gt;<i> say &quot;Any hints concerning passive mode?&quot;.
+</I>&gt;<i>
+</I>&gt;<i> The FTP protocol is _really_ not designed to go through firewalls (it
+</I>&gt;<i> was designed well before anyone had even thought of the need for
+</I>&gt;<i> firewalls, let alone actually designed a firewall).  You should probably
+</I>&gt;<i> seriously consider whether you can do what you want with HTTP instead of
+</I>&gt;<i> FTP.
+</I>&gt;<i>
+</I>&gt;<i> If you still want to use FTP you need to remember that there are two
+</I>&gt;<i> modes of FTP:
+</I>&gt;<i> 1. Active FTP:  control connection open from client-&gt;server; if the client
+</I>&gt;<i>    wants to download something, the client picks a port number at its,
+</I>&gt;<i>    end and the server connects to that port, and sends the file.  If the
+</I>&gt;<i>    client wants to upload something the server picks a port number at
+</I>&gt;<i>    its end, and the client connects to that.  (Ie, the connection for
+</I>&gt;<i>    transfering the data always opens in the connection the data is being
+</I>&gt;<i>    sent.)
+</I>&gt;<i>
+</I>&gt;<i> 2. Passive FTP: control connection open from client-&gt;server; if the
+</I>&gt;<i>    client wants to download something the server picks a port number at
+</I>&gt;<i>    its end, and tells the client to connect there to &quot;pull&quot; the file
+</I>&gt;<i>    back.  If the client wants to upload something the server picks a
+</I>&gt;<i>    port number at its end, and the client connects to that.  (Ie, the
+</I>&gt;<i>    connection for transfering data is always opened from the client to
+</I>&gt;<i>    the server.)
+</I>&gt;<i>
+</I>&gt;<i> Using passive mode usually gets around most problems with firewalls at
+</I>&gt;<i> the _client_ end.  But it causes complications if there is also a
+</I>&gt;<i> firewall at the _server_ end.
+</I>&gt;<i>
+</I>&gt;<i> There are two basic complications caused by passive FTP when the server
+</I>&gt;<i> is behind a firewall:
+</I>&gt;<i> 1. The port that is picked by the FTP server may not be allowed through
+</I>&gt;<i>    the firewall.  Since the FTP server needs to allow more than one
+</I>&gt;<i>    connection at a time, this may mean multiple ports need to be allowed
+</I>&gt;<i>    through the firewall.
+</I>&gt;<i>
+</I>&gt;<i> 2. If the firewall is doing NAT, the address given out to connect to by
+</I>&gt;<i>    the FTP server will probaly be an internal address, not an external
+</I>&gt;<i>    one, and thus not usable.
+</I>&gt;<i>
+</I>&gt;<i> The main complication caused by active FTP is at the client end, where
+</I>&gt;<i> their firewall may not allow an incoming connection to whatever port the
+</I>&gt;<i> client picks; but many firewalls can handle this automatically.
+</I>&gt;<i>
+</I>&gt;<i> Debugging this sort of thing generally requires snooping on the TCP/IP
+</I>&gt;<i> traffic at one or both ends, and figuring out what each end is trying to
+</I>&gt;<i> do.
+</I>&gt;<i>
+</I>&gt;<i> Generally it's all too hard; and if you're going to have your server
+</I>&gt;<i> behind a firewall you probably want to avoid using FTP.
+</I>&gt;<i>
+</I>&gt;<i> Ewen
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+Thank you very much for this very useful lesson, Ewen!
+
+--
+Servus,
+ Andreas
+
+------------------------
+Andreas Zieritz
+Siviling. Svein Sovik AS
+Fantoftveien 42
+N-5072 Bergen
+<A HREF="http://www.sovik.no">http://www.sovik.no</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001091.html">[Xitami] FTP-passive mode
+</A></li>
+	<LI> Next message: <A HREF="001096.html">[Xitami] Schemas?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1094">[ date ]</a>
+              <a href="thread.html#1094">[ thread ]</a>
+              <a href="subject.html#1094">[ subject ]</a>
+              <a href="author.html#1094">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

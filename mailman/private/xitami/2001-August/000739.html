@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] localhost problems..
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000730.html">
+   <LINK REL="Next"  HREF="000740.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] localhost problems..
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] localhost problems..">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 18 Aug 2001 10:23:32 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000730.html">[Xitami] Console.log msgs
+</A></li>
+        <LI> Next message: <A HREF="000740.html">[Xitami] localhost problems..
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#739">[ date ]</a>
+              <a href="thread.html#739">[ thread ]</a>
+              <a href="subject.html#739">[ subject ]</a>
+              <a href="author.html#739">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3B7D7372.1062E0D7@esite-me.net">3B7D7372.1062E0D7@esite-me.net</A>&gt;, Dan Fisher writes:
+&gt;<i>So if I try <A HREF="http://localhost/FisherWeb/,">http://localhost/FisherWeb/,</A> it does not like my index.htm file:
+</I>&gt;<i>&lt;HTML&gt;
+</I>&gt;<i>&lt;HEAD&gt;&lt;/HEAD&gt;
+</I>&gt;<i>&lt;BODY BGCOLOR=&quot;#FFFFFF&quot;&gt;
+</I>&gt;<i>&lt;? php header(&quot;Location:
+</I>&gt;<i><A HREF="http://localhost/FisherWeb/menu.php?menu=1&submenu=0"">http://localhost/FisherWeb/menu.php?menu=1&amp;submenu=0&quot;</A>); ?&gt;
+</I>&gt;<i>&lt;/BODY&gt;
+</I>&gt;<i>&lt;/HTML&gt;
+</I>
+I'm not absolutely certain with PHP, but I think that it's getting
+rather late to be thinking about outputting HTTP headers whenyou've
+already output half of the HTML!  (For it to work, PHP would have to
+scan the whole page and process the header directives first, before
+outputting any of the page.)
+
+Try turning on CGI debugging ([CGI] debug=1), and then look at the
+temporary file output by accessing that page via the PHP filter.  Unless
+the Location: line appears at the top of the file (in the headers
+section), it won't work.
+
+&gt;<i>or my index.php file:
+</I>&gt;<i>&lt;?  header(&quot;Location: menu.php?menu=1&amp;submenu=0&quot;); ?&gt;
+</I>&gt;<i>
+</I>&gt;<i>But if I enter <A HREF="http://localhost/FisherWeb/menu.php?menu=1&submenu=0">http://localhost/FisherWeb/menu.php?menu=1&amp;submenu=0</A>
+</I>&gt;<i>directly, it works.
+</I>
+This won't work because you're trying to use a relative URL for your
+Location: header, and Xitami doesn't support that.  You should either
+use a full &quot;<A HREF="http://.../..."">http://.../...&quot;</A> URL for a client side redirect, or a full path
+reference &quot;/FisherWeb/menu.php?....&quot; for a server side redirect.
+
+&gt;<i>Also, I have noticed lately that when I make a change to Xitami,
+</I>&gt;<i>terminate and attempt to restart, it complains that the port is already
+</I>&gt;<i>in use.  I have to reboot the machine to get to work again.
+</I>
+You _probably_ won't have to reboot the machine providing whatever is
+using the port is stopped correctly.  But if you interupt a connection
+which Xitami thinks is open, then you may have to wait for the &quot;closing
+connections&quot; phase before you can restart it.
+
+Try:
+
+netstat -nr
+
+from a command shell, and look to see if there are any lines for port
+80 (http), particularly any that mention being in a CLOSE phase (or even
+&quot;listening&quot;).
+
+Typical timeouts is about 5 minutes or so.  Xitami tries to tell the
+operating system not to wait in this instance, but it may not get it
+right for every operating system.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000730.html">[Xitami] Console.log msgs
+</A></li>
+	<LI> Next message: <A HREF="000740.html">[Xitami] localhost problems..
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#739">[ date ]</a>
+              <a href="thread.html#739">[ thread ]</a>
+              <a href="subject.html#739">[ subject ]</a>
+              <a href="author.html#739">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

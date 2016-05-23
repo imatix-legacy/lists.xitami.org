@@ -1,0 +1,285 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some
+	CGI hints)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Re%3A%20Urgent-%20server%20crashes%20Xitami%202.5c2%20%28and%20some%0A%09CGI%20hints%29&In-Reply-To=007a01c63983%24cd4d6be0%24d50110ac%40test123">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007180.html">
+   <LINK REL="Next"  HREF="007182.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some
+	CGI hints)</H1>
+    <B>MRJ InfoTech Admin</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Re%3A%20Urgent-%20server%20crashes%20Xitami%202.5c2%20%28and%20some%0A%09CGI%20hints%29&In-Reply-To=007a01c63983%24cd4d6be0%24d50110ac%40test123"
+       TITLE="[Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some
+	CGI hints)">admin at mrjdesign.net
+       </A><BR>
+    <I>Sat Feb 25 21:01:57 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007180.html">[Xitami] Re: Urgent- server crashes Xitami 2.5c2
+</A></li>
+        <LI>Next message: <A HREF="007182.html">[Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some	CGI
+	hints)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7181">[ date ]</a>
+              <a href="thread.html#7181">[ thread ]</a>
+              <a href="subject.html#7181">[ subject ]</a>
+              <a href="author.html#7181">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Thank you for explaining the 4 and 5...
+
+I've used Xitami since I first started doing basic HTML code on my 
+own just to have something to test it with,
+instead of the old angelfire web sites as where massively popular back in 1995.
+
+I think I am coming to a couple of conclusions in this Xitami bug 
+issue, and they may be wrong,
+until I get more into the source of the applications themselves, but 
+here goes nothing.
+
+1) The FTP server should clearly not be used.
+     I have tried several other server versions, but what I like with 
+Xitami is the simple and straight
+     forward VHosting setup and that has lead me to keep running it 
+until just a few weeks back.
+
+    In fact I have always truly disliked Apache because of the setup 
+and configuration that is so different than Xitami.
+
+  I have tried RaidenFTP and I really like how stabile it is, how 
+relatively easy it is to set up on a single
+  machine but it's a nightmare trying to write a cgi myself to add or 
+remove users. Xitami is unbeatable on ease of use there.
+Also, there has to be some way they can keep a nag screen in the 
+program without requiring the user who is
+testing it to click on their web site ever 1 - 3 hours to keep the 
+server alive. It's not only ridiculous but plain stupidly annoying so 
+I dumped it.
+
+Now I am testing Platypus FTP server that also support FTPS however 
+it is very sluggish, takes for ever to refresh the remote side window 
+in the client application.
+Doesn't strike me as stabile at all.
+
+So, in regards to Xitami, I disabled the FTP to begin with. This 
+removed approx. 75% of all crashes, and in particular the one popping 
+up showing C++ errors.
+The C++ error leads me to believe there is something in Xitami that 
+was not quite written right for an XP machine. After all, the later 
+editions of XP, including later installs of SP1 versions does have 
+things now included that did not exist back when Xitami's latest 
+version was undergoing the highest attention I bet.
+
+
+2) The CGI environment. Yes, you're absolutely right that it looks 
+like parsing pages through an interpretor takes longer time and puts 
+a certain load on your server.
+
+Even more so if you add PHP that require a special parser and MIME 
+entry to run. PERL is a bit more stabile here, however, I write 
+mostly VB based compiled stuff, and the way I write it, it's intended 
+to run server side and just return a minimal amount of data to the 
+browser where needed.
+
+Since I can't figure out how I first managed to get VBS to run on 
+Xitami, I am stuck relearning a lot of my old JavaScript, and trying 
+to reduce the load on the server, by pushing most of the front end 
+stuff to the client this way. It's actually fairly simple to do, once 
+you get an idea as how it runs behind the scene.
+
+More about this below. but first...
+
+3) The LOG files! Apparently a big culprit in causing errors.
+
+There has to be some majestic buildup of data in this processing 
+because of the following.
+
+A) As soon I reach close to or over 8000 hits in the properties 
+window field Hits: I risk having a crash.
+B) If the sum of all hits add up in the kb transfered field, to over 
+1,000,000, I know it's coming sooner or later.
+C) If you run several VHost sites, I noticed, simply by opening the 
+logs folder, to see that all sites hits are not stored in individual 
+log files as one would assume.
+
+Lets assume I have SiteA.log, SiteB.log, SiteC.log
+
+I set the log files to cycle daily, without regard for any max size 
+of the log files, and instead I end up with log files like this...
+
+SiteA.log + 10 Kb
+SiteB.log = 5,006 Kb
+SiteC.log = 490 kb
+
+
+I know, that this is wrong because SiteA.log should be huge and has 
+25 times more hits than
+SiteC, that currently stands for more than 95% of my mail servers 
+traffic for instance.
+
+In addition, I get Ac20022006log.001, Ac20022006log.002, 
+Ac20022006log.003, Ac20022006log.004
+all containing hits from all of the above.
+
+How can that be &quot;individual logging&quot; for each vhost?  (makes a note 
+to self for this years project with studying Xitami source to stop 
+this concatenation of log files.)
+
+I just completed a minor CGI that will write my own logs instead, 
+saving each site for instance for my main domain as 
+www.mrjdesign.net25022006.log for todays hits.
+If I add another vhost, it will log in it's own domain+date and if 
+the Cycle24hr is true, then it auto generates a new file every 24 
+hours, otherwise every hour.
+
+I turned off, the access log, kept the error log and xitami.log 
+active, and voila, another 80% of all crash prone activities died.
+
+In all honesty, I did turn of powersave, &quot;turn off monitor after&quot;, 
+and the &quot;turn off harddisks after&quot; settings as well.
+Why you might ask, but someone suggested there was a backend issue 
+with them, and perhaps this leads back
+to my original theory above that something in C++ is conflicting with 
+how the powersave is handled.
+
+=== In conclusion
+
+Since I did these changes and tests, I have had ONE server crash, and 
+it was not on the main server but the developer station,
+when I executed a cgi, repeatedly, in fact 1,338 times in the time 
+span of less than 30 seconds.
+
+I doubt in this case it was caused by the CGI, but once again a log 
+file problem.
+The CGI was executed through a javascript that kept calling the page, 
+and it could not find one of the components the page referred to.
+As such the error log kept building up instead, and thats when it crashed.
+
+=== Now for something much more fun I noticed.
+
+If you execute a CGI, try calling it by passing a action tag through 
+JavaScript rather than calling it by other methods.
+Why? you might ask.
+
+It's quite simple, if you look at how the processes are executed.
+
+Xitami is pretty strict on the time-out settings fro cgi's, and in my 
+case I have it at 60 seconds by default.
+Consider the one site I mentioned before, executing a check of 47,000 
+images in a mdb file, towards a
+VB cgi, running on xitami, its is sometimes dead slow when I have 
+many visitors.
+
+On the other hand, I have not yet had a time out error on that CGI, 
+and it controls everything from logging
+hits per thumbnail, hits per thumbnail page, visitors locations, and 
+much more. (including looping and building thumbs pages)
+
+Now, I tried something new, and found to my surprise it actually 
+works pretty good.
+
+(lets hope the mail server doesnt think this is a html include here now)
+
+&lt;script src=&quot;<A HREF="http://yoursite.com/cgi-bin/YourCgi.exe&quot;">http://yoursite.com/cgi-bin/YourCgi.exe&quot;</A>&gt;&lt;/script&gt;
+
+placed anywhere in your html page will execute the cgi as if you had 
+clicked the submit button in a form.
+
+So will the following...
+
+&lt;script src=&quot;<A HREF="http://yoursite.com/cgi-bin/YourController.js&quot;">http://yoursite.com/cgi-bin/YourController.js&quot;</A>&gt;&lt;/script&gt;
+
+containing the script line ...
+
+document.write(&quot;&lt;script 
+src=\&quot;<A HREF="http://yoursite.com/cgi-bin/YourCgi.exe?PARAM1=&quot;+">http://yoursite.com/cgi-bin/YourCgi.exe?PARAM1=&quot;+</A> What 
+YouGotElsewhere +&quot;&amp;PARAM2=&quot;+ SomeOtherDynamicBit +&quot;\&quot;&gt;&lt;/script&gt;&quot;);
+
+
+This means, you can execute a huge collection of data through java 
+script, build a connect string to your cgi and execute the cgi before 
+it does the following...
+
+The cgi in this case cannot push any data back to the calling page 
+directly... so now we include a statement in the cgi saying
+
+(this is VB guys)
+
+'get out of the cgi  bin into the webpages directory of xitami...
+sFILE = App.path &quot;\..\webpages\temp.js&quot;
+FN = FreeFile
+open sFILE for Output As #FN
+Print #FN, &quot;&lt;!-- //&quot;
+Print #FN, &quot;document.write(&quot;&quot;Hello World, here is my temp value &quot; &amp; 
+varDataFromCGI &amp; &quot;&quot;&quot;);&quot;
+Print #FN, &quot;//  --&gt;&quot;
+Close #FN
+
+
+
+Since Xitami, and any decent server, slows down while the CGI is 
+running, this gives you a whole
+60 seconds to run what you are doing, produce this temp file and then 
+return the processing to
+the calling HTML document again.
+
+
+Now, once the document is release... we are back in the body of the 
+HTML page and there you have the following code...
+AFTER the CGI and JS mix...
+
+
+&lt;script src=&quot;<A HREF="http://yoursite.com/tmp.js&quot;">http://yoursite.com/tmp.js&quot;</A>&gt;&lt;/script&gt;
+
+and voila, there is your output, without pushing anything from the 
+CGI to the HTML directly.
+
+And from what I can tell, you can do this over and over and over, 
+like a energizer bunny with a lot less stress on the server itself.
+It's partly because now you pushed some of the details down to the 
+user, and the CGI processing is only holding a thread for
+the server but not communicating back as much as it otherwise would 
+with stdio routines.
+
+Well... I hope this is useful to you all. Otherwise I just spent 30 
+minutes potential sleeping time typing for nothing &gt;.&lt;
+
+- Mike J.
+
+
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007180.html">[Xitami] Re: Urgent- server crashes Xitami 2.5c2
+</A></li>
+	<LI>Next message: <A HREF="007182.html">[Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some	CGI
+	hints)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7181">[ date ]</a>
+              <a href="thread.html#7181">[ thread ]</a>
+              <a href="subject.html#7181">[ subject ]</a>
+              <a href="author.html#7181">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Talking about FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003278.html">
+   <LINK REL="Next"  HREF="003262.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Talking about FTP
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Talking about FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 31 May 2002 13:20:36 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003278.html">[Xitami] Talking about FTP
+</A></li>
+        <LI> Next message: <A HREF="003262.html">[Xitami] forcing authentication for a subtree ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3279">[ date ]</a>
+              <a href="thread.html#3279">[ thread ]</a>
+              <a href="subject.html#3279">[ subject ]</a>
+              <a href="author.html#3279">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Frank Harrell wrote:
+&gt;<i> 
+</I>&gt;<i> I use a Linksys cable router. Would this idea of ftp using various ports
+</I>&gt;<i> (if I read this message correctly) be a likely reason that I can (from
+</I>&gt;<i> the outside) connect to Xitami's ftp (running on an odd port, 384) but
+</I>&gt;<i> when my client requests a &quot;list&quot; I get no response? I do have the port
+</I>&gt;<i> 384 mapped. The system works fine and I get ftp lists when Xitami is
+</I>&gt;<i> running on it's normal ports (80, 21). I have to use an odd port due to
+</I>&gt;<i> cable blocking 80. Currently I am using a free generic ftp server to get
+</I>&gt;<i> around this. I like Xitami's though because it is so easy to setup
+</I>&gt;<i> usernames and passwords.
+</I>
+If you're using port 384, then also open port 383 and use passive
+transfers.  This works with most RFC compliant FTP servers.  The Linksys
+cable/DSL router, while a fine device for home networks, is a poor choice
+for running port-forwarded servers on private IP addresses behind the
+firewall.  The reason is because it's firewalling ruleset is too simple and
+restrictive, and not dynamic enough to provide good security and still be
+able to run a server.  I believe Linksys' solution was to offer limited
+support for DMZ - you should refer to the documentation for your router on
+how to set up the DMZ network, and put any servers on the DMZ, then place
+workstations or other PC's on the firewalled network.
+
+One other thing I don't like about the Linksys router is that whoever wrote
+it's firewall ruleset used alot of DENY rules instead of REJECT, it's
+default is to DENY ICMP packets, and it uses flashram, which is writeable
+and/or configurable for a cracker.  They stand out like a sore thumb on a
+half open syn or stealth portscan, and opening ports to servers behind the
+firewall is basically the same as not running any firewall at all, as a good
+cracker can tunnel a Linksys router in under 15 minutes if there's any ports
+open.
+-- 
+Chris Olson
+System Administrator
+AST Communications     <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+Linux Support          <A HREF="http://linux.astcomm.net">http://linux.astcomm.net</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003278.html">[Xitami] Talking about FTP
+</A></li>
+	<LI> Next message: <A HREF="003262.html">[Xitami] forcing authentication for a subtree ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3279">[ date ]</a>
+              <a href="thread.html#3279">[ thread ]</a>
+              <a href="subject.html#3279">[ subject ]</a>
+              <a href="author.html#3279">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

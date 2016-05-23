@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI Scripting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001276.html">
+   <LINK REL="Next"  HREF="001282.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI Scripting
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI Scripting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 26 Oct 2001 23:24:33 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001276.html">[Xitami] CGI Scripting
+</A></li>
+        <LI> Next message: <A HREF="001282.html">OT: Re: [Xitami] CGI Scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1277">[ date ]</a>
+              <a href="thread.html#1277">[ thread ]</a>
+              <a href="subject.html#1277">[ subject ]</a>
+              <a href="author.html#1277">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt;  through a browser, the server returns no file contents. 
+</I>&gt;<i> 
+</I>&gt;<i> Does a basic Hello World! perl script work through a browser? 
+</I>&gt;<i> 
+</I>&gt;<i>  #! fee/fie/perl
+</I>&gt;<i>  print &quot;Hello World&quot;;
+</I>
+To be a real CGI script (i.e. one that will work) I believe that's
+
+---- begin
+#!/usr/bin/perl
+
+# for Windows + ActivePerl the above should work anyway;
+# if not, use #!c:/perl/bin/perl or whatever
+
+print &quot;Content-Type:text/plain\n\n&quot;;
+print &quot;Hello, World!\n&quot;;
+---- end
+
+since you need at least a Content-Type header and a blank line (so two 
+consecutive newlines) before the content starts.
+
+&gt;<i> &gt;  Perl script in webroot/cgi-bin
+</I>&gt;<i> 
+</I>&gt;<i> Ugh, that's asking for trouble. Better to be in /Xitami/cgi-bin, OUTSIDE
+</I>&gt;<i> the webpages folder, so nobody can read it. 
+</I>
+Indeed, is that the problem? /cgi-bin is (by default) an alias for 
+c:\xitami\cgi-bin, which makes c:\xitami\webroot\cgi-bin &quot;invisible&quot; to the 
+server...
+
+&gt;<i> 
+</I>&gt;<i> &gt; This message is intended only for ...blah...
+</I>&gt;<i> 
+</I>&gt;<i> Is the Queen going to come to my house and arrest me? I must make a pot
+</I>&gt;<i> of tea, make scones, teach my Corgi-dog to curtsey, oh so much to do!
+</I>&gt;<i> &lt;G?&gt;
+</I>
+Who said anything about the Queen? (yes, the uber-disclaimer mentioned UK law, and the UK has a queen, but that's a fairly tenuous link... :-)
+
+Regards,
+Simon &quot;tea-drinking Brit&quot; McVittie
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001276.html">[Xitami] CGI Scripting
+</A></li>
+	<LI> Next message: <A HREF="001282.html">OT: Re: [Xitami] CGI Scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1277">[ date ]</a>
+              <a href="thread.html#1277">[ thread ]</a>
+              <a href="subject.html#1277">[ subject ]</a>
+              <a href="author.html#1277">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

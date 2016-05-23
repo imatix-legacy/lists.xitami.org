@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Custom Error 404 pages directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000717.html">
+   <LINK REL="Next"  HREF="000722.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Custom Error 404 pages directories
+   </H1>
+    <B>Michael S. Kazarin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Custom Error 404 pages directories">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 16 Aug 2001 14:55:32 +0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000717.html">[Xitami] Custom Error 404 pages directories
+</A></li>
+        <LI> Next message: <A HREF="000722.html">[Xitami] Forbidden 403 errors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#721">[ date ]</a>
+              <a href="thread.html#721">[ thread ]</a>
+              <a href="subject.html#721">[ subject ]</a>
+              <a href="author.html#721">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have the following set up for my server:
+xitami.cfg -&gt; [Server] -&gt; error-script=./templates/errmain.gsl (for main
+server, you might be using defaults.cfg as recommended by Imatix people)
+vhost01.cfg -&gt; [Server] -&gt; error-script=./templates/errvhost01.gsl (for
+virtual host 1)
+vhost02.cfg -&gt; [Server] -&gt; error-script=./templates/errvhost02.gsl (for
+virtual host 2)
+vhost03.cfg -&gt; [Server] -&gt; error-script=./templates/errvhost03.gsl (for
+virtual host 3)
+... etc.
+You have to also specify in configs the use of error-schemas: [Server] -&gt;
+use-error-script=1
+In this case templates directory should be under Xitami executable directory
+(in your case //xitami).
+
+|<i> IS there a way to specify a separate errors pages for virtual domains?
+</I>|<i> I am hosting s few virtual domains under a directory structure as such:
+</I>|<i>
+</I>|<i> //xitami/webpages  (main)
+</I>|<i> //xitami/webpages/domain1
+</I>|<i> //xitami/webpages/domain2
+</I>|<i> //xitami/webpages/domain3
+</I>|<i> etc.
+</I>|<i>
+</I>|<i> The way it is set up (or not set up) now, every virtual domain calls the
+</I>error
+|<i> pages from the main domain. How do I change this?
+</I>|<i> Examples of config files and directory structure would be helpful.
+</I>|<i>
+</I>|<i> Thanks all!
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000717.html">[Xitami] Custom Error 404 pages directories
+</A></li>
+	<LI> Next message: <A HREF="000722.html">[Xitami] Forbidden 403 errors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#721">[ date ]</a>
+              <a href="thread.html#721">[ thread ]</a>
+              <a href="subject.html#721">[ subject ]</a>
+              <a href="author.html#721">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

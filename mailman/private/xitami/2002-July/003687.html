@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Why is this crashing me?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003686.html">
+   <LINK REL="Next"  HREF="003688.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Why is this crashing me?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Why is this crashing me?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 16 Jul 2002 11:43:44 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003686.html">[Xitami] Why is this crashing me?
+</A></li>
+        <LI> Next message: <A HREF="003688.html">[Xitami] Site listing for search engines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3687">[ date ]</a>
+              <a href="thread.html#3687">[ thread ]</a>
+              <a href="subject.html#3687">[ subject ]</a>
+              <a href="author.html#3687">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  &quot;GET /default.ida?NNNNNNNNNNNNN
+</I>
+I get thousands of these a week from all over the world. I'm not
+crashing and other Xitami users here are handling it fine. It bloats
+the log-files, that's all.
+
+The over-sized request is a deliberate attempt to break into MS IIS
+webserver. It is very specific to unpatched IIS and products based
+on IIS; no other software can be be infected.
+
+The over-sized request can confuse and crash some non-IIS software
+that never expected over-sized requests. Several network printers
+and some routers lock-up or die after one of these.
+
+Unlike IIS, written by children, and printers with a web interface
+that is only a frill, Xitami was written by adults who won't take
+candy from strangers without examining it carefully and safely.
+Request buffers are checked and don't overflow. And even if they
+did, the code that Red/Nimda tries to inject would not run in Xitami
+because it needs to hit a specific place in IIS's code.
+
+&gt;<i>  this always seems to be the last entry in the log
+</I>
+At the height of these epidemics, over half of my logs were
+Red/Nimda requests. On a low-traffic server, the odds are high that
+the &quot;last log entry&quot; would be one of these.
+
+Xitami sometimes has trouble rotating its logs, a problem that gets
+worse when under heavy traffic as from these epidemics. Especially
+on Windows which does get sluggish with thousands of files in one
+folder. It seems to help to clear out any temporary or odd-name
+files in the logs and temp folders.
+
+Do you have a second machine that is networked, always on, and has
+Perl? I have a little script to read a web page at intervals and
+report if it isn't there (or does not have an expected phrase, to
+distinguish the right response from error-messages). That would
+narrow down the actual time of crash.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003686.html">[Xitami] Why is this crashing me?
+</A></li>
+	<LI> Next message: <A HREF="003688.html">[Xitami] Site listing for search engines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3687">[ date ]</a>
+              <a href="thread.html#3687">[ thread ]</a>
+              <a href="subject.html#3687">[ subject ]</a>
+              <a href="author.html#3687">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

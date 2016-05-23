@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Redirecting By IP Address
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Redirecting%20By%20IP%20Address&In-Reply-To=f83609d50604190944w7efcf1e6xaf9979ba47ed20a4%40mail.gmail.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007270.html">
+   <LINK REL="Next"  HREF="007271.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Redirecting By IP Address</H1>
+    <B>David Wolever</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Redirecting%20By%20IP%20Address&In-Reply-To=f83609d50604190944w7efcf1e6xaf9979ba47ed20a4%40mail.gmail.com"
+       TITLE="[Xitami] Redirecting By IP Address">wolever.lists at gmail.com
+       </A><BR>
+    <I>Wed Apr 19 19:17:03 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007270.html">[Xitami] Redirecting By IP Address
+</A></li>
+        <LI>Next message: <A HREF="007271.html">[Xitami] Redirecting By IP Address
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7272">[ date ]</a>
+              <a href="thread.html#7272">[ thread ]</a>
+              <a href="subject.html#7272">[ subject ]</a>
+              <a href="author.html#7272">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>And this is the part I hate: When I get baffled by something so stupidly simple.
+You were very right: I was assuming that Apache would pass the Host:
+header along to the IP address it was contacting.  I guess not.  When
+I told it to connect to xitami.example.com (which, internally, points
+to 192.168.1.2) everything seems to work fine.
+
+As far as the setup goes, we have one Linux server (that is horribly
+over loaded).  It provides Internet to about 30 computers, runs an
+Apache server for our external page and runs a virtual machine (with
+VMWare) to run Windows.  We need Windows+Xitami because there are a
+couple apps written in Perl for Xitami+Windows that don't like to run
+on Linux at all (and wading through 10,000 lines of Perl which was
+written by a non-programmer is not my idea of fun).
+
+Anyway, it all seems to be working well now.
+Thanks again for the help,
+David
+
+On 4/19/06, Francis Turner &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">francis.turner at gmail.com</A>&gt; wrote:
+&gt;<i> You need to tell your internal DNS that xitami.example.com is
+</I>&gt;<i> 192.168.1.2 and tell your apache server to redirect to
+</I>&gt;<i> xitami.example.com not to 192.168.1.2
+</I>&gt;<i>
+</I>&gt;<i> On 4/19/06, David Wolever &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">wolever.lists at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; I'm not quite sure what you're saying.
+</I>&gt;<i> &gt; We only have one external IP address, which is being used by a primay
+</I>&gt;<i> &gt; site (hosted by Apache).
+</I>&gt;<i> &gt; The secondary site, hosted by Xitami, is on a LAN.  We can not put it
+</I>&gt;<i> &gt; any farther out because we do not have another IP address and I do not
+</I>&gt;<i> &gt; want to put a Windows machine right on the Internet.
+</I>&gt;<i> &gt; The problem lies with the Location header.
+</I>&gt;<i> &gt; When a directory is requested with out the trailing slash (eg:
+</I>&gt;<i> &gt; example.com/foo instead of example.com/foo/), Xitami does what it
+</I>&gt;<i> &gt; should and sends a 302 moved temporally header, trying to redirect the
+</I>&gt;<i> &gt; client to /foo/.  The problem is that the Location: used by Xitami is
+</I>&gt;<i> &gt; it's IP address, NOT the host supplied by the browser (as, I believe,
+</I>&gt;<i> &gt; it should be).
+</I>&gt;<i> &gt; Here is what the transaction looks like:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Browser:
+</I>&gt;<i> &gt; GET /foo HTTP/1.1
+</I>&gt;<i> &gt; Host: xitami.example.com
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Xitami:
+</I>&gt;<i> &gt; HTTP/1.0 302 Moved Temporarily
+</I>&gt;<i> &gt; Vary: Host
+</I>&gt;<i> &gt; Location: <A HREF="http://192.168.1.2/foo/">http://192.168.1.2/foo/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; But this is what it should say:
+</I>&gt;<i> &gt; HTTP/1.0 301 Moved Permanently
+</I>&gt;<i> &gt; Location: <A HREF="http://xitami.example.com/foo/">http://xitami.example.com/foo/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I hope this clarifies things.
+</I>&gt;<i> &gt; David
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 4/19/06, MRJ InfoTech Admin &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">admin at mrjdesign.net</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;  Your DNS server should route the traffic
+</I>&gt;<i> &gt; &gt;  your Xitami should be on a machine on the outside of your fire walled
+</I>&gt;<i> &gt; &gt; router or a DMZ machine
+</I>&gt;<i> &gt; &gt;  Then you can skip the double router step of the apache hack.
+</I>&gt;<i> &gt; &gt;  All IP to Domain name is routed through, say BIND 9.3 or different DNS
+</I>&gt;<i> &gt; &gt; solutions only.
+</I>&gt;<i> &gt; &gt;  Xitami only handles Virtual host routes on that same IP to specific
+</I>&gt;<i> &gt; &gt; directed domains, still routed with DNS albeit virtual.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  MRJ
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  At 15:58 19/04/2006, you wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Hey,
+</I>&gt;<i> &gt; &gt;  I've been put in charge of making an Xitami work.  It is running on a
+</I>&gt;<i> &gt; &gt;  virtual machine with a local IP address (192.168.10.2), and it's
+</I>&gt;<i> &gt; &gt;  mother host is using Apache's mod_proxy to forward requests from the
+</I>&gt;<i> &gt; &gt;  outside to Xitami, then send Xitami's response back to the world.
+</I>&gt;<i> &gt; &gt;  The problem I'm having is that, in Xitami-generated Location: headers,
+</I>&gt;<i> &gt; &gt;  it is using it's IP address (192.168.10.2) instead of it's hostname
+</I>&gt;<i> &gt; &gt;  (fs.example.com).  I have set up it's hostname in xitami.cfg and I
+</I>&gt;<i> &gt; &gt;  have set the computer's hostname to the same.
+</I>&gt;<i> &gt; &gt;  We are not using any sort of virtual hosting and (as far as I know)
+</I>&gt;<i> &gt; &gt;  the config is pretty much stock.
+</I>&gt;<i> &gt; &gt;  Any help would be much appreciated.
+</I>&gt;<i> &gt; &gt;  David
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  --
+</I>&gt;<i> &gt; &gt;  Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt;  To unsubscribe:
+</I>&gt;<i> &gt; &gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  (c)1996-2006 - all communication with this account holder is regarded
+</I>&gt;<i> &gt; &gt; personal and confidential at all times.
+</I>&gt;<i> &gt; &gt;  MRJ Information Technology Ltd. / 35 Camden High St., NW1 7JE, London,
+</I>&gt;<i> &gt; &gt; United Kingdom
+</I>&gt;<i> &gt; &gt;  <A HREF="http://www.mrjdesign.net">http://www.mrjdesign.net</A> or
+</I>&gt;<i> &gt; &gt; <A HREF="http://www.mrjinformationtechnology.net">http://www.mrjinformationtechnology.net</A>
+</I>&gt;<i> &gt; &gt;  Please report any abusive messaging through our network, to the email
+</I>&gt;<i> &gt; &gt; address <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">abuse at mrjdesign.net</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe:
+</I>&gt;<i> &gt; &gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> <A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+</I>&gt;<i> Faber's Fourth Law:
+</I>&gt;<i>   Necessity is the mother of strange bedfellows.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007270.html">[Xitami] Redirecting By IP Address
+</A></li>
+	<LI>Next message: <A HREF="007271.html">[Xitami] Redirecting By IP Address
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7272">[ date ]</a>
+              <a href="thread.html#7272">[ thread ]</a>
+              <a href="subject.html#7272">[ subject ]</a>
+              <a href="author.html#7272">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

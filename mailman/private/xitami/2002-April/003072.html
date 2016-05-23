@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002897.html">
+   <LINK REL="Next"  HREF="003080.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 28 Apr 2002 22:23:46</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002897.html">[Xitami] Server Being Flooded
+</A></li>
+        <LI> Next message: <A HREF="003080.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3072">[ date ]</a>
+              <a href="thread.html#3072">[ thread ]</a>
+              <a href="subject.html#3072">[ subject ]</a>
+              <a href="author.html#3072">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I previously e-mailed this list about a problem with 50 simultaneous
+connections to CGI scripts under Xitami.  I have since performed additional
+testing and have come to the conclusion that CGIs are a fatal source of
+DoS/DDoS attacks with the Xitami webserver under Windows (others have
+complained about Xitami slowing to a crawl under Linux).  Below are the
+steps that I took to come to this conclusion:
+
+1)  I fixed my localhost Distributed Attack Server/Client (DAS/DAC) so that
+it didn't crash (really silly problem dealing with attempting to allocate
+and write to the same area of memory at the same time).
+
+2)  I fixed many of XiFusion's bugs that people have mentioned since the
+release of v2.5.
+
+3)  I re-ran the DAS/DAC.  The same problems arose as before in the logs.
+Just a refresher, the log files look like this under a 60 user load:
+127.0.0.1 - - [28/Apr/2002:15:20:49 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99340
+127.0.0.1 - - [28/Apr/2002:15:28:25 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 5
+127.0.0.1 - - [28/Apr/2002:15:28:25 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 5
+127.0.0.1 - - [28/Apr/2002:15:28:26 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1117
+127.0.0.1 - - [28/Apr/2002:15:28:26 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 1
+127.0.0.1 - - [28/Apr/2002:15:28:26 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 0
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 0
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 0
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 1
+
+The above sample logs should have been the following:
+
+127.0.0.1 - - [28/Apr/2002:15:20:49 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99340
+127.0.0.1 - - [28/Apr/2002:15:28:25 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 5
+127.0.0.1 - - [28/Apr/2002:15:28:25 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 5
+127.0.0.1 - - [28/Apr/2002:15:28:26 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1117
+127.0.0.1 - - [28/Apr/2002:15:28:26 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99340
+127.0.0.1 - - [28/Apr/2002:15:28:26 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1117
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99340
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1117
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 5
+127.0.0.1 - - [28/Apr/2002:15:28:27 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99340
+
+Obviously, a very serious problem is occurring here.  Sometimes I am
+getting zero bytes returned, one byte returned, and the rest of the time
+the correct number of bytes returned.
+
+At this point, I whipped out my compiler, Borland's C RTL, and downloaded
+the latest stable Xitami source.
+
+4)  Next, I wrote my own function that calls CreateProcess and
+WaitForSingleObject to see if either function fails within XiFusion.  The
+same problems arose and neither function failed.
+
+5)  I created a file for every single thread started in the DAC to track
+exactly what happens with each thread.  The DAC stopped opening files after
+47 files were opened.  The problem:  The number of open files had been
+exceeded for the application.
+
+Obviously, I only hit a C library limitation, but it dawned on me that
+since CreateProcess was not failing and WaitForSingleObject was not
+failing, creating the file handle is the only alternative.  Below is a
+logical explanation of what is happening inside both Xitami and XiFusion:
+
+1)  A request comes to the Xitami webserver for a CGI-based application
+(assume for this example XiFusion is associated with the file extension).
+2)  Xitami calls the function process_create() to launch the CGI.
+3)  Inside process_create(), the function redirect_io() is called three
+times (once for each standard handle).  This creates three file I/O handles
+which the CGI is supposed to dump its data into.  However, there is no test
+for whether or not the file was opened successfully within redirect_io()
+for both std_out and std_err.  If either fails to open,
+INVALID_HANDLE_VALUE is returned (which is -1) and the resulting value is
+assigned to the STARTUPINFO structure that is submitted to CreateProcess().
+4)  XiFusion is then launched via CreateProcess and then the process is
+waited on (CreateProcess rarely ever fails (only under low system resources
+will it fail) and I have yet to see WaitForSingleObject to fail as well - I
+also have set my CGIs to run until they finish).  Note, at this point in
+the Xitami code, it fails to detect whether WaitForSingleObject() fails or
+not.
+5)  XiFusion's underlying Borland C RTL fails to detect whether
+GetStdHandle fails.  The value at this point should be INVALID_HANDLE_VALUE
+if Xitami failed to create the file handle.  All output data will therefore
+fail to be displayed, hence zero bytes returned.
+6)  XiFusion itself fails to check to see if its own stdout redirection
+fails.  Hence the return of only one byte of data (padding) in some cases
+where stdout was successfully created by Xitami.
+7)  Only very rarely, will both redirected input and output handles get
+created in Xitami and the redirected output handle in XiFusion (Xitami has
+a better chance of creating the redirected input handle since it will
+Sleep(1000) if it fails to be created).  This explains the occasional
+correct number of bytes returned from the server.
+
+
+MSDN Library demonstrates the correct way to start processes with
+redirected input and output:
+
+MSDN Library-&gt;Platform SDK-&gt;Base Services-&gt;DLLs, Processes, and
+Threads-&gt;Processes and Threads-&gt;Using Processes and Threads-&gt;Creating a
+Child Process with Redirected Input and Output
+
+Unfortunately, most compiler writers use the poor example mentioned in the
+CreateProcess() description.
+
+Under normal circumstances this issue will not occur, but under very heavy
+CGI usage, the problems will appear frequently (95-99% of the time).
+End-users will be unable to get results and their browsers will, in many
+cases, appear to hang on a completed webpage (zero bytes returned).
+Several people have mentioned that I should make XiFusion a LRWP
+application.  Doing this is possible, but a DoS/DDoS can still take place
+just as easily (600 simultaneous users instead of 60).  It really does not
+matter...the problem is that both Xitami and XiFusion have a major DoS/DDoS
+issue that is going to take a while to fix.
+
+Ewen, I have a 'localhost' version of the DAS/DAC ready if you want it for
+testing purposes.  I don't want to distribute it to others because of the
+implications this particular DoS has.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002897.html">[Xitami] Server Being Flooded
+</A></li>
+	<LI> Next message: <A HREF="003080.html">[Xitami] Xitami DoS/DDoS (CFM, PHP, Perl, and *ALL* CGIs)...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3072">[ date ]</a>
+              <a href="thread.html#3072">[ thread ]</a>
+              <a href="subject.html#3072">[ subject ]</a>
+              <a href="author.html#3072">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

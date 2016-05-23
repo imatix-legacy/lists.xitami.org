@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> No subject
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org?Subject=No%20subject&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>No subject</H1>
+    <B></B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org?Subject=No%20subject&In-Reply-To="
+       TITLE="No subject">
+       </A><BR>
+    <I>Thu Dec 27 22:14:07 CET 2007</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#411">[ date ]</a>
+              <a href="thread.html#411">[ thread ]</a>
+              <a href="subject.html#411">[ subject ]</a>
+              <a href="author.html#411">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>questions [regarding iMatix Technology Packages], find and use the
+xitami-dev list, which is the most likely place to find people with a
+similar interest in these technologies. &quot;
+
+What's the problem?
+
+My script works fine for Gsl version 2 and 3, but now breaks at version 4. Here is the stripped test case:
+
+Test case works fine with gsl3:
+
+  $ gsl -script:template2.gsl template.xml
+  2008/02/01 18:32:46: GSL/3.1 Copyright (c) 1991-2003 iMatix Corporation
+  2008/02/01 18:32:46: gsl3 I: Processing template.xml...
+  rem run 'template2.gsl' using 'gsl3'
+   gsl3
+   gsl3
+
+Test case works fine with gsl2 that comes with iMatix Technology Packages CVS Uploaded on Tue Sep 4 14:35:21 CEST 2007:
+
+  $ /pkg/iMatix/bin/gslgen -script:template2.gsl template.xml
+  GSLgen/2.01 Copyright (c) 1991-2003 iMatix Corporation
+  gslgen I: Processing template.xml...
+  rem run 'template2.gsl' using 'gslgen'
+   gslgen
+   gslgen
+
+Test case breaks with gsl4 that comes with iMatix Technology Packages CVS Uploaded on Tue Sep 4 14:35:21 CEST 2007:
+
+  $ /pkg/iMatix/bin/gsl -script:template2.gsl template.xml
+  2008/02/01 18:33:27: GSL/4.0c19 Copyright (c) 1996-2007 iMatix Corporation
+  2008/02/01 18:33:27: gsl/4 I: Processing template.xml...
+  2008/02/01 18:33:27: (template2.gsl 4)  &gt; $(me)
+  2008/02/01 18:33:27: (template2.gsl 4) ^
+  2008/02/01 18:33:27: (template2.gsl 4) Unexpected token.
+
+Here is the actual template2.gsl file:
+
+  $ cat -n template2.gsl
+     1  rem run '$(script)' using '$(me)'
+     2  .template 0
+     3          &gt; $(me)
+     4          &gt; $(me)
+     5  endtemplate
+
+Line 3 &amp; 4's only difference is that line 4 uses tab instead of space.
+
+The template.xml is a dummy file, without which the script won't run:
+
+ echo '&lt;t&gt;&lt;/t&gt;' &gt; template.xml
+
+please CC me when reply. I'm not on the mlist. 
+
+Thanks
+
+Tong
+
+
+
+
+
+
+      ____________________________________________________________________________________
+Looking for last minute shopping deals?  
+Find them fast with Yahoo! Search.  <A HREF="http://tools.search.yahoo.com/newsearch/category.php?category=shopping">http://tools.search.yahoo.com/newsearch/category.php?category=shopping</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#411">[ date ]</a>
+              <a href="thread.html#411">[ thread ]</a>
+              <a href="subject.html#411">[ subject ]</a>
+              <a href="author.html#411">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami-dev">More information about the Xitami-Dev
+mailing list</a><br>
+</body></html>

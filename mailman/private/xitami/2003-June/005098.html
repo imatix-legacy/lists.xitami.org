@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] New to Xitami &amp; running xbase++ CGI's
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005096.html">
+   <LINK REL="Next"  HREF="005101.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] New to Xitami &amp; running xbase++ CGI's
+   </H1>
+    <B>Jeff Hamblin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] New to Xitami &amp; running xbase++ CGI's">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 2 Jun 2003 08:41:39 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005096.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+        <LI> Next message: <A HREF="005101.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5098">[ date ]</a>
+              <a href="thread.html#5098">[ thread ]</a>
+              <a href="subject.html#5098">[ subject ]</a>
+              <a href="author.html#5098">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>From: &lt;<A HREF="mailto:brent.mawhinney@rogers.com">brent.mawhinney@rogers.com</A>&gt;
+&gt;<i> Thanks. File received, loaded and run succussfully.
+</I>&gt;<i>  So I guess the issue isn't the mapping but some other setting.
+</I>&gt;<i>  I attempted to run my dll [ which is uspposed to call the exe ].
+</I>&gt;<i> MZLOAD1.dll and I receive a windows warning 'You area
+</I>&gt;<i> attempting to open a file of type &quot;Application Extension&quot; dll '
+</I>&gt;<i> and suggests that running a file of this type may be harmful
+</I>&gt;<i> etc. Its as if its trying to download the dll instaed of running
+</I>&gt;<i> it the same way IIS used to.
+</I>&gt;<i> 
+</I>
+CGI runs executable files -- not DLLs. DLLs are not directly
+executable. As the name infers, they are Dynamic Link
+Libraries that are used by applications.
+
+Your DLL is likely an
+ISAPI DLL designed to work with IIS. This has some performance
+benefits since the DLL is loaded once by the IIS exe into
+its memory space, whereas CGI exes must run-execute-close
+each time they are needed.
+
+
+Further, a CGI exe must
+conform to the input/output requirements of CGI.
+Try calling your exe directly.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005096.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+	<LI> Next message: <A HREF="005101.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5098">[ date ]</a>
+              <a href="thread.html#5098">[ thread ]</a>
+              <a href="subject.html#5098">[ subject ]</a>
+              <a href="author.html#5098">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

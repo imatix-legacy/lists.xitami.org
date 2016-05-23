@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami crashing after FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003611.html">
+   <LINK REL="Next"  HREF="003613.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami crashing after FTP
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami crashing after FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 09 Jul 2002 09:05:19 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003611.html">[Xitami] Xitami crashing after FTP
+</A></li>
+        <LI> Next message: <A HREF="003613.html">[Xitami] Xitami crashing after FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3612">[ date ]</a>
+              <a href="thread.html#3612">[ thread ]</a>
+              <a href="subject.html#3612">[ subject ]</a>
+              <a href="author.html#3612">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 12:12 AM 7/9/2002 -0400, WhiteShepherd writeth:
+&gt;<i>Ok ran a netstat -s to check.  FTPD is only using 21 and Xitami is
+</I>listening to 80 and 81.  
+&gt;<i>Here is a common error befor a crash: 
+</I>&gt;<i>
+</I>&gt;<i>No such file or directory
+</I>
+Xitami could not find the file or directory to load.  Sounds like the FTP
+server is doing some sort of caching it shouldn't...or Windows could be
+corrupted or Xitami is corrupted or something is not right.
+
+&gt;<i>Broken pipe
+</I>
+Possibly a further result of the file not opening.  My guess here is that
+Xitami is attempting to use a file or socket anyway.  At this point there
+is trouble later on whatever the case is.
+
+&gt;<i>Socket operation on non-socket
+</I>
+The client socket has been closed or we are accessing memory we don't own...
+
+&gt;<i>Clean-memory assertion failed - xitami.c (208)
+</I>
+This is (strangely) located at the end of Xitami's execution in main().
+I'm surprised the program got that far.  However, it is due to Xitami
+attempting to use or access memory it doesn't own or no longer owns.
+Xitami appears to be on its way out the door to avoid that great core dump
+in the skies whatever the case is.
+
+&gt;<i>Abnormal program termination
+</I>
+It looks like the program exited but then the CPU took over and realized a
+memory fault took place during the clean-memory scan.
+
+&gt;<i>core dumped
+</I>
+Hence, the core dump.  So much for avoiding it...
+
+&gt;<i>Any of this make sense?
+</I>
+Nope.  Just extrapolating on what seems to be taking place.
+
+&gt;<i>On 8 Jul 2002 at 16:30, Gunnar Swan wrote:
+</I>&gt;&gt;<i> I would check out a port sniffer. 
+</I>&gt;&gt;<i> Turn the OTHER FTP server completely off ... at the service panel.
+</I>&gt;&gt;<i> Then see what is listening on the ports.
+</I>&gt;&gt;<i> I would think that there are two apps fighting for the same port.
+</I>
+There should be no problem here.  Any Windows sockets provider worth its
+salt will only allow one program to own a single port on one IP at one
+time.  So, if there are two server programs contending for the same port,
+only one gets it.
+
+&gt;&gt;<i> Unless two programs are fighting for the same memory or communication
+</I>channel, 
+&gt;&gt;<i> they should co-exist.
+</I>
+This could be, but with Windows you never know what the OS will decide to
+do next :)  (I'm not an advocate of any OS...I just haven't found any that
+I really like).
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003611.html">[Xitami] Xitami crashing after FTP
+</A></li>
+	<LI> Next message: <A HREF="003613.html">[Xitami] Xitami crashing after FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3612">[ date ]</a>
+              <a href="thread.html#3612">[ thread ]</a>
+              <a href="subject.html#3612">[ subject ]</a>
+              <a href="author.html#3612">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

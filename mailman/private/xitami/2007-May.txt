@@ -1,0 +1,830 @@
+From ewen at imatix.com  Thu May  3 04:54:48 2007
+From: ewen at imatix.com (Ewen McNeill)
+Date: Thu, 03 May 2007 14:54:48 +1200
+Subject: [Xitami] Administrivia: New mailing list server
+Message-ID: <20070503025448.78851112E1F@wat.la.naos.co.nz>
+
+Hi,
+
+The lists.xitami.org domain, and hence this list
+<xitami at lists.imatix.org> has been relocated to a new iMatix mail server
+(smtp.imatix.com).  All the details for the mailing list remain the
+same, including subscriptions, email addresses, and the mailing list
+archives.
+
+We don't expect any problems with the new location, but if you do notice
+a problem please contact me directly off list (ewen at imatix.com).
+
+Thanks,
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+
+From navynutt2000 at yahoo.ca  Tue May  8 07:26:37 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Tue, 8 May 2007 01:26:37 -0400 (EDT)
+Subject: [Xitami] Annoying FTP-Bots
+Message-ID: <201198.97236.qm@web62509.mail.re1.yahoo.com>
+
+As of late...
+   
+  I've been getting hit quite frequently by something that appears to be a BOT of sorts, trying (in rapid succession) to break entry into my FTP login... using a handful of common generic user-names (and probably an assortment of various common passwords).
+   
+  To my knowledge, this "bot thing" has never successfully gained access... but often hammers away several times per minute, for hours on end, until it finally crashes Xitami (if/when it goes undetected).  This is most annoying, because it means that I have to keep someone periodically monitoring log-files around the clock.
+   
+  At times when I've caught this activity in action, I've simply just closed port 21 on the router for an hour or two, and the bot goes away... but only to return a few days (or whenever it pleases) later, and always identifies itself by a different IP-address upon it's return.  At least I assume it's the same bot... masked behind an available open proxy.
+   
+  I'm curious to know if anyone else has had this trouble, and what they've done to correct it.
+   
+  A SAMPLE CLIP FROM THE ERROR LOG:
+   
+  140.135.9.174 - admin [07/May/2007:17:44:02 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:04 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:07 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:09 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:12 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:14 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:17 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:19 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:22 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+140.135.9.174 - admin [07/May/2007:17:44:24 -0700] "ftp://140.135.9.174/" 530 0 "-" ""
+   
+  Rod
+   
+
+       
+---------------------------------
+Ask a question on any topic and get answers from real people. Go to Yahoo! Answers. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070508/460b9aca/attachment.htm 
+
+From marc at verfaillie.be  Tue May  8 08:19:54 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Tue, 08 May 2007 08:19:54 +0200
+Subject: [Xitami] [Spam]  Annoying FTP-Bots
+In-Reply-To: <201198.97236.qm@web62509.mail.re1.yahoo.com>
+Message-ID: <464032AA.16153.4CF09@localhost>
+
+On 8 May 2007 at 1:26, navy nut wrote:
+
+> I'm curious to know if anyone else has had this trouble, and what they've done 
+> to correct it.
+
+Use another FTP port and tell your users to use this port.
+FTP section in default.cfg, replace the value of 21 with another value.
+
+marc
+
+
+From fuzzydog at whiteshepherd.net  Tue May  8 08:24:26 2007
+From: fuzzydog at whiteshepherd.net (Gene)
+Date: Tue, 08 May 2007 02:24:26 -0400
+Subject: [Xitami] Annoying FTP-Bots
+In-Reply-To: <201198.97236.qm@web62509.mail.re1.yahoo.com>
+References: <201198.97236.qm@web62509.mail.re1.yahoo.com>
+Message-ID: <4640179A.5020908@whiteshepherd.net>
+
+Xitami FTP is not very stable.  In fact it makes your web unstable. It 
+also corrupts files at high speed (my experience). I would just turn it 
+off and use a seperate FTP server (guild, warftp, or TinyFTP).  You will 
+get a lot better performance for this anyways. 
+
+Also if you go into your windows services you can tell it to auto 
+restart the Xitami service on a crash.
+
+As far as the bots I run a art site and these spam bots are hammering my 
+site.  If your FTP is for personal use you could move the FTP port to 
+something other then 21.  99% of all bots will just be mass scanning 
+standard ports.
+
+  Gene
+
+navy nut wrote:
+> As of late...
+>  
+> I've been getting hit quite frequently by something that appears to be 
+> a BOT of sorts, trying (in rapid succession) to break entry into my 
+> FTP login... using a handful of common generic user-names (and 
+> probably an assortment of various common passwords).
+>  
+> To my knowledge, this "bot thing" has never successfully gained 
+> access... but often hammers away several times per minute, for hours 
+> on end, until it finally crashes Xitami (if/when it goes undetected).  
+> This is most annoying, because it means that I have to keep someone 
+> periodically monitoring log-files around the clock.
+>  
+> At times when I've caught this activity in action, I've simply just 
+> closed port 21 on the router for an hour or two, and the bot goes 
+> away... but only to return a few days (or whenever it pleases) later, 
+> and always identifies itself by a different IP-address upon it's 
+> return.  At least I assume it's the same bot... masked behind an 
+> available open proxy.
+>  
+> I'm curious to know if anyone else has had this trouble, and what 
+> they've done to correct it.
+>  
+> A SAMPLE CLIP FROM THE ERROR LOG:
+>  
+> 140.135.9.174 - admin [07/May/2007:17:44:02 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:04 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:07 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:09 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:12 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:14 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:17 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:19 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:22 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+> 140.135.9.174 - admin [07/May/2007:17:44:24 -0700] 
+> "ftp://140.135.9.174/" 530 0 "-" ""
+>  
+> Rod
+>  
+>
+> ------------------------------------------------------------------------
+> Ask a question on any topic and get answers from real people. *Go to 
+> Yahoo! Answers.* <http://ca.answers.yahoo.com>
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From slackrat4Q at azurservers.com  Tue May  8 18:36:08 2007
+From: slackrat4Q at azurservers.com (Slackrat)
+Date: Tue, 08 May 2007 18:36:08 +0200
+Subject: [Xitami] Annoying FTP-Bots
+In-Reply-To: <201198.97236.qm@web62509.mail.re1.yahoo.com> (navy nut's message
+	of "Tue\, 8 May 2007 01\:26\:37 -0400 \(EDT\)")
+References: <201198.97236.qm@web62509.mail.re1.yahoo.com>
+Message-ID: <87ps5b9ssn.fsf@azurservers.com>
+
+
+* navy nut <navynutt2000 at yahoo.ca> a ?crit
+> As of late...
+>    
+
+I never have had any problems but I have port shifted both http and
+ftp to an oddball port, ie. not something that ends in 80/21 
+
+
+Like 
+"Portbase = 3234"
+will put you on port 3314 http 
+and 3355 for ftp
+
+Just check that there is nothing else that should run on these ports -
+Like mySQL on 3380 for instance comes to mind
+
+Maybe also set your firewall to drop inbound traffic on the standard
+ports and not log accesses
+
+I am not Windows literate so can't help you too much on firewalls
+etc. 
+
+Although I still run Apache on the standard port
+
+-- 
+Regards, Slackrat [Bill Henderson] [No _4Q_ for direct email]
+http://azurservers.com
+
+
+From navynutt2000 at yahoo.ca  Thu May 10 00:16:57 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Wed, 9 May 2007 18:16:57 -0400 (EDT)
+Subject: [Xitami] Annoying FTP-Bots
+In-Reply-To: <4640179A.5020908@whiteshepherd.net>
+Message-ID: <284873.94296.qm@web62514.mail.re1.yahoo.com>
+
+I'd like to take a moment to thank all of you who replied and offered suggestions pertaining to my bot-troubles.
+   
+  I sometimes run a copy of Xitami (at port-base 8000) on a test machine while trying out new ideas... and though it works, I'm rather dissatisfied with the overall results of routing WEB-traffic through any port other than 80.  DNS anomalies are the main problem in this case, as I find the domain name often gets dropped altogether, and visitors are left looking at my IP-address and port-number in their browser's address-bar, rather than a domain name. 
+   
+  FTP on the other hand, is welcome to run on whatever port it will function best...  I have fewer than thirty FTP-users, and absolutely no FTP-port preference whatsoever.  The thought had actually crossed my mind to try an alternate FTP port, but I'm not sure I can do that without disturbing my standard web-port... or at least not without running a second copy of Xitami (or other FTP-daemon). 
+   
+  Guild or War-FTP on an alternate port, is probably the ultimate solution... and something I'll be looking into again over the next few days.  I took a quick look at both of these FTP-daemons in the past, and remember that one of the two looked very promising, but was going to take more time than I could afford right then, to learn and configure correctly.  The other, was like opening a fresh can of rocket science, and was very quickly dismissed. 
+   
+  > Gene said:
+  > Also if you go into your windows services you can tell it to auto 
+> restart the Xitami service on a crash.
+   
+  To be quite honest with you Gene, I've never quite figured out how to run Xitami as a WinXP service.  I have no trouble adding "xigui32.exe" to the list of services, but always encounter failure when trying to start it.  I simply just run the executable, and tick the box that says "Autorun at login".  The PC itself, loads directly into the desktop on boot-up anyway, so this has never really posed any major issues for me... yet.  I'd eventually like to run Xitami as a service if I can ever figure out what I'm doing wrong... and would definitely take advantage of the settings you suggest. 
+   
+  There are times most recently however, when I've discovered Xitami stunned, in a 'suspended' state (red icon in the system-tray), where it hasn't actually crashed until I've attempted to resume or restart it. 
+   
+  Thank you all once again for your valuable information and speedy response.
+   
+  Rod
+   
+   
+
+       
+---------------------------------
+Ask a question on any topic and get answers from real people. Go to Yahoo! Answers. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070509/13205560/attachment.htm 
+
+From navynutt2000 at yahoo.ca  Thu May 10 06:16:20 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Thu, 10 May 2007 00:16:20 -0400 (EDT)
+Subject: [Xitami] Annoying FTP-Bots
+In-Reply-To: <284873.94296.qm@web62514.mail.re1.yahoo.com>
+Message-ID: <974747.61654.qm@web62507.mail.re1.yahoo.com>
+
+> I Previously said:
+  >
+  > To be quite honest with you Gene, I've never quite figured 
+  > out how to run Xitami as a WinXP service.
+   
+   
+  Uh huh... let's cancel that comment, as I believe I've just figured it out!
+   
+  I must say however, that most of the documentation I've ever found on this topic, simply does not apply.  In most cases, I'm instructed to use CMD commands which only generate 'invalid-command' responses.  Perhaps this is a matter of out-dated documentation vs. O/S version.  Select snippets from numerous documents, is what eventually helped snap this puzzle together in a sensible manner.
+   
+  I'm just glad I remembered to create my own notes on the topic.
+   
+  Thanks again!
+   
+  Rod
+
+       
+---------------------------------
+Be smarter than spam. See how smart SpamGuard is at giving junk email the boot with the All-new Yahoo! Mail  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070510/bcad29ba/attachment.htm 
+
+From navynutt2000 at yahoo.ca  Thu May 10 06:16:29 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Thu, 10 May 2007 00:16:29 -0400 (EDT)
+Subject: [Xitami] Annoying FTP-Bots
+In-Reply-To: <284873.94296.qm@web62514.mail.re1.yahoo.com>
+Message-ID: <379002.36838.qm@web62512.mail.re1.yahoo.com>
+
+> I Previously said:
+  >
+  > To be quite honest with you Gene, I've never quite figured 
+  > out how to run Xitami as a WinXP service.
+   
+   
+  Uh huh... let's cancel that comment, as I believe I've just figured it out!
+   
+  I must say however, that most of the documentation I've ever found on this topic, simply does not apply.  In most cases, I'm instructed to use CMD commands which only generate 'invalid-command' responses.  Perhaps this is a matter of out-dated documentation vs. O/S version.  Select snippets from numerous documents, is what eventually helped snap this puzzle together in a sensible manner.
+   
+  I'm just glad I remembered to create my own notes on the topic.
+   
+  Thanks again!
+   
+  Rod
+
+       
+---------------------------------
+Be smarter than spam. See how smart SpamGuard is at giving junk email the boot with the All-new Yahoo! Mail  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070510/bf412da6/attachment.htm 
+
+From marc at verfaillie.be  Thu May 10 07:58:48 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Thu, 10 May 2007 07:58:48 +0200
+Subject: [Xitami] Annoying FTP-Bots
+References: <284873.94296.qm@web62514.mail.re1.yahoo.com>
+Message-ID: <003201c792c8$46e648c0$1dbebebe@VERFAILLIE5>
+
+
+----- Original Message -----
+From: navy nut
+To: Xitami Users General Discussion
+Sent: Thursday, May 10, 2007 12:16 AM
+Subject: Re: [Xitami] Annoying FTP-Bots
+
+
+FTP on the other hand, is welcome to run on whatever port it will function
+best...  I have fewer than thirty FTP-users, and absolutely no FTP-port
+preference whatsoever.  The thought had actually crossed my mind to try an
+alternate FTP port, but I'm not sure I can do that without disturbing my
+standard web-port... or at least not without running a second copy of Xitami
+(or other FTP-daemon).
+
+
+You can run make ftp listen on any port, just change the value
+
+[ftp]
+   port=xxx
+
+in your default.cfg
+
+marc
+
+
+From navynutt2000 at yahoo.ca  Fri May 11 10:07:05 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Fri, 11 May 2007 04:07:05 -0400 (EDT)
+Subject: [Xitami] Annoying FTP-Bots
+In-Reply-To: <003201c792c8$46e648c0$1dbebebe@VERFAILLIE5>
+Message-ID: <973310.550.qm@web62504.mail.re1.yahoo.com>
+
+Thank you very kindly for this info Marc!
+   
+  I did read this the first time around, but somehow assumed that you really meant the port-base setting.  My mistake.  I previously didn't realize that port-settings in Xitami could be could be adjusted any other way.
+   
+  With this in mind, I think I'll continue using Xitami for FTP for the time being, but on an alternate port as you've suggested.  I plan to roll this out over the weekend, once I've notified my users of the change.
+   
+  I've attempted to Google up a list of TCP ports that are not commonly used (I believe they call them "scratch ports"), but didn't really find what I was looking for.  I'm hoping my choice of FTP-port 2112 wont wind up becoming just another invitation for other ongoing issues.  "Shields Up" claims this port is commonly used by "Idonix MetaNet" (whatever that is)... but then again, I was unable to find a port number in their database that wasn't said to be commonly used by something or other.
+   
+  Thanks again  :)
+   
+  Rod
+   
+  > marc said:
+  >
+  > You can run make ftp listen on any port, just change the value
+>
+> [ftp]
+>   port=xxx
+>
+> in your default.cfg
+>
+> marc
+  >
+
+       
+---------------------------------
+ All new Yahoo! Mail - 
+---------------------------------
+Get a sneak peak at messages with a handy reading pane.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070511/c2678a90/attachment.htm 
+
+From navynutt2000 at yahoo.ca  Thu May 17 22:13:08 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Thu, 17 May 2007 16:13:08 -0400 (EDT)
+Subject: [Xitami] Alternate FTP-Port
+In-Reply-To: <003201c792c8$46e648c0$1dbebebe@VERFAILLIE5>
+Message-ID: <837272.17325.qm@web62503.mail.re1.yahoo.com>
+
+While running either the Xitami GUI OR Service, the edit:
+   
+  [Ftp]
+    Port = "2112"
+   
+  in the defaults.cfg did not prove satisfactory.
+   
+  When tested on the local network, FTP functioned flawlessly on port-2112... but I wound up having some major problems with clients attempting to connect from outside the network.
+   
+  Their access would log:
+   
+  68.111.xx.xx - dave [16/May/2007:23:13:10 -0700] "ftp://68.111.xx.xx/" 230 0 "-" ""
+  207.255.xx.xx - jayne [17/May/2007:03:15:14 -0700] "ftp://207.255.xx.xx/" 230 0 "-" ""
+   
+  ... but they'd never receive a response.  Their connection would simply time-out.
+   
+  TCP port-2112 was open, both on the router and software firewall (ZoneAlarm Pro) on my Xitami box (WinXp-Pro)... with no unusual activity reporting to the firewall logs.
+   
+  Immediately upon a clients attempt to log in, the serving PC would hang, and become extremely non-responsive until I stopped (and restarted) Xitami.  At least twice, this "hanging" was so extreme, that it required me to trip the power-switch in order to force a reboot.  Xitami did however, seem to continue serving web-content at a steady rate, even with the PC hanging as such.
+   
+  Since removing this line from the defaults.cfg (and reverting back to FTP port-21), clients can once again log in without any trouble... and Xitami's overall performance is UP by a very noticeable measure.
+   
+  * HTTP activity seemed to work alright after the alternate FTP-port was applied... but was far more sluggish than usual.
+   
+  Can anyone think of anything I may possibly have overlooked?
+   
+  Thanks,
+   
+  Rod
+  
+> Marc Doigny <marc at verfaillie.be> wrote:
+  > 
+> You can run make ftp listen on any port, just change the value
+> 
+> [ftp]
+>    port=xxx
+>
+> in your default.cfg
+>
+> marc
+  >
+
+
+
+       
+---------------------------------
+Ask a question on any topic and get answers from real people. Go to Yahoo! Answers. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070517/3adc0ed7/attachment.htm 
+
+From slackrat4Q at azurservers.com  Thu May 17 22:46:54 2007
+From: slackrat4Q at azurservers.com (Slackrat)
+Date: Thu, 17 May 2007 22:46:54 +0200
+Subject: [Xitami] Alternate FTP-Port
+In-Reply-To: <837272.17325.qm@web62503.mail.re1.yahoo.com> (navy nut's message
+	of "Thu\, 17 May 2007 16\:13\:08 -0400 \(EDT\)")
+References: <837272.17325.qm@web62503.mail.re1.yahoo.com>
+Message-ID: <87bqgj2n5t.fsf@azurservers.com>
+
+
+* navy nut <navynutt2000 at yahoo.ca> a ?crit
+> While running either the Xitami GUI OR Service, the edit:
+>    
+>   [Ftp]
+>     Port = "2112"
+>    
+>   in the defaults.cfg did not prove satisfactory.
+>    
+>   When tested on the local network, FTP functioned flawlessly on port-2112... but I wound up having some major problems with clients attempting to connect from outside the network.
+>    
+>   Their access would log:
+>    
+>   68.111.xx.xx - dave [16/May/2007:23:13:10 -0700] "ftp://68.111.xx.xx/" 230 0 "-" ""
+>   207.255.xx.xx - jayne [17/May/2007:03:15:14 -0700] "ftp://207.255.xx.xx/" 230 0 "-" ""
+>    
+>   ... but they'd never receive a response.  Their connection would simply time-out.
+>    
+>   TCP port-2112 was open, both on the router and software firewall (ZoneAlarm Pro) on my Xitami box (WinXp-Pro)... with no unusual activity reporting to the firewall logs.
+>    
+>   Immediately upon a clients attempt to log in, the serving PC would hang, and become extremely non-responsive until I stopped (and restarted) Xitami.  At least twice, this "hanging" was so extreme, that it required me to trip the power-switch in order to force a reboot.  Xitami did however, seem to continue serving web-content at a steady rate, even with the PC hanging as such.
+>    
+>   Since removing this line from the defaults.cfg (and reverting back to FTP port-21), clients can once again log in without any trouble... and Xitami's overall performance is UP by a very noticeable measure.
+>    
+>   * HTTP activity seemed to work alright after the alternate FTP-port was applied... but was far more sluggish than usual.
+>    
+>   Can anyone think of anything I may possibly have overlooked?
+>    
+>   Thanks,
+>    
+>   Rod
+>   
+>> Marc Doigny <marc at verfaillie.be> wrote:
+>   > 
+>> You can run make ftp listen on any port, just change the value
+>> 
+>> [ftp]
+>>    port=xxx
+>>
+>> in your default.cfg
+>>
+>> marc
+>   >
+
+Did you open the port outbound on your firewall?
+
+I personally portshift with no problem
+
+eg "portbase=1234" in defaults.cfg
+
+then http port = 80+1234
+
+anf ftp port = 21+1234
+
+
+-- 
+Regards, Slackrat [Bill Henderson] [No _4Q_ for direct email]
+
+
+From navynutt2000 at yahoo.ca  Sat May 19 15:12:14 2007
+From: navynutt2000 at yahoo.ca (navy nut)
+Date: Sat, 19 May 2007 09:12:14 -0400 (EDT)
+Subject: [Xitami] Alternate FTP-Port
+In-Reply-To: <87bqgj2n5t.fsf@azurservers.com>
+Message-ID: <234028.14388.qm@web62511.mail.re1.yahoo.com>
+
+
+FRESH MESSAGE AT PAGE-BOTTOM
+ 
+> * navy nut <navynutt2000 at yahoo.ca>
+>
+> > While running either the Xitami GUI OR Service,   
+
+> >   [Ftp]
+> >     Port = "2112"    
+> >   in the defaults.cfg did not prove satisfactory.
+> >    
+> >   clients access would log:        
+> >   ... but they'd never receive a response.
+> >    
+   
+--- Slackrat <slackrat4Q at azurservers.com> wrote:
+> 
+> Did you open the port outbound on your firewall?
+> 
+> I personally portshift with no problem
+> 
+> eg "portbase=1234" in defaults.cfg
+> 
+> then http port = 80+1234
+> 
+> anf ftp port = 21+1234
+> 
+
+Thank you for the reply Bill... 
+  please excuse my delay.
+
+"Portbase" is something I avoided, in my effort to
+keep Xitami (HTTP) listening on port 80 as usual. 
+Marc's suggestion to shift the FTP port only, was
+exactly what I was trying to achieve, and did work
+very well across the LAN.
+
+You have however caught my attention by mentioning the
+outbound port on the firewall.  This has never been an
+issue while running Xitami FTP on port-21, but may
+very well have something to do with my problem when
+shifting ports.
+
+I'm assuming that the inbound and outbound FTP-port
+would be the same???  If not, how would the outbound
+FTP port number be determined (or designated)?
+
+Thank you,
+
+Rod
+
+
+
+
+      Get a sneak peak at messages with a handy reading pane with All new Yahoo! Mail: http://mrd.mail.yahoo.com/try_beta?.intl=ca
+
+
+From nif at excitor.dk  Thu May 24 09:14:39 2007
+From: nif at excitor.dk (Niels =?ISO-8859-1?Q?Fan=F8e?=)
+Date: Thu, 24 May 2007 09:14:39 +0200
+Subject: [Xitami] Flash
+Message-ID: <OFC17D65F3.952CA01A-ONC12572E5.0026B41D-C12572E5.0027CB4F@excitor.dk>
+
+Hi,
+
+My first post - Xitami/2.5c2 on Windows XP Pro. 
+
+I've made an intranet home page on my computer at work. Only people behind 
+the firewall have access to seeing it.
+
+I want to use it as a link page for flash demo files that I create (so 
+that other people can see them as I create them). However, when I add a 
+link to the Flash container HTML file, Xitami says, "The URL you asked for 
+does not exist on this website". This, of course, is nonsense. The files 
+are there. Opening the HTML file in Firefox or IE plays the Flash nicely.
+
+In the link to the file, I have tried both a relative link 
+("/flash/AcceptMeeting.htm") and absolute links 
+("http://exi_nif-l01.headquarters.excitor.dk/webpages/flash/AcceptMeeting.htm").
+Now the funny thing is that it actually worked once when I had my computer 
+(a laptop) at home, running on my own wireless network.
+
+Xitami has been up and down several times. The swf mime type is listed in 
+the xitami.cfg file with no comment sign.
+
+I really hope someone can help me! I'd hate to give up Xitami and go 
+IIS..!
+
+(I've got another issue involving PHP and the "file()" command, but I'll 
+save that for later!)
+Med venlig hilsen / Best regards,
+Niels Fan?e
+Documentation Manager
+Excitor A/S - Frydenh?j All? 73 - 2670 Greve - Denmark - CVR 2603 1508
+Mobile: +45 3091 4222 - Phone: +45 7021 6800 - Fax: +45 7021 6810
+Internet: www.dmesync.com
+This e-mail and any attached files along with it may contain confidential 
+information and is for the addressee's eyes only. The information included 
+is not to be surrendered, released or copied to any unauthorized persons. 
+If you have received this communication in error, please notify us 
+immediately by telephone: +45 7021 6800 or by sender's e-mail, and delete 
+this e-mail from your computer. Thank you.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070524/7e0c1c64/attachment.htm 
+
+From francis.turner at gmail.com  Sun May 27 12:21:00 2007
+From: francis.turner at gmail.com (Francis Turner)
+Date: Sun, 27 May 2007 12:21:00 +0200
+Subject: [Xitami] Flash
+In-Reply-To: <OFC17D65F3.952CA01A-ONC12572E5.0026B41D-C12572E5.0027CB4F@excitor.dk>
+References: <OFC17D65F3.952CA01A-ONC12572E5.0026B41D-C12572E5.0027CB4F@excitor.dk>
+Message-ID: <f83609d50705270321h63fafcdewbc75ccf4ee721cff@mail.gmail.com>
+
+Relative links should definitely be better.
+
+You probably need to add an alias. If /flash/AcceptMeeting.html is in
+the directory c:\flash then you will need to create a directory alias
+to it as the default root directory for xitami webpages is
+c:\xitami\webpages. Hence if you do not put the alias in there when
+xitami tries to find /flash/AcceptMeeting.html it looks for
+c:\xitami\webpages\flash\AcceptMeeting.html not
+c:\flash\AcceptMeeting.html
+
+To create the alias stick
+[Alias]
+    flash = "c:/flash"
+in your c:\xitami\defaults.cfg file (or used the web admin tool to do
+the same thing).
+
+On 5/24/07, Niels Fan?e <nif at excitor.dk> wrote:
+>
+> Hi,
+>
+> My first post - Xitami/2.5c2 on Windows XP Pro.
+>
+> I've made an intranet home page on my computer at work. Only people behind
+> the firewall have access to seeing it.
+>
+> I want to use it as a link page for flash demo files that I create (so that
+> other people can see them as I create them). However, when I add a link to
+> the Flash container HTML file, Xitami says, "The URL you asked for does not
+> exist on this website". This, of course, is nonsense. The files are there.
+> Opening the HTML file in Firefox or IE plays the Flash nicely.
+>
+> In the link to the file, I have tried both a relative link
+> ("/flash/AcceptMeeting.htm") and absolute links
+> ("http://exi_nif-l01.headquarters.excitor.dk/webpages/flash/AcceptMeeting.htm").
+> Now the funny thing is that it actually worked once when I had my computer
+> (a laptop) at home, running on my own wireless network.
+>
+> Xitami has been up and down several times. The swf mime type is listed in
+> the xitami.cfg file with no comment sign.
+>
+> I really hope someone can help me! I'd hate to give up Xitami and go IIS..!
+>
+> (I've got another issue involving PHP and the "file()" command, but I'll
+> save that for later!)
+>
+> Med venlig hilsen / Best regards,
+>
+> Niels Fan?e
+>  Documentation Manager
+>
+> Excitor A/S - Frydenh?j All? 73 - 2670 Greve - Denmark - CVR 2603 1508
+>  Mobile: +45 3091 4222 - Phone: +45 7021 6800 - Fax: +45 7021 6810
+>  Internet: www.dmesync.com
+>  ________________________________
+> This e-mail and any attached files along with it may contain confidential
+> information and is for the addressee's eyes only. The information included
+> is not to be surrendered, released or copied to any unauthorized persons. If
+> you have received this communication in error, please notify us immediately
+> by telephone: +45 7021 6800 or by sender's e-mail, and delete this e-mail
+> from your computer. Thank you.
+>
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From nif at excitor.dk  Wed May 30 14:01:07 2007
+From: nif at excitor.dk (Niels =?ISO-8859-1?Q?Fan=F8e?=)
+Date: Wed, 30 May 2007 14:01:07 +0200
+Subject: [Xitami] Flash
+In-Reply-To: <f83609d50705270321h63fafcdewbc75ccf4ee721cff@mail.gmail.com>
+Message-ID: <OF641918D0.409272DB-ONC12572EB.0041AFC2-C12572EB.0042057E@excitor.dk>
+
+Hi,
+
+Thanks. The "flash" directory is relative to the webpages directory.
+
+I have now abandoned xitami for apache - there are simply too many quirks. 
+Sad - I liked xitami. But my PHP code stopped working (especially code 
+related to opening files) - etc.
+
+Apache worked out of the box...
+Med venlig hilsen / Best regards,
+Niels Fan?e
+Documentation Manager
+Excitor A/S - Frydenh?j All? 73 - 2670 Greve - Denmark - CVR 2603 1508
+Mobile: +45 3091 4222 - Phone: +45 7021 6800 - Fax: +45 7021 6810
+Internet: www.dmesync.com
+This e-mail and any attached files along with it may contain confidential 
+information and is for the addressee's eyes only. The information included 
+is not to be surrendered, released or copied to any unauthorized persons. 
+If you have received this communication in error, please notify us 
+immediately by telephone: +45 7021 6800 or by sender's e-mail, and delete 
+this e-mail from your computer. Thank you.
+
+xitami-bounces at lists.xitami.org wrote on 27-05-2007 12:21:00:
+
+> Relative links should definitely be better.
+> 
+> You probably need to add an alias. If /flash/AcceptMeeting.html is in
+> the directory c:\flash then you will need to create a directory alias
+> to it as the default root directory for xitami webpages is
+> c:\xitami\webpages. Hence if you do not put the alias in there when
+> xitami tries to find /flash/AcceptMeeting.html it looks for
+> c:\xitami\webpages\flash\AcceptMeeting.html not
+> c:\flash\AcceptMeeting.html
+> 
+> To create the alias stick
+> [Alias]
+>     flash = "c:/flash"
+> in your c:\xitami\defaults.cfg file (or used the web admin tool to do
+> the same thing).
+> 
+> On 5/24/07, Niels Fan?e <nif at excitor.dk> wrote:
+> >
+> > Hi,
+> >
+> > My first post - Xitami/2.5c2 on Windows XP Pro.
+> >
+> > I've made an intranet home page on my computer at work. Only people 
+behind
+> > the firewall have access to seeing it.
+> >
+> > I want to use it as a link page for flash demo files that I create (so 
+that
+> > other people can see them as I create them). However, when I add a 
+link to
+> > the Flash container HTML file, Xitami says, "The URL you asked for 
+does not
+> > exist on this website". This, of course, is nonsense. The files are 
+there.
+> > Opening the HTML file in Firefox or IE plays the Flash nicely.
+> >
+> > In the link to the file, I have tried both a relative link
+> > ("/flash/AcceptMeeting.htm") and absolute links
+> > ("http://exi_nif-l01.headquarters.excitor.
+> dk/webpages/flash/AcceptMeeting.htm").
+> > Now the funny thing is that it actually worked once when I had my 
+computer
+> > (a laptop) at home, running on my own wireless network.
+> >
+> > Xitami has been up and down several times. The swf mime type is listed 
+in
+> > the xitami.cfg file with no comment sign.
+> >
+> > I really hope someone can help me! I'd hate to give up Xitami and go 
+IIS..!
+> >
+> > (I've got another issue involving PHP and the "file()" command, but 
+I'll
+> > save that for later!)
+> >
+> > Med venlig hilsen / Best regards,
+> >
+> > Niels Fan?e
+> >  Documentation Manager
+> >
+> > Excitor A/S - Frydenh?j All? 73 - 2670 Greve - Denmark - CVR 2603 1508
+> >  Mobile: +45 3091 4222 - Phone: +45 7021 6800 - Fax: +45 7021 6810
+> >  Internet: www.dmesync.com
+> >  ________________________________
+> > This e-mail and any attached files along with it may contain 
+confidential
+> > information and is for the addressee's eyes only. The information 
+included
+> > is not to be surrendered, released or copied to any unauthorized 
+persons. If
+> > you have received this communication in error, please notify us 
+immediately
+> > by telephone: +45 7021 6800 or by sender's e-mail, and delete this 
+e-mail
+> > from your computer. Thank you.
+> >
+> >
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe:
+> > http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> -- 
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070530/e1c2a98e/attachment.htm 
+

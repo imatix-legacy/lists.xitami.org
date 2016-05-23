@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=001101c88e14%24733f0860%2459bd1920%24%40net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007769.html">
+   <LINK REL="Next"  HREF="007779.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>Paul Reid</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=001101c88e14%24733f0860%2459bd1920%24%40net"
+       TITLE="[Xitami] Multi server issue">preid at rci.rutgers.edu
+       </A><BR>
+    <I>Wed Mar 26 06:48:40 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007769.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007779.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7777">[ date ]</a>
+              <a href="thread.html#7777">[ thread ]</a>
+              <a href="subject.html#7777">[ subject ]</a>
+              <a href="author.html#7777">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here's some sloppy thinking from someone who knew the ARPAnet, drifted 
+away, and on return had to learn this newfangled TCP stuff.
+
+ &gt; You have one port 80
+
+IP is street address.
+
+Port is a box at that address.
+
+Clearly you can have 1234 Oak St Box 80, and 1235 Oak St Box 80, without 
+mix-up. 192.168.1.100:80 and 192.168.1.101:80 are -different- logical 
+places, even if they are same physical card in same machine.
+
+What RO was trying -SHOULD- work.
+
+Well, maybe. I'm constantly getting mail for &quot;141&quot; in other 
+buildings/streets. My mailman does not always get it right.
+
+Hierarchical addressing systems are easy to screw-up. Mailman sorts 
+right only 99% of the time. If you are building a machine, it is easy to 
+overlook something, get it 99% right. If it screws-up only in unusual 
+situations, it may go unnoticed for a decade.
+
+If this were Mac O/S 7, or Win 311, I'd bet on the tossed-together 
+non-unix TCP stacks of that vintage. But W2K+ stole a unix stack and 
+should do the right thing.
+
+Magnus has magnanimously traced the conflict. Xitami opens a lot more 
+ports than just 80. My reading is that some of these are opened without 
+specifying an IP. The default is &quot;all&quot;, the first copy already snagged 
+those ports, the request is refused, Xitami suspends itself.
+
+Is it a bug? Since you CAN run MANY different IP addresses on a single 
+copy of Xitami, demanding to be able to run two copies seems greedy. 
+(Specially for free.)
+
+Yet clearly there is IP:Port support; just somehow not on the LRWP 
+frill. Probably an oversight by the developer. Well, it IS a technology 
+demo, not promised to be all things to all people. And it appears the 
+community didn't notice this oddity for many years; how &quot;essential&quot; can 
+it be?
+
+Xitami NT-Service source code IS available. And it is darn clean stuff. 
+Knowing the bug location, any half-fast C programmer should be able to 
+find the function call and the oversight. (Or, since &quot;nobody&quot; uses LRWP, 
+simply lose the whole LRWP call.)
+
+Nearly a decade ago, I was able to build Xitami from source. I'm not so 
+clever anymore, or I've grown smart enough to have lost all my MS-C 
+compiler disks.  I'm a user, not a coder. Do we have any coders here, or 
+just users? And coders who want to spend time on this odd-horse problem?
+
+I think the xitami.wikidot.com site says it all. There are NO edits, 
+ever, not even the glaring typo in Pieter's introduction (&quot;not&quot; for 
+&quot;now&quot;). I just fixed that, and added Magnus's comments.... but 45 days 
+with __NO__ community input means nobody has an oar in the water.
+
+  -PRR
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007769.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007779.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7777">[ date ]</a>
+              <a href="thread.html#7777">[ thread ]</a>
+              <a href="subject.html#7777">[ subject ]</a>
+              <a href="author.html#7777">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

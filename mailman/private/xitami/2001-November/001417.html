@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] $PHP_SELF variable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001416.html">
+   <LINK REL="Next"  HREF="001421.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] $PHP_SELF variable
+   </H1>
+    <B>Paul N Shortis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] $PHP_SELF variable">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 14 Nov 2001 09:45:06 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001416.html">[Xitami] Xitami 2.5b5 NT service version
+</A></li>
+        <LI> Next message: <A HREF="001421.html">[Xitami] Problem with xml-gsl and v25b6 console app
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1417">[ date ]</a>
+              <a href="thread.html#1417">[ thread ]</a>
+              <a href="subject.html#1417">[ subject ]</a>
+              <a href="author.html#1417">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--0__=8M7op4MRVL1Zv4mEu0fS8SQh96FFLWW20Fq1q0xVQxPncZYpiO0U01G2
+Content-type: text/plain; charset=&quot;us-ascii&quot;
+Content-Disposition: inline
+
+
+
+
+Just a little something that I used when I came across this difference between
+Apache &amp; Xitami. This will run
+on either Apache or Xitami, I didn't wrap it in a function as it is only
+executed once at the beginning of a new
+session in my application.
+
+Hope you find this of some help.
+
+        $session-&gt;RootPath = stripSlashes( dirname( $PATH_TRANSLATED));     //
+Assume we are in the root dir
+        $session-&gt;BasePath = basename( $session-&gt;RootPath);
+// Assume we are one directory below the resource root
+        if( strlen( trim($PHP_SELF))) $session-&gt;BaseURL = dirname( $PHP_SELF);
+// &amp; that this matches BasePath - this works with Apache
+        else   // Xitami  ???
+        {
+     // This works for Xitami
+               $url = parse_url($HTTP_REFERER);
+               $session-&gt;BaseURL = dirname( $url[&quot;path&quot;]);
+        }
+
+Regards, Paul Shortis
+
+
+
+
+
+Fabian Bess &lt;<A HREF="mailto:fbess@gmx.net">fbess@gmx.net</A>&gt; on 11/13/2001 05:28:36 PM
+
+Please respond to <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+To:   <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+cc:    (bcc: Paul N Shortis/Roads/QMR/Au)
+Subject:  Re: [Xitami] $PHP_SELF variable
+
+
+
+Paul Reid wrote:
+
+&gt;&gt;<i> Since Version 2.4d5 (or d4 I'm not sure) this PHP variable which should be
+</I>filled with the calling script's filename is empty.
+&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Which Version Of PHP ???
+</I>&gt;<i>
+</I>latest PHP 4.0.6
+
+&gt;<i>The current version of PHP changed which variable it uses to find its
+</I>&gt;<i>script. The PHP site documents this as a security issue. Xitami does not
+</I>&gt;<i>(AFAIK, never did) fill this variable.
+</I>&gt;<i>
+</I>Well, it did on Xitami sometime and it still does with Apache.
+
+&gt;<i>I had a BAT file which patched this under DOS/Win. It was posted here
+</I>&gt;<i>last year. Unfortunately I lost most of my older messages since then. I
+</I>&gt;<i>*think* the trick is to SET PATH_INFO the same as SCRIPT_PATH and then
+</I>&gt;<i>call PHP.
+</I>&gt;<i>
+</I>Maybe you could describe this a little more in detail to me? Not on the list but
+in private?
+
+--
+Fabian Bess (<A HREF="mailto:webmaster@tannenhof.de">webmaster@tannenhof.de</A>)
+Webmaster Drogenhilfe Tannenhof Berlin e.V. '<A HREF="http://www.tannenhof.de'">http://www.tannenhof.de'</A>
+
+
+
+
+
+************************************************************
+Opinions contained in this e-mail do not necessarily reflect
+the opinions of the Queensland Department of Main Roads,
+Queensland Transport or National Transport Secretariat, or
+endorsed organisations utilising the same infrastructure.
+If you have received this electronic mail message in error,
+please immediately notify the sender and delete the message
+from your computer.
+************************************************************
+
+
+--0__=8M7op4MRVL1Zv4mEu0fS8SQh96FFLWW20Fq1q0xVQxPncZYpiO0U01G2
+Content-type: text/html; 
+	name=&quot;att1.htm&quot;
+Content-Disposition: attachment; filename=&quot;att1.htm&quot;
+Content-transfer-encoding: base64
+Content-Description: Internet HTML
+
+PGh0bWw+DQo8aGVhZD4NCjwvaGVhZD4NCjxib2R5Pg0KUGF1bCBSZWlkIHdyb3RlOjxicj4NCjxi
+bG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNpdGU9Im1pZDozQkYwMThGRi43N0MzMTZGMUByY2kucnV0
+Z2Vycy5lZHUiPg0KICA8YmxvY2txdW90ZSB0eXBlPSJjaXRlIj4NCiAgICA8cHJlIHdyYXA9IiI+
+IFNpbmNlIFZlcnNpb24gMi40ZDUgKG9yIGQ0IEknbSBub3Qgc3VyZSkgdGhpcyBQSFAgdmFyaWFi
+bGUgd2hpY2ggc2hvdWxkIGJlIGZpbGxlZCB3aXRoIHRoZSBjYWxsaW5nIHNjcmlwdCdzIGZpbGVu
+YW1lIGlzIGVtcHR5LiA8YnI+PC9wcmU+DQogICAgPC9ibG9ja3F1b3RlPg0KICAgIDxwcmUgd3Jh
+cD0iIj48IS0tLS0+PGJyPldoaWNoIFZlcnNpb24gT2YgUEhQID8/PzwvcHJlPg0KICAgIDwvYmxv
+Y2txdW90ZT4NCmxhdGVzdCBQSFAgNC4wLjY8YnI+DQogICAgPGJsb2NrcXVvdGUgdHlwZT0iY2l0
+ZSIgY2l0ZT0ibWlkOjNCRjAxOEZGLjc3QzMxNkYxQHJjaS5ydXRnZXJzLmVkdSI+DQogICAgICA8
+cHJlIHdyYXA9IiI+VGhlIGN1cnJlbnQgdmVyc2lvbiBvZiBQSFAgY2hhbmdlZCB3aGljaCB2YXJp
+YWJsZSBpdCB1c2VzIHRvIGZpbmQgaXRzPGJyPnNjcmlwdC4gVGhlIFBIUCBzaXRlIGRvY3VtZW50
+cyB0aGlzIGFzIGEgc2VjdXJpdHkgaXNzdWUuIFhpdGFtaSBkb2VzIG5vdDxicj4oQUZBSUssIG5l
+dmVyIGRpZCkgZmlsbCB0aGlzIHZhcmlhYmxlLjwvcHJlPg0KICAgICAgPC9ibG9ja3F1b3RlPg0K
+V2VsbCwgaXQgZGlkIG9uIFhpdGFtaSBzb21ldGltZSBhbmQgaXQgc3RpbGwgZG9lcyB3aXRoIEFw
+YWNoZS48YnI+DQogICAgICA8YmxvY2txdW90ZSB0eXBlPSJjaXRlIiBjaXRlPSJtaWQ6M0JGMDE4
+RkYuNzdDMzE2RjFAcmNpLnJ1dGdlcnMuZWR1Ij4NCiAgICAgICAgPHByZSB3cmFwPSIiPkkgaGFk
+IGEgQkFUIGZpbGUgd2hpY2ggcGF0Y2hlZCB0aGlzIHVuZGVyIERPUy9XaW4uIEl0IHdhcyBwb3N0
+ZWQgaGVyZTxicj5sYXN0IHllYXIuIFVuZm9ydHVuYXRlbHkgSSBsb3N0IG1vc3Qgb2YgbXkgb2xk
+ZXIgbWVzc2FnZXMgc2luY2UgdGhlbi4gSTxicj4qdGhpbmsqIHRoZSB0cmljayBpcyB0byBTRVQg
+UEFUSF9JTkZPIHRoZSBzYW1lIGFzIFNDUklQVF9QQVRIIGFuZCB0aGVuPGJyPmNhbGwgUEhQLiA8
+YnI+PC9wcmU+DQogICAgICAgIDwvYmxvY2txdW90ZT4NCiAgICAgICAgPHByZSBjbGFzcz0ibW96
+LXNpZ25hdHVyZSIgY29scz0iJG1haWx3cmFwY29sIj5NYXliZSB5b3UgY291bGQgZGVzY3JpYmUg
+dGhpcyBhIGxpdHRsZSBtb3JlIGluIGRldGFpbCB0byBtZT8gTm90IG9uIHRoZSBsaXN0IGJ1dCBp
+biBwcml2YXRlPzxicj48YnI+LS0gDQpGYWJpYW4gQmVzcyAoPGEgY2xhc3M9Im1vei10eHQtbGlu
+ay1hYmJyZXZpYXRlZCIgaHJlZj0ibWFpbHRvOndlYm1hc3RlckB0YW5uZW5ob2YuZGUiPndlYm1h
+c3RlckB0YW5uZW5ob2YuZGU8L2E+KQ0KV2VibWFzdGVyIERyb2dlbmhpbGZlIFRhbm5lbmhvZiBC
+ZXJsaW4gZS5WLiAnPGEgY2xhc3M9Im1vei10eHQtbGluay1mcmVldGV4dCIgaHJlZj0iaHR0cDov
+L3d3dy50YW5uZW5ob2YuZGUiPmh0dHA6Ly93d3cudGFubmVuaG9mLmRlPC9hPicNCjwvcHJlPg0K
+ICAgICAgICA8YnI+DQogICAgICAgIDwvYm9keT4NCiAgICAgICAgPC9odG1sPg0KDQo=
+
+--0__=8M7op4MRVL1Zv4mEu0fS8SQh96FFLWW20Fq1q0xVQxPncZYpiO0U01G2--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001416.html">[Xitami] Xitami 2.5b5 NT service version
+</A></li>
+	<LI> Next message: <A HREF="001421.html">[Xitami] Problem with xml-gsl and v25b6 console app
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1417">[ date ]</a>
+              <a href="thread.html#1417">[ thread ]</a>
+              <a href="subject.html#1417">[ subject ]</a>
+              <a href="author.html#1417">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

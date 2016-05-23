@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] xitami - php (PHP_SELF)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002190.html">
+   <LINK REL="Next"  HREF="002195.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] xitami - php (PHP_SELF)
+   </H1>
+    <B>Marcio Marchini
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] xitami - php (PHP_SELF)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 29 Jan 2002 09:54:21 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002190.html">[Xitami] xitami - php (PHP_SELF)
+</A></li>
+        <LI> Next message: <A HREF="002195.html">[Xitami] Anyone good with cgi - perl??
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2191">[ date ]</a>
+              <a href="thread.html#2191">[ thread ]</a>
+              <a href="subject.html#2191">[ subject ]</a>
+              <a href="author.html#2191">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> When running the phpinfo() to get all the values for the system
+</I>&gt;<i> variables etc ... the PHP_SELF variable is blank/empty .... it should
+</I>&gt;<i> normally return the URL of the webpage from where you call the
+</I>&gt;<i> phpinfo () function or the variable itself.
+</I>&gt;<i> 
+</I>&gt;<i> Anyone have an idea where the mistake might be? some Xitami server
+</I>&gt;<i> setting somewhere? perhaps a setting in the php.ini configuration?
+</I>&gt;<i> Any help is much appreciated. Thanks!
+</I>&gt;<i> God bless you with His grace and peace 
+</I>
+
+	This is what I use:
+
+// Under Apache $PHP_SELF is what we want, under Xitami it is $SCRIPT_NAME
+// We find out based on which one has &quot;.php&quot; in it.
+if (ereg (&quot;\.php&quot;, $SCRIPT_NAME)) $CONSTANT_SELF = $SCRIPT_NAME;
+else $CONSTANT_SELF = $PHP_SELF;
+$CONSTANT_SELF = str_replace (&quot;\\\\&quot;, &quot;/&quot;, $CONSTANT_SELF);
+
+
+
+	Then just use $CONSTANT_SELF
+
+marcio
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002190.html">[Xitami] xitami - php (PHP_SELF)
+</A></li>
+	<LI> Next message: <A HREF="002195.html">[Xitami] Anyone good with cgi - perl??
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2191">[ date ]</a>
+              <a href="thread.html#2191">[ thread ]</a>
+              <a href="subject.html#2191">[ subject ]</a>
+              <a href="author.html#2191">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

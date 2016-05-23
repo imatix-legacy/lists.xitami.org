@@ -1,0 +1,208 @@
+From xitami_help at hotmail.com  Fri May  5 21:07:16 2006
+From: xitami_help at hotmail.com (University of BC Psychology)
+Date: Fri May  5 21:07:21 2006
+Subject: [Xitami] can't turn off computer after running xigui32.exe
+Message-ID: <BAY13-F216140F11983D8CC83E56181B50@phx.gbl>
+
+Hi,
+
+I am using a windows tablet PC (Toshiba M200) and Xitami 2.5c2.  I am having 
+a slight problem.  Initially I start xitami by running xigui32.exe.  That 
+opens up a small icon in the windows tray.  I then start a computerized 
+questionnaire I programmed for collecting some hospital data using microsoft 
+internet explorer.  When I am done running the questionnaire, I close 
+internet explorer and right click on the xitami icon to shut it down.  But 
+here's where the problem starts, even after terminating xitami, I can't shut 
+down or log off windows.  When click "start --> shutdown" the screen 
+flashes, and I am still logged in.
+
+Any suggestions?
+thanks,
+Dan
+
+_________________________________________________________________
+Don't just Search. Find! http://search.sympatico.msn.ca/default.aspx The new 
+MSN Search! Check it out!
+
+From wolever.lists at gmail.com  Fri May 12 21:43:29 2006
+From: wolever.lists at gmail.com (David Wolever)
+Date: Fri May 12 21:43:35 2006
+Subject: [Xitami] Random Lockups
+Message-ID: <1c33a90a0605121243v10764f75l12f410089ef20a66@mail.gmail.com>
+
+Hey,
+I've noticed that, from time to time, Xitami will lock up (port 80
+will close) and I'll have to kill/restart it by hand.  While I place
+the blame for this soly on the unholy mess of Perl scripts that it is
+serving, I'd like to know if there are any facilities Xitami provides
+to debug these lockups.  I've tried using the "debug" flag in the
+config file, but it does not seem to provide any useful information.
+Alternately, if there was a better way to kill/restart Xitami when it
+goes down, it would be nice to know about... Right now I've just got a
+script that queries the server every 30 seconds, and if the query
+fails it kills/restarts it (which is neither terribly clean or
+effective).
+Thanks for the help,
+David
+
+From rickhead at gmail.com  Fri May 12 22:07:05 2006
+From: rickhead at gmail.com (Rick Headly)
+Date: Fri May 12 22:07:11 2006
+Subject: [Xitami] Random Lockups
+In-Reply-To: <1c33a90a0605121243v10764f75l12f410089ef20a66@mail.gmail.com>
+References: <1c33a90a0605121243v10764f75l12f410089ef20a66@mail.gmail.com>
+Message-ID: <11689a700605121307y61dcadb6ta7fcb0dbc7909ef3@mail.gmail.com>
+
+i'm likely way off base with this one...
+
+but is it possible that you may have another application running on that
+machine (like a messenger client), that opens and steals port 80 away from
+xitami?
+
+rick
+
+
+On 5/12/06, David Wolever <wolever.lists@gmail.com> wrote:
+>
+> Hey,
+> I've noticed that, from time to time, Xitami will lock up (port 80
+> will close) and I'll have to kill/restart it by hand.  While I place
+> the blame for this soly on the unholy mess of Perl scripts that it is
+> serving, I'd like to know if there are any facilities Xitami provides
+> to debug these lockups.  I've tried using the "debug" flag in the
+> config file, but it does not seem to provide any useful information.
+> Alternately, if there was a better way to kill/restart Xitami when it
+> goes down, it would be nice to know about... Right now I've just got a
+> script that queries the server every 30 seconds, and if the query
+> fails it kills/restarts it (which is neither terribly clean or
+> effective).
+> Thanks for the help,
+> David
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060512/e7cbee70/attachment.html
+From ibjr at ecvnet.com  Fri May 12 22:41:46 2006
+From: ibjr at ecvnet.com (ibjr)
+Date: Fri May 12 22:41:27 2006
+Subject: [Xitami] Random Lockups
+References: <1c33a90a0605121243v10764f75l12f410089ef20a66@mail.gmail.com>
+	<11689a700605121307y61dcadb6ta7fcb0dbc7909ef3@mail.gmail.com>
+Message-ID: <000e01c67604$7d6733a0$1401a8c0@p4>
+
+My problem was that xitami would not let go of some connections, and they 
+would pile up and cause a lockup or crash every couple of days. I am using 
+it on a PC with XP Pro, and my solution was to make xitami a service, then 
+use the "scheduled tasks" feature to stop and start the service each morning 
+about 3:45 AM...... Haven't had any problems at all since setting it up this 
+way, and I also run a ton of perl scripts on 5 domains using a DSL line.
+I am even running two instances of xitami, using the second one to reset the 
+main one when a new password is added for a "protected folder" area. This is 
+needed because Xitami's "refresh" doesn't seem to work in the newer versions 
+....... JR 
+
+
+From wolever.lists at gmail.com  Sat May 13 05:08:16 2006
+From: wolever.lists at gmail.com (David Wolever)
+Date: Sat May 13 05:08:26 2006
+Subject: [Xitami] Random Lockups
+In-Reply-To: <000e01c67604$7d6733a0$1401a8c0@p4>
+References: <1c33a90a0605121243v10764f75l12f410089ef20a66@mail.gmail.com>
+	<11689a700605121307y61dcadb6ta7fcb0dbc7909ef3@mail.gmail.com>
+	<000e01c67604$7d6733a0$1401a8c0@p4>
+Message-ID: <1c33a90a0605122008o19b9e869p48ed1ee34eccde30@mail.gmail.com>
+
+Ah, this seems like it could be it!
+I'll give it a try.
+Thanks,
+David
+
+On 5/12/06, ibjr <ibjr@ecvnet.com> wrote:
+> My problem was that xitami would not let go of some connections, and they
+> would pile up and cause a lockup or crash every couple of days. I am using
+> it on a PC with XP Pro, and my solution was to make xitami a service, then
+> use the "scheduled tasks" feature to stop and start the service each morning
+> about 3:45 AM...... Haven't had any problems at all since setting it up this
+> way, and I also run a ton of perl scripts on 5 domains using a DSL line.
+> I am even running two instances of xitami, using the second one to reset the
+> main one when a new password is added for a "protected folder" area. This is
+> needed because Xitami's "refresh" doesn't seem to work in the newer versions
+> ....... JR
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+From dbuckley at tex.com  Thu May 25 01:05:46 2006
+From: dbuckley at tex.com (David Buckley)
+Date: Thu May 25 01:05:59 2006
+Subject: [Xitami] problem building Xitami on Linux
+Message-ID: <620142177.1148555146@[192.168.2.170]>
+
+
+I'm attempting to build Xitami under Linux, but am having a problem.  The 
+file 'c' appears to be missing from the tar of both the 2.4 and 2.5 
+releases.
+
+Is this an oversight, or is there something I just don't know...
+
+Thanks, David Buckley.
+
+From wlofie.ml at gmail.com  Thu May 25 04:56:32 2006
+From: wlofie.ml at gmail.com (Bob Wolf)
+Date: Thu May 25 04:56:36 2006
+Subject: [Xitami] problem building Xitami on Linux
+In-Reply-To: <620142177.1148555146@192.168.2.170>
+References: <620142177.1148555146@192.168.2.170>
+Message-ID: <4e44b760605241956q617ee71bwd4fdd1b8b490c062@mail.gmail.com>
+
+I had the same problem and just like you tracked it to missing 'c'  I asked
+and
+the reply i was given from this list (and the solution did work) is just
+below:
+
+---quote---
+Xitami uses a number of components from other iMatix packages to build.  The
+'c' script being the one you need to compile (others are used when modifying
+the source code).
+
+The simplest solution is to download the Base package from http://
+www.imatix.net/pub and extract the 'c' script you'll find in base/boom.
+Place this on the path somewhere.
+
+Alternatively you can build the full Base package, after which Xitami will
+be
+happy to compile.
+
+I'm sorry for the broken Xitami source package.  I'll get around to fixing
+it,
+one day.
+
+---end quote---
+
+Hope this helps
+wlofie
+
+
+On 5/24/06, David Buckley <dbuckley@tex.com> wrote:
+>
+>
+> I'm attempting to build Xitami under Linux, but am having a problem.  The
+> file 'c' appears to be missing from the tar of both the 2.4 and 2.5
+> releases.
+>
+> Is this an oversight, or is there something I just don't know...
+>
+> Thanks, David Buckley.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060524/0874aa66/attachment.htm

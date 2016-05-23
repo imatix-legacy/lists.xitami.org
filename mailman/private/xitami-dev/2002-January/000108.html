@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] About Libero
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000104.html">
+   <LINK REL="Next"  HREF="000105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] About Libero
+   </H1>
+    <B>KERESZTFALVI Laszlo
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] About Libero">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 22 Jan 2002 10:31:55 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000104.html">[Xitami-Dev] About Libero
+</A></li>
+        <LI> Next message: <A HREF="000105.html">[Xitami-Dev] Change of architecture in SMT@CVS ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Jan 21, 2002 at 01:31:37PM +0100, Pieter Hintjens wrote:
+&gt;<i> It's a good idea, and indeed I generally prefer Flex to Libero for 
+</I>&gt;<i> designing parsers.  However... I once wrote a full COBOL lexical 
+</I>&gt;<i> analyser in Lex, hit several hard limitations and ended-up using a 
+</I>
+Basically, I suggest Bison which is a 'yacc' by GNU (AFAIK). So, it is a
+compiler compiler. Flex is only a parser generator, no more!
+
+Flex really supports states to enable very complicated context dependent
+tokenization but this is usually not required and the syntax should be
+realized in the Bison part.
+
+Before I found Libero (and it was a love for the first sight) I had first
+met the FSM design in real-life when one of my collegues who had worked on
+cdrom controller hardwares ten years ago had used the FSM approach to
+build data stream processor programs using a switch-case representation by
+hand. So, I'd hunt for some tool to help the design-to-representation.
+First, I'd wanted to use Bison and so grammars to build the FSM (bison
+also generates state transition matrix in source format) but it had been
+very very hard to construct a language from a flowchart. (I'd thought that
+since the data stream can be processed it is a kind of protocol and
+protocols are usually spoken :)
+
+Even the FSM is a fine representation for both grammars and logic the
+approach is very different I think. You mention that &quot;Libero is not for
+everything&quot; in the doc. I think program logic usually use comparisions
+(if/switch), iterations (loops) and exception handling while grammars use
+substitution, recursion and pattern matching. We know that a recursion can
+be transformed into iteration and so on, but I think a compiler can be
+more efficient and extendable using grammar techniques while a program
+logic can profit from flowchart-like clear transition description
+technique.
+
+I feel the difference is something like between C/C++/Java/whatever and
+LISP/Scheme. While the previous is for programming logic the latter is for
+pattern finding, decision trees, AI. Both can be used for other targets
+but it'd be a pain! Just think about general, day-by-day coding in LISP!
+OK, maybe thit was too hard, but feel the difference. That's why I think
+Bison would be better for compiler issues like Libero and GSL. Libero will
+still remain genious for logic!
+
+
+Sorry being so long or talking about well-known issues.
+
+Regards,
+Laszlo
+
+-- 
+If carrots are so good for the eyes, how come I see so many dead rabbits
+on the highway?
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000104.html">[Xitami-Dev] About Libero
+</A></li>
+	<LI> Next message: <A HREF="000105.html">[Xitami-Dev] Change of architecture in SMT@CVS ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

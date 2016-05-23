@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> re;  [Xitami] Most Requested Files
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005675.html">
+   <LINK REL="Next"  HREF="005681.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>re;  [Xitami] Most Requested Files
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="re;  [Xitami] Most Requested Files">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 2 Feb 2004 10:56:20 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005675.html">re;  [Xitami] Most Requested Files
+</A></li>
+        <LI> Next message: <A HREF="005681.html">[Xitami] Help setting up virtual hosts.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5676">[ date ]</a>
+              <a href="thread.html#5676">[ thread ]</a>
+              <a href="subject.html#5676">[ subject ]</a>
+              <a href="author.html#5676">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Steve,
+
+Don't forget the default.ida file request that has that gibberishly long
+request.  I believe that is an attempt to stuff and overflow some buffer
+(that appears fixed in latest Xitami).  Yeah!
+
+Virtual Hosting maintains separate log files for each domain.  (Those
+numerical archive things are bugging me though.).  &quot;Access.log&quot; now logs
+only the base host.  Since the scanners only go at your WAN IP, it logs into
+access.log and the world is a neater, cleaner place.
+
+To be rid of these scans, I first tried to port forward port 80 to another
+port on my router but what I wanted to filter just followed the forwarding
+(duh!).
+
+So I changed my base HTTP port to 1975.  This eliminates ALL scanners that
+come in under my IP (search bots come in by domain).  At my DNS service
+(ZoneEdit) I set up a ww2.thisdomain.com(or any extension) for each domain I
+have and point it to my server.  In Web Forwarding, each main domain
+(www.eachdomain.com and eachdomain.com) to <A HREF="http://ww2eachdomain.com:1975/.">http://ww2eachdomain.com:1975/.</A>
+Cloaking is not necessary since you don't really need to hide anything.
+
+This really cleaned up everything.  If you VH, another entry for each ww2
+domain must made.
+
+What I want to know is how do we tell these people that their computer is
+compromised.  Or retaliate.  The IPs I log appear to be simple users, some
+even in my cluster.  Since most Broadband providers frown on serving, it's
+not like I can report these incidents to my provider!
+
+Still searching...
+
+Charles
+
+
+----- Original Message -----
+From: &quot;Steven L. Haas&quot; &lt;<A HREF="mailto:slhaas99@hotmail.com">slhaas99@hotmail.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, February 02, 2004 7:16 AM
+Subject: Re: re; [Xitami] Most Requested Files
+
+
+&gt;<i> how?
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Go Bonkers&quot; &lt;<A HREF="mailto:gobonkers@hotmail.com">gobonkers@hotmail.com</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Monday, February 02, 2004 8:53 AM
+</I>&gt;<i> Subject: re; [Xitami] Most Requested Files
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; ~~~
+</I>&gt;<i> &gt; &quot;404 not found errors, but none of my links
+</I>&gt;<i> &gt; are bad, so I don't understand what this could be caused by.  The only
+</I>&gt;<i> thing
+</I>&gt;<i> &gt; I can track down is that the most commonly requested files are cmd.exe
+</I>and
+&gt;<i> &gt; httpodbc.dll&quot;
+</I>&gt;<i> &gt; ~
+</I>&gt;<i> &gt; I've taken the approach of making a virtual host.cfg for my IP# and
+</I>&gt;<i> blocking
+</I>&gt;<i> &gt; access to it.  Those worms still come through but now get logged into a
+</I>&gt;<i> &gt; separate logfile - keeps my regular logfile much smaller and readable
+</I>and
+&gt;<i> at
+</I>&gt;<i> &gt; the same time keeps the kids scanning ip#'s and fiddling around away.
+</I>&gt;<i> &gt; ~~~
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; _________________________________________________________________
+</I>&gt;<i> &gt; What are the 5 hot job markets for 2004? Click here to find out.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I><A HREF="http://msn.careerbuilder.com/Custom/MSN/CareerAdvice/WPI_WhereWillWeFindJobs">http://msn.careerbuilder.com/Custom/MSN/CareerAdvice/WPI_WhereWillWeFindJobs</A>
+In2004.htm?siteid=CBMSN3006&amp;sc_extcmp=JS_wi08_dec03_hotmail1
+&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005675.html">re;  [Xitami] Most Requested Files
+</A></li>
+	<LI> Next message: <A HREF="005681.html">[Xitami] Help setting up virtual hosts.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5676">[ date ]</a>
+              <a href="thread.html#5676">[ thread ]</a>
+              <a href="subject.html#5676">[ subject ]</a>
+              <a href="author.html#5676">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,308 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] web server w/ router (again)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005662.html">
+   <LINK REL="Next"  HREF="005667.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] web server w/ router (again)
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] web server w/ router (again)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 29 Jan 2004 12:08:44 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005662.html">[Xitami] web server w/ router (again)
+</A></li>
+        <LI> Next message: <A HREF="005667.html">[Xitami] web server w/ router (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5664">[ date ]</a>
+              <a href="thread.html#5664">[ thread ]</a>
+              <a href="subject.html#5664">[ subject ]</a>
+              <a href="author.html#5664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0010_01C3E660.A44C0440
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Chestnut,
+
+Entering your external IP WILL access your web site, even when typed at =
+the server (just tested it).  Your access.log file will show your =
+gateway address (in Steve's case 192.168.1.1) instead of the usual =
+external access IP.  Sometimes, in my instance anyway, you have to enter =
+the &quot;<A HREF="http://"">http://&quot;</A> along with the IP.  But ... if virtual hosting is active =
+and there's nothing at base host, then you get nothing.
+
+I don't understand why it doesn't work the same as my operation.  For =
+the sake of comparison:
+
+Router is a Linksys BEFW11S4 wireless 4-port (first version, nearly 2 =
+years old)
+Router's address is changed to 10.168.1.1 and is also the gateway
+Subnet mask is 255.255.248.0 (I don't know why)
+DHCP services are on with addresses starting at 10.168.1.100
+DMZ Host is set to 10.168.1.50 (notice outside DHCP territory but =
+shouldn't matter)
+    (*I have tried Port Forward and that works slick too!)
+
+Computer is a hand-me-down P166 that I just upped the mem to 256MB; =
+3.25GB HD.
+Running a Xitami 2.5c1 console (xidos.exe) in a DOS windows on Windows =
+98SE (does service work?)
+HTTP port is changed to 1975 and FTP is disabled
+Virtual Host is active (and actually working) but base host is blank.
+Server is manually configure to 10.168.1.50
+Gateway is entered as 10.168.1.1 along with subnet mask 255.255.255.0
+DNS IPs are also entered manually and can be found on the router's =
+Status page
+Other servers installed: Fictional Daemon (FTP and Telnet) and Mercury =
+Mail
+Also on board: MySQL and PHP
+
+I think that's all.  Hope this is useful.
+
+Charles
+www.puuaukuu.net
+
+----- Original Message -----=20
+  From: Chestnut=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Thursday, January 29, 2004 7:59 AM
+  Subject: Re: [Xitami] web server w/ router (again)
+
+
+  Steve, do you mean that you enter 24.209.120.13 when within your own =
+network, if so that will not work, need to be on the outside, another =
+computer accessing from somewhere other than your own place. The setup =
+appears to be fine. I accessed your site at 24... and it loads fine. =
+Even went to the link on The ORIGINAL DARWIN... and it loads, went to =
+one of the links from there, fine. It appears to me that your setup is =
+working as you want it to. I would say you are doing nothing wrong.
+  Patrick
+    ----- Original Message -----=20
+    From: Steven L. Haas=20
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+    Sent: Wednesday, January 28, 2004 12:43 AM
+    Subject: [Xitami] web server w/ router (again)
+
+
+    Ive posted a couple of times now about trying to run the xitami web =
+server from my computer.  It's set up pn a broadband connection that is =
+shared with a Linksys router between two computers.  I set this computer =
+(Windows XP)  to have a manual IP of 192.168.1.2  (the router's IP is =
+192.168.1.1) with the subnet mask being set to 255.255.255.0, the =
+default gateway as 192.168.1.1.  When I ran ipconfig/all I got 3 DNS =
+numbers and put the first two in as my primary and alternate DNS =
+servers.  I then set the router up in the advanced/DMZ HOST IP ADDRESS =
+to be 192.168.1.2 and turned the Xitami web server on.  When I enter =
+<A HREF="http://192.168.1.1">http://192.168.1.1</A> into the browser it goes to the router set-up, which =
+is good.  When I try to access pages on the internet, it works, which is =
+good.  When I enter <A HREF="http://192.168.1.2">http://192.168.1.2</A> it loads the index.html page I =
+put in the Xitami server folder, which is great.  Here's the problem, =
+however... when I look up my IP address online (the one assigned to me =
+via my ISP) I get 24.209.120.13.  When I enter <A HREF="http://24.209.120.13">http://24.209.120.13</A> into =
+my browser, I get nothing, which is bad.  It seems that I have =
+everything set up right and straightened out, but I still cant get =
+access to the web site Im trying to host from this computer.  What am I =
+doing wrong, or what else can I do?  
+------=_NextPart_000_0010_01C3E660.A44C0440
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4934.1600&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;Chestnut,&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Entering your external IP&amp;nbsp;WILL access your web&amp;nbsp;site, even =
+when=20
+typed at the server (just tested it).&amp;nbsp; Your access.log file will =
+show your=20
+gateway address (in Steve's case 192.168.1.1) instead of the usual =
+external=20
+access IP.&amp;nbsp; Sometimes, in my instance anyway, you have to enter the =
+
+&quot;<A HREF="http://"">http://&quot;</A> along with the IP.&amp;nbsp; But ...&amp;nbsp;if virtual hosting is =
+active and=20
+there's nothing at base host, then you get nothing.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;I don't understand why it doesn't work the same as my =
+operation.&amp;nbsp; For=20
+the sake of comparison:&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Router is a Linksys BEFW11S4 wireless 4-port (first version, nearly =
+2 years=20
+old)&lt;/DIV&gt;
+&lt;DIV&gt;Router's address is changed to 10.168.1.1 and is also the =
+gateway&lt;/DIV&gt;
+&lt;DIV&gt;Subnet mask is 255.255.248.0 (I don't know why)&lt;/DIV&gt;
+&lt;DIV&gt;DHCP services are on with addresses starting at 10.168.1.100&lt;/DIV&gt;
+&lt;DIV&gt;DMZ Host is set to 10.168.1.50 (notice outside DHCP territory but =
+shouldn't=20
+matter)&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; (*I have tried Port Forward and that works slick =
+
+too!)&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Computer is a hand-me-down P166 that I just upped the mem to 256MB; =
+3.25GB=20
+HD.&lt;/DIV&gt;
+&lt;DIV&gt;Running a Xitami 2.5c1 console (xidos.exe) in a DOS windows on =
+Windows 98SE=20
+(does service work?)&lt;/DIV&gt;
+&lt;DIV&gt;HTTP port is changed to 1975 and FTP is disabled&lt;/DIV&gt;
+&lt;DIV&gt;Virtual Host is active (and actually working) but base host is =
+blank.&lt;/DIV&gt;
+&lt;DIV&gt;Server is manually configure to 10.168.1.50&lt;/DIV&gt;
+&lt;DIV&gt;Gateway&amp;nbsp;is entered as 10.168.1.1 along with subnet&amp;nbsp;mask=20
+255.255.255.0&lt;/DIV&gt;
+&lt;DIV&gt;DNS IPs are&amp;nbsp;also entered manually and can be found on=20
+the&amp;nbsp;router's&amp;nbsp;Status page&lt;/DIV&gt;
+&lt;DIV&gt;Other servers installed: Fictional Daemon (FTP and Telnet) and =
+Mercury=20
+Mail&lt;/DIV&gt;
+&lt;DIV&gt;Also on board: MySQL and PHP&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;I think that's all.&amp;nbsp; Hope this is useful.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Charles&lt;/DIV&gt;
+&lt;DIV&gt;&lt;A href=3D&quot;<A HREF="http://www.puuaukuu.net"">http://www.puuaukuu.net&quot;</A>&gt;www.puuaukuu.net&lt;/A&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;----- Original Message ----- &lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dchestnut@willapabay.org">3Dchestnut@willapabay.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:chestnut@willapabay.org">chestnut@willapabay.org</A>&quot;&gt;Chestnut&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Thursday, January 29, =
+2004 7:59=20
+  AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] web =
+server w/=20
+  router (again)&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Steve, do you mean that you enter =
+24.209.120.13=20
+  when within your own network, if so that will not work, need to be on =
+the=20
+  outside, another computer accessing from somewhere other than your own =
+place.=20
+  The setup appears to be fine. I accessed your site at 24... and it =
+loads fine.=20
+  Even went to the link on The ORIGINAL DARWIN... and it loads, went to =
+one of=20
+  the links from there, fine. It appears to me that your setup is =
+working as you=20
+  want it to. I would say you are doing nothing wrong.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Patrick&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=3Dltr=20
+  style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+    &lt;DIV=20
+    style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+    &lt;A title=<A HREF="mailto:3Dslhaas99@hotmail.com">3Dslhaas99@hotmail.com</A> =
+href=3D&quot;mailto:<A HREF="mailto:slhaas99@hotmail.com">slhaas99@hotmail.com</A>&quot;&gt;Steven L.=20
+    Haas&lt;/A&gt; &lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+    href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, January 28, =
+2004 12:43=20
+    AM&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] web server =
+w/ router=20
+    (again)&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Ive posted a couple of times now =
+about trying=20
+    to run the xitami web server from my computer.&amp;nbsp; It's set up pn =
+a=20
+    broadband connection that is shared with a Linksys router between =
+two=20
+    computers.&amp;nbsp; I set this computer (Windows XP) &amp;nbsp;to have a =
+manual IP=20
+    of 192.168.1.2&amp;nbsp; (the router's IP is 192.168.1.1) with the =
+subnet mask=20
+    being set to 255.255.255.0, the default gateway as =
+192.168.1.1.&amp;nbsp; When I=20
+    ran ipconfig/all I got 3 DNS numbers and put the first two in as my =
+primary=20
+    and alternate DNS servers.&amp;nbsp; I then set the router up in the=20
+    advanced/DMZ HOST IP ADDRESS to be 192.168.1.2 and turned the Xitami =
+web=20
+    server on.&amp;nbsp; When I enter &lt;A=20
+    href=3D&quot;<A HREF="http://192.168.1.1"">http://192.168.1.1&quot;</A>&gt;<A HREF="http://192.168.1.1</A">http://192.168.1.1&lt;/A</A>&gt; into the browser =
+it goes to=20
+    the router set-up, which is good.&amp;nbsp; When I try to access pages =
+on the=20
+    internet, it works, which is good.&amp;nbsp; When I enter &lt;A=20
+    href=3D&quot;<A HREF="http://192.168.1.2"">http://192.168.1.2&quot;</A>&gt;<A HREF="http://192.168.1.2</A">http://192.168.1.2&lt;/A</A>&gt; it loads the =
+index.html=20
+    page I put in the Xitami server folder, which is great.&amp;nbsp; Here's =
+the=20
+    problem, however... when I look up my IP address online (the one =
+assigned to=20
+    me via my ISP) I get 24.209.120.13.&amp;nbsp; When I enter &lt;A=20
+    href=3D&quot;<A HREF="http://24.209.120.13"">http://24.209.120.13&quot;</A>&gt;<A HREF="http://24.209.120.13</A">http://24.209.120.13&lt;/A</A>&gt;&amp;nbsp;into my =
+browser, I=20
+    get nothing, which is bad.&amp;nbsp; It seems that I have everything set =
+up=20
+    right and straightened out, but I still cant get access to the web =
+site Im=20
+    trying to host from this computer.&amp;nbsp; What am I doing wrong, or =
+what else=20
+    can I do?&amp;nbsp; =
+&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0010_01C3E660.A44C0440--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005662.html">[Xitami] web server w/ router (again)
+</A></li>
+	<LI> Next message: <A HREF="005667.html">[Xitami] web server w/ router (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5664">[ date ]</a>
+              <a href="thread.html#5664">[ thread ]</a>
+              <a href="subject.html#5664">[ subject ]</a>
+              <a href="author.html#5664">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami2.4d9 and PHP4
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003071.html">
+   <LINK REL="Next"  HREF="003075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami2.4d9 and PHP4
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami2.4d9 and PHP4">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 28 Apr 2002 22:29:26 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003071.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+        <LI> Next message: <A HREF="003075.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3073">[ date ]</a>
+              <a href="thread.html#3073">[ thread ]</a>
+              <a href="subject.html#3073">[ subject ]</a>
+              <a href="author.html#3073">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ewen McNeill wrote:
+&gt;<i> There's no loadable module for PHP for Xitami; in fact as far as I
+</I>&gt;<i> recall the loadable module is only for Apache, and PHP was originally
+</I>&gt;<i> written to run only with Apache.
+</I>
+This gets pretty obvious when reading the docs for PHP :-)  Us Debian users
+hardly ever read the docs unless we get something that doesn't work for some
+reason - otherwise it's just apt-get install whatever, and it usually
+works.  I had to do a little reading for this one - it's been a while since
+I built custom apache servers, and the entire INSTALL file for PHP4 is
+centered around how to build a static or dynamic module for apache.
+
+&gt;<i> In the case of PHP and Xitami, the real killer under load is that PHP is
+</I>&gt;<i> being run as a CGI (a filter in Xitami is basically a CGI process in
+</I>&gt;<i> disguise).  The overhead of forking and starting up the CGI process, and
+</I>&gt;<i> dragging the output back in from the output files gets pretty noticable
+</I>&gt;<i> when things get busy.  Apache/mod-php avoids all that overhead.
+</I>
+That's the same observation I had.
+ 
+&gt;<i> The obvious half way house is to turn PHP into a LRWP process attached
+</I>&gt;<i> to Xitami, an idea that we played around with briefly some time ago but
+</I>&gt;<i> never quite got completed.  If someone (who knows how to write C code)
+</I>&gt;<i> is interested in playing with this idea let me know, and I'll try to
+</I>&gt;<i> find the source code we'd thrown together.
+</I>
+My C skills are rusty to non-existant :-)  Otherwise I might spend some time
+on this.  I think it would show some merit, though.  Xitami beats apache
+hands down for serving static stuff - *WAY* less memory useage, and very
+efficient on the cpu.  I've seen Xitami do some amazing things on a little
+486/8MB machine that apache could send into a death spiral with no problem
+:<i>-)
+</I>
+&gt;<i> I actually suspect that it's still the same version of Xitami as you
+</I>&gt;<i> last noted this problem with.  We haven't noticed the source growing
+</I>&gt;<i> new functions all by itself... :-)  (Yes, alas, the release versions of
+</I>&gt;<i> Xitami have hardly changed in two years :-(  Even our internal versions
+</I>&gt;<i> have changed all that much, although some of the libraries have.)
+</I>
+I think the last version I tested was 2.4d7.  And you're right - I'm sure
+contributions to an open source project would be appreciated!!!
+
+&gt;<i> A number of people have noted this too.  I suspect there's just not
+</I>&gt;<i> quite enough checking of all the files going on.  But it's another
+</I>&gt;<i> thing that we haven't been able to make enough time to investigate.
+</I>
+This is really minor for a unix box when you have ssh access, anyway.  But
+I'll throw something out;  my workstation is Debian 3.0/2.4.17-k6
+kernel/KDE2.2.2.  With Konqueror I can't get the admin panel to work at
+all.  With Netscape 6.2 it's funky sometimes.  With Netscape 4.78 I've
+actually gotten the server to restart a couple of times, but it's not
+consistent.  Do you suppose it might have something to do with the browser
+and Javascript compatibility?
+
+Regards,
+-- 
+Chris Olson
+System Administrator
+AST Communications   <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003071.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+	<LI> Next message: <A HREF="003075.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3073">[ date ]</a>
+              <a href="thread.html#3073">[ thread ]</a>
+              <a href="subject.html#3073">[ subject ]</a>
+              <a href="author.html#3073">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

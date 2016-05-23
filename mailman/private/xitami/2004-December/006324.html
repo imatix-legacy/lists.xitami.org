@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI problem....
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006323.html">
+   <LINK REL="Next"  HREF="006337.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI problem....
+   </H1>
+    <B>Stephen S. Disbrow
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI problem....">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 21 Dec 2004 23:42:45 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006323.html">[Xitami] Installing Xitami as a service
+</A></li>
+        <LI> Next message: <A HREF="006337.html">[Xitami] SSI problem....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6324">[ date ]</a>
+              <a href="thread.html#6324">[ thread ]</a>
+              <a href="subject.html#6324">[ subject ]</a>
+              <a href="author.html#6324">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+--Boundary_(ID_z33RHmsnCPvnh5nwWKFHnA)
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+Hello,
+
+        I changed my default1 entry to point to index.shtml which is as follows;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;OUR FAMILY&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body Text=#ffffff bgcolor=&quot;#000000&quot;&gt;
+&lt;CENTER&gt;
+&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+&lt;H1&gt;
+&lt;MARQUEE&gt;This page is under construction.&lt;/MARQUEE&gt;
+&lt;/H1&gt;
+&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+&lt;!--#INCLUDE VIRTUAL=&quot;cgi-bin/time.pl&quot;--&gt;
+&lt;/CENTER&gt;
+&lt;/body&gt;
+&lt;/HTML&gt;
+
+
+&lt;/html&gt;
+
+I placed my perl in cgi-bin time.pl it looks as follows;
+#! /usr/bin/perl
+
+$ENV{&quot;TZ&quot;} = &quot;EST5EDT&quot;;
+($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+if ($hour &gt;  12)
+{
+ $hour = $hour - 12;
+ $ind = &quot;PM&quot;;
+}
+elsif ($hour == 12)
+{
+ $ind = &quot;PM&quot;;
+}
+elsif ($hour == 0)
+{
+ $hour = 12;
+ $ind = &quot;AM&quot;;
+}
+else
+{
+ $ind = &quot;AM&quot;;
+}
+$day=(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday)[$wday];
+$month=(January,February,March,April,May,June,July,August,September,October,November,December)[$mon];
+print &quot;Content-type: text/html\n\n&quot;;
+printf (&quot;%s %s %02d %4d, %02d:%02d %2s&quot;, $day, $month, $mday, (1900+$year), $hour, $min, $ind);
+
+exit 0;
+
+The problem is when  I attempt to open the page as localhost the system seems to hang for a long period of time I don't know what is wrong if anyone could tell me what's wrong I'd really appreciate it. I run the same shtml doc and cgi on a apache web server and it works perfect. Any help would really be appreciated.
+I am running on WinXPHome  xitami-25 version as a service(xisrv32.exe);
+
+Thank You,
+
+Stephen S. Disbrow
+
+Stephen S. Disbrow
+
+--Boundary_(ID_z33RHmsnCPvnh5nwWKFHnA)
+Content-type: text/html; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+&lt;META content=&quot;MSHTML 6.00.2900.2523&quot; name=GENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Hello,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; I changed my default1 entry to point 
+to index.shtml which is as follows;&lt;/DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&amp;lt;html&amp;gt;&lt;BR&gt;&amp;lt;head&amp;gt;&lt;BR&gt;&amp;lt;title&amp;gt;OUR 
+FAMILY&amp;lt;/title&amp;gt;&lt;BR&gt;&amp;lt;/head&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&amp;lt;body Text=#ffffff 
+bgcolor=&quot;#000000&quot;&amp;gt;&lt;BR&gt;&amp;lt;CENTER&amp;gt;&lt;BR&gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;gt;&lt;BR&gt;&amp;lt;H1&amp;gt;&lt;BR&gt;&amp;lt;MARQUEE&amp;gt;This 
+page is under 
+construction.&amp;lt;/MARQUEE&amp;gt;&lt;BR&gt;&amp;lt;/H1&amp;gt;&lt;BR&gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;gt;&amp;lt;BR&amp;gt;&lt;BR&gt;&amp;lt;!--#INCLUDE 
+VIRTUAL=&quot;cgi-bin/time.pl&quot;--&amp;gt;&lt;BR&gt;&amp;lt;/CENTER&amp;gt;&lt;BR&gt;&amp;lt;/body&amp;gt;&lt;BR&gt;&amp;lt;/HTML&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;FONT face=Arial size=2&gt;
+&lt;DIV&gt;&lt;BR&gt;&amp;lt;/html&amp;gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/FONT&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;I placed my perl in cgi-bin time.pl it looks as 
+follows;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;#! /usr/bin/perl&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;$ENV{&quot;TZ&quot;} = 
+&quot;EST5EDT&quot;;&lt;BR&gt;($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = 
+localtime(time);&lt;BR&gt;if ($hour &amp;gt;&amp;nbsp; 12)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$hour = $hour - 
+12;&lt;BR&gt;&amp;nbsp;$ind = &quot;PM&quot;;&lt;BR&gt;}&lt;BR&gt;elsif ($hour == 12)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$ind = 
+&quot;PM&quot;;&lt;BR&gt;}&lt;BR&gt;elsif ($hour == 0)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$hour = 12;&lt;BR&gt;&amp;nbsp;$ind = 
+&quot;AM&quot;;&lt;BR&gt;}&lt;BR&gt;else&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$ind = 
+&quot;AM&quot;;&lt;BR&gt;}&lt;BR&gt;$day=(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday)[$wday];&lt;BR&gt;$month=(January,February,March,April,May,June,July,August,September,October,November,December)[$mon];&lt;BR&gt;print 
+&quot;Content-type: text/html\n\n&quot;;&lt;BR&gt;printf (&quot;%s %s %02d %4d, %02d:%02d %2s&quot;, $day, 
+$month, $mday, (1900+$year), $hour, $min, $ind);&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;exit 0;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;The problem is when&amp;nbsp; I attempt to open the 
+page as localhost the system seems to hang for a long period of time I don't 
+know what is wrong if anyone could tell me what's wrong I'd really appreciate 
+it. I run the same shtml doc and cgi on a apache web server and it works 
+perfect. Any help would really be appreciated.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;I am running on WinXPHome &amp;nbsp;xitami-25 version 
+as a service(xisrv32.exe);&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Thank You,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Stephen S. Disbrow&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=Arial size=2&gt;Stephen S. Disbrow&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+--Boundary_(ID_z33RHmsnCPvnh5nwWKFHnA)--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006323.html">[Xitami] Installing Xitami as a service
+</A></li>
+	<LI> Next message: <A HREF="006337.html">[Xitami] SSI problem....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6324">[ date ]</a>
+              <a href="thread.html#6324">[ thread ]</a>
+              <a href="subject.html#6324">[ subject ]</a>
+              <a href="author.html#6324">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

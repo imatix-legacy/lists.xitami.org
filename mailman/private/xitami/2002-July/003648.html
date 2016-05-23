@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] IP numbers,etc.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003685.html">
+   <LINK REL="Next"  HREF="003661.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] IP numbers,etc.
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] IP numbers,etc.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 11 Jul 2002 14:30:04 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003685.html">[Xitami] IP numbers,etc.
+</A></li>
+        <LI> Next message: <A HREF="003661.html">[Xitami] IP numbers,etc.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3648">[ date ]</a>
+              <a href="thread.html#3648">[ thread ]</a>
+              <a href="subject.html#3648">[ subject ]</a>
+              <a href="author.html#3648">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  is it possible to give a page a more durable address - say, a URL
+</I>&gt;<i> or a domain name?
+</I>
+&quot;Easy way&quot;: get a Fixed IP address. That's how we used to do all
+internet machines. Each school was given a block of IP numbers. At
+each school a&quot;hostmaster&quot; person or office would assign IP numbers
+to new machines, and that IP number is entered in the machine's TCP
+configuration file.
+
+Since people prefer typing names instead of numbers, a system
+evolved so if you type a name where an IP number would be, the
+computer contacts a name-server to translate the name to an IP
+number. &quot;DNS&quot; is a Dynamic Name Server (it can be updated
+constantly, compared to older systems that were harder to update).
+Generally each school maintains a DNS server and contracts another
+school to be a back-up in case of trouble.
+
+Al Gore commercialized the InterNet, but ISPs follow the same
+pattern. They have a block of IP addresses they can give to
+customers, and maintain DNS servers to translate names to numbers.
+
+So you get an IP number, you reserve names for your domain and each
+machine, you enter those names and IP numbers in a DNS server. Then
+anybody who types the name of your machine will get the IP number
+and connect to your machine. Easy.
+
+The DNS server has to be easy to find and very reliable. It is
+possible to run your own DNS server but you usually want to have
+someone else with an established DNS system to handle it.
+
+A problem with that is: the world is running out of IP numbers. And
+anyway it is silly to permanently assign an IP number to a dial-up
+user who only needs it a few hours a month. A dial-up service with
+10,000 customers often has only 1,000 modems and so only needs 1,000
+IP addresses. You get an IP address when you connect, and you lose
+it when you disconnect, and next time you will probably get a
+different IP number.
+
+Another side is: cable-modem/DSL is &quot;always on&quot; but the ISP may need
+to change IP numbers as they grow their system. Customers won't know
+how to change their IP numbers. So they ask you to use DCHP, a
+protocol that assigns IP numbers when you connect and can re-assign
+if needed. (PoET is another variant of DCHP-like service, adapted
+for spread networking.) Or to be honest: many ISPs deliberately
+change IP numbers from time to time, just to make it hard for you to
+run a busy server on a &quot;home&quot; account, so you will pay more for a
+Business account.
+
+There is a way to get around impermanent IP numbers. Others have
+pointed you to the Dynamic DNS services. When you start your
+machine, or your IP number changes, your machine tells them what
+your IP number is today. Their DNS server is registered (with the
+master DNS systems) to be the DNS server for your domain. When
+people type your machine name, they end up at that DNS server which
+gives them the latest IP number for you. It is not perfect:
+sometimes intermediate DNS servers hold old info longer than they
+should. But as you see, it works good for jon and Marcio.
+
+<A HREF="http://www.zoneedit.com/doc/dynamic.html?">http://www.zoneedit.com/doc/dynamic.html?</A>
+
+Yes, Dynamic Dynamic Name Server sounds redundant. But in fact there
+is an extra level of &quot;dynamic&quot; in these systems. Traditional DNS is
+managed by a hostmaster, who can make changes any time she feels
+like it. DDNS allows users to update info very frequently without
+human attention.
+
+For many reasons, it is often better to off-load the whole chore to
+a commercial Web Host: someone with a fast connection, established
+DNS, and racks of servers they rent-out. Do-it-yerself can be fun,
+and sometimes the best way, but a goos web host service can be more
+reliable and possibly cheaper all considered.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003685.html">[Xitami] IP numbers,etc.
+</A></li>
+	<LI> Next message: <A HREF="003661.html">[Xitami] IP numbers,etc.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3648">[ date ]</a>
+              <a href="thread.html#3648">[ thread ]</a>
+              <a href="subject.html#3648">[ subject ]</a>
+              <a href="author.html#3648">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

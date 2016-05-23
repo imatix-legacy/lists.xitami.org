@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Changing HTTP Ports
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005255.html">
+   <LINK REL="Next"  HREF="005258.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Changing HTTP Ports
+   </H1>
+    <B>Jeff Hamblin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Changing HTTP Ports">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 19 Jul 2003 20:24:42 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005255.html">[Xitami] Changing HTTP Ports
+</A></li>
+        <LI> Next message: <A HREF="005258.html">[Xitami] cgi
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5256">[ date ]</a>
+              <a href="thread.html#5256">[ thread ]</a>
+              <a href="subject.html#5256">[ subject ]</a>
+              <a href="author.html#5256">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>---- Original Message ----- 
+From: &quot;Brian Fisher&quot; &lt;<A HREF="mailto:brianf213@msn.com">brianf213@msn.com</A>&gt;
+&gt;<i> My ISP has recently blocked inbound port 80 traffic.
+</I>&gt;<i> 
+</I>&gt;<i> Is there a way to change the HTTP port to one other than port 80?
+</I>
+
+Yes. You need to change the PORTBASE config value.
+For example, if you want to move your xitami HTTP port to
+9090 but keep your xitami FTP on 21, you would need the
+following in your defaults.cfg:
+
+
+[Server]
+    portbase=9010                       #   +80 = 9090
+
+[Ftp]
+    port=-8989                             #   + 9010 = 21
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005255.html">[Xitami] Changing HTTP Ports
+</A></li>
+	<LI> Next message: <A HREF="005258.html">[Xitami] cgi
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5256">[ date ]</a>
+              <a href="thread.html#5256">[ thread ]</a>
+              <a href="subject.html#5256">[ subject ]</a>
+              <a href="author.html#5256">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

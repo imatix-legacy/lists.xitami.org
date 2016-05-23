@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ASP/VBS in Xitami for Windows
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006174.html">
+   <LINK REL="Next"  HREF="006176.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ASP/VBS in Xitami for Windows
+   </H1>
+    <B>admin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ASP/VBS in Xitami for Windows">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 16 Oct 2004 03:22:04 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006174.html">[Xitami] security question about Xitami &amp; CGI's
+</A></li>
+        <LI> Next message: <A HREF="006176.html">[Xitami] ASP/VBS in Xitami for Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6175">[ date ]</a>
+              <a href="thread.html#6175">[ thread ]</a>
+              <a href="subject.html#6175">[ subject ]</a>
+              <a href="author.html#6175">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_11978187==.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+Ok guys... one step closer to the sorting out all of the nasty bits, odds 
+and ends. Many asked before me, I'm sure, if we can run ASP on Xitami 
+without having to hassle through IIS and ASP.DLL and so forth. Everyone 
+here surely knows that VBScript and VBS for Applications is the root to ASP 
+3.0 Now, many also say, Yes we can if you pay this and that much for a 
+parser. Well... we're one step closer to the FREE way of doing it. At least 
+it seems to work on my Win 2000 Pro box with nothing but Windows Script 
+Engine 5.6 freely available from MS web site. Download and install the 
+Scipting engine, unless you already have it. ----------- Add the following 
+to your MIME specifications in the DEFAULT.CFG file [Mime] # &gt;&gt; Added by 
+MRJ Design Vbs=&quot;application/x-vbs&quot; Vbs=&quot;text/vbs&quot; Vbs=&quot;text/vbscript&quot; #
+
+A Simple First Page
+
+
+----------
+==================================================================== End 
+adding here, and restart/reset your Xitami... Surf into your page 
+<A HREF="http://127.0.0.1/TEST.HTM">http://127.0.0.1/TEST.HTM</A> 
+==================================================================== Now, 
+if this doesn't look and feel like VB to you, then I don't know...
+--=====================_11978187==.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+
+
+Ok guys... one step closer to the sorting out all of the nasty bits, odds
+and ends.
+
+Many asked before me, I'm sure, if we can run ASP on Xitami without
+having to hassle through IIS and ASP.DLL and so forth.
+Everyone here surely knows that VBScript and VBS for Applications is the
+root to ASP 3.0
+Now, many also say, Yes we can if you pay this and that much for a
+parser.
+
+
+Well... we're one step closer to the FREE way of doing it.
+At least it seems to work on my Win 2000 Pro box with nothing but Windows
+Script Engine 5.6 freely available from MS web site.
+Download and install the Scipting engine, unless you already have it.
+
+-----------
+Add the following to your MIME specifications in the DEFAULT.CFG file
+
+[Mime]
+# &gt;&gt; Added by MRJ Design
+    Vbs=&quot;application/x-vbs&quot;
+    Vbs=&quot;text/vbs&quot;
+    Vbs=&quot;text/vbscript&quot;
+# &lt;&lt; Added by MRJ Design
+# If you want to make it appear as if ASP is being enabled on your domain, you could
+# also add a line saying
+    Asp=&quot;text/html&quot;
+#It's cheating but looks kinda cool.
+
+
+
+====================================================================
+Now create a file named TEST.HTM and add the following lines.........................................
+====================================================================
+
+&lt;HTML&gt;
+&lt;HEAD&gt;&lt;TITLE&gt;A Simple First Page&lt;/TITLE&gt;
+&lt;SCRIPT LANGUAGE=&quot;VBScript&quot;&gt;
+&lt;!--
+
+Sub ConvertTemp()
+   temp = InputBox(&quot;Please enter the temperature in degrees F.&quot;, 1)
+   MsgBox &quot;The temperature is &quot; &amp; Celsius(temp) &amp; &quot; degrees C.&quot;
+End Sub
+
+Function Celsius(fDegrees)
+   Celsius = (fDegrees - 32) * 5 / 9
+End Function
+
+Sub Button1_OnClick
+   MsgBox &quot;Mirabile visu.&quot;
+End Sub
+
+Call ConvertTemp
+--&gt;
+&lt;/SCRIPT&gt;
+
+
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;H3&gt;A Simple First Page&lt;/H3&gt;&lt;HR&gt;
+&lt;FORM&gt;&lt;INPUT NAME=&quot;Button1&quot; TYPE=&quot;BUTTON&quot; VALUE=&quot;Click Here&quot;&gt;&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+====================================================================
+End adding here, and restart/reset your Xitami...
+Surf into your page <A HREF="http://127.0.0.1/TEST.HTM">http://127.0.0.1/TEST.HTM</A>
+====================================================================
+
+Now, if this doesn't look and feel like VB to you, then I don't know...
+
+--=====================_11978187==.ALT--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006174.html">[Xitami] security question about Xitami &amp; CGI's
+</A></li>
+	<LI> Next message: <A HREF="006176.html">[Xitami] ASP/VBS in Xitami for Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6175">[ date ]</a>
+              <a href="thread.html#6175">[ thread ]</a>
+              <a href="subject.html#6175">[ subject ]</a>
+              <a href="author.html#6175">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] read_TCP returns 0 instead of -1
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000207.html">
+   <LINK REL="Next"  HREF="000209.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] read_TCP returns 0 instead of -1
+   </H1>
+    <B>D'Hoye, Peter
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] read_TCP returns 0 instead of -1">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Wed, 12 Jun 2002 11:08:50 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000207.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+</A></li>
+        <LI> Next message: <A HREF="000209.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#208">[ date ]</a>
+              <a href="thread.html#208">[ thread ]</a>
+              <a href="subject.html#208">[ subject ]</a>
+              <a href="author.html#208">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Rafael,
+
+thanks for this obvious fix. I'm using LRWP to create
+a web-interface for a machine we make, and I saw the
+LRWP client go in a loop when Xitami was restarted.
+I didn't have any time to investigate, thanks to you
+I can scratch another bug from my to-do list :-)
+
+PS: Pieter, we all mis Liberetto !!!
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: Rafael Cano Pérez [mailto:<A HREF="mailto:rafael.cano@o-labs.com">rafael.cano@o-labs.com</A>]
+</I>&gt;<i> Sent: vrijdag 7 juni 2002 16:40
+</I>&gt;<i> To: Xitami devel
+</I>&gt;<i> Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>  Hello Imatix.
+</I>&gt;<i> 
+</I>&gt;<i>  I am using lrwplib.c for a prototype LRWP application,
+</I>&gt;<i>  wich will be later implementing the LRWP via an
+</I>&gt;<i>  SMT agent.
+</I>&gt;<i> 
+</I>&gt;<i>  In read_full_TCP() in lrwplib.c, after calling
+</I>&gt;<i>  read_TCP() reads the return code, and compares
+</I>&gt;<i>  it to SOCKET_ERROR for errors. This macro
+</I>&gt;<i>  is defined in sfl.h as -1, but when the socket is
+</I>&gt;<i>  closed, for example when xitami is closed, read_TCP
+</I>&gt;<i>  returns 0, making any application based on lrwplib.c
+</I>&gt;<i>  go into an infinite loop.
+</I>&gt;<i>  Changing the test against 0
+</I>&gt;<i>  ...
+</I>&gt;<i>  if (chunkLen == 0)
+</I>&gt;<i>   return SOCKET_ERROR;
+</I>&gt;<i>  ...
+</I>&gt;<i> 
+</I>&gt;<i>  fixes the error.
+</I>&gt;<i> 
+</I>&gt;<i>  A bug in sfl.h, lrwplib.c or read_TCP() ??
+</I>
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000207.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+</A></li>
+	<LI> Next message: <A HREF="000209.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#208">[ date ]</a>
+              <a href="thread.html#208">[ thread ]</a>
+              <a href="subject.html#208">[ subject ]</a>
+              <a href="author.html#208">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

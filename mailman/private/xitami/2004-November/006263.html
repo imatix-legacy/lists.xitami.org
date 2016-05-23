@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI crash under WinXP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="006264.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI crash under WinXP
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI crash under WinXP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 01 Nov 2004 17:10:41 -0500</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="006264.html">[Xitami] SSI crash under WinXP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6263">[ date ]</a>
+              <a href="thread.html#6263">[ thread ]</a>
+              <a href="subject.html#6263">[ subject ]</a>
+              <a href="author.html#6263">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 02:36 PM 10/30/2004 -0500, Gord Tanner writeth:
+&gt;<i>I include the section of code from xixssi.c surrounding line 570. (and
+</I>&gt;<i>attach the whole file)
+</I>&gt;<i>I don't know much C,
+</I>
+But I do.  That's why I asked you to post the source.
+
+&gt;<i>Also, this is the exact SSI command that causes the failure.
+</I>&gt;<i>&lt;!--#include file=&quot;../cgi-bin/last_post.txt&quot; --&gt;
+</I>&gt;<i>
+</I>&gt;<i>If I change it to:
+</I>&gt;<i>
+</I>&gt;<i>&lt;!--#include file=&quot;last_post.txt&quot; --&gt;
+</I>&gt;<i>
+</I>&gt;<i>and make sure the last_post.txt file is located in the webroot
+</I>&gt;<i>directory, it no longer causes a crash, but it doesn't include the
+</I>&gt;<i>file.
+</I>&gt;<i>
+</I>&gt;<i>/*****************************   OPEN SSI FILE
+</I>*****************************/
+&gt;<i>
+</I>&gt;<i>MODULE open_ssi_file (THREAD *thread)
+</I>&gt;<i>{
+</I>&gt;<i>    time_t
+</I>&gt;<i>        file_time;
+</I>&gt;<i>        
+</I>&gt;<i>    tcb = thread-&gt; tcb;                 /*  Point to thread's context
+</I>  */
+&gt;<i>
+</I>&gt;<i>    ASSERT (tcb-&gt; file_name);                          &lt;&lt;&lt;----------- 
+</I>&gt;<i>Line 570  ----------------
+</I>
+This will fire if &quot;file_name&quot; in the tcb is NULL.
+
+What happens if you use:
+
+&lt;!--#include file=&quot;..\cgi-bin\last_post.txt&quot; --&gt;
+or
+&lt;!--#include file=&quot;..\\cgi-bin\\last_post.txt&quot; --&gt;
+or
+&lt;!--#include file=&quot;/cgi-bin/last_post.txt&quot; --&gt;
+or
+&lt;!--#include file=&quot;\cgi-bin\last_post.txt&quot; --&gt;
+or
+&lt;!--#include file=&quot;\\cgi-bin\\last_post.txt&quot; --&gt;
+
+Instead?
+
+The information you gave here says that the real error is somewhere up the
+stack and may have something to do with the relative path information (..)
+and/or the forward or backslash.  You may be able to hack around the bug by
+using one of the options above, switching to absolute paths, or something
+equivalent.
+
+&gt;<i>    /* Check if file is not already open
+</I>  */
+&gt;<i>    if (sym_get_value (tcb-&gt; open_file, tcb-&gt; file_name, NULL) != NULL)
+</I>
+This is where the crash will likely happen.  sym_get_value will likely try
+to dereference file_name, which is NULL, and throw the exception all the
+way back to the OS, where the kernel will kill the program that tried to
+blue-screen the OS.  If running as a NT service, the NT service manager
+will note that Xitami stopped/died and restart it automatically up to 3
+times in any session.
+
+If it doesn't crash here, then fopen() will surely crash.  I've not seen a
+library implementation that defended against NULL filenames.
+
+What I was doing above is having you try different combinations of file
+names as a workaround to ultimately get tcb-&gt;file_name to not be NULL and
+therefore not crash in this function.
+
+
+Thomas J. Hruska
+Shining Light Productions
+<A HREF="http://www.slproweb.com/">http://www.slproweb.com/</A>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="006264.html">[Xitami] SSI crash under WinXP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6263">[ date ]</a>
+              <a href="thread.html#6263">[ thread ]</a>
+              <a href="subject.html#6263">[ subject ]</a>
+              <a href="author.html#6263">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

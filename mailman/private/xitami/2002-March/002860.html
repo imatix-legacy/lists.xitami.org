@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Newbie question: Xitami and php
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002847.html">
+   <LINK REL="Next"  HREF="002848.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Newbie question: Xitami and php
+   </H1>
+    <B>Ed op Het Net
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Newbie question: Xitami and php">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 31 Mar 2002 19:17:13 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002847.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+        <LI> Next message: <A HREF="002848.html">[Xitami] Xitami HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2860">[ date ]</a>
+              <a href="thread.html#2860">[ thread ]</a>
+              <a href="subject.html#2860">[ subject ]</a>
+              <a href="author.html#2860">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Just one more question. Redirection worked fine after a fresh install.
+But if I set the doc_root (just out of curiosity, I only test my
+php-files locally, so it's not a security issue), I have to define the
+exact name of the php-file, before it works.
+So, if I enter the path : ../../php/info.php I can open the file, but
+this file alone. If I open another php-file, say test.php, my browser
+gives me the output of info.php.
+Did I miss a configuration option in Xitami?
+
+Thanks for your help,
+Edward
+
+
+
+
+RO&gt; I got this to work but there are a few catches:
+RO&gt; 1.  cgi.force_redirected = 0   ;;; make certain the &quot;;&quot; is removed from the
+RO&gt; front of the line..
+RO&gt; 2.  All php files must go into the *./webpages directories for each of your
+RO&gt; domains
+RO&gt; 3.  Pros/Cons of using the &quot;doc_root&quot; variable:
+RO&gt;     CONS:
+RO&gt;         1. #2 won't apply if you define it - ALL php files for all domains
+RO&gt; must go into that directory, thus your files start to get jumbled together
+RO&gt; and files for virtual domain &quot;blah.com&quot; will sit in the same directory for
+RO&gt; another virtual domain &quot;blah1.com&quot;.  There could possibly be a way around
+RO&gt; this if you did something along the following (I haven't tested it though):
+RO&gt;             PHP.INI: doc_root = /xitami/php
+RO&gt;             Xitami blah1.cfg: [Alias Section] *.php = /xitami/php/blah1/
+RO&gt;             Xitami blah2.cfg: [Alias Section] *.php = /xitami/php/blah2/
+
+RO&gt;             You would have to manually created each virtual domain directory
+RO&gt; reference in the /xitami/php directory - you would then also have to force
+RO&gt; FTP paths so those domain admins could upload php files for their domain,
+RO&gt; ONLY to their directory.  I think this might work.  You definently have to
+RO&gt; jump through hoops though.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002847.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+	<LI> Next message: <A HREF="002848.html">[Xitami] Xitami HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2860">[ date ]</a>
+              <a href="thread.html#2860">[ thread ]</a>
+              <a href="subject.html#2860">[ subject ]</a>
+              <a href="author.html#2860">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

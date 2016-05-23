@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Getting the FTP side up and running
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006062.html">
+   <LINK REL="Next"  HREF="006060.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Getting the FTP side up and running
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Getting the FTP side up and running">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 18 Aug 2004 16:35:15 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006062.html">[Xitami] Getting the FTP side up and running
+</A></li>
+        <LI> Next message: <A HREF="006060.html">[Xitami] Where is the list archive?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6059">[ date ]</a>
+              <a href="thread.html#6059">[ thread ]</a>
+              <a href="subject.html#6059">[ subject ]</a>
+              <a href="author.html#6059">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ralph,
+
+My system runs with the same version and I'm only just half a year familiar with websites and all 
+that &quot;Stuff&quot;. Please excuse me, if I explain this a bit like a newcomer.
+
+It sounds for me that you copied the xitami.cfg to the default.cfg. That is not the way it should 
+be. You create a default.cfg and put in the settings you prefer for YOUR system. Only that, nothing 
+else. Xitami will read first the xitami.cfg and after that the default.cfg and the settings in the 
+default.cfg will override the ones in the xitami.cfg.
+
+I have some directories in the ftproot from xitami and I have no problems to get my files.
+The directories are looking like this:
+
+..\ftproot\directoryname-1
+..\ftproot\directoryname-2
+
+one user can access only one of the two directories with the rights I gave them.
+You are looking for a user &quot;anonymus&quot; create one and as far as I understood, this user should only 
+be able to retrieve files. He will get the right &quot;G&quot; for get.
+
+Your ftpdirs.aut should look now like this
+
+[directoryname-1]
+    anonymus = &quot;G&quot;
+[directoryname-2]
+    anonymus = &quot;G&quot;
+
+make sure that you have one space between = and &quot;G&quot;
+
+and your ftpusers.aut should look like 
+
+[anonymus]
+    Access = &quot;G&quot;
+    Aliases = &quot;0&quot;
+    Hard-quota = &quot;&quot;
+    Password = &quot;anonymus&quot;
+    Pipe = &quot;&quot;
+    Root = &quot;directoryname-1&quot;
+    Soft-quota = &quot;&quot;
+    Use-quotas = &quot;0&quot;
+
+Same thing here with the space. If you like, you can disable the password. If I'm correct, it will 
+look like password = &quot;&quot;.
+I don't have anonymus access. 
+
+I hope this will be correct and it is from help for you.
+
+
+Johannes
+
+-----------------------
+Johannes Prost
+<A HREF="mailto:xitami@pastryworld.ca">xitami@pastryworld.ca</A>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006062.html">[Xitami] Getting the FTP side up and running
+</A></li>
+	<LI> Next message: <A HREF="006060.html">[Xitami] Where is the list archive?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6059">[ date ]</a>
+              <a href="thread.html#6059">[ thread ]</a>
+              <a href="subject.html#6059">[ subject ]</a>
+              <a href="author.html#6059">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

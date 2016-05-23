@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Imatix Xitami If-Modified-Since Remote Buffer OverflowVulnerability
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Imatix%20Xitami%20If-Modified-Since%20Remote%20Buffer%0A%20OverflowVulnerability&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007648.html">
+   <LINK REL="Next"  HREF="007637.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Imatix Xitami If-Modified-Since Remote Buffer OverflowVulnerability</H1>
+    <B>Maurilio Longo</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Imatix%20Xitami%20If-Modified-Since%20Remote%20Buffer%0A%20OverflowVulnerability&In-Reply-To="
+       TITLE="[Xitami] Imatix Xitami If-Modified-Since Remote Buffer OverflowVulnerability">maurilio.longo at libero.it
+       </A><BR>
+    <I>Tue Oct  2 17:30:47 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007648.html">[Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow Vulnerability
+</A></li>
+        <LI>Next message: <A HREF="007637.html">[Xitami] Imatix Xitami If-Modified-Since Remote Buffer	OverflowVulnerability
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7636">[ date ]</a>
+              <a href="thread.html#7636">[ thread ]</a>
+              <a href="subject.html#7636">[ subject ]</a>
+              <a href="author.html#7636">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Pieter,
+
+are there fully (by fully I mean with all the changes done over the years)
+updated/patched sources on xitami site?
+
+Thanks.
+
+Maurilio.
+
+
+Pieter Hintjens ha scritto:
+&gt;<i> 
+</I>&gt;<i> On 10/2/07, Francis Turner &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">francis.turner at gmail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; FWIW I can confirm that a perl ver of the explot code does kill my xitami
+</I>&gt;<i> 
+</I>&gt;<i> Sorry for not responding earlier, I missed the original exploit
+</I>&gt;<i> report.  Here is a patch that fixes the code (apply to sfl/sflmime.c):
+</I>&gt;<i> 
+</I>&gt;<i> Index: sflmime.c
+</I>&gt;<i> ===================================================================
+</I>&gt;<i> --- sflmime.c   (revision 10715)
+</I>&gt;<i> +++ sflmime.c   (working copy)
+</I>&gt;<i> @@ -285,7 +285,8 @@
+</I>&gt;<i>          min   = 0,
+</I>&gt;<i>          sec   = 0;
+</I>&gt;<i>      char
+</I>&gt;<i> -        month_name [20],
+</I>&gt;<i> +        mime_safe  [50],
+</I>&gt;<i> +        month_name [50],
+</I>&gt;<i>          buffer     [50],
+</I>&gt;<i>          *p_char;
+</I>&gt;<i> 
+</I>&gt;<i> @@ -293,9 +294,13 @@
+</I>&gt;<i>      ASSERT (date);
+</I>&gt;<i>      ASSERT (time);
+</I>&gt;<i> 
+</I>&gt;<i> +    /*  Copy input to safe string for security                               */
+</I>&gt;<i> +    strncpy (mime_safe, mime_string, 49);
+</I>&gt;<i> +    mime_safe [50] = 0;
+</I>&gt;<i> +
+</I>&gt;<i>      /*  Whatever format we're looking at, it will start with weekday.        */
+</I>&gt;<i>      /*  Skip to first space.                                                 */
+</I>&gt;<i> -    if (!(p_char = strchr (mime_string, ' ')))
+</I>&gt;<i> +    if (!(p_char = strchr (mime_safe, ' ')))
+</I>&gt;<i>          return FALSE;
+</I>&gt;<i>      else
+</I>&gt;<i>          while (isspace (*p_char))
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Pieter Hintjens
+</I>&gt;<i> iMatix Corporation
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+-- 
+ __________                   
+|<i>  |  | |__| Maurilio Longo
+</I>|<i>_|_|_|____| farmaconsult s.r.l.
+</I>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007648.html">[Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow Vulnerability
+</A></li>
+	<LI>Next message: <A HREF="007637.html">[Xitami] Imatix Xitami If-Modified-Since Remote Buffer	OverflowVulnerability
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7636">[ date ]</a>
+              <a href="thread.html#7636">[ thread ]</a>
+              <a href="subject.html#7636">[ subject ]</a>
+              <a href="author.html#7636">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

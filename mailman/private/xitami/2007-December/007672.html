@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI Environment Variable problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20Environment%20Variable%20problem&In-Reply-To=BAY105-W8BDCDFF09B17BF2C8B86AF86E0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007671.html">
+   <LINK REL="Next"  HREF="007673.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI Environment Variable problem</H1>
+    <B>Francis Turner</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20Environment%20Variable%20problem&In-Reply-To=BAY105-W8BDCDFF09B17BF2C8B86AF86E0%40phx.gbl"
+       TITLE="[Xitami] CGI Environment Variable problem">francis.turner at gmail.com
+       </A><BR>
+    <I>Thu Dec  6 09:49:09 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007671.html">[Xitami] CGI Environment Variable problem
+</A></li>
+        <LI>Next message: <A HREF="007673.html">[Xitami] ''could not open HTTP port 80- connection failed on	listen() (WSAEACCES)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7672">[ date ]</a>
+              <a href="thread.html#7672">[ thread ]</a>
+              <a href="subject.html#7672">[ subject ]</a>
+              <a href="author.html#7672">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This seems to be a Xitami feature (or bug). As I'm now moving stuff to
+Linux I'm also investigating lighttpd which seems to be not disimilar
+in philosphy to Xitami. I checked. Lighttpd displays the query in the
+referer environment variable as you would hope.
+
+Ubuntu server plus lighttpd (plus perl &amp; php) seems to be a very
+stable platform and it hasn't been that hard for me to migrate a test
+Xitami server to Lighttpd. If you need this info then that looks like
+the best way to go.
+
+Interestingly the user's browser will have the correct
+document.referer including the query string. You could possibly set a
+cookie and reload if the cookie wasn't present to transfer the info to
+the server?
+
+Francis
+
+On Dec 5, 2007 1:24 AM, R O &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Nope.
+</I>&gt;<i>
+</I>&gt;<i>  If I go to google and search for (2001 + honda + adcrow) info on my site I
+</I>&gt;<i> get bunch of results, one of which is:
+</I>&gt;<i>  Ex:
+</I>&gt;<i> <A HREF="http://www.adcrow.com/cgi-bin/postList.pl?cityCode=san&amp;cid=3&amp;fid=26&amp;sid=0">http://www.adcrow.com/cgi-bin/postList.pl?cityCode=san&amp;cid=3&amp;fid=26&amp;sid=0</A>
+</I>&gt;<i>
+</I>&gt;<i>  The referring page would be:
+</I>&gt;<i>  Ex: <A HREF="http://www.google.com/search?ln=en&amp;q=honda+2001+adcrow">http://www.google.com/search?ln=en&amp;q=honda+2001+adcrow</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  When I click that link, I am trapping the incoming HTTP info, using perls
+</I>&gt;<i> native $ENV{HTTP_REFERER} or perl's CGI $query-&gt;referer(), and I get the
+</I>&gt;<i> same result of :
+</I>&gt;<i>  Ex: <A HREF="http://www.google.com/search">http://www.google.com/search</A>
+</I>&gt;<i>
+</I>&gt;<i>  When I grab Query_String (from either method) I get the following:
+</I>&gt;<i>  Ex: cityCode=san&amp;cid=3&amp;fid=26&amp;sid=0  - which is the query string FOR my
+</I>&gt;<i> URL, not the referring URL.
+</I>&gt;<i>
+</I>&gt;<i>  When I do print out the full environment variables, $ENV, no where in the
+</I>&gt;<i> returned HTTP enviornment value is the entire referer URL, just the partial
+</I>&gt;<i> pre query_string URL.
+</I>&gt;<i>
+</I>&gt;<i>  However, the full referer URL, including referer query_string, is showing
+</I>&gt;<i> up in Xitami's web logs.
+</I>&gt;<i>
+</I>&gt;<i>  Are you able to grab the referring URL including query_string
+</I>&gt;<i>
+</I>&gt;<i> &gt; Date: Tue, 4 Dec 2007 19:10:02 -0500
+</I>&gt;<i> &gt; From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">preid at rci.rutgers.edu</A>
+</I>&gt;<i> &gt; To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> &gt; Subject: Re: [Xitami] CGI Environment Variable problem
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; not able to retrieve the full referring URL....only the partial
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; You want query_string
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007671.html">[Xitami] CGI Environment Variable problem
+</A></li>
+	<LI>Next message: <A HREF="007673.html">[Xitami] ''could not open HTTP port 80- connection failed on	listen() (WSAEACCES)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7672">[ date ]</a>
+              <a href="thread.html#7672">[ thread ]</a>
+              <a href="subject.html#7672">[ subject ]</a>
+              <a href="author.html#7672">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

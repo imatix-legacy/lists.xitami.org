@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Regular crash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001103.html">
+   <LINK REL="Next"  HREF="001105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Regular crash
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Regular crash">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 05 Oct 2001 14:58:17 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001103.html">[Xitami] File upload with xitami???
+</A></li>
+        <LI> Next message: <A HREF="001105.html">[Xitami] PHP_SELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1104">[ date ]</a>
+              <a href="thread.html#1104">[ thread ]</a>
+              <a href="subject.html#1104">[ subject ]</a>
+              <a href="author.html#1104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:20010922114028.M77@eyup.org">20010922114028.M77@eyup.org</A>&gt;, John Poltorak writes:
+&gt;<i>#4  0x58753 in _closedir ()
+</I>&gt;<i>#5  0x1a99d in close_dir ()
+</I>
+Ah.  I think I know what's going on -- there was a bug in Xitami where
+if it failed to open a directory it would still try to call close_dir(),
+which would then get very upset because it didn't have a valid directory
+handle.
+
+I think this problem is fixed in the version in CVS, as I seem to recall
+a bug like this was reported a while ago.
+
+If you want to fix it yourself and rebuild the binary have a look in
+smtftpl.c (for ftpc_make_listing()), and change the logic for
+opening/closing the directory around so that it only tries to close it
+if the open was successful.
+
+&gt;<i>Incidentally, an OS/2 port of GCC v3.0 has just been released and is 
+</I>&gt;<i>available here:-
+</I>&gt;<i><A HREF="ftp://unixos2.org/incoming/gcc-os2-3.0-gcc.zip">ftp://unixos2.org/incoming/gcc-os2-3.0-gcc.zip</A>
+</I>
+Interesting.
+
+&gt;<i>I'd be interested in which tools you use for building Xitami on OS/2 as
+</I>&gt;<i>I'm hoping to put together an updated set as part of the UnixOS/2 project.
+</I>
+Xitami for OS/2 was built using the EMX compiler suite, plus REXX.  Otto
+will generate REXX build scripts (but pre-built versions of these should
+already be in the source kits), and Libero is used for generating some
+of the other code (again, pre-built versions are in the source kits).
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001103.html">[Xitami] File upload with xitami???
+</A></li>
+	<LI> Next message: <A HREF="001105.html">[Xitami] PHP_SELF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1104">[ date ]</a>
+              <a href="thread.html#1104">[ thread ]</a>
+              <a href="subject.html#1104">[ subject ]</a>
+              <a href="author.html#1104">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

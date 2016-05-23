@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami PHP Header Redirect issues...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami%20PHP%20Header%20Redirect%20issues...&In-Reply-To=44907033.19881.93E488%40mw.9000.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007325.html">
+   <LINK REL="Next"  HREF="007327.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami PHP Header Redirect issues...</H1>
+    <B>Webb, Paul</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami%20PHP%20Header%20Redirect%20issues...&In-Reply-To=44907033.19881.93E488%40mw.9000.org"
+       TITLE="[Xitami] Xitami PHP Header Redirect issues...">pwebb at webbenabled.com
+       </A><BR>
+    <I>Wed Jun 14 20:37:20 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007325.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+        <LI>Next message: <A HREF="007327.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7326">[ date ]</a>
+              <a href="thread.html#7326">[ thread ]</a>
+              <a href="subject.html#7326">[ subject ]</a>
+              <a href="author.html#7326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Magnus Wedberg wrote:
+&gt;<i> Um, just a stupid question, but you aren't sending anything else to 
+</I>&gt;<i> the client before are you? The redirect needs to be received by the 
+</I>&gt;<i> client exclusively or it won't work. In your situation I would telnet 
+</I>&gt;<i> to the server, GET the page, and see what response there is.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>Nope. I even plugged in your header line just to be sure that it wasn't
+me being stupid. Here's the content of the current index.php file:
+
+&lt;?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', true);
+    header(&quot;Location: <A HREF="http://www.magnuswedberg.com/&quot;">http://www.magnuswedberg.com/&quot;</A>);
+?&gt;
+
+The first two lines are me trying to get something, anything out of PHP
+to indicate that something could be wrong on it's end. I still see nothing.
+
+Additionally, I've been looking at what is displayed in the access logs.
+Here's what I get when I request index.php:
+
+10.0.143.51 - - [14/Jun/2006:13:59:01 -0500] &quot;GET / HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+10.0.143.51 - - [14/Jun/2006:13:59:04 -0500] &quot;GET / HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+10.0.143.51 - - [14/Jun/2006:13:59:06 -0500] &quot;GET / HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+10.0.143.51 - - [14/Jun/2006:14:00:19 -0500] &quot;GET / HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+10.0.143.51 - - [14/Jun/2006:14:01:26 -0500] &quot;GET / HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+10.0.143.51 - - [14/Jun/2006:14:04:56 -0500] &quot;GET / HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+
+Note the 0 byte-count that is returned, and the fact that there's
+nothing in the referrer section at the end. Here's a normal one from the
+same log file:
+
+10.0.143.51 - admin [14/Jun/2006:14:09:37 -0500] &quot;GET /admin HTTP/1.1&quot;
+200 4130 &quot;&quot; &quot;&quot;
+10.0.143.51 - admin [14/Jun/2006:14:09:37 -0500] &quot;GET /admin/$left.gif
+HTTP/1.1&quot; 200 179 &quot;<A HREF="http://10.0.143.253/admin&quot;">http://10.0.143.253/admin&quot;</A> &quot;&quot;
+10.0.143.51 - admin [14/Jun/2006:14:09:37 -0500] &quot;GET /admin/$help.gif
+HTTP/1.1&quot; 200 213 &quot;<A HREF="http://10.0.143.253/admin&quot;">http://10.0.143.253/admin&quot;</A> &quot;&quot;
+10.0.143.51 - admin [14/Jun/2006:14:09:37 -0500] &quot;GET /admin/$right.gif
+HTTP/1.1&quot; 200 182 &quot;<A HREF="http://10.0.143.253/admin&quot;">http://10.0.143.253/admin&quot;</A> &quot;&quot;
+10.0.143.51 - admin [14/Jun/2006:14:09:37 -0500] &quot;GET
+/admin/$console.gif HTTP/1.1&quot; 200 281 &quot;<A HREF="http://10.0.143.253/admin&quot;">http://10.0.143.253/admin&quot;</A> &quot;&quot;
+
+What I'm seeing from here is that nothing is being passed back from PHP
+to Xitami to tell it where to redirect to. The question is, why not?
+
+And just for kicks, here's the first few lines of my php.ini file:
+
+[PHP]
+   allow_call_time_pass_reference    = On
+   allow_url_fopen            = On
+   asp_tags                = Off
+   auto_append_file            =
+   auto_prepend_file            =
+   cgi.force_redirect            = 0
+   default_mimetype            = &quot;text/html&quot;
+   default_socket_timeout        = 60
+   disable_functions            =
+   disable_classes            =
+   display_errors            = On
+
+Very, very confusing.... If you'd like, take a look yourself. You can
+get to the test server at <A HREF="http://www.journalcommunity.com:8084,">http://www.journalcommunity.com:8084,</A> and
+index.php is the default page.
+
+Thanks!
+-- 
+Paul Webb
+WebbEnabled Solutions, LLC (vCard
+&lt;<A HREF="http://www.webbenabled.com/%7Epwebb/vcard/WebbPaul.vcf">http://www.webbenabled.com/%7Epwebb/vcard/WebbPaul.vcf</A>&gt;)
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">pwebb at webbenabled.com</A> &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">pwebb at webbenabled.com</A>&gt; (PGP/GPG Encryption
+Capable)
+<A HREF="http://www.webbenabled.com">http://www.webbenabled.com</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060614/b6a2452c/attachment.html">http://lists.imatix.org/pipermail/xitami/attachments/20060614/b6a2452c/attachment.html</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007325.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+	<LI>Next message: <A HREF="007327.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7326">[ date ]</a>
+              <a href="thread.html#7326">[ thread ]</a>
+              <a href="subject.html#7326">[ subject ]</a>
+              <a href="author.html#7326">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

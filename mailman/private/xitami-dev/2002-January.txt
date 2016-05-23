@@ -1,0 +1,1123 @@
+From xitami-dev@lists.xitami.org  Tue Jan  8 09:55:52 2002
+From: xitami-dev@lists.xitami.org (Angus Lord)
+Date: Tue, 8 Jan 2002 10:55:52 +0100
+Subject: [Xitami-Dev] C++/C linkage
+Message-ID: <01f101c1982a$aa9e3d30$ee02a8c0@development.europeonline.net>
+
+Hi,
+
+I encountered a couple of problems when writing my own windows front end to
+Xitami. I was using ATL - therefore C++ - for the object and when linking in
+the sfl and smt libraries I had to change the header files sfl.h smtlib.h
+and smthhtp.h to add the extern "C" to the declaration of the global
+variables.
+
+I also got a warning when compiling about a redefinition of FD_SETSIZE in
+sfl.h (also declared in winsock.h - included earlier in atlbase.h) so I
+added a
+
+#  ifdef FD_SETSIZE
+#   undef FD_SETSIZE
+#  endif
+
+ on line 258 in sfl.h
+
+Should these changes be included in the source?
+
+Angus Lord
+
+
+From xitami-dev@lists.xitami.org  Thu Jan 10 15:58:32 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Thu, 10 Jan 2002 10:58:32 -0500
+Subject: [Xitami-Dev] POP3?
+Message-ID: <200201101055578.SM00388@there>
+
+I wanted to write a spam filter using SFL/SMT, so that I could get the same 
+code to run on Windows and Linux.
+
+Before I go reinventing the wheel has any one here done any thing with POP3 & 
+SFL/SMT?
+
+From xitami-dev@lists.xitami.org  Fri Jan 11 09:23:36 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 11 Jan 2002 10:23:36 +0100
+Subject: [Xitami-Dev] POP3?
+In-Reply-To: <200201101055578.SM00388@there>
+Message-ID: <3C3EBD28.5676.DEAA2BD@localhost>
+
+Bob,
+
+> Before I go reinventing the wheel has any one here done any thing 
+with
+> POP3 & SFL/SMT?
+
+Yes, we have a POP3 client written with SMT/SFL.  Let me just check 
+that it's actually in the public CVS... okay, it's not, so we'll put 
+it there and you can access it later from: 
+
+    http://cvs.imatix.com./cgi-bin/viewcvs/
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Fri Jan 11 10:57:47 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Fri, 11 Jan 2002 05:57:47 -0500
+Subject: [Xitami-Dev] POP3?
+In-Reply-To: <3C3EBD28.5676.DEAA2BD@localhost>
+References: <3C3EBD28.5676.DEAA2BD@localhost>
+Message-ID: <20020111060578.SM00388@there>
+
+Thank you.
+
+> > POP3 & SFL/SMT?
+>
+> Yes, we have a POP3 client written with SMT/SFL.  Let me just check
+> that it's actually in the public CVS... okay, it's not, so we'll put
+> it there and you can access it later from:
+>
+>     http://cvs.imatix.com./cgi-bin/viewcvs/
+
+From xitami-dev@lists.xitami.org  Fri Jan 11 15:38:55 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 11 Jan 2002 16:38:55 +0100
+Subject: [Xitami-Dev] POP3?
+In-Reply-To: <3C3EBD28.5676.DEAA2BD@localhost>
+References: <200201101055578.SM00388@there>
+Message-ID: <3C3F151F.22325.F424B1B@localhost>
+
+Folks,
+
+Just FYI, there are now two new agents in the SMT library: smtpop3 
+and smtsmtp, plus two matching test programs.  These agents provide 
+multithread POP3 and SMTP access.  All comments welcome!
+
+-Pietert
+
+
+From xitami-dev@lists.xitami.org  Sat Jan 12 18:59:49 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Sat, 12 Jan 2002 13:59:49 EST
+Subject: [Xitami-Dev] POP3?
+Message-ID: <200201120258.g0C2wdN79697@whirlwind.netspace.net.au>
+
+>Folks,
+>
+>Just FYI, there are now two new agents in the SMT library: smtpop3 
+>and smtsmtp, plus two matching test programs.  These agents provide 
+>multithread POP3 and SMTP access.  All comments welcome!
+>
+>-Pietert
+
+Cool. How's that book going? : )
+
+Rob
+
+From xitami-dev@lists.xitami.org  Sat Jan 12 16:57:33 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sat, 12 Jan 2002 11:57:33 -0500
+Subject: [Xitami-Dev] Regular Experssions in SMT?
+Message-ID: <200201121154531.SM00388@there>
+
+Any one done a Regular Expression parser in SMT?
+
+If not I'll use this RE library:
+http://www.ddj.com/articles/2001/0110/
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 01:44:07 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sun, 13 Jan 2002 20:44:07 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+Message-ID: <200201132041250.SM00388@there>
+
+I've got SFL to build and test just fine from CVS.
+
+I've got SMT from CVS but it seems like there is some thing missing, or I'm 
+missing a step in the build process.
+
+I've used otto to produce 'build'.
+
+When I run build it says:
+
+Checking for required files...
+smtlog.d missing - aborting
+
+I tried running make and it says:
+
+c -q -c smtlog.c
+In file included from smtlog.c:18:
+smtdefn.h:23:80: smtmsg.h: No such file or directory
+smtlog.c:48:80: smtlog.d: No such file or directory
+smtlog.c:77:80: smtlog.i: No such file or directory
+make: *** [smtlog.o] Error 1
+
+There is no smtmsg.h in cvs ( http://cvs.imatix.com./cgi-bin/viewcvs/smt/ ), 
+is there some thing I need to do to generate it?
+
+I'm sure I've missed a step, but don't know where...
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 02:13:08 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 14 Jan 2002 15:13:08 +1300
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: Message from Bob Paddock <bpaddock@csonline.net>
+ of "Sun, 13 Jan 2002 20:44:07 CDT." <200201132041250.SM00388@there>
+Message-ID: <200201140213.PAA04776@pagoda.in.naos.co.nz>
+
+In message <200201132041250.SM00388@there>, Bob Paddock writes:
+>I've got SMT from CVS but it seems like there is some thing missing, or I'm 
+>missing a step in the build process.
+
+You'll need to run libero to generate all the dialogs.  (The single on
+in SFL is pre-generated, after much internal discussion, because "it
+doesn't change much".)
+
+You'll also need to generate the SMT message include files, using GSL.
+GSL2 can be used, I think.  GSL3 is in CVS as "gsl", but you need to
+build SMT before you can build GSL3...
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 19:11:09 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Mon, 14 Jan 2002 14:11:09 EST
+Subject: [Xitami-Dev] How do I build SMT?
+Message-ID: <200201140309.g0E39oK97757@whirlwind.netspace.net.au>
+
+Welcome to the nightmare. You need to use Libero to build some of the 
+files with a '.d' extension.
+
+Rob Judd
+
+>
+>I've got SFL to build and test just fine from CVS.
+>
+>I've got SMT from CVS but it seems like there is some thing missing, 
+or I'm 
+>missing a step in the build process.
+>
+>I've used otto to produce 'build'.
+>
+>When I run build it says:
+>
+>Checking for required files...
+>smtlog.d missing - aborting
+>
+>I tried running make and it says:
+>
+>c -q -c smtlog.c
+>In file included from smtlog.c:18:
+>smtdefn.h:23:80: smtmsg.h: No such file or directory
+>smtlog.c:48:80: smtlog.d: No such file or directory
+>smtlog.c:77:80: smtlog.i: No such file or directory
+>make: *** [smtlog.o] Error 1
+>
+>There is no smtmsg.h in cvs ( http://cvs.imatix.com./cgi-bin/viewcvs/
+smt/ ), 
+>is there some thing I need to do to generate it?
+>
+>I'm sure I've missed a step, but don't know where...
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 22:43:03 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Mon, 14 Jan 2002 17:43:03 EST
+Subject: [Xitami-Dev] How do I build SMT?
+Message-ID: <200201140641.g0E6fZA61158@whirlwind.netspace.net.au>
+
+Can someone please fix my email address for this list?
+
+Correct return address is now judd@ob-wan.com (my own domain) and the 
+current one subscribed will not reach me after March.
+
+Thanks,
+
+Rob
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 07:13:42 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 14 Jan 2002 20:13:42 +1300
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: Message from "Rob Judd" <judd@ob-wan.com>
+ of "Mon, 14 Jan 2002 17:43:03 EST." <200201140641.g0E6fZA61158@whirlwind.netspace.net.au>
+Message-ID: <200201140713.UAA06374@pagoda.in.naos.co.nz>
+
+In message <200201140641.g0E6fZA61158@whirlwind.netspace.net.au>, "Rob Judd" writes:
+>Can someone please fix my email address for this list?
+>Correct return address is now judd@ob-wan.com (my own domain) and the 
+>current one subscribed will not reach me after March.
+
+It's traditional to unsubscribe the address you don't want subscribed, and
+then subscribe the one that you do want subscribed.  It's also traditional
+to address such questions to the mailing list manager off-list.
+
+And it's often helpful to provide some indication of what address it was
+that you want unsubscribed, as well as what one you want subscribed.
+
+Wearing my "mind reader" hat, I've unsubscribed judd@alphalink.com.au
+and subscribed judd@ob-wan.com.  Hopefully this was the intended result.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 11:06:51 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Mon, 14 Jan 2002 06:06:51 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201140213.PAA04776@pagoda.in.naos.co.nz>
+References: <200201140213.PAA04776@pagoda.in.naos.co.nz>
+Message-ID: <200201140607859.SM00388@there>
+
+> You'll need to run libero to generate all the dialogs.
+>
+> You'll also need to generate the SMT message include files, using GSL.
+> GSL2 can be used, I think.  GSL3 is in CVS as "gsl", but you need to
+> build SMT before you can build GSL3...
+
+Ok thanks.  Where did I miss reading this step in the documentation?
+
+I am a bit perplexed as to why SFL & SMT in the Xitami package build them 
+self, but the ones in CVS do not.
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 14 11:22:57 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Tue, 15 Jan 2002 00:22:57 +1300
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: Message from Bob Paddock <bpaddock@csonline.net>
+ of "Mon, 14 Jan 2002 06:06:51 CDT." <200201140607859.SM00388@there>
+Message-ID: <200201141122.AAA07661@pagoda.in.naos.co.nz>
+
+In message <200201140607859.SM00388@there>, Bob Paddock writes:
+>> You'll need to run libero to generate all the dialogs.
+>>
+>> You'll also need to generate the SMT message include files, using GSL.
+>> GSL2 can be used, I think.  GSL3 is in CVS as "gsl", but you need to
+>> build SMT before you can build GSL3...
+>
+>Ok thanks.  Where did I miss reading this step in the documentation?
+>
+>I am a bit perplexed as to why SFL & SMT in the Xitami package build them 
+>self, but the ones in CVS do not.
+
+In the "Xitami build package"?  The ones from http://www.xitami.com/?
+
+They're about 12-18 months older, and include all the various things
+pregenerated, for easy of compile-and-go.  The CVS archive is our current
+development tree, and one of the reasons that there's been no new releases
+is that the build environment "needs work".
+
+As for documentation, that's another thing that "needs work".  :-)
+
+Feel free to use the SFL/SMT from the Xitami package if they're easier
+for you to build and they hvae the functionality you want.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Thu Jan 17 13:29:29 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Thu, 17 Jan 2002 14:29:29 +0100
+Subject: [Xitami-Dev] Context management, LRWP
+Message-ID: <3C46DFC9.5853.4EC795D@localhost>
+
+"Joseph Saunders" <jsaunders@caw.com> wrote:
+
+> Ideally when a user is logged on and navigating the GUI, a second 
+user
+> could log in and do the same.  Supporting this will require 
+management
+> of each user session.
+
+We've done this before... long time back we wrote a session 
+management layer for Xitami.  It was part of our WTP protocol 
+handler, a kind of large-scale LRWP manager that we built for our 
+Studio toolkit.
+
+WTP is a bit like LRWP but more complex.  We wrote our Studio 
+application programs using Libero and the same form i/o system that 
+comes with Xitami's administration SDK.  Studio has been static for a 
+while and I've now put it into our public CVS archive.
+
+This should be available from:
+
+    http://cvs.imatix.com./cgi-bin/viewcvs/
+
+when the site has been mirrored, which will happen some time today.
+
+Check the OpenKernel Studio directory.  I can't guarantee that Studio 
+will make sense or even build.  You will have to be ready to build 
+your own version of Xitami (it uses a WSX plugin).
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Thu Jan 17 18:10:19 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Fri, 18 Jan 2002 04:10:19 +1000
+Subject: [Xitami-Dev] Context management, LRWP
+References: <3C46DFC9.5853.4EC795D@localhost>
+Message-ID: <3C47138B.33DABFB7@ob-wan.com>
+
+Pieter,
+
+> WTP is a bit like LRWP but more complex.  We wrote our Studio
+> application programs using Libero and the same form i/o system that
+> comes with Xitami's administration SDK.  Studio has been static for a
+> while and I've now put it into our public CVS archive.
+> 
+> This should be available from:
+> 
+>     http://cvs.imatix.com./cgi-bin/viewcvs/
+> 
+> when the site has been mirrored, which will happen some time today.
+> 
+> Check the OpenKernel Studio directory.  I can't guarantee that Studio
+> will make sense or even build.  You will have to be ready to build
+> your own version of Xitami (it uses a WSX plugin).
+
+Hmmm. Studio seems to be cross-linked somewhere. I ended up with a copy
+under the directory xitami/studio here. Nice to see it out in the open
+anyhow; if you hear "aaa-a-argh" noises from down here you'll know I'm
+making progress.
+
+Rob
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 06:30:43 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Fri, 18 Jan 2002 16:30:43 +1000
+Subject: [Xitami-Dev] Otto from CVS
+References: <3C46DFC9.5853.4EC795D@localhost>
+Message-ID: <3C47C113.1C735B6E@ob-wan.com>
+
+Bug report:
+
+otto\install.bat installs otto.d and otto.fmt to /usr/bin but otto can't
+find them there.
+
+Rob Judd
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 06:42:57 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Fri, 18 Jan 2002 16:42:57 +1000
+Subject: [Xitami-Dev] LR from CVS
+References: <3C46DFC9.5853.4EC795D@localhost>
+Message-ID: <3C47C3F1.7E9C7979@ob-wan.com>
+
+Bug report:
+
+Three files c, c.cmd and c.bat are missing from the lr directory. They
+are different from the ones in \otto and so need to be supplied.
+
+Rob Judd
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 06:47:08 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Fri, 18 Jan 2002 16:47:08 +1000
+Subject: [Xitami-Dev] LR from CVS
+References: <3C46DFC9.5853.4EC795D@localhost> <3C47C3F1.7E9C7979@ob-wan.com>
+Message-ID: <3C47C4EC.3E81CDA5@ob-wan.com>
+
+Correction to this message:
+
+This is another bug in /otto/install.bat - they're not copied into ../lr
+
+Rob Judd
+
+
+Rob Judd wrote:
+> 
+> Bug report:
+> 
+> Three files c, c.cmd and c.bat are missing from the lr directory. They
+> are different from the ones in \otto and so need to be supplied.
+> 
+> Rob Judd
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 07:20:48 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Fri, 18 Jan 2002 17:20:48 +1000
+Subject: [Xitami-Dev] GSLgen problem
+References: <3C46DFC9.5853.4EC795D@localhost>
+Message-ID: <3C47CCD0.10D58A4B@ob-wan.com>
+
+Is a newer version of GSLgen required here?
+
+
+H:\iMatix\smt>gslgen smtmsg.xml
+gslgen - Generalised Schema Language Generator V2.000 Beta 1
+Copyright (c) 1996-2000 iMatix - http://www.imatix.com
+
+gslgen I: Processing smtmsg.xml...
+gslgen W: (smtexdr.gsl 90) Undefined identifier: message.name
+
+Rob Judd
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 11:57:07 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Fri, 18 Jan 2002 12:57:07 +0100
+Subject: [Xitami-Dev] Missing files in SFL buildsfl.txt
+Message-ID: <GMEIJMPDFMEGPAGNKHKDEEONCAAA.rafael.cano@o-labs.com>
+
+ Is there any reason for not having
+ included these files in the
+ builfsl.txt for otto ?
+
+ sflarg.c and .h
+ sfldes.c and .h
+ sflidea.c and .h
+ sflprocx.c and .h
+ sflrc4.c and .h
+ sflsha.c and .h
+ sflstat.c and .h
+
+ Regards.
+
+   Rafael Cano Pérez
+ --------------------------------------------------
+ Okhtor Labs - Communication & Integration Software
+ gran vía 15                     28013 madrid spain
+ tel +34 917 011 790            fax +34 917 011 791
+ rafael.cano@o-labs.com              www.o-labs.com
+ --------------------------------------------------
+
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 12:27:08 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sat, 19 Jan 2002 01:27:08 +1300
+Subject: [Xitami-Dev] LR from CVS
+In-Reply-To: Message from Rob Judd <judd@ob-wan.com>
+ of "Fri, 18 Jan 2002 16:42:57 +1000." <3C47C3F1.7E9C7979@ob-wan.com>
+Message-ID: <200201181227.BAA05978@pagoda.in.naos.co.nz>
+
+In message <3C47C3F1.7E9C7979@ob-wan.com>, Rob Judd writes:
+>Three files c, c.cmd and c.bat are missing from the lr directory. They
+>are different from the ones in \otto and so need to be supplied.
+
+How are they different from the ones in the otto directory?  
+
+FWIW, this has always been the case with the CVS archive: the "c" script
+"belongs" to otto, and hence they are in that directory, rather than
+duplicated in difficult-to-maintain positions throughout the archive.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Sat Jan 19 05:26:04 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Sat, 19 Jan 2002 00:26:04 EST
+Subject: [Xitami-Dev] LR from CVS
+Message-ID: <200201181324.g0IDOvu62750@whirlwind.netspace.net.au>
+
+Ewen,
+
+This message was corrected by the next one, issued within about 5 
+minutes.
+
+Cheers,
+
+Rob
+
+
+>In message <3C47C3F1.7E9C7979@ob-wan.com>, Rob Judd writes:
+>>Three files c, c.cmd and c.bat are missing from the lr directory. 
+They
+>>are different from the ones in \otto and so need to be supplied.
+>
+>How are they different from the ones in the otto directory?  
+>
+>FWIW, this has always been the case with the CVS archive: the "c" 
+script
+>"belongs" to otto, and hence they are in that directory, rather than
+>duplicated in difficult-to-maintain positions throughout the archive.
+>
+>Ewen
+>
+>-- 
+>Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Fri Jan 18 16:44:48 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 18 Jan 2002 17:44:48 +0100
+Subject: [Xitami-Dev] Missing files in SFL buildsfl.txt
+In-Reply-To: <GMEIJMPDFMEGPAGNKHKDEEONCAAA.rafael.cano@o-labs.com>
+Message-ID: <3C485F10.8276.17552CC@localhost>
+
+Rafael,
+ 
+>  Is there any reason for not having
+>  included these files in the
+>  builfsl.txt for otto ?
+> 
+>  sflarg.c and .h...
+
+Yes, some of these are experimental and/or incomplete and/or just new.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Sat Jan 19 15:32:39 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sat, 19 Jan 2002 10:32:39 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201140213.PAA04776@pagoda.in.naos.co.nz>
+References: <200201140213.PAA04776@pagoda.in.naos.co.nz>
+Message-ID: <200201191032593.SM00379@there>
+
+> You'll also need to generate the SMT message include files, using GSL.
+> GSL2 can be used, I think.  GSL3 is in CVS as "gsl", but you need to
+> build SMT before you can build GSL3...
+
+Ok, I've spent the last half hour trying to build the version of GSL that I 
+downloaded in the zip file, so I could build SMT, so I could build GSL3, so I 
+could build...
+
+All I get out of it is "bad interperter, no such file or directory" when I 
+try to run 'c' or the makefile.  
+
+sh-2.05 is my /bin/sh so I don't understand what it is complaning about.
+
+I'm running Mandrake8.1.  Can some one point me in useful direction please?
+
+From xitami-dev@lists.xitami.org  Sat Jan 19 20:34:00 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sun, 20 Jan 2002 09:34:00 +1300
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: Message from Bob Paddock <bpaddock@csonline.net>
+ of "Sat, 19 Jan 2002 10:32:39 CDT." <200201191032593.SM00379@there>
+Message-ID: <200201192034.JAA25878@pagoda.in.naos.co.nz>
+
+In message <200201191032593.SM00379@there>, Bob Paddock writes:
+>All I get out of it is "bad interperter, no such file or directory" when I 
+>try to run 'c' or the makefile.  
+>
+>sh-2.05 is my /bin/sh so I don't understand what it is complaning about.
+
+Chances are fairly high that there is something wrong with the #! line
+in the c script.  If there's nothing "visibly" wrong with it, and you
+downloaded the zip file and didn't unzip it with the ascii file handling
+(-a), chances are strong that there's stray carriage returns in the file.
+So that it's looking for the interpreter /bin/sh\015 which doesn't exist.
+
+Either open it in an editor and replace all the carriage returns with
+nothing, or unzip it again with the "-a" flag, so that ascii files are
+translated to the correct line terminators.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Sat Jan 19 21:17:21 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sat, 19 Jan 2002 16:17:21 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201192034.JAA25878@pagoda.in.naos.co.nz>
+References: <200201192034.JAA25878@pagoda.in.naos.co.nz>
+Message-ID: <200201191617734.SM00379@there>
+
+> Either open it in an editor and replace all the carriage returns with
+> nothing, or unzip it again with the "-a" flag, so that ascii files are
+> translated to the correct line terminators.
+
+Yes that is was the problem.
+
+It looks to me that I'm just not meant to use SMT... :-(
+
+Compiling ggcode...
+ggcode.c: In function `store_symbol_definition':
+ggcode.c:606: too few arguments to function `xml_put_attr_ic'
+ggcode.c: In function `substitute_parameter_into_xml':
+ggcode.c:1426: too few arguments to function `xml_put_attr_ic'
+ggcode.c: In function `initialise_for_block':
+ggcode.c:1499: warning: `scope_item' might be used uninitialized in this 
+function
+ggcode.c: In function `sort_xml_items':
+ggcode.c:2451: warning: `scope_item' might be used uninitialized in this 
+function
+
+From xitami-dev@lists.xitami.org  Sun Jan 20 03:27:36 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sun, 20 Jan 2002 16:27:36 +1300
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: Message from Bob Paddock <bpaddock@csonline.net>
+ of "Sat, 19 Jan 2002 16:17:21 CDT." <200201191617734.SM00379@there>
+Message-ID: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+
+In message <200201191617734.SM00379@there>, Bob Paddock writes:
+>It looks to me that I'm just not meant to use SMT... :-(
+>
+>Compiling ggcode...
+>ggcode.c: In function `store_symbol_definition':
+>ggcode.c:606: too few arguments to function `xml_put_attr_ic'
+>ggcode.c: In function `substitute_parameter_into_xml':
+>ggcode.c:1426: too few arguments to function `xml_put_attr_ic'
+
+Looks like whatever version of GSL you're building is incompatible with
+whatever version of SFL you're using.  IIRC xml_put_attr_ic had an extra
+parameter added a while ago in SFL which caused this problem (and, yes,
+there was some internal, umm, discussion about doing this).
+
+So you'll probably want to build GSL2 from the website with the SFL from
+the website.
+
+Finally, yes, making this all easier to build is on our list of things
+to do -- pretty high on our list these days :-)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Sun Jan 20 10:23:31 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Sun, 20 Jan 2002 11:23:31 +0100
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201191617734.SM00379@there>
+References: <200201192034.JAA25878@pagoda.in.naos.co.nz>
+Message-ID: <3C4AA8B3.26987.A654F36@localhost>
+
+Bob Paddock <bpaddock@csonline.net> wrote:
+
+> > Either open it in an editor and replace all the carriage returns
+> > with nothing, or unzip it again with the "-a" flag, so that ascii
+> > files are translated to the correct line terminators.
+> 
+> Yes that is was the problem.
+> It looks to me that I'm just not meant to use SMT... :-(
+
+Don't give up. :)  The reaction of Unix shells to scripts that have 
+been DOS-ified is always cryptic.
+
+To follow on Ewen's remarks, we are working towards a single 
+OpenKernel distribution that includes all our open source tools in 
+one nice package.  Estimate about 1-2 months before this is finished 
+and stable.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Sun Jan 20 11:19:59 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sun, 20 Jan 2002 06:19:59 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz>
+Message-ID: <200201200621890.SM00379@there>
+
+> Looks like whatever version of GSL you're building is incompatible with
+> whatever version of SFL you're using. 
+
+SFL is from CVS, which built with little problem.  GSL is from the zip file 
+from the web site because you had said that the version in CVS needed SMT 
+first, but to build SMT I needed GSL...
+
+I'll try building GSL, if it is not already there, with the stuff from Tami 
+since it built fine, but ultimately I need the SMT form CVS because it had 
+the pop3 stuff that I'm trying to use.
+
+> Finally, yes, making this all easier to build is on our list of things
+> to do -- pretty high on our list these days :-)
+
+Thank you.  Take a look at the cons 'make' replacement project, maybe that 
+would help.  http://www.gnu.org/directory/cons.html
+
+
+
+
+From xitami-dev@lists.xitami.org  Sun Jan 20 13:36:31 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Sun, 20 Jan 2002 08:36:31 -0500
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201200621890.SM00379@there>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <200201200621890.SM00379@there>
+Message-ID: <200201200836734.SM00379@there>
+
+> I'll try building GSL, if it is not already there, with the stuff from     
+> xitami since it built fine, 
+
+Nope, you simply can't get there from here it seems.
+
+SMT in CVS needs GSL from CVS, as was stated.
+
+Can't build GSL from CVS because there is no build instructions of any kind, 
+and I don't fell like creating them.  Also the gsl files won't build with the 
+old version of gsl from Xitami, so even if there was build instructions, I 
+still don't think I could build it.  To many circular build problems.
+
+> > Finally, yes, making this all easier to build is on our list of things
+> > to do -- pretty high on our list these days :-)
+
+I guess I'll just wait...
+
+Please test on a clean machine starting where you have no tools but the 
+standard GNU tool chain, like I'm trying to start with...
+
+
+
+From xitami-dev@lists.xitami.org  Sun Jan 20 15:02:45 2002
+From: xitami-dev@lists.xitami.org (Patricko)
+Date: Sun, 20 Jan 2002 08:02:45 -0700
+Subject: [Xitami-Dev] GCC for windows
+Message-ID: <002701c1a1c3$864be520$b56be73f@patricko>
+
+Has anyone got Xitami to compile with GNU GCC WIN32
+
+
+http://www.nanotech.wisc.edu/~khan/software/gnu-win32/index.html
+
+this has some good stuff with it but was unable to compile without errors
+so figured I'd ask here and see if it's been done
+
+Thanks
+Patrick
+
+
+
+From xitami-dev@lists.xitami.org  Sun Jan 20 16:49:54 2002
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Mon, 21 Jan 2002 02:49:54 +1000
+Subject: [Xitami-Dev] GCC for windows
+References: <002701c1a1c3$864be520$b56be73f@patricko>
+Message-ID: <3C4AF532.A6C662B3@ob-wan.com>
+
+Patrick,
+
+I almost got it to compile with mingw32 about 18 months ago (xitami
+2.5b4), but GCC has changed a lot since then in some very incompatible
+ways. You would probably have more luck with it than, say, cygwin
+though.
+
+For certain results, get a copy of msvc from somewhere.
+
+Rob
+
+
+Patricko wrote:
+> 
+> Has anyone got Xitami to compile with GNU GCC WIN32
+> 
+> http://www.nanotech.wisc.edu/~khan/software/gnu-win32/index.html
+> 
+> this has some good stuff with it but was unable to compile without errors
+> so figured I'd ask here and see if it's been done
+> 
+> Thanks
+> Patrick
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Mon Jan 21 08:33:56 2002
+From: xitami-dev@lists.xitami.org (KERESZTFALVI Laszlo)
+Date: Mon, 21 Jan 2002 09:33:56 +0100
+Subject: [Xitami-Dev] How do I build SMT?
+In-Reply-To: <200201200836734.SM00379@there>
+References: <200201200327.QAA28825@pagoda.in.naos.co.nz> <200201200621890.SM00379@there> <200201200836734.SM00379@there>
+Message-ID: <20020121093356.A349@buci>
+
+On Sun, Jan 20, 2002 at 08:36:31AM -0500, Bob Paddock wrote:
+> 
+> > I'll try building GSL, if it is not already there, with the stuff from     
+> > xitami since it built fine, 
+> [...] 
+> Can't build GSL from CVS because there is no build instructions of any kind, 
+> and I don't fell like creating them.  Also the gsl files won't build with the 
+> old version of gsl from Xitami, so even if there was build instructions, I 
+> still don't think I could build it.  To many circular build problems.
+
+I think (and I did sometime) you can build the "original, current" GSL2
+downloaded from the www.imatix.com and then the GSL link with the SFL and
+SMT which is both there or in the Xitami but not with those in the CVS. I
+think there are the "too new" SFL and SMT in the CVS which reqire GSL2 and
+are required for GSL3. :))
+
+Hope this helps!
+Laszlo
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 21 09:00:25 2002
+From: xitami-dev@lists.xitami.org (KERESZTFALVI Laszlo)
+Date: Mon, 21 Jan 2002 10:00:25 +0100
+Subject: [Xitami-Dev] About Libero
+Message-ID: <20020121100025.B349@buci>
+
+Hi All,
+
+I'm relativelty new to the developer list and I know a newcomer speak
+easily.. but an idea even I think you already considered it.
+
+What about to implement Libero (and maybe GSL) by flex and bison and of
+course still using SFL? I think it can help to evolve the syntax and add
+features. At least, sometimes I'm thinking about extending and embedding
+Libero for run-time scripting. Bison also generates FSM but the aproach is
+from the syntax which enables to modify it more easily than coming from an
+automaton and trying to describe a language. IMO, bison is better for
+languages while Libero/SMT, the direct FSM approach is great for logic and
+programming, for algorithms.
+
+Regards,
+Laszlo
+
+-- 
+The most precious thing we have is life. Yet it has absolutely no
+trade-in value.
+
+From xitami-dev@lists.xitami.org  Mon Jan 21 12:31:37 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 21 Jan 2002 13:31:37 +0100
+Subject: [Xitami-Dev] About Libero
+In-Reply-To: <20020121100025.B349@buci>
+Message-ID: <3C4C1839.3027.794E14@localhost>
+
+Laszlo wrote:
+
+> What about to implement Libero (and maybe GSL) by flex and bison and
+> of course still using SFL?...
+
+It's a good idea, and indeed I generally prefer Flex to Libero for 
+designing parsers.  However... I once wrote a full COBOL lexical 
+analyser in Lex, hit several hard limitations and ended-up using a 
+small tool I'd written, called Libero.  That led me to finishing 
+Libero and releasing it as free software.
+
+Back to 2002.  We're rewriting Libero using GSL, so the tool will 
+disappear as such, and become a GSL package.  The scanner/parser in 
+GSLgen 3.x is probably too bizarre to be written using Flex/Bison, 
+since it runs through SMT to allow multithreaded execution.  We did 
+this to allow GSL programming in Xitami and similar contexts.
+
+So I don't think it's interesting to consider Flex/Bison for GSL.
+
+Regards,
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 21 14:36:39 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Mon, 21 Jan 2002 15:36:39 +0100
+Subject: [Xitami-Dev] Change of architecture in SMT@CVS ?
+Message-ID: <GMEIJMPDFMEGPAGNKHKDGEPCCAAA.rafael.cano@o-labs.com>
+
+ I see changes in the SMT source code in CVS
+ with some functionality missing, like sendfmt() is not
+ longer in smtlib.c and some defines, specially
+ for the SMTSOCK messages for exdr functions,
+ like SMT_SOCK_READ etc, that is giving me
+ a lot of problems with my own SMT agents.
+
+ Is this for good, or just a matter of SMT not
+ being ready for shipment yet ?.
+
+ Regards
+
+   Rafael Cano Pérez
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 21 14:41:45 2002
+From: xitami-dev@lists.xitami.org (Patricko)
+Date: Mon, 21 Jan 2002 07:41:45 -0700
+Subject: [Xitami-Dev] GCC for windows
+References: <002701c1a1c3$864be520$b56be73f@patricko> <3C4AF532.A6C662B3@ob-wan.com>
+Message-ID: <011e01c1a289$c176eb60$b56be73f@patricko>
+
+Ok Rob thanks I'll dig at it a bit before I dish out the bucks for M$ but
+may have to one of these day's
+
+----- Original Message -----
+From: "Rob Judd" <judd@ob-wan.com>
+To: <xitami-dev@lists.xitami.org>
+Sent: Sunday, January 20, 2002 9:49 AM
+Subject: Re: [Xitami-Dev] GCC for windows
+
+
+> Patrick,
+>
+> I almost got it to compile with mingw32 about 18 months ago (xitami
+> 2.5b4), but GCC has changed a lot since then in some very incompatible
+> ways. You would probably have more luck with it than, say, cygwin
+> though.
+>
+> For certain results, get a copy of msvc from somewhere.
+>
+> Rob
+>
+>
+> Patricko wrote:
+> >
+> > Has anyone got Xitami to compile with GNU GCC WIN32
+> >
+> > http://www.nanotech.wisc.edu/~khan/software/gnu-win32/index.html
+> >
+> > this has some good stuff with it but was unable to compile without
+errors
+> > so figured I'd ask here and see if it's been done
+> >
+> > Thanks
+> > Patrick
+> >
+
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 21 17:12:28 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 21 Jan 2002 18:12:28 +0100
+Subject: [Xitami-Dev] Change of architecture in SMT@CVS ?
+In-Reply-To: <GMEIJMPDFMEGPAGNKHKDGEPCCAAA.rafael.cano@o-labs.com>
+Message-ID: <3C4C5A0C.15983.17A78FE@localhost>
+
+Rafael Cano Pérez <rafael.cano@o-labs.com> wrote:
+
+>  I see changes in the SMT source code in CVS
+>  with some functionality missing, like sendfmt() is not
+>  longer in smtlib.c and some defines, specially
+>  for the SMTSOCK messages for exdr functions,
+>  like SMT_SOCK_READ etc, that is giving me
+>  a lot of problems with my own SMT agents.
+
+We have -- as you see -- been working on SMT despite the apparent 
+silence over the last year or two.  smtsock and smttime no longer 
+exist.  Their functions are now carried out inside the kernel itself. 
+ This change allowed us to improve signal handling and certain stress 
+conditions.  There have been many other small changes but overall the 
+architecture is still the same.
+
+However, you'll need to modify your code for talking to smtsock and 
+smttime.  I'm not sure why sendfmt disappeared but there is probably 
+a good reason for it.  In any case the CVS version is stable.  
+
+I'll get someone to post a summary of the changes and how to convert 
+your SMT agents.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Tue Jan 22 09:31:55 2002
+From: xitami-dev@lists.xitami.org (KERESZTFALVI Laszlo)
+Date: Tue, 22 Jan 2002 10:31:55 +0100
+Subject: [Xitami-Dev] About Libero
+In-Reply-To: <3C4C1839.3027.794E14@localhost>
+References: <20020121100025.B349@buci> <3C4C1839.3027.794E14@localhost>
+Message-ID: <20020122103155.A1372@buci>
+
+On Mon, Jan 21, 2002 at 01:31:37PM +0100, Pieter Hintjens wrote:
+> It's a good idea, and indeed I generally prefer Flex to Libero for 
+> designing parsers.  However... I once wrote a full COBOL lexical 
+> analyser in Lex, hit several hard limitations and ended-up using a 
+
+Basically, I suggest Bison which is a 'yacc' by GNU (AFAIK). So, it is a
+compiler compiler. Flex is only a parser generator, no more!
+
+Flex really supports states to enable very complicated context dependent
+tokenization but this is usually not required and the syntax should be
+realized in the Bison part.
+
+Before I found Libero (and it was a love for the first sight) I had first
+met the FSM design in real-life when one of my collegues who had worked on
+cdrom controller hardwares ten years ago had used the FSM approach to
+build data stream processor programs using a switch-case representation by
+hand. So, I'd hunt for some tool to help the design-to-representation.
+First, I'd wanted to use Bison and so grammars to build the FSM (bison
+also generates state transition matrix in source format) but it had been
+very very hard to construct a language from a flowchart. (I'd thought that
+since the data stream can be processed it is a kind of protocol and
+protocols are usually spoken :)
+
+Even the FSM is a fine representation for both grammars and logic the
+approach is very different I think. You mention that "Libero is not for
+everything" in the doc. I think program logic usually use comparisions
+(if/switch), iterations (loops) and exception handling while grammars use
+substitution, recursion and pattern matching. We know that a recursion can
+be transformed into iteration and so on, but I think a compiler can be
+more efficient and extendable using grammar techniques while a program
+logic can profit from flowchart-like clear transition description
+technique.
+
+I feel the difference is something like between C/C++/Java/whatever and
+LISP/Scheme. While the previous is for programming logic the latter is for
+pattern finding, decision trees, AI. Both can be used for other targets
+but it'd be a pain! Just think about general, day-by-day coding in LISP!
+OK, maybe thit was too hard, but feel the difference. That's why I think
+Bison would be better for compiler issues like Libero and GSL. Libero will
+still remain genious for logic!
+
+
+Sorry being so long or talking about well-known issues.
+
+Regards,
+Laszlo
+
+-- 
+If carrots are so good for the eyes, how come I see so many dead rabbits
+on the highway?
+
+From xitami-dev@lists.xitami.org  Wed Jan 23 09:08:19 2002
+From: xitami-dev@lists.xitami.org (KERESZTFALVI Laszlo)
+Date: Wed, 23 Jan 2002 10:08:19 +0100
+Subject: [Xitami-Dev] Re: Change of architecture in SMT@CVS ?
+Message-ID: <20020123100819.E1922@buci>
+
+> We have -- as you see -- been working on SMT despite the apparent 
+> silence over the last year or two.  smtsock and smttime no longer 
+> exist.  Their functions are now carried out inside the kernel itself. 
+For me, it was very nice and consistent reaching the Kernel services very
+same as all other components (agents). Anyway, SMT is a chained
+multi-threading kernel you mention in the doc. Partially, that's why I
+have no problem living with the Kernel on the same "level", I was
+cooperative ;)
+
+> I'll get someone to post a summary of the changes and how to convert 
+> your SMT agents.
+That would be nice to see the improvements in one place together! Thanks!
+
+Cheers,
+Laszlo
+
+-- 
+I don't approve of political jokes...I've seen too many of them get
+elected.
+
+

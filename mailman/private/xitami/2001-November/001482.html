@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Looking for anyone interested in advancing Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001479.html">
+   <LINK REL="Next"  HREF="001463.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Looking for anyone interested in advancing Xitami
+   </H1>
+    <B>bernd hohmann
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Looking for anyone interested in advancing Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 26 Nov 2001 10:30:15 +0100 (MEZ)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001479.html">[Xitami] What is the [stats] section?
+</A></li>
+        <LI> Next message: <A HREF="001463.html">[Xitami] I can't get PHP4 to run with Xitami!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1482">[ date ]</a>
+              <a href="thread.html#1482">[ thread ]</a>
+              <a href="subject.html#1482">[ subject ]</a>
+              <a href="author.html#1482">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 23 Nov 2001 20:15:08 -0000, Ben Sadler wrote:
+
+&gt;<i> how did you get sub-domains to work on xitami? next year i want to move my
+</I>&gt;<i> domain to my computer, so that nameservers are running on my computer (its
+</I>&gt;<i> cheaper) and i would like to know how to do this.
+</I>
+as any other subdomain too: you define the subdomain in your DNS (like os2.harddiskcafe.de, www.harddiskcafe.de, ftp.harddiskafe.de) and create an entry in the [Virtual-Hosts] section of the xitami configuration.
+
+os2.harddiskcafe.de=c:\www\vhosts\os2.harddiskcafe.de\vhost.cfg
+
+in this vhost.cfg you define the differences in the configuration:
+
+[Server]
+    ipaddress=62.159.157.34
+    webpages=c:\www\vhosts\os2.harddiskcafe.de\htdocs\
+[AccessLog]
+    filename=c:\www\vhosts\os2.harddiskcafe.de\logdata\access.log
+   cycle-arg=c:\www\vhosts\os2.harddiskcafe.de\logdata\ac%yy%mm%dd.log
+[ErrorLog]
+    filename=c:\www\vhosts\os2.harddiskcafe.de\logdata\access.log
+   cycle-arg=c:\www\vhosts\os2.harddiskcafe.de\logdata\ac%yy%mm%dd.log
+[Security]
+    filename=c:\www\vhosts\os2.harddiskcafe.de\vhost.aut
+    dirlist=1
+
+bernd
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001479.html">[Xitami] What is the [stats] section?
+</A></li>
+	<LI> Next message: <A HREF="001463.html">[Xitami] I can't get PHP4 to run with Xitami!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1482">[ date ]</a>
+              <a href="thread.html#1482">[ thread ]</a>
+              <a href="subject.html#1482">[ subject ]</a>
+              <a href="author.html#1482">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

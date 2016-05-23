@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Help with Virtual Hosts (I think)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003219.html">
+   <LINK REL="Next"  HREF="003221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Help with Virtual Hosts (I think)?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Help with Virtual Hosts (I think)?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 22 May 2002 19:15:17 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003219.html">[Xitami] Help with Virtual Hosts (I think)?
+</A></li>
+        <LI> Next message: <A HREF="003221.html">[Xitami] [agendavr3] AGENDA VR3 Linux PDA
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3220">[ date ]</a>
+              <a href="thread.html#3220">[ thread ]</a>
+              <a href="subject.html#3220">[ subject ]</a>
+              <a href="author.html#3220">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I want to be able to have a seperate, simple URL for each of my
+</I>&gt;<i> sites on my home computer. If I type &quot;<A HREF="http://qbono"">http://qbono&quot;</A> I want it to
+</I>&gt;<i> load the site located at &quot;e:\websites\qbono.com\&quot;, and if I type
+</I>&gt;<i> &quot;<A HREF="http://xpxl"">http://xpxl&quot;</A> I want it to load the site located at
+</I>&gt;<i> &quot;e:\websites\xpxl.net\&quot;, etc.
+</I>
+Find your &quot;hosts&quot; file, hidden deep under the WINDOWS folder. Mine
+is at C:\Windows\system32\drivers\etc Open it with NotePad.
+
+Add lines :
+
+127.0.0.1       qbono.com
+127.0.0.1       xpxl.net
+
+Now (if Xitami is running with basic configuration) these URLs
+should open your default page. (Only on that machine.)
+
+To make them open different sites:
+
+Use the <A HREF="http://localhost/admin">http://localhost/admin</A> tool to set up Virtual Hosts for each
+site.
+
+The fist box is a nickname and will be used as file-name for the
+VHost CFG files. &quot;qbono&quot; is a good name here.
+
+In &quot;DNS Host Name&quot;, put &quot;qbono.com&quot;
+
+In &quot;Web page directory&quot;, put &quot;e:/websites/qbono.com/&quot; (note:
+forward-slash is probably best here, even on DOS\Win boxes.)
+
+Ignore the other boxes for today.
+
+&quot;Create&quot;, Save your way back to the main admin screen, and then it
+may be best to re-start Xitami.
+
+Test.
+
+If it works, repeat for your other sites.
+
+When the real qbono.com comes on-line, you better go into the
+&quot;hosts&quot; file again and delete the pointer to 127.0.0.1 !!! Otherwise
+your PC will forever go to your box, not the real server.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003219.html">[Xitami] Help with Virtual Hosts (I think)?
+</A></li>
+	<LI> Next message: <A HREF="003221.html">[Xitami] [agendavr3] AGENDA VR3 Linux PDA
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3220">[ date ]</a>
+              <a href="thread.html#3220">[ thread ]</a>
+              <a href="subject.html#3220">[ subject ]</a>
+              <a href="author.html#3220">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

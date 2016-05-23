@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Can't access cd rom through web pages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002110.html">
+   <LINK REL="Next"  HREF="002111.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Can't access cd rom through web pages
+   </H1>
+    <B>eric
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Can't access cd rom through web pages">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 19 Jan 2002 10:08:52 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002110.html">[Xitami] Can't access cd rom through web pages
+</A></li>
+        <LI> Next message: <A HREF="002111.html">[Xitami] Virtual Hosts Help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2117">[ date ]</a>
+              <a href="thread.html#2117">[ thread ]</a>
+              <a href="subject.html#2117">[ subject ]</a>
+              <a href="author.html#2117">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>1/18/02 10:12:04 AM, &quot;Peter&quot; &lt;<A HREF="mailto:peterdn@telusplanet.net">peterdn@telusplanet.net</A>&gt; wrote:
+
+	Hi Peter, thanks for the reply...it got me thinking in a different direction and I 
+was able to solve the problem. I've got a couple of small glitches left, but those are html 
+problems.
+
+	In case you want to add this to the &quot;Xitami For Dummies&quot; book, here's what I 
+did.
+
+	I went back and renamed the Xitami.cfg (actually did a copy and rename) to 
+defaults. cfg and base host.cfg. Changed the location of the .aut files and rewrote the 
+.cfg's to reflect my web site. (After all why reinvent the wheel, modify it!&lt;LOL&gt;) Among the 
+changes,I changed the aliases to 
+		(first column)	(second column-path)
+		 cdrom        		E:\
+		cdrom1			F:\
+
+	I could have called them Moe and Larry or anything else, it doesn't matter. 
+Also, if the drive was multi partioned, I could have used the same setup.
+
+	Next in my Index.html, I addressed the drives as cdrom or cdrom1. This Xitami 
+understood and took me right to the drive I wanted. I found that the .html could be written 
+as ;
+	&lt;a href=&quot;<A HREF="http://the-beast.hn.org/cdrom/main-index.html"">http://the-beast.hn.org/cdrom/main-index.html&quot;</A>&gt;&lt;/a&gt;
+			or
+	&lt;a href=&quot;cdrom/main-index.html&quot;&gt;&lt;/a&gt; 
+	(NB: Neither line specifies the drive by a letter only as cdrom) I decided to use 
+the shorter of the two, I'm lazy.
+
+	Then from another system I went out on the web and tested it and it worked 
+fine.
+
+	So I have to thank you again for at least getting me out of the cycle of how to 
+address drive E:\...it was getting very frustrating. Sort of like the old BBS days. The 
+standing joke was everything worked locally, but not remotely. &lt;LOL&gt;....
+
+	Hope this helps someone else in the future and if there's anyone with some 
+more tips for using externals, I'd love to hear from them.
+
+	Eric Hamel
+&gt;<i>On the html page are the links constructed as ftp:// or http://
+</I>&gt;<i>
+</I>&gt;<i>If /webpages is your root folder for your site, can any http access be
+</I>&gt;<i>outside of that root folder?  It could be that if the links are accessed via
+</I>&gt;<i>http the link could not access outside of your /webpages folder.  Just a
+</I>&gt;<i>thought.
+</I>&gt;<i>
+</I>&gt;<i>Peter
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;eric&quot; &lt;<A HREF="mailto:erh51@yahoo.com">erh51@yahoo.com</A>&gt;
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Friday, January 18, 2002 6:46 AM
+</I>&gt;<i>Subject: [Xitami] Can't access cd rom through web pages
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> I need help! I'm begining to feel very stupid, right now.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm running Xotami under WinNT 4 (and a friend is running it under
+</I>&gt;<i>Win98SE).
+</I>&gt;&gt;<i> Everything works fine locally, the cd rom gets accessed and the data is
+</I>&gt;<i>available....until
+</I>&gt;&gt;<i> you connect in from the Net. Then it is a 404, the url can't be found.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm also using a Dynamic DNS (Hammer Node)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The site index.html is in /webpages and it is directed by .html to the
+</I>&gt;<i>cdrom (E:\)
+</I>&gt;&gt;<i> and refuses to see it or loses it when trying to access it.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I have been able to access the drives through ftp and transfer data from
+</I>&gt;<i>them.
+</I>&gt;&gt;<i> I have changed Aliases and .html's until my fingers are ready to fall off
+</I>&gt;<i>&lt;LOL&gt;.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Can someone give me a Dummies explanation of what Xitami needs in order to
+</I>&gt;&gt;<i> access the cdrom?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks in advance,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Eric
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> _________________________________________________________
+</I>&gt;&gt;<i> Do You Yahoo!?
+</I>&gt;&gt;<i> Get your free @yahoo.com address at <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+
+_________________________________________________________
+Do You Yahoo!?
+Get your free @yahoo.com address at <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002110.html">[Xitami] Can't access cd rom through web pages
+</A></li>
+	<LI> Next message: <A HREF="002111.html">[Xitami] Virtual Hosts Help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2117">[ date ]</a>
+              <a href="thread.html#2117">[ thread ]</a>
+              <a href="subject.html#2117">[ subject ]</a>
+              <a href="author.html#2117">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

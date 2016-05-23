@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Perl support ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000794.html">
+   <LINK REL="Next"  HREF="000797.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Perl support ?
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Perl support ?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 24 Aug 2001 10:15:27 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000794.html">[Xitami] Perl support ?
+</A></li>
+        <LI> Next message: <A HREF="000797.html">[Xitami] Perl support ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#795">[ date ]</a>
+              <a href="thread.html#795">[ thread ]</a>
+              <a href="subject.html#795">[ subject ]</a>
+              <a href="author.html#795">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 24 Aug 2001, at 9:06, Danny Van Neyghem wrote:
+
+&gt;<i> 
+</I>&gt;<i> &gt; -----Oorspronkelijk bericht-----
+</I>&gt;<i> &gt; Van: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]Namens Owen Rudge
+</I>&gt;<i> &gt; Verzonden: maandag 20 augustus 2001 14:32
+</I>&gt;<i> &gt; Aan: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt; Onderwerp: Re: [Xitami] Perl support ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Is there something I sould be checking or configuring
+</I>&gt;<i> &gt; &gt; ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; You need to install Perl on your system. For Windows, download ActivePerl
+</I>&gt;<i> &gt; from www.activestate.com (I think that's the URL).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Owen Rudge
+</I>&gt;<i> &gt; <A HREF="http://www.owenrudge.co.uk/">http://www.owenrudge.co.uk/</A>
+</I>&gt;<i> &gt; <A HREF="http://www.gamearchive.uk.tt/">http://www.gamearchive.uk.tt/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> I have download ActivePerl en install in e:\webservers\Perl.  Xitami and php
+</I>&gt;<i> are installed in e:\webservers\xitami and e:\webservers\php.
+</I>&gt;<i> 
+</I>&gt;<i> How must I change the configuration of Xitami for Perl, so that i will work
+</I>&gt;<i> for all my virtual hosts.
+</I>&gt;<i> 
+</I>&gt;<i> Second Question.
+</I>&gt;<i> I have a free perl script for forms, it make use of Sendmail.  What must i
+</I>&gt;<i> install for this script to work local?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks in advanced
+</I>&gt;<i> 
+</I>&gt;<i> --------------------
+</I>&gt;<i> Groetjes, greetings
+</I>&gt;<i> 
+</I>&gt;<i> Danny Van Neyghem
+</I>&gt;<i> <A HREF="mailto:danny.vanneyghem@gooftroop.be">danny.vanneyghem@gooftroop.be</A>
+</I>&gt;<i> <A HREF="http://www.gooftroop.be">http://www.gooftroop.be</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+Hello,
+
+your PATH-Variable should reflect your Perl-Installation.
+On my System this is:
+
+F:\&gt;path
+PATH=D:\Programme\Apple\Developer\Executables\Utilities;D:\Pro
+gramme\Apple\Devel
+oper\Executables;D:\Programme\Apple\Local\Library\Executables;
+D:\Programme\Apple
+\Library\JDK\bin;D:\Programme\Apple\Library\Executables;D:\Progr
+amme\Perl\bin\;D
+:<i>\Perl\5.6.0\bin\;C:\WINNT\system32;C:\WINNT;D:\Programme\cyg
+</I>win\bin;D:\Programm
+e\cygwin\usr\bin;D:\Programme\cygwin\usr\local\bin;D:\Programme\
+Python20\;D:\Pro
+gramme\jdk1.2\bin;D:\gnu\usr\local\wbin;C:\Programme\texmf\mikte
+x\bin;C:\Program
+me\localtexmf;C:\Programme\Symantec\pcAnywhere\;D:\Programm
+e\Komodo\python\;D:\P
+rogramme\cygwin\bin;D:\Programme\ssl\bin;D:\Programme\gnu\usr\
+local\wbin;D:\Prog
+ramme\vunix
+
+If you add  #!/usr/bin/perl (the exact path to perl not neccesary)  to 
+the first line of perl-scripts, xitami/perl should work with any 
+virualhost.
+
+
+You don't need these free mailing scripts; better do your own:
+
+
+#!/usr/bin/perl 
+
+use MIME::Lite;
+
+$mailhost = &quot;someMailAlias&quot;;
+$From = '<A HREF="mailto:someOne@somewhere.net">someOne@somewhere.net</A>';
+$To = '<A HREF="mailto:anotherOne@outside.net">anotherOne@outside.net</A>';
+$Subject = 'mailing';
+$text .= &quot;$something\n&quot;;
+ MIME::Lite -&gt; send('smtp', $mailhost, Timeout =&gt; 60);
+ $msg = MIME::Lite -&gt; new(From =&gt; $From, To =&gt; $To, Subject 
+=&gt; $Subject, Data =&gt; $text);
+$msg -&gt; send;
+undef $msg;
+
+
+
+So long,
+
+Peter
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000794.html">[Xitami] Perl support ?
+</A></li>
+	<LI> Next message: <A HREF="000797.html">[Xitami] Perl support ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#795">[ date ]</a>
+              <a href="thread.html#795">[ thread ]</a>
+              <a href="subject.html#795">[ subject ]</a>
+              <a href="author.html#795">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

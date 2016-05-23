@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Reverse DNS lookup........ again
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004580.html">
+   <LINK REL="Next"  HREF="004581.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Reverse DNS lookup........ again
+   </H1>
+    <B>RPO
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Reverse DNS lookup........ again">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 31 Dec 2002 09:08:40 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004580.html">[Xitami] Reverse DNS lookup........ again
+</A></li>
+        <LI> Next message: <A HREF="004581.html">[Xitami] lrwp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4582">[ date ]</a>
+              <a href="thread.html#4582">[ thread ]</a>
+              <a href="subject.html#4582">[ subject ]</a>
+              <a href="author.html#4582">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Under the logging section of the main configuration file there is an option:
+&quot;Translate IP address&quot; - I would assume that is a DNS lookup on the IP
+address.  If that is not enough then you could also toy with the &quot;Log File
+Format&quot; - it gives you different options (maybe the extended one) that might
+do what you are looking for.  And 3rd, the &quot;log file format string&quot; might
+allow you to put a DNS/Hostname variable that writes the DNS name to the log
+file.
+
+And if all that doesn't work, then you can always write a script that parses
+the more recent log file (not the current though because the current log
+file is still open and controlled by xitami) and performs a DNS nslookup/dig
+on the IP address and rewrites that data back to the log file.
+
+good luck.
+-R
+----- Original Message -----
+From: &quot;Espen Ruud&quot; &lt;<A HREF="mailto:esruud@start.no">esruud@start.no</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, December 31, 2002 2:02 AM
+Subject: [Xitami] Reverse DNS lookup........ again
+
+
+&gt;<i> I have asked this question a couple of times before .... But here I og
+</I>&gt;<i> again...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> What can I do to get the web server to list the hostnames instead of IP
+</I>&gt;<i> adresses in the log file??
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> In my &quot;default.cfg&quot; file I have this:
+</I>&gt;<i> ---------------
+</I>&gt;<i> [Accesslog]
+</I>&gt;<i>     Custom = &quot;$\(client) - $\(user) [$\(datetime)] \&quot;$\(request)\&quot;
+</I>&gt;<i> $\(status-
+</I>&gt;<i>  \&quot;$\(referer)\&quot; \&quot;$\(agent)\&quot;&quot;
+</I>&gt;<i>     Cycle = &quot;monthly&quot;
+</I>&gt;<i>     Local = &quot;0&quot;
+</I>&gt;<i>     Translate = &quot;1&quot;
+</I>&gt;<i> ------------------
+</I>&gt;<i> And this:
+</I>&gt;<i> ------------------
+</I>&gt;<i> [Rdns]
+</I>&gt;<i>     Recurse-lookups = &quot;1&quot;
+</I>&gt;<i>     Debug = &quot;1&quot;
+</I>&gt;<i>     Primary-server = &quot;DNS server1&quot;
+</I>&gt;<i>     Secondary-server = &quot;DNS server2&quot;
+</I>&gt;<i> ------------------
+</I>&gt;<i> (DNS server1 and 2 are replaced by real servers)
+</I>&gt;<i>
+</I>&gt;<i> In my .cfg file for the spesific site i have this:
+</I>&gt;<i> ------------------
+</I>&gt;<i> [Accesslog]
+</I>&gt;<i>     Filename = &quot;sitename.log&quot;
+</I>&gt;<i>     Local = &quot;0&quot;
+</I>&gt;<i>     Translate = &quot;1&quot;
+</I>&gt;<i>
+</I>&gt;<i> [Rdns]
+</I>&gt;<i>     Recurse-lookups = &quot;1&quot;
+</I>&gt;<i> -------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> But I still don't get hostnames in the log file.
+</I>&gt;<i>
+</I>&gt;<i> I run version 2.5b5 as a windows service on a w2K proffesional platform.
+</I>&gt;<i>
+</I>&gt;<i> Does anyone else have this problem ???? And does anyoune know how to solve
+</I>&gt;<i> it ?
+</I>&gt;<i>
+</I>&gt;<i> Yours
+</I>&gt;<i> Espen Ruud
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004580.html">[Xitami] Reverse DNS lookup........ again
+</A></li>
+	<LI> Next message: <A HREF="004581.html">[Xitami] lrwp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4582">[ date ]</a>
+              <a href="thread.html#4582">[ thread ]</a>
+              <a href="subject.html#4582">[ subject ]</a>
+              <a href="author.html#4582">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Tseting CGI on localhost
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006013.html">
+   <LINK REL="Next"  HREF="006016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Tseting CGI on localhost
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Tseting CGI on localhost">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 6 Jul 2004 16:36:32 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006013.html">[Xitami] mod_rewrite equivalent
+</A></li>
+        <LI> Next message: <A HREF="006016.html">[Xitami] Tseting CGI on localhost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6015">[ date ]</a>
+              <a href="thread.html#6015">[ thread ]</a>
+              <a href="subject.html#6015">[ subject ]</a>
+              <a href="author.html#6015">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm trying to test a Perl CGI program (form processor, POST) on localhost
+(WinXP).  I'm experiencing a series of problems:
+
+1)  When I invoke the pgm.pl from a form with
+action=&quot;<A HREF="http://localhost/cgi/alwmsg.pl"">http://localhost/cgi/alwmsg.pl&quot;</A> it fails with a &quot;Page not found&quot;
+error; however, if I type the same URL into a browser the program runs, but
+(see problem 2)
+2)  When the program executes, it seems to be simply executing under
+Windows. Running the manual debugger, I see that none of the HTTP variables
+are in ENV, and none of the form fields are passed in.
+
+I've set up a CGI Alias called &quot;localalw&quot; and associated the exact directory
+where the Perl script is.
+ 
+I've also set two environmental variables to try to invoke the ActiveState
+Komodo debugger instead of the default one:
+ 
+PERL5LIB
+c:\Program Files\ActiveState Komodo 2.5
+PERLDB_OPTS
+RemotePort=localhost:9011 PrintRet=0 
+ 
+But this does not work; default (command line) debugger still gets invoked.
+
+My Goal: When I invoke the Perl program from a HTML page form, I would like
+the debugger (Komodo) to be invoked for the program, normal HTTP/CGI
+environment variables to be set up for the program, and the output from the
+program (an HTML page) returned in the browser.
+
+Any idea why HTTP isn't handling my Perl script?
+ 
+Thanks for any help.
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006013.html">[Xitami] mod_rewrite equivalent
+</A></li>
+	<LI> Next message: <A HREF="006016.html">[Xitami] Tseting CGI on localhost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6015">[ date ]</a>
+              <a href="thread.html#6015">[ thread ]</a>
+              <a href="subject.html#6015">[ subject ]</a>
+              <a href="author.html#6015">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

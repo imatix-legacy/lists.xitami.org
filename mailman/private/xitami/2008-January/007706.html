@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Logfile issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Logfile%20issues&In-Reply-To=001901c863d0%2435428b40%24e0d610ac%40lap6a">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007704.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Logfile issues</H1>
+    <B>Rick Headly</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Logfile%20issues&In-Reply-To=001901c863d0%2435428b40%24e0d610ac%40lap6a"
+       TITLE="[Xitami] Logfile issues">rickhead at gmail.com
+       </A><BR>
+    <I>Thu Jan 31 10:41:23 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007704.html">[Xitami] Logfile issues
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7706">[ date ]</a>
+              <a href="thread.html#7706">[ thread ]</a>
+              <a href="subject.html#7706">[ subject ]</a>
+              <a href="author.html#7706">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>alright..
+i will mention this again, only because i suspect that i may not have been
+clear in my explanation the first time around.
+
+i'm assuming that that you guys have a number of virtual hosts, and would
+like each of them to create their own set of logs (*without additional
+suffixed numbers being applied to the file-names*).  if so, you would
+probably want the config file of *each* virtual host to include these lines:
+
+
+[Accesslog]
+    Cycle-arg = &quot;acc-*insert pertaining v-host name here*-%yy%mm%dd.log&quot;
+    Filename = &quot;*insert pertaining v-host name here-*access.log&quot;
+
+[Errorlog]
+    Cycle-arg = &quot;err-*insert pertaining v-host name here*-%yy%mm%dd.log&quot;
+    Filename = &quot;*insert pertaining v-host name here-*errors.log&quot;
+
+
+
+i strongly believe that doing so will indeed solve your problem, as long as
+you've supplied a *unique* log-file naming-scheme for *each* of your virtual
+hosts.
+
+this will prevent xitami from attempting to create multiple logs with the
+exact same name (*a set for each virtual host*)... which is precisely where
+those extra unwanted numbers are originating.
+
+hope this helps  :)
+
+rick
+On 1/31/08, Martin Bleisteiner &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">martin at bleisteiner.net</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Hello,
+</I>&gt;<i>
+</I>&gt;<i> *From:* Russel Olinger &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> My logs files are set to cycle once a day and then to store then log file
+</I>&gt;<i> into the default name: ac%yy%mm%dd.log
+</I>&gt;<i>
+</I>&gt;<i> However, I almost everyday I see the following log entries:
+</I>&gt;<i> ac%yy%mm%dd.log
+</I>&gt;<i> ac%yy%mm%dd.log_000
+</I>&gt;<i> ac%yy%mm%dd.log_001
+</I>&gt;<i>
+</I>&gt;<i>  My server Xitami 2.4d1 does the same. Seems to be dependent on virtual
+</I>&gt;<i> hosts. For every virtual host, and for access by every IP without name, a
+</I>&gt;<i> _nnn logfile is created. Not absolutely sure but I guess because every day
+</I>&gt;<i> it's the same until log_005 and I do have 6 virtual hosts.
+</I>&gt;<i>
+</I>&gt;<i> I don't know the reason for this behavior. No idea where to turn off.
+</I>&gt;<i>
+</I>&gt;<i> Martin
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080131/93ef519f/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080131/93ef519f/attachment.htm</A> 
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007704.html">[Xitami] Logfile issues
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7706">[ date ]</a>
+              <a href="thread.html#7706">[ thread ]</a>
+              <a href="subject.html#7706">[ subject ]</a>
+              <a href="author.html#7706">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

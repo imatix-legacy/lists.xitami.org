@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002350.html">
+   <LINK REL="Next"  HREF="002344.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] (no subject)
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] (no subject)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 08 Feb 2002 01:43:01 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002350.html">[Xitami] (no subject)
+</A></li>
+        <LI> Next message: <A HREF="002344.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2354">[ date ]</a>
+              <a href="thread.html#2354">[ thread ]</a>
+              <a href="subject.html#2354">[ subject ]</a>
+              <a href="author.html#2354">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I have not seen anything run in the cgi-bin directory that wasn't a cgi or perl script, 
+</I>
+As Mr Shortis says, &quot;CGI&quot; is an interface between a web server
+program and any other program. I don't think &quot;a cgi&quot; has much
+meaning, except that it is probably -something- that can work
+with the CGI protocol. 
+
+&gt;<i>  I guess you could run about any exe file there. 
+</I>
+Yes. On a Windows machine, put Sol.exe in your cgi-bin folder. Go
+to a browser on another machine and call
+<A HREF="http://othermachine/cgi-bin/sol.exe.">http://othermachine/cgi-bin/sol.exe.</A> Nothing will happen in the
+browser, it will time-out waiting for a reply; sol.exe is not
+meant to read and write data according to the CGI protocol. But
+when you go back to the server you will find Solitaire started
+and ready to play. 
+
+Which is a reason to be VERY careful what you put in the CGI
+folder. Solitaire is pointless but safe (unless someone opens a
+hundred copies of it and chokes the server RAM); but other
+programs, especially ones that read and write to standard input
+and output, can send back all sorts of information.
+
+The testcgi.exe program that used to come with Xitami-Win is an
+example. It shows anybody several bits of information about the
+server machine's configuration, like PATH and where the HTTP
+files are actually stored. In itself it isn't a lot of exposure,
+but in conjunction with other info it could aid a hacker. 
+
+BTW: in DOS/Win a BAT file can be a useful CGI program. It gets
+awkward in a hurry (DOS BAT files eat &quot;&lt;&quot; signs and aren't too
+smart anyway) but I use a BAT file to call a filter and an
+emailer  and a logger in sequence. In unix, shell-scripts can be
+very useful CGI programs. (Also very dangerous because of the
+power of the unix shell.)
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002350.html">[Xitami] (no subject)
+</A></li>
+	<LI> Next message: <A HREF="002344.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2354">[ date ]</a>
+              <a href="thread.html#2354">[ thread ]</a>
+              <a href="subject.html#2354">[ subject ]</a>
+              <a href="author.html#2354">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

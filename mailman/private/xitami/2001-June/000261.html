@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami on BeOS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000259.html">
+   <LINK REL="Next"  HREF="000252.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami on BeOS
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami on BeOS">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 28 Jun 2001 12:11:06 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000259.html">[Xitami] Xitami on BeOS
+</A></li>
+        <LI> Next message: <A HREF="000252.html">[Xitami] Xitami on BeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#261">[ date ]</a>
+              <a href="thread.html#261">[ thread ]</a>
+              <a href="subject.html#261">[ subject ]</a>
+              <a href="author.html#261">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> [in BeOS] cpu load ... goes up to 100% and stays there
+</I>
+Does it yield? That is, when you do other work on the machine, does it
+feel slow? 
+
+I don't know BeOS, but in Windows many DOS apps will send the CPU Use
+meter to the max yet the machine feels only 5%-10% slow in other
+applications. 
+
+In Windows, a proper app is supposed to give up its time slice if it has
+nothing to do. DOS apps assume they own the whole machine. Many of them,
+when &quot;doing nothing&quot; sit in a tight loop asking &quot;Did user press a key
+yet?&quot;, asking that question 750,000,000 times a second on modern CPUs.
+Windows can't be sure if the DOS app's frenzy is doing something useful
+or not. So if no other app is demanding cycles, the DOS app gets most of
+the CPU's time. If another app does have something to do, it gets the
+time it needs, and the DOS app gets just a few cycles on every loop of
+the Windows task-switcher. 
+
+Sometimes the DOS app appears to Windows to be greedy; I have a DOS
+modem program that -will- slow the rest of Windows if it has trouble
+opening the modem (because Windows has grabbed the modem for DUN). 
+
+BTW, there are some tricks for time-sharing background programs in
+Windows (NT). A main one is to &quot;Stall&quot; a DOS app when it is in the
+background, so it gets no time when you are not using it. Good for a
+text editor, bad for a web server. There are other priority options,
+though I must note that some cause more trouble than they are worth.
+(Don't put a DOS app in RealTime priority or you'll never get control
+back!)
+
+Clearly the BeOS compile of Xitami is not supporting whatever
+load-sharing that BeOS has. Of course it is interesting that Xitami
+works at all on a platform that isn't really a classic unix and isn't
+DOS/Win or OS/2, the platforms that got specific support. 
+
+There is of course a native web server in BeOS. And I'd guess that the
+total BeOS webserver market is too small for anybody to spend a lot of
+programming time on. But since Xitami itself runs on one big loop,
+anybody who really knows BeOS's load-share technique (or who can find
+similar code in some other BeOS application) could add a &quot;Nothing to do
+right now&quot; flag to release the current time-slice back to BeOS.
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000259.html">[Xitami] Xitami on BeOS
+</A></li>
+	<LI> Next message: <A HREF="000252.html">[Xitami] Xitami on BeOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#261">[ date ]</a>
+              <a href="thread.html#261">[ thread ]</a>
+              <a href="subject.html#261">[ subject ]</a>
+              <a href="author.html#261">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

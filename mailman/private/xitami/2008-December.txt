@@ -1,0 +1,883 @@
+From magus1011 at gmail.com  Fri Dec 12 03:16:20 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Thu, 11 Dec 2008 20:16:20 -0600
+Subject: [Xitami] Xitami and DDNS
+Message-ID: <4941C974.9050700@googlemaill.com>
+
+Hi All,
+
+I'm back to running Xitami again and I'm having problems logging into my
+DDNS service DynDns. I've tried playing with the ddnsdef.xml file based
+on the manual login:
+
+http://magus1011:password at members.dyndns.org/nic/update?hostname=brewhau.dyndns.tv&myip=999.999.999.999&wildcard=NOCHG
+
+to no good effect. Of course my password isn't password nor is my IP
+999.999.999.999 but other than that this works to get me either a "good
+<my real IP>" or a "nochg <my real IP>" response in a browser. Does
+anyone have a clue what I should have in the ddnsdef.xml file to get the
+same response from Xitami?
+
+-- 
+Best regards,
+Magus1011.
+
+The main things which seem to me important on their own account, and not
+merely as means to other things, are knowledge, art, instinctive
+happiness, and relations of friendship or affection.
+ - Bertrand Russell
+
+
+From rolinger1 at hotmail.com  Fri Dec 12 18:40:11 2008
+From: rolinger1 at hotmail.com (rolinger)
+Date: Fri, 12 Dec 2008 09:40:11 -0800
+Subject: [Xitami] Xitami and DDNS
+References: <4941C974.9050700@googlemaill.com>
+Message-ID: <BAY127-DAV26D30D1F9AF389B48A37AF8F90@phx.gbl>
+
+Curious, how are you running DynDNS with Xitami - or at least how were you 
+running it previously?  Was it for virtual domains or for a single domain? 
+Is it an actual setting in Xiami config file?
+
+I use DynDNS for my home system (w/o Xitami), but its a simple client thats 
+on the actual PC (that you could also run on the webserver) that updates 
+DynDNS with my real IP.  Certain home routers have an option built into it 
+to use one of serveral dynamic dns providers but I am choosing to use the PC 
+client instead.
+
+-R
+
+=========
+"Socialism is the philosophy of failure, the creed of ignorance,
+and the gospel of envy, its inherent virtue is the equal sharing of misery."
+     - Sir Winston Churchill -
+=========
+----- Original Message ----- 
+From: "Magus1011" <magus1011 at gmail.com>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Thursday, December 11, 2008 6:16 PM
+Subject: [Xitami] Xitami and DDNS
+
+
+> Hi All,
+>
+> I'm back to running Xitami again and I'm having problems logging into my
+> DDNS service DynDns. I've tried playing with the ddnsdef.xml file based
+> on the manual login:
+>
+> http://magus1011:password at members.dyndns.org/nic/update?hostname=brewhau.dyndns.tv&myip=999.999.999.999&wildcard=NOCHG
+>
+> to no good effect. Of course my password isn't password nor is my IP
+> 999.999.999.999 but other than that this works to get me either a "good
+> <my real IP>" or a "nochg <my real IP>" response in a browser. Does
+> anyone have a clue what I should have in the ddnsdef.xml file to get the
+> same response from Xitami?
+>
+> -- 
+> Best regards,
+> Magus1011.
+>
+> The main things which seem to me important on their own account, and not
+> merely as means to other things, are knowledge, art, instinctive
+> happiness, and relations of friendship or affection.
+> - Bertrand Russell
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+From magus1011 at gmail.com  Fri Dec 12 19:14:12 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Fri, 12 Dec 2008 12:14:12 -0600
+Subject: [Xitami] Xitami and DDNS
+In-Reply-To: <BAY127-DAV26D30D1F9AF389B48A37AF8F90@phx.gbl>
+References: <4941C974.9050700@googlemaill.com>
+	<BAY127-DAV26D30D1F9AF389B48A37AF8F90@phx.gbl>
+Message-ID: <4942A9F4.1000806@googlemaill.com>
+
+rolinger wrote:
+> Curious, how are you running DynDNS with Xitami - or at least how
+> were you running it previously?  Was it for virtual domains or for a
+> single domain? Is it an actual setting in Xiami config file?
+
+No, my name is Magus, not Curious. 8=))
+
+Well, there's a ddnsdef.xml file in the app folder. The definitions for
+various Dynamic DNS services are in there. It takes some tweaking but
+I'm about one millimetre from having it working with DynDns. I've
+learned a lot watching the wire with WireShark about how this file works
+with DynDns. It's for a single domain right now.
+> 
+> I use DynDNS for my home system (w/o Xitami), but its a simple client
+> thats on the actual PC (that you could also run on the webserver)
+> that updates DynDNS with my real IP.  Certain home routers have an
+> option built into it to use one of serveral dynamic dns providers but
+> I am choosing to use the PC client instead.
+
+I have such a program also, but I thik the less I have running in my
+system tray the better which is why I'm getting this working with
+Xitami. Some programs also have it built in. One example would be HFS or
+HTTP Files System. Of course if you want to do it manually, just play
+with the manual logon I gave below, changing whatever is appropriate
+the dyndns user name and password, the hostname and IP, in your instance.
+> 
+> -R
+> 
+> ========= "Socialism is the philosophy of failure, the creed of
+> ignorance, and the gospel of envy, its inherent virtue is the equal
+> sharing of misery." - Sir Winston Churchill - ========= -----
+> Original Message ----- From: "Magus1011" <magus1011 at gmail.com> To:
+> "Xitami Users General Discussion" <xitami at lists.xitami.org> Sent:
+> Thursday, December 11, 2008 6:16 PM Subject: [Xitami] Xitami and DDNS
+> 
+> 
+> 
+>> Hi All,
+>> 
+>> I'm back to running Xitami again and I'm having problems logging
+>> into my DDNS service DynDns. I've tried playing with the
+>> ddnsdef.xml file based on the manual login:
+>> 
+>> http://magus1011:password at members.dyndns.org/nic/update?hostname=brewhau.dyndns.tv&myip=999.999.999.999&wildcard=NOCHG
+>> 
+>> 
+>> to no good effect. Of course my password isn't password nor is my
+>> IP 999.999.999.999 but other than that this works to get me either
+>> a "good <my real IP>" or a "nochg <my real IP>" response in a
+>> browser. Does anyone have a clue what I should have in the
+>> ddnsdef.xml file to get the same response from Xitami?
+>> 
+>> -- Best regards, Magus1011.
+>> 
+>> The main things which seem to me important on their own account,
+>> and not merely as means to other things, are knowledge, art,
+>> instinctive happiness, and relations of friendship or affection. -
+>> Bertrand Russell
+>> 
+>> 
+>> -- Xitami Users Mailing List -- For Xitami support To unsubscribe:
+>> http://lists.xitami.org/mailman/listinfo/xitami
+>> 
+> 
+> 
+> 
+> -- Xitami Users Mailing List -- For Xitami support To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+-- 
+Best regards,
+Magus1011.
+
+The follies which a man regrets most, in his life, are those which he
+didn't commit when he had the opportunity.
+ - Helen Rowland
+
+From magus1011 at gmail.com  Fri Dec 12 19:25:00 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Fri, 12 Dec 2008 12:25:00 -0600
+Subject: [Xitami] Got it!
+Message-ID: <4942AC7C.1050708@googlemaill.com>
+
+Hi All,
+
+Here's what you can have in your ddnsdef.xml file for dyndns.org that
+will work. Thanks to the good people at WireShark for an excellent
+packet sniffer I was able to get this to work for me.
+
+
+<!-----------------------------------------------------------------------
+    dyndns.org
+
+    Free DDNS service, fast updates.
+    --------------------------------------------------------------------->
+<SERVICE
+  NAME  = "dyndns.org"
+  TITLE = "dyndns.org"
+  HOST  = "members.dyndns.org"
+  URL   = "www.dyndns.org" >
+  <SIGNON
+    URI  = "/nic/update"
+    ARGS = "hostname=$(domain)&myip=$(ipaddr)"
+    SEND = "GET $(URI)?$(ARGS) HTTP/1.1\r\n$(httpauth)$(httpheaders)" />
+</SERVICE>
+
+-- 
+Best regards,
+Magus1011.
+
+When I do good, I feel good; when I do bad, I feel bad, and that is my
+religion.
+  - Abraham Lincoln
+
+
+From hogan at geeksgalore.ca  Fri Dec 12 20:36:49 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Fri, 12 Dec 2008 14:36:49 -0500
+Subject: [Xitami] Xitami and DDNS
+In-Reply-To: <4942A9F4.1000806@googlemaill.com>
+References: <4941C974.9050700@googlemaill.com>	<BAY127-DAV26D30D1F9AF389B48A37AF8F90@phx.gbl>
+	<4942A9F4.1000806@googlemaill.com>
+Message-ID: <4942BD51.3050207@geeksgalore.ca>
+
+I have been running dyndns with Xitami for over 9 Years, it is such a 
+easy setup, consider these points
+
+Aquire the server IP on DynDNS, select wildcards if you want them and 
+you are done, make sure you have a port forward if you are using a 
+router and forward to port 80
+
+Takes all of 22 seconds
+
+Magus1011 wrote:
+> rolinger wrote:
+>   
+>> Curious, how are you running DynDNS with Xitami - or at least how
+>> were you running it previously?  Was it for virtual domains or for a
+>> single domain? Is it an actual setting in Xiami config file?
+>>     
+>
+> No, my name is Magus, not Curious. 8=))
+>
+> Well, there's a ddnsdef.xml file in the app folder. The definitions for
+> various Dynamic DNS services are in there. It takes some tweaking but
+> I'm about one millimetre from having it working with DynDns. I've
+> learned a lot watching the wire with WireShark about how this file works
+> with DynDns. It's for a single domain right now.
+>   
+>> I use DynDNS for my home system (w/o Xitami), but its a simple client
+>> thats on the actual PC (that you could also run on the webserver)
+>> that updates DynDNS with my real IP.  Certain home routers have an
+>> option built into it to use one of serveral dynamic dns providers but
+>> I am choosing to use the PC client instead.
+>>     
+>
+> I have such a program also, but I thik the less I have running in my
+> system tray the better which is why I'm getting this working with
+> Xitami. Some programs also have it built in. One example would be HFS or
+> HTTP Files System. Of course if you want to do it manually, just play
+> with the manual logon I gave below, changing whatever is appropriate
+> the dyndns user name and password, the hostname and IP, in your instance.
+>   
+>> -R
+>>
+>> ========= "Socialism is the philosophy of failure, the creed of
+>> ignorance, and the gospel of envy, its inherent virtue is the equal
+>> sharing of misery." - Sir Winston Churchill - ========= -----
+>> Original Message ----- From: "Magus1011" <magus1011 at gmail.com> To:
+>> "Xitami Users General Discussion" <xitami at lists.xitami.org> Sent:
+>> Thursday, December 11, 2008 6:16 PM Subject: [Xitami] Xitami and DDNS
+>>
+>>
+>>
+>>     
+>>> Hi All,
+>>>
+>>> I'm back to running Xitami again and I'm having problems logging
+>>> into my DDNS service DynDns. I've tried playing with the
+>>> ddnsdef.xml file based on the manual login:
+>>>
+>>> http://magus1011:password at members.dyndns.org/nic/update?hostname=brewhau.dyndns.tv&myip=999.999.999.999&wildcard=NOCHG
+>>>
+>>>
+>>> to no good effect. Of course my password isn't password nor is my
+>>> IP 999.999.999.999 but other than that this works to get me either
+>>> a "good <my real IP>" or a "nochg <my real IP>" response in a
+>>> browser. Does anyone have a clue what I should have in the
+>>> ddnsdef.xml file to get the same response from Xitami?
+>>>
+>>> -- Best regards, Magus1011.
+>>>
+>>> The main things which seem to me important on their own account,
+>>> and not merely as means to other things, are knowledge, art,
+>>> instinctive happiness, and relations of friendship or affection. -
+>>> Bertrand Russell
+>>>
+>>>
+>>> -- Xitami Users Mailing List -- For Xitami support To unsubscribe:
+>>> http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>       
+>>
+>> -- Xitami Users Mailing List -- For Xitami support To unsubscribe:
+>> http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>     
+>
+>
+>   
+
+-- 
+-- 
+Hogan Courrier
+Geeks Galore Computer Center
+(613) 472-0005
+http://www.geeksgalore.ca
+
+
+From hogan at geeksgalore.ca  Fri Dec 12 20:37:47 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Fri, 12 Dec 2008 14:37:47 -0500
+Subject: [Xitami] Got it!
+In-Reply-To: <4942AC7C.1050708@googlemaill.com>
+References: <4942AC7C.1050708@googlemaill.com>
+Message-ID: <4942BD8B.6090104@geeksgalore.ca>
+
+Why people have to do things the hard way blows my mind.  Explains 
+Windows I guess....
+
+Magus1011 wrote:
+> Hi All,
+>
+> Here's what you can have in your ddnsdef.xml file for dyndns.org that
+> will work. Thanks to the good people at WireShark for an excellent
+> packet sniffer I was able to get this to work for me.
+>
+>
+> <!-----------------------------------------------------------------------
+>     dyndns.org
+>
+>     Free DDNS service, fast updates.
+>     --------------------------------------------------------------------->
+> <SERVICE
+>   NAME  = "dyndns.org"
+>   TITLE = "dyndns.org"
+>   HOST  = "members.dyndns.org"
+>   URL   = "www.dyndns.org" >
+>   <SIGNON
+>     URI  = "/nic/update"
+>     ARGS = "hostname=$(domain)&myip=$(ipaddr)"
+>     SEND = "GET $(URI)?$(ARGS) HTTP/1.1\r\n$(httpauth)$(httpheaders)" />
+> </SERVICE>
+>
+>   
+
+-- 
+-- 
+Hogan Courrier
+Geeks Galore Computer Center
+(613) 472-0005
+http://www.geeksgalore.ca
+
+
+From rolinger1 at hotmail.com  Fri Dec 12 21:12:23 2008
+From: rolinger1 at hotmail.com (rolinger)
+Date: Fri, 12 Dec 2008 12:12:23 -0800
+Subject: [Xitami] Got it!
+References: <4942AC7C.1050708@googlemaill.com>
+	<4942BD8B.6090104@geeksgalore.ca>
+Message-ID: <BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>
+
+Well, thats my point.  I was originally asking if there was some special 
+Xitami DynDNS setup because otherwise its really shouldn't have anything to 
+do with Xitami.  DynDNS would be a server/pc thing, not Xitami specific. 
+Point DynDNS domain (ie: gotdns.com) to your PC/Servers IP, and you are 
+done.
+
+-R
+
+=========
+"Socialism is the philosophy of failure, the creed of ignorance,
+and the gospel of envy, its inherent virtue is the equal sharing of misery."
+     - Sir Winston Churchill -
+=========
+----- Original Message ----- 
+From: "Hogan" <hogan at geeksgalore.ca>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Friday, December 12, 2008 11:37 AM
+Subject: Re: [Xitami] Got it!
+
+
+> Why people have to do things the hard way blows my mind.  Explains
+> Windows I guess....
+>
+> Magus1011 wrote:
+>> Hi All,
+>>
+>> Here's what you can have in your ddnsdef.xml file for dyndns.org that
+>> will work. Thanks to the good people at WireShark for an excellent
+>> packet sniffer I was able to get this to work for me.
+>>
+>>
+>> <!-----------------------------------------------------------------------
+>>     dyndns.org
+>>
+>>     Free DDNS service, fast updates.
+>>     --------------------------------------------------------------------->
+>> <SERVICE
+>>   NAME  = "dyndns.org"
+>>   TITLE = "dyndns.org"
+>>   HOST  = "members.dyndns.org"
+>>   URL   = "www.dyndns.org" >
+>>   <SIGNON
+>>     URI  = "/nic/update"
+>>     ARGS = "hostname=$(domain)&myip=$(ipaddr)"
+>>     SEND = "GET $(URI)?$(ARGS) HTTP/1.1\r\n$(httpauth)$(httpheaders)" />
+>> </SERVICE>
+>>
+>>
+>
+> -- 
+> -- 
+> Hogan Courrier
+> Geeks Galore Computer Center
+> (613) 472-0005
+> http://www.geeksgalore.ca
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+From magus1011 at gmail.com  Fri Dec 12 21:18:07 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Fri, 12 Dec 2008 14:18:07 -0600
+Subject: [Xitami] Xitami and DDNS
+In-Reply-To: <4942BD51.3050207@geeksgalore.ca>
+References: <4941C974.9050700@googlemaill.com>	<BAY127-DAV26D30D1F9AF389B48A37AF8F90@phx.gbl>	<4942A9F4.1000806@googlemaill.com>
+	<4942BD51.3050207@geeksgalore.ca>
+Message-ID: <4942C6FF.9020600@googlemaill.com>
+
+Hogan wrote:
+> I have been running dyndns with Xitami for over 9 Years, it is such a 
+> easy setup, consider these points
+>
+> Aquire the server IP on DynDNS, select wildcards if you want them and 
+> you are done, make sure you have a port forward if you are using a 
+> router and forward to port 80
+>
+> Takes all of 22 seconds
+>> Why people have to do things the hard way blows my mind.  Explains 
+>> Windows I guess....
+Perhaps it does, perhaps it doesn't, explain Windows. Flaming someone
+else's choice of Operating System is just asking to start a flame war,
+something I consider a pointless waste of my time.
+
+I not certain what it is you are talking about taking "all of 22
+seconds". Are you using your browser to log in to DynDNS and then do
+your steps? I've been using DynDNS Updater in my system tray to
+accomplish the same thing for many, many years, I think Xitami was at
+0.9 something when I first started. I've now made running DynDNS Updater
+obsolete.
+
+What I'm talking about is using the Xitami Administration page,
+Configuration and then the DDNS Setup page to set this up so that when
+Xitami starts it automatically sets my address on DynDNS for me. Perhaps
+it is the "hard way" to get things working right, but I strongly doubt
+that it's the "hard way" when I  reduce your 22 seconds to 0 seconds.
+
+-- 
+Best regards,
+Magus1011.
+
+A university is what a college becomes when the faculty loses interest
+in students.
+ - /John Ciardi/
+
+From magus1011 at gmail.com  Fri Dec 12 21:27:59 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Fri, 12 Dec 2008 14:27:59 -0600
+Subject: [Xitami] Got it!
+In-Reply-To: <BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>
+References: <4942AC7C.1050708@googlemaill.com>	<4942BD8B.6090104@geeksgalore.ca>
+	<BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>
+Message-ID: <4942C94F.6060809@googlemaill.com>
+
+rolinger wrote:
+> Well, thats my point.  I was originally asking if there was some special 
+> Xitami DynDNS setup because otherwise its really shouldn't have anything to 
+> do with Xitami.  DynDNS would be a server/pc thing, not Xitami specific. 
+> Point DynDNS domain (ie: gotdns.com) to your PC/Servers IP, and you are 
+> done.
+> 
+> -R
+> 
+
+Yes, there is a Xitami specific setup for DDNS. You will find it in the
+Administration, then Configuration then DDNS section of the
+Administrators screens. When it's setup correctly, you do absolutely
+nothing to have Xitami set your IP with DynDNS. Don't forget to check
+the "Enable dynamic DNS sign-on?" check-box and fill out the rest of the
+page correctly. It then becomes an "It's set so I can forget it" matter.
+
+-- 
+Best regards,
+Magus1011.
+
+If little else, the brain is an educational toy.
+ - Tom Robbins
+
+> =========
+> "Socialism is the philosophy of failure, the creed of ignorance,
+> and the gospel of envy, its inherent virtue is the equal sharing of misery."
+>      - Sir Winston Churchill -
+> =========
+> ----- Original Message ----- 
+> From: "Hogan" <hogan at geeksgalore.ca>
+> To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+> Sent: Friday, December 12, 2008 11:37 AM
+> Subject: Re: [Xitami] Got it!
+> 
+> 
+>> Why people have to do things the hard way blows my mind.  Explains
+>> Windows I guess....
+>>
+>> Magus1011 wrote:
+>>> Hi All,
+>>>
+>>> Here's what you can have in your ddnsdef.xml file for dyndns.org that
+>>> will work. Thanks to the good people at WireShark for an excellent
+>>> packet sniffer I was able to get this to work for me.
+>>>
+>>>
+>>> <!-----------------------------------------------------------------------
+>>>     dyndns.org
+>>>
+>>>     Free DDNS service, fast updates.
+>>>     --------------------------------------------------------------------->
+>>> <SERVICE
+>>>   NAME  = "dyndns.org"
+>>>   TITLE = "dyndns.org"
+>>>   HOST  = "members.dyndns.org"
+>>>   URL   = "www.dyndns.org" >
+>>>   <SIGNON
+>>>     URI  = "/nic/update"
+>>>     ARGS = "hostname=$(domain)&myip=$(ipaddr)"
+>>>     SEND = "GET $(URI)?$(ARGS) HTTP/1.1\r\n$(httpauth)$(httpheaders)" />
+>>> </SERVICE>
+>>>
+>>>
+>> -- 
+>> -- 
+>> Hogan Courrier
+>> Geeks Galore Computer Center
+>> (613) 472-0005
+>> http://www.geeksgalore.ca
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+From hogan at geeksgalore.ca  Fri Dec 12 21:32:04 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Fri, 12 Dec 2008 15:32:04 -0500
+Subject: [Xitami] Got it!
+In-Reply-To: <BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>
+References: <4942AC7C.1050708@googlemaill.com>	<4942BD8B.6090104@geeksgalore.ca>
+	<BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>
+Message-ID: <4942CA44.9030401@geeksgalore.ca>
+
+so simple a monkey could do it   hehehehhehe
+
+rolinger wrote:
+> Well, thats my point.  I was originally asking if there was some special 
+> Xitami DynDNS setup because otherwise its really shouldn't have anything to 
+> do with Xitami.  DynDNS would be a server/pc thing, not Xitami specific. 
+> Point DynDNS domain (ie: gotdns.com) to your PC/Servers IP, and you are 
+> done.
+>
+> -R
+>
+> =========
+> "Socialism is the philosophy of failure, the creed of ignorance,
+> and the gospel of envy, its inherent virtue is the equal sharing of misery."
+>      - Sir Winston Churchill -
+> =========
+> ----- Original Message ----- 
+> From: "Hogan" <hogan at geeksgalore.ca>
+> To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+> Sent: Friday, December 12, 2008 11:37 AM
+> Subject: Re: [Xitami] Got it!
+>
+>
+>   
+>> Why people have to do things the hard way blows my mind.  Explains
+>> Windows I guess....
+>>
+>> Magus1011 wrote:
+>>     
+>>> Hi All,
+>>>
+>>> Here's what you can have in your ddnsdef.xml file for dyndns.org that
+>>> will work. Thanks to the good people at WireShark for an excellent
+>>> packet sniffer I was able to get this to work for me.
+>>>
+>>>
+>>> <!-----------------------------------------------------------------------
+>>>     dyndns.org
+>>>
+>>>     Free DDNS service, fast updates.
+>>>     --------------------------------------------------------------------->
+>>> <SERVICE
+>>>   NAME  = "dyndns.org"
+>>>   TITLE = "dyndns.org"
+>>>   HOST  = "members.dyndns.org"
+>>>   URL   = "www.dyndns.org" >
+>>>   <SIGNON
+>>>     URI  = "/nic/update"
+>>>     ARGS = "hostname=$(domain)&myip=$(ipaddr)"
+>>>     SEND = "GET $(URI)?$(ARGS) HTTP/1.1\r\n$(httpauth)$(httpheaders)" />
+>>> </SERVICE>
+>>>
+>>>
+>>>       
+>> -- 
+>> -- 
+>> Hogan Courrier
+>> Geeks Galore Computer Center
+>> (613) 472-0005
+>> http://www.geeksgalore.ca
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>     
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>   
+
+-- 
+-- 
+Hogan Courrier
+Geeks Galore Computer Center
+(613) 472-0005
+http://www.geeksgalore.ca
+
+
+From rolinger1 at hotmail.com  Fri Dec 12 22:35:04 2008
+From: rolinger1 at hotmail.com (rolinger)
+Date: Fri, 12 Dec 2008 13:35:04 -0800
+Subject: [Xitami] Got it!
+References: <4942AC7C.1050708@googlemaill.com>	<4942BD8B.6090104@geeksgalore.ca><BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>
+	<4942C94F.6060809@googlemaill.com>
+Message-ID: <BAY127-DAV1120053911C0EC266FA2D9F8F90@phx.gbl>
+
+Heh...in all the years I have used Xitami I never recall seeing that 
+feature.  In fact, I am looking now and don't see it anywhere in the Admin 
+user web interface.  What version of Xitami are you using?  I am using 
+v2.4d9
+
+-R
+
+=========
+"Socialism is the philosophy of failure, the creed of ignorance,
+and the gospel of envy, its inherent virtue is the equal sharing of misery."
+     - Sir Winston Churchill -
+=========
+----- Original Message ----- 
+From: "Magus1011" <magus1011 at gmail.com>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Friday, December 12, 2008 12:27 PM
+Subject: Re: [Xitami] Got it!
+
+
+> rolinger wrote:
+>> Well, thats my point.  I was originally asking if there was some special
+>> Xitami DynDNS setup because otherwise its really shouldn't have anything 
+>> to
+>> do with Xitami.  DynDNS would be a server/pc thing, not Xitami specific.
+>> Point DynDNS domain (ie: gotdns.com) to your PC/Servers IP, and you are
+>> done.
+>>
+>> -R
+>>
+>
+> Yes, there is a Xitami specific setup for DDNS. You will find it in the
+> Administration, then Configuration then DDNS section of the
+> Administrators screens. When it's setup correctly, you do absolutely
+> nothing to have Xitami set your IP with DynDNS. Don't forget to check
+> the "Enable dynamic DNS sign-on?" check-box and fill out the rest of the
+> page correctly. It then becomes an "It's set so I can forget it" matter.
+>
+> -- 
+> Best regards,
+> Magus1011.
+>
+> If little else, the brain is an educational toy.
+> - Tom Robbins
+>
+>> =========
+>> "Socialism is the philosophy of failure, the creed of ignorance,
+>> and the gospel of envy, its inherent virtue is the equal sharing of 
+>> misery."
+>>      - Sir Winston Churchill -
+>> =========
+>> ----- Original Message ----- 
+>> From: "Hogan" <hogan at geeksgalore.ca>
+>> To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+>> Sent: Friday, December 12, 2008 11:37 AM
+>> Subject: Re: [Xitami] Got it!
+>>
+>>
+>>> Why people have to do things the hard way blows my mind.  Explains
+>>> Windows I guess....
+>>>
+>>> Magus1011 wrote:
+>>>> Hi All,
+>>>>
+>>>> Here's what you can have in your ddnsdef.xml file for dyndns.org that
+>>>> will work. Thanks to the good people at WireShark for an excellent
+>>>> packet sniffer I was able to get this to work for me.
+>>>>
+>>>>
+>>>> <!-----------------------------------------------------------------------
+>>>>     dyndns.org
+>>>>
+>>>>     Free DDNS service, fast updates.
+>>>>     --------------------------------------------------------------------->
+>>>> <SERVICE
+>>>>   NAME  = "dyndns.org"
+>>>>   TITLE = "dyndns.org"
+>>>>   HOST  = "members.dyndns.org"
+>>>>   URL   = "www.dyndns.org" >
+>>>>   <SIGNON
+>>>>     URI  = "/nic/update"
+>>>>     ARGS = "hostname=$(domain)&myip=$(ipaddr)"
+>>>>     SEND = "GET $(URI)?$(ARGS) HTTP/1.1\r\n$(httpauth)$(httpheaders)" 
+>>>> />
+>>>> </SERVICE>
+>>>>
+>>>>
+>>> -- 
+>>> -- 
+>>> Hogan Courrier
+>>> Geeks Galore Computer Center
+>>> (613) 472-0005
+>>> http://www.geeksgalore.ca
+>>>
+>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+From magus1011 at gmail.com  Fri Dec 12 23:07:08 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Fri, 12 Dec 2008 16:07:08 -0600
+Subject: [Xitami] Got it!
+In-Reply-To: <BAY127-DAV1120053911C0EC266FA2D9F8F90@phx.gbl>
+References: <4942AC7C.1050708@googlemaill.com>	<4942BD8B.6090104@geeksgalore.ca><BAY127-DAV31BB033F843CA313141DCF8F90@phx.gbl>	<4942C94F.6060809@googlemaill.com>
+	<BAY127-DAV1120053911C0EC266FA2D9F8F90@phx.gbl>
+Message-ID: <4942E08C.7070306@googlemaill.com>
+
+rolinger wrote:
+> Heh...in all the years I have used Xitami I never recall seeing that 
+> feature.  In fact, I am looking now and don't see it anywhere in the Admin 
+> user web interface.  What version of Xitami are you using?  I am using 
+> v2.4d9
+> 
+> -R
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+Ah, another difference between Xitami/Pro and your free version.
+
+-- 
+Best regards,
+Magus1011.
+
+The only difference between a rut and a grave is in the dimensions.
+ - Magus1011
+
+From the5thq at netzero.net  Tue Dec 16 15:45:38 2008
+From: the5thq at netzero.net (the5thq at netzero.net)
+Date: Tue, 16 Dec 2008 14:45:38 GMT
+Subject: [Xitami] Got it!
+Message-ID: <20081216.094538.9883.0@webmail02.dca.untd.com>
+
+YEAH, THIS IS ALL Acedemic, as far as X serv goes but there are issues aplenty with local DNS and running a dynamic update, called poisoning...
+
+ModZilla
+
+
+____________________________________________________________
+Save $15 on Flowers and Gifts from FTD!
+Shop now at http://offers.netzero.net/TGL1231/?u=http://www.ftd.com/17007
+
+From magus1011 at gmail.com  Wed Dec 17 20:56:43 2008
+From: magus1011 at gmail.com (Magus1011)
+Date: Wed, 17 Dec 2008 13:56:43 -0600
+Subject: [Xitami] Got it!
+In-Reply-To: <20081216.094538.9883.0@webmail02.dca.untd.com>
+References: <20081216.094538.9883.0@webmail02.dca.untd.com>
+Message-ID: <4949597B.60705@googlemaill.com>
+
+the5thq at netzero.net wrote:
+> YEAH, THIS IS ALL Academic, as far as X serv goes but there are
+> issues aplenty with local DNS and running a dynamic update, called
+> poisoning...
+> 
+> ModZilla
+> 
+> 
+> ____________________________________________________________ Save $15
+>  on Flowers and Gifts from FTD! Shop now at 
+> http://offers.netzero.net/TGL1231/?u=http://www.ftd.com/17007>
+> -- Xitami Users Mailing List -- For Xitami support To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+> 
+Well, the source to Xitami 2.5c2 is at
+http://www.xitami.com/download.htm. Help yourself. You'll need a Windows
+98se Virtual Machine and a copy of VS 6 and a few other simple tools for
+the Windows version. There's also a copy of 2.4d11 there as well. Find a
+bug, fix it and publish the fix.
+
+-- 
+Best regards,
+Magus1011.
+
+The best way to keep one's word is not to give it.
+ - Napoleon Bonaparte
+
+From bogus@does.not.exist.com  Sat Dec 27 22:51:38 2008
+From: bogus@does.not.exist.com ()
+Date: Sat, 27 Dec 2008 21:51:38 -0000
+Subject: No subject
+Message-ID: <mailman.1.1231952181.6348.xitami@lists.xitami.org>
+
+# Xitami 1.0b was released as a separate product in December 1996.
+# Xitami 1.0a was released as part of the SMT product in October 1996.
+
+-Pieter
+

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006737.html">
+   <LINK REL="Next"  HREF="006723.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Maurilio Longo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 11 May 2005 17:42:01 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006737.html">[Xitami] Page detection and reporting
+</A></li>
+        <LI> Next message: <A HREF="006723.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6722">[ date ]</a>
+              <a href="thread.html#6722">[ thread ]</a>
+              <a href="subject.html#6722">[ subject ]</a>
+              <a href="author.html#6722">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+my build of xitami 2.5c2 on OS/2 works well but I've found something which I
+think is a problem with xitami itself and not with the build.
+
+I have this defaults.cfg
+
+--------8&lt;---------------------
+#*END
+
+[Alias]
+   /schede = &quot;w:\\wiki&quot;
+
+
+[Cgi]
+    workdir=-
+    Form-query = &quot;1&quot;
+    debug=1
+
+[Filter]
+    .php = &quot;e:/internet/php/cgi/php.exe&quot;
+    .prg = &quot;./cgi-bin/hscript.exe&quot;
+
+[Server]
+    Cache-defaults = &quot;0&quot;
+    Webpages = &quot;w:/web&quot;
+    temp-dir = &quot;./temp/&quot;
+    debug=1
+-------------------------------
+
+Look that I have an [Alias] and a [Filter] section for .php files.
+
+Now, when a request arrives for a .php file which resides in an aliased dir it
+does not get &quot;translated&quot; as if it where a simple .html file.
+
+Look at this debug log:
+
+-------8&lt;------------------------
+2005/05/11 17:29:45: Loading VH data for base host
+2005/05/11 17:29:45: - loading config data from basehost.cfg
+2005/05/11 17:29:45:  - rootdir=w:/web, cgi-bin=cgi-bin
+2005/05/11 17:29:45: - loading password data from: xitami.aut
+2005/05/11 17:29:50: Looking for VH using Host value: localhost
+2005/05/11 17:29:50:  - looking for VH using IP address: 127.0.0.1
+2005/05/11 17:29:50: - using default virtual host values
+2005/05/11 17:29:50: Resolving URL request: /schede/pmwiki.php
+2005/05/11 17:29:50:  - URL handled by filter 'e:/internet/php/cgi/php.exe'
+2005/05/11 17:29:50: - request refers to a normal readable file
+2005/05/11 17:29:51: Transfer file=.\TEMP\pipe0001.flt size=25 from=66
+...
+---------------------------------
+
+while a request for a .html file is correctly translated: see this log:
+
+----8&lt;------------------------
+2005/05/11 17:40:41: Loading VH data for base host
+2005/05/11 17:40:41: - loading config data from basehost.cfg
+2005/05/11 17:40:41:  - rootdir=w:/web, cgi-bin=cgi-bin
+2005/05/11 17:40:41: - loading password data from: xitami.aut
+2005/05/11 17:40:48: Looking for VH using Host value: localhost
+2005/05/11 17:40:48:  - looking for VH using IP address: 127.0.0.1
+2005/05/11 17:40:48: - using default virtual host values
+2005/05/11 17:40:48: Resolving URL request: /schede/test.html
+2005/05/11 17:40:48:  - URL refers to a normal HTML file
+2005/05/11 17:40:48: - request refers to a normal readable file
+2005/05/11 17:40:48: Transfer file=w:/wiki/test.html size=18009 from=0
+-------------------------------
+
+Now, the question is: how can I execute a filtered file from an aliased path?
+
+TIA.
+
+Maurilio.
+
+--
+ __________
+|<i>  |  | |__| Maurilio Longo
+</I>|<i>_|_|_|____| farmaconsult s.r.l.
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006737.html">[Xitami] Page detection and reporting
+</A></li>
+	<LI> Next message: <A HREF="006723.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6722">[ date ]</a>
+              <a href="thread.html#6722">[ thread ]</a>
+              <a href="subject.html#6722">[ subject ]</a>
+              <a href="author.html#6722">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

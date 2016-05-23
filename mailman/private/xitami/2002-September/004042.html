@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004038.html">
+   <LINK REL="Next"  HREF="004007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 25 Sep 2002 18:23:28 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004038.html">Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004007.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued (Follow-up on Log content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4042">[ date ]</a>
+              <a href="thread.html#4042">[ thread ]</a>
+              <a href="subject.html#4042">[ subject ]</a>
+              <a href="author.html#4042">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Paul Reid wrote:
+
+&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>******************* Lesson Learned! ********************
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>NEVER, NEVER TEST Perl CGI SCRIPTS WITHOUT:
+</I>&gt;<i> 1) use CGI::Carp qw(fatalsToBrowser);
+</I>&gt;<i> 2) running with the &quot; -w&quot; option
+</I>&gt;<i> 3) use Strict;
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I have also found that the environment is rather useful when testing 
+(e.g. paramters passed tend to be called FORM_XXXX so you can easily 
+spot any typos) thus I tend to have the following at the top of my 
+scripts (note that the environment is only printed out when the remote 
+address is 127.0.0.1 I.e. localhost)
+
+use CGI::Carp qw(fatalsToBrowser set_message);
+BEGIN {
+  sub handle_errors {
+    my $msg = shift;
+    print &quot;&lt;h1&gt;Script Error&lt;/h1&gt; running&quot;.$ENV{'SCRIPT_NAME'}.&quot;&lt;p&gt;&lt;pre&gt;&quot;;
+    $msg =~ s/ (of )*\Q$0//g;
+    print &quot;$msg&lt;/pre&gt;&lt;A HREF='mailto:XXXXX'&gt;Email me this page&lt;/a&gt;&quot;;
+    return unless ($ENV{'REMOTE_ADDR'} eq &quot;127.0.0.1&quot;);
+    print '&lt;p&gt;&lt;B&gt;Environment Variables:&lt;/B&gt;&lt;PRE&gt;';
+    foreach (sort keys %ENV) {
+    print &quot;$_: [$ENV{$_}]\n&quot;;
+    }
+    }
+  set_message(\&amp;handle_errors);
+}
+
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004038.html">Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004007.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued (Follow-up on Log content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4042">[ date ]</a>
+              <a href="thread.html#4042">[ thread ]</a>
+              <a href="subject.html#4042">[ subject ]</a>
+              <a href="author.html#4042">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

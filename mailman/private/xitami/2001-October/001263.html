@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] is Xitami hack-proof?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001233.html">
+   <LINK REL="Next"  HREF="001259.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] is Xitami hack-proof?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] is Xitami hack-proof?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 24 Oct 2001 13:28:16 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001233.html">[Xitami] is Xitami hack-proof?
+</A></li>
+        <LI> Next message: <A HREF="001259.html">[Xitami] is Xitami hack-proof?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1263">[ date ]</a>
+              <a href="thread.html#1263">[ thread ]</a>
+              <a href="subject.html#1263">[ subject ]</a>
+              <a href="author.html#1263">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  is Xitami hack-proof?
+</I>
+Nothing is hack-proof. 
+
+Let's look at what a hacker can do:
+
+ 1) crash your server. Most complex software has some combination of
+unexpected input that will confuse it to death. Older versions of Xitami
+on DOS/Win would lock-up if you request the file &quot;/LPT1&quot;... it waits
+forever for the printer to supply data. But there are ways to make your
+server inaccessible no matter what software it runs; ping-floods are a
+popular trick.
+
+ 2) read your secret data. A good webserver on a good O/S has a very
+clear policy about what files may or may not be served. I have not heard
+of any Xitami hacks like this, and only one minor Apache hack. IIS seems
+to have a big loophole in how it parses invalid meta-characters and a
+carefully designed URL can read anything on an unpatched IIS machine. 
+
+ 3) infect your server. Install the hacker's code to run on your
+machine, either to aid in an attack on another machine or to give the
+hacker access to your secret files. It isn't that easy to make a
+computer run arbitrary code. The easiest way is to find a telnet login
+with no password and ample permissions. Another way is to hit a
+protected login with a VERY long username or password that overflows the
+login code and inserts malicious code where it will be run; this
+requires specific knowledge of the binary code behind the login. CodeRed
+exploits something like that in how IIS handles URL query-strings. 
+
+Note that a specific attack on the &quot;wrong&quot; machine may have unintended
+side-effects. CodeRed does not infect H-P printers, but a CodeRed attack
+can cause the printer to lock-up and need a re-boot. 
+
+However, Xitami is well designed (simple direct code), and is too
+uncommon to attract hacker's direct interest. The only side-effect of
+CodeRed attacks is bloated log files. I'd rather watch my logs grow than
+suffer the pains of IIS operators. 
+
+Most hacks have to target specific flaws in the server-- the hacker has
+to know the insides of the code or behavior. For best effect, hackers
+study the most-used servers: Apache and IIS. Apache is fairly clean and
+has a large support community capable of quick patches. IIS is a mess
+and it takes MS a long time to even admit there is a problem. (There are
+a few other big servers popular for e-Commerce, like iPlanet, and these
+are targeted by hackers to gain money-info.)
+
+We don't know how many vulnerabilities exist in Xitami. But Xitami has
+NO code in common with the hacker-favorites, Apache and IIS, so attacks
+that work on the big servers are not liable to infect Xitami. Even if a
+CodeRed-type worm were possible on Xitami, it would have a fairly hard
+time finding another Xitami server to infect. 
+
+ &quot;GET /msadc/..%255c..
+ &quot;GET /scripts/..%c1%1c../
+
+Someone is trying to exploit IIS's directories and flaws. They are too
+dumb to notice that yours is not a IIS server. (These attacks are
+automated; it is quicker to poke blindly than to check to see if the
+target is the right brand.)
+
+-OR-... your network administrator is testing to see if any machines on
+her subnets are potential targets of a CodeRed-type attack. My
+university has been &quot;hack-testing&quot; every machine here and referring any
+vulnerabilities found to the responsible person. They found an old
+version of WU-FTP, one that I know can be over-flowed and subverted, on
+one of &quot;my&quot; boxes. Someone else actually manages that machine, so I was
+glad that my net-bosses told me of his sin. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001233.html">[Xitami] is Xitami hack-proof?
+</A></li>
+	<LI> Next message: <A HREF="001259.html">[Xitami] is Xitami hack-proof?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1263">[ date ]</a>
+              <a href="thread.html#1263">[ thread ]</a>
+              <a href="subject.html#1263">[ subject ]</a>
+              <a href="author.html#1263">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

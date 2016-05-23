@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Stopping%20and%20restarting%20%28or%20resetting%29%20Xitamiwithperl&In-Reply-To=5821ea240601041202h103da6a3h157f719ec8b0488b%40mail.gmail.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007071.html">
+   <LINK REL="Next"  HREF="007073.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl</H1>
+    <B>Francis Turner</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Stopping%20and%20restarting%20%28or%20resetting%29%20Xitamiwithperl&In-Reply-To=5821ea240601041202h103da6a3h157f719ec8b0488b%40mail.gmail.com"
+       TITLE="[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl">francis.turner at gmail.com
+       </A><BR>
+    <I>Wed Jan  4 23:29:35 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007071.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+        <LI>Next message: <A HREF="007073.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7072">[ date ]</a>
+              <a href="thread.html#7072">[ thread ]</a>
+              <a href="subject.html#7072">[ subject ]</a>
+              <a href="author.html#7072">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>For those that care here is the script - obviously change 'username',
+'password' to the right values.
+
+Normally you would do the VHOST creation foirst then call this script.
+I don't see why you can't do this during the CGI call although I admit
+I haven't tested it to see if that works. Leaving this script to run
+as a dedicated service is left as an exercise to the student but some
+hints can be found in my realplayer controller code
+<A HREF="http://www.di2.nu/software/muzack.htm">http://www.di2.nu/software/muzack.htm</A>
+
+#!/usr/bin/perl
+
+# Created on 04-Jan-2006 22:17:28
+
+use LWP::UserAgent;
+my $ua = LWP::UserAgent-&gt;new;
+
+my $req = HTTP::Request-&gt;new(GET =&gt; '<A HREF="http://localhost/admin'">http://localhost/admin'</A>);
+$req-&gt;authorization_basic('username', 'password');
+my $response = $ua-&gt;request($req);
+
+if ($response-&gt;is_success) {
+     $_ = $response-&gt;as_string;  # or whatever
+     die &quot;no admin in $_&quot; unless m!FORM METHOD=POST ACTION=&quot;/admin([^&quot;]+)&quot;!s;
+     print &quot;got first round - $1\nsecond... &quot;;
+     $req = HTTP::Request-&gt;new(POST =&gt; '<A HREF="http://localhost/admin'.$1">http://localhost/admin'.$1</A>);
+     $req-&gt;authorization_basic('username', 'password');
+     $req-&gt;content_type('application/x-www-form-urlencoded');
+     $req-&gt;content('jsaction=~A47.0');
+     $response = $ua-&gt;request($req);
+     print $response-&gt;status_line;
+}
+else {
+     die $response-&gt;status_line;
+}
+
+On 1/4/06, Pieter Hintjens &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ph at imatix.com</A>&gt; wrote:
+&gt;<i> &gt; problem two - which is where I'm proposing the perl script is for when
+</I>&gt;<i> &gt; you want to prod Yitami to reload its config because you have
+</I>&gt;<i> &gt; (programatically) added some more VHOSTS or similar. In this case you
+</I>&gt;<i> &gt; know Xitami is actually alive so you don't want to kill it in the
+</I>&gt;<i> &gt; middle of doing something
+</I>&gt;<i>
+</I>&gt;<i> Xitami will automatically reload its config file when it can, however
+</I>&gt;<i> it cannot reload its vhost config dynamically, and for this you need
+</I>&gt;<i> to stop/restart it.  Using the WBA interface is equivalent to doing a
+</I>&gt;<i> stop/start.
+</I>&gt;<i>
+</I>&gt;<i> Yes, to do this remotely, you could use the /admin interface and
+</I>&gt;<i> 'click' on the restart button.
+</I>&gt;<i>
+</I>&gt;<i> -Pieter Hintjens
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007071.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+	<LI>Next message: <A HREF="007073.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7072">[ date ]</a>
+              <a href="thread.html#7072">[ thread ]</a>
+              <a href="subject.html#7072">[ subject ]</a>
+              <a href="author.html#7072">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

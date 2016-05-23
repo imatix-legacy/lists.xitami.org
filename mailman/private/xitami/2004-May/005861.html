@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Building Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005860.html">
+   <LINK REL="Next"  HREF="005857.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Building Xitami
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Building Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 3 May 2004 20:05:56 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005860.html">[Xitami] Building Xitami
+</A></li>
+        <LI> Next message: <A HREF="005857.html">[Xitami] Building Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5861">[ date ]</a>
+              <a href="thread.html#5861">[ thread ]</a>
+              <a href="subject.html#5861">[ subject ]</a>
+              <a href="author.html#5861">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 02/05/04 03:54, Brian {Hamilton Kelly} wrote:
+&gt;<i> Ugh!  [Spit, spit]
+</I>
+:<i>-)
+</I>
+&gt;<i> Are you really able to keep a cross-platform source that compiles through
+</I>&gt;<i> that heap of shit?  If so, I take off my hat to you.
+</I>&gt;<i>
+</I>&gt;<i> Or have you got configuration control problems, and multiple forking of
+</I>&gt;<i> sources?
+</I>
+Take a look, if you care.  Xitami consists of a core engine that is totally 
+portable.  This engine is wrapped in several command-line envelopes that 
+include more or less functionality (e.g. xilite which is minimalistic).
+
+There is also a Windows GUI that provides a simple front-end for the web 
+server engine.  This code is not portable.
+
+We don't have code forks and we don't have many configuration problems, but 
+there is a price to pay nonetheless - the source code is split into different 
+layers (such as SFL for all portability, SMT for the multithreading engine) 
+and the build process has to work with these.  It is not trivial to build 
+Xitami from scratch.
+
+Incidentally, we make other products, and it's always quite complex to build 
+them.  We developed Boom (a configuration management tool) because the manual 
+packaging process for Xitami was too delicate and broke too often.  So while 
+the current source packages are difficult to build, they are accurate and 
+complete.
+
+Xitami's architecture dates from 1996 when we started designing portable 
+servers, and it's still a good architecture.  Apache/2.0 uses the same 3-tier 
+model (since 1999, three years after us), with a portability library, a 
+network service framework, and server protocol handlers.
+
+-
+Pieter Hintjens
+iMatix
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005860.html">[Xitami] Building Xitami
+</A></li>
+	<LI> Next message: <A HREF="005857.html">[Xitami] Building Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5861">[ date ]</a>
+              <a href="thread.html#5861">[ thread ]</a>
+              <a href="subject.html#5861">[ subject ]</a>
+              <a href="author.html#5861">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

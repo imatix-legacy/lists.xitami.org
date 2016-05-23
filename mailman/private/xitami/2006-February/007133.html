@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] URGENT - Major server bug in cgi - never before
+  seen
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20URGENT%20-%20Major%20server%20bug%20in%20cgi%20-%20never%20before%0A%20%20seen&In-Reply-To=6.2.0.14.0.20060203092556.01cbe1a8%40mail.mrjdesign.net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007132.html">
+   <LINK REL="Next"  HREF="007135.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] URGENT - Major server bug in cgi - never before
+  seen</H1>
+    <B>MRJ InfoTech Admin</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20URGENT%20-%20Major%20server%20bug%20in%20cgi%20-%20never%20before%0A%20%20seen&In-Reply-To=6.2.0.14.0.20060203092556.01cbe1a8%40mail.mrjdesign.net"
+       TITLE="[Xitami] URGENT - Major server bug in cgi - never before
+  seen">admin at mrjdesign.net
+       </A><BR>
+    <I>Fri Feb  3 14:18:05 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007132.html">[Xitami] URGENT - Major server bug in cgi - never before
+  seen
+</A></li>
+        <LI>Next message: <A HREF="007135.html">[Xitami] help please
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7133">[ date ]</a>
+              <a href="thread.html#7133">[ thread ]</a>
+              <a href="subject.html#7133">[ subject ]</a>
+              <a href="author.html#7133">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Problem solved...
+Apparently the error through a fit before the actual location in the code. 
+As usual, the problem remains the same.
+An issue with the device located between the screen parsing data going to 
+the keyboard (^^)
+
+(in other words, input error)
+
+The problem was very simple, the output code depends on a text file containing
+the formatting for the header and footer in the CGI result, and these two 
+files
+where missing due to a simple copy error.
+
+I keep having to remind myself, that the error is not what is last 
+returned, but what was NOT last returned.
+Sorry to bug the board, but perhaps someone can learn from my mistake too.
+
+MRJ
+
+At 09:28 03/02/2006, you wrote:
+&gt;<i>A little update after testing even more with all settings, including 
+</I>&gt;<i>running the value - 1 to disallow creation of short file names in the registry.
+</I>&gt;<i>
+</I>&gt;<i>I can create the file, write to it by using Print #iFileNumber, &quot;0&quot;
+</I>&gt;<i>
+</I>&gt;<i>but still not read the file or even see it in the CGI.
+</I>&gt;<i>
+</I>&gt;<i>Windows can see it alright, and I can list it and so on, but the CGI 
+</I>&gt;<i>doesn't appear to have the right permissions.
+</I>&gt;<i>
+</I>&gt;<i>I didn't think Xitami was permission dependant on windows for access to 
+</I>&gt;<i>some folders, when running Xitami as Admin
+</I>&gt;<i>
+</I>&gt;<i>At 08:30 03/02/2006, you wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i>I have been using and testing Xitami with my VB cgi's for some 5 years now.
+</I>&gt;&gt;<i>Never before have I seen such odd behaviour as the past two days.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I built my cgi on a box running XP Pro sp1
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I intend to run them on the exact same configuration Xitami 2.5 with XP 
+</I>&gt;&gt;<i>pro sp1
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>In this cgi I have a call for the following
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>sFilePath = App.path &amp; &quot;\lst\_filename.hit&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>then open the file and increment a number and close it again... basic hit 
+</I>&gt;&gt;<i>count
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>When i run it on the dev station it executes fast and excellent like it 
+</I>&gt;&gt;<i>should
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>When I execute this on a setup on my server machine I get
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Error msg (if any): X:\webroot\TheDomainName\cgi-bin\lst\filename.hit
+</I>&gt;&gt;<i>The following internal error has occurred:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>File not found Error Number =  53
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Ohhhh boy
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Well to begin with, for some obscure reason, on the server machine it 
+</I>&gt;&gt;<i>doesn't really come back this way.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>If I do a set call to the exact path, hard coded, that's what it look like
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>When I do a call app.path in VB it comes back as
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>X:\webroot\TheDom~1\cgi-bin\lst\filename.hit
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Why in heavens name it suddenly started doing short filenames and paths I 
+</I>&gt;&gt;<i>cannot understand.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Does anyone have a clue as to how to disable this goof ball function in 
+</I>&gt;&gt;<i>my machine so my Xitami will run as a normal machine again?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Thank you in advance.
+</I>&gt;&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060203/d2fb1fae/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20060203/d2fb1fae/attachment.htm</A>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007132.html">[Xitami] URGENT - Major server bug in cgi - never before
+  seen
+</A></li>
+	<LI>Next message: <A HREF="007135.html">[Xitami] help please
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7133">[ date ]</a>
+              <a href="thread.html#7133">[ thread ]</a>
+              <a href="subject.html#7133">[ subject ]</a>
+              <a href="author.html#7133">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

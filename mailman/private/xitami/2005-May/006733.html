@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006732.html">
+   <LINK REL="Next"  HREF="006734.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 22:30:54 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006732.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006734.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6733">[ date ]</a>
+              <a href="thread.html#6733">[ thread ]</a>
+              <a href="subject.html#6733">[ subject ]</a>
+              <a href="author.html#6733">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>BTW since we are on this portion of the code there is a fairly ugly
+&quot;lowercasing&quot; bug in the ALIAS area which means that (IIRC) aliases on
+case sensitive OSes (i.e. linux) have a problem with paths where the
+path after the alias contains an upercase letter
+
+E.g. if you have /alias as an alias of /usr/local/Alias is OK. But a
+subdirectory (/alias/SubDirectory/ returns a 404 even if
+/usr/local/Alias/SubDirectory exists
+
+I fixed it once in one of the 2.5b releases but I stopped using Xitami
+on Linux shortly thereafter and mislaid the code otherwise I'd provide
+the patch. I seem to recall it required using a copy that is
+lowercased for comparison and then inserting the original in the
+actual path
+
+On 5/12/05, Pieter Hintjens &lt;<A HREF="mailto:ph@imatix.com">ph@imatix.com</A>&gt; wrote:
+&gt;<i> On 12/05/2005 08:04 pm, Maurilio Longo wrote:
+</I>&gt;<i>=20
+</I>&gt;<i> &gt; With this last fix I can now correctly execute <A HREF="http://localhost/wiki/">http://localhost/wiki/</A>
+</I>&gt;<i> pmwiki.php
+</I>&gt;<i>=20
+</I>&gt;<i> That's nice.
+</I>&gt;<i>=20
+</I>&gt;<i> &gt; :) _but_ I cannot execute <A HREF="http://localhost/schede/pmwiki.php">http://localhost/schede/pmwiki.php</A> since, aft=
+</I>er
+&gt;<i> &gt; : the first request, all links point to /wiki/ instead of /schede/.
+</I>&gt;<i>=20
+</I>&gt;<i> ?... Ah, I understand: the generated PHP page links contains the real pat=
+</I>h
+&gt;<i> rather than the alias.  There must be another environment variable that i=
+</I>s
+&gt;<i> being wrongly set.  If PHP is using PATH_TRANSLATED then we are stuck bec=
+</I>ause
+&gt;<i> it means there is basically no way to run PHP scripts on an alias.
+</I>&gt;<i>=20
+</I>&gt;<i> &gt; but it is not a big problem since it is easily fixed simply having the
+</I>&gt;<i> &gt; [Alias] equal to the folder it is aliasing...
+</I>&gt;<i>=20
+</I>&gt;<i> Not really a good fix since it's just avoiding the problem.  We should fi=
+</I>nd
+&gt;<i> out what variable PHP is using, and fix that.
+</I>&gt;<i>=20
+</I>&gt;<i> -Pieter
+</I>&gt;<i>=20
+</I>&gt;<i>=20
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>=20
+</I>
+
+--=20
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006732.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006734.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6733">[ date ]</a>
+              <a href="thread.html#6733">[ thread ]</a>
+              <a href="subject.html#6733">[ subject ]</a>
+              <a href="author.html#6733">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

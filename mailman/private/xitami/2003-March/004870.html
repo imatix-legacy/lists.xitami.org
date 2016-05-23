@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004867.html">
+   <LINK REL="Next"  HREF="004866.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Mar 2003 10:10:02 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004867.html">[Xitami] CGI
+</A></li>
+        <LI> Next message: <A HREF="004866.html">[Xitami] problems with xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4870">[ date ]</a>
+              <a href="thread.html#4870">[ thread ]</a>
+              <a href="subject.html#4870">[ subject ]</a>
+              <a href="author.html#4870">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> #! C:\Perl\Bin
+</I>
+&gt;<i> Yes, I do have Perl installed to C:\Perl\Bin, and yes, perl.exe is
+</I>&gt;<i> located within that dir.
+</I>
+But the she-bang has to say what PROGRAM, not just what directory.
+It needs to say &quot;perl&quot; or &quot;perl.exe&quot;. Or maybe MyPearl.COM if you
+have built your own script interpreter.
+
+As Axel points out: on DOS/Windows: if you omit the directory or
+specify a directory that does not exist, Xitami will attempt to find
+the program by name along PATH, which is why &quot;#! perl&quot; will work.
+Not all webservers will do this. I don't think Xitami will under
+unix.
+
+Also: Xitami often handles DOS-type back-slash directory syntax
+correctly, but forward-slash works too and maybe more reliably.
+Xitami will translate forward-slash syntax to back-slash on DOS
+filesystems, but NT/XP systems actually take / just as well as \.
+
+The most universal she-bang is &quot;#! /usr/bin/perl&quot;
+
+This specifies the full path/program on most unix machines. On a
+DOS/Win machine, be sure you do NOT have a /usr/bin/ folder (you
+usually won't) and when Xitami fails there it will search along PATH
+and find a &quot;perl&quot; to use.
+
+If you must rely on PATH, be sure Perl Install sets it (or you set
+it) and you may need to re-boot after Perl install so the PATH
+statement is in effect when Xitami starts up.
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004867.html">[Xitami] CGI
+</A></li>
+	<LI> Next message: <A HREF="004866.html">[Xitami] problems with xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4870">[ date ]</a>
+              <a href="thread.html#4870">[ thread ]</a>
+              <a href="subject.html#4870">[ subject ]</a>
+              <a href="author.html#4870">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

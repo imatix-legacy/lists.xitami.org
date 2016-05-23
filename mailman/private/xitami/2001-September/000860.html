@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Suspend
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000858.html">
+   <LINK REL="Next"  HREF="000863.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Suspend
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Suspend">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 05 Sep 2001 08:33:29 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000858.html">[Xitami] Suspend
+</A></li>
+        <LI> Next message: <A HREF="000863.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#860">[ date ]</a>
+              <a href="thread.html#860">[ thread ]</a>
+              <a href="subject.html#860">[ subject ]</a>
+              <a href="author.html#860">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;004101c1357d$f0799ad0$<A HREF="mailto:ea409fc1@ednic">ea409fc1@ednic</A>&gt;, Joubin Far writes:
+&gt;<i>I have installed the zip file bw3224d9 without any problem and i have 
+</I>&gt;<i>gotten the following error message while starting: Xitami was suspended
+</I>&gt;<i>Could not open HTTP port 80 - Port is already used by another 
+</I>&gt;<i>server(WSAEADDRINUSE).
+</I>&gt;<i>My OS W2K runs on 1200MHz AMD.  I had never this problem with Win95 and WinNT.
+</I>
+Did you install IIS when you installed W2K?  (Or did W2K decide to
+install it for you along with something else?)
+
+You can check if something is definitely using port-80 in a cmd window
+with:
+
+netstat -na
+
+Then look through the output for a line mentioning &quot;:80&quot; or &quot;.80&quot; (at
+the end of an address, and &quot;listening&quot;.  If there is one there, then
+you've definitely already got a webserver running.
+
+Either you need to change that webserver to another port, or you need to
+run Xitami on a different port.  All Xitami's ports can be shifted with
+the portbase option: eg &quot;xitami -b 5000&quot; will move all the ports up by
+5000, giving 5080 for HTTP, etc.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000858.html">[Xitami] Suspend
+</A></li>
+	<LI> Next message: <A HREF="000863.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#860">[ date ]</a>
+              <a href="thread.html#860">[ thread ]</a>
+              <a href="subject.html#860">[ subject ]</a>
+              <a href="author.html#860">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

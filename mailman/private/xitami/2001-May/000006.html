@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Can't connect to port 80
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000010.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Can't connect to port 80
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Can't connect to port 80">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 30 May 2001 20:41:13 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000010.html">[Xitami] FTP uploads only in lowercase!
+</A></li>
+        <LI> Next message: <A HREF="000007.html">[Xitami] port 81
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3B142293.17543.335605@localhost">3B142293.17543.335605@localhost</A>&gt;, &quot;Dennis G. Wicks&quot; writes:
+&gt;<i>I am running Xitami on NT 4.0 SP 6. Once in a great while Xitami 
+</I>&gt;<i>crashes and when I tell it to restart I get a message back that says it 
+</I>&gt;<i>can't access port 80 because some other server is using it.(?)
+</I>
+With some TCP/IP stacks (I don't know if it applies to NT 4), if a
+server is stopped &quot;suddenly&quot;, then it can't be restarted for a few
+minutes after it has been stopped (to allow all the old connections to
+die off).
+
+One way to check for this is to run:
+
+netstat -na | more
+
+and look for entries with port 80 (&quot;.80&quot; or &quot;:80&quot; at the end).  If there
+are entries like that and it is telling you that you cannot restart
+Xitami, then try waiting a few minutes until they go away, and see if
+you can restart Xitami then.
+
+If that works (ie, if it's the cause of the problem) we'll see if NT has
+any equivilent of the Unix &quot;this is a server, let it restart and use the
+same port again immediately&quot; option.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000010.html">[Xitami] FTP uploads only in lowercase!
+</A></li>
+	<LI> Next message: <A HREF="000007.html">[Xitami] port 81
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

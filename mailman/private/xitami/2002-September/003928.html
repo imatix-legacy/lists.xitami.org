@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP_SELF problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003927.html">
+   <LINK REL="Next"  HREF="003930.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP_SELF problem
+   </H1>
+    <B>TW
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP_SELF problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 05 Sep 2002 18:34:42 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003927.html">[Xitami] PHP_SELF problem
+</A></li>
+        <LI> Next message: <A HREF="003930.html">[Xitami] PHP_SELF problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3928">[ date ]</a>
+              <a href="thread.html#3928">[ thread ]</a>
+              <a href="subject.html#3928">[ subject ]</a>
+              <a href="author.html#3928">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_27842785==_.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+Use a workaround if nothing else helps.
+Put the following in some ever available header or config file:
+
+function scriptname($buffer) {
+         $buff_array = explode(&quot;/&quot;, $buffer);
+         $i = count($buff_array);
+         $i--;
+         $scriptname = $buff_array[$i];
+         return $scriptname;
+}
+
+$php_self = scriptname($SCRIPT_NAME);
+
+Regards,
+tony
+
+At 11:28 05.09.2002 -0400, you wrote:
+&gt;<i>How to have that variable working properly in PHP 4.2.2.
+</I>&gt;<i>Is is working ok under Apache but I cannot find out how to get it working
+</I>&gt;<i>with Xitami. All the other such variables are ok when I execute phpinfo().
+</I>&gt;<i>I would need this one working and I tried a lot of changes in Xitami cfg
+</I>&gt;<i>files and the php.ini file as well.
+</I>&gt;<i>Thanks for your help
+</I>&gt;<i>JPSmith
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--=====================_27842785==_.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+&lt;html&gt;
+Use a workaround if nothing else helps.&lt;br&gt;
+Put the following in some ever available header or config file:&lt;br&gt;&lt;br&gt;
+&lt;font face=&quot;Courier New, Courier&quot;&gt;function scriptname($buffer) {&lt;br&gt;
+&lt;x-tab&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/x-tab&gt;$buff_array
+= explode(&amp;quot;/&amp;quot;, $buffer);&lt;br&gt;
+&lt;x-tab&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/x-tab&gt;$i =
+count($buff_array);&lt;br&gt;
+&lt;x-tab&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/x-tab&gt;$i--;&lt;br&gt;
+&lt;x-tab&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/x-tab&gt;$scriptname
+= $buff_array[$i];&lt;br&gt;
+&lt;x-tab&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/x-tab&gt;return
+$scriptname;&lt;br&gt;
+}&lt;br&gt;&lt;br&gt;
+$php_self = scriptname($SCRIPT_NAME);&lt;br&gt;&lt;br&gt;
+&lt;/font&gt;Regards,&lt;br&gt;
+tony&lt;br&gt;&lt;br&gt;
+At 11:28 05.09.2002 -0400, you wrote:&lt;br&gt;
+&lt;blockquote type=cite class=cite cite&gt;How to have that variable working
+properly in PHP 4.2.2.&lt;br&gt;
+Is is working ok under Apache but I cannot find out how to get it
+working&lt;br&gt;
+with Xitami. All the other such variables are ok when I execute
+phpinfo().&lt;br&gt;
+I would need this one working and I tried a lot of changes in Xitami
+cfg&lt;br&gt;
+files and the php.ini file as well.&lt;br&gt;
+Thanks for your help&lt;br&gt;
+JPSmith&lt;br&gt;&lt;br&gt;
+--&lt;br&gt;
+Xitami Users Mailing List -- For Xitami support&lt;br&gt;
+To unsubscribe:
+&lt;a href=&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A> eudora=&quot;autourl&quot;&gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami</a">http://lists.xitami.org/mailman/listinfo/xitami&lt;/a</A>&gt;
+&lt;/blockquote&gt;&lt;/html&gt;
+
+--=====================_27842785==_.ALT--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003927.html">[Xitami] PHP_SELF problem
+</A></li>
+	<LI> Next message: <A HREF="003930.html">[Xitami] PHP_SELF problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3928">[ date ]</a>
+              <a href="thread.html#3928">[ thread ]</a>
+              <a href="subject.html#3928">[ subject ]</a>
+              <a href="author.html#3928">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

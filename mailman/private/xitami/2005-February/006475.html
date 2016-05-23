@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ftp: revisited
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006473.html">
+   <LINK REL="Next"  HREF="006484.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ftp: revisited
+   </H1>
+    <B>Alex Barna
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ftp: revisited">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 02 Feb 2005 20:24:55 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006473.html">[Xitami] ftp: revisited
+</A></li>
+        <LI> Next message: <A HREF="006484.html">[Xitami] ftp: revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6475">[ date ]</a>
+              <a href="thread.html#6475">[ thread ]</a>
+              <a href="subject.html#6475">[ subject ]</a>
+              <a href="author.html#6475">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi  Johannes,
+
+Johannes Prost wrote:
+
+&gt;<i>  Hello Alex,
+</I>&gt;<i>
+</I>&gt;<i>  you need to create 2 files. You can do so through the GUI or just
+</I>&gt;<i>  edit the file directly. The files are ftpdirs.aut and ftpusers.aut
+</I>&gt;<i>  In the file ftpdirs.aut you name the directories you want to be
+</I>&gt;<i>  accessed by ftp or browser from the users you define .
+</I>&gt;<i>  Here an example entry
+</I>
+&gt;<i>  [../webpages/dirname] username = &quot;*&quot;
+</I>&gt;<i>
+</I>&gt;<i>  [dirname] username = &quot;P&quot; anonymus = &quot;G&quot; Between the &quot; &quot; you have to
+</I>&gt;<i>  define the access right. Make sure you have a &quot;space&quot; between = and &quot;
+</I>&gt;<i>  For anyone to download you can use anonymus = &quot;G&quot; as username and
+</I>&gt;<i>  user right for this particular directory.
+</I>
+Ok, those files exist. ftpdirs.aut currently reads;
+[]
+    Admin=*
+
+I just want to use the pub directory &amp;  if I understand what xitami &amp; 
+you said, if I want to allow uploads to the default <A HREF="ftp://myswbsite">ftp://myswbsite</A>  pub 
+directory, could I just change ftpdirs.aut to;
+
+[pub]
+       anonymous= &quot;G&quot;
+[pub]
+       username = &quot;GP&quot;
+
+username being the name of the person I want to allow to upload ?  
+Would I need to add another;
+
+[pub]
+       username = &quot;GP&quot;
+
+if I were to allow other people to upload.
+
+&gt;<i>  For the second file ftpusers.aut it would look as follows. In this
+</I>&gt;<i>  file you define the users right to connect, the root (dir),
+</I>&gt;<i>  password... Here the sample [username] Access = &quot;P&quot; Aliases = &quot;0&quot;
+</I>&gt;<i>  Hard-quota = &quot;&quot; Password = &quot;whatever-you-want&quot; Pipe = &quot;&quot; Root =
+</I>&gt;<i>  &quot;dirname&quot; Soft-quota = &quot;&quot; Use-quotas = &quot;0&quot;
+</I>&gt;<i>
+</I>&gt;<i>  For your example you would have to create 2 entries for the same
+</I>&gt;<i>  root; one entry for the user ( username) and one entry for the
+</I>&gt;<i>  visitors (anonymus) who should be able to ONLY download, as I
+</I>&gt;<i>  understood correct. For the user Access = &quot;P&quot; For the visitor Access
+</I>&gt;<i>  = &quot;G&quot; Both entries would have the same root = &quot;dirname&quot;
+</I>&gt;<i>
+</I>&gt;<i>  The directories which you want to create don't have to be in \ftproot
+</I>&gt;<i>  . I have, as example, set \webpages with its directories for the
+</I>&gt;<i>  virtual domains to access by ftp only for myself. If I'm correct,
+</I>&gt;<i>  xitami finds the way to the correct directory mainly through the
+</I>&gt;<i>  username / directory entries in ftpdirs.aut
+</I>
+The ftpusers.aut file currently contains;
+
+[Admin]
+access=GPDMR
+password=-
+root=&quot;&quot;
+use-Quotas=0 # Enforce quotas per user
+
+[Anonymous]
+access=G
+password=*
+root=pub
+
+[Ftp]
+access=G
+password=*
+root=pub
+
+[Guest]
+access=G
+password=&quot;&quot;
+root=pub
+
+[Upload]
+access=P
+password=xxxxxxxx
+root=pub
+use-quotas=0
+soft-quota=1.0 # Warnings above 4 Mbytes
+hard-quota=2.0 # Blocks above 5 Mbytes
+
+I have no need of upload or download quotas so would I keep that at 0 ?
+Couldn't I just use this file with the changes I made here to password &amp; 
+root??
+
+Thanks,
+Alex,
+
+&gt;<i>  I hope this description is clear enough.If not, let me know and I
+</I>&gt;<i>  will try to explain it better.
+</I>&gt;<i>
+</I>&gt;<i>  2 Feb 2005 um 13:11 hat Alex Barna geschrieben:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Windows XP, Xitami 2.5c1 5MBS cable connection.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I haven't used the ftp part of xitami &amp; had it set to o off.. I now
+</I>&gt;<i> &gt; have a need to use it &amp; need to set it to allow a friend to upload
+</I>&gt;<i> &gt; a 5mb file so others can download it.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I reset defaults.cfg to, [Ftp] Enabled = &quot;1&quot; &amp; can ftp to my site
+</I>&gt;<i> &gt; &amp; see this default ftp page:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Index of <A HREF="ftp://xx.xx.xxx.xx/">ftp://xx.xx.xxx.xx/</A> ------------------------- Up to higher
+</I>&gt;<i> &gt; level directory File: index.htm 1 KB 9/16/2002 12:00:00
+</I>&gt;<i> &gt; AM File: index.txt 1 KB 9/16/2002 12:00:00 AM
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; What do I need to add so: there is only one directory shown a
+</I>&gt;<i> &gt; person with a password I give them can upload to this directory
+</I>&gt;<i> &gt; with an ftp client anyone can download from this directory with a
+</I>&gt;<i> &gt; browser?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Alex,
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>  Johannes
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006473.html">[Xitami] ftp: revisited
+</A></li>
+	<LI> Next message: <A HREF="006484.html">[Xitami] ftp: revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6475">[ date ]</a>
+              <a href="thread.html#6475">[ thread ]</a>
+              <a href="subject.html#6475">[ subject ]</a>
+              <a href="author.html#6475">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

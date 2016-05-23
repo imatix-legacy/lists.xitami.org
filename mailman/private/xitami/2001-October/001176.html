@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001175.html">
+   <LINK REL="Next"  HREF="001177.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+   </H1>
+    <B>Jeff Hamblin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 15 Oct 2001 16:20:02 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001175.html">[Xitami] SysV init script
+</A></li>
+        <LI> Next message: <A HREF="001177.html">[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1176">[ date ]</a>
+              <a href="thread.html#1176">[ thread ]</a>
+              <a href="subject.html#1176">[ subject ]</a>
+              <a href="author.html#1176">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I'm trying to setup an NT4 System as an FTP Server for Xerox Docutech job
+files. We currently have a SunOS server, but need massive amounts of cheap
+disk space and have an existing NT system available.
+
+Running Xitami 2.4d9, I can get the DT (Docutech) to connect and login, but
+its LIST request is not handled by Xitami the same way as the Sun FTP
+server. I put Xitami in Debug mode to examine the requests. Then I used a
+command window to compare output from the offending command on NT and Sun.
+
+The DT is sending a list request as follows:
+ftp&gt; ls \dtf-tests\*\*Job.type
+200 Command okay
+150 Preparing to transfer ASCII file
+226 Closing data connection
+
+As you can see above, this returns nothing on Xitami.
+
+On the Sun I get the following output:
+ftp&gt; ls /dtf-tests/*/*Job.type
+200 PORT command successful.
+150 ASCII data connection for /bin/ls (192.168.0.3,2072) (0 bytes).
+/dtf-tests/test1/DocuJob.type
+/dtf-tests/test2/DocuJob.type
+/dtf-tests/test3/DocuJob.type
+/dtf-tests/test4/DocuJob.type
+...
+226 ASCII Transfer complete.
+
+The above list response is what the DT needs in order to recognize jobs on
+an FTP server.
+
+I assume this problem has to do with the wildcards in the path, because I
+can list the files on Xitami using a complete path. However, I have no
+control over the formatting of the DT list command. Is there a way to get
+Xitami to handle this kind of list request?
+
+
+- Jeff Hamblin
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001175.html">[Xitami] SysV init script
+</A></li>
+	<LI> Next message: <A HREF="001177.html">[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1176">[ date ]</a>
+              <a href="thread.html#1176">[ thread ]</a>
+              <a href="subject.html#1176">[ subject ]</a>
+              <a href="author.html#1176">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

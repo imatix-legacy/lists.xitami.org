@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running Xitami as a service under Win9x
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000111.html">
+   <LINK REL="Next"  HREF="000113.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running Xitami as a service under Win9x
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Running Xitami as a service under Win9x">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 08 Jun 2001 11:19:49 GMT</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000111.html">[Xitami] Setting Alias's
+</A></li>
+        <LI> Next message: <A HREF="000113.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#112">[ date ]</a>
+              <a href="thread.html#112">[ thread ]</a>
+              <a href="subject.html#112">[ subject ]</a>
+              <a href="author.html#112">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:42119@dsl.co.uk">42119@dsl.co.uk</A>&gt;
+   <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A> (Brian {Hamilton Kelly}) writes:
+
+&gt;<i> Then later, I saw that there IS a mention of running it as a Service
+</I>&gt;<i> under Win9x, oddly enough on the downloads page (I didn't read any
+</I>&gt;<i> further having once identified the package that I [thought] I wanted:-)
+</I>&gt;<i> 
+</I>&gt;<i> So today I fetched the console version, which has of course been updated
+</I>&gt;<i> since my FTP session of last week, so I got bc3224d9.exe.  According to
+</I>&gt;<i> the installation description &quot;The Xitami console version installation
+</I>&gt;<i> package asks whether you want to install it as a Win95 service&quot;.  SFAICS,
+</I>&gt;<i> it did NOT ask this question; neither did it create &quot;a small dispatcher,
+</I>&gt;<i> called &quot;C:\Services.bat&quot; which simply changes to the Xitami directory and
+</I>&gt;<i> then runs Xitami&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Has the installation procedure been botched since those words were
+</I>&gt;<i> written?  Or has this part never been written after all?
+</I>&gt;<i> 
+</I>&gt;<i> Can I manually create the requisite batch file, and install the registry
+</I>&gt;<i> key manually (I'm quite happy with registry hacking)?
+</I>
+Sadly, I've seen no response to this query :-(
+
+In the interim, I've written a batch file [C:\Xitami\Service.bat] of my
+own, containing:
+    C:
+    cd \Xitami
+    XiDOS32 -s
+and have edited the relevant [...\RunServices] registry key to have an
+additional entry:
+    &quot;Xitami&quot; = &quot;C:\Xitami\Service.bat&quot;
+
+This works OK originally: the HTTP server starts running about the same
+time as the &quot;Login to Domain&quot; dialogue box appears on the screen.  (I had
+to edit the job's properties so that it started minimized, rather than
+having a blobby-great DOS-box on the screen.)
+
+The service continues to work happily also after a user has logged in for
+the first time.  However, when that user elects to &quot;Start -&gt; Shutdown -&gt;
+Close all programs and log in as a different user&quot; then the server
+process also gets killed.
+
+This isn't really very useful; surely after having been started with the
+-s switch[1] the process ought not to be a candidate for killing off on
+user &quot;logout&quot;?
+
+I'm suspecting that we shall have to revert to the bw (Windows version)
+and just be content with its being started through the Run key for each
+login, and then not have the user logout.
+
+&gt;<i> As an extension, would it be possible to start the iASP admin and servlet
+</I>&gt;<i> processes from within the same batch file as well?
+</I>
+Any information and hints on this aspect would also be appreciated; with
+these Java processes, one *can't* logout without running the associated
+&quot;Stop&quot; programs.
+
+[1] Yes, it is lower-case, and yes, the box reports &quot;Moving into background&quot;.
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000111.html">[Xitami] Setting Alias's
+</A></li>
+	<LI> Next message: <A HREF="000113.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#112">[ date ]</a>
+              <a href="thread.html#112">[ thread ]</a>
+              <a href="subject.html#112">[ subject ]</a>
+              <a href="author.html#112">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

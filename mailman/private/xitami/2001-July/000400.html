@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Off Topic Perl Programmer
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000395.html">
+   <LINK REL="Next"  HREF="000393.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Off Topic Perl Programmer
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Off Topic Perl Programmer">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 13 Jul 2001 18:19:36 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000395.html">[Xitami] Off Topic Perl Programmer
+</A></li>
+        <LI> Next message: <A HREF="000393.html">[Xitami] Virtual Hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#400">[ date ]</a>
+              <a href="thread.html#400">[ thread ]</a>
+              <a href="subject.html#400">[ subject ]</a>
+              <a href="author.html#400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 12:23 PM 7/13/01 -0700, you wrote:
+&gt;<i>Hi All,
+</I>&gt;<i>
+</I>&gt;<i>I need someone to take a perl script I have and make it so that
+</I>&gt;<i>I can pass form values to it. I know just about nothing when it
+</I>&gt;<i>comes to perl thats why I was looking for someone to help.
+</I>&gt;<i>
+</I>&gt;<i>Anyone able to offer a hand? It's very very simple. I can do it
+</I>&gt;<i>in cold fusion but not in Perl. Thanks,
+</I>&gt;<i>
+</I>&gt;<i>david
+</I>
+The following two functions will extract each value from STDIN (where form
+values are placed) and put them into a hash.  Just use '&amp;ParseForm();'
+(without the quotes) to parse the data into the 'values' hash, then you
+access your form variables using '$values{FormName}' to access each
+individual element of the form data.
+
+sub ParseForm
+{
+  local ($fields, $name, $value, $data);
+
+  read(STDIN, $data, $ENV{&quot;CONTENT_LENGTH&quot;});
+  @fields = split(/&amp;/, $data);
+
+  foreach $item (@fields)
+  {
+    ($name, $value) = split(/=/, $item);
+    $name = &amp;UnescapeString($name);
+    $value = &amp;UnescapeString($value);
+    $values{$name} = $value;
+  }
+}
+
+sub UnescapeString
+{
+  local ($s) = $_[0];
+  local ($pos, $ascii);
+
+  $s =~ s/\+/ /g;       # Replace the + sign with spaces
+
+  $pos = 0;             # Replace %xx with hexadecimal
+  while (($pos = index($s, &quot;%&quot;, $pos)) != -1)
+  {
+    $ascii = hex(substr($s, $pos + 1, 2));
+    substr($s, $pos, 3) = pack(&quot;c&quot;, $ascii);
+  }
+  $s;
+}
+
+
+Hope that helps!
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000395.html">[Xitami] Off Topic Perl Programmer
+</A></li>
+	<LI> Next message: <A HREF="000393.html">[Xitami] Virtual Hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#400">[ date ]</a>
+              <a href="thread.html#400">[ thread ]</a>
+              <a href="subject.html#400">[ subject ]</a>
+              <a href="author.html#400">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

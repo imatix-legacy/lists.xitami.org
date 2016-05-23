@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami bug with relative redirects (Any working version for windows?)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003676.html">
+   <LINK REL="Next"  HREF="003677.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami bug with relative redirects (Any working version for windows?)
+   </H1>
+    <B>Jim Brown
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami bug with relative redirects (Any working version for windows?)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 15 Jul 2002 14:12:09 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003676.html">[Xitami] Elementary PHP/mySQL
+</A></li>
+        <LI> Next message: <A HREF="003677.html">[Xitami] Xitami bug with relative redirects (Any working
+ version for windows?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3674">[ date ]</a>
+              <a href="thread.html#3674">[ thread ]</a>
+              <a href="subject.html#3674">[ subject ]</a>
+              <a href="author.html#3674">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  Does anyone know of a version of Xitami where relative redirects (not
+  PHP) work as expected... ie. a relative redirect is actually relative???
+
+  I ask, as I've been testing a groupware product ;
+
+      <A HREF="http://www.neoint.com/ioffice2000/">http://www.neoint.com/ioffice2000/</A>
+
+  running on Xitami.. (which isn't a listed as supported server.. but I'd
+  prefer to not need to re-enable IIS... ;&gt;) but it relies on 302
+  redirects to executables, and due to a seeming dup of Francis's (though
+  the first char is not dropped in my case (running 2.4d9 NT service
+  verson) described issue below.. I'm stuck getting 404 errors... as it
+  redirects to the root dir and from there can't run a cgi executable...
+
+  THANX in advance...
+  
+
+------------- Original message text ------------------
+Received: Wednesday, February 20, 2002, at 7:27 AM
+From:     Francis Turner &lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+To:       Xitami list &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+CC:       
+Subject:  [Xitami] Xitami bug with relative redirects
+ 
+Using the standard CGI.pm you can (theoretically) redirect people to a 
+URl doing something like
+print $query-&gt;redirect(&quot;destination.url&quot;). This prints two lines to STDOUT
+
+Status: 302 Moved
+location: destination.url
+
+And normally you get a redirect from there.
+
+It works is my destination.url is a fully defined 
+<A HREF="http://host/path/file.html">http://host/path/file.html</A> or similar
+
+But I have found 2 bugs in this with Xitami when one uses a non absolute URL
+
+with a file only relative url (just file.html) it chops of the leading 
+character to produce a redirect to ile.html in the ROOT of the webserver 
+. i.e. the absolute URL is <A HREF="http://host/ile.html">http://host/ile.html</A>
+with a path and file relative url (/path/file.html) the redirect never 
+completes and xitami just sits there serving up nothing until you hit 
+cancel - conceivably there is a timeout after 120 seconds or whatever 
+but I didn't wait that long.
+
+This does not appear to occur with Apache which handles both relative 
+URLs just fine. Arguably this is a bug with the redirect generator as  
+RFC 2616 (http 1.1) section 14.30 states that only absolute URIs are 
+allowed for the location field, but it would be nice to see it 
+documented if not fixed.
+
+14.30 Location
+
+   The Location response-header field is used to redirect the recipient
+   to a location other than the Request-URI for completion of the
+   request or identification of a new resource. For 201 (Created)
+   responses, the Location is that of the new resource which was created
+   by the request. For 3xx responses, the location SHOULD indicate the
+   server's preferred URI for automatic redirection to the resource. The
+   field value consists of a single absolute URI.
+
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003676.html">[Xitami] Elementary PHP/mySQL
+</A></li>
+	<LI> Next message: <A HREF="003677.html">[Xitami] Xitami bug with relative redirects (Any working
+ version for windows?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3674">[ date ]</a>
+              <a href="thread.html#3674">[ thread ]</a>
+              <a href="subject.html#3674">[ subject ]</a>
+              <a href="author.html#3674">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Help please,  php not working.... please
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005969.html">
+   <LINK REL="Next"  HREF="005970.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Help please,  php not working.... please
+   </H1>
+    <B>Michael diLorenzo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Help please,  php not working.... please">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 30 May 2004 19:10:19 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005969.html">[Xitami] Help please,  php not working.... please
+</A></li>
+        <LI> Next message: <A HREF="005970.html">[Xitami] Help please,  php not working.... please
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5971">[ date ]</a>
+              <a href="thread.html#5971">[ thread ]</a>
+              <a href="subject.html#5971">[ subject ]</a>
+              <a href="author.html#5971">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Lee,
+
+Two other troubleshooting things you might try:
+
+1) Create a php file with an intentional error in it.  Do you get an error 
+message on the resulting web page?  That might help determine if Xitami is 
+even firing up the php compiler.  To create an even worse error, rename 
+php.exe to something else, and see what error you get.  If you don't get 
+an error THERE, then you know the server is not being properly instructed 
+on how to treat php files.
+
+2) Create a php file (either pure php or php/html mix), put it in the same 
+directory as your php.exe, and in a DOS prompt, type php.exe &lt;filename&gt;.  
+This will run the php compiler outside the web server environment.  The 
+php.exe should spit out the html code for your page, right there in the 
+DOS prompt.  That will tell you if php is working properly, regardless of 
+what server you use.
+
+You also might want to run Patrick's three line php file at the DOS prompt 
+too.  Send the output to an html file, and view that output on the 
+server.  For example, save the following three lines as phpinfo.php, and 
+put it in your PHP folder:
+
+&lt;?php
+phpinfo();
+?&gt;
+
+Then at the DOS prompt, run php.exe phpinfo.php &gt; phpinfo.html.  And then 
+view phpinfo.html with your web browser.  Compare that page with what you 
+get when you look at phpinfo.php from the server.
+
+Oh, and make sure you aren't using a .css file that turns your text to 
+white! (just kidding)
+
+Michael
+
+On Sat, 29 May 2004 14:49:52 -0700, Chestnut &lt;<A HREF="mailto:chestnut@willapabay.org">chestnut@willapabay.org</A>&gt; 
+wrote:
+
+&gt;<i> Another item I thought of later: use a php file with the following three
+</I>&gt;<i> lines in it
+</I>&gt;<i> &lt;?php
+</I>&gt;<i> phpinfo();
+</I>&gt;<i> ?&gt;
+</I>&gt;<i> Put in the root of the web server and use a browser to go to it.
+</I>&gt;<i> This gives (should) all of the infomation available to display on php and
+</I>&gt;<i> your server.
+</I>&gt;<i> Patrick
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;leegold&quot; &lt;<A HREF="mailto:leegold2@verizon.net">leegold2@verizon.net</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Saturday, May 29, 2004 7:41 AM
+</I>&gt;<i> Subject: Re: [Xitami] Help please, php not working.... please
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> Alasdair Macdonald wrote:
+</I>&gt;&gt;<i> &gt; You'll need to have set up your defaults.cfg file too. The most
+</I>&gt;<i> important
+</I>&gt;&gt;<i> &gt; lines in that will be these:
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;     .php=C:\PHP\php.exe
+</I>&gt;&gt;<i> &gt;     .php3=C:\PHP\php.exe
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; (naturally your path may be different). I have 97 lines in my
+</I>&gt;<i> defaults.cfg,
+</I>&gt;&gt;<i> &gt; and some virtual host .cfg files too. But the settings above are the
+</I>&gt;<i> first,
+</I>&gt;&gt;<i> &gt; and I think you should begin to see results once you've added them.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; Alasdair
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Tried all the suggest but no luck, still get a blank page.
+</I>&gt;&gt;<i> Any other ideas - this should be easy I wonder what is wrong?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+-- 
+Using M2, Opera's revolutionary e-mail client: <A HREF="http://www.opera.com/m2/">http://www.opera.com/m2/</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005969.html">[Xitami] Help please,  php not working.... please
+</A></li>
+	<LI> Next message: <A HREF="005970.html">[Xitami] Help please,  php not working.... please
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5971">[ date ]</a>
+              <a href="thread.html#5971">[ thread ]</a>
+              <a href="subject.html#5971">[ subject ]</a>
+              <a href="author.html#5971">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

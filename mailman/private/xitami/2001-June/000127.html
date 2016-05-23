@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running Xitami as a service under Win9x
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000126.html">
+   <LINK REL="Next"  HREF="000131.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running Xitami as a service under Win9x
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Running Xitami as a service under Win9x">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 08 Jun 2001 20:02:22 GMT</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000126.html">[Xitami] Web server not finding IP address
+</A></li>
+        <LI> Next message: <A HREF="000131.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#127">[ date ]</a>
+              <a href="thread.html#127">[ thread ]</a>
+              <a href="subject.html#127">[ subject ]</a>
+              <a href="author.html#127">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200106081055.WAA24910@pagoda.wgtn.cat-it.co.nz">200106081055.WAA24910@pagoda.wgtn.cat-it.co.nz</A>&gt;
+   Ewen McNeill writes:
+
+&gt;<i> This is largely because no one knows the answer :-)  Windows 95/98
+</I>&gt;<i> really are not intended for running services on them; any attempts to do
+</I>&gt;<i> otherwise are at best somewhat hopeful and as you have found.
+</I>&gt;<i> 
+</I>&gt;<i> Basically from what I've been able to find out any &quot;services&quot; you run
+</I>&gt;<i> under Windows 95 generally start when you log in, and stop when you log
+</I>&gt;<i> out, and there's relatively little you can do about that.  Apparently if
+</I>&gt;<i> you install the NT Service version (bs3224d9.exe) under Windows 95 it
+</I>&gt;<i> will register itself in basically the way that you have found.
+</I>
+If something is place in the registry key
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run], then
+it will be executed (asynchronously) when anyone logs in.  If placed in
+the [...\RunServices] key, then it will be executed when Windows first
+boots up.  (I make use of the RunServiceOnce key to execute some commands
+that configure each machine in the lab, when they've all been downloaded
+an identical Ghosted image: works brilliantly.)
+
+What I hadn't appreciated was that something started from the RunServices
+key is killed off, like any other program, when a user logs out.  And
+there is then no mechanism by which it will be restarted on the next log
+in.
+
+Daft, in my book.
+
+&gt;<i> Alternatively you can run the DOS console version in a minimised window
+</I>&gt;<i> as you have done (the &quot;-s&quot; switch doesn't do anything under DOS/Windows
+</I>&gt;<i> other than print out the message you saw; it does useful things only in
+</I>&gt;<i> Unix and OS/2).  However as you've found, it'll be stopped when the user
+</I>&gt;<i> logs out.
+</I>
+Indeed :-(
+
+I have now reverted to running the Win32 version rather than the console
+one, and it's fired up when someone logs in.
+
+Incidentally, and this is the main point of this posting, I found that
+the file bw3224d9.exe on the Belgian mirror site is corrupted.  Instead
+of transferring 700kB, it stops after 68kB (and obviously the resultant
+file is not executable: it complains &quot;Corrupt previous installation&quot; and
+exits).  I had to fetch this file from the USA site.
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000126.html">[Xitami] Web server not finding IP address
+</A></li>
+	<LI> Next message: <A HREF="000131.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#127">[ date ]</a>
+              <a href="thread.html#127">[ thread ]</a>
+              <a href="subject.html#127">[ subject ]</a>
+              <a href="author.html#127">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ip blocking
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006302.html">
+   <LINK REL="Next"  HREF="006305.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ip blocking
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ip blocking">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 1 Dec 2004 08:43:34 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006302.html">[Xitami] ip blocking
+</A></li>
+        <LI> Next message: <A HREF="006305.html">[Xitami] ip blocking
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6303">[ date ]</a>
+              <a href="thread.html#6303">[ thread ]</a>
+              <a href="subject.html#6303">[ subject ]</a>
+              <a href="author.html#6303">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Robert,
+
+You've been found!  Usually doesn't take long.
+
+Another trick to defeat these things is change your working HTTP port from
+80 to something other.  Since doing this, I've gotten ZERO DoS scans.  The
+trick is to set up a CNAME for your domain and forward your web page to the
+new port via this &quot;alias&quot;.
+
+Example:
+Say I want my HTTP port to set at 450.  This is done as an offset setting in
+defaults.cfg file.  Next, I set up CNAME with my DNS service (either at my
+domain registrar (e.g.NetSol) or a DNS service (e.g. ZoneEdit)).  Last, I
+forward
+          www.mydomain.com
+to
+        ww2.mydomain.com:450/index.html.
+
+and voila, no more DoS scanners.  I now only receive &quot;legitimate&quot; scans from
+robot hunters and search engines.  And these folk are generally identifiable
+in the logs.
+
+The standard &quot;48 to 72 hour&quot; propagation delay will apply the first time you
+do this due to the new &quot;domain.&quot;  Forwarding changes are instantaneous.
+
+If you use Virtual Domains, you will need to add the new ww2.mydomain.com to
+your domain list.  Unless you want it to go someplace different, point it to
+the same configuration file as www.mydomain.com.
+
+Happy serving,
+Charles
+
+----- Original Message -----
+From: &quot;Schmitt Scheubel&quot; &lt;<A HREF="mailto:rss@jean.kgw.tu-berlin.de">rss@jean.kgw.tu-berlin.de</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, November 30, 2004 11:30 PM
+Subject: [Xitami] ip blocking
+
+
+&gt;<i> Hi,
+</I>&gt;<i> can anyone tell me what i must do to block up ip-numbers.
+</I>&gt;<i> Reason
+</I>&gt;<i> last night a computer sends requests every seconds to my server over six
+</I>&gt;<i> hour , and I don't know what to do.
+</I>&gt;<i>
+</I>&gt;<i> greetings
+</I>&gt;<i> robert
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006302.html">[Xitami] ip blocking
+</A></li>
+	<LI> Next message: <A HREF="006305.html">[Xitami] ip blocking
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6303">[ date ]</a>
+              <a href="thread.html#6303">[ thread ]</a>
+              <a href="subject.html#6303">[ subject ]</a>
+              <a href="author.html#6303">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

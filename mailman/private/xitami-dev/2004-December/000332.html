@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Antwort: [Xitami-Dev] More bugs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000331.html">
+   <LINK REL="Next"  HREF="000333.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Antwort: [Xitami-Dev] More bugs
+   </H1>
+    <B>Justin Frim
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="Antwort: [Xitami-Dev] More bugs">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Dec 2004 04:07:26 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000331.html">Antwort: [Xitami-Dev] More bugs
+</A></li>
+        <LI> Next message: <A HREF="000333.html">[Xitami-Dev] XitamiUp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#332">[ date ]</a>
+              <a href="thread.html#332">[ thread ]</a>
+              <a href="subject.html#332">[ subject ]</a>
+              <a href="author.html#332">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+--------------040204080009000503020106
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Installing PHP under Xitami is quite easy.
+You have to install it as a CGI...  There's no plug-in module that can 
+be linked to Xitami.
+Personally, my suggestion is to install PHP to a directory which is NOT 
+accessible by the general public via the web server.  (ie. a directory 
+which is not in the HTTP directory tree).
+After installing it, edit PHP.INI (it will be located in the Windows 
+directory) so that the cgi.force_redirect option = 0.  (this is safe now 
+since PHP.EXE can not be accessed from the web)
+Then in the Filters section of the Xitami configuration, create a filter 
+for all files with a .PHP extension.  For the &quot;filter command or script&quot; 
+part, enter the full path and filename where you installed PHP.EXE.
+
+I still haven't tackled the MySQL yet, so I can't help you there.
+
+Good luck!
+
+--
+TTYL
+
+
+
+<A HREF="mailto:klaus-robert.schmalhorst@ivv.de">klaus-robert.schmalhorst@ivv.de</A> wrote:
+
+&gt;<i>
+</I>&gt;<i> Hallo Justin,
+</I>&gt;<i>
+</I>&gt;<i> I'd been wondering now for a long time how I can get a Windows-based 
+</I>&gt;<i> web server working on an Xitami basis. Until now I've been working 
+</I>&gt;<i> with the wide-spread Apache which to my opinion is a bit oversized for 
+</I>&gt;<i> Windows-based web server. What I need is an means to get PHP and 
+</I>&gt;<i> MySQL-databases working under Xitami. could you please give me some 
+</I>&gt;<i> links? Those from the Xitami-homepage don't help me much.
+</I>&gt;<i>
+</I>&gt;<i> Thanx
+</I>&gt;<i>
+</I>&gt;<i> K-R Schmalhorst
+</I>
+
+--------------040204080009000503020106
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta content=&quot;text/html;charset=ISO-8859-1&quot; http-equiv=&quot;Content-Type&quot;&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body bgcolor=&quot;#ffffff&quot; text=&quot;#000000&quot;&gt;
+Installing PHP under Xitami is quite easy.&lt;br&gt;
+You have to install it as a CGI...&amp;nbsp; There's no plug-in module that can
+be linked to Xitami.&lt;br&gt;
+Personally, my suggestion is to install PHP to a directory which is NOT
+accessible by the general public via the web server.&amp;nbsp; (ie. a directory
+which is not in the HTTP directory tree).&lt;br&gt;
+After installing it, edit PHP.INI (it will be located in the Windows
+directory) so that the cgi.force_redirect option = 0.&amp;nbsp; (this is safe
+now since PHP.EXE can not be accessed from the web)&lt;br&gt;
+Then in the Filters section of the Xitami configuration, create a
+filter for all files with a .PHP extension.&amp;nbsp; For the &quot;filter command or
+script&quot; part, enter the full path and filename where you installed
+PHP.EXE.&lt;br&gt;
+&lt;br&gt;
+I still haven't tackled the MySQL yet, so I can't help you there.&lt;br&gt;
+&lt;br&gt;
+Good luck!&lt;br&gt;
+&lt;br&gt;
+&lt;pre class=&quot;moz-signature&quot; cols=&quot;72&quot;&gt;--
+TTYL
+&lt;/pre&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;a class=&quot;moz-txt-link-abbreviated&quot; href=&quot;mailto:<A HREF="mailto:klaus-robert.schmalhorst@ivv.de">klaus-robert.schmalhorst@ivv.de</A>&quot;&gt;<A HREF="mailto:klaus-robert.schmalhorst@ivv.de">klaus-robert.schmalhorst@ivv.de</A>&lt;/a&gt; wrote:
+&lt;blockquote
+ cite=&quot;<A HREF="mailto:midOF5567F6E5.243999C6-ONC1256F6A.002B0E80-C1256F6A.002B878B@ivv-verbund.de">midOF5567F6E5.243999C6-ONC1256F6A.002B0E80-C1256F6A.002B878B@ivv-verbund.de</A>&quot;
+ type=&quot;cite&quot;&gt;&lt;br&gt;
+  &lt;font face=&quot;sans-serif&quot; size=&quot;2&quot;&gt;Hallo Justin,&lt;/font&gt;
+  &lt;br&gt;
+  &lt;br&gt;
+  &lt;font face=&quot;sans-serif&quot; size=&quot;2&quot;&gt;I'd been wondering now for a long
+time how I can get a Windows-based web server working on an Xitami
+basis. Until now I've been working with the wide-spread Apache which to
+my opinion is a bit oversized for Windows-based web server. What I need
+is an means to get PHP and MySQL-databases working under Xitami. could
+you please give me some links? Those from the Xitami-homepage don't
+help me much.&lt;/font&gt;
+  &lt;br&gt;
+  &lt;br&gt;
+  &lt;font face=&quot;sans-serif&quot; size=&quot;2&quot;&gt;Thanx&lt;/font&gt;
+  &lt;br&gt;
+  &lt;br&gt;
+  &lt;font face=&quot;sans-serif&quot; size=&quot;2&quot;&gt;K-R Schmalhorst&lt;/font&gt;
+  &lt;br&gt;
+&lt;/blockquote&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+--------------040204080009000503020106--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000331.html">Antwort: [Xitami-Dev] More bugs
+</A></li>
+	<LI> Next message: <A HREF="000333.html">[Xitami-Dev] XitamiUp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#332">[ date ]</a>
+              <a href="thread.html#332">[ thread ]</a>
+              <a href="subject.html#332">[ subject ]</a>
+              <a href="author.html#332">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

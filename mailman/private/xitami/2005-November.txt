@@ -1,0 +1,1060 @@
+From j.torrance at earthlink.net  Thu Nov  3 02:02:23 2005
+From: j.torrance at earthlink.net (John Torrance)
+Date: Thu Nov  3 02:01:53 2005
+Subject: [Xitami] Xitami and PHP
+Message-ID: <4369619F.6050007@earthlink.net>
+
+I run a simple little website and I want to grab the referer and store that in a database.  Everything I've programmed has worked (I've been in databases for 20 years, I am relatively new to PHP however).  Anyway, someone links to my site from a page with a url like:
+
+http://it.slashdot.org/article.pl?sid=05/08/21/1946254
+
+I see that exact URL in my web log as the referrer.  If, I check the HTTP_REFERER in PHP, it always shows as
+
+http://it.slashdot.org/article.pl 
+
+Everything past the ? is stripped.  In javascript, document.referrer is the comlpete URL. So, the browser appears to have access to the complete URL, the web server does too, but for some reason PHP does not.  Leads me to believe it's a config error, but I'll be darned if I can find it.  Any ideas?
+
+I have used PHPBB etc in the past with no problems.  I am not sure if this problem is in PHP or Xitami, but I thought I'd ask here.
+
+It's a Xitami 2.4d9, Win2K, PHP 4.3.1 if I recall correctly.
+
+Any help is appreciated.
+
+John Torrance
+
+From polson1 at adelphia.net  Fri Nov  4 08:11:40 2005
+From: polson1 at adelphia.net (patricko)
+Date: Fri Nov  4 08:13:45 2005
+Subject: [Norton AntiSpam] [Xitami] Xitami and PHP
+References: <4369619F.6050007@earthlink.net>
+Message-ID: <000801c5e10f$00f962f0$6401a8c0@pressmans>
+
+in your php.ini file you have to allow that ?...........
+just re-check the config
+
+----- Original Message ----- 
+From: "John Torrance" <j.torrance@earthlink.net>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, November 02, 2005 6:02 PM
+Subject: [Norton AntiSpam] [Xitami] Xitami and PHP
+
+
+|I run a simple little website and I want to grab the referer and store that 
+in a database.  Everything I've programmed has worked (I've been in 
+databases for 20 years, I am relatively new to PHP however).  Anyway, 
+someone links to my site from a page with a url like:
+|
+| http://it.slashdot.org/article.pl?sid=05/08/21/1946254
+|
+| I see that exact URL in my web log as the referrer.  If, I check the 
+HTTP_REFERER in PHP, it always shows as
+|
+| http://it.slashdot.org/article.pl
+|
+| Everything past the ? is stripped.  In javascript, document.referrer is 
+the comlpete URL. So, the browser appears to have access to the complete 
+URL, the web server does too, but for some reason PHP does not.  Leads me to 
+believe it's a config error, but I'll be darned if I can find it.  Any 
+ideas?
+|
+| I have used PHPBB etc in the past with no problems.  I am not sure if this 
+problem is in PHP or Xitami, but I thought I'd ask here.
+|
+| It's a Xitami 2.4d9, Win2K, PHP 4.3.1 if I recall correctly.
+|
+| Any help is appreciated.
+|
+| John Torrance
+|
+|
+| --
+| Xitami Users Mailing List -- For Xitami support
+| To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+| 
+
+
+From xitami at pastryworld.ca  Sun Nov  6 04:30:10 2005
+From: xitami at pastryworld.ca (xitami@pastryworld.ca)
+Date: Sun Nov  6 04:28:29 2005
+Subject: [Xitami] xitami & Forum/Bulletin board
+Message-ID: <.24.72.112.29.1131247810.squirrel@webmail.pastryworld.ca>
+
+Hi members,
+
+does anyone have experince with a bulletin board/forum and xitami ?
+In particular phpBB.if there is something others out, he let me know as
+well. I am trying to get this installed, but have no luck since 2 days so
+far. Don't know where to look anymore.
+Other php pages are displaying properly, but I can't get the installation
+going. I get only the 404 error.
+
+Any help would be appreciated.
+
+Johannes
+
+
+From todd at mindfire.com  Tue Nov  8 22:25:04 2005
+From: todd at mindfire.com (Todd Garland)
+Date: Tue Nov  8 22:25:08 2005
+Subject: [Xitami] xitami feature comparable to mod_rewrite
+Message-ID: <!~!UENERkVCMDkAAQACAAAAAAAAAAAAAAAAABgAAAAAAAAABa9WtSrjLEChC14X0Spw5CKUAAAQAAAAKeVfB7kwq0uqiYjUy4G04wEAAAAA@mindfire.com>
+
+Does Xitami have a feature or plug-in similar to mod_rewrite in Apache?
+
+ 
+
+- Todd
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20051108/a3e4fc05/attachment.html
+From David at AccessPC.com  Wed Nov  9 01:05:17 2005
+From: David at AccessPC.com (David Edick)
+Date: Wed Nov  9 01:05:50 2005
+Subject: [Xitami] PHP with Xitami
+Message-ID: <20051109000549.501CE1C109B0@sxpublic.imatix.net>
+
+How can I enable PHP with xitami for windows?
+
+Is there extra software needed?
+
+Thanks,
+
+/David
+
+
+From mw at 9000.org  Wed Nov  9 01:22:50 2005
+From: mw at 9000.org (Magnus Wedberg)
+Date: Wed Nov  9 01:23:16 2005
+Subject: [Xitami] PHP with Xitami
+In-Reply-To: <20051109000549.501CE1C109B0@sxpublic.imatix.net>
+Message-ID: <43714F6A.9578.2C8E5B8@mw.9000.org>
+
+> How can I enable PHP with xitami for windows?
+
+Generally, running the php setup .exe should configure Xitami 
+automagically.
+
+> Is there extra software needed?
+
+No. If the setup program doesn't work, try adding these lines under 
+the indicated headers to your Xitami defaults.cfg file:
+
+
+[Filter]
+    .php=D:\\php\\php.exe
+
+[Server]
+    Default1=index.php
+
+
+(replace with your path, and you may want the index.php to have 
+another name or be Default2 or so -- naturally, the number indicates 
+the order in which the server is looking for default documents) 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From xitami at pastryworld.ca  Wed Nov  9 02:13:11 2005
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Wed Nov  9 02:11:04 2005
+Subject: [Xitami] PHP with Xitami
+In-Reply-To: <43714F6A.9578.2C8E5B8@mw.9000.org>
+References: <20051109000549.501CE1C109B0@sxpublic.imatix.net>
+	<43714F6A.9578.2C8E5B8@mw.9000.org>
+Message-ID: <.24.72.112.29.1131498791.squirrel@webmail.pastryworld.ca>
+
+Hello David,
+
+take a look below for my comment
+
+>> How can I enable PHP with xitami for windows?
+>
+> Generally, running the php setup .exe should configure Xitami
+> automagically.
+>
+>> Is there extra software needed?
+>
+> No. If the setup program doesn't work, try adding these lines under
+> the indicated headers to your Xitami defaults.cfg file:
+>
+>
+> [Filter]
+>     .php=D:\\php\\php.exe
+>
+
+I couldn't get php running with back slashes, single or double.
+For me to get it working, I had to use forward slashes, like
+    .php=D:/php/php.exe
+ Xitami 2.5c2 php 4.3.11
+
+I was stuck for  a few days and found this info by chance as a comment
+on one of the php help sites.
+
+> [Server]
+>     Default1=index.php
+>
+>
+> (replace with your path, and you may want the index.php to have
+> another name or be Default2 or so -- naturally, the number indicates
+> the order in which the server is looking for default documents)
+>
+> --
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From mw at 9000.org  Wed Nov  9 09:47:54 2005
+From: mw at 9000.org (Magnus Wedberg)
+Date: Wed Nov  9 09:48:45 2005
+Subject: [Xitami] PHP with Xitami
+In-Reply-To: <.24.72.112.29.1131498791.squirrel@webmail.pastryworld.ca>
+References: <43714F6A.9578.2C8E5B8@mw.9000.org>
+Message-ID: <4371C5CA.15629.1DEA5B@mw.9000.org>
+
+> I couldn't get php running with back slashes, single or double.
+> For me to get it working, I had to use forward slashes, like
+>     .php=D:/php/php.exe
+>  Xitami 2.5c2 php 4.3.11
+> 
+> I was stuck for  a few days and found this info by chance as a comment
+> on one of the php help sites.
+
+Maybe a 2.5 bug / undocumented change? I run 2.4... 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From francis.turner at gmail.com  Wed Nov  9 12:56:43 2005
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Nov  9 12:56:46 2005
+Subject: [Xitami] xitami feature comparable to mod_rewrite
+In-Reply-To: <!~!UENERkVCMDkAAQACAAAAAAAAAAAAAAAAABgAAAAAAAAABa9WtSrjLEChC14X0Spw5CKUAAAQAAAAKeVfB7kwq0uqiYjUy4G04wEAAAAA@mindfire.com>
+References: <!~!UENERkVCMDkAAQACAAAAAAAAAAAAAAAAABgAAAAAAAAABa9WtSrjLEChC14X0Spw5CKUAAAQAAAAKeVfB7kwq0uqiYjUy4G04wEAAAAA@mindfire.com>
+Message-ID: <f83609d50511090356m67c7004w418e771890047e77@mail.gmail.com>
+
+No
+On 11/8/05, Todd Garland <todd@mindfire.com> wrote:
+>
+>
+>
+> Does Xitami have a feature or plug-in similar to mod_rewrite in Apache?
+>
+>
+>
+> - Todd
+>
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From ron at miplanet.net  Fri Nov 11 07:26:59 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Fri Nov 11 07:26:26 2005
+Subject: [Xitami] List Admim
+In-Reply-To: <4371C5CA.15629.1DEA5B@mw.9000.org>
+Message-ID: <000501c5e688$ec5e2220$0201a8c0@ronscomputer>
+
+Could you please change my email address from ron@miplanet.net to
+ron1@miplanet.net. 
+
+Thank you
+
+Ron 
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.362 / Virus Database: 267.12.8/165 - Release Date:
+11/9/2005
+ 
+
+From a-v-a-t-a-r at gmx.net  Fri Nov 18 10:39:52 2005
+From: a-v-a-t-a-r at gmx.net (Andreas)
+Date: Fri Nov 18 10:39:53 2005
+Subject: [Xitami] Bug: Xitami aliases vs. PHP $_POST, $_GET, $_REQUEST
+Message-ID: <437DA168.5070304@gmx.net>
+
+Hi.
+
+Using aliases (alias-target on different drive than xitami),
+
+$_POST, $_GET, $_REQUEST globals stay empty.
+
+If I put the same file into Xitami's webpages directory, it works.
+
+I tried with PHP4 and PHP 5.0.4, 5.0.5.
+
+(The only workaround for me up to now are NTFS junctions.)
+
+Thanks for any help, regards,
+Andreas
+
+From maurilio.longo at libero.it  Tue Nov 22 15:31:32 2005
+From: maurilio.longo at libero.it (Maurilio Longo)
+Date: Tue Nov 22 15:31:54 2005
+Subject: [Xitami] corrupted downloads.
+References: <001401c5d0eb$abc16f40$7200a90a@org.cnib.ca>
+	<6.1.0.6.0.20051014142210.01d7a3e0@mail.abccom.bc.ca>
+Message-ID: <43832BC3.18059AC2@libero.it>
+
+Reg,
+
+the same problem here with open xitami 2.5/c2 when doing an http download of a
+few megabytes file, it stops after some 150kbs.
+
+Any idea anyone?
+
+regards.
+
+
+Reg ha scritto:
+
+> I don't know if anyone knows the answer for that one Jim. I have the same
+> problem downloading files from the Xitami server itself. I have asked about
+> it before with no responses.
+>
+> At 11:18 AM 10/14/2005, you wrote:
+>
+> >Hi Gang:
+> >
+> >I've asked this question before; however, I received no response.
+> >
+> >For some reason, many people who use Internet Explorer  to download from
+> >my Xitami FTP server are receiving corrupted files. There seems to be no
+> >problem for those using other FTP clients.
+> >
+> >Any help would be appreciated all over the place.
+> >
+> >Cheers
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >No virus found in this incoming message.
+> >Checked by AVG Anti-Virus.
+> >Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 10/14/2005
+>
+> --
+> No virus found in this outgoing message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 10/14/2005
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+--
+ __________
+|  |  | |__| Maurilio Longo
+|_|_|_|____| farmaconsult s.r.l.
+
+
+From xitami at pastryworld.ca  Tue Nov 22 15:43:28 2005
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Tue Nov 22 15:44:05 2005
+Subject: [Xitami] corrupted downloads.
+In-Reply-To: <43832BC3.18059AC2@libero.it>
+Message-ID: <4382DA30.8004.524D15@localhost>
+
+He Maurilio,
+
+I just tried it and didn't had a problem here. Had this in the past too, but just started a 
+second time and over wrote the first try with that 150kb and it was proper.
+Will sent you off list the file.
+
+> Reg,
+> 
+> the same problem here with open xitami 2.5/c2 when doing an http download of a
+> few megabytes file, it stops after some 150kbs.
+> 
+> Any idea anyone?
+> 
+> regards.
+> 
+> 
+> Reg ha scritto:
+> 
+> > I don't know if anyone knows the answer for that one Jim. I have the same
+> > problem downloading files from the Xitami server itself. I have asked about
+> > it before with no responses.
+> >
+> > At 11:18 AM 10/14/2005, you wrote:
+> >
+> > >Hi Gang:
+> > >
+> > >I've asked this question before; however, I received no response.
+> > >
+> > >For some reason, many people who use Internet Explorer  to download from
+> > >my Xitami FTP server are receiving corrupted files. There seems to be no
+> > >problem for those using other FTP clients.
+> > >
+> > >Any help would be appreciated all over the place.
+> > >
+> > >Cheers
+> > >
+> > >--
+> > >Xitami Users Mailing List -- For Xitami support
+> > >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> > >No virus found in this incoming message.
+> > >Checked by AVG Anti-Virus.
+> > >Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 10/14/2005
+> >
+> > --
+> > No virus found in this outgoing message.
+> > Checked by AVG Anti-Virus.
+> > Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 10/14/2005
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+> --
+>  __________
+> |  |  | |__| Maurilio Longo
+> |_|_|_|____| farmaconsult s.r.l.
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+From paulo.silva at orgaman.com  Tue Nov 22 15:53:21 2005
+From: paulo.silva at orgaman.com (Paulo Silva)
+Date: Tue Nov 22 15:55:36 2005
+Subject: [Xitami] corrupted downloads.
+References: <001401c5d0eb$abc16f40$7200a90a@org.cnib.ca><6.1.0.6.0.20051014142210.01d7a3e0@mail.abccom.bc.ca>
+	<43832BC3.18059AC2@libero.it>
+Message-ID: <007701c5ef74$7b936830$0302a8c0@pcplon01>
+
+I had the same problem and i could never solve it.
+So i decided to use quick&easy ftp server, that is free.
+Not a great server but it's enough for what i need. But i'm still interested
+in knowing how to solve this problem.
+
+
+
+----- Original Message ----- 
+From: "Maurilio Longo" <maurilio.longo@libero.it>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Tuesday, November 22, 2005 3:31 PM
+Subject: Re: [Xitami] corrupted downloads.
+
+
+> Reg,
+>
+> the same problem here with open xitami 2.5/c2 when doing an http download
+of a
+> few megabytes file, it stops after some 150kbs.
+>
+> Any idea anyone?
+>
+> regards.
+>
+>
+> Reg ha scritto:
+>
+> > I don't know if anyone knows the answer for that one Jim. I have the
+same
+> > problem downloading files from the Xitami server itself. I have asked
+about
+> > it before with no responses.
+> >
+> > At 11:18 AM 10/14/2005, you wrote:
+> >
+> > >Hi Gang:
+> > >
+> > >I've asked this question before; however, I received no response.
+> > >
+> > >For some reason, many people who use Internet Explorer  to download
+from
+> > >my Xitami FTP server are receiving corrupted files. There seems to be
+no
+> > >problem for those using other FTP clients.
+> > >
+> > >Any help would be appreciated all over the place.
+> > >
+> > >Cheers
+> > >
+> > >--
+> > >Xitami Users Mailing List -- For Xitami support
+> > >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> > >No virus found in this incoming message.
+> > >Checked by AVG Anti-Virus.
+> > >Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date:
+10/14/2005
+> >
+> > --
+> > No virus found in this outgoing message.
+> > Checked by AVG Anti-Virus.
+> > Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date:
+10/14/2005
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> --
+>  __________
+> |  |  | |__| Maurilio Longo
+> |_|_|_|____| farmaconsult s.r.l.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+From maurilio.longo at libero.it  Tue Nov 22 18:05:59 2005
+From: maurilio.longo at libero.it (Maurilio Longo)
+Date: Tue Nov 22 18:06:18 2005
+Subject: [Xitami] corrupted downloads.
+References: <4382DA30.8004.524D15@localhost>
+Message-ID: <43834FF7.3E875459@libero.it>
+
+Johannes,
+
+thanks so much, there must have been a misunderstanding.
+
+I'm not saying I cannot download xitami package, but that, users cannot download files from my
+website.
+
+regards.
+
+Johannes Prost ha scritto:
+
+> He Maurilio,
+>
+> I just tried it and didn't had a problem here. Had this in the past too, but just started a
+> second time and over wrote the first try with that 150kb and it was proper.
+> Will sent you off list the file.
+>
+> > Reg,
+> >
+> > the same problem here with open xitami 2.5/c2 when doing an http download of a
+> > few megabytes file, it stops after some 150kbs.
+> >
+> > Any idea anyone?
+> >
+> > regards.
+> >
+> >
+> > Reg ha scritto:
+> >
+> > > I don't know if anyone knows the answer for that one Jim. I have the same
+> > > problem downloading files from the Xitami server itself. I have asked about
+> > > it before with no responses.
+> > >
+> > > At 11:18 AM 10/14/2005, you wrote:
+> > >
+> > > >Hi Gang:
+> > > >
+> > > >I've asked this question before; however, I received no response.
+> > > >
+> > > >For some reason, many people who use Internet Explorer  to download from
+> > > >my Xitami FTP server are receiving corrupted files. There seems to be no
+> > > >problem for those using other FTP clients.
+> > > >
+> > > >Any help would be appreciated all over the place.
+> > > >
+> > > >Cheers
+> > > >
+> > > >--
+> > > >Xitami Users Mailing List -- For Xitami support
+> > > >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > > >
+> > > >No virus found in this incoming message.
+> > > >Checked by AVG Anti-Virus.
+> > > >Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 10/14/2005
+> > >
+> > > --
+> > > No virus found in this outgoing message.
+> > > Checked by AVG Anti-Virus.
+> > > Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 10/14/2005
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> > --
+> >  __________
+> > |  |  | |__| Maurilio Longo
+> > |_|_|_|____| farmaconsult s.r.l.
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> Johannes
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+--
+ __________
+|  |  | |__| Maurilio Longo
+|_|_|_|____| farmaconsult s.r.l.
+
+
+From rolinger1 at hotmail.com  Tue Nov 22 18:08:42 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Tue Nov 22 18:08:32 2005
+Subject: [Xitami] corrupted downloads.
+References: <001401c5d0eb$abc16f40$7200a90a@org.cnib.ca><6.1.0.6.0.20051014142210.01d7a3e0@mail.abccom.bc.ca><43832BC3.18059AC2@libero.it>
+	<007701c5ef74$7b936830$0302a8c0@pcplon01>
+Message-ID: <BAY105-DAV8F8F63743D5BAE9FB890CF8520@phx.gbl>
+
+I recall having many Xitami FTP server problems several years ago and after
+seeking help the basic response I always got was that Xitami FTP was very
+buggy, that they weren't certain if they were ever going to make Xitami FTP
+fixes a priority and not to rely on it for production services.  I took
+their advice and sought other FTP server solutions.  Over the years I have
+seen many, many people inquire about the same problems I experienced and I
+don't ever recall anyone ever being satisfied with it.  It's best you find
+another FTP solution and leave Xitami as standalone web server.
+
+The web server seems to work great, however, recently I discovered a bug, or
+flaw, in it's design:
+
+The CGI engine buffers files being uploaded via http and prevents other
+mechanisms from controlling the upload STDIN buffer.  I wrote a perl script
+to by-pass the CGI buffering process so I could provide my users with an
+accurate upload progress meter.  The basic concept is to grab the total size
+of the upload prior to the upload occurring, then read in the STDIN buffer
+and make comparrisons to how much has been read in versus the known over all
+size of the upload.  Through each comparrison increment a progress meter
+that is in a pop up window.
+
+It took me weeks to figure out what was wrong with it until I installed
+Apache on my server and my scripts worked perfectly on the first try.
+Xitami's CGI engine doesn't release any buffer information until all of the
+file(s) have been loaded into the servers memory - then it allows those
+file(s) to be processed, error checked and written to the hard drive.  In
+order for my script to work properly it needs to grab information before the
+upload starts, but Xitami is somehow preventing that.
+
+
+
+----- Original Message ----- 
+From: "Paulo Silva" <paulo.silva@orgaman.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Tuesday, November 22, 2005 6:53 AM
+Subject: Re: [Xitami] corrupted downloads.
+
+
+> I had the same problem and i could never solve it.
+> So i decided to use quick&easy ftp server, that is free.
+> Not a great server but it's enough for what i need. But i'm still
+interested
+> in knowing how to solve this problem.
+>
+>
+>
+> ----- Original Message ----- 
+> From: "Maurilio Longo" <maurilio.longo@libero.it>
+> To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+> Sent: Tuesday, November 22, 2005 3:31 PM
+> Subject: Re: [Xitami] corrupted downloads.
+>
+>
+> > Reg,
+> >
+> > the same problem here with open xitami 2.5/c2 when doing an http
+download
+> of a
+> > few megabytes file, it stops after some 150kbs.
+> >
+> > Any idea anyone?
+> >
+> > regards.
+> >
+> >
+> > Reg ha scritto:
+> >
+> > > I don't know if anyone knows the answer for that one Jim. I have the
+> same
+> > > problem downloading files from the Xitami server itself. I have asked
+> about
+> > > it before with no responses.
+> > >
+> > > At 11:18 AM 10/14/2005, you wrote:
+> > >
+> > > >Hi Gang:
+> > > >
+> > > >I've asked this question before; however, I received no response.
+> > > >
+> > > >For some reason, many people who use Internet Explorer  to download
+> from
+> > > >my Xitami FTP server are receiving corrupted files. There seems to be
+> no
+> > > >problem for those using other FTP clients.
+> > > >
+> > > >Any help would be appreciated all over the place.
+> > > >
+> > > >Cheers
+> > > >
+> > > >--
+> > > >Xitami Users Mailing List -- For Xitami support
+> > > >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > > >
+> > > >No virus found in this incoming message.
+> > > >Checked by AVG Anti-Virus.
+> > > >Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date:
+> 10/14/2005
+> > >
+> > > --
+> > > No virus found in this outgoing message.
+> > > Checked by AVG Anti-Virus.
+> > > Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date:
+> 10/14/2005
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> > --
+> >  __________
+> > |  |  | |__| Maurilio Longo
+> > |_|_|_|____| farmaconsult s.r.l.
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+From rbeck at laketown.net  Tue Nov 22 19:46:33 2005
+From: rbeck at laketown.net (Reg)
+Date: Tue Nov 22 19:46:22 2005
+Subject: [Xitami] corrupted downloads.
+In-Reply-To: <43834FF7.3E875459@libero.it>
+References: <4382DA30.8004.524D15@localhost>
+ <43834FF7.3E875459@libero.it>
+Message-ID: <6.1.0.6.0.20051122104340.01e730b8@mail.abccom.bc.ca>
+
+Hello: What I was saying before is that I cannot download the Xitami 
+packages from THEIR own server which I imagine uses their own FTP, meaning 
+that the Xitami FTP is buggy and they haven't even fixed it for use on 
+their own site. So its no wonder your users cannot use it on your site.
+It always downloads a small portion of the file and ends.
+
+Reg
+
+
+t 09:05 AM 11/22/2005, you wrote:
+
+>Johannes,
+>
+>thanks so much, there must have been a misunderstanding.
+>
+>I'm not saying I cannot download xitami package, but that, users cannot 
+>download files from my
+>website.
+>
+>regards.
+>
+>Johannes Prost ha scritto:
+>
+> > He Maurilio,
+> >
+> > I just tried it and didn't had a problem here. Had this in the past 
+> too, but just started a
+> > second time and over wrote the first try with that 150kb and it was proper.
+> > Will sent you off list the file.
+> >
+> > > Reg,
+> > >
+> > > the same problem here with open xitami 2.5/c2 when doing an http 
+> download of a
+> > > few megabytes file, it stops after some 150kbs.
+> > >
+> > > Any idea anyone?
+> > >
+> > > regards.
+> > >
+> > >
+> > > Reg ha scritto:
+> > >
+> > > > I don't know if anyone knows the answer for that one Jim. I have 
+> the same
+> > > > problem downloading files from the Xitami server itself. I have 
+> asked about
+> > > > it before with no responses.
+> > > >
+> > > > At 11:18 AM 10/14/2005, you wrote:
+> > > >
+> > > > >Hi Gang:
+> > > > >
+> > > > >I've asked this question before; however, I received no response.
+> > > > >
+> > > > >For some reason, many people who use Internet Explorer  to 
+> download from
+> > > > >my Xitami FTP server are receiving corrupted files. There seems to 
+> be no
+> > > > >problem for those using other FTP clients.
+> > > > >
+> > > > >Any help would be appreciated all over the place.
+> > > > >
+> > > > >Cheers
+> > > > >
+> > > > >--
+> > > > >Xitami Users Mailing List -- For Xitami support
+> > > > >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > > > >
+> > > > >No virus found in this incoming message.
+> > > > >Checked by AVG Anti-Virus.
+> > > > >Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 
+> 10/14/2005
+> > > >
+> > > > --
+> > > > No virus found in this outgoing message.
+> > > > Checked by AVG Anti-Virus.
+> > > > Version: 7.0.344 / Virus Database: 267.12.0/134 - Release Date: 
+> 10/14/2005
+> > > >
+> > > > --
+> > > > Xitami Users Mailing List -- For Xitami support
+> > > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> > > --
+> > >  __________
+> > > |  |  | |__| Maurilio Longo
+> > > |_|_|_|____| farmaconsult s.r.l.
+> > >
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> > Johannes
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>--
+>  __________
+>|  |  | |__| Maurilio Longo
+>|_|_|_|____| farmaconsult s.r.l.
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>
+>--
+>No virus found in this incoming message.
+>Checked by AVG Anti-Virus.
+>Version: 7.1.362 / Virus Database: 267.13.5/177 - Release Date: 11/21/2005
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.1.362 / Virus Database: 267.13.5/177 - Release Date: 11/21/2005
+
+
+From xitami at pastryworld.ca  Tue Nov 22 19:54:54 2005
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Tue Nov 22 19:55:36 2005
+Subject: [Xitami] corrupted downloads.
+In-Reply-To: <6.1.0.6.0.20051122104340.01e730b8@mail.abccom.bc.ca>
+References: <43834FF7.3E875459@libero.it>
+Message-ID: <4383151E.29333.458A0B@localhost>
+
+okay, sorry for the misunderstanding. I had the same "buggy" experience myself with 
+the ftp server. Even sometimes updating my sites with a few files was a bit of a pain.
+I switch to FileZilla Server after long searching and I love it, 
+http://sourceforge.net/projects/filezilla.
+Easy to configure.
+
+Hope that helps.
+
+> Hello: What I was saying before is that I cannot download the Xitami 
+> packages from THEIR own server which I imagine uses their own FTP, meaning 
+> that the Xitami FTP is buggy and they haven't even fixed it for use on 
+> their own site. So its no wonder your users cannot use it on your site.
+> It always downloads a small portion of the file and ends.
+> 
+> Reg
+> 
+> 
+> t 09:05 AM 11/22/2005, you wrote:
+> 
+> >Johannes,
+> >
+> >thanks so much, there must have been a misunderstanding.
+> >
+> >I'm not saying I cannot download xitami package, but that, users cannot 
+> >download files from my
+> >website.
+> >
+> >regards.
+
+Johannes
+
+
+
+From ph at imatix.com  Tue Nov 22 23:00:39 2005
+From: ph at imatix.com (Pieter Hintjens)
+Date: Tue Nov 22 23:00:46 2005
+Subject: [Xitami] corrupted downloads.
+In-Reply-To: <6.1.0.6.0.20051122104340.01e730b8@mail.abccom.bc.ca>
+References: <4382DA30.8004.524D15@localhost> <43834FF7.3E875459@libero.it>
+	<6.1.0.6.0.20051122104340.01e730b8@mail.abccom.bc.ca>
+Message-ID: <5821ea240511221400p63c3a454p116e7dac1c986c40@mail.gmail.com>
+
+On 11/22/05, Reg <rbeck@laketown.net> wrote:
+
+> Hello: What I was saying before is that I cannot download the Xitami
+> packages from THEIR own server which I imagine uses their own FTP,
+
+Hmmm, the Xitami packages on xitami.com are downloaded via HTTP not
+FTP, and the downloads should work just fine.
+
+The Xitami FTP server is buggy, yes. Bad code, written by a sloppy
+programmer, and we've never had the time to fix it.  We have said some
+time ago that for production FTP usage, you will be wise to use a real
+FTP server.  Xitami's FTP is useful mainly for uploading files to web
+sites, and it works fine for this.
+
+For users having trouble downloading responses from Xitami, you should
+check whether you're using the last version.  There were some bugs in
+the past that caused CGI output to be truncated in some cases.
+
+I'm sorry not to be able to provide better news, such as updates and
+fixes.  Xitami has been frozen for some time.  We keep the web site
+and these lists up, and we make security patches, but the
+functionality is on ice until someone gives us or we find the money to
+make a new version.
+
+Cheers,
+--
+Pieter Hintjens
+iMatix Corporation
+
+From maurilio.longo at libero.it  Wed Nov 23 09:38:18 2005
+From: maurilio.longo at libero.it (Maurilio Longo)
+Date: Wed Nov 23 09:38:37 2005
+Subject: [Xitami] corrupted downloads.
+References: <4382DA30.8004.524D15@localhost> <43834FF7.3E875459@libero.it>
+	<6.1.0.6.0.20051122104340.01e730b8@mail.abccom.bc.ca>
+	<5821ea240511221400p63c3a454p116e7dac1c986c40@mail.gmail.com>
+Message-ID: <43842A79.8D200B1B@libero.it>
+
+Pieter Hintjens ha scritto:
+
+> On 11/22/05, Reg <rbeck@laketown.net> wrote:
+>
+> > Hello: What I was saying before is that I cannot download the Xitami
+> > packages from THEIR own server which I imagine uses their own FTP,
+>
+> Hmmm, the Xitami packages on xitami.com are downloaded via HTTP not
+> FTP, and the downloads should work just fine.
+>
+> The Xitami FTP server is buggy, yes. Bad code, written by a sloppy
+> programmer, and we've never had the time to fix it.  We have said some
+> time ago that for production FTP usage, you will be wise to use a real
+> FTP server.  Xitami's FTP is useful mainly for uploading files to web
+> sites, and it works fine for this.
+>
+> For users having trouble downloading responses from Xitami, you should
+> check whether you're using the last version.  There were some bugs in
+> the past that caused CGI output to be truncated in some cases.
+
+Yes, latest code, the problem seems to be bound to client speed, I mean, the
+same file can be downloaded without problems by clients coming from a fast
+connection (ADSL or more) but gets truncated if the client is coming from a
+dial-up, 56k modem, connection.
+
+> I'm sorry not to be able to provide better news, such as updates and
+> fixes.  Xitami has been frozen for some time.  We keep the web site
+> and these lists up, and we make security patches, but the
+> functionality is on ice until someone gives us or we find the money to
+> make a new version.
+
+Really sad.
+
+Best regards.
+
+Maurilio.
+
+>
+>
+> Cheers,
+> --
+> Pieter Hintjens
+> iMatix Corporation
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+--
+ __________
+|  |  | |__| Maurilio Longo
+|_|_|_|____| farmaconsult s.r.l.
+
+

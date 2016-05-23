@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Virtual Hosts Security Configuration Question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004899.html">
+   <LINK REL="Next"  HREF="004887.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Virtual Hosts Security Configuration Question
+   </H1>
+    <B>Steve Shervais
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Virtual Hosts Security Configuration Question">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 02 Apr 2003 09:31:51 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004899.html">[Xitami] Icons in Directory Lists
+</A></li>
+        <LI> Next message: <A HREF="004887.html">[Xitami] Why does my XITAMI keep on crashing ????
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4897">[ date ]</a>
+              <a href="thread.html#4897">[ thread ]</a>
+              <a href="subject.html#4897">[ subject ]</a>
+              <a href="author.html#4897">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Still fighting the VHosts problem.
+I have a number of VHs, of the general form :MyClassTeam01.ewu.edu
+I have created separate .aut and .cfg files for each VH.
+
+APPROACH 1
+In the defaults.cfg file, I say this:
+[Virtual-hosts]
+MyClassTeam01.ewu.edu = &quot;team01.cfg&quot;
+
+In team01.cfg, I say this:
+[Security]
+     Filename = &quot;team01.aut&quot;
+
+in team01.aut, I say:
+[/Setup]
+     team01=&quot;password&quot;
+
+HOWEVER,
+If you log in to MyClassTeam01.ewu.edu, Xitami ignores the security 
+settings and just lets you in.
+
+APPROACH 2
+If, in defaults.cfg I say:
+[Virtual-hosts]
+MyClassTeam01.ewu.edu = &quot;defaults.cfg&quot;
+
+[Security]
+     Filename = &quot;defaults.aut&quot;
+
+then in defaults.aut
+[Team01]
+     Team01= &quot;password&quot;
+
+it works.
+
+The trouble is, approach 1 is preferred because it puts user logs where the 
+student teams can get to them.
+
+Obviously a configuration problem.  I tried dropping the [Security] entry 
+in defaults.cfg, but that didn't help.
+Any idea how I can get approach 1 to work?
+
+
+
+Stephen Shervais, Ph.D.
+Assistant Professor, MIS
+College of Business and Public Administration
+Eastern Washington University
+Cheney, WA 99004
+
+509.359.4280
+
+You understand ONE, so you think you understand TWO.
+Because one and one are two.
+But you must also understand AND
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004899.html">[Xitami] Icons in Directory Lists
+</A></li>
+	<LI> Next message: <A HREF="004887.html">[Xitami] Why does my XITAMI keep on crashing ????
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4897">[ date ]</a>
+              <a href="thread.html#4897">[ thread ]</a>
+              <a href="subject.html#4897">[ subject ]</a>
+              <a href="author.html#4897">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

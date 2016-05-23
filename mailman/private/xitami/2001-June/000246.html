@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] How-to? Set up multiple web sites using a single static IP address
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000237.html">
+   <LINK REL="Next"  HREF="000247.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] How-to? Set up multiple web sites using a single static IP address
+   </H1>
+    <B>Andrew Tate
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] How-to? Set up multiple web sites using a single static IP address">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Jun 2001 17:51:04 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000237.html">[Xitami] How-to? Set up multiple web sites using a single static IP
+ address
+</A></li>
+        <LI> Next message: <A HREF="000247.html">[Xitami] How-to? Set up multiple web sites using a single static IP
+ address
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#246">[ date ]</a>
+              <a href="thread.html#246">[ thread ]</a>
+              <a href="subject.html#246">[ subject ]</a>
+              <a href="author.html#246">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Others have already replied and given some information.  The way the server decides on which site to serve up is the name given in the http request.  So for instance one of my servers is on ip 131.227.111.3 - you can try it and you get served up the  so called 'basehost.cfg' pages.  If you use www.cpe.surrey.ac.uk then it finds the string in the request and severs up the pages defined in www.cfg. 
+
+However, this only works in recent browsers and may not be supported with light wap phones etc - I don't know.  I have just tested this and Netscape 1.0 and 1.2 give the basehost pages for www.cpe.surrey.ac.uk but version 2.0 and onwards behave properly.  I guess newer browsers pass on the request string.  Not that it matters much these days but I have no access to lightwieght browsers in personal phones and organisers. 
+
+The suggestion to use the web admin page is good - once you have set one up then you can tweak and copy the actual file.  The main file to look at is:- 
+
+defaults.cfg
+
+and the lines that matter are like
+
+[Virtual-hosts]
+    Www.cpe.surrey.ac.uk=www.cfg
+    Www.tates.co.uk=tates.cfg
+
+
+as you see if you hit my server at 131.227.111.3 with the request string of www.cpe.surrey.ac.uk then it uses the www.cfg file for details of the web pages to serve up.  If however you use www.tates.co.uk then it looks in tates.cfg.  You can use any file name but these seemed sensible to me to keep it logical.  You can even have multiple domain names going to the same pages so you can have your own custom pages - &quot; web site under construction &quot;
+
+
+Now file tates.cfg has 
+
+
+[Accesslog]
+    Cycle=5
+    Cycle-arg=tates-acc%yy%mm%dd.log
+    Filename=tates-access.log
+    Format=CLF
+    Cycle-how=0
+
+[Alias]
+    Xitami=c:/xitami/webpages/xitami
+
+[Errorlog]
+    Cycle=5
+    Cycle-arg=tates-er%yy%mm%dd.log
+    Filename=tates-error.log
+    Format=CLFX
+    Translate=1
+
+[Rdns]
+    Recurse-lookups=0
+
+[Security]
+    Filename=tates.aut
+    Safepaths=0
+
+[Server]
+    Webpages=/xitami/websites/tates
+
+[Serverlog]
+    Enabled=0
+
+
+so you see I mirror the normal file but put tates in place of the standard server to create log files, access files etc etc.  You also need to create tates.aut to set the authorisations.  I also use \websites as the directory under which all my virtual websites live but leave the default \webpages that Xitami sets up for basehost and other bits.
+
+basehost.cfg is automatically picked up by xitami if there is no match hence it gets any other unknown dns name that points to the ip address or a pure ip address as in my example above. On my server I serve up a page all about the wonders of Xitami !!  The sample web pages that come with the distribution.
+
+I have typed this quickly and hope it helps - they may be a few mistakes I am no expert.  I believe there is another way of multiple hosting where you assign multiple ip addresses to the same machine and xitami serves up the pages dependant on this but I have never done this and it does not seem to fit so well with the sort of re-direction available from isp services who will set up a redirection page for you.  It also needs an operating system able to assign multiple ips to one ethernet card or you need multiple ethernet cards...  not so easy.
+
+
+Yours,
+
+Andy Tate.
+
+
+At 22:37 24/06/2001 EDT, you wrote:
+&gt;<i> Hi, 
+</I>&gt;<i> 
+</I>&gt;<i>This was talked about by Andrew Tate a while back, but I didn't quite follow  
+</I>&gt;<i> I have a single web site running fine, but I have purchased  
+</I>&gt;<i> I had it directed to my  
+</I>&gt;<i>DSL provider, who just pointed it to my same IP address, so now I get my same  
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i>I would like to be able to have it go to the correct website when I type in  
+</I>&gt;<i>the name, and I am pretty sure that I am supposed to use the VHOST stuff, but  
+</I>&gt;<i> I think  
+</I>&gt;<i>that Andrew Tate is running it that way now, so I gues what I would like to  
+</I>&gt;<i>have is him, or someone else who is already doing this to point out what they  
+</I>&gt;<i> Currently xitami is only aware of the one  
+</I>&gt;<i>website, although I have the directory structure already set u for the second  
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i>I am assuming that there will be a second set of *.CFG files for the second  
+</I>&gt;<i>site, but I'm stuck at how I get XITAMI to point to the correct site when I  
+</I>&gt;<i>enter the website name for the second (or first) website name. 
+</I>&gt;<i> 
+</I>&gt;<i>Hopefully I have stated the question clearly, but if I have not, please let  
+</I>&gt;<i>me know and I will try to clairify the question a little better. 
+</I>&gt;<i> 
+</I>&gt;<i>Brian 
+</I>
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000237.html">[Xitami] How-to? Set up multiple web sites using a single static IP
+ address
+</A></li>
+	<LI> Next message: <A HREF="000247.html">[Xitami] How-to? Set up multiple web sites using a single static IP
+ address
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#246">[ date ]</a>
+              <a href="thread.html#246">[ thread ]</a>
+              <a href="subject.html#246">[ subject ]</a>
+              <a href="author.html#246">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

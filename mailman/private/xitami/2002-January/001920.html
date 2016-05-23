@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Configuring your Web server to handle the DjVu MIME Types
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001921.html">
+   <LINK REL="Next"  HREF="001924.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Configuring your Web server to handle the DjVu MIME Types
+   </H1>
+    <B>Bob Paddock
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Configuring your Web server to handle the DjVu MIME Types">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 1 Jan 2002 08:24:37 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001921.html">[Xitami] Xitami And PHP
+</A></li>
+        <LI> Next message: <A HREF="001924.html">[Xitami] Configuring your Web server to handle the DjVu MIME Types
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1920">[ date ]</a>
+              <a href="thread.html#1920">[ thread ]</a>
+              <a href="subject.html#1920">[ subject ]</a>
+              <a href="author.html#1920">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>DjVu is a new file format becoming popular for posting scanned documents to 
+web sites.  For example one document I just dealt with was 520K as DjVu and 
+3.6 Megs as a PDF.
+
+Check out:
+<A HREF="http://www.djvuzone.org/">http://www.djvuzone.org/</A>
+
+<A HREF="http://any2web.djvuzone.org/">http://any2web.djvuzone.org/</A>
+
+<A HREF="http://openlib.djvuzone.org/">http://openlib.djvuzone.org/</A>
+
+Now my question is how do I get xitami to serve these DjVu file types?
+
+I added these to xitami.cfg:
+    #   Image MIME types
+    djv=image/x.djvu
+    djvu=image/x.djvu
+
+Can I put those in default.cfg or must mime types be in xitami.cfg?
+
+However they don't seem to show up when I restart the server from the /admin 
+screen.  I did back all the way up to the first screen like one of the 
+recent messages said to do.
+
+Xitami wants to download rather than serve the files.
+
+Info on how to do this for Apache:
+
+If you get garbled output when attempting to view DjVu documents
+from your web page using Netscape, it means your web server
+software is not configured to serve the DjVu mime.types.
+The bib2web server automatically includes a hidden file named .htaccess
+in the output TAR/ZIP file. This hidden file tells your web server
+to serve .djvu files with the image/x.djvu mime.type.
+However, certain types of web servers do not recognize this file,
+in which case you must ask your system administrator to
+configure your web server to serve DjVu files properly.
+
+If your Web server runs the Apache web server, please follow the instructions 
+below. If your server runs another Web server than Apache, please visit  
+<A HREF="http://djvuzone.org/support/tutorial/chapter-serving.html#mime2">http://djvuzone.org/support/tutorial/chapter-serving.html#mime2</A>
+for instructions on how to configure it to serve DjVu documents.
+
+Configuring Apache to serve DjVu documents.
+login as root
+ 
+Using a text editor, edit the file mimes.types file 
+     used by your Web server (generally /etc/mime.types) 
+     and add to following line to it:
+              image/x.djvu djvu djv
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001921.html">[Xitami] Xitami And PHP
+</A></li>
+	<LI> Next message: <A HREF="001924.html">[Xitami] Configuring your Web server to handle the DjVu MIME Types
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1920">[ date ]</a>
+              <a href="thread.html#1920">[ thread ]</a>
+              <a href="subject.html#1920">[ subject ]</a>
+              <a href="author.html#1920">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

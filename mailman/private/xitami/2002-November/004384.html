@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: Separate server processes for different subdomains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004383.html">
+   <LINK REL="Next"  HREF="004385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: Separate server processes for different subdomains
+   </H1>
+    <B>Utku Uzmen
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: Separate server processes for different subdomains">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 29 Nov 2002 01:45:20 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004383.html">[Xitami] Fw: what is this
+</A></li>
+        <LI> Next message: <A HREF="004385.html">[Xitami] Re: Separate server processes for different
+ subdomains
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4384">[ date ]</a>
+              <a href="thread.html#4384">[ thread ]</a>
+              <a href="subject.html#4384">[ subject ]</a>
+              <a href="author.html#4384">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Paul and Marc, thanks for your replies. Basically both of you has
+suggested the same idea, which I'm already using (you can try going to
+www.maddrive.com and mail.maddrive.com to see it for yourself, if you
+like). However I want this redirection to be all server-side and totally
+transparent to the user. The reason I want to do this is because I want
+my webmail server to be reached using WAP-enabled mobile phones (the
+webmail server supports WAP). But because it's running on port 800, the
+WAP gateways that I've tried can't access the server. If I can do the
+redirection transparently at the server, I think I'll be able to reach
+the webmail server. I'd really appreciate anything you might want to
+suggest.
+
+
+
+
+Utku Uzmen
+----------------------
+<A HREF="http://www.maddrive.com/">http://www.maddrive.com/</A>
+<A HREF="mailto:utku@maddrive.com">utku@maddrive.com</A>
+
+
+----- Original Message -----
+Date: Wed, 27 Nov 2002 16:56:01 -0500
+From: Paul Reid &lt;<A HREF="mailto:preid@rci.rutgers.edu">preid@rci.rutgers.edu</A>&gt;
+To: Utku Uzmen &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Subject: Re: [Xitami] Separate server processes for different subdomains
+Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+&gt;<i> Xitami running on port 80. I also have a web-mail server on the
+</I>&gt;<i> same computer running on port 800. I'm trying to set things up in
+</I>&gt;<i> such a way
+</I>
+The only easy way to do that is to put a click-link on your port-80
+main page: &lt;A HREF=&quot;<A HREF="http://mydomain.com:800"">http://mydomain.com:800&quot;</A>&gt;Webmail!&lt;/a&gt;
+
+If your main page loads quickly, this is one-click for the users.
+
+What -might- work slicker is a V-host main page that did a quick
+redirect. The HTML below seems to work for me (with your real URL).
+The user sees a black page with a link, but if the browser handles a
+meta-redirect (and if your server is quick) they hardly see it at
+all before your mail-page opens. If their browser doesn't take the
+hint, they click on &quot;Web-Mail&quot; and get there.
+
+&lt;HTML&gt;
+ &lt;HEAD&gt;
+  &lt;TITLE&gt;bouncing . . . .&lt;/TITLE&gt;
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;1; URL=<A HREF="http://mydomain.com:800"">http://mydomain.com:800&quot;</A>&gt;
+
+ &lt;/HEAD&gt;
+
+&lt;BODY bgcolor=&quot;#000000&quot;&gt;
+ &amp;nbsp;
+ &lt;p&gt;
+ &amp;nbsp;
+ &lt;p&gt;
+ &lt;TABLE cellpadding=&quot;10&quot; cellspacing=&quot;0&quot; align=&quot;center&quot; valign=&quot;center&quot;&gt;
+   &lt;TR align=&quot;center&quot;&gt;
+     &lt;TD width=&quot;100%&quot; align=&quot;center&quot; bgcolor=#E6E7E1&gt;
+Jump to &lt;a href=&quot;<A HREF="http://http://mydomain.com:800"">http://http://mydomain.com:800&quot;</A>&gt;Web-Mail&lt;/a&gt;
+       &lt;/TD&gt;
+   &lt;/TR&gt;
+ &lt;/TABLE&gt;
+
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+
+Otherwise it gets pretty messy.
+
+
+ -PRR
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004383.html">[Xitami] Fw: what is this
+</A></li>
+	<LI> Next message: <A HREF="004385.html">[Xitami] Re: Separate server processes for different
+ subdomains
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4384">[ date ]</a>
+              <a href="thread.html#4384">[ thread ]</a>
+              <a href="subject.html#4384">[ subject ]</a>
+              <a href="author.html#4384">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

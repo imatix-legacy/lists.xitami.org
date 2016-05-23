@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSL on xitami Pro
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005908.html">
+   <LINK REL="Next"  HREF="005910.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSL on xitami Pro
+   </H1>
+    <B>Dave Cole
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSL on xitami Pro">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 15 May 2004 09:24:32 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005908.html">[Xitami] SSL on xitami Pro
+</A></li>
+        <LI> Next message: <A HREF="005910.html">[Xitami] only localhost access for xitami - help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5909">[ date ]</a>
+              <a href="thread.html#5909">[ thread ]</a>
+              <a href="subject.html#5909">[ subject ]</a>
+              <a href="author.html#5909">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0038_01C43A5E.6E402190
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: 7bit
+
+Thanks For all the answers and suggestions. This is the proceadure I have
+decided on using.
+I use php and not perl but the end result is the same.
+
+  -----Original Message-----
+  From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Robert Gilbertson
+  Sent: Saturday, May 15, 2004 7:52 AM
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+  Subject: Re: [Xitami] SSL on xitami Pro
+
+
+  An easy way would be to get your server script to find out if it is using
+a secure connection, and if not, to feed your browser a simple page telling
+it to load the secure one instead.
+
+  An example of how to do this using perl is as follows:
+
+  Insert the following line into your script, somewhere before the script
+sends any info to the browser.
+  Immediately after any 'use' or require' statements is a good place.
+
+  If your secure port is not 443, change the number below.
+  #
+  if ($ENV{'SERVER_PORT'} ne '443') { &amp;redirectsecure; }
+  #
+
+  now insert the following procedure into the script, changing
+www.mysite.com to your own address (e.g.
+<A HREF="https://www.thesite.com/cgi-bin/page.pl">https://www.thesite.com/cgi-bin/page.pl</A>
+  #
+  print &quot;Content-type: text/html\n\n&quot;;
+  print &quot;This is the secure page&quot;;
+  sub redirectsecure {
+  print &quot;Content-type: text/html\n\n&quot;;
+  print &lt;&lt;&quot;EOF&quot;;
+  &lt;html&gt;
+  &lt;head&gt;
+  &lt;script language=&quot;JavaScript&quot;&gt;
+  window.location = &quot;<A HREF="https://www.mysite.com";">https://www.mysite.com&quot;;</A>
+  &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  EOF
+  exit;
+  }
+  #
+
+----------------------------------------------------------------------------
+--
+
+
+
+  ----- Original Message -----
+  From: &quot;Dave Cole&quot; &lt;<A HREF="mailto:dave@advancedzzz.com">dave@advancedzzz.com</A>&gt;
+  To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+  Sent: Tuesday, May 11, 2004 9:35 PM
+  Subject: [Xitami] SSL on xitami Pro
+
+
+  &gt; I have been a long time Xitami user, but now however I am at a impasse.
+  &gt; Perhaps I am overlooking something.
+  &gt; Here is my problem.
+  &gt; I have purchased Xitami Pro and installed it as per the instructions.
+  &gt; I have generated my private key and created a Temporary Untrusted
+  &gt; Certificate.
+  &gt; So far so Good.
+  &gt; When I type the address in as follows <A HREF="https://mysite.com">https://mysite.com</A> the security
+works
+  &gt; and the little lock icon lights up showing that I am using a secure
+  &gt; connection.
+  &gt; HOWEVER
+  &gt; If I type <A HREF="http://mysite.com">http://mysite.com</A> it still displays my wbsite in a non secure
+  &gt; connection.
+  &gt; How do I prevent this behavior?
+  &gt; How do I force secure connections only?
+  &gt; Thanks for answering.
+  &gt;
+  &gt;
+  &gt;
+  &gt;
+  &gt;
+  &gt; --
+  &gt; Xitami Users Mailing List -- For Xitami support
+  &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+------=_NextPart_000_0038_01C43A5E.6E402190
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2800.1400&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;DIV&gt;&lt;SPAN class=3D096232214-15052004&gt;&lt;FONT face=3DArial color=3D#0000ff =
+size=3D2&gt;Thanks=20
+For all the answers and suggestions. This is the proceadure I have =
+decided on=20
+using.&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=3D096232214-15052004&gt;&lt;FONT face=3DArial color=3D#0000ff =
+size=3D2&gt;I use=20
+php and not perl but the end result is the same.&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;SPAN class=3D096232214-15052004&gt;&lt;FONT face=3DArial color=3D#0000ff =
+
+size=3D2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE&gt;
+  &lt;DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft&gt;&lt;FONT =
+face=3DTahoma=20
+  size=3D2&gt;-----Original Message-----&lt;BR&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> =
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]&lt;B&gt;On=20
+  Behalf Of &lt;/B&gt;Robert Gilbertson&lt;BR&gt;&lt;B&gt;Sent:&lt;/B&gt; Saturday, May 15, 2004 =
+7:52=20
+  AM&lt;BR&gt;&lt;B&gt;To:&lt;/B&gt; <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;BR&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: =
+[Xitami] SSL=20
+  on xitami Pro&lt;BR&gt;&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;An easy way would be to get your =
+server script to=20
+  find out if it is using a secure connection, and if not, to feed your =
+browser=20
+  a simple page telling it to load the secure one instead.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;An example of how to do this using =
+perl is as=20
+  follows:&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Insert the following line into your =
+script,=20
+  somewhere before the script sends any info to the =
+browser.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Immediately after any 'use' or =
+require'=20
+  statements is a good place.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;If your secure port is not 443, =
+change the number=20
+  below.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#&lt;BR&gt;if ($ENV{'SERVER_PORT'} ne =
+'443') {=20
+  &amp;amp;redirectsecure; }&lt;BR&gt;#&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;now insert the following procedure =
+into the=20
+  script, changing www.mysite.com to your own address (e.g.=20
+  <A HREF="https://www.thesite.com/cgi-bin/page.pl</FONT">https://www.thesite.com/cgi-bin/page.pl&lt;/FONT</A>&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;print &quot;Content-type: =
+text/html\n\n&quot;;&lt;BR&gt;print=20
+  &quot;This is the secure page&quot;;&lt;BR&gt;sub redirectsecure {&lt;BR&gt;print =
+&quot;Content-type:=20
+  text/html\n\n&quot;;&lt;BR&gt;print=20
+  &amp;lt;&amp;lt;&quot;EOF&quot;;&lt;BR&gt;&amp;lt;html&amp;gt;&lt;BR&gt;&amp;lt;head&amp;gt;&lt;BR&gt;&amp;lt;script=20
+  language=3D&quot;JavaScript&quot;&amp;gt;&lt;BR&gt;window.location =3D=20
+  =
+&quot;<A HREF="https://www.mysite.com";<BR">https://www.mysite.com&quot;;&lt;BR</A>&gt;&amp;lt;/script&amp;gt;&lt;BR&gt;&amp;lt;/head&amp;gt;&lt;BR&gt;&amp;lt;body=
+&amp;gt;<i>&lt;BR&gt;&amp;lt;/body&amp;gt;&lt;BR&gt;&amp;lt;/html&amp;gt;&lt;BR&gt;EOF&lt;BR&gt;exit;&lt;BR&gt;}&lt;/FONT&gt;&lt;/DIV&gt;
+</I>  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;
+  &lt;HR&gt;
+  &lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;----- Original Message ----- &lt;/FONT&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;From: &quot;Dave Cole&quot; &amp;lt;&lt;/FONT&gt;&lt;A=20
+  href=3D&quot;mailto:<A HREF="mailto:dave@advancedzzz.com">dave@advancedzzz.com</A>&quot;&gt;&lt;FONT face=3DArial=20
+  size=3D2&gt;<A HREF="mailto:dave@advancedzzz.com">dave@advancedzzz.com</A>&lt;/FONT&gt;&lt;/A&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;To: &amp;lt;&lt;/FONT&gt;&lt;A=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;&lt;FONT face=3DArial=20
+  size=3D2&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/FONT&gt;&lt;/A&gt;&lt;FONT face=3DArial=20
+  size=3D2&gt;&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Sent: Tuesday, May 11, 2004 9:35 =
+PM&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Subject: [Xitami] SSL on xitami=20
+  Pro&lt;/FONT&gt;&lt;/DIV&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial&gt;&lt;BR&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;FONT =
+face=3DArial=20
+  size=3D2&gt;&amp;gt; I have been a long time Xitami user, but now however I =
+am at a=20
+  impasse.&lt;BR&gt;&amp;gt; Perhaps I am overlooking something.&lt;BR&gt;&amp;gt; Here is =
+my=20
+  problem.&lt;BR&gt;&amp;gt; I have purchased Xitami Pro and installed it as per =
+the=20
+  instructions.&lt;BR&gt;&amp;gt; I have generated my private key and created a =
+Temporary=20
+  Untrusted&lt;BR&gt;&amp;gt; Certificate.&lt;BR&gt;&amp;gt; So far so Good.&lt;BR&gt;&amp;gt; When I =
+type the=20
+  address in as follows &lt;/FONT&gt;&lt;A href=3D&quot;<A HREF="https://mysite.com"">https://mysite.com&quot;</A>&gt;&lt;FONT =
+face=3DArial=20
+  size=3D2&gt;<A HREF="https://mysite.com</FONT">https://mysite.com&lt;/FONT</A>&gt;&lt;/A&gt;&lt;FONT face=3DArial size=3D2&gt; the =
+security=20
+  works&lt;BR&gt;&amp;gt; and the little lock icon lights up showing that I am =
+using a=20
+  secure&lt;BR&gt;&amp;gt; connection.&lt;BR&gt;&amp;gt; HOWEVER&lt;BR&gt;&amp;gt; If I type &lt;/FONT&gt;&lt;A =
+
+  href=3D&quot;<A HREF="http://mysite.com"">http://mysite.com&quot;</A>&gt;&lt;FONT face=3DArial=20
+  size=3D2&gt;<A HREF="http://mysite.com</FONT">http://mysite.com&lt;/FONT</A>&gt;&lt;/A&gt;&lt;FONT face=3DArial size=3D2&gt; it =
+still displays=20
+  my wbsite in a non secure&lt;BR&gt;&amp;gt; connection.&lt;BR&gt;&amp;gt; How do I prevent =
+this=20
+  behavior?&lt;BR&gt;&amp;gt; How do I force secure connections only?&lt;BR&gt;&amp;gt; =
+Thanks for=20
+  answering.&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; =
+--&lt;BR&gt;&amp;gt;=20
+  Xitami Users Mailing List -- For Xitami support&lt;BR&gt;&amp;gt; To =
+unsubscribe:=20
+  &lt;/FONT&gt;&lt;A =
+href=3D&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;&lt;FONT=20
+  face=3DArial =
+size=3D2&gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami</FONT">http://lists.xitami.org/mailman/listinfo/xitami&lt;/FONT</A>&gt;&lt;/A&gt;=20
+&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0038_01C43A5E.6E402190--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005908.html">[Xitami] SSL on xitami Pro
+</A></li>
+	<LI> Next message: <A HREF="005910.html">[Xitami] only localhost access for xitami - help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5909">[ date ]</a>
+              <a href="thread.html#5909">[ thread ]</a>
+              <a href="subject.html#5909">[ subject ]</a>
+              <a href="author.html#5909">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

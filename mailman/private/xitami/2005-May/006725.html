@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006724.html">
+   <LINK REL="Next"  HREF="006727.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 11 May 2005 19:29:16 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006724.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006727.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6725">[ date ]</a>
+              <a href="thread.html#6725">[ thread ]</a>
+              <a href="subject.html#6725">[ subject ]</a>
+              <a href="author.html#6725">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11/05/2005 07:21 pm, Maurilio Longo wrote:
+
+&gt;<i> could you please point me in the right direction, I mean, which source file
+</I>&gt;<i> handles this? (then I'll try to understand what happens exactly).
+</I>
+OK.  It's smthttp.c, and smthttpl.c.  smthttp.c is built using Libero and has 
+an animation ability (you need Libero installed):
+
+ - lr -animate smthttp.l
+ - rebuild
+
+This shows what the HTTP agent in the server does when the request comes in.  
+You can test with a local (working) filtered file and an aliased (failing) 
+filtered file.  If there's a difference in the animation trace, that makes 
+the problem easy to find.
+
+Next, smthttpl.c does most of the hard work of handling a HTTP request.  There 
+are two or three main functions that check the type of file, resolve aliases, 
+etc.  You'd have to start with the code in smthttp.c and follow it as it 
+calls these functions (you can see which ones, they are printing the debug 
+statements you reported in your email).
+
+-Pieter
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006724.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006727.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6725">[ date ]</a>
+              <a href="thread.html#6725">[ thread ]</a>
+              <a href="subject.html#6725">[ subject ]</a>
+              <a href="author.html#6725">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Windows client: opening non-standard ports
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005176.html">
+   <LINK REL="Next"  HREF="005200.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Windows client: opening non-standard ports
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Windows client: opening non-standard ports">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 29 Jun 2003 21:27:28 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005176.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+        <LI> Next message: <A HREF="005200.html">[Xitami] Configuration
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5177">[ date ]</a>
+              <a href="thread.html#5177">[ thread ]</a>
+              <a href="subject.html#5177">[ subject ]</a>
+              <a href="author.html#5177">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 19:37 27/06/03 +0000, you wrote:
+
+&gt;<i>Why not get yourself a less restrictive (and more knowledgable) ISP?
+</I>The amount of ISP's in my region is very limited.
+We have one national telecom operator (Belgacom: phone/gsm/dial 
+up/adsl/sdsl) and one cable operator (Telenet, that is even more restrictive).
+Smaller companies that could be more user-fiendly uses the telecom 
+operator's network and settings and eventually provide their own servers.
+
+[... lots of bashing removed ...]
+The server is for private use, we do not request that customers abide by 
+these rules.
+
+
+&gt;<i>Will IE6 not work if provided with a FULL URL, including schema, host,
+</I>&gt;<i>and port?  If it does work, then make sure you always publish links in
+</I>&gt;<i>full like that.
+</I>I always use the full url in the redirect (i'm writing html stuff for 
+nearly 10 years)
+
+
+
+&gt;<i> &gt; Having to use port xxx is a good thing (no virus of other malevolent user
+</I>&gt;<i> &gt; is actually trying to connect)...
+</I>&gt;<i>
+</I>&gt;<i>Now you really ARE displaying incredible ignorance and naivety.
+</I>
+Logs don't show any strange connect activity. I even installed a packet 
+sniffer (ethereal).
+Using another server and another port for our more sensitive data is just 
+part of a broader set of measures:
+- load some page (could be located anywhere)
+- this page contains a &lt;script src=<A HREF="http://mypublicserver/cgi-bin/...">http://mypublicserver/cgi-bin/...</A>&gt;-tag 
+displaying nothing, but get the client's IP registered for one minute
+- go to the private server default page (it's a cgi that also checks the IP).
+- This page contains a &lt;input type=hidden&gt; field with a hash (or is a 
+redirection to the main server if the IP was not registered).
+- login to the private server with login, pass (and hidden field)
+- the hash is modified each time a new page is asked for
+- without correct hash, any request on the private server is redirected to 
+the main server
+- and so on
+
+We are not such a big company that hackers will try for hours to find out 
+how to get past the login screen, if they ever get there.
+The only thing they will get is the server name (Xitami rules!) and a 
+un-conspicuous redirection to the main server.
+I could install a point-to-point tunnelling protocol, but the isp asks LOTS 
+of money for making this service available (we simply can't afford it).
+
+Could we go back to the question, now that some points of details have been 
+cleared out?
+
+
+Marc Doigny
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005176.html">[Xitami] Windows client: opening non-standard ports
+</A></li>
+	<LI> Next message: <A HREF="005200.html">[Xitami] Configuration
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5177">[ date ]</a>
+              <a href="thread.html#5177">[ thread ]</a>
+              <a href="subject.html#5177">[ subject ]</a>
+              <a href="author.html#5177">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

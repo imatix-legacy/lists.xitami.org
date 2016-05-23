@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Sub domains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005598.html">
+   <LINK REL="Next"  HREF="005576.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Sub domains
+   </H1>
+    <B>Tom Baker
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Sub domains">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 21 Dec 2003 00:01:53 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005598.html">[Xitami] Server Priority
+</A></li>
+        <LI> Next message: <A HREF="005576.html">[Xitami] [Alias]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5592">[ date ]</a>
+              <a href="thread.html#5592">[ thread ]</a>
+              <a href="subject.html#5592">[ subject ]</a>
+              <a href="author.html#5592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_001E_01C3C755.A42EBD60
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+[Alias]----- Original Message -----=20
+  From: Ron Ackerman=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Saturday, December 20, 2003 3:09 PM
+  Subject: [Xitami] Sub domains
+
+
+  I am able to do sub domains like www.mydomain.com/sub or =
+sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't need it's own IP address. However with the second one I have to =
+set up an IP address for it. Is there a way to set up sub.mydomain.com =
+without it's own IP.=20
+
+  Ron
+You need two things to make this work.
+
+You need a CNAME record in your DNS server pointing to mydomain.com
+Example:
+A-record : mydomain.com =3D 192.168.0.1
+CNAME-record : www =3D mydomain.com   (This would get resolved as =
+www.mydomain.com =3D mydomain.com =3D 192.168.0.1. NOTE: some DNS =
+services requite CNAME www.mydomain.com =3D mydomain.com. Check their =
+instructions first.)
+CNAME-record : sub =3D mydomain.com  (This would get resolved as =
+sub.mydomain.com =3D mydomain.com =3D 192.168.0.1)
+
+Now, you need to set up a virtual host in Xitami, where sub.mydomain.com =
+=3D config.file
+
+When a request for sub.mydomain.com comes in, it will get passed to the =
+virtual host you setup.
+
+
+Tom
+------=_NextPart_000_001E_01C3C755.A42EBD60
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;[Alias]&lt;/TITLE&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2800.1276&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;----- Original Message ----- &lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dron@miplanet.net">3Dron@miplanet.net</A> href=3D&quot;mailto:<A HREF="mailto:ron@miplanet.net">ron@miplanet.net</A>&quot;&gt;Ron =
+Ackerman&lt;/A&gt;=20
+  &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Saturday, December 20, =
+2003 3:09=20
+  PM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] Sub =
+domains&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;FONT face=3DArial =
+color=3D#0000ff size=3D2&gt;I am=20
+  able to do sub domains like &lt;A=20
+  href=3D&quot;<A HREF="http://www.mydomain.com/sub"">http://www.mydomain.com/sub&quot;</A>&gt;www.mydomain.com/sub&lt;/A&gt; or=20
+  sub.mydomain.com. Now of course the first one is just a directory and =
+doesn't=20
+  need it's own IP address. However with the second one I have to set up =
+an IP=20
+  address for it. Is there a way to set up sub.mydomain.com without it's =
+own IP.=20
+  &lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2&gt;&lt;/FONT&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2&gt;Ron&lt;/FONT&gt;&lt;/SPAN&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;You need two things to =
+make this=20
+work.&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;You need a CNAME record =
+in your DNS=20
+server pointing to mydomain.com&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;Example:&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;A-record : mydomain.com =
+=3D=20
+192.168.0.1&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;CNAME-record : www =3D=20
+mydomain.com&amp;nbsp;&amp;nbsp; (This would get resolved as &lt;A=20
+href=3D&quot;<A HREF="http://www.mydomain.com"">http://www.mydomain.com&quot;</A>&gt;www.mydomain.com&lt;/A&gt; =3D mydomain.com =
+=3D=20
+192.168.0.1. NOTE: some DNS services requite CNAME &lt;A=20
+href=3D&quot;<A HREF="http://www.mydomain.com"">http://www.mydomain.com&quot;</A>&gt;www.mydomain.com&lt;/A&gt; =3D mydomain.com. =
+Check their=20
+instructions first.)&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;CNAME-record : sub =3D=20
+mydomain.com&amp;nbsp; (This would get resolved as sub.mydomain.com =3D =
+mydomain.com =3D=20
+192.168.0.1)&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;Now, you need to set up =
+a virtual=20
+host in Xitami, where sub.mydomain.com =3D config.file&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;When a request for =
+sub.mydomain.com=20
+comes in, it will get passed to the virtual host you setup.&lt;/SPAN&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN class=3D989120520-20122003&gt;&lt;/SPAN&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;&lt;SPAN =
+class=3D989120520-20122003&gt;Tom&lt;/SPAN&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_001E_01C3C755.A42EBD60--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005598.html">[Xitami] Server Priority
+</A></li>
+	<LI> Next message: <A HREF="005576.html">[Xitami] [Alias]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5592">[ date ]</a>
+              <a href="thread.html#5592">[ thread ]</a>
+              <a href="subject.html#5592">[ subject ]</a>
+              <a href="author.html#5592">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

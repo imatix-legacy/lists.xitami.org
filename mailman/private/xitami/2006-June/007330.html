@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami PHP Header Redirect issues...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami%20PHP%20Header%20Redirect%20issues...&In-Reply-To=449180F5.8060907%40webbenabled.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007329.html">
+   <LINK REL="Next"  HREF="007331.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami PHP Header Redirect issues...</H1>
+    <B>Ron Ackerman</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami%20PHP%20Header%20Redirect%20issues...&In-Reply-To=449180F5.8060907%40webbenabled.com"
+       TITLE="[Xitami] Xitami PHP Header Redirect issues...">ronackgen01 at bellsouth.net
+       </A><BR>
+    <I>Thu Jun 15 23:21:07 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007329.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+        <LI>Next message: <A HREF="007331.html">[Xitami] Unsolicited HTTP GET requests in access.log 
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7330">[ date ]</a>
+              <a href="thread.html#7330">[ thread ]</a>
+              <a href="subject.html#7330">[ subject ]</a>
+              <a href="author.html#7330">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> 
+
+
+   _____  
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Webb, Paul
+Sent: Thursday, June 15, 2006 11:47 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami PHP Header Redirect issues...
+
+
+Webb, Paul wrote: 
+
+Ron Ackerman wrote: 
+
+What version of PHP are you using and is this on the linux or win box or
+both. Can we see your php.ini? Can you do a phpinfo();
+ 
+Ron
+
+All,
+    Here's something additional for you to consider. It may eliminate a few
+questions you all may have...
+
+Go to HYPERLINK
+&quot;<A HREF="http://www.journalcommunity.com:8084&quot;http://www.journalcommunity.com:8084">http://www.journalcommunity.com:8084&quot;http://www.journalcommunity.com:8084</A>
+-- this is Xitami running JournalCommunity from
+C:\Websites\JournalCommunity\wwwroot on my SBS server, and it points at
+index.php, which is just a redirector to Magnus's website. The redirect
+won't work.
+
+Then go to HYPERLINK
+&quot;<A HREF="http://www.journalcommunity.com:8080&quot;http://www.journalcommunity.com:8080">http://www.journalcommunity.com:8080&quot;http://www.journalcommunity.com:8080</A> -
+this is IIS running JournalCommunity from the same location --
+C:\Websites\JournalCommunity\wwwroot -- also on my SBS server. It also
+points at index.php. It works.
+
+Both Xitami and IIS are using PHP v5.1.2 from C:\PHP ...
+
+Very, very weird. If IIS didn't run so slow, have so many problems and
+caveats, and wasn't made by Microsoft, I might consider running it instead.
+Unfortunately since it has all those things, I won't. :-/
+
+Has anyone tried thttpd on Linux?
+
+Thanks all!
+
+-- 
+Paul Webb
+WebbEnabled Solutions, LLC (HYPERLINK
+&quot;<A HREF="http://www.webbenabled.com/%7Epwebb/vcard/WebbPaul.vcf&quot;vCard">http://www.webbenabled.com/%7Epwebb/vcard/WebbPaul.vcf&quot;vCard</A>)
+HYPERLINK &quot;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">pwebb at webbenabled.com</A>&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">pwebb at webbenabled.com</A> (PGP/GPG
+Encryption Capable)
+HYPERLINK &quot;<A HREF="http://www.webbenabled.com&quot;http://www.webbenabled.com">http://www.webbenabled.com&quot;http://www.webbenabled.com</A> 
+
+
+ 
+
+In xitami.cfg under (my drive is F you'll need to change it as neeeded.
+
+ 
+[Filter]
+ 
+#
+-------------------------------------------------------------------------
+#   CGI configuration section
+#
+#   This section controls the CGI protocol.
+.cfm = f:\cfusion\bin\XiFusion f:\cfusion\bin\cfml.exe
+.php = f:\cfusion\bin\XiFusion f:\xitami\php\php.exe
+ 
+.php=f:\xitami\php f:\xitami\php\php.exe
+.php3=f:\xitami\php f:\xitami\php\php.exe
+.php4=f:\xitami\php f:\xitami\php\php.exe
+.phtml=f:\xitami\php f:\xitami\php\php.exe
+ 
+ 
+ 
+I seem to remember something about ver 5  not being able to run some
+commands that the previous versions did or the commands changed. But bottom
+line is if it works in IIS it should work in Xitami. Do you have the above
+in your xitami.cfg?
+ 
+  
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.394 / Virus Database: 268.8.4/364 - Release Date: 6/14/2006
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060615/4e7ba13e/attachment.html">http://lists.imatix.org/pipermail/xitami/attachments/20060615/4e7ba13e/attachment.html</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007329.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+	<LI>Next message: <A HREF="007331.html">[Xitami] Unsolicited HTTP GET requests in access.log 
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7330">[ date ]</a>
+              <a href="thread.html#7330">[ thread ]</a>
+              <a href="subject.html#7330">[ subject ]</a>
+              <a href="author.html#7330">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

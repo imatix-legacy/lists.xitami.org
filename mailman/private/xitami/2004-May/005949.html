@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] a bit off topic
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005948.html">
+   <LINK REL="Next"  HREF="005954.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] a bit off topic
+   </H1>
+    <B>Jill Douglas
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] a bit off topic">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 May 2004 13:56:26 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005948.html">[Xitami] a bit off topic
+</A></li>
+        <LI> Next message: <A HREF="005954.html">[Xitami] a bit off topic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5949">[ date ]</a>
+              <a href="thread.html#5949">[ thread ]</a>
+              <a href="subject.html#5949">[ subject ]</a>
+              <a href="author.html#5949">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Johannes,
+
+You can use a simple JScript code that disables the typical visitor from
+doing a 'right-click' to save images like this:
+
+Paste this code into the HEAD of your HTML document
+
+&lt;HEAD&gt;
+
+&lt;SCRIPT LANGUAGE=&quot;JavaScript1.1&quot;&gt;
+
+&lt;!-- Begin
+function right(e) {
+if (navigator.appName == 'Netscape' &amp;&amp;
+(e.which == 3 || e.which == 2))
+return false;
+else if (navigator.appName == 'Microsoft Internet Explorer' &amp;&amp;
+(event.button == 2 || event.button == 3)) {
+alert(&quot;Sorry, you do not have permission to right click.&quot;);
+return false;
+}
+return true;
+}
+
+document.onmousedown=right;
+document.onmouseup=right;
+if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+if (document.layers) window.captureEvents(Event.MOUSEUP);
+window.onmousedown=right;
+window.onmouseup=right;
+//  End --&gt;
+&lt;/script&gt;
+&lt;/HEAD&gt;
+
+
+
+BUT.... This script is *NOT* fool-proof. People can disable JavaScript
+support in their browser, use a browser which doesn't support JavaScript, or
+use a browser to link directly to the image that you want to protect. Also
+the pages and images are normally stored in the user's browser cache (for
+viewing later whilst offline) - with a little bit of work, the thief could
+find your image in their cache. It also doesn't stop users accessing the
+source of your page from the toolbar menus (View | Page Source). You could
+attempt to load your page into a window without toolbars - but again this
+isn't fool-proof. They can access the page directly, with toolbars, instead
+of opening it without them as you intended. There is a tool for Microsoft
+Internet Explorer 5 that will encrypt JScript code - but this is only
+supported by Microsoft Internet Explorer 5 - and will not allow the scripts
+to run on any other browser.
+
+Bearing this in mind, the above script should stop right clicks (and left
+button held down, followed by a right click) in both Netscape Navigator and
+Microsoft Internet Explorer. It will not stop users who use a Mac - where
+the mouse only has one button.
+
+If this script doesn't do what you require (i.e. protect your images and or
+your scripts) then don't use it and don't put your images/scripts on the
+net. If your livelihood relies on people not copying your images - then add
+a water mark or &quot;sample&quot; stamp to your images.
+
+Jill
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005948.html">[Xitami] a bit off topic
+</A></li>
+	<LI> Next message: <A HREF="005954.html">[Xitami] a bit off topic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5949">[ date ]</a>
+              <a href="thread.html#5949">[ thread ]</a>
+              <a href="subject.html#5949">[ subject ]</a>
+              <a href="author.html#5949">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

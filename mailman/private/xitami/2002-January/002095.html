@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] webcam
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002094.html">
+   <LINK REL="Next"  HREF="002098.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] webcam
+   </H1>
+    <B>Craig Morrison
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] webcam">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 17 Jan 2002 19:06:39 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002094.html">[Xitami] webcam
+</A></li>
+        <LI> Next message: <A HREF="002098.html">[Xitami] webcam
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2095">[ date ]</a>
+              <a href="thread.html#2095">[ thread ]</a>
+              <a href="subject.html#2095">[ subject ]</a>
+              <a href="author.html#2095">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Comments below...
+
+miplanet wrote:
+&gt;<i> 
+</I>&gt;<i> I think we are a little off track here. The problem is that
+</I>&gt;<i> webcam.ackerman-family.com points to port 80 via the DNS. The A record for
+</I>&gt;<i> ackerman-family.com points to internal IP 192.168.1.3, the CNAME point
+</I>&gt;<i> www.ackerman-famly.com to ackerman-family.com. So any subdomain that is not
+</I>&gt;<i> defined in the DNS will go to 192.168.1.3 port 80 (80 is opened on the
+</I>&gt;<i> router and is what Xitami is set for). So port 8080 will not work. I have
+</I>&gt;<i> even tried opening port 8080 on the router but you can't specify a port in
+</I>&gt;<i> dns records (that I know of). I think I can have the DNS server point
+</I>&gt;<i> webcam.ackerman-family.com to a different IP with an A record to that
+</I>&gt;<i> effect.
+</I>
+Your confusion is understood, I was there once myself. DNS has nothing to do
+with ports, it only serves to translate a name to an IP address. Your router
+takes care of port forwarding and translating between external and internal IP
+addresses.
+
+With that in mind, open up port 8080 on your router and have it forwarded to
+192.168.1.3. Make sure that webcam.ackerman-family.com points to your
+_external_ IP (which it does, nslookup reports that).
+
+Then use one of the redirection techniques that have been suggested on the
+list. The following type of redirection will be supported by most modern
+browsers (and doesn't require JavaScript):
+
+&lt;META HTTP-EQUIV=Refresh CONTENT=&quot;0;
+URL=<A HREF="http://webcam.ackerman-family.com:8080/"">http://webcam.ackerman-family.com:8080/&quot;</A>&gt;
+
+Just make sure you place it in the &lt;head&gt; section of your HTML document.
+
+To get to the document, all depends on whether you have virtual domains setup
+or not.
+
+If you don't, you just need to create an HTML document with the above in it
+and place it in your webpages folder. Which means you'll need a link of some
+kind on another page to get to it.
+
+Personally what I would do is put the above in a basic HTML document and save
+it as index.html in a folder off the webpages folder, say 'webcam'. So you
+would end up with:
+
+\xitami\webpages\webcam
+
+Which could be used as the [Server]webpages entry in the cfg file for a
+virtual domain.
+
+Does that help any?
+
+--
+Craig Morrison
+  <A HREF="http://www.mtsprofessional.com/">http://www.mtsprofessional.com/</A>
+  A Win32 Email server that works for you.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002094.html">[Xitami] webcam
+</A></li>
+	<LI> Next message: <A HREF="002098.html">[Xitami] webcam
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2095">[ date ]</a>
+              <a href="thread.html#2095">[ thread ]</a>
+              <a href="subject.html#2095">[ subject ]</a>
+              <a href="author.html#2095">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

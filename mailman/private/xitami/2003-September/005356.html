@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] NEW Xitami Open Source Web Server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005353.html">
+   <LINK REL="Next"  HREF="005365.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] NEW Xitami Open Source Web Server
+   </H1>
+    <B>H.W Overman
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] NEW Xitami Open Source Web Server">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Sep 2003 08:31:03 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005353.html">[Xitami] NEW Xitami Open Source Web Server
+</A></li>
+        <LI> Next message: <A HREF="005365.html">[Xitami] Xitami 2.5c0 release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5356">[ date ]</a>
+              <a href="thread.html#5356">[ thread ]</a>
+              <a href="subject.html#5356">[ subject ]</a>
+              <a href="author.html#5356">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;Pieter Hintjens&quot; &lt;<A HREF="mailto:ph@imatix.com">ph@imatix.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, September 25, 2003 3:38 AM
+Subject: Re: [Xitami] NEW Xitami Open Source Web Server
+
+
+&gt;<i> &quot;H.W Overman&quot; &lt;<A HREF="mailto:euman@bellsouth.net">euman@bellsouth.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Im not sure you have given thought to Xitami running well on any other
+</I>&gt;<i> &gt; browser than IE6+. I have Netscape 7.1 and it takes virtualy forever
+</I>&gt;<i> &gt; for a single 6k page to load and my PHP site is all screwed up with
+</I>&gt;<i> &gt; the new version under Netscape. I would assume Opera will have the
+</I>&gt;<i> &gt; same issue as it too runs Mozilla 5+.
+</I>&gt;<i>
+</I>&gt;<i> We use Mozilla mainly, MSIE in some cases, and we test regularly with
+</I>&gt;<i> Opera and other browsers.
+</I>&gt;<i>
+</I>&gt;<i> I'm surprised to hear that your web site works differently with the
+</I>&gt;<i> new version of Xitami, but it is possible.  The timeout problem
+</I>&gt;<i> sounds like your page (PHP) is not providing a valid content-length
+</I>&gt;<i> header.  You might want to (a) disable keep-alives, (b) enable
+</I>&gt;<i> debugging and take a look at the log files to see exactly what
+</I>&gt;<i> headers are being sent back to the browser.
+</I>&gt;<i>
+</I>&gt;<i> If you find something specific that Xitami is doing wrong, we'll fix
+</I>&gt;<i> it.
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> Pieter Hintjens
+</I>&gt;<i> iMatix Corporation
+</I>&gt;<i>
+</I>
+Hello Pieter,
+
+I never recieve 411 Length Required
+The &quot;Content-Length&quot; is not defined.
+The server will not accept the request without it.
+
+For compatibility with HTTP/1.0 applications, HTTP/1.1 requests containing
+a message-body MUST include a valid Content-Length header field unless the
+server is known to be HTTP/1.1 compliant. If a request contains a
+message-body and a Content-Length is not given, the server SHOULD respond
+with 400 (bad request) if it cannot determine the length of the message, or
+with 411 (length required) if it wishes to insist on receiving a valid
+Content-Length.
+
+I assume you are asking for this line of the debug.log that could be the
+cause of the
+problem but from the statment above this shouldnt matter...?
+Transfer file=[virtual-host]/index.htm size=-1 from=0
+
+When I look at the Xitami Source, you do not use Content-Length either.
+
+Im at a loss for why the newest version doesnt like my pages using Netscape
+but MSIE is perfectly fine. It should be worth mentioning, 2.5b5 worked
+very nicely on Netscape, Opera and IE...
+
+Euman
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005353.html">[Xitami] NEW Xitami Open Source Web Server
+</A></li>
+	<LI> Next message: <A HREF="005365.html">[Xitami] Xitami 2.5c0 release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5356">[ date ]</a>
+              <a href="thread.html#5356">[ thread ]</a>
+              <a href="subject.html#5356">[ subject ]</a>
+              <a href="author.html#5356">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

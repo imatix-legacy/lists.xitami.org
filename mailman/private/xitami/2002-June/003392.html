@@ -1,0 +1,587 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Rotate Logs SOLVED
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003374.html">
+   <LINK REL="Next"  HREF="003362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Rotate Logs SOLVED
+   </H1>
+    <B>Forward Design
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Rotate Logs SOLVED">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 13 Jun 2002 18:44:24 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003374.html">[Xitami] Rotate Logs
+</A></li>
+        <LI> Next message: <A HREF="003362.html">[Xitami] Xitami 2.5 production release...when?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3392">[ date ]</a>
+              <a href="thread.html#3392">[ thread ]</a>
+              <a href="subject.html#3392">[ subject ]</a>
+              <a href="author.html#3392">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_026C_01C2130A.56DBA0B0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+OK, I solved the problem.
+
+I wrote a Perl script that kills the Xitami server process, which frees =
+up the access.log file,
+
+rotates the access log file, then restarts the machine.
+
+I wanted to restart the machine, so that the Xitami server had a fresh =
+start for the day,
+
+so any leaks or problems would never get a foot hold.
+
+Works great, and unless something else happens, I am assured consistent =
+rotation of=20
+
+my log files.  If you use this script, make sure to set up Xitami to =
+stop rotating its logs,
+
+just set it up as manual, so it just keeps loggin forever to access.log.
+
+Quite obviously this is for Windows only, and for Window 2000 only, =
+since I do not believe
+
+that the iteration and termination of system processes works right under =
+other Window OSs.
+
+This script also assumes that you keep your logs in c:\xitami\logs.
+
+But if you don't just read the script and change it, its not rocket =
+science.
+
+P.S.-You might want to comment out the InitiateSystemShutdown function =
+when you first
+
+test it, just to make sure everything is cool, and you are not surprised =
+by a system shutdown.
+
+
+Here is my script, hope it can help someone:
+
+
+
+#!/usr/local/bin/perl
+
+use Win32;
+use Win32::PerfLib;
+use Win32::Process;
+
+### kill xitami
+
+my $h=3D'';
+my %tasks=3Dget_remote_process_list($h);
+
+foreach my $key(keys %tasks){
+    #print &quot;$key\t$tasks{$key}\n&quot;;
+  if ($tasks{$key} eq &quot;xipro&quot;) {
+  Win32::Process::KillProcess($key, $exitcode);
+  #print &quot;process killed\n&quot;;
+  }
+}
+
+sleep(5);
+
+### rotate logs
+
+$currenttime=3Dtime-(86400*1);=20
+
+($sec,$min,$hour,$day,$month,$year,$wday,$yday,$isdst) =3D =
+localtime($currenttime);
+$year+=3D1900;
+$currentyear=3D$year;
+$year-=3D2000;
+$month++;
+$currentmonth=3D$month;
+$mspace=3D'';
+if ($month&lt;10) {
+ $mspace=3D'0';
+ }
+$dspace=3D'';
+if ($day&lt;10) {
+ $dspace=3D'0';
+ }
+$yspace=3D'';
+if ($year&lt;10) {
+ $yspace=3D'0';
+ }
+$currentdate=3D&quot;$yspace$year$mspace$month$dspace$day&quot;;
+$logfile=3D&quot;c:\\xitami\\logs\\ac$currentdate.log&quot;;
+
+
+$hold=3D0;
+while ($hold&lt;60) {
+ `copy c:\\xitami\\logs\\access.log $logfile`;
+ @filecheck=3Dglob(&quot;$logfile*&quot;);
+ $busy=3D0;
+ if ($#filecheck=3D=3D-1) {
+  $hold++;
+  $busy=3D1;
+  sleep(1);
+  }
+ else {
+  $hold=3D60;
+  }
+ }
+if ($busy) {
+ print &quot;Could not copy log file.\n&quot; ;
+ exit 0 ;
+ return 1 ;=20
+ }
+
+
+$hold=3D0;
+while ($hold&lt;120) {
+ `del c:\\xitami\\logs\\access.log`;
+ @filecheck=3Dglob(&quot;c:\\xitami\\logs\\access.log*&quot;);
+ $busy=3D0;
+ if ($#filecheck&gt;-1) {
+  $hold++;
+  $busy=3D1;
+  sleep(1);
+  }
+ else {
+  $hold=3D120;
+  }
+ }
+if ($busy) {
+ print &quot;Could not delete access log file.\n&quot; ;
+ exit 0 ;
+ return 1 ;=20
+ }
+
+Win32::InitiateSystemShutdown ('','This computer is about to be =
+restarted.',5,1,1);
+
+sub get_remote_process_list {
+   =20
+my $server =3D $_[0];
+   =20
+my %rtasks;
+my %counter;
+   =20
+Win32::PerfLib::GetCounterNames($server, \%counter);
+my %r_counter =3D map { $counter{$_} =3D&gt; $_ } keys %counter;
+# retrieve the id for process object
+my $process_obj =3D $r_counter{Process};
+# retrieve the id for the process ID counter
+my $process_id =3D $r_counter{'ID Process'};
+   =20
+# create connection to $server
+my $perflib =3D new Win32::PerfLib($server);
+my $proc_ref =3D {};
+# get the performance data for the process object
+$perflib-&gt;GetObjectList($process_obj, $proc_ref);
+$perflib-&gt;Close();
+my $instance_ref =3D $proc_ref-&gt;{Objects}-&gt;{$process_obj}-&gt;{Instances};
+foreach my $p (sort keys %{$instance_ref})
+{
+    my $counter_ref =3D $instance_ref-&gt;{$p}-&gt;{Counters};
+    foreach my $i (keys %{$counter_ref})
+    {
+        if($counter_ref-&gt;{$i}-&gt;{CounterNameTitleIndex} =3D=3D =
+$process_id)
+        {
+            $rtasks{$counter_ref-&gt;{$i}-&gt;{Counter}} =3D =
+$instance_ref-&gt;{$p}-&gt;{Name};
+        }
+    }
+}
+  return %rtasks;
+}
+
+
+
+  ----- Original Message -----=20
+  From: Forward Design=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Wednesday, June 12, 2002 12:40 AM
+  Subject: Re: [Xitami] Rotate Logs
+
+
+  Thank you, but everything is set correctly.
+
+  Does everyone else's log files work perfectly?
+
+  Doesn't anyone else have this problem?
+
+  =20
+    From: Gregory Hart=20
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+    Sent: Tuesday, June 11, 2002 7:10 PM
+    Subject: Re: [Xitami] Rotate Logs
+
+
+    In the admin screen, go to Configuration, and then Logging. Make =
+sure that all the settings that you want are correct.
+    -Greg
+
+    ----- Original Message -----=20
+    From: Forward Design=20
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+    Sent: Tuesday, June 11, 2002 12:53 AM
+    Subject: [Xitami] Rotate Logs
+
+
+    Shoot me dead if this has already been solved.
+
+    Xitami seems to have a hard time rotating the access logs.
+
+    Xitami should be copying the current access.log file to yesterdays
+
+    date 'ac0x0x0x.log' type of thing, but sometimes it skips days,
+
+    and the access.log file just gets bigger and bigger... then it =
+finally does it.
+
+    I am thinking that when my server is busy, and it is suppose to =
+actually rotate
+
+    the log file, it can't because the server is being hit, and it is =
+writing to the file,
+
+    access denied type of thing.
+
+
+    I even gave up having Xitami do it, and wrote a perl script to do =
+the rotating for me, but
+
+    Xitami won't let go of the access.log file, and I can't delete it to =
+start
+
+    fresh after I copy the file.
+
+    Any ideas on how to get Xitami to perform this seemingly simple =
+task??? =20
+
+    Reliably?=20
+
+    Using Xitami Pro v2.4d10
+
+------=_NextPart_000_026C_01C2130A.56DBA0B0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2715.400&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;OK, I solved the problem.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I wrote a Perl script that kills the =
+Xitami server=20
+process, which frees up the access.log file,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;rotates the access log file, then =
+restarts the=20
+machine.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I wanted to restart the machine, so =
+that the Xitami=20
+server had a fresh start for the day,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;so any leaks or problems would never =
+get a foot=20
+hold.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Works great, and unless something else =
+happens, I=20
+am assured&amp;nbsp;consistent rotation of &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;my log files.&amp;nbsp; If you use this =
+script, make=20
+sure to set up Xitami to stop rotating its logs,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;just set it up as manual, so it just =
+keeps loggin=20
+forever to access.log.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Quite obviously this is for Windows =
+only, and for=20
+Window 2000 only, since I do not believe&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;that the iteration and termination of =
+system=20
+processes works right under other Window OSs.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;This script also assumes that you keep =
+your logs in=20
+c:\xitami\logs.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;But if you don't just read the script =
+and change=20
+it, its not rocket science.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;P.S.-You might want to comment out the=20
+InitiateSystemShutdown function when you first&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;test it, just to make sure everything =
+is cool, and=20
+you are not surprised by a system shutdown.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Here is my script, hope it can help=20
+someone:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#!/usr/local/bin/perl&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;use Win32;&lt;BR&gt;use =
+Win32::PerfLib;&lt;BR&gt;use=20
+Win32::Process;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;### kill xitami&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;my $h=3D'';&lt;BR&gt;my=20
+%tasks=3Dget_remote_process_list($h);&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;foreach my $key(keys =
+%tasks){&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+#print &quot;$key\t$tasks{$key}\n&quot;;&lt;BR&gt;&amp;nbsp; if ($tasks{$key} eq &quot;xipro&quot;)=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;Win32::Process::KillProcess($key,=20
+$exitcode);&lt;BR&gt;&amp;nbsp;&amp;nbsp;#print &quot;process=20
+killed\n&quot;;&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;}&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;sleep(5);&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;### rotate logs&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;$currenttime=3Dtime-(86400*1); =
+&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;($sec,$min,$hour,$day,$month,$year,$wday,$yday,$isdst) =3D=20
+localtime($currenttime);&lt;BR&gt;$year+=3D1900;&lt;BR&gt;$currentyear=3D$year;&lt;BR&gt;$y=
+ear-=3D2000;&lt;BR&gt;$month++;&lt;BR&gt;$currentmonth=3D$month;&lt;BR&gt;$mspace=3D'';&lt;BR&gt;=
+if=20
+($month&amp;lt;10) =
+{&lt;BR&gt;&amp;nbsp;$mspace=3D'0';&lt;BR&gt;&amp;nbsp;}&lt;BR&gt;$dspace=3D'';&lt;BR&gt;if=20
+($day&amp;lt;10) {&lt;BR&gt;&amp;nbsp;$dspace=3D'0';&lt;BR&gt;&amp;nbsp;}&lt;BR&gt;$yspace=3D'';&lt;BR&gt;if =
+
+($year&amp;lt;10)=20
+{&lt;BR&gt;&amp;nbsp;$yspace=3D'0';&lt;BR&gt;&amp;nbsp;}&lt;BR&gt;$currentdate=3D&quot;$yspace$year$mspa=
+ce$month$dspace$day&quot;;&lt;BR&gt;$logfile=3D&quot;c:\\xitami\\logs\\ac$currentdate.log=
+&quot;;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;BR&gt;$hold=3D0;&lt;BR&gt;while ($hold&amp;lt;60) {&lt;BR&gt;&amp;nbsp;`copy=20
+c:\\xitami\\logs\\access.log=20
+$logfile`;&lt;BR&gt;&amp;nbsp;@filecheck=3Dglob(&quot;$logfile*&quot;);&lt;BR&gt;&amp;nbsp;$busy=3D0;&lt;B=
+R&gt;&amp;nbsp;if=20
+($#filecheck=3D=3D-1)=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;$hold++;&lt;BR&gt;&amp;nbsp;&amp;nbsp;$busy=3D1;&lt;BR&gt;&amp;nbsp;&amp;nbsp;sleep(=
+1);&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;else=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;$hold=3D60;&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;}&lt;BR&gt;if ($busy)=20
+{&lt;BR&gt;&amp;nbsp;print &quot;Could not copy log file.\n&quot; ;&lt;BR&gt;&amp;nbsp;exit 0=20
+;&lt;BR&gt;&amp;nbsp;return 1 ; &lt;BR&gt;&amp;nbsp;}&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;BR&gt;$hold=3D0;&lt;BR&gt;while ($hold&amp;lt;120) {&lt;BR&gt;&amp;nbsp;`del=20
+c:\\xitami\\logs\\access.log`;&lt;BR&gt;&amp;nbsp;@filecheck=3Dglob(&quot;c:\\xitami\\lo=
+gs\\access.log*&quot;);&lt;BR&gt;&amp;nbsp;$busy=3D0;&lt;BR&gt;&amp;nbsp;if=20
+($#filecheck&amp;gt;-1)=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;$hold++;&lt;BR&gt;&amp;nbsp;&amp;nbsp;$busy=3D1;&lt;BR&gt;&amp;nbsp;&amp;nbsp;sleep(=
+1);&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;else=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;$hold=3D120;&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;}&lt;BR&gt;if ($busy)=20
+{&lt;BR&gt;&amp;nbsp;print &quot;Could not delete access log file.\n&quot; ;&lt;BR&gt;&amp;nbsp;exit 0 =
+
+;&lt;BR&gt;&amp;nbsp;return 1 ; &lt;BR&gt;&amp;nbsp;}&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Win32::InitiateSystemShutdown ('','This computer is about to be=20
+restarted.',5,1,1);&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;sub get_remote_process_list {&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;BR&gt;my $server =
+=3D=20
+$_[0];&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;BR&gt;my %rtasks;&lt;BR&gt;my=20
+%counter;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&lt;BR&gt;Win32::PerfLib::GetCounterNames($server,=20
+\%counter);&lt;BR&gt;my %r_counter =3D map { $counter{$_} =3D&amp;gt; $_ } keys =
+%counter;&lt;BR&gt;#=20
+retrieve the id for process object&lt;BR&gt;my $process_obj =3D=20
+$r_counter{Process};&lt;BR&gt;# retrieve the id for the process ID =
+counter&lt;BR&gt;my=20
+$process_id =3D $r_counter{'ID Process'};&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;BR&gt;# =
+create=20
+connection to $server&lt;BR&gt;my $perflib =3D new =
+Win32::PerfLib($server);&lt;BR&gt;my=20
+$proc_ref =3D {};&lt;BR&gt;# get the performance data for the process=20
+object&lt;BR&gt;$perflib-&amp;gt;GetObjectList($process_obj,=20
+$proc_ref);&lt;BR&gt;$perflib-&amp;gt;Close();&lt;BR&gt;my $instance_ref =3D=20
+$proc_ref-&amp;gt;{Objects}-&amp;gt;{$process_obj}-&amp;gt;{Instances};&lt;BR&gt;foreach =
+my $p=20
+(sort keys %{$instance_ref})&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; my $counter_ref =
+=3D=20
+$instance_ref-&amp;gt;{$p}-&amp;gt;{Counters};&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; foreach my =
+$i (keys=20
+%{$counter_ref})&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+if($counter_ref-&amp;gt;{$i}-&amp;gt;{CounterNameTitleIndex} =3D=3D=20
+$process_id)&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+$rtasks{$counter_ref-&amp;gt;{$i}-&amp;gt;{Counter}} =3D=20
+$instance_ref-&amp;gt;{$p}-&amp;gt;{Name};&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; }&lt;BR&gt;}&lt;BR&gt;&amp;nbsp; return =
+%rtasks;&lt;BR&gt;}&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&lt;BR&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dforward@forwarddesign.com">3Dforward@forwarddesign.com</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:forward@forwarddesign.com">forward@forwarddesign.com</A>&quot;&gt;Forward Design&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, June 12, 2002 =
+12:40=20
+  AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] Rotate =
+Logs&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thank you, but everything is set=20
+  correctly.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Does everyone else's log files work=20
+  perfectly?&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Doesn't anyone else have this=20
+  problem?&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=3Dltr=20
+  style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV=20
+    style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+    &lt;A title=<A HREF="mailto:3Dgreg@freastro.net">3Dgreg@freastro.net</A> =
+href=3D&quot;mailto:<A HREF="mailto:greg@freastro.net">greg@freastro.net</A>&quot;&gt;Gregory Hart&lt;/A&gt;=20
+    &lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+    href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Tuesday, June 11, 2002 =
+7:10=20
+    PM&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] Rotate =
+Logs&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;In the admin screen, go to =
+Configuration, and=20
+    then Logging. Make sure that all the settings that you want are=20
+    correct.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;-Greg&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message -----=20
+    &lt;DIV style=3D&quot;BACKGROUND: #e4e4e4; font-color: black&quot;&gt;&lt;B&gt;From:&lt;/B&gt; =
+&lt;A=20
+    title=<A HREF="mailto:3Dforward@forwarddesign.com">3Dforward@forwarddesign.com</A>=20
+    href=3D&quot;mailto:<A HREF="mailto:forward@forwarddesign.com">forward@forwarddesign.com</A>&quot;&gt;Forward Design&lt;/A&gt; &lt;/DIV&gt;
+    &lt;DIV&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+    href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;B&gt;Sent:&lt;/B&gt; Tuesday, June 11, 2002 12:53 AM&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] Rotate Logs&lt;/DIV&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Shoot me dead if this has already =
+been=20
+    solved.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami seems to have a hard time =
+rotating the=20
+    access logs.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami should be copying the =
+current access.log=20
+    file to yesterdays&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;date 'ac0x0x0x.log' type of thing, =
+but=20
+    sometimes it skips days,&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;and the access.log file just gets =
+bigger and=20
+    bigger...&amp;nbsp;then it finally does it.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am thinking that when my server =
+is busy, and=20
+    it is suppose to actually rotate&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;the log file, it can't because the =
+server is=20
+    being hit, and it is writing to the file,&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;access denied type of =
+thing.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I even gave up having Xitami do it, =
+and wrote a=20
+    perl script to do the rotating for me, but&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami won't let go of =
+the&amp;nbsp;access.log=20
+    file, and I can't delete&amp;nbsp;it to start&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;fresh after I copy the =
+file.&lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Any ideas on how to get Xitami to =
+perform this=20
+    seemingly simple task???&amp;nbsp; &lt;/FONT&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Reliably?&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Using Xitami Pro=20
+v2.4d10&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_026C_01C2130A.56DBA0B0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003374.html">[Xitami] Rotate Logs
+</A></li>
+	<LI> Next message: <A HREF="003362.html">[Xitami] Xitami 2.5 production release...when?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3392">[ date ]</a>
+              <a href="thread.html#3392">[ thread ]</a>
+              <a href="subject.html#3392">[ subject ]</a>
+              <a href="author.html#3392">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] TCP stack problem on windows?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002162.html">
+   <LINK REL="Next"  HREF="002167.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] TCP stack problem on windows?
+   </H1>
+    <B>Warren 'Llama' Ernst
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] TCP stack problem on windows?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 27 Jan 2002 12:29:51 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002162.html">[Xitami] TCP stack problem on windows?
+</A></li>
+        <LI> Next message: <A HREF="002167.html">[Xitami] TCP stack problem on windows?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2166">[ date ]</a>
+              <a href="thread.html#2166">[ thread ]</a>
+              <a href="subject.html#2166">[ subject ]</a>
+              <a href="author.html#2166">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Melle,
+
+My gut reaction here is that Sygate is the &quot;problem.&quot; I have a lot of
+experience with Sygate AND Xitami on a Win98 box. Whenever I use Sygate as a
+NAT (connection sharer), any servers (software daemons, and not just Xitami)
+run in that machine act strangely ONLY when you try to access them from a
+LOCAL machine.
+
+What I THINK is happeneing here is that Sygate is tring to redirect the
+incoming request out to the Internet, but only after some time passes does
+it figure out that the request is actually intended for ITSELF, and then let
+it through. In so figuring out what to do, Sygate sort of goes beserk for a
+little bit, and fails as a NAT until it regains its composure.
+
+There are plenty of solutions. Personally, for the home office, I have been
+using a Linksys DSL-Router for NAT duties. It is much more stable than
+sygate, more flexible for port forwarding, and it never requires rebooting
+;-). With Sygate off of your Win98 server, it can be free to run Xitami
+quite happily. Just tell the Router to forward port 80 (and port 21, if
+using FTP also) to the Xitami machine.
+
+I have a Win98 machine running Xitami, a separate FTP server, a mail server
+(pop and SMTP), a remote access server (sort of like PC Anywhere), plus it
+serves out a laser printer to the LAN and provides a shared Windows hard
+drive. I restart it every 80 days just out of habit. Though it is not being
+slammed by hundreds of users daily, serving speed is NOT an issue, nor is
+stability. And this is a Pentium 133 with around 80 megs of ram I'm talking
+about here.
+
+My point here is to say that Win98 can be fine for your server if there
+aren't dozens of concurrent users slamming it.
+
+-Warr
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Melle Koning
+</I>
+&gt;<i> I've got another problem with Xitami, or at least: I think Xitami may
+</I>&gt;<i> be causing some troubles. But maybe it's due to TCP stack troubles on
+</I>&gt;<i> Win98, I don't know.
+</I>&gt;<i>
+</I>&gt;<i> Let me explain my setup and when the problem occurs:
+</I>
+....
+
+
+&gt;<i> Could this be due to:
+</I>&gt;<i> a) The workings of Xitami?
+</I>&gt;<i> b) The OS; Win98?
+</I>&gt;<i> c) Sygate?
+</I>&gt;<i> d) Something funny the ISP has done to the CableModem?
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002162.html">[Xitami] TCP stack problem on windows?
+</A></li>
+	<LI> Next message: <A HREF="002167.html">[Xitami] TCP stack problem on windows?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2166">[ date ]</a>
+              <a href="thread.html#2166">[ thread ]</a>
+              <a href="subject.html#2166">[ subject ]</a>
+              <a href="author.html#2166">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Considering switch to Xitami Pro for SSL
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003293.html">
+   <LINK REL="Next"  HREF="003295.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Considering switch to Xitami Pro for SSL
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Considering switch to Xitami Pro for SSL">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 3 Jun 2002 09:40:31 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003293.html">[Xitami] Considering switch to Xitami Pro for SSL
+</A></li>
+        <LI> Next message: <A HREF="003295.html">[Xitami] Considering switch to Xitami Pro for SSL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3297">[ date ]</a>
+              <a href="thread.html#3297">[ thread ]</a>
+              <a href="subject.html#3297">[ subject ]</a>
+              <a href="author.html#3297">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I've been running Xitami Pro, 2.4d10 for 4 months. It works well 
+except a few minor issues. So I would say it is stable.
+The problems are
+	- initially there is no logs directory, you'll have to create it 
+yourself; Xitami tells you this in the console log or if you run it as 
+console mode which I recommend during the site certificate setup
+	- setting up the certificates it's a bit tricky, I think there is a 
+problem with a path in the configuration file; in the SSL section of 
+sslhttp.cfs which contains these entries
+    
+    [Ssl]
+        cert-key=key.pem   
+        cert-file=cert.pem 
+        ca-cert-path=certs 
+        ca-cert-file=thawteca.pem
+
+I've had to specify the path like this, it seemed that ca-cert-path 
+entry is not working
+
+ [Ssl]
+        cert-key=key.pem   
+        cert-file=certs\cert.pem 
+        ca-cert-path=certs 
+        ca-cert-file=thawteca.pem
+
+	- generating certificates with extended validity, ex. 1 year 
+requires that you get the documentation for ssleay, actually there 
+is a parameter called -days that needs to be changed
+	- it the begining I've had a problem with the log files not being 
+renamed (permission denied); I've had to play with the logs 
+configurations, basically I've just change them and now it is working
+	- the documentation (i.e. the html help files) is outdated (from 
+2.4d7)
+	- once you get/generate your certificates (1024 bit keys) and 
+make the ssl work, the encription is seamless for you, as far as 
+CGI or lrwp programming, are concerned; however, the whole 
+transfers are slowed down the speed probably depends on your 
+machine as well as users' machines
+	- all in all, it seems that although Xitami Pro I have is the 
+version 2.4d10, its configuration and other files have somewhat not 
+been fully updated
+
+Please note that the website that I am running is only for research and is not receiving a lot of hits.
+
+
+
+On 2 Jun 02, at 22:52, Jeff Hamblin wrote:
+
+&gt;<i> Hello All,
+</I>&gt;<i> 
+</I>&gt;<i> I've been running Xitami for years on various
+</I>&gt;<i> Windows versions. Currently running 2.4d9 on
+</I>&gt;<i> Win2kPro with no problems.
+</I>&gt;<i> 
+</I>&gt;<i> I need to implement SSL on one of the sites I
+</I>&gt;<i> administer so am considering purchasing a license
+</I>&gt;<i> to Xitami Pro. I am wondering if Pro is available
+</I>&gt;<i> in version 2.4d9, if it is as stable as the non-pro
+</I>&gt;<i> version, and if there are any issues anyone would
+</I>&gt;<i> care to comment on regarding encryption speed/
+</I>&gt;<i> performance, etc.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks in advance for any comments and info.
+</I>&gt;<i> 
+</I>&gt;<i> -Jeff Hamblin
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003293.html">[Xitami] Considering switch to Xitami Pro for SSL
+</A></li>
+	<LI> Next message: <A HREF="003295.html">[Xitami] Considering switch to Xitami Pro for SSL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3297">[ date ]</a>
+              <a href="thread.html#3297">[ thread ]</a>
+              <a href="subject.html#3297">[ subject ]</a>
+              <a href="author.html#3297">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

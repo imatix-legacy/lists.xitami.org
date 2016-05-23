@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] LWRP : NonBlocking Sockets
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="000245.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] LWRP : NonBlocking Sockets
+   </H1>
+    <B>Kimman Balakrishnan
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] LWRP : NonBlocking Sockets">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 06 Aug 2002 18:41:34 +0530</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="000245.html">[Xitami-Dev] Sokrates 1.73 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello
+
+Our document management application, comprising 8 different LRWP
+modules, are written in either Visual Basic or C (console applications).
+
+We noticed that when the Visual Basic applications are running and
+waiting for requests, the machine tends to 'hang' - the applications
+work ok but we could not start new instances of Explorer nor Internet
+Explorer - any instance of these applications already running would work
+fine. Furhter,  the 'open' common dialog of some applications would not
+work.  The machine resource usage indicates over 60% free.
+
+We have now changed the implementation in lrwplib.c to optionally use
+non-blocking sockets. A new function, lrwp_setoptions has been added
+with arguments :
+
+    int non_blocking;        // whether to use non-blocking sockets
+    int sleep_interval;       // sleep interval for timer - see below
+    callback_proc;         // optional procedure to be called when
+'select' indicates no data to read or cannot write
+    callback_data;         // caller specific data
+
+This function is called before making the 'connect' request to the
+lrwplib.c. The default values are to use blocking sockets as implemented
+currently. This ensures no 'break' for existing implementations. The
+values of these options have been added as a separate structure and
+appended to the existing struct LRWP.
+
+If 'select' indicates that a read/write cannot be performed just yet,
+the 'callback_proc', if non-NULL, is called. After this call, if the
+sleep_interval is non-zero, the function invokes the 'sleep' function
+with the argument, sleep_interval.
+
+The callback_procedure can take over the responsibility for 'delay' or
+it can let the lrwplib.c function handle it. In our case, the callback
+function in Visual Basic makes a DoEvents call and lets the lrwplib.c
+function handle the sleep.
+
+With this implementation, the 'hang' problem seems to have been take
+care of but it has yet to be tested on a wider range of machines. I was
+able to run these applications and still work on several other
+applications (Visual C++, Visual Basic and TextPad) while the requests
+were being serviced. The machine on which this was tested is a Win98
+(4.10.1998) Intel Pentium II box with 64 MB RAM.
+
+The lrwp_connect2 modification was the main challenge since the quantum
+of data expected is not easily predicted - it can either be OK or
+CHALLENGE. Likewise after the response to the CHALLENGE, the response
+could be either OK or REJECTED.
+
+Comments and suggestions are invited.
+
+Thanks
+
+Kimman Balakrishnan
+Imaging Solutions Pvt Ltd
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="000245.html">[Xitami-Dev] Sokrates 1.73 released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

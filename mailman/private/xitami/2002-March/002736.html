@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] simultaneous frames - 50+ simultaneous users...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002733.html">
+   <LINK REL="Next"  HREF="002751.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] simultaneous frames - 50+ simultaneous users...
+   </H1>
+    <B>Ayhan Tuncer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] simultaneous frames - 50+ simultaneous users...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 14 Mar 2002 14:38:56 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002733.html">[Xitami] 50+ simultaneous users...
+</A></li>
+        <LI> Next message: <A HREF="002751.html">[Xitami] simultaneous frames - 50+ simultaneous users...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2736">[ date ]</a>
+              <a href="thread.html#2736">[ thread ]</a>
+              <a href="subject.html#2736">[ subject ]</a>
+              <a href="author.html#2736">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello.
+
+
+This posting refers to :
+
+  &gt; Subject:  Re: [Xitami] 50+ simultaneous users...
+  &gt; Date:     Thu, 14 Mar 2002 17:20:48 +1300
+  &gt; From:     Ewen McNeill &lt;<A HREF="mailto:ewen@imatix.com">ewen@imatix.com</A>&gt;
+  &gt; Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+  &gt; To:       <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+  in reply to:
+
+       &gt; Subject:   [Xitami] 50+ simultaneous users...
+       &gt; Date:      Wed, 13 Mar 2002 22:56:39
+       &gt; From:      &quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt;
+       &gt; Reply-To:  <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+       &gt; To:        <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+
+I've had a different problem which may have a similar cause.
+
+
+One of my perl cgi programs serves multiple responses against extra path
+info in the url.
+Responses are all html pages. All output is as expected, I have no
+problems.
+
+Except for one response which is multiple-framed:
+  One frameset / 3 frames
+  Javascript - no errors known to me.
+  No html code errors known to me.
+  No html code framesetting errors known to me.
+  Html output varies - have 15 different frameset content for same
+frameset scheme.
+  Minimum total frameset content 11 Kb  / maximum total frameset content
+73 Kb.
+
+
+Problem:
+--------
+- The third frame locks Xitami up - regardless of content served,
+- corrupts any files ( db temp lockfiles ) being written by the
+  cgi program ( it executes ) during the lockup and
+- crashes the computer.
+Db is simple text files - no engine - no server.
+
+
+Logfiles show
+-------------
+- Three successive requests - one frameset, two frames. Fourth request
+not there.
+- Request order of frames varies and is identical in requests both from
+Netscape and  Explorer.
+- Different content has different frame request order.
+- Both browsers trigger the crash.
+
+
+So that
+-------
+- A different page is being served during each crash,
+- a different frame of the set is being served during each crash,
+- the html/Js content served is different during each crash,
+- the file size being requested is different during each crash,
+- and a different browser is making the request at each crash.
+
+
+The only thing I have found to be in common is the fact that a third
+frame is being requested.
+
+It's difficult to reproduce the environment unless I give a few hours of
+time, because I changed the third frame to a Js write from the frameset
+&lt;head&gt; content and solved the problem for good. However, I am upset not
+being able to serve a third frame from a cgi program.
+
+I use Windows 98 on a Pentium II 64 Mb Ram and Xitami 2.4d6 to serve an
+introvert website. No workload - mostly testing.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002733.html">[Xitami] 50+ simultaneous users...
+</A></li>
+	<LI> Next message: <A HREF="002751.html">[Xitami] simultaneous frames - 50+ simultaneous users...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2736">[ date ]</a>
+              <a href="thread.html#2736">[ thread ]</a>
+              <a href="subject.html#2736">[ subject ]</a>
+              <a href="author.html#2736">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

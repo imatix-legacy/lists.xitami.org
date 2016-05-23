@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] memtrace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001299.html">
+   <LINK REL="Next"  HREF="001301.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] memtrace
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] memtrace">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 01 Nov 2001 23:44:15 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001299.html">[Xitami] memtrace
+</A></li>
+        <LI> Next message: <A HREF="001301.html">[Xitami] memtrace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1300">[ date ]</a>
+              <a href="thread.html#1300">[ thread ]</a>
+              <a href="subject.html#1300">[ subject ]</a>
+              <a href="author.html#1300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt;It should never be generated; the fact that it has means something broke.
+</I>&gt;<i> &gt;I'm sure it shouldn't be as large as 8GB though... how long had Xitami been
+</I>&gt;<i> &gt;running for?
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> In fact, only 5 hours. Hard to believe such a writing rate.
+</I>
+&gt;<i>From more source code reading, it's actually all written on exit, but the file is a record of *all* the memory Xitami allocated and deallocated (which will probably only be a few bytes at a time in some places). 8GB in 5 hours does seem about right for that, but writing the file at all seems like debug-version behaviour.
+</I>
+Try creating a read-only file with the same name in the same folder... if this problem persists and Xitami manages to overwrite it, you'll just have to clean up after it when you exit :-( You could also try a different Xitami version and see if whatever memory leak caused this has been fixed.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001299.html">[Xitami] memtrace
+</A></li>
+	<LI> Next message: <A HREF="001301.html">[Xitami] memtrace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1300">[ date ]</a>
+              <a href="thread.html#1300">[ thread ]</a>
+              <a href="subject.html#1300">[ subject ]</a>
+              <a href="author.html#1300">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] mysql/php on a Win2k under Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000789.html">
+   <LINK REL="Next"  HREF="000792.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] mysql/php on a Win2k under Xitami
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] mysql/php on a Win2k under Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 23 Aug 2001 19:23:28 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000789.html">[Xitami] mysql/php on a Win2k under Xitami
+</A></li>
+        <LI> Next message: <A HREF="000792.html">[Xitami] mysql/php on a Win2k under Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#790">[ date ]</a>
+              <a href="thread.html#790">[ thread ]</a>
+              <a href="subject.html#790">[ subject ]</a>
+              <a href="author.html#790">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> The mysql items needed to connect from a domain / website to it are a &quot;host&quot; (server), the database name, username and password ... and it is the first one (the &quot;host&quot; / server) which I was wondering about 
+</I>
+Ah. 
+
+It &quot;should&quot; work to specify &quot;localhost&quot; as the &quot;remote&quot; server, and TCP
+as the protocol if that is needed.
+
+Then when PHP opens a connection to the &quot;remote server&quot; named
+&quot;localhost&quot;, the TCP stack re-directs it to the same machine. Change
+&quot;localhost&quot; to &quot;server2.your_isp.com&quot; for production. 
+
+In some cases, &quot;localhost&quot; isn't correctly specified. &quot;127.0.0.1&quot; should
+also work to mean &quot;this same machine&quot;. 
+
+In some cases, for no good reason, Windows will insist on connecting to
+an outside DNS server even for hosts it has in its own &quot;hosts&quot; file.
+Microsoft just doesn't understand DNS or TCP. It may work if you unplug
+your modem phone line and wait patiently for it to give up trying to
+reach an external DNS server. You can check that by seeing if opening
+&quot;localhost&quot; in your browser works without Windows trying to reach out
+for DNS service. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000789.html">[Xitami] mysql/php on a Win2k under Xitami
+</A></li>
+	<LI> Next message: <A HREF="000792.html">[Xitami] mysql/php on a Win2k under Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#790">[ date ]</a>
+              <a href="thread.html#790">[ thread ]</a>
+              <a href="subject.html#790">[ subject ]</a>
+              <a href="author.html#790">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP , data mode not working
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006551.html">
+   <LINK REL="Next"  HREF="006553.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP , data mode not working
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP , data mode not working">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 20 Feb 2005 13:03:15 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006551.html">[Xitami] FTP , data mode not working
+</A></li>
+        <LI> Next message: <A HREF="006553.html">[Xitami] FTP , data mode not working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6552">[ date ]</a>
+              <a href="thread.html#6552">[ thread ]</a>
+              <a href="subject.html#6552">[ subject ]</a>
+              <a href="author.html#6552">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Am 20 Feb 2005 um 3:35 hat d calif geschrieben:
+
+&gt;<i> Once again, Thanks to ALL offering help and support!!!
+</I>&gt;<i> 
+</I>&gt;<i> FTP now working!   BUT!
+</I>&gt;<i> 
+</I>&gt;<i> First note, I have a dynamic IP.
+</I>&gt;<i> To get FTP server operating I had to put the external IP in the default.cfg. 
+</I>Then you prpably has NOT port forwarding setup in the advanced tab of your router, or 
+do you ?
+
+&gt;<i>   Also Force IP to on.
+</I>&gt;<i> In addition Ports 8020, 8021, and range 8020 - 8030 were openned in the 
+</I>&gt;<i> router.
+</I>
+You don't need to do that. As I desribed in my previous post, you enable the &quot;virtual ftp 
+server&quot; in the advanced tab in the router under
+1. open the router GUI in the browser
+2. click advanced tab
+3.scroll down, mark the preconfigured virtual ftp server
+4.it should be now shown in the fields above with name ect. You ONLY have to put in 
+the ip of your ftp server machine, something like 192.168......NOT the public ip !!
+5. just click enable
+6. click &quot;apply&quot;
+7. in the next window &quot;save settings ?&quot;
+8.click &quot; yes&quot;
+9. Now your ftp server is ready to get connections.
+
+&gt;<i> BUT, having to put the hard IP in default.cfg, means that I will have to 
+</I>&gt;<i> manually edit the default.cfg every time my dynamic IP changes.  Not a good 
+</I>&gt;<i> solution.
+</I>
+Sorry, but that is totally wrong.
+
+&gt;<i> Here are my default.cfg
+</I>&gt;<i> 
+</I>&gt;<i> [Ftp]
+</I>&gt;<i>     enabled = &quot;1&quot;
+</I>&gt;<i>     Limit = &quot;25&quot;
+</I>&gt;<i>     Pipe = &quot;64k pipe A&quot;
+</I>&gt;<i>     User-file = &quot;ftpxxxxts.aut&quot;
+</I>&gt;<i>     ipaddress = &quot;63.163.33.138&quot;
+</I>&gt;<i>     force-ip = &quot;1&quot;
+</I>&gt;<i>     passiveip = &quot;63.163.33.138&quot;
+</I>&gt;<i> 
+</I>&gt;<i> Please commit if you have a solution for dynamic IP other than the current 
+</I>&gt;<i> hard IP I have to use.
+</I>&gt;<i> I did try putting the domain mysite.yi.org as ip addr, and passive ip, that 
+</I>&gt;<i> didn't work, could connect but not get the data port working, xitami kept 
+</I>&gt;<i> returning the local ip.  The only way so far to get the external IP returned 
+</I>&gt;<i> so passive data transfer on 8020 worked was the above config.
+</I>&gt;<i> 
+</I>&gt;<i> If I am stuck with the above solution, can someone recommend a utility that 
+</I>&gt;<i> will get a string from a file and then replace a string in another file, 
+</I>&gt;<i> this has to be all command line or ini file initiated.  I have a Dynamic 
+</I>&gt;<i> Update Client that saves a IP.txt with the current IP, and the same client 
+</I>&gt;<i> will execute another program upon update of IP with dns service.  So Update 
+</I>&gt;<i> client saves IP, utility will grab IP and replace the old IP in default.cfg. 
+</I>&gt;<i>    (it would be great if Xitami did this with the DDNS module).
+</I>&gt;<i> 
+</I>&gt;<i> Again thanks to all who offered help......
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>with the normal configuration, you have to update your DNS settings. That will be in 
+your case yi.org ? Is that correct.
+I'm using zoneedit.com as my dns service.It's free and lost of features with an easy to 
+understand webinterface. I'm running my mail and webserver since 2,5 years with them. 
+No problem at all.
+
+&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+Johannes
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006551.html">[Xitami] FTP , data mode not working
+</A></li>
+	<LI> Next message: <A HREF="006553.html">[Xitami] FTP , data mode not working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6552">[ date ]</a>
+              <a href="thread.html#6552">[ thread ]</a>
+              <a href="subject.html#6552">[ subject ]</a>
+              <a href="author.html#6552">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

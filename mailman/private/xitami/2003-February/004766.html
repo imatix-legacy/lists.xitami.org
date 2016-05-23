@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] To make turn Xitami and PHP under OS/2
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004762.html">
+   <LINK REL="Next"  HREF="004767.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] To make turn Xitami and PHP under OS/2
+   </H1>
+    <B>WhiteShepherd
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] To make turn Xitami and PHP under OS/2">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 27 Feb 2003 22:32:06 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004762.html">[Xitami] To make turn Xitami and PHP under OS/2
+</A></li>
+        <LI> Next message: <A HREF="004767.html">[Xitami] To make turn Xitami and PHP under OS/2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4766">[ date ]</a>
+              <a href="thread.html#4766">[ thread ]</a>
+              <a href="subject.html#4766">[ subject ]</a>
+              <a href="author.html#4766">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I still use Xitami for Windows.  But I use Web/2 now.  Stability of 
+OS/2 Xitami failed when my web server started (other's 
+experiences may vary).  However I did use PHP with Xitami for 
+OS/2 for a long time with no problems.  Unfortunately there is no 
+easy OS/2 PHP setup page. I will give you my setup.  Hope it 
+helps. :)
+
+First download the latest copy of PHP.  You can get it here: 
+<A HREF="http://silk.apana.org.au/php/download/php-4.2.3-os2-exe.zip">http://silk.apana.org.au/php/download/php-4.2.3-os2-exe.zip</A>
+Note: The whole package is contained in the PHP.EXE .  That was 
+convenient for me as I placed it on a ram disk for extra speed.  But 
+this is not necessary.
+
+On the same drive as your OS/2 in your x:\MPTN\ETC directory 
+create a php.ini file.
+
+For me I used a php.ini from a windows distribution.  You will want 
+to modify the [mail function] I spent months trying to figure this one 
+out.
+
+Here are my settings:
+
+[mail function]
+SMTP = smpt.yourmailserver.net
+sendmail_from = <A HREF="mailto:your@email.org">your@email.org</A>
+sendmail_path = &quot;sendmail -t -i -F Your-Name-No-Spaces -f 
+<A HREF="mailto:your@email.org">your@email.org</A>&quot;
+
+I feel it is important to note.  You will have to configure sendmail in 
+your OS/2 TCP/IP settings to use your SMTP server.  However.. 
+DO NOT, I repeat DO NOT enable SENDMAIL to run on start-up.  
+Unless you know what you are doing sendmail will function as a 
+open mail relay.  I've never done it myself but I know people who 
+learned the hard way.  So remember DO NOT enable sendmail.exe 
+to load on start-up.
+
+Now you need to configure your Xitami CFG files.  Bellow are 
+mine.  You can modify yours to match your configuration.
+
+These settings are in my defaults.cfg file:
+
+[Server]
+default1-index.html
+default2=index.htm
+default3=index.php
+default4=index.php3                  #   Any number of default pages
+default5=default.htm                #      called 'default&lt;n&gt;'
+
+[Filter]
+.php=e:\php4\php.exe
+.php3=e:\php4\php.exe
+.phtml=e:\php4\php.exe
+
+[Mime]
+
+    #  Video MIME types
+    avi=video/msvideo
+    wmv=video/msvideo
+    mov=video/quicktime
+    movie=video/x-sgi-movie
+    mpe=video/mpeg
+    mpeg=video/mpeg
+    mpg=video/mpeg
+    qt=video/quicktime
+
+    #  Audio MIME types
+    aif=audio/x-aiff
+    aifc=audio/x-aiff
+    aiff=audio/x-aiff
+    au=audio/basic
+    snd=audio/basic
+    wav=audio/wav
+    mid=audio/midi
+    rmi=audio/midi
+    ram=audio/x-pn-realaudio
+    rpm=audio/x-pn-realaudio-plugin
+    ra=audio/x-realaudio
+    rm=audio/x-pn-realaudio
+    mp3=audio/mpeg
+    m3u=audio/mpegurl
+    mp3url=audio/mpegurl
+
+Php=application/x-httpd-php
+Php3=application/x-httpd-php
+Phtml=application/x-httpd-php
+
+
+That should be a good start.  Good luck on your setup!
+
+  Gene Angel
+
+On 27 Feb 2003 at 19:23, <A HREF="mailto:wilfrid.hernandez@ctrmidi1.caisse-epargne">wilfrid.hernandez@ctrmidi1.caisse-epargne</A> wrote:
+
+&gt;<i> To make turn Xitami and PHP under OS/2
+</I>&gt;<i> 
+</I>&gt;<i> Hello with all
+</I>&gt;<i> I am new on this list and French (I use Altavista for the 
+</I>translation) I
+&gt;<i> must make turn PHP on an OS/2, Xitami walks very well, but do 
+</I>not recognize
+&gt;<i> the installation of PHP. Perhaps I do not have the good version 
+</I>of PHP, in
+&gt;<i> any case, my problem is located, I think in the parameter setting. 
+</I>Did one
+&gt;<i> of other already make a success of you to make cohabit this trio? 
+</I>Thank
+&gt;<i> you.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004762.html">[Xitami] To make turn Xitami and PHP under OS/2
+</A></li>
+	<LI> Next message: <A HREF="004767.html">[Xitami] To make turn Xitami and PHP under OS/2
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4766">[ date ]</a>
+              <a href="thread.html#4766">[ thread ]</a>
+              <a href="subject.html#4766">[ subject ]</a>
+              <a href="author.html#4766">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

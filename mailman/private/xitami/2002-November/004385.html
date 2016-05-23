@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: Separate server processes for different
+ subdomains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004384.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: Separate server processes for different
+ subdomains
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: Separate server processes for different
+ subdomains">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 29 Nov 2002 08:47:29 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004384.html">[Xitami] Re: Separate server processes for different subdomains
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4385">[ date ]</a>
+              <a href="thread.html#4385">[ thread ]</a>
+              <a href="subject.html#4385">[ subject ]</a>
+              <a href="author.html#4385">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello !
+
+I think you will have to do it by configuring your router to allow your 
+requests.
+imho since port 800 is not a well know port, no good gateway will allow 
+requests through this port if not configured adequately.
+
+My mailserver (Merak) allows imap, web and wap.
+To use wap, i have configured it to listen to port 119.
+This is the port used for news, but i don't have a newsserver.
+
+Portnumbers are actually just numbers, and you can use any number if you 
+wish, but since this portnumber is a well known number, gateways will not 
+block it.
+
+You still will have to do a single redirect from a webpage (so you can use 
+a easy to remember name like &lt;wap.maddrive.com&gt; instead of 
+&lt;<A HREF="http://mail.maddrive.com:119">http://mail.maddrive.com:119</A>&gt;)
+Attention, a wap page is not like a normal html page. Even Internet 
+Explorer won't display a wap page correctly, so debugging has to be done 
+using some PDA.
+
+Marc
+
+PS: i'm quite interested in this matter since i'm also struggling to create 
+wap pages.
+But it's a lot of work and nobody actually uses it!
+
+
+
+
+At 00:45 29/11/02, you wrote:
+&gt;<i>Paul and Marc, thanks for your replies. Basically both of you has
+</I>&gt;<i>suggested the same idea, which I'm already using (you can try going to
+</I>&gt;<i>www.maddrive.com and mail.maddrive.com to see it for yourself, if you
+</I>&gt;<i>like). However I want this redirection to be all server-side and totally
+</I>&gt;<i>transparent to the user. The reason I want to do this is because I want
+</I>&gt;<i>my webmail server to be reached using WAP-enabled mobile phones (the
+</I>&gt;<i>webmail server supports WAP). But because it's running on port 800, the
+</I>&gt;<i>WAP gateways that I've tried can't access the server. If I can do the
+</I>&gt;<i>redirection transparently at the server, I think I'll be able to reach
+</I>&gt;<i>the webmail server. I'd really appreciate anything you might want to
+</I>&gt;<i>suggest.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Utku Uzmen
+</I>&gt;<i>----------------------
+</I>&gt;<i><A HREF="http://www.maddrive.com/">http://www.maddrive.com/</A>
+</I>&gt;<i><A HREF="mailto:utku@maddrive.com">utku@maddrive.com</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>Date: Wed, 27 Nov 2002 16:56:01 -0500
+</I>&gt;<i>From: Paul Reid &lt;<A HREF="mailto:preid@rci.rutgers.edu">preid@rci.rutgers.edu</A>&gt;
+</I>&gt;<i>To: Utku Uzmen &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Separate server processes for different subdomains
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Xitami running on port 80. I also have a web-mail server on the
+</I>&gt;<i> &gt; same computer running on port 800. I'm trying to set things up in
+</I>&gt;<i> &gt; such a way
+</I>&gt;<i>
+</I>&gt;<i>The only easy way to do that is to put a click-link on your port-80
+</I>&gt;<i>main page: &lt;A HREF=&quot;<A HREF="http://mydomain.com:800"">http://mydomain.com:800&quot;</A>&gt;Webmail!&lt;/a&gt;
+</I>&gt;<i>
+</I>&gt;<i>If your main page loads quickly, this is one-click for the users.
+</I>&gt;<i>
+</I>&gt;<i>What -might- work slicker is a V-host main page that did a quick
+</I>&gt;<i>redirect. The HTML below seems to work for me (with your real URL).
+</I>&gt;<i>The user sees a black page with a link, but if the browser handles a
+</I>&gt;<i>meta-redirect (and if your server is quick) they hardly see it at
+</I>&gt;<i>all before your mail-page opens. If their browser doesn't take the
+</I>&gt;<i>hint, they click on &quot;Web-Mail&quot; and get there.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Jump to &lt;<A HREF="http://http://mydomain.com:800">http://http://mydomain.com:800</A>&gt;Web-Mail
+</I>&gt;<i>
+</I>&gt;<i>Otherwise it gets pretty messy.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  -PRR
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+--::Mailserver Verfaillie Bauwens::-- contact [<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004384.html">[Xitami] Re: Separate server processes for different subdomains
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4385">[ date ]</a>
+              <a href="thread.html#4385">[ thread ]</a>
+              <a href="subject.html#4385">[ subject ]</a>
+              <a href="author.html#4385">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

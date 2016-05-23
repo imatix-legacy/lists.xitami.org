@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Small modification to ISAPI support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007795.html">
+   <LINK REL="Next"  HREF="007797.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Small modification to ISAPI support</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To="
+       TITLE="[Xitami] Small modification to ISAPI support">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Apr 30 21:49:37 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007795.html">[Xitami] Small modification to ISAPI support
+</A></li>
+        <LI>Next message: <A HREF="007797.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7796">[ date ]</a>
+              <a href="thread.html#7796">[ thread ]</a>
+              <a href="subject.html#7796">[ subject ]</a>
+              <a href="author.html#7796">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Interesting.  For your example that didn't work, you might also be able to 
+add an extension filter to your configuration file and it might 
+work...though in the end your rewrite methods are probably much better.  But 
+give it a shot and see if this works.
+
+In the defaults.cfg file add a filter extension
+[Filter]
+    .php=c:\php\php.exe
+    .pl=c:\perl\bin\perl.exe
+    .shtm=perlssi
+    .shtml=perlssi
+    .ssi=perlssi
+    .dll=\true\path\isapi.exe
+
+and then in your CGI alias section do something like:
+&gt;<i> /test  -&gt;  /new/true/path/testisapi.dll
+</I>
+The alias will reference the .dll file, then the [filter] section should 
+initiate the isapi.exe file.  In your examples, what exactly is isapi.exe 
+and testiasapi.dll or register.dll doing?  I imagine isapi.exe is to *.dll 
+as perl.exe is to *.pl.  But the .dll files you are using, they sound like 
+MS OLE files...now that I think of it, if you get the above to work then 
+there is a good chance the entire cgi alias step can be bypassed as the 
+simple [filter] will provide all needed associations.  though the file would 
+still need to have an extension of dll.
+
+Without the cgi alias <A HREF="http://domain/register.dll">http://domain/register.dll</A> should trigger the 
+isapi.exe, but the dll would be needed.  However, I do believe the 
+configuration is parsed, even in memory, sequentially... so you could 
+literally put a .*=isapi.exe at the ed of the filter section gauranteeing 
+that if another extension isn't matched first, then Xitami will default 
+everything to .*=isapi.exe.
+
+How much faster is ISAPI versus CGI - and what language are the dll's 
+written in?  At least for me, this method you have described is new to me.
+
+Let us know.
+
+----- Original Message ----- 
+From: &quot;JLIST&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">jlist9 at gmail.com</A>&gt;
+To: &quot;Russel Olinger&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Wednesday, April 30, 2008 12:07 PM
+Subject: Re[2]: [Xitami] Small modification to ISAPI support
+
+
+&gt;<i> Hello Russel,
+</I>&gt;<i>
+</I>&gt;<i> Sorr for not being clear. My change is for the ISAPI add-on listed
+</I>&gt;<i> on the add-on page, not for xitami itself. Basically I need a high
+</I>&gt;<i> performance mechanism to serve dynamic pages (so, no CGI) on Windows.
+</I>&gt;<i> (I use FastCGI on Linux but that's not an option for Xitami.) I suppose
+</I>&gt;<i> I'll need to use LRWP. I find that the ISAPI add-on allows me
+</I>&gt;<i> to run ISAPI DLLs as LRWP and that ISAPI is easier to write than
+</I>&gt;<i> a complete LRWP. I think I'll be writing some ISAPI DLLs instead.
+</I>&gt;<i> But with the ISAPI add-on, it always shows the DLL name in the URL,
+</I>&gt;<i> hence why my change to remove that.
+</I>&gt;<i>
+</I>&gt;<i> I am new to xitami and I wasn't aware of CGI aliasing. Howerver,
+</I>&gt;<i> it seems to work only for CGIs. I tried it with ISAPI add-on and
+</I>&gt;<i> it didn't work. CGI aliasing doesn't really work the same way
+</I>&gt;<i> URL rewriting does.
+</I>&gt;<i>
+</I>&gt;<i> This didn't work:
+</I>&gt;<i> /test  -&gt;  /isapi_exe/testisapi.dll
+</I>&gt;<i>
+</I>&gt;<i> URL rewriting (I use mod_rewrite on lighttpd on Linux) is more
+</I>&gt;<i> generic and more flexible. You can specify a regular expression
+</I>&gt;<i> to do the work (and more) that you described with the .pl CGI.
+</I>&gt;<i> It works with all URLs (cgi, fastcgi, scgi, static files ...)
+</I>&gt;<i> It also allows you to redirect all requests (/*) but some exceptions
+</I>&gt;<i> (e.g. /images/*) to your app at, e.g. /myapp.
+</I>&gt;<i>
+</I>&gt;<i> Jack
+</I>&gt;<i>
+</I>&gt;<i> Wednesday, April 30, 2008, 9:30:52 AM, you wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> JLIST:  Could you explain that a bit more?  I get the gist of it but I
+</I>&gt;&gt;<i> assume you are also compiling our own Xitami and are able to modify the
+</I>&gt;&gt;<i> source.  For us non-compiled users I am not certain we can use that 
+</I>&gt;&gt;<i> method.
+</I>&gt;<i>
+</I>&gt;&gt;<i> So instead, I do my own version of URL rewrites through Xitami's CGI
+</I>&gt;&gt;<i> aliasing.  It works just fine and still provides you with all the 
+</I>&gt;&gt;<i> necessary
+</I>&gt;&gt;<i> PATH_INFO and perl $ENV of the alias - not of the actual called script
+</I>&gt;<i>
+</I>&gt;&gt;<i> Example:
+</I>&gt;&gt;<i> /showArticle    /cgi-bin/postShow.pl
+</I>&gt;<i>
+</I>&gt;&gt;<i> A URL example would be:
+</I>&gt;&gt;<i> <A HREF="http://www.foo.com/showArticle/cars/classic/1965-Convertable-Corvette_12345.html">http://www.foo.com/showArticle/cars/classic/1965-Convertable-Corvette_12345.html</A>
+</I>&gt;<i>
+</I>&gt;&gt;<i> /showArticle calls the &quot;/cgi-bin/poswShow.pl&quot; script, in the script I 
+</I>&gt;&gt;<i> parse
+</I>&gt;&gt;<i> the PATH_INFO environment variable to grab all the necessary ID info 
+</I>&gt;&gt;<i> about
+</I>&gt;&gt;<i> the URL to call up the correct article.  In this case, &quot;cars&quot; and 
+</I>&gt;&gt;<i> &quot;classic&quot;
+</I>&gt;&gt;<i> translate to category and forum IDs, then grab the actual article ID 
+</I>&gt;&gt;<i> &quot;12345&quot;
+</I>&gt;&gt;<i> to call it up to the user.  Using the CGI alias method, the PATH_INFO
+</I>&gt;&gt;<i> environment variable is conveniently everything AFTER the /showArticle
+</I>&gt;&gt;<i> alias.
+</I>&gt;<i>
+</I>&gt;&gt;<i> So PATH_INFO = /cars/classic/1965-Convertable-Corvette_12345.html
+</I>&gt;&gt;<i> Parse everything on &quot;/&quot; into an array: @array = split(/\//,$PATH_INFO)
+</I>&gt;&gt;<i> SPLICE the first empty element: splice @array,
+</I>&gt;&gt;<i> Then split the last element for the article ID, the text of irrelevant, 
+</I>&gt;&gt;<i> its
+</I>&gt;&gt;<i> only good for SEO stuff: @idInfo = split(/_/,$array[2]) ;
+</I>&gt;&gt;<i> Remove the &quot;.html&quot; : $articleID = $idInfo[1] =~ s/\.html//;
+</I>&gt;<i>
+</I>&gt;&gt;<i> Since I have never used Apache's mod_rewrite I don't know how much more
+</I>&gt;&gt;<i> laborious the above method is...but its really not that difficult, each
+</I>&gt;&gt;<i> script has to be slightly customized and you have to know what each part 
+</I>&gt;&gt;<i> of
+</I>&gt;&gt;<i> the URL stands for, but if you logically plan it out you can achieve the
+</I>&gt;&gt;<i> whole thing pretty easy using just one called function to parse all your
+</I>&gt;&gt;<i> vars for you.  It also requires that for every script you want to do URL
+</I>&gt;&gt;<i> rewrites on, you must add a unique CGI alias for it.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hope it helps.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007795.html">[Xitami] Small modification to ISAPI support
+</A></li>
+	<LI>Next message: <A HREF="007797.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7796">[ date ]</a>
+              <a href="thread.html#7796">[ thread ]</a>
+              <a href="subject.html#7796">[ subject ]</a>
+              <a href="author.html#7796">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

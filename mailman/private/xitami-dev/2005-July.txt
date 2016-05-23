@@ -1,0 +1,241 @@
+From xitami-dev@lists.xitami.org  Sun Jul  3 20:31:35 2005
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Sun, 3 Jul 2005 12:31:35 -0700 (PDT)
+Subject: [Xitami-Dev] Building base 2 packages
+In-Reply-To: <20050408042502.30870.14975.Mailman@sxpublic.imatix.net>
+Message-ID: <20050703193135.65356.qmail@web80408.mail.yahoo.com>
+
+> Ah, yes... the good old days. =A0I suppose these
+> days it'd have to be a blo=
+> g or=20
+> something nasty like that.
+> 
+> Anyhow. =A0http://imatix.net/pub is where you want
+> to go.
+> 
+> Regards,
+> Pieter Hintjens
+> iMatix Corporation
+
+I downloaded the packages.
+
+Base/1 compiles fine in windows.
+gsl4 compiles by copying libraries and headers into
+gsl4 local directory and modifying the makefile to
+include the libsfl and libsmt3
+
+Base/2 is totally different story. Can you give some
+brief documentation on building Base/2 ? Thanks
+
+I am mainly interested in gsl4 so I'm ok. But would
+like to try the Base/2
+
+Thanks
+
+Kumar
+
+
+
+From xitami-dev@lists.xitami.org  Sun Jul  3 20:58:12 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Sun, 3 Jul 2005 21:58:12 +0200
+Subject: [Xitami-Dev] Building base 2 packages
+In-Reply-To: <20050703193135.65356.qmail@web80408.mail.yahoo.com>
+References: <20050408042502.30870.14975.Mailman@sxpublic.imatix.net>
+ <20050703193135.65356.qmail@web80408.mail.yahoo.com>
+Message-ID: <5821ea2405070312582c39eae1@mail.gmail.com>
+
+On 7/3/05, Shivakumar Gopalakrishnan <g_skumar@yahoo.com> wrote:
+
+
+> Base/1 compiles fine in windows.
+> gsl4 compiles by copying libraries and headers into
+> gsl4 local directory and modifying the makefile to
+> include the libsfl and libsmt3
+>=20
+> Base/2 is totally different story. Can you give some
+> brief documentation on building Base/2 ? Thanks
+
+First, set IBASE to the install root, and INCDIR to %IBASE%\include,
+and LIBDIR to %IBASE%\lib.  Check that base1 builds (without copying
+files) like that.  Then build base2.
+
+If you get errors, let me know,
+
+-Pieter
+
+From xitami-dev@lists.xitami.org  Mon Jul  4 05:56:34 2005
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Sun, 3 Jul 2005 21:56:34 -0700 (PDT)
+Subject: [Xitami-Dev] Re: Building base 2 packages
+In-Reply-To: <20050704042503.27729.91603.Mailman@sxpublic.imatix.net>
+Message-ID: <20050704045634.58600.qmail@web80403.mail.yahoo.com>
+
+> --__--__--
+> 
+> Message: 2
+> Date: Sun, 3 Jul 2005 21:58:12 +0200
+> From: Pieter Hintjens <pieterh@gmail.com>
+> To: xitami-dev@lists.xitami.org
+> Subject: Re: [Xitami-Dev] Building base 2 packages
+> Reply-To: xitami-dev@lists.xitami.org
+> 
+> On 7/3/05, Shivakumar Gopalakrishnan
+> <g_skumar@yahoo.com> wrote:
+> 
+> 
+> > Base/1 compiles fine in windows.
+> > gsl4 compiles by copying libraries and headers
+> into
+> > gsl4 local directory and modifying the makefile to
+> > include the libsfl and libsmt3
+> >=20
+> > Base/2 is totally different story. Can you give
+> some
+> > brief documentation on building Base/2 ? Thanks
+> 
+> First, set IBASE to the install root, and INCDIR to
+> %IBASE%\include,
+> and LIBDIR to %IBASE%\lib.  Check that base1 builds
+> (without copying
+> files) like that.  Then build base2.
+
+Base1 builds fine. 
+
+Question about base2.
+
+It should expanded in a different directory and the
+IBASE directory should be set to the Base1 directory
+right?
+
+e.g:
+
+C:\base1
+ build
+
+C:\Base2
+IBASE=C:\base1
+INCDIR=C:\base1\include
+...
+
+Right?
+> 
+> If you get errors, let me know,
+> 
+> -Pieter
+> 
+Thanks for the reply
+
+Kumar
+
+
+From xitami-dev@lists.xitami.org  Mon Jul  4 07:57:55 2005
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 4 Jul 2005 08:57:55 +0200
+Subject: [Xitami-Dev] Re: Building base 2 packages
+In-Reply-To: <20050704045634.58600.qmail@web80403.mail.yahoo.com>
+References: <20050704045634.58600.qmail@web80403.mail.yahoo.com>
+Message-ID: <200507040857.55102.ph@imatix.com>
+
+On 04/07/2005 06:56 am, Shivakumar Gopalakrishnan wrote:
+
+> It should expanded in a different directory and the
+> IBASE directory should be set to the Base1 directory
+> right?
+
+No, this is not what's intended.  Set IBASE to something like c:\home, so that 
+Base/1, Base/2, and GSL/4 will all install there.  You'll end up with c:\home
+\bin (which needs to go on the path), c:\home\lib, c:\home\include.
+
+-Pieter
+
+
+From xitami-dev@lists.xitami.org  Mon Jul  4 17:42:22 2005
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Mon, 4 Jul 2005 09:42:22 -0700 (PDT)
+Subject: [Xitami-Dev] Minor patch for case insensitive filename extension check
+In-Reply-To: <20050704042503.27729.91603.Mailman@sxpublic.imatix.net>
+Message-ID: <20050704164222.6527.qmail@web80407.mail.yahoo.com>
+
+--0-963186740-1120495342=:5282
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Id: 
+Content-Disposition: inline
+
+Hi
+
+Minor patch for headache that I had. Typing
+<XMLFILE>.XML generated errors and since I was trying
+gsl4 for the first time, I thought "Oh my god, I
+should redo all my existing templates".
+
+Later I found out that <XMLFILE>.xml works just fine.
+
+So this minor patch so that it does not happen again.
+
+Thanks
+
+Kumar
+--0-963186740-1120495342=:5282
+Content-Type: application/octet-stream; name="case_insensitive_filename_check.patch"
+Content-Transfer-Encoding: base64
+Content-Description: 1182995445-case_insensitive_filename_check.patch
+Content-Disposition: attachment; filename="case_insensitive_filename_check.patch"
+
+LS0tIGdzbC5jCTIwMDUtMDctMDMgMjM6MDE6MzcuOTY4NzUwMDAwIC0wNzAw
+DQorKysgZ3NsLmMJMjAwNS0wMy0yMSAxODo0Nzo1NC4wMDAwMDAwMDAgLTA4
+MDANCkBAIC0zNTAsMTMgKzM1MCwxMyBAQCBzdGF0aWMgdm9pZCByZWFkX3ht
+bF9vcl9nc2xfZmlsZSAodm9pZCkNCiAgICAgY2ggPSBzdHJyY2hyIChmaWxl
+bmFtZSwgJy4nKTsNCiAgICAgaWYgKGNoKQ0KICAgICAgIHsNCi0gICAgICAg
+IGlmIChzdHJlcSAoY2ggKyAxLCAiZ3NsIikgfHwgc3RyZXEoY2ggKzEsICJH
+U0wiKSkNCisgICAgICAgIGlmIChzdHJlcSAoY2ggKyAxLCAiZ3NsIikpDQog
+ICAgICAgICAgIHsNCiAgICAgICAgICAgICBwcmVwYXJlX2dzbF9maWxlIChm
+aWxlbmFtZSk7DQogICAgICAgICAgICAgcmV0dXJuOw0KICAgICAgICAgICB9
+DQogICAgICAgICBlbHNlDQotICAgICAgICBpZiAoc3RyZXEgKGNoICsgMSwg
+InhtbCIpIHx8IHN0cmVxKGNoICsxLCAiWE1MIikpDQorICAgICAgICBpZiAo
+c3RyZXEgKGNoICsgMSwgInhtbCIpKQ0KICAgICAgICAgICB7DQogICAgICAg
+ICAgICAgcHJlcGFyZV94bWxfZmlsZSAoZmlsZW5hbWUpOw0KICAgICAgICAg
+ICAgIHJldHVybjsNCg==
+
+--0-963186740-1120495342=:5282--
+
+From xitami-dev@lists.xitami.org  Mon Jul  4 18:23:16 2005
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Mon, 4 Jul 2005 10:23:16 -0700 (PDT)
+Subject: [Xitami-Dev] OOPS! Minor patch for case insensitive filename extension check
+In-Reply-To: <20050704042503.27729.91603.Mailman@sxpublic.imatix.net>
+Message-ID: <20050704172316.59179.qmail@web80410.mail.yahoo.com>
+
+--0-681281462-1120497796=:58080
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+Content-Id: 
+Content-Disposition: inline
+
+Sorry the patch was reversed.
+
+Kumar
+--0-681281462-1120497796=:58080
+Content-Type: application/octet-stream; name="case_insensitive_filename_check.patch"
+Content-Transfer-Encoding: base64
+Content-Description: 1182995445-case_insensitive_filename_check.patch
+Content-Disposition: attachment; filename="case_insensitive_filename_check.patch"
+
+LS0tIC9jeWdkcml2ZS9jL3RlbXAvZ3NsLmMJMjAwNS0wMy0yMSAxODo0Nzo1
+NC4wMDAwMDAwMDAgLTA4MDANCisrKyBnc2wuYwkyMDA1LTA3LTAzIDIzOjAx
+OjM3Ljk2ODc1MDAwMCAtMDcwMA0KQEAgLTM1MCwxMyArMzUwLDEzIEBAIHN0
+YXRpYyB2b2lkIHJlYWRfeG1sX29yX2dzbF9maWxlICh2b2lkKQ0KICAgICBj
+aCA9IHN0cnJjaHIgKGZpbGVuYW1lLCAnLicpOw0KICAgICBpZiAoY2gpDQog
+ICAgICAgew0KLSAgICAgICAgaWYgKHN0cmVxIChjaCArIDEsICJnc2wiKSkN
+CisgICAgICAgIGlmIChzdHJlcSAoY2ggKyAxLCAiZ3NsIikgfHwgc3RyZXEo
+Y2ggKzEsICJHU0wiKSkNCiAgICAgICAgICAgew0KICAgICAgICAgICAgIHBy
+ZXBhcmVfZ3NsX2ZpbGUgKGZpbGVuYW1lKTsNCiAgICAgICAgICAgICByZXR1
+cm47DQogICAgICAgICAgIH0NCiAgICAgICAgIGVsc2UNCi0gICAgICAgIGlm
+IChzdHJlcSAoY2ggKyAxLCAieG1sIikpDQorICAgICAgICBpZiAoc3RyZXEg
+KGNoICsgMSwgInhtbCIpIHx8IHN0cmVxKGNoICsxLCAiWE1MIikpDQogICAg
+ICAgICAgIHsNCiAgICAgICAgICAgICBwcmVwYXJlX3htbF9maWxlIChmaWxl
+bmFtZSk7DQogICAgICAgICAgICAgcmV0dXJuOw0K
+
+--0-681281462-1120497796=:58080--
+

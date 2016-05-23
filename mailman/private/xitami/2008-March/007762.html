@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E9879F.2030104%40geeksgalore.ca">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007778.html">
+   <LINK REL="Next"  HREF="007763.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>R O</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E9879F.2030104%40geeksgalore.ca"
+       TITLE="[Xitami] Multi server issue">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Mar 26 00:37:20 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007778.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007763.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7762">[ date ]</a>
+              <a href="thread.html#7762">[ thread ]</a>
+              <a href="subject.html#7762">[ subject ]</a>
+              <a href="author.html#7762">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Jesus Criminy - this is entertaining.  Had no idea my questions were going to spur such passionate responses.  
+
+But, in a nutshell - Ports are IP based.  One range of ports per IP address.  So if you have 3 IP addresses on one NIC, then theoretically you have 3X ports available.  And I say 'theoretically' because it depends on how the application is using the IP addresses.  I thought I covered all this in my first response.
+
+However, for those of you who know that TCP Port 80 is per IP address, then please help me understand what I might be doing wrong or where I can look at that is causing a conflict.  In the past, I am pretty confident I had two or three instances of xitami running on Port 80, each on its own IP address (all on the SAME NIC) but can't recall what, if anything, special I did to get it working.  Its been a while.
+
+I have come up with a solution that fixed my original issue of needing a second production server to begin with, however I would still like to move forward with a second server as a test server running on Port 80.  Port 80 is important, and not using some other port, because then my new code can be tested identically to how it would run before making it the production code.  As well, alternate ports other than port 80 can cause some outbound firewall issues that I would rather not deal with.
+
+Config one:
+/xitami/defaults.cfg
+     * IP : 192.168.20.20
+     * Service-Name: Xitami Production Server
+     * port:0
+
+/xitamitest/defaults.cfg
+
+     * IP : 192.168.20.30
+
+     * Service-Name: Xitami Test Server
+
+     * port:0
+
+On the test server I even went so far as to copy the xiwinnt.exe file to xiwintest.exe thinking that might help prevent any &quot;service&quot; based conflicts (within Windows 2003 Server).  This did nothing, and the test server would not initialize until I changed it to Port:5080 (or anything other than port 80).  In addition, if I comment out (#Port:0) in the test server, the server service will actually start but nothing will respond on that IP port 80.  
+
+Not certain whats going on but as basic as these configs should be, I believe I may have discovered some kind of compatibility bug between Xitami v2.4d9 and Windows 2003 Server.  I am going to test running multiple copies on Windows XP under the same conditions to test if its a 2003 Server issue.
+
+Comments? 
+
+
+
+Russel P. Olinger 
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+&gt;<i> Date: Tue, 25 Mar 2008 19:15:43 -0400
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">hogan at geeksgalore.ca</A>
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Multi server issue
+</I>&gt;<i> 
+</I>&gt;<i> there is ONLY one port 80 man!  Per NIC/Router/Linux Box
+</I>&gt;<i> Man the documentation is right on Xitami's website, or even better buy 
+</I>&gt;<i> PRO and get the full support, you need it!
+</I>&gt;<i> 
+</I>&gt;<i> Magnus Wedberg wrote:
+</I>&gt;<i> &gt; General wrote, On 2008-03-25 23:41:
+</I>&gt;<i> &gt;   
+</I>&gt;<i> &gt;&gt; Show me some documentation that says you can have more than one port 80
+</I>&gt;<i> &gt;&gt; listening- 
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;     
+</I>&gt;<i> Hogan Courrier
+</I>&gt;<i> Geeks Galore Computer Center
+</I>&gt;<i> (613) 472-0005
+</I>&gt;<i> <A HREF="http://www.geeksgalore.ca">http://www.geeksgalore.ca</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080325/ae46dd71/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080325/ae46dd71/attachment.htm</A> 
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007778.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007763.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7762">[ date ]</a>
+              <a href="thread.html#7762">[ thread ]</a>
+              <a href="subject.html#7762">[ subject ]</a>
+              <a href="author.html#7762">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP! Upgrading to Xitami Pro
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003455.html">
+   <LINK REL="Next"  HREF="003454.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP! Upgrading to Xitami Pro
+   </H1>
+    <B>Stefan Pantazi
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP! Upgrading to Xitami Pro">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Jun 2002 12:09:32 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003455.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+        <LI> Next message: <A HREF="003454.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3453">[ date ]</a>
+              <a href="thread.html#3453">[ thread ]</a>
+              <a href="subject.html#3453">[ subject ]</a>
+              <a href="author.html#3453">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I have been through this myself.
+The first suggestion is to unzip Xitami Pro in another folder, preferably in
+the root, like c:\Xipro and keep your previous Xitami config
+handy/functional in case things go wrong. run xitami pro from the console,
+do not use it as a service yet. Open a DOS box and run xipro -d. If anything
+is wrong it will be output in the console. For example, xipro will complain
+about missing logs directory. Create it manually.
+
+Yes, first COPY your configs and dir structure, do not remove them yet.
+Remove when you get everything working.
+
+The best would be to try it out on a test machine, get it working and make
+changes quickly on your server afterwards.
+There are a few tricky configs especially for the SSL. I replied with a few
+of them when people asked previously about Xitami Pro.
+
+Because it's the pro version it means that you would be able to handle SSL
+(i.e. HTTPS requests, port 443), however if one type HTTP instead of HTTPS
+the nonsecure versions of the webpages you serve is available. You might
+want to restrict HTTPS to only sensitive data forms, because HTTPS
+encryption slows things down.
+
+The keys you generate them yourself using ssleay tool. The certificates will
+be therefore self issued unless you buy one from verisign or other.. This
+self issued thing will make a window pop up in IE which asks the user if
+he/she chooses to trust the issuer (i.e. yourself), other than that
+everything is fine, as long as you match the certificate issuer with the
+actual site address and your certificate is valid. By default, the ssleay
+configuraiton file (sslcert.cfg) makes certificates which are valid only 1
+month. Use the parameter -days (e.g. -days 365) to extend the validity of
+the self issued cert. to a year.
+
+here's  a paste of makecertificateLONG.bat which I derived from  make
+certificate.bat
+use it to generate your key and certificate.
+
+@echo off
+Echo Do you wish to make a new certificate (press Ctrl-C to cancel)?
+Pause
+ssleay genrsa -rand .rnd -out key.pem 1024
+ssleay req -new -key key.pem -out cert.pem -x509 -days 365 -config
+sslcert.cfg
+del .rnd
+
+
+There is a problem with an config entry in the sslhttp.cfs configuraiton
+file. I will paste the ssl section here and you'll make the difference.
+
+[Ssl]
+    cert-key=key.pem                    #   Server key
+    cert-file=cert.pem                  #   Server certificate
+    ca-cert-path=certs                  #   Certificate authorities path
+#    ca-cert-file=ca-cert.pem            #   Certificate authorities file
+#   For Thawte test certificates
+    ca-cert-file=certs\thawteca.pem           #   Server certificate
+    required-ciphers=
+    verify-client=0
+    verify-depth=10
+
+Actually the difference is that you have to specify path info in
+ca-cert-file (e.g. ca-cert-file=certs\thawteca.pem) otherwise the server
+won't find the certificate and complain in the console.
+
+Read ssldoc.txt again, it actually contains the bare necessity.
+
+
+Good luck
+
+Stefan
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On
+Behalf Of Russel Olinger
+Sent: Thursday, June 20, 2002 11:31 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: [Xitami] HELP! Upgrading to Xitami Pro
+
+
+Ok, folks need some serious help here, i don't have a lot of time to do
+research on this - so I need the crash course.
+
+I am running the normal Xitami and am upgrading to Xitami Pro.  As usual,
+there is hardly ANY documentation on how to do this step by step.  Do I
+install to same directory OR do I install to a new directory and copy my
+previous configs/directory structure over?  Because it is the Pro version
+does that mean EVERY site is going to be a secure site - or can I only turn
+the secure feature on for specific pages or links within each site?  Are
+there tricky configurations I need to be aware of.  I do know I am supposed
+to get a KEY from somewhere, but again, I don't understand this process.  I
+don't want to disrupt my current installation.
+
+I am in a bind and need to upgrade fast b/c one of my sites needs to do
+Credit Card transactions.  So any and all help is very appreciated.  I have
+never worked with SSL and I am worried about the time involved to get this
+all working.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003455.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+	<LI> Next message: <A HREF="003454.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3453">[ date ]</a>
+              <a href="thread.html#3453">[ thread ]</a>
+              <a href="subject.html#3453">[ subject ]</a>
+              <a href="author.html#3453">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

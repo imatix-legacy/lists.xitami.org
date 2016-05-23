@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Suspend
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000874.html">
+   <LINK REL="Next"  HREF="000876.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Suspend
+   </H1>
+    <B>Joubin Far
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Suspend">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 5 Sep 2001 14:24:36 -0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000874.html">[Xitami] Suspend
+</A></li>
+        <LI> Next message: <A HREF="000876.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#875">[ date ]</a>
+              <a href="thread.html#875">[ thread ]</a>
+              <a href="subject.html#875">[ subject ]</a>
+              <a href="author.html#875">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ewen,
+By your tip i have found the Ghost and Zombie that lives in background and
+makes the life difficult for Xitami.
+The Ghost is called IIS you was right.
+I couldn´t belive it because i didn´t installed it direct.
+It was installed by Visual Studio.net package by clicking on OK and with it
+i have installed IIS server and some other server option.
+Bevor starting of Xitami it have to be cloesd or ended by
+administration/service/www-publishing service/task end.
+There are other possibility to do it but generally you can end this
+background process via administration/services
+The status of IIS Autostart can change via setup.
+
+Now a new problem:
+The file host ( without extension) with following contents i have copied
+into WINNT and system32 directories(i did it for win95 as well).
+127.0.0.1 localhost
+
+127.0.0.1 www.jf.com
+
+127.0.0.1 www.far.com
+
+but i cann´t access to these pages.
+
+Every time if i access to one of above pages that i heve defined them as
+Virtual Hosts, modem switchs on and Xitami is going to access to the page
+via modem( via ISP) but by access to localhost or 127.0.0.1 does it direct
+without is activated modem.
+
+I use OS W2K.
+
+Can you help me again.
+
+Best regards,
+
+Joubin
+
+
+----- Original Message -----
+From: &quot;Ewen McNeill&quot; &lt;<A HREF="mailto:ewen@imatix.com">ewen@imatix.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Wednesday, September 05, 2001 10:45 AM
+Subject: Re: [Xitami] Suspend
+
+
+&gt;<i> In message &lt;001501c135ed$a4e11420$<A HREF="mailto:86919fc1@ednic">86919fc1@ednic</A>&gt;, Joubin Far writes:
+</I>&gt;<i> &gt;I didn´t install IIS-Server but i have installed Visual Studio.net Beta
+</I>2.
+&gt;<i>
+</I>&gt;<i> Ah, that's possibly installed a webserver as part of its test environment.
+</I>
+&gt;<i>
+</I>&gt;<i> &gt;[netstat -na shows]
+</I>&gt;<i> &gt;TCP        0.0.0.0:21       0.0.0.0       heard
+</I>&gt;<i> &gt;TCP        0.0.0.0:25       0.0.0.0       heard
+</I>&gt;<i> &gt;TCP        0.0.0.0:80       0.0.0.0       heard
+</I>&gt;<i>
+</I>&gt;<i> The :80 one is the important one; it's the webserver port (by common
+</I>&gt;<i> convention).  So you've definitely got _something_ which is running as a
+</I>&gt;<i> webserver.  (And also a FTP server, and also a mail server.)
+</I>&gt;<i>
+</I>&gt;<i> I believe there are some third party programs which can tell you for a
+</I>&gt;<i> given network port, or file, which programs have it open, but off hand I
+</I>&gt;<i> don't know of any of them.  (Under linux/unix there is &quot;lsof&quot; (list open
+</I>&gt;<i> files) which does this; I'm pretty sure there's a Windows equivilent.)
+</I>&gt;<i>
+</I>&gt;<i> Failing that, there's two possiblities:
+</I>&gt;<i> 1.  Looking in the list of running services and applications (in the
+</I>&gt;<i>     task manager) for likely suspects, and try to figure out which one
+</I>&gt;<i>     it is.  Anything &quot;information server&quot; or &quot;web server&quot; like is a
+</I>&gt;<i>     possibility.  You could try stopping the likely suspects one at a
+</I>&gt;<i>     time until you figure out which one it is takes away the &quot;:80&quot;
+</I>&gt;<i>     reference in netstat -na.
+</I>&gt;<i>
+</I>&gt;<i> 2.  You could try connecting to the webserver, with, eg, telnet and see
+</I>&gt;<i>     if it'll tell you anything about itself.  Eg:
+</I>&gt;<i>
+</I>&gt;<i>     telnet 127.0.0.1 80
+</I>&gt;<i>
+</I>&gt;<i>     GET / HTTP/1.0
+</I>&gt;<i>
+</I>&gt;<i>     (and press return twice)  Often there'll be some sort of Server:
+</I>&gt;<i>     line that identifies it, and you might be able to match this up with
+</I>&gt;<i>     some program running on your system.
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt;All Xitami's ports can be shifted with the portbase option: eg
+</I>&gt;<i> &gt;&gt;&quot;xitami -b 5000&quot; will move all the ports up by 5000, giving 5080 for
+</I>HTTP
+&gt;<i> &gt;
+</I>&gt;<i> &gt;By cmd W2K i couldn´t execute &quot;xitami -b 5000&quot; because there isn´t
+</I>&gt;<i> &gt;xitami.exe and if i have done with Xiwin32.exe -b 5000
+</I>&gt;<i>
+</I>&gt;<i> Yup, that was what I meant.  (The name of xitami varies depending on
+</I>&gt;<i> which build you have (console, gui window version, NT service, etc), but
+</I>&gt;<i> we usually just say &quot;xitami&quot; when we suggest running it.)
+</I>&gt;<i>
+</I>&gt;<i> Unfortunately it seems that version of Xitami doesn't check for command
+</I>&gt;<i> line paramters.  In which case you'll need to create a defaults.cfg file
+</I>&gt;<i> (if you don't already have one; add this to the end if you do) which
+</I>&gt;<i> says:
+</I>&gt;<i>
+</I>&gt;<i> [server]
+</I>&gt;<i>   portbase=5000
+</I>&gt;<i>
+</I>&gt;<i> For the builds that support it the &quot;-b&quot; paramter does the same thing for
+</I>&gt;<i> a single run.
+</I>&gt;<i>
+</I>&gt;<i> Ewen
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000874.html">[Xitami] Suspend
+</A></li>
+	<LI> Next message: <A HREF="000876.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#875">[ date ]</a>
+              <a href="thread.html#875">[ thread ]</a>
+              <a href="subject.html#875">[ subject ]</a>
+              <a href="author.html#875">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

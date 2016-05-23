@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Keep Alive Max counter does not get decremented
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002605.html">
+   <LINK REL="Next"  HREF="002607.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Keep Alive Max counter does not get decremented
+   </H1>
+    <B>Dmitry Isakbayev
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Keep Alive Max counter does not get decremented">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 28 Feb 2002 11:51:27 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002605.html">[Xitami] Re: StarOffice ADABAS with Dreamweaver UltraDev and Xitami
+</A></li>
+        <LI> Next message: <A HREF="002607.html">[Xitami] PHP vulnerability
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2606">[ date ]</a>
+              <a href="thread.html#2606">[ thread ]</a>
+              <a href="subject.html#2606">[ subject ]</a>
+              <a href="author.html#2606">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>We are using &quot;SSL/Pro Web Server v2.5b4&quot;.
+
+Given these values in the defaults.cfg file -
+
+[Server]
+    keep-alive=1
+    keep-alive-max=200
+    timeout=3600
+
+
+In the HTTP headers, &quot;max&quot; is always 200.  Is this a (known) problem?
+
+
+It seems like &quot;http_refresh_context&quot; always resets &quot;p_http-&gt;keep_alive_max&quot;
+to the configured value.
+
+After making a few add-hoc changes -
+
+1) removed call to &quot;http_refresh_context&quot; from
+&quot;smthttp.c::resolve_virtual_hostname&quot;
+2) removed call to &quot;http_refresh_context&quot; from
+&quot;smthttpl.c::http_init_context&quot;
+3) added   call to &quot;http_refresh_context&quot; to
+&quot;smthttp.c::initialise_the_thread&quot; (right after calling &quot;http_init_context&quot;)
+
+&quot;max&quot; starts to get decremented for every response on the alive connection.
+
+Thank You,
+
+Dmitry
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002605.html">[Xitami] Re: StarOffice ADABAS with Dreamweaver UltraDev and Xitami
+</A></li>
+	<LI> Next message: <A HREF="002607.html">[Xitami] PHP vulnerability
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2606">[ date ]</a>
+              <a href="thread.html#2606">[ thread ]</a>
+              <a href="subject.html#2606">[ subject ]</a>
+              <a href="author.html#2606">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

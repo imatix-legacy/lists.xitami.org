@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Perl script deleting all my perl scripts ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002716.html">
+   <LINK REL="Next"  HREF="002715.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Perl script deleting all my perl scripts ?
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Perl script deleting all my perl scripts ?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 11 Mar 2002 08:51:42 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002716.html">[Xitami] Problem with downloading off Xitami
+</A></li>
+        <LI> Next message: <A HREF="002715.html">[Xitami] Perl script deleting all my perl scripts ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2713">[ date ]</a>
+              <a href="thread.html#2713">[ thread ]</a>
+              <a href="subject.html#2713">[ subject ]</a>
+              <a href="author.html#2713">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This message is in MIME format. Since your mail reader does not understand
+this format, some or all of this message may not be legible.
+
+------_=_NextPart_000_01C1C8D1.9548C9A0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+
+Hi again, 
+
+I think the deletion happens in the code in attach.  I don't know whether
+you would have the time to take a look at this file, but it would be greatly
+appreciated.  What is a directory read ?!
+
+Best Regards, 
+
+
+-----Original Message-----
+From: Russel Olinger [mailto:<A HREF="mailto:rolinger@airpower.net">rolinger@airpower.net</A>]
+Sent: vendredi 8 mars 2002 1:15
+To: activeperl; <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] Perl script deleting all my perl scripts ?
+
+
+you should post your article to: <A HREF="mailto:activeperl@listserv.ActiveState.com">activeperl@listserv.ActiveState.com</A>
+
+however, you need to register with the site first before you can post to the
+forums.  It sounds like a directory read deleting your .pl files....post me
+the code that is causing the deletes.
+
+-R
+
+----- Original Message -----
+From: &lt;<A HREF="mailto:nico.debackere@skynet.be">nico.debackere@skynet.be</A>&gt;
+To: &quot;Xitami&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, March 07, 2002 3:58 PM
+Subject: [Xitami] Perl script deleting all my perl scripts ?
+
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I am using a tested web infrastructure, and it seems to work fine, excepts
+</I>&gt;<i> for some buttons; when I use them, all my scripts.pl dissapear from the
+</I>&gt;<i> cgi-bin directory!  I've tried moving them to another directory, but there
+</I>&gt;<i> the same thing happend.  The problem is I am no good around Perl, any
+</I>&gt;<i> suggestions ?
+</I>&gt;<i> Any comment welcome.
+</I>&gt;<i>
+</I>&gt;<i> Joris
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+------_=_NextPart_000_01C1C8D1.9548C9A0
+Content-Type: application/octet-stream;
+	name=&quot;welcome.pl&quot;
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename=&quot;welcome.pl&quot;
+
+#!perl
+
+
+#
+# The welcome page.  It handles the bottom frame.  Generally, it splits
+# the bottom frame into two more frames - the left (navigation) and =
+right (info)
+# frames.
+#
+# It also is used to reset the cookies on the client side when the user =
+logs
+# out.=20
+#=20
+
+use CGI qw(:standard);
+
+require &quot;systemPaths&quot;;
+
+if (param('page') eq 'menus')  {
+	showMenus();
+}
+elsif ((param('page') eq 'search') || (param('startOver'))) {
+	showFlightSearch();
+}
+elsif (param('page') eq 'itinerary') {
+	showItinerary();
+}
+else {
+	showDefault();
+}
+
+
+########################################################################=
+##
+
+#
+# show the menus - the search/itinerary/home/logout menu on the left,
+# and the homepage on the right.  home button is shaded.
+#
+
+sub showMenus {
+
+	print header();
+	print &lt;&lt;EOF;
+&lt;!--=20
+ User has returned to the home page.  Since user has already logged on,
+ we can give them the menu in the navbar.
+ ---&gt;
+
+&lt;html&gt;
+&lt;title&gt;Mercury Tours&lt;/title&gt;
+   &lt;!-- Frame Set --&gt;
+   &lt;frameset cols=3D&quot;125,*&quot; border=3D0 frameborder=3D0&gt;
+      &lt;!-- Navigation Frame --&gt;
+      &lt;frame src=3Dnav.pl?page=3Dmenu&amp;in=3Dhome name=3Dnavbar=20
+            marginheight=3D0 marginwidth=3D0 noresize scrolling=3Dauto&gt;
+      &lt;!-- Intro Frame --&gt;
+      &lt;frame src=3Dlogin.pl?intro=3Dtrue name=3Dinfo=20
+            marginheight=3D0 marginwidth=3D0 noresize scrolling=3Dauto&gt;
+   &lt;/frameset&gt;
+EOF
+
+}
+
+#
+# start the flight search sequence...load the menu with the search =
+button
+# shaded...and start the flight intro page, allowing the users to =
+search
+# through the various flights available.
+#
+
+sub showFlightSearch {
+
+	print header();
+	print &lt;&lt;EOF;
+&lt;!--=20
+ User has returned to the search page.  Since user has already logged =
+on,
+ we can give them the menu in the navbar.
+ ---&gt;
+
+&lt;html&gt;
+&lt;title&gt;Mercury Tours&lt;/title&gt;
+   &lt;!-- Frame Set --&gt;
+   &lt;frameset cols=3D&quot;125,*&quot; border=3D0 frameborder=3D0&gt;
+      &lt;!-- Navigation Frame --&gt;
+      &lt;frame src=3Dnav.pl?page=3Dmenu&amp;in=3Dflights name=3Dnavbar=20
+            marginheight=3D0 marginwidth=3D0 noresize scrolling=3Dauto&gt;
+      &lt;!-- Reservation Frame --&gt;
+      &lt;frame src=3Dreservations.pl?page=3Dwelcome name=3Dinfo=20
+            marginheight=3D0 marginwidth=3D0 noresize scrolling=3Dauto&gt;
+   &lt;/frameset&gt;
+EOF
+
+}
+
+#
+# load the itinerary pages into the info frame...and shade the =
+itinerary
+# button.
+#
+
+sub showItinerary {
+
+	print header();
+	print &lt;&lt;EOF;
+&lt;!--=20
+ User wants the intineraries.  Since user has already logged on,
+ we can give them the menu in the navbar.
+ ---&gt;
+
+&lt;html&gt;
+&lt;title&gt;Mercury Tours&lt;/title&gt;
+   &lt;!-- Frame Set --&gt;
+   &lt;frameset cols=3D&quot;125,*&quot; border=3D0 frameborder=3D0&gt;
+      &lt;!-- Navigation Frame --&gt;
+      &lt;frame src=3Dnav.pl?page=3Dmenu&amp;in=3Ditinerary name=3Dnavbar=20
+            marginheight=3D0 marginwidth=3D0 noresize scrolling=3Dauto&gt;
+      &lt;!-- Itinerary Frame --&gt;
+      &lt;frame src=3Ditinerary.pl name=3Dinfo=20
+            marginheight=3D0 marginwidth=3D0 noresize scrolling=3Dauto&gt;
+   &lt;/frameset&gt;
+EOF
+
+}
+
+
+#
+# This is the default page.  It gives the user two cookies. Once cookie
+# is used as user information - it starts out with only a session value =
+- which
+# is used later on as a weak form of authentication.  The MSO cookie is =
+used
+# to maintain the server options as the user moves throughout the site.
+# Load in the login navigation page, with the welcome to mercury tours
+# homepage.
+#
+# If the users directory doesn't exist in MTData, it will create it,
+# and all its subdirectories.  Subdirectories are used to store =
+usernames
+# by hash values.
+#
+
+sub showDefault {
+
+	# create a session ID - it's just the time for now..
+
+	$cookie1 =3D fillCookie();
+
+	# delete any old info and get a new server option cookie
+	if (param('signOff')) {
+		$cookie2 =3D cookie(-name=3D&gt;'MTUserInfo', -value=3D&gt;&quot;&quot;,
+							-path=3D&gt;&quot;/&quot;, -expires=3D&gt;'-1d');
+		print header(-cookie=3D&gt;[$cookie1, $cookie2]);
+	}
+	# give them a cookie if they don't already have one.
+	elsif (!cookie('MSO')) {
+		print header(-cookie=3D&gt;$cookie1);
+	}
+	else {
+		print header();
+	}
+=09
+=09
+	# Framesets can't be in the body....
+
+	print &lt;&lt;EOF;
+&lt;!--=20
+ A Session ID has been created and loaded into a cookie called MSO.
+ Also, the server options have been loaded into the cookie called
+ MSO as well.  The server options can be set via the Admin page.
+ ---&gt;
+
+&lt;html&gt;
+&lt;title&gt;Mercury Tours&lt;/title&gt;
+   &lt;!-- Frame Set --&gt;
+   &lt;frameset cols=3D&quot;125,*&quot; border=3D0 frameborder=3D0&gt;
+      &lt;!-- Navigation Frame --&gt;
+      &lt;frame src=3Dnav.pl?in=3Dhome name=3Dnavbar marginheight=3D0 =
+marginwidth=3D0=20
+            noresize scrolling=3Dauto&gt;
+      &lt;!-- Home Frame --&gt;
+      &lt;frame src=3D$pageBase/home.html name=3Dinfo marginheight=3D0 =
+marginwidth=3D0=20
+            noresize scrolling=3Dauto&gt;
+   &lt;/frameset&gt;
+EOF
+
+	print end_html();
+=09
+	chdir (&quot;MTData&quot;);=09
+	createDirectories() unless (-d &quot;users&quot;);
+}
+
+#
+# Utility functions to=20
+# 	build the necessary file structure
+#	load the server options for a cookie
+#	create the actual cookie.
+#
+
+sub createDirectories {
+
+    mkdir (&quot;users&quot;, 0777) unless (-d &quot;users&quot;);
+    chdir(&quot;users&quot;);
+    for ($i =3D 0; $i &lt; 128; $i++) {
+		mkdir($i, 0777) unless (-d $i);
+    }
+}
+
+sub loadServerOptions {
+	%tempOptions =3D ( &quot;SID&quot; =3D&gt; time);
+=09
+	$ip =3D remote_addr();
+	$filename =3D $ip.&quot;so&quot;;
+	$filename =3D~ s/\.//g;
+	chdir(&quot;MTData&quot;);
+  	open (ADMINFILE, &quot;&lt;$filename&quot;) or return %tempOptions;
+  	$query =3D new CGI(ADMINFILE);
+  	close ADMINFILE; =20
+
+  	@names =3D $query-&gt;param;
+  	foreach $key (@names) {
+    	$tempOptions{$key} =3D $query-&gt;param($key) unless ($key eq =
+'save');
+  	}
+  =09
+  	return %tempOptions;
+}
+=09
+sub fillCookie {  =09
+ 	%options =3D loadServerOptions();
+
+  	return cookie(-name=3D&gt;'MSO',
+                -value=3D&gt;\%options,
+				-path=3D&gt;&quot;/&quot;);
+}
+
+
+
+------_=_NextPart_000_01C1C8D1.9548C9A0--
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002716.html">[Xitami] Problem with downloading off Xitami
+</A></li>
+	<LI> Next message: <A HREF="002715.html">[Xitami] Perl script deleting all my perl scripts ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2713">[ date ]</a>
+              <a href="thread.html#2713">[ thread ]</a>
+              <a href="subject.html#2713">[ subject ]</a>
+              <a href="author.html#2713">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

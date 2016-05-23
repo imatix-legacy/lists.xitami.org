@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] LRWP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002864.html">
+   <LINK REL="Next"  HREF="002866.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] LRWP
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] LRWP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 01 Apr 2002 13:54:00 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002864.html">[Xitami] LRWP
+</A></li>
+        <LI> Next message: <A HREF="002866.html">[Xitami] LRWP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2865">[ date ]</a>
+              <a href="thread.html#2865">[ thread ]</a>
+              <a href="subject.html#2865">[ subject ]</a>
+              <a href="author.html#2865">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;011c01c1d91b$85c96fc0$<A HREF="mailto:dd31200a@JAZZ">dd31200a@JAZZ</A>&gt;, &quot;Norman Makoto Su&quot; writes:
+&gt;<i>Would you mind explaining what you mean by &quot;just open multiple connections&quot;?
+</I>&gt;<i>I'm not sure why its all in one process-- don't you have to run multiple LRWP
+</I>&gt;<i>peers (each which have their own memory space, etc)?  I think I'm
+</I>&gt;<i>misunderstanding something.
+</I>
+The original question was whether a LRWP peer could handle multiple
+requests simultaneously (ie, overlapping), to which my response was
+&quot;just open multiple connections&quot; (there is only one request at a time per
+connection).
+
+You can achieve the multiple connections by running multiple instances
+of the LRWP peer (ie, multiple processes), and that'll work fine.  But
+if the LRWP instances need to share data then they'll have to do it via
+a database (common technique), or via shared memory, a private
+connection, etc.
+
+If you want to avoid the overhead of reading/writing to a database, and
+the hassle of shared memory code (particularly portable shared memory
+code), then you could simply write a LRWP peer that opens multiple
+sockets connected to Xitami, and registers itself on each one.  As far
+as Xitami is concerned it's multiple LRWP peers, and they'll be used in
+a round-robin fashion (or in a first-available fashion; depending on how
+Xitami is configured).
+
+There are basically three ways to handle the &quot;multiple
+connections/requests in one process&quot; situation:
+- OS level threading (kernel or system library threading)
+- select()-style loops
+- SMT
+
+While you can do select()-style loops by hand, the design will rapidly
+drive you nuts if it is of any size.  SMT allows you to abstract the
+design further, and gives you &quot;thread-like&quot; execution of the
+select()-style loop handling.
+
+The important thing to remember is that as far as Xitami is concerned,
+LRWP peers are just a socket connection to it, that has registered.  It
+doesn't know anything else about them, and it doesn't care.  It just
+sends them requests to be handled across the socket, one request per
+socket.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002864.html">[Xitami] LRWP
+</A></li>
+	<LI> Next message: <A HREF="002866.html">[Xitami] LRWP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2865">[ date ]</a>
+              <a href="thread.html#2865">[ thread ]</a>
+              <a href="subject.html#2865">[ subject ]</a>
+              <a href="author.html#2865">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

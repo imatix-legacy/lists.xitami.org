@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami Pro and CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004589.html">
+   <LINK REL="Next"  HREF="004594.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami Pro and CGI
+   </H1>
+    <B>Ayhan Tuncer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami Pro and CGI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 07 Jan 2003 14:32:18 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004589.html">[Xitami] Xitami Pro and CGI
+</A></li>
+        <LI> Next message: <A HREF="004594.html">[Xitami] Xitami Pro and CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4593">[ date ]</a>
+              <a href="thread.html#4593">[ thread ]</a>
+              <a href="subject.html#4593">[ subject ]</a>
+              <a href="author.html#4593">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Neil Finlayson wrote:
+</I>&gt;<i> 
+</I>&gt;<i> Hey,
+</I>&gt;<i> 
+</I>&gt;<i> I have just move to Xitami Pro and when i run my CGI scripts i get the
+</I>&gt;<i> error:
+</I>&gt;<i> 
+</I>&gt;<i> Can't locate sub.txt in @INC (@INC contains: c:/Perl1/lib
+</I>&gt;<i> c:/Perl1/site/lib .) at webpages/cgi-bin/2.cgi line 2.
+</I>&gt;<i> I have tried reinstalling Perl, ant nothing else has changed apart
+</I>&gt;<i> from moving to Xitami Pro.
+</I>&gt;<i> 
+</I>&gt;<i> Here is my system config:
+</I>&gt;<i> Windows 2000 server
+</I>&gt;<i> Xitami Pro
+</I>&gt;<i> 1.4Ghz Duron
+</I>&gt;<i> Activeperl
+</I>&gt;<i> PHP
+</I>&gt;<i> 
+</I>&gt;<i> thanks.
+</I>
+This looks like a Perl cgi error if you found the error in cgierr.log
+located in the main Xitami directory. It means your browser's request
+managed both to find the url and to execute the cgi script, however
+there is an error in the cgi script at line 2 .
+
+The Perl interpreter stops execution of the program and issues a warning
+which is written to the standard error, the cgierr.log.
+
+Open with a text editor your script file located at:
+webpages/cgi-bin/2.cgi
+at line 2 of this 2.cgi there should be some code which the perl
+interpreter
+can not execute.
+
+What does it say at line 2?  If it says something like this:
+
+require 'sub.txt';
+
+this means that you have neglected to copy over from your old
+directories
+an individual file by the name of  sub.txt  which your cgi program has
+to
+find and read before it can go any further. You should find this sub.txt
+file and copy it over to the same directory that 2.cgi is in.
+
+Ayhan Tuncer
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004589.html">[Xitami] Xitami Pro and CGI
+</A></li>
+	<LI> Next message: <A HREF="004594.html">[Xitami] Xitami Pro and CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4593">[ date ]</a>
+              <a href="thread.html#4593">[ thread ]</a>
+              <a href="subject.html#4593">[ subject ]</a>
+              <a href="author.html#4593">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

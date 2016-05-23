@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Memory allocation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007659.html">
+   <LINK REL="Next"  HREF="007661.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Memory allocation</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To="
+       TITLE="[Xitami] Memory allocation">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Sat Oct 13 01:34:33 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007659.html">[Xitami] Memory allocation
+</A></li>
+        <LI>Next message: <A HREF="007661.html">[Xitami] Memory allocation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7660">[ date ]</a>
+              <a href="thread.html#7660">[ thread ]</a>
+              <a href="subject.html#7660">[ subject ]</a>
+              <a href="author.html#7660">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Good info, thanks.
+
+For more specifics:
+Server: HP DL380 G2, Dual Processor, 6Gb RAM, 6 146Gb RAID-5 drives, SCSI 
+1Gb controller
+OS: Windows 2003 Enterprise Server (32Bit) with /pae boot.ini option 
+(extended memory from 4Gb to 6Gb)
+Applications: DNS, Mail, MySql, Web
+
+MySql maxes at 3.5Gb (what I have read).  I have set mysql max_connections 
+at 1000 (for now) and optimized the cache(s) at 250Mb.  MySql is configured 
+for MYISAM dbs.  Xitami &gt; Perl &gt; MySql will be the most intensive 
+applications.  I ultimately will be moving Web/Perl, DNS, and Mail off of 
+the above server as I expand.  However, until I expand, the 
+Xitami/Perl/Mysql trio is my biggest concern when it comes to optimization.
+
+Perl only gets executed as a result of cgi-bin files in Xitami.  And I 
+believe I have tweaked MySql as best as I can get it (for now) so my biggest 
+concern was configuring Xitami/Windows so that Xitami and OS wouldn't be a 
+bottle neck.  I know soooo many people have said on many many occassions not 
+to use Xitami for production.  But for the many years I have run I have 
+NEVER had a problem with it and its been very trustworthy, fast and 
+reliable.  I suspect though that my latest website is going to test all 
+previous limits but I still want to give Xitami the chance it deserves as my 
+production webserver.
+
+Is it best to let Windows determine its own virtual memory or should I just 
+set it 10Gb?  And I wish there was a way to completely dedicate, within 
+Windows, physical ram to specific apps.
+
+Thanks
+-R
+
+----- Original Message ----- 
+From: &quot;Paul Reid&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">preid at rci.rutgers.edu</A>&gt;
+To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Friday, October 12, 2007 3:25 PM
+Subject: Re: [Xitami] Memory allocation
+
+
+&gt;<i> &gt;  is there anyway to provde the application more memory so that if it
+</I>&gt;<i> needs it, it is available.
+</I>&gt;<i>
+</I>&gt;<i> It's not Mac OS/6. Any 32-bit Win-app can request 2GB at any time. The
+</I>&gt;<i> whole point of virtual memory is that the app does not know if the 2GB
+</I>&gt;<i> is DRAM or hard drive or small angels with clay tablets.
+</I>&gt;<i>
+</I>&gt;<i> I've run Xitami and CGI in 8MB (obviously not Win2003). If a runaway
+</I>&gt;<i> script asks for 6MB, so the total system demand is 12MB in 8MB RAM, the
+</I>&gt;<i> request is satisfied though the system gets slow. The fix is to be sure
+</I>&gt;<i> you always have that 5MB (or whatever) to spare.
+</I>&gt;<i>
+</I>&gt;<i> Use Task Manager. &quot;PF Usage&quot; should flutter far below the Physical
+</I>&gt;<i> Memory number. Launching a CGI interpreter will spike it; VB6 runtime
+</I>&gt;<i> loads over 1MB of junk into RAM, but gives it back when it exits.
+</I>&gt;<i>
+</I>&gt;<i> My Xitami on Win2003 box is idling at 173MB total. Xitami is 5th on the
+</I>&gt;<i> process list with about 5MB used. Launching a small Perl script barely
+</I>&gt;<i> registers.
+</I>&gt;<i>
+</I>&gt;<i> Task Manager also shows CPU Usage. When code is not waiting on disk or
+</I>&gt;<i> I/O, this always spikes to 100%, but if it spikes and falls in a blink
+</I>&gt;<i> then you are not really limited by CPU.
+</I>&gt;<i>
+</I>&gt;<i> &gt;  with 6Gb of memory
+</I>&gt;<i>
+</I>&gt;<i> I think Xitami has more than enough memory. Also VB, Perl, PHP.
+</I>&gt;<i>
+</I>&gt;<i> &gt; The biggest slow down of the server is watching cgi-bin scripts kick 
+</I>&gt;<i> &gt; off.
+</I>&gt;<i>
+</I>&gt;<i> What interpreter, and how heavy are the scripts? Even back in 133MHz
+</I>&gt;<i> 128MB RAM days, we could get away with quite sloppy code. One of my
+</I>&gt;<i> scripts opens and reads several text files, twice, because it was less
+</I>&gt;<i> programmer work than doing it once and the result was plenty fast.
+</I>&gt;<i> Another one must skim every file in a folder to get type and summary
+</I>&gt;<i> info, and it runs in a blink. If you are opening gigabyte databases, you
+</I>&gt;<i> probably don't want the script doing that, you want a persistent
+</I>&gt;<i> database server application which is already primed when the CGI asks
+</I>&gt;<i> for data.
+</I>&gt;<i>
+</I>&gt;<i> Apache has a way to keep PHP running all the time so you don't suffer a
+</I>&gt;<i> PHP interpreter load on every hit. But that only helps if you have a LOT
+</I>&gt;<i> of hits on scripts so easy that interpreter load-time exceeds script
+</I>&gt;<i> runtime.
+</I>&gt;<i>
+</I>&gt;<i> Interpreted scripts can sometimes be compiled, and run somewhat faster,
+</I>&gt;<i> if they are not disk-bound.
+</I>&gt;<i>
+</I>&gt;<i> In short: you need to know what's really taking time, and what resource
+</I>&gt;<i> it is bound in. And with 6GB, it seems unlikely that RAM-cram or memory
+</I>&gt;<i> allocation is the problem.
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Paul Reid
+</I>&gt;<i> System Administrator
+</I>&gt;<i> Music Department
+</I>&gt;<i> Mason Gross School of the Arts
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007659.html">[Xitami] Memory allocation
+</A></li>
+	<LI>Next message: <A HREF="007661.html">[Xitami] Memory allocation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7660">[ date ]</a>
+              <a href="thread.html#7660">[ thread ]</a>
+              <a href="subject.html#7660">[ subject ]</a>
+              <a href="author.html#7660">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

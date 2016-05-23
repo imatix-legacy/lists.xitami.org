@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Plaintext passwords on Bugtraq (again)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003508.html">
+   <LINK REL="Next"  HREF="003469.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Plaintext passwords on Bugtraq (again)
+   </H1>
+    <B>Dwaine Gonyier
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Plaintext passwords on Bugtraq (again)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Jun 2002 10:01:46 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003508.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+        <LI> Next message: <A HREF="003469.html">[Xitami] Virtual hosts how to setup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3511">[ date ]</a>
+              <a href="thread.html#3511">[ thread ]</a>
+              <a href="subject.html#3511">[ subject ]</a>
+              <a href="author.html#3511">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I don't know if this has been brought up before, but
+you can always configure Xitami to only allow admin
+access from localhost and use encrypted tunneling via
+ssh (<A HREF="http://www.openssh.com/">http://www.openssh.com/</A>)
+or zebedee (<A HREF="http://www.winton.org.uk/zebedee/">http://www.winton.org.uk/zebedee/</A>)
+to open a secure connection to the web server
+host to do administrative stuff with Xitami.
+Either way, HTTP text will be sent through an encrypted
+tunnel via port forwarding.
+
+I use zebedee to do this all the time with Xitami.
+
+For windows, you can try <A HREF="http://www.cygwin.com">http://www.cygwin.com</A> for ssh.
+I think it has a sshd too.
+
+--
+Dwaine Gonyier
+<A HREF="mailto:dwaine_gonyier@mindspring.com">dwaine_gonyier@mindspring.com</A>
+
+----- Original Message -----
+From: &quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, June 24, 2002 9:11 AM
+Subject: Re: [Xitami] Plaintext passwords on Bugtraq (again)
+
+
+&gt;<i> At 10:58 AM 6/24/2002 +0200, Pieter Hintjens writeth:
+</I>&gt;<i> &gt;Michael Burns &lt;<A HREF="mailto:mburns83@directvinternet.com">mburns83@directvinternet.com</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt; Imatix,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Why were the passwords in the configuration files (default.aut,
+</I>&gt;<i> &gt;&gt; ftpusers.aut, etc.) left in plaintext? Is there any plan to change
+</I>&gt;<i> &gt;&gt; that?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I think the FAQ answers the 'why', and I don't see any flaws in the
+</I>&gt;<i> &gt;original reasoning: if someone can read your password files, then (a)
+</I>&gt;<i> &gt;they can use dictionary-based attacks, and (b) your general security
+</I>&gt;<i> &gt;has been compromised and that is much more serious than whether the
+</I>&gt;<i> &gt;passwords are hashed or not (and the extra hour or two that takes for
+</I>&gt;<i> &gt;someone to crack enough of them to get into your server).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;My personal opinion is that flagrantly unsecured password files are
+</I>&gt;<i> &gt;actually a 'feature' since they oblige the system administrator to
+</I>&gt;<i> &gt;think seriously about security issues (such as running NTFS vs.
+</I>&gt;<i> &gt;FAT32).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;But that may just be laziness.  We've always planned to implement
+</I>&gt;<i> &gt;password hashing at some stage.  Given that this issue keeps coming
+</I>&gt;<i> &gt;back, we'll look at this for the next release.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;The planned design is this: we will keep the existing file
+</I>&gt;<i> &gt;structures, and put the hashing logic inside Xitami.  When it reads a
+</I>&gt;<i> &gt;password file, it will hash any (new) unhashed passwords.  We don't
+</I>&gt;<i> &gt;want to break scripts that create password files.
+</I>&gt;<i>
+</I>&gt;<i> However, the problem still won't go away since anyone sniffing for
+</I>packets
+&gt;<i> can grab any HTTP Authorization header and store it away for a later
+</I>replay
+&gt;<i> attack (MD5 hashes included).  What is worse is that Xitami doesn't
+</I>have
+&gt;<i> DIGEST mode available which means that the username:password
+</I>combination is
+&gt;<i> only Base64 encoded (and makes it _VERY_ easy to obtain access to
+</I>&quot;secure&quot;
+&gt;<i> areas - e.g. remote /admin access).  Even with DIGEST mode, it still
+</I>&gt;<i> doesn't stop a replay attack since the HTTP protocol doesn't have any
+</I>&gt;<i> secure handshaking methods.
+</I>&gt;<i>
+</I>&gt;<i> So, hashing the files might help some locally, but won't stop anyone
+</I>from
+&gt;<i> attacking the server remotely.  The problem is not necessarily with
+</I>Xitami
+&gt;<i> but also has to do with the inherent weakness of the HTTP protocol.
+</I>&gt;<i>
+</I>&gt;<i> Hope this helps!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+</I>&gt;<i> Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+</I>&gt;<i>                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003508.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+	<LI> Next message: <A HREF="003469.html">[Xitami] Virtual hosts how to setup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3511">[ date ]</a>
+              <a href="thread.html#3511">[ thread ]</a>
+              <a href="subject.html#3511">[ subject ]</a>
+              <a href="author.html#3511">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

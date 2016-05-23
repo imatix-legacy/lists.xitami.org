@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] VHost CNAME path question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006248.html">
+   <LINK REL="Next"  HREF="006246.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] VHost CNAME path question
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] VHost CNAME path question">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Oct 2004 22:54:59 +0100 (BST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006248.html">[Xitami] VHost CNAME path question
+</A></li>
+        <LI> Next message: <A HREF="006246.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6244">[ date ]</a>
+              <a href="thread.html#6244">[ thread ]</a>
+              <a href="subject.html#6244">[ subject ]</a>
+              <a href="author.html#6244">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:5.1.1.6.0.20041026141828.00b3b838@mail.mrjdesign.com">5.1.1.6.0.20041026141828.00b3b838@mail.mrjdesign.com</A>&gt;
+   admin writes:
+
+&gt;<i> I have different domain names specified in the Vhost section done.
+</I>&gt;<i> That works fine as long as the domain name is different.
+</I>&gt;<i> 
+</I>&gt;<i> when I add a CNAME named OTHER to the OTHER.MYDOMAIN.COM
+</I>&gt;<i> 
+</I>&gt;<i> then OTHER.MYDOMAIN.COM and MYDOMAIN.COM still go to the same site.
+</I>
+OK, ignore my earlier reply (written Tues am, but only recently
+uploaded).  I now understand better what your problem is.
+
+When you add a CNAME RR to your domain, then anything encountering that
+record will in turn ask to resolve the IP address for the &quot;canonical
+name&quot; to which you've just pointed.  Therefore, by the time the web
+browser issues its request, it will have that canonical name in its Host:
+header line, and not the original name.
+
+The answer is NOT to use CNAME; instead, provide a separate A record,
+pointing to the same IP address as the other host(s); the HTTP request
+will now include the original other.mydomain.com in its headers.
+
+&gt;<i> They shouldn't.
+</I>
+They will; that's how CNAMEs work.
+
+-- 
+Brian {Hamilton Kelly}                                     <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+   &quot;I don't use Linux. I prefer to use an OS supported by a large multi-
+   national vendor, with a good office suite, excellent network/internet
+   software and decent hardware support.&quot;
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006248.html">[Xitami] VHost CNAME path question
+</A></li>
+	<LI> Next message: <A HREF="006246.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6244">[ date ]</a>
+              <a href="thread.html#6244">[ thread ]</a>
+              <a href="subject.html#6244">[ subject ]</a>
+              <a href="author.html#6244">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

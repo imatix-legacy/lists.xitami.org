@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006266.html">
+   <LINK REL="Next"  HREF="006268.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Limiting Bandwidth - How to Use Pipe Settings?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 04 Nov 2004 15:15:27 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006266.html">[Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+</A></li>
+        <LI> Next message: <A HREF="006268.html">[Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6267">[ date ]</a>
+              <a href="thread.html#6267">[ thread ]</a>
+              <a href="subject.html#6267">[ subject ]</a>
+              <a href="author.html#6267">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Adam,
+
+I haven't done that, but I would try to edit the default.cfg directly. Here the section out of the 
+xitami.cfg.
+
+#   Specifies the HTTP throttle pipe. With a throttle pipe you can
+#   restrict the throughput of a website to some fixed maximum, e.g.
+#   64Kbps. This can be useful if several websites share a single
+#   line, and you need to share this on a quality-of-service basis.
+#   The HTTP throttle pipe is applied to all download and upload
+#   requests to the website. You can apply a throttle pipe to the
+#   entire HTTP server or to specific virtual hosts. Pipes are defined
+#   in the XML file 'pipedef.xml'. You can edit this file to add new
+#   pipes; Xitami reloads this automatically after a short delay. Each
+#   pipe is defined as several 'instances', which are simply
+#   individual pipes that share the same characteristics. For example,
+#   the default pipedef.xml file defines several pipes with a 64Kbps
+#   throughput. These are individual instances of a 64Kpbs pipe. All
+#   transfers that use a specific pipe instance share the bandwidth of
+#   that pipe instance.
+
+    pipe=
+
+#   Specifies the throttle pipe definition file. This is an XML file
+#   that follows a specific format - look at pipedef.xml for an
+#   explanation. If you define your own throttle pipes, it's a good
+#   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+#   and then change that. This avoids unpleasant surprises when you
+#   upgrade your Xitami version. Note that we may change the format of
+#   the pipe definition file in the future.
+
+    pipedef=pipedef.xml
+
+If you want to make changes to that, make them in your default.cfg. After editing and the saving 
+the default.cfg the changes should take affect. I experienced similar problems when working with 
+the &quot;admin gui&quot; and just edited the file and the settings did take effect.
+
+
+
+Am 4 Nov 2004 um 11:36 hat Adam Schroeder geschrieben:
+
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I've read through the FAQ and help, but I can't figure out how to make use 
+</I>&gt;<i> of the Pipe settings to limit bandwidth.
+</I>&gt;<i> 
+</I>&gt;<i> I want to limit the bandwidth so I can see how my project will run over 
+</I>&gt;<i> various connections.  When I try to select an HTTP throttle pipe from the 
+</I>&gt;<i> configuration screen it never saves my selection.  Ideally I would like to 
+</I>&gt;<i> limit it even further then 32k.
+</I>&gt;<i> 
+</I>&gt;<i> I am not worried about segmenting the bandwidth among sites,  a global 
+</I>&gt;<i> setting will work fine for me.
+</I>&gt;<i> 
+</I>&gt;<i> I imagine this is pretty simple to do, once you know the right steps to 
+</I>&gt;<i> take. If anyone could provide me those steps I would really appreciate it.
+</I>&gt;<i> 
+</I>&gt;<i> I am on an XP machine.  Running Xitami 2.5c2
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for your time,
+</I>&gt;<i> Adam
+</I>&gt;<i> 
+</I>
+
+
+#   Specifies the HTTP throttle pipe. With a throttle pipe you can
+#   restrict the throughput of a website to some fixed maximum, e.g.
+#   64Kbps. This can be useful if several websites share a single
+#   line, and you need to share this on a quality-of-service basis.
+#   The HTTP throttle pipe is applied to all download and upload
+#   requests to the website. You can apply a throttle pipe to the
+#   entire HTTP server or to specific virtual hosts. Pipes are defined
+#   in the XML file 'pipedef.xml'. You can edit this file to add new
+#   pipes; Xitami reloads this automatically after a short delay. Each
+#   pipe is defined as several 'instances', which are simply
+#   individual pipes that share the same characteristics. For example,
+#   the default pipedef.xml file defines several pipes with a 64Kbps
+#   throughput. These are individual instances of a 64Kpbs pipe. All
+#   transfers that use a specific pipe instance share the bandwidth of
+#   that pipe instance.
+
+    pipe=
+
+#   Specifies the throttle pipe definition file. This is an XML file
+#   that follows a specific format - look at pipedef.xml for an
+#   explanation. If you define your own throttle pipes, it's a good
+#   idea to copy pipedef.xml to something else (e.g. 'mypipes.xml')
+#   and then change that. This avoids unpleasant surprises when you
+#   upgrade your Xitami version. Note that we may change the format of
+#   the pipe definition file in the future.
+
+    pipedef=pipedef.xmlJohannes
+
+-----------------------
+Johannes Prost
+<A HREF="mailto:xitami@pastryworld.ca">xitami@pastryworld.ca</A>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006266.html">[Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+</A></li>
+	<LI> Next message: <A HREF="006268.html">[Xitami] Limiting Bandwidth - How to Use Pipe Settings?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6267">[ date ]</a>
+              <a href="thread.html#6267">[ thread ]</a>
+              <a href="subject.html#6267">[ subject ]</a>
+              <a href="author.html#6267">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

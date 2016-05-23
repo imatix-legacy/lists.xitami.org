@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] memtrace file clogging system up?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000067.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] memtrace file clogging system up?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] memtrace file clogging system up?">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 13 Dec 2001 17:05:42 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000067.html">[Xitami-Dev] memtrace file clogging system up?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:17122790551.20011212141645@gzo.dk">17122790551.20011212141645@gzo.dk</A>&gt;, AO writes:
+&gt;<i>A couble of time have I tried to get my Xitami installation
+</I>&gt;<i>drive filled totally up by a file called
+</I>&gt;<i>memtrace.[something] I cant remember the extension, since i
+</I>&gt;<i>had to remove the file in order to get anyting to work. It
+</I>&gt;<i>seems to be some kind of debugging info or something...
+</I>
+Yeah, memtrace.lst is written when the server stops without freeing up
+all the memory it allocates -- as a debugging aid.
+
+Usually the file should be pretty small (10KB or so at worst); if you
+get an &quot;infinite&quot; length file (ie, bigger than 1-2MB), then chances are
+the memory has become corrupted for some reason, so that the list of
+&quot;allocated memory blocks&quot; goes around in a loop, and the file repeats
+the same information over and over again.  This is a bug too, but
+perhaps not the best way to tell you about it :-)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000067.html">[Xitami-Dev] memtrace file clogging system up?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

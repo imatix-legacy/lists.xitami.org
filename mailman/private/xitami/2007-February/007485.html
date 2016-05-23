@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running two copies of xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Running%20two%20copies%20of%20xitami&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007486.html">
+   <LINK REL="Next"  HREF="007487.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running two copies of xitami</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Running%20two%20copies%20of%20xitami&In-Reply-To="
+       TITLE="[Xitami] Running two copies of xitami">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Thu Feb  1 10:49:31 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007486.html">[Spam] [Xitami] Running two copies of xitami
+</A></li>
+        <LI>Next message: <A HREF="007487.html">[Xitami] Simple forum software
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7485">[ date ]</a>
+              <a href="thread.html#7485">[ thread ]</a>
+              <a href="subject.html#7485">[ subject ]</a>
+              <a href="author.html#7485">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Linda:
+
+You don't have to run a seperate copy of Xitami.  If you aren't aware you 
+can have many virtual domains exist on a single IP address.  Each virtual 
+domain would have its own config file.  However, if you are aware of this 
+and still want a second copy of xitami running then you would need a second 
+install of xitami (in a second folder) and you would need to do a minimum of 
+two things:
+
+1.  change the service name of the second copy - by default ximati uses its 
+names as the windows process service identifier. In the defaults.cfg of the 
+second install under the [Win32] section you would need to change 
+&quot;Service-name&quot; to something other than &quot;Xitami&quot; (this is assuming you left 
+the first install copy as the default service name.).  Ideally you would 
+want to change the &quot;Service-text&quot; too, but that is just the service 
+description so its not truly needed.
+
+2.  for the port, in the defaults.cfg file uner [Server] you would need to 
+change the &quot;portbase&quot; to the appropriate number.  If you don't see it there 
+then you can add it:
+    portbase= 0        # e.g. 5000 for port 5080
+
+by the example after the #, the default port (aka: base port) is port 80 
+thats one reaons why you might not see it under the [Server] section, but if 
+it is or you have already added it then note that portbase=0 IS the HTTP 
+port 80.  So if you wanted to change your secondary Xitami install to port 
+81, then set portbase=1, to set it to 8080, portbase=8000.  Basically, what 
+ever number you want to use, subtract 80 from that number and that will be 
+your portbase.
+
+I probably did overkill on the explanation but its late my time right now 
+and I have sort of gone into zombie mode.  :-)
+
+-Russel
+
+
+
+----- Original Message ----- 
+From: &quot;Linda McCullough&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ltdeditions at paradise.net.nz</A>&gt;
+To: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Tuesday, January 30, 2007 8:56 PM
+Subject: [Xitami] Running two copies of xitami
+
+
+&gt;<i> Hi everyone!
+</I>&gt;<i>
+</I>&gt;<i> This is from my ISP...
+</I>&gt;<i>
+</I>&gt;<i> &quot;I have set the DNS records for dingbattees.co.nz to point to your cable 
+</I>&gt;<i> IP of 203.97.121.175.&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I am running
+</I>&gt;<i> xitami and already have solarcharts.co.nz on
+</I>&gt;<i> port 80 at the same IP. I have set up another copy of xitami for the 
+</I>&gt;<i> dingbat tees website. Does this go on a different port? If so, where do I 
+</I>&gt;<i> change the port number. I have tried the help pages but couldn't find how 
+</I>&gt;<i> to do it.
+</I>&gt;<i>
+</I>&gt;<i> Thanks
+</I>&gt;<i> linda
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007486.html">[Spam] [Xitami] Running two copies of xitami
+</A></li>
+	<LI>Next message: <A HREF="007487.html">[Xitami] Simple forum software
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7485">[ date ]</a>
+              <a href="thread.html#7485">[ thread ]</a>
+              <a href="subject.html#7485">[ subject ]</a>
+              <a href="author.html#7485">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

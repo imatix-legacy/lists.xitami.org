@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HTTP Publishing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002892.html">
+   <LINK REL="Next"  HREF="002895.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HTTP Publishing
+   </H1>
+    <B>Sean Brennan
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HTTP Publishing">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 05 Apr 2002 14:42:07 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002892.html">[Xitami] HTTP Publishing
+</A></li>
+        <LI> Next message: <A HREF="002895.html">[Xitami] HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2893">[ date ]</a>
+              <a href="thread.html#2893">[ thread ]</a>
+              <a href="subject.html#2893">[ subject ]</a>
+              <a href="author.html#2893">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_18859556==_.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+
+I believe my problem is that HTTP update method on a resource which has not 
+been authorized for this. I think it's authentication. I'm trying to figure 
+out the correct way to configure the xitami.aut allow an HTTP put. I've 
+added http-update=1 to the xitami.aut file but it's not accepting it for my 
+user I configured. Maybe someone has a xitami.aut file I can see who's 
+using HTTP puts to the server.
+
+Thanks,
+
+Sean
+
+At 04:08 PM 4/5/2002 -0600, you wrote:
+&gt;<i>Sean,
+</I>&gt;<i>
+</I>&gt;<i>Maybe this quote from the FAQ helps...:
+</I>&gt;<i>
+</I>&gt;<i>&quot;
+</I>&gt;<i>
+</I>&gt;<i>15: I get 'Not authorized to access this resource' on other URLs
+</I>&gt;<i>
+</I>&gt;<i>There are a number of specific reasons why Xitami may return this:
+</I>&gt;<i>    * The resource you are accessing is protected by a 'webmask' 
+</I>&gt;<i> definition which excludes your PC.
+</I>&gt;<i>    * You are trying to browse a directory, but directory listings have 
+</I>&gt;<i> not been enabled.
+</I>&gt;<i>    * You are trying to use an HTTP update method (PUT, DELETE, MOVE, or 
+</I>&gt;<i> COPY) on a resource which has not been authorised for this.
+</I>&gt;<i>    * You are trying to run the WBA, but this has been disabled by the 
+</I>&gt;<i> security:admin option.
+</I>&gt;<i>    * The URL refers to a Windows short filename when a long filename also 
+</I>&gt;<i> exists. Xitami rejects this as being a potential security violation. You 
+</I>&gt;<i> can switch this behaviour off by setting security:safepaths to 0.
+</I>&gt;<i>    * You're trying to do a HTTP PUT, DELETE, MOVE, or COPY operation, and 
+</I>&gt;<i> specified an absolute Content-Location: or Destination: URI which did not 
+</I>&gt;<i> have the same path as the request URI. Xitami rejects this because the 
+</I>&gt;<i> authorisation was carried-out on the request URL, and using a different 
+</I>&gt;<i> path for the Content-Location: or Destination: URL would violate this.
+</I>&gt;<i>    * A HTTP PUT, DELETE, MOVE, or COPY operation failed because of an 
+</I>&gt;<i> access violation at the operating system level - for instance Xitami 
+</I>&gt;<i> tried to write to a file which was marked as read-only.
+</I>&gt;<i>In most of these cases, the reason for the error will be logged when you 
+</I>&gt;<i>enable server debugging.
+</I>&gt;<i>&quot;
+</I>&gt;<i>
+</I>&gt;<i>Kind Regards,
+</I>&gt;<i>Paul Claessen
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &lt;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&gt;Sean Brennan
+</I>&gt;<i>To: &lt;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> ; 
+</I>&gt;<i>&lt;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Sent: Friday, April 05, 2002 3:44 PM
+</I>&gt;<i>Subject: Re: [Xitami] HTTP Publishing
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Thanks for the responses. Paul is correct, I'm just trying to update a web 
+</I>&gt;<i>page via an HTTP PUT using Netscape's Composer. My understanding is that 
+</I>&gt;<i>this &quot;Publish&quot; feature I'm referring to uses an HTTP Put to update the 
+</I>&gt;<i>html pages to servers. I hit the server, but it returns an &quot;the server 
+</I>&gt;<i>responded: You are not authorized to access this resource&quot;.
+</I>&gt;<i>
+</I>&gt;<i>The page Xitami I'm referring that states it supports HTTP is under the 
+</I>&gt;<i>User Authentication section
+</I>&gt;<i>
+</I>&gt;<i>at: <A HREF="http://www.imatix.com/html/xitami/index3.htm#TOC18">http://www.imatix.com/html/xitami/index3.htm#TOC18</A>
+</I>&gt;<i>
+</I>&gt;<i>Thanks for all the responses.
+</I>&gt;<i>
+</I>&gt;<i>Regards,
+</I>&gt;<i>
+</I>&gt;<i>Sean
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>At 01:28 PM 4/5/2002 -0600, Paul Claessen wrote:
+</I>&gt;&gt;<i>Ervin,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>No, I don't think he's referring to Frontpage. Just to HTTP's
+</I>&gt;&gt;<i>'put' request. (See RFC 2068, under 9.6).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Xitami indeed states somewhere that they have no intention
+</I>&gt;&gt;<i>to support Frontpage and gives as reason that it is not properly
+</I>&gt;&gt;<i>documented and that they're not in the business of reverse
+</I>&gt;&gt;<i>engineering Microsoft software.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>So, since you claim FP to be a documented protocol, I would
+</I>&gt;&gt;<i>be very interested in obtaining a link to that document!
+</I>&gt;&gt;<i>Could you supply that to us?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Kind Regards,
+</I>&gt;&gt;<i>Paul Claessen
+</I>&gt;&gt;<i>What your trying to do id use FrontPage extensions.  Xitami doesn't support
+</I>&gt;&gt;<i>that protocal.  FP extensions is a special way to change files on a web
+</I>&gt;&gt;<i>server.  I would recomend that you publish your pages with an FTP program.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Xitami does not now, nor will in the future support Front Page extensions.
+</I>&gt;&gt;<i>This has been a hot topic in the past.  If you're a savy enough programmer
+</I>&gt;&gt;<i>Xitami is open source.  And the FrontPage is actually a documented protocal
+</I>&gt;&gt;<i>so you could in theory build FP compatibility into Xitami.
+</I>&gt;&gt;<i>--------- Original message --------
+</I>&gt;&gt;<i>From: &quot;Sean Brennan&quot; 
+</I>&gt;&gt;<i>&lt;&lt;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&gt;<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&gt;
+</I>&gt;&gt;<i>To: &quot;&lt;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot; 
+</I>&gt;&gt;<i>&lt;&lt;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;&gt;<i>Subject: [Xitami] HTTP Publishing
+</I>&gt;&gt;<i>Date: 04-05-02 05:52
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I'm trying to &quot;publish&quot; web pages to the Xitami server via HTTP put. I found
+</I>&gt;&gt;<i>some real generic information, but I cannot get this functionality
+</I>&gt;&gt;<i>working. Can anyone help?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Thanks and best regards,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Sean Brennan
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>--
+</I>&gt;&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i>To unsubscribe: 
+</I>&gt;&gt;<i>&lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>&gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+</I>&gt;&gt;<i>
+</I>
+--=====================_18859556==_.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+&lt;html&gt;
+&lt;br&gt;
+I believe my problem is that HTTP update method on a resource which has
+not been authorized for this. I think it's authentication. I'm trying to
+figure out the correct way to configure the xitami.aut allow an HTTP put.
+I've added http-update=1 to the xitami.aut file but it's not accepting it
+for my user I configured. Maybe someone has a xitami.aut file I can see
+who's using HTTP puts to the server.&lt;br&gt;&lt;br&gt;
+Thanks,&lt;br&gt;&lt;br&gt;
+Sean&lt;br&gt;&lt;br&gt;
+At 04:08 PM 4/5/2002 -0600, you wrote:&lt;br&gt;
+&lt;blockquote type=cite class=cite cite&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;Sean,&lt;/font&gt;&lt;br&gt;
+&amp;nbsp;&lt;br&gt;
+&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;Maybe this quote from
+the FAQ helps...:&lt;/font&gt;&lt;br&gt;
+&amp;nbsp;&lt;br&gt;
+&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;&amp;quot;&lt;/font&gt;&lt;br&gt;&lt;br&gt;
+&lt;b&gt;15: I get 'Not authorized to access this resource' on other
+URLs&lt;/b&gt;&lt;a name=&quot;w_15&quot;&gt;&lt;/a&gt;  &lt;br&gt;&lt;br&gt;
+There are a number of specific reasons why Xitami may return this: 
+&lt;ol&gt;
+&lt;li&gt;The resource you are accessing is protected by a 'webmask' definition
+which excludes your PC. 
+&lt;li&gt;You are trying to browse a directory, but directory listings have not
+been enabled. 
+&lt;li&gt;You are trying to use an HTTP update method (PUT, DELETE, MOVE, or
+COPY) on a resource which has not been authorised for this. 
+&lt;li&gt;You are trying to run the WBA, but this has been disabled by the
+security:admin option. 
+&lt;li&gt;The URL refers to a Windows short filename when a long filename also
+exists. Xitami rejects this as being a potential security violation. You
+can switch this behaviour off by setting security:safepaths to 0. 
+&lt;li&gt;You're trying to do a HTTP PUT, DELETE, MOVE, or COPY operation, and
+specified an absolute Content-Location: or Destination: URI which did not
+have the same path as the request URI. Xitami rejects this because the
+authorisation was carried-out on the request URL, and using a different
+path for the Content-Location: or Destination: URL would violate this. 
+&lt;li&gt;A HTTP PUT, DELETE, MOVE, or COPY operation failed because of an
+access violation at the operating system level - for instance Xitami
+tried to write to a file which was marked as read-only. 
+&lt;/ol&gt;In most of these cases, the reason for the error will be logged when
+you enable server debugging. &lt;br&gt;
+&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;&amp;quot;&lt;/font&gt;&lt;br&gt;
+&amp;nbsp;&lt;br&gt;
+&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;Kind
+Regards,&lt;/font&gt;&lt;br&gt;
+&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;Paul
+Claessen&lt;/font&gt;&lt;br&gt;
+&amp;nbsp;
+&lt;dl&gt;
+&lt;dd&gt;----- Original Message ----- 
+&lt;dd&gt;From:&lt;/b&gt; &lt;a href=&quot;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&quot;&gt;Sean
+Brennan&lt;/a&gt; 
+&lt;dd&gt;To:&lt;/b&gt;
+&lt;a href=&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/a&gt; ; &lt;a href=&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/a&gt; 
+&lt;dd&gt;Sent:&lt;/b&gt; Friday, April 05, 2002 3:44 PM
+&lt;dd&gt;Subject:&lt;/b&gt; Re: [Xitami] HTTP Publishing&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Thanks for the responses. Paul is correct, I'm just trying to update a web page via an HTTP PUT using Netscape's Composer. My understanding is that this &amp;quot;Publish&amp;quot; feature I'm referring to uses an HTTP Put to update the html pages to servers. I hit the server, but it returns an &amp;quot;the server responded: You are not authorized to access this resource&amp;quot;.&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;The page Xitami I'm referring that states it supports HTTP is under the User Authentication section &lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;at: &lt;a href=&quot;<A HREF="http://www.imatix.com/html/xitami/index3.htm#TOC18"">http://www.imatix.com/html/xitami/index3.htm#TOC18&quot;</A> eudora=&quot;autourl&quot;&gt;<A HREF="http://www.imatix.com/html/xitami/index3.htm#TOC18</a">http://www.imatix.com/html/xitami/index3.htm#TOC18&lt;/a</A>&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Thanks for all the responses.&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Regards,&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Sean
+&lt;dd&gt;&amp;nbsp;&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;At 01:28 PM 4/5/2002 -0600, Paul Claessen wrote:&lt;blockquote type=cite class=cite cite&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;Ervin,&lt;/font&gt;
+&lt;dd&gt;&amp;nbsp;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;No, I don't think he's referring to Frontpage. Just to HTTP's&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;'put' request. (See RFC 2068, under 9.6).&lt;/font&gt;
+&lt;dd&gt;&amp;nbsp;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;Xitami indeed states somewhere that they have no intention&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;to support Frontpage and gives as reason that it is not properly&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;documented and that they're not in the business of reverse&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;engineering Microsoft software.&lt;/font&gt;
+&lt;dd&gt;&amp;nbsp;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;So, since you claim FP to be a documented protocol, I would&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;be very interested in obtaining a link to that document!&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;Could you supply that to us?&lt;/font&gt;
+&lt;dd&gt;&amp;nbsp;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;Kind Regards,&lt;/font&gt;&lt;font face=&quot;Comic Sans MS&quot; size=2 color=&quot;#800000&quot;&gt;
+&lt;dd&gt;Paul Claessen&lt;/font&gt; 
+&lt;dd&gt;What your trying to do id use FrontPage extensions.&amp;nbsp; Xitami doesn't support 
+&lt;dd&gt;that protocal.&amp;nbsp; FP extensions is a special way to change files on a web 
+&lt;dd&gt;server.&amp;nbsp; I would recomend that you publish your pages with an FTP program.&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Xitami does not now, nor will in the future support Front Page extensions. 
+&lt;dd&gt;This has been a hot topic in the past.&amp;nbsp; If you're a savy enough programmer 
+&lt;dd&gt;Xitami is open source.&amp;nbsp; And the FrontPage is actually a documented protocal 
+&lt;dd&gt;so you could in theory build FP compatibility into Xitami.
+&lt;dd&gt;--------- Original message -------- 
+&lt;dd&gt;From: &amp;quot;Sean Brennan&amp;quot; &amp;lt;&lt;a href=&quot;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&quot;&gt;<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&lt;/a&gt;&amp;gt; 
+&lt;dd&gt;To: &amp;quot;&lt;a href=&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/a&gt;&amp;quot; &amp;lt;&lt;a href=&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/a&gt;&amp;gt; 
+&lt;dd&gt;Subject: [Xitami] HTTP Publishing 
+&lt;dd&gt;Date: 04-05-02 05:52&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;I'm trying to &amp;quot;publish&amp;quot; web pages to the Xitami server via HTTP put. I found 
+&lt;dd&gt;some real generic information, but I cannot get this functionality 
+&lt;dd&gt;working. Can anyone help?&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Thanks and best regards,&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;Sean Brennan&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;
+
+&lt;dd&gt;-- 
+&lt;dd&gt;Xitami Users Mailing List -- For Xitami support 
+&lt;dd&gt;To unsubscribe: &lt;a href=&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami</a">http://lists.xitami.org/mailman/listinfo/xitami&lt;/a</A>&gt; 
+&lt;/dl&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/html&gt;
+
+--=====================_18859556==_.ALT--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002892.html">[Xitami] HTTP Publishing
+</A></li>
+	<LI> Next message: <A HREF="002895.html">[Xitami] HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2893">[ date ]</a>
+              <a href="thread.html#2893">[ thread ]</a>
+              <a href="subject.html#2893">[ subject ]</a>
+              <a href="author.html#2893">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

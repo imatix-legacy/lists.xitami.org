@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami crashing after FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003612.html">
+   <LINK REL="Next"  HREF="003614.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami crashing after FTP
+   </H1>
+    <B>WhiteShepherd
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami crashing after FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 9 Jul 2002 13:17:13 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003612.html">[Xitami] Xitami crashing after FTP
+</A></li>
+        <LI> Next message: <A HREF="003614.html">[Xitami] php
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3613">[ date ]</a>
+              <a href="thread.html#3613">[ thread ]</a>
+              <a href="subject.html#3613">[ subject ]</a>
+              <a href="author.html#3613">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for theinsight.  If it's any help I'm not running Windows.  I'm running OS/2 4.0 
+with Xitami for OS/2.  Double checked and no apps are using ports they should not.
+
+Hmm..  new error.  But with no crash still running:
+
+smthttp:  error on socket 11: Invalid argument
+
+Possible corrupted copy of Xitami? 
+
+
+Ok as a possible aid and to help prevent DOS attacks I have split my web server onto 2 
+machines both running Xitami for OS/2.  One is my primary web server.  The second 
+runs all CGIs.  I figure if I get hit with a GCI DOS attack worst they'll do is drag down the 
+CGI box.  My primary non-cgi box should keep working smoothly.
+
+Gene  
+
+On 9 Jul 2002 at 9:05, Thomas J. Hruska wrote:
+
+&gt;<i> At 12:12 AM 7/9/2002 -0400, WhiteShepherd writeth:
+</I>&gt;<i> &gt;Ok ran a netstat -s to check.  FTPD is only using 21 and Xitami is
+</I>&gt;<i> listening to 80 and 81.  
+</I>&gt;<i> &gt;Here is a common error befor a crash: 
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;No such file or directory
+</I>&gt;<i> 
+</I>&gt;<i> Xitami could not find the file or directory to load.  Sounds like the FTP
+</I>&gt;<i> server is doing some sort of caching it shouldn't...or Windows could be
+</I>&gt;<i> corrupted or Xitami is corrupted or something is not right.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;Broken pipe
+</I>&gt;<i> 
+</I>&gt;<i> Possibly a further result of the file not opening.  My guess here is that
+</I>&gt;<i> Xitami is attempting to use a file or socket anyway.  At this point there
+</I>&gt;<i> is trouble later on whatever the case is.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;Socket operation on non-socket
+</I>&gt;<i> 
+</I>&gt;<i> The client socket has been closed or we are accessing memory we don't own...
+</I>&gt;<i> 
+</I>&gt;<i> &gt;Clean-memory assertion failed - xitami.c (208)
+</I>&gt;<i> 
+</I>&gt;<i> This is (strangely) located at the end of Xitami's execution in main().
+</I>&gt;<i> I'm surprised the program got that far.  However, it is due to Xitami
+</I>&gt;<i> attempting to use or access memory it doesn't own or no longer owns.
+</I>&gt;<i> Xitami appears to be on its way out the door to avoid that great core dump
+</I>&gt;<i> in the skies whatever the case is.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;Abnormal program termination
+</I>&gt;<i> 
+</I>&gt;<i> It looks like the program exited but then the CPU took over and realized a
+</I>&gt;<i> memory fault took place during the clean-memory scan.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;core dumped
+</I>&gt;<i> 
+</I>&gt;<i> Hence, the core dump.  So much for avoiding it...
+</I>&gt;<i> 
+</I>&gt;<i> &gt;Any of this make sense?
+</I>&gt;<i> 
+</I>&gt;<i> Nope.  Just extrapolating on what seems to be taking place.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;On 8 Jul 2002 at 16:30, Gunnar Swan wrote:
+</I>&gt;<i> &gt;&gt; I would check out a port sniffer. 
+</I>&gt;<i> &gt;&gt; Turn the OTHER FTP server completely off ... at the service panel.
+</I>&gt;<i> &gt;&gt; Then see what is listening on the ports.
+</I>&gt;<i> &gt;&gt; I would think that there are two apps fighting for the same port.
+</I>&gt;<i> 
+</I>&gt;<i> There should be no problem here.  Any Windows sockets provider worth its
+</I>&gt;<i> salt will only allow one program to own a single port on one IP at one
+</I>&gt;<i> time.  So, if there are two server programs contending for the same port,
+</I>&gt;<i> only one gets it.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;&gt; Unless two programs are fighting for the same memory or communication
+</I>&gt;<i> channel, 
+</I>&gt;<i> &gt;&gt; they should co-exist.
+</I>&gt;<i> 
+</I>&gt;<i> This could be, but with Windows you never know what the OS will decide to
+</I>&gt;<i> do next :)  (I'm not an advocate of any OS...I just haven't found any that
+</I>&gt;<i> I really like).
+</I>&gt;<i> 
+</I>&gt;<i> Hope this helps!
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>           Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+</I>&gt;<i> Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+</I>&gt;<i>                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+----------------------------------------------------------------
+Whiteshepherd ( www.whiteshepherd.net/whiteshp )
+
+<A HREF="http://www.furtopia.org">http://www.furtopia.org</A> / www.dragoncity.net  - Unlimited fast and free hosting for ALL 
+the furry arts.  Personalized subdomains available with accounts.  Furry Sketch-n-Guess 
+games held online Sundays at 8PM (www.furtopia.org/sketch).
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003612.html">[Xitami] Xitami crashing after FTP
+</A></li>
+	<LI> Next message: <A HREF="003614.html">[Xitami] php
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3613">[ date ]</a>
+              <a href="thread.html#3613">[ thread ]</a>
+              <a href="subject.html#3613">[ subject ]</a>
+              <a href="author.html#3613">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] lrwp php?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001536.html">
+   <LINK REL="Next"  HREF="001540.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] lrwp php?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] lrwp php?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 29 Nov 2001 13:11:47 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001536.html">[Xitami] lrwp php?
+</A></li>
+        <LI> Next message: <A HREF="001540.html">[Xitami] IIS Coexistence
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1537">[ date ]</a>
+              <a href="thread.html#1537">[ thread ]</a>
+              <a href="subject.html#1537">[ subject ]</a>
+              <a href="author.html#1537">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> searches through some large text files, I'd like to have the text files loaded in memory so they don't keep being read from disk during each query.
+</I>
+How large? Are you sure they are actually being read from disk? 
+
+In unix and Windows, most available memory is used as disk cache. If you
+have enough RAM to avoid thrashing, the second third etc time you read a
+file that hasn't changed on disk, it usually comes from cache rather
+than from physical disk.
+
+You could test this by adding code to grab the time when the program
+starts and is done, compute the difference, and write that at the bottom
+of the search report. If I'm right, the very first time each day (or
+re-boot, or RAM-overload) that it runs will be seconds, each subsequent
+search will be milliseconds.
+
+You might also grab the time before and after the file read and before
+and after the search process, if they are two phases. In VB, a
+case-sensitive search turned out to be FAR slower than any disk-work. 
+
+I'm also sure that for VB and Perl, the interpreter start-up takes
+longer than about any code I can write in a month. 
+
+LRWP is a good idea, but hard to get working. Be sure you need the speed
+and that it will really help before you go to that extreme. Many massive
+sites work fine with plain CGI. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001536.html">[Xitami] lrwp php?
+</A></li>
+	<LI> Next message: <A HREF="001540.html">[Xitami] IIS Coexistence
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1537">[ date ]</a>
+              <a href="thread.html#1537">[ thread ]</a>
+              <a href="subject.html#1537">[ subject ]</a>
+              <a href="author.html#1537">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] localhost problems..
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000739.html">
+   <LINK REL="Next"  HREF="000741.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] localhost problems..
+   </H1>
+    <B>Kartic Krishnamurthy
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] localhost problems..">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 17 Aug 2001 18:46:12 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000739.html">[Xitami] localhost problems..
+</A></li>
+        <LI> Next message: <A HREF="000741.html">[Xitami] localhost problems..
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#740">[ date ]</a>
+              <a href="thread.html#740">[ thread ]</a>
+              <a href="subject.html#740">[ subject ]</a>
+              <a href="author.html#740">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I joined the list a few minutes ago and I don't know the entire background
+of your problem.  However, from the PHP script you've shown, it seems that
+you are outputting HTTP headers rather late in your script.
+
+If you want to output HTTP headers, they *must* be output before any other
+kind of output is sent to the browser, including HTML tags and specifically
+HTML &lt;head&gt; tag.  Your script should actually read:
+&lt;?php
+header(&quot;Location:<A HREF="http://.../"">http://.../&quot;</A>);
+?&gt;
+&lt;HTML&gt;
+...
+&lt;/HTML&gt;
+
+(the rest of the HTML stuff is redundant as your page will have been
+redirected)  For more information on usage of header() PHP function and
+associated caveats, please refer <A HREF="http://php.net/header">http://php.net/header</A>
+
+Of course, what Ewen says about either specifying <A HREF="http://../">http://../</A> or the page
+relative to the webroot (/menu.php) is correct, for the Location header to
+work.
+
+Thank you,
+--Kartic
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000739.html">[Xitami] localhost problems..
+</A></li>
+	<LI> Next message: <A HREF="000741.html">[Xitami] localhost problems..
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#740">[ date ]</a>
+              <a href="thread.html#740">[ thread ]</a>
+              <a href="subject.html#740">[ subject ]</a>
+              <a href="author.html#740">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

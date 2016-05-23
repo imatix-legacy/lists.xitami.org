@@ -1,0 +1,1098 @@
+From xitami-dev@lists.xitami.org  Mon Aug  9 17:32:34 2004
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Mon, 9 Aug 2004 12:32:34 -0400
+Subject: [Xitami-Dev] Linux Build
+Message-ID: <OF8287400D.8E024461-ON85256EEB.0054B79F-85256EEB.005ADF9A@nucorsteel.com>
+
+This is a multipart message in MIME format.
+--=_alternative 005ADF9685256EEB_=
+Content-Type: text/plain; charset="US-ASCII"
+
+ I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2). 
+I have downloaded source archive and then figured out that there is a 
+script named 'c' that gets called from boomake in each directory. This 
+script is not in the downloaded archive. I was able to find one among the 
+sfl sources I have downloaded before. So, I have copied the script to my 
+/usr/bin/, chmod it 755 and I still can not build the thing.
+
+When I run ./build.sh on RedHat, I get a whole bunch of following:
+
+Building application...
+: bad interpreter: No such file or directory
+
+I do have /bin/sh. I have removed a space between #! and /bin/sh at the 
+beginning of the build.sh and c. None of these things helped.
+
+On Gentoo box, I get
+
+Building application...
+egrep: -g.c: No such file or directory
+Compiling -g...
+cat: invalid option -- g
+Try `cat --help' for more information.
+egrep: -g.c: No such file or directory
+
+Can someone point me in the right direction?
+
+Any help appreciated.
+
+Alex
+
+--=_alternative 005ADF9685256EEB_=
+Content-Type: text/html; charset="US-ASCII"
+
+
+<br><font size=2 face="sans-serif">&nbsp;I have a problem building xitami
+on Linux (RedHat 9.0 and Gentoo 2004.2). I have downloaded source archive
+and then figured out that there is a script named 'c' that gets called
+from boomake in each directory. This script is not in the downloaded archive.
+I was able to find one among the sfl sources I have downloaded before.
+So, I have copied the script to my /usr/bin/, chmod it 755 and I still
+can not build the thing.</font>
+<br>
+<br><font size=2 face="sans-serif">When I run ./build.sh on RedHat, I get
+a whole bunch of following:</font>
+<br>
+<br><font size=2 face="sans-serif">Building application...</font>
+<br><font size=2 face="sans-serif">: bad interpreter: No such file or directory</font>
+<br>
+<br><font size=2 face="sans-serif">I do have /bin/sh. I have removed a
+space between #! and /bin/sh at the beginning of the build.sh and c. None
+of these things helped.</font>
+<br>
+<br><font size=2 face="sans-serif">On Gentoo box, I get</font>
+<br>
+<br><font size=2 face="Courier New">Building application...</font>
+<br><font size=2 face="Courier New">egrep: -g.c: No such file or directory</font>
+<br><font size=2 face="Courier New">Compiling -g...</font>
+<br><font size=2 face="Courier New">cat: invalid option -- g</font>
+<br><font size=2 face="Courier New">Try `cat --help' for more information.</font>
+<br><font size=2 face="Courier New">egrep: -g.c: No such file or directory</font>
+<br>
+<br><font size=2 face="sans-serif">Can someone point me in the right direction?</font>
+<br>
+<br><font size=2 face="sans-serif">Any help appreciated.</font>
+<br>
+<br><font size=2 face="sans-serif">Alex</font>
+<br>
+--=_alternative 005ADF9685256EEB_=--
+
+From xitami-dev@lists.xitami.org  Mon Aug  9 22:43:48 2004
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Mon, 9 Aug 2004 17:43:48 -0400
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <OF8287400D.8E024461-ON85256EEB.0054B79F-85256EEB.005ADF9A@nucorsteel.com>
+Message-ID: <OF24781826.AC342EFF-ON85256EEB.007737E8-85256EEB.00775DF3@nucorsteel.com>
+
+This is a multipart message in MIME format.
+--=_alternative 00775DF285256EEB_=
+Content-Type: text/plain; charset="US-ASCII"
+
+I have tried to install ReliBase on both RedHat and Gentoo and it fails 
+(there is no bdb directory in the archive).
+
+Has anyone been able to install Xitami on Linux?
+Is this mailing list active?
+
+Thanks,
+
++++
+Aleksandar Fabijanic
+Level 2 Automation Engineer 
+Nucor Steel Berkeley - Beam Mill
+Phone: 843.336.6678
+Fax:      843.336.6072
+---
+--=_alternative 00775DF285256EEB_=
+Content-Type: text/html; charset="US-ASCII"
+
+
+<br><font size=2 face="sans-serif">I have tried to install ReliBase on
+both RedHat and Gentoo and it fails (there is no bdb directory in the archive).</font>
+<br>
+<br><font size=2 face="sans-serif">Has anyone been able to install Xitami
+on Linux?</font>
+<br><font size=2 face="sans-serif">Is this mailing list active?</font>
+<br>
+<br><font size=2 face="sans-serif">Thanks,</font>
+<br>
+<br><font size=2 face="sans-serif">+++<br>
+Aleksandar Fabijanic<br>
+Level 2 Automation Engineer <br>
+Nucor Steel Berkeley - Beam Mill<br>
+Phone: 843.336.6678<br>
+Fax: &nbsp; &nbsp; &nbsp;843.336.6072<br>
+---</font>
+--=_alternative 00775DF285256EEB_=--
+
+From xitami-dev@lists.xitami.org  Tue Aug 10 03:55:11 2004
+From: xitami-dev@lists.xitami.org (Justin Frim)
+Date: Mon, 09 Aug 2004 22:55:11 -0400
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <OF24781826.AC342EFF-ON85256EEB.007737E8-85256EEB.00775DF3@nucorsteel.com>
+References: <OF24781826.AC342EFF-ON85256EEB.007737E8-85256EEB.00775DF3@nucorsteel.com>
+Message-ID: <4118390F.3030406@idirect.com>
+
+This is a multi-part message in MIME format.
+--------------070107000902010409020704
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+It's active, sort of...
+I never see much going on here, but yeah, the system is functional...
+
+Sorry I can't help you much...  I'm still running Xitami 2.4d9, and on a 
+Windows 95b computer.
+
+--
+TTYL
+
+
+
+FabijanicA@nucorsteel.com wrote:
+
+>
+> I have tried to install ReliBase on both RedHat and Gentoo and it 
+> fails (there is no bdb directory in the archive).
+>
+> Has anyone been able to install Xitami on Linux?
+> Is this mailing list active?
+>
+> Thanks,
+>
+> +++
+> Aleksandar Fabijanic
+> Level 2 Automation Engineer
+> Nucor Steel Berkeley - Beam Mill
+> Phone: 843.336.6678
+> Fax:      843.336.6072
+> --- 
+
+
+--------------070107000902010409020704
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+  <title></title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+It's active, sort of...<br>
+I never see much going on here, but yeah, the system is functional...<br>
+<br>
+Sorry I can't help you much...&nbsp; I'm still running Xitami 2.4d9, and on
+a Windows 95b computer.<br>
+<br>
+<pre class="moz-signature" cols="72">--
+TTYL</pre>
+<br>
+<br>
+<a class="moz-txt-link-abbreviated" href="mailto:FabijanicA@nucorsteel.com">FabijanicA@nucorsteel.com</a> wrote:
+<blockquote
+ cite="midOF24781826.AC342EFF-ON85256EEB.007737E8-85256EEB.00775DF3@nucorsteel.com"
+ type="cite"><br>
+  <font face="sans-serif" size="2">I have tried to install ReliBase on
+both RedHat and Gentoo and it fails (there is no bdb directory in the
+archive).</font>
+  <br>
+  <br>
+  <font face="sans-serif" size="2">Has anyone been able to install
+Xitami
+on Linux?</font>
+  <br>
+  <font face="sans-serif" size="2">Is this mailing list active?</font>
+  <br>
+  <br>
+  <font face="sans-serif" size="2">Thanks,</font>
+  <br>
+  <br>
+  <font face="sans-serif" size="2">+++<br>
+Aleksandar Fabijanic<br>
+Level 2 Automation Engineer <br>
+Nucor Steel Berkeley - Beam Mill<br>
+Phone: 843.336.6678<br>
+Fax: &nbsp; &nbsp; &nbsp;843.336.6072<br>
+---</font>
+</blockquote>
+</body>
+</html>
+
+--------------070107000902010409020704--
+
+
+From xitami-dev@lists.xitami.org  Tue Aug 10 10:34:24 2004
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Tue, 10 Aug 2004 11:34:24 +0200
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <OF8287400D.8E024461-ON85256EEB.0054B79F-85256EEB.005ADF9A@nucorsteel.com>
+References: <OF8287400D.8E024461-ON85256EEB.0054B79F-85256EEB.005ADF9A@nucorsteel.com>
+Message-ID: <200408101134.24120.ph@imatix.com>
+
+Hi,
+
+Just reading all your emails.
+
+> When I run ./build.sh on RedHat, I get a whole bunch of following:
+
+Try "sh build.sh".
+
+-Pieter
+
+
+From xitami-dev@lists.xitami.org  Tue Aug 10 13:26:18 2004
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Tue, 10 Aug 2004 08:26:18 -0400
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <200408101134.24120.ph@imatix.com>
+Message-ID: <OF9925DDA9.9010230F-ON85256EEC.00442F2C-85256EEC.00445394@nucorsteel.com>
+
+This is a multipart message in MIME format.
+--=_alternative 0044539385256EEC_=
+Content-Type: text/plain; charset="US-ASCII"
+
+> > When I run ./build.sh on RedHat, I get a whole bunch of following:
+> 
+> Try "sh build.sh".
+
+I tried it already, didn't work. I also tried to cd to sfl and run 'sh 
+boomake build'. I get same errors.
+--=_alternative 0044539385256EEC_=
+Content-Type: text/html; charset="US-ASCII"
+
+
+<br><font size=2><tt>&gt; &gt; When I run ./build.sh on RedHat, I get a
+whole bunch of following:<br>
+&gt; <br>
+&gt; Try &quot;sh build.sh&quot;.<br>
+</tt></font>
+<br><font size=2><tt>I tried it already, didn't work. I also tried to cd
+to sfl and run 'sh boomake build'. I get same errors.</tt></font>
+--=_alternative 0044539385256EEC_=--
+
+From xitami-dev@lists.xitami.org  Wed Aug 11 06:54:07 2004
+From: xitami-dev@lists.xitami.org (Kris Beazley)
+Date: Wed, 11 Aug 2004 01:54:07 -0400
+Subject: [Xitami-Dev] Linux Build
+References: <OF8287400D.8E024461-ON85256EEB.0054B79F-85256EEB.005ADF9A@nucorsteel.com>
+Message-ID: <BAY1-DAV186nx8dyDd300013d60@hotmail.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0041_01C47F46.16E04010
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I have a working linux version.  I built it while back and god knows I =
+do not wont to build it again.  It wasn't easy and that is one reason I =
+am just zipping the binary for you.
+Xitami/Open/2.4d10
+Debug release for internal use
+Copyright (c) 1991-2003 iMatix
+Built on: 2003/09/24 20:21:41
+Xitami binary and its copyright file required by xitami to distro it =
+http://www.epluribusunix.net/xitami.zip<http://www.epluribusunix.net/xita=
+mi.zip>=20
+You will need to use the xitami files required to run it and they come =
+in the src you've already downloaded.  Hope this helps.
+  ----- Original Message -----=20
+  From: FabijanicA@nucorsteel.com<mailto:FabijanicA@nucorsteel.com>=20
+  To: xitami-dev@lists.xitami.org<mailto:xitami-dev@lists.xitami.org>=20
+  Sent: Monday, August 09, 2004 12:32 PM
+  Subject: [Xitami-Dev] Linux Build
+
+
+
+   I have a problem building xitami on Linux (RedHat 9.0 and Gentoo =
+2004.2). I have downloaded source archive and then figured out that =
+there is a script named 'c' that gets called from boomake in each =
+directory. This script is not in the downloaded archive. I was able to =
+find one among the sfl sources I have downloaded before. So, I have =
+copied the script to my /usr/bin/, chmod it 755 and I still can not =
+build the thing.=20
+
+  When I run ./build.sh on RedHat, I get a whole bunch of following:=20
+
+  Building application...=20
+  : bad interpreter: No such file or directory=20
+
+  I do have /bin/sh. I have removed a space between #! and /bin/sh at =
+the beginning of the build.sh and c. None of these things helped.=20
+
+  On Gentoo box, I get=20
+
+  Building application...=20
+  egrep: -g.c: No such file or directory=20
+  Compiling -g...=20
+  cat: invalid option -- g=20
+  Try `cat --help' for more information.=20
+  egrep: -g.c: No such file or directory=20
+
+  Can someone point me in the right direction?=20
+
+  Any help appreciated.=20
+
+  Alex=20
+
+------=_NextPart_000_0041_01C47F46.16E04010
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type =
+content=3Dtext/html;charset=3Diso-8859-1>
+<STYLE></STYLE>
+
+<META content=3D"MSHTML 6.00.2800.1458" name=3DGENERATOR></HEAD>
+<BODY id=3DMailContainerBody=20
+style=3D"PADDING-LEFT: 10px; FONT-WEIGHT: normal; FONT-SIZE: 10pt; =
+COLOR: #000000; BORDER-TOP-STYLE: none; PADDING-TOP: 15px; FONT-STYLE: =
+normal; FONT-FAMILY: Verdana; BORDER-RIGHT-STYLE: none; =
+BORDER-LEFT-STYLE: none; TEXT-DECORATION: none; BORDER-BOTTOM-STYLE: =
+none"=20
+leftMargin=3D0 topMargin=3D0 acc_role=3D"text" CanvasTabStop=3D"true"=20
+name=3D"Compose message area"><!--[gte IE 5]><?xml:namespace =
+prefix=3D"v" /><?xml:namespace prefix=3D"o" /><![endif]-->
+<DIV>
+<DIV>I have a working linux version.&nbsp; I built it while back and god =
+knows I=20
+do not wont to build it again.&nbsp; It wasn't easy and that is one =
+reason I am=20
+just zipping the binary for you.</DIV>
+<DIV>Xitami/Open/2.4d10<BR>Debug release for internal use<BR>Copyright =
+(c)=20
+1991-2003 iMatix<BR>Built on: 2003/09/24 20:21:41</DIV>
+<DIV>Xitami binary and its copyright file required by xitami to distro=20
+it&nbsp;<A title=3Dhttp://www.epluribusunix.net/xitami.zip=20
+href=3D"http://www.epluribusunix.net/xitami.zip">http://www.epluribusunix=
+net/xitami.zip</A>&nbsp;</DIV>
+<DIV>You will need to use the xitami files required to run it and they =
+come in=20
+the src you've already&nbsp;downloaded.&nbsp; Hope this helps.</DIV>
+<BLOCKQUOTE=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>From:</B> <A=20
+  title=3Dmailto:FabijanicA@nucorsteel.com=20
+  =
+href=3D"mailto:FabijanicA@nucorsteel.com">FabijanicA@nucorsteel.com</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A=20
+  title=3Dmailto:xitami-dev@lists.xitami.org=20
+  =
+href=3D"mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</=
+A>=20
+  </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Monday, August 09, 2004 =
+12:32=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami-Dev] Linux =
+Build</DIV>
+  <DIV><BR></DIV><BR><FONT face=3Dsans-serif size=3D2>&nbsp;I have a =
+problem=20
+  building xitami on Linux (RedHat 9.0 and Gentoo 2004.2). I have =
+downloaded=20
+  source archive and then figured out that there is a script named 'c' =
+that gets=20
+  called from boomake in each directory. This script is not in the =
+downloaded=20
+  archive. I was able to find one among the sfl sources I have =
+downloaded=20
+  before. So, I have copied the script to my /usr/bin/, chmod it 755 and =
+I still=20
+  can not build the thing.</FONT> <BR><BR><FONT face=3Dsans-serif =
+size=3D2>When I=20
+  run ./build.sh on RedHat, I get a whole bunch of following:</FONT>=20
+  <BR><BR><FONT face=3Dsans-serif size=3D2>Building =
+application...</FONT> <BR><FONT=20
+  face=3Dsans-serif size=3D2>: bad interpreter: No such file or =
+directory</FONT>=20
+  <BR><BR><FONT face=3Dsans-serif size=3D2>I do have /bin/sh. I have =
+removed a space=20
+  between #! and /bin/sh at the beginning of the build.sh and c. None of =
+these=20
+  things helped.</FONT> <BR><BR><FONT face=3Dsans-serif size=3D2>On =
+Gentoo box, I=20
+  get</FONT> <BR><BR><FONT face=3D"Courier New" size=3D2>Building=20
+  application...</FONT> <BR><FONT face=3D"Courier New" size=3D2>egrep: =
+-g.c: No such=20
+  file or directory</FONT> <BR><FONT face=3D"Courier New" =
+size=3D2>Compiling=20
+  -g...</FONT> <BR><FONT face=3D"Courier New" size=3D2>cat: invalid =
+option --=20
+  g</FONT> <BR><FONT face=3D"Courier New" size=3D2>Try `cat --help' for =
+more=20
+  information.</FONT> <BR><FONT face=3D"Courier New" size=3D2>egrep: =
+-g.c: No such=20
+  file or directory</FONT> <BR><BR><FONT face=3Dsans-serif size=3D2>Can =
+someone=20
+  point me in the right direction?</FONT> <BR><BR><FONT =
+face=3Dsans-serif=20
+  size=3D2>Any help appreciated.</FONT> <BR><BR><FONT face=3Dsans-serif=20
+  size=3D2>Alex</FONT> <BR></BLOCKQUOTE></DIV></BODY></HTML>
+
+------=_NextPart_000_0041_01C47F46.16E04010--
+
+From xitami-dev@lists.xitami.org  Wed Aug 11 13:20:32 2004
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Wed, 11 Aug 2004 08:20:32 -0400
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <BAY1-DAV186nx8dyDd300013d60@hotmail.com>
+Message-ID: <OFBFA5D60A.27500478-ON85256EED.0042F564-85256EED.0043CC62@nucorsteel.com>
+
+This is a multipart message in MIME format.
+--=_alternative 0043CC5E85256EED_=
+Content-Type: text/plain; charset="US-ASCII"
+
+Kris,
+
+thank you. 
+In the mean time I got a hold of Peter Hintjens and he pointed out that 
+RealiBase (in fact only the 'c' script from it) is necessary to build 
+xitami on unix/linux. Not knowing where to find the script I was initially 
+using an ages old version of script scavenged from sfl archive I 
+downloaded long time ago. After downloading RealiBase archive and placing 
+the script in the path (it is in the boom directory), build was 
+straightforward. Simply running 'sh build.sh' will build with few 
+warnings. I was able to build and run it on both RedHat and Gentoo boxes.
+
+NB: I was not able to completely build RealiBase, but I don't need it 
+either. 
+
+Thanks anyway,
+
+Alex
+
+
+
+
+"Kris Beazley" <krisbeazley@hotmail.com> 
+Sent by: xitami-dev-admin@lists.xitami.org
+08/11/2004 01:54 AM
+Please respond to
+xitami-dev@lists.xitami.org
+
+
+To
+<xitami-dev@lists.xitami.org>
+cc
+
+Subject
+Re: [Xitami-Dev] Linux Build
+
+
+
+
+
+
+I have a working linux version.  I built it while back and god knows I do 
+not wont to build it again.  It wasn't easy and that is one reason I am 
+just zipping the binary for you.
+Xitami/Open/2.4d10
+Debug release for internal use
+Copyright (c) 1991-2003 iMatix
+Built on: 2003/09/24 20:21:41
+Xitami binary and its copyright file required by xitami to distro it 
+http://www.epluribusunixnet/xitami.zip 
+You will need to use the xitami files required to run it and they come in 
+the src you've already downloaded.  Hope this helps.
+----- Original Message ----- 
+From: FabijanicA@nucorsteel.com 
+To: xitami-dev@lists.xitami.org 
+Sent: Monday, August 09, 2004 12:32 PM
+Subject: [Xitami-Dev] Linux Build
+
+
+ I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2). 
+I have downloaded source archive and then figured out that there is a 
+script named 'c' that gets called from boomake in each directory. This 
+script is not in the downloaded archive. I was able to find one among the 
+sfl sources I have downloaded before. So, I have copied the script to my 
+/usr/bin/, chmod it 755 and I still can not build the thing. 
+
+When I run ./build.sh on RedHat, I get a whole bunch of following: 
+
+Building application... 
+: bad interpreter: No such file or directory 
+
+I do have /bin/sh. I have removed a space between #! and /bin/sh at the 
+beginning of the build.sh and c. None of these things helped. 
+
+On Gentoo box, I get 
+
+Building application... 
+egrep: -g.c: No such file or directory 
+Compiling -g... 
+cat: invalid option -- g 
+Try `cat --help' for more information. 
+egrep: -g.c: No such file or directory 
+
+Can someone point me in the right direction? 
+
+Any help appreciated. 
+
+Alex 
+
+--=_alternative 0043CC5E85256EED_=
+Content-Type: text/html; charset="US-ASCII"
+
+
+<br><font size=2 face="sans-serif">Kris,</font>
+<br>
+<br><font size=2 face="sans-serif">thank you. </font>
+<br><font size=2 face="sans-serif">In the mean time I got a hold of Peter
+Hintjens and he pointed out that RealiBase (in fact only the 'c' script
+from it) is necessary to build xitami on unix/linux. Not knowing where
+to find the script I was initially using an ages old version of script
+scavenged from sfl archive I downloaded long time ago. After downloading
+RealiBase archive and placing the script in the path (it is in the boom
+directory), build was straightforward. Simply running 'sh build.sh' will
+build with few warnings. I was able to build and run it on both RedHat
+and Gentoo boxes.</font>
+<br>
+<br><font size=2 face="sans-serif">NB: I was not able to completely build
+RealiBase, but I don't need it either. </font>
+<br>
+<br><font size=2 face="sans-serif">Thanks anyway,</font>
+<br>
+<br><font size=2 face="sans-serif">Alex</font>
+<br>
+<br>
+<br>
+<br>
+<table width=100%>
+<tr valign=top>
+<td width=40%><font size=1 face="sans-serif"><b>&quot;Kris Beazley&quot;
+&lt;krisbeazley@hotmail.com&gt;</b> </font>
+<br><font size=1 face="sans-serif">Sent by: xitami-dev-admin@lists.xitami.org</font>
+<p><font size=1 face="sans-serif">08/11/2004 01:54 AM</font>
+<table border>
+<tr valign=top>
+<td bgcolor=white>
+<div align=center><font size=1 face="sans-serif">Please respond to<br>
+xitami-dev@lists.xitami.org</font></div></table>
+<br>
+<td width=59%>
+<table width=100%>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">To</font></div>
+<td valign=top><font size=1 face="sans-serif">&lt;xitami-dev@lists.xitami.org&gt;</font>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">cc</font></div>
+<td valign=top>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">Subject</font></div>
+<td valign=top><font size=1 face="sans-serif">Re: [Xitami-Dev] Linux Build</font></table>
+<br>
+<table>
+<tr valign=top>
+<td>
+<td></table>
+<br></table>
+<br>
+<br>
+<br><font size=2 face="Verdana">I have a working linux version. &nbsp;I
+built it while back and god knows I do not wont to build it again. &nbsp;It
+wasn't easy and that is one reason I am just zipping the binary for you.</font>
+<br><font size=2 face="Verdana">Xitami/Open/2.4d10<br>
+Debug release for internal use<br>
+Copyright (c) 1991-2003 iMatix<br>
+Built on: 2003/09/24 20:21:41</font>
+<br><font size=2 face="Verdana">Xitami binary and its copyright file required
+by xitami to distro it </font><a href=http://www.epluribusunix.net/xitami.zip><font size=2 color=blue face="Verdana"><u>http://www.epluribusunixnet/xitami.zip</u></font></a><font size=2 face="Verdana">
+</font>
+<br><font size=2 face="Verdana">You will need to use the xitami files required
+to run it and they come in the src you've already downloaded. &nbsp;Hope
+this helps.</font>
+<br><font size=2 face="Verdana">----- Original Message ----- </font>
+<br><font size=2 face="Verdana"><b>From:</b> </font><a href=mailto:FabijanicA@nucorsteel.com><font size=2 color=blue face="Verdana"><u>FabijanicA@nucorsteel.com</u></font></a><font size=2 face="Verdana">
+</font>
+<br><font size=2 face="Verdana"><b>To:</b> </font><a href="mailto:xitami-dev@lists.xitami.org"><font size=2 color=blue face="Verdana"><u>xitami-dev@lists.xitami.org</u></font></a><font size=2 face="Verdana">
+</font>
+<br><font size=2 face="Verdana"><b>Sent:</b> Monday, August 09, 2004 12:32
+PM</font>
+<br><font size=2 face="Verdana"><b>Subject:</b> [Xitami-Dev] Linux Build</font>
+<br>
+<br><font size=2 face="sans-serif"><br>
+ I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2).
+I have downloaded source archive and then figured out that there is a script
+named 'c' that gets called from boomake in each directory. This script
+is not in the downloaded archive. I was able to find one among the sfl
+sources I have downloaded before. So, I have copied the script to my /usr/bin/,
+chmod it 755 and I still can not build the thing.</font><font size=2 face="Verdana">
+<br>
+</font><font size=2 face="sans-serif"><br>
+When I run ./build.sh on RedHat, I get a whole bunch of following:</font><font size=2 face="Verdana">
+<br>
+</font><font size=2 face="sans-serif"><br>
+Building application...</font><font size=2 face="Verdana"> </font><font size=2 face="sans-serif"><br>
+: bad interpreter: No such file or directory</font><font size=2 face="Verdana">
+<br>
+</font><font size=2 face="sans-serif"><br>
+I do have /bin/sh. I have removed a space between #! and /bin/sh at the
+beginning of the build.sh and c. None of these things helped.</font><font size=2 face="Verdana">
+<br>
+</font><font size=2 face="sans-serif"><br>
+On Gentoo box, I get</font><font size=2 face="Verdana"> <br>
+</font><font size=2 face="Courier New"><br>
+Building application...</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+egrep: -g.c: No such file or directory</font><font size=2 face="Verdana">
+</font><font size=2 face="Courier New"><br>
+Compiling -g...</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+cat: invalid option -- g</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+Try `cat --help' for more information.</font><font size=2 face="Verdana">
+</font><font size=2 face="Courier New"><br>
+egrep: -g.c: No such file or directory</font><font size=2 face="Verdana">
+<br>
+</font><font size=2 face="sans-serif"><br>
+Can someone point me in the right direction?</font><font size=2 face="Verdana">
+<br>
+</font><font size=2 face="sans-serif"><br>
+Any help appreciated.</font><font size=2 face="Verdana"> <br>
+</font><font size=2 face="sans-serif"><br>
+Alex</font><font size=2 face="Verdana"> </font>
+<br>
+--=_alternative 0043CC5E85256EED_=--
+
+From xitami-dev@lists.xitami.org  Wed Aug 11 17:59:43 2004
+From: xitami-dev@lists.xitami.org (Joe Saunders)
+Date: Wed, 11 Aug 2004 09:59:43 -0700 (PDT)
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <OFBFA5D60A.27500478-ON85256EED.0042F564-85256EED.0043CC62@nucorsteel.com>
+Message-ID: <20040811165943.83483.qmail@web41505.mail.yahoo.com>
+
+--0-1730363342-1092243583=:83379
+Content-Type: text/plain; charset=us-ascii
+
+Where does one get RealiBase??  Where do you download it from???
+ 
+Joe Saunders
+Spirent Communications
+
+FabijanicA@nucorsteel.com wrote:
+
+Kris, 
+
+thank you. 
+In the mean time I got a hold of Peter Hintjens and he pointed out that RealiBase (in fact only the 'c' script from it) is necessary to build xitami on unix/linux. Not knowing where to find the script I was initially using an ages old version of script scavenged from sfl archive I downloaded long time ago. After downloading RealiBase archive and placing the script in the path (it is in the boom directory), build was straightforward. Simply running 'sh build.sh' will build with few warnings. I was able to build and run it on both RedHat and Gentoo boxes. 
+
+NB: I was not able to completely build RealiBase, but I don't need it either. 
+
+Thanks anyway, 
+
+Alex 
+
+
+
+"Kris Beazley" <krisbeazley@hotmail.com> 
+Sent by: xitami-dev-admin@lists.xitami.org 
+08/11/2004 01:54 AM Please respond to
+xitami-dev@lists.xitami.org
+
+
+To
+<xitami-dev@lists.xitami.org> cc
+Subject
+Re: [Xitami-Dev] Linux Build
+
+
+
+
+I have a working linux version.  I built it while back and god knows I do not wont to build it again.  It wasn't easy and that is one reason I am just zipping the binary for you. 
+Xitami/Open/2.4d10
+Debug release for internal use
+Copyright (c) 1991-2003 iMatix
+Built on: 2003/09/24 20:21:41 
+Xitami binary and its copyright file required by xitami to distro it http://www.epluribusunixnet/xitami.zip 
+You will need to use the xitami files required to run it and they come in the src you've already downloaded.  Hope this helps. 
+----- Original Message ----- 
+From: FabijanicA@nucorsteel.com 
+To: xitami-dev@lists.xitami.org 
+Sent: Monday, August 09, 2004 12:32 PM 
+Subject: [Xitami-Dev] Linux Build 
+
+
+I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2). I have downloaded source archive and then figured out that there is a script named 'c' that gets called from boomake in each directory. This script is not in the downloaded archive. I was able to find one among the sfl sources I have downloaded before. So, I have copied the script to my /usr/bin/, chmod it 755 and I still can not build the thing. 
+
+When I run ./build.sh on RedHat, I get a whole bunch of following: 
+
+Building application... 
+: bad interpreter: No such file or directory 
+
+I do have /bin/sh. I have removed a space between #! and /bin/sh at the beginning of the build.sh and c. None of these things helped. 
+
+On Gentoo box, I get 
+
+Building application... 
+egrep: -g.c: No such file or directory 
+Compiling -g... 
+cat: invalid option -- g 
+Try `cat --help' for more information. 
+egrep: -g.c: No such file or directory 
+
+Can someone point me in the right direction? 
+
+Any help appreciated. 
+
+Alex 
+
+--0-1730363342-1092243583=:83379
+Content-Type: text/html; charset=us-ascii
+
+<DIV>Where does one get RealiBase??&nbsp; Where do you download it from???</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Joe Saunders</DIV>
+<DIV>Spirent Communications<BR><BR><B><I>FabijanicA@nucorsteel.com</I></B> wrote:</DIV>
+<BLOCKQUOTE class=replbq style="PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #1010ff 2px solid"><BR><FONT face=sans-serif size=2>Kris,</FONT> <BR><BR><FONT face=sans-serif size=2>thank you. </FONT><BR><FONT face=sans-serif size=2>In the mean time I got a hold of Peter Hintjens and he pointed out that RealiBase (in fact only the 'c' script from it) is necessary to build xitami on unix/linux. Not knowing where to find the script I was initially using an ages old version of script scavenged from sfl archive I downloaded long time ago. After downloading RealiBase archive and placing the script in the path (it is in the boom directory), build was straightforward. Simply running 'sh build.sh' will build with few warnings. I was able to build and run it on both RedHat and Gentoo boxes.</FONT> <BR><BR><FONT face=sans-serif size=2>NB: I was not able to completely build RealiBase, but I don't need it either. </FONT><BR><BR><FONT face=sans-serif size=2>Thanks anyway,</FONT> <BR><BR><FONT
+ face=sans-serif size=2>Alex</FONT> <BR><BR><BR><BR>
+<TABLE width="100%">
+<TBODY>
+<TR vAlign=top>
+<TD width="40%"><FONT face=sans-serif size=1><B>"Kris Beazley" &lt;krisbeazley@hotmail.com&gt;</B> </FONT><BR><FONT face=sans-serif size=1>Sent by: xitami-dev-admin@lists.xitami.org</FONT> 
+<P><FONT face=sans-serif size=1>08/11/2004 01:54 AM</FONT> 
+<TABLE border=1>
+<TBODY>
+<TR vAlign=top>
+<TD bgColor=white>
+<DIV align=center><FONT face=sans-serif size=1>Please respond to<BR>xitami-dev@lists.xitami.org</FONT></DIV></TR></TBODY></TABLE><BR></P>
+<TD width="59%">
+<TABLE width="100%">
+<TBODY>
+<TR>
+<TD>
+<DIV align=right><FONT face=sans-serif size=1>To</FONT></DIV>
+<TD vAlign=top><FONT face=sans-serif size=1>&lt;xitami-dev@lists.xitami.org&gt;</FONT> 
+<TR>
+<TD>
+<DIV align=right><FONT face=sans-serif size=1>cc</FONT></DIV>
+<TD vAlign=top>
+<TR>
+<TD>
+<DIV align=right><FONT face=sans-serif size=1>Subject</FONT></DIV>
+<TD vAlign=top><FONT face=sans-serif size=1>Re: [Xitami-Dev] Linux Build</FONT></TR></TBODY></TABLE><BR>
+<TABLE>
+<TBODY>
+<TR vAlign=top>
+<TD>
+<TD></TR></TBODY></TABLE><BR></TR></TBODY></TABLE><BR><BR><BR><FONT face=Verdana size=2>I have a working linux version. &nbsp;I built it while back and god knows I do not wont to build it again. &nbsp;It wasn't easy and that is one reason I am just zipping the binary for you.</FONT> <BR><FONT face=Verdana size=2>Xitami/Open/2.4d10<BR>Debug release for internal use<BR>Copyright (c) 1991-2003 iMatix<BR>Built on: 2003/09/24 20:21:41</FONT> <BR><FONT face=Verdana size=2>Xitami binary and its copyright file required by xitami to distro it </FONT><A href="http://www.epluribusunix.net/xitami.zip"><FONT face=Verdana color=blue size=2><U>http://www.epluribusunixnet/xitami.zip</U></FONT></A><FONT face=Verdana size=2> </FONT><BR><FONT face=Verdana size=2>You will need to use the xitami files required to run it and they come in the src you've already downloaded. &nbsp;Hope this helps.</FONT> <BR><FONT face=Verdana size=2>----- Original Message ----- </FONT><BR><FONT face=Verdana
+ size=2><B>From:</B> </FONT><A href="mailto:FabijanicA@nucorsteel.com"><FONT face=Verdana color=blue size=2><U>FabijanicA@nucorsteel.com</U></FONT></A><FONT face=Verdana size=2> </FONT><BR><FONT face=Verdana size=2><B>To:</B> </FONT><A href="mailto:xitami-dev@lists.xitami.org"><FONT face=Verdana color=blue size=2><U>xitami-dev@lists.xitami.org</U></FONT></A><FONT face=Verdana size=2> </FONT><BR><FONT face=Verdana size=2><B>Sent:</B> Monday, August 09, 2004 12:32 PM</FONT> <BR><FONT face=Verdana size=2><B>Subject:</B> [Xitami-Dev] Linux Build</FONT> <BR><BR><FONT face=sans-serif size=2><BR>I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2). I have downloaded source archive and then figured out that there is a script named 'c' that gets called from boomake in each directory. This script is not in the downloaded archive. I was able to find one among the sfl sources I have downloaded before. So, I have copied the script to my /usr/bin/, chmod it 755 and I still can
+ not build the thing.</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>When I run ./build.sh on RedHat, I get a whole bunch of following:</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>Building application...</FONT><FONT face=Verdana size=2> </FONT><FONT face=sans-serif size=2><BR>: bad interpreter: No such file or directory</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>I do have /bin/sh. I have removed a space between #! and /bin/sh at the beginning of the build.sh and c. None of these things helped.</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>On Gentoo box, I get</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face="Courier New" size=2><BR>Building application...</FONT><FONT face=Verdana size=2> </FONT><FONT face="Courier New" size=2><BR>egrep: -g.c: No such file or directory</FONT><FONT face=Verdana size=2> </FONT><FONT face="Courier New" size=2><BR>Compiling
+ -g...</FONT><FONT face=Verdana size=2> </FONT><FONT face="Courier New" size=2><BR>cat: invalid option -- g</FONT><FONT face=Verdana size=2> </FONT><FONT face="Courier New" size=2><BR>Try `cat --help' for more information.</FONT><FONT face=Verdana size=2> </FONT><FONT face="Courier New" size=2><BR>egrep: -g.c: No such file or directory</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>Can someone point me in the right direction?</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>Any help appreciated.</FONT><FONT face=Verdana size=2> <BR></FONT><FONT face=sans-serif size=2><BR>Alex</FONT><FONT face=Verdana size=2> </FONT><BR></BLOCKQUOTE>
+--0-1730363342-1092243583=:83379--
+
+From xitami-dev@lists.xitami.org  Wed Aug 11 18:02:04 2004
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Wed, 11 Aug 2004 13:02:04 -0400
+Subject: [Xitami-Dev] Linux Build
+In-Reply-To: <20040811165943.83483.qmail@web41505.mail.yahoo.com>
+Message-ID: <OF75D07E5A.AF9E7E8F-ON85256EED.005D88B5-85256EED.005D92C0@nucorsteel.com>
+
+This is a multipart message in MIME format.
+--=_alternative 005D92B685256EED_=
+Content-Type: text/plain; charset="US-ASCII"
+
+http://www.imatix.com/downloads.htm
+
+
+
+
+Joe Saunders <joe_saunders@yahoo.com> 
+Sent by: xitami-dev-admin@lists.xitami.org
+08/11/2004 12:59 PM
+Please respond to
+xitami-dev@lists.xitami.org
+
+
+To
+xitami-dev@lists.xitami.org
+cc
+
+Subject
+Re: [Xitami-Dev] Linux Build
+
+
+
+
+
+
+Where does one get RealiBase??  Where do you download it from???
+ 
+Joe Saunders
+Spirent Communications
+
+FabijanicA@nucorsteel.com wrote:
+
+Kris, 
+
+thank you. 
+In the mean time I got a hold of Peter Hintjens and he pointed out that 
+RealiBase (in fact only the 'c' script from it) is necessary to build 
+xitami on unix/linux. Not knowing where to find the script I was initially 
+using an ages old version of script scavenged from sfl archive I 
+downloaded long time ago. After downloading RealiBase archive and placing 
+the script in the path (it is in the boom directory), build was 
+straightforward. Simply running 'sh build.sh' will build with few 
+warnings. I was able to build and run it on both RedHat and Gentoo boxes. 
+
+NB: I was not able to completely build RealiBase, but I don't need it 
+either. 
+
+Thanks anyway, 
+
+Alex 
+
+
+
+"Kris Beazley" <krisbeazley@hotmail.com> 
+Sent by: xitami-dev-admin@lists.xitami.org 
+08/11/2004 01:54 AM 
+
+Please respond to
+xitami-dev@lists.xitami.org
+
+
+
+To
+<xitami-dev@lists.xitami.org> 
+cc
+
+Subject
+Re: [Xitami-Dev] Linux Build
+
+
+
+
+
+
+
+
+I have a working linux version.  I built it while back and god knows I do 
+not wont to build it again.  It wasn't easy and that is one reason I am 
+just zipping the binary for you. 
+Xitami/Open/2.4d10
+Debug release for internal use
+Copyright (c) 1991-2003 iMatix
+Built on: 2003/09/24 20:21:41 
+Xitami binary and its copyright file required by xitami to distro it 
+http://www.epluribusunixnet/xitami.zip 
+You will need to use the xitami files required to run it and they come in 
+the src you've already downloaded.  Hope this helps. 
+----- Original Message ----- 
+From: FabijanicA@nucorsteel.com 
+To: xitami-dev@lists.xitami.org 
+Sent: Monday, August 09, 2004 12:32 PM 
+Subject: [Xitami-Dev] Linux Build 
+
+
+I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2). 
+I have downloaded source archive and then figured out that there is a 
+script named 'c' that gets called from boomake in each directory. This 
+script is not in the downloaded archive. I was able to find one among the 
+sfl sources I have downloaded before. So, I have copied the script to my 
+/usr/bin/, chmod it 755 and I st ill can not build the thing. 
+
+When I run ./build.sh on RedHat, I get a whole bunch of following: 
+
+Building application... 
+: bad interpreter: No such file or directory 
+
+I do have /bin/sh. I have removed a space between #! and /bin/sh at the 
+beginning of the build.sh and c. None of these things helped. 
+
+On Gentoo box, I get 
+
+Building application... 
+egrep: -g.c: No such file or directory 
+C ompiling -g... 
+cat: invalid option -- g 
+Try `cat --help' for more information. 
+egrep: -g.c: No such file or directory 
+
+Can someone point me in the right direction? 
+
+Any help appreciated. 
+
+Alex 
+
+--=_alternative 005D92B685256EED_=
+Content-Type: text/html; charset="US-ASCII"
+
+
+<br><font size=2 face="sans-serif">http://www.imatix.com/downloads.htm</font>
+<br>
+<br>
+<br>
+<br>
+<table width=100%>
+<tr valign=top>
+<td width=40%><font size=1 face="sans-serif"><b>Joe Saunders &lt;joe_saunders@yahoo.com&gt;</b>
+</font>
+<br><font size=1 face="sans-serif">Sent by: xitami-dev-admin@lists.xitami.org</font>
+<p><font size=1 face="sans-serif">08/11/2004 12:59 PM</font>
+<table border>
+<tr valign=top>
+<td bgcolor=white>
+<div align=center><font size=1 face="sans-serif">Please respond to<br>
+xitami-dev@lists.xitami.org</font></div></table>
+<br>
+<td width=59%>
+<table width=100%>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">To</font></div>
+<td valign=top><font size=1 face="sans-serif">xitami-dev@lists.xitami.org</font>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">cc</font></div>
+<td valign=top>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">Subject</font></div>
+<td valign=top><font size=1 face="sans-serif">Re: [Xitami-Dev] Linux Build</font></table>
+<br>
+<table>
+<tr valign=top>
+<td>
+<td></table>
+<br></table>
+<br>
+<br>
+<br><font size=3>Where does one get RealiBase?? &nbsp;Where do you download
+it from???</font>
+<br><font size=3>&nbsp;</font>
+<br><font size=3>Joe Saunders</font>
+<br><font size=3>Spirent Communications<br>
+<b><i><br>
+FabijanicA@nucorsteel.com</i></b> wrote:</font>
+<br><font size=2 face="sans-serif"><br>
+Kris,</font><font size=3> <br>
+</font><font size=2 face="sans-serif"><br>
+thank you. <br>
+In the mean time I got a hold of Peter Hintjens and he pointed out that
+RealiBase (in fact only the 'c' script from it) is necessary to build xitami
+on unix/linux. Not knowing where to find the script I was initially using
+an ages old version of script scavenged from sfl archive I downloaded long
+time ago. After downloading RealiBase archive and placing the script in
+the path (it is in the boom directory), build was straightforward. Simply
+running 'sh build.sh' will build with few warnings. I was able to build
+and run it on both RedHat and Gentoo boxes.</font><font size=3> <br>
+</font><font size=2 face="sans-serif"><br>
+NB: I was not able to completely build RealiBase, but I don't need it either.
+</font><font size=3><br>
+</font><font size=2 face="sans-serif"><br>
+Thanks anyway,</font><font size=3> <br>
+</font><font size=2 face="sans-serif"><br>
+Alex</font><font size=3> <br>
+<br>
+<br>
+</font>
+<table width=100%>
+<tr valign=top>
+<td width=57%><font size=1 face="sans-serif"><b>&quot;Kris Beazley&quot;
+&lt;krisbeazley@hotmail.com&gt;</b> <br>
+Sent by: xitami-dev-admin@lists.xitami.org</font><font size=3> </font>
+<p><font size=1 face="sans-serif">08/11/2004 01:54 AM</font><font size=3>
+</font>
+<br>
+<table border=4 width=100%>
+<tr valign=top>
+<td width=100% bgcolor=white>
+<div align=center><font size=1 face="sans-serif">Please respond to<br>
+xitami-dev@lists.xitami.org</font></div></table>
+<p>
+<td width=42%>
+<br>
+<table width=100%>
+<tr>
+<td width=21%>
+<div align=right><font size=1 face="sans-serif">To</font></div>
+<td width=78% valign=top><font size=1 face="sans-serif">&lt;xitami-dev@lists.xitami.org&gt;</font><font size=3>
+</font>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">cc</font></div>
+<td valign=top>
+<tr>
+<td>
+<div align=right><font size=1 face="sans-serif">Subject</font></div>
+<td valign=top><font size=1 face="sans-serif">Re: [Xitami-Dev] Linux Build</font></table>
+<br>
+<br>
+<table width=100%>
+<tr valign=top>
+<td width=49%>
+<td width=50%></table>
+<br></table>
+<br><font size=3><br>
+<br>
+</font><font size=2 face="Verdana"><br>
+I have a working linux version. &nbsp;I built it while back and god knows
+I do not wont to build it again. &nbsp;It wasn't easy and that is one reason
+I am just zipping the binary for you.</font><font size=3> </font><font size=2 face="Verdana"><br>
+Xitami/Open/2.4d10<br>
+Debug release for internal use<br>
+Copyright (c) 1991-2003 iMatix<br>
+Built on: 2003/09/24 20:21:41</font><font size=3> </font><font size=2 face="Verdana"><br>
+Xitami binary and its copyright file required by xitami to distro it </font><a href=http://www.epluribusunix.net/xitami.zip><font size=2 color=blue face="Verdana"><u>http://www.epluribusunixnet/xitami.zip</u></font></a><font size=2 face="Verdana">
+<br>
+You will need to use the xitami files required to run it and they come
+in the src you've already downloaded. &nbsp;Hope this helps.</font><font size=3>
+</font><font size=2 face="Verdana"><br>
+----- Original Message ----- <b><br>
+From:</b> </font><a href=mailto:FabijanicA@nucorsteel.com><font size=2 color=blue face="Verdana"><u>FabijanicA@nucorsteel.com</u></font></a><font size=2 face="Verdana">
+<b><br>
+To:</b> </font><a href="mailto:xitami-dev@lists.xitami.org"><font size=2 color=blue face="Verdana"><u>xitami-dev@lists.xitami.org</u></font></a><font size=2 face="Verdana">
+<b><br>
+Sent:</b> Monday, August 09, 2004 12:32 PM</font><font size=3> </font><font size=2 face="Verdana"><b><br>
+Subject:</b> [Xitami-Dev] Linux Build</font><font size=3> <br>
+</font><font size=2 face="sans-serif"><br>
+<br>
+I have a problem building xitami on Linux (RedHat 9.0 and Gentoo 2004.2).
+I have downloaded source archive and then figured out that there is a script
+named 'c' that gets called from boomake in each directory. This script
+is not in the downloaded archive. I was able to find one among the sfl
+sources I have downloaded before. So, I have copied the script to my /usr/bin/,
+chmod it 755 and I st ill can not build the thing.</font><font size=2 face="Verdana">
+</font><font size=2 face="sans-serif"><br>
+<br>
+When I run ./build.sh on RedHat, I get a whole bunch of following:</font><font size=2 face="Verdana">
+</font><font size=2 face="sans-serif"><br>
+<br>
+Building application...</font><font size=2 face="Verdana"> </font><font size=2 face="sans-serif"><br>
+: bad interpreter: No such file or directory</font><font size=2 face="Verdana">
+</font><font size=2 face="sans-serif"><br>
+<br>
+I do have /bin/sh. I have removed a space between #! and /bin/sh at the
+beginning of the build.sh and c. None of these things helped.</font><font size=2 face="Verdana">
+</font><font size=2 face="sans-serif"><br>
+<br>
+On Gentoo box, I get</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+<br>
+Building application...</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+egrep: -g.c: No such file or directory</font><font size=2 face="Verdana">
+</font><font size=2 face="Courier New"><br>
+C ompiling -g...</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+cat: invalid option -- g</font><font size=2 face="Verdana"> </font><font size=2 face="Courier New"><br>
+Try `cat --help' for more information.</font><font size=2 face="Verdana">
+</font><font size=2 face="Courier New"><br>
+egrep: -g.c: No such file or directory</font><font size=2 face="Verdana">
+</font><font size=2 face="sans-serif"><br>
+<br>
+Can someone point me in the right direction?</font><font size=2 face="Verdana">
+</font><font size=2 face="sans-serif"><br>
+<br>
+Any help appreciated.</font><font size=2 face="Verdana"> </font><font size=2 face="sans-serif"><br>
+<br>
+Alex</font><font size=2 face="Verdana"> </font>
+<br>
+--=_alternative 005D92B685256EED_=--
+

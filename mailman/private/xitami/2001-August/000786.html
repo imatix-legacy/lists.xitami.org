@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] axs script
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000778.html">
+   <LINK REL="Next"  HREF="000787.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] axs script
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] axs script">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 23 Aug 2001 11:35:36 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000778.html">[Xitami] axs script
+</A></li>
+        <LI> Next message: <A HREF="000787.html">[Xitami] axs script
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#786">[ date ]</a>
+              <a href="thread.html#786">[ thread ]</a>
+              <a href="subject.html#786">[ subject ]</a>
+              <a href="author.html#786">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Does someone have the AXS Site Tracking System (<A HREF="http://www.xav.com/">http://www.xav.com/</A>) up and running. ...whenever i try ax.pl (the script that actually counts the visits) I'm always getting...  ax.pl - working okay - no logging command received - use ?debugme query string for more info. 
+</I>
+You don't normally call ax.pl directly. If you do, you get that message. 
+
+You embed ax.pl in an IMG (or SSI) tag on the page(s) you want counted.
+There is a link to instructions in localhost/cgi-bin/axs/ax.pl?debugme
+
+I could not get it to work at first. There seem to be typos in the
+documentation. I use Xitami but this isn't an Xitami issue. 
+
+&quot;if you are not using SSI, place this code on each of your HTML pages:
+
+ &lt;SCRIPT LANGUAGE=&quot;JavaScript&quot;&gt;
+ &lt;!--
+   document.write(&quot;&lt;IMG SRC=\&quot;\cgi-bin\axs\ax.pl?trans.gif&amp;ref=&quot;);
+   document.write(document.referrer);
+   document.write(&quot;\&quot; HEIGHT=1 WIDTH=1&gt;&quot;);
+ // --&gt;
+ &lt;/SCRIPT&gt;&lt;NOSCRIPT&gt;
+ &lt;IMG SRC=&quot;\cgi-bin\axs\ax.pl?trans.gif&quot; HEIGHT=&quot;1&quot; WIDTH=&quot;1&quot;&gt;
+ &lt;/NOSCRIPT&gt;  
+
+I'm pretty sure the DOS-type path slashes &quot;\&quot; MUST be changed to
+unix/perl/javascript type slashes &quot;/&quot;. (Even on Windows.) However, the
+escape slashes in front of quotes must be back\slashes. 
+
+This is my interpretation. I assume (for testing) that all clients have
+javascript so I only have to mess with one part. (I also highlighted the
+&quot;invisible&quot; image so I could verify it was being shown.)
+
+ &lt;SCRIPT LANGUAGE=&quot;JavaScript&quot;&gt;
+ &lt;!--
+   document.write(&quot;&lt;IMG SRC=\&quot;/cgi-bin/axs/ax.pl?trans.gif&amp;ref=&quot;);
+   document.write(document.referrer);
+   document.write(&quot;\&quot; HEIGHT=10 WIDTH=10 border=2&gt;&quot;);
+ // --&gt;
+ &lt;/SCRIPT&gt;
+
+Since this seems to be a problem with AXS's skimpy instructions, not any
+interaction with Xitami, you should probably seek further help on their
+support forum <A HREF="http://www.xav.com/scripts/forum.pl">http://www.xav.com/scripts/forum.pl</A>
+
+  -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000778.html">[Xitami] axs script
+</A></li>
+	<LI> Next message: <A HREF="000787.html">[Xitami] axs script
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#786">[ date ]</a>
+              <a href="thread.html#786">[ thread ]</a>
+              <a href="subject.html#786">[ subject ]</a>
+              <a href="author.html#786">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

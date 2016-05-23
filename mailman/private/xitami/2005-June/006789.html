@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> /Spam/ [Xitami] Xitami performance regarding directory
+ structures
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006787.html">
+   <LINK REL="Next"  HREF="006791.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>/Spam/ [Xitami] Xitami performance regarding directory
+ structures
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="/Spam/ [Xitami] Xitami performance regarding directory
+ structures">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Jun 2005 18:59:40 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006787.html">/Spam/ [Xitami] Xitami performance regarding directory  structures
+</A></li>
+        <LI> Next message: <A HREF="006791.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6789">[ date ]</a>
+              <a href="thread.html#6789">[ thread ]</a>
+              <a href="subject.html#6789">[ subject ]</a>
+              <a href="author.html#6789">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 18:32 8/06/05, you wrote:
+&gt;<i>If you switch the 8.3 naming off aren't you limited to 128 characters in the
+</I>&gt;<i>path string and wouldn't you have to limit the file and directory names to 8
+</I>&gt;<i>characters?
+</I>&gt;<i>
+</I>&gt;<i>Ron
+</I>
+
+No, when switching the 8.3 naming convention OFF, you switch compatibility 
+with legacy applications off. The 8.3 sheme has a 8 character limit, the 
+LFN not.
+By switching 8.3 support off, you switch off the possibility to display 
+file names using the 8.3 naming convention for applications needing it.
+Not having to bother to create unique 8.3 filenames based on the LFN can 
+speed up the system. Whenever a file is created, a 8.3 filename must be 
+created too, and in most cases this mean that the directory must be 
+searched to look for an unique name, and create a new one if the name is 
+already in use. With large directories, this process must be repeated over 
+and over.
+
+ From Microsoft:
+&quot;Every time you create a file with a long file name, NTFS creates a second 
+file entry that has a similar 8.3 short file name. A file with an 8.3 short 
+file name has a file name containing 1 to 8 characters and a file name 
+extension containing 1 to 3 characters. The file name and file name 
+extension are separated by a period.
+If you have a large number of files (300,000 or more) in a folder, and the 
+files have long file names with the same initial characters, the time 
+required to create the files increases. The increase occurs because NTFS 
+bases the short file name on the first six characters of the long file 
+name. In folders with more than 300,000 files, the short file names start 
+to conflict after NTFS uses all of the 8.3 names that are similar to the 
+long file names. Repeated conflicts between a generated short file name and 
+existing short file names cause NTFS to regenerate the short file name from 
+6 to 8 times.
+To reduce the time required to create files, you can use the fsutil 
+behavior set disable8dot3 command to disable the creation of 8.3 short file 
+names. (You must restart your computer for this setting to take effect.) 
+For more information about disabling 8.3 short file names, see 
+&quot;MS-DOS-Readable File Names on NTFS Volumes&quot; later in this chapter.&quot;
+
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------- 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006787.html">/Spam/ [Xitami] Xitami performance regarding directory  structures
+</A></li>
+	<LI> Next message: <A HREF="006791.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6789">[ date ]</a>
+              <a href="thread.html#6789">[ thread ]</a>
+              <a href="subject.html#6789">[ subject ]</a>
+              <a href="author.html#6789">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP! Upgrading to Xitami Pro
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003453.html">
+   <LINK REL="Next"  HREF="003458.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP! Upgrading to Xitami Pro
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP! Upgrading to Xitami Pro">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Jun 2002 15:20:16 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003453.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+        <LI> Next message: <A HREF="003458.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3454">[ date ]</a>
+              <a href="thread.html#3454">[ thread ]</a>
+              <a href="subject.html#3454">[ subject ]</a>
+              <a href="author.html#3454">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 11:31 AM 6/20/2002 -0700, Russel Olinger writeth:
+&gt;<i>Ok, folks need some serious help here, i don't have a lot of time to do
+</I>research on this - so I need the crash course.
+&gt;<i>  
+</I>&gt;<i>I am running the normal Xitami and am upgrading to Xitami Pro.  As usual,
+</I>there is hardly ANY documentation on how to do this step by step.  Do I
+install to same directory OR do I install to a new directory and copy my
+previous configs/directory structure over?  Because it is the Pro version
+does that mean EVERY site is going to be a secure site - or can I only turn
+the secure feature on for specific pages or links within each site?  Are
+there tricky configurations I need to be aware of.  I do know I am supposed
+to get a KEY from somewhere, but again, I don't understand this process.  I
+don't want to disrupt my current installation.
+
+To really understand SSL, you really should read the HTTPS RFC.  However,
+since you are in a time crunch, let me take you quickly through what is
+involved.
+
+First off, your entire site can be run under SSL/TLS (if you want).  The
+tricky part is to remember that the SSL/TLS protocol provides no means for
+VHosting except by IP address under Xitami Pro.  This is due to the nature
+of the SSL/TLS protocols and not Xitami.  The problem is that when an
+SSL-capable client connects, the SSL server certificate that gets sent is
+the one tied to the IP address and there is no way to determine what VHost
+the client wants until after authentication.  This is, IMO, the biggest
+blunder the IETF (Internet Engineering Task Force) ever made.
+
+Second, all of your current configuration files can be the same as for
+Xitami.  The SSL config is located in HTTPSSL.CFS (or something like that).
+ Just edit the SSL config to point at the proper certificates needed for
+the server.
+
+Finally, you need a certificate chain.  This will consist of a root
+certificate authority encrypted private key (e.g. Verisign) and your own
+certificate that is signed by the owner of the private key of the root
+cert.  You need both the encrypted server private key and unencrypted
+server private key in order to get Xitami Pro to work.  Let me warn you
+that Verisign signed certs. are *EXTREMELY* expensive and there are cheaper
+alternatives to using their certs.
+
+&gt;<i>I am in a bind and need to upgrade fast b/c one of my sites needs to do
+</I>Credit Card transactions.  So any and all help is very appreciated.  I have
+never worked with SSL and I am worried about the time involved to get this
+all working.
+
+Make sure that your user has a merchant account before going to the trouble
+of setting up SSL so quickly.  If they don't have a merchant account, it
+will take them about 2-3 weeks (minimum) to get one.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003453.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+	<LI> Next message: <A HREF="003458.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3454">[ date ]</a>
+              <a href="thread.html#3454">[ thread ]</a>
+              <a href="subject.html#3454">[ subject ]</a>
+              <a href="author.html#3454">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

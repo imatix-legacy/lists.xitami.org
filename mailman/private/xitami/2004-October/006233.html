@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] VHost CNAME path question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006229.html">
+   <LINK REL="Next"  HREF="006235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] VHost CNAME path question
+   </H1>
+    <B>Alex Barna
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] VHost CNAME path question">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Oct 2004 09:34:14 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006229.html">[Xitami] VHost CNAME path question
+</A></li>
+        <LI> Next message: <A HREF="006235.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6233">[ date ]</a>
+              <a href="thread.html#6233">[ thread ]</a>
+              <a href="subject.html#6233">[ subject ]</a>
+              <a href="author.html#6233">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>admin wrote:
+&gt;<i> 
+</I>&gt;<i> Ok so here's a somewhat stupid question or maybe I just need more sleep.
+</I>&gt;<i> 
+</I>&gt;<i> Assume: the base host domain name is MYDOMAIN.COM
+</I>
+You're forgetting that domain names are for people, computers look for IP
+addresses.
+ 
+&gt;<i> Now by default all hits on www.mydomain.com, mydomain.com and
+</I>&gt;<i> anything.mydomain.com will hit the base host.
+</I>
+Because the name's resolves to the same IPaddress of the server.
+ 
+&gt;<i> I also run several VHosted domains with different domain names.
+</I>
+Different names at the same address get put in the same mail box.
+ 
+&gt;<i> I specify a cfg and aut file for a VHost path to a different directory now
+</I>&gt;<i> say we call the directory D:\OTHER\
+</I>&gt;<i> 
+</I>&gt;<i> I want to set other.mydomain.com to go in this directory only and not to the
+</I>&gt;<i> basehost but whatever I try keeps being bumped into the basehost root path.
+</I>
+mydomain.com/other will send to other folder.
+ 
+&gt;<i> I have also specified it under the Virtual Hosts section in the default.cfg
+</I>&gt;<i> to no avail.
+</I>&gt;<i> And I also pointed to the correct path where I keep the cfg and aut files
+</I>&gt;<i> for this cname header.
+</I>&gt;<i> 
+</I>&gt;<i> Does anyone have an idea/solution to this?
+</I>&gt;<i> 
+</I>&gt;<i>    Thanks in advance
+</I>
+You would need different IP addresses for each of the 'other' vhost folders to
+be considered different places. 
+
+Xitami is small enough you could run a different site each with it's own VHost
+name on different ports. 
+IE: 
+Register ipaddress:80 for main, ipadress:8080 for vhost1 &amp; using different ports
+for each vhost site.
+
+Or just do like the big guys (&amp; the rest of us) do &amp; put each site at
+maindomain/~vhost for each different site. Which is a lot easier.
+
+Alex,
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006229.html">[Xitami] VHost CNAME path question
+</A></li>
+	<LI> Next message: <A HREF="006235.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6233">[ date ]</a>
+              <a href="thread.html#6233">[ thread ]</a>
+              <a href="subject.html#6233">[ subject ]</a>
+              <a href="author.html#6233">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

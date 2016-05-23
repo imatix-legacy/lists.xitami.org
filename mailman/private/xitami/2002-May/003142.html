@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami crash question?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003141.html">
+   <LINK REL="Next"  HREF="003147.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami crash question?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami crash question?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 11 May 2002 22:29:31 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003141.html">[Xitami] Xitami crash question?
+</A></li>
+        <LI> Next message: <A HREF="003147.html">[Xitami] Xitami crash question?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3142">[ date ]</a>
+              <a href="thread.html#3142">[ thread ]</a>
+              <a href="subject.html#3142">[ subject ]</a>
+              <a href="author.html#3142">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3CDC6418.4857.279ED08@localhost">3CDC6418.4857.279ED08@localhost</A>&gt;, &quot;WhiteShepherd&quot; writes:
+&gt;<i>    Well my art hopsting page is coming along fine so far.  However with the 
+</I>&gt;<i>increase in trafic I am getting some odd errors as Xitami crashes.  Here is 
+</I>&gt;<i>the error.  
+</I>&gt;<i>------------
+</I>&gt;<i>smtsock: error on select():  Socket operation on non-socket
+</I>&gt;<i>Clean-memory assertion failes - xitami.c (208)
+</I>&gt;<i>Details are in memtrace.lst
+</I>
+I'm fairly sure that this is a race condition in smtsock, which in some
+situations isn't updating it's list of file handles to look for I/O on
+quickly enough before trying to use it again.   We've seen similar
+issues under Windows as well, and also in an internal rewritten version
+of smtsock.  Race conditions are, by their very nature, hard to track
+down and completely fix.
+
+As Bernd suggests, running Xitami in a &quot;restart if it crashes&quot; loop is
+generally a good idea if you depend on it staying up, as there are a few
+oddities like this which can cause it to give up when it shouldn't.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003141.html">[Xitami] Xitami crash question?
+</A></li>
+	<LI> Next message: <A HREF="003147.html">[Xitami] Xitami crash question?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3142">[ date ]</a>
+              <a href="thread.html#3142">[ thread ]</a>
+              <a href="subject.html#3142">[ subject ]</a>
+              <a href="author.html#3142">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

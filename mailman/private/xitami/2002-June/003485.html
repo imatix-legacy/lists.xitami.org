@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami and PHP - revisited
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003479.html">
+   <LINK REL="Next"  HREF="003429.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami and PHP - revisited
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami and PHP - revisited">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 Jun 2002 16:47:17 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003479.html">[Xitami] Xitami and PHP - revisited
+</A></li>
+        <LI> Next message: <A HREF="003429.html">[Xitami] XiFusion v2.6 Released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3485">[ date ]</a>
+              <a href="thread.html#3485">[ thread ]</a>
+              <a href="subject.html#3485">[ subject ]</a>
+              <a href="author.html#3485">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 11:55 AM 6/21/2002 -0700, Liz Marr writeth:
+&gt;<i>Have a temp directory and temp and tmp vars declared in startup.  PHP.ini 
+</I>&gt;<i>did NOT have a session.save_path defined.  I wonder what else it is 
+</I>&gt;<i>missing.  Still gives a blank output with test.php (although there is at
+</I>least 
+&gt;<i>basic HTML text in the file now)  I have also included c:\php in the 
+</I>&gt;<i>PATH= statement - I wonder what other programs are supposed to be 
+</I>&gt;<i>listed?
+</I>
+Umm...re-install PHP?  If you are missing items in your PHP.INI file, you
+either copied the wrong one (e.g. the optimized INI, try using the default
+INI file), the installation of PHP is corrupt (unlikely), you are using a
+different version of PHP than what SquirrelMail works with (unlikely - but
+if this is the case, I would download the latest CVS repository), or you
+have drastically changed the PHP config from the default settings (most
+likely).
+
+My first suggestion is to uninstall PHP and re-install it.  SquirrelMail
+should work when PHP is properly installed.  Copy php4ts.dll from c:\php to
+c:\winnt\system32 (or c:\windows\system32 - depends on the OS).  Copy
+php.ini-dist from c:\php to c:\winnt and rename it to php.ini.  Finally,
+don't touch the INI settings.  Now, in the [Filters] section of Xitami make
+sure PHP is defined (hand-edit the config to rule out web-admin-based
+problems):
+
+[Filters]
+  .php=c:\php\php.exe
+
+Restart the OS (this guarantees that all loaded DLLs are flushed from
+memory).  Run the following PHP script across localhost:
+
+&lt;?
+phpinfo();
+?&gt;
+
+If that doesn't work, something is:
+
+1)  Inherently wrong with your ability to follow directions (unlikely).
+2)  Xitami is corrupt (unlikely, but try re-installing it - install the
+latest stable release so that we are on the same page - I'm using 2.4d9
+locally).
+
+OR
+3)  Your OS is corrupt (most likely - I've never heard of anyone having
+this much trouble with the PHP/Xitami combination - not even with the beta
+versions of Xitami).  The only solution to this is to try standard OS
+repair utilities (e.g. installing IE - IE has kernel patches embedded
+within the installation program).  If the registry is shot, then there is
+no solution except to re-install the OS or drop an installation image.
+
+Once PHP is working, modify the INI to properly support session management:
+
+&gt;<i>On 21 Jun 2002, at 14:06, Thomas J. Hruska wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> 1)  Create a directory called 'C:\TEMP' on the local machine (name it
+</I>&gt;&gt;<i> whatever you want).
+</I>&gt;&gt;<i> 2)  Locate 'session.save_path = /tmp' in the PHP.INI file and change it to
+</I>&gt;&gt;<i> 'session.save_path = c:\temp'.
+</I>
+Next, re-install SquirrelMail.  Run the config.pl script and configure it.
+Run SquirrelMail on Xitami.
+
+If all of that doesn't work, then something is wrong at a level lower than
+software (your hardware is messed up - or something is interfering with
+Xitami/PHP such as a virus or firewall software).
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003479.html">[Xitami] Xitami and PHP - revisited
+</A></li>
+	<LI> Next message: <A HREF="003429.html">[Xitami] XiFusion v2.6 Released!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3485">[ date ]</a>
+              <a href="thread.html#3485">[ thread ]</a>
+              <a href="subject.html#3485">[ subject ]</a>
+              <a href="author.html#3485">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

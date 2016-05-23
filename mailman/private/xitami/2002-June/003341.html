@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami Pro SSL and Thawte Certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003339.html">
+   <LINK REL="Next"  HREF="003328.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami Pro SSL and Thawte Certificates
+   </H1>
+    <B>Brad Smith
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami Pro SSL and Thawte Certificates">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Jun 2002 08:23:47 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003339.html">[Xitami] Xitami Pro SSL and Thawte Certificates
+</A></li>
+        <LI> Next message: <A HREF="003328.html">[Xitami] how to get CDROM directory listing?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3341">[ date ]</a>
+              <a href="thread.html#3341">[ thread ]</a>
+              <a href="subject.html#3341">[ subject ]</a>
+              <a href="author.html#3341">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sean:
+
+There could be several problems here:
+
+1.  Many cable modem ISP's block the ports below 1024, at which point 
+the typical SSL port (443) would be blocked also.  Therefore, you need 
+to redirect to a different port.  It is easy!  First you need to change your 
+typical port number in the SSL control file (sslhttp.cfs).  The port 
+number variable is under the first section labeled [Server].  CHange it to 
+anything you would like (for example, 2443).  From now on, instead of 
+sending ssl requests to <A HREF="https://www.southbroadwaytropicals.com,">https://www.southbroadwaytropicals.com,</A> you 
+would send the requests to <A HREF="https://southbroadwaytropicals.com:2443.">https://southbroadwaytropicals.com:2443.</A>
+
+2.  If you want to know for sure that port 443 is blocked, go to 
+www.tzo.com and download their app, Port Detective.  It will run through 
+all the typical ports and tell you which ones are blocked.
+
+3.  Finally, check the final line of the sslhttp.cfs file, in the section 
+labeled [Virtual_hosts].  You must give it the IP addy of your 
+connection.  The instructions actually read that you must use actual IP 
+addresses; though, I have used domain names (since we have a 
+dynamic IP), and have found that it works for us.... though, I have no 
+guarantees for anyone else.
+
+Hope this helps.
+
+Sincerely,
+Brad Smith, CFO
+Social Design Technologies
+<A HREF="mailto:mata@matatech.tzo.com">mata@matatech.tzo.com</A>
+
+
+On 8 Jun 2002 at 12:05, sbtropicals wrote:
+
+&gt;<i> I am hoping somebody with a bit more knowledge than I have could help
+</I>&gt;<i> me past this stumbling block.
+</I>&gt;<i> 
+</I>&gt;<i> We are building an e-commerce site and I am using Xitami Pro v2.4d10
+</I>&gt;<i> (c) on Windows 95. Xitami was very easy for a total beginner to
+</I>&gt;<i> install and get running. The system operates properly except now I am
+</I>&gt;<i> trying to install CA Certificates from Thawte to provide SSL
+</I>&gt;<i> encrytion. The bulk of the html pages are stored on our ISP's servers,
+</I>&gt;<i> and cgi-scripts retrieve the shopping cart pages from our local
+</I>&gt;<i> server, which is tied into our point of sale software here. Connection
+</I>&gt;<i> is made through DSL with a Cisco 675, and we run ZoneAlarm firewall
+</I>&gt;<i> protection.
+</I>&gt;<i> 
+</I>&gt;<i> I believe I have done everything right in terms of paths, placement of
+</I>&gt;<i> certificates, etc. But the SSL layer is never getting connected, I
+</I>&gt;<i> believe as a result of the error message below from the xitami log
+</I>&gt;<i> file. I hate to admit this, but I am in way over my head here!
+</I>&gt;<i> 
+</I>&gt;<i> 2/06/07 15:24:47: smtssl: preparing for connections on port 443
+</I>&gt;<i> 2/06/07 15:24:47: smtssl: ready for SSL connections on port 443
+</I>&gt;<i> 2/06/07 15:24:47: smtssl: accepting connections on 65.100.174.89
+</I>&gt;<i> 2/06/07 15:24:47: smtssl: accepting connections on 127.0.0.1
+</I>&gt;<i> 2/06/07 15:56:09: smtftpc: error on socket 148: WSAENOTCONN
+</I>&gt;<i> 
+</I>&gt;<i> I am guessing this is a Winsocket error message, but I lack the smarts
+</I>&gt;<i> to figure out how to cure it! I have no formal training in this area
+</I>&gt;<i> at all!
+</I>&gt;<i> 
+</I>&gt;<i> Does anybody out there have some time to point me in the right
+</I>&gt;<i> direction?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for your time! 
+</I>&gt;<i> Sean Niland
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003339.html">[Xitami] Xitami Pro SSL and Thawte Certificates
+</A></li>
+	<LI> Next message: <A HREF="003328.html">[Xitami] how to get CDROM directory listing?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3341">[ date ]</a>
+              <a href="thread.html#3341">[ thread ]</a>
+              <a href="subject.html#3341">[ subject ]</a>
+              <a href="author.html#3341">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

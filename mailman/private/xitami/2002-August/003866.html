@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] EU: OpenSSL Security Update
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003854.html">
+   <LINK REL="Next"  HREF="004167.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] EU: OpenSSL Security Update
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] EU: OpenSSL Security Update">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 20 Aug 2002 22:47:26 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003854.html">[Xitami] EU: OpenSSL Security Update
+</A></li>
+        <LI> Next message: <A HREF="004167.html">[Xitami] Connection problem with Zone Alarm
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3866">[ date ]</a>
+              <a href="thread.html#3866">[ thread ]</a>
+              <a href="subject.html#3866">[ subject ]</a>
+              <a href="author.html#3866">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 07:37 PM 8/19/2002 -0700, Jeff Hamblin writeth:
+&gt;&gt;<i> Affected Software:  ProtoNova v1.0-v1.1.  Xitami/Pro - all versions.
+</I>&gt;&gt;<i> Apache (mod_ssl) - all versions.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Security Issues:  A buffer overrun in the distributed OpenSSL binaries can
+</I>&gt;&gt;<i> enable an attacker to execute arbitrary code on the local machine.  Other
+</I>&gt;&gt;<i> serious security issues are also present in 0.9.6f and lower.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Fix For Windows Users:  Install the Win32 OpenSSL project (0.9.6g) and
+</I>&gt;&gt;<i> rename the old libeay32.dll and ssleay32.dll files to libeay32b.dll and
+</I>&gt;&gt;<i> ssleay32b.dll in the directory where the web server is installed.
+</I>&gt;<i>
+</I>&gt;<i>Is an update going to be released for Xitami/Pro? Or is there
+</I>&gt;<i>some way to patch this ourselves? The fix described above
+</I>&gt;<i>does not seem to apply to Xitami/Pro -- I cannot find any of
+</I>&gt;<i>the files listed in the xitami directory, or anywhere on the
+</I>&gt;<i>system for that matter (Win2k Pro platform).
+</I>
+You are absolutely right about this.  It appears that the Xitami/Pro server
+is statically linked with SSLeay - an ancient OpenSSL implementation -
+v0.9.0 to be exact (according to the hex dump I have before me).  There is
+no way to patch this yourself.  iMatix should dynamically bind this library
+for future releases of their SSL-capable server.
+
+I'm sorry that I can't help you beyond this, but it is now imperative that
+iMatix get a fix out for the problem ASAP as well as dynamically linking to
+OpenSSL to avoid future hassles.  If you want to read more about it, you
+can find the Security Advisory here:
+
+&lt;<A HREF="http://www.openssl.org/news/secadv_20020730.txt">http://www.openssl.org/news/secadv_20020730.txt</A>&gt;
+
+Note that it says that SSLeay is &quot;probably also affected.&quot;  I would
+consider anyone running an unpatched/unfixed production server to be
+walking in dangerous territory and should take down any production
+Xitami/Pro servers until iMatix fixes this.  It was serious enough to
+generate a panic attack across the entire _world_ and generated THREE
+different OpenSSL releases (two occured within 24 hours of each other) to
+finally fix the problems.  0.9.6g is the latest, stable release.
+
+Exploits exist for one of the buffer overflow vulnerabilities, but the code
+is claimed to be &quot;unreleased.&quot;  The fact that such code exists should send
+everyone into hiding.  I suspect that in the next couple months we will see
+unpatched/unfixed servers being changed remotely via malicious scripts.
+
+iMatix, what is the status on this issue?
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003854.html">[Xitami] EU: OpenSSL Security Update
+</A></li>
+	<LI> Next message: <A HREF="004167.html">[Xitami] Connection problem with Zone Alarm
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3866">[ date ]</a>
+              <a href="thread.html#3866">[ thread ]</a>
+              <a href="subject.html#3866">[ subject ]</a>
+              <a href="author.html#3866">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

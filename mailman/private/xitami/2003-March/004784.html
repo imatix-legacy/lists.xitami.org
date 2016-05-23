@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] New User Question - Server Intrusion
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004783.html">
+   <LINK REL="Next"  HREF="004785.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] New User Question - Server Intrusion
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] New User Question - Server Intrusion">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 5 Mar 2003 11:10:15 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004783.html">[Xitami] New User Question - Server Intrusion
+</A></li>
+        <LI> Next message: <A HREF="004785.html">[Xitami] New User Question - Server Intrusion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4784">[ date ]</a>
+              <a href="thread.html#4784">[ thread ]</a>
+              <a href="subject.html#4784">[ subject ]</a>
+              <a href="author.html#4784">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> responses to the script are other than 404 indicating, I assume,
+</I>&gt;<i> that some response was obtained.
+</I>
+Those URLs are invalid syntax. They are carefully crafted to confuse
+MS IIS webserver. They work up out of the wwwroot directory then
+down into the Windows directory and run programs. That's what can
+happen when children write webservers: other smarter children find
+ways to break their toys.
+
+Xitami can't be tricked that way.
+
+On a few of those it does show other than &quot;404&quot;. What's happening:
+Xitami tries to parse the invalid URL, chokes on the illegal part
+&quot;%%&quot;, and simply truncates the URL at that point. The result is
+&quot;/scripts/..&quot;, which simplifies to &quot;/&quot;, so Xitami delivers your top
+home page and calls it a success. The attacker, who had hoped for a
+file-listing (thus proving that he or she could access CMD and
+execute arbitrary commands) will not consider this a success.
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004783.html">[Xitami] New User Question - Server Intrusion
+</A></li>
+	<LI> Next message: <A HREF="004785.html">[Xitami] New User Question - Server Intrusion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4784">[ date ]</a>
+              <a href="thread.html#4784">[ thread ]</a>
+              <a href="subject.html#4784">[ subject ]</a>
+              <a href="author.html#4784">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

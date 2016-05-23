@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Re: XITAMI CRASH      ERROR-URGENT!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org?Subject=%5BXitami-Dev%5D%20Re%3A%20XITAMI%20CRASH%20%20%20%20%20%20ERROR-URGENT%21&In-Reply-To=43789.202.63.116.234.1173955726.squirrel%40mail.sirvisetti.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Re: XITAMI CRASH      ERROR-URGENT!</H1>
+    <B>Shivakumar Gopalakrishnan</B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org?Subject=%5BXitami-Dev%5D%20Re%3A%20XITAMI%20CRASH%20%20%20%20%20%20ERROR-URGENT%21&In-Reply-To=43789.202.63.116.234.1173955726.squirrel%40mail.sirvisetti.com"
+       TITLE="[Xitami-Dev] Re: XITAMI CRASH      ERROR-URGENT!">g_skumar at yahoo.com
+       </A><BR>
+    <I>Sat Apr  7 04:15:32 CEST 2007</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#394">[ date ]</a>
+              <a href="thread.html#394">[ thread ]</a>
+              <a href="subject.html#394">[ subject ]</a>
+              <a href="author.html#394">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Other than actually fixing the code itself, other options are starting the process as a service and set the option to restart itself on failure.
+   
+  Do not know whether you are trying this already.
+   
+  Kumar
+  
+
+Vishal Kumar Nalla &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">vishalkumar.nalla at sirvisetti.com</A>&gt; wrote:
+  Hi,
+
+Xitami 2.5c is crashing at the following events,can anybody give me a resolution as why this is
+happening:
+
+Abort at xisuper:Clean-Up-Temporary-Files: (Ready-To-Go, Not-Busy-Event)
+Abort at smttran:Regenerate-Alarm-Event: (Getting-Event, Alarm-Event)
+Abort at smttime:Generate-Response-Events:set alarm request (Expect-Event, Timer-Event)
+
+At these three events Xitami is crashing on my system,the above information i have gathered from
+the crash log.This is a high priority issue for us, as we dont have options to go for other
+webservers.Kindly assist/provide a resolution for the above mentioned crash details.
+
+References to source code for the above events:
+
+smttime:
+/************************ GENERATE RESPONSE EVENTS ***********************/
+
+MODULE generate_response_events (THREAD *thread)
+{
+static long
+cur_date = 0, /* Check if clock went backwards */
+cur_time = 0;
+TIMEREQ
+*request; /* Pointer to request in list */
+long
+sig_date, /* When do we signal */
+sig_time, /* the next alarm? */
+delay_days, /* Which is in how many days */
+delay_csecs; /* and how many centiseconds */
+
+/* Handle a backwards clock adjustment by estimating the difference */
+/* and applying this to all time requests. */
+smt_set_step (&quot;handle clock adjustment&quot;);
+if (date_is_future (cur_date, cur_time))
+{
+date_diff (cur_date, cur_time,
+date_now (), time_now (),
+&amp;delay_days, &amp;delay_csecs);
+for (request = requests.next;
+request != (TIMEREQ *) &amp;requests;
+request = request-&gt; next)
+{
+past_date (&amp;request-&gt; exp_date, &amp;request-&gt; exp_time,
+delay_days, delay_csecs);
+}
+}
+cur_time = time_now ();
+cur_date = date_now ();
+sig_date = 0; /* No alarm requests, yet */
+sig_time = 0;
+
+/* First pass - generate response events and expire old requests */
+smt_set_step (&quot;expire old requests&quot;);
+for (request = requests.next;
+request != (TIMEREQ *) &amp;requests;
+request = request-&gt; next)
+{
+if (request-&gt; exp_date &lt; cur_date
+||<i> (request-&gt; exp_date == cur_date
+</I>&amp;&amp; request-&gt; exp_time &lt;= cur_time))
+{
+send_alarm_reply (request); /* Send back an ALARM to caller */
+if (request-&gt; cycles == 1) /* Expire if single-shot */
+{
+request = request-&gt; prev;
+request_destroy (request-&gt; next);
+}
+/* Else set next expiry time to closest future point... under
+* normal circumstances we add the delay date and time. If the
+* delay is very short (too short), or the clock was moved
+* forwards, this may not be enough. We then take the current
+* date and time and add the delay to that.
+*/
+else
+{
+future_date (&amp;request-&gt; exp_date, &amp;request-&gt; exp_time,
+request-&gt; days, request-&gt; csecs);
+
+if (request-&gt; exp_date &lt; cur_date
+||<i> (request-&gt; exp_date == cur_date
+</I>&amp;&amp; request-&gt; exp_time &lt; cur_time))
+{
+request-&gt; exp_date = cur_date;
+request-&gt; exp_time = cur_time;
+future_date (&amp;request-&gt; exp_date, &amp;request-&gt; exp_time,
+request-&gt; days, request-&gt; csecs);
+}
+if (request-&gt; cycles &gt; 1)
+request-&gt; cycles--;
+}
+}
+}
+/* Second pass - calculate time for next signal */
+smt_set_step (&quot;calculate next signal&quot;);
+for (request = requests.next;
+request != (TIMEREQ *) &amp;requests;
+request = request-&gt; next)
+{
+/* Keep track of the oldest expiry time, for next timer signal */
+if (sig_date &gt; request-&gt; exp_date
+||<i> (sig_date == request-&gt; exp_date
+</I>&amp;&amp; sig_time &gt; request-&gt; exp_time)
+||<i> sig_date == 0)
+</I>{
+sig_date = request-&gt; exp_date;
+sig_time = request-&gt; exp_time;
+}
+}
+/* If we had an alarm request, go set it off */
+smt_set_step (&quot;set alarm request&quot;);
+if (sig_date)
+{
+date_diff (sig_date, sig_time,
+cur_date, cur_time,
+&amp;delay_days, &amp;delay_csecs);
+if (delay_days &gt; 24) /* 24 days are less than 2^31 */
+delay_days = 24;
+
+/* Try to set a process alarm (SIGALRM signal) after the desired
+* delay. If this fails -- usually because we're on a crippleOS
+* -- then we substitute a real timer by a slow SMT loop. This is
+* okay on crippleOS'es since these usually don't worry too much
+* if one process hogs the CPU.
+*/
+if (!process_alarm (delay_days * 86400000L + delay_csecs * 10))
+SEND (&amp;thread-&gt; queue-&gt; qid, &quot;_TIMER&quot;, &quot;&quot;);
+}
+}
+
+static void
+send_alarm_reply (TIMEREQ *request)
+{
+byte
+*msg_body; /* Message returned to caller */
+int
+msg_size; /* Size of formatted msg_body */
+
+/* Calculate size required for message body */
+msg_size = exdr_write (NULL, SMT_TIME_REPLY,
+request-&gt; body_size, request-&gt; body_data);
+
+/* Now allocate and format the buffer */
+msg_body = mem_alloc (msg_size);
+msg_size = exdr_write (msg_body, SMT_TIME_REPLY,
+request-&gt; body_size, request-&gt; body_data);
+event_send (
+&amp;request-&gt; reply_to, /* Send to specified queue */
+NULL, /* No queue for reply */
+&quot;TIME_ALARM&quot;, /* Name of event to send */
+msg_body, /* Event body contents */
+msg_size, /* Event body size */
+NULL, NULL, NULL, /* No response events */
+0); /* No timeout */
+
+mem_free (msg_body); /* And we can free the buffer */
+}
+
+
+/* -------------------------------------------------------------------------
+* request_destroy
+*
+* Destroys the specified request.
+*/
+
+static void
+request_destroy (TIMEREQ *request)
+{
+mem_free (request-&gt; body_data);
+node_destroy (request);
+}
+
+
+smttran:
+
+/************************* REGENERATE ALARM EVENT ************************/
+
+MODULE regenerate_alarm_event (THREAD *thread)
+{
+struct_smt_time_reply
+*reply; /* Reply from timer */
+
+tcb = thread-&gt; tcb; /* Point to thread's context */
+get_smt_time_reply (thread-&gt; event-&gt; body, &amp;reply);
+if (streq ((char *) reply-&gt; tag_data, &quot;COMMIT&quot;))
+the_next_event = commit_event;
+else
+the_next_event = empty_event;
+
+free_smt_time_reply (&amp;reply);
+
+}
+
+xisuper:
+
+/************************ CLEAN UP TEMPORARY FILES ***********************/
+
+MODULE clean_up_temporary_files (THREAD *thread)
+{
+SYMBOL
+*symbol;
+
+/* We get the list of temp file directories (potentially a different one
+* for each virtual host) from the http_dirs symbol table. We delete
+* temporary files older than one day.
+*/
+for (symbol = http_dirs-&gt; symbols; symbol; symbol = symbol-&gt; next)
+cleanup_directory (symbol-&gt; name, &quot;pipe*&quot;, 1);
+}
+
+
+/************************* TERMINATE THE THREAD **************************/
+
+MODULE terminate_the_thread (THREAD *thread)
+{
+the_next_event = terminate_event;
+}
+
+
+-- 
+Thanks
+Vishal Kumar Nalla
+
+On Sun, November 19, 2006 00:29, Roman Stepanov wrote:
+&gt;<i> Sorry, but i didn't receive any attachments with your mail.
+</I>&gt;<i> About setting the time - works fine, without any crashes.
+</I>&gt;<i> I have a fresh copy of xitami installed from <A HREF="http://www.xitami.com/xiopen_2_5.zip">http://www.xitami.com/xiopen_2_5.zip</A>
+</I>&gt;<i> If your copy has been downloaded from another source, please send me url.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Saturday, November 18, 2006, 8:13:59 PM, you wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi Everyone,
+</I>&gt;<i>
+</I>&gt;&gt;<i> Can you please look into these log files and let me know what exactly is happening from
+</I>&gt;&gt;<i> Xitami.This is haulting our process,kindly provide a solution as soon as possible.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami-dev/attachments/20070406/8b0d5ad7/attachment.htm">http://lists.imatix.org/pipermail/xitami-dev/attachments/20070406/8b0d5ad7/attachment.htm</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#394">[ date ]</a>
+              <a href="thread.html#394">[ thread ]</a>
+              <a href="subject.html#394">[ subject ]</a>
+              <a href="author.html#394">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami-dev">More information about the Xitami-Dev
+mailing list</a><br>
+</body></html>

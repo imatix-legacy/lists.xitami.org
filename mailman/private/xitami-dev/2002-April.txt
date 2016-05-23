@@ -1,0 +1,1103 @@
+From xitami-dev@lists.xitami.org  Sun Apr  7 09:03:16 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sun, 07 Apr 2002 20:03:16 +1200
+Subject: [Xitami-Dev] LRWP Error Response
+In-Reply-To: Message from "bernd hohmann" <xitami-dev@conacom.de>
+ of "Mon, 18 Mar 2002 15:42:04 +0100." <200203181438.PAA16469@sxpublic.nxrda.imatix.net>
+Message-ID: <200204070803.UAA13771@pagoda.in.naos.co.nz>
+
+In message <200203181438.PAA16469@sxpublic.nxrda.imatix.net>, "bernd hohmann" writes:
+>what is the proposed error-response for xitami and LRWP 2.0 ?
+>as far as i understand Ewens implementation the implementation
+>returns a buffer with 1024 bytes length starting with
+>"REJECTED+delimiter" following the errormessage and i have to
+>check, if there is a second delimitier after the message itself.
+
+I assume you're talking about at the signon phase. 
+
+In LRWP1.0 the response would be ERROR (IIRC), with no terminator.
+
+In LRWP2.0 as far as I recall the idea was that it'd send REJECTED, a
+terminator character (0xFF), and then an error message, and then another
+terminator.
+
+There's no fixed length blocks (those are just buffers in the program,
+and not all of them will be sent if they're not needed).
+
+>it no delimiter was found i can fetch another 1024 byte block.
+>can i rely on 1024 byte sized buffers ?
+
+>From a receiving point of view, you need to keep receiving (in LRWP2.0)
+until you've received the two terminators, and then extract the error
+message.  If you don't want the error message you can just close the
+connection of course.
+
+Reading (with Java, I'm guessing) into 1024-byte buffers should be okay;
+it should return you what is available, and you can then check to see if
+it's complete or not.
+
+FWIW, the iMatix ServletRunner (0.3 beta) has Java implementation code 
+to handle this (LRWP_2_0_WebServerConnection.java) which AFAIK will work.  
+You might want to at least look through what that does to understand how
+the protocol is handled.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Sun Apr  7 09:25:02 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sun, 07 Apr 2002 20:25:02 +1200
+Subject: [Xitami-Dev] 44: In FTP, 'ls' fails from a remote system (it works locally)
+In-Reply-To: Message from "Gary Hartmann" <ghartmann@tcs-sec.com>
+ of "Thu, 21 Feb 2002 14:52:33 CDT." <AAEPIGJGFNAFKCOFPEJPCEIGCCAA.ghartmann@tcs-sec.com>
+Message-ID: <200204070825.UAA15251@pagoda.in.naos.co.nz>
+
+In message <AAEPIGJGFNAFKCOFPEJPCEIGCCAA.ghartmann@tcs-sec.com>, "Gary Hartmann"
+ writes:
+>In the FAQ:
+>44: In FTP, 'ls' fails from a remote system (it works locally)
+>
+>This is probably due to the remote machine being hidden by a router or
+>firewall which prevents return connections from the FTP server to the
+>client. You should use passive mode for such connections. The next release
+>of Xitami handles this situation better
+
+I don't actually recall when that FAQ entry was written, so I don't know
+which "next release" it is referring to.  You could try 2.4d9 and 2.5b5
+and see if they solve your problem, but I suspect that at least some of
+the situation will remain.
+
+FTP is just basically a very troublesome protocol when one or more
+routers/firewalls are involved.
+
+>What release has addressed this issue? Does the Pro version address's the
+>issue?
+
+The Pro version is built from the same source at the current Xitami
+releases, but with the HTTPS support added in.  So no, if it doesn't
+work in the current Xitami releases, it won't work any better in the Pro
+version.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Mon Apr  8 09:35:11 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Mon, 08 Apr 2002 09:35:11 +0100 (MEZ)
+Subject: [Xitami-Dev] LRWP Error Response
+In-Reply-To: <200204070803.UAA13771@pagoda.in.naos.co.nz>
+Message-ID: <200204080735.JAA05934@sxpublic.nxrda.imatix.net>
+
+On Sun, 07 Apr 2002 20:03:16 +1200, Ewen McNeill wrote:
+
+> FWIW, the iMatix ServletRunner (0.3 beta) has Java implementation code 
+> to handle this (LRWP_2_0_WebServerConnection.java) which AFAIK will work.  
+> You might want to at least look through what that does to understand how
+> the protocol is handled.
+
+i know. your implementation its gentle enough to handle LRWP 1.0
+too.
+
+my new one simply bails out. but: the LRWP implementation of
+xitami was buggy before beta 5 so it doesn't matter ;-)
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Wed Apr 10 16:54:42 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Wed, 10 Apr 2002 17:54:42 +0200
+Subject: [Xitami-Dev] New SMT Agents  API
+Message-ID: <GMEIJMPDFMEGPAGNKHKDIEGNCBAA.rafael.cano@o-labs.com>
+
+ Hi.
+
+ I've been porting some of my old SMT Agents to the new
+ API (declare_..., send_..., get_... ) and, after some
+ effort in understanding these functions and macros, my code
+ has become much cleaner and easier to maintain. No more
+ exdr_* stuff ;-)
+
+ Just a few questions:
+
+ Why have the messages "SMTSOCK WRITE/INPUT/OUTPUT OK" dissapear?.
+
+ Is there anyone thinking of writing some "SMT Kernel and Agents
+ Programming Reference"?. I would be willing to cooperate.
+
+ Are all the SMT subdirectories in CVS the same?. It seems so,
+ but I would appreciate some explanation of the CVS tree.
+
+
+ Regards.
+
+
+   Rafael Cano Pérez
+
+
+
+From xitami-dev@lists.xitami.org  Wed Apr 10 22:33:58 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 11 Apr 2002 09:33:58 +1200
+Subject: [Xitami-Dev] New SMT Agents API
+In-Reply-To: Message from =?iso-8859-1?Q?Rafael_Cano_P=E9rez?= <rafael.cano@o-labs.com>
+ of "Wed, 10 Apr 2002 17:54:42 +0200." <GMEIJMPDFMEGPAGNKHKDIEGNCBAA.rafael.cano@o-labs.com>
+Message-ID: <200204102133.JAA11160@pagoda.in.naos.co.nz>
+
+In message <GMEIJMPDFMEGPAGNKHKDIEGNCBAA.rafael.cano@o-labs.com>, =?iso-8859-1?Q
+?Rafael_Cano_P=E9rez?= writes:
+>Why have the messages "SMTSOCK WRITE/INPUT/OUTPUT OK" dissapear?.
+
+smtSock has been extensively rewritten, and sort of combined with the
+smttime functions.  I haven't been working on it so I don't precisely
+recall what happened to the smtsock write/input/output okay messages,
+but I'll forward your message to the person who was.
+
+> Is there anyone thinking of writing some "SMT Kernel and Agents
+> Programming Reference"?. I would be willing to cooperate.
+
+Feel free to start :-)  (It's a really excellent idea, but no one at
+iMatix has had much time to work on the code, let alone documentation.)
+
+> Are all the SMT subdirectories in CVS the same?. It seems so,
+> but I would appreciate some explanation of the CVS tree.
+
+Yes.  All the public SMT directories are actually linux symlinks to the
+same directory.  Checking in/out of any public SMT directory will get
+you the same code/change all of them.  Cleaning this up further is on 
+our "to do" list.  (There are also some internal SMT directories which
+have cached copies of things like the code in Xitami 2.4d9, since it
+didn't exactly correspond to anything in the CVS archive.)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 10:24:47 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Thu, 11 Apr 2002 11:24:47 +0200
+Subject: [Xitami-Dev] JBuilder plug-in
+Message-ID: <NEEFLDLKNGPKINAMMMLJIEANCAAA.cetti@keytech.it>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0013_01C1E14B.7D0968D0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Hi
+ just wondering if there's a plug-in so to use the Xitami web server (and
+hopefully the servlet runner)
+within an Java IDE such as Jbuilder (my need is to debug my application ....
+maybe there's another IDE integrable with Xitami debugging)
+
+Thanks in advance
+
+
+------=_NextPart_000_0013_01C1E14B.7D0968D0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><SPAN class=3D695462109-11042002><FONT face=3DArial=20
+size=3D2>Hi</FONT></SPAN></DIV>
+<DIV><SPAN class=3D695462109-11042002><FONT face=3DArial =
+size=3D2>&nbsp;just wondering=20
+if there's a plug-in so to use the Xitami web server (and hopefully the =
+servlet=20
+runner)</FONT></SPAN></DIV>
+<DIV><SPAN class=3D695462109-11042002><FONT face=3DArial size=3D2>within =
+an Java IDE=20
+such as Jbuilder (my need is to debug my application .... maybe there's =
+another=20
+IDE integrable with Xitami debugging)</FONT></SPAN></DIV>
+<DIV><SPAN class=3D695462109-11042002><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D695462109-11042002><FONT face=3DArial size=3D2>Thanks =
+in=20
+advance</FONT></SPAN></DIV>
+<DIV><SPAN class=3D695462109-11042002></SPAN>&nbsp;</DIV></BODY></HTML>
+
+------=_NextPart_000_0013_01C1E14B.7D0968D0--
+
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 10:34:43 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Thu, 11 Apr 2002 05:34:43 EDT
+Subject: [Xitami-Dev] JBuilder plug-in
+Message-ID: <96.24ca6005.29e6b2b3@aol.com>
+
+--part1_96.24ca6005.29e6b2b3_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+I can think of many different scenarios where you wouldn't need a plugin to 
+debug a java application.  You have to describe more specifically what your 
+application does I guess
+
+--part1_96.24ca6005.29e6b2b3_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2>I can think of many different scenarios where you wouldn't need a plugin to debug a java application. &nbsp;You have to describe more specifically what your application does I guess</FONT></HTML>
+
+--part1_96.24ca6005.29e6b2b3_boundary--
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 10:35:46 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 11 Apr 2002 21:35:46 +1200
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: Message from "Jonathan Cetti" <cetti@keytech.it>
+ of "Thu, 11 Apr 2002 11:24:47 +0200." <NEEFLDLKNGPKINAMMMLJIEANCAAA.cetti@keytech.it>
+Message-ID: <200204110935.VAA15367@pagoda.in.naos.co.nz>
+
+In message <NEEFLDLKNGPKINAMMMLJIEANCAAA.cetti@keytech.it>, "Jonathan Cetti" writes:
+> just wondering if there's a plug-in so to use the Xitami web server (and
+>hopefully the servlet runner) within an Java IDE such as Jbuilder 
+>(my need is to debug my application ....  maybe there's another IDE 
+>integrable with Xitami debugging)
+
+Considering that Xitami is written in C, I doubt that it would run all
+that well in a Java IDE...
+
+However if you want to debug a Java LRWP application (which is my guess)
+then you should be able to run Xitami in one window, quite separately,
+and then start the Servlet Runner (which is Java) in the IDE.  Some
+random fiddling with runtime environment may be required, particularly
+if you try to use the old iMatix beta ServletRunner rather than the
+newer one that Bernd Hohmann has been working on.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 10:51:15 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Thu, 11 Apr 2002 11:51:15 +0200
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <96.24ca6005.29e6b2b3@aol.com>
+Message-ID: <NEEFLDLKNGPKINAMMMLJAEAOCAAA.cetti@keytech.it>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_001B_01C1E14F.2F9A4570
+Content-Type: text/plain;
+	charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+I have to build a web application based on servlet. That application will
+need to be runned on Xitami web server and will use xitami servlet runner
+(have the beta3 release now). I would like to develop the application in an
+IDE (now we use JBuilder 6 Enterprise) and have the opportunity to debug it
+before deploy it. Jbuilder allows to remote debug, but needs a plugin to
+recognize the web/application server ... this is because it searches for all
+java native servers, while Xitami exe should be (for what i saw) in c++ ...
+dunno ...
+my application have to build a dynamic page , which have a state based on
+session cookies and querystring. Each object in it is defined by a dynamic
+xml file given to an appropriate gsl file which by using xitami's "gslgen"
+read correctly the page ...
+  -----Original Message-----
+  From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of TonicPeddler@aol.com
+  Sent: Thursday, April 11, 2002 11:35 AM
+  To: xitami-dev@lists.xitami.org
+  Subject: Re: [Xitami-Dev] JBuilder plug-in
+
+
+  I can think of many different scenarios where you wouldn't need a plugin
+to debug a java application.  You have to describe more specifically what
+your application does I guess
+
+------=_NextPart_000_001B_01C1E14F.2F9A4570
+Content-Type: text/html;
+	charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dus-ascii">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><SPAN class=3D795114509-11042002><FONT face=3DArial color=3D#0000ff =
+size=3D2>I have=20
+to build a web application based on servlet. That application will need =
+to be=20
+runned on Xitami web server and will use xitami servlet runner (have the =
+beta3=20
+release now). I would like to develop the application in an IDE (now we =
+use=20
+JBuilder 6 Enterprise) and have the opportunity to debug it before =
+deploy it.=20
+Jbuilder allows to remote debug, but needs a plugin to recognize the=20
+web/application server ... this is because it searches for all java =
+native=20
+servers, while Xitami exe should be (for what i saw) in c++ ... dunno =
+...=20
+</FONT></SPAN></DIV>
+<DIV><SPAN class=3D795114509-11042002><FONT face=3DArial color=3D#0000ff =
+size=3D2>my=20
+application have to build a dynamic page , which have a state based on =
+session=20
+cookies and querystring. Each object in it is defined by a dynamic xml =
+file=20
+given to an appropriate gsl file which by using xitami's "gslgen" read =
+correctly=20
+the page ...</FONT></SPAN></DIV>
+<BLOCKQUOTE>
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-dev-admin@lists.xitami.org=20
+  [mailto:xitami-dev-admin@lists.xitami.org]<B>On Behalf Of=20
+  </B>TonicPeddler@aol.com<BR><B>Sent:</B> Thursday, April 11, 2002 =
+11:35=20
+  AM<BR><B>To:</B> xitami-dev@lists.xitami.org<BR><B>Subject:</B> Re:=20
+  [Xitami-Dev] JBuilder plug-in<BR><BR></FONT></DIV><FONT=20
+  face=3Darial,helvetica><FONT size=3D2>I can think of many different =
+scenarios=20
+  where you wouldn't need a plugin to debug a java application. =
+&nbsp;You have=20
+  to describe more specifically what your application does I =
+guess</FONT>=20
+</FONT></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_001B_01C1E14F.2F9A4570--
+
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 10:55:44 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Thu, 11 Apr 2002 11:55:44 +0200
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <200204110935.VAA15367@pagoda.in.naos.co.nz>
+Message-ID: <NEEFLDLKNGPKINAMMMLJGEAOCAAA.cetti@keytech.it>
+
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of Ewen McNeill
+Sent: Thursday, April 11, 2002 11:36 AM
+To: xitami-dev@lists.xitami.org
+Subject: Re: [Xitami-Dev] JBuilder plug-in
+
+
+In message <NEEFLDLKNGPKINAMMMLJIEANCAAA.cetti@keytech.it>, "Jonathan Cetti"
+writes:
+> just wondering if there's a plug-in so to use the Xitami web server (and
+>hopefully the servlet runner) within an Java IDE such as Jbuilder
+>(my need is to debug my application ....  maybe there's another IDE
+>integrable with Xitami debugging)
+
+Considering that Xitami is written in C, I doubt that it would run all
+that well in a Java IDE...
+
+However if you want to debug a Java LRWP application (which is my guess)
+then you should be able to run Xitami in one window, quite separately,
+and then start the Servlet Runner (which is Java) in the IDE.
+
+that's it exactly my need, but Jbuilder to recognize the servlet runner
+needs a plug-in (i suppose) to be configured ... i'll try out to manage
+
+Some
+random fiddling with runtime environment may be required, particularly
+if you try to use the old iMatix beta ServletRunner rather than the
+newer one that Bernd Hohmann has been working on.
+
+Ewen
+
+
+Thanks a lot
+
+--
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 10:59:12 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Thu, 11 Apr 2002 05:59:12 EDT
+Subject: [Xitami-Dev] JBuilder plug-in
+Message-ID: <ad.1b5fbae5.29e6b870@aol.com>
+
+--part1_ad.1b5fbae5.29e6b870_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+I'm not sure how you would go about debugging it if it is run by xitami 
+servlet runner.  Many IDEs have advanced debug tools, including the option to 
+begin debugging an application after it's already been executed (my 
+experience is with MSVC++)  As long as you can see your way around the 
+machine code, that's one way you can go about doing it.
+
+--part1_ad.1b5fbae5.29e6b870_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2>I'm not sure how you would go about debugging it if it is run by xitami servlet runner. &nbsp;Many IDEs have advanced debug tools, including the option to begin debugging an application after it's already been executed (my experience is with MSVC++) &nbsp;As long as you can see your way around the machine code, that's one way you can go about doing it.</FONT></HTML>
+
+--part1_ad.1b5fbae5.29e6b870_boundary--
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 11:28:07 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Thu, 11 Apr 2002 12:28:07 +0200
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <ad.1b5fbae5.29e6b870@aol.com>
+Message-ID: <NEEFLDLKNGPKINAMMMLJAEAPCAAA.cetti@keytech.it>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0023_01C1E154.55C6F810
+Content-Type: text/plain;
+	charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Done it! ok just made a main class which loads the xitami servlet runner,
+then i can use my IDE debugging instructions to debug the application which
+is used OUTSIDE ... obviously it needs to be running xitami ws ... but
+jbuilder 6 enterprise by default uses tomcat 3.2.3 and xitami servlet runner
+seems to b much faster and lighter ,,, :)
+  -----Original Message-----
+  From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of TonicPeddler@aol.com
+  Sent: Thursday, April 11, 2002 11:59 AM
+  To: xitami-dev@lists.xitami.org
+  Subject: Re: [Xitami-Dev] JBuilder plug-in
+
+
+  I'm not sure how you would go about debugging it if it is run by xitami
+servlet runner.  Many IDEs have advanced debug tools, including the option
+to begin debugging an application after it's already been executed (my
+experience is with MSVC++)  As long as you can see your way around the
+machine code, that's one way you can go about doing it.
+
+------=_NextPart_000_0023_01C1E154.55C6F810
+Content-Type: text/html;
+	charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dus-ascii">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><SPAN class=3D024382510-11042002><FONT face=3DArial color=3D#0000ff =
+size=3D2>Done=20
+it! ok just made a main class which loads the xitami servlet runner, =
+then i can=20
+use my IDE debugging instructions to debug the application which is used =
+OUTSIDE=20
+... obviously it needs to be running xitami ws ... but jbuilder 6 =
+enterprise by=20
+default uses tomcat 3.2.3 and xitami servlet runner seems to b much =
+faster and=20
+lighter ,,, :)</FONT></SPAN></DIV>
+<BLOCKQUOTE>
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-dev-admin@lists.xitami.org=20
+  [mailto:xitami-dev-admin@lists.xitami.org]<B>On Behalf Of=20
+  </B>TonicPeddler@aol.com<BR><B>Sent:</B> Thursday, April 11, 2002 =
+11:59=20
+  AM<BR><B>To:</B> xitami-dev@lists.xitami.org<BR><B>Subject:</B> Re:=20
+  [Xitami-Dev] JBuilder plug-in<BR><BR></FONT></DIV><FONT=20
+  face=3Darial,helvetica><FONT size=3D2>I'm not sure how you would go =
+about=20
+  debugging it if it is run by xitami servlet runner. &nbsp;Many IDEs =
+have=20
+  advanced debug tools, including the option to begin debugging an =
+application=20
+  after it's already been executed (my experience is with MSVC++) =
+&nbsp;As long=20
+  as you can see your way around the machine code, that's one way you =
+can go=20
+  about doing it.</FONT> </FONT></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0023_01C1E154.55C6F810--
+
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 11:33:56 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Thu, 11 Apr 2002 06:33:56 EDT
+Subject: [Xitami-Dev] JBuilder plug-in
+Message-ID: <147.cac1fd8.29e6c094@aol.com>
+
+--part1_147.cac1fd8.29e6c094_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Great, glad to help
+
+In a message dated 4/11/2002 3:31:22 AM Pacific Daylight Time, 
+cetti@keytech.it writes:
+
+
+> Subj:RE: [Xitami-Dev] JBuilder plug-in
+> Date:4/11/2002 3:31:22 AM Pacific Daylight Time
+> From:    cetti@keytech.it (Jonathan Cetti)
+> Sender:    xitami-dev-admin@lists.xitami.org
+> Reply-to: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+> To:    xitami-dev@lists.xitami.org
+> 
+> 
+> 
+> 
+> Done it! ok just made a main class which loads the xitami servlet runner, 
+> then i can use my IDE debugging instructions to debug the application which 
+> is used OUTSIDE ... obviously it needs to be running xitami ws ... but 
+> jbuilder 6 enterprise by default uses tomcat 3.2.3 and xitami servlet 
+> runner seems to b much faster and lighter ,,, :)
+> 
+> >> -----Original Message-----
+>> From: xitami-dev-admin@lists.xitami.org 
+>> [mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of TonicPeddler@aol.com
+>> Sent: Thursday, April 11, 2002 11:59 AM
+>> To: xitami-dev@lists.xitami.org
+>> Subject: Re: [Xitami-Dev] JBuilder plug-in
+>> 
+>> 
+>> I'm not sure how you would go about debugging it if it is run by xitami 
+>> servlet runner.  Many IDEs have advanced debug tools, including the option 
+>> to begin debugging an application after it's already been executed (my 
+>> experience is with MSVC++)  As long as you can see your way around the 
+>> machine code, that's one way you can go about doing it.
+> 
+> 
+> ----------------------- Headers --------------------------------
+> Return-Path: <xitami-dev-admin@lists.xitami.org>
+> Received: from  rly-xg02.mx.aol.com (rly-xg02.mail.aol.com 
+> [172.20.115.199]) by air-xg03.mail.aol.com (v84.10) with ESMTP id 
+> MAILINXG31-0411063122; Thu, 11 Apr 2002 06:31:22 -0500
+> Received: from  sxpublic.nxrda.imatix.net (dial-21-11.win.be 
+> [212.166.21.11]) by rly-xg02.mx.aol.com (v84.10) with ESMTP id 
+> MAILRELAYINXG29-0411063038; Thu, 11 Apr 2002 06:30:38 -0400
+> Received: from sxpublic.nxrda.imatix.net (localhost [127.0.0.1])
+>     by sxpublic.nxrda.imatix.net (8.9.3/8.9.3/Debian 8.9.3-21) with ESMTP 
+> id MAA19751;
+>     Thu, 11 Apr 2002 12:31:04 +0200
+> Received: from zippa.keytech.it ([217.56.98.230])
+>     by sxpublic.nxrda.imatix.net (8.9.3/8.9.3/Debian 8.9.3-21) with ESMTP 
+> id MAA19722
+>     for <xitami-dev@lists.xitami.org>; Thu, 11 Apr 2002 12:30:15 +0200
+> X-Authentication-Warning: sxpublic.nxrda.imatix.net: Host [217.56.98.230] 
+> claimed to be zippa.keytech.it
+> Received: from cetti (cippa.keytech.it [217.56.98.231])
+>     by zippa.keytech.it (8.9.3/8.8.7) with SMTP id MAA05426
+>     for <xitami-dev@lists.xitami.org>; Thu, 11 Apr 2002 12:29:38 +0200
+> From: "Jonathan Cetti" <cetti@keytech.it>
+> To: <xitami-dev@lists.xitami.org>
+> Subject: RE: [Xitami-Dev] JBuilder plug-in
+> Message-ID: <NEEFLDLKNGPKINAMMMLJAEAPCAAA.cetti@keytech.it>
+> MIME-Version: 1.0
+> Content-Type: multipart/alternative;
+>     boundary="----=_NextPart_000_0023_01C1E154.55C6F810"
+> X-Priority: 3 (Normal)
+> X-MSMail-Priority: Normal
+> X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+> Importance: Normal
+> X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+> In-Reply-To: <ad.1b5fbae5.29e6b870@aol.com>
+> Sender: xitami-dev-admin@lists.xitami.org
+> Errors-To: xitami-dev-admin@lists.xitami.org
+> X-BeenThere: xitami-dev@lists.xitami.org
+> X-Mailman-Version: 2.0.5
+> Precedence: bulk
+> Reply-To: xitami-dev@lists.xitami.org
+> List-Help: <mailto:xitami-dev-request@lists.xitami.org?subject=help>
+> List-Post: <mailto:xitami-dev@lists.xitami.org>
+> List-Subscribe: <http://lists.xitami.org/mailman/listinfo/xitami-dev>,
+>     <mailto:xitami-dev-request@lists.xitami.org?subject=subscribe>
+> List-Id: Xitami Development Discussion <xitami-dev.lists.xitami.org>
+> List-Unsubscribe: <http://lists.xitami.org/mailman/listinfo/xitami-dev>,
+>     <mailto:xitami-dev-request@lists.xitami.org?subject=unsubscribe>
+> List-Archive: <http://lists.xitami.org/pipermail/xitami-dev/>
+> Date: Thu, 11 Apr 2002 12:28:07 +0200
+> 
+> 
+
+
+
+--part1_147.cac1fd8.29e6c094_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Great, glad to help
+<BR>
+<BR>In a message dated 4/11/2002 3:31:22 AM Pacific Daylight Time, cetti@keytech.it writes:
+<BR>
+<BR>
+<BR><BLOCKQUOTE TYPE=CITE style="BORDER-LEFT: #0000ff 2px solid; MARGIN-LEFT: 5px; MARGIN-RIGHT: 0px; PADDING-LEFT: 5px">Subj:<B>RE: [Xitami-Dev] JBuilder plug-in</B>
+<BR>Date:4/11/2002 3:31:22 AM Pacific Daylight Time
+<BR>From: &nbsp;&nbsp;&nbsp;cetti@keytech.it (Jonathan Cetti)
+<BR>Sender: &nbsp;&nbsp;&nbsp;xitami-dev-admin@lists.xitami.org
+<BR>Reply-to: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+<BR>To: &nbsp;&nbsp;&nbsp;xitami-dev@lists.xitami.org
+<BR>
+<BR>
+<BR>
+<BR>
+<BR></FONT><FONT  COLOR="#0000ff" SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Done it! ok just made a main class which loads the xitami servlet runner, then i can use my IDE debugging instructions to debug the application which is used OUTSIDE ... obviously it needs to be running xitami ws ... but jbuilder 6 enterprise by default uses tomcat 3.2.3 and xitami servlet runner seems to b much faster and lighter ,,, :)</FONT><FONT  COLOR="#000000" SIZE=3 FAMILY="SANSSERIF" FACE="Arial" LANG="0">
+<BR></FONT><FONT  COLOR="#000000" SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">
+<BR></FONT><FONT  COLOR="#000000" SIZE=2 FAMILY="SANSSERIF" FACE="Tahoma" LANG="0"><BLOCKQUOTE TYPE=CITE style="BORDER-LEFT: #0000ff 2px solid; MARGIN-LEFT: 5px; MARGIN-RIGHT: 0px; PADDING-LEFT: 5px">-----Original Message-----
+<BR><B>From:</B> xitami-dev-admin@lists.xitami.org [mailto:xitami-dev-admin@lists.xitami.org]<B>On Behalf Of </B>TonicPeddler@aol.com
+<BR><B>Sent:</B> Thursday, April 11, 2002 11:59 AM
+<BR><B>To:</B> xitami-dev@lists.xitami.org
+<BR><B>Subject:</B> Re: [Xitami-Dev] JBuilder plug-in
+<BR>
+<BR></FONT><FONT  COLOR="#000000" SIZE=3 FAMILY="SANSSERIF" FACE="Tahoma" LANG="0">
+<BR></FONT><FONT  COLOR="#000000" SIZE=2 FAMILY="SANSSERIF" FACE="arial" LANG="0">I'm not sure how you would go about debugging it if it is run by xitami servlet runner. &nbsp;Many IDEs have advanced debug tools, including the option to begin debugging an application after it's already been executed (my experience is with MSVC++) &nbsp;As long as you can see your way around the machine code, that's one way you can go about doing it.</FONT><FONT  COLOR="#000000" SIZE=3 FAMILY="SANSSERIF" FACE="arial" LANG="0"> </BLOCKQUOTE>
+<BR></FONT><FONT  COLOR="#0f0f0f" SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">
+<BR>
+<BR>----------------------- Headers --------------------------------
+<BR>Return-Path: &lt;xitami-dev-admin@lists.xitami.org&gt;
+<BR>Received: from &nbsp;rly-xg02.mx.aol.com (rly-xg02.mail.aol.com [172.20.115.199]) by air-xg03.mail.aol.com (v84.10) with ESMTP id MAILINXG31-0411063122; Thu, 11 Apr 2002 06:31:22 -0500
+<BR>Received: from &nbsp;sxpublic.nxrda.imatix.net (dial-21-11.win.be [212.166.21.11]) by rly-xg02.mx.aol.com (v84.10) with ESMTP id MAILRELAYINXG29-0411063038; Thu, 11 Apr 2002 06:30:38 -0400
+<BR>Received: from sxpublic.nxrda.imatix.net (localhost [127.0.0.1])
+<BR> &nbsp;&nbsp;&nbsp;by sxpublic.nxrda.imatix.net (8.9.3/8.9.3/Debian 8.9.3-21) with ESMTP id MAA19751;
+<BR> &nbsp;&nbsp;&nbsp;Thu, 11 Apr 2002 12:31:04 +0200
+<BR>Received: from zippa.keytech.it ([217.56.98.230])
+<BR> &nbsp;&nbsp;&nbsp;by sxpublic.nxrda.imatix.net (8.9.3/8.9.3/Debian 8.9.3-21) with ESMTP id MAA19722
+<BR> &nbsp;&nbsp;&nbsp;for &lt;xitami-dev@lists.xitami.org&gt;; Thu, 11 Apr 2002 12:30:15 +0200
+<BR>X-Authentication-Warning: sxpublic.nxrda.imatix.net: Host [217.56.98.230] claimed to be zippa.keytech.it
+<BR>Received: from cetti (cippa.keytech.it [217.56.98.231])
+<BR> &nbsp;&nbsp;&nbsp;by zippa.keytech.it (8.9.3/8.8.7) with SMTP id MAA05426
+<BR> &nbsp;&nbsp;&nbsp;for &lt;xitami-dev@lists.xitami.org&gt;; Thu, 11 Apr 2002 12:29:38 +0200
+<BR>From: "Jonathan Cetti" &lt;cetti@keytech.it&gt;
+<BR>To: &lt;xitami-dev@lists.xitami.org&gt;
+<BR>Subject: RE: [Xitami-Dev] JBuilder plug-in
+<BR>Message-ID: &lt;NEEFLDLKNGPKINAMMMLJAEAPCAAA.cetti@keytech.it&gt;
+<BR>MIME-Version: 1.0
+<BR>Content-Type: multipart/alternative;
+<BR> &nbsp;&nbsp;&nbsp;boundary="----=_NextPart_000_0023_01C1E154.55C6F810"
+<BR>X-Priority: 3 (Normal)
+<BR>X-MSMail-Priority: Normal
+<BR>X-Mailer: Microsoft Outlook IMO, Build 9.0.2416 (9.0.2911.0)
+<BR>Importance: Normal
+<BR>X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+<BR>In-Reply-To: &lt;ad.1b5fbae5.29e6b870@aol.com&gt;
+<BR>Sender: xitami-dev-admin@lists.xitami.org
+<BR>Errors-To: xitami-dev-admin@lists.xitami.org
+<BR>X-BeenThere: xitami-dev@lists.xitami.org
+<BR>X-Mailman-Version: 2.0.5
+<BR>Precedence: bulk
+<BR>Reply-To: xitami-dev@lists.xitami.org
+<BR>List-Help: &lt;mailto:xitami-dev-request@lists.xitami.org?subject=help&gt;
+<BR>List-Post: &lt;mailto:xitami-dev@lists.xitami.org&gt;
+<BR>List-Subscribe: &lt;http://lists.xitami.org/mailman/listinfo/xitami-dev&gt;,
+<BR> &nbsp;&nbsp;&nbsp;&lt;mailto:xitami-dev-request@lists.xitami.org?subject=subscribe&gt;
+<BR>List-Id: Xitami Development Discussion &lt;xitami-dev.lists.xitami.org&gt;
+<BR>List-Unsubscribe: &lt;http://lists.xitami.org/mailman/listinfo/xitami-dev&gt;,
+<BR> &nbsp;&nbsp;&nbsp;&lt;mailto:xitami-dev-request@lists.xitami.org?subject=unsubscribe&gt;
+<BR>List-Archive: &lt;http://lists.xitami.org/pipermail/xitami-dev/&gt;
+<BR>Date: Thu, 11 Apr 2002 12:28:07 +0200
+<BR>
+<BR></BLOCKQUOTE>
+<BR>
+<BR></FONT></HTML>
+
+--part1_147.cac1fd8.29e6c094_boundary--
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 15:44:46 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Thu, 11 Apr 2002 15:44:46 +0100 (MEZ)
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <NEEFLDLKNGPKINAMMMLJIEANCAAA.cetti@keytech.it>
+Message-ID: <200204111345.PAA23501@sxpublic.nxrda.imatix.net>
+
+On Thu, 11 Apr 2002 11:24:47 +0200, Jonathan Cetti wrote:
+
+> just wondering if there's a plug-in so to use the Xitami web server (and
+> hopefully the servlet runner) within an Java IDE such as Jbuilder (my need 
+> is to debug my application .... maybe there's another IDE integrable with 
+> Xitami debugging)
+
+my suggestion: import the sourcecode of http://runner.conacom.de
+into a separate project and run the runner from there.
+
+thats the way we're developing webapplications and the
+servletrunner too.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Thu Apr 11 16:20:46 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Thu, 11 Apr 2002 17:20:46 +0200
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <200204111345.PAA23501@sxpublic.nxrda.imatix.net>
+Message-ID: <NEEFLDLKNGPKINAMMMLJGEDACAAA.cetti@keytech.it>
+
+thank you Bernd
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of bernd hohmann
+Sent: Thursday, April 11, 2002 4:45 PM
+To: xitami-dev@lists.xitami.org
+Subject: Re: [Xitami-Dev] JBuilder plug-in
+
+
+On Thu, 11 Apr 2002 11:24:47 +0200, Jonathan Cetti wrote:
+
+> just wondering if there's a plug-in so to use the Xitami web server (and
+> hopefully the servlet runner) within an Java IDE such as Jbuilder (my need
+> is to debug my application .... maybe there's another IDE integrable with
+> Xitami debugging)
+
+my suggestion: import the sourcecode of http://runner.conacom.de
+into a separate project and run the runner from there.
+
+thats the way we're developing webapplications and the
+servletrunner too.
+
+bernd
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Fri Apr 12 16:39:55 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Fri, 12 Apr 2002 17:39:55 +0200
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <200204111345.PAA23501@sxpublic.nxrda.imatix.net>
+Message-ID: <NEEFLDLKNGPKINAMMMLJEEDDCAAA.cetti@keytech.it>
+
+Hi Bernd
+i'm using the runner on xitami 25b5, but it seems to close the header while
+adding a cookie!!! So i can't fix my session as long it closes before ....
+can u help me?
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of bernd hohmann
+Sent: Thursday, April 11, 2002 4:45 PM
+To: xitami-dev@lists.xitami.org
+Subject: Re: [Xitami-Dev] JBuilder plug-in
+
+
+On Thu, 11 Apr 2002 11:24:47 +0200, Jonathan Cetti wrote:
+
+> just wondering if there's a plug-in so to use the Xitami web server (and
+> hopefully the servlet runner) within an Java IDE such as Jbuilder (my need
+> is to debug my application .... maybe there's another IDE integrable with
+> Xitami debugging)
+
+my suggestion: import the sourcecode of http://runner.conacom.de
+into a separate project and run the runner from there.
+
+thats the way we're developing webapplications and the
+servletrunner too.
+
+bernd
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Fri Apr 12 17:53:25 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Fri, 12 Apr 2002 17:53:25 +0100 (MEZ)
+Subject: [Xitami-Dev] runner rc0.9 performance update 2
+Message-ID: <200204121553.RAA17689@sxpublic.nxrda.imatix.net>
+
+hi,
+
+this update fixes some performance issues in the logwriter (1000
+lines need 3 seconds, now only 1 second) and in the LRWP
+handling (15% performance boost).
+
+i also added a "stress test" with an automatic test also.
+
+the webpage is rewritten, i created some nice tables with
+performance values of xitami in comparision to the
+servletrunner.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Fri Apr 12 17:55:49 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Fri, 12 Apr 2002 17:55:49 +0100 (MEZ)
+Subject: [Xitami-Dev] JBuilder plug-in
+In-Reply-To: <NEEFLDLKNGPKINAMMMLJEEDDCAAA.cetti@keytech.it>
+Message-ID: <200204121556.RAA17751@sxpublic.nxrda.imatix.net>
+
+On Fri, 12 Apr 2002 17:39:55 +0200, Jonathan Cetti wrote:
+
+> i'm using the runner on xitami 25b5, but it seems to close the header while
+> adding a cookie!!! So i can't fix my session as long it closes before ....
+> can u help me?
+
+this was a problem which i fixed 2002/04/07.
+
+in the runner, there is a TestServlet included where you can
+test the cookies.
+
+if the latest version of the runner doesn't fixes the problem, i
+need a small test-servlet from you where the error occurs.
+
+i will take the source to my homeoffice and monitor the
+mailinglists this weekend.
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Fri Apr 12 17:07:39 2002
+From: xitami-dev@lists.xitami.org (Jonathan Cetti)
+Date: Fri, 12 Apr 2002 18:07:39 +0200
+Subject: [Xitami-Dev] runner rc0.9 performance update 2
+In-Reply-To: <200204121553.RAA17689@sxpublic.nxrda.imatix.net>
+Message-ID: <NEEFLDLKNGPKINAMMMLJKEDECAAA.cetti@keytech.it>
+
+where can i get the rc09? on runner.conacom.de u can only d/l the 08 final
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of bernd hohmann
+Sent: Friday, April 12, 2002 6:53 PM
+To: xitami-dev@lists.xitami.org
+Subject: [Xitami-Dev] runner rc0.9 performance update 2
+
+
+hi,
+
+this update fixes some performance issues in the logwriter (1000
+lines need 3 seconds, now only 1 second) and in the LRWP
+handling (15% performance boost).
+
+i also added a "stress test" with an automatic test also.
+
+the webpage is rewritten, i created some nice tables with
+performance values of xitami in comparision to the
+servletrunner.
+
+bernd
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Sat Apr 20 03:04:04 2002
+From: xitami-dev@lists.xitami.org (mail.earthlink.net)
+Date: Fri, 19 Apr 2002 19:04:04 -0700
+Subject: [Xitami-Dev] Ftp portion of Xitami...
+Message-ID: <020401c1e80f$a669a760$0301a8c0@Mesa.com>
+
+Hi,
+
+I've just started to really look at the Xitami application and am interested
+in using the FTP portion only. Has anyone created a stripped down version of
+the Xitami app with just the FTP functionality. Also, I might be interested
+in adapting the code to utilize configurable TCP windows to support auto
+tuning between my FTP client. Does anyone know if Xitami already supports
+auto configurable TCP windows, or has anyone already done any work in this
+area?
+
+Any assitance or pointers will be greatly appreciated.
+
+Thanks,
+
+Bruce Douglas
+bedouglas@earthlink.net
+
+
+From xitami-dev@lists.xitami.org  Sat Apr 20 06:10:03 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Sat, 20 Apr 2002 01:10:03 EDT
+Subject: [Xitami-Dev] Ftp portion of Xitami...
+Message-ID: <22.275ef517.29f2522b@aol.com>
+
+--part1_22.275ef517.29f2522b_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+What does "tcp windows'" mean?  I have a general idea of what you're saying, 
+but I'm not entirely sure.  Personally I think if you want _just_ an ftp 
+server, you should probably look somewhere other than xitami.
+
+--part1_22.275ef517.29f2522b_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2>What does "tcp windows'" mean? &nbsp;I have a general idea of what you're saying, but I'm not entirely sure. &nbsp;Personally I think if you want _just_ an ftp server, you should probably look somewhere other than xitami.</FONT></HTML>
+
+--part1_22.275ef517.29f2522b_boundary--
+
+From xitami-dev@lists.xitami.org  Sat Apr 20 20:32:23 2002
+From: xitami-dev@lists.xitami.org (mail.earthlink.net)
+Date: Sat, 20 Apr 2002 12:32:23 -0700
+Subject: [Xitami-Dev] Ftp portion of Xitami...
+In-Reply-To: <22.275ef517.29f2522b@aol.com>
+Message-ID: <000401c1e8a2$190b9520$0301a8c0@Mesa.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0005_01C1E867.6CACBD20
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+hey...
+
+The term "TCP window" refers to the size of the TCP buffer used in
+communication between the client/server applications. In most apps, the is
+set to some default which may or may not be optimal depending on the network
+traffic (among other things).
+
+We've been looking for an FTP server with source code for the Windows
+platform with no luck. Do you have a suggestion??
+
+Thanks
+
+Bruce
+bedouglas@earthlink.net
+
+  -----Original Message-----
+  From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]On Behalf Of TonicPeddler@aol.com
+  Sent: Friday, April 19, 2002 10:10 PM
+  To: xitami-dev@lists.xitami.org
+  Subject: Re: [Xitami-Dev] Ftp portion of Xitami...
+
+
+  What does "tcp windows'" mean?  I have a general idea of what you're
+saying, but I'm not entirely sure.  Personally I think if you want _just_ an
+ftp server, you should probably look somewhere other than xitami.
+
+------=_NextPart_000_0005_01C1E867.6CACBD20
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+
+
+<META content=3D"MSHTML 6.00.2715.400" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2>hey...</FONT></SPAN></DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial size=3D2>The =
+term "TCP=20
+window" refers to the size of the TCP buffer used in communication =
+between the=20
+client/server applications. In most apps, the is set to some default =
+which may=20
+or may not be optimal depending on the network traffic (among other =
+things).=20
+</FONT></SPAN></DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial size=3D2>We've =
+been looking=20
+for an FTP server with source code for the Windows platform with no =
+luck. Do you=20
+have a suggestion??</FONT></SPAN></DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2>Thanks</FONT></SPAN></DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial size=3D2>Bruce=20
+</FONT></SPAN></DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2>bedouglas@earthlink.net</FONT></SPAN></DIV>
+<DIV><SPAN class=3D237202919-20042002><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<BLOCKQUOTE>
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-dev-admin@lists.xitami.org=20
+  [mailto:xitami-dev-admin@lists.xitami.org]<B>On Behalf Of=20
+  </B>TonicPeddler@aol.com<BR><B>Sent:</B> Friday, April 19, 2002 10:10=20
+  PM<BR><B>To:</B> xitami-dev@lists.xitami.org<BR><B>Subject:</B> Re:=20
+  [Xitami-Dev] Ftp portion of Xitami...<BR><BR></FONT></DIV><FONT=20
+  face=3Darial,helvetica><FONT size=3D2>What does "tcp windows'" mean? =
+&nbsp;I have=20
+  a general idea of what you're saying, but I'm not entirely sure.=20
+  &nbsp;Personally I think if you want _just_ an ftp server, you should =
+probably=20
+  look somewhere other than xitami.</FONT> =
+</FONT></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0005_01C1E867.6CACBD20--
+
+
+From xitami-dev@lists.xitami.org  Sat Apr 20 21:26:58 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Sat, 20 Apr 2002 16:26:58 EDT
+Subject: [Xitami-Dev] Ftp portion of Xitami...
+Message-ID: <17d.715fc56.29f32912@aol.com>
+
+--part1_17d.715fc56.29f32912_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Just reading the projects listed at 
+http://sourceforge.net/softwaremap/trove_list.php gave me these listings.
+
+Java: http://sourceforge.net/projects/wrabbitftp/
+
+C++: http://sourceforge.net/projects/wfde/
+
+C++: http://sourceforge.net/projects/jftp/
+
+Forth (?!): http://sourceforge.net/projects/acftp/
+
+Feel free to do your own search at sourceforge.net
+
+--part1_17d.715fc56.29f32912_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2>Just reading the projects listed at http://sourceforge.net/softwaremap/trove_list.php gave me these listings.
+<BR>
+<BR>Java: http://sourceforge.net/projects/wrabbitftp/
+<BR>
+<BR>C++: http://sourceforge.net/projects/wfde/
+<BR>
+<BR>C++: http://sourceforge.net/projects/jftp/
+<BR>
+<BR>Forth (?!): http://sourceforge.net/projects/acftp/
+<BR>
+<BR>Feel free to do your own search at sourceforge.net</FONT></HTML>
+
+--part1_17d.715fc56.29f32912_boundary--
+

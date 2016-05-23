@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Does Xitami support content-encoding?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+   <LINK REL="Previous"  HREF="003655.html">
+   <LINK REL="Next"  HREF="003669.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Does Xitami support content-encoding?
+   </H1>
+    <B>Janko Slavič
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Does Xitami support content-encoding?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 15 Jul 2002 11:31:51 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003655.html">[Xitami] Does Xitami support content-encoding?
+</A></li>
+        <LI> Next message: <A HREF="003669.html">[Xitami] Does Xitami support content-encoding?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3667">[ date ]</a>
+              <a href="thread.html#3667">[ thread ]</a>
+              <a href="subject.html#3667">[ subject ]</a>
+              <a href="author.html#3667">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have used the added perl code as a hitami *.html filter (for
+compression). Does anybody know why  my IE6 doesn't decodes the data? 
+
+Thanks in advance.
+
+janko
+
+*******************perl***************************
+#!/usr/local/bin/perl
+
+use strict ;
+local ($^W) = 1; #use warnings ;
+
+use Compress::Zlib ;
+
+binmode STDIN;
+binmode STDOUT;
+my $x = deflateInit()
+   or die &quot;Cannot create a deflation stream\n&quot; ;
+
+my ($output, $status) ;
+while (&lt;&gt;)
+{
+    ($output, $status) = $x-&gt;deflate($_) ;
+
+    $status == Z_OK
+        or die &quot;deflation failed\n&quot; ;
+
+    print $output ;
+}
+
+($output, $status) = $x-&gt;flush() ;
+
+$status == Z_OK
+    or die &quot;deflation failed\n&quot; ;
+
+print $output ; 
+
+*******************perl***************************
+
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.375 / Virus Database: 210 - Release Date: 10.7.2002
+ 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003655.html">[Xitami] Does Xitami support content-encoding?
+</A></li>
+	<LI> Next message: <A HREF="003669.html">[Xitami] Does Xitami support content-encoding?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3667">[ date ]</a>
+              <a href="thread.html#3667">[ thread ]</a>
+              <a href="subject.html#3667">[ subject ]</a>
+              <a href="author.html#3667">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

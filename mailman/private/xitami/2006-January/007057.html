@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re:Subdomains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Re%3ASubdomains&In-Reply-To=s3bad09a.039%40mail.uxbridgecollege.co.uk">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007056.html">
+   <LINK REL="Next"  HREF="007058.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re:Subdomains</H1>
+    <B>R O</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Re%3ASubdomains&In-Reply-To=s3bad09a.039%40mail.uxbridgecollege.co.uk"
+       TITLE="[Xitami] Re:Subdomains">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Tue Jan  3 21:08:50 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007056.html">[Xitami] Re:Subdomains
+</A></li>
+        <LI>Next message: <A HREF="007058.html">[Xitami] RE: Stopping and restarting (or resetting) Xitami with perl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7057">[ date ]</a>
+              <a href="thread.html#7057">[ thread ]</a>
+              <a href="subject.html#7057">[ subject ]</a>
+              <a href="author.html#7057">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+yup, you can automate it with cgi or php.  The process can be pretty 
+extensive, but ultimately you need to create a forms for the user to fill 
+out basic info about the subdomain and then when the form is submitted the 
+cgi/php would need to automate all the background scripts to create the 
+subdomain.  the scripts would create the directories, all the necessary the 
+subdomain .cfg files, add a subdomain line to the defaults.cgf file that 
+points/aliases the new subdomian to the appropriate subdomain.cfg files.  
+Then after all that is done your cgi/php script would need to reload/restart 
+the Xitami service to load the new defaults.cfg file into memory (without a 
+service reload the new subdomain would remain unaccessable).
+
+Whats the purpose of creating a blank subdomain though?  Even if you 
+automate the subdomain creation process is your client going to develop the 
+subdomain website?  If you are creating the subdomain website then it would 
+take you two minutes to be able to create the subdomain via dns and xitami.  
+If your client can manage to create their own subdomain website then they 
+should be able to manage the xitami server too.
+
+Then again, if your client wants to create subdomains for the purpose of 
+allowing users to create their own websites then you will need to write a 
+very extensive system that tracks users, interfaces with Xitami subdomains, 
+deals with subdomain administrators, etc etc etc....and there are premade 
+packages out there that already do this and do them well.
+
+-R
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+
+
+
+
+&gt;<i>From: &quot;Michael Gibbons&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">MGibbons at UxbridgeCollege.ac.uk</A>&gt;
+</I>&gt;<i>Reply-To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>To: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Re:Subdomains
+</I>&gt;<i>Date: Tue, 03 Jan 2006 19:29:26 +0000
+</I>&gt;<i>
+</I>&gt;<i>Hi
+</I>&gt;<i>Thanks for such a speedy responce, i don't want to sound dumb, but can i 
+</I>&gt;<i>have that in english again, the dns is ok i think thats configured and 
+</I>&gt;<i>works ok because don't laugh &quot;i can ping ip address or name&quot; now i'm lost, 
+</I>&gt;<i>is there any chance you can send me a llist of instructions i'm good at 
+</I>&gt;<i>following instructions, i know a fair bit about xitami and should be able 
+</I>&gt;<i>to do most things once pointed into the right direction.
+</I>&gt;<i>
+</I>&gt;<i>Regards
+</I>&gt;<i>michael
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt;&gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">francis.turner at gmail.com</A> 01/03/06 03:44pm &gt;&gt;&gt;
+</I>&gt;<i>Assuming that you have the appropriate wildcard CNAME in the DNS for
+</I>&gt;<i>your domain so that all addresses point to the same place then this
+</I>&gt;<i>should be as simple as writing a (perl) script to copy a blank virtual
+</I>&gt;<i>host directory to the one for the name and edit defaults.cfg to add
+</I>&gt;<i>the new vhost.
+</I>&gt;<i>
+</I>&gt;<i>In other words it should be trivial with the hardest bit being
+</I>&gt;<i>controlling who is allowed to create the subdomain and to ensure that
+</I>&gt;<i>only valid and sensible names are used (at least I assume your client
+</I>&gt;<i>would prefer it if obscene subdomains were not allowed for example)
+</I>&gt;<i>
+</I>&gt;<i>Francis
+</I>&gt;<i>
+</I>&gt;<i>On 1/3/06, Michael Gibbons &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">MGibbons at uxbridgecollege.ac.uk</A>&gt; wrote:
+</I>&gt;<i> &gt; Hi All
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Seasons greetings to all!!!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Can anyone help, i've develop a simple website for a client, she now 
+</I>&gt;<i>wishes to offer subdomains on her site, <A HREF="http://www.localklicks.co.uk">http://www.localklicks.co.uk</A> is 
+</I>&gt;<i>there a way i can automate this so that it does not require any user 
+</I>&gt;<i>interaction on the part of my client.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks in advance
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Michael
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The information or opinions in this message (including
+</I>&gt;<i> &gt; any attachments) are those of the author and are not
+</I>&gt;<i> &gt; necessarily those of Uxbridge College, which disclaims
+</I>&gt;<i> &gt; responsibility for loss or damage arising from its use to
+</I>&gt;<i> &gt; the maximum extent permitted by law. E-mail messages
+</I>&gt;<i> &gt; sometimes go astray. This message is sent in
+</I>&gt;<i> &gt; confidence for the addressee only. It may contain
+</I>&gt;<i> &gt; confidential or sensitive information. The contents
+</I>&gt;<i> &gt; are not to be disclosed to anyone other than the
+</I>&gt;<i> &gt; addressee. Unauthorised recipients are requested to
+</I>&gt;<i> &gt; preserve this confidentiality and to advise the originator.
+</I>&gt;<i> &gt; immediately and to delete the message without copying,
+</I>&gt;<i> &gt; altering or disclosing its contents. E-mails to or from
+</I>&gt;<i> &gt; Uxbridge College may be monitored by the College in
+</I>&gt;<i> &gt; accordance with its current policy.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i><A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+</I>&gt;<i>Faber's Fourth Law:
+</I>&gt;<i>   Necessity is the mother of strange bedfellows.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>Email has been scanned for viruses by Altman Technologies' email management 
+</I>&gt;<i>service - www.altman.co.uk/emailsystems
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>The information or opinions in this message (including
+</I>&gt;<i>any attachments) are those of the author and are not
+</I>&gt;<i>necessarily those of Uxbridge College, which disclaims
+</I>&gt;<i>responsibility for loss or damage arising from its use to
+</I>&gt;<i>the maximum extent permitted by law. E-mail messages
+</I>&gt;<i>sometimes go astray. This message is sent in
+</I>&gt;<i>confidence for the addressee only. It may contain
+</I>&gt;<i>confidential or sensitive information. The contents
+</I>&gt;<i>are not to be disclosed to anyone other than the
+</I>&gt;<i>addressee. Unauthorised recipients are requested to
+</I>&gt;<i>preserve this confidentiality and to advise the originator.
+</I>&gt;<i>immediately and to delete the message without copying,
+</I>&gt;<i>altering or disclosing its contents. E-mails to or from
+</I>&gt;<i>Uxbridge College may be monitored by the College in
+</I>&gt;<i>accordance with its current policy.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007056.html">[Xitami] Re:Subdomains
+</A></li>
+	<LI>Next message: <A HREF="007058.html">[Xitami] RE: Stopping and restarting (or resetting) Xitami with perl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7057">[ date ]</a>
+              <a href="thread.html#7057">[ thread ]</a>
+              <a href="subject.html#7057">[ subject ]</a>
+              <a href="author.html#7057">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

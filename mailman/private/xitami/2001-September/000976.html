@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Regular crash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000964.html">
+   <LINK REL="Next"  HREF="000965.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Regular crash
+   </H1>
+    <B>John Poltorak
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Regular crash">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 22 Sep 2001 11:40:29 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000964.html">[Xitami] Regular crash
+</A></li>
+        <LI> Next message: <A HREF="000965.html">[Xitami] Pro on FreeBSD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#976">[ date ]</a>
+              <a href="thread.html#976">[ thread ]</a>
+              <a href="subject.html#976">[ subject ]</a>
+              <a href="author.html#976">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Sep 22, 2001 at 07:40:11PM +1200, Ewen McNeill wrote:
+&gt;<i> In message &lt;<A HREF="mailto:20010921010442.C77@eyup.org">20010921010442.C77@eyup.org</A>&gt;, John Poltorak writes:
+</I>&gt;<i> &gt;I've found that Xitami crashes regularly when a particular user access it.
+</I>&gt;<i> &gt;How do I find out what is wrong?
+</I>&gt;<i> 
+</I>&gt;<i> If you've got a repeatable bug (and it sounds like you do), then the
+</I>&gt;<i> main thing to do is to try to gather as much information about the
+</I>&gt;<i> circumstances it occurs in as possible.  In particular turning on the
+</I>&gt;<i> Xitami server debugging support ([Server] debug=1) and trying again
+</I>&gt;<i> should give you more detail on the command(s) the user's FTP program is
+</I>&gt;<i> sending at the time that Xitami crashes.  It certainly sounds like it's
+</I>&gt;<i> choking on one of the commands being sent for some reason.
+</I>
+Whilst it is repeatable, it isn't something I can reproduce myself because 
+I don't know exactly what software is being used although I think it is 
+being run under Win98 and this user only connects every one or two weeks. 
+ 
+&gt;<i> The next thing I'd usually try is network traffic snooping, which is
+</I>&gt;<i> easy under Linux/Unix (tcpdump, ethereal, snoop, etc), but off hand I
+</I>&gt;<i> can't think go a way to do it under OS/2.  This gives you a
+</I>&gt;<i> packet-by-packet view of the data that Xitami is sending and receiving,
+</I>&gt;<i> which can help narrow down the troublesome cause further.
+</I>
+Tcpdump is available for OS/2 but I've never managed to get it working,
+however I don't think packet snooping is a realistic option unless I can 
+set up a controlled test.
+ 
+&gt;<i> &gt;I'm running v2.4d6 on OS/2. I have a CORE file but have no idea how to 
+</I>&gt;<i> &gt;glean anything from it.
+</I>&gt;<i> 
+</I>&gt;<i> If you have the EMX development tools installed, you can try:
+</I>&gt;<i> 
+</I>&gt;<i> gdb xitami.exe core
+</I>&gt;<i> 
+</I>&gt;<i> And then &quot;bt&quot; (back trace) to try to find out which routine Xitami was
+</I>&gt;<i> running when it crashed.  This may or may not be as useful as the
+</I>&gt;<i> information from the debug log, depending on what type of bug it is (eg,
+</I>&gt;<i> some bugs corrupt things which only cause crashes later on, so what you
+</I>&gt;<i> want to know is where it was corrupted not where it finally crashed
+</I>&gt;<i> because of the corruption).
+</I>
+I'm not familiar with GDB, but here's the output I get following your 
+suggestion. I hope it makes some sense to you.
+
+K:\xitami&gt;gdb.exe XITAMI.EXE core
+GDB is free software and you are welcome to distribute copies of it
+ under certain conditions; type &quot;show copying&quot; to see the conditions.
+There is absolutely no warranty for GDB; type &quot;show warranty&quot; for details.
+GDB 4.16.gnat.3.12w-20 (emx), Copyright 1996 Free Software Foundation, Inc...
+(no debugging symbols found)...
+#0  0x5d087 in raise ()
+(gdb) bt
+#0  0x5d087 in raise ()
+#1  0x585ca in abort ()
+#2  0x2a8b3 in handle_signal ()
+#3  &lt;signal handler called&gt;
+#4  0x58753 in _closedir ()
+#5  0x1a99d in close_dir ()
+#6  0x34aca in ftpc_make_listing ()
+#7  0x27ecd in make_full_directory_listing ()
+#8  0x2b020 in execute_thread ()
+#9  0x2a9a5 in smt_exec_step ()
+#10 0x2a97d in smt_exec_full ()
+#11 0x10953 in main ()
+
+
+Incidentally, an OS/2 port of GCC v3.0 has just been released and is 
+available here:-
+
+<A HREF="ftp://unixos2.org/incoming/gcc-os2-3.0-gcc.zip">ftp://unixos2.org/incoming/gcc-os2-3.0-gcc.zip</A>
+
+I'd be interested in which tools you use for building Xitami on OS/2 as
+I'm hoping to put together an updated set as part of the UnixOS/2 project.
+
+
+
+&gt;<i> 
+</I>&gt;<i> Ewen
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+</I>
+
+-- 
+John
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000964.html">[Xitami] Regular crash
+</A></li>
+	<LI> Next message: <A HREF="000965.html">[Xitami] Pro on FreeBSD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#976">[ date ]</a>
+              <a href="thread.html#976">[ thread ]</a>
+              <a href="subject.html#976">[ subject ]</a>
+              <a href="author.html#976">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

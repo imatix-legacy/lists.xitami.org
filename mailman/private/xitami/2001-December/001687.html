@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] IIS Coexistence
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001686.html">
+   <LINK REL="Next"  HREF="001715.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] IIS Coexistence
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] IIS Coexistence">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Dec 2001 19:55:42 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001686.html">[Xitami] How to limit number of simultaneous requests per IP?
+</A></li>
+        <LI> Next message: <A HREF="001715.html">[Xitami] IIS Coexistence
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1687">[ date ]</a>
+              <a href="thread.html#1687">[ thread ]</a>
+              <a href="subject.html#1687">[ subject ]</a>
+              <a href="author.html#1687">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;000801c17923$d5ffc550$<A HREF="mailto:01597ec2@tay">01597ec2@tay</A>&gt;, <A HREF="mailto:test@emcom.co.uk">test@emcom.co.uk</A> writes:
+&gt;<i>I run Windows 2000 Professional and have IIIS installed. Can I run =
+</I>&gt;<i>xitami and IIS together?
+</I>
+Yes.  Either on different IP addresses (tell each one to use only a
+specific IP address), or on different ports.  
+
+&gt;<i>If I can, how can I direct my browser to correct site/virtual site?
+</I>
+If you use different IP addresses, use your hosts file, or the DNS, to
+map from the names to the IP addresses for each server.  If you use
+different ports, include the port number in the URL.
+
+You can run Xitami on a different port using the &quot;portbase&quot; command line
+option: -b BASE (which shifts _all_ port numbers up by that BASE
+amount).
+
+You can run Xitami on only one specific IP address by adding:
+
+[server]  
+  ipaddress=aaa.bbb.ccc.ddd
+
+in your defaults.cfg and restarting Xitami.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001686.html">[Xitami] How to limit number of simultaneous requests per IP?
+</A></li>
+	<LI> Next message: <A HREF="001715.html">[Xitami] IIS Coexistence
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1687">[ date ]</a>
+              <a href="thread.html#1687">[ thread ]</a>
+              <a href="subject.html#1687">[ subject ]</a>
+              <a href="author.html#1687">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

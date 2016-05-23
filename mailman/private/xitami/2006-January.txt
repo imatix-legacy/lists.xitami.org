@@ -1,0 +1,4818 @@
+From MGibbons at UxbridgeCollege.ac.uk  Tue Jan  3 16:10:18 2006
+From: MGibbons at UxbridgeCollege.ac.uk (Michael Gibbons)
+Date: Tue Jan  3 16:10:47 2006
+Subject: [Xitami] Re:Subdomains
+Message-ID: <s3ba93df.090@mail.uxbridgecollege.co.uk>
+
+Hi All
+
+Seasons greetings to all!!!
+
+
+Can anyone help, i've develop a simple website for a client, she now wishes to offer subdomains on her site, http://www.localklicks.co.uk is there a way i can automate this so that it does not require any user interaction on the part of my client.
+
+Thanks in advance
+
+Michael
+
+
+
+The information or opinions in this message (including
+any attachments) are those of the author and are not 
+necessarily those of Uxbridge College, which disclaims
+responsibility for loss or damage arising from its use to
+the maximum extent permitted by law. E-mail messages
+sometimes go astray. This message is sent in
+confidence for the addressee only. It may contain
+confidential or sensitive information. The contents
+are not to be disclosed to anyone other than the
+addressee. Unauthorised recipients are requested to
+preserve this confidentiality and to advise the originator.
+immediately and to delete the message without copying,
+altering or disclosing its contents. E-mails to or from
+Uxbridge College may be monitored by the College in
+accordance with its current policy.
+
+From francis.turner at gmail.com  Tue Jan  3 16:44:09 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Tue Jan  3 16:44:15 2006
+Subject: [Xitami] Re:Subdomains
+In-Reply-To: <s3ba93df.090@mail.uxbridgecollege.co.uk>
+References: <s3ba93df.090@mail.uxbridgecollege.co.uk>
+Message-ID: <f83609d50601030744m4d3a00dbve91924aeb0e33dd8@mail.gmail.com>
+
+Assuming that you have the appropriate wildcard CNAME in the DNS for
+your domain so that all addresses point to the same place then this
+should be as simple as writing a (perl) script to copy a blank virtual
+host directory to the one for the name and edit defaults.cfg to add
+the new vhost.
+
+In other words it should be trivial with the hardest bit being
+controlling who is allowed to create the subdomain and to ensure that
+only valid and sensible names are used (at least I assume your client
+would prefer it if obscene subdomains were not allowed for example)
+
+Francis
+
+On 1/3/06, Michael Gibbons <MGibbons@uxbridgecollege.ac.uk> wrote:
+> Hi All
+>
+> Seasons greetings to all!!!
+>
+>
+> Can anyone help, i've develop a simple website for a client, she now wishes to offer subdomains on her site, http://www.localklicks.co.uk is there a way i can automate this so that it does not require any user interaction on the part of my client.
+>
+> Thanks in advance
+>
+> Michael
+>
+>
+>
+> The information or opinions in this message (including
+> any attachments) are those of the author and are not
+> necessarily those of Uxbridge College, which disclaims
+> responsibility for loss or damage arising from its use to
+> the maximum extent permitted by law. E-mail messages
+> sometimes go astray. This message is sent in
+> confidence for the addressee only. It may contain
+> confidential or sensitive information. The contents
+> are not to be disclosed to anyone other than the
+> addressee. Unauthorised recipients are requested to
+> preserve this confidentiality and to advise the originator.
+> immediately and to delete the message without copying,
+> altering or disclosing its contents. E-mails to or from
+> Uxbridge College may be monitored by the College in
+> accordance with its current policy.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From MGibbons at UxbridgeCollege.ac.uk  Tue Jan  3 20:29:26 2006
+From: MGibbons at UxbridgeCollege.ac.uk (Michael Gibbons)
+Date: Tue Jan  3 20:29:45 2006
+Subject: [Xitami] Re:Subdomains
+Message-ID: <s3bad09a.039@mail.uxbridgecollege.co.uk>
+
+Hi
+Thanks for such a speedy responce, i don't want to sound dumb, but can i have that in english again, the dns is ok i think thats configured and works ok because don't laugh "i can ping ip address or name" now i'm lost, is there any chance you can send me a llist of instructions i'm good at following instructions, i know a fair bit about xitami and should be able to do most things once pointed into the right direction.
+
+Regards
+michael
+
+>>> francis.turner@gmail.com 01/03/06 03:44pm >>>
+Assuming that you have the appropriate wildcard CNAME in the DNS for
+your domain so that all addresses point to the same place then this
+should be as simple as writing a (perl) script to copy a blank virtual
+host directory to the one for the name and edit defaults.cfg to add
+the new vhost.
+
+In other words it should be trivial with the hardest bit being
+controlling who is allowed to create the subdomain and to ensure that
+only valid and sensible names are used (at least I assume your client
+would prefer it if obscene subdomains were not allowed for example)
+
+Francis
+
+On 1/3/06, Michael Gibbons <MGibbons@uxbridgecollege.ac.uk> wrote:
+> Hi All
+>
+> Seasons greetings to all!!!
+>
+>
+> Can anyone help, i've develop a simple website for a client, she now wishes to offer subdomains on her site, http://www.localklicks.co.uk is there a way i can automate this so that it does not require any user interaction on the part of my client.
+>
+> Thanks in advance
+>
+> Michael
+>
+>
+>
+> The information or opinions in this message (including
+> any attachments) are those of the author and are not
+> necessarily those of Uxbridge College, which disclaims
+> responsibility for loss or damage arising from its use to
+> the maximum extent permitted by law. E-mail messages
+> sometimes go astray. This message is sent in
+> confidence for the addressee only. It may contain
+> confidential or sensitive information. The contents
+> are not to be disclosed to anyone other than the
+> addressee. Unauthorised recipients are requested to
+> preserve this confidentiality and to advise the originator.
+> immediately and to delete the message without copying,
+> altering or disclosing its contents. E-mails to or from
+> Uxbridge College may be monitored by the College in
+> accordance with its current policy.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+>
+
+
+--
+http://www.di2.nu/blog.htm 
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+Email has been scanned for viruses by Altman Technologies' email management service - www.altman.co.uk/emailsystems
+
+
+
+The information or opinions in this message (including
+any attachments) are those of the author and are not 
+necessarily those of Uxbridge College, which disclaims
+responsibility for loss or damage arising from its use to
+the maximum extent permitted by law. E-mail messages
+sometimes go astray. This message is sent in
+confidence for the addressee only. It may contain
+confidential or sensitive information. The contents
+are not to be disclosed to anyone other than the
+addressee. Unauthorised recipients are requested to
+preserve this confidentiality and to advise the originator.
+immediately and to delete the message without copying,
+altering or disclosing its contents. E-mails to or from
+Uxbridge College may be monitored by the College in
+accordance with its current policy.
+
+From rolinger1 at hotmail.com  Tue Jan  3 21:08:50 2006
+From: rolinger1 at hotmail.com (R O)
+Date: Tue Jan  3 21:08:57 2006
+Subject: [Xitami] Re:Subdomains
+In-Reply-To: <s3bad09a.039@mail.uxbridgecollege.co.uk>
+Message-ID: <BAY105-F13555EF903D378FFC82285F82C0@phx.gbl>
+
+
+yup, you can automate it with cgi or php.  The process can be pretty 
+extensive, but ultimately you need to create a forms for the user to fill 
+out basic info about the subdomain and then when the form is submitted the 
+cgi/php would need to automate all the background scripts to create the 
+subdomain.  the scripts would create the directories, all the necessary the 
+subdomain .cfg files, add a subdomain line to the defaults.cgf file that 
+points/aliases the new subdomian to the appropriate subdomain.cfg files.  
+Then after all that is done your cgi/php script would need to reload/restart 
+the Xitami service to load the new defaults.cfg file into memory (without a 
+service reload the new subdomain would remain unaccessable).
+
+Whats the purpose of creating a blank subdomain though?  Even if you 
+automate the subdomain creation process is your client going to develop the 
+subdomain website?  If you are creating the subdomain website then it would 
+take you two minutes to be able to create the subdomain via dns and xitami.  
+If your client can manage to create their own subdomain website then they 
+should be able to manage the xitami server too.
+
+Then again, if your client wants to create subdomains for the purpose of 
+allowing users to create their own websites then you will need to write a 
+very extensive system that tracks users, interfaces with Xitami subdomains, 
+deals with subdomain administrators, etc etc etc....and there are premade 
+packages out there that already do this and do them well.
+
+-R
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+
+
+
+>From: "Michael Gibbons" <MGibbons@UxbridgeCollege.ac.uk>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: <xitami@lists.xitami.org>
+>Subject: Re: [Xitami] Re:Subdomains
+>Date: Tue, 03 Jan 2006 19:29:26 +0000
+>
+>Hi
+>Thanks for such a speedy responce, i don't want to sound dumb, but can i 
+>have that in english again, the dns is ok i think thats configured and 
+>works ok because don't laugh "i can ping ip address or name" now i'm lost, 
+>is there any chance you can send me a llist of instructions i'm good at 
+>following instructions, i know a fair bit about xitami and should be able 
+>to do most things once pointed into the right direction.
+>
+>Regards
+>michael
+>
+> >>> francis.turner@gmail.com 01/03/06 03:44pm >>>
+>Assuming that you have the appropriate wildcard CNAME in the DNS for
+>your domain so that all addresses point to the same place then this
+>should be as simple as writing a (perl) script to copy a blank virtual
+>host directory to the one for the name and edit defaults.cfg to add
+>the new vhost.
+>
+>In other words it should be trivial with the hardest bit being
+>controlling who is allowed to create the subdomain and to ensure that
+>only valid and sensible names are used (at least I assume your client
+>would prefer it if obscene subdomains were not allowed for example)
+>
+>Francis
+>
+>On 1/3/06, Michael Gibbons <MGibbons@uxbridgecollege.ac.uk> wrote:
+> > Hi All
+> >
+> > Seasons greetings to all!!!
+> >
+> >
+> > Can anyone help, i've develop a simple website for a client, she now 
+>wishes to offer subdomains on her site, http://www.localklicks.co.uk is 
+>there a way i can automate this so that it does not require any user 
+>interaction on the part of my client.
+> >
+> > Thanks in advance
+> >
+> > Michael
+> >
+> >
+> >
+> > The information or opinions in this message (including
+> > any attachments) are those of the author and are not
+> > necessarily those of Uxbridge College, which disclaims
+> > responsibility for loss or damage arising from its use to
+> > the maximum extent permitted by law. E-mail messages
+> > sometimes go astray. This message is sent in
+> > confidence for the addressee only. It may contain
+> > confidential or sensitive information. The contents
+> > are not to be disclosed to anyone other than the
+> > addressee. Unauthorised recipients are requested to
+> > preserve this confidentiality and to advise the originator.
+> > immediately and to delete the message without copying,
+> > altering or disclosing its contents. E-mails to or from
+> > Uxbridge College may be monitored by the College in
+> > accordance with its current policy.
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+>--
+>http://www.di2.nu/blog.htm
+>Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>Email has been scanned for viruses by Altman Technologies' email management 
+>service - www.altman.co.uk/emailsystems
+>
+>
+>
+>The information or opinions in this message (including
+>any attachments) are those of the author and are not
+>necessarily those of Uxbridge College, which disclaims
+>responsibility for loss or damage arising from its use to
+>the maximum extent permitted by law. E-mail messages
+>sometimes go astray. This message is sent in
+>confidence for the addressee only. It may contain
+>confidential or sensitive information. The contents
+>are not to be disclosed to anyone other than the
+>addressee. Unauthorised recipients are requested to
+>preserve this confidentiality and to advise the originator.
+>immediately and to delete the message without copying,
+>altering or disclosing its contents. E-mails to or from
+>Uxbridge College may be monitored by the College in
+>accordance with its current policy.
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From tuncer at dalan.com.tr  Wed Jan  4 08:17:58 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Wed Jan  4 08:13:59 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitami with perl
+Message-ID: <EE5D17F9BCAE5645B246C3307D8550724EC98D@mailsrv.dalan.local>
+
+Can anyone give an idea on a wise way of handling this with Perl
+commands on Win XP?
+
+I've never interfered with a running program before?
+
+Ayhan
+
+From francis.turner at gmail.com  Wed Jan  4 08:57:09 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Jan  4 08:57:14 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitami with
+	perl
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D8550724EC98D@mailsrv.dalan.local>
+References: <EE5D17F9BCAE5645B246C3307D8550724EC98D@mailsrv.dalan.local>
+Message-ID: <f83609d50601032357p1962d0exa807d177394e683e@mail.gmail.com>
+
+>From the FAQ. If xitami is installed as a service then
+net stop xitami
+net start xitami
+works.
+
+You usually don't need to do this but just need to have a low server
+refresh time because Xitami reloads its config file absed on this
+time.
+
+i.e. in the [Server] section of defaults.cfg put
+  Refresh = "1"
+so that the server reloads its config every second
+
+
+On 1/4/06, Ayhan Tuncer <tuncer@dalan.com.tr> wrote:
+> Can anyone give an idea on a wise way of handling this with Perl
+> commands on Win XP?
+>
+> I've never interfered with a running program before?
+>
+> Ayhan
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From stefano.ricci at achab.it  Wed Jan  4 12:37:43 2006
+From: stefano.ricci at achab.it (Stefano Ricci)
+Date: Wed Jan  4 12:38:16 2006
+Subject: [Xitami] enable HTTP PUT
+References: <00c901c6071e$59c8c120$a864a8c0@achab.it>
+	<6.2.0.14.0.20051224133029.01da2a80@mail.mrjdesign.net>
+Message-ID: <013001c61123$473c4ea0$a864a8c0@achab.it>
+
+Hi Everyone, 
+I'm not able to "enable" anonymous HTTP PUT (please note, not FTP PUT) on a single directory.
+Is there any way to do this without Xitami asking for username and password?
+
+thank you very much in advance
+
+stefano
+
+
+  ----- Original Message ----- 
+  From: MRJ InfoTech Admin 
+  To: Xitami Users General Discussion 
+  Sent: Saturday, December 24, 2005 2:32 PM
+  Subject: Re: [Xitami] enable HTTP PUT
+
+
+  See the listed default example for how to add Anonymous as a user and allow users with no password to log in.
+  You cannot log in to FTP without having at least a  username, even if you disable the password or leave it as * or blank.
+
+  At 17:37 22/12/2005, you wrote:
+
+    Hi everyone,
+     
+    I'm running Xitami on Windows
+    I need to enable HTTP PUT to "everyone" on a particular folder (alias /upload)
+     
+    I added the following to xitami.aut config file
+     
+    [/upload]
+    http-update=1
+    all=*
+     
+    but when I try to do a PUT, I get the windows login dialog asking me for a username and 
+    a password.
+    Is it possible to avoid that dialog?
+     
+    thanks in advance for your help
+     
+    cheers
+    stefano
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+  -?2005-------------------------------
+  MRJ Information Technology Ltd.
+  35 Camden High St., Camden/London, NW1 7JE
+  United Kingdom    http://www.mrjdesign.net 
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060104/74bd075e/attachment.html
+From tuncer at dalan.com.tr  Wed Jan  4 12:49:30 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Wed Jan  4 12:45:42 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitami 
+	withperl
+Message-ID: <EE5D17F9BCAE5645B246C3307D8550724EC9FD@mailsrv.dalan.local>
+
+Perl 5.8 complete installation gives the following error when script
+containing statement is executed from the command:
+
+-- Can't locate object method "net" via package "stop" --
+
+Was this shorthand for the following?
+
+-- &stop::net( qw(xitami) ); --
+
+Which FAQ is it?
+
+Ayhan
+
+- - -
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+Sent: Wednesday, January 04, 2006 9:57 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] RE: Stopping and restarting (or resetting) Xitami
+withperl
+
+>From the FAQ. If xitami is installed as a service then
+net stop xitami
+net start xitami
+works.
+
+You usually don't need to do this but just need to have a low server
+refresh time because Xitami reloads its config file absed on this
+time.
+
+i.e. in the [Server] section of defaults.cfg put
+  Refresh = "1"
+so that the server reloads its config every second
+
+
+On 1/4/06, Ayhan Tuncer <tuncer@dalan.com.tr> wrote:
+> Can anyone give an idea on a wise way of handling this with Perl
+> commands on Win XP?
+>
+> I've never interfered with a running program before?
+>
+> Ayhan
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From francis.turner at gmail.com  Wed Jan  4 12:50:34 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Jan  4 12:50:39 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitami
+	withperl
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D8550724EC9FD@mailsrv.dalan.local>
+References: <EE5D17F9BCAE5645B246C3307D8550724EC9FD@mailsrv.dalan.local>
+Message-ID: <f83609d50601040350w46d19de9h20e4c2e2538f6c69@mail.gmail.com>
+
+no it was a windows CLI command in perl that wpould be
+
+ qx(net stop xitami)
+
+The FAQ is the xitami documentation faq. Its on the web at
+http://www.imatix.com/html/xitami/index13.htm#n_5
+
+
+On 1/4/06, Ayhan Tuncer <tuncer@dalan.com.tr> wrote:
+> Perl 5.8 complete installation gives the following error when script
+> containing statement is executed from the command:
+>
+> -- Can't locate object method "net" via package "stop" --
+>
+> Was this shorthand for the following?
+>
+> -- &stop::net( qw(xitami) ); --
+>
+> Which FAQ is it?
+>
+> Ayhan
+>
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From tuncer at dalan.com.tr  Wed Jan  4 13:30:36 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Wed Jan  4 13:26:29 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+Message-ID: <EE5D17F9BCAE5645B246C3307D8550724ECA05@mailsrv.dalan.local>
+
+It does work inside backticks but Xitami is not installed as a service
+on my system so I can't test whether really it stops.
+
+Thanks.
+
+Ayhan
+
+- - -
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+Sent: Wednesday, January 04, 2006 1:51 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] RE: Stopping and restarting (or resetting)
+Xitamiwithperl
+
+no it was a windows CLI command in perl that wpould be
+
+ qx(net stop xitami)
+
+The FAQ is the xitami documentation faq. Its on the web at
+http://www.imatix.com/html/xitami/index13.htm#n_5
+
+
+On 1/4/06, Ayhan Tuncer <tuncer@dalan.com.tr> wrote:
+> Perl 5.8 complete installation gives the following error when script
+> containing statement is executed from the command:
+>
+> -- Can't locate object method "net" via package "stop" --
+>
+> Was this shorthand for the following?
+>
+> -- &stop::net( qw(xitami) ); --
+>
+> Which FAQ is it?
+>
+> Ayhan
+>
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From mail at bleisteiner.net  Wed Jan  4 15:30:28 2006
+From: mail at bleisteiner.net (Martin Bleisteiner)
+Date: Wed Jan  4 15:28:14 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D8550724ECA05@mailsrv.dalan.local>
+Message-ID: <PC171020060104153028061383464161@mb80>
+
+Hello,
+
+try to download Windows Command line Tool "kill.exe" 
+Then try to put two Shell Commands by PHP:
+
+shell("kill xiwin32.exe");
+shell("xiwin32.exe");
+
+- or something like this.
+
+First line kills all active tasks of Xitami, the second line starts new Xitami.
+Refer to the manual of the kill.exe tool.
+
+Martin
+
+----- Original Message ---------------
+
+Subject: RE: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+   From: "Ayhan Tuncer" <tuncer@dalan.com.tr>
+   Date: Wed, 4 Jan 2006 14:30:36 +0200
+     To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+
+>It does work inside backticks but Xitami is not installed as a service
+>on my system so I can't test whether really it stops.
+>
+>Thanks.
+>
+>Ayhan
+>
+>- - -
+>
+>-----Original Message-----
+>From: xitami-bounces@lists.xitami.org
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+>Sent: Wednesday, January 04, 2006 1:51 PM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] RE: Stopping and restarting (or resetting)
+>Xitamiwithperl
+>
+>no it was a windows CLI command in perl that wpould be
+>
+> qx(net stop xitami)
+>
+>The FAQ is the xitami documentation faq. Its on the web at
+>http://www.imatix.com/html/xitami/index13.htm#n_5
+>
+>
+>On 1/4/06, Ayhan Tuncer <tuncer@dalan.com.tr> wrote:
+>> Perl 5.8 complete installation gives the following error when script
+>> containing statement is executed from the command:
+>>
+>> -- Can't locate object method "net" via package "stop" --
+>>
+>> Was this shorthand for the following?
+>>
+>> -- &stop::net( qw(xitami) ); --
+>>
+>> Which FAQ is it?
+>>
+>> Ayhan
+>>
+>
+>--
+>http://www.di2.nu/blog.htm
+>Faber's Fourth Law:
+>  Necessity is the mother of strange bedfellows.
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From tuncer at dalan.com.tr  Wed Jan  4 16:54:34 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Wed Jan  4 16:50:32 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+Message-ID: <EE5D17F9BCAE5645B246C3307D8550724ECA4C@mailsrv.dalan.local>
+
+Yes but is it safe to kill Xitami just like that whenever you feel like
+it? Runing CGIs, open files and all..
+
+Ayhan
+
+- - -
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Martin Bleisteiner
+Sent: Wednesday, January 04, 2006 4:30 PM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] RE: Stopping and restarting (or resetting)
+Xitamiwithperl
+
+Hello,
+
+try to download Windows Command line Tool "kill.exe" 
+Then try to put two Shell Commands by PHP:
+
+shell("kill xiwin32.exe");
+shell("xiwin32.exe");
+
+- or something like this.
+
+First line kills all active tasks of Xitami, the second line starts new
+Xitami.
+Refer to the manual of the kill.exe tool.
+
+Martin
+
+----- Original Message ---------------
+
+Subject: RE: [Xitami] RE: Stopping and restarting (or resetting)
+Xitamiwithperl
+   From: "Ayhan Tuncer" <tuncer@dalan.com.tr>
+   Date: Wed, 4 Jan 2006 14:30:36 +0200
+     To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+
+>It does work inside backticks but Xitami is not installed as a service
+>on my system so I can't test whether really it stops.
+>
+>Thanks.
+>
+>Ayhan
+>
+>- - -
+>
+>-----Original Message-----
+>From: xitami-bounces@lists.xitami.org
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+>Sent: Wednesday, January 04, 2006 1:51 PM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] RE: Stopping and restarting (or resetting)
+>Xitamiwithperl
+>
+>no it was a windows CLI command in perl that wpould be
+>
+> qx(net stop xitami)
+>
+>The FAQ is the xitami documentation faq. Its on the web at
+>http://www.imatix.com/html/xitami/index13.htm#n_5
+>
+>
+>On 1/4/06, Ayhan Tuncer <tuncer@dalan.com.tr> wrote:
+>> Perl 5.8 complete installation gives the following error when script
+>> containing statement is executed from the command:
+>>
+>> -- Can't locate object method "net" via package "stop" --
+>>
+>> Was this shorthand for the following?
+>>
+>> -- &stop::net( qw(xitami) ); --
+>>
+>> Which FAQ is it?
+>>
+>> Ayhan
+>>
+>
+>--
+>http://www.di2.nu/blog.htm
+>Faber's Fourth Law:
+>  Necessity is the mother of strange bedfellows.
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From mail at bleisteiner.net  Wed Jan  4 19:33:02 2006
+From: mail at bleisteiner.net (Martin Bleisteiner)
+Date: Wed Jan  4 19:30:49 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D8550724ECA4C@mailsrv.dalan.local>
+Message-ID: <PC171020060104193302097236161f2e@mb80>
+
+Hello,
+
+There are lots of different "kill" tools out there. Most of them can be set to different "brutality" levels. First they try to stop the running task by sending a kind of "Alt-F4" command. When the task is still running properly it will react by closing all open files and terminate the regular way. After this, when no reaction, the running .exe can be really "killed" and can be kicked out of memory.
+
+I'm running a scheduled task that is testing the Xitami server every minute by a simple http-Get, and if there is no answer probably Xitami was shot by unknown reason (maybe my own PHP scripts do so by fault). This happens 2-3 times a day to me. After a defect is recognized, Xitami becomes killed and restarted in the way I mentioned. I never found problems when doing so. No problems with open files, even when PHP scrips are called.
+
+Martin
+
+----- Original Message ---------------
+
+>Yes but is it safe to kill Xitami just like that whenever you feel like
+>it? Runing CGIs, open files and all..
+>
+>Ayhan
+>
+>try to download Windows Command line Tool "kill.exe" 
+>Then try to put two Shell Commands by PHP:
+>
+>shell("kill xiwin32.exe");
+>shell("xiwin32.exe");
+>
+>- or something like this.
+>
+>First line kills all active tasks of Xitami, the second line starts new
+>Xitami.
+>Refer to the manual of the kill.exe tool.
+>
+>Martin
+>
+
+From rolinger1 at hotmail.com  Wed Jan  4 19:47:58 2006
+From: rolinger1 at hotmail.com (R O)
+Date: Wed Jan  4 19:48:06 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <PC171020060104193302097236161f2e@mb80>
+Message-ID: <BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+
+
+This all seems  a bit too complicated for a simple process.
+
+The problem with killing and restarting the service via cgi (and I think 
+php) is that when you kill the server you will also kill the process that is 
+executing the kill/restart commands.  The kill command will work and will 
+stop the service, but now that the service is stopped the cgi will be 
+terminated which means the second part of the the perl process, "restart", 
+won't get executed simply because the CGI process has already been 
+terminated.
+
+I know this is a fact for the CGI process but I am not certain about the 
+PHP.  CGI is a engine that runs and execute web based perl scripts.  However 
+I think the beauty of PHP is that there is no engine managing php scripts, 
+which means if a php script is run via a url, that the php script will load 
+into memory and execute even if the webserver is killed in the middle of 
+being executed. Someone might be able to elaborate on the PHP process but I 
+think thats how PHP works.
+
+Someone else suggested use the "server refresh" feature in the defaults.cfg 
+but this means its an automated thing and doesn't give you the ability to do 
+it remotely, quickly, etc.  when ever you want.  You need another way of 
+executing a perl/php script remotely that isn't done via the URL, or via the 
+same webserver.  Maybe run a second web service on a different port that 
+simply manages the kill/restart of the first service.
+
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+
+
+
+>From: Martin Bleisteiner <mail@bleisteiner.net>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] RE: Stopping and restarting (or resetting) 
+>Xitamiwithperl
+>Date: Wed, 4 Jan 2006 19:33:02 +0100
+>
+>Hello,
+>
+>There are lots of different "kill" tools out there. Most of them can be set 
+>to different "brutality" levels. First they try to stop the running task by 
+>sending a kind of "Alt-F4" command. When the task is still running properly 
+>it will react by closing all open files and terminate the regular way. 
+>After this, when no reaction, the running .exe can be really "killed" and 
+>can be kicked out of memory.
+>
+>I'm running a scheduled task that is testing the Xitami server every minute 
+>by a simple http-Get, and if there is no answer probably Xitami was shot by 
+>unknown reason (maybe my own PHP scripts do so by fault). This happens 2-3 
+>times a day to me. After a defect is recognized, Xitami becomes killed and 
+>restarted in the way I mentioned. I never found problems when doing so. No 
+>problems with open files, even when PHP scrips are called.
+>
+>Martin
+>
+>----- Original Message ---------------
+>
+> >Yes but is it safe to kill Xitami just like that whenever you feel like
+> >it? Runing CGIs, open files and all..
+> >
+> >Ayhan
+> >
+> >try to download Windows Command line Tool "kill.exe"
+> >Then try to put two Shell Commands by PHP:
+> >
+> >shell("kill xiwin32.exe");
+> >shell("xiwin32.exe");
+> >
+> >- or something like this.
+> >
+> >First line kills all active tasks of Xitami, the second line starts new
+> >Xitami.
+> >Refer to the manual of the kill.exe tool.
+> >
+> >Martin
+> >
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From francis.turner at gmail.com  Wed Jan  4 20:04:29 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Jan  4 20:04:41 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+References: <PC171020060104193302097236161f2e@mb80>
+	<BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+Message-ID: <f83609d50601041104i1d73837bp8fa6449b26adcb1c@mail.gmail.com>
+
+If you look at the /admin page there seems to be a fairly simple way
+to cause the server to reset (or halt).
+
+I think you would need to create a perl script with LWP or equivalent
+to get (with authentication) http://localhost/admin and then post to
+/admin?somemagicstring with post data jsaction=~A47.0 where the
+(somemagicstring) is retrieved from the LWP get page.
+
+Writing a server to monitor certain requests and do this when asked is
+pretty trivial but I'm not sure you would need to do even that much
+because I think the resrat saves the state anyway or queues it so that
+it occurs in a safe way
+
+Francis
+
+On 1/4/06, R O <rolinger1@hotmail.com> wrote:
+>
+> This all seems  a bit too complicated for a simple process.
+>
+> The problem with killing and restarting the service via cgi (and I think
+> php) is that when you kill the server you will also kill the process that is
+> executing the kill/restart commands.  The kill command will work and will
+> stop the service, but now that the service is stopped the cgi will be
+> terminated which means the second part of the the perl process, "restart",
+> won't get executed simply because the CGI process has already been
+> terminated.
+>
+> I know this is a fact for the CGI process but I am not certain about the
+> PHP.  CGI is a engine that runs and execute web based perl scripts.  However
+> I think the beauty of PHP is that there is no engine managing php scripts,
+> which means if a php script is run via a url, that the php script will load
+> into memory and execute even if the webserver is killed in the middle of
+> being executed. Someone might be able to elaborate on the PHP process but I
+> think thats how PHP works.
+>
+> Someone else suggested use the "server refresh" feature in the defaults.cfg
+> but this means its an automated thing and doesn't give you the ability to do
+> it remotely, quickly, etc.  when ever you want.  You need another way of
+> executing a perl/php script remotely that isn't done via the URL, or via the
+> same webserver.  Maybe run a second web service on a different port that
+> simply manages the kill/restart of the first service.
+>
+>
+>
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1@hotmail.com
+>
+>
+>
+>
+>
+> >From: Martin Bleisteiner <mail@bleisteiner.net>
+> >Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+> >To: Xitami Users General Discussion <xitami@lists.xitami.org>
+> >Subject: RE: [Xitami] RE: Stopping and restarting (or resetting)
+> >Xitamiwithperl
+> >Date: Wed, 4 Jan 2006 19:33:02 +0100
+> >
+> >Hello,
+> >
+> >There are lots of different "kill" tools out there. Most of them can be set
+> >to different "brutality" levels. First they try to stop the running task by
+> >sending a kind of "Alt-F4" command. When the task is still running properly
+> >it will react by closing all open files and terminate the regular way.
+> >After this, when no reaction, the running .exe can be really "killed" and
+> >can be kicked out of memory.
+> >
+> >I'm running a scheduled task that is testing the Xitami server every minute
+> >by a simple http-Get, and if there is no answer probably Xitami was shot by
+> >unknown reason (maybe my own PHP scripts do so by fault). This happens 2-3
+> >times a day to me. After a defect is recognized, Xitami becomes killed and
+> >restarted in the way I mentioned. I never found problems when doing so. No
+> >problems with open files, even when PHP scrips are called.
+> >
+> >Martin
+> >
+> >----- Original Message ---------------
+> >
+> > >Yes but is it safe to kill Xitami just like that whenever you feel like
+> > >it? Runing CGIs, open files and all..
+> > >
+> > >Ayhan
+> > >
+> > >try to download Windows Command line Tool "kill.exe"
+> > >Then try to put two Shell Commands by PHP:
+> > >
+> > >shell("kill xiwin32.exe");
+> > >shell("xiwin32.exe");
+> > >
+> > >- or something like this.
+> > >
+> > >First line kills all active tasks of Xitami, the second line starts new
+> > >Xitami.
+> > >Refer to the manual of the kill.exe tool.
+> > >
+> > >Martin
+> > >
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From ph at imatix.com  Wed Jan  4 20:25:03 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Wed Jan  4 20:25:12 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <f83609d50601041104i1d73837bp8fa6449b26adcb1c@mail.gmail.com>
+References: <PC171020060104193302097236161f2e@mb80>
+	<BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+	<f83609d50601041104i1d73837bp8fa6449b26adcb1c@mail.gmail.com>
+Message-ID: <5821ea240601041125u654ac9b6rfa3ecc8e87fcea04@mail.gmail.com>
+
+On 1/4/06, Francis Turner <francis.turner@gmail.com> wrote:
+
+> If you look at the /admin page there seems to be a fairly simple way
+> to cause the server to reset (or halt).
+
+The problem here is that if the server has died, that's not going to work.
+
+What we generally do - on Linux, but the same works on Win32 - is to
+monitor the process continuously from a script that runs on the same
+box as the server, using wget, and if the server fails to respond
+within a second, kill it and then restart it.
+
+Under win32, you can stop/restart the server by using the server
+manager (net stop / net start),  but since the net stop command needs
+the server to respond, I'd suggest using kill.exe.
+
+You can do this in Perl but it's really not worth it, it's just a few
+lines of batch commands.
+
+-Pieter Hintjens
+
+From francis.turner at gmail.com  Wed Jan  4 20:49:43 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Jan  4 20:49:49 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <5821ea240601041125u654ac9b6rfa3ecc8e87fcea04@mail.gmail.com>
+References: <PC171020060104193302097236161f2e@mb80>
+	<BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+	<f83609d50601041104i1d73837bp8fa6449b26adcb1c@mail.gmail.com>
+	<5821ea240601041125u654ac9b6rfa3ecc8e87fcea04@mail.gmail.com>
+Message-ID: <f83609d50601041149u460c53e3yb0a82abe8cba185d@mail.gmail.com>
+
+Pieter, there are I think two separte problems that are trying to be solved
+
+problem one - the one where you recommend using kill.exe is for when
+you believe Xitami is dead.
+
+problem two - which is where I'm proposing the perl script is for when
+you want to prod Yitami to reload its config because you have
+(programatically) added some more VHOSTS or similar. In this case you
+know Xitami is actually alive so you don't want to kill it in the
+middle of doing something
+
+Francis
+
+On 1/4/06, Pieter Hintjens <ph@imatix.com> wrote:
+> On 1/4/06, Francis Turner <francis.turner@gmail.com> wrote:
+>
+> > If you look at the /admin page there seems to be a fairly simple way
+> > to cause the server to reset (or halt).
+>
+> The problem here is that if the server has died, that's not going to work.
+>
+> What we generally do - on Linux, but the same works on Win32 - is to
+> monitor the process continuously from a script that runs on the same
+> box as the server, using wget, and if the server fails to respond
+> within a second, kill it and then restart it.
+>
+> Under win32, you can stop/restart the server by using the server
+> manager (net stop / net start),  but since the net stop command needs
+> the server to respond, I'd suggest using kill.exe.
+>
+> You can do this in Perl but it's really not worth it, it's just a few
+> lines of batch commands.
+>
+> -Pieter Hintjens
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From ph at imatix.com  Wed Jan  4 21:02:08 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Wed Jan  4 21:02:19 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <f83609d50601041149u460c53e3yb0a82abe8cba185d@mail.gmail.com>
+References: <PC171020060104193302097236161f2e@mb80>
+	<BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+	<f83609d50601041104i1d73837bp8fa6449b26adcb1c@mail.gmail.com>
+	<5821ea240601041125u654ac9b6rfa3ecc8e87fcea04@mail.gmail.com>
+	<f83609d50601041149u460c53e3yb0a82abe8cba185d@mail.gmail.com>
+Message-ID: <5821ea240601041202h103da6a3h157f719ec8b0488b@mail.gmail.com>
+
+On 1/4/06, Francis Turner <francis.turner@gmail.com> wrote:
+
+> problem one - the one where you recommend using kill.exe is for when
+> you believe Xitami is dead.
+
+Indeed.
+
+> problem two - which is where I'm proposing the perl script is for when
+> you want to prod Yitami to reload its config because you have
+> (programatically) added some more VHOSTS or similar. In this case you
+> know Xitami is actually alive so you don't want to kill it in the
+> middle of doing something
+
+Xitami will automatically reload its config file when it can, however
+it cannot reload its vhost config dynamically, and for this you need
+to stop/restart it.  Using the WBA interface is equivalent to doing a
+stop/start.
+
+Yes, to do this remotely, you could use the /admin interface and
+'click' on the restart button.
+
+-Pieter Hintjens
+
+From francis.turner at gmail.com  Wed Jan  4 23:29:35 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Jan  4 23:29:40 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <5821ea240601041202h103da6a3h157f719ec8b0488b@mail.gmail.com>
+References: <PC171020060104193302097236161f2e@mb80>
+	<BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+	<f83609d50601041104i1d73837bp8fa6449b26adcb1c@mail.gmail.com>
+	<5821ea240601041125u654ac9b6rfa3ecc8e87fcea04@mail.gmail.com>
+	<f83609d50601041149u460c53e3yb0a82abe8cba185d@mail.gmail.com>
+	<5821ea240601041202h103da6a3h157f719ec8b0488b@mail.gmail.com>
+Message-ID: <f83609d50601041429v2d2f4ba3k307b383542b3a489@mail.gmail.com>
+
+For those that care here is the script - obviously change 'username',
+'password' to the right values.
+
+Normally you would do the VHOST creation foirst then call this script.
+I don't see why you can't do this during the CGI call although I admit
+I haven't tested it to see if that works. Leaving this script to run
+as a dedicated service is left as an exercise to the student but some
+hints can be found in my realplayer controller code
+http://www.di2.nu/software/muzack.htm
+
+#!/usr/bin/perl
+
+# Created on 04-Jan-2006 22:17:28
+
+use LWP::UserAgent;
+my $ua = LWP::UserAgent->new;
+
+my $req = HTTP::Request->new(GET => 'http://localhost/admin');
+$req->authorization_basic('username', 'password');
+my $response = $ua->request($req);
+
+if ($response->is_success) {
+     $_ = $response->as_string;  # or whatever
+     die "no admin in $_" unless m!FORM METHOD=POST ACTION="/admin([^"]+)"!s;
+     print "got first round - $1\nsecond... ";
+     $req = HTTP::Request->new(POST => 'http://localhost/admin'.$1);
+     $req->authorization_basic('username', 'password');
+     $req->content_type('application/x-www-form-urlencoded');
+     $req->content('jsaction=~A47.0');
+     $response = $ua->request($req);
+     print $response->status_line;
+}
+else {
+     die $response->status_line;
+}
+
+On 1/4/06, Pieter Hintjens <ph@imatix.com> wrote:
+> > problem two - which is where I'm proposing the perl script is for when
+> > you want to prod Yitami to reload its config because you have
+> > (programatically) added some more VHOSTS or similar. In this case you
+> > know Xitami is actually alive so you don't want to kill it in the
+> > middle of doing something
+>
+> Xitami will automatically reload its config file when it can, however
+> it cannot reload its vhost config dynamically, and for this you need
+> to stop/restart it.  Using the WBA interface is equivalent to doing a
+> stop/start.
+>
+> Yes, to do this remotely, you could use the /admin interface and
+> 'click' on the restart button.
+>
+> -Pieter Hintjens
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From admin at mrjdesign.net  Fri Jan  6 15:50:27 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Jan  6 15:50:37 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+References: <PC171020060104193302097236161f2e@mb80>
+	<BAY105-F1631906B72B5A82AE9DB4FF82F0@phx.gbl>
+Message-ID: <6.2.0.14.0.20060106144512.01e03af0@mail.mrjdesign.net>
+
+If and as long as you run two processes there is no problem.
+
+1) Your CGI application to execute a call to an application in your server 
+machine
+2) The Application which is invoked by the CGI.
+
+The CGI is only to send some parameters to the main Application to indicate 
+what you want it to do.
+
+A proper set of rules for this would be as follows
+
+    Halt server
+    Start Server
+    Reboot PC
+
+The fourth optional parameter I am toying with now since I keep having 
+problems keeping Xitami alive
+since FTP keep hanging up with nasty C errors is a checker that can lay 
+dormant in the background
+and run a check every 30 seconds to ensure that Xitami is actually up and 
+running.
+
+The reboot PC I made into a CGI to force a full system flush at a set time 
+every night.
+If I miss to log in and run it, It will run itself by the Scheduler to 
+force a flush of the system.
+
+Since Xitami can be set to run on boot up, this is not a problem either.
+
+Further more, if your config is ok, and you execute a cgi to reset your 
+machine, you can just as
+well do this from the cgi if you have another app restarting it again.
+
+I dont see any problems whatsoever with this and in fact wrote my solutions 
+in VB 5 to keep it simple fast and practical.
+
+MRJ
+
+
+At 18:47 04/01/2006, you wrote:
+
+>This all seems  a bit too complicated for a simple process.
+>
+>The problem with killing and restarting the service via cgi (and I think 
+>php) is that when you kill the server you will also kill the process that 
+>is executing the kill/restart commands.  The kill command will work and 
+>will stop the service, but now that the service is stopped the cgi will be 
+>terminated which means the second part of the the perl process, "restart", 
+>won't get executed simply because the CGI process has already been terminated.
+>
+>I know this is a fact for the CGI process but I am not certain about the 
+>PHP.  CGI is a engine that runs and execute web based perl 
+>scripts.  However I think the beauty of PHP is that there is no engine 
+>managing php scripts, which means if a php script is run via a url, that 
+>the php script will load into memory and execute even if the webserver is 
+>killed in the middle of being executed. Someone might be able to elaborate 
+>on the PHP process but I think thats how PHP works.
+>
+>Someone else suggested use the "server refresh" feature in the 
+>defaults.cfg but this means its an automated thing and doesn't give you 
+>the ability to do it remotely, quickly, etc.  when ever you want.  You 
+>need another way of executing a perl/php script remotely that isn't done 
+>via the URL, or via the same webserver.  Maybe run a second web service on 
+>a different port that simply manages the kill/restart of the first service.
+>
+>
+>
+>Russel P. Olinger
+>(310) 466-3399
+>rolinger1@hotmail.com
+>
+>
+>
+>
+>
+>>From: Martin Bleisteiner <mail@bleisteiner.net>
+>>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>>To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>>Subject: RE: [Xitami] RE: Stopping and restarting (or resetting) 
+>>Xitamiwithperl
+>>Date: Wed, 4 Jan 2006 19:33:02 +0100
+>>
+>>Hello,
+>>
+>>There are lots of different "kill" tools out there. Most of them can be 
+>>set to different "brutality" levels. First they try to stop the running 
+>>task by sending a kind of "Alt-F4" command. When the task is still 
+>>running properly it will react by closing all open files and terminate 
+>>the regular way. After this, when no reaction, the running .exe can be 
+>>really "killed" and can be kicked out of memory.
+>>
+>>I'm running a scheduled task that is testing the Xitami server every 
+>>minute by a simple http-Get, and if there is no answer probably Xitami 
+>>was shot by unknown reason (maybe my own PHP scripts do so by fault). 
+>>This happens 2-3 times a day to me. After a defect is recognized, Xitami 
+>>becomes killed and restarted in the way I mentioned. I never found 
+>>problems when doing so. No problems with open files, even when PHP scrips 
+>>are called.
+>>
+>>Martin
+>>
+>>----- Original Message ---------------
+>>
+>> >Yes but is it safe to kill Xitami just like that whenever you feel like
+>> >it? Runing CGIs, open files and all..
+>> >
+>> >Ayhan
+>> >
+>> >try to download Windows Command line Tool "kill.exe"
+>> >Then try to put two Shell Commands by PHP:
+>> >
+>> >shell("kill xiwin32.exe");
+>> >shell("xiwin32.exe");
+>> >
+>> >- or something like this.
+>> >
+>> >First line kills all active tasks of Xitami, the second line starts new
+>> >Xitami.
+>> >Refer to the manual of the kill.exe tool.
+>> >
+>> >Martin
+>> >
+>>
+>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060106/375e4244/attachment.htm
+From tuncer at dalan.com.tr  Fri Jan  6 17:21:11 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Fri Jan  6 17:17:07 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072572062@mailsrv.dalan.local>
+
+So do you mean that 
+
+- either your CGI either goes directly and reboots the PC if on Win, and
+  Xitami is killed/can start up auto after reboot,
+
+- or the perl CGI would say something like:
+
+  exec( halting_and_starting_executable() );
+
+  and the exec'ed process would not self-destroy after Xitami halt
+  when Xitami kills all executing CGI's because an exec'ed process is
+not 
+  a process dependent on the lifespan of the launcher of itself?
+
+Ayhan
+
+
+- - -
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Friday, January 06, 2006 4:50 PM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] RE: Stopping and restarting (or resetting)
+Xitamiwithperl
+
+If and as long as you run two processes there is no problem.
+
+1) Your CGI application to execute a call to an application in your
+server machine
+2) The Application which is invoked by the CGI.
+
+The CGI is only to send some parameters to the main Application to
+indicate what you want it to do.
+
+A proper set of rules for this would be as follows
+
+   Halt server
+   Start Server
+   Reboot PC
+
+The fourth optional parameter I am toying with now since I keep having
+problems keeping Xitami alive 
+since FTP keep hanging up with nasty C errors is a checker that can lay
+dormant in the background 
+and run a check every 30 seconds to ensure that Xitami is actually up
+and running.
+
+The reboot PC I made into a CGI to force a full system flush at a set
+time every night.
+If I miss to log in and run it, It will run itself by the Scheduler to
+force a flush of the system.
+
+Since Xitami can be set to run on boot up, this is not a problem either.
+
+Further more, if your config is ok, and you execute a cgi to reset your
+machine, you can just as
+well do this from the cgi if you have another app restarting it again.
+
+I dont see any problems whatsoever with this and in fact wrote my
+solutions in VB 5 to keep it simple fast and practical.
+
+MRJ
+
+
+At 18:47 04/01/2006, you wrote:
+
+
+
+	This all seems  a bit too complicated for a simple process.
+	
+	The problem with killing and restarting the service via cgi (and
+I think php) is that when you kill the server you will also kill the
+process that is executing the kill/restart commands.  The kill command
+will work and will stop the service, but now that the service is stopped
+the cgi will be terminated which means the second part of the the perl
+process, "restart", won't get executed simply because the CGI process
+has already been terminated.
+	
+	I know this is a fact for the CGI process but I am not certain
+about the PHP.  CGI is a engine that runs and execute web based perl
+scripts.  However I think the beauty of PHP is that there is no engine
+managing php scripts, which means if a php script is run via a url, that
+the php script will load into memory and execute even if the webserver
+is killed in the middle of being executed. Someone might be able to
+elaborate on the PHP process but I think thats how PHP works.
+	
+	Someone else suggested use the "server refresh" feature in the
+defaults.cfg but this means its an automated thing and doesn't give you
+the ability to do it remotely, quickly, etc.  when ever you want.  You
+need another way of executing a perl/php script remotely that isn't done
+via the URL, or via the same webserver.  Maybe run a second web service
+on a different port that simply manages the kill/restart of the first
+service.
+	
+	
+	
+	Russel P. Olinger
+	(310) 466-3399
+	rolinger1@hotmail.com
+	
+	
+	
+	
+	
+	
+
+		From: Martin Bleisteiner <mail@bleisteiner.net>
+		Reply-To: Xitami Users General Discussion
+<xitami@lists.xitami.org>
+		To: Xitami Users General Discussion
+<xitami@lists.xitami.org>
+		Subject: RE: [Xitami] RE: Stopping and restarting (or
+resetting) Xitamiwithperl
+		Date: Wed, 4 Jan 2006 19:33:02 +0100
+		
+		Hello,
+		
+		There are lots of different "kill" tools out there. Most
+of them can be set to different "brutality" levels. First they try to
+stop the running task by sending a kind of "Alt-F4" command. When the
+task is still running properly it will react by closing all open files
+and terminate the regular way. After this, when no reaction, the running
+.exe can be really "killed" and can be kicked out of memory.
+		
+		I'm running a scheduled task that is testing the Xitami
+server every minute by a simple http-Get, and if there is no answer
+probably Xitami was shot by unknown reason (maybe my own PHP scripts do
+so by fault). This happens 2-3 times a day to me. After a defect is
+recognized, Xitami becomes killed and restarted in the way I mentioned.
+I never found problems when doing so. No problems with open files, even
+when PHP scrips are called.
+		
+		Martin
+		
+		----- Original Message ---------------
+		
+		>Yes but is it safe to kill Xitami just like that
+whenever you feel like
+		>it? Runing CGIs, open files and all..
+		>
+		>Ayhan
+		>
+		>try to download Windows Command line Tool "kill.exe"
+		>Then try to put two Shell Commands by PHP:
+		>
+		>shell("kill xiwin32.exe");
+		>shell("xiwin32.exe");
+		>
+		>- or something like this.
+		>
+		>First line kills all active tasks of Xitami, the second
+line starts new
+		>Xitami.
+		>Refer to the manual of the kill.exe tool.
+		>
+		>Martin
+		>
+		
+		
+		--
+		Xitami Users Mailing List -- For Xitami support
+		To unsubscribe:
+http://lists.xitami.org/mailman/listinfo/xitami
+<http://lists.xitami.org/mailman/listinfo/xitami> 
+
+
+
+
+	--
+	Xitami Users Mailing List -- For Xitami support
+	To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+<http://lists.xitami.org/mailman/listinfo/xitami> 
+	
+	
+
+-(c)2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net <http://www.mrjdesign.net/>  
+
+From rolinger1 at hotmail.com  Fri Jan  6 19:06:58 2006
+From: rolinger1 at hotmail.com (R O)
+Date: Fri Jan  6 19:07:05 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <6.2.0.14.0.20060106144512.01e03af0@mail.mrjdesign.net>
+Message-ID: <BAY105-F197B1AB89D3C155E1F7624F8210@phx.gbl>
+
+
+So, are you saying the CGI simply invokes the Perl compiler after passing 
+the parameters to the script?  Then once the Perl is invoked it will 
+continue as a seperate process even if part of that process is to 
+kill/restart the Xitami server?
+
+Why are you still even trying to run the Xitami FTP server.  It is a well 
+documented buggy server application that the Xitami folks stopped 
+development on years ago.  If you start Xitami, absent of the FTP server, 
+you shouldn't have any problems with Xitami hosing up on you all the time.
+
+-R
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+
+
+
+>From: MRJ InfoTech Admin <admin@mrjdesign.net>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] RE: Stopping and restarting (or resetting) 
+>Xitamiwithperl
+>Date: Fri, 06 Jan 2006 14:50:27 +0000
+>
+>If and as long as you run two processes there is no problem.
+>
+>1) Your CGI application to execute a call to an application in your server 
+>machine
+>2) The Application which is invoked by the CGI.
+>
+>The CGI is only to send some parameters to the main Application to indicate 
+>what you want it to do.
+>
+>A proper set of rules for this would be as follows
+>
+>    Halt server
+>    Start Server
+>    Reboot PC
+>
+>The fourth optional parameter I am toying with now since I keep having 
+>problems keeping Xitami alive
+>since FTP keep hanging up with nasty C errors is a checker that can lay 
+>dormant in the background
+>and run a check every 30 seconds to ensure that Xitami is actually up and 
+>running.
+>
+>The reboot PC I made into a CGI to force a full system flush at a set time 
+>every night.
+>If I miss to log in and run it, It will run itself by the Scheduler to 
+>force a flush of the system.
+>
+>Since Xitami can be set to run on boot up, this is not a problem either.
+>
+>Further more, if your config is ok, and you execute a cgi to reset your 
+>machine, you can just as
+>well do this from the cgi if you have another app restarting it again.
+>
+>I dont see any problems whatsoever with this and in fact wrote my solutions 
+>in VB 5 to keep it simple fast and practical.
+>
+>MRJ
+>
+>
+>At 18:47 04/01/2006, you wrote:
+>
+>>This all seems  a bit too complicated for a simple process.
+>>
+>>The problem with killing and restarting the service via cgi (and I think 
+>>php) is that when you kill the server you will also kill the process that 
+>>is executing the kill/restart commands.  The kill command will work and 
+>>will stop the service, but now that the service is stopped the cgi will be 
+>>terminated which means the second part of the the perl process, "restart", 
+>>won't get executed simply because the CGI process has already been 
+>>terminated.
+>>
+>>I know this is a fact for the CGI process but I am not certain about the 
+>>PHP.  CGI is a engine that runs and execute web based perl scripts.  
+>>However I think the beauty of PHP is that there is no engine managing php 
+>>scripts, which means if a php script is run via a url, that the php script 
+>>will load into memory and execute even if the webserver is killed in the 
+>>middle of being executed. Someone might be able to elaborate on the PHP 
+>>process but I think thats how PHP works.
+>>
+>>Someone else suggested use the "server refresh" feature in the 
+>>defaults.cfg but this means its an automated thing and doesn't give you 
+>>the ability to do it remotely, quickly, etc.  when ever you want.  You 
+>>need another way of executing a perl/php script remotely that isn't done 
+>>via the URL, or via the same webserver.  Maybe run a second web service on 
+>>a different port that simply manages the kill/restart of the first 
+>>service.
+>>
+>>
+>>
+>>Russel P. Olinger
+>>(310) 466-3399
+>>rolinger1@hotmail.com
+>>
+>>
+>>
+>>
+>>
+>>>From: Martin Bleisteiner <mail@bleisteiner.net>
+>>>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>>>To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>>>Subject: RE: [Xitami] RE: Stopping and restarting (or resetting) 
+>>>Xitamiwithperl
+>>>Date: Wed, 4 Jan 2006 19:33:02 +0100
+>>>
+>>>Hello,
+>>>
+>>>There are lots of different "kill" tools out there. Most of them can be 
+>>>set to different "brutality" levels. First they try to stop the running 
+>>>task by sending a kind of "Alt-F4" command. When the task is still 
+>>>running properly it will react by closing all open files and terminate 
+>>>the regular way. After this, when no reaction, the running .exe can be 
+>>>really "killed" and can be kicked out of memory.
+>>>
+>>>I'm running a scheduled task that is testing the Xitami server every 
+>>>minute by a simple http-Get, and if there is no answer probably Xitami 
+>>>was shot by unknown reason (maybe my own PHP scripts do so by fault). 
+>>>This happens 2-3 times a day to me. After a defect is recognized, Xitami 
+>>>becomes killed and restarted in the way I mentioned. I never found 
+>>>problems when doing so. No problems with open files, even when PHP scrips 
+>>>are called.
+>>>
+>>>Martin
+>>>
+>>>----- Original Message ---------------
+>>>
+>>> >Yes but is it safe to kill Xitami just like that whenever you feel like
+>>> >it? Runing CGIs, open files and all..
+>>> >
+>>> >Ayhan
+>>> >
+>>> >try to download Windows Command line Tool "kill.exe"
+>>> >Then try to put two Shell Commands by PHP:
+>>> >
+>>> >shell("kill xiwin32.exe");
+>>> >shell("xiwin32.exe");
+>>> >
+>>> >- or something like this.
+>>> >
+>>> >First line kills all active tasks of Xitami, the second line starts new
+>>> >Xitami.
+>>> >Refer to the manual of the kill.exe tool.
+>>> >
+>>> >Martin
+>>> >
+>>>
+>>>
+>>>--
+>>>Xitami Users Mailing List -- For Xitami support
+>>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>
+>-©2005-------------------------------
+>MRJ Information Technology Ltd.
+>35 Camden High St., Camden/London, NW1 7JE
+>United Kingdom    http://www.mrjdesign.net
+
+
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From BLambert at ccgw.cc.hollandc.pe.ca  Fri Jan  6 16:45:57 2006
+From: BLambert at ccgw.cc.hollandc.pe.ca (Brian Lambert)
+Date: Fri Jan  6 22:03:31 2006
+Subject: [Xitami] PHP help
+Message-ID: <s3be5888.005@ccgw.cc.hollandc.pe.ca>
+
+Hi everyone,
+
+hopefully this hasn't been posted before (I did a search of the
+archives back three years and couldn't find anything).  
+
+I'm running Xitami on an intranet and have bee for the past seven years
+with little or no problems.  I just recently upgraded to version 2.5c2
+and I'm running on Windows 2000.  I've been trying to get a simple
+feedback (php) form to run.  I have very little experience with php but
+the form works on another server I sometimes use.  However when I access
+it on the Xitami server it downloads the file instead of opening and
+running  it.  Do I need a php software install in order to have a php
+form work?
+
+Any suggestions would be appreciated.
+
+Thanks
+
+Brian
+
+From francis.turner at gmail.com  Fri Jan  6 23:52:56 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Fri Jan  6 23:53:01 2006
+Subject: [Xitami] PHP help
+In-Reply-To: <s3be5888.005@ccgw.cc.hollandc.pe.ca>
+References: <s3be5888.005@ccgw.cc.hollandc.pe.ca>
+Message-ID: <f83609d50601061452v6be5f01co8b51236f4980fd48@mail.gmail.com>
+
+yes you need to install PHP. PHP understand's Xitami so typically all
+you need to do is download the latest PHP version and runs tha
+standard install script
+
+
+On 1/6/06, Brian Lambert <BLambert@ccgw.cc.hollandc.pe.ca> wrote:
+> Hi everyone,
+>
+> hopefully this hasn't been posted before (I did a search of the
+> archives back three years and couldn't find anything).
+>
+> I'm running Xitami on an intranet and have bee for the past seven years
+> with little or no problems.  I just recently upgraded to version 2.5c2
+> and I'm running on Windows 2000.  I've been trying to get a simple
+> feedback (php) form to run.  I have very little experience with php but
+> the form works on another server I sometimes use.  However when I access
+> it on the Xitami server it downloads the file instead of opening and
+> running  it.  Do I need a php software install in order to have a php
+> form work?
+>
+> Any suggestions would be appreciated.
+>
+> Thanks
+>
+> Brian
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From xitami at pastryworld.ca  Sat Jan  7 15:50:25 2006
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Sat Jan  7 15:50:42 2006
+Subject: [Xitami] PHP help
+In-Reply-To: <f83609d50601061452v6be5f01co8b51236f4980fd48@mail.gmail.com>
+References: <s3be5888.005@ccgw.cc.hollandc.pe.ca>
+Message-ID: <43BF80D1.3413.11396D@localhost>
+
+after running the installer you need to enable php in xitami itself.
+Open up your default.cfg and create 2 new sections like or copy / paste.
+The path for the php directory has to be set to yours. :)
+Stop the server / start the server so the changes will take effect.
+If it's not working, you maybe have to put backslashes into the php path.Mine is only working this 
+way. ( xitami 2.5c2)
+
+[Filter]
+    .php = "D:/PHP/php.exe"
+
+[Mime]
+    Php = "application/x-httpd-php"
+ 
+
+
+> yes you need to install PHP. PHP understand's Xitami so typically all
+> you need to do is download the latest PHP version and runs tha
+> standard install script
+> 
+> 
+> On 1/6/06, Brian Lambert <BLambert@ccgw.cc.hollandc.pe.ca> wrote:
+> > Hi everyone,
+> >
+> > hopefully this hasn't been posted before (I did a search of the
+> > archives back three years and couldn't find anything).
+> >
+> > I'm running Xitami on an intranet and have bee for the past seven years
+> > with little or no problems.  I just recently upgraded to version 2.5c2
+> > and I'm running on Windows 2000.  I've been trying to get a simple
+> > feedback (php) form to run.  I have very little experience with php but
+> > the form works on another server I sometimes use.  However when I access
+> > it on the Xitami server it downloads the file instead of opening and
+> > running  it.  Do I need a php software install in order to have a php
+> > form work?
+> >
+> > Any suggestions would be appreciated.
+> >
+> > Thanks
+> >
+> > Brian
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+From admin at mrjdesign.net  Sun Jan  8 02:25:14 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Jan  8 02:25:24 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+In-Reply-To: <BAY105-F197B1AB89D3C155E1F7624F8210@phx.gbl>
+References: <6.2.0.14.0.20060106144512.01e03af0@mail.mrjdesign.net>
+	<BAY105-F197B1AB89D3C155E1F7624F8210@phx.gbl>
+Message-ID: <6.2.0.14.0.20060108012059.01df2dc8@mail.mrjdesign.net>
+
+
+>
+>So, are you saying the CGI simply invokes the Perl compiler after passing 
+>the parameters to the script?  Then once the Perl is invoked it will 
+>continue as a seperate process even if part of that process is to 
+>kill/restart the Xitami server?
+
+I am not using Perl at all. I write all my CGI's in pure VB 5 or 6 code.
+The CGI I made I called RefreshServer.exe and all you need to do is call it 
+and on run, it shuts down the machine and reboots it.
+I of course added the Xitami to the startup sequence or as a service auto 
+start then it works fine.
+
+
+>Why are you still even trying to run the Xitami FTP server.  It is a well 
+>documented buggy server application that the Xitami folks stopped 
+>development on years ago.  If you start Xitami, absent of the FTP server, 
+>you shouldn't have any problems with Xitami hosing up on you all the time.
+
+I have not really had any troubles with the FTP server part except for the 
+fact that if the client accessing it is having some kind of FTP app not 
+dedicatedly made for the proper environment, then errors happen.
+
+WS_FTP free version works fine on Win 95, 98, NT4  and 2000 but not XP or 
+2003 because WS_FTP was made for an older winsock.
+The new one shouldn't have a problem but I have not tried it.
+
+Cute FTP clients in free mode have a problem on XP too.
+
+Linux FTP works just fine, I tried it from my linux can and its working as 
+fast as ever.
+
+Windows FTP doesnt work at all.
+
+
+
+
+From admin at mrjdesign.net  Sun Jan  8 02:34:53 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Jan  8 02:34:57 2006
+Subject: [Xitami] RE: Stopping and restarting (or resetting) 
+	Xitamiwithperl
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D855072572062@mailsrv.dalan.local
+ >
+References: <EE5D17F9BCAE5645B246C3307D855072572062@mailsrv.dalan.local>
+Message-ID: <6.2.0.14.0.20060108012553.01e05158@mail.mrjdesign.net>
+
+
+>- either your CGI either goes directly and reboots the PC if on Win, and
+>   Xitami is killed/can start up auto after reboot,
+>
+>- or the perl CGI would say something like:
+
+The CGI would reboot the system using the following windows API
+'This works in VB 5 and 6, havn't tried 4 but should work if you have an 
+old compiler.
+
+'In general section
+Const EWX_LOGOFF = 0
+Const EWX_SHUTDOWN = 1
+Const EWX_REBOOT = 2
+Const EWX_FORCE = 4
+Private Declare Function ExitWindowsEx Lib "user32" (ByVal uFlags As Long, 
+ByVal dwReserved As Long) As Long
+
+Sub Main()
+     'reboot the computer
+     ret& = ExitWindowsEx(EWX_FORCE Or EWX_REBOOT, 0)
+End Sub
+
+
+
+>   exec( halting_and_starting_executable() );
+
+I wouldn't know cause I don't do Perl at all.
+
+
+>   and the exec'ed process would not self-destroy after Xitami halt
+>   when Xitami kills all executing CGI's because an exec'ed process is
+>not
+>   a process dependent on the lifespan of the launcher of itself?
+
+Of course it's killed.
+It kills the server even in this case but you could just as well create an 
+application that will initiate a set order of actions by an ini file or 
+registry entries after rebooting again to do what you want it to do...
+
+Say for instance according to the following scheme...
+
+
+1) save params desired to a ini file
+2) Execute the reboot by force, make sure your app is in the startup list 
+for HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
+3) On run , read the saved params in the ini file and do what you want it 
+to do...
+4) Restart the Xitami by using WindowsProc or ShellExec API for instance...
+
+It's all fairly basic stuff once you get used to it.
+I am sure you can do it the open source way too and even use VBScript or 
+JScript on your server can to do it.
+
+I just find Perl to "un-readable" to deal with myself and I prefer to stick 
+with the VB way of controlling my machines
+It's also fairly simple to re-write and alter shoul dyou want to add or 
+change something later on.
+
+Then again, to all their favourite flavor I guess (^^)
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060108/f5364872/attachment.html
+From kharzham at earthlink.net  Wed Jan 11 02:10:41 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Wed Jan 11 02:06:34 2006
+Subject: [Xitami] Xitami Setup
+Message-ID: <DATAPIPE-AHLQ5Kcf3e000011ae@epmail2.com>
+
+Xitami is the first web server I have ever tried to run.  I have just gotten a domain name through DNSexit, and want to run a small family web site.  I am using my home computer via an ADSL line.  I have set up Xitami, and installed 3Dwatch to update my IP.  Everything works fine on yje localhost, or if I access my domain from my computer (www.hopkinsfamily.com), but no one can access it from another computer.  I also can not access it via my computer at work.  I believe I have opened the proper ports in my firewall.  Can anyone suggest a way to test my setup?
+
+Thanks,
+Dwayne
+
+___________________________________________________________
+Sent by ePrompter, the premier email notification software.
+Free download at http://www.ePrompter.com.
+
+From icosahedron at gmail.com  Wed Jan 11 02:50:42 2006
+From: icosahedron at gmail.com (Icosahedron)
+Date: Wed Jan 11 02:50:49 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <DATAPIPE-AHLQ5Kcf3e000011ae@epmail2.com>
+References: <DATAPIPE-AHLQ5Kcf3e000011ae@epmail2.com>
+Message-ID: <5a69947e0601101750x5ce93c4dy970650aa9dca1717@mail.gmail.com>
+
+It's possible that your ISP has a NAT installed, meaning that you
+can't host things like web servers on a PC in your home.  It's not
+uncommon.
+
+I'd look for a cheap hosting plan.  There are plenty available that
+will host your website.
+
+Jay
+
+On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> Xitami is the first web server I have ever tried to run.  I have just gotten a domain name through DNSexit, and want to run a small family web site.  I am using my home computer via an ADSL line.  I have set up Xitami, and installed 3Dwatch to update my IP.  Everything works fine on yje localhost, or if I access my domain from my computer (www.hopkinsfamily.com), but no one can access it from another computer.  I also can not access it via my computer at work.  I believe I have opened the proper ports in my firewall.  Can anyone suggest a way to test my setup?
+>
+> Thanks,
+> Dwayne
+>
+> ___________________________________________________________
+> Sent by ePrompter, the premier email notification software.
+> Free download at http://www.ePrompter.com.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+Icosahedron
+20 sides of fun
+
+From francis.turner at gmail.com  Wed Jan 11 08:41:53 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Jan 11 08:42:00 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <5a69947e0601101750x5ce93c4dy970650aa9dca1717@mail.gmail.com>
+References: <DATAPIPE-AHLQ5Kcf3e000011ae@epmail2.com>
+	<5a69947e0601101750x5ce93c4dy970650aa9dca1717@mail.gmail.com>
+Message-ID: <f83609d50601102341q6b3924fbi2b583aa736bc65e@mail.gmail.com>
+
+You ought to be able to check whether it is possible to see if your
+ISP is blocking ports or similar by using the GRC shields up test -
+https://www.grc.com/x/ne.dll
+
+On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> It's possible that your ISP has a NAT installed, meaning that you
+> can't host things like web servers on a PC in your home.  It's not
+> uncommon.
+>
+> I'd look for a cheap hosting plan.  There are plenty available that
+> will host your website.
+>
+> Jay
+>
+> On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > Xitami is the first web server I have ever tried to run.  I have just gotten a domain name through DNSexit, and want to run a small family web site.  I am using my home computer via an ADSL line.  I have set up Xitami, and installed 3Dwatch to update my IP.  Everything works fine on yje localhost, or if I access my domain from my computer (www.hopkinsfamily.com), but no one can access it from another computer.  I also can not access it via my computer at work.  I believe I have opened the proper ports in my firewall.  Can anyone suggest a way to test my setup?
+> >
+> > Thanks,
+> > Dwayne
+> >
+> > ___________________________________________________________
+> > Sent by ePrompter, the premier email notification software.
+> > Free download at http://www.ePrompter.com.
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> Icosahedron
+> 20 sides of fun
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From admin at mrjdesign.net  Wed Jan 11 09:13:30 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Wed Jan 11 09:13:37 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <DATAPIPE-AHLQ5Kcf3e000011ae@epmail2.com>
+References: <DATAPIPE-AHLQ5Kcf3e000011ae@epmail2.com>
+Message-ID: <6.2.0.14.0.20060111081018.01dec8e8@mail.mrjdesign.net>
+
+
+The only ports you should need to open are 80 and if you use the FTP 21.
+It could also be that your public IP is different from that provided to you 
+by your provider.
+
+Say for instance you are issued a dynamic IP 19.19.19.1 and you have this 
+assigned to your router/firewall.
+In fact your ISP may assign you a this only for their internal use, and run 
+you through a gateway of say 19.19.18.254
+So instead you show up as surfing from this gateway IP.
+
+Go to DNSSTUFF.COM and verify your public IP address is in fact the one 
+your DynIP is getting.
+It will show up in the top right hand corner of the screen what you are 
+actually on.
+This would be the first thing I'd check and believe it or not, but it does 
+even happen on ranges which are issued static IP's too on SDSL.
+
+
+
+At 01:10 11/01/2006, you wrote:
+>Xitami is the first web server I have ever tried to run.  I have just 
+>gotten a domain name through DNSexit, and want to run a small family web 
+>site.  I am using my home computer via an ADSL line.  I have set up 
+>Xitami, and installed 3Dwatch to update my IP.  Everything works fine on 
+>yje localhost, or if I access my domain from my computer 
+>(www.hopkinsfamily.com), but no one can access it from another 
+>computer.  I also can not access it via my computer at work.  I believe I 
+>have opened the proper ports in my firewall.  Can anyone suggest a way to 
+>test my setup?
+>
+>Thanks,
+>Dwayne
+
+
+
+
+From bkowald at synergybroadcast.com  Wed Jan 11 04:29:47 2006
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Wed Jan 11 09:14:05 2006
+Subject: [Xitami] Xitami Setup
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E5E90F7@sbsserver.tiltrac.local>
+
+You should have port 80 forwared through your router, if you have one.
+And it should be open in a software firewall too.  Also, your ISP may be
+blocking port 80 from coming to you so you don't run a webserver. You
+could check with your ISP if its allowed in your service agreemet.  If
+its not allowed, don't ask. If port 80 is blocked by your ISP you could
+change try changing it to a different port like 8080. Your uses would
+then access it by using www.hopkinsfamily.com:8080 
+
+BK
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of
+kharzham@earthlink.net
+Sent: Tuesday, January 10, 2006 8:11 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Xitami Setup
+
+
+Xitami is the first web server I have ever tried to run.  I have just
+gotten a domain name through DNSexit, and want to run a small family web
+site.  I am using my home computer via an ADSL line.  I have set up
+Xitami, and installed 3Dwatch to update my IP.  Everything works fine on
+yje localhost, or if I access my domain from my computer
+(www.hopkinsfamily.com), but no one can access it from another computer.
+I also can not access it via my computer at work.  I believe I have
+opened the proper ports in my firewall.  Can anyone suggest a way to
+test my setup?
+
+Thanks,
+Dwayne
+
+___________________________________________________________
+Sent by ePrompter, the premier email notification software. Free
+download at http://www.ePrompter.com.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From kharzham at earthlink.net  Thu Jan 12 02:51:46 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Thu Jan 12 02:46:58 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <5a69947e0601101750x5ce93c4dy970650aa9dca1717@mail.gmail.com>
+Message-ID: <000501c6171a$bf2f6260$9711fea9@net>
+
+Is there a way to test for this?  Correction on the domain, it is .net.
+
+-----Original Message-----
+From: Icosahedron [mailto:icosahedron@gmail.com] 
+Sent: Tuesday, January 10, 2006 7:51 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Setup
+
+
+It's possible that your ISP has a NAT installed, meaning that you can't host
+things like web servers on a PC in your home.  It's not uncommon.
+
+I'd look for a cheap hosting plan.  There are plenty available that will
+host your website.
+
+Jay
+
+On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> Xitami is the first web server I have ever tried to run.  I have just 
+> gotten a domain name through DNSexit, and want to run a small family 
+> web site.  I am using my home computer via an ADSL line.  I have set 
+> up Xitami, and installed 3Dwatch to update my IP.  Everything works 
+> fine on yje localhost, or if I access my domain from my computer 
+> (www.hopkinsfamily.com), but no one can access it from another 
+> computer.  I also can not access it via my computer at work.  I 
+> believe I have opened the proper ports in my firewall.  Can anyone 
+> suggest a way to test my setup?
+>
+> Thanks,
+> Dwayne
+>
+> ___________________________________________________________
+> Sent by ePrompter, the premier email notification software. Free 
+> download at http://www.ePrompter.com.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+Icosahedron
+20 sides of fun
+
+
+
+From bkowald at mchsi.com  Thu Jan 12 03:16:03 2006
+From: bkowald at mchsi.com (Brian Kowald)
+Date: Thu Jan 12 03:16:20 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <000501c6171a$bf2f6260$9711fea9@net>
+Message-ID: <000001c6171e$23aa9f40$2000a8c0@TILTRACLAPTOP>
+
+When I ping www.hopkinsfamily.net it shows that its ip address is
+169.254.17.151.  Is that the address your server has? You can go to
+www.whatismyip.com to see your server address.  That should match the web
+server address that is setup for the domain in your registration.   
+
+When I pinged it, I get no response.
+
+By the way, www.hopkinsfamily.com shows to be an address of 169.254.17.151.
+Something completely different.
+
+One of the responses mentioned a port tester that you can run, so see what
+ports are open. I don't recall what it was. (Sorry, having a clean inbox is
+a New Year's resolution)
+
+Brian
+
+
+
+DEVICE_CONTROL_VIDEOTEK_DM154
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of kharzham@earthlink.net
+Sent: Wednesday, January 11, 2006 8:52 PM
+To: 'Xitami Users General Discussion'
+Subject: RE: [Xitami] Xitami Setup
+
+
+Is there a way to test for this?  Correction on the domain, it is .net.
+
+-----Original Message-----
+From: Icosahedron [mailto:icosahedron@gmail.com] 
+Sent: Tuesday, January 10, 2006 7:51 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Setup
+
+
+It's possible that your ISP has a NAT installed, meaning that you can't host
+things like web servers on a PC in your home.  It's not uncommon.
+
+I'd look for a cheap hosting plan.  There are plenty available that will
+host your website.
+
+Jay
+
+On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> Xitami is the first web server I have ever tried to run.  I have just
+> gotten a domain name through DNSexit, and want to run a small family 
+> web site.  I am using my home computer via an ADSL line.  I have set 
+> up Xitami, and installed 3Dwatch to update my IP.  Everything works 
+> fine on yje localhost, or if I access my domain from my computer 
+> (www.hopkinsfamily.com), but no one can access it from another 
+> computer.  I also can not access it via my computer at work.  I 
+> believe I have opened the proper ports in my firewall.  Can anyone 
+> suggest a way to test my setup?
+>
+> Thanks,
+> Dwayne
+>
+> ___________________________________________________________
+> Sent by ePrompter, the premier email notification software. Free
+> download at http://www.ePrompter.com.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+Icosahedron
+20 sides of fun
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From kharzham at earthlink.net  Thu Jan 12 03:38:01 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Thu Jan 12 03:32:54 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <f83609d50601102341q6b3924fbi2b583aa736bc65e@mail.gmail.com>
+Message-ID: <000001c61721$365e57f0$9711fea9@net>
+
+The desired ports are open, but the IP shown by ShieldsUp! Is totally
+different than the IP as reported by ipconfig.  It appears to be the IP of
+my ISP?
+
+-----Original Message-----
+From: Francis Turner [mailto:francis.turner@gmail.com] 
+Sent: Wednesday, January 11, 2006 1:42 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Setup
+
+
+You ought to be able to check whether it is possible to see if your ISP is
+blocking ports or similar by using the GRC shields up test -
+https://www.grc.com/x/ne.dll
+
+On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> It's possible that your ISP has a NAT installed, meaning that you 
+> can't host things like web servers on a PC in your home.  It's not 
+> uncommon.
+>
+> I'd look for a cheap hosting plan.  There are plenty available that 
+> will host your website.
+>
+> Jay
+>
+> On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > Xitami is the first web server I have ever tried to run.  I have 
+> > just gotten a domain name through DNSexit, and want to run a small 
+> > family web site.  I am using my home computer via an ADSL line.  I 
+> > have set up Xitami, and installed 3Dwatch to update my IP.  
+> > Everything works fine on yje localhost, or if I access my domain 
+> > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > from another computer.  I also can not access it via my computer at 
+> > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > anyone suggest a way to test my setup?
+> >
+> > Thanks,
+> > Dwayne
+> >
+> > ___________________________________________________________
+> > Sent by ePrompter, the premier email notification software. Free 
+> > download at http://www.ePrompter.com.
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> Icosahedron
+> 20 sides of fun
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+
+From kharzham at earthlink.net  Thu Jan 12 03:41:49 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Thu Jan 12 03:36:38 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <6.2.0.14.0.20060111081018.01dec8e8@mail.mrjdesign.net>
+Message-ID: <000101c61721$bd5ac540$9711fea9@net>
+
+That does appear to be exactly what is happening.  Is there a way to fix
+this?
+
+-----Original Message-----
+From: MRJ InfoTech Admin [mailto:admin@mrjdesign.net] 
+Sent: Wednesday, January 11, 2006 2:14 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Setup
+
+
+
+The only ports you should need to open are 80 and if you use the FTP 21. It
+could also be that your public IP is different from that provided to you 
+by your provider.
+
+Say for instance you are issued a dynamic IP 19.19.19.1 and you have this 
+assigned to your router/firewall.
+In fact your ISP may assign you a this only for their internal use, and run 
+you through a gateway of say 19.19.18.254
+So instead you show up as surfing from this gateway IP.
+
+Go to DNSSTUFF.COM and verify your public IP address is in fact the one 
+your DynIP is getting.
+It will show up in the top right hand corner of the screen what you are 
+actually on.
+This would be the first thing I'd check and believe it or not, but it does 
+even happen on ranges which are issued static IP's too on SDSL.
+
+
+
+At 01:10 11/01/2006, you wrote:
+>Xitami is the first web server I have ever tried to run.  I have just
+>gotten a domain name through DNSexit, and want to run a small family web 
+>site.  I am using my home computer via an ADSL line.  I have set up 
+>Xitami, and installed 3Dwatch to update my IP.  Everything works fine on 
+>yje localhost, or if I access my domain from my computer 
+>(www.hopkinsfamily.com), but no one can access it from another 
+>computer.  I also can not access it via my computer at work.  I believe I 
+>have opened the proper ports in my firewall.  Can anyone suggest a way to 
+>test my setup?
+>
+>Thanks,
+>Dwayne
+
+
+
+
+
+
+From xitami at pastryworld.ca  Thu Jan 12 15:06:25 2006
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Thu Jan 12 15:06:26 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <000001c61721$365e57f0$9711fea9@net>
+References: <f83609d50601102341q6b3924fbi2b583aa736bc65e@mail.gmail.com>
+Message-ID: <43C60E01.26914.19051B@localhost>
+
+ipconfig is a tool to show your ip# of your computer build in network card.
+That has nothing to do with your public ip.
+A bit more detailed info about your setup would help to make more clear answers.
+1. are you using a router ?
+2. is your machine directly connected to the ADSL ( Iam assuming you have this kind of connection) 
+
+The more detail we get, the easier it is to find the problem.
+
+Johannes
+
+> The desired ports are open, but the IP shown by ShieldsUp! Is totally
+> different than the IP as reported by ipconfig.  It appears to be the IP of
+> my ISP?
+> 
+> -----Original Message-----
+> From: Francis Turner [mailto:francis.turner@gmail.com] 
+> Sent: Wednesday, January 11, 2006 1:42 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Setup
+> 
+> 
+> You ought to be able to check whether it is possible to see if your ISP is
+> blocking ports or similar by using the GRC shields up test -
+> https://www.grc.com/x/ne.dll
+> 
+> On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > It's possible that your ISP has a NAT installed, meaning that you 
+> > can't host things like web servers on a PC in your home.  It's not 
+> > uncommon.
+> >
+> > I'd look for a cheap hosting plan.  There are plenty available that 
+> > will host your website.
+> >
+> > Jay
+> >
+> > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > Xitami is the first web server I have ever tried to run.  I have 
+> > > just gotten a domain name through DNSexit, and want to run a small 
+> > > family web site.  I am using my home computer via an ADSL line.  I 
+> > > have set up Xitami, and installed 3Dwatch to update my IP.  
+> > > Everything works fine on yje localhost, or if I access my domain 
+> > > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > > from another computer.  I also can not access it via my computer at 
+> > > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > > anyone suggest a way to test my setup?
+> > >
+> > > Thanks,
+> > > Dwayne
+> > >
+> > > ___________________________________________________________
+> > > Sent by ePrompter, the premier email notification software. Free 
+> > > download at http://www.ePrompter.com.
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Icosahedron
+> > 20 sides of fun
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+From daleunroe at fuse.net  Thu Jan 12 17:29:03 2006
+From: daleunroe at fuse.net (Dale Unroe)
+Date: Thu Jan 12 17:29:13 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <43C60E01.26914.19051B@localhost>
+Message-ID: <001101c61795$4efc6e90$6210b90a@antecp4>
+
+Lets get on some basic terms as a foundation to build the solution upon.
+
+1.  Private IP address (only works internally/LAN) vs. Public IP address
+(searchable/findable across the internet/WAN) 
+2.  Dynamically assigned IP addressing (changes from time to time) vs.
+Static IP addressing (the same day in day out) (see your ISP's offering
+details if you don't already know.
+3.  The 169.254.x.x is one of the reserved IP addressing ranges for
+internal/private only usage.  It is a Class C address with the subnet mask
+255.255.255.0
+4.  If you are clueless about terminology do some research beyond this list
+including googling and surfing Wikipedia
+5.  IP addressing as a subject is a two edged subject in that it is
+fundamentally simple but the details of subnetting are one of the most
+dreaded subjects by teachers when instructing on networking.  Fortunately
+for your sake subnetting most likely will not come into play for a single
+home network.
+6.  Once you understand the basics of IP addressing for your situation then
+you must move on to understand putting that IP address into a publicly
+reachable index that points to your machine.  This index is called a DNS
+server.  DNS servers can be specifically internal so not any DNS server will
+work.  You need to have a properly configured DNS server with all the right
+records, forwarders, and web listeners for things to work.  Usually the
+simple need is met not by doing this on your own but by having a third party
+provide DNS provisioning for you.  DYNDNS.org and TZO.com are a couple of
+many such business that can do this.  Your own ISP may do this and it may or
+may not be for additional costs (check before you have this service
+initiated).
+7.  If this is getting too difficult for you, contact a local network savvy
+person for hire to get this set up for you.  I bet for $50 someone would be
+willing to do this.
+
+I am glad to provide this help to someone willing to be ambitious and take
+on a nice technical challenge such as yours.
+
+Good luck,
+
+Dale Unroe
+Microsoft Certified Professional
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Johannes Prost
+Sent: Thursday, January 12, 2006 9:06 AM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Xitami Setup
+
+ipconfig is a tool to show your ip# of your computer build in network card.
+That has nothing to do with your public ip.
+A bit more detailed info about your setup would help to make more clear
+answers.
+1. are you using a router ?
+2. is your machine directly connected to the ADSL ( Iam assuming you have
+this kind of connection) 
+
+The more detail we get, the easier it is to find the problem.
+
+Johannes
+
+> The desired ports are open, but the IP shown by ShieldsUp! Is totally
+> different than the IP as reported by ipconfig.  It appears to be the IP of
+> my ISP?
+> 
+> -----Original Message-----
+> From: Francis Turner [mailto:francis.turner@gmail.com] 
+> Sent: Wednesday, January 11, 2006 1:42 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Setup
+> 
+> 
+> You ought to be able to check whether it is possible to see if your ISP is
+> blocking ports or similar by using the GRC shields up test -
+> https://www.grc.com/x/ne.dll
+> 
+> On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > It's possible that your ISP has a NAT installed, meaning that you 
+> > can't host things like web servers on a PC in your home.  It's not 
+> > uncommon.
+> >
+> > I'd look for a cheap hosting plan.  There are plenty available that 
+> > will host your website.
+> >
+> > Jay
+> >
+> > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > Xitami is the first web server I have ever tried to run.  I have 
+> > > just gotten a domain name through DNSexit, and want to run a small 
+> > > family web site.  I am using my home computer via an ADSL line.  I 
+> > > have set up Xitami, and installed 3Dwatch to update my IP.  
+> > > Everything works fine on yje localhost, or if I access my domain 
+> > > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > > from another computer.  I also can not access it via my computer at 
+> > > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > > anyone suggest a way to test my setup?
+> > >
+> > > Thanks,
+> > > Dwayne
+> > >
+> > > ___________________________________________________________
+> > > Sent by ePrompter, the premier email notification software. Free 
+> > > download at http://www.ePrompter.com.
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Icosahedron
+> > 20 sides of fun
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From kharzham at earthlink.net  Sat Jan 14 15:23:39 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Sat Jan 14 15:19:08 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <43C60E01.26914.19051B@localhost>
+Message-ID: <000601c61916$1d89c1a0$9711fea9@net>
+
+Johannes,
+	I am not using a router, it is directly connected to the ADSL.  The
+modem is a ZyXel 645 Series.  It looks like I have to do some more research
+on this whole topic if IP addresses.
+
+Dwayne
+
+-----Original Message-----
+From: Johannes Prost [mailto:xitami@pastryworld.ca] 
+Sent: Thursday, January 12, 2006 8:06 AM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Xitami Setup
+
+
+ipconfig is a tool to show your ip# of your computer build in network card.
+That has nothing to do with your public ip. A bit more detailed info about
+your setup would help to make more clear answers. 1. are you using a router
+? 2. is your machine directly connected to the ADSL ( Iam assuming you have
+this kind of connection) 
+
+The more detail we get, the easier it is to find the problem.
+
+Johannes
+
+> The desired ports are open, but the IP shown by ShieldsUp! Is totally 
+> different than the IP as reported by ipconfig.  It appears to be the 
+> IP of my ISP?
+> 
+> -----Original Message-----
+> From: Francis Turner [mailto:francis.turner@gmail.com]
+> Sent: Wednesday, January 11, 2006 1:42 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Setup
+> 
+> 
+> You ought to be able to check whether it is possible to see if your 
+> ISP is blocking ports or similar by using the GRC shields up test - 
+> https://www.grc.com/x/ne.dll
+> 
+> On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > It's possible that your ISP has a NAT installed, meaning that you
+> > can't host things like web servers on a PC in your home.  It's not 
+> > uncommon.
+> >
+> > I'd look for a cheap hosting plan.  There are plenty available that
+> > will host your website.
+> >
+> > Jay
+> >
+> > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > Xitami is the first web server I have ever tried to run.  I have
+> > > just gotten a domain name through DNSexit, and want to run a small 
+> > > family web site.  I am using my home computer via an ADSL line.  I 
+> > > have set up Xitami, and installed 3Dwatch to update my IP.  
+> > > Everything works fine on yje localhost, or if I access my domain 
+> > > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > > from another computer.  I also can not access it via my computer at 
+> > > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > > anyone suggest a way to test my setup?
+> > >
+> > > Thanks,
+> > > Dwayne
+> > >
+> > > ___________________________________________________________
+> > > Sent by ePrompter, the premier email notification software. Free
+> > > download at http://www.ePrompter.com.
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Icosahedron
+> > 20 sides of fun
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+
+
+From kharzham at earthlink.net  Sat Jan 14 15:37:41 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Sat Jan 14 15:33:06 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <001101c61795$4efc6e90$6210b90a@antecp4>
+Message-ID: <000701c61918$1350f4e0$9711fea9@net>
+
+Dale,
+	I've never shied away from a little technical challenge.  Any
+suggested reading?  I am already very familiar with computer hardware, and
+some simple programming (BASIC, VBS, Pascal, assembly, ATLAS). I don't know
+if the latter will help 8^).  I also know my way around the registry fairly
+well.  I am using XP Home, so IIS is not an option.  I know there is a
+"process" that will enable NT 2000 IIS to run on XP Home, but am more
+interested in a supported methodology.  Xitami seems to have a fairly good
+support network for shareware, and seems less complex than Apache.
+
+Dwayne
+
+-----Original Message-----
+From: Dale Unroe [mailto:daleunroe@fuse.net] 
+Sent: Thursday, January 12, 2006 10:29 AM
+To: 'Xitami Users General Discussion'
+Subject: RE: [Xitami] Xitami Setup
+
+
+Lets get on some basic terms as a foundation to build the solution upon.
+
+1.  Private IP address (only works internally/LAN) vs. Public IP address
+(searchable/findable across the internet/WAN) 
+2.  Dynamically assigned IP addressing (changes from time to time) vs.
+Static IP addressing (the same day in day out) (see your ISP's offering
+details if you don't already know. 3.  The 169.254.x.x is one of the
+reserved IP addressing ranges for internal/private only usage.  It is a
+Class C address with the subnet mask 255.255.255.0 4.  If you are clueless
+about terminology do some research beyond this list including googling and
+surfing Wikipedia 5.  IP addressing as a subject is a two edged subject in
+that it is fundamentally simple but the details of subnetting are one of the
+most dreaded subjects by teachers when instructing on networking.
+Fortunately for your sake subnetting most likely will not come into play for
+a single home network. 6.  Once you understand the basics of IP addressing
+for your situation then you must move on to understand putting that IP
+address into a publicly reachable index that points to your machine.  This
+index is called a DNS server.  DNS servers can be specifically internal so
+not any DNS server will work.  You need to have a properly configured DNS
+server with all the right records, forwarders, and web listeners for things
+to work.  Usually the simple need is met not by doing this on your own but
+by having a third party provide DNS provisioning for you.  DYNDNS.org and
+TZO.com are a couple of many such business that can do this.  Your own ISP
+may do this and it may or may not be for additional costs (check before you
+have this service initiated). 7.  If this is getting too difficult for you,
+contact a local network savvy person for hire to get this set up for you.  I
+bet for $50 someone would be willing to do this.
+
+I am glad to provide this help to someone willing to be ambitious and take
+on a nice technical challenge such as yours.
+
+Good luck,
+
+Dale Unroe
+Microsoft Certified Professional
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Johannes Prost
+Sent: Thursday, January 12, 2006 9:06 AM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Xitami Setup
+
+ipconfig is a tool to show your ip# of your computer build in network card.
+That has nothing to do with your public ip. A bit more detailed info about
+your setup would help to make more clear answers. 1. are you using a router
+? 2. is your machine directly connected to the ADSL ( Iam assuming you have
+this kind of connection) 
+
+The more detail we get, the easier it is to find the problem.
+
+Johannes
+
+> The desired ports are open, but the IP shown by ShieldsUp! Is totally 
+> different than the IP as reported by ipconfig.  It appears to be the 
+> IP of my ISP?
+> 
+> -----Original Message-----
+> From: Francis Turner [mailto:francis.turner@gmail.com]
+> Sent: Wednesday, January 11, 2006 1:42 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Setup
+> 
+> 
+> You ought to be able to check whether it is possible to see if your 
+> ISP is blocking ports or similar by using the GRC shields up test - 
+> https://www.grc.com/x/ne.dll
+> 
+> On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > It's possible that your ISP has a NAT installed, meaning that you
+> > can't host things like web servers on a PC in your home.  It's not 
+> > uncommon.
+> >
+> > I'd look for a cheap hosting plan.  There are plenty available that
+> > will host your website.
+> >
+> > Jay
+> >
+> > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > Xitami is the first web server I have ever tried to run.  I have
+> > > just gotten a domain name through DNSexit, and want to run a small 
+> > > family web site.  I am using my home computer via an ADSL line.  I 
+> > > have set up Xitami, and installed 3Dwatch to update my IP.  
+> > > Everything works fine on yje localhost, or if I access my domain 
+> > > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > > from another computer.  I also can not access it via my computer at 
+> > > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > > anyone suggest a way to test my setup?
+> > >
+> > > Thanks,
+> > > Dwayne
+> > >
+> > > ___________________________________________________________
+> > > Sent by ePrompter, the premier email notification software. Free
+> > > download at http://www.ePrompter.com.
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Icosahedron
+> > 20 sides of fun
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From daleunroe at fuse.net  Sat Jan 14 20:37:15 2006
+From: daleunroe at fuse.net (Dale Unroe)
+Date: Sat Jan 14 20:37:21 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <000601c61916$1d89c1a0$9711fea9@net>
+Message-ID: <001001c61941$ee08a370$6310b90a@antecp4>
+
+Again go read up on the terms so this makes sense and you don't spin your
+wheels.  The term "modem" (as in DSL Modem or similarly Cable Modem) is most
+likely a router; in fact you might also refer to it as a "bridge" (in a
+looser sense but that is off topic).  The modem establishes the connection
+to your ISP and then converts it to route into your home environment.  This
+device usually will NAT the external IP into an internal IP (like
+169.254.xxx.xxx) and it may be programmed to allow you something like four
+machines to simultaneously go through it to the internet.  This means it can
+assign up to four addresses internally.  The router in this example is a
+mini DHCP server or sorts.  If so then it is routing four internal IP
+addresses through a single NAT'ed external IP address (it could also be
+using port address translation too, PAT).  The point is don't get all in a
+bunch over semantics; do your own homework and then ask some knowledgeable
+questions.
+
+Good luck,
+Dale Unroe 
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of kharzham@earthlink.net
+Sent: Saturday, January 14, 2006 9:24 AM
+To: 'Xitami Users General Discussion'
+Subject: RE: [Xitami] Xitami Setup
+
+Johannes,
+	I am not using a router, it is directly connected to the ADSL.  The
+modem is a ZyXel 645 Series.  It looks like I have to do some more research
+on this whole topic if IP addresses.
+
+Dwayne
+
+-----Original Message-----
+From: Johannes Prost [mailto:xitami@pastryworld.ca] 
+Sent: Thursday, January 12, 2006 8:06 AM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Xitami Setup
+
+
+ipconfig is a tool to show your ip# of your computer build in network card.
+That has nothing to do with your public ip. A bit more detailed info about
+your setup would help to make more clear answers. 1. are you using a router
+? 2. is your machine directly connected to the ADSL ( Iam assuming you have
+this kind of connection) 
+
+The more detail we get, the easier it is to find the problem.
+
+Johannes
+
+> The desired ports are open, but the IP shown by ShieldsUp! Is totally 
+> different than the IP as reported by ipconfig.  It appears to be the 
+> IP of my ISP?
+> 
+> -----Original Message-----
+> From: Francis Turner [mailto:francis.turner@gmail.com]
+> Sent: Wednesday, January 11, 2006 1:42 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Setup
+> 
+> 
+> You ought to be able to check whether it is possible to see if your 
+> ISP is blocking ports or similar by using the GRC shields up test - 
+> https://www.grc.com/x/ne.dll
+> 
+> On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > It's possible that your ISP has a NAT installed, meaning that you
+> > can't host things like web servers on a PC in your home.  It's not 
+> > uncommon.
+> >
+> > I'd look for a cheap hosting plan.  There are plenty available that
+> > will host your website.
+> >
+> > Jay
+> >
+> > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > Xitami is the first web server I have ever tried to run.  I have
+> > > just gotten a domain name through DNSexit, and want to run a small 
+> > > family web site.  I am using my home computer via an ADSL line.  I 
+> > > have set up Xitami, and installed 3Dwatch to update my IP.  
+> > > Everything works fine on yje localhost, or if I access my domain 
+> > > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > > from another computer.  I also can not access it via my computer at 
+> > > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > > anyone suggest a way to test my setup?
+> > >
+> > > Thanks,
+> > > Dwayne
+> > >
+> > > ___________________________________________________________
+> > > Sent by ePrompter, the premier email notification software. Free
+> > > download at http://www.ePrompter.com.
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Icosahedron
+> > 20 sides of fun
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From admin at mrjdesign.net  Sat Jan 14 22:02:40 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sat Jan 14 22:02:49 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <000601c61916$1d89c1a0$9711fea9@net>
+References: <43C60E01.26914.19051B@localhost>
+	<000601c61916$1d89c1a0$9711fea9@net>
+Message-ID: <6.2.0.14.0.20060114210041.01de7e78@mail.mrjdesign.net>
+
+
+>Johannes,
+>         I am not using a router, it is directly connected to the ADSL.  The
+>modem is a ZyXel 645 Series.  It looks like I have to do some more research
+>on this whole topic if IP addresses.
+>
+>Dwayne
+
+This is a problem.
+You cannot specify to the ADSL modem how it should react or what IP it has 
+or receives from your IP.
+If you have specified to receive a static IP from your ISP then use the IP 
+you where assigned.
+
+If not, then I am afraid you are on a static IP and that is only displayed 
+to your "router" part of the ADSL modem and not your PC.
+
+What you would have to do is treat it as a dynamic IP in this case and try 
+to hook up with some form of free DynIP service to get the site to show up 
+properly.
+
+
+
+
+
+From admin at mrjdesign.net  Sat Jan 14 23:23:01 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sat Jan 14 23:23:14 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <6.2.0.14.0.20060114210041.01de7e78@mail.mrjdesign.net>
+References: <43C60E01.26914.19051B@localhost>
+	<000601c61916$1d89c1a0$9711fea9@net>
+	<6.2.0.14.0.20060114210041.01de7e78@mail.mrjdesign.net>
+Message-ID: <6.2.0.14.0.20060114222133.01df5cd8@mail.mrjdesign.net>
+
+
+>This is a problem.
+>You cannot specify to the ADSL modem how it should react or what IP it has 
+>or receives from your IP.
+>If you have specified to receive a static IP from your ISP then use the IP 
+>you where assigned.
+>
+>If not, then I am afraid you are on a static IP and that is only displayed 
+>to your "router" part of the ADSL modem and not your PC.
+>
+>What you would have to do is treat it as a dynamic IP in this case and try 
+>to hook up with some form of free DynIP service to get the site to show up 
+>properly.
+
+Sorry I shouldn't type this stuff after having been up for three days.
+What I meant is, you have to treat this as if you're on a dynamic IP (not 
+static) and as such you cannot set anything except rely on a DynIP service.
+
+Do a google search for DynIP and read up on that option.
+
+M. 
+
+
+
+
+From kharzham at earthlink.net  Sun Jan 15 18:34:32 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Sun Jan 15 18:31:07 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <001001c61941$ee08a370$6310b90a@antecp4>
+Message-ID: <000501c619f9$f2f6f5e0$4ba0fea9@net>
+
+Dale,
+>...and you don't spin your wheels.
+Natural state of affairs for me!  I learn by doing, and enjoy the research
+and discovery.
+
+	I did discover that the ADSL "modem" is a router and has NAT
+capability.  I'm starting to learn this stuff, I think.  I am using an IP
+updater, 3DWatch.  It seems to work well so I'll be registering it soon,
+unless I find a better one.  I set up a static IP in XP HE and forwarded
+ports 80 and 21 in the NAT to this IP.  I had already opened ports 80 and 21
+in my firewall, and Xitami seems to work perfectly now. Once I learned what
+I needed to learn I found a site, www.portforward.com, that was able to
+supply some of the details.  Thank you, and thanks to Johannes, Brian, and
+the others as well.  You all got me headed in the right direction.  I know I
+am by no means an expert, so more reading is still needed.  I just purchased
+a 400+ page book on networking, this may help.
+
+      I also have a few other items I want to work out; currently I am
+attempting to set up PERL, get RealVNC working, and set up FTP in the near
+future.  I'll keep the site updated on my progress, or lack thereof. 8^)
+RealVNC is something I am just checking out, it may have uses for some of us
+who deploy for long periods.
+
+	I just downloaded and installed PXPerl (is it an acronym, PERL, or
+is Perl correct?), and am going to attempt to set up a guest book using CGI.
+Not very high aspirations, to be sure, but a start.
+
+Thanks again for all the help,
+Dwayne
+
+-----Original Message-----
+From: Dale Unroe [mailto:daleunroe@fuse.net] 
+Sent: Saturday, January 14, 2006 1:37 PM
+To: 'Xitami Users General Discussion'
+Subject: RE: [Xitami] Xitami Setup
+
+
+Again go read up on the terms so this makes sense and you don't spin your
+wheels.  The term "modem" (as in DSL Modem or similarly Cable Modem) is most
+likely a router; in fact you might also refer to it as a "bridge" (in a
+looser sense but that is off topic).  The modem establishes the connection
+to your ISP and then converts it to route into your home environment.  This
+device usually will NAT the external IP into an internal IP (like
+169.254.xxx.xxx) and it may be programmed to allow you something like four
+machines to simultaneously go through it to the internet.  This means it can
+assign up to four addresses internally.  The router in this example is a
+mini DHCP server or sorts.  If so then it is routing four internal IP
+addresses through a single NAT'ed external IP address (it could also be
+using port address translation too, PAT).  The point is don't get all in a
+bunch over semantics; do your own homework and then ask some knowledgeable
+questions.
+
+Good luck,
+Dale Unroe 
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of kharzham@earthlink.net
+Sent: Saturday, January 14, 2006 9:24 AM
+To: 'Xitami Users General Discussion'
+Subject: RE: [Xitami] Xitami Setup
+
+Johannes,
+	I am not using a router, it is directly connected to the ADSL.  The
+modem is a ZyXel 645 Series.  It looks like I have to do some more research
+on this whole topic if IP addresses.
+
+Dwayne
+
+-----Original Message-----
+From: Johannes Prost [mailto:xitami@pastryworld.ca] 
+Sent: Thursday, January 12, 2006 8:06 AM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Xitami Setup
+
+
+ipconfig is a tool to show your ip# of your computer build in network card.
+That has nothing to do with your public ip. A bit more detailed info about
+your setup would help to make more clear answers. 1. are you using a router
+? 2. is your machine directly connected to the ADSL ( Iam assuming you have
+this kind of connection) 
+
+The more detail we get, the easier it is to find the problem.
+
+Johannes
+
+> The desired ports are open, but the IP shown by ShieldsUp! Is totally
+> different than the IP as reported by ipconfig.  It appears to be the 
+> IP of my ISP?
+> 
+> -----Original Message-----
+> From: Francis Turner [mailto:francis.turner@gmail.com]
+> Sent: Wednesday, January 11, 2006 1:42 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Setup
+> 
+> 
+> You ought to be able to check whether it is possible to see if your
+> ISP is blocking ports or similar by using the GRC shields up test - 
+> https://www.grc.com/x/ne.dll
+> 
+> On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > It's possible that your ISP has a NAT installed, meaning that you 
+> > can't host things like web servers on a PC in your home.  It's not 
+> > uncommon.
+> >
+> > I'd look for a cheap hosting plan.  There are plenty available that 
+> > will host your website.
+> >
+> > Jay
+> >
+> > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > Xitami is the first web server I have ever tried to run.  I have 
+> > > just gotten a domain name through DNSexit, and want to run a small 
+> > > family web site.  I am using my home computer via an ADSL line.  I 
+> > > have set up Xitami, and installed 3Dwatch to update my IP.
+> > > Everything works fine on yje localhost, or if I access my domain 
+> > > from my computer (www.hopkinsfamily.com), but no one can access it 
+> > > from another computer.  I also can not access it via my computer at 
+> > > work.  I believe I have opened the proper ports in my firewall.  Can 
+> > > anyone suggest a way to test my setup?
+> > >
+> > > Thanks,
+> > > Dwayne
+> > >
+> > > ___________________________________________________________
+> > > Sent by ePrompter, the premier email notification software. Free 
+> > > download at http://www.ePrompter.com.
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > Icosahedron
+> > 20 sides of fun
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> 
+> 
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+> 
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Johannes
+
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From admin at mrjdesign.net  Sun Jan 15 21:05:06 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Jan 16 08:46:02 2006
+Subject: [Xitami] Xitami Setup
+In-Reply-To: <000501c619f9$f2f6f5e0$4ba0fea9@net>
+References: <001001c61941$ee08a370$6310b90a@antecp4>
+	<000501c619f9$f2f6f5e0$4ba0fea9@net>
+Message-ID: <6.2.0.14.0.20060115200040.01e02430@mail.mrjdesign.net>
+
+
+As for Perl just download the usual Win package and run the installer.
+
+As for RealVNC, dowload and install the full package only on the server and 
+use the viewer only on your work station to maintain some kind of security.
+Open port 5800 and 5900 for your router to allow RealVNC access anywhere.
+
+Also note, if you try to manage the Xitami from RealVNC, you will probably 
+need to add a short cut to the folder for Xitami and one for your web 
+directory paths if you use the virtual hosts in a separate folder. You will 
+also have to right click the folders and other shortcuts and select OPEN 
+rather than double click it when you use the viewer, however it seems to 
+work ok in the web viewer version.
+
+To log into and admin your Xitami you can then disable your web admin to 
+protect xitami better, and also edit the defaults.cfg file manually.
+
+A very helpful hint to use in all this is to add shortcuts to notepad in 
+the strategical places like the xitami root foler and your cfg files path.
+Then you can drag and drop files there to edit rather than assign generic 
+extension tags to allow windows to control each file extension.
+
+Further, to open the web viewer of RealVNC in this, navigate to your IP 
+address ###.###.###.###:5800 to log in and you're set.
+
+
+
+At 17:34 15/01/2006, you wrote:
+>Dale,
+> >...and you don't spin your wheels.
+>Natural state of affairs for me!  I learn by doing, and enjoy the research
+>and discovery.
+>
+>         I did discover that the ADSL "modem" is a router and has NAT
+>capability.  I'm starting to learn this stuff, I think.  I am using an IP
+>updater, 3DWatch.  It seems to work well so I'll be registering it soon,
+>unless I find a better one.  I set up a static IP in XP HE and forwarded
+>ports 80 and 21 in the NAT to this IP.  I had already opened ports 80 and 21
+>in my firewall, and Xitami seems to work perfectly now. Once I learned what
+>I needed to learn I found a site, www.portforward.com, that was able to
+>supply some of the details.  Thank you, and thanks to Johannes, Brian, and
+>the others as well.  You all got me headed in the right direction.  I know I
+>am by no means an expert, so more reading is still needed.  I just purchased
+>a 400+ page book on networking, this may help.
+>
+>       I also have a few other items I want to work out; currently I am
+>attempting to set up PERL, get RealVNC working, and set up FTP in the near
+>future.  I'll keep the site updated on my progress, or lack thereof. 8^)
+>RealVNC is something I am just checking out, it may have uses for some of us
+>who deploy for long periods.
+>
+>         I just downloaded and installed PXPerl (is it an acronym, PERL, or
+>is Perl correct?), and am going to attempt to set up a guest book using CGI.
+>Not very high aspirations, to be sure, but a start.
+>
+>Thanks again for all the help,
+>Dwayne
+>
+>-----Original Message-----
+>From: Dale Unroe [mailto:daleunroe@fuse.net]
+>Sent: Saturday, January 14, 2006 1:37 PM
+>To: 'Xitami Users General Discussion'
+>Subject: RE: [Xitami] Xitami Setup
+>
+>
+>Again go read up on the terms so this makes sense and you don't spin your
+>wheels.  The term "modem" (as in DSL Modem or similarly Cable Modem) is most
+>likely a router; in fact you might also refer to it as a "bridge" (in a
+>looser sense but that is off topic).  The modem establishes the connection
+>to your ISP and then converts it to route into your home environment.  This
+>device usually will NAT the external IP into an internal IP (like
+>169.254.xxx.xxx) and it may be programmed to allow you something like four
+>machines to simultaneously go through it to the internet.  This means it can
+>assign up to four addresses internally.  The router in this example is a
+>mini DHCP server or sorts.  If so then it is routing four internal IP
+>addresses through a single NAT'ed external IP address (it could also be
+>using port address translation too, PAT).  The point is don't get all in a
+>bunch over semantics; do your own homework and then ask some knowledgeable
+>questions.
+>
+>Good luck,
+>Dale Unroe
+>
+>-----Original Message-----
+>From: xitami-bounces@lists.xitami.org
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of kharzham@earthlink.net
+>Sent: Saturday, January 14, 2006 9:24 AM
+>To: 'Xitami Users General Discussion'
+>Subject: RE: [Xitami] Xitami Setup
+>
+>Johannes,
+>         I am not using a router, it is directly connected to the ADSL.  The
+>modem is a ZyXel 645 Series.  It looks like I have to do some more research
+>on this whole topic if IP addresses.
+>
+>Dwayne
+>
+>-----Original Message-----
+>From: Johannes Prost [mailto:xitami@pastryworld.ca]
+>Sent: Thursday, January 12, 2006 8:06 AM
+>To: Xitami Users General Discussion
+>Subject: RE: [Xitami] Xitami Setup
+>
+>
+>ipconfig is a tool to show your ip# of your computer build in network card.
+>That has nothing to do with your public ip. A bit more detailed info about
+>your setup would help to make more clear answers. 1. are you using a router
+>? 2. is your machine directly connected to the ADSL ( Iam assuming you have
+>this kind of connection)
+>
+>The more detail we get, the easier it is to find the problem.
+>
+>Johannes
+>
+> > The desired ports are open, but the IP shown by ShieldsUp! Is totally
+> > different than the IP as reported by ipconfig.  It appears to be the
+> > IP of my ISP?
+> >
+> > -----Original Message-----
+> > From: Francis Turner [mailto:francis.turner@gmail.com]
+> > Sent: Wednesday, January 11, 2006 1:42 AM
+> > To: Xitami Users General Discussion
+> > Subject: Re: [Xitami] Xitami Setup
+> >
+> >
+> > You ought to be able to check whether it is possible to see if your
+> > ISP is blocking ports or similar by using the GRC shields up test -
+> > https://www.grc.com/x/ne.dll
+> >
+> > On 1/11/06, Icosahedron <icosahedron@gmail.com> wrote:
+> > > It's possible that your ISP has a NAT installed, meaning that you
+> > > can't host things like web servers on a PC in your home.  It's not
+> > > uncommon.
+> > >
+> > > I'd look for a cheap hosting plan.  There are plenty available that
+> > > will host your website.
+> > >
+> > > Jay
+> > >
+> > > On 1/10/06, kharzham@earthlink.net <kharzham@earthlink.net> wrote:
+> > > > Xitami is the first web server I have ever tried to run.  I have
+> > > > just gotten a domain name through DNSexit, and want to run a small
+> > > > family web site.  I am using my home computer via an ADSL line.  I
+> > > > have set up Xitami, and installed 3Dwatch to update my IP.
+> > > > Everything works fine on yje localhost, or if I access my domain
+> > > > from my computer (www.hopkinsfamily.com), but no one can access it
+> > > > from another computer.  I also can not access it via my computer at
+> > > > work.  I believe I have opened the proper ports in my firewall.  Can
+> > > > anyone suggest a way to test my setup?
+> > > >
+> > > > Thanks,
+> > > > Dwayne
+> > > >
+> > > > ___________________________________________________________
+> > > > Sent by ePrompter, the premier email notification software. Free
+> > > > download at http://www.ePrompter.com.
+> > > >
+> > > >
+> > > > --
+> > > > Xitami Users Mailing List -- For Xitami support
+> > > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > > >
+> > >
+> > >
+> > > --
+> > > Icosahedron
+> > > 20 sides of fun
+> > >
+> > >
+> > > --
+> > > Xitami Users Mailing List -- For Xitami support
+> > > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> > >
+> >
+> >
+> > --
+> > http://www.di2.nu/blog.htm
+> > Faber's Fourth Law:
+> >   Necessity is the mother of strange bedfellows.
+> >
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>Johannes
+>
+>
+>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060115/3db215d7/attachment.htm
+From kiddre at ix.netcom.com  Sat Jan 21 00:24:25 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 21 00:24:33 2006
+Subject: [Xitami] Assertion Failed!
+Message-ID: <FAEMIFKOBMPMNNMHDPGIGEIDCCAA.kiddre@ix.netcom.com>
+
+I receive an Assertion failed! Module
+c:\iMatic\work\products\xitami-25\sfl\sflfile.c, line 2188 error when I add
+these lines to defaults.cfg:
+
+[Cgi]
+    stdio = 0
+    form-fields = 0
+
+These lines cause no problem:
+
+[Cgi]
+    stdio = 1
+    form-fields = 1
+
+What am I doing wrong?
+
+Thanks
+
+Ronald Kidd
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060120/048ed656/attachment.html
+From kiddre at ix.netcom.com  Sat Jan 21 01:34:35 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 21 01:34:46 2006
+Subject: [Xitami] Assertion failed! (continued)
+Message-ID: <FAEMIFKOBMPMNNMHDPGIMEIECCAA.kiddre@ix.netcom.com>
+
+Apparently it is failing in this routine:
+
+/*  ---------------------------------------------------------------------[<]
+-
+    Function: get_file_size
+
+    Synopsis: Returns the size, in bytes, of the specified file or
+    directory.  The size of a directory is not a portable concept.  If there
+    is an error, returns -1.
+    ---------------------------------------------------------------------[>]
+-*/
+
+long
+get_file_size (
+    const char *filename)
+{
+    struct stat
+        stat_buf;
+
+    ASSERT (filename);
+
+#   if (defined (GATES_FILESYSTEM))
+    if (system_devicename (filename))
+        return (-1);                    /*  Not allowed on device names
+*/
+#   endif
+    if (stat ((char *) filename, &stat_buf) == 0)
+        return ((long) stat_buf.st_size);
+    else
+        return (-1);
+}
+
+I?m trying to CGI_STDIN and CGI_STDOUT to read FORM type=?post? controls and
+to write the HTML file I want to return to the client.  I?m using Quercus
+REXX for the cgi program.  I have traced the execution and found that the
+program runs to completion after completing the output file, then the
+Assertion failed message appears.
+
+Thanks again,
+Ronald Kidd
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060120/20074553/attachment.htm
+From kiddre at ix.netcom.com  Sat Jan 21 09:29:47 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 21 09:29:56 2006
+Subject: [Xitami] Assertion failed! (continued)
+Message-ID: <FAEMIFKOBMPMNNMHDPGIKEIGCCAA.kiddre@ix.netcom.com>
+
+My Ignorance about Xitami just birthed a wild thought.  Do I have to have C
+runtime libraries installed to use the Cgi:stdio=0 feature?
+
+I?m running Windows/XP Home Edition, I had a similar/same problem when I
+tried this on Windows/98.
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060121/12e7ade8/attachment.html
+From ph at imatix.com  Sat Jan 21 09:59:59 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Sat Jan 21 10:00:07 2006
+Subject: [Xitami] Assertion failed! (continued)
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGIKEIGCCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGIKEIGCCAA.kiddre@ix.netcom.com>
+Message-ID: <5821ea240601210059w333db9eal91faf2924f0dd65e@mail.gmail.com>
+
+On 1/21/06, Ronald Eugene Kidd <kiddre@ix.netcom.com> wrote:
+
+> My Ignorance about Xitami just birthed a wild thought.  Do I have to have C
+> runtime libraries installed to use the Cgi:stdio=0 feature?
+
+No, Xitami runs without any external libraries.
+
+Thanks for the debug report.
+
+-Pieter Hintjens
+iMatix Corporation
+
+From kiddre at ix.netcom.com  Sat Jan 21 11:03:35 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 21 11:03:36 2006
+Subject: [Xitami] Assertion failed! (continued)
+In-Reply-To: <5821ea240601210059w333db9eal91faf2924f0dd65e@mail.gmail.com>
+Message-ID: <FAEMIFKOBMPMNNMHDPGICEIICCAA.kiddre@ix.netcom.com>
+
+Thank you very much! This really has me pulling my hair out!
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org]On Behalf Of Pieter Hintjens
+Sent: Saturday, January 21, 2006 1:00 AM
+To: kiddre@ix.netcom.com; Xitami Users General Discussion
+Subject: Re: [Xitami] Assertion failed! (continued)
+
+On 1/21/06, Ronald Eugene Kidd <kiddre@ix.netcom.com> wrote:
+
+> My Ignorance about Xitami just birthed a wild thought.  Do I have to have
+C
+> runtime libraries installed to use the Cgi:stdio=0 feature?
+
+No, Xitami runs without any external libraries.
+
+Thanks for the debug report.
+
+-Pieter Hintjens
+iMatix Corporation
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From kiddre at ix.netcom.com  Sat Jan 21 19:45:58 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 21 19:46:03 2006
+Subject: [Xitami] Assertion failed (continued)
+Message-ID: <FAEMIFKOBMPMNNMHDPGIIEIKCCAA.kiddre@ix.netcom.com>
+
+
+Question:
+
+
+Do I have to customize (re-install) XITAMI on my system before I can use
+this feature.
+
+
+The reason that I suspect I may have to customize XITAMI:
+
+
+1.    The path c:\imatix\... given in the error message doesn't exist on my
+system:
+
+o        c:\imatix\work\products\xitami-25\sfl\
+
+
+2.    I scanned the XITAMI source code and found c:\imatix in all the
+boomake.bat files.
+
+Example:
+:- Set environment variables to point to install location
+:- Start by using final IBASE, then handle local -install path
+set self=%0
+set OLDPATH=%PATH%
+set OLDPERLLIB=%PERLLIB%
+set _IBASE=%IBASE%
+if "%_IBASE%"=="" set _IBASE=c:\imatix
+set INCDIR=%_IBASE%\xitami-25\include
+set LIBDIR=%_IBASE%\xitami-25\lib
+set PATH=.;%_IBASE%\xitami-25\bin;%PATH%
+set PERLLIB=.;%_IBASE%\xitami-25\bin;%PERLLIB%
+set _LOCAL=0
+
+3.    It appears that I may need to update parts of XITAMI to use the actual
+path names on my system
+
+
+
+If this assumption is correct, where can I find instructions that would walk
+me through the process?
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060121/f3ee3ae8/attachment.htm
+From ph at imatix.com  Sat Jan 21 19:49:45 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Sat Jan 21 19:49:48 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGIIEIKCCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGIIEIKCCAA.kiddre@ix.netcom.com>
+Message-ID: <5821ea240601211049q5782704fof34ed3ddb27b1022@mail.gmail.com>
+
+On 1/21/06, Ronald Eugene Kidd <kiddre@ix.netcom.com> wrote:
+
+> Do I have to customize (re-install) XITAMI on my system before I can use
+> this feature.
+
+No, you can use the executables provided for Windows.
+
+-Pieter
+
+From rolinger1 at hotmail.com  Sat Jan 21 20:20:47 2006
+From: rolinger1 at hotmail.com (RPO)
+Date: Sat Jan 21 20:19:44 2006
+Subject: [Xitami] Assertion failed (continued)
+References: <FAEMIFKOBMPMNNMHDPGIIEIKCCAA.kiddre@ix.netcom.com>
+	<5821ea240601211049q5782704fof34ed3ddb27b1022@mail.gmail.com>
+Message-ID: <BAY105-DAV14E06AF51AD7DA7194341EF81E0@phx.gbl>
+
+I doubt this is the same issue but I will lend my comments none the less.  A
+few months back I ran into a problem with CGI STDIN that wouldn't allow me
+to retrieve uploaded files one buffer at a time - Xitami held the whole
+uploaded file in memory before releasing it to the hard drive.  I was
+writing a Progress Meter script to show users the progress of their uploaded
+files so they wouldn't think anything hung or timed out.  In order to do
+this you need to write the input buffer to a file, then every two seconds
+(or how ever often you wanted) read the size of that file , a second script
+would run using an html refresh and check the progress/size of that file and
+increment the progress bar.
+
+Xitami held the entire STDIN buffer before writing to the file...so with a
+1000K file to be uploaded, the local file size literally went from 0 to
+1000K (when done) even though the buffer was reading 1K at a time.  The
+progress meter would start and show the file size as 0....and stay at 0,
+then 20 seconds later it suddenly flashed 1000K and showed the file upload
+as finished.    I was always able to retrieve the total file size from the
+CGI $ENV{CONTENT_LENGTH}, but the buffer simply wouldn't write to the local
+file until the entire file/files had completed their upload.  I even tried
+to reading the TEMP files that are natively created via the CGI and
+monitored their progress during the file uploads.  The same thing occurred.
+
+I installed Apache, ran the identical upload and progress meter scripts and
+it worked perfectly....I saw the same 1000K file incrementing in batches of
+75k per second via the progress meter.
+
+So, as mentioned before, I doubt this issue is the same but the fact that
+you were working with CGI STDIN and STDOUT and were having (buffer?)
+problems I thought I would bring this up.  Unfortunately for me, in order to
+have this simple little progress meter for my users I have to have Apache
+installed and run my upload scripts on the Apache server...I am still
+sticking with Xitami but at the moment thats all I am using the Apache for -
+a progress meter!
+
+-Russel
+
+----- Original Message ----- 
+From: "Pieter Hintjens" <ph@imatix.com>
+To: <kiddre@ix.netcom.com>; "Xitami Users General Discussion"
+<xitami@lists.xitami.org>
+Sent: Saturday, January 21, 2006 10:49 AM
+Subject: Re: [Xitami] Assertion failed (continued)
+
+
+On 1/21/06, Ronald Eugene Kidd <kiddre@ix.netcom.com> wrote:
+
+> Do I have to customize (re-install) XITAMI on my system before I can use
+> this feature.
+
+No, you can use the executables provided for Windows.
+
+-Pieter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From kiddre at ix.netcom.com  Sat Jan 21 20:37:57 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 21 20:38:02 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <BAY105-DAV14E06AF51AD7DA7194341EF81E0@phx.gbl>
+Message-ID: <FAEMIFKOBMPMNNMHDPGIKEILCCAA.kiddre@ix.netcom.com>
+
+Russel, thank you for the information.
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org]On Behalf Of RPO
+Sent: Saturday, January 21, 2006 11:21 AM
+To: Xitami Users General Discussion; kiddre@ix.netcom.com
+Subject: Re: [Xitami] Assertion failed (continued)
+
+I doubt this is the same issue but I will lend my comments none the less.  A
+few months back I ran into a problem with CGI STDIN that wouldn't allow me
+to retrieve uploaded files one buffer at a time - Xitami held the whole
+uploaded file in memory before releasing it to the hard drive.  I was
+writing a Progress Meter script to show users the progress of their uploaded
+files so they wouldn't think anything hung or timed out.  In order to do
+this you need to write the input buffer to a file, then every two seconds
+(or how ever often you wanted) read the size of that file , a second script
+would run using an html refresh and check the progress/size of that file and
+increment the progress bar.
+
+Xitami held the entire STDIN buffer before writing to the file...so with a
+1000K file to be uploaded, the local file size literally went from 0 to
+1000K (when done) even though the buffer was reading 1K at a time.  The
+progress meter would start and show the file size as 0....and stay at 0,
+then 20 seconds later it suddenly flashed 1000K and showed the file upload
+as finished.    I was always able to retrieve the total file size from the
+CGI $ENV{CONTENT_LENGTH}, but the buffer simply wouldn't write to the local
+file until the entire file/files had completed their upload.  I even tried
+to reading the TEMP files that are natively created via the CGI and
+monitored their progress during the file uploads.  The same thing occurred.
+
+I installed Apache, ran the identical upload and progress meter scripts and
+it worked perfectly....I saw the same 1000K file incrementing in batches of
+75k per second via the progress meter.
+
+So, as mentioned before, I doubt this issue is the same but the fact that
+you were working with CGI STDIN and STDOUT and were having (buffer?)
+problems I thought I would bring this up.  Unfortunately for me, in order to
+have this simple little progress meter for my users I have to have Apache
+installed and run my upload scripts on the Apache server...I am still
+sticking with Xitami but at the moment thats all I am using the Apache for -
+a progress meter!
+
+-Russel
+
+----- Original Message -----
+From: "Pieter Hintjens" <ph@imatix.com>
+To: <kiddre@ix.netcom.com>; "Xitami Users General Discussion"
+<xitami@lists.xitami.org>
+Sent: Saturday, January 21, 2006 10:49 AM
+Subject: Re: [Xitami] Assertion failed (continued)
+
+
+On 1/21/06, Ronald Eugene Kidd <kiddre@ix.netcom.com> wrote:
+
+> Do I have to customize (re-install) XITAMI on my system before I can use
+> this feature.
+
+No, you can use the executables provided for Windows.
+
+-Pieter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From kiddre at ix.netcom.com  Sat Jan 21 11:02:31 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sun Jan 22 08:23:52 2006
+Subject: [Xitami] Assertion failed! (continued)
+Message-ID: <FAEMIFKOBMPMNNMHDPGIMEIHCCAA.kiddre@ix.netcom.com>
+
+I am a complete novice with Xitami and I don't even know what to include
+when I ask for help. I was afraid of inputting too much information.
+
+Here's what I have:
+
+Quercus REXX program:
+
+/*! c:\WINREXX\PREXXW.EXE quest.rex */
+
+/*Trace ?R;*/
+
+FORMfile=DOSENV(CGI_STDIN);
+HTMLfile=DOSENV(CGI_STDOUT);
+XITAMIO=DOSENV(XITAMIO);
+RC=LINEOUT(HTMLfile,"CGI_STDIN="FORMfile);
+RC=LINEOUT(HTMLfile,"CGI_STDOUT="HTMLfile);
+RC=LINEOUT(HTMLfile,"temp-dir="XITAMIO);
+inLine=LINEIN(FORMfile);
+RC=LINEOUT(HTMLfile,"FORM controls="inLine);
+
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+RC=LINEOUT(HTMLfile,"Line1");
+
+RC=LINEOUT(FORMfile);
+RC=LINEOUT(HTMLfile);
+RC=REXXCONSOLE("C");
+RC=REXXSOURCEWINDOW("C");
+
+Exit (0);
+
+
+XITAMI Output:
+
+C:\Xitami\xitami-25\app\temp1\pipe0001.cgi contains:
+OTH1=&OTH2=&GAME=&DRAM=&BAGG=&REAL=
+
+
+C:\Xitami\xitami-25\app\temp1\pipe0001.cgo contains:
+CGI_STDIN=C:\Xitami\xitami-25\app\temp1\pipe0001.cgi
+CGI_STDOUT=C:\Xitami\xitami-25\app\temp1\pipe0001.cgo
+temp-dir=C:\Xitami\xitami-25\app\temp1
+FORM controls=OTH1=&OTH2=&GAME=&DRAM=&BAGG=&REAL=
+Line1
+Line1
+Line1
+Line1
+Line1
+Line1
+Line1
+Line1
+Line1
+Line1
+
+Defaults.cfg
+#*END
+
+[Security]
+    Filename = "defaults.aut"
+
+[Server]
+    Autostart = "1"
+    Recover = "1"
+    temp-dir=XITAMIO
+    debug=1
+    debug-dir=./debug1/
+
+[Cgi]
+    stdio=0
+    msdos-style=0
+    form-fields=0
+    timeout=0
+    debug=0
+
+
+header.log
+HTTP/1.1 304 Not modified
+Server: Xitami
+Date: Sat, 21 Jan 2006 09:51:57 GMT
+Content-length: 0
+Content-type: text/html
+
+HTTP/1.1 304 Not modified
+Server: Xitami
+Date: Sat, 21 Jan 2006 09:51:57 GMT
+Content-length: 0
+Content-type: text/html
+
+HTTP/1.1 304 Not modified
+Server: Xitami
+Date: Sat, 21 Jan 2006 09:51:57 GMT
+Content-length: 0
+Content-type: text/html
+
+
+request.log
+GET /m2.html HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg,
+application/x-shockwave-flash, application/vnd.ms-powerpoint,
+application/vnd.ms-excel, application/msword, */*
+Accept-Language: en-us
+---------------: ----- -------
+If-Modified-Since: Fri, 20 Jan 2006 13:44:07 GMT
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR
+1.1.4322)
+Host: bplanet.ipupdater.com
+Connection: Keep-Alive
+
+GET /images/skeptical.jpg HTTP/1.1
+Accept: */*
+Referer: http://bplanet.ipupdater.com/m2.html
+Accept-Language: en-us
+---------------: ----- -------
+If-Modified-Since: Wed, 18 Jan 2006 00:03:29 GMT
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR
+1.1.4322)
+Host: bplanet.ipupdater.com
+Connection: Keep-Alive
+
+GET /images/globe.gif HTTP/1.1
+Accept: */*
+Referer: http://bplanet.ipupdater.com/m2.html
+Accept-Language: en-us
+---------------: ----- -------
+If-Modified-Since: Wed, 18 Jan 2006 00:23:39 GMT
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR
+1.1.4322)
+Host: bplanet.ipupdater.com
+Connection: Keep-Alive
+
+POST /cgi-bin/quest.rex HTTP/1.1
+Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg,
+application/x-shockwave-flash, application/vnd.ms-powerpoint,
+application/vnd.ms-excel, application/msword, */*
+Referer: http://bplanet.ipupdater.com/m2.html
+Accept-Language: en-us
+Content-Type: application/x-www-form-urlencoded
+---------------: ----- -------
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR
+1.1.4322)
+Host: bplanet.ipupdater.com
+Content-Length: 35
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+debug.log
+
+2006/01/21  1:51:40: Loading VH data for base host
+2006/01/21  1:51:40: - loading config data from basehost.cfg
+2006/01/21  1:51:40:  - rootdir=webpages, cgi-bin=cgi-bin
+2006/01/21  1:51:40: - loading password data from: defaults.aut
+2006/01/21  1:51:57: Looking for VH using Host value: bplanet.ipupdater.com
+2006/01/21  1:51:57:  - looking for VH using IP address: 192.168.2.20
+2006/01/21  1:51:57: - using default virtual host values
+2006/01/21  1:51:57: Resolving URL request: /m2.html
+2006/01/21  1:51:57:  - URL refers to a normal HTML file
+2006/01/21  1:51:57: - request refers to a normal readable file
+2006/01/21  1:51:57: Looking for VH using Host value: bplanet.ipupdater.com
+2006/01/21  1:51:57:  - looking for VH using IP address: 192.168.2.20
+2006/01/21  1:51:57: - using default virtual host values
+2006/01/21  1:51:57: Resolving URL request: /images/skeptical.jpg
+2006/01/21  1:51:57:  - URL refers to a normal HTML file
+2006/01/21  1:51:57: - request refers to a normal readable file
+2006/01/21  1:51:57: Looking for VH using Host value: bplanet.ipupdater.com
+2006/01/21  1:51:57:  - looking for VH using IP address: 192.168.2.20
+2006/01/21  1:51:57: - using default virtual host values
+2006/01/21  1:51:57: Resolving URL request: /images/globe.gif
+2006/01/21  1:51:57:  - URL refers to a normal HTML file
+2006/01/21  1:51:57: - request refers to a normal readable file
+2006/01/21  1:52:05: Looking for VH using Host value: bplanet.ipupdater.com
+2006/01/21  1:52:05:  - looking for VH using IP address: 192.168.2.20
+2006/01/21  1:52:05: - using default virtual host values
+2006/01/21  1:52:05: Resolving URL request: /cgi-bin/quest.rex
+2006/01/21  1:52:05:  - URL is refers to a CGI
+2006/01/21  1:52:05: - CGI request refers to an executable file
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060121/20d97abf/attachment.html
+From edwardt at eircom.net  Sun Jan 22 16:29:16 2006
+From: edwardt at eircom.net (Niall Galway)
+Date: Sun Jan 22 16:30:15 2006
+Subject: [Xitami] No. of Connections
+Message-ID: <000501c61f68$9b92d930$1201a8c0@niallpc>
+
+Xitami will only allow 3 connections at once, how do increase the number of 
+allowed connections?
+
+Thanks
+
+NG 
+
+
+From washuu_de at yahoo.com  Mon Jan 23 13:35:37 2006
+From: washuu_de at yahoo.com (washuu)
+Date: Mon Jan 23 13:35:59 2006
+Subject: [Xitami] No. of Connections
+References: <000501c61f68$9b92d930$1201a8c0@niallpc>
+Message-ID: <076901c62019$83ef3100$a175f353@mine.nu>
+
+
+----- Original Message -----
+From: "Niall Galway" <edwardt@eircom.net>
+To: <xitami@lists.xitami.org>
+Sent: Sunday, January 22, 2006 4:29 PM
+Subject: [Xitami] No. of Connections
+
+
+> Xitami will only allow 3 connections at once, how do increase the number
+of
+> allowed connections?
+>
+> Thanks
+>
+> NG
+>
+>
+>From the helpfile http://127.0.0.1/xitami/index4.htm#config_server
+
+limit
+Specifies the maximum number of concurrent HTTP connections. On systems that
+can handle lots of open sockets (e.g. Unix, OS/2, WinNT, Win98), you may
+want to set this high. Xitami does not impose any fixed limit. If you set
+this value to 0, it means 'no limit'.
+Default: 0.
+
+my entry in ......\app\xitami.cfg is
+
+    limit=0
+
+Hope that helped
+
+    Andy
+
+
+
+From edwardt at eircom.net  Mon Jan 23 12:37:26 2006
+From: edwardt at eircom.net (Niall Galway)
+Date: Mon Jan 23 14:05:05 2006
+Subject: [Xitami] No. of Connections
+References: <000501c61f68$9b92d930$1201a8c0@niallpc>
+	<076901c62019$83ef3100$a175f353@mine.nu>
+Message-ID: <000001c62011$eb455440$1201a8c0@niallpc>
+
+thank you
+
+NG
+----- Original Message ----- 
+From: "washuu" <washuu_de@yahoo.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Monday, January 23, 2006 12:35 PM
+Subject: Re: [Xitami] No. of Connections
+
+
+>
+> ----- Original Message -----
+> From: "Niall Galway" <edwardt@eircom.net>
+> To: <xitami@lists.xitami.org>
+> Sent: Sunday, January 22, 2006 4:29 PM
+> Subject: [Xitami] No. of Connections
+>
+>
+>> Xitami will only allow 3 connections at once, how do increase the number
+> of
+>> allowed connections?
+>>
+>> Thanks
+>>
+>> NG
+>>
+>>
+>>From the helpfile http://127.0.0.1/xitami/index4.htm#config_server
+>
+> limit
+> Specifies the maximum number of concurrent HTTP connections. On systems 
+> that
+> can handle lots of open sockets (e.g. Unix, OS/2, WinNT, Win98), you may
+> want to set this high. Xitami does not impose any fixed limit. If you set
+> this value to 0, it means 'no limit'.
+> Default: 0.
+>
+> my entry in ......\app\xitami.cfg is
+>
+>    limit=0
+>
+> Hope that helped
+>
+>    Andy
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From kiddre at ix.netcom.com  Wed Jan 25 01:09:07 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Wed Jan 25 01:09:13 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <200601231642.1f19rV1d13Nl34h0@mx-mastin.atl.sa.earthlink.net>
+Message-ID: <FAEMIFKOBMPMNNMHDPGIIEKACCAA.kiddre@ix.netcom.com>
+
+I sent this message to Quercus REXX support.
+I want to use REXX to write cgi-bin programs for my Web server.
+The XITAMI Web server that I am using provides two input/output options.
+1. The cgi-bin program (REXX routine) can read directly from the stdin
+device (or alternately from DOSENV variables), and write directly to the
+stdout device.
+2. The cgi-bin program (REXX routine) can read input from a temporary file
+named pipe0001.cgi (or alternately from DOSENV variables), and write output
+to a temporary file named pipe0001.cgo.
+For several reasons, I would prefer using the second option.
+
+My first and most severe problem is that my XITAMI Web server aborts after
+issuing an Assertion Failure message whenever I try to use the pipe0001.cgi
+and pipe0002.cgo temporary files in my REXX program. I've run traces that
+have shown that the REXX program has run to completion after reading from
+pipe0001.cgi and creating pipe0001.cgo.
+
+I've asked for help from XITAMI and the XITAMI user's forum on this problem,
+but so far, everyone seems to be baffled.
+
+Up until I installed the updated REXX files that you sent to me yesterday, I
+was able to successfully use the first option by running REXX.exe instead of
+PREXXW.exe. After I installed the REXX updates that you sent to me
+yesterday, the first option no longer works. Now the REXX.exe output is
+written to the REXX console window instead of to stdout so the XITAMI Web
+server can no longer send the output back across the Internet to the client
+that submitted the form.
+
+When I switch back to the older copy of REXX, once again I can read input
+from ENVIRONMENT variables using DOSENV, and write output (my HTML Web page)
+to stdout.
+
+Questions:
+* Do you have any suggestions that might help me make option 2 work?
+* Is there anyway I can force PREXXW.exe to read from the stdin stream and
+write to the stdout stream instead of to the REXX console window?
+* What changes were made to REXX.exe in the update that causes it to write
+to the REXX console window instead of to stdout?
+I will really appreciate any light you can shed on this problem.
+
+Thank you!
+
+
+From craighp at 2cah.com  Wed Jan 25 02:25:12 2006
+From: craighp at 2cah.com (Craig Morrison)
+Date: Wed Jan 25 02:25:30 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGIIEKACCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGIIEKACCAA.kiddre@ix.netcom.com>
+Message-ID: <43D6D378.3050505@2cah.com>
+
+Ronald Eugene Kidd wrote:
+> I sent this message to Quercus REXX support.
+> I want to use REXX to write cgi-bin programs for my Web server.
+
+I know it isn't probably the answer you are looking for, but I've been 
+using Regina REXX for over 5 years to do CGI and its not failed me.
+
+http://regina-rexx.sourceforge.net/
+
+Its open source, so if it's broke, you have all the parts. :-)
+
+-- 
+Craig Morrison
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://pse.2cah.com
+   Controlling pseudoephedrine purchases.
+
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+From kiddre at ix.netcom.com  Wed Jan 25 06:46:31 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Wed Jan 25 06:46:36 2006
+Subject: [Xitami] Is anyone using Cgi:stdio=0 on Windows/98 or Windows/XP
+Message-ID: <FAEMIFKOBMPMNNMHDPGIOEKCCCAA.kiddre@ix.netcom.com>
+
+If you are running XITAMI on Windows/98 or Windows/XP with Cgi:stdio=0, may
+I have a copy of your XITAMI.cfg and your defaults.cfg files?  I am having
+the same problem with the Assertion failed error using two different REXX
+products.  Quercus REXX and Regina REXX (Craig, thanks for the heads up!).
+
+[Cgi]
+    stdio=0
+
+Thank you
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060124/ee20cf35/attachment.htm
+From kiddre at ix.netcom.com  Wed Jan 25 06:49:10 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Wed Jan 25 06:49:14 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <43D6D378.3050505@2cah.com>
+Message-ID: <FAEMIFKOBMPMNNMHDPGICEKDCCAA.kiddre@ix.netcom.com>
+
+Thanks Craig.  I appreciate you taking the time to answer.  Do you have
+stdio=0 in your defaults.cfg or xitami.cfg file?  Are you running Windows/98
+or Windows/XP?
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org]On Behalf Of Craig Morrison
+Sent: Tuesday, January 24, 2006 5:25 PM
+To: kiddre@ix.netcom.com; Xitami Users General Discussion
+Subject: Re: [Xitami] Assertion failed (continued)
+
+Ronald Eugene Kidd wrote:
+> I sent this message to Quercus REXX support.
+> I want to use REXX to write cgi-bin programs for my Web server.
+
+I know it isn't probably the answer you are looking for, but I've been
+using Regina REXX for over 5 years to do CGI and its not failed me.
+
+http://regina-rexx.sourceforge.net/
+
+Its open source, so if it's broke, you have all the parts. :-)
+
+
+From craighp at 2cah.com  Wed Jan 25 14:25:31 2006
+From: craighp at 2cah.com (Craig Morrison)
+Date: Wed Jan 25 14:26:27 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGICEKDCCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGICEKDCCAA.kiddre@ix.netcom.com>
+Message-ID: <43D77C4B.7070801@2cah.com>
+
+Ronald Eugene Kidd wrote:
+> Thanks Craig.  I appreciate you taking the time to answer.  Do you have
+> stdio=0 in your defaults.cfg or xitami.cfg file?  Are you running Windows/98
+> or Windows/XP?
+
+Windows 2000 Server, Xitami Pro 2.4d10, Regina REXX 4.0.1.
+
+[CGI]
+     stdio=1	#   Use standard CGI input/output
+
+Using the defaults..
+
+-- 
+Craig Morrison
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://pse.2cah.com
+   Controlling pseudoephedrine purchases.
+
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+From craighp at 2cah.com  Wed Jan 25 14:30:49 2006
+From: craighp at 2cah.com (Craig Morrison)
+Date: Wed Jan 25 14:31:10 2006
+Subject: [Xitami] Assertion failed (continued)
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGICEKDCCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGICEKDCCAA.kiddre@ix.netcom.com>
+Message-ID: <43D77D89.50602@2cah.com>
+
+Ronald Eugene Kidd wrote:
+> Thanks Craig.  I appreciate you taking the time to answer.  Do you have
+> stdio=0 in your defaults.cfg or xitami.cfg file?  Are you running Windows/98
+> or Windows/XP?
+
+Erm, not enough caffiene yet..
+
+Windows 2000 Server, Xitami Pro 2.4d10, Regina REXX _3_.0.1.
+
+-- 
+Craig Morrison
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://pse.2cah.com
+   Controlling pseudoephedrine purchases.
+
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+From kiddre at ix.netcom.com  Fri Jan 27 09:51:33 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Fri Jan 27 09:51:35 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+Message-ID: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+
+Can anyone tell me how I can submit a bug report to XITAMI?
+ 
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060127/bf777d0a/attachment.html
+From admin at mrjdesign.net  Fri Jan 27 10:34:30 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Jan 27 10:34:57 2006
+Subject: [Xitami] PHP & VBS in Xitami
+Message-ID: <6.2.0.14.0.20060127093231.01dabbb8@mail.mrjdesign.net>
+
+ok now here is a stupid question but that's a) nothing unusual for me and 
+b) very easy to reply to I bet (^^)
+
+I misplaced a few good files from my old setup so I would very much 
+appreciate if someone could pop in a message here as how to;
+
+a) Add all necessary lines in the defaults.cfg to enable PHP and,
+
+b) what exactly to add for the mime types to enable VBS again.
+
+It seems my machine doesn't like what I did to it.
+
+Thanks in advance.
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060127/f9200391/attachment.htm
+From francis.turner at gmail.com  Fri Jan 27 10:40:18 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Fri Jan 27 10:40:31 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+Message-ID: <f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.com>
+
+Easiest way is to detail it here. Imatix people read this list as do
+most users so we can learn to avoid it.
+
+Unless it is a bug with a vrey simple fix and/or it is a major
+security hole I doubt Imatix will fix it...
+
+Francis
+
+On 1/27/06, Ronald Eugene Kidd <kiddre@ix.netcom.com> wrote:
+>
+>
+>
+> Can anyone tell me how I can submit a bug report to XITAMI?
+>
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+
+--
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From admin at mrjdesign.net  Fri Jan 27 10:44:27 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Jan 27 10:44:44 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+In-Reply-To: <f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.co
+ m>
+References: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+	<f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.com>
+Message-ID: <6.2.0.14.0.20060127094232.01e19580@mail.mrjdesign.net>
+
+I really wish they would pick up the development of this great little http 
+server again.
+Up until the bug with FTP I find this server the best of all alternatives, 
+including IIS and Apache out there.
+
+I guess I'm getting to old to do major strategic choices anymore but I 
+would prefer to run Xitami than anything else.
+
+If it wasn't for the ASP options only being free in IIS I would find no use 
+for it at all.
+
+>Unless it is a bug with a vrey simple fix and/or it is a major
+>security hole I doubt Imatix will fix it...
+>
+>Francis
+
+
+
+
+From wdterry at rogers.com  Fri Jan 27 16:23:03 2006
+From: wdterry at rogers.com (WD Terry)
+Date: Fri Jan 27 16:23:07 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+In-Reply-To: <6.2.0.14.0.20060127094232.01e19580@mail.mrjdesign.net>
+References: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>	<f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.com>
+	<6.2.0.14.0.20060127094232.01e19580@mail.mrjdesign.net>
+Message-ID: <43DA3AD7.7060302@rogers.com>
+
+I will second that emotion.  I have use Xitami for several years, and it 
+is the ideal for home users (in particular) such as myself. Simple and 
+effective.
+I wonder if there are enough 'technical' types in the user community to 
+think about supporting it as 'open source', if Imatix would release the 
+code ?
+Wayne.
+
+MRJ InfoTech Admin wrote:
+
+> I really wish they would pick up the development of this great little 
+> http server again.
+> Up until the bug with FTP I find this server the best of all 
+> alternatives, including IIS and Apache out there.
+>
+> I guess I'm getting to old to do major strategic choices anymore but I 
+> would prefer to run Xitami than anything else.
+>
+> If it wasn't for the ASP options only being free in IIS I would find 
+> no use for it at all.
+>
+>> Unless it is a bug with a vrey simple fix and/or it is a major
+>> security hole I doubt Imatix will fix it...
+>>
+>> Francis
+>
+>
+>
+>
+>
+>
+> -- 
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+From ph at imatix.com  Fri Jan 27 16:28:09 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Fri Jan 27 16:28:14 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+In-Reply-To: <43DA3AD7.7060302@rogers.com>
+References: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+	<f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.com>
+	<6.2.0.14.0.20060127094232.01e19580@mail.mrjdesign.net>
+	<43DA3AD7.7060302@rogers.com>
+Message-ID: <5821ea240601270728m31d55759u76580a3bcaf4d88e@mail.gmail.com>
+
+On 1/27/06, WD Terry <wdterry@rogers.com> wrote:
+
+> I wonder if there are enough 'technical' types in the user community to
+> think about supporting it as 'open source', if Imatix would release the
+> code ?
+
+:-)  The code has been released since the very first version in 1996.
+
+-Pieter
+
+From admin at mrjdesign.net  Fri Jan 27 16:44:23 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Jan 27 16:44:27 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+In-Reply-To: <5821ea240601270728m31d55759u76580a3bcaf4d88e@mail.gmail.co
+ m>
+References: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+	<f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.com>
+	<6.2.0.14.0.20060127094232.01e19580@mail.mrjdesign.net>
+	<43DA3AD7.7060302@rogers.com>
+	<5821ea240601270728m31d55759u76580a3bcaf4d88e@mail.gmail.com>
+Message-ID: <6.2.0.14.0.20060127154353.01df2eb8@mail.mrjdesign.net>
+
+Coooooooooooool#
+
+Could you pass me a link to a MSVC 5 or similar port version of it?
+Thanks.
+
+At 15:28 27/01/2006, you wrote:
+>On 1/27/06, WD Terry <wdterry@rogers.com> wrote:
+>
+> > I wonder if there are enough 'technical' types in the user community to
+> > think about supporting it as 'open source', if Imatix would release the
+> > code ?
+>
+>:-)  The code has been released since the very first version in 1996.
+>
+>-Pieter
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060127/f1f1d536/attachment.html
+From ph at imatix.com  Fri Jan 27 16:53:29 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Fri Jan 27 16:53:34 2006
+Subject: [Xitami] How do I report a bug to XITAMI?
+In-Reply-To: <6.2.0.14.0.20060127154353.01df2eb8@mail.mrjdesign.net>
+References: <FAEMIFKOBMPMNNMHDPGIEEKOCCAA.kiddre@ix.netcom.com>
+	<f83609d50601270140i6f5e4d49kd81d6602cc07dd00@mail.gmail.com>
+	<6.2.0.14.0.20060127094232.01e19580@mail.mrjdesign.net>
+	<43DA3AD7.7060302@rogers.com>
+	<5821ea240601270728m31d55759u76580a3bcaf4d88e@mail.gmail.com>
+	<6.2.0.14.0.20060127154353.01df2eb8@mail.mrjdesign.net>
+Message-ID: <5821ea240601270753jc77020cp281edc42cc52a1fe@mail.gmail.com>
+
+On 1/27/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+
+>  Could you pass me a link to a MSVC 5 or similar port version of it?
+
+All the packages are on xitami.com.
+
+-Pieter
+
+From kiddre at ix.netcom.com  Sat Jan 28 01:17:17 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Sat Jan 28 01:17:25 2006
+Subject: [Xitami] Assertion failed!  - XITAMI BUG
+Message-ID: <FAEMIFKOBMPMNNMHDPGIAELCCCAA.kiddre@ix.netcom.com>
+
+
+Problem:
+
+Assertion failed!
+Module C:\iMatix\Work\products\xitami-25\sfl\sflfile.c, line 2188
+Abort   Retry   Ignore
+I am convinced that this must be a bug in XITAMI. I've eliminated everything
+else with the possible exception of ipUpdater somehow being involved.
+The problem is very easy to recreate. It will occur every time stdio=0 is
+specified in the configuration file.
+I've recreated the failure linking to routines in cgi-bin that I have coded
+using two different REXX products and a .bat file. The failure occurs after
+the cgi-bin routine terminates.
+These files will recreate the problem.
+
+defaults.cfg
+
+#*END
+
+[Cgi]
+     stdio=0
+
+testhtml.html
+
+<html>
+<head>
+<title>Test HTML</title>
+</head>
+<body>
+<a href="http://bplanet.ipupdater.com/cgi-bin/testbat.bat">testbat</a><br>
+</body>
+</html>
+
+testbat.bat
+
+@ECHO ON
+@ECHO I'm here
+
+I have installed XITAMI in C:\XITAMI\Xitami-25\app
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060127/baefe3df/attachment.htm

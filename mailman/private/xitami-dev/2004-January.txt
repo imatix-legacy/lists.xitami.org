@@ -1,0 +1,245 @@
+From xitami-dev@lists.xitami.org  Tue Jan 20 16:46:50 2004
+From: xitami-dev@lists.xitami.org (Kareem !Badr)
+Date: Tue, 20 Jan 2004 10:46:50 -0600
+Subject: [Xitami-Dev] List archive?
+Message-ID: <400D5B7A.1030302@journyx.com>
+
+Are old message from this list archived anywhere? I'd like to avoid 
+asking questions that have been answered before.
+
+Thanks.
+
+
+From xitami-dev@lists.xitami.org  Tue Jan 20 20:50:25 2004
+From: xitami-dev@lists.xitami.org (David Pettersson)
+Date: Tue, 20 Jan 2004 21:50:25 +0100
+Subject: [Xitami-Dev] List archive?
+In-Reply-To: <400D5B7A.1030302@journyx.com>
+References: <400D5B7A.1030302@journyx.com>
+Message-ID: <400D9491.3060208@home.se>
+
+Kareem !Badr wrote:
+> Are old message from this list archived anywhere? I'd like to avoid 
+> asking questions that have been answered before.
+
+Yes, at http://lists.xitami.org/pipermail/xitami-dev/
+
+which can be found by following the link in the footer.
+
+From xitami-dev@lists.xitami.org  Wed Jan 21 18:02:27 2004
+From: xitami-dev@lists.xitami.org (Justin Frim)
+Date: Wed, 21 Jan 2004 13:02:27 -0500 (EST)
+Subject: [Xitami-Dev] bug?
+Message-ID: <37621.131.136.242.1.1074708147.squirrel@webmail.look.ca>
+
+Ok I'm new to this list, so don't jump on me if this is the wrong place to
+post.  But...
+
+critical bug with Xitami 2.5c1
+
+After saving the configuration from the web based admin, restarting the
+web server craps out.  It appears to not read the xitami.cfg file properly
+on restart (but only if you previously clicked SAVE on the web based
+admin).
+
+The error occurs around when reading the "webpages=" and "cgi-bin="
+parameters.  It looks like arbitrary data from elsewhere in the xitami.cfg
+is being read in for those parameters, and when the webpages= does not
+match a valid path, the program terminates.  The exact point in the file
+where it reads the bogus data is not always consistent.  From my last run,
+these are the results reported in the log files:  (note that it was
+restarted from WBA @ 11:37)
+
+
+CONSOLE.LOG
+
+2004/01/21 11:36:52: xilrwp: ready for LRWP connections on port 81
+2004/01/21 11:36:52: smthttp: web server binding to address 127.0.0.1
+2004/01/21 11:36:52: smthttp: opening HTTP service on port 80...
+2004/01/21 11:36:52: smthttp: HTTP service is now running
+2004/01/21 11:36:52: smtftpc: opening FTP service on port 21...
+2004/01/21 11:36:52: smtftpc: FTP service is now running
+2004/01/21 11:37:01: smthttp: closing HTTP service on port 80
+2004/01/21 11:37:02: webpages directory 'application/octet-stream' not
+found - Permission denied
+2004/01/21 11:37:02: smtftpc: closing FTP service on port 21
+
+
+DEBUG.LOG
+
+2004/01/21 11:36:59: Looking for VH using Host value: localhost
+2004/01/21 11:36:59:  - looking for VH using IP address: 127.0.0.1
+2004/01/21 11:36:59: - using default virtual host values
+2004/01/21 11:36:59: Resolving URL request: /admin
+2004/01/21 11:36:59:  - URL refers to WSX 'xiadmin' with PATH-INFO=''
+2004/01/21 11:37:00: Looking for VH using Host value: localhost
+2004/01/21 11:37:00:  - looking for VH using IP address: 127.0.0.1
+2004/01/21 11:37:00: - using default virtual host values
+2004/01/21 11:37:00: Resolving URL request: /admin
+2004/01/21 11:37:00:  - URL refers to WSX 'xiadmin' with PATH-INFO=''
+2004/01/21 11:37:02: Loading VH data for base host
+2004/01/21 11:37:02: - loading config data from basehost.cfg
+2004/01/21 11:37:02:  - rootdir=application/octet-stream, cgi-bin=mime:gtar
+2004/01/21 11:37:02: - loading password data from: security.txt
+
+
+
+As you can see, the pointer jumped to a random spot in the xitami.cfg file
+where the MIME types were defined when Xitami was trying to read the
+webpages and cgi-bin settings.
+
+
+Also maybe related, some settings on the web based admin do not actually
+update the defaults.cfg file.  Most notably the IP addresses to which
+Xitami should bind (this setting usually used for customizing multi-homed
+servers).  The only way to set that is to manually edit the defaults.cfg
+file.  There may be other items in the web based admit that also don't
+work.
+
+
+Finally, my apologies if this was the wrong place to post.  Please forward
+this email to the appropriate people if such is the case.
+
+
+-- 
+TTYL,
+Justin
+jfrim@idirect.com
+ICQ: 24984606
+AIM: xr714
+PalTalk: shadowman714
+
+
+From xitami-dev@lists.xitami.org  Fri Jan 23 16:42:08 2004
+From: xitami-dev@lists.xitami.org (Kareem !Badr)
+Date: Fri, 23 Jan 2004 10:42:08 -0600
+Subject: [Xitami-Dev] Compiling with VC 6.0
+Message-ID: <40114EE0.3080709@journyx.com>
+
+I downloaded the Xitami source package, and I'm having problems 
+compiling. Besides any environment/configuration issues I might be 
+having, there was an actual compile error that makes me think that the 
+source package is not the one used to compile all of the binaries that 
+are available for download.
+
+Compiling...
+smthttpl.c
+C:\xitami src\smt\smthttpl.c(1646) : error C2143: syntax error : missing 
+';' before '||'
+C:\xitami src\smt\smthttpl.c(1646) : error C2059: syntax error : ')'
+C:\xitami src\smt\smthttpl.c(1648) : error C2181: illegal else without 
+matching if
+Error executing cl.exe.
+
+I can edit the source and figure out how to fix that line, but I'm still 
+worried that the rest of the code isn't going to have all of the latest 
+updates and features. Does anyone know where I can get the source used 
+to build the binaries that are available for download?
+
+Also, when I run build.bat, I get a lot of messages like this:
+
+C:\xitami src>build
+Building application...
+'c' is not recognized as an internal or external command, operable 
+program or batch file.
+boomake: "call c -q -g sflbits" failed
+
+I'm sure it's due to a simple config issue, but googling "call c visual 
+studio" doesn't yield many useful results.
+
+-Kareem
+
+
+From xitami-dev@lists.xitami.org  Fri Jan 23 18:32:44 2004
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Sat, 24 Jan 2004 05:32:44 +1100
+Subject: [Xitami-Dev] Compiling with VC 6.0
+References: <40114EE0.3080709@journyx.com>
+Message-ID: <401168CC.5F324E8E@ob-wan.com>
+
+Kareem,
+
+C is actually a batchfile that should be included with the package. It
+probably isn't present in the directory you're working from.
+
+Rob
+
+
+Kareem !Badr wrote:
+> 
+> I downloaded the Xitami source package, and I'm having problems
+> compiling. Besides any environment/configuration issues I might be
+> having, there was an actual compile error that makes me think that the
+> source package is not the one used to compile all of the binaries that
+> are available for download.
+> 
+> Compiling...
+> smthttpl.c
+> C:\xitami src\smt\smthttpl.c(1646) : error C2143: syntax error : missing
+> ';' before '||'
+> C:\xitami src\smt\smthttpl.c(1646) : error C2059: syntax error : ')'
+> C:\xitami src\smt\smthttpl.c(1648) : error C2181: illegal else without
+> matching if
+> Error executing cl.exe.
+> 
+> I can edit the source and figure out how to fix that line, but I'm still
+> worried that the rest of the code isn't going to have all of the latest
+> updates and features. Does anyone know where I can get the source used
+> to build the binaries that are available for download?
+> 
+> Also, when I run build.bat, I get a lot of messages like this:
+> 
+> C:\xitami src>build
+> Building application...
+> 'c' is not recognized as an internal or external command, operable
+> program or batch file.
+> boomake: "call c -q -g sflbits" failed
+> 
+> I'm sure it's due to a simple config issue, but googling "call c visual
+> studio" doesn't yield many useful results.
+> 
+> -Kareem
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Mon Jan 26 20:08:57 2004
+From: xitami-dev@lists.xitami.org (Kareem !Badr)
+Date: Mon, 26 Jan 2004 14:08:57 -0600
+Subject: [Xitami-Dev] Compiling with VC 6.0
+References: <40114EE0.3080709@journyx.com>
+Message-ID: <401573D9.7090703@journyx.com>
+
+Pieter Hintjens from iMatix sent me thing, regarding the compilation 
+problem:
+
+We fixed that syntax error and rebuilt the packages but somehow the
+online archive did not get updated.  It's still a bit more manual
+than it should be.
+
+It's a small syntax error and the code should read thus:
+
+         case HTTP_RESPONSE_OK:
+             if (p_http-> transaction == TRANSACTION_CGI
+             ||  p_http-> transaction == TRANSACTION_WSX
+             ||  p_http-> transaction == TRANSACTION_FILTER)
+                 put_dynamic_headers (p_http, header);
+             else
+
+Kareem !Badr wrote:
+> I can edit the source and figure out how to fix that line, but I'm still 
+> worried that the rest of the code isn't going to have all of the latest 
+> updates and features. 
+
+
+From xitami-dev@lists.xitami.org  Mon Jan 26 22:01:38 2004
+From: xitami-dev@lists.xitami.org (Kareem !Badr)
+Date: Mon, 26 Jan 2004 16:01:38 -0600
+Subject: [Xitami-Dev] Public CVS Repository for Xitami?
+Message-ID: <40158E42.8090200@journyx.com>
+
+Is there a public CVS for Xitami? If so, where is it? Googling for it 
+didn't turn up any results.
+
+

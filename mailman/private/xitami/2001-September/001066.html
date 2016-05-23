@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Some problems with XML file and directory listings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001058.html">
+   <LINK REL="Next"  HREF="001068.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Some problems with XML file and directory listings
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Some problems with XML file and directory listings">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 29 Sep 2001 17:21:55 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001058.html">[Xitami] Some problems with XML file and directory listings
+</A></li>
+        <LI> Next message: <A HREF="001068.html">Re[2]: [Xitami] Some problems with XML file and directory listings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1066">[ date ]</a>
+              <a href="thread.html#1066">[ thread ]</a>
+              <a href="subject.html#1066">[ subject ]</a>
+              <a href="author.html#1066">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Rod B. Nussbaumer wrote:
+
+&gt;<i> David Broker wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i> I was wondering if someone could help me with a few problems I was having?
+</I>&gt;&gt;<i> I'm using Xitami 2.5b4 on Windows 98 for testing of my websites.
+</I>&gt;<i> 
+</I>&gt;&gt;<i> And my other problem; when clicking on a link in a directory listing the
+</I>&gt;&gt;<i> URL in the address bar will come up like so:
+</I>&gt;&gt;<i> <A HREF="http://127.0.0.1/test%2Ephp">http://127.0.0.1/test%2Ephp</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Same problem here, with 2.5b4 on Win95.  I reported this a few months
+</I>&gt;<i> ago, and the only recommendation I got was to make sure Xitami was
+</I>&gt;<i> out in it's own directory; ie not under 'Program Files'.  I tried that
+</I>&gt;<i> and it didn't help.  I'm still hoping someone can come up with a solution.
+</I>&gt;<i> 
+</I>&gt;<i> 	---   rod.
+</I>&gt;<i> 
+</I>This is fixed by the same name/nameurl fix that ewen mentioned fixing 
+the double extension issue.
+
+You need to modify the httpdir.gsl (or better copy it, modify the copy 
+and use the copy instead of the original) in the templates directory.
+
+Line 89 is in the original form:
+
+&lt;A HREF=&quot;$(urlbase:)$(nameurl:)&quot;&gt;&lt;IMG SRC=&quot;$(icon)&quot; 
+BORDER=0&gt;$(name:)&lt;/A&gt;&lt;/TD&gt;
+
+You should change this to :
+
+&lt;A HREF=&quot;$(urlbase:)$(name:)&quot;&gt;&lt;IMG SRC=&quot;$(icon)&quot; BORDER=0&gt;$(name:)&lt;/A&gt;&lt;/TD&gt;
+
+Personally I think this is the correct behaviour. Nameurl seems to be a 
+bit too escaped to be useful for anything
+
+Francis
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001058.html">[Xitami] Some problems with XML file and directory listings
+</A></li>
+	<LI> Next message: <A HREF="001068.html">Re[2]: [Xitami] Some problems with XML file and directory listings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1066">[ date ]</a>
+              <a href="thread.html#1066">[ thread ]</a>
+              <a href="subject.html#1066">[ subject ]</a>
+              <a href="author.html#1066">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,100 @@
+From znotify at hotmail.com  Thu Apr 16 09:54:32 2009
+From: znotify at hotmail.com (znotify)
+Date: Thu, 16 Apr 2009 17:54:32 +1000
+Subject: [Xitami] xitami
+Message-ID: <BAY105-DS64D5317430A5FBF6484E9B67A0@phx.gbl>
+
+Have just downloaded xitami and installed.
+I am using a book (which is fairly old) on Perl.  I have tested xitami (as per my book) which seems to be working.
+The Perl book tells me that Perl scripts (.pl) should be loaded into a dir, cgi-bin, which I had to create under the xitami directory.
+The book gives a perl file to test and gives the location of  the web browser to be http://localhost/virtual_scripts_directory/perltest.pl
+This does not work, error "The resource you asked for does not exist on this website".
+
+Where should .pl files be put?
+Is the location correct?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20090416/42065ff7/attachment.htm 
+
+From rolinger1 at hotmail.com  Thu Apr 16 19:14:20 2009
+From: rolinger1 at hotmail.com (rolinger)
+Date: Thu, 16 Apr 2009 10:14:20 -0700
+Subject: [Xitami] xitami
+References: <BAY105-DS64D5317430A5FBF6484E9B67A0@phx.gbl>
+Message-ID: <BAY127-DAV941FD3DF41773AC0EA928F87A0@phx.gbl>
+
+Welcome to Xitami...didn't know new users were still joining.  Though the 
+version of Xitami you installed is probably quite old as iMatix stopped 
+development on it many years ago.  But, there is hope because the developers 
+have recently picked it up again and have released Xitami 5.  I don't quite 
+know the state of it yet but its still early stage.  It is probably best you 
+use the older version, as it is stable, until you become more familiar with 
+it and its features.
+
+To your questions.
+
+1.  The cgi-bin should already be a part of the install thus there would be 
+no need to create a second cgi-bin directory.
+2.  In the Xitami administration pages, go to the main section and make 
+certain your 'cgi-bin' path options are set correctly.  That the main CGI 
+directory is "cgi-bin" and either at the beginning of the path (ie: 
+/cgi-bin/myscripts/go/here.pl) or just in the path itself (ie: 
+/myScripts/cgi-bin/go/here.pl).  And then verify your script is in that 
+directory.
+3. Go to the CGI section of the admin pages and verify CGI is enabled, and 
+there is a dash "-" in the working directory which implies to use the 
+default program directory
+4.  Verify that your windows/unix (don't know which you are using) system 
+variables have associated ".pl" files to the Perl interpreter.  You can also 
+map Xitami to execute .pl scripts by hard setting the defaults.cfg file 
+under the Filter section:
+[Filter]
+    .php=c:\php\php.exe
+    .pl=c:\perl\bin\perl.exe
+
+The easiest way to test is to simply put your script into the default 
+directory: /xitami/cgi-bin - and then execute 
+http://127.0.0.1/cgi-bin/perltest.pl - also, verify your script works from a 
+command prompt first so you know the script is working correctly and that 
+the script itself is not the source of the problem.
+
+Good luck.  And welcome to the world of Xitami.
+
+-R
+
+=========
+"Socialism is the philosophy of failure, the creed of ignorance,
+and the gospel of envy, its inherent virtue is the equal sharing of misery."
+     - Sir Winston Churchill -
+=========
+----- Original Message ----- 
+From: "znotify" <znotify at hotmail.com>
+To: <xitami at lists.xitami.org>
+Sent: Thursday, April 16, 2009 12:54 AM
+Subject: [Xitami] xitami
+
+
+Have just downloaded xitami and installed.
+I am using a book (which is fairly old) on Perl.  I have tested xitami (as 
+per my book) which seems to be working.
+The Perl book tells me that Perl scripts (.pl) should be loaded into a dir, 
+cgi-bin, which I had to create under the xitami directory.
+The book gives a perl file to test and gives the location of  the web 
+browser to be http://localhost/virtual_scripts_directory/perltest.pl
+This does not work, error "The resource you asked for does not exist on this 
+website".
+
+Where should .pl files be put?
+Is the location correct?
+
+
+--------------------------------------------------------------------------------
+
+
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+

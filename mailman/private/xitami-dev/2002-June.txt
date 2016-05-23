@@ -1,0 +1,2336 @@
+From xitami-dev@lists.xitami.org  Mon Jun  3 12:21:12 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Mon, 3 Jun 2002 13:21:12 +0200
+Subject: [Xitami-Dev] Trying to keep SMT and SFL
+Message-ID: <GMEIJMPDFMEGPAGNKHKDKECICCAA.rafael.cano@o-labs.com>
+
+ Hi Imatix.
+
+ When will cvs.imatix.com be available again?.
+
+ How fresh is the New Zeeland site, and why have
+ the building files disappear?.
+
+ How stable is SMT v 3.0 ( smtsock ) for building
+ a production service?.
+
+ How is the near future regarding SFL & SMT distribution?.
+
+ Are there plans to extend the SFL library for XML functionality,
+ like search and sort?.
+
+ How can I pay you a beer for your good work?.
+
+
+ Regards.  Rafael Cano Pérez
+
+
+From xitami-dev@lists.xitami.org  Mon Jun  3 12:33:04 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Mon, 3 Jun 2002 13:33:04 +0200
+Subject: [Xitami-Dev] Trying to keep SMT and SFL
+In-Reply-To: <GMEIJMPDFMEGPAGNKHKDKECICCAA.rafael.cano@o-labs.com>
+Message-ID: <3CFB7010.26296.FC43745@localhost>
+
+Rafael Cano Pérez <rafael.cano@o-labs.com> wrote:
+
+Good questions.  Let me answer each of them.
+
+>  When will cvs.imatix.com be available again?.
+
+Not for a while.  We have decided that CVS was not a good way to 
+deliver the Xitami source code, taking too much effort to build.  We 
+will provide source kits as zip/tgz files.  At a later stage we may 
+decide to make daily snapshots of the development CVS.
+
+>  How fresh is the New Zeeland site, and why have
+>  the building files disappear?.
+
+The iMatix NZ site will be absorbed into the imatix.com site.
+
+>  How stable is SMT v 3.0 ( smtsock ) for building
+>  a production service?.
+
+It is stable and we are using it for production services.
+
+>  How is the near future regarding SFL & SMT distribution?.
+
+We are in the process of repackaging all our source code.  iMatix.com 
+will have news once we are ready to go public.  Basically we will 
+have packages for:
+
+ - base tools (SFL, SMT, GSL, htmlpp, etc.)
+ - Xitami 2.4 (including archaic SFL & SMT)
+ - Xitami 2.5 (including archaic SFL & SMT)
+
+plus Xitami 3.0 once that starts to become stable.
+
+>  Are there plans to extend the SFL library for XML functionality, like
+>  search and sort?.
+
+Yes, we have planned to make such extensions to sflxml.  However, I 
+can't tell you when.
+
+>  How can I pay you a beer for your good work?.
+
+Come to Brussels and visit us.  We are always happy to share a beer. 
+:)
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Mon Jun  3 13:54:12 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Mon, 03 Jun 2002 13:54:12 +0100 (MEZ)
+Subject: [Xitami-Dev] referrer
+Message-ID: <200206031155.NAA19269@sxpublic.nxrda.imatix.net>
+
+a user thinks that he has discovered a bug in xitami. i'm
+currently tracking it down but i'm a little bit confused. the
+application is a webmail interface.
+
+what happens ?
+
+1) user presses "delete email"
+
+2) webmail deletes the email and sends a "301 Moved" with a new
+location to the browser
+
+3) the browser requests the new location
+
+4) xitami answers with "200 OK", but don't send the REFERRER
+field.
+
+5) webmail bumps the user to the login page because of a missing
+referrer.
+
+i have 2.5b5 in the debugger.
+
+neither "put_standard_headers" nor "put_dynamic_headers" are
+dealing with p_http->referrer.
+
+any hints where to look ?
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Tue Jun  4 09:29:19 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Tue, 4 Jun 2002 10:29:19 +0200
+Subject: [Xitami-Dev] referrer
+In-Reply-To: <200206031155.NAA19269@sxpublic.nxrda.imatix.net>
+Message-ID: <3CFC967F.5403.3B69F3A@localhost>
+
+"bernd hohmann" <xitami-dev@conacom.de> wrote:
+
+> 4) xitami answers with "200 OK", but don't send the REFERRER
+> field...
+
+The referrer field is only returned if it is supplied by the browser 
+in the first place.  First thing we need to do to understand what's 
+going on is to enable debugging, then look at the request.log and 
+header.log files.  Usually with that we can see where the problem is.
+
+If you've done this, send me the two files and I'll see what's 
+happening in Xitami.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Wed Jun  5 19:51:37 2002
+From: xitami-dev@lists.xitami.org (David Salisbury)
+Date: Wed, 5 Jun 2002 19:51:37 +0100
+Subject: [Xitami-Dev] Mutiple copies of xitami
+Message-ID: <000201c20cc2$0924a360$80ce7ad5@DAD>
+
+On the FAQ for the 2.4d9 version, it says that you can run multiple
+copies of xitami.#
+
+When I do this, I get a message pop up saying 
+
+"HTTP Service already started" followed by the date/time
+
+Why could this be happening?
+
+I'm running Win 98 SE
+
+Any help appreciated
+
+
+
+From xitami-dev@lists.xitami.org  Wed Jun  5 22:36:58 2002
+From: xitami-dev@lists.xitami.org (Paul Reid)
+Date: Wed, 5 Jun 2002 17:36:58 -0400
+Subject: [Xitami-Dev] Mutiple copies of xitami
+In-Reply-To: <000201c20cc2$0924a360$80ce7ad5@DAD>
+References: <000201c20cc2$0924a360$80ce7ad5@DAD>
+Message-ID: <1191915933456.20020605173658@rci.rutgers.edu>
+
+> you can run multiple copies of xitami.#
+
+Each one must be configured for a different base port.
+
+You can do a lot with one copy and Virtual Hosts.
+
+ -PRR
+
+
+From xitami-dev@lists.xitami.org  Thu Jun  6 09:19:32 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 06 Jun 2002 10:19:32 +0200
+Subject: [Xitami-Dev] Mutiple copies of xitami
+In-Reply-To: Message from "David Salisbury" <david.salis@btinternet.com>
+ of "Wed, 05 Jun 2002 19:51:37 BST." <000201c20cc2$0924a360$80ce7ad5@DAD>
+Message-ID: <20020606081932.7112DADF86@basilica.la.naos.co.nz>
+
+In message <000201c20cc2$0924a360$80ce7ad5@DAD>, "David Salisbury" writes:
+>On the FAQ for the 2.4d9 version, it says that you can run multiple
+>copies of xitami.#
+
+Providing they are in different directories, with different
+configuration, and run on different addresses/ports.  
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Thu Jun  6 09:23:29 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Thu, 6 Jun 2002 04:23:29 EDT
+Subject: [Xitami-Dev] Mutiple copies of xitami
+Message-ID: <92.26dfe8f6.2a307601@aol.com>
+
+--part1_92.26dfe8f6.2a307601_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+Actually i unintintentionally ran two under different usernames in windows 
+xp.  though i never actually did much else with it after that other than 
+change some options so it wouldn't happen again.
+
+--part1_92.26dfe8f6.2a307601_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">Actually i unintintentionally ran two under different usernames in windows xp.&nbsp; though i never actually did much else with it after that other than change some options so it wouldn't happen again.</FONT></HTML>
+
+--part1_92.26dfe8f6.2a307601_boundary--
+
+From xitami-dev@lists.xitami.org  Fri Jun  7 09:15:29 2002
+From: xitami-dev@lists.xitami.org (Pieter Hintjens)
+Date: Fri, 7 Jun 2002 10:15:29 +0200
+Subject: [Xitami-Dev] Mutiple copies of xitami
+In-Reply-To: <000201c20cc2$0924a360$80ce7ad5@DAD>
+Message-ID: <3D0087C1.18212.131D0BC4@localhost>
+
+"David Salisbury" <david.salis@btinternet.com> wrote:
+
+> On the FAQ for the 2.4d9 version, it says that you can run multiple
+> copies of xitami.
+
+Under Windows 9x you can run multiple copies providing (a) you run 
+them from separate directories, since they will otherwise get 
+conflicts on log files and such like, and (b) you use different port 
+bases.  AFAIK you cannot run two Xitami services under Win9x, at 
+least one of the instances must be a user process (started when you 
+login).
+
+Under WindowsNT/2000 you can run multiple instances as services, so 
+long as you observe (a) and (b) above, and also set the Xitami 
+configuration to use different service names.  This works far better 
+than under Win9x.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+From xitami-dev@lists.xitami.org  Fri Jun  7 15:40:00 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Fri, 7 Jun 2002 16:40:00 +0200
+Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+Message-ID: <GMEIJMPDFMEGPAGNKHKDAECPCCAA.rafael.cano@o-labs.com>
+
+ Hello Imatix.
+
+ I am using lrwplib.c for a prototype LRWP application,
+ wich will be later implementing the LRWP via an
+ SMT agent.
+
+ In read_full_TCP() in lrwplib.c, after calling
+ read_TCP() reads the return code, and compares
+ it to SOCKET_ERROR for errors. This macro
+ is defined in sfl.h as -1, but when the socket is
+ closed, for example when xitami is closed, read_TCP
+ returns 0, making any application based on lrwplib.c
+ go into an infinite loop.
+ Changing the test against 0
+ ...
+ if (chunkLen == 0)
+  return SOCKET_ERROR;
+ ...
+
+ fixes the error.
+
+ A bug in sfl.h, lrwplib.c or read_TCP() ??
+
+ I'm thinking of writing an ISAPI dll that
+ accepts LRWP2 connections and acts as the
+ LRWP agent in Xitami. Is this already available?
+ ( I know there is the other way round, LRWP client
+  calling ISAPI.dll ).
+
+ Kind regards.
+
+   Rafael Cano Pérez
+
+
+From xitami-dev@lists.xitami.org  Fri Jun  7 16:56:41 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Fri, 07 Jun 2002 16:56:41 +0100 (MEZ)
+Subject: [Xitami-Dev] Sokrates 1.3 - Weekend release
+Message-ID: <200206071457.QAA19014@sxpublic.nxrda.imatix.net>
+
+hi there,
+
+the usual weekend release :-)
+
+we removed the remote administration client. a newer and better
+technology (servlet based) is on the way - stay tuned !
+
+http://runner.conacom.de
+
+1.3  HttpServletResponse: don't redirect if target contains
+protocol
+     Internal changes for remote administration.
+     Removed RemoteGUI from package.
+     Fix in ServletOutputStream.
+
+1.2  (Internal release)
+     HttpServletResponse: bufix in redirectURL
+     ServletRequest#getServletPort() got a workaround for the 
+     "server_port=0" bug in Xitami 2.5b5
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Mon Jun 10 15:11:32 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 10 Jun 2002 16:11:32 +0200
+Subject: [Xitami-Dev] cvs.imatix.co.nz: GONE
+Message-ID: <20020610141132.5D2CCADF9D@basilica.la.naos.co.nz>
+
+Hi,
+
+In case anyone is wondering, the cvs.imatix.co.nz pserver anonymous CVS
+archive has been removed, as the internal iMatix CVS repository is no
+longer organised to provide a portion via CVS and is generally in a
+state of flux as has been noted here in the past.  The cvs.imatix.co.nz
+CVS was somewhat broken as a result of partial updates during some of
+this transition so there didn't seem any point in keeping it around.
+
+There may (or may not) be an announcement from someone else at some
+later point as to how more recent (than the packages on imatix.com)
+open source software can be obtained.
+
+Ewen
+
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Tue Jun 11 22:14:19 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Tue, 11 Jun 2002 17:14:19 -0400
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+Message-ID: <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>
+
+Hi there,
+
+I am just about to re-write a C++ version of the LRWP C library (out of 
+frustration), capable of supporting multithreaded operations (under Windows 
+for now).
+
+Before re-inventing the wheel, I'd like to know if someone has already done 
+this? A quick Google search came out with nothing on the subject.
+
+IMHO, the fact that the current implementation of the LRWP C lib is bound to 
+SFL (which requires single threading) is a mistake. While SFL makes perfect 
+sense in the context of the architecture of Xitami, LRWP as a protocol 
+should be designed with applications in mind and therefore should be 
+agnostic to threading issues. This limitation is probably what has been 
+holding LRWP back from being more popular (compared to FastCGI for 
+instance).
+
+Don't get me wrong. I *love* Xitami and how it is put together.
+
+Regards,
+Fabien.
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+
+
+From xitami-dev@lists.xitami.org  Tue Jun 11 22:34:39 2002
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Tue, 11 Jun 2002 14:34:39 -0700
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app
+ support anyone?
+In-Reply-To: <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>
+Message-ID: <5.0.2.1.0.20020611142948.029684b8@pop3.norton.antivirus>
+
+Hi:
+
+Being a fan of Delphi Pascal, I wrote an object library for LRWP 1.0 in 
+about a day. It's
+called a unit in delphi parlance. I did not need to use any other library. 
+LRWP works
+like a charm and I have many processes attached to a single XITAMI server. 
+All use
+that unit.
+
+If you take the perl example and you have a good command of the C++ String 
+object it should
+not give you any problem.
+
+George
+
+
+At 05:14 PM 6/11/2002 -0400, you wrote:
+
+>Hi there,
+>
+>I am just about to re-write a C++ version of the LRWP C library (out of 
+>frustration), capable of supporting multithreaded operations (under 
+>Windows for now).
+>
+>Before re-inventing the wheel, I'd like to know if someone has already 
+>done this? A quick Google search came out with nothing on the subject.
+>
+>IMHO, the fact that the current implementation of the LRWP C lib is bound 
+>to SFL (which requires single threading) is a mistake. While SFL makes 
+>perfect sense in the context of the architecture of Xitami, LRWP as a 
+>protocol should be designed with applications in mind and therefore should 
+>be agnostic to threading issues. This limitation is probably what has been 
+>holding LRWP back from being more popular (compared to FastCGI for instance).
+>
+>Don't get me wrong. I *love* Xitami and how it is put together.
+>
+>Regards,
+>Fabien.
+>
+>_________________________________________________________________
+>Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+George Blat
+NT with real time performance
+8016 188th SW, Edmonds, WA 98026
+
+phone:  425-775-7475
+fax:    781-998-5940
+mailto:georgeb@ntrealtime.com
+
+
+
+From xitami-dev@lists.xitami.org  Tue Jun 11 22:34:39 2002
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Tue, 11 Jun 2002 14:34:39 -0700
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app
+ support anyone?
+In-Reply-To: <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>
+Message-ID: <5.0.2.1.0.20020611142948.029684b8@pop3.norton.antivirus>
+
+Hi:
+
+Being a fan of Delphi Pascal, I wrote an object library for LRWP 1.0 in 
+about a day. It's
+called a unit in delphi parlance. I did not need to use any other library. 
+LRWP works
+like a charm and I have many processes attached to a single XITAMI server. 
+All use
+that unit.
+
+If you take the perl example and you have a good command of the C++ String 
+object it should
+not give you any problem.
+
+George
+
+
+At 05:14 PM 6/11/2002 -0400, you wrote:
+
+>Hi there,
+>
+>I am just about to re-write a C++ version of the LRWP C library (out of 
+>frustration), capable of supporting multithreaded operations (under 
+>Windows for now).
+>
+>Before re-inventing the wheel, I'd like to know if someone has already 
+>done this? A quick Google search came out with nothing on the subject.
+>
+>IMHO, the fact that the current implementation of the LRWP C lib is bound 
+>to SFL (which requires single threading) is a mistake. While SFL makes 
+>perfect sense in the context of the architecture of Xitami, LRWP as a 
+>protocol should be designed with applications in mind and therefore should 
+>be agnostic to threading issues. This limitation is probably what has been 
+>holding LRWP back from being more popular (compared to FastCGI for instance).
+>
+>Don't get me wrong. I *love* Xitami and how it is put together.
+>
+>Regards,
+>Fabien.
+>
+>_________________________________________________________________
+>Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+George Blat
+NT with real time performance
+8016 188th SW, Edmonds, WA 98026
+
+phone:  425-775-7475
+fax:    781-998-5940
+mailto:georgeb@ntrealtime.com
+
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 08:48:45 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Wed, 12 Jun 2002 09:48:45 +0200
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+In-Reply-To: <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>
+Message-ID: <GMEIJMPDFMEGPAGNKHKDAEDDCCAA.rafael.cano@o-labs.com>
+
+ Hi.
+
+ LRWP is a protocol, and has nothing to do with
+ SFL, as a C callable library. All that has to be
+ done is open a socket, read from and write to it.
+ How you reach the WINSOCK library its not relevant.
+
+ By the way, what do you mean SFL requires single
+ threading?, I think it all depends how you build
+ it, to which specific libc library you link it to
+ resolve the basic WIN32 API functions, SFL calls.
+
+ Has any one thought of building specifications
+ for a LRWP 3, with compression and encryption?
+
+ Regards,
+
+
+ I miss Liberetto.
+
+
+
+   Rafael Cano Pérez
+
+
+
+-----Mensaje original-----
+De: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]En nombre de Fabien Royer
+Enviado el: martes, 11 de junio de 2002 23:14
+Para: xitami-dev@lists.xitami.org
+Asunto: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support
+anyone?
+
+
+Hi there,
+
+I am just about to re-write a C++ version of the LRWP C library (out of
+frustration), capable of supporting multithreaded operations (under Windows
+for now).
+
+Before re-inventing the wheel, I'd like to know if someone has already done
+this? A quick Google search came out with nothing on the subject.
+
+IMHO, the fact that the current implementation of the LRWP C lib is bound to
+SFL (which requires single threading) is a mistake. While SFL makes perfect
+sense in the context of the architecture of Xitami, LRWP as a protocol
+should be designed with applications in mind and therefore should be
+agnostic to threading issues. This limitation is probably what has been
+holding LRWP back from being more popular (compared to FastCGI for
+instance).
+
+Don't get me wrong. I *love* Xitami and how it is put together.
+
+Regards,
+Fabien.
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 08:54:38 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Wed, 12 Jun 2002 09:54:38 +0200
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+In-Reply-To: Message from "Fabien Royer" <fabien_royer@hotmail.com>
+ of "Tue, 11 Jun 2002 17:14:19 EDT." <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>
+Message-ID: <20020612075438.A40B2ADF9D@basilica.la.naos.co.nz>
+
+In message <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>, "Fabien Royer" writes:
+>I am just about to re-write a C++ version of the LRWP C library [....]
+>Before re-inventing the wheel, I'd like to know if someone has already done 
+>this? A quick Google search came out with nothing on the subject.
+
+AFAIK no one has done so already.  (The implementations that I know of
+are C, Perl (an example), Python and Java, plus some sort-of-released
+ones for things like Visual Basic, etc.)
+
+>IMHO, the fact that the current implementation of the LRWP C lib is bound to 
+>SFL (which requires single threading) is a mistake.
+
+The LRWP C library was the original proof-of-concept library, written by
+Total Control Software, with minor updates as things went along.  By all
+means rewrite it using something else.  The Java implementation (in the
+form of the Sokrates Servlet Runner from Conacom, etc) is probably the
+most complete multithreaded version.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 10:08:50 2002
+From: xitami-dev@lists.xitami.org (D'Hoye, Peter)
+Date: Wed, 12 Jun 2002 11:08:50 +0200
+Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+Message-ID: <86F8C6DEC76FD411AF5D00508BC744FA5F4DDF@tramex01.gent.bg.barco.com>
+
+Rafael,
+
+thanks for this obvious fix. I'm using LRWP to create
+a web-interface for a machine we make, and I saw the
+LRWP client go in a loop when Xitami was restarted.
+I didn't have any time to investigate, thanks to you
+I can scratch another bug from my to-do list :-)
+
+PS: Pieter, we all mis Liberetto !!!
+
+> -----Original Message-----
+> From: Rafael Cano Pérez [mailto:rafael.cano@o-labs.com]
+> Sent: vrijdag 7 juni 2002 16:40
+> To: Xitami devel
+> Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+> 
+> 
+> 
+>  Hello Imatix.
+> 
+>  I am using lrwplib.c for a prototype LRWP application,
+>  wich will be later implementing the LRWP via an
+>  SMT agent.
+> 
+>  In read_full_TCP() in lrwplib.c, after calling
+>  read_TCP() reads the return code, and compares
+>  it to SOCKET_ERROR for errors. This macro
+>  is defined in sfl.h as -1, but when the socket is
+>  closed, for example when xitami is closed, read_TCP
+>  returns 0, making any application based on lrwplib.c
+>  go into an infinite loop.
+>  Changing the test against 0
+>  ...
+>  if (chunkLen == 0)
+>   return SOCKET_ERROR;
+>  ...
+> 
+>  fixes the error.
+> 
+>  A bug in sfl.h, lrwplib.c or read_TCP() ??
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 16:18:24 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Wed, 12 Jun 2002 11:18:24 -0400
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+Message-ID: <F94FCQS4VbD5iVEfEj9000176ae@hotmail.com>
+
+Hello,
+
+>From: Rafael Cano Pérez <rafael.cano@o-labs.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: <xitami-dev@lists.xitami.org>
+>Subject: RE: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support 
+>anyone?
+>Date: Wed, 12 Jun 2002 09:48:45 +0200
+>
+>
+>  Hi.
+>
+>  LRWP is a protocol, and has nothing to do with
+>  SFL, as a C callable library. All that has to be
+>  done is open a socket, read from and write to it.
+>  How you reach the WINSOCK library its not relevant.
+
+That's my point exactly.
+That's why SFL should not be involved in the LRWP C lib. You'd think that 
+this could have been done the first time around ;-)
+
+>  By the way, what do you mean SFL requires single
+>  threading?, I think it all depends how you build
+>  it, to which specific libc library you link it to
+>  resolve the basic WIN32 API functions, SFL calls.
+
+Not quite. Building SFL (and the other Xitami libs) with the  multithreaded 
+C runtime libs under Windows ends up affecting Xitami negatively (dies after 
+a few seconds or so).
+
+>  Has any one thought of building specifications
+>  for a LRWP 3, with compression and encryption?
+
+I use zlib for the compression and BlowFish for encryption. But I have kept 
+these layers separate from LRWP itself. It makes things a lot cleaner to 
+reuse.
+
+Anyways, I end up writing a C++ version of LRWP in about a day with a few 
+performance optimizations regarding memory allocation and the ability to 
+save posted data to disk.
+
+Regards,
+Fabien.
+
+>  Regards,
+>
+>
+>  I miss Liberetto.
+>
+>
+>
+>    Rafael Cano Pérez
+>
+>
+>
+>-----Mensaje original-----
+>De: xitami-dev-admin@lists.xitami.org
+>[mailto:xitami-dev-admin@lists.xitami.org]En nombre de Fabien Royer
+>Enviado el: martes, 11 de junio de 2002 23:14
+>Para: xitami-dev@lists.xitami.org
+>Asunto: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support
+>anyone?
+>
+>
+>Hi there,
+>
+>I am just about to re-write a C++ version of the LRWP C library (out of
+>frustration), capable of supporting multithreaded operations (under Windows
+>for now).
+>
+>Before re-inventing the wheel, I'd like to know if someone has already done
+>this? A quick Google search came out with nothing on the subject.
+>
+>IMHO, the fact that the current implementation of the LRWP C lib is bound 
+>to
+>SFL (which requires single threading) is a mistake. While SFL makes perfect
+>sense in the context of the architecture of Xitami, LRWP as a protocol
+>should be designed with applications in mind and therefore should be
+>agnostic to threading issues. This limitation is probably what has been
+>holding LRWP back from being more popular (compared to FastCGI for
+>instance).
+>
+>Don't get me wrong. I *love* Xitami and how it is put together.
+>
+>Regards,
+>Fabien.
+>
+>_________________________________________________________________
+>Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+MSN Photos is the easiest way to share and print your photos: 
+http://photos.msn.com/support/worldwide.aspx
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 16:26:53 2002
+From: xitami-dev@lists.xitami.org (D'Hoye, Peter)
+Date: Wed, 12 Jun 2002 17:26:53 +0200
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a
+ nyone?
+Message-ID: <86F8C6DEC76FD411AF5D00508BC744FA5F4DE8@tramex01.gent.bg.barco.com>
+
+> >  By the way, what do you mean SFL requires single
+> >  threading?, I think it all depends how you build
+> >  it, to which specific libc library you link it to
+> >  resolve the basic WIN32 API functions, SFL calls.
+> 
+> Not quite. Building SFL (and the other Xitami libs) with the  
+> multithreaded 
+> C runtime libs under Windows ends up affecting Xitami 
+> negatively (dies after 
+> a few seconds or so).
+
+huh?
+I have build SFL and LRWPlib with the multithreaded C runtime (/MTd)
+and use them without a problem.
+
+Peter
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 16:31:34 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Wed, 12 Jun 2002 11:31:34 -0400
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+Message-ID: <F207IPOJP1VSN6ywdpf0001436e@hotmail.com>
+
+Thanks Ewen.
+
+I just finished rewriting and testing that library with a few performance 
+improvements and a bug fix (read_TCP() has a bug causing it to not return 
+SOCKET_ERROR when the connection is lost). C++ being my weapon of choice for 
+system programming, I couldn't use Java at all.
+
+Regards,
+Fabien.
+
+>From: Ewen McNeill <ewen@imatix.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: xitami-dev@lists.xitami.org
+>Subject: Re: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support 
+>anyone?
+>Date: Wed, 12 Jun 2002 09:54:38 +0200
+>
+>In message <F183xLJQHRWT5K5TEOY000140dd@hotmail.com>, "Fabien Royer" 
+>writes:
+> >I am just about to re-write a C++ version of the LRWP C library [....]
+> >Before re-inventing the wheel, I'd like to know if someone has already 
+>done
+> >this? A quick Google search came out with nothing on the subject.
+>
+>AFAIK no one has done so already.  (The implementations that I know of
+>are C, Perl (an example), Python and Java, plus some sort-of-released
+>ones for things like Visual Basic, etc.)
+>
+> >IMHO, the fact that the current implementation of the LRWP C lib is bound 
+>to
+> >SFL (which requires single threading) is a mistake.
+>
+>The LRWP C library was the original proof-of-concept library, written by
+>Total Control Software, with minor updates as things went along.  By all
+>means rewrite it using something else.  The Java implementation (in the
+>form of the Sokrates Servlet Runner from Conacom, etc) is probably the
+>most complete multithreaded version.
+>
+>Ewen
+>
+>--
+>Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+MSN Photos is the easiest way to share and print your photos: 
+http://photos.msn.com/support/worldwide.aspx
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 16:37:35 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Wed, 12 Jun 2002 11:37:35 -0400
+Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+Message-ID: <F2013H7cAmZ4wxTTpSR00013fd5@hotmail.com>
+
+Hi all,
+
+As far as I am concerned, the bug is in read_TCP(). I had reported this 
+problem to the Xitami team about 3-4 weeks ago. I guess I should have posted 
+it here as well.
+
+Regards,
+Fabien.
+
+>From: "D'Hoye, Peter" <PDHO@esko-graphics.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: "'xitami-dev@lists.xitami.org'" <xitami-dev@lists.xitami.org>
+>Subject: RE: [Xitami-Dev] read_TCP returns 0 instead of -1
+>Date: Wed, 12 Jun 2002 11:08:50 +0200
+>
+>Rafael,
+>
+>thanks for this obvious fix. I'm using LRWP to create
+>a web-interface for a machine we make, and I saw the
+>LRWP client go in a loop when Xitami was restarted.
+>I didn't have any time to investigate, thanks to you
+>I can scratch another bug from my to-do list :-)
+>
+>PS: Pieter, we all mis Liberetto !!!
+>
+> > -----Original Message-----
+> > From: Rafael Cano Pérez [mailto:rafael.cano@o-labs.com]
+> > Sent: vrijdag 7 juni 2002 16:40
+> > To: Xitami devel
+> > Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+> >
+> >
+> >
+> >  Hello Imatix.
+> >
+> >  I am using lrwplib.c for a prototype LRWP application,
+> >  wich will be later implementing the LRWP via an
+> >  SMT agent.
+> >
+> >  In read_full_TCP() in lrwplib.c, after calling
+> >  read_TCP() reads the return code, and compares
+> >  it to SOCKET_ERROR for errors. This macro
+> >  is defined in sfl.h as -1, but when the socket is
+> >  closed, for example when xitami is closed, read_TCP
+> >  returns 0, making any application based on lrwplib.c
+> >  go into an infinite loop.
+> >  Changing the test against 0
+> >  ...
+> >  if (chunkLen == 0)
+> >   return SOCKET_ERROR;
+> >  ...
+> >
+> >  fixes the error.
+> >
+> >  A bug in sfl.h, lrwplib.c or read_TCP() ??
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Join the world’s largest e-mail service with MSN Hotmail. 
+http://www.hotmail.com
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 16:44:20 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Wed, 12 Jun 2002 11:44:20 -0400
+Subject: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a nyone?
+Message-ID: <F117JF8NfxLGUDX3Z3e0001666d@hotmail.com>
+
+Really!? That's interesting. I just could not get it to work after changing 
+the original VC++ projects for the various Xitami libs to be multithreaded. 
+I wonder what I have done wrong. Can you post the compiler settings that you 
+used?
+
+Regards,
+Fabien.
+
+
+>From: "D'Hoye, Peter" <PDHO@esko-graphics.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: "'xitami-dev@lists.xitami.org'" <xitami-dev@lists.xitami.org>
+>Subject: RE: [Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a 
+>nyone?
+>Date: Wed, 12 Jun 2002 17:26:53 +0200
+>
+> > >  By the way, what do you mean SFL requires single
+> > >  threading?, I think it all depends how you build
+> > >  it, to which specific libc library you link it to
+> > >  resolve the basic WIN32 API functions, SFL calls.
+> >
+> > Not quite. Building SFL (and the other Xitami libs) with the
+> > multithreaded
+> > C runtime libs under Windows ends up affecting Xitami
+> > negatively (dies after
+> > a few seconds or so).
+>
+>huh?
+>I have build SFL and LRWPlib with the multithreaded C runtime (/MTd)
+>and use them without a problem.
+>
+>Peter
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Chat with friends online, try MSN Messenger: http://messenger.msn.com
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 21:53:05 2002
+From: xitami-dev@lists.xitami.org (Charles W Howard)
+Date: Wed, 12 Jun 2002 13:53:05 -0700
+Subject: [Xitami-Dev] Question
+Message-ID: <OFF60EBBDA.CF9C20DB-ON07256BD6.00726752@rsc.raytheon.com>
+
+I would like to know if there is a way to run Xitami on a machine(laptop)
+and operate as a server
+if not hooked up to a network or in other words as a stand alone
+machine(for development purposes)?
+
+Chuck
+
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 21:48:59 2002
+From: xitami-dev@lists.xitami.org (Paul Reid)
+Date: Wed, 12 Jun 2002 16:48:59 -0400
+Subject: [Xitami-Dev] Question
+In-Reply-To: <OFF60EBBDA.CF9C20DB-ON07256BD6.00726752@rsc.raytheon.com>
+References: <OFF60EBBDA.CF9C20DB-ON07256BD6.00726752@rsc.raytheon.com>
+Message-ID: <75508568242.20020612164859@rci.rutgers.edu>
+
+> a way to run Xitami on a machine(laptop) and operate as a server
+> if not hooked up to a network or in other words as a stand alone
+> machine(for development purposes)?
+
+Install Xitami.
+
+Open a browser on the same machine, open http://localhost , there is
+your site (the default Xitami sample page, which you will edit or
+replace).
+
+*some* versions of Windows are reluctant even to open "localhost"
+until they check with a DNS server. Stupid, but MS never understood
+the internet. But my dial-up WinNT4 machine can surf itself all
+night long without trying to dial-out.
+
+ -PRR
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 21:57:53 2002
+From: xitami-dev@lists.xitami.org (Patrick O'Mara)
+Date: Wed, 12 Jun 2002 16:57:53 -0400
+Subject: [Xitami-Dev] Question
+In-Reply-To: <OFF60EBBDA.CF9C20DB-ON07256BD6.00726752@rsc.raytheon.com>
+Message-ID: <000001c21253$d250ee60$2514000a@patspc02>
+
+Yeah sure..  just install it and it's ready..
+
+
+
+
+-p@
+
+
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org] On Behalf Of Charles W Howard
+Sent: Wednesday, June 12, 2002 4:53 PM
+To: xitami-dev@lists.xitami.org
+Subject: [Xitami-Dev] Question
+
+I would like to know if there is a way to run Xitami on a
+machine(laptop)
+and operate as a server
+if not hooked up to a network or in other words as a stand alone
+machine(for development purposes)?
+
+Chuck
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 21:58:46 2002
+From: xitami-dev@lists.xitami.org (Patrick O'Mara)
+Date: Wed, 12 Jun 2002 16:58:46 -0400
+Subject: [Xitami-Dev] Question
+In-Reply-To: <OFF60EBBDA.CF9C20DB-ON07256BD6.00726752@rsc.raytheon.com>
+Message-ID: <000101c21253$f1b39960$2514000a@patspc02>
+
+I have xitami,php,mysql, aquaserver all installed on the same standalone
+computer.....it's working GREAT....
+
+
+
+
+-p@
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org] On Behalf Of Charles W Howard
+Sent: Wednesday, June 12, 2002 4:53 PM
+To: xitami-dev@lists.xitami.org
+Subject: [Xitami-Dev] Question
+
+I would like to know if there is a way to run Xitami on a
+machine(laptop)
+and operate as a server
+if not hooked up to a network or in other words as a stand alone
+machine(for development purposes)?
+
+Chuck
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 09:50:18 2002
+From: xitami-dev@lists.xitami.org (Richard Plinston)
+Date: Thu, 13 Jun 2002 09:50:18 +0100
+Subject: [Xitami-Dev] Question
+References: <OFF60EBBDA.CF9C20DB-ON07256BD6.00726752@rsc.raytheon.com> <75508568242.20020612164859@rci.rutgers.edu>
+Message-ID: <3D085CCA.76B5C6B2@Azonic.co.nz>
+
+Paul Reid wrote:
+> 
+> Open a browser on the same machine, open http://localhost ,
+> 
+> *some* versions of Windows are reluctant even to open "localhost"
+> until they check with a DNS server. 
+
+Add a file \Windows\hosts with:
+
+127.0.0.1	localhost 
+
+or just open http://127.0.0.1
+
+You could even put other names into the hosts file:
+
+127.0.0.1	myownsite.me
+
+and then open http://myownsite.me
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 23:04:01 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Wed, 12 Jun 2002 18:04:01 -0400
+Subject: [Xitami-Dev] Question
+Message-ID: <215C1D5A0FFDD011B3CC00805FC18C29023081A5@ntsrv2>
+
+Chuck,
+
+Install Xitami and open a browser.  Use a URL address of http://127.0.0.1.
+You should connect to your site on the laptop.  I am assuming you are
+running a version of Windows for an operating system.  If you don't have a
+file called "hosts" without the double quotes in your Windows directory,
+then create one and add a line to it like the following:
+
+127.0.0.1   localhost           # point to my own machine
+
+On bootup Windows will read your Hosts file and know that a name like
+localhost is attached to a specific IP.  127.0.0.1 is universally known to
+be the machine you are running from.
+
+Don
+
+
+> -----Original Message-----
+> From:	Charles W Howard [SMTP:cwhoward1@raytheon.com]
+> Sent:	Wednesday, June 12, 2002 4:53 PM
+> To:	xitami-dev@lists.xitami.org
+> Subject:	[Xitami-Dev] Question
+> 
+> I would like to know if there is a way to run Xitami on a machine(laptop)
+> and operate as a server
+> if not hooked up to a network or in other words as a stand alone
+> machine(for development purposes)?
+> 
+> Chuck
+> 
+> 
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Wed Jun 12 23:55:39 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Wed, 12 Jun 2002 18:55:39 -0400
+Subject: [Xitami-Dev] Question
+Message-ID: <F1028BTtLziZozZtMK000017db4@hotmail.com>
+
+Under Windows, you may also want to install the loopback adapter if you 
+don't have a network card in the machine.
+
+Regards,
+Fabien.
+
+
+>From: "Charles W Howard" <cwhoward1@raytheon.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: xitami-dev@lists.xitami.org
+>Subject: [Xitami-Dev] Question
+>Date: Wed, 12 Jun 2002 13:53:05 -0700
+>
+>I would like to know if there is a way to run Xitami on a machine(laptop)
+>and operate as a server
+>if not hooked up to a network or in other words as a stand alone
+>machine(for development purposes)?
+>
+>Chuck
+>
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 17:42:07 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Thu, 13 Jun 2002 12:42:07 -0400
+Subject: [Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+Message-ID: <F54rRHyQWwAJIlZ5cNw0001b598@hotmail.com>
+
+Hi all,
+
+I have a client app written to POST compressed and encrypted data to a LRWP 
+process. The problem is that the LRWP process only receives a few bytes 
+instead of the whole data stream. Basically, it appears that the WSX module 
+xilrwp.c punts on the first NUL it encounters in the stream. POST'ing text 
+data works like a charm though...
+
+Looking at the source code, it would appear that this issue has been 
+resolved already (as indicated by the comments at the top of xilrwp.c). But 
+the problem still exists as of the latest 2.5 codebase...Or am I missing 
+something?
+
+Has anyone written a fix for this issue (I'd like to know before I do it).
+
+Regards,
+Fabien.
+
+/*  
+----------------------------------------------------------------<Prolog>-
+    Name:       xilrwp.c
+    Title:      Xitami WSX agent for long-running web process (LRWP) 
+protocol
+    Package:    Xitami
+
+    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes from
+                                Bruce Dodson <bruce_dodson@bigfoot.com>
+                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+prevent
+                                         DoS issues.
+                1999/12/30    Xitami Team: Fixed issues with NULs in data 
+sent
+		2001/05/15    Xitami Team: Fixed issue with sending binary data
+
+    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+    License:    This is free software; you can redistribute it and/or modify
+                it under the terms of the SMT License Agreement as provided
+                in the file LICENSE.TXT.  This software is distributed in
+                the hope that it will be useful, but without any warranty.
+------------------------------------------------------------------</Prolog>-*/
+
+_________________________________________________________________
+Send and receive Hotmail on your mobile device: http://mobile.msn.com
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 17:58:58 2002
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Thu, 13 Jun 2002 09:58:58 -0700
+Subject: [Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+In-Reply-To: <F54rRHyQWwAJIlZ5cNw0001b598@hotmail.com>
+Message-ID: <5.0.2.1.0.20020613095555.022eab28@pop3.norton.antivirus>
+
+I use modules that process uploaded .jpg files sent to the server
+  and did not have any problem. I have verified that LRWP can handle binary 
+streams.
+
+George
+
+
+At 12:42 PM 6/13/2002 -0400, you wrote:
+
+>Hi all,
+>
+>I have a client app written to POST compressed and encrypted data to a 
+>LRWP process. The problem is that the LRWP process only receives a few 
+>bytes instead of the whole data stream. Basically, it appears that the WSX 
+>module xilrwp.c punts on the first NUL it encounters in the stream. 
+>POST'ing text data works like a charm though...
+>
+>Looking at the source code, it would appear that this issue has been 
+>resolved already (as indicated by the comments at the top of xilrwp.c). 
+>But the problem still exists as of the latest 2.5 codebase...Or am I 
+>missing something?
+>
+>Has anyone written a fix for this issue (I'd like to know before I do it).
+>
+>Regards,
+>Fabien.
+>
+>/*
+>----------------------------------------------------------------<Prolog>-
+>    Name:       xilrwp.c
+>    Title:      Xitami WSX agent for long-running web process (LRWP) protocol
+>    Package:    Xitami
+>
+>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes from
+>                                Bruce Dodson <bruce_dodson@bigfoot.com>
+>                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+> prevent
+>                                         DoS issues.
+>                1999/12/30    Xitami Team: Fixed issues with NULs in data sent
+>                 2001/05/15    Xitami Team: Fixed issue with sending 
+> binary data
+>
+>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+>    License:    This is free software; you can redistribute it and/or modify
+>                it under the terms of the SMT License Agreement as provided
+>                in the file LICENSE.TXT.  This software is distributed in
+>                the hope that it will be useful, but without any warranty.
+>------------------------------------------------------------------</Prolog>-*/
+>
+>_________________________________________________________________
+>Send and receive Hotmail on your mobile device: http://mobile.msn.com
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 17:58:58 2002
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Thu, 13 Jun 2002 09:58:58 -0700
+Subject: [Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+In-Reply-To: <F54rRHyQWwAJIlZ5cNw0001b598@hotmail.com>
+Message-ID: <5.0.2.1.0.20020613095555.022eab28@pop3.norton.antivirus>
+
+I use modules that process uploaded .jpg files sent to the server
+  and did not have any problem. I have verified that LRWP can handle binary 
+streams.
+
+George
+
+
+At 12:42 PM 6/13/2002 -0400, you wrote:
+
+>Hi all,
+>
+>I have a client app written to POST compressed and encrypted data to a 
+>LRWP process. The problem is that the LRWP process only receives a few 
+>bytes instead of the whole data stream. Basically, it appears that the WSX 
+>module xilrwp.c punts on the first NUL it encounters in the stream. 
+>POST'ing text data works like a charm though...
+>
+>Looking at the source code, it would appear that this issue has been 
+>resolved already (as indicated by the comments at the top of xilrwp.c). 
+>But the problem still exists as of the latest 2.5 codebase...Or am I 
+>missing something?
+>
+>Has anyone written a fix for this issue (I'd like to know before I do it).
+>
+>Regards,
+>Fabien.
+>
+>/*
+>----------------------------------------------------------------<Prolog>-
+>    Name:       xilrwp.c
+>    Title:      Xitami WSX agent for long-running web process (LRWP) protocol
+>    Package:    Xitami
+>
+>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes from
+>                                Bruce Dodson <bruce_dodson@bigfoot.com>
+>                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+> prevent
+>                                         DoS issues.
+>                1999/12/30    Xitami Team: Fixed issues with NULs in data sent
+>                 2001/05/15    Xitami Team: Fixed issue with sending 
+> binary data
+>
+>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+>    License:    This is free software; you can redistribute it and/or modify
+>                it under the terms of the SMT License Agreement as provided
+>                in the file LICENSE.TXT.  This software is distributed in
+>                the hope that it will be useful, but without any warranty.
+>------------------------------------------------------------------</Prolog>-*/
+>
+>_________________________________________________________________
+>Send and receive Hotmail on your mobile device: http://mobile.msn.com
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 19:12:02 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Thu, 13 Jun 2002 14:12:02 -0400
+Subject: [Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in
+ xilrwp.c?)
+Message-ID: <F81y6qnOZTX9oeihX580001b6df@hotmail.com>
+
+George,
+
+Let me be more specific.
+
+While you are right about a LRWP process being capable of *sending* binary 
+data without any problem (I have tested that on JPEG files too), you are not 
+correct about a LRWP being capable of *receiving* binary data POST'ed to it.
+
+For instance, try to POST a JPEG image to your LRWP process rather than 
+having it uploaded over FTP. You will not get what you expect.
+
+The obvious workaround would be to UUENCODE the binary data, but I want to 
+avoid this at all cost. There's no reason why a LRWP could not handle binary 
+data.
+
+Regards,
+Fabien.
+
+
+>From: George Blat <georgeb@ntrealtime.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: xitami-dev@lists.xitami.org
+>Subject: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not  
+>work (bug in xilrwp.c?)
+>Date: Thu, 13 Jun 2002 09:58:58 -0700
+>
+>I use modules that process uploaded .jpg files sent to the server
+>  and did not have any problem. I have verified that LRWP can handle binary 
+>streams.
+>
+>George
+>
+>
+>At 12:42 PM 6/13/2002 -0400, you wrote:
+>
+>>Hi all,
+>>
+>>I have a client app written to POST compressed and encrypted data to a 
+>>LRWP process. The problem is that the LRWP process only receives a few 
+>>bytes instead of the whole data stream. Basically, it appears that the WSX 
+>>module xilrwp.c punts on the first NUL it encounters in the stream. 
+>>POST'ing text data works like a charm though...
+>>
+>>Looking at the source code, it would appear that this issue has been 
+>>resolved already (as indicated by the comments at the top of xilrwp.c). 
+>>But the problem still exists as of the latest 2.5 codebase...Or am I 
+>>missing something?
+>>
+>>Has anyone written a fix for this issue (I'd like to know before I do it).
+>>
+>>Regards,
+>>Fabien.
+>>
+>>/*
+>>----------------------------------------------------------------<Prolog>-
+>>    Name:       xilrwp.c
+>>    Title:      Xitami WSX agent for long-running web process (LRWP) 
+>>protocol
+>>    Package:    Xitami
+>>
+>>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+>>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes 
+>>from
+>>                                Bruce Dodson <bruce_dodson@bigfoot.com>
+>>                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+>>prevent
+>>                                         DoS issues.
+>>                1999/12/30    Xitami Team: Fixed issues with NULs in data 
+>>sent
+>>                 2001/05/15    Xitami Team: Fixed issue with sending 
+>>binary data
+>>
+>>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+>>    License:    This is free software; you can redistribute it and/or 
+>>modify
+>>                it under the terms of the SMT License Agreement as 
+>>provided
+>>                in the file LICENSE.TXT.  This software is distributed in
+>>                the hope that it will be useful, but without any warranty.
+>>------------------------------------------------------------------</Prolog>-*/
+>>
+>>_________________________________________________________________
+>>Send and receive Hotmail on your mobile device: http://mobile.msn.com
+>>
+>>
+>>--
+>>Xitami-Dev -- Xitami Development Mailing List
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 20:31:22 2002
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Thu, 13 Jun 2002 21:31:22 +0200
+Subject: [Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+In-Reply-To: <F81y6qnOZTX9oeihX580001b6df@hotmail.com>
+Message-ID: <GMEIJMPDFMEGPAGNKHKDGEDICCAA.rafael.cano@o-labs.com>
+
+ Fabien,
+
+ I am building a system that receives binary data
+ in an LRWP connected process. No problem, use
+ http_multipart_mem().
+
+ Regards.
+
+
+
+   Rafael Cano Pérez
+
+
+
+-----Mensaje original-----
+De: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]En nombre de Fabien Royer
+Enviado el: jueves, 13 de junio de 2002 20:12
+Para: xitami-dev@lists.xitami.org
+Asunto: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not
+work (bug in xilrwp.c?)
+
+
+George,
+
+Let me be more specific.
+
+While you are right about a LRWP process being capable of *sending* binary
+data without any problem (I have tested that on JPEG files too), you are not
+correct about a LRWP being capable of *receiving* binary data POST'ed to it.
+
+For instance, try to POST a JPEG image to your LRWP process rather than
+having it uploaded over FTP. You will not get what you expect.
+
+The obvious workaround would be to UUENCODE the binary data, but I want to
+avoid this at all cost. There's no reason why a LRWP could not handle binary
+data.
+
+Regards,
+Fabien.
+
+
+>From: George Blat <georgeb@ntrealtime.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: xitami-dev@lists.xitami.org
+>Subject: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not
+>work (bug in xilrwp.c?)
+>Date: Thu, 13 Jun 2002 09:58:58 -0700
+>
+>I use modules that process uploaded .jpg files sent to the server
+>  and did not have any problem. I have verified that LRWP can handle binary
+>streams.
+>
+>George
+>
+>
+>At 12:42 PM 6/13/2002 -0400, you wrote:
+>
+>>Hi all,
+>>
+>>I have a client app written to POST compressed and encrypted data to a
+>>LRWP process. The problem is that the LRWP process only receives a few
+>>bytes instead of the whole data stream. Basically, it appears that the WSX
+>>module xilrwp.c punts on the first NUL it encounters in the stream.
+>>POST'ing text data works like a charm though...
+>>
+>>Looking at the source code, it would appear that this issue has been
+>>resolved already (as indicated by the comments at the top of xilrwp.c).
+>>But the problem still exists as of the latest 2.5 codebase...Or am I
+>>missing something?
+>>
+>>Has anyone written a fix for this issue (I'd like to know before I do it).
+>>
+>>Regards,
+>>Fabien.
+>>
+>>/*
+>>----------------------------------------------------------------<Prolog>-
+>>    Name:       xilrwp.c
+>>    Title:      Xitami WSX agent for long-running web process (LRWP)
+>>protocol
+>>    Package:    Xitami
+>>
+>>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+>>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes
+>>from
+>>                                Bruce Dodson <bruce_dodson@bigfoot.com>
+>>                1999/11/11    Xitami Team: Bug fixes for cleanup code to
+>>prevent
+>>                                         DoS issues.
+>>                1999/12/30    Xitami Team: Fixed issues with NULs in data
+>>sent
+>>                 2001/05/15    Xitami Team: Fixed issue with sending
+>>binary data
+>>
+>>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+>>    License:    This is free software; you can redistribute it and/or
+>>modify
+>>                it under the terms of the SMT License Agreement as
+>>provided
+>>                in the file LICENSE.TXT.  This software is distributed in
+>>                the hope that it will be useful, but without any warranty.
+>>------------------------------------------------------------------</Prolog
+>-*/
+>>
+>>_________________________________________________________________
+>>Send and receive Hotmail on your mobile device: http://mobile.msn.com
+>>
+>>
+>>--
+>>Xitami-Dev -- Xitami Development Mailing List
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Thu Jun 13 21:15:06 2002
+From: xitami-dev@lists.xitami.org (George Blat)
+Date: Thu, 13 Jun 2002 13:15:06 -0700
+Subject: [Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+In-Reply-To: <F81y6qnOZTX9oeihX580001b6df@hotmail.com>
+Message-ID: <5.0.2.1.0.20020613131120.022b3428@pop3.norton.antivirus>
+
+I stand corrected. The data had been converted to 7 bit when I received and 
+I had to
+convert it to back  binary. I am not sure whether the HTTP spec, which is 
+based on SMTP, guarantees 8 bit transport. SMTP uses mime for that and so 
+does http.
+
+George
+
+
+
+At 02:12 PM 6/13/2002 -0400, you wrote:
+
+>George,
+>
+>Let me be more specific.
+>
+>While you are right about a LRWP process being capable of *sending* binary 
+>data without any problem (I have tested that on JPEG files too), you are 
+>not correct about a LRWP being capable of *receiving* binary data POST'ed 
+>to it.
+>
+>For instance, try to POST a JPEG image to your LRWP process rather than 
+>having it uploaded over FTP. You will not get what you expect.
+>
+>The obvious workaround would be to UUENCODE the binary data, but I want to 
+>avoid this at all cost. There's no reason why a LRWP could not handle 
+>binary data.
+>
+>Regards,
+>Fabien.
+>
+>
+>>From: George Blat <georgeb@ntrealtime.com>
+>>Reply-To: xitami-dev@lists.xitami.org
+>>To: xitami-dev@lists.xitami.org
+>>Subject: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not
+>>work (bug in xilrwp.c?)
+>>Date: Thu, 13 Jun 2002 09:58:58 -0700
+>>
+>>I use modules that process uploaded .jpg files sent to the server
+>>  and did not have any problem. I have verified that LRWP can handle 
+>> binary streams.
+>>
+>>George
+>>
+>>
+>>At 12:42 PM 6/13/2002 -0400, you wrote:
+>>
+>>>Hi all,
+>>>
+>>>I have a client app written to POST compressed and encrypted data to a 
+>>>LRWP process. The problem is that the LRWP process only receives a few 
+>>>bytes instead of the whole data stream. Basically, it appears that the 
+>>>WSX module xilrwp.c punts on the first NUL it encounters in the stream. 
+>>>POST'ing text data works like a charm though...
+>>>
+>>>Looking at the source code, it would appear that this issue has been 
+>>>resolved already (as indicated by the comments at the top of xilrwp.c). 
+>>>But the problem still exists as of the latest 2.5 codebase...Or am I 
+>>>missing something?
+>>>
+>>>Has anyone written a fix for this issue (I'd like to know before I do it).
+>>>
+>>>Regards,
+>>>Fabien.
+>>>
+>>>/*
+>>>----------------------------------------------------------------<Prolog>-
+>>>    Name:       xilrwp.c
+>>>    Title:      Xitami WSX agent for long-running web process (LRWP) 
+>>> protocol
+>>>    Package:    Xitami
+>>>
+>>>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+>>>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes from
+>>>                                Bruce Dodson <bruce_dodson@bigfoot.com>
+>>>                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+>>> prevent
+>>>                                         DoS issues.
+>>>                1999/12/30    Xitami Team: Fixed issues with NULs in 
+>>> data sent
+>>>                 2001/05/15    Xitami Team: Fixed issue with sending 
+>>> binary data
+>>>
+>>>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+>>>    License:    This is free software; you can redistribute it and/or modify
+>>>                it under the terms of the SMT License Agreement as provided
+>>>                in the file LICENSE.TXT.  This software is distributed in
+>>>                the hope that it will be useful, but without any warranty.
+>>>------------------------------------------------------------------</Prolog>-*/
+>>>
+>>>_________________________________________________________________
+>>>Send and receive Hotmail on your mobile device: http://mobile.msn.com
+>>>
+>>>
+>>>--
+>>>Xitami-Dev -- Xitami Development Mailing List
+>>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>>
+>>
+>>--
+>>Xitami-Dev -- Xitami Development Mailing List
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>
+>
+>_________________________________________________________________
+>Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Fri Jun 14 06:21:27 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Fri, 14 Jun 2002 01:21:27 -0400
+Subject: [Xitami-Dev] Hummm...POST'ing binary data to a LRWP process *does* work after all :)
+Message-ID: <F88Yhsl4OhAt8zqzjkn0001bf89@hotmail.com>
+
+Hi all,
+
+Thank you Rafael for pointing me in the right direction :)
+
+After much reading (of RFC 1521) about "Content-Type: multipart/form-data" 
+(and looking at a raw dump of a HTTP file upload using libwww), I finally 
+got my binary uploads to work flawlessly using a LRWP.
+
+Sorry about the confusion.
+
+Regards,
+Fabien.
+
+>From: Rafael Cano Pérez <rafael.cano@o-labs.com>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: <xitami-dev@lists.xitami.org>
+>Subject: RE: [Xitami-Dev] POST'ing binary data to LRWP process does not 
+>work (bug in xilrwp.c?)
+>Date: Thu, 13 Jun 2002 21:31:22 +0200
+>
+>
+>  Fabien,
+>
+>  I am building a system that receives binary data
+>  in an LRWP connected process. No problem, use
+>  http_multipart_mem().
+>
+>  Regards.
+>
+>
+>
+>    Rafael Cano Pérez
+>
+>
+>
+>-----Mensaje original-----
+>De: xitami-dev-admin@lists.xitami.org
+>[mailto:xitami-dev-admin@lists.xitami.org]En nombre de Fabien Royer
+>Enviado el: jueves, 13 de junio de 2002 20:12
+>Para: xitami-dev@lists.xitami.org
+>Asunto: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not
+>work (bug in xilrwp.c?)
+>
+>
+>George,
+>
+>Let me be more specific.
+>
+>While you are right about a LRWP process being capable of *sending* binary
+>data without any problem (I have tested that on JPEG files too), you are 
+>not
+>correct about a LRWP being capable of *receiving* binary data POST'ed to 
+>it.
+>
+>For instance, try to POST a JPEG image to your LRWP process rather than
+>having it uploaded over FTP. You will not get what you expect.
+>
+>The obvious workaround would be to UUENCODE the binary data, but I want to
+>avoid this at all cost. There's no reason why a LRWP could not handle 
+>binary
+>data.
+>
+>Regards,
+>Fabien.
+>
+>
+> >From: George Blat <georgeb@ntrealtime.com>
+> >Reply-To: xitami-dev@lists.xitami.org
+> >To: xitami-dev@lists.xitami.org
+> >Subject: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not
+> >work (bug in xilrwp.c?)
+> >Date: Thu, 13 Jun 2002 09:58:58 -0700
+> >
+> >I use modules that process uploaded .jpg files sent to the server
+> >  and did not have any problem. I have verified that LRWP can handle 
+>binary
+> >streams.
+> >
+> >George
+> >
+> >
+> >At 12:42 PM 6/13/2002 -0400, you wrote:
+> >
+> >>Hi all,
+> >>
+> >>I have a client app written to POST compressed and encrypted data to a
+> >>LRWP process. The problem is that the LRWP process only receives a few
+> >>bytes instead of the whole data stream. Basically, it appears that the 
+>WSX
+> >>module xilrwp.c punts on the first NUL it encounters in the stream.
+> >>POST'ing text data works like a charm though...
+> >>
+> >>Looking at the source code, it would appear that this issue has been
+> >>resolved already (as indicated by the comments at the top of xilrwp.c).
+> >>But the problem still exists as of the latest 2.5 codebase...Or am I
+> >>missing something?
+> >>
+> >>Has anyone written a fix for this issue (I'd like to know before I do 
+>it).
+> >>
+> >>Regards,
+> >>Fabien.
+> >>
+> >>/*
+> >>----------------------------------------------------------------<Prolog>-
+> >>    Name:       xilrwp.c
+> >>    Title:      Xitami WSX agent for long-running web process (LRWP)
+> >>protocol
+> >>    Package:    Xitami
+> >>
+> >>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+> >>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes
+> >>from
+> >>                                Bruce Dodson <bruce_dodson@bigfoot.com>
+> >>                1999/11/11    Xitami Team: Bug fixes for cleanup code to
+> >>prevent
+> >>                                         DoS issues.
+> >>                1999/12/30    Xitami Team: Fixed issues with NULs in 
+>data
+> >>sent
+> >>                 2001/05/15    Xitami Team: Fixed issue with sending
+> >>binary data
+> >>
+> >>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+> >>    License:    This is free software; you can redistribute it and/or
+> >>modify
+> >>                it under the terms of the SMT License Agreement as
+> >>provided
+> >>                in the file LICENSE.TXT.  This software is distributed 
+>in
+> >>                the hope that it will be useful, but without any 
+>warranty.
+> >>------------------------------------------------------------------</Prolog
+> >-*/
+> >>
+> >>_________________________________________________________________
+> >>Send and receive Hotmail on your mobile device: http://mobile.msn.com
+> >>
+> >>
+> >>--
+> >>Xitami-Dev -- Xitami Development Mailing List
+> >>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+> >
+> >
+> >--
+> >Xitami-Dev -- Xitami Development Mailing List
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>
+>
+>_________________________________________________________________
+>Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at http://explorer.msn.com/intl.asp.
+
+
+From xitami-dev@lists.xitami.org  Fri Jun 14 07:33:28 2002
+From: xitami-dev@lists.xitami.org (Kimman Balakrishnan)
+Date: Fri, 14 Jun 2002 12:03:28 +0530
+Subject: [Xitami-Dev] Large Volume File Transfer
+References: <F54rRHyQWwAJIlZ5cNw0001b598@hotmail.com>
+Message-ID: <3D098E38.38C0C03D@imagingindia.com>
+
+Hello all
+
+Our application area is document imaging including production environments.
+
+With the growing trend towards offshore processing, we now are faced with customers
+scanning on-site and then transferring files to an offshore server. The quantum of
+data could be anywhere from 500 MB per day to a few GB. Some of the customers have
+dedicated 'pipes' which have to be used. Typically there is a dedicated pipe to a
+US HQ and then one or more dedicated pipes to offshore servers. This implies a
+multi-step transfer. And to complicate things a little more, there can be time
+slots for the use of the pipes for these transfers.
+
+It seems like we could build this using the SMT architecture.
+
+At the originating site, we have a FTP client - this could be built as an SMT
+agent.  Happily the FTP RFC includes state diagrams and should make writing the
+agent relatively easier.
+
+At all other sites we have a Xitami webserver with the FTP agent running. If the
+server is an 'intermediate' site, the server includes the FTP client agent as well.
+Once a 'set' of files are recd by the server, a message is sent to the FTP client
+agent to initiate the transfer to the next server. Each 'set' is a batch of images
+with a control file - the onward sending starts only when the 'set' is complete -
+this validation is specific to our context.
+
+The FTP client configuration will include :
+
+a. the alternate routes available for transfer - this would be in the intermediate
+sites.
+b. the number of simultaneous transfers that can be initiated
+c. TCP/IP configuration to ensure max throughput - I have found some articles on
+the TCP/IP configuration for these kind of large transfers
+
+Comments and suggestions are invited.
+
+Kimman Balakrishnan
+Imaging Solutions Pvt Ltd
+
+
+
+
+From xitami-dev@lists.xitami.org  Fri Jun 14 08:39:20 2002
+From: xitami-dev@lists.xitami.org (=?US-ASCII?Q?Rafael_Cano_Perez?=)
+Date: Fri, 14 Jun 2002 09:39:20 +0200
+Subject: [Xitami-Dev] Large Volume File Transfer
+In-Reply-To: <3D098E38.38C0C03D@imagingindia.com>
+Message-ID: <GMEIJMPDFMEGPAGNKHKDIEDJCCAA.rafael.cano@o-labs.com>
+
+ Hi Kimman,
+
+ I think HTTP would be a better protocol to use,
+ if only for the benefit of using LRWP to receive data
+ behind a standard xitami or an "HTTPS" xitamipro, and
+ the functions available in SFL.
+
+ This would allow you to prototype with a stand alone
+ LRWP executable before going into a full SMT Agent/Application.
+
+ Besides, the meta information that you could put in
+ an HTTP header, would be useful for your routing
+ algorithms on the receiving site.
+
+ It would also allow the end users scanning the documents
+ to easily send them via an HTML form.
+
+ Regards
+
+
+
+   Rafael Cano Perez
+
+
+-----Mensaje original-----
+De: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]En nombre de Kimman
+Balakrishnan
+Enviado el: viernes, 14 de junio de 2002 08:33
+Para: xitami-dev@lists.xitami.org
+Asunto: [Xitami-Dev] Large Volume File Transfer
+
+
+Hello all
+
+Our application area is document imaging including production environments.
+
+With the growing trend towards offshore processing, we now are faced with
+customers
+scanning on-site and then transferring files to an offshore server. The
+quantum of
+data could be anywhere from 500 MB per day to a few GB. Some of the
+customers have
+dedicated 'pipes' which have to be used. Typically there is a dedicated pipe
+to a
+US HQ and then one or more dedicated pipes to offshore servers. This implies
+a
+multi-step transfer. And to complicate things a little more, there can be
+time
+slots for the use of the pipes for these transfers.
+
+It seems like we could build this using the SMT architecture.
+
+At the originating site, we have a FTP client - this could be built as an
+SMT
+agent.  Happily the FTP RFC includes state diagrams and should make writing
+the
+agent relatively easier.
+
+At all other sites we have a Xitami webserver with the FTP agent running. If
+the
+server is an 'intermediate' site, the server includes the FTP client agent
+as well.
+Once a 'set' of files are recd by the server, a message is sent to the FTP
+client
+agent to initiate the transfer to the next server. Each 'set' is a batch of
+images
+with a control file - the onward sending starts only when the 'set' is
+complete -
+this validation is specific to our context.
+
+The FTP client configuration will include :
+
+a. the alternate routes available for transfer - this would be in the
+intermediate
+sites.
+b. the number of simultaneous transfers that can be initiated
+c. TCP/IP configuration to ensure max throughput - I have found some
+articles on
+the TCP/IP configuration for these kind of large transfers
+
+Comments and suggestions are invited.
+
+Kimman Balakrishnan
+Imaging Solutions Pvt Ltd
+
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+From xitami-dev@lists.xitami.org  Fri Jun 14 11:09:26 2002
+From: xitami-dev@lists.xitami.org (Bob Paddock)
+Date: Fri, 14 Jun 2002 06:09:26 -0400
+Subject: [Xitami-Dev] Large Volume File Transfer
+In-Reply-To: <3D098E38.38C0C03D@imagingindia.com>
+References: <F54rRHyQWwAJIlZ5cNw0001b598@hotmail.com> <3D098E38.38C0C03D@imagingindia.com>
+Message-ID: <20020614060846.SM00444@there>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+
+> Our application area is document imaging including production
+> environments.
+>
+> With the growing trend towards offshore processing, we now are
+> faced with customers scanning on-site and then transferring
+> files to an offshore server. The quantum of data could be
+> anywhere from 500 MB per day to a few GB. 
+
+You really should look at some document specific compression 
+methods then.
+
+Take a look at http://www.lizardtech.com/ .
+
+and 
+
+http://www.djvuzone.org/ .
+
+Using DjVu compression I can get a 43+Meg document down to under
+10 Megs.  You can see these examples on 
+http://www.unusualresearch.com/ .
+
+Simple black and white page scans might be as low as 50K per 
+page, from originals that are in the meg range.
+
+There are specific compression methods for medical imaging and 
+maps as well.
+
+> At the originating site, we have a FTP client - 
+
+You might be better served by a rsync or unison client.
+rsync has much better error detection and recovery than FTP.
+
+Any one done rsync in SMT?
+
+> Imaging Solutions Pvt Ltd
+
+Sounds like a fun project.  I'm always playing with my scanners 
+here at home trying to reduce the weight of my library down to a 
+few CD's.  Just wish I could afford faster scanners, and ones 
+that didn't skew the paper during feeding all the time.
+
+Ever come across any good deskewing code?
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.0.6 (GNU/Linux)
+Comment: For info see http://www.gnupg.org
+
+iD8DBQE9CcDWoqsDS8ujjoQRAsHhAJ4qY68ygdkr0zxYZlXyf5CPF7ZGVACgp0h2
+g2xMjBFxro9zuucUXDHcGfk=
+=CfNW
+-----END PGP SIGNATURE-----
+
+From xitami-dev@lists.xitami.org  Fri Jun 14 16:34:01 2002
+From: xitami-dev@lists.xitami.org (Paul Reid)
+Date: Fri, 14 Jun 2002 11:34:01 -0400
+Subject: [Xitami-Dev] Large Volume File Transfer
+In-Reply-To: <3D098E38.38C0C03D@imagingindia.com>
+References: <F54rRHyQWwAJIlZ5cNw0001b598@hotmail.com>
+ <3D098E38.38C0C03D@imagingindia.com>
+Message-ID: <44662470161.20020614113401@rci.rutgers.edu>
+
+> a Xitami webserver with the FTP agent running.
+
+With the Xitami FTP server? Have you stress-tested it with the loads
+you expect?
+
+X's FTP is fine for lightweight duty and is free. My experience
+though is that it can lock-up on a hundred files and a hundred megs.
+Not every time, in fact maybe twice a year for a small system. But
+you'll have more traffic, and bigger traffic, every day than I have
+in a year. With remote servers all over the world, that means a lot
+of driving to re-boot stuck machines, and a lot of error recovery to
+find where the transfer stuck and try again.
+
+
+ -PRR
+
+
+From xitami-dev@lists.xitami.org  Mon Jun 24 14:22:10 2002
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 24 Jun 2002 15:22:10 +0200
+Subject: [Xitami-Dev] Mailing List Admin: DNS changes
+Message-ID: <20020624132210.A79D1ADF71@basilica.la.naos.co.nz>
+
+Hi Folks,
+
+We (iMatix) are in the middle of moving some domains from one DNS server
+to another DNS server.  One of the domains being moved is "xitami.org",
+as used by lists.xitami.org for this mailing list.
+
+It is possible that for a (hopefully) short period of time during this
+move the domain xitami.org, and hence lists.xitami.org, may be
+inaccessible, at least to some people.
+
+To help ensure that the mailing list remains available during this
+period, I have configured "lists.xitami.com" (note ".com", not ".org")
+as a backup name for the mailing list, viz:
+
+http://lists.xitami.com/mailman/listinfo/xitami-dev
+
+xitami-dev@lists.xitami.com
+
+If you have trouble with the main address (lists.xitami.org) this week 
+please try the lists.xitami.com address instead.
+
+Ewen McNeill
+Mailing List Administrator
+
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Tue Jun 25 16:07:50 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Tue, 25 Jun 2002 16:07:50 +0100 (MEZ)
+Subject: [Xitami-Dev] sokrates with 2.3 api
+Message-ID: <200206251409.QAA27771@sxpublic.nxrda.imatix.net>
+
+we finished the update to the 2.3 api (without JSP) and need
+beta testers for it.
+
+it should run with java 1.1.8 also. any volunteers ? the beta
+should run by simply exchanging the javax.jar and runner.jar
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Sat Jun 29 11:57:01 2002
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Sat, 29 Jun 2002 11:57:01 +0100 (MEZ)
+Subject: [Xitami-Dev] ping
+Message-ID: <200206290956.g5T9us4W010043@sxpublic.nxrda.imatix.net>
+
+anyone here ?
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Sat Jun 29 13:57:01 2002
+From: xitami-dev@lists.xitami.org (Fabien Royer)
+Date: Sat, 29 Jun 2002 08:57:01 -0400
+Subject: [Xitami-Dev] ping
+Message-ID: <F67VMczi9yzu23LiC1h000015bf@hotmail.com>
+
+Pong!
+
+
+>From: "bernd hohmann" <xitami-dev@conacom.de>
+>Reply-To: xitami-dev@lists.xitami.org
+>To: "xitami-dev@lists.xitami.org" <xitami-dev@lists.xitami.org>
+>Subject: [Xitami-Dev] ping
+>Date: Sat, 29 Jun 2002 11:57:01 +0100 (MEZ)
+>
+>anyone here ?
+>
+>bernd
+>
+>
+>
+>--
+>Xitami-Dev -- Xitami Development Mailing List
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+
+
+
+_________________________________________________________________
+Send and receive Hotmail on your mobile device: http://mobile.msn.com
+
+
+From xitami-dev@lists.xitami.org  Sat Jun 29 22:51:17 2002
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Sat, 29 Jun 2002 17:51:17 EDT
+Subject: [Xitami-Dev] ping
+Message-ID: <c8.29120e42.2a4f85d5@aol.com>
+
+--part1_c8.29120e42.2a4f85d5_boundary
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+heh
+
+--part1_c8.29120e42.2a4f85d5_boundary
+Content-Type: text/html; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+
+<HTML><FONT FACE=arial,helvetica><FONT  SIZE=2 FAMILY="SANSSERIF" FACE="Arial" LANG="0">heh</FONT></HTML>
+
+--part1_c8.29120e42.2a4f85d5_boundary--
+
+From xitami-dev@lists.xitami.org  Sun Jun 30 08:01:28 2002
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Sun, 30 Jun 2002 00:01:28 -0700 (PDT)
+Subject: [Xitami-Dev] Re: pong :-)
+In-Reply-To: <200206291001.g5TA124W010122@sxpublic.nxrda.imatix.net>
+Message-ID: <20020630070128.77395.qmail@web13401.mail.yahoo.com>
+
+pong.
+
+Yes, atleast I am watching your great work with
+servlets with great interest even though I have not
+used it yet.
+
+Hopefully I will do it soon.
+
+Shivakumar G.
+
+> Today's Topics:
+> 
+>    1. ping (bernd hohmann)
+> 
+> --__--__--
+> 
+> 
+> anyone here ?
+> 
+> bernd
+> 
+
+
+__________________________________________________
+Do You Yahoo!?
+Yahoo! - Official partner of 2002 FIFA World Cup
+http://fifaworldcup.yahoo.com
+

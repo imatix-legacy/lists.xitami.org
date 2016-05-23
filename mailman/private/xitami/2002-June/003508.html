@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Plaintext passwords on Bugtraq (again)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003507.html">
+   <LINK REL="Next"  HREF="003511.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Plaintext passwords on Bugtraq (again)
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Plaintext passwords on Bugtraq (again)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Jun 2002 09:11:36 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003507.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+        <LI> Next message: <A HREF="003511.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3508">[ date ]</a>
+              <a href="thread.html#3508">[ thread ]</a>
+              <a href="subject.html#3508">[ subject ]</a>
+              <a href="author.html#3508">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 10:58 AM 6/24/2002 +0200, Pieter Hintjens writeth:
+&gt;<i>Michael Burns &lt;<A HREF="mailto:mburns83@directvinternet.com">mburns83@directvinternet.com</A>&gt; wrote:
+</I>&gt;&gt;<i> Imatix,
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Why were the passwords in the configuration files (default.aut, 
+</I>&gt;&gt;<i> ftpusers.aut, etc.) left in plaintext? Is there any plan to change
+</I>&gt;&gt;<i> that?
+</I>&gt;<i>
+</I>&gt;<i>I think the FAQ answers the 'why', and I don't see any flaws in the 
+</I>&gt;<i>original reasoning: if someone can read your password files, then (a) 
+</I>&gt;<i>they can use dictionary-based attacks, and (b) your general security 
+</I>&gt;<i>has been compromised and that is much more serious than whether the 
+</I>&gt;<i>passwords are hashed or not (and the extra hour or two that takes for 
+</I>&gt;<i>someone to crack enough of them to get into your server).
+</I>&gt;<i>
+</I>&gt;<i>My personal opinion is that flagrantly unsecured password files are 
+</I>&gt;<i>actually a 'feature' since they oblige the system administrator to 
+</I>&gt;<i>think seriously about security issues (such as running NTFS vs. 
+</I>&gt;<i>FAT32).
+</I>&gt;<i>
+</I>&gt;<i>But that may just be laziness.  We've always planned to implement 
+</I>&gt;<i>password hashing at some stage.  Given that this issue keeps coming 
+</I>&gt;<i>back, we'll look at this for the next release.
+</I>&gt;<i>
+</I>&gt;<i>The planned design is this: we will keep the existing file 
+</I>&gt;<i>structures, and put the hashing logic inside Xitami.  When it reads a 
+</I>&gt;<i>password file, it will hash any (new) unhashed passwords.  We don't 
+</I>&gt;<i>want to break scripts that create password files.
+</I>
+However, the problem still won't go away since anyone sniffing for packets
+can grab any HTTP Authorization header and store it away for a later replay
+attack (MD5 hashes included).  What is worse is that Xitami doesn't have
+DIGEST mode available which means that the username:password combination is
+only Base64 encoded (and makes it _VERY_ easy to obtain access to &quot;secure&quot;
+areas - e.g. remote /admin access).  Even with DIGEST mode, it still
+doesn't stop a replay attack since the HTTP protocol doesn't have any
+secure handshaking methods.
+
+So, hashing the files might help some locally, but won't stop anyone from
+attacking the server remotely.  The problem is not necessarily with Xitami
+but also has to do with the inherent weakness of the HTTP protocol.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003507.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+	<LI> Next message: <A HREF="003511.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3508">[ date ]</a>
+              <a href="thread.html#3508">[ thread ]</a>
+              <a href="subject.html#3508">[ subject ]</a>
+              <a href="author.html#3508">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

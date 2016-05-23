@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Load/Stress Testing Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Load/Stress%20Testing%20Xitami&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007586.html">
+   <LINK REL="Next"  HREF="007589.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Load/Stress Testing Xitami</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Load/Stress%20Testing%20Xitami&In-Reply-To="
+       TITLE="[Xitami] Load/Stress Testing Xitami">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Aug  1 10:04:13 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007586.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+        <LI>Next message: <A HREF="007589.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7588">[ date ]</a>
+              <a href="thread.html#7588">[ thread ]</a>
+              <a href="subject.html#7588">[ subject ]</a>
+              <a href="author.html#7588">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thomas,
+
+Comments inserted below
+
+&gt;<i>
+</I>&gt;<i> Russel,
+</I>&gt;<i>
+</I>&gt;<i> You didn't mention if you are using PHP or some other scripting
+</I>
+I am using Win32 Perl
+
+&gt;<i> language, but I'm not aware of any method to query a MySQL database
+</I>&gt;<i> without one.  Scripting languages under Xitami typically require CGI.
+</I>&gt;<i>
+</I>&gt;<i> When CGI runs like that, the CPU gets hammered because you've got new
+</I>&gt;<i> processes being created left and right.  The system is spending most of
+</I>&gt;<i> its time starting up and shutting down processes.
+</I>
+Doesn't Xitami create an individual Perl process per cgi script being 
+called?  If 25 users hit the server at once then that would be 25 perl calls 
+with 25 instances Perl.exe running?  How would Apache and IIS handle a 
+similar situation?
+
+&gt;<i>
+</I>&gt;<i> I ran a similar test spread across 15 machines on a LAN once with Xitami
+</I>&gt;<i> via CGI and got similar results (I wrote my own tool).  Xitami simply
+</I>&gt;<i> couldn't handle the load.  Most of the time it just returned blank
+</I>&gt;<i> pages.  I don't know what tool you are using but socket code fails if
+</I>
+Using Microsoft Web Application Stress Tool ver1.1 .  Do you recall the load 
+it was able to handle?  And is there anyway you could think of to push the 
+25 connections per second without moving to PHP?  And doesn't the Xitami PHP 
+get handled by the CGI processor so there is no real advantage to moving to 
+PHP?
+
+&gt;<i> you mass connect to a server in rapid succession (Windows hangs onto
+</I>&gt;<i> socket handles until TCP closes down cleanly or times out)...for my
+</I>&gt;<i> test, I wrote a tool to manage the process and just retried the
+</I>&gt;<i> connection on failure (i.e. it is almost always the client that fails to
+</I>&gt;<i> connect because all sockets are in use).  Keep in mind that this test
+</I>
+The Client fails to connect because the client sockets are in use or the 
+Server sockets are in use?  If its the Server sockets in use, using Win2003 
+Server is there away to increase buffers specfically for more web sockets to 
+be created ?
+
+&gt;<i> was many years ago, so I've forgotten a lot of the details but from what
+</I>&gt;<i> you've described, you're running into many of the same issues I ran into.
+</I>&gt;<i>
+</I>&gt;<i> I do seem to recall the web document root getting flooded with bogus
+</I>&gt;<i> files from stdin/stdout.  Search the Xitami archives and there should be
+</I>&gt;<i> a warning from me about a DDoS issue with CGI support in Xitami.  I
+</I>&gt;<i> remember looking at the source code to CGI support to see how it would
+</I>&gt;<i> need to be fixed and something about incorrect filename selection was
+</I>&gt;<i> the cause of bogus files and the blank pages (i.e. too many requests in
+</I>&gt;<i> too short of a time resulted in lousy/incorrect filename selection).
+</I>&gt;<i> Also because the files are in the web root, it is conceivable that
+</I>&gt;<i> security is drastically reduced (i.e. someone could remotely gain access
+</I>&gt;<i> to passwords/credit card info/etc).
+</I>&gt;<i>
+</I>&gt;<i> In theory, if you are using PHP, you should be able to drastically
+</I>&gt;<i> improve performance and security by using Xitami LRWP, multiple
+</I>&gt;<i> instances of the ISAPI LRWP daemon (isapid - probably still a 'beta'),
+</I>&gt;<i> and the ISAPI PHP module.  Then, in your PHP code, use persistent
+</I>&gt;<i> connections to the MySQL database (i.e. mysql_pconnect()).  LRWP, IMO,
+</I>&gt;<i> is a weak protocol - it can only handle one request at a time.  For the
+</I>&gt;<i> load you describe, 10-12 instances of the ISAPI LRWP daemon will
+</I>&gt;<i> probably be sufficient.  The server will still be hammered but should be
+</I>&gt;<i> able to handle the load.
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Thomas Hruska
+</I>&gt;<i> Shining Light Productions
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007586.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+	<LI>Next message: <A HREF="007589.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7588">[ date ]</a>
+              <a href="thread.html#7588">[ thread ]</a>
+              <a href="subject.html#7588">[ subject ]</a>
+              <a href="author.html#7588">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

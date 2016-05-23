@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] intranet security
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002821.html">
+   <LINK REL="Next"  HREF="002819.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] intranet security
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] intranet security">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Mar 2002 10:32:54 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002821.html">[Xitami] intranet security
+</A></li>
+        <LI> Next message: <A HREF="002819.html">[Xitami] intranet security
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2822">[ date ]</a>
+              <a href="thread.html#2822">[ thread ]</a>
+              <a href="subject.html#2822">[ subject ]</a>
+              <a href="author.html#2822">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael wrote:
+
+&gt;<i>On 25 Mar 2002 at 12:55, Stefan Pantazi wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i>Hi,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>You could have only one, unique URL which points to a CGI (could be
+</I>&gt;&gt;<i>anything, console application, LRWP-based, etc) which looks at the IP of the
+</I>&gt;&gt;<i>user and then routes the request through the CGI response which is a
+</I>&gt;&gt;<i>dynamically generated temporary page with a refresh of 1 second pointing to
+</I>&gt;&gt;<i>the to the appropriate URL (either public or private).
+</I>&gt;&gt;<i>I hope this helps.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Stefan
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Stefan is on the right track.  Redirecting by ip is easy esp when you 
+</I>&gt;<i>are willing to use cgi and ssi.   There's no need for any time lapse 
+</I>&gt;<i>or refresh.
+</I>&gt;<i>
+</I>&gt;<i>Just create a simple script to redirect based upon ip.  You can 
+</I>&gt;<i>easily redirect those outside the intranet one direction and those 
+</I>&gt;<i>inside the intranet another direction.
+</I>&gt;<i>
+</I>
+You can also do it using Xitami's handy built-in GSL scripting tool. 
+Only possible disadvantage is that your HTML docuemtns will probably 
+need to have a different extension. But the different extension and the 
+addition of a few script lines at the top is all you need.
+
+For example instead of index.htm you have index.dhtm
+index.dhtm has the lines like the following tagged onto the front of it
+
+.if defined(REMOTE_USER)
+.- do some other validation if you feel like it e.g. check a cookie 
+contacined in HTTP_COOKIE
+.  define loginOK = 1
+.else
+.- Assume internal network is 10.1.1.0/24
+.  if (substr(REMOTE_IP,,,7) = &quot;10.1.1.&quot;)
+.    define loginOK = 1
+.  endif
+.endif
+.if (! defined(loginOK))
+  Need to Login&lt;/TITLE&gt;
+  &lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; 
+URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>)/cgi-bin/ra/login.pl?referer=$(path_info)$(wasloggedin?:)&quot;&gt;&lt;/HEAD&gt;
+  &lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.  abort
+.endif
+&lt;!-- start of  regular page --&gt;
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002821.html">[Xitami] intranet security
+</A></li>
+	<LI> Next message: <A HREF="002819.html">[Xitami] intranet security
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2822">[ date ]</a>
+              <a href="thread.html#2822">[ thread ]</a>
+              <a href="subject.html#2822">[ subject ]</a>
+              <a href="author.html#2822">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

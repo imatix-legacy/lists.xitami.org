@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] somebody using visual basic out there?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001571.html">
+   <LINK REL="Next"  HREF="001582.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] somebody using visual basic out there?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] somebody using visual basic out there?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 02 Dec 2001 03:09:20 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001571.html">[Xitami] somebody using visual basic out there?
+</A></li>
+        <LI> Next message: <A HREF="001582.html">[Xitami] somebody using visual basic out there?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1576">[ date ]</a>
+              <a href="thread.html#1576">[ thread ]</a>
+              <a href="subject.html#1576">[ subject ]</a>
+              <a href="author.html#1576">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  i started writing cgi with visual basic
+</I>
+I would have expected you to get razzed on that point: &quot;You
+program in BASIC? Yuck!&quot;, rather than the non-unix point. Even
+FORTRAN gets more respect than BASIC. 
+
+I'd argue that *nix is NOT universally &quot;more stable&quot;... but this
+isn't the place. 
+
+Using MS Basic &quot;prevents&quot; you from porting to non-MS platforms,
+which isn't much of an issue for me. I have stable MS machines.
+If I had to move to a commercial hosting site, most assume unix
+but plenty of NT hosts are available. 
+
+Yes, I too program in BASIC, when nobody is watching. I have a VB
+filter serving many pages on my site from a database. And because
+I am a really crude guy, I also have a QuickBasic 4.5 (1985 DOS
+tool) CGI handling forms. Hey: it works, I understand it; what
+more could I want? 
+
+&gt;<i>From one Basic-user to another: once you get over Perl's chaos,
+</I>it ain't as bad as it looks. I have 21 years experience in BASIC,
+I spent a month part-time writing my VB filter. After a month of
+poking at Perl trying to get a handle on it, I did more in one
+day than I did in a month with VB. Some things are still better
+in VB-- nobody's string functions compare with MS BASIC. But many
+things web-related are pre-made in Perl. 
+
+&gt;<i>  the object code was some 120 kB, but when using only the 
+</I>needed statements the object code is only 15..25k
+
+One think I learned in years of QB programming, and the same is
+true in VB: the object code size is meaningless. The compiler is
+pretty sloppy. Much of that &quot;excess&quot; code won't be used. And even
+more so in VB, where ANY program loads and initializes a 2 Meg
+library, which dwarfs the code you or I will write. (Perl does
+the same thing, only differently.) If your code reads better with
+(or without) some function or module, do it regardless of how big
+the BIN or EXE file comes out. 
+
+&gt;<i>  It can search through 12000 records, send e-mail and faxes and generate output in less than a second.
+</I>
+My VB filter does a very dumb sequential search on a flat text
+file and can pull 1,000 hits in less than a second on P-350. Some
+things in VB are slow (case-sensitive text match) but most things
+are bound by disk and network speed, not program speed. A rough
+comparison with old QB45 (which ran well on 8088-5 machines)
+shows little difference. 
+
+Your question may be about VB but it probably is really about CGI
+or Xitami's interface to CGI, which IS on-point on this list. 
+
+&gt;<i>  can't get any file download done. When checking the files on the server just after a download i don't find any file 
+</I>
+Without details of what you mean &quot;download&quot; I can't begin to
+think where to look. Do you really mean &quot;upload&quot;? What HTML code
+do you use in the form? Does your VB code believe it has handled
+a file? 
+
+&gt;<i> Xitami even parses the form fields so i don't have to do it myself!
+</I>
+Yes, but MultiPartEncoded is a bit tricky. 
+
+This is one place where I'd be inclined to use Perl. BASIC/VB's
+notion of STDIN and STDOUT is a bit arcane... well to be frank,
+it isn't like unix and CGI assumes that kind of input stream.
+Perl has modules, or you can find pre-made File UpLoad Perl
+scripts. Since form-upload really does not have to interface
+directly with your VB code, it should not interfere. 
+
+And BTW: I would have written that VB filter in QB; in fact I
+prototyped it in QB. The thing that &quot;forced&quot; me to VB is QB45's
+64K limit on string-space. I could have worked-around, but I was
+attracted to the &quot;infinite&quot; heap in VB-Win. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001571.html">[Xitami] somebody using visual basic out there?
+</A></li>
+	<LI> Next message: <A HREF="001582.html">[Xitami] somebody using visual basic out there?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1576">[ date ]</a>
+              <a href="thread.html#1576">[ thread ]</a>
+              <a href="subject.html#1576">[ subject ]</a>
+              <a href="author.html#1576">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

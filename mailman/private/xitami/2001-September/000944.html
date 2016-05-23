@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP - virtual DNS hosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000940.html">
+   <LINK REL="Next"  HREF="000946.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP - virtual DNS hosting
+   </H1>
+    <B>John Jonas
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP - virtual DNS hosting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Sep 2001 18:58:16 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000940.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+        <LI> Next message: <A HREF="000946.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#944">[ date ]</a>
+              <a href="thread.html#944">[ thread ]</a>
+              <a href="subject.html#944">[ subject ]</a>
+              <a href="author.html#944">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--------------5852EDA155B9A8655EBC7923
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Here is what works for me using 2.4d7 on W2K Pro (worked the same on NT
+4.0 Server).  Our primary site is www.arbor-freight.com with a virtual
+site of www.audctrl.com.
+
+The default.cfg that I believe is automatically merged with the
+xitami.cfg contains:
+
+#*END
+
+[Ftp]
+    Email-check=1
+    Root=t:\ftphome
+
+[Security]
+    Filename=defaults.aut
+
+[Server]
+    Cgi-bin=e:\webhome\cgi-bin
+    Webpages=e:\webhome\arbor
+
+[Virtual-hosts]
+    www.audctrl.com=audctrl.cfg
+
+Then there is an audctrl.cfg (as pointed to by the default.cfg)
+containing:
+
+#*END
+
+[Accesslog]
+    Filename=audctrl.log
+
+[Ftp]
+    Root=t:\ftphome
+
+[Security]
+    Admin=0
+    Filename=audctrl.aut
+
+[Server]
+    Cgi-bin=e:\webhome\cgi-bin
+    Webpages=e:\webhome\audctrl
+
+Note in our case we use the same ftp and cgi-bin for both the primary
+and virtual, but use separate webpage directories.
+
+Hope this helps!
+
+Russel Olinger wrote:
+
+&gt;<i> Ok, I am caving in and need some help here folks.  This is driving me
+</I>&gt;<i> nuts.  Two years ago, on a Win98 platform I was able to get virtual
+</I>&gt;<i> hosting to work via DNS.  But now I am running a newer Xitami version
+</I>&gt;<i> on WinNT 4.0 and can't seem to get anything to work.
+</I>
+--------------5852EDA155B9A8655EBC7923
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+&lt;!doctype html public &quot;-//w3c//dtd html 4.0 transitional//en&quot;&gt;
+&lt;html&gt;
+&lt;body bgcolor=&quot;#FFFFFF&quot;&gt;
+Here is what works for me using 2.4d7 on W2K Pro (worked the same on NT
+4.0 Server).&amp;nbsp; Our primary site is www.arbor-freight.com with a virtual
+site of www.audctrl.com.
+&lt;p&gt;The default.cfg that I believe is automatically merged with the xitami.cfg
+contains:
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;#*END&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Ftp]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Email-check=1&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Root=t:\ftphome&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Security]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Filename=defaults.aut&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Server]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Cgi-bin=e:\webhome\cgi-bin&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Webpages=e:\webhome\arbor&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Virtual-hosts]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+www.audctrl.com=audctrl.cfg&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;/b&gt;
+&lt;p&gt;Then there is an audctrl.cfg (as pointed to by the default.cfg) containing:&lt;b&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;#*END&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Accesslog]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Filename=audctrl.log&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Ftp]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Root=t:\ftphome&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Security]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Admin=0&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Filename=audctrl.aut&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;[Server]&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Cgi-bin=e:\webhome\cgi-bin&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;br&gt;&lt;b&gt;&lt;font face=&quot;Courier New,Courier&quot;&gt;&lt;font size=-1&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+Webpages=e:\webhome\audctrl&lt;/font&gt;&lt;/font&gt;&lt;/b&gt;
+&lt;p&gt;Note in our case we use the same ftp and cgi-bin for both the primary
+and virtual, but use separate webpage directories.
+&lt;p&gt;Hope this helps!
+&lt;p&gt;Russel Olinger wrote:
+&lt;blockquote TYPE=CITE&gt;&lt;font face=&quot;Arial&quot;&gt;&lt;font size=-1&gt;Ok, I am caving
+in and need some help here folks.&amp;nbsp; This is driving me nuts.&amp;nbsp;
+Two years ago, on a Win98 platform I was able to get virtual hosting to
+work via DNS.&amp;nbsp; But now I am running a newer Xitami version on WinNT
+4.0 and can't seem to get anything to work.&lt;/font&gt;&lt;/font&gt;&lt;/blockquote&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+--------------5852EDA155B9A8655EBC7923--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000940.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+	<LI> Next message: <A HREF="000946.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#944">[ date ]</a>
+              <a href="thread.html#944">[ thread ]</a>
+              <a href="subject.html#944">[ subject ]</a>
+              <a href="author.html#944">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

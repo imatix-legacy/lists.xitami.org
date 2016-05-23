@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004006.html">
+   <LINK REL="Next"  HREF="004012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Peter van der Goes
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 23 Sep 2002 06:46:38 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004006.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004012.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4009">[ date ]</a>
+              <a href="thread.html#4009">[ thread ]</a>
+              <a href="subject.html#4009">[ subject ]</a>
+              <a href="author.html#4009">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message -----
+From: &quot;$Bill Luebkert&quot; &lt;<A HREF="mailto:dbe@wgn.net">dbe@wgn.net</A>&gt;
+To: &quot;Peter van der Goes&quot; &lt;<A HREF="mailto:pvdg@worldnet.att.net">pvdg@worldnet.att.net</A>&gt;
+Sent: Sunday, September 22, 2002 6:02 PM
+Subject: Re: ActivePerl &amp; Xitami - CGI problems Continued
+
+
+Once again, thanks $BIll, for continuing to try to help!
+Answers in context...
+
+ When I downloaded and installed it last night, it created a cgi-bin dir
+right
+&gt;<i> under install dir (parallel to webpages dir).  Look in INSTALL.LOG, I
+</I>have:
+&gt;<i>
+</I>&gt;<i> Made Dir: I:\Xitami\cgi-bin
+</I>&gt;<i> File Copy: I:\Xitami\cgi-bin\testperl.pl
+</I>&gt;<i>
+</I>My install.log has no such entry. Strange. I'll have to try to contact
+Xitami by a more direct means to address this phenomenon.
+
+&gt;<i> &gt; &lt;body&gt;
+</I>&gt;<i> &gt; &lt;form action=&quot;/cgi-bin/animal.cgi&quot; METHOD=POST&gt;
+</I>&gt;<i> &gt; Which animal? &lt;INPUT type=&quot;text&quot; name=&quot;animal&quot;&gt;
+</I>&gt;<i> &gt; &lt;P&gt;&lt;INPUT type=&quot;submit&quot;&gt;
+</I>&gt;<i> &gt; &lt;/form&gt;
+</I>&gt;<i> &gt; &lt;/body&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt;From animal.cgi (in \xitami\cgi-bin)
+</I>&gt;<i> &gt; #!C:\perl\bin\perl.exe -w
+</I>&gt;<i> &gt; use strict;
+</I>&gt;<i> &gt; use CGI ':standard';
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; my $animal;
+</I>&gt;<i> &gt; $animal = param('animal');
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; print &quot;Content-type: text/html\n\n&quot;;
+</I>&gt;<i> &gt; print &quot;Show me the $animal&quot;;
+</I>&gt;<i>
+</I>&gt;<i> Ran both of those and they worked fine (changed drive for Perl and that's
+</I>all).
+As I suspected 8).
+&gt;<i>
+</I>&gt;<i> &gt;&gt;From access.log
+</I>&gt;<i> &gt; No entries from displaying animal.html
+</I>&gt;<i>
+</I>&gt;<i> I get:
+</I>&gt;<i>
+</I>&gt;<i> 127.0.0.1 - - [22/Sep/2002:15:33:23 -0800] &quot;GET /animal.html HTTP/1.1&quot; 200
+</I>146 &quot;&quot; &quot;Mozilla/5.0 (Windows; U; Win98; en-US; rv:1.0.1) Gecko/20020823
+Netscape/7.0&quot;
+&gt;<i>
+</I>&gt;<i> and
+</I>&gt;<i>
+</I>&gt;<i> 127.0.0.1 - - [22/Sep/2002:15:33:35 -0800] &quot;POST /cgi-bin/animal.cgi
+</I>HTTP/1.1&quot; 200 21 &quot;<A HREF="http://localhost:8080/animal.html"">http://localhost:8080/animal.html&quot;</A> &quot;&quot;
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I get nothing new here.  You're getting a 404 (Not Found) error and appear
+</I>to
+&gt;<i> be using a private area under HTTP authentication (pvan field).  Did you
+</I>modify
+&gt;<i> xitami.aut ?
+</I>
+No, but the message report was my error.
+&gt;<i>
+</I>&gt;<i> &gt;&gt;From cgierr.log
+</I>&gt;<i> &gt; No entries from displaying animal.html, entering text and clicking on
+</I>&gt;<i> &gt; Submit.
+</I>&gt;<i>
+</I>&gt;<i> That's good (except no output).
+</I>&gt;<i>
+</I>&gt;<i> The only difference is that I'm using port 8080 (I have Apache running on
+</I>80).
+&gt;<i>
+</I>&gt;<i>      portbase=8000 in xitami.cfg
+</I>
+I could also try a different portbase, just in case.
+&gt;<i>
+</I>&gt;<i> Have you tried another browser just for kicks ?
+</I>No, but I'm about to do several things.
+1. Try all this on a PC that has none of AT&amp;T Worldnet software on it, and
+2. Try Netscape.
+
+Again, thank you very much for all your efforts!
+&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i>    ,-/-  __      _  _         $Bill Luebkert   ICQ=162126130
+</I>&gt;<i>   (_/   /  )    // //       DBE Collectibles   Mailto:<A HREF="mailto:dbe@todbe.com">dbe@todbe.com</A>
+</I>&gt;<i>    / ) /--&lt;  o // //      <A HREF="http://dbecoll.tripod.com/">http://dbecoll.tripod.com/</A> (Free site for Perl)
+</I>&gt;<i> -/-' /___/_&lt;_&lt;/_&lt;/_     Castle of Medieval Myth &amp; Magic
+</I><A HREF="http://www.todbe.com/">http://www.todbe.com/</A>
+&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004006.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004012.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4009">[ date ]</a>
+              <a href="thread.html#4009">[ thread ]</a>
+              <a href="subject.html#4009">[ subject ]</a>
+              <a href="author.html#4009">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,632 @@
+From xitami-dev@lists.xitami.org  Thu Jul 17 10:33:46 2003
+From: xitami-dev@lists.xitami.org (Thomas Burghardt)
+Date: Thu, 17 Jul 2003 11:33:46 +0200
+Subject: [Xitami-Dev] xitami (smt) in a multi-threaded windows program (linker option \MT)
+Message-ID: <001d01c34c46$88cf1400$fe78a8c0@Mars>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_001A_01C34C57.489E5E70
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Dear programmers,
+we would like to use the xitami (with smt) implementation in a =
+multithreading windows program (compile with VC++ and the \MT option).
+but we still discovered, that smt only run with the singlethreaded =
+runtime libraries.
+Is there any solution to link our program with the multithreading =
+runtime libraries?
+For example build the xitami as a dynamic link library (dll) with single =
+threaded!
+
+With best regards
+
+Institute of Regional Geography
+Thomas Burghardt
+Leipzig
+Germany
+t_burghardt@ifl-leipzig.de
+
+
+
+------=_NextPart_000_001A_01C34C57.489E5E70
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META content=3D"text/html; charset=3Diso-8859-1" =
+http-equiv=3DContent-Type>
+<META content=3D"MSHTML 5.00.3502.5390" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>
+<DIV><FONT face=3DArial size=3D2>Dear programmers,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>we would like to use the xitami (with =
+smt)=20
+implementation in a multithreading windows program (compile with VC++ =
+and the=20
+\MT option).</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>but we still discovered, that smt only =
+run with=20
+the&nbsp;singlethreaded runtime libraries.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Is there any&nbsp;solution to link our =
+program with=20
+the multithreading runtime libraries?</FONT></DIV>
+<DIV>For example build the xitami as a dynamic link library (dll) with =
+single=20
+threaded!</DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>With best regards</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Institute of Regional =
+Geography</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Thomas Burghardt</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Leipzig</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Germany</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2><A=20
+href=3D"mailto:t_burghardt@ifl-leipzig.de">t_burghardt@ifl-leipzig.de</A>=
+</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_001A_01C34C57.489E5E70--
+
+
+From xitami-dev@lists.xitami.org  Thu Jul 17 11:04:20 2003
+From: xitami-dev@lists.xitami.org (Angus Lord)
+Date: Thu, 17 Jul 2003 12:04:20 +0200
+Subject: [Xitami-Dev] xitami (smt) in a multi-threaded windows program (linker option \MT)
+In-Reply-To: <001d01c34c46$88cf1400$fe78a8c0@Mars>
+Message-ID: <01ca01c34c4a$cb166800$6909020a@groovinhigh>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_01CB_01C34C5B.8EA24540
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+I use the Xitami engine as a single threaded COM dll, called from a
+multithreaded application. You just have to be careful with which threads
+access the COM object. Generally, I keep all comunication with the COM
+object within a single thread and use the other threads for the user
+interface etc. all with liberal use of the PostThreadMessage API call.
+ 
+Angus Lord
+ 
+Technical Director
+Moviva Ltd.
+ 
+
+-----Original Message-----
+From: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org] On Behalf Of Thomas Burghardt
+Sent: 17 July 2003 11:34
+To: xitami-dev@lists.xitami.org
+Subject: [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+(linker option \MT)
+
+
+
+Dear programmers,
+we would like to use the xitami (with smt) implementation in a
+multithreading windows program (compile with VC++ and the \MT option).
+but we still discovered, that smt only run with the singlethreaded runtime
+libraries.
+Is there any solution to link our program with the multithreading runtime
+libraries?
+For example build the xitami as a dynamic link library (dll) with single
+threaded!
+ 
+With best regards
+ 
+Institute of Regional Geography
+Thomas Burghardt
+Leipzig
+Germany
+t_burghardt@ifl-leipzig.de
+ 
+ 
+
+
+------=_NextPart_000_01CB_01C34C5B.8EA24540
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+<TITLE>Message</TITLE>
+
+<META content=3D"MSHTML 6.00.2800.1170" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+size=3D2>I use=20
+the Xitami engine as a single threaded COM dll, called from&nbsp;a =
+multithreaded=20
+application. You just have to be careful with which threads access the =
+COM=20
+object. Generally, I keep all comunication with the COM object within a =
+single=20
+thread and use the other threads for the user interface etc.&nbsp;all=20
+with&nbsp;liberal use of the PostThreadMessage API =
+call.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+size=3D2>Angus=20
+Lord</FONT></SPAN></DIV>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Technical Director</FONT></SPAN></DIV>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+size=3D2>Moviva=20
+Ltd.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D874100010-17072003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-LEFT: 5px; MARGIN-LEFT: 5px; BORDER-LEFT: #0000ff 2px =
+solid; MARGIN-RIGHT: 0px">
+  <DIV></DIV>
+  <DIV class=3DOutlookMessageHeader lang=3Den-us dir=3Dltr =
+align=3Dleft><FONT=20
+  face=3DTahoma size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-dev-admin@lists.xitami.org =
+[mailto:xitami-dev-admin@lists.xitami.org]=20
+  <B>On Behalf Of </B>Thomas Burghardt<BR><B>Sent:</B> 17 July 2003=20
+  11:34<BR><B>To:</B> xitami-dev@lists.xitami.org<BR><B>Subject:</B>=20
+  [Xitami-Dev] xitami (smt) in a multi-threaded windows program (linker =
+option=20
+  \MT)<BR><BR></FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>
+  <DIV><FONT face=3DArial size=3D2>Dear programmers,</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>we would like to use the xitami (with =
+smt)=20
+  implementation in a multithreading windows program (compile with VC++ =
+and the=20
+  \MT option).</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>but we still discovered, that smt =
+only run with=20
+  the&nbsp;singlethreaded runtime libraries.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>Is there any&nbsp;solution to link =
+our program=20
+  with the multithreading runtime libraries?</FONT></DIV>
+  <DIV>For example build the xitami as a dynamic link library (dll) with =
+single=20
+  threaded!</DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>With best regards</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Institute of Regional =
+Geography</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>Thomas Burghardt</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>Leipzig</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>Germany</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2><A=20
+  =
+href=3D"mailto:t_burghardt@ifl-leipzig.de">t_burghardt@ifl-leipzig.de</A>=
+</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV>&nbsp;</DIV></FONT></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_01CB_01C34C5B.8EA24540--
+
+
+From xitami-dev@lists.xitami.org  Thu Jul 17 12:40:42 2003
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Thu, 17 Jul 2003 13:40:42 +0200
+Subject: [Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+Message-ID: <9307C9319CD71A499EDDA4739F4C80C8010D63@olxchg.okhtor.net>
+
+ Hi.
+
+ Has anyone been able to use the SMTSOCK from SMT 3.0
+ ( as it comes in realibase 1.0 ) in Windows XP?
+
+ In www.imatix.com, they state that you need Windows 2000, 
+ and indeed it works under win2k, but I don´t understand
+ why it does not under WinXP.
+
+ Previous versions of SMT, 2.0 as in Xitami 2.4d9 and 2.5b5,
+ work on all win32 platforms.
+
+ How safe is SFL as to build (and use!!) a multithreaded DLL?
+
+ Regards.
+
+
+
+ 
+   Rafael Cano Pérez,  Okhtor Labs, S.L.
+
+
+
+From xitami-dev@lists.xitami.org  Fri Jul 18 22:08:09 2003
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Fri, 18 Jul 2003 14:08:09 -0700 (PDT)
+Subject: [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+In-Reply-To: <20030718042502.517.28866.Mailman@sxpublic.imatix.net>
+Message-ID: <20030718210809.21884.qmail@web13407.mail.yahoo.com>
+
+Hi
+
+I found this easier method but it will work ONLY IF
+you are not accessing smt/sfl functions simultaneously
+from multiple threads. Given the warning it has worked
+fine with my windows programs.
+
+What I do is creat another configuration in VC++
+called MultiThreaded Debug/Release in libsfl project
+and change the C++ options to use the Multithreaded
+library.
+
+I rebuild the project with the new configuration and
+use it in my windows programs without any problems.
+
+Optional Advanced Tip: I also create similarly named
+configurations in my windows VC++ project and make it
+dependent on the libsfl and libsmt project (You have
+to insert the libsfl and libsmt project into your
+windows project first) . This way the correct
+(debug/release) library gets automatically linked with
+my windows program. Also any changes in the libsfl or
+libsmt code would automatically force relinking in the
+windows program.
+
+Hope this helps.
+
+Shivakumar Gopalakrishnan
+
+--- xitami-dev-request@lists.xitami.org wrote:
+> Send Xitami-Dev mailing list submissions to
+> 	xitami-dev@lists.xitami.org
+> 
+> To subscribe or unsubscribe via the World Wide Web,
+> visit
+> 	http://lists.xitami.org/mailman/listinfo/xitami-dev
+> or, via email, send a message with subject or body
+> 'help' to
+> 	xitami-dev-request@lists.xitami.org
+> 
+> You can reach the person managing the list at
+> 	xitami-dev-admin@lists.xitami.org
+> 
+> When replying, please edit your Subject line so it
+> is more specific
+> than "Re: Contents of Xitami-Dev digest..."
+> 
+> 
+> Today's Topics:
+> 
+>    1. xitami (smt) in a multi-threaded windows
+> program (linker option \MT) (Thomas Burghardt)
+>    2. RE: xitami (smt) in a multi-threaded windows
+> program (linker option \MT) (Angus Lord)
+>    3. SMT 3.0 sockets on Windows XP fail
+> (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+> 
+> --__--__--
+> 
+> Message: 1
+> From: "Thomas Burghardt"
+> <thomas.burghardt@onlinehome.de>
+> To: <xitami-dev@lists.xitami.org>
+> Date: Thu, 17 Jul 2003 11:33:46 +0200
+> Organization: Worms & Partner
+> Subject: [Xitami-Dev] xitami (smt) in a
+> multi-threaded windows program (linker option \MT)
+> Reply-To: xitami-dev@lists.xitami.org
+> 
+> This is a multi-part message in MIME format.
+> 
+> ------=_NextPart_000_001A_01C34C57.489E5E70
+> Content-Type: text/plain;
+> 	charset="iso-8859-1"
+> Content-Transfer-Encoding: quoted-printable
+> 
+> Dear programmers,
+> we would like to use the xitami (with smt)
+> implementation in a =
+> multithreading windows program (compile with VC++
+> and the \MT option).
+> but we still discovered, that smt only run with the
+> singlethreaded =
+> runtime libraries.
+> Is there any solution to link our program with the
+> multithreading =
+> runtime libraries?
+> For example build the xitami as a dynamic link
+> library (dll) with single =
+> threaded!
+> 
+> With best regards
+> 
+> Institute of Regional Geography
+> Thomas Burghardt
+> Leipzig
+> Germany
+> t_burghardt@ifl-leipzig.de
+> 
+
+
+From xitami-dev@lists.xitami.org  Fri Jul 18 16:18:59 2003
+From: xitami-dev@lists.xitami.org (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+Date: Fri, 18 Jul 2003 17:18:59 +0200
+Subject: [Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+Message-ID: <9307C9319CD71A499EDDA4739F4C80C8010D64@olxchg.okhtor.net>
+
+This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01C34D3F.E9A8DD50
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+
+ Hi.
+
+ I think I've been able to build a thread safe multithreaded DLL
+ version of SFL, by using the Storage-Class attribute,
+
+ __declspec(thread) TYPE globalvariable;
+
+ for the global variables, and using the function,
+
+ _beginthread(..)
+
+ instead of=20
+
+ CreateThread()
+
+ for creating the threads that access SFL functions.
+
+ Kind regards.  Rafael Cano P=E9rez. Okhtor Labs.
+     =20
+
+-----Mensaje original-----
+De: xitami-dev-admin@lists.xitami.org
+[mailto:xitami-dev-admin@lists.xitami.org]En nombre de Rafael Cano =
+P=E9rez
+Enviado el: jueves, 17 de julio de 2003 13:41
+Para: Xitami devel (E-mail)
+Asunto: [Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+
+
+
+ Hi.
+
+ Has anyone been able to use the SMTSOCK from SMT 3.0
+ ( as it comes in realibase 1.0 ) in Windows XP?
+
+ In www.imatix.com, they state that you need Windows 2000,=20
+ and indeed it works under win2k, but I don=B4t understand
+ why it does not under WinXP.
+
+ Previous versions of SMT, 2.0 as in Xitami 2.4d9 and 2.5b5,
+ work on all win32 platforms.
+
+ How safe is SFL as to build (and use!!) a multithreaded DLL?
+
+ Regards.
+
+
+
+=20
+   Rafael Cano P=E9rez,  Okhtor Labs, S.L.
+
+
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+------_=_NextPart_001_01C34D3F.E9A8DD50
+Content-Type: application/ms-tnef;
+	name="winmail.dat"
+Content-Transfer-Encoding: base64
+
+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
+8xABAAAAdAAAAFIARQAlADMAQQAgAFsAWABpAHQAYQBtAGkALQBEAGUAdgBdACAAUwBNAFQAIAAz
+AC4AMAAgAHMAbwBjAGsAZQB0AHMAIABvAG4AIABXAGkAbgBkAG8AdwBzACAAWABQACAAZgBhAGkA
+bAAuAEUATQBMAAAACwD2EAAAAABAAAcwkMCi6T9NwwFAAAgw0Ba16T9NwwEDAN4/r28AAAMA8T8K
+DAAAHgD4PwEAAAASAAAAUmFmYWVsIENhbm8gUOlyZXoAAAACAfk/AQAAAGYAAAAAAAAA3KdAyMBC
+EBq0uQgAKy/hggEAAAAAAAAAL089T0tIVE9SIExBQlMvT1U9RklSU1QgQURNSU5JU1RSQVRJVkUg
+R1JPVVAvQ049UkVDSVBJRU5UUy9DTj1SQUZBRUwuQ0FOTwAAAB4A+j8BAAAAFQAAAFN5c3RlbSBB
+ZG1pbmlzdHJhdG9yAAAAAAIB+z8BAAAAHgAAAAAAAADcp0DIwEIQGrS5CAArL+GCAQAAAAAAAAAu
+AAAAAwAZQAAAAAADABpAAAAAAB4AMEABAAAADAAAAFJBRkFFTC5DQU5PAB4AMUABAAAADAAAAFJB
+RkFFTC5DQU5PAB4AOEABAAAADAAAAFJBRkFFTC5DQU5PAB4AOUABAAAAAgAAAC4AAAADAAlZAQAA
+AAsAZoEIIAYAAAAAAMAAAAAAAABGAAAAAA6FAAAAAAAAAwB+gQggBgAAAAAAwAAAAAAAAEYAAAAA
+UoUAAHN5AQAeAH+BCCAGAAAAAADAAAAAAAAARgAAAABUhQAAAQAAAAQAAAA5LjAAAwDCgQggBgAA
+AAAAwAAAAAAAAEYAAAAAAYUAAAAAAAALAMeBCCAGAAAAAADAAAAAAAAARgAAAAADhQAAAAAAAAMA
+zIEIIAYAAAAAAMAAAAAAAABGAAAAABGFAAAAAAAAAwDRgQggBgAAAAAAwAAAAAAAAEYAAAAAEIUA
+AAAAAAADANiBCCAGAAAAAADAAAAAAAAARgAAAAAYhQAAAAAAAAsAWYIIIAYAAAAAAMAAAAAAAABG
+AAAAAAaFAAAAAAAACwApAAAAAAALACMAAAAAAAMABhCyqRl7AwAHEMkDAAADABAQAAAAAAMAERAA
+AAAAHgAIEAEAAABlAAAASElJVEhJTktJVkVCRUVOQUJMRVRPQlVJTERBVEhSRUFEU0FGRU1VTFRJ
+VEhSRUFERURETExWRVJTSU9OT0ZTRkwsQllVU0lOR1RIRVNUT1JBR0UtQ0xBU1NBVFRSSUJVVEUs
+RAAAAAACAX8AAQAAADsAAAA8OTMwN0M5MzE5Q0Q3MUE0OTlFRERBNDczOUY0QzgwQzgwMTBENjRA
+b2x4Y2hnLm9raHRvci5uZXQ+AACDfQ==
+
+------_=_NextPart_001_01C34D3F.E9A8DD50--
+
+From xitami-dev@lists.xitami.org  Mon Jul 21 06:34:31 2003
+From: xitami-dev@lists.xitami.org (Thomas Burghardt)
+Date: Mon, 21 Jul 2003 07:34:31 +0200
+Subject: [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+References: <20030718210809.21884.qmail@web13407.mail.yahoo.com>
+Message-ID: <003801c34f49$c6c40d50$fe78a8c0@Mars>
+
+sorry, but if you take the xitami-xinwin-project, with the changed C++
+options (now  Multithreaded
+library), the xitami will not run well. Better solution: running the xitami
+in a single-threaded dll but it will work only fine, if you  access the
+xitami only from one 'Interface-Thread'
+
+With best reagards
+> > Institute of Regional Geography
+> > Thomas Burghardt
+> > Leipzig
+> > Germany
+> > t_burghardt@ifl-leipzig.de
+
+
+.
+
+
+----- Original Message -----
+From: "Shivakumar Gopalakrishnan" <g_skumar@yahoo.com>
+To: <xitami-dev@lists.xitami.org>
+Sent: Friday, July 18, 2003 11:08 PM
+Subject: Re: [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+
+
+> Hi
+>
+> I found this easier method but it will work ONLY IF
+> you are not accessing smt/sfl functions simultaneously
+> from multiple threads. Given the warning it has worked
+> fine with my windows programs.
+>
+> What I do is creat another configuration in VC++
+> called MultiThreaded Debug/Release in libsfl project
+> and change the C++ options to use the Multithreaded
+> library.
+>
+> I rebuild the project with the new configuration and
+> use it in my windows programs without any problems.
+>
+> Optional Advanced Tip: I also create similarly named
+> configurations in my windows VC++ project and make it
+> dependent on the libsfl and libsmt project (You have
+> to insert the libsfl and libsmt project into your
+> windows project first) . This way the correct
+> (debug/release) library gets automatically linked with
+> my windows program. Also any changes in the libsfl or
+> libsmt code would automatically force relinking in the
+> windows program.
+>
+> Hope this helps.
+>
+> Shivakumar Gopalakrishnan
+>
+> --- xitami-dev-request@lists.xitami.org wrote:
+> > Send Xitami-Dev mailing list submissions to
+> > xitami-dev@lists.xitami.org
+> >
+> > To subscribe or unsubscribe via the World Wide Web,
+> > visit
+> > http://lists.xitami.org/mailman/listinfo/xitami-dev
+> > or, via email, send a message with subject or body
+> > 'help' to
+> > xitami-dev-request@lists.xitami.org
+> >
+> > You can reach the person managing the list at
+> > xitami-dev-admin@lists.xitami.org
+> >
+> > When replying, please edit your Subject line so it
+> > is more specific
+> > than "Re: Contents of Xitami-Dev digest..."
+> >
+> >
+> > Today's Topics:
+> >
+> >    1. xitami (smt) in a multi-threaded windows
+> > program (linker option \MT) (Thomas Burghardt)
+> >    2. RE: xitami (smt) in a multi-threaded windows
+> > program (linker option \MT) (Angus Lord)
+> >    3. SMT 3.0 sockets on Windows XP fail
+> > (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+> >
+> > --__--__--
+> >
+> > Message: 1
+> > From: "Thomas Burghardt"
+> > <thomas.burghardt@onlinehome.de>
+> > To: <xitami-dev@lists.xitami.org>
+> > Date: Thu, 17 Jul 2003 11:33:46 +0200
+> > Organization: Worms & Partner
+> > Subject: [Xitami-Dev] xitami (smt) in a
+> > multi-threaded windows program (linker option \MT)
+> > Reply-To: xitami-dev@lists.xitami.org
+> >
+> > This is a multi-part message in MIME format.
+> >
+> > ------=_NextPart_000_001A_01C34C57.489E5E70
+> > Content-Type: text/plain;
+> > charset="iso-8859-1"
+> > Content-Transfer-Encoding: quoted-printable
+> >
+> > Dear programmers,
+> > we would like to use the xitami (with smt)
+> > implementation in a =
+> > multithreading windows program (compile with VC++
+> > and the \MT option).
+> > but we still discovered, that smt only run with the
+> > singlethreaded =
+> > runtime libraries.
+> > Is there any solution to link our program with the
+> > multithreading =
+> > runtime libraries?
+> > For example build the xitami as a dynamic link
+> > library (dll) with single =
+> > threaded!
+> >
+> > With best regards
+> >
+> > Institute of Regional Geography
+> > Thomas Burghardt
+> > Leipzig
+> > Germany
+> > t_burghardt@ifl-leipzig.de
+> >
+>
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+

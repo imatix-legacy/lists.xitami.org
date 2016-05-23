@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Using a CGI for a default web page?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006623.html">
+   <LINK REL="Next"  HREF="006625.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Using a CGI for a default web page?
+   </H1>
+    <B>Gene Angel
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Using a CGI for a default web page?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 07 Apr 2005 13:08:43 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006623.html">[Xitami] Using a CGI for a default web page?
+</A></li>
+        <LI> Next message: <A HREF="006625.html">[Xitami] remote startup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6624">[ date ]</a>
+              <a href="thread.html#6624">[ thread ]</a>
+              <a href="subject.html#6624">[ subject ]</a>
+              <a href="author.html#6624">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+--------------010500010308060502080404
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Magnus Wedberg wrote:
+
+&gt;&gt;&gt;<i>[Server]
+</I>&gt;&gt;&gt;<i>default1=index.html
+</I>&gt;&gt;&gt;<i>default2=index.htm
+</I>&gt;&gt;&gt;<i>default3=index.php
+</I>&gt;&gt;&gt;<i>default4=index.php3
+</I>&gt;&gt;&gt;<i>default5=default.htm
+</I>&gt;&gt;&gt;<i>default6=index.shtml
+</I>&gt;&gt;&gt;<i>default7=/cgi-bin/indexer.exe
+</I>&gt;&gt;&gt;<i>      
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>The defaults are webpages, they apply to all directories when the
+</I>&gt;&gt;<i>filename is not specified.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>&quot;If no filename is specified, look for default1 in requested
+</I>&gt;&gt;<i>directory, if not present look for default2, ...&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I'm not sure Xitami can handle directories.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I'm pretty sure it can't. The solution (if any) to this is probably 
+</I>&gt;<i>to set up a filter that maps .exe to &quot;cmd.exe /c&quot; or something like 
+</I>&gt;<i>that. I haven't done it in Xitami, but I vaguely recall that I did it 
+</I>&gt;<i>in Netscape FastTrack some time back in the dark ages.
+</I>&gt;<i>
+</I>&gt;<i>You may have to wrap it in a batch file, too (map extension .exe to 
+</I>&gt;<i>startcmd.bat which contains
+</I>&gt;<i>@echo off
+</I>&gt;<i>cmd.exe /c %1
+</I>&gt;<i>..and that should be it).
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Good idea I'll give it a try.  I'll try writing a program called 
+&quot;exec.exe&quot; I'll have the filter call.  I'll have exec.exe abort any call 
+if the called exe file is not found in cgi-bin dir.  That way users 
+arn't running .exe's into their home directories.  Thanks for the info 
+I'll let you know how it goes!
+
+  Gene
+
+--------------010500010308060502080404
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta content=&quot;text/html;charset=ISO-8859-1&quot; http-equiv=&quot;Content-Type&quot;&gt;
+&lt;/head&gt;
+&lt;body bgcolor=&quot;#ffffff&quot; text=&quot;#000000&quot;&gt;
+Magnus Wedberg wrote:
+&lt;blockquote cite=&quot;<A HREF="mailto:mid425542B6.12276.12493F7@localhost">mid425542B6.12276.12493F7@localhost</A>&quot; type=&quot;cite&quot;&gt;
+  &lt;blockquote type=&quot;cite&quot;&gt;
+    &lt;blockquote type=&quot;cite&quot;&gt;
+      &lt;pre wrap=&quot;&quot;&gt;[Server]
+default1=index.html
+default2=index.htm
+default3=index.php
+default4=index.php3
+default5=default.htm
+default6=index.shtml
+default7=/cgi-bin/indexer.exe
+      &lt;/pre&gt;
+    &lt;/blockquote&gt;
+    &lt;pre wrap=&quot;&quot;&gt;
+The defaults are webpages, they apply to all directories when the
+filename is not specified.
+
+&quot;If no filename is specified, look for default1 in requested
+directory, if not present look for default2, ...&quot;
+
+I'm not sure Xitami can handle directories.
+    &lt;/pre&gt;
+  &lt;/blockquote&gt;
+  &lt;pre wrap=&quot;&quot;&gt;&lt;!----&gt;
+I'm pretty sure it can't. The solution (if any) to this is probably 
+to set up a filter that maps .exe to &quot;cmd.exe /c&quot; or something like 
+that. I haven't done it in Xitami, but I vaguely recall that I did it 
+in Netscape FastTrack some time back in the dark ages.
+
+You may have to wrap it in a batch file, too (map extension .exe to 
+startcmd.bat which contains
+@echo off
+cmd.exe /c %1
+..and that should be it).
+ 
+ 
+  &lt;/pre&gt;
+&lt;/blockquote&gt;
+Good idea I'll give it a try.&amp;nbsp; I'll try writing a program called
+&quot;exec.exe&quot; I'll have the filter call.&amp;nbsp; I'll have exec.exe abort any
+call if the called exe file is not found in cgi-bin dir.&amp;nbsp; That way
+users arn't running .exe's into their home directories.&amp;nbsp; Thanks for the
+info I'll let you know how it goes!&lt;br&gt;
+&lt;br&gt;
+&amp;nbsp; Gene&lt;br&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+--------------010500010308060502080404--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006623.html">[Xitami] Using a CGI for a default web page?
+</A></li>
+	<LI> Next message: <A HREF="006625.html">[Xitami] remote startup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6624">[ date ]</a>
+              <a href="thread.html#6624">[ thread ]</a>
+              <a href="subject.html#6624">[ subject ]</a>
+              <a href="author.html#6624">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

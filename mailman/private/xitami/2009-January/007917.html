@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami/5 - new project announcement
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami/5%20-%20new%20project%20announcement&In-Reply-To=5821ea240901030857r4e62d674w791dc6f018508739%40mail.gmail.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007905.html">
+   <LINK REL="Next"  HREF="007918.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami/5 - new project announcement</H1>
+    <B>Paul Reid</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami/5%20-%20new%20project%20announcement&In-Reply-To=5821ea240901030857r4e62d674w791dc6f018508739%40mail.gmail.com"
+       TITLE="[Xitami] Xitami/5 - new project announcement">preid at rci.rutgers.edu
+       </A><BR>
+    <I>Tue Jan  6 01:06:01 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007905.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+        <LI>Next message: <A HREF="007918.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7917">[ date ]</a>
+              <a href="thread.html#7917">[ thread ]</a>
+              <a href="subject.html#7917">[ subject ]</a>
+              <a href="author.html#7917">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Interesting, but: why do we need another HTTP server?
+
+ &gt; we need a small, tough server
+
+OK. I'll suggest that Apache is reasonably tough and small enough to run 
+on very modest machines. But Apache is far from &quot;unhackable&quot;. The core 
+is getting fairly low-bugs, but it is so feature-rich that it invites 
+probes at every keyhole.
+
+ &gt;  FastCGI, SCGI, Proxying, URL Rewriting
+
+Adding all this stuff (even having the interface to add stuff) tends to 
+increase hacks and crashes. So what is the goal: tight or fancy? I think 
+it is whatever Pieter says it is, for his needs.
+
+ &gt;  It will run without ever crashing.
+ &gt;  Xitami constantly crashes ...I had to run Always Up to restart it
+
+Like Hogan, my Xitami (and my Apaches) &quot;still runs flawless here&quot;.
+
+ &gt; seems stable on a minimal XP installation - runs for days without errors.
+
+My webservers NEVER go down, except power-loss and monthly Win Update 
+re-starts. Mostly bare installations of Win-2003 (which is nearly XP 
+without frills).
+
+One is still on WinNT4, and currently show 3,225 hours (134 days) 
+uptime, the last power-failure.
+
+Frequent crashing suggests that you have another application which is 
+trying to grab Xitami's port, or something tricky like bad RAM.
+
+ &gt; CGI is important ... explain why you felt it was easier in Xitami 
+than in other web servers?
+
+Historical: Back in 1995 I was told to use MS PWS. It works. It had a 
+few sample &quot;CGI-like&quot; applications written to an MS proprietary 
+interface. Enabling common CGI required hacking both PWS settings and 
+Registry entries, and was strongly discouraged. (I think the real goal 
+was to make you buy MS-brand programming tools.) I used PWS for a year 
+and never got CGI working.
+
+I got a spare box w/2MB RAM. This was ample to run Win3.1 and Xitami. 
+(Incidentally, it was a fine fast server but a terrible slow browser.) I 
+read the Xitami docs, realized CGI was just a EXEC call, and wrote a DOS 
+BAT file which output &quot;Hello World!&quot;... 20 minutes from reading the docs 
+to working CGI. Overnight I wrote a filter EXE with QuickBasic (DOS, not 
+Windows!) and it worked right-off. Only the 64KB limit in QB forced me 
+to VB, and yes the sample VB code in the Xitami package helped me make a 
+non-Visual VB filter.
+
+That was over a decade ago. PHP is a nasty hack but useful. PHP has been 
+coded around Apache bugs, particularly environment variable names. 
+Sooner or later, most of my servers hit a place where a specific PHP 
+script would not work with Xitami but worked first-try with Apache. I 
+detest Apache's mud-pit INI file, but hey I can usually flog it into 
+doing what I need. And FWIW, that NT4 machine up for 134 days is running 
+two copies of -Apache-, just as solid as when it ran Xitami.
+
+ &gt; CCC: Cascading Config Configuration!
+
+Yes, the murkiness of Apachi with multiple INI files is dreadful. 
+Instead I run one file which takes days to scroll through......
+
+ &gt; I also like the way Xitami assumes it's an executable, by looking at 
+the directory.
+
+In &quot;cgi-bin&quot; context, Xitami uses much the same logic(?) as MS-DOS 2.0. 
+You type &quot;123&quot; at the command line, DOS looks for 123.EXE, 123.COM, 
+123.BAT in the current directory (and then along PATH). When it finds 
+one, it does not rely on the EXE extension: the file must have an MZ 
+header and a non-null pointer into code to invoke the EXE loader. (BAT 
+files have to be texty; COM files have to be run blind.) Xitami on DOS 
+does have another trick: if a script explicitly points to a directory 
+which does not exist, Xitami will search down PATH. This handles the 
+case of a unix-standard script run on a DOS box where directory 
+conventions are different, and usually does the right thing.
+
+ &gt; the console version?  Making win32-specific services and GUIs is a 
+lot of work.
+
+There is general need for a &quot;service&quot;. It can load before user log-in 
+(some of my boxes, I don't touch for a year at a time). It has some 
+extra privileges relative to a user-space program. Vista tends to try to 
+be very strict about user-space apps but has to cut some slack for 
+services. (OTOH a misbehaving service can do more damage to the rest of 
+the system.)
+
+GUI, beyond a webpage to set settings, is not needed. Or let some 
+customer demand (and pay for) it.
+
+
+-- 
+Paul Reid
+System Administrator
+Music Department
+Mason Gross School of the Arts
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007905.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+	<LI>Next message: <A HREF="007918.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7917">[ date ]</a>
+              <a href="thread.html#7917">[ thread ]</a>
+              <a href="subject.html#7917">[ subject ]</a>
+              <a href="author.html#7917">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

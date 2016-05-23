@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Screen Resolution...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000265.html">
+   <LINK REL="Next"  HREF="000267.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Screen Resolution...
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Screen Resolution...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 29 Jun 2001 11:26:55 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000265.html">[Xitami] Screen Resolution...
+</A></li>
+        <LI> Next message: <A HREF="000267.html">[Xitami] Screen Resolution...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Comment below
+
+Thomas J. Hruska wrote:
+
+&gt;<i> As I was playing around with IE, I noticed that the headers contain some
+</I>&gt;<i> extremely useful data that my CGI-based applications could use.  I have
+</I>&gt;<i> this interesting idea that Xitami could do something horribly non-standard
+</I>&gt;<i> and pass all of the headers onto my CGI (filter) through another
+</I>&gt;<i> environment variable.  Here is what I propose:
+</I>&gt;<i> 
+</I>&gt;<i> 1)  Create a configuration file option to turn on/off the COMPLETE_HEADERS
+</I>&gt;<i> environment variable.
+</I>&gt;<i> 2)  During runtime, if the environment variable option is on, then the
+</I>&gt;<i> COMPLETE_HEADERS variable is created.  Xitami stores the headers into the
+</I>&gt;<i> environment variable as a zero-terminated URL encoded string.
+</I>&gt;<i> 
+</I>&gt;<i> Of particular interest to me (and probably a few others) are the headers:
+</I>&gt;<i> 
+</I>&gt;<i> UA-pixels: 1152x864
+</I>&gt;<i> UA-color: color16
+</I>&gt;<i> UA-OS: Windows NT
+</I>&gt;<i> UA-CPU: x86
+</I>&gt;<i> 
+</I>&gt;<i> Now, I could use JavaScript to do what I want on the client end of things,
+</I>&gt;<i> but it would be nice to just grab and parse the headers for the information
+</I>
+Since this is coming from a form - create a hidden field which is 
+populated by Javascript. The JS can query the browser for those fields. 
+This works with all browsers and is trivial to implement and you don't 
+need any cookies.
+
+For example
+
+&lt;form name=myForm&gt;&lt;script&gt;
+  document.writeln('&lt;INPUT TYPE=&quot;hidden&quot; NAME=&quot;hiddenObject&quot; VALUE=&quot;' +
+     screen.width + &quot;,&quot; + screen.height + &quot;,&quot; +
+     screen.pixelDepth + &quot;,&quot; + screen.colorDepth + &quot;'&gt;&quot; )
+&lt;/script&gt;
+rest of form &lt;/form&gt;
+
+-- 
+&quot;Education is when you read the fine print; 
+ experience is what you get when you don't.&quot; Pete Seeger
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000265.html">[Xitami] Screen Resolution...
+</A></li>
+	<LI> Next message: <A HREF="000267.html">[Xitami] Screen Resolution...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#436">[ date ]</a>
+              <a href="thread.html#436">[ thread ]</a>
+              <a href="subject.html#436">[ subject ]</a>
+              <a href="author.html#436">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

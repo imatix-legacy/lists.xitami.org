@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] restricting access
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001285.html">
+   <LINK REL="Next"  HREF="001287.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] restricting access
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] restricting access">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 29 Oct 2001 08:46:53 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001285.html">[Xitami] restricting access
+</A></li>
+        <LI> Next message: <A HREF="001287.html">[Xitami] Does xitami feature a proxy server?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1286">[ date ]</a>
+              <a href="thread.html#1286">[ thread ]</a>
+              <a href="subject.html#1286">[ subject ]</a>
+              <a href="author.html#1286">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[Security]
+    webmask=!123.45.67.89,*
+
+will deny requests from the IP 123.45.67.89 then allow from everyone else. 
+See &lt;your Xitami docs&gt;/index4.htm#webmask (usually accessible as 
+<A HREF="http://127.0.0.1/xitami/index4.htm#webmask">http://127.0.0.1/xitami/index4.htm#webmask</A> while Xitami is running) for 
+more details.
+
+Note that, for real security, it may be better to IPban people using a 
+firewall (if you do that, anyone connecting to your server from a banned IP 
+will usually get no indication that a server even exists at your IP - they 
+won't get an error from Xitami, but their computer will generate an error 
+when its request times out). If you're doing this to prevent Code Red or 
+other virus traffic, this is probably A Good Thing (the more time the virus 
+spends waiting for a response which isn't going to arrive, the less time it 
+has to flood you or other servers with requests).
+
+Also note that the banned computer will be able to access your server 
+through a proxy like their ISP's web proxy or the Google cache or whatever. 
+If you're banning a human, this is an issue - if you're banning a 
+virus-infected host, this shouldn't be a problem.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001285.html">[Xitami] restricting access
+</A></li>
+	<LI> Next message: <A HREF="001287.html">[Xitami] Does xitami feature a proxy server?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1286">[ date ]</a>
+              <a href="thread.html#1286">[ thread ]</a>
+              <a href="subject.html#1286">[ subject ]</a>
+              <a href="author.html#1286">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

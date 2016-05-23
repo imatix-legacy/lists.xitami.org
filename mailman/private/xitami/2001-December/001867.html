@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] devices problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001866.html">
+   <LINK REL="Next"  HREF="001875.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] devices problem
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] devices problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 30 Dec 2001 10:14:09 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001866.html">[Xitami] Running Xitami locally
+</A></li>
+        <LI> Next message: <A HREF="001875.html">[Xitami] devices problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1867">[ date ]</a>
+              <a href="thread.html#1867">[ thread ]</a>
+              <a href="subject.html#1867">[ subject ]</a>
+              <a href="author.html#1867">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3C2DC7F8.1000402@freesbee.fr">3C2DC7F8.1000402@freesbee.fr</A>&gt;, Francis Turner writes:
+&gt;<i>Jason Ozin at Technica Solutions wrote:
+</I>&gt;&gt;<i>Ewen says:
+</I>&gt;&gt;<i> &gt; Can anyone else reproduce this issue on another version of Windows?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I would remind you that I can produce a similar effect see our previous
+</I>&gt;&gt;<i>thread: RE: [Xitami] DoS Bug still in v2.4d9 (W2K service)
+</I>&gt;<i>
+</I>&gt;<i>I have now just reproduced Jason's bug. <A HREF="http://localhost/lpt1">http://localhost/lpt1</A> kills 
+</I>&gt;<i>xitami if a printer is installed on win2k
+</I>
+And doesn't if no printer is installed?  (Can someone check this:
+temporarily uninstall the printer in Windows, and try again to see if it
+locks up.)
+
+I'm wondering if the key difference from the last set of problems is
+whether or not there is an actual device (modem, printer, whatever) 
+installed on the particular port name in question (aux, lpt, etc).
+
+The fix in Xitami 2.4d9/2.5b4 was to take each filename it was asked to
+open, open it, and ask Windows &quot;is this a file?&quot; -- if Windows said
+anything other than &quot;yes, it's a normal file&quot;, then Xitami closed it
+again and backed away quickly (returning 403 etc).  
+
+Possibly this test is either (a) getting an unexpected result when there
+is a real device installed, or (b) something about doing the test that
+way causes problems when there is a real device installed.
+
+Also, can those who have crashes with &quot;<A HREF="http://localhost/lpt1"">http://localhost/lpt1&quot;</A> please try
+&quot;<A HREF="http://localhost/prn"">http://localhost/prn&quot;</A> (which ought to be the same device, according to
+DOS tradition), and see if it gives the same effect.
+
+Please report:
+(a) the exact URL used during testing (including the exact upper/lower 
+    case, etc)
+(b) the version of Xitami being used (2.4d9, 2.5b5, windows gui, windows
+    console, nt service)
+(c) the version of Windows you have
+(d) what web browser you used (name, and version)
+(e) any service packs, patches, etc that you have
+(f) what devices you have installed (modem, printer, etc)
+(g) what crashes (eg, just xitami so you can kill it off and keep going;
+    the OS freezes so you need to ctrl-alt-del and reboot; the OS
+    freezes so hard that you can only turn the machine off/hit reset)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001866.html">[Xitami] Running Xitami locally
+</A></li>
+	<LI> Next message: <A HREF="001875.html">[Xitami] devices problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1867">[ date ]</a>
+              <a href="thread.html#1867">[ thread ]</a>
+              <a href="subject.html#1867">[ subject ]</a>
+              <a href="author.html#1867">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

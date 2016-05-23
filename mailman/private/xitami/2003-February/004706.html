@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Setting Up Virtual Hosts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004705.html">
+   <LINK REL="Next"  HREF="004708.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Setting Up Virtual Hosts
+   </H1>
+    <B>Otto Haldi
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Setting Up Virtual Hosts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 09 Feb 2003 11:41:06 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004705.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+        <LI> Next message: <A HREF="004708.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4706">[ date ]</a>
+              <a href="thread.html#4706">[ thread ]</a>
+              <a href="subject.html#4706">[ subject ]</a>
+              <a href="author.html#4706">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Many thanks too for your help.
+
+Only a small question. I'm using Xitami only locally to learn PHP. 
+Question: how do you start the another web located on separated directory's.
+Like: d:\web\ex1\index.htm
+      d:\web\ex2\index.htm
+      ...
+      
+I did the following with the help of the &quot;Virtual hosts&quot; template: 
+
+
+This created a new file called &quot;ex1.cfg&quot; who look like this:
+#*END
+
+[Accesslog]
+    Filename = &quot;ex1.log&quot;
+[Security]
+    Filename = &quot;ex1.aut&quot;
+[Server]
+    Webpages = &quot;d:/web/ex1&quot;
+[Wsx]
+    Admin = &quot;&quot;
+
+I tried to start the page with: 
+<A HREF="http://localhost/ex1,">http://localhost/ex1,</A> but do not work!
+
+if I start with this URL: <A HREF="http://localhost/admin">http://localhost/admin</A>
+then the admin page is loaded correctly.
+
+What is the right way to create many web?
+
+My defalut.cfg file look like that:
+#*END
+[Security]
+    Filename = &quot;defaults.aut&quot;
+[Server]
+    Priority = &quot;1&quot;
+[Virtual-hosts]
+    * = &quot;ex1.cfg&quot;
+
+Many thanks in advance for your help. 
+
+Regards 
+
+Otto
+
+     
+      
+
+
+In article &lt;<A HREF="mailto:3E453C5B.22650.1408066@localhost">3E453C5B.22650.1408066@localhost</A>&gt;, WhiteShepherd wrote:
+&gt;<i> From: &quot;WhiteShepherd&quot; &lt;<A HREF="mailto:fuzzydog@whiteshepherd.net">fuzzydog@whiteshepherd.net</A>&gt;
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Setting Up Virtual Hosts
+</I>&gt;<i> Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Date: Sat, 8 Feb 2003 17:20:27 -0500
+</I>&gt;<i> 
+</I>&gt;<i> Well when setting up Xitami there are a few useful tips to know.  First a very useful 
+</I>&gt;<i> feature is Xitami uses a hierarchy system for it's config files.  They would look like 
+</I>&gt;<i> this:
+</I>&gt;<i> 
+</I>&gt;<i> Xitami.cfg--&gt;defaults.cfg---&gt;All vhost cfg's defined in defaults.cfg (virtual host1, 
+</I>&gt;<i> virtual host 2, virtual host3)
+</I>&gt;<i> 
+</I>&gt;<i> So a rule defined in Xitami.cfg is overridden by the same rule in defaults.cfg.  
+</I>&gt;<i> Furthermore a rule in say: vhost1.cfg (one of your vhosts defined in defaults.cfg) 
+</I>&gt;<i> will override any setting in defaults.cfg .  However keep in mind the rules defined in 
+</I>&gt;<i> your vhost{xx}.cfg (basically the same as found in xitami.cfg ) only apply to the 
+</I>&gt;<i> virtual host they reference.  So you can have different vhosts with different rules.
+</I>&gt;<i> 
+</I>&gt;<i> To set up a virtual host is very simple.  In your defaults.cfg you must create a line 
+</I>&gt;<i> called [Virtual Hosts].  Following this line should be your DNS name connections will 
+</I>&gt;<i> be coming in on then a &quot;=&quot; then the cfg with the &quot;RULES&quot; for your vhost.
+</I>&gt;<i> 
+</I>&gt;<i> For example in your defaults.cfg it may look like this (note I am catching all 
+</I>&gt;<i> connections with and without a www.):
+</I>&gt;<i> 
+</I>&gt;<i> [Virtual-Hosts]
+</I>&gt;<i> www.mydomain.com=vhost1.cfg
+</I>&gt;<i> mydomain.com=vhost1.cfg
+</I>&gt;<i> www.myfriendsdomain.com=vhost2.cfg
+</I>&gt;<i> myfriendsdomain.com=vhost2.cfg
+</I>&gt;<i> 
+</I>&gt;<i> Your vhost{xx}.cfg (or any name you set it) can be set up with rules from Xitami.cfg.  
+</I>&gt;<i> Make sure you set the different web directories in you vhost{xx}.cfg files.
+</I>&gt;<i> 
+</I>&gt;<i> Example of a vhost{xx}.cfg file:
+</I>&gt;<i> 
+</I>&gt;<i> Filename vhost1.cfg (bellow is what is inside this text file)
+</I>&gt;<i> [Server]
+</I>&gt;<i> webpages=c:\xitami\webpages\mywebdirectory
+</I>&gt;<i> cgi-bin=c:\xitami\cgi-bin
+</I>&gt;<i> 
+</I>&gt;<i> Filename vhost2.cfg (bellow is what is inside this text file)
+</I>&gt;<i> [Server]
+</I>&gt;<i> webpages=c:\xitami\webpages\myfriendswebdirectory
+</I>&gt;<i> cgi-bin=c:\xitami\cgi-bin
+</I>&gt;<i> 
+</I>&gt;<i> Well that is about it.  It's really pretty simple once you got the hang of it.  Hopefully 
+</I>&gt;<i> did that help or did I shoot over your head? :)
+</I>&gt;<i> 
+</I>&gt;<i> --  WhiteShepherd (www.whiteshepherd.furtopia.org)
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://www.furtopia.org">http://www.furtopia.org</A> / www.dragoncity.net - Unlimited fast and completely free 
+</I>&gt;<i> hosting (CGI/perl/PHP/MySQL available) for ALL the furry arts.  Personalized 
+</I>&gt;<i> (www.&quot;yourname&quot;.*.*) subdomains available, and/or linking to existing web pages to 
+</I>&gt;<i> increase your traffic.  Message forums to discuss ideas and art of the week to 
+</I>&gt;<i> peruse.  Furry Sketch-n-Guess games held online Sundays at 8PM 
+</I>&gt;<i> (www.furtopia.org/sketch).
+</I>&gt;<i> 
+</I>&gt;<i> On 8 Feb 2003 at 12:10, Rob @ BMM wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Hi,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I have been successfully using Xitami for several months now.  Now I want to
+</I>&gt;<i> &gt; modify the system to run a second website.  I believe that I will have to
+</I>&gt;<i> &gt; begin using &quot;virtual hosts&quot;, but after reading the instructions, not quite
+</I>&gt;<i> &gt; clear how to achieve this.  I understand the concept, but lack complete
+</I>&gt;<i> &gt; documentation to move towards this.  Can someone provide me with a brief
+</I>&gt;<i> &gt; summary to which config file sections and syntax to use.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Best Regards,
+</I>&gt;<i> &gt; Rob Allen
+</I>&gt;<i> &gt; President, Blue Marble Meds LLC.  Offering 30-85% off Prescription Meds
+</I>&gt;<i> &gt; See us at <A HREF="http://www.BlueMarbleMeds.com">http://www.BlueMarbleMeds.com</A>
+</I>&gt;<i> &gt; Call us for a quote - 480-836-7232, or Toll Free 866-247-8469
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004705.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+	<LI> Next message: <A HREF="004708.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4706">[ date ]</a>
+              <a href="thread.html#4706">[ thread ]</a>
+              <a href="subject.html#4706">[ subject ]</a>
+              <a href="author.html#4706">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

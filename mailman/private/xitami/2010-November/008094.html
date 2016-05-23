@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Safari and DOCTYPE
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Safari%20and%20DOCTYPE&In-Reply-To=NNBBJOEJINMFDFNCBBKPKEGGOCAA.wilson%40wha.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="008093.html">
+   <LINK REL="Next"  HREF="008095.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Safari and DOCTYPE</H1>
+    <B>Gordon Wong</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Safari%20and%20DOCTYPE&In-Reply-To=NNBBJOEJINMFDFNCBBKPKEGGOCAA.wilson%40wha.com"
+       TITLE="[Xitami] Safari and DOCTYPE">gordonw at gwinfo.net
+       </A><BR>
+    <I>Wed Nov  3 16:40:33 CET 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="008093.html">[Xitami] Safari and DOCTYPE
+</A></li>
+        <LI>Next message: <A HREF="008095.html">[Xitami] Safari and DOCTYPE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8094">[ date ]</a>
+              <a href="thread.html#8094">[ thread ]</a>
+              <a href="subject.html#8094">[ subject ]</a>
+              <a href="author.html#8094">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+I am using Xitami 2.4d10 under Windows 2000 Pro and had been fighting for 
+months with how Chrome (only Chrome) completely ignored external css files.
+
+But all was fine after I told Xitami yesterday that .css files were of type 
+text/css in defaults.cfg:
+[Mime]
+      css=text/css
+
+Now it does not matter what &lt;!DOCTYPE&gt; I use:
+- HTML 4.01 strict
+- HTML 4.01 transitional
+- XHTML 1.0 Transitional
+- even with a missing &lt;!DOCTYPE&gt; line the external CSS works !
+
+
+My current working test site setup:
+
+HTML 4.01 strict in pages:
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; 
+&quot;<A HREF="http://www.w3.org/TR/html4/strict.dtd&quot;">http://www.w3.org/TR/html4/strict.dtd&quot;</A>&gt;
+
+In the &lt;head&gt; I specified charset:
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;CHARSET=iso-8859-1&quot;&gt;
+
+In the external CSS the matching charset specification was the first line:
+@charset &quot;iso-8859-1&quot;;
+
+External stylesheet reference was:
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/style.css&quot;&gt;
+
+How is your page wacky?  Can you confirm that 2.4d6 understands the new 
+lines in defaults.cfg ?
+
+I will send you the link to the working page.
+
+
+
+At 09:54 AM 2010-11-02 -0500, you wrote:
+&gt;<i>Gordon,
+</I>&gt;<i>
+</I>&gt;<i>This did NOT work for me.  I added the line in the defaults.cfg with a
+</I>&gt;<i>&quot;normal&quot; DOCTYPE and page was wacky.  Tried restarting Xitami.  No change.
+</I>&gt;<i>Tried adding line to MIME section of xitami.cfg with and without a restart -
+</I>&gt;<i>no difference.  For me the only thing that works is using a DOCTYPE of
+</I>&gt;<i>&lt;!DOCTYPE&gt;
+</I>&gt;<i>
+</I>&gt;<i>Would you mind giving me the page address that now works for you.  I'd like
+</I>&gt;<i>to see what you have in your CSS. Thanks.
+</I>&gt;<i>
+</I>&gt;<i>Phil
+</I>&gt;<i>
+</I>&gt;<i>-----Original Message-----
+</I>&gt;<i>From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i>[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>]On Behalf Of Gordon Wong
+</I>&gt;<i>Sent: Tuesday, November 02, 2010 11:23 PM
+</I>&gt;<i>To: Xitami Users General Discussion
+</I>&gt;<i>Subject: Re: [Xitami] Safari and DOCTYPE
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Whoops - found the solution.  Now Chrome works with external stylesheets.
+</I>&gt;<i>
+</I>&gt;<i>Edit defaults.cfg and add the two lines:
+</I>&gt;<i>
+</I>&gt;<i>[Mime]
+</I>&gt;<i>      css=text/css
+</I>&gt;<i>
+</I>&gt;<i>I didn't even have to restart Xitami.
+</I>&gt;<i>
+</I>&gt;<i>- Gordon
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I said:
+</I>&gt;<i>I have been having unreliable results with external stylesheets with Xitami
+</I>&gt;<i>2.4d10 under Windows with Chrome browser.
+</I>&gt;<i>The same test site that fails with Chrome browser when served by Xitami
+</I>&gt;<i>works fine with Apache.
+</I>&gt;<i>I tried everything to do with DTD and @charset etc.
+</I>&gt;<i>Unless someone can identify why Xitami does this it's time to move on ...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>At 06:34 PM 2010-09-20 -0400, you wrote:
+</I>&gt;<i> &gt;To Pieter (or anyone who might know)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;In searching for a solution to an issue I was having, I found a 1 Dec 2009
+</I>&gt;<i> &gt;post on Wikidot which indicated that if a DOCTYPE line was present that
+</I>&gt;<i> &gt;Xitami would not respect the formatting in the CSS file.  I am having the
+</I>&gt;<i> &gt;same issue with both Safari and Chrome.  Pieter had suggested that this was
+</I>&gt;<i> &gt;a &quot;pure HTML&quot; issue and encouraged the poster to ask the question in this
+</I>&gt;<i> &gt;forum but I don't see that he ever did.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;In anyone's experience, is there a DOCTYPE that will work with Xitami
+</I>&gt;<i> &gt;(V2.4d6) on Safari and Chrome?  Or is there otherwise a solution?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Thanks
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Phil
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20101103/1e7a50f4/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20101103/1e7a50f4/attachment.htm</A> 
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="008093.html">[Xitami] Safari and DOCTYPE
+</A></li>
+	<LI>Next message: <A HREF="008095.html">[Xitami] Safari and DOCTYPE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8094">[ date ]</a>
+              <a href="thread.html#8094">[ thread ]</a>
+              <a href="subject.html#8094">[ subject ]</a>
+              <a href="author.html#8094">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

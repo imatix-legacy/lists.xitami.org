@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000227.html">
+   <LINK REL="Next"  HREF="000228.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+   </H1>
+    <B>Dr. Martin R. Hadam
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 23 Jun 2001 19:56:33 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000227.html">[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+</A></li>
+        <LI> Next message: <A HREF="000228.html">[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#225">[ date ]</a>
+              <a href="thread.html#225">[ thread ]</a>
+              <a href="subject.html#225">[ subject ]</a>
+              <a href="author.html#225">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 11 Jun 2001 00:54:48 +1200, Ewen McNeill wrote:
+
+ I've done some deep thinking &lt;g&gt; and then tested one thing I'd
+apparently  forgotten (shame on me!): since the problem [see below] is
+occuring on an SMP machine, I've disabled the use of both processors
+using execmode and voilà - Xitami is now perfectly stable again. In
+case you're not familiar with execmode: this IBM utility patches an
+exe/dll to only make use of one processor in an smp system. So it seems
+that there is a serious new problem with threading in Xitami versions
+&gt;<i>2.4d6 [OS/2]. This has been tested / verified on two different machines running OS/2 Warp Server SMP at FP 42/43 resp. The test version I used with execmode was the 2.5b4 patch #2 (Bernd Hohmann).
+</I>
+ To reiterate the problem - since its description is now some time ago:
+Xitami starts and quits after a while without any further error message
+(other than the one below).
+
+ Hope that this will allow you to better trace the problem.
+ 
+ Martin
+
+
+&gt;<i>In message &lt;<A HREF="mailto:E158S7R-0000Ee-00@Mail.MH-Hannover.DE">E158S7R-0000Ee-00@Mail.MH-Hannover.DE</A>&gt;, &quot;Dr. Martin R. Hadam&quot; writes:
+</I>&gt;&gt;<i> I've been moving machines and today, Xitami provided some message, for
+</I>&gt;&gt;<i>the first time:
+</I>&gt;&gt;<i>2001/06/08 21:32:16: smthttp: HTTP service is now running
+</I>&gt;&gt;<i>Fatal error in application - aborted
+</I>&gt;&gt;<i>Abort at smtsock:Check-For-Expired-Requests: (Getting-Event, Empty-Event)
+</I>&gt;&gt;<i>Abnormal program termination
+</I>&gt;<i>
+</I>&gt;<i>Ah, that sort of problem.  You might want to keep an eye on whether it's
+</I>&gt;<i>always at the same point, or whether the problems shift around.  If they
+</I>&gt;<i>shift around it's most likely that something is writing to memory it
+</I>&gt;<i>shouldn't.  If it's always (or usually) one place, then possibly there's
+</I>&gt;<i>something wrong with the way that some requests are handled by smtsock.
+</I>&gt;<i>Unfortunately either way they're difficult to diagnose problems, since
+</I>&gt;<i>they're not easily reproducable.
+</I>
+
+ Martin R. Hadam
+ Kinderklinik - Medizinische Hochschule
+ D-30623 Hannover
+ Germany
+ Email: <A HREF="mailto:Hadam.Martin@MH-Hannover.de">Hadam.Martin@MH-Hannover.de</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000227.html">[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+</A></li>
+	<LI> Next message: <A HREF="000228.html">[Xitami] SMP Problem (WAS: Xitami 2.4d9/Xitami 2.5b5)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#225">[ date ]</a>
+              <a href="thread.html#225">[ thread ]</a>
+              <a href="subject.html#225">[ subject ]</a>
+              <a href="author.html#225">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

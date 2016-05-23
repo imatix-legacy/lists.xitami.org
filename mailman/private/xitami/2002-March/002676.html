@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: multiple domains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002675.html">
+   <LINK REL="Next"  HREF="002677.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: multiple domains
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] RE: multiple domains">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 6 Mar 2002 17:46:22 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002675.html">[Xitami] RE: multiple domains
+</A></li>
+        <LI> Next message: <A HREF="002677.html">[Xitami] RE: multiple domains
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2676">[ date ]</a>
+              <a href="thread.html#2676">[ thread ]</a>
+              <a href="subject.html#2676">[ subject ]</a>
+              <a href="author.html#2676">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Can I run www.four-banger.net and www.mrhymbaugh.com from the same
+</I>&gt;<i> computer with xitami?  These are two completely different sites.
+</I>&gt;<i> Right now they are both going to the same site.
+</I>
+Register both names with your DNS, to the same machine. I think you
+already have that working.
+
+In Xitami's web-administration screen, click &quot;V-Host Wizard&quot;. Click
+&quot;New&quot;.
+
+Make up a name for the config file. Leave IP address blank; put
+&quot;www.mrhymbaugh.com&quot; in &quot;...DNS host name:&quot;.
+
+&quot;Web page root directory:&quot; is the folder where this site's home page
+is.
+
+While the docs suggest that a relative path can work, I've had best
+luck using an absolute path like &quot;d:/wwwroot/Imlc&quot;. Use the forward
+slashes, this isn't DOS. If you were on unix, you'd use the exact
+letter-case.
+
+For starters, you can ignore all else. Save Save Save until you
+get back to the top Admin screen.
+
+Now, stop Xitami completely, freshen your coffee, and restart it.
+That isn't supposed to be necessary; X should note the modified
+config file and re-read it within a minute. But some of us feel that
+it is sometimes reluctant to do so. Killing it and cold-starting it
+forces it to get the new configuration.
+
+Also, whack your browser. Explorer in particular (but also NS) hates
+to re-read a page if it thinks it &quot;hasn't changed&quot;. It can't
+understand that the URL is no longer supposed to go to the same
+file. Leaning on Ctrl-F5 will sometimes make it go to all the
+trouble of actually getting the page.
+
+Do the same for your four-banger. It can point to your main HTML
+folder, or a sub-folder.
+
+If a request comes to your machine and does not match any of the
+V-Hosts you have defined, they will get Xitami's default page,
+probably your Pub Crawl page. That would happen if the page were
+requested by IP number instead of name (though that is very unlikely
+for your dynamic IP), or super-old browsers that do not say (in the
+HTTP header) where they think they are going. So be sure that page
+gives them what you want, or at least nothing too dumb.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002675.html">[Xitami] RE: multiple domains
+</A></li>
+	<LI> Next message: <A HREF="002677.html">[Xitami] RE: multiple domains
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2676">[ date ]</a>
+              <a href="thread.html#2676">[ thread ]</a>
+              <a href="subject.html#2676">[ subject ]</a>
+              <a href="author.html#2676">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

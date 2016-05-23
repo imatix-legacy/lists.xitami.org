@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000290.html">
+   <LINK REL="Next"  HREF="000291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+   </H1>
+    <B>Shivakumar Gopalakrishnan
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] xitami (smt) in a multi-threaded windows program">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Fri, 18 Jul 2003 14:08:09 -0700 (PDT)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000290.html">[Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+</A></li>
+        <LI> Next message: <A HREF="000291.html">[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#289">[ date ]</a>
+              <a href="thread.html#289">[ thread ]</a>
+              <a href="subject.html#289">[ subject ]</a>
+              <a href="author.html#289">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+I found this easier method but it will work ONLY IF
+you are not accessing smt/sfl functions simultaneously
+from multiple threads. Given the warning it has worked
+fine with my windows programs.
+
+What I do is creat another configuration in VC++
+called MultiThreaded Debug/Release in libsfl project
+and change the C++ options to use the Multithreaded
+library.
+
+I rebuild the project with the new configuration and
+use it in my windows programs without any problems.
+
+Optional Advanced Tip: I also create similarly named
+configurations in my windows VC++ project and make it
+dependent on the libsfl and libsmt project (You have
+to insert the libsfl and libsmt project into your
+windows project first) . This way the correct
+(debug/release) library gets automatically linked with
+my windows program. Also any changes in the libsfl or
+libsmt code would automatically force relinking in the
+windows program.
+
+Hope this helps.
+
+Shivakumar Gopalakrishnan
+
+--- <A HREF="mailto:xitami-dev-request@lists.xitami.org">xitami-dev-request@lists.xitami.org</A> wrote:
+&gt;<i> Send Xitami-Dev mailing list submissions to
+</I>&gt;<i> 	<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i> 
+</I>&gt;<i> To subscribe or unsubscribe via the World Wide Web,
+</I>&gt;<i> visit
+</I>&gt;<i> 	<A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>&gt;<i> or, via email, send a message with subject or body
+</I>&gt;<i> 'help' to
+</I>&gt;<i> 	<A HREF="mailto:xitami-dev-request@lists.xitami.org">xitami-dev-request@lists.xitami.org</A>
+</I>&gt;<i> 
+</I>&gt;<i> You can reach the person managing the list at
+</I>&gt;<i> 	<A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>
+</I>&gt;<i> 
+</I>&gt;<i> When replying, please edit your Subject line so it
+</I>&gt;<i> is more specific
+</I>&gt;<i> than &quot;Re: Contents of Xitami-Dev digest...&quot;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Today's Topics:
+</I>&gt;<i> 
+</I>&gt;<i>    1. xitami (smt) in a multi-threaded windows
+</I>&gt;<i> program (linker option \MT) (Thomas Burghardt)
+</I>&gt;<i>    2. RE: xitami (smt) in a multi-threaded windows
+</I>&gt;<i> program (linker option \MT) (Angus Lord)
+</I>&gt;<i>    3. SMT 3.0 sockets on Windows XP fail
+</I>&gt;<i> (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+</I>&gt;<i> 
+</I>&gt;<i> --__--__--
+</I>&gt;<i> 
+</I>&gt;<i> Message: 1
+</I>&gt;<i> From: &quot;Thomas Burghardt&quot;
+</I>&gt;<i> &lt;<A HREF="mailto:thomas.burghardt@onlinehome.de">thomas.burghardt@onlinehome.de</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>&gt;
+</I>&gt;<i> Date: Thu, 17 Jul 2003 11:33:46 +0200
+</I>&gt;<i> Organization: Worms &amp; Partner
+</I>&gt;<i> Subject: [Xitami-Dev] xitami (smt) in a
+</I>&gt;<i> multi-threaded windows program (linker option \MT)
+</I>&gt;<i> Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i> 
+</I>&gt;<i> This is a multi-part message in MIME format.
+</I>&gt;<i> 
+</I>&gt;<i> ------=_NextPart_000_001A_01C34C57.489E5E70
+</I>&gt;<i> Content-Type: text/plain;
+</I>&gt;<i> 	charset=&quot;iso-8859-1&quot;
+</I>&gt;<i> Content-Transfer-Encoding: quoted-printable
+</I>&gt;<i> 
+</I>&gt;<i> Dear programmers,
+</I>&gt;<i> we would like to use the xitami (with smt)
+</I>&gt;<i> implementation in a =
+</I>&gt;<i> multithreading windows program (compile with VC++
+</I>&gt;<i> and the \MT option).
+</I>&gt;<i> but we still discovered, that smt only run with the
+</I>&gt;<i> singlethreaded =
+</I>&gt;<i> runtime libraries.
+</I>&gt;<i> Is there any solution to link our program with the
+</I>&gt;<i> multithreading =
+</I>&gt;<i> runtime libraries?
+</I>&gt;<i> For example build the xitami as a dynamic link
+</I>&gt;<i> library (dll) with single =
+</I>&gt;<i> threaded!
+</I>&gt;<i> 
+</I>&gt;<i> With best regards
+</I>&gt;<i> 
+</I>&gt;<i> Institute of Regional Geography
+</I>&gt;<i> Thomas Burghardt
+</I>&gt;<i> Leipzig
+</I>&gt;<i> Germany
+</I>&gt;<i> <A HREF="mailto:t_burghardt@ifl-leipzig.de">t_burghardt@ifl-leipzig.de</A>
+</I>&gt;<i> 
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000290.html">[Xitami-Dev] SMT 3.0 sockets on Windows XP fail
+</A></li>
+	<LI> Next message: <A HREF="000291.html">[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#289">[ date ]</a>
+              <a href="thread.html#289">[ thread ]</a>
+              <a href="subject.html#289">[ subject ]</a>
+              <a href="author.html#289">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

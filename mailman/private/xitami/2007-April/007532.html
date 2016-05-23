@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] LRWP problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20LRWP%20problem&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="007533.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] LRWP problem</H1>
+    <B>B.P.</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20LRWP%20problem&In-Reply-To="
+       TITLE="[Xitami] LRWP problem">thingieStuff at gamebox.net
+       </A><BR>
+    <I>Fri Apr  6 15:49:15 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="007533.html">[Xitami] LRWP problem (no more)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7532">[ date ]</a>
+              <a href="thread.html#7532">[ thread ]</a>
+              <a href="subject.html#7532">[ subject ]</a>
+              <a href="author.html#7532">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Has anyone tried to make a LRWP client in PERL?
+I don't know what I'm doing wrong, but I can't seem to get any response from
+the LRWP agent when my script is connecting :
+
+---- start of script ----
+# name of the server extension programme (accessible with
+<A HREF="http://localhost/test">http://localhost/test</A>)
+$nameLRWP = 'test';
+
+push @INC, 'G:/Prog/perl';
+use IO::Socket::INET;
+
+# launch TCP connection
+$canalLRWP = IO::Socket::INET-&gt;new('PeerAddr', '127.0.0.1', 'PeerPort',
+'81', 'Proto', 'tcp');
+$canalLRWP-&gt;connected() or die 'can\'t connect!';
+
+binmode($canalLRWP);
+$canalLRWP-&gt;autoflush(1);
+
+# send the startup string
+print $canalLRWP &quot;$nomLRWP\xFF\xFF&quot;;
+
+# echo back (to STDOUT) whatever was read from socket, and output a simple
+message to the LRWP agent
+while($request = &lt;$canalLRWP&gt;)
+{
+print &quot;Request :\n$request\n&quot;;
+print $canalLRWP '000000009', 'All right';
+}
+
+# close the socket
+$canalLRWP-&gt;shutdown(2);
+---- end of script ----
+
+
+In the DOS32 console window, XITAMI tells me that the connection was
+successful (xilrwp: Peer test connected for &lt;any&gt; host), but no answer on
+the socket (should be &quot;OK&quot; or &quot;ERROR ...&quot;). Besides, even a simple HTML form
+cannot seem to POST its data to my program. It seems the whole thing can't
+get past that OK/ERROR part of the protocol.
+
+Any clue anyone?
+Thanks
+
+Bruno
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="007533.html">[Xitami] LRWP problem (no more)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7532">[ date ]</a>
+              <a href="thread.html#7532">[ thread ]</a>
+              <a href="subject.html#7532">[ subject ]</a>
+              <a href="author.html#7532">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

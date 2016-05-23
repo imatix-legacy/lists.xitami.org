@@ -1,0 +1,354 @@
+From xitami-dev@lists.xitami.org  Tue Mar 16 14:56:55 2004
+From: xitami-dev@lists.xitami.org (Laszlo Fazekas)
+Date: Tue, 16 Mar 2004 15:56:55 +0100
+Subject: [Xitami-Dev] Xitami service goes wrong
+Message-ID: <405715B7.1000407@szegvx.szeg.matav.hu>
+
+Hi,
+can anabody does help me:
+the Xitami server for 2 years  goes god (in WIN2000 server) but last 
+week was a  windows restart and this time it doesn't work anymore. 
+What's the problem with this service ? It's very mysterious.
+
+It's  log file:
+
+
+2004/03/16 15:25:51: xilrwp: Could not open LRWP port 81
+2004/03/16 15:25:51: Protocol not known
+2004/03/16 15:25:51: smthttp: web server binding to address
+10.4.40.35
+2004/03/16 15:25:51: smthttp: web server binding to address 127.0.0.1
+2004/03/16 15:25:51: smthttp: opening HTTP service on port 80...
+2004/03/16 15:25:51: smthttp: could not open port 80
+2004/03/16 15:25:51: smthttp: Protocol not known
+2004/03/16 15:25:51: smthttp: No error
+
+
+Thanks:
+Laci
+
+From xitami-dev@lists.xitami.org  Tue Mar 16 14:36:40 2004
+From: xitami-dev@lists.xitami.org (=?ISO-8859-1?Q?=DCgyeletes_telefon?=)
+Date: Tue, 16 Mar 2004 15:36:40 +0100
+Subject: [Xitami-Dev] Xitami service goes wrong
+Message-ID: <405710F8.1070009@westel900.net>
+
+Hi,
+can anabody does help me:
+the Xitami server for 2 years  goes god (in WIN2000 server) but last 
+week was a  windows restart and this time it doesn't work anymore. 
+What's the problem with this service ? It's very mysterious.
+
+It's  log file:
+
+
+2004/03/16 15:25:51: xilrwp: Could not open LRWP port 81
+2004/03/16 15:25:51: Protocol not known
+2004/03/16 15:25:51: smthttp: web server binding to address
+10.4.40.35
+2004/03/16 15:25:51: smthttp: web server binding to address 127.0.0.1
+2004/03/16 15:25:51: smthttp: opening HTTP service on port 80...
+2004/03/16 15:25:51: smthttp: could not open port 80
+2004/03/16 15:25:51: smthttp: Protocol not known
+2004/03/16 15:25:51: smthttp: No error
+
+
+Thanks:
+Laci
+
+From xitami-dev@lists.xitami.org  Tue Mar 16 19:04:17 2004
+From: xitami-dev@lists.xitami.org (shadowman)
+Date: Tue, 16 Mar 2004 14:04:17 -0500
+Subject: [Xitami-Dev] Xitami service goes wrong
+In-Reply-To: <405715B7.1000407@szegvx.szeg.matav.hu>
+References: <405715B7.1000407@szegvx.szeg.matav.hu>
+Message-ID: <40574FB1.5070208@cyberpimp.pimpdomain.com>
+
+I'm not too familiar with Windows 2000, but judging from what the error 
+log indicates, I'd suggest maybe checking your network settings.  
+Specifically, ensure the TCP/IP protocol is installed correctly and 
+bound to the network adapter (ie Network Interface Card) which you are 
+using for your web server.
+
+Also maybe check that no other daemons are bound to port 80 and 81.  (ie 
+Microsoft IIS)
+
+--
+-Justin Frim
+
+
+
+Laszlo Fazekas wrote:
+
+> Hi,
+> can anabody does help me:
+> the Xitami server for 2 years  goes god (in WIN2000 server) but last 
+> week was a  windows restart and this time it doesn't work anymore. 
+> What's the problem with this service ? It's very mysterious.
+>
+> It's  log file:
+>
+>
+> 2004/03/16 15:25:51: xilrwp: Could not open LRWP port 81
+> 2004/03/16 15:25:51: Protocol not known
+> 2004/03/16 15:25:51: smthttp: web server binding to address
+> 10.4.40.35
+> 2004/03/16 15:25:51: smthttp: web server binding to address 127.0.0.1
+> 2004/03/16 15:25:51: smthttp: opening HTTP service on port 80...
+> 2004/03/16 15:25:51: smthttp: could not open port 80
+> 2004/03/16 15:25:51: smthttp: Protocol not known
+> 2004/03/16 15:25:51: smthttp: No error
+>
+>
+> Thanks:
+> Laci
+>
+> -- 
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+
+
+From xitami-dev@lists.xitami.org  Wed Mar 17 03:20:47 2004
+From: xitami-dev@lists.xitami.org (Rob Judd)
+Date: Wed, 17 Mar 2004 14:20:47 +1100
+Subject: [Xitami-Dev] Xitami service goes wrong
+References: <405715B7.1000407@szegvx.szeg.matav.hu>
+Message-ID: <4057C40F.57F55A3F@ob-wan.com>
+
+Laszlo,
+
+Looks to me like sockets aren't running at all. Check your network
+setups.
+
+Rob
+
+
+Laszlo Fazekas wrote:
+> 
+> Hi,
+> can anabody does help me:
+> the Xitami server for 2 years  goes god (in WIN2000 server) but last
+> week was a  windows restart and this time it doesn't work anymore.
+> What's the problem with this service ? It's very mysterious.
+> 
+> It's  log file:
+> 
+> 2004/03/16 15:25:51: xilrwp: Could not open LRWP port 81
+> 2004/03/16 15:25:51: Protocol not known
+> 2004/03/16 15:25:51: smthttp: web server binding to address
+> 10.4.40.35
+> 2004/03/16 15:25:51: smthttp: web server binding to address 127.0.0.1
+> 2004/03/16 15:25:51: smthttp: opening HTTP service on port 80...
+> 2004/03/16 15:25:51: smthttp: could not open port 80
+> 2004/03/16 15:25:51: smthttp: Protocol not known
+> 2004/03/16 15:25:51: smthttp: No error
+> 
+> Thanks:
+> Laci
+> 
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From xitami-dev@lists.xitami.org  Wed Mar 24 18:18:19 2004
+From: xitami-dev@lists.xitami.org (Joe Saunders)
+Date: Wed, 24 Mar 2004 10:18:19 -0800 (PST)
+Subject: [Xitami-Dev] Building the 2.4d10 release...
+In-Reply-To: <4057C40F.57F55A3F@ob-wan.com>
+Message-ID: <20040324181819.89953.qmail@web41504.mail.yahoo.com>
+
+--0-598612204-1080152299=:89420
+Content-Type: text/plain; charset=us-ascii
+
+Hello,
+ 
+Downloaded the UNIX source installation, untared the file, ran build.sh and could not get the source s\to build.  It like the build.sh script is not ready for primetime...
+ 
+This was with 2.4d10.  We currently use 2.4d9 and would like to upgrade...
+ 
+Weve never had these problems in the years we've been using Xitami...
+Are there build instructions we dont know about???...
+ 
+Thanks for any help you can give...
+Joe
+
+
+--0-598612204-1080152299=:89420
+Content-Type: text/html; charset=us-ascii
+
+<DIV>
+<DIV>Hello,</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Downloaded the UNIX source installation, untared the file, ran build.sh and could not get the source s\to build.&nbsp; It like the build.sh script is not ready for primetime...</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>This was with 2.4d10.&nbsp; We currently use 2.4d9 and would like to upgrade...</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Weve never had these problems in the years we've been using Xitami...</DIV>
+<DIV>Are there build instructions we dont know about???...</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>Thanks for any help you can give...</DIV>
+<DIV>Joe</DIV></DIV>
+--0-598612204-1080152299=:89420--
+
+From xitami-dev@lists.xitami.org  Fri Mar 26 11:08:06 2004
+From: xitami-dev@lists.xitami.org (Angus Lord)
+Date: Fri, 26 Mar 2004 12:08:06 +0100
+Subject: [Xitami-Dev] Big in sfl library - ini_dyn_loade
+In-Reply-To: <20040324181819.89953.qmail@web41504.mail.yahoo.com>
+Message-ID: <0a5201c41322$9da6b2e0$6909020a@groovinhigh>
+
+Hi,
+
+I've found a bug in the sfl library - sflini.c. The function ini_dyn_loade
+(with the e) doesn't release the file handle after a file_locate.
+
+The orginal code is
+
+SYMTAB *
+ini_dyn_loade (
+    SYMTAB *load_symtab,
+    const char *filename)
+{
+    ASSERT (filename);
+    if (file_locate ("PATH", filename, NULL))
+        return (ini_dyn_load (load_symtab, filename));
+    else
+        return (NULL);
+}
+
+Fixed this would be
+
+SYMTAB *
+ini_dyn_loade (
+    SYMTAB *load_symtab,
+    const char *filename)
+{
+    FILE *fp;
+    ASSERT (filename);
+    if ((fp = file_locate ("PATH", filename, NULL)) != NULL) {
+	  file_close(fp);
+        return (ini_dyn_load (load_symtab, filename));
+    }
+    else
+        return (NULL);
+}
+
+I've checked that this method is not used in the smt libaries (xitami) but
+could present problems to other developers.
+
+Cheers
+
+	Angus Lord
+
+
+From xitami-dev@lists.xitami.org  Fri Mar 26 19:13:24 2004
+From: xitami-dev@lists.xitami.org (Justin Frim)
+Date: Fri, 26 Mar 2004 14:13:24 -0500 (EST)
+Subject: [Xitami-Dev] Big in sfl library - ini_dyn_loade
+In-Reply-To: <0a5201c41322$9da6b2e0$6909020a@groovinhigh>
+References: <20040324181819.89953.qmail@web41504.mail.yahoo.com>
+ <0a5201c41322$9da6b2e0$6909020a@groovinhigh>
+Message-ID: <48314.131.136.242.1.1080328404.squirrel@webmail.look.ca>
+
+Pardon my stupidity, but does this mean Xitami is not affected by this
+problem?  (ie Xitami does not use SFL, or it just doesn't use the
+ini_dyn_loade function from that library?)
+
+
+-- 
+TTYL,
+Justin
+
+
+> Hi,
+>
+> I've found a bug in the sfl library - sflini.c. The function ini_dyn_loade
+> (with the e) doesn't release the file handle after a file_locate.
+>
+> The orginal code is
+>
+> SYMTAB *
+> ini_dyn_loade (
+>     SYMTAB *load_symtab,
+>     const char *filename)
+> {
+>     ASSERT (filename);
+>     if (file_locate ("PATH", filename, NULL))
+>         return (ini_dyn_load (load_symtab, filename));
+>     else
+>         return (NULL);
+> }
+>
+> Fixed this would be
+>
+> SYMTAB *
+> ini_dyn_loade (
+>     SYMTAB *load_symtab,
+>     const char *filename)
+> {
+>     FILE *fp;
+>     ASSERT (filename);
+>     if ((fp = file_locate ("PATH", filename, NULL)) != NULL) {
+> 	  file_close(fp);
+>         return (ini_dyn_load (load_symtab, filename));
+>     }
+>     else
+>         return (NULL);
+> }
+>
+> I've checked that this method is not used in the smt libaries (xitami) but
+> could present problems to other developers.
+>
+> Cheers
+>
+> 	Angus Lord
+>
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+
+
+From xitami-dev@lists.xitami.org  Tue Mar 30 10:51:19 2004
+From: xitami-dev@lists.xitami.org (Angus Lord)
+Date: Tue, 30 Mar 2004 11:51:19 +0200
+Subject: [Xitami-Dev] Big in sfl library - ini_dyn_loade
+In-Reply-To: <48314.131.136.242.1.1080328404.squirrel@webmail.look.ca>
+Message-ID: <0cd101c4163c$8e0e57d0$6909020a@groovinhigh>
+
+> Pardon my stupidity, but does this mean Xitami is not affected by this
+> problem?  (ie Xitami does not use SFL, or it just doesn't use the
+> ini_dyn_loade function from that library?)
+> 
+
+Xitami is based upon SFL, but as far as I can tell doesn't use the
+ini_dyn_loade function.
+
+Cheers
+
+	Angus
+
+
+From xitami-dev@lists.xitami.org  Tue Mar 30 10:49:07 2004
+From: xitami-dev@lists.xitami.org (Angus Lord)
+Date: Tue, 30 Mar 2004 11:49:07 +0200
+Subject: [Xitami-Dev] Big in sfl library - ini_dyn_loade
+In-Reply-To: <48314.131.136.242.1.1080328404.squirrel@webmail.look.ca>
+Message-ID: <0cd001c4163c$408f52c0$6909020a@groovinhigh>
+
+> Pardon my stupidity, but does this mean Xitami is not affected by this
+> problem?  (ie Xitami does not use SFL, or it just doesn't use the
+> ini_dyn_loade function from that library?)
+> 
+
+Xitami is based upon SFL, but as far as I can tell doesn't use the
+ini_dyn_loade function.
+
+Cheers
+
+	Angus
+
+

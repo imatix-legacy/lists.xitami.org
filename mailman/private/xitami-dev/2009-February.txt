@@ -1,0 +1,206 @@
+From ph at imatix.com  Fri Feb  6 18:47:54 2009
+From: ph at imatix.com (Pieter Hintjens)
+Date: Fri, 6 Feb 2009 18:47:54 +0100
+Subject: [Xitami-Dev] X5 release a0 now available
+Message-ID: <5821ea240902060947q52c7b0e0nfefe317e6c7870c2@mail.gmail.com>
+
+Hi folks,
+
+For early birds who don't mind a worm or two, X5/a0 is now online, in
+source form.  The server is still packaged with the OpenAMQ product.
+To get it, download OpenAMQ/1.4a3, and build as per instructions.  (It
+probably won't build on Windows.)  In the directory base2/http, you'll
+find Xitami/5 built and ready to run.
+
+The server is largely self-documenting: "xitami -h" for a summary, or
+"xitami --help" for full details.
+
+Questions to this list.
+
+Cheers,
+Pieter
+
+-- 
+"Silence (n.) The sound of something really terrible just about to happen."
+-- Devil's Wiki - http://www.devilswiki.com.
+
+From bob.paddock at gmail.com  Sat Feb  7 02:29:36 2009
+From: bob.paddock at gmail.com (Bob Paddock)
+Date: Fri, 6 Feb 2009 20:29:36 -0500
+Subject: [Xitami-Dev] X5 release a0 now available
+In-Reply-To: <5821ea240902060947q52c7b0e0nfefe317e6c7870c2@mail.gmail.com>
+References: <5821ea240902060947q52c7b0e0nfefe317e6c7870c2@mail.gmail.com>
+Message-ID: <bf689bbe0902061729p12de3001ve61eaaf4ae22ec2a@mail.gmail.com>
+
+On Fri, Feb 6, 2009 at 12:47 PM, Pieter Hintjens <ph at imatix.com>
+> For early birds who don't mind a worm or two
+
+Failing to build on my AMD64 Dual core Gentoo box:
+
+boom I: [Xitami]: Building Xitami...
+boom I: [Xitami]: Installing Xitami into
+/dat/Build/OpenAMQ-1.4a3/base2-2.3/_install...
+boom I: [iCL]: Running regression tests...
+boom I: [ipr]: Running regression tests...
+ipr_http_test: ipr_http.c:857: ipr_http_selftest: Assertion
+`ipr_regexp_eq ("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9]{2}:[0-9]{2}:[0-9]{2}
+`+[0-9]{2}:[0-9]{2}", text_string)' failed.
+boomake: line 4068: 29250 Aborted                 $RUN_COMMAND
+boom E: [ipr]: "./ipr_http_test -q" failed - stop
+boom E: [base2]: stop
+E: Build of base2-2.3 failed
+
+
+-- 
+http://www.wearablesmartsensors.com/
+http://www.softwaresafety.net/
+http://www.designer-iii.com/
+http://www.unusualresearch.com/
+
+From bob.paddock at gmail.com  Sat Feb  7 02:41:08 2009
+From: bob.paddock at gmail.com (Bob Paddock)
+Date: Fri, 6 Feb 2009 20:41:08 -0500
+Subject: [Xitami-Dev] X5 release a0 now available
+In-Reply-To: <5821ea240902060947q52c7b0e0nfefe317e6c7870c2@mail.gmail.com>
+References: <5821ea240902060947q52c7b0e0nfefe317e6c7870c2@mail.gmail.com>
+Message-ID: <bf689bbe0902061741o54a57d77yb4e460bc5e1d4253@mail.gmail.com>
+
+On Fri, Feb 6, 2009 at 12:47 PM, Pieter Hintjens <ph at imatix.com> wrote:
+
+> For early birds who don't mind a worm or two
+
+Is it really a good thing to be pulling in the Google Analytics stuff,
+and wikidot stuff in the default.html webpage of the distribution?
+
+Also default.html is full of invisible white space, slows down load time.
+
+From ph at imatix.com  Sat Feb  7 08:57:48 2009
+From: ph at imatix.com (Pieter Hintjens)
+Date: Sat, 7 Feb 2009 08:57:48 +0100
+Subject: [Xitami-Dev] X5 release a0 now available
+In-Reply-To: <bf689bbe0902061729p12de3001ve61eaaf4ae22ec2a@mail.gmail.com>
+References: <5821ea240902060947q52c7b0e0nfefe317e6c7870c2@mail.gmail.com>
+	<bf689bbe0902061729p12de3001ve61eaaf4ae22ec2a@mail.gmail.com>
+Message-ID: <5821ea240902062357o373b1f42j90644e387f9783c1@mail.gmail.com>
+
+Bob,
+
+Thanks for the report.  I think the test case is bogus and fails
+because you have a different timezone setting.  You can simply comment
+out that assertion.  Better would be to add 'icl_console_print
+(text_string);' before it, so we know what's going wrong...
+
+Cheers,
+
+-Pieter
+
+On Sat, Feb 7, 2009 at 2:29 AM, Bob Paddock <bob.paddock at gmail.com> wrote:
+> On Fri, Feb 6, 2009 at 12:47 PM, Pieter Hintjens <ph at imatix.com>
+>> For early birds who don't mind a worm or two
+>
+> Failing to build on my AMD64 Dual core Gentoo box:
+>
+> boom I: [Xitami]: Building Xitami...
+> boom I: [Xitami]: Installing Xitami into
+> /dat/Build/OpenAMQ-1.4a3/base2-2.3/_install...
+> boom I: [iCL]: Running regression tests...
+> boom I: [ipr]: Running regression tests...
+> ipr_http_test: ipr_http.c:857: ipr_http_selftest: Assertion
+> `ipr_regexp_eq ("[0-9]{2}/[a-zA-Z]{3}/[0-9]{4}:[0-9]{2}:[0-9]{2}:[0-9]{2}
+> `+[0-9]{2}:[0-9]{2}", text_string)' failed.
+> boomake: line 4068: 29250 Aborted                 $RUN_COMMAND
+> boom E: [ipr]: "./ipr_http_test -q" failed - stop
+> boom E: [base2]: stop
+> E: Build of base2-2.3 failed
+>
+>
+> --
+> http://www.wearablesmartsensors.com/
+> http://www.softwaresafety.net/
+> http://www.designer-iii.com/
+> http://www.unusualresearch.com/
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+
+
+
+-- 
+"Silence (n.) The sound of something really terrible just about to happen."
+-- Devil's Wiki - http://www.devilswiki.com.
+
+From ph at imatix.com  Wed Feb 18 15:04:52 2009
+From: ph at imatix.com (Pieter Hintjens)
+Date: Wed, 18 Feb 2009 15:04:52 +0100
+Subject: [Xitami-Dev] New X5 website, downloads
+Message-ID: <5821ea240902180604o60db9c18pf04db13a91d436e1@mail.gmail.com>
+
+Hi all,
+
+We've released an X5 binary for Windows, and will have proper source
+kits shortly.
+
+Installation on Windows is trivial: pop the .exe onto a directory in
+your path, run it.  'xitami -h' gives help.
+
+I redesigned the xitami.wikidot.com website this morning, and it'll
+move to www.xitami.com.  If you edit pages, or submit issues, you'll
+get emails when someone adds a comment.  This is quite fun.
+
+Sorry for spamming both lists here.  We'll stick to xitami-dev for all
+development discussions, so anyone who wants to follow those, make
+sure you're registered on xitami-dev.
+
+It'll take a few more hours for the DNS changes to complete.
+
+Cheers!
+
+-Pieter
+
+From i001584 at gmail.com  Wed Feb 18 16:09:59 2009
+From: i001584 at gmail.com (Rafael Cano)
+Date: Wed, 18 Feb 2009 16:09:59 +0100
+Subject: [Xitami-Dev] New X5 website, downloads
+In-Reply-To: <5821ea240902180604o60db9c18pf04db13a91d436e1@mail.gmail.com>
+References: <5821ea240902180604o60db9c18pf04db13a91d436e1@mail.gmail.com>
+Message-ID: <7d44ae7a0902180709k5709854bu6225760cf308382d@mail.gmail.com>
+
+Hi Pieter.
+
+The executable is missing ;-)
+
+Kind regards, Rafael.
+
+On Wed, Feb 18, 2009 at 3:04 PM, Pieter Hintjens <ph at imatix.com> wrote:
+> Hi all,
+>
+> We've released an X5 binary for Windows, and will have proper source
+> kits shortly.
+>
+> Installation on Windows is trivial: pop the .exe onto a directory in
+> your path, run it.  'xitami -h' gives help.
+>
+> I redesigned the xitami.wikidot.com website this morning, and it'll
+> move to www.xitami.com.  If you edit pages, or submit issues, you'll
+> get emails when someone adds a comment.  This is quite fun.
+>
+> Sorry for spamming both lists here.  We'll stick to xitami-dev for all
+> development discussions, so anyone who wants to follow those, make
+> sure you're registered on xitami-dev.
+>
+> It'll take a few more hours for the DNS changes to complete.
+>
+> Cheers!
+>
+> -Pieter
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+>
+

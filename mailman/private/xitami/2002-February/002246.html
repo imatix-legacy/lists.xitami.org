@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Two domain names.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002245.html">
+   <LINK REL="Next"  HREF="002239.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Two domain names.
+   </H1>
+    <B>TCD Support
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Two domain names.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 4 Feb 2002 01:39:13 -0500 (Eastern Standard Time)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002245.html">[Xitami] Two domain names.
+</A></li>
+        <LI> Next message: <A HREF="002239.html">[Xitami] VH WBA no accesss
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2246">[ date ]</a>
+              <a href="thread.html#2246">[ thread ]</a>
+              <a href="subject.html#2246">[ subject ]</a>
+              <a href="author.html#2246">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>------Original Message-------
+
+From: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Date: Tuesday, January 22, 2002 8:28:59 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: [Xitami] Two domain names.
+
+Hello to everyone.
+
+I have had Xitami 2.5b5 running for over a year now and first I must say it
+has been a joy to use. Actually all I had to do was install it, made some
+html and after that, just forget about it. No need to check every day if my
+pages were alive. They truly have been. Including FTP.
+
+I have to agree.  I have, been running Xitami Powered for over 4 years, on a
+M$ Operating to say the least! ;-0   I have found over the final OS switch
+to a flavor of UNIX, LINUX, xBSD.
+
+I have ADSL connection with static IP. So my
+both domains point to same IP-address. Is it possible to make Xitami to
+separate these domain names and guide the visitors to sites (in this case
+two different folders on same HD) they are looking for or do I have to set
+up a DNS-server or something else? I've tried to use virtual hosts but I
+just 
+
+Ok here is how I do it and it works, and one thing I have to say before I
+tell you is that, it is here at the Xitami Support Forum from great people I
+have learned to achieve this.  Another STRONG feature from Imatix! 
+-----remember this is just one way to set it up, there are many solutions
+and alternatives, I am just telling you the way I have it setup and it works
+ 
+
+1st:  You have the DSL connection and the Static IP, (The best start you
+could ask for), even if you had a block of addresses, it is still better to
+bind &amp; multi-home all your Virtual Hosts to one IP, I mean the IP system as
+Area codes and phone numbers are running their course.
+
+2nd-Solution-A: Set up a box with FreeBSD (again, there are many available
+solutions, I do not want to start a OS war here).  This will be for your
+name server.  You will also need 2 more IP's Static for the Name Server. 
+Just ask your uplink to provide you with some.  There is rarely a cost
+associated with getting more IP's, you just need a valid reason for usage, a
+name server is a very valid reason.
+!!-This is the most effective solution-!!
+
+2nd-Solution-B:  Have someone do your name server (DNS).  Point of the
+matter is, the more control you have of your OWN name server the better. 
+There are people that will do it for you, the question is, are they
+available to update a name server when ever YOU want, and then at what cost?
+If you are interested in this solution, we www.thecomputerdojo.com can
+provide this service for you for 9.99 per month.  It is cheaper than buying
+another machine and dealing with your uplink trying to get IP's, (some
+uplinks charge for extra IP's).
+
+3rd:  Setup a box for Xitami using whatever operating system.  I myself
+still run my Xitami Web Server on the M$ Platform.  I am sure some people
+will think this is a mistake and would suggest running under some flavor of
+UNIX/LINUX.
+Bind this machine to the static IP you choose.
+
+4th:  Setup name server with A-Name and C-name, you can do MX resolutions
+too, Deerfield 
+has a great Mail Daemon   www.mdaemon.com
+
+5th: Now that you have all that setup, the easy part is dealing with Vhosts.
+ Here is how you do it.  Go into Xitami Setup, click on Virtual Hosts, click
+on NEW:
+
+
+Create virtual host profile:   .cfg extension is assumed 
+stick to the actual domain name, for example: cybercoalition
+
+Overwrite existing?   
+ALWAYS!
+
+
+
+Select IP address:   All addresses (recommended)209.5.45.142127.0.0.1 
+do not change
+
+Or, enter DNS host name:   
+here you would put  www.cybercoalition.com
+
+
+
+
+Web page root directory:  
+Here you put the path eg: webpages/cybercoalition 
+CGI-bin directory:  
+best to make separate cgi-bin directories eg:
+webpages/cybercoalition/cgi-bin
+
+FTP root directory:  
+I use WAR_FTP, was not happy with Xitami's FTP server for what I run.  For a
+stand alone webserver FTP it's alright.
+
+Create directories if necessary?  
+Absolutely
+
+Superuser password:  
+anything you want
+
+Uses shared logfiles?  
+Up to you, I make separate, do not want everyone sharing log files.
+
+Can use Browser-Based Admin?  
+again, up to you.....
+
+If so, user id:  
+anything
+
+and password:  
+anything
+
+
+Now restart the server and exit....
+
+
+
+
+So, in short. Two domain names pointing to same IP and in Xitami I have two
+different folders for two different domains. How can I make this work?
+
+
+see above......  ;-)
+
+Hope this helps you out....
+
+Best regards
+
+Hogan
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002245.html">[Xitami] Two domain names.
+</A></li>
+	<LI> Next message: <A HREF="002239.html">[Xitami] VH WBA no accesss
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2246">[ date ]</a>
+              <a href="thread.html#2246">[ thread ]</a>
+              <a href="subject.html#2246">[ subject ]</a>
+              <a href="author.html#2246">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

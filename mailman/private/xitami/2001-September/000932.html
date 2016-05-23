@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Bug: SSI Includes aren't recursive
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000937.html">
+   <LINK REL="Next"  HREF="000933.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Bug: SSI Includes aren't recursive
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Bug: SSI Includes aren't recursive">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Sep 2001 11:22:39 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000937.html">[Xitami] &quot;GET /scripts/.......
+</A></li>
+        <LI> Next message: <A HREF="000933.html">[Xitami] SSI and PHP Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#932">[ date ]</a>
+              <a href="thread.html#932">[ thread ]</a>
+              <a href="subject.html#932">[ subject ]</a>
+              <a href="author.html#932">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I just noticed that the SSI include tag (e.g. the one on the testssi 
+page &lt;!--#include file=&quot;testssi.inc&quot;--&gt;) cuases the rest of the 
+including document (e.g. testssi.ssi) after the tag not to get delivered 
+if the included document itself uses SSI as the example include does.
+
+SSI returns just fine if the included document itself does not try any 
+SSI calls.
+
+This is true using Xitami 2.5b5 (and 2.5b4) with NS6.1, 4.7 and IE5 and 
+appears to be a xitami thing in that the HTML is in fact completely 
+unfinished. I'm guessing that Xixssi doesn't deal well with the same 
+page requiring 2 levels of return.
+
+Also in the process of debugging and playing I noticed that Xitami has a 
+limit on files with SSI includes of about 35,000+ bytes (one file 
+displayed upto the 35922nd byte, another upto the 35553rd) and any data 
+thereafter is abruptly truncated. The limit is not there for pure HTML 
+files - I can successfully read 1Mbyte + sized .htm files but the same 
+file renamed as .SSI will be truncated around this point even if it has 
+no includes.
+
+Francis
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000937.html">[Xitami] &quot;GET /scripts/.......
+</A></li>
+	<LI> Next message: <A HREF="000933.html">[Xitami] SSI and PHP Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#932">[ date ]</a>
+              <a href="thread.html#932">[ thread ]</a>
+              <a href="subject.html#932">[ subject ]</a>
+              <a href="author.html#932">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

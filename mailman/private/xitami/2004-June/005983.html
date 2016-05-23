@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] directory listing locationbar
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005982.html">
+   <LINK REL="Next"  HREF="005984.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] directory listing locationbar
+   </H1>
+    <B>Michael diLorenzo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] directory listing locationbar">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 05 Jun 2004 19:43:46 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005982.html">[Xitami] directory listing locationbar
+</A></li>
+        <LI> Next message: <A HREF="005984.html">[Xitami] directory listing location bar
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5983">[ date ]</a>
+              <a href="thread.html#5983">[ thread ]</a>
+              <a href="subject.html#5983">[ subject ]</a>
+              <a href="author.html#5983">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Being the php guy that I am, may I suggest that you write a php script  
+that takes the gif that you want to display, copies it to someting else  
+(temp.gif, perhaps), displays that, and then deletes the copy.  Since php  
+is compiled before the page is delivered, all you see for source code is a  
+reference to temp.gif, which won't exist by the time the visitor tries to  
+find it.  You won't see any php script in the final web output, and so the  
+visitor won't know the real name of the picture he's looking at.
+
+It sounds from your question that you might also be wondering about how to  
+supress directory listings in Xitami itself.  That is a setting in  
+xitami.cfg.  Set dirlist equal to zero, and directory listings won't be  
+displayed for any directory.  Or, put an index.html file in your pictures  
+directory containing a blank page.
+
+On Sat, 05 Jun 2004 15:50:01 -0600, Johannes Prost &lt;<A HREF="mailto:xitami@pastryworld.ca">xitami@pastryworld.ca</A>&gt;  
+wrote:
+
+&gt;<i> Hello Marc,
+</I>&gt;<i> If I understand this correct, see more below
+</I>&gt;<i>
+</I>&gt;<i> Am 5 Jun 2004 um 21:11 hat Marc Doigny geschrieben:
+</I>&gt;<i>
+</I>&gt;&gt;<i> &gt;Xitami 2.5b6
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> There are no stupid questions.
+</I>&gt;&gt;<i> For a web server each request (main page, first gif, first jpg, first
+</I>&gt;&gt;<i> javascript source, second gif, ... and so on) is a completely new one.  
+</I>&gt;&gt;<i> The
+</I>&gt;&gt;<i> browser has no memory of what was loaded before (except if it looks in  
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> logs).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> To prevent the usage of your gif, you must create it on-the-fly (using a
+</I>&gt;&gt;<i> script, for instance).
+</I>&gt;&gt;<i> You also need some server scripts.
+</I>&gt;&gt;<i> This is just one example, they are probably more possibilities:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &lt;html&gt;
+</I>&gt;&gt;<i> &lt;script src=cgi-bin/create.js&gt;&lt;/script&gt;
+</I>&gt;&gt;<i> &lt;script&gt;
+</I>&gt;&gt;<i> function makegif(a)
+</I>&gt;&gt;<i> {
+</I>&gt;&gt;<i> document.write(&quot;&lt;img src=' + a + b + '.gif'&gt;&quot;);
+</I>&gt;&gt;<i> }
+</I>&gt;&gt;<i> &lt;/script&gt;
+</I>&gt;&gt;<i> &lt;body&gt;
+</I>&gt;&gt;<i> &lt;h1&gt;This is my protected gif:&lt;/h1&gt;
+</I>&gt;&gt;<i> &lt;script&gt;
+</I>&gt;&gt;<i> makegif(&quot;photos/special&quot;);
+</I>&gt;&gt;<i> makegif(&quot;photos/second&quot;);
+</I>&gt;&gt;<i> &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The function &quot;makegif&quot; in your html will create the call to the gif
+</I>&gt;&gt;<i> on-the-fly, using the parameter that's provided by create.js
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Now the special thing resides in create.js.
+</I>&gt;&gt;<i> It's a script that produces a single output line (using a random  
+</I>&gt;&gt;<i> generator)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> var b = 124582134;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> and renames the image to
+</I>&gt;&gt;<i> photos/special124582134.gif and the same with the second gif.
+</I>&gt;&gt;<i>
+</I>&gt;<i> because of this randomly chosen &quot;extended&quot; file name the viewer actually  
+</I>&gt;<i> isn't able to call the
+</I>&gt;<i> file directly.
+</I>&gt;<i>
+</I>&gt;&gt;<i> For more help (and maybe an easier way to do it), you could ask it on  
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> webreference forum:
+</I>&gt;&gt;<i> <A HREF="http://www.webdeveloper.com/forum/">http://www.webdeveloper.com/forum/</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i> will do that.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> marc
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i> Johannes
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+-- 
+Using M2, Opera's revolutionary e-mail client: <A HREF="http://www.opera.com/m2/">http://www.opera.com/m2/</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005982.html">[Xitami] directory listing locationbar
+</A></li>
+	<LI> Next message: <A HREF="005984.html">[Xitami] directory listing location bar
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5983">[ date ]</a>
+              <a href="thread.html#5983">[ thread ]</a>
+              <a href="subject.html#5983">[ subject ]</a>
+              <a href="author.html#5983">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

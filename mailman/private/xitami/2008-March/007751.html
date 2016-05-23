@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=BAY127-W303324054B20E5F07309C1F8000%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007750.html">
+   <LINK REL="Next"  HREF="007752.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>General</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=BAY127-W303324054B20E5F07309C1F8000%40phx.gbl"
+       TITLE="[Xitami] Multi server issue">ronackgen01 at bellsouth.net
+       </A><BR>
+    <I>Sat Mar 22 13:57:56 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007750.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007752.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7751">[ date ]</a>
+              <a href="thread.html#7751">[ thread ]</a>
+              <a href="subject.html#7751">[ subject ]</a>
+              <a href="author.html#7751">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I just tried it with 192.168.1.2 port 80 and 192.168.1.18 port 80. I can
+start one but not the other. Xitami loads both instances but one doesn't
+start even though it says that it's started. I'm not sure what's stopping it
+from running tho?  
+
+ 
+
+I have 28 IP addresses loaded on this NIC. Virtual sites on one Xitami work
+fine. 
+
+ 
+
+I don't know maybe I missed something?
+
+ 
+
+Ron
+
+ 
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of R O
+Sent: Thursday, March 20, 2008 3:22 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Multi server issue
+
+ 
+
+Paul,
+ 
+Thanks.  This is the kind of info I was looking for.  Port 80 is dependent
+per IP as its a tcp issue.  I checked 'netstat -na' and see only see Port 80
+bound to the first server.  There is no other port 80 on any of the other
+IPs on the NIC.  Currently the second IP has port 5080 bound to it which is
+what I had to set that second server to just to come up.  But changing that
+second server back to port 80 prevents the service from starting.
+ 
+The NIC currently has 3 IPs, each IP serves different sevcies (dns, smtp,
+pop, http, etc).  I am using Windows Advanced Server 2003 and was pretty
+certain that I previously did this type of configuration but couldn't recall
+if I ran both IPs with port 80 or one on port 80 and the other on another
+port.
+ 
+Can anyone else test this for me to see what results you get?  Simply add
+another IP to your nic, stop your xitami service and copy the xitami folder
+to a new folder (otherwise the defaults.cfg file will get corrupted in the
+copy), change the defaults.cfg server IP to the new IP of the nic and change
+the Xitami Service Name, and then start the both sevices from both xitami
+folders.
+ 
+Can you connect port 80 on both IPs?  Will the second sevice even start up?
+ 
+In the meantime I am checking to see if there are conflicting config files
+in either of the folders that I am currently using.
+ 
+Thanks all.
+
+Russel P. Olinger 
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+&gt;<i> Date: Thu, 20 Mar 2008 12:42:49 -0400
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">preid at rci.rutgers.edu</A>
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Multi server issue
+</I>&gt;<i> 
+</I>&gt;<i> &gt; You have one NIC. It has one Port 80.
+</I>&gt;<i> 
+</I>&gt;<i> No. The NIC doesn't even know what an IP is, much less a port. If it 
+</I>&gt;<i> gets a packet it passes it to the TCP/IP service. This examines the IP 
+</I>&gt;<i> and port, checks a list of what programs have requested to bind to what 
+</I>&gt;<i> IP:port combinations, and passes the packet to the program indicated.
+</I>&gt;<i> 
+</I>&gt;<i> It isn't a hardware thing. We know that multiple webservers will work 
+</I>&gt;<i> over one NIC. A second NIC is not the answer and sure will confuse you.
+</I>&gt;<i> 
+</I>&gt;<i> It is possible you found an oversight (bug) in Xitami or your TCP/IP
+</I>demon.
+&gt;<i> 
+</I>&gt;<i> IMHO it is far more likely a configuration error. Xitami has many ways 
+</I>&gt;<i> to find configuration data. The default bind is to &quot;All IPs&quot;. My 2 cents 
+</I>&gt;<i> says there is another .CFG file which is binding all IPs to the first 
+</I>&gt;<i> copy which starts, leaving the second copy stranded.
+</I>&gt;<i> 
+</I>&gt;<i> Use 'netstat -an' to see what IP:ports are &quot;Listening&quot;. Since the basic 
+</I>&gt;<i> netstat may not indicate -which- program is listening, see what it says 
+</I>&gt;<i> when each server is started alone.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Paul Reid
+</I>&gt;<i> System Administrator
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080322/95e61399/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080322/95e61399/attachment.htm</A> 
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007750.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007752.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7751">[ date ]</a>
+              <a href="thread.html#7751">[ thread ]</a>
+              <a href="subject.html#7751">[ subject ]</a>
+              <a href="author.html#7751">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

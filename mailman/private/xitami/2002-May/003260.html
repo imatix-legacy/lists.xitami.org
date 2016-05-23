@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Need some help from the Xitami OS/2 users. :)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003255.html">
+   <LINK REL="Next"  HREF="003257.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Need some help from the Xitami OS/2 users. :)
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Need some help from the Xitami OS/2 users. :)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 28 May 2002 11:44:15 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003255.html">[Xitami] Need some help from the Xitami OS/2 users. :)
+</A></li>
+        <LI> Next message: <A HREF="003257.html">[Xitami] Talking about FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3260">[ date ]</a>
+              <a href="thread.html#3260">[ thread ]</a>
+              <a href="subject.html#3260">[ subject ]</a>
+              <a href="author.html#3260">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I compiled the counters and the all compiled smoothly with no
+</I>&gt;<i> errors at all.  However Xitami seems to ignore them.
+</I>
+How do you call them in your HTML? Where did you put them so Xitami
+would find them and know that they are to be executed? &quot;Xitami seems
+to ignore them&quot; is really not much clue.
+
+But back up. Do they run from the command line? Assume you have
+compiled &quot;amy.c&quot; to &quot;C:\Xitami\cgi-bin\amy.exe&quot;. Open a DOS command
+window and type &quot;C:\Xitami\cgi-bin\amy.exe&quot;. You should get a whole
+lot of gibberish. If you look fast (or capture it in a file), the
+first few bytes spell &quot;GIF89a&quot;. (Actually, I think it says
+&quot;Content-type: image/gif&quot; and two line-feeds before that.)
+
+Does it do that?
+
+It might not, because the code tests the environment variable
+&quot;PATH_INFO&quot; (probably doing things different depending on if it
+thinks a webserver called it). So try it this way:
+
+C:
+CD \Xitami\cgi-bin
+set PATH_INFO=foo
+amy &gt; amy.txt
+copy amy.txt amy.gif
+
+(I assume that OS/2 command line syntax is DOS-Windows-ish. Check
+it, especially the exact syntax for SET.)
+
+Open amy.txt in a text reader, it should start &quot;Content....GIF89a&quot;
+and be a lot of gibberish after that. Open amy.gif in an image
+viewer, it should be a picture.
+
+If it works from command line if PATH_INFO is not blank, the problem
+may be that Xitami does not always supply PATH_INFO. in amy.c,
+change PATH_INFO to SCRIPT_NAME (twice) and re-compile.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003255.html">[Xitami] Need some help from the Xitami OS/2 users. :)
+</A></li>
+	<LI> Next message: <A HREF="003257.html">[Xitami] Talking about FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3260">[ date ]</a>
+              <a href="thread.html#3260">[ thread ]</a>
+              <a href="subject.html#3260">[ subject ]</a>
+              <a href="author.html#3260">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

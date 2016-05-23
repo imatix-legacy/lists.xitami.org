@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Server Crashes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="000355.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Server Crashes
+   </H1>
+    <B>Brandl, Thomas
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Server Crashes">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 14:49:14 +0200</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="000355.html">[Xitami-Dev] Server Crashes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#354">[ date ]</a>
+              <a href="thread.html#354">[ thread ]</a>
+              <a href="subject.html#354">[ subject ]</a>
+              <a href="author.html#354">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone,
+
+I'm running Xitami 2.5c1 on a WinXP Embedded System.
+
+I encountered a couple of not reproducable crashes, with scare my a bit.
+This is what crash.log says:
+
+-------------------------------------------------------------
+23/Mar/2004:12:57:02 +0000 Xitami/2.5c1
+Abort at SMTPIPE:Reload-Pipes-If-Changed: (After-Waking, Timer-Event)
+23/Mar/2004:12:57:21 +0000 Xitami/2.5c1
+Abort at xiadmin:Close-All-Forms: (Defaults, New-Session-Event)
+23/Mar/2004:12:57:34 +0000 Xitami/2.5c1
+Abort at xiadmin:Decode-Http-Initial-Request: (Start-Session, Ok-Event)
+23/Mar/2004:12:57:40 +0000 Xitami/2.5c1
+Abort at xiadmin:Close-All-Forms: (Defaults, Shutdown-Event)
+03/Jun/2004:11:19:49 +0100 Xitami/2.5c1 Abort at
+smthttp:Write-Http-Header: (Wait-For-Filter,
+Finished-Event)09/Jun/2004:09:31:41 +0100 Xitami/2.5c1 Abort at
+smthttp:Terminate-The-Thread: (End-Thread,
+Client-Event)06/Jun/2004:23:20:24 +0100 Xitami/2.5c1 Abort at
+SMTPIPE:Reload-Pipes-If-Changed: (After-Waking,
+Timer-Event)29/Jun/2004:21:28:49 +0100 Xitami/2.5c1 Abort at
+SMTPIPE:Reload-Pipes-If-Changed: (After-Waking,
+Timer-Event)06/Feb/2106:07:28:15 +0100 Xitami/2.5c1 Abort at
+xixlog:Write-Request-Log-Entry: (Before-Writing-Log,
+Ok-Event)12/Apr/2005:12:29:17 +0100 Xitami/2.5c1 Abort at
+SMTPIPE:Reload-Pipes-If-Changed: (After-Waking,
+Timer-Event)12/Apr/2005:16:20:48 +0100 Xitami/2.5c1 Abort at
+SMTPIPE:Reload-Pipes-If-Changed: (After-Waking,
+Timer-Event)10/May/2005:14:52:20 +0100 Xitami/2.5c1 Abort at
+SMTPIPE:Reload-Pipes-If-Changed: (After-Waking,
+Timer-Event)11/May/2005:15:58:49 +0100 Xitami/2.5c1 Abort at
+smttran:Put-Buffer-To-Socket: (File-Buffer-Out,
+Write-Ok-Event)12/May/2005:09:25:07 +0100 Xitami/2.5c1 Abort at
+smtsock:Create-Read-Request: (Getting-Event,
+Read-Event)12/May/2005:14:09:27 +0100 Xitami/2.5c1 Abort at
+smttran:Terminate-The-Thread: (File-Buffer-In,
+Sock-Closed-Event)12/May/2005:14:11:14 +0100 Xitami/2.5c1 Abort at
+smttran:Get-Buffer-From-Socket: (File-Buffer-In,
+Read-Ok-Event)12/May/2005:14:11:52 +0100 Xitami/2.5c1 Abort at
+smttran:Get-Buffer-From-Socket: (File-Buffer-In,
+Read-Ok-Event)12/May/2005:14:12:44 +0100 Xitami/2.5c1 Abort at
+smttran:Get-Buffer-From-Socket: (File-Buffer-In,
+Read-Ok-Event)12/May/2005:14:13:37 +0100 Xitami/2.5c1 Abort at
+smttran:Get-Buffer-From-Socket: (File-Buffer-In,
+Read-Ok-Event)12/May/2005:14:21:14 +0100 Xitami/2.5c1 Abort at
+smttran:Get-Buffer-From-Socket: (File-Buffer-In, Read-Ok-Event)
+-------------------------------------------------------------
+
+And the cgierr.log
+-------------------------------------------------------------
+FATAL:  emalloc():  Unable to allocate 5632 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 5632 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 22 bytes
+FATAL:  emalloc():  Unable to allocate 22 bytes
+FATAL:  emalloc():  Unable to allocate 22 bytes
+FATAL:  emalloc():  Unable to allocate 22 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 47 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 4096 bytes
+FATAL:  emalloc():  Unable to allocate 5632 bytes
+s
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 4096 bytes
+FATAL:  emalloc():  Unable to allocate 4096 bytes
+FATAL:  emalloc():  Unable to allocate 5632 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 256 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  emalloc():  Unable to allocate 256 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+FATAL:  erealloc():  Unable to allocate 22528 bytes
+'/q' is not recognized as an internal or external command, operable
+program or batch file.=20
+-------------------------------------------------------------
+
+Can anyone point me towards the root of the problem? I have no clue, why
+this happens!
+
+Thanks very much!
+
+Thomas
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="000355.html">[Xitami-Dev] Server Crashes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#354">[ date ]</a>
+              <a href="thread.html#354">[ thread ]</a>
+              <a href="subject.html#354">[ subject ]</a>
+              <a href="author.html#354">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

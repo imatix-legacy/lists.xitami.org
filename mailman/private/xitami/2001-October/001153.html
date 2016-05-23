@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE:Perl scripts in Windows (Andrew Morris)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001151.html">
+   <LINK REL="Next"  HREF="001158.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE:Perl scripts in Windows (Andrew Morris)
+   </H1>
+    <B>Boyan Brezinsky
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] RE:Perl scripts in Windows (Andrew Morris)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 11 Oct 2001 10:52:15 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001151.html">[Xitami] FTP Virtual Hosts
+</A></li>
+        <LI> Next message: <A HREF="001158.html">[Xitami] $900.00 for ASP!!!! Yikes!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1153">[ date ]</a>
+              <a href="thread.html#1153">[ thread ]</a>
+              <a href="subject.html#1153">[ subject ]</a>
+              <a href="author.html#1153">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>When I was playing with Bugzilla 2.12, I found the same slowness of perl. I 
+couldn't figure out why, I only found the symptoms. Bugzilla is a 
+bug-tracking system written in Perl. In version 2.12, there was a script 
+that was finding the differences between bug reports - using diff. The 
+operation flow was xitami-&gt;perl.script1-&gt;perl.script2-&gt;diff
+IIRC, every time xitami called perl, cmd.exe was invoked. In this manner of 
+operation the call to diff took 30 seconds to complete, although the 
+program itself was ready almost instantly. When I would execute the same 
+script (script1) directly from the command line, it completed in the usual 
+fast way.
+I couldn't resolve this, but thankfully it was done by others - in the 
+following versions of Bugzilla diff was dropped, so now it runs just fine 
+in the rare occasions that somebody uses it.
+System:
+Xitami 2.4d9, NT service
+Perl ActiveState 5.6.1 - 628
+Windows 2000 SP2
+128 MB RAM
+MySQL 3.23.39 or something like that
+diff - from the Cygnus library - ver. 2.7
+IE 5.0
+
+So I'd suggest examining which is the component that causes the slowdown. I 
+think that 30 seconds was the default timeout of Xitami for processes that 
+it perceives as hung. As to why it wouldn't detect the completion of diff, 
+or whatever the reason was (I never found it out, as I said) - I don't have 
+the slightest idea.
+What I did was to turn on the security auditing to find out when each 
+process starts and stops, and to turn on the cgi debugging in xitami, so I 
+can see when the files were generated.
+Maybe in your case it is something to do with paths and exit codes? E.g. if 
+a process is called in such a way that it needs to be found via the PATH 
+environment variable, its exit code is not correctly passed back? This is 
+as wild a guess as it can get, but with all this software you never know.
+Best regards,
+Boyan
+
+Andrew Morris wrote:
+
+&gt;<i> Has anybody found that Perl scripts run intolerably slow on Windows 98/NT
+</I>&gt;<i> with Xitami? I'm using ActivePerl 623 and the problem doesn't appear to 
+</I>be
+&gt;<i> specific to the machine or the installation. Even a small test Perl 
+</I>script
+&gt;<i> (e.g 'hello world') type stuff takes up to _30 seconds_ to appear in the
+</I>&gt;<i> browser. I'm only running this on a local-loop. Does the problem go away
+</I>&gt;<i> when you're calling the server from a remote computer?
+</I>&gt;<i> Any info or insights appreciated.
+</I>&gt;<i> Andy
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001151.html">[Xitami] FTP Virtual Hosts
+</A></li>
+	<LI> Next message: <A HREF="001158.html">[Xitami] $900.00 for ASP!!!! Yikes!!!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1153">[ date ]</a>
+              <a href="thread.html#1153">[ thread ]</a>
+              <a href="subject.html#1153">[ subject ]</a>
+              <a href="author.html#1153">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with NSLOOKUP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005387.html">
+   <LINK REL="Next"  HREF="005390.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with NSLOOKUP
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problem with NSLOOKUP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 11 Oct 2003 09:05:55 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005387.html">[Xitami] Problem with NSLOOKUP
+</A></li>
+        <LI> Next message: <A HREF="005390.html">[Xitami] Problem with NSLOOKUP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5388">[ date ]</a>
+              <a href="thread.html#5388">[ thread ]</a>
+              <a href="subject.html#5388">[ subject ]</a>
+              <a href="author.html#5388">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 02:49 PM 10/11/2003 +0200, Marc Doigny writeth:
+&gt;<i>Hello !
+</I>&gt;<i>
+</I>&gt;<i>I have a strange problem with NSLOOKUP on a win2k server.
+</I>&gt;<i>
+</I>&gt;<i>When i call nslookup from the command prompt, it works fine.
+</I>&gt;<i>It works also fine when inside a batch script (writing it's output to a 
+</I>&gt;<i>file or to the console screen).
+</I>&gt;<i>
+</I>&gt;<i>When i call nslookup from a program that is called by Xitami (cgi-bin 
+</I>&gt;<i>application), i always get the error &quot;Default Server: UnKnown&quot;.
+</I>&gt;<i>Same sort of error with another utility that also performs lookups (&quot;no 
+</I>&gt;<i>data&quot;), so i think the problem is Xitami-related. (Xitami has the correct 
+</I>&gt;<i>NT rights)
+</I>&gt;<i>
+</I>&gt;<i>Is this a known error or is there a workaround?
+</I>&gt;<i>I want to do a MX lookup on a domain to determine if a e-mail address is
+</I>valid
+&gt;<i>(are they other alternatives than nslookup for performing a MX lookup? 
+</I>&gt;<i>-could be a API call to some dll)
+</I>
+The environment variable &quot;SystemRoot&quot; has to exist (with valid information)
+during program startup in order for socket calls to work under NT/2000/XP.
+I discovered this oddity when developing the CGI Remote Module for the
+ProtoNova Web Server.
+
+This happens when programs are started from an NT service.  So, if you run
+Xitami from the console or use the GUI version, your socket-based programs
+should work just fine.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~
+  Tired of expensive $5,000+ web application servers like ColdFusion?
+  Try Nuclear Vision today!
+
+  <A HREF="http://internal.shininglightpro.com/search.nvm?searchname=Nuclear+Vision">http://internal.shininglightpro.com/search.nvm?searchname=Nuclear+Vision</A>
+
+  Announcing Nuclear Vision v1.1, a superior scripting language with
+powerful features in a HTML-like syntax.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005387.html">[Xitami] Problem with NSLOOKUP
+</A></li>
+	<LI> Next message: <A HREF="005390.html">[Xitami] Problem with NSLOOKUP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5388">[ date ]</a>
+              <a href="thread.html#5388">[ thread ]</a>
+              <a href="subject.html#5388">[ subject ]</a>
+              <a href="author.html#5388">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

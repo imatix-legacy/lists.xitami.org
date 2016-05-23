@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Php problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Php%20problems&In-Reply-To=BAY127-DAV112B38790EDBE564D95464F86D0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007861.html">
+   <LINK REL="Next"  HREF="007863.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Php problems</H1>
+    <B>MRJ</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Php%20problems&In-Reply-To=BAY127-DAV112B38790EDBE564D95464F86D0%40phx.gbl"
+       TITLE="[Xitami] Php problems">mrj at 10e12.com
+       </A><BR>
+    <I>Fri Aug 15 08:59:08 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007861.html">[Xitami] Php problems
+</A></li>
+        <LI>Next message: <A HREF="007863.html">[Xitami] Php problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7862">[ date ]</a>
+              <a href="thread.html#7862">[ thread ]</a>
+              <a href="subject.html#7862">[ subject ]</a>
+              <a href="author.html#7862">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The problem is common.
+You must change the default page section as well.
+
+the proper config is as follows
+
+Skip all they say about PHP-CGI
+
+Use this to make it work..
+
+In defaults.cfg  add the following...
+
+[Filter]
+#   
+-------------------------------------------------------------------------
+.php=&quot;c:/php/php.exe&quot;
+
+[Mime]
+    php=application/x-httpd-php
+
+
+Change your default index settings as follows...
+
+    default1=index.php
+    default2=default.php
+    default3=index.htm
+    default4=default.htm
+    default5=index.html
+    default6=default.html
+    default7=404.htm
+
+
+In default setup of PHP 5 on Windows you should be aware of the following.
+
+a)    $_POST[$VarName] WILL NOT WORK
+       $_SESSION[$xVar]  WILL NOT WORK
+
+they are turned off by default and should be so as well since they pose 
+security risks.
+
+b) The workaround for this is included below
+
+(&#169;2008 to myself)
+
+&lt;?php
+/*
+==========================================================================
+A replacement function for $_REQUEST as this does not work at all out of
+the box on XITAMI web server. I was seriously thinking of making it a
+somwhat permanent fixture in my PHP arsenal by adding a $_ infront of
+the name but that would not fly to well in some languages I bet.
+==========================================================================
+Safer Networks Ltd. (c) 2008 - Major Thanks to
+lphuberdeau at phpquebec dot org (21-Aug-2004 05:55)
+for the entry that resolved all my problems in PHP man. 5 chm version
+suggestion in Chapter 4. Dealing with XForms
+==========================================================================
+*/
+function EX_REQUEST($var){
+If ($_SERVER['REQUEST_METHOD']==&quot;GET&quot;){
+    $qstr = $_SERVER['QUERY_STRING'];
+    If ($qstr!=&quot;&quot;){
+        parse_str($qstr, $element);
+        $val = $element[$var];
+    }else{
+        $val = NULL;
+    }
+    unset($qstr); //free mem or data you dont want GC to keep
+}else if($_SERVER['REQUEST_METHOD']==&quot;POST&quot;){
+    $fp = fopen( &quot;<A HREF="php://stdin&quot;,">php://stdin&quot;,</A> &quot;r&quot; );
+    $data = &quot;&quot;;
+    while(!feof( $fp ) ){
+       $data .= fgets( $fp );
+        }
+    fclose( $fp );
+    if($data!=&quot;&quot;){
+        parse_str($data, $element); //printf($data);
+        $val = $element[$var];
+        unset($data); //free mem or data you dont want GC to keep
+    }else{
+        $val = NULL;
+    }
+}else{
+    // DOES NOT SUPPORT PUT OR HEAD AT THIS TIME.
+    // and we cannot return Empty or 0 when nothing was recieved.
+    $val = NULL;
+}
+return $val;
+}
+?&gt;
+SEE&amp;nbsp;SOURCE&amp;nbsp;FOR&amp;nbsp;INFORMATION&lt;HR&gt;
+&lt;?php
+// HOW TO USE THE FUNCTION --------------------
+/* REMOVE LINE 46 AND 66 TO SEE WORKING EXAMPLE
+
+&lt;html&gt;&lt;body&gt;
+&lt;form method=post action=&quot;x.php&quot; 
+enctype='application/x-www-form-urlencoded'&gt;
+&lt;input type=hidden value=4 name='p'&gt;&lt;input type=submit value='post 
+it'&gt;&lt;/form&gt;&lt;br&gt;
+
+&lt;form method=get action=&quot;x.php&quot; enctype='application/x-www-form-urlencoded'&gt;
+&lt;input type=hidden value=4 name='p'&gt;&lt;input type=submit value='get 
+it'&gt;&lt;/form&gt;&lt;br&gt;
+
+&lt;?php
+  echo &quot;The variable p is detected as having Value: &quot; . ParseReq('p') . 
+&quot;&lt;br&gt;&quot;;
+?&gt;
+
+&lt;/body&gt;&lt;/html&gt;
+
+
+*/
+?&gt;
+
+
+
+---
+
+Russel Olinger wrote:
+&gt;<i> From a command prompt have you verify the php script works properly?
+</I>&gt;<i>  
+</I>&gt;<i> When installing PHP there is an option to select which webserver you 
+</I>&gt;<i> are installing for and it lists Xitami - make certain you select 
+</I>&gt;<i> that.  But what Brian stated below should be sufficient to get things 
+</I>&gt;<i> working.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;<i>     ----- Original Message -----
+</I>&gt;<i>     *From:* Donna Kordell &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">DKordell at msn.com</A>&gt;
+</I>&gt;<i>     *To:* Xitami Users General Discussion
+</I>&gt;<i>     &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>     *Sent:* Thursday, August 14, 2008 7:46 PM
+</I>&gt;<i>     *Subject:* Re: [Xitami] Php problems
+</I>&gt;<i>
+</I>&gt;<i>     I tried everything you said and I still see nothing in the
+</I>&gt;<i>     browser. I used the php installer to install php. Should I go back
+</I>&gt;<i>     and do it manually?
+</I>&gt;<i>
+</I>&gt;<i>         ----- Original Message -----
+</I>&gt;<i>         *From:* Brian Kowald &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">bkowald at synergybroadcast.com</A>&gt;
+</I>&gt;<i>         *To:* Xitami Users General Discussion
+</I>&gt;<i>         &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>         *Sent:* Thursday, August 14, 2008 9:34 PM
+</I>&gt;<i>         *Subject:* Re: [Xitami] Php problems
+</I>&gt;<i>
+</I>&gt;<i>         Donna,
+</I>&gt;<i>          
+</I>&gt;<i>         You should have a php.ini in your php folder.
+</I>&gt;<i>         Did you copy &quot;php.ini-recomended&quot; to &quot;php.ini&quot; ?
+</I>&gt;<i>          
+</I>&gt;<i>         In xitami add this line in xitami.cfg or defaults.cfg under
+</I>&gt;<i>         the [Filters] section
+</I>&gt;<i>         For php 5:
+</I>&gt;<i>             .php = &quot;C:\\php\\php-cgi.exe&quot;
+</I>&gt;<i>         for php 4:
+</I>&gt;<i>             .php = &quot;C:\\php\\php.exe&quot;   
+</I>&gt;<i>         You must set this in php.ini to get output back through the
+</I>&gt;<i>         server to the browser:
+</I>&gt;<i>         cgi.force_redirect = 0
+</I>&gt;<i>         make this file and try to access it though a browser:
+</I>&gt;<i>         Quick test file:
+</I>&gt;<i>         &lt;?php
+</I>&gt;<i>         phpinfo();
+</I>&gt;<i>         ?&gt;
+</I>&gt;<i>         Look at cgierr.log in c:\xitami for errors.
+</I>&gt;<i>          
+</I>&gt;<i>         That should give you some stuff to get going,
+</I>&gt;<i>         Brian
+</I>&gt;<i>          
+</I>&gt;<i>          
+</I>&gt;<i>          
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>             -----Original Message-----
+</I>&gt;<i>             *From:* Donna Kordell [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">DKordell at msn.com</A>]
+</I>&gt;<i>             *Sent:* Thursday, August 14, 2008 10:14 PM
+</I>&gt;<i>             *To:* <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i>             *Subject:* [Xitami] Php problems
+</I>&gt;<i>
+</I>&gt;<i>             Hello,
+</I>&gt;<i>              
+</I>&gt;<i>             I am new here and have very little clue what I am doing. I
+</I>&gt;<i>             am basically just trying to get PHP to work on my home
+</I>&gt;<i>             computer. I tried unsuccessfully to download apache.
+</I>&gt;<i>             Having no other places to turn to, I found xitami. I
+</I>&gt;<i>             followed the instruction in the FAQ to install php and
+</I>&gt;<i>             they worked, sort of. The code printed out fine in DOS but
+</I>&gt;<i>             still wouldn't function in a regular browser window. All
+</I>&gt;<i>             the php tags were completely ignored.
+</I>&gt;<i>              
+</I>&gt;<i>             Please, I have no idea what I'm doing here. Any advice
+</I>&gt;<i>             would be helpful. Thanks in advance.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>         --
+</I>&gt;<i>         Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>         To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>     ------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>     --
+</I>&gt;<i>     Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>     To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Phone: 020 7724 5943
+  Mob:   079 6445 0998
+
+International Callers;
+  Phone: +44 207 724 5943
+  Mob:   +44 796 445 0998
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007861.html">[Xitami] Php problems
+</A></li>
+	<LI>Next message: <A HREF="007863.html">[Xitami] Php problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7862">[ date ]</a>
+              <a href="thread.html#7862">[ thread ]</a>
+              <a href="subject.html#7862">[ subject ]</a>
+              <a href="author.html#7862">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

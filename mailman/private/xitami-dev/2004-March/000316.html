@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Big in sfl library - ini_dyn_loade
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000315.html">
+   <LINK REL="Next"  HREF="000317.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Big in sfl library - ini_dyn_loade
+   </H1>
+    <B>Angus Lord
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Big in sfl library - ini_dyn_loade">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Fri, 26 Mar 2004 12:08:06 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000315.html">[Xitami-Dev] Building the 2.4d10 release...
+</A></li>
+        <LI> Next message: <A HREF="000317.html">[Xitami-Dev] Big in sfl library - ini_dyn_loade
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#316">[ date ]</a>
+              <a href="thread.html#316">[ thread ]</a>
+              <a href="subject.html#316">[ subject ]</a>
+              <a href="author.html#316">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I've found a bug in the sfl library - sflini.c. The function ini_dyn_loade
+(with the e) doesn't release the file handle after a file_locate.
+
+The orginal code is
+
+SYMTAB *
+ini_dyn_loade (
+    SYMTAB *load_symtab,
+    const char *filename)
+{
+    ASSERT (filename);
+    if (file_locate (&quot;PATH&quot;, filename, NULL))
+        return (ini_dyn_load (load_symtab, filename));
+    else
+        return (NULL);
+}
+
+Fixed this would be
+
+SYMTAB *
+ini_dyn_loade (
+    SYMTAB *load_symtab,
+    const char *filename)
+{
+    FILE *fp;
+    ASSERT (filename);
+    if ((fp = file_locate (&quot;PATH&quot;, filename, NULL)) != NULL) {
+	  file_close(fp);
+        return (ini_dyn_load (load_symtab, filename));
+    }
+    else
+        return (NULL);
+}
+
+I've checked that this method is not used in the smt libaries (xitami) but
+could present problems to other developers.
+
+Cheers
+
+	Angus Lord
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000315.html">[Xitami-Dev] Building the 2.4d10 release...
+</A></li>
+	<LI> Next message: <A HREF="000317.html">[Xitami-Dev] Big in sfl library - ini_dyn_loade
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#316">[ date ]</a>
+              <a href="thread.html#316">[ thread ]</a>
+              <a href="subject.html#316">[ subject ]</a>
+              <a href="author.html#316">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

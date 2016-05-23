@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP server woes...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001387.html">
+   <LINK REL="Next"  HREF="001328.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP server woes...
+   </H1>
+    <B>Carl J. Elitz
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP server woes...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 4 Nov 2001 15:03:06 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001387.html">[Xitami] Webmask??  How do I block a list of IP addresses?
+</A></li>
+        <LI> Next message: <A HREF="001328.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1326">[ date ]</a>
+              <a href="thread.html#1326">[ thread ]</a>
+              <a href="subject.html#1326">[ subject ]</a>
+              <a href="author.html#1326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have installed Xitami and the web server works well. However, I cannot get
+FTP to work, which is most frustrating. I suspect my setup is a bit
+unusual... can anyone help?
+
+I have an ISDN connection and my machine is behind a router which does NAT.
+Because I have a dynamic IP address, I use TZO.com. (I have registered my
+domain name to TZO's name servers; software on my machine monitors my
+changing IP address and passes this info to TZO, which redirects traffic
+which hits its servers looking for me back to my machine.)
+
+People hitting my FTP server typically just get the time-out message.
+Occassionally, someone gets logged on anonymously, but then the system drops
+them when they try to download something. A tech at TZO was able to upload a
+file to my machine, but not download. On my side of the router, everything
+seems to work perfectly (the machines that I have can use the FTP service -
+although only by using the local machine numbers as addresses... they are
+not able to use my internet domain name, something I understand is normal
+for being behind a router.)
+
+I noticed that there is a setting in Xitami for Dynamic DNS. I have not been
+able to get this configured properly, and suspect this could be the
+problem's cause, although I am not even sure of this.
+
+Here is the details on the DDNS settings:
+
+1. Enable DNS sign on? YES/NO (default is NO)
+2. DDNS service definition file:  (default is &quot;ddnsdef.xml&quot;)
+3. Dynamic DNS service:  Default is &quot;DDNS test using localhost&quot;.
+4. Your server domain name: (no default).
+5. Your username or e-mail adddress: (no default). I have given my email
+address, which is the user name used by TZO.com.
+6. Your password or DDNS key: (no default). I have supplied the TZO &quot;key&quot;
+which TZO assigned to me.
+
+I have tried setting No. 1 to YES, No. 2 to the default file of
+&quot;ddnsdef.xml&quot;, No. 3. to &quot;TZO.com&quot;, No. 4 to &quot;elitz.com&quot; and also tried the
+name of my local machine, No. 5 to
+&quot;<A HREF="mailto:reds@chicagonet.net">reds@chicagonet.net</A>&quot; (my email address), and No. 6 to my assigned TZO key
+for elitz.com.
+
+The ddnsdef.xml file has a section relevant to when No. 3 is set to
+&quot;TZO.com&quot;.  It reads as follows:
+
+&lt;!-----------------------------------------------------------------------
+    tzo.com
+
+    Service for tzo.com domains.  TZO uses an e-mail address as the
+username,
+    and a generated key as password.  Fast DNS updates.
+    ---------------------------------------------------------------------&gt;
+&lt;SERVICE
+  NAME  = &quot;tzo.com&quot;
+  TITLE = &quot;tzo.com&quot;
+  HOST  = &quot;rh.tzo.com&quot;
+  URL   = &quot;tzo.com&quot;
+  PORT  = &quot;21333&quot; &gt;
+  &lt;SIGNON
+    URL  = &quot;/webclient/rhsignedon.html&quot;
+    ARGS =
+&quot;TZOName=$(domain)&amp;Email=$(username)&amp;TZOKey=$(password)&amp;CType=6&amp;B1=Sign+On+t
+o+TZO+DDNS+Servers&quot;
+    SEND = &quot;GET $(url)?$(args) HTTP/1.0\r\n$(httpheaders)&quot; /&gt;
+  &lt;SIGNOFF
+    URL  = &quot;/webclient/signedoff.html&quot;
+    ARGS = &quot;B1=Sign+Me+Off+from+TZO&quot;
+    SEND = &quot;GET $(url)?$(args) HTTP/1.0\r\n$(httpheaders)&quot; /&gt;
+&lt;/SERVICE&gt;
+
+-----------------------------------------------------------------------
+
+The error message generated in the Xitami console message window is:
+
+2001/11/04 14:53:21: xiddns: 'localhost': HTTP/1.1 404 Not found
+
+The TZO tech has asked that I work with Xitami people, as he is not sure of
+the problem. He seemed to feel that the problem was that Xitami is using IP
+references that are exclusively for local use: 192.168.1.2 and 127.0.0.1. I
+think he may be right (these IP numbers are in the &quot;statistics&quot; window that
+appears when I click the Xitami icon) and that the solution is to get Xitami
+to recognize my changing IP, hence my question about DDNS.
+
+Thank you.
+Carl
+www.elitz.com
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001387.html">[Xitami] Webmask??  How do I block a list of IP addresses?
+</A></li>
+	<LI> Next message: <A HREF="001328.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1326">[ date ]</a>
+              <a href="thread.html#1326">[ thread ]</a>
+              <a href="subject.html#1326">[ subject ]</a>
+              <a href="author.html#1326">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] hack attack or just ignorance?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002947.html">
+   <LINK REL="Next"  HREF="002954.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] hack attack or just ignorance?
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] hack attack or just ignorance?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 12 Apr 2002 12:15:36 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002947.html">[Xitami] hack attack or just ignorance?
+</A></li>
+        <LI> Next message: <A HREF="002954.html">[Xitami] hack attack or just ignorance?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2953">[ date ]</a>
+              <a href="thread.html#2953">[ thread ]</a>
+              <a href="subject.html#2953">[ subject ]</a>
+              <a href="author.html#2953">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> These aren't malicious attempts are they?
+</I>
+They are, and they come from within your ISP, but probably not
+&quot;from&quot; your ISP. The IP number translates to a hostname that looks a
+lot like the one you sent this email from.
+
+ &gt; host 24.128.72.232
+232.72.128.24.IN-ADDR.ARPA domain name pointer h00c0f03820eb.ne.client2.attbi.com
+
+ &gt; host 24.128.19.74
+ 74.19.128.24.IN-ADDR.ARPA domain name pointer h00a0cc58ab25.ne.client2.attbi.com
+
+What are they doing?
+
+ &quot;GET /scripts/..%c1%9c../winnt/system32/cmd.exe?/c+dir
+
+This requested URL is &quot;malformed&quot;. The dots and percents aren't
+right. Xitami properly notices that, and replies 404 or 403
+depending on just where it decides that this is meaningless.
+
+However, MS IIS webserver is tricked into navigating up out of the
+webpages folder, into the root, down into the windows system folder,
+and runs CMD, the command processor! (Some call it the &quot;DOS box&quot;.)
+
+This involves two very stupid mistakes by MS IIS's programmers.
+Malformed URLs should be rejected, and files outside those folder
+specifically designated for web-serving should never be served. You
+could say that running a program not designated for CGI delivery is
+also a mistake, though MS IIS's notion of CGI is pretty elaborate,
+supporting MS-proprietary extensions that basically sell MS
+programming languages.
+
+In this case, they request a DIR from CMD. On Xitami and patched
+IIS, the response is &quot;error&quot;, they ignore it. If the response is a
+list of files, they struck gold. They can put more clever commands
+into CMD and do almost anything to your machine.
+
+You may wonder why they are trying IIS hacks on your Xitami server.
+Well, IIS is the second most common webserver, and THE most common
+inside home-ISP networks. Many folks have IIS running and don't even
+know it. And it is just plain easier to try a IIS-hack on every
+machine than to actually check which ones are IIS. Typically, the
+script contacts -every- IP number in a given range, whether or not
+there is a webserver there. If no server, it times-out. If a &quot;good&quot;
+webserver, it ignores these silly requests. But unpatched IIS will
+do the wrong thing quickly and efficiently.
+
+This isn't a DoS attack. CMD..DIR just asks for a list of files. If
+they can do that, they can ask CMD to install software that could
+start flooding other machines to jam them. But that's not seen here.
+
+You could report that IP number to your ISP. It is barely possible
+that your ISP is doing it: my net-admins do a similar (but better!)
+scan every month and inform anybody hosting a vulnerable machine.
+More likely it is some kid reading hacker-sites and trying the most
+basic hack-scripts. If the ISP cares, they will warn the account
+holder and the kid may be sent to bed without supper. But there is
+always another kid.
+
+It does you no harm, except a slight increase in log-file size. When
+CodeRed was popular, my logs were 10% real hits and 90% CodeRed
+errors. In the peak-week, it actually was a mild problem: my slow
+machine was bogged on logs, and I had to take it down for 10 minutes
+and delete some monster files. CodeRed and Samba are different: they
+use a VERY long request URL (thousands of characters) to overflow
+IIS's request buffer and inject malicious code into IIS. Again,
+Xitami handles this correctly: no overflow, just an error and huge
+log files.
+
+&gt;<i>  Perl.exe mysteriously disappeared from my machine recently.
+</I>
+Odd. But not something a hacker would want to do.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002947.html">[Xitami] hack attack or just ignorance?
+</A></li>
+	<LI> Next message: <A HREF="002954.html">[Xitami] hack attack or just ignorance?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2953">[ date ]</a>
+              <a href="thread.html#2953">[ thread ]</a>
+              <a href="subject.html#2953">[ subject ]</a>
+              <a href="author.html#2953">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

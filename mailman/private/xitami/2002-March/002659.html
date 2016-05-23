@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Intranet questions
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002658.html">
+   <LINK REL="Next"  HREF="002643.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Intranet questions
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Intranet questions">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 5 Mar 2002 15:54:45 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002658.html">[Xitami] Intranet questions
+</A></li>
+        <LI> Next message: <A HREF="002643.html">[Xitami] forgot
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2659">[ date ]</a>
+              <a href="thread.html#2659">[ thread ]</a>
+              <a href="subject.html#2659">[ subject ]</a>
+              <a href="author.html#2659">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> how to create a host file?
+</I>
+You surely already have one.
+
+On my XP box it is at C:\WINDOWS\system32\drivers\etc\hosts
+
+Win9x is different. Start, Find (or Search), Files, &quot;hosts&quot;.
+
+There may be hosts.sam and lmhosts. In rare cases there is no hosts
+file, just the lmhosts (which is for Windows Networking). Copy one
+of those, edit, save as &quot;hosts&quot;.
+
+Open it in NotePad. It has some comments (marked by &quot;#&quot;) and then a
+list of IP numbers and machines. Here's the default:
+
+ #      102.54.94.97     rhino.acme.com          # source server
+ #       38.25.63.10     x.acme.com              # x client host
+ 127.0.0.1       localhost
+
+The acme.com entries are bogus examples, and because of the &quot;#&quot; are
+ignored.
+
+The &quot;127.0.0.1 localhost&quot; entry is how your machine finds
+&quot;localhost&quot;.
+
+Add some lines like
+
+ 127.0.0.2  bedroom
+ 127.0.0.3  kitchen
+ 127.0.0.4  attic
+
+Use the IP numbers you or your router assigned to your in-house
+machines. Most routers use a 168... range instead of the 127...
+range.
+
+Save the file (and be sure NotePad doesn't stick a TXT extension on
+it!).
+
+On the same machine, now &quot;<A HREF="http://kitchen"">http://kitchen&quot;</A> should open the web server
+on the machine 127.0.0.3
+
+So that every machine in the house knows the name-IP assignments for
+all the other machines, copy your custom HOSTS file to the right
+folder on every machine in the house.
+
+If you let your router do DCHP, each machine's IP number may change
+at each re-boot. That's no good for a static hosts file. Tell your
+router to reserve some fixed IP numbers for those machines that will
+have &quot;public&quot; (in-house) names and services, or turn off DCHP on
+those machines and hand-enter IP numbers (being sure the router is
+told not to use those numbers in DCHP for other machines).
+
+That HOSTS file is how we used to do it. Much better than a printout
+tacked to the wall and typing IP numbers by hand. When the ARPAnet
+was dozens of machines, it was cool. But in bigger networks, it gets
+cumbersome to keep adding new machines to the file and copying the
+file to all other machines. ARPAnet choked when there were thousands
+of machines on the net and these HOSTS files had to be updated and
+distributed nightly.
+
+That's where DNS is better. One machine holds all the data and other
+machines ask it to look-up IP numbers for names they don't know. You
+could set up your own in-house DNS service, but it is really more
+work than a typical home LAN justifies, especially if there are only
+a few machines that need to be &quot;known&quot; to others as DNS names.
+
+ -PRR
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002658.html">[Xitami] Intranet questions
+</A></li>
+	<LI> Next message: <A HREF="002643.html">[Xitami] forgot
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2659">[ date ]</a>
+              <a href="thread.html#2659">[ thread ]</a>
+              <a href="subject.html#2659">[ subject ]</a>
+              <a href="author.html#2659">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

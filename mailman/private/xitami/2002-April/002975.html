@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Changing web page filesize limit
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002972.html">
+   <LINK REL="Next"  HREF="002977.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Changing web page filesize limit
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Changing web page filesize limit">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 16 Apr 2002 14:07:06 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002972.html">[Xitami] Changing web page filesize limit
+</A></li>
+        <LI> Next message: <A HREF="002977.html">[Xitami] Changing web page filesize limit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2975">[ date ]</a>
+              <a href="thread.html#2975">[ thread ]</a>
+              <a href="subject.html#2975">[ subject ]</a>
+              <a href="author.html#2975">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+--------------000803090901020608010706
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+C Bass wrote:
+
+&gt;<i>I am using SSI; I just removed all SSI calls from one of the files, as you
+</I>&gt;<i>suggested, &amp; replaced them with the static content. 82K page file still
+</I>&gt;<i>does not complete.
+</I>&gt;<i>
+</I>
+Well I downloaded a couple of project gutenberg books and HTMLised them 
+- ~1MB files. Loads perfectly without SSI. Stops at ~30kb if its a 
+.shtml and I have a &lt;!--#include file=&quot;/filename/&quot;--&gt; in it.
+
+I posted about this last september (see enclosed email) which also notes 
+another SSI bug. The result of this is that I have tended to avoid SSI 
+personally .
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+--------------000803090901020608010706
+Content-Type: message/rfc822;
+ name=&quot;mailbox-<A HREF="message://francis.turner@pop.freesbee.fr/Sent#4561945"">message://francis.turner@pop.freesbee.fr/Sent#4561945&quot;</A>
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename=&quot;mailbox-<A HREF="message://francis.turner@pop.freesbee.fr/Sent#4561945"">message://francis.turner@pop.freesbee.fr/Sent#4561945&quot;</A>
+
+X-Mozilla-Status2: 00000000
+Message-ID: &lt;<A HREF="mailto:3BA9B55F.7000108@freesbee.fr">3BA9B55F.7000108@freesbee.fr</A>&gt;
+Date: Thu, 20 Sep 2001 11:22:39 +0200
+From: Francis Turner &lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+User-Agent: Mozilla/5.0 (Windows; U; Win98; en-US; m18) Gecko/20001108 Netscape6/6.0
+X-Accept-Language: en
+MIME-Version: 1.0
+To: Xitami list &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Subject: Bug: SSI Includes aren't recursive
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+I just noticed that the SSI include tag (e.g. the one on the testssi 
+page &lt;!--#include file=&quot;testssi.inc&quot;--&gt;) cuases the rest of the 
+including document (e.g. testssi.ssi) after the tag not to get delivered 
+if the included document itself uses SSI as the example include does.
+
+SSI returns just fine if the included document itself does not try any 
+SSI calls.
+
+This is true using Xitami 2.5b5 (and 2.5b4) with NS6.1, 4.7 and IE5 and 
+appears to be a xitami thing in that the HTML is in fact completely 
+unfinished. I'm guessing that Xixssi doesn't deal well with the same 
+page requiring 2 levels of return.
+
+Also in the process of debugging and playing I noticed that Xitami has a 
+limit on files with SSI includes of about 35,000+ bytes (one file 
+displayed upto the 35922nd byte, another upto the 35553rd) and any data 
+thereafter is abruptly truncated. The limit is not there for pure HTML 
+files - I can successfully read 1Mbyte + sized .htm files but the same 
+file renamed as .SSI will be truncated around this point even if it has 
+no includes.
+
+Francis
+
+
+
+
+--------------000803090901020608010706--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002972.html">[Xitami] Changing web page filesize limit
+</A></li>
+	<LI> Next message: <A HREF="002977.html">[Xitami] Changing web page filesize limit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2975">[ date ]</a>
+              <a href="thread.html#2975">[ thread ]</a>
+              <a href="subject.html#2975">[ subject ]</a>
+              <a href="author.html#2975">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

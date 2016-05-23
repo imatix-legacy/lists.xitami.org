@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Rename log files: permission denied?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001702.html">
+   <LINK REL="Next"  HREF="001704.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Rename log files: permission denied?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Rename log files: permission denied?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Dec 2001 21:20:23 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001702.html">[Xitami] [Security]
+</A></li>
+        <LI> Next message: <A HREF="001704.html">[Xitami] Problem with cgi-bin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1703">[ date ]</a>
+              <a href="thread.html#1703">[ thread ]</a>
+              <a href="subject.html#1703">[ subject ]</a>
+              <a href="author.html#1703">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:1311492402.20011023210029@chello.nl">1311492402.20011023210029@chello.nl</A>&gt;, Melle Koning writes:
+&gt;<i>For the last seven days I see the following errors in the
+</I>&gt;<i>xitami-xidos32-console:
+</I>&gt;<i>Could not rename '.\logs\access.log to' '.\logs\ac011023.log'
+</I>&gt;<i>Permission denied
+</I>&gt;<i>[....]
+</I>&gt;<i>Is it possible that the logs are locked by MS Windows when there's a
+</I>&gt;<i>visitor on the site?
+</I>
+Not, really, no.  The logging module keeps the log files open when it is
+running, but it is supposed to close them prior to trying to rename them.
+
+So basically there's a few things that could be going on:
+1.  The files are open for some reason, and so the log rotation fails
+    (this would be a bug)
+
+2.  The destination files exist for some reason (in which case Xitami
+    is supposed to try some alternative names)
+
+3.  The new files cannot be written for some reason (unlikely)
+
+4.  The path names used internally for renaming the files are wrong
+    (I've seen this happen in some older versions of Xitami.)
+
+Running Xitami in server debug mode overnight:
+
+[server]
+  debug=1
+
+in defaults.cfg may give you a little bit more information about what is
+happening.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001702.html">[Xitami] [Security]
+</A></li>
+	<LI> Next message: <A HREF="001704.html">[Xitami] Problem with cgi-bin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1703">[ date ]</a>
+              <a href="thread.html#1703">[ thread ]</a>
+              <a href="subject.html#1703">[ subject ]</a>
+              <a href="author.html#1703">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] mailing on NT
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000044.html">
+   <LINK REL="Next"  HREF="000039.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] mailing on NT
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] mailing on NT">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 5 Jun 2001 12:28:11 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000044.html">[Xitami] (no subject)
+</A></li>
+        <LI> Next message: <A HREF="000039.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 4 Jun 2001, at 18:54, Francis Turner wrote:
+
+&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Dragonballz Insane wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I had a question on a perl program, I was trying to
+</I>&gt;<i> &gt; figure out how to use a form which the user puts info
+</I>&gt;<i> &gt; onto a html page and then sends it through perl.  I
+</I>&gt;<i> &gt; need to know if Xitami has a sendmail program or what
+</I>&gt;<i> &gt; I should use to fix the $mailprog = '/usr/lib/sendmail'
+</I>&gt;<i> 
+</I>&gt;<i> Xitam does not have a built-in sendmail program.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>..or you try blat:
+
+package Blat;
+use strict;
+my($mailer, $server, $Subject, $From, $To, $message);
+$server =  &quot;somemailer&quot;;# o.s.e
+$Subject = &quot;testing blat&quot;;
+$From = &quot;you\@somewhere.net&quot;;
+$To = &quot;to\@somewhere.net&quot;;
+$message = &quot;Hello blat !&quot;;
+$mailer = &quot;blat - -server $server -f $From -t $To -s \&quot;$Subject\&quot;&quot;;
+$ENV{&quot;TMP&quot;} = &quot;C:\\TEMP&quot;;
+open (MAIL, &quot;|$mailer &quot;)or die &quot;Oh shit: $!&quot;;
+print MAIL $message;
+close (MAIL);
+=cut
+Blat v1.8.2b: WinNT/95 console utility to mail a file via SMTP
+by P.Mendes, M.Neal, G.Vollant, T. Charron
+  <A HREF="http://www.interlog.com/~tcharron/blat.html">http://www.interlog.com/~tcharron/blat.html</A>
+syntax:
+  Blat &lt;filename&gt; -t &lt;recipient&gt; [optional switches (see below)]
+  Blat -install &lt;server addr&gt; &lt;sender's addr&gt; 
+[&lt;try&gt;[&lt;port&gt;[&lt;profile&gt;]]] [-q]
+  Blat -profile [-delete | &quot;&lt;default&gt;&quot;] [profile1] [profileN] [-q]
+  Blat -h [-q]
+
+-install &lt;server addr&gt; &lt;sender's addr&gt; [&lt;try n times&gt; [&lt;port&gt; 
+[&lt;profile&gt;]]]
+     : set's SMTP server, sender, number of tries and port for profile
+       (&lt;try n times&gt; and &lt;port&gt; may be replaced by '-').
+
+&lt;filename&gt;     : file with the message body ('-' for console input, 
+end with ^Z)
+-t &lt;recipient&gt; : recipient list (comma separated)
+-s &lt;subj&gt;      : subject line
+-f &lt;sender&gt;    : overrides the default sender address (must be 
+known to server)
+-i &lt;addr&gt;      : a 'From:' address, not necessarily known to the 
+SMTP server.
+-c &lt;recipient&gt; : carbon copy recipient list (comma separated)
+-b &lt;recipient&gt; : blind carbon copy recipient list (comma separated)
+-o &lt;organization&gt;: Organization field
+-h             : displays this help.
+-q             : supresses *all* output.
+-noh           : prevent X-Mailer header from showing homepage of 
+blat
+-noh2          : prevent X-Mailer header entirely
+-p &lt;profile&gt;   : send with SMTP server, user and port defined in 
+&lt;profile&gt;.
+-server &lt;addr&gt; : Specify SMTP server to be used. (optionally, 
+addr:port)
+-port &lt;port&gt;   : port to be used on the server, defaults to SMTP (25)
+-hostname &lt;hst&gt;: select the hostname used to send the message
+-mime          : MIME Quoted-Printable Content-Transfer-Encoding.
+-uuencode      : Send (binary) file UUEncoded
+-base64        : Send (binary) file using base64 (binary Mime)
+-try &lt;n times&gt; : how many time blat should try to send. from '1' to 
+'INFINITE'
+-attach &lt;file&gt; : attach binary file to message (may be repeated)
+-attacht &lt;file&gt;: attach text file to message (may be repeated)
+
+Note that if the '-i' option is used, &lt;sender&gt; is included in 'Reply-to:'
+and 'Sender:' fields in the header of the message.
+=end
+
+...or you use MIME::Lite ; in this case adding and compressing an 
+attachment:
+
+package myMailTool;
+use MIME::Lite;
+use Cwd;
+use strict;
+my($dir,$path,$text,$msg,$From,$To,$Subject,$mailhost,$type,$su
+ffix);
+$mailhost = &quot;somemailer&quot;;
+$dir = shift;
+$From = '<A HREF="mailto:you@somewhere.net">you@somewhere.net</A>';
+$To = '<A HREF="mailto:to@somewhere.net">to@somewhere.net</A>';
+$Subject = 'attachment';
+$path = getcwd;
+$type = 'application/octet-stream';
+$text = &quot;someText\n&quot;;
+$suffix = &quot;\.tar\.gz&quot;;
+if(!$dir){die &quot;Shit, no directory! $!&quot;}
+`tar cvf $dir.tar $dir`;
+`gzip --best $dir.tar`;
+MIME::Lite -&gt; send('smtp', $mailhost, Timeout =&gt; 60);
+$msg = MIME::Lite -&gt; new(From =&gt; $From, To =&gt; $To, Subject =&gt; 
+$Subject, Data =&gt; $text);
+$msg -&gt; attach(Type =&gt; $type, Path =&gt; &quot;$path\/$dir$suffix &quot;);
+$msg -&gt; send;
+undef $msg;
+
+
+yours,  Peter
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000044.html">[Xitami] (no subject)
+</A></li>
+	<LI> Next message: <A HREF="000039.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

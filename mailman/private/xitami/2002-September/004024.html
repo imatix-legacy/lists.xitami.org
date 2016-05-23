@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004023.html">
+   <LINK REL="Next"  HREF="004034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 24 Sep 2002 11:52:24 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004023.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004034.html">Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4024">[ date ]</a>
+              <a href="thread.html#4024">[ thread ]</a>
+              <a href="subject.html#4024">[ subject ]</a>
+              <a href="author.html#4024">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>------------8D1DD222B6A0C56
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+No, it isn't the browser. I hate to exonerate IE, and it will
+sometimes throw bogus error messages, but it should work.
+
+PLEASE use the &quot;Carp Fatals To Browser&quot; code Patricko posted. IMHO,
+you can not debug these things without it.
+
+Are we allowing file attachments on this list? If so, attached is a
+Perl form-handler that works for me. It is called from a form that
+supplies the variables &quot;$ENV{FORM_....&quot; and sends an email via the
+local host, then prints something for the user to see (either
+&quot;Thanks&quot; or &quot;error&quot;).
+
+I have clobbered the script name and the shebang so nobody's email
+reader tries to Run it. No matter, because I've also clobbered the
+mail parameters so you guys won't annoy the person who gets the real
+script's emails.
+
+If you fix the shebang, it should at least return a polite error
+message. if called from a form with &quot;name&quot; &quot;gender' and &quot;Address1&quot;
+fields, it should display them before erroring on the mail-call. If
+even that does not work, un-comment the line with &quot;Hello?&quot; and see
+if it runs that far.
+
+ -PRR
+------------8D1DD222B6A0C56
+Content-Type: text/plain; name=&quot;aud-g.txt&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename=&quot;aud-g.txt&quot;
+
+IyAgcmVtb3ZlIHRoaXMgbGluZS0tIGluc2VydGVkIG9ubHkgdG8gImJyZWFrIiB0aGUgc2NyaXB0
+IGZvciBwb3N0aW5nDQojIS91c3IvYmluL3BlcmwgLXcNCiMgDQoNCnVzZSBzdHJpY3Q7DQp1c2Ug
+Q0dJIHF3KDpzdGFuZGFyZCk7DQp1c2UgQ0dJOjpDYXJwIHF3KGZhdGFsc1RvQnJvd3Nlcik7DQpw
+cmludCAiPEhUTUw+XG4iOw0KcHJpbnQgIjxoZWFkPjx0aXRsZT5UaGFuayBZb3UhPC90aXRsZT48
+L2hlYWQ+XG4iOw0KcHJpbnQgIjxCT0RZPlxuIjsNCiMgcHJpbnQgImhlbGxvPyA8YnI+XG4iOw0K
+cHJpbnQgIlRoYW5rIHlvdSBmb3IgYXBwbHlpbmcgdG8gdGhlIEJvZ3VzIE11c2ljIERlcGFydG1l
+bnQhPHA+XG4iOw0KDQp1c2UgTWFpbDo6U2VuZG1haWw7DQoNCm15ICRtZXNzYWdlYm9keSA9ICJc
+bkF1dG9tYXRlZCBhcHBsaWNhdGlvblxuIjsNCiRtZXNzYWdlYm9keSAgLj0gIkFwcGxpY2FudF9U
+eXBlIF9fIEdyYWR1YXRlXG4iOw0KJG1lc3NhZ2Vib2R5ICAuPSAiTmFtZSBfX19fX19fX19fX18g
+JEVOVntGT1JNX25hbWV9XG4iOw0KJG1lc3NhZ2Vib2R5ICAuPSAiR2VuZGVyIF9fX19fX19fX18g
+JEVOVntGT1JNX2dlbmRlcn1cbiI7DQokbWVzc2FnZWJvZHkgIC49ICJBZGRyZXNzMSBfX19fX19f
+XyAkRU5We0ZPUk1fQWRkcmVzczF9XG4iOw0KDQogICAgICBteSAlbWFpbCA9ICgNCiAgICAgICAg
+ICBUbyAgICAgID0+ICc8Ym9ndXNAbXVzaWNtYWlsLmJvZ3VzLmVkdT4nLA0KICAgICAgICAgIEZy
+b20gICAgPT4gJ01haWwgUm9ib3QgPGd1c2JvQG11c2ljbWFpbC5ib2d1cy5lZHU+JywNCiAgICAg
+ICAgICBDYyAgICAgID0+ICdNYWlsIFJvYm90IDxndXNib0BtdXNpY21haWwuYm9ndXMuZWR1Pics
+DQogICAgICAgICAgU3ViamVjdCA9PiAiR3JhZHVhdGUgQXVkaXRpb24gQXBwbGljYXRpb24iLA0K
+ICAgICAgKTsNCg0KICAgICAgJG1haWx7J01lc3NhZ2UgOiAnfSA9ICIkbWVzc2FnZWJvZHkiOw0K
+DQogICAgICBpZiAoc2VuZG1haWwgJW1haWwpIHsNCiAgICAgICAgcHJpbnQgIllvdXIgYXBwbGlj
+YXRpb24gaGFzIGJlZW4gc2VudC4gPGJyPlxuIiA7DQogICAgICAgIHByaW50ICJSZXR1cm4gdG8g
+TXVzaWMgRGVwYXJ0bWVudCA8YSBocmVmPVwiaHR0cDovL211c2ljLmJvZ3VzLmVkdVwiPkhvbWUg
+UGFnZTwvYT4uIDxicj5cbiI7DQogICAgICB9DQogICAgICBlbHNlIHsgDQogICAgICAgIHByaW50
+ICJFcnJvciBzZW5kaW5nIGF1ZGl0aW9uIGFwcGxpY2F0aW9uOiAkTWFpbDo6U2VuZG1haWw6OmVy
+cm9yICA8YnI+XG4iOyANCiAgICAgICAgcHJpbnQgIlBsZWFzZSBwcmVzcyB0aGUgQkFDSyBidXR0
+b24sIHByaW50IHRoZSBmb3JtLCBhbmQgbWFpbCBpdCB0byB0aGUgaW5kaWNhdGVkIGFkZHJlc3Mu
+PGJyPlxuIjsgDQogICAgICB9DQoNCiMgICAgICBwcmludCAiXG5cJE1haWw6OlNlbmRtYWlsOjps
+b2cgc2F5czpcbiIsICRNYWlsOjpTZW5kbWFpbDo6bG9nLCAiIDxwPlxuIjsNCg0KcHJpbnQgIjwv
+Qk9EWT5cbiI7DQpwcmludCAiPC9IVE1MPlxuIjsNCg==
+
+
+
+
+------------8D1DD222B6A0C56--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004023.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004034.html">Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4024">[ date ]</a>
+              <a href="thread.html#4024">[ thread ]</a>
+              <a href="subject.html#4024">[ subject ]</a>
+              <a href="author.html#4024">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

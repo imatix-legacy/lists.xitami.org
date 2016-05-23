@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] second webserver
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005811.html">
+   <LINK REL="Next"  HREF="005812.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] second webserver
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] second webserver">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 19 Apr 2004 07:54:48 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005811.html">[Xitami] second webserver
+</A></li>
+        <LI> Next message: <A HREF="005812.html">[Xitami] Xitami and PHP (fwd)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5818">[ date ]</a>
+              <a href="thread.html#5818">[ thread ]</a>
+              <a href="subject.html#5818">[ subject ]</a>
+              <a href="author.html#5818">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 20:40 18/04/04, you wrote:
+I use a feature in National Instruments LabVIEW called Remote Panel.
+To publish these Remote Panels I have to run the National Instruments
+Webserver.
+Unfortunately this Webserver has no possibilities for user/password
+authentification .
+How can I use Xitami as a first Webserver for authentification and get
+the content of the National Instruments Webserver ?
+Thank you for help
+Thomas
+
+
+It's possible, but not a good solution.
+Once somebody knows the address+port of the NI webserver, he can bypass Xitami.
+
+Other possibility is to bypass NI web ...
+Point the main HTML directory to the directory hosting the files
+(configuration/server/main HTML directory in the web admin).
+You can use a network path (\\server\sharedDir) if Xitami runs as a normal 
+user (=has access to the directory).
+If both servers are on the same computer, one of them must listen to an 
+alternate port, like 8080.
+Check that your router is configured correctly to redirect all access to 
+this port to the correct computer -most routers will drop packets to 
+unexpected port numbers.
+This will of course not work if the pages are dynamic, only if the pages 
+are readily available somewhere.
+cgi-bin is not possible without tweaking either.
+
+Marc
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005811.html">[Xitami] second webserver
+</A></li>
+	<LI> Next message: <A HREF="005812.html">[Xitami] Xitami and PHP (fwd)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5818">[ date ]</a>
+              <a href="thread.html#5818">[ thread ]</a>
+              <a href="subject.html#5818">[ subject ]</a>
+              <a href="author.html#5818">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

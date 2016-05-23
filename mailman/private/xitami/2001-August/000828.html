@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP4 Installation Problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000834.html">
+   <LINK REL="Next"  HREF="000830.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP4 Installation Problems
+   </H1>
+    <B>Paul N Shortis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP4 Installation Problems">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 30 Aug 2001 11:24:59 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000834.html">[Xitami] PHP4 Installation Problems
+</A></li>
+        <LI> Next message: <A HREF="000830.html">[Xitami] PHP4 Installation Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#828">[ date ]</a>
+              <a href="thread.html#828">[ thread ]</a>
+              <a href="subject.html#828">[ subject ]</a>
+              <a href="author.html#828">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Brad,
+
+No, a path entry for php isn't necessary (but it might be worth trying at this
+point !), I even went to the extent of moving php4ts.dll from the Xitami
+directory to the wnint\system32 directory &amp; deleting php.exe &amp; php4ts.dll from
+the C:\php directory &amp; all still functions perfectly.
+
+Correction - I found out what is happening, - instead of just accepting that my
+installation was working I had a poke around to see if I could reproduce the
+'blank page problem' .... it happens when php.exe can't locate php4ts.dll, if
+you do a 'view source' on the blank page you will see that php has produced the
+headers then given up when unable to load it's main dll.
+
+It just so happened that when I moved php.exe to C:\Xitami I also moved
+php4ts.dll which allowed it to be found. Now I've moved php.exe to c:\php &amp;
+altered the filter to point to c:\php\php.exe and all works fine when php4ts.dll
+is placed in winnt\system32.
+
+My suggestion - place php4ts.dll in the winnt\system32 directory, it will always
+get found there.
+
+Best of luck, Paul
+
+
+
+
+
+&quot;MATA Tech&quot; &lt;<A HREF="mailto:mata@matatech.tzo.com">mata@matatech.tzo.com</A>&gt; on 30/08/2001 10:24:20 AM
+
+Please respond to <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+To:   <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+cc:    (bcc: Paul N Shortis/Roads/QMR/Au)
+Subject:  Re: [Xitami] PHP4 Installation Problems
+
+
+
+Paul:
+
+As per your instructions below, I have repeatedly tried to get Xitami
+and PHP to coordinate efforts, but I am still getting blank pages!
+Wah!
+
+Just by chance, does autoexe.bat need to have a line added to it
+so that Windows knows where PHP is located?  That is the only
+thing I haven't done yet.
+
+Sincerely,
+Brad Smith
+
+On 30 Aug 2001, at 9:55, Paul N Shortis wrote:
+&gt;<i> There's no need at all to alter the extension settings in the php.ini
+</I>&gt;<i> file unless you atually move the directory the extenstions are placed
+</I>&gt;<i> in. php parses the php.ini file at startup and looks there expicilty
+</I>&gt;<i> to load extensions. There's also no need to place the extension
+</I>&gt;<i> directory in the path (although it shouldn't do any harm).
+</I>&gt;<i>
+</I>&gt;<i> With php.exe in the Xitami directory (eg if Xitami is installed in
+</I>&gt;<i> C:\Xitami this is where php.exe should be placed - NOT in any
+</I>&gt;<i> subdirectory such as C:\Xitami\cgi-bin etc) the filter should simply
+</I>&gt;<i> be set to
+</I>&gt;<i>
+</I>&gt;<i> .php php.exe
+</I>&gt;<i>
+</I>&gt;<i> without any paths.
+</I>&gt;<i>
+</I>&gt;<i> I was assuming from your original post that you weren't getting error
+</I>&gt;<i> messages... just blank pages, is this correct ???
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+
+
+
+
+
+************************************************************
+Opinions contained in this e-mail do not necessarily reflect
+the opinions of the Queensland Department of Main Roads,
+Queensland Transport or National Transport Secretariat, or
+endorsed organisations utilising the same infrastructure.
+If you have received this electronic mail message in error,
+please immediately notify the sender and delete the message
+from your computer.
+************************************************************
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000834.html">[Xitami] PHP4 Installation Problems
+</A></li>
+	<LI> Next message: <A HREF="000830.html">[Xitami] PHP4 Installation Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#828">[ date ]</a>
+              <a href="thread.html#828">[ thread ]</a>
+              <a href="subject.html#828">[ subject ]</a>
+              <a href="author.html#828">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

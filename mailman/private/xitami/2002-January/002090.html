@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] webcam
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002088.html">
+   <LINK REL="Next"  HREF="002091.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] webcam
+   </H1>
+    <B>miplanet
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] webcam">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 17 Jan 2002 17:18:28 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002088.html">[Xitami] webcam
+</A></li>
+        <LI> Next message: <A HREF="002091.html">[Xitami] webcam
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2090">[ date ]</a>
+              <a href="thread.html#2090">[ thread ]</a>
+              <a href="subject.html#2090">[ subject ]</a>
+              <a href="author.html#2090">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Nope,
+
+I get this:
+
+Warning: Cannot add header information - headers already sent by (output
+started at f:\Xitami\websites\&lt;domain&gt;.com\webcam.php:2) in
+f:\Xitami\websites\&lt;domain&gt;.com\webcam.php on line 3
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Marcio Marchini
+Sent: Thursday, January 17, 2002 5:09 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: RE: [Xitami] webcam
+
+
+
+	You can do redirects with regular html, you don't need PHP.
+
+	If you save this file to index.html:
+
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content=&quot;text/html; charset=unicode&quot; http-equiv=Content-Type&gt;
+&lt;META content=&quot;MSHTML 5.00.2614.3500&quot; name=GENERATOR&gt;&lt;/HEAD&gt;
+&lt;BODY onload=&quot;window.location='index.php'&quot;&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+
+	and visit it with a browser, it will try to redirect to 'index.php' on the
+same
+host. Just put what you need in there, instead of 'index.php'.
+
+
+	I am not claiming this is an answer to your original question, I am just
+saying
+you can redirect without having to learn/install PHP.
+
+
+marcio
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of miplanet
+</I>&gt;<i> Sent: January 17, 2002 4:44 PM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: RE: [Xitami] webcam
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I guess it's time to learn PHP. I have no idea what to do with this. I'll
+</I>&gt;<i> start doing some research on this but in the mean time...
+</I>&gt;<i>
+</I>&gt;<i> Where do I need to put it to redirect webcam.domain.com to port 8080?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Thomas J. Hruska
+</I>&gt;<i> Sent: Thursday, January 17, 2002 6:00 AM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] webcam
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> At 08:20 PM 1/16/2002 -0500, Ron Ackerman writeth:
+</I>&gt;<i> &gt;I currently have 11 domains running and I am trying to set up a webcam
+</I>&gt;<i> using
+</I>&gt;<i> &gt;WebCam2000. WebCam 2000 can be set up for any port and is currently using
+</I>&gt;<i> port
+</I>&gt;<i> &gt;8080. Xitami is set up for default port 80 and needs to stay there. I can
+</I>&gt;<i> set up
+</I>&gt;<i> &gt;the DNS server for webcam.&lt;domain&gt;.com. How should I set up Xitami to
+</I>&gt;<i> alias port
+</I>&gt;<i> &gt;8080 for that subdomain. Any ideas?
+</I>&gt;<i>
+</I>&gt;<i> Well, you could always use a script to redirect to port 8080.  Here's a
+</I>&gt;<i> quickie PHP script that will do the trick:
+</I>&gt;<i>
+</I>&gt;<i> &lt;?
+</I>&gt;<i>   header(&quot;Location: <A HREF="http://webcam.<domain">http://webcam.&lt;domain</A>&gt;.com:8080/&quot;);
+</I>&gt;<i> ?&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hope this helps!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+</I>&gt;<i> Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+</I>&gt;<i>                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002088.html">[Xitami] webcam
+</A></li>
+	<LI> Next message: <A HREF="002091.html">[Xitami] webcam
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2090">[ date ]</a>
+              <a href="thread.html#2090">[ thread ]</a>
+              <a href="subject.html#2090">[ subject ]</a>
+              <a href="author.html#2090">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

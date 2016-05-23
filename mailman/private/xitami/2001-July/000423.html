@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: POST troubles (longish)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000422.html">
+   <LINK REL="Next"  HREF="000429.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: POST troubles (longish)
+   </H1>
+    <B>Boyan Brezinsky
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] RE: POST troubles (longish)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 16 Jul 2001 17:45:09 +0300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000422.html">[Xitami] SSI Help desperately needed
+</A></li>
+        <LI> Next message: <A HREF="000429.html">[Xitami] Custom Errors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#423">[ date ]</a>
+              <a href="thread.html#423">[ thread ]</a>
+              <a href="subject.html#423">[ subject ]</a>
+              <a href="author.html#423">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for the tips. I've found and worked around the problem, now the 
+question is if it is a bug in Xitami or some misunderstanding by the 
+developer of dcl.
+On login, dcl sends user name, password and so on to login.php3.
+login.php3 in turn calls its own function Refresh(). This function is used 
+to redirect the server to a new file - main.php3 or listFrame.php3, 
+depending on your choice of frames or not.
+The Refresh() function can use two types of redirect - through the php 
+Header() function or through html meta tags.
+The relevant part is:
+		if ($GLOBALS['cookieMethod'] == 'header')
+		{
+			$hdr = '';
+			if ($GLOBALS['redirMethod'] == 'php')
+				$hdr = &quot;Location: $toHere\n&quot;;
+
+			$hdr .= &quot;Set-Cookie: DCLINFO=$theCookie\n&quot;;
+			$hdr .= &quot;Set-Cookie: DCLTYPEMENU=$DCLUI\n&quot;;
+			$hdr .= &quot;\r\n&quot;;
+
+			Header($hdr);
+			if (substr($toHere, 0, 10) == 'index.php3')
+				exit;
+		}
+&lt;snip some code&gt;
+		print('&lt;html&gt;&lt;head&gt;');
+&lt;snip a little more&gt;	
+		print(&quot;&lt;meta http-equiv=\&quot;refresh\&quot; content=\&quot;00;URL=$toHere\&quot;&gt;&quot;);
+		print('&lt;/head&gt;');
+&lt;and snip till end of function&gt;
+
+In the non-working configuration I have $redirMethod==&quot;php&quot; and 
+$cookieMethod==&quot;header&quot;
+In the working configuration the $redirMethod is set to &quot;meta&quot;.
+In both cases the $toHere variable gets the value 
+&quot;main.php3?menuAction=boMyDCL.show&quot; (actually, the php3 filename depends on 
+the type of the interface, but this is not important here). Unfortunately, 
+it is hard-coded: Refresh('main.php3?menuAction=boMyDCL.show', $id, 
+$thispwd, $GLOBALS['DCLUI'], $GLOBALS['LANG'], $GLOBALS['DOMAIN']);
+
+In the non-working case the generated output is (from *.flt):
+X-Powered-By: PHP/4.0.4
+Location: main.php3?menuAction=boMyDCL.show
+Set-Cookie: DCLINFO=1/0/dfe2c07de313f0d7ca27146e068767f1/en/default
+Set-Cookie: DCLTYPEMENU=0
+Content-type: text/html
+
+&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;refresh&quot; 
+content=&quot;00;URL=main.php3?menuAction=boMyDCL.show&quot;&gt;&lt;/head&gt;
+
+
+
+In the working case ($redirMethod==&quot;meta&quot;) the generated output is:
+X-Powered-By: PHP/4.0.4
+Set-Cookie: DCLINFO=1/0/dfe2c07de313f0d7ca27146e068767f1/en/default
+Set-Cookie: DCLTYPEMENU=0
+Content-type: text/html
+
+&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;refresh&quot; 
+content=&quot;00;URL=main.php3?menuAction=boMyDCL.show&quot;&gt;&lt;/head&gt;
+
+
+As you can see, the difference is in the &quot;Location:&quot; header. The obvious 
+reason is that Xitami can't find the file specified in the Location header 
+and returns 404.
+Now the question is if this is a bug or a feature. According to HTML 1.1 
+definition from 
+<A HREF="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30:">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30:</A>
+&quot;The field value consists of a single absolute URI.
+       Location       = &quot;Location&quot; &quot;:&quot; absoluteURI  &quot;
+In this case the URI is definitely not an absolute one. So if this is the 
+reason for the 404 error, I guess it's OK, although other users seem to be 
+using this dcl software just fine. On the other hand, if for some reason 
+Xitami tries, but cannot parse the &quot;Location:&quot; field, then it is a bug.
+
+Thanks again,
+Boyan
+
+
+&gt;<i> From: Ewen McNeill &lt;<A HREF="mailto:ewen@imatix.com">ewen@imatix.com</A>&gt;
+</I>&gt;<i> Subject: Re: [Xitami] POST troubles (longish)
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Date: Sun, 15 Jul 2001 21:08:57 +1200
+</I>&gt;<i> Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>
+</I>&gt;<i> In message &lt;<A HREF="mailto:01C10BA4.D1051D80.boyan@sanbolic.com">01C10BA4.D1051D80.boyan@sanbolic.com</A>&gt;, Boyan Brezinsky 
+</I>writes:
+&gt;<i>
+</I>&gt;<i> &gt;Here is the story. Yesterday downloaded dcl - a project tracking system
+</I>&gt;<i> &gt;written in PHP. At startup you have to login, supplying username and
+</I>&gt;<i> &gt;password.  [Get 404 error when use Login]
+</I>&gt;<i>
+</I>&gt;<i> There's two things that could be generating the 404: Xitami and PHP.
+</I>&gt;<i> I can't remember off hand if Xitami logs a 404 only when it generates
+</I>&gt;<i> it, or when that's the code it's going to return (which a CGI/filter can
+</I>&gt;<i> supply).
+</I>&gt;<i>
+</I>&gt;<i> Since the request/debug log entries you supply don't match up with the
+</I>&gt;<i> times in the other snippets you supply, it's hard to know exactly what
+</I>&gt;<i> is going on.
+</I>&gt;<i>
+</I>&gt;<i> However I'd definitely suggest (a) looking for messages in cgierr.log,
+</I>&gt;<i> and (b) adding something to the PHP so you can tell if it is being run.
+</I>&gt;<i> The fact that Xitami seems to be trying to transfer .flt files (filter
+</I>&gt;<i> files), suggests that something must have generated those files to
+</I>&gt;<i> transfer.
+</I>&gt;<i>
+</I>&gt;<i> You might also want to enable [cgi] debug=1 (which controls filtering
+</I>&gt;<i> too) and let it preserve the filter files (normally they are removed
+</I>&gt;<i> after being sent).  Then you can check the contents of those to see if
+</I>&gt;<i> it is PHP that is writing the 404 error (or indeed if it is writing
+</I>&gt;<i> anything).
+</I>&gt;<i>
+</I>&gt;<i> Given that you seem to have a working PHP setup in general (since some
+</I>&gt;<i> of your other PHP works) I suspect that looking closely at what the
+</I>&gt;<i> problem PHP script is doing/trying to do has to be your next step.
+</I>&gt;<i>
+</I>&gt;<i> Ewen
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000422.html">[Xitami] SSI Help desperately needed
+</A></li>
+	<LI> Next message: <A HREF="000429.html">[Xitami] Custom Errors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#423">[ date ]</a>
+              <a href="thread.html#423">[ thread ]</a>
+              <a href="subject.html#423">[ subject ]</a>
+              <a href="author.html#423">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

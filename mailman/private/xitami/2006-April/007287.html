@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Error on .shtml pages!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Error%20on%20.shtml%20pages%21&In-Reply-To=44482C33.4070500%40whiteshepherd.net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007286.html">
+   <LINK REL="Next"  HREF="007289.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Error on .shtml pages!</H1>
+    <B>Francis Turner</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Error%20on%20.shtml%20pages%21&In-Reply-To=44482C33.4070500%40whiteshepherd.net"
+       TITLE="[Xitami] Error on .shtml pages!">francis.turner at gmail.com
+       </A><BR>
+    <I>Fri Apr 21 08:02:57 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007286.html">[Xitami] Error on .shtml pages!
+</A></li>
+        <LI>Next message: <A HREF="007289.html">[Xitami] Error on .shtml pages!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7287">[ date ]</a>
+              <a href="thread.html#7287">[ thread ]</a>
+              <a href="subject.html#7287">[ subject ]</a>
+              <a href="author.html#7287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You have two SSI includes in the page. /ssi/ssiLinks.txt and
+/ssi/ssiChooseStyle.txt I imagine that is the problem
+
+On 4/21/06, WhiteShepherd &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">fuzzydog at whiteshepherd.net</A>&gt; wrote:
+&gt;<i> I'm running Xitami 2.4.9d  (I've tried newer some versions but they
+</I>&gt;<i> crash when displaying a perl CGI page that is too large, don't know if
+</I>&gt;<i> that is fixed yet?).  Anyways I run Xitami and Apache2 on the same
+</I>&gt;<i> machine seperated by hosting IP.  Static websites that get real heavy
+</I>&gt;<i> traffic I put on Xitami as the server is under a heavy load.  The
+</I>&gt;<i> problem is some of these sites have .shtml files.  When running under
+</I>&gt;<i> Xitami, when it hits these .shtml files it just gives an error page:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>   Internal error: your request was unsuccessful
+</I>&gt;<i>   Cannot create CGI process - program not found
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> However these same .shtml files run fine under Apache2.  Any idea why
+</I>&gt;<i> this can't run under Xitami?  I will post one of these .shtml files
+</I>&gt;<i> below for reference. Thanks for any help!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &quot;<A HREF="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;html&gt;
+</I>&gt;<i> &lt;META http-equiv=&quot;PICS-Label&quot; content='(PICS-1.1
+</I>&gt;<i> &quot;<A HREF="http://www.classify.org/safesurf/&quot;">http://www.classify.org/safesurf/&quot;</A> l gen true for
+</I>&gt;<i> &quot;<A HREF="http://www.ayame.furtopia.org&quot;">http://www.ayame.furtopia.org&quot;</A> r (SS~~000 9 SS~~001 2 SS~~002 5 SS~~003
+</I>&gt;<i> 5 SS~~004 5 SS~~005 1 SS~~009 5))' /&gt;
+</I>&gt;<i> &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+</I>&gt;<i> &lt;meta name=&quot;author&quot; content=&quot;Ayame Emaya&quot; /&gt;
+</I>&gt;<i> &lt;meta http-equiv=&quot;pics-label&quot; content='(pics-1.1
+</I>&gt;<i> &quot;<A HREF="http://www.icra.org/ratingsv02.html&quot;">http://www.icra.org/ratingsv02.html&quot;</A> comment &quot;ICRAonline EN v2.0&quot; l gen
+</I>&gt;<i> true for &quot;<A HREF="http://www.ayame.furtopia.org&quot;">http://www.ayame.furtopia.org&quot;</A> r (na 1 nb 1 nc 1 nd 1 ne 1 nf
+</I>&gt;<i> 1 ng 1 nh 1 ni 1 vz 1 la 1 lc 1 oh 1 cz 1)
+</I>&gt;<i> &quot;<A HREF="http://www.rsac.org/ratingsv01.html&quot;">http://www.rsac.org/ratingsv01.html&quot;</A> l gen true for
+</I>&gt;<i> &quot;<A HREF="http://www.ayame.furtopia.org&quot;">http://www.ayame.furtopia.org&quot;</A> r (n 4 s 4 v 0 l 4))' /&gt;
+</I>&gt;<i> &lt;head&gt;
+</I>&gt;<i> &lt;title&gt;Ayame&lt;/title&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot;
+</I>&gt;<i> href=&quot;./styles/default.css&quot; / title=&quot;default&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;link rel=&quot;alternate stylesheet&quot;
+</I>&gt;<i> type=&quot;text/css&quot; href=&quot;./styles/layout3.css&quot; / title=&quot;other&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;link rel=&quot;alternate stylesheet&quot;
+</I>&gt;<i> type=&quot;text/css&quot; href=&quot;./styles/easy.css&quot; / title=&quot;easy&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;link rel=&quot;alternate stylesheet&quot;
+</I>&gt;<i> type=&quot;text/css&quot; href=&quot;./styles/jordan.css&quot; / title=&quot;jordan&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;link rel=&quot;alternate stylesheet&quot;
+</I>&gt;<i> type=&quot;text/css&quot; href=&quot;./styles/monotone.css&quot; / title=&quot;mono&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
+</I>&gt;<i> &lt;!--
+</I>&gt;<i> @import url(&quot;/styles/image.css&quot;);
+</I>&gt;<i> --&gt;
+</I>&gt;<i> &lt;/style&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;!-- Place all styles above this note. Thank you ALA.--&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;script type=&quot;text/javascript&quot; src=&quot;/scripts/styleswitcher.js&quot;&gt;&lt;/script&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &lt;/head&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;body&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;div class=&quot;content&quot;&gt;
+</I>&gt;<i>   &lt;!--#include virtual=&quot;/ssi/ssiHeader.txt&quot; --&gt;
+</I>&gt;<i> &lt;/div&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;div class=&quot;content&quot;&gt;
+</I>&gt;<i>  &lt;!--#include virtual=&quot;/ssi/ssiIndex.txt&quot; --&gt;
+</I>&gt;<i> &lt;/div&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;div class=&quot;content&quot;&gt;
+</I>&gt;<i>   &lt;!--#include virtual=&quot;/ssi/ssiNews.txt&quot; --&gt;
+</I>&gt;<i> &lt;/div&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;div class=&quot;content&quot;&gt;
+</I>&gt;<i>     &lt;!--#include virtual=&quot;/ssi/ssiFooter.txt&quot; --&gt;
+</I>&gt;<i> &lt;/div&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;div id=&quot;navAlpha&quot;&gt;
+</I>&gt;<i>     &lt;!--#include virtual=&quot;/ssi/ssiChooseStyle.txt&quot; --&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;/div&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;div id=&quot;navBeta&quot;&gt;
+</I>&gt;<i>     &lt;!--#include virtual=&quot;/ssi/ssiLinks.txt&quot; --&gt;
+</I>&gt;<i> &lt;/div&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;!-- BlueRobot was here. --&gt;
+</I>&gt;<i> &lt;!-- So was Ayame. Thanks BlueRobot. --&gt;
+</I>&gt;<i>
+</I>&gt;<i> &lt;/body&gt;
+</I>&gt;<i> &lt;/html&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007286.html">[Xitami] Error on .shtml pages!
+</A></li>
+	<LI>Next message: <A HREF="007289.html">[Xitami] Error on .shtml pages!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7287">[ date ]</a>
+              <a href="thread.html#7287">[ thread ]</a>
+              <a href="subject.html#7287">[ subject ]</a>
+              <a href="author.html#7287">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

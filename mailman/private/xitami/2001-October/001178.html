@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001177.html">
+   <LINK REL="Next"  HREF="001179.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 15 Oct 2001 22:10:12 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001177.html">[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+</A></li>
+        <LI> Next message: <A HREF="001179.html">[Xitami] installer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1178">[ date ]</a>
+              <a href="thread.html#1178">[ thread ]</a>
+              <a href="subject.html#1178">[ subject ]</a>
+              <a href="author.html#1178">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> On the Sun I get the following output:
+</I> ftp&gt; ls /dtf-tests/*/*Job.type
+ /dtf-tests/test1/DocuJob.type
+ /dtf-tests/test2/DocuJob.type
+
+Interesting. Wild-card directory is not specifically supported in
+most FTP docs, but my school's Sun's docs have a clue: 
+
+ SunOS 5.5 
+ FTP(1)                    User Commands    
+
+  ls [remote-directory] [local-file]
+  Print a listing of the contents of a directory  on  the
+  remote  machine.   The  listing  includes  any  system-
+  dependent  information  that  the  server  chooses   to
+  include;  for  example,  most UNIX systems will produce
+  output from the command `ls -l'.  ....
+
+That is, ftp on unix is liable to call `ls' directly and pipe it
+to the terminal. unix 'ls' typically supports wild directories. 
+
+That can't happen on NT, which has no `ls'. It could call `DIR',
+or `DIR /s', but Xitami's cross-platform code tends to avoid
+platform-specific calls whenever possible, in favor of simple
+universal techniques. 
+
+Since wild-carded directories is kind of an obscure feature, I
+suspect you may have to try various FTP servers until you find
+one that supports it. If the hint in Sun's FTP docs is correct,
+you may have better luck on a unix platform. Be aware that the
+Linux default FTP service WS-FTP is notoriously hackable (been
+there, been bitten). 
+
+Or, if you grok `c', edit and recompile Xitami's ftp functions to
+your liking. The code is neat and clean, but folder globbing is
+not necessarily easy to roll from scratch. 
+
+It should be possible to build a FTP service in Perl, with `ls'
+features of your choice. I know I could not do it, though. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001177.html">[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+</A></li>
+	<LI> Next message: <A HREF="001179.html">[Xitami] installer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1178">[ date ]</a>
+              <a href="thread.html#1178">[ thread ]</a>
+              <a href="subject.html#1178">[ subject ]</a>
+              <a href="author.html#1178">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

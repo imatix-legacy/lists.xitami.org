@@ -1,0 +1,244 @@
+From xitami-dev@lists.xitami.org  Sat Jun  2 19:23:44 2001
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Sat, 02 Jun 2001 19:23:44 +0100 (MEZ)
+Subject: [Xitami-Dev] LRWP: Name length limitations ?
+Message-ID: <200106021724.TAA29425@sxpublic.nxrda.imatix.com>
+
+do we have some obscure limits in the xitami LRWP process ?
+
+i'm starting 4 servlet processes:
+
+ytm.conacom.hr.servlets.ListApp
+ytm.conacom.hr.servlets.ListAppEx
+ytm.conacom.hr.servlets.DetailApp
+ytm.conacom.hr.servlets.DetailAppEx
+
+which connects as servlet/ytm.conacom.hr.servlets.ListApp etc..
+
+the xitami console window tells me, that all 4 different
+servlets are connected.
+
+but: sometimes an url-request to
+servlet/ytm.conacom.hr.servlets.ListAppEx starts ListApp
+(instead of ListAppEx) ?
+
+any ideas ?
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Mon Jun  4 10:29:50 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 04 Jun 2001 21:29:50 +1200
+Subject: [Xitami-Dev] LRWP: Name length limitations ?
+In-Reply-To: Message from "bernd hohmann" <xitami-dev@conacom.de>
+ of "Sat, 02 Jun 2001 19:23:44 +0100." <200106021724.TAA29425@sxpublic.nxrda.imatix.com>
+Message-ID: <200106040929.VAA05163@pagoda.wgtn.cat-it.co.nz>
+
+In message <200106021724.TAA29425@sxpublic.nxrda.imatix.com>, "bernd hohmann" wr
+ites:
+>do we have some obscure limits in the xitami LRWP process ?
+
+No, but they match on a "prefix" basis; by scanning a list of registered
+LRWP URL paths.  So the order in which your servlets register will be
+VERY important if you want to call them names that overlap.  (Alas, I
+don't remember if it pushes onto the front of the list, or adds to the
+end, so you'll eitehr need to register the "...Ex" ones last, or first.)
+
+The best way to work around this is simply _not_ to give them names
+where some of them are the prefix of others :-)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Tue Jun  5 09:04:39 2001
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Tue, 05 Jun 2001 09:04:39 +0100 (MEZ)
+Subject: [Xitami-Dev] LRWP: Name length limitations ?
+In-Reply-To: <200106040929.VAA05163@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <200106050705.JAA16154@sxpublic.nxrda.imatix.com>
+
+On Mon, 04 Jun 2001 21:29:50 +1200, Ewen McNeill wrote:
+
+> (Alas, I don't remember if it pushes onto the front of the list, or 
+> adds to the end, so you'll eitehr need to register the "...Ex" ones 
+> last, or first.)
+
+last, i presume. i'll consider it in the next version of the
+servlet runner - currently i have to put a 300ms delay in the
+startup loop because the registrationprocess "servlet -> lrwp"
+is asynchronous and causes a more or less "random" behaviour.
+ 
+> The best way to work around this is simply _not_ to give them names
+> where some of them are the prefix of others :-)
+
+3rd party module. anymore questions ? :(
+
+bernd
+
+
+
+From xitami-dev@lists.xitami.org  Thu Jun  7 10:06:21 2001
+From: xitami-dev@lists.xitami.org (bernd hohmann)
+Date: Thu, 07 Jun 2001 10:06:21 +0100 (MEZ)
+Subject: [Xitami-Dev] building os2 production release...
+Message-ID: <200106070806.KAA30403@sxpublic.nxrda.imatix.com>
+
+after finally finding a link386.exe (didn't installed it) i get
+a lot of link errors building beta4 as production release (crt0
+and other stuff). 
+
+debug and standard are ok (using the linker from the EMX
+package). 
+
+are there special environment variables for link386.exe ?
+
+bernd
+
+
+
+
+
+From xitami-dev@lists.xitami.org  Thu Jun  7 09:39:01 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Thu, 07 Jun 2001 20:39:01 +1200
+Subject: [Xitami-Dev] building os2 production release...
+In-Reply-To: Message from "bernd hohmann" <xitami-dev@conacom.de>
+ of "Thu, 07 Jun 2001 10:06:21 +0100." <200106070806.KAA30403@sxpublic.nxrda.imatix.com>
+Message-ID: <200106070839.UAA12023@pagoda.wgtn.cat-it.co.nz>
+
+In message <200106070806.KAA30403@sxpublic.nxrda.imatix.com>, "bernd hohmann" wr
+ites:
+>after finally finding a link386.exe (didn't installed it) i get a lot of 
+>link errors building beta4 as production release (crt0 and other stuff). 
+>debug and standard are ok (using the linker from the EMX package). 
+>are there special environment variables for link386.exe ?
+
+It's been quite a while since I've done this, but as I recall it, the
+debug and standard versions build a.out (COFF) executables, which then
+have an EMX header applied to them, and pretty much everything is done
+with the EMX tools.
+
+The production version builds .obj/.lib files, and is linked through the
+EMX front end to link386.  Certainly you can't link using link386
+directly, unless you supply all the arguments that the EMX front end
+would supply.
+
+As far as I remember the c.cmd script has the logic needed to do this
+providing all the objects are build in production mode, the libraries
+built in production mode, and you link in production mode.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Fri Jun  8 14:24:41 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Sat, 09 Jun 2001 01:24:41 +1200
+Subject: [Xitami-Dev] SMT Agents
+In-Reply-To: Message from Shivakumar Gopalakrishnan <g_skumar@yahoo.com>
+ of "Fri, 23 Mar 2001 14:09:48 EST." <3.0.1.32.20010323111246.00a1dac0@dnai.com>
+Message-ID: <200106081324.BAA26204@pagoda.wgtn.cat-it.co.nz>
+
+In message <3.0.1.32.20010323111246.00a1dac0@dnai.com>, Shivakumar Gopalakrishna
+n writes:
+>I think we have been teased about GSLgen3 long enough. 
+>Any ideas of posting the pre-pre-alpha version to some iMatix diehard fans
+>only site?
+
+For the "diehard fans only", they can get it from CVS.  ViewCVS will let
+you look at what is there:
+
+http://cvs.imatix.com./cgi-bin/viewcvs/
+
+Our public CVS archive is in the middle of a rearrangement at present,
+so it's a bit messy (eg, there are multiple names for many things: the
+shorter ones are the newer ones).
+
+The modules you need are "sfl", "smt", and "gsl".  The GSL there is GSL3.
+
+There are brief details on how to get a (read only) copy from CVS on
+that webpage, as well as the ability to navigate the archive.
+
+>Also from the postings it appears that GSLgen is not meant to be used
+>for dynamic HTML generation. What would you suggest for XML-> HTML ? There
+>are many XSLT but XSL is not as easy to learn as GSL and less powerful 
+>than GSL (IMHO). Any suggestions?
+
+Personally I'd tend to use GSL for dynamic XML -> HTML conversion for
+relatively small things; and I'd tend to avoid on-the-fly conversion of
+anything large (irrespective of technology) because it takes too long.
+GSL3 in the Xitami in CVS is somewhat better for on-the-fly conversion
+because it's a SMT-agent itself, and so can be multithreaded with other
+things.  (The GSL2 in Xitami 2.5b5 has to run to completion before
+anything else can be done.)  (Note however that the GSL3/Xitami
+interface is still in a state of flux and not entirely debugged.)
+
+As you say XSLT is more difficult to learn than GSL, and from what I've
+seen to date, not really any faster to write/use than GSL.  So I don't
+think there's all that much advantage in learning it just to do dynamic
+XML->HTML conversions if you already know GSL.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Sun Jun 10 16:27:28 2001
+From: xitami-dev@lists.xitami.org (Ewen McNeill)
+Date: Mon, 11 Jun 2001 03:27:28 +1200
+Subject: [Xitami-Dev] Add-ons Isapi
+In-Reply-To: Message from "Richard James" <bro_eht@yahoo.co.uk>
+ of "Sun, 15 Apr 2001 09:32:40 EST." <001c01c0c5f3$bd4c6880$dba832d4@blop>
+Message-ID: <200106101527.DAA28216@pagoda.wgtn.cat-it.co.nz>
+
+In message <001c01c0c5f3$bd4c6880$dba832d4@blop>, "Richard James" writes:
+>ISAPI Support (beta 1)
+>
+>I downloaded the program from the link 
+>(http://www.imatix.com/pub/addons/isapi10a.zip)
+>and then installed PWS (Microsoft Personal Webserver I`m assuming).
+>
+>I execute the isapid.exe (from the isapi10a.zip) and try to view the 
+>testisapi page, All I get is `Page cannot be displayed` message from 
+>IExplorer.
+
+Unfortunately Internet Explorer's "friendly" error messages obscure what
+really happened.  Could you perhaps try this again with either Xitami's
+debugging mode turned on ([Server] debug=1), and then check the debug
+logs to see what Xitami found, or with Internet Explorer's "friendly"
+error messages turned off (so that it shows the error message the server
+sent).
+
+Also remember you need to run Xitami, then run the isapid program to
+"hook in" to Xitami, then try accessing things.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami-dev@lists.xitami.org  Mon Jun 11 00:13:48 2001
+From: xitami-dev@lists.xitami.org (Shivakumar Gopalakrishnan)
+Date: Sun, 10 Jun 2001 16:13:48 -0700 (PDT)
+Subject: [Xitami-Dev] Re: SMT Agents (Ewen McNeill)
+In-Reply-To: <200106091001.MAA11362@sxpublic.nxrda.imatix.com>
+Message-ID: <20010610231348.59295.qmail@web13405.mail.yahoo.com>
+
+All I can say is thank you, thank you, thank you :-)
+
+Will try the new programs out and give some feedback
+later.
+
+Shivakumar G.
+
+
+__________________________________________________
+Do You Yahoo!?
+Get personalized email addresses from Yahoo! Mail - only $35 
+a year!  http://personal.mail.yahoo.com/
+

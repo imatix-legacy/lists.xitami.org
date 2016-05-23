@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Memory allocation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=47105FF8.4060609%40rci.rutgers.edu">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007661.html">
+   <LINK REL="Next"  HREF="007663.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Memory allocation</H1>
+    <B>R O</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=47105FF8.4060609%40rci.rutgers.edu"
+       TITLE="[Xitami] Memory allocation">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Sat Oct 13 22:23:49 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007661.html">[Xitami] Memory allocation
+</A></li>
+        <LI>Next message: <A HREF="007663.html">[Xitami] root URL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7662">[ date ]</a>
+              <a href="thread.html#7662">[ thread ]</a>
+              <a href="subject.html#7662">[ subject ]</a>
+              <a href="author.html#7662">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Again, more good info.  I just saw your email address - I almost went to 
+Rutgers, ended up going to Radford U in Virginia.  But I like the school 
+when I visited, what, 19 years ago.  Sheesh, been a long time.
+
+By trade I am a Network Engineer so systems, server applications, 
+programming etc has always been a side thing for me but has never a focus.  
+I know more than enough in the other areas to understand the big picture and 
+know more than enough to get the job done.  But when it comes system and 
+application optimization and understanding the gazillion intracies for 
+tweaking a system I have always had to rely on the subject matter experts to 
+play their role.
+
+However, I now find myself having to be the expert of everything because the 
+business I have launched is a 100% solo effort and don't have the $$$ (yet) 
+to hire/contract the right people.  My money is spent on operations 
+(bandwidth), applications and hardware and other business needs.  In short I 
+am nervous that all my preperations simply aren't enough or that I haven't 
+considered something, or optimized something properly, that will come back 
+and bite me in the ass.  But at some point you have to let your kid leave 
+the house right?
+
+As far as what I am doing, no I don't think I was that guy doing the massive 
+real estate gig though my business does have real estate in it.  My site is 
+a head to head competitor to www.craigslist.com.  The name of the site is 
+<A HREF="http://www.adcrow.com">http://www.adcrow.com</A> - I already have tons of traffic and users and 
+everything is running smoothly, but some new marketing efforts are about to 
+take place within the next two weeks that should increasing my exposure 100 
+fold.  Everything was running fine on the P-IV 2Gb RAM system but I always 
+new my hardware was a weak link in the operations so I went out go an 
+enterprise class work horse.  Everything is migrated to the new server and I 
+am taking this window of opportunity pay much closer attention to the 
+optimization of all the applications and server performance.
+
+In essence I have to hope everything I taught myself these last few years: 
+perl/php, mysql, server apps, Windows OS (intracies), server hardware etc is 
+up to par.  I know these newly acquired skills aren't up to speed as my 
+networking skills are - but I keep my fingers crossed that its good enough 
+for now.
+
+Anwyay, good repsonses and very help info.  Thanks.  If you get the 
+opportunity go check out the site: <A HREF="http://www.adcrow.com">http://www.adcrow.com</A> - I always welcome 
+comments and criticisms and feedback from my peers.
+
+-R
+
+Russel P. Olinger
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+
+
+
+
+From: Paul Reid &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">preid at rci.rutgers.edu</A>&gt;
+Reply-To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Subject: Re: [Xitami] Memory allocation
+Date: Sat, 13 Oct 2007 02:04:40 -0400
+
+  &gt; let Windows determine its own virtual memory or should I just
+set it 10Gb?
+
+Ideally, if speed matters, you NEVER want to swap. Physical drives are
+1,000 times slower than DRAM. If you catch it touching the drive for
+swap, and speed is money, buy it more RAM. So the size of the swap space
+does not matter.
+
+You do need swap space &quot;in case&quot; some app goes off the rails and starts
+allocating infinite memory. But a big swap space just leaves it swapping
+many seconds longer before the crash. You want a small swap space so
+that when the memory allocator sees it is in trouble, it has a little
+headroom for its error processes. A Gig or three seems plenty. I thought
+64MB was enough to make some RAM space for the error handlers to throw a
+mystery message before the machine just got stuck.
+
+  &gt; I wish there was a way to completely dedicate, within Windows,
+physical ram to specific apps.
+
+Either it gets the memory it wants, or it doesn't. If Xitami can't get
+its modest memory needs, then one of the monster svchost.exe processes
+is sure to fail a malloc just about the same time, and the whole box
+goes down. Either you have enough, or you don't.
+
+  &gt; soooo many people have said on many many occasions not to use Xitami
+for production.
+
+Who? Why? Anyway &quot;they&quot; also said that about Win-Apache for many years,
+it was official project policy. In fact both servers seem to be more
+stable than Windows, and a clean installation of Win Server O/S is the
+next best thing to a stripped unix or OS/2.
+
+Are you the guy with the enormous real-estate database? Some projects
+like eBay or Amazon or WayBack are simply too much for any one machine.
+Distributed and cluster work is mature stuff; fortunately I never needed
+to look into it for my modest needs. You may be near that point.
+
+   -PRR
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007661.html">[Xitami] Memory allocation
+</A></li>
+	<LI>Next message: <A HREF="007663.html">[Xitami] root URL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7662">[ date ]</a>
+              <a href="thread.html#7662">[ thread ]</a>
+              <a href="subject.html#7662">[ subject ]</a>
+              <a href="author.html#7662">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

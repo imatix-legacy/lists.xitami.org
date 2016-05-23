@@ -1,0 +1,389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami has slowed to a crawl
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006365.html">
+   <LINK REL="Next"  HREF="006358.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami has slowed to a crawl
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami has slowed to a crawl">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 12 Jan 2005 10:27:11 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006365.html">[Xitami] Xitami has slowed to a crawl
+</A></li>
+        <LI> Next message: <A HREF="006358.html">[Xitami] Xitami has slowed to a crawl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6357">[ date ]</a>
+              <a href="thread.html#6357">[ thread ]</a>
+              <a href="subject.html#6357">[ subject ]</a>
+              <a href="author.html#6357">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Ron
+
+I use a txt file as well. Have a look below
+
+Am 12 Jan 2005 um 10:30 hat Ron Ackerman geschrieben:
+
+&gt;<i> Seems Googlebot is ignoring the robots.txt file, I can see other bots hit
+</I>&gt;<i> the file and obey it but the Googlebot just keeps on hitting the server.
+</I>&gt;<i> 
+</I>&gt;<i> Here is what I have in my robots.txt file
+</I>&gt;<i> ----------------------------------
+</I>&gt;<i> User-agent: *
+</I>&gt;<i> Disallow: /comment.php
+</I>&gt;<i> Disallow: /submit.php
+</I>&gt;<i> Disallow: /forum/createtopic.php
+</I>&gt;<i> Disallow: /calendar.php
+</I>&gt;<i> 
+</I>&gt;<i> User-agent: msnbot
+</I>&gt;<i> Disallow: /
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> Yet this is in my log
+</I>&gt;<i> 
+</I>&gt;<i> 66.249.66.51 - - [12/Jan/2005:10:21:11 -0500] &quot;GET
+</I>&gt;<i> /submit.php?type=event&amp;mode=&amp;month=04&amp;day=23&amp;year=2004&amp;hour=8 HTTP/1.1&quot; 403
+</I>&gt;<i> 0
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> My next step is to exclude it in the Webmask= area, I am using a text file
+</I>&gt;<i> called webmask.txt. My question is the format of the ip? Should it look like
+</I>&gt;<i> this
+</I>&gt;<i> 
+</I>&gt;<i> !66.249.66.51,
+</I>&gt;<i> 
+</I>&gt;<i> or like this
+</I>&gt;<i> 
+</I>&gt;<i> '!66.249.66.51'
+</I>&gt;<i> 
+</I>&gt;<i> Does the ballbat (!) exclude or include.
+</I>&gt;<i> Do I need the ballbat?  (I know it's an exclaimation point but it's easier
+</I>&gt;<i> to type ball bat).
+</I>&gt;<i> How about the single quotes do I need them?
+</I>&gt;<i> The info in the xitami.cfg isn't clear to me.
+</I>&gt;<i> 
+</I>here some lines of my txt file which is working here at my place
+
+webmask= !211.*
+webmask= !216.239.244.98
+webmask= !216.136.85.161
+webmask= !217.236.57.66
+webmask= !218.150.163.30
+webmask= !221.232.128.2
+webmask= *
+
+# 195.92.95.61 netcraft
+# 209.237.238.*  ia archiver
+
+even the comment lines are okay in there.  Just make sure that the last entry of all lines 
+&quot;webmask&quot; is set to webmask= * like in my sample. Xitami reads the file from top to bottom, each 
+line separate, and to ba able to allow all other addresses except the ones with !  the entry has to 
+be there. In other words: first all disallowed IP's and then free entry. 
+Hope this helps
+
+
+Johannes
+
+PS.  I found that the ia archiver is very pesty and is NOT obeying the robots.txt. I had to 
+occasions were thex explecitly (hopefully correct spelled, not my native language) downloaded 
+picture files from directories which were disallowed correctly.
+
+&gt;<i> Thanks,
+</I>&gt;<i> Ron
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of William R. Palaia
+</I>&gt;<i> Sent: Tuesday, January 11, 2005 3:41 PM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Xitami has slowed to a crawl
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Go here:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://www.robotstxt.org/wc/norobots.html">http://www.robotstxt.org/wc/norobots.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; My system is Pentium 4, 1 gig DDRAM2.0, 2 dual 250Gb data drives
+</I>&gt;<i> (mirrored)
+</I>&gt;<i> &gt; with a 40Gb IOS drive that has 10Gb set aside as virtual memory.  I am
+</I>&gt;<i> &gt; running Win2K Advanced Server and Xitami ver2.49d.  MySQL, PHP, Perl and
+</I>&gt;<i> am
+</I>&gt;<i> &gt; running about 18 sites at the moment.  My server is a work horse but by
+</I>&gt;<i> the
+</I>&gt;<i> &gt; sounds of the MSNbot it won't matter b/c it will be killing the bandwidth
+</I>&gt;<i> &gt; more so than the system.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Good research and great info about the msnbot - I read the whole thread
+</I>&gt;<i> and
+</I>&gt;<i> &gt; got more than I was expecting.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Question: I am surprised but I have never even heard of the robots.txt
+</I>&gt;<i> file,
+</I>&gt;<i> &gt; could you send me a copy of yours so I could see the proper format?  Where
+</I>&gt;<i> &gt; does it go?  I def. want to restrict the msnbot from my server until I can
+</I>&gt;<i> &gt; properly understand everything and be able to determine the best time to
+</I>&gt;<i> &gt; allow it back on later.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks Ron.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Russel P. Olinger
+</I>&gt;<i> &gt; (310) 466-3399
+</I>&gt;<i> &gt; <A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; From: &quot;Ron Ackerman&quot; &lt;<A HREF="mailto:ron@miplanet.net">ron@miplanet.net</A>&gt;
+</I>&gt;<i> &gt;&gt; Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt; To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt;&gt; Subject: RE: [Xitami] Xitami has slowed to a crawl
+</I>&gt;<i> &gt;&gt; Date: Tue, 11 Jan 2005 14:22:42 -0500
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; UPDATE:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I have disallowed MSNbot for now based on information from this forum
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> <A HREF="http://my.jimworld.com/apps/searchengine.forums/forum::other-search-engines/">http://my.jimworld.com/apps/searchengine.forums/forum::other-search-engines/</A>
+</I>&gt;<i> &gt;&gt; thread::1085675955/action::thread/
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; -----Original Message-----
+</I>&gt;<i> &gt;&gt; From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Ron Ackerman
+</I>&gt;<i> &gt;&gt; Sent: Tuesday, January 11, 2005 2:10 PM
+</I>&gt;<i> &gt;&gt; To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt; Subject: RE: [Xitami] Xitami has slowed to a crawl
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Just read this on a forum, it seems others are having problems with
+</I>&gt;<i> MSNbot.
+</I>&gt;<i> &gt;&gt; Ok most don't want to be EXCLUDED from MSN but like me they don't want
+</I>&gt;<i> &gt;&gt; MSNbot to eat up our bandwidth. They had several solutions.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; ======================================================
+</I>&gt;<i> &gt;&gt; HELP! MSN Bot Eating Up ALL my bandwidth!!!
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; MSN Bot Statistics for the month of May (up to May 15th -- only 15 days
+</I>&gt;<i> of
+</I>&gt;<i> &gt;&gt; stats!!!)
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; msnbot64047.search.msn.com:
+</I>&gt;<i> &gt;&gt; bandwidth: 7625158 Kbytes (7.6GB)
+</I>&gt;<i> &gt;&gt; files: 166806
+</I>&gt;<i> &gt;&gt; hits: 167027
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; This is 29.4% of my sites bandwidth this month just from MSN Bot!
+</I>&gt;<i> Yesterday
+</I>&gt;<i> &gt;&gt; alone it used 1.3 GB bandwidth!
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; By comparison, Googles bot(s) have only used about 1.4GB total bandwidth
+</I>&gt;<i> &gt;&gt; this month.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; How can I stop MSN from killing me! At this rate itwill use 15 GB this
+</I>&gt;<i> &gt;&gt; month! Just from being indexed
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> ============================================================================
+</I>&gt;<i> &gt;&gt; ========
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; -----Original Message-----
+</I>&gt;<i> &gt;&gt; From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of R O
+</I>&gt;<i> &gt;&gt; Sent: Tuesday, January 11, 2005 1:31 PM
+</I>&gt;<i> &gt;&gt; To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt; Subject: RE: [Xitami] Xitami has slowed to a crawl
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Ron,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I am curious, what ver of Xitami are you running, IOS, and what kind of
+</I>&gt;<i> &gt;&gt; system are you running it on.  You mention Xitami slowing down b/c of the
+</I>&gt;<i> &gt;&gt; crawlers, but it is Xitami or is it system performance trying to service
+</I>&gt;<i> &gt;&gt; the
+</I>&gt;<i> &gt;&gt; bots?  Just trying to get some clarity on where the actual problem lies
+</I>&gt;<i> so
+</I>&gt;<i> &gt;&gt; I
+</I>&gt;<i> &gt;&gt; can A) know what to look for and B) try to correct or prevent the same
+</I>&gt;<i> &gt;&gt; issue
+</I>&gt;<i> &gt;&gt; from happening to my system.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; -Russel
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Russel P. Olinger
+</I>&gt;<i> &gt;&gt; (310) 466-3399
+</I>&gt;<i> &gt;&gt; <A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; From: &quot;Ron Ackerman&quot; &lt;<A HREF="mailto:ron@miplanet.net">ron@miplanet.net</A>&gt;
+</I>&gt;<i> &gt;&gt;&gt; Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt;&gt; To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt;&gt;&gt; Subject: RE: [Xitami] Xitami has slowed to a crawl
+</I>&gt;<i> &gt;&gt;&gt; Date: Tue, 11 Jan 2005 12:44:05 -0500
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; That will exclude all robots, I'm not sure I want to do that because I
+</I>&gt;<i> &gt;&gt;&gt; would
+</I>&gt;<i> &gt;&gt;&gt; like to be included in the Search Engines. Is there a time setting that
+</I>&gt;<i> &gt;&gt; can
+</I>&gt;<i> &gt;&gt;&gt; be applied. Like Excluding the robots between 7am and 11pm?
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; -----Original Message-----
+</I>&gt;<i> &gt;&gt;&gt; From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt;&gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On
+</I>&gt;<i> &gt;&gt;&gt; Behalf Of Jeff Hamblin
+</I>&gt;<i> &gt;&gt;&gt; Sent: Tuesday, January 11, 2005 12:39 PM
+</I>&gt;<i> &gt;&gt;&gt; To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;&gt;&gt; Subject: Re: [Xitami] Xitami has slowed to a crawl
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;&gt; I think I'm finding the source of my slow downs. Crawlers and the worst
+</I>&gt;<i> &gt;&gt;&gt;&gt; right now is msn bot. But I'm also seeing Yahoo Slurp. Which normally
+</I>&gt;<i> &gt;&gt; I
+</I>&gt;<i> &gt;&gt;&gt;&gt; woudn't mind them indexing my websites but when it is affecting the
+</I>&gt;<i> &gt;&gt;&gt; server
+</I>&gt;<i> &gt;&gt;&gt;&gt; then it's a problem.
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; Try putting a &quot;robots.txt&quot; file in the root of your website with the
+</I>&gt;<i> &gt;&gt;&gt; following:
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; # robots.txt file to stop indexing of site
+</I>&gt;<i> &gt;&gt;&gt; User-agent: *
+</I>&gt;<i> &gt;&gt;&gt; Disallow: /
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; --
+</I>&gt;<i> &gt;&gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt;&gt; --
+</I>&gt;<i> &gt;&gt;&gt; No virus found in this incoming message.
+</I>&gt;<i> &gt;&gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; --
+</I>&gt;<i> &gt;&gt;&gt; No virus found in this outgoing message.
+</I>&gt;<i> &gt;&gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt;&gt; --
+</I>&gt;<i> &gt;&gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; No virus found in this incoming message.
+</I>&gt;<i> &gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; No virus found in this outgoing message.
+</I>&gt;<i> &gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; No virus found in this incoming message.
+</I>&gt;<i> &gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; No virus found in this outgoing message.
+</I>&gt;<i> &gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; No virus found in this incoming message.
+</I>&gt;<i> &gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; No virus found in this outgoing message.
+</I>&gt;<i> &gt;&gt; Checked by AVG Anti-Virus.
+</I>&gt;<i> &gt;&gt; Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> --
+</I>&gt;<i> No virus found in this incoming message.
+</I>&gt;<i> Checked by AVG Anti-Virus.
+</I>&gt;<i> Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> No virus found in this outgoing message.
+</I>&gt;<i> Checked by AVG Anti-Virus.
+</I>&gt;<i> Version: 7.0.300 / Virus Database: 265.6.10 - Release Date: 01/10/2005
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006365.html">[Xitami] Xitami has slowed to a crawl
+</A></li>
+	<LI> Next message: <A HREF="006358.html">[Xitami] Xitami has slowed to a crawl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6357">[ date ]</a>
+              <a href="thread.html#6357">[ thread ]</a>
+              <a href="subject.html#6357">[ subject ]</a>
+              <a href="author.html#6357">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

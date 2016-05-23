@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] #exec cmd= in Win XP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005579.html">
+   <LINK REL="Next"  HREF="005571.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] #exec cmd= in Win XP
+   </H1>
+    <B>Charles Duval
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] #exec cmd= in Win XP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 12 Dec 2003 17:01:35 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005579.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+        <LI> Next message: <A HREF="005571.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5581">[ date ]</a>
+              <a href="thread.html#5581">[ thread ]</a>
+              <a href="subject.html#5581">[ subject ]</a>
+              <a href="author.html#5581">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>For those following this topic, here's more.
+Thank you to those who have given me advices, but we're not there yet.
+
+1) #exec cmd=
+On my system (Windows XP), Xitami  (ver 2.5b5) is installed as a Service.
+In XP, when you do that, the service runs as LocalService and uses
+permissions attributed to Local Services which are limited.  When you set an
+Environment Variable (like ssi_insecure) in the Administrator account for
+example, it won't be set in the LocalService account, so Xitami won't see
+it.
+
+So... I was trying to run a &quot;#exec cmd=&quot; SSIs, but in LocalService, the
+SSI_INSECURE was not set to YES: it did not exist.  I changed the rights of
+the Xitami Service so it now runs with the Administrator rights.  Now I can
+read SSI_INSECURE=YES in the environment variables through a CGI called by
+Xitami.  Even there, I have not been able to run anything through #exec cmd=
+even something as simple as :
+
+&lt;!--#exec cmd=&quot;cmd /c set&quot;--&gt;
+or &lt;!--#exec cmd=&quot;c:\test.exe&quot;--&gt;  (a simple HelloWorld application that
+runs fine as a CGI)...
+It should work, shouldn't it???
+
+2) CGI stand alone.
+I want to use XCOPY to copy the content of one directory on a hard disk to a
+ramdisk through a CGI that run simply by typing
+<A HREF="http://myServerAddress/cgi-bin/copy2ramdsk"">http://myServerAddress/cgi-bin/copy2ramdsk&quot;</A> in a browser (or by clicking on
+an Hyperlink).
+
+Someone wrote that I had to use the DOS &quot;CMD&quot; command 'cause it needs the
+command line interpreter. But this is not a command line.  It's an .EXE
+located in \windows\system32.  The &quot;DIR&quot; command won't work without &quot;CMD&quot;,
+but xcopy should (I tryed the cmd command anyways - with our without quotes,
+but it didn't work).  All the other stuff works:
+cmd /c dir c:\
+cmd /c copy c:\test\*.* r:\
+cmd /c copy \?
+cmd c:\xitami\cgi-bin\testcgi.exe
+
+Maybe it's just XCOPY that does not allow this. :-(
+
+About RapidQ basic, I know that it's not the best, but I don't use it for
+heavy CGI jobs : it's my &quot;fast testing&quot; software and it's much faster than
+my regular C compiler.  It has a CGI switch that compiles (in bytecode) in o
+ne pass and the output of the &quot;compiled&quot; application is sent to the stdio
+like a regular C application (not the screen).  And it's free !  I use C++
+for the real-life stuff.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005579.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+	<LI> Next message: <A HREF="005571.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5581">[ date ]</a>
+              <a href="thread.html#5581">[ thread ]</a>
+              <a href="subject.html#5581">[ subject ]</a>
+              <a href="author.html#5581">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

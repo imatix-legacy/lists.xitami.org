@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] instant notification when a page is visited ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004418.html">
+   <LINK REL="Next"  HREF="004421.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] instant notification when a page is visited ?
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] instant notification when a page is visited ?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 04 Dec 2002 11:34:28 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004418.html">[Xitami] instant notification when a page is visited ?
+</A></li>
+        <LI> Next message: <A HREF="004421.html">[Xitami] instant notification when a page is visited ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4419">[ date ]</a>
+              <a href="thread.html#4419">[ thread ]</a>
+              <a href="subject.html#4419">[ subject ]</a>
+              <a href="author.html#4419">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Don't works under windows 98.
+The notepad editor works for files up to 50kB (very small for a log file), 
+becauses it opens the file for reading only.
+Workpad fails to open the file becauses it tries to open it for R/W (but 
+the file is already open for writing by Xitami).
+
+Solution: add a small script on your page (include it anywhere in your page).
+&lt;script src=<A HREF="http://myserver/cgi-bin/popup.exe">http://myserver/cgi-bin/popup.exe</A>&gt;&lt;/script&gt;
+popup.exe is a simple program that displays anything you want on your 
+screen. It produces no output to the html page.
+Xitami starts all cgi programs with window hidden, so your popup.exe has to 
+start another program (let's call it popup1.exe) with the window visible. 
+This second program has to be started asynchronously, so the calling 
+program (popup.exe) does not have to wait for the termination of 
+popup1.exe, but can terminate directly. In that way, you can have more than 
+one instance of popup1.exe running.
+
+Don't know if you can use perl to display windows messages, i'm using 
+powerbasic.
+
+Marc
+
+
+
+At 10:51 4/12/02, you wrote:
+&gt;<i>Hi there,
+</I>&gt;<i>just open your access.log file in any texteditor. when someone accesses
+</I>&gt;<i>your site, the file will be changed and the editor notifies you about that.
+</I>&gt;<i>Since it is access.log you can also instantly see which resource is being
+</I>&gt;<i>accessed and by whom.
+</I>&gt;<i>tony
+</I>&gt;<i>At 00:07 04.12.2002 -0500, you wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt;Hi all,
+</I>&gt;<i> &gt;Xitami on win98/ActivePerl here.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Is there a simple way for a newbie(me) to instantly pop a local message on
+</I>&gt;<i> &gt;the servers screen when a visitor clicks a link or loads a page so I know
+</I>&gt;<i> &gt;they're sitting on a specific page ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;thanks, mike
+</I>&gt;<i>&lt;
+</I>
+
+--::Mailserver Verfaillie Bauwens::-- contact [<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004418.html">[Xitami] instant notification when a page is visited ?
+</A></li>
+	<LI> Next message: <A HREF="004421.html">[Xitami] instant notification when a page is visited ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4419">[ date ]</a>
+              <a href="thread.html#4419">[ thread ]</a>
+              <a href="subject.html#4419">[ subject ]</a>
+              <a href="author.html#4419">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

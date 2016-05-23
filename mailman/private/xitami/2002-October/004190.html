@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] apache equivalents
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004200.html">
+   <LINK REL="Next"  HREF="004191.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] apache equivalents
+   </H1>
+    <B>Joel Crainshaw
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] apache equivalents">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 29 Oct 2002 10:56:44 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004200.html">[Xitami] re: Which Version for XP?
+</A></li>
+        <LI> Next message: <A HREF="004191.html">[Xitami] apache equivalents
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4190">[ date ]</a>
+              <a href="thread.html#4190">[ thread ]</a>
+              <a href="subject.html#4190">[ subject ]</a>
+              <a href="author.html#4190">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>we are trying to get the oracle web forms server to run under xitami...
+we're running into problems due to some items in a conf file that is needed
+when run under apache... is there an equivalent for each of the settings in
+the the following?:  The ScriptAlias equates to [CGI-Alias], we think the
+Alias item equate to [Alias], but the SetEnvIf and SetEnv are questionable:
+
+
+
+Alias /dev60html/ &quot;c:\ORACLE\DEV6i\tools\web60\html/&quot;   
+Alias /jinitiator/ &quot;c:\ORACLE\DEV6i\JINIT/&quot;   
+Alias /forms60java/ &quot;c:\ORACLE\DEV6i\FORMS60\java/&quot;   
+Alias /dev60temp/ &quot;c:\ORACLE\DEV6i\tools\web60\temp/&quot;
+
+ScriptAlias /dev60cgi/ &quot;c:\ORACLE\DEV6i\tools\web60\cgi/&quot;
+
+
+# Forms and Reports CGI needs to have ORACLE_HOME set
+SetEnvIf Request_URI  &quot;rwcgi60&quot;   ORACLE_HOME=c:\ORACLE\DEV6i
+SetEnvIf Request_URI  &quot;rwcgi60&quot;   RW60=c:\ORACLE\DEV6i\report60
+SetEnvIf Request_URI  &quot;ifcgi60&quot;   ORACLE_HOME=c:\ORACLE\DEV6i
+SetEnvIf Request_URI  &quot;ifcgi60&quot;   FORMS60=c:\ORACLE\DEV6i\forms60
+
+# Forms CGI needs location of formsweb.cfg file
+SetEnv   FORMS60_WEB_CONFIG_FILE
+c:\ORACLE\DEV6i\forms60\server\formsweb.cfg
+
+# Mime types for Forms and Reports
+AddType video/avi avi
+AddType application/x-orarrp rrpa rrpp rrpt rrpr
+
+
+# Virtual paths for Forms and Reports demos (if installed)
+# Alias   /rep60demo/     &quot;c:\ORACLE\DEV6i\tools\devdem60\demo\reports/&quot;
+# Alias   /forms60demo/   &quot;c:\ORACLE\DEV6i\tools\devdem60\web/&quot;
+ Alias   /web_qt/        &quot;c:\ORACLE\DEV6i\tools\doc60\US/&quot;            
+
+=============================
+Joel Crainshaw
+BILLFREE (American Credit Counselors) 
+PH-(704) 897-2329
+FAX-(704) 892-9509 
+<A HREF="mailto:joel.crainshaw@getbillfree.com">joel.crainshaw@getbillfree.com</A>
+www.GetBillFree.com
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004200.html">[Xitami] re: Which Version for XP?
+</A></li>
+	<LI> Next message: <A HREF="004191.html">[Xitami] apache equivalents
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4190">[ date ]</a>
+              <a href="thread.html#4190">[ thread ]</a>
+              <a href="subject.html#4190">[ subject ]</a>
+              <a href="author.html#4190">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

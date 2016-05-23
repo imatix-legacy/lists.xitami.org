@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] using cgi with Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005706.html">
+   <LINK REL="Next"  HREF="005710.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] using cgi with Xitami
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] using cgi with Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 11 Feb 2004 15:28:31 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005706.html">[Xitami] using cgi with Xitami
+</A></li>
+        <LI> Next message: <A HREF="005710.html">[Xitami] my problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5707">[ date ]</a>
+              <a href="thread.html#5707">[ thread ]</a>
+              <a href="subject.html#5707">[ subject ]</a>
+              <a href="author.html#5707">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The &quot;&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html; 
+charset=windows-1252&quot;&gt;&lt;/HEAD&gt;&quot;
+
+comes from you defaults.cfg [CGI] parameters,
+[CGI]
+    ....
+    http-fields=1                       #   Add HTTP_ header fields?
+    http-prefix=HTTP_              #   If so, what prefix?
+    ....
+
+Some others posted some info that the lastest Xitami code is quite 
+buggy....I don't run it so I couldn't comment on the latest version.
+
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+
+
+
+
+&gt;<i>From: Vera Cranor &lt;<A HREF="mailto:vcranor@InfoAve.Net">vcranor@InfoAve.Net</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Subject: Re: [Xitami] using cgi with Xitami
+</I>&gt;<i>Date: Wed, 11 Feb 2004 17:17:22 -0600
+</I>&gt;<i>
+</I>&gt;<i>Thanks Russ. Yep I can pull a html page... even from the cgi-bin. And the 
+</I>&gt;<i>test
+</I>&gt;<i>cgi program even runs.
+</I>&gt;<i>It's just that the output from the cgi is not returned to the browser. 
+</I>&gt;<i>There is
+</I>&gt;<i>no kind of error indication.
+</I>&gt;<i>
+</I>&gt;<i>Here's the test script, which runs ok in the DOS box:
+</I>&gt;<i>
+</I>&gt;<i>#!/usr/bin/perl
+</I>&gt;<i>print &quot;content-type: text/html\n\n&quot;;
+</I>&gt;<i>print '&lt;html&gt;&lt;body&gt;&lt;center&gt;test&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;';
+</I>&gt;<i>open(F, &quot;&gt;xtest.txt&quot;);
+</I>&gt;<i>print F &quot;okedoke&quot;;
+</I>&gt;<i>close F;
+</I>&gt;<i>exit;
+</I>&gt;<i>
+</I>&gt;<i>Here's the source from the page Xitami returns:
+</I>&gt;<i>
+</I>&gt;<i>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+</I>&gt;<i>&lt;HTML&gt;&lt;HEAD&gt;
+</I>&gt;<i>&lt;META http-equiv=Content-Type content=&quot;text/html; 
+</I>&gt;<i>charset=windows-1252&quot;&gt;&lt;/HEAD&gt;
+</I>&gt;<i>
+</I>&gt;<i>&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</I>&gt;<i>
+</I>&gt;<i>I don't know where that came from, but it didn't come from the test script.
+</I>&gt;<i>Here's the output from the test script using the DOS box:
+</I>&gt;<i>
+</I>&gt;<i>content-type: text/html
+</I>&gt;<i>
+</I>&gt;<i>&lt;html&gt;&lt;body&gt;&lt;center&gt;test&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
+</I>&gt;<i>
+</I>&gt;<i>I've tried all these: bs3225b4, bw3225b4, bw3224d7.exe, and the zip file,
+</I>&gt;<i>xiopen_2_4.zip
+</I>&gt;<i>and can't get any of them to work. Maybe it's something to do with Win XP?
+</I>&gt;<i>
+</I>&gt;<i>Thanks for the try,
+</I>&gt;<i>vera
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Vera,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; First off, can you even pull up a generic webpage with your current
+</I>&gt;<i> &gt; settings.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+_________________________________________________________________
+Click here for a FREE online computer virus scan from McAfee. 
+<A HREF="http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3963">http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3963</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005706.html">[Xitami] using cgi with Xitami
+</A></li>
+	<LI> Next message: <A HREF="005710.html">[Xitami] my problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5707">[ date ]</a>
+              <a href="thread.html#5707">[ thread ]</a>
+              <a href="subject.html#5707">[ subject ]</a>
+              <a href="author.html#5707">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

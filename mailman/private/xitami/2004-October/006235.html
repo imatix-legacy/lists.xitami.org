@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] VHost CNAME path question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006233.html">
+   <LINK REL="Next"  HREF="006238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] VHost CNAME path question
+   </H1>
+    <B>Ron Ackerman
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] VHost CNAME path question">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Oct 2004 11:00:53 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006233.html">[Xitami] VHost CNAME path question
+</A></li>
+        <LI> Next message: <A HREF="006238.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6235">[ date ]</a>
+              <a href="thread.html#6235">[ thread ]</a>
+              <a href="subject.html#6235">[ subject ]</a>
+              <a href="author.html#6235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I run my own DNS server on the same machine which resolves different domains
+to different IP addresses. A good easy to use DNS server is DNS Plus and if
+you are on a dynamic IP you can use DNS2GO.com or 2myDNS.com. So as my ISP
+changes my IP, daily I might add, DNS2GO and 2MYDSN update their DNS Server
+for my new IP Address. So if someone enters www.mydomain.com, or
+www.myotherdomain.com or 123.mydomain.com. it will naturally go to the IP
+address of my computer. Now what does my computer do with it. That's where
+DNS Plus takes that domain name and resolves it to an internal IP which
+Windows 2000 Pro can have hundreds of virtial IPs. So it goes like this.
+
+Enter www.mydomain.com &gt; 2MYDNS.com says go to my PC at 200.111.222.111 &gt;
+DNSPlus gets it and says go to 192.168.1.12 &gt; which my Xitami default.cfg
+says this 192.168.1.12 = &quot;mydomain.cfg&quot; and thus viola the www.mydomain.com
+index.html page displays.
+
+If someone enters 123.mydomain.com then DNSPlus may send it to 192.168.1.13
+which the Xitami default.cfg says 192.168.1.13 = &quot;123mydomain.cfg&quot;
+
+I know there are other ways to do this but this works well for me. I can
+host many VHosts.
+
+Ron
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Alex Barna
+Sent: Tuesday, October 26, 2004 10:34 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] VHost CNAME path question
+
+
+admin wrote:
+&gt;<i>
+</I>&gt;<i> Ok so here's a somewhat stupid question or maybe I just need more sleep.
+</I>&gt;<i>
+</I>&gt;<i> Assume: the base host domain name is MYDOMAIN.COM
+</I>
+You're forgetting that domain names are for people, computers look for IP
+addresses.
+
+&gt;<i> Now by default all hits on www.mydomain.com, mydomain.com and
+</I>&gt;<i> anything.mydomain.com will hit the base host.
+</I>
+Because the name's resolves to the same IPaddress of the server.
+
+&gt;<i> I also run several VHosted domains with different domain names.
+</I>
+Different names at the same address get put in the same mail box.
+
+&gt;<i> I specify a cfg and aut file for a VHost path to a different directory now
+</I>&gt;<i> say we call the directory D:\OTHER\
+</I>&gt;<i>
+</I>&gt;<i> I want to set other.mydomain.com to go in this directory only and not to
+</I>the
+&gt;<i> basehost but whatever I try keeps being bumped into the basehost root
+</I>path.
+
+mydomain.com/other will send to other folder.
+
+&gt;<i> I have also specified it under the Virtual Hosts section in the
+</I>default.cfg
+&gt;<i> to no avail.
+</I>&gt;<i> And I also pointed to the correct path where I keep the cfg and aut files
+</I>&gt;<i> for this cname header.
+</I>&gt;<i>
+</I>&gt;<i> Does anyone have an idea/solution to this?
+</I>&gt;<i>
+</I>&gt;<i>    Thanks in advance
+</I>
+You would need different IP addresses for each of the 'other' vhost folders
+to
+be considered different places.
+
+Xitami is small enough you could run a different site each with it's own
+VHost
+name on different ports.
+IE:
+Register ipaddress:80 for main, ipadress:8080 for vhost1 &amp; using different
+ports
+for each vhost site.
+
+Or just do like the big guys (&amp; the rest of us) do &amp; put each site at
+maindomain/~vhost for each different site. Which is a lot easier.
+
+Alex,
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+---
+Incoming mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.778 / Virus Database: 525 - Release Date: 10/15/2004
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+Version: 6.0.778 / Virus Database: 525 - Release Date: 10/15/2004
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006233.html">[Xitami] VHost CNAME path question
+</A></li>
+	<LI> Next message: <A HREF="006238.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6235">[ date ]</a>
+              <a href="thread.html#6235">[ thread ]</a>
+              <a href="subject.html#6235">[ subject ]</a>
+              <a href="author.html#6235">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

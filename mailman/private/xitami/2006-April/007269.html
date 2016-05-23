@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Redirecting By IP Address
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Redirecting%20By%20IP%20Address&In-Reply-To=6.2.1.2.0.20060419160408.01d0aa80%40mail.mrjdesign.net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007268.html">
+   <LINK REL="Next"  HREF="007270.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Redirecting By IP Address</H1>
+    <B>David Wolever</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Redirecting%20By%20IP%20Address&In-Reply-To=6.2.1.2.0.20060419160408.01d0aa80%40mail.mrjdesign.net"
+       TITLE="[Xitami] Redirecting By IP Address">wolever.lists at gmail.com
+       </A><BR>
+    <I>Wed Apr 19 18:40:41 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007268.html">[Xitami] Redirecting By IP Address
+</A></li>
+        <LI>Next message: <A HREF="007270.html">[Xitami] Redirecting By IP Address
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7269">[ date ]</a>
+              <a href="thread.html#7269">[ thread ]</a>
+              <a href="subject.html#7269">[ subject ]</a>
+              <a href="author.html#7269">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm not quite sure what you're saying.
+We only have one external IP address, which is being used by a primay
+site (hosted by Apache).
+The secondary site, hosted by Xitami, is on a LAN.  We can not put it
+any farther out because we do not have another IP address and I do not
+want to put a Windows machine right on the Internet.
+The problem lies with the Location header.
+When a directory is requested with out the trailing slash (eg:
+example.com/foo instead of example.com/foo/), Xitami does what it
+should and sends a 302 moved temporally header, trying to redirect the
+client to /foo/.  The problem is that the Location: used by Xitami is
+it's IP address, NOT the host supplied by the browser (as, I believe,
+it should be).
+Here is what the transaction looks like:
+
+Browser:
+GET /foo HTTP/1.1
+Host: xitami.example.com
+
+Xitami:
+HTTP/1.0 302 Moved Temporarily
+Vary: Host
+Location: <A HREF="http://192.168.1.2/foo/">http://192.168.1.2/foo/</A>
+
+But this is what it should say:
+HTTP/1.0 301 Moved Permanently
+Location: <A HREF="http://xitami.example.com/foo/">http://xitami.example.com/foo/</A>
+
+I hope this clarifies things.
+David
+
+On 4/19/06, MRJ InfoTech Admin &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">admin at mrjdesign.net</A>&gt; wrote:
+&gt;<i>  Your DNS server should route the traffic
+</I>&gt;<i>  your Xitami should be on a machine on the outside of your fire walled
+</I>&gt;<i> router or a DMZ machine
+</I>&gt;<i>  Then you can skip the double router step of the apache hack.
+</I>&gt;<i>  All IP to Domain name is routed through, say BIND 9.3 or different DNS
+</I>&gt;<i> solutions only.
+</I>&gt;<i>  Xitami only handles Virtual host routes on that same IP to specific
+</I>&gt;<i> directed domains, still routed with DNS albeit virtual.
+</I>&gt;<i>
+</I>&gt;<i>  MRJ
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  At 15:58 19/04/2006, you wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hey,
+</I>&gt;<i>  I've been put in charge of making an Xitami work.  It is running on a
+</I>&gt;<i>  virtual machine with a local IP address (192.168.10.2), and it's
+</I>&gt;<i>  mother host is using Apache's mod_proxy to forward requests from the
+</I>&gt;<i>  outside to Xitami, then send Xitami's response back to the world.
+</I>&gt;<i>  The problem I'm having is that, in Xitami-generated Location: headers,
+</I>&gt;<i>  it is using it's IP address (192.168.10.2) instead of it's hostname
+</I>&gt;<i>  (fs.example.com).  I have set up it's hostname in xitami.cfg and I
+</I>&gt;<i>  have set the computer's hostname to the same.
+</I>&gt;<i>  We are not using any sort of virtual hosting and (as far as I know)
+</I>&gt;<i>  the config is pretty much stock.
+</I>&gt;<i>  Any help would be much appreciated.
+</I>&gt;<i>  David
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  --
+</I>&gt;<i>  Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>  To unsubscribe:
+</I>&gt;<i> <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>  (c)1996-2006 - all communication with this account holder is regarded
+</I>&gt;<i> personal and confidential at all times.
+</I>&gt;<i>  MRJ Information Technology Ltd. / 35 Camden High St., NW1 7JE, London,
+</I>&gt;<i> United Kingdom
+</I>&gt;<i>  <A HREF="http://www.mrjdesign.net">http://www.mrjdesign.net</A> or
+</I>&gt;<i> <A HREF="http://www.mrjinformationtechnology.net">http://www.mrjinformationtechnology.net</A>
+</I>&gt;<i>  Please report any abusive messaging through our network, to the email
+</I>&gt;<i> address <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">abuse at mrjdesign.net</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe:
+</I>&gt;<i> <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007268.html">[Xitami] Redirecting By IP Address
+</A></li>
+	<LI>Next message: <A HREF="007270.html">[Xitami] Redirecting By IP Address
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7269">[ date ]</a>
+              <a href="thread.html#7269">[ thread ]</a>
+              <a href="subject.html#7269">[ subject ]</a>
+              <a href="author.html#7269">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

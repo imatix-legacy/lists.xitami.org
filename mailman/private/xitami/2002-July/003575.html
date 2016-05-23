@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Dynamic IP to Static IP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003573.html">
+   <LINK REL="Next"  HREF="003576.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Dynamic IP to Static IP
+   </H1>
+    <B>Control-Freak
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Dynamic IP to Static IP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 5 Jul 2002 12:50:00 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003573.html">[Xitami] Dynamic IP to Static IP
+</A></li>
+        <LI> Next message: <A HREF="003576.html">[Xitami] Dynamic IP to Static IP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3575">[ date ]</a>
+              <a href="thread.html#3575">[ thread ]</a>
+              <a href="subject.html#3575">[ subject ]</a>
+              <a href="author.html#3575">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You can't do it yourself, unless you order a static IP from RoadRunner.
+But, that might be expensive (don't know, never checked the price).  So,
+instead,  you can go with an IP forwarding service like www.dns2go.com .
+You point your URL (with your domain provider (or just use
+www.yourdomain.dns2go.com for free)) to dns2go (They will tell you the DNS
+IPs).  Then, you run  their client software on your server that updates
+dns2go with your current IP.  Then dns2go re-directs all domain requests to
+your current IP.
+
+There is one more problem, however.  RoadRunner blocks port 80 (standard
+html port).  So you have to tell Xitami to run your webserver at a port like
+6800 or something (read how in the Xitami docs).  You also have to tell the
+dns2go client software to portforward requests with a www. prefix to
+whatever port you use.  And, bring your FTP port back down to 20 (see Xitami
+docs).
+
+Then, your html URL will be www.yourdomain.com and your FTP URL will be
+<A HREF="ftp://yourdomain.com">ftp://yourdomain.com</A> .  You have to use the www. prefix or dns2go will not
+know to portforward html requests to your new html port (6800 or whatever
+you picked), and you have to make sure not to use it with FTP requests, or
+dns2go will portforward those to the same port as your webserver.
+
+Its all free (and pretty transparent) unless you want email.  Then they
+charge a bit.
+
+Good Luck,
+
+- Jay
+
+----- Original Message -----
+From: ShweMyint
+To: xitami-post
+Sent: Friday, July 05, 2002 11:49 AM
+Subject: [Xitami] Dynamic IP to Static IP
+
+
+Hello! There,
+
+I have installed xitami-2.4d7 under linux at home network with cable(rr) and
+3Com-3C510.
+I like to change my dynamic IP to static IP. Being new to NW I don't know
+how and where.
+I can not locate any document.
+
+Appreciated if you can point me to the right direction.
+Thanks,
+Myint
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003573.html">[Xitami] Dynamic IP to Static IP
+</A></li>
+	<LI> Next message: <A HREF="003576.html">[Xitami] Dynamic IP to Static IP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3575">[ date ]</a>
+              <a href="thread.html#3575">[ thread ]</a>
+              <a href="subject.html#3575">[ subject ]</a>
+              <a href="author.html#3575">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

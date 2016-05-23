@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] problems running commony used Perl script
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002982.html">
+   <LINK REL="Next"  HREF="002973.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] problems running commony used Perl script
+   </H1>
+    <B>E. Egberts
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] problems running commony used Perl script">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 17 Apr 2002 00:56:57 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002982.html">[Xitami] Changing web page filesize limit
+</A></li>
+        <LI> Next message: <A HREF="002973.html">[Xitami] Changing web page filesize limit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2991">[ date ]</a>
+              <a href="thread.html#2991">[ thread ]</a>
+              <a href="subject.html#2991">[ subject ]</a>
+              <a href="author.html#2991">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01C1E5AA.C6575DE0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+Attached Perl script does not run properly on the Xitami webserver version
+2.4d9 running on my Win98SE machine. It is a widely used script which is
+part of LiveCounter classic. When triggering the script the following way:
+<A HREF="http://www.familie-egberts.tk/cgi-bin/livecnt1.pl?v">http://www.familie-egberts.tk/cgi-bin/livecnt1.pl?v</A> it should print some
+version information (however, it does more than that!) but the browser
+(IE5.5) stops responding for a while and then returns a blank screen.
+
+No CGI (compilation) errors are reported. The pipexxxx.cgi file is empty and
+the .cgo file only contains the content_type line. I'm lost, please help.
+
+Thanks,
+Egbert
+
+--------------------
+ICQ: 1398381
+MSN: <A HREF="mailto:Tover@genie.nl">Tover@genie.nl</A>
+Fax: 00-31-30-6382461
+--------------------
+
+
+
+
+
+------=_NextPart_000_0000_01C1E5AA.C6575DE0
+Content-Type: application/octet-stream;
+	name=&quot;livecnt1.pl&quot;
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename=&quot;livecnt1.pl&quot;
+
+#! d:/perl/bin/perl
+
+
+$sURLFilter       =3D '';
+$sIPFilter        =3D '';
+$sHostFilter      =3D '';
+$sCounterFilter   =3D '';
+$bAutoCreate      =3D 0;
+
+
+#------------------------------------------------------------------------=
+---
+
+{
+  local( $__COUNTER_DAT ) =3D 'livecntr.dat';
+
+  print &quot;Content-type: text/plain\nPragma: no-cache\nCache-control: =
+no-cache\nExpires: Mon, 28 Apr 1997 00:01:00 -0500\n\n&quot;;
+
+
+  if( $ARGV[0] )
+  {
+    local( $nCount ) =3D 0;
+    local( $Temp );
+
+    if( '' ne $ARGV[4] )
+    {
+      $ENV{'HTTP_REFERER'} =3D $ARGV[4];
+    }
+
+    if( $ARGV[1] &amp;&amp; ( '0' ne $ARGV[1] ) )
+    {
+      $__COUNTER_DAT =3D $ARGV[1] . '.lcd';
+    }
+
+    if( -w &quot;$__COUNTER_DAT&quot; )
+    {
+      local( $bInc ) =3D 0;
+
+      if( open( F, &quot;+&lt;$__COUNTER_DAT&quot; ) )
+      {
+        #flock( F, 2 );
+        seek( F, 0, 0 );
+
+        ( $Temp, $nCount ) =3D split( /\s/, &lt;F&gt; );
+
+        if( 'i' eq $ARGV[0] )
+        {
+          local( $bFiltersOk ) =3D 1;
+
+          if( $sURLFilter &amp;&amp; ( lc( $ENV{'HTTP_REFERER'} ) !~ $sURLFilter =
+) )
+          {
+            $bFiltersOk =3D 0;
+          }
+          if( $bFiltersOk     &amp;&amp;
+              $sIPFilter      &amp;&amp; ( $ENV{'REMOTE_ADDR'} =3D~ $sIPFilter ) =
+)
+          {
+            $bFiltersOk =3D 0;
+          }
+          if( $bFiltersOk     &amp;&amp;
+              $sHostFilter    &amp;&amp; ( $ENV{'REMOTE_HOST'} =3D~ $sHostFilter =
+) )
+          {
+            $bFiltersOk =3D 0;
+          }
+          if( $bFiltersOk     &amp;&amp;
+              $sCounterFilter &amp;&amp; ( $__COUNTER_DAT =3D~ $sCounterFilter ) =
+)
+          {
+            $bFiltersOk =3D 0;
+          }
+
+          if( $bFiltersOk )
+          {
+            seek( F, 0, 0 );
+
+            ++$nCount;
+
+            print F &quot;Total: $nCount\n&quot;;
+
+            $bInc =3D 1;
+          }
+        }
+
+        #flock( F, 8 );
+        close( F );
+      }
+
+    }
+    elsif( $bAutoCreate )=20
+    {
+      if( ( !( -e &quot;$__COUNTER_DAT&quot; ) ) &amp;&amp; open( F, &quot;&gt;$__COUNTER_DAT&quot; ) )
+      {
+        print F &quot;Total: 0\n&quot;;
+        close( F );
+      }
+    }
+
+    print &quot;c0=3D$nCount\n&quot;;
+    if( 'v' eq $ARGV[0] )
+    {
+      print &quot;vr=3D99AX\n&quot;;
+    }
+  }
+}
+
+
+------=_NextPart_000_0000_01C1E5AA.C6575DE0--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002982.html">[Xitami] Changing web page filesize limit
+</A></li>
+	<LI> Next message: <A HREF="002973.html">[Xitami] Changing web page filesize limit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2991">[ date ]</a>
+              <a href="thread.html#2991">[ thread ]</a>
+              <a href="subject.html#2991">[ subject ]</a>
+              <a href="author.html#2991">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

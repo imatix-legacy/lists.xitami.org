@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami PHP Header Redirect issues...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami%20PHP%20Header%20Redirect%20issues...&In-Reply-To=448EFA2A.6090901%40webbenabled.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007317.html">
+   <LINK REL="Next"  HREF="007319.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami PHP Header Redirect issues...</H1>
+    <B>Johannes Prost</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami%20PHP%20Header%20Redirect%20issues...&In-Reply-To=448EFA2A.6090901%40webbenabled.com"
+       TITLE="[Xitami] Xitami PHP Header Redirect issues...">xitami at pastryworld.ca
+       </A><BR>
+    <I>Tue Jun 13 20:13:31 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007317.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+        <LI>Next message: <A HREF="007319.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7318">[ date ]</a>
+              <a href="thread.html#7318">[ thread ]</a>
+              <a href="subject.html#7318">[ subject ]</a>
+              <a href="author.html#7318">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Paul,
+
+I am not a php guy, but I know that the following setting in the php.ini has to be set as
+
+cgi.force_redirect = 0
+ otherwise you will have problems with php's redirect to pages. That's the only thing I know to 
+look for.
+
+Johannes
+
+&gt;<i> Hi all,
+</I>&gt;<i>     I've searched through the archives for this problem as much as
+</I>&gt;<i> possible, and I've googled around looking for a solution. I can't find
+</I>&gt;<i> one, but if I'm missing something, feel free to point me at the archive
+</I>&gt;<i> where it's addressed, beat me senseless, and tell me to go RTFM... :-)
+</I>&gt;<i> 
+</I>&gt;<i>     I'm considering a switch from that &quot;Patchy&quot; HTTP server to something
+</I>&gt;<i> else. IIS is completely out of the realm of possibility, and I've picked
+</I>&gt;<i> up Xitami and I'm trying it out. For a reference point on my level of
+</I>&gt;<i> skill here, I have Xitami successfully running on both a Windows machine
+</I>&gt;<i> and I've also compiled it on my Linux machine without significant issues
+</I>&gt;<i> (though &quot;c&quot; and &quot;boomake&quot; did momentarily throw me for a loop, I'll
+</I>&gt;<i> admit. But I found an article on that and got it online).
+</I>&gt;<i> 
+</I>&gt;<i> (In other words, I'm no slouch as a network administrator in both the
+</I>&gt;<i> Linux and Windows realms, and I've set up multiple HTTP servers and
+</I>&gt;<i> domains over the past 10 years. If this is a case of being incompetent,
+</I>&gt;<i> I'll be surprised.)
+</I>&gt;<i> 
+</I>&gt;<i> So, here's what I've done so far: I've set up Xitami v2.5b6 on both
+</I>&gt;<i> Windows and Linux machines. The machine in question here is the Windows
+</I>&gt;<i> one.
+</I>&gt;<i> 
+</I>&gt;<i> (I'd try it on the linux box, but it requires a reconfig of PHP and
+</I>&gt;<i> well, production sites are running on it at the moment, so.... :-))
+</I>&gt;<i> 
+</I>&gt;<i>     I got the default Xitami page to load up.
+</I>&gt;<i>     I then set up a virtual host pointing to my PHP based main website.
+</I>&gt;<i> I set up the PHP filter and the page loaded up without incident.
+</I>&gt;<i>     I set up my remaining, ancillary PHP websites as new virtual hosts.
+</I>&gt;<i>     Once that was done without incident, I attempted to sign in to one
+</I>&gt;<i> of the PHP sites that requires a login. That... doesn't... work...
+</I>&gt;<i> 
+</I>&gt;<i> So, here's what I have:
+</I>&gt;<i> 
+</I>&gt;<i>    1. I have a form on the main page of the site.
+</I>&gt;<i>    2. Users type in their alias and password and hit &quot;login&quot; which
+</I>&gt;<i>       submits the user's information via POST to a PHP script called
+</I>&gt;<i>       &quot;login.php&quot;.
+</I>&gt;<i>    3. The information gets there, the user's information is validated
+</I>&gt;<i>       (which I can see in MySQL's logs).
+</I>&gt;<i>    4. Once login.php does its job, the last thing it's supposed to do is
+</I>&gt;<i>       redirect the user via a Header Redirect back to the main page
+</I>&gt;<i>       after setting some session variables. This is where the train is
+</I>&gt;<i>       derailed, so to speak. The header redirect doesn't work.
+</I>&gt;<i> 
+</I>&gt;<i> So, from there I started doing some debugging to find the problem. I
+</I>&gt;<i> created two files.
+</I>&gt;<i> 
+</I>&gt;<i>     One is a straight HTML file called &quot;success.html&quot;. Its content is:
+</I>&gt;<i> 
+</I>&gt;<i>         &quot;Good News, the redirect was successful!&quot;
+</I>&gt;<i> 
+</I>&gt;<i>     And the second file is called &quot;index.php&quot;. It's content is:
+</I>&gt;<i> 
+</I>&gt;<i>         &lt; ? php (spaces removed -- I'm not sure what the mailer daemon
+</I>&gt;<i>         uses here and don't want to interfere if it's PHP)
+</I>&gt;<i>            Header(&quot;Location: <A HREF="http://mydomain.com/success.html&quot;">http://mydomain.com/success.html&quot;</A>);
+</I>&gt;<i>            Echo &quot;Bad News... It Failed.&quot; . chr(13);
+</I>&gt;<i>         ? &gt;
+</I>&gt;<i> 
+</I>&gt;<i>     Every time I visit, no matter what I change, I get &quot;Bad News... It
+</I>&gt;<i> Failed.&quot; I've tried multiple settings, and I restart Xitami's services
+</I>&gt;<i> every time.
+</I>&gt;<i> 
+</I>&gt;<i> Any ideas? Why is the Header redirect not being honored, either by
+</I>&gt;<i> Xitami or by the client browser? Note that the sites are running
+</I>&gt;<i> successfully under that &quot;Patchy&quot; web server...
+</I>&gt;<i> 
+</I>&gt;<i> Oh, and before I forget... debug is on, and I'm seeing nothing in the
+</I>&gt;<i> logs to tell me that anything is wrong.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks (in advance) for your help!
+</I>&gt;<i> (Please don't mind me while I bang my head against a wall over here.)
+</I>&gt;<i> -- 
+</I>&gt;<i> Paul Webb
+</I>&gt;<i> WebbEnabled Solutions, LLC (vCard
+</I>&gt;<i> &lt;<A HREF="http://www.webbenabled.com/%7Epwebb/vcard/WebbPaul.vcf">http://www.webbenabled.com/%7Epwebb/vcard/WebbPaul.vcf</A>&gt;)
+</I>&gt;<i> &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">pwebb at webbenabled.com</A>&gt;
+</I>&gt;<i> 
+</I>
+Johannes
+
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007317.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+	<LI>Next message: <A HREF="007319.html">[Xitami] Xitami PHP Header Redirect issues...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7318">[ date ]</a>
+              <a href="thread.html#7318">[ thread ]</a>
+              <a href="subject.html#7318">[ subject ]</a>
+              <a href="author.html#7318">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

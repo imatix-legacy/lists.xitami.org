@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ASP MIME won't work. please help
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006113.html">
+   <LINK REL="Next"  HREF="006114.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ASP MIME won't work. please help
+   </H1>
+    <B>Magnus Wedberg
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ASP MIME won't work. please help">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 04 Oct 2004 11:22:10 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006113.html">[Xitami] ASP MIME won't work. please help
+</A></li>
+        <LI> Next message: <A HREF="006114.html">[Xitami] Imatix email servers down
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6116">[ date ]</a>
+              <a href="thread.html#6116">[ thread ]</a>
+              <a href="subject.html#6116">[ subject ]</a>
+              <a href="author.html#6116">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I am somewhat new to using Xitami and I really need ot activate ASP to
+</I>&gt;<i> work in my web pages.
+</I>&gt;<i> 
+</I>&gt;<i> I know, many will say, You're not running IIS, then why and so on.
+</I>&gt;<i> Just trust me, I have 100,000 line sof code ready made and I want to
+</I>&gt;<i> use what I have, not re-invent the wheel again. Just get my site up
+</I>&gt;<i> and running.
+</I>&gt;<i> 
+</I>&gt;<i> SO, to make it simple...
+</I>&gt;<i> 
+</I>&gt;<i> I added the mime type in the default.cfg file to specify asp=text/html
+</I>
+Wrong way to do it. That will only serve up the ASP code as HTML as 
+you discovered. You need to add a filter. Like:
+[Filter]
+    .asp=D:\\chilisoft\\asp.exe
+
+But: Xitami can't run ASP. Only IIS and PWS can, natively, for others 
+(xitami included) you need an ASP parser such as Chilisoft ASP (now 
+obviously bought by Sun, don't know of alternatives, only that there 
+are). You will have to run it in CGI mode, which is very slow. The 
+beta version of Xitami has ISAPI support and may run some kind of 
+ISAPI ASP parser (much, much faster), but the beta version is less 
+stable and much buggier in my experience. Basically, Xitami is very 
+ill-suited to doing ASP, or indeed any kind of server-side scripting 
+requiring CGI parsing.
+
+Plus, Xitami is unofficially dead. No long term solution. My advice 
+would be to switch to something supported. 
+ 
+-- 
+Magnus Wedberg
+<A HREF="http://www.magnuswedberg.com/">http://www.magnuswedberg.com/</A>
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006113.html">[Xitami] ASP MIME won't work. please help
+</A></li>
+	<LI> Next message: <A HREF="006114.html">[Xitami] Imatix email servers down
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6116">[ date ]</a>
+              <a href="thread.html#6116">[ thread ]</a>
+              <a href="subject.html#6116">[ subject ]</a>
+              <a href="author.html#6116">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

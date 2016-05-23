@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] directory listing locationbar
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005981.html">
+   <LINK REL="Next"  HREF="005983.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] directory listing locationbar
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] directory listing locationbar">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 05 Jun 2004 15:50:01 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005981.html">[Xitami] directory listing locationbar
+</A></li>
+        <LI> Next message: <A HREF="005983.html">[Xitami] directory listing locationbar
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5982">[ date ]</a>
+              <a href="thread.html#5982">[ thread ]</a>
+              <a href="subject.html#5982">[ subject ]</a>
+              <a href="author.html#5982">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Marc,
+If I understand this correct, see more below
+
+Am 5 Jun 2004 um 21:11 hat Marc Doigny geschrieben:
+
+&gt;<i> &gt;Xitami 2.5b6
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> There are no stupid questions.
+</I>&gt;<i> For a web server each request (main page, first gif, first jpg, first 
+</I>&gt;<i> javascript source, second gif, ... and so on) is a completely new one. The 
+</I>&gt;<i> browser has no memory of what was loaded before (except if it looks in the 
+</I>&gt;<i> logs).
+</I>&gt;<i> 
+</I>&gt;<i> To prevent the usage of your gif, you must create it on-the-fly (using a 
+</I>&gt;<i> script, for instance).
+</I>&gt;<i> You also need some server scripts.
+</I>&gt;<i> This is just one example, they are probably more possibilities:
+</I>&gt;<i> 
+</I>&gt;<i> &lt;html&gt;
+</I>&gt;<i> &lt;script src=cgi-bin/create.js&gt;&lt;/script&gt;
+</I>&gt;<i> &lt;script&gt;
+</I>&gt;<i> function makegif(a)
+</I>&gt;<i> {
+</I>&gt;<i> document.write(&quot;&lt;img src=' + a + b + '.gif'&gt;&quot;);
+</I>&gt;<i> }
+</I>&gt;<i> &lt;/script&gt;
+</I>&gt;<i> &lt;body&gt;
+</I>&gt;<i> &lt;h1&gt;This is my protected gif:&lt;/h1&gt;
+</I>&gt;<i> &lt;script&gt;
+</I>&gt;<i> makegif(&quot;photos/special&quot;);
+</I>&gt;<i> makegif(&quot;photos/second&quot;);
+</I>&gt;<i> &lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+</I>&gt;<i> 
+</I>&gt;<i> The function &quot;makegif&quot; in your html will create the call to the gif 
+</I>&gt;<i> on-the-fly, using the parameter that's provided by create.js
+</I>&gt;<i> 
+</I>&gt;<i> Now the special thing resides in create.js.
+</I>&gt;<i> It's a script that produces a single output line (using a random generator)
+</I>&gt;<i> 
+</I>&gt;<i> var b = 124582134;
+</I>&gt;<i> 
+</I>&gt;<i> and renames the image to
+</I>&gt;<i> photos/special124582134.gif and the same with the second gif.
+</I>&gt;<i> 
+</I>because of this randomly chosen &quot;extended&quot; file name the viewer actually isn't able to call the 
+file directly. 
+
+&gt;<i> For more help (and maybe an easier way to do it), you could ask it on the 
+</I>&gt;<i> webreference forum:
+</I>&gt;<i> <A HREF="http://www.webdeveloper.com/forum/">http://www.webdeveloper.com/forum/</A>
+</I>&gt;<i> 
+</I>will do that. 
+
+
+&gt;<i> marc
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>Johannes
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005981.html">[Xitami] directory listing locationbar
+</A></li>
+	<LI> Next message: <A HREF="005983.html">[Xitami] directory listing locationbar
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5982">[ date ]</a>
+              <a href="thread.html#5982">[ thread ]</a>
+              <a href="subject.html#5982">[ subject ]</a>
+              <a href="author.html#5982">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

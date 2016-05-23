@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Web server not finding IP address
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000124.html">
+   <LINK REL="Next"  HREF="000127.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Web server not finding IP address
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Web server not finding IP address">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 08 Jun 2001 19:34:08 GMT</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000124.html">[Xitami] HTTP_REFERER(sp) and CGI
+</A></li>
+        <LI> Next message: <A HREF="000127.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200106081426.CAA27428@pagoda.wgtn.cat-it.co.nz">200106081426.CAA27428@pagoda.wgtn.cat-it.co.nz</A>&gt;
+   Ewen McNeill writes:
+&gt;<i> In message &lt;<A HREF="mailto:8A6229AB5BE35447A7A838D64C1792BBB2A747@exchangeus.edocs.com">8A6229AB5BE35447A7A838D64C1792BBB2A747@exchangeus.edocs.com</A>&gt; &lt;Xitami
+</I>&gt;<i> @ec-computers.net&gt;, <A HREF="mailto:Xitami@EC-Computers.Net">Xitami@EC-Computers.Net</A>, Ted Morgan writes:
+</I>&gt;<i> &gt;Very recently my Xitami web server started having problems binding to my IP
+</I>&gt;<i> &gt;address.  I have it configured so that it will run at startup (using Windows
+</I>&gt;<i> &gt;98).  But it will only list 127.0.0.1 as the IP address of the machine.  
+</I>&gt;<i> 
+</I>&gt;<i> Which version of Xitami is it? (2.5b4, but dos console? Win32?  NT
+</I>&gt;<i> Service?)  And how do you have it configured to &quot;run at startup&quot;?  When
+</I>&gt;<i> a user logs in?  Or before that?
+</I>&gt;<i> 
+</I>&gt;<i> Normally Xitami will find the IP addresses that are available when it
+</I>&gt;<i> starts, so I'm puzzled by your situation -- possibly it is starting
+</I>&gt;<i> before an address has been allocated for your network card (eg, via
+</I>&gt;<i> DHCP)?  Or possibly something strange is going on.
+</I>
+FWIW, a colleague of mine tried installing Xitami on some machines in a
+teaching lab last year (I don't know which version he was using).  The
+machines all worked fine if one logged in to them as &quot;admin&quot;, or with
+otherwise unrestricted accounts, yet if one logged in with a very
+restricted account[1], the server would only respond to the loopback
+address, and not to that of the LAN[2].
+
+I'm pleased to say that bw3224b9 does *not* suffer with this problem: it
+runs with both the 127.0.0.1 and the allocated 193.63.241.* addresses
+quite happily whatever the privileges of the user account.
+
+[1] I've used the System Policy Editor[3] to create very restrictive
+accounts to prevent students screwing up the configurations of these
+Win95 machines; it works *really* well.  (Of course, it makes it much
+easier to prevent these policies being circumvented by having a PDC on
+the network too.)
+
+[2] The LAN has fixed, pre-allocated IP addresses: no DHCP involved here.
+
+[3] There have been no changes to the policies between last year's
+failures and this year's successes: originally, I had thought that some
+part of a policy prevented a server process from binding to, and/or
+listening on, any IP address other than 127.0.0.1.
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000124.html">[Xitami] HTTP_REFERER(sp) and CGI
+</A></li>
+	<LI> Next message: <A HREF="000127.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#126">[ date ]</a>
+              <a href="thread.html#126">[ thread ]</a>
+              <a href="subject.html#126">[ subject ]</a>
+              <a href="author.html#126">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

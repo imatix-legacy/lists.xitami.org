@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] perlssi not passing args?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004072.html">
+   <LINK REL="Next"  HREF="004073.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] perlssi not passing args?
+   </H1>
+    <B>Stephen Graybeal
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] perlssi not passing args?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 3 Oct 2002 01:21:37 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004072.html">[Xitami] perlssi not passing args?
+</A></li>
+        <LI> Next message: <A HREF="004073.html">[Xitami] perlssi not passing args?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4074">[ date ]</a>
+              <a href="thread.html#4074">[ thread ]</a>
+              <a href="subject.html#4074">[ subject ]</a>
+              <a href="author.html#4074">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; working HTML url: www.graysoftenterprises.com/default.html
+</I>&gt;<i>
+</I>&gt;<i> This works fine and isn't slow.
+</I>&gt;<i> &gt; messed-up SHTML url: www.graysoftenterprises.com/default.shtml
+</I>&gt;<i>
+</I>&gt;<i> This returns &quot;An internal Visual Basic error has occurred in
+</I>&gt;<i> \default.shtml. File not found (error #53), GSECntr&quot;
+</I>&gt;<i>
+</I>&gt;<i> So I would say VB is getting called, but isn't getting some slice of
+</I>&gt;<i> information.
+</I>&gt;<i>
+</I>&gt;<i> Visual Basic is _NOT_ a good language for CGI. Oh, I've done it and
+</I>&gt;<i> got a paycheck. But I had to study the sample VB application that
+</I>&gt;<i> came with Xitami to find out how to get the CGI arguments and STDIN.
+</I>&gt;<i> MS BASIC and VB really don't like to do that.
+</I>
+
+The reason for that error output is my program relies on the argument
+&quot;code=default&quot; to open a file (default.count) with a number in it.  I get
+the file not found error because no arguments are making it to the program.
+It's trying to open &quot;.class&quot; which doesn't exist.
+
+It's slow because the server sends the html file to the client machine.  The
+client machine reads the html and sends a request back to the server which
+then executes the CGI and sends the input of the iframe back.  That is two
+extra steps, which isn't too bad unless you look at it as TWICE the steps.
+Just don't like inefficiency.  And I have a module that gets the STDIO just
+fine (this is obvious from the working iframe).
+
+This software isn't keeping records online, it's just a website to market a
+client-side database application.  All the CGI really is is a counter I
+wrote but more than anything I'm trying to get my feet wet in CGI.  I know I
+can find generic counters, but the point is that this SHOULD work fine.
+
+Surely someone out there has successfully executed a CGI with #exec cgi=&quot;&quot;
+
+Stephen Graybeal
+<A HREF="mailto:graybeal@bellatlantic.net">graybeal@bellatlantic.net</A>
+<A HREF="mailto:webmaster@graysoftenterprises.com">webmaster@graysoftenterprises.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004072.html">[Xitami] perlssi not passing args?
+</A></li>
+	<LI> Next message: <A HREF="004073.html">[Xitami] perlssi not passing args?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4074">[ date ]</a>
+              <a href="thread.html#4074">[ thread ]</a>
+              <a href="subject.html#4074">[ subject ]</a>
+              <a href="author.html#4074">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

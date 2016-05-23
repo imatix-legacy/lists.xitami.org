@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multiple cgi directories--confusion still
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002429.html">
+   <LINK REL="Next"  HREF="002430.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multiple cgi directories--confusion still
+   </H1>
+    <B>Chris Stromberger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Multiple cgi directories--confusion still">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 19 Feb 2002 18:41:28 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002429.html">[Xitami] Multiple cgi directories--confusion
+</A></li>
+        <LI> Next message: <A HREF="002430.html">[Xitami] Turbo setting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2509">[ date ]</a>
+              <a href="thread.html#2509">[ thread ]</a>
+              <a href="subject.html#2509">[ subject ]</a>
+              <a href="author.html#2509">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm confused by the two config items
+
+[Server]
+cgi-bin=path (docs say &quot;Specifies the directory where CGI programs are
+located&quot;)
+
+and
+
+[CGI-Alias]
+demos=G:\site\demos (docs say &quot;This section lets you define multiple CGI
+program roots&quot;)
+
+How do these two directives interact?  They seem to sort of overlap.
+
+I would like to set up multiple cgi directories.  Is this possible?  I
+have tried this using the CGI-Alias setting, like so:
+
+[CGI-Alias]
+abc=c:\web\abc\cgi-bin                 
+xyz=c:\web\xyz\cgi-bin      
+
+Now, this seems to work when I point my browser to
+<A HREF="http://localhost/abc/script.py">http://localhost/abc/script.py</A> and <A HREF="http://localhost/xyz/script.py,">http://localhost/xyz/script.py,</A>
+except that relative paths in the generated html are not resolved
+correctly: references to images at &quot;../images/x.jpg&quot; fail to find the
+file, and a style sheet link of &quot;../file.css&quot; fails to find the style
+sheet.  If I move the style sheet into the cgi-bin directory with the
+scripts and change the link to &quot;file.css&quot; in the html, it works fine.
+Where is the server looking for the files that it can't find?  How can I
+get these relative paths to work?
+
+Many thanks!
+
+Chris
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002429.html">[Xitami] Multiple cgi directories--confusion
+</A></li>
+	<LI> Next message: <A HREF="002430.html">[Xitami] Turbo setting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2509">[ date ]</a>
+              <a href="thread.html#2509">[ thread ]</a>
+              <a href="subject.html#2509">[ subject ]</a>
+              <a href="author.html#2509">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] using cgi with Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005709.html">
+   <LINK REL="Next"  HREF="005706.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] using cgi with Xitami
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] using cgi with Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 11 Feb 2004 10:13:29 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005709.html">[Xitami] Win XP, Xitami, Perl
+</A></li>
+        <LI> Next message: <A HREF="005706.html">[Xitami] using cgi with Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5702">[ date ]</a>
+              <a href="thread.html#5702">[ thread ]</a>
+              <a href="subject.html#5702">[ subject ]</a>
+              <a href="author.html#5702">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Vera,
+
+First off, can you even pull up a generic webpage with your current 
+settings.  In your browswer go to: <A HREF="http://127.0.0.1/testpage.html">http://127.0.0.1/testpage.html</A> . Making 
+certain &quot;testpage.html&quot; exists in your webpages root folder.  If you can't 
+pull an html file then you have bigger issues with your configuration and 
+most likely its not a cgi issue at all.
+
+Second, if you can pull html normally verify your default.cfg (config) file 
+and make certain your cgi path options are set correctly.
+
+ipaddress=127.0.0.1                 #   * = use any IP address on host
+webpages=htdocs                     #   Relative or full path
+defaults=defaults.cfg               #   Local config file
+base-host=basehost.cfg              #   Base host config (optional)
+portbase=0                          #   e.g. 5000 for port 5080
+priority=1                          #   1 = normal, 2=low, 3=high
+background=0                        #   1 = run as daemon
+refresh=60                          #   Seconds between refreshes
+cgi-url=/cgi-bin                    #   What defines a CGI URL?
+cgi-bin=cgi-bin                     #   Relative or full path, or '*'
+
+In the above example, all cgi files can ONLY be refernced as such:  
+www.foo.com/cgi-bin/testcgi.pl.
+
+Also verify the CGI section itself:
+[CGI]
+    enabled=1                           #   CGI programs enabled?
+    workdir=-                           #   Where CGI scripts run
+    wildcard=0                          #   Allow /cgi-bin anywhere in URL, 
+0=No, 1=Yes
+    dirlist=0                           #   Allow directory listings
+    passargs=0                          #   Pass arguments on command line?
+    debug=0                             #   Keep input and output files
+    http-fields=1                       #   Add HTTP_ header fields?
+    http-prefix=HTTP_                   #   If so, what prefix?
+    form-fields=1                       #   Add form fields to environment?
+    form-prefix=FORM_                   #   If so, what prefix?
+    form-query=0                        #   Pass form fields as 
+QUERY_STRING?
+    environment=1                       #   CGI gets server environment?
+
+Goodluck.
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+&gt;<i>From: Vera Cranor &lt;<A HREF="mailto:vcranor@InfoAve.Net">vcranor@InfoAve.Net</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Subject: Re: [Xitami] using cgi with Xitami
+</I>&gt;<i>Date: Tue, 10 Feb 2004 19:13:03 -0600
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Murali... I downloaded this file, bs3225b4.exe and installed it.
+</I>&gt;<i>This seems to be version 2.5b4 for Windows NT, 95, 98, Linux, OS/2, and 
+</I>&gt;<i>Unix.
+</I>&gt;<i>(I'm using Win XP)
+</I>&gt;<i>
+</I>&gt;<i>In the &quot;Computer Management&quot;, under Services, I now have &quot;Xitami Web 
+</I>&gt;<i>Server&quot;, and it says it's running.
+</I>&gt;<i>However... I still can't get a Perl cgi progy to run, but it will run the 
+</I>&gt;<i>&quot;textcgi.exe&quot; that comes with it.
+</I>&gt;<i>Ping 127.0.0.1 works ok.
+</I>&gt;<i>
+</I>&gt;<i>errors.log:
+</I>&gt;<i>     127.0.0.1 - vera [10/Feb/2004:18:55:12 -0600] &quot;GET /cgi-bin/test.cgi 
+</I>&gt;<i>HTTP/1.1&quot; 500 1065 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE
+</I>&gt;<i>
+</I>&gt;<i>6.0; Windows NT 5.1; .NET CLR 1.1.4322)&quot;
+</I>&gt;<i>
+</I>&gt;<i>cgierr.log: empty
+</I>&gt;<i>
+</I>&gt;<i>I tried cussing and crying.... should I shoot it or just puke?
+</I>&gt;<i>
+</I>&gt;<i>vera
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+_________________________________________________________________
+Click here for a FREE online computer virus scan from McAfee. 
+<A HREF="http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3963">http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3963</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005709.html">[Xitami] Win XP, Xitami, Perl
+</A></li>
+	<LI> Next message: <A HREF="005706.html">[Xitami] using cgi with Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5702">[ date ]</a>
+              <a href="thread.html#5702">[ thread ]</a>
+              <a href="subject.html#5702">[ subject ]</a>
+              <a href="author.html#5702">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

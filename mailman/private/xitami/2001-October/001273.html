@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] basic questions
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001272.html">
+   <LINK REL="Next"  HREF="001274.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] basic questions
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] basic questions">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Oct 2001 23:32:37 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001272.html">[Xitami] basic questions
+</A></li>
+        <LI> Next message: <A HREF="001274.html">[Xitami] Re: No resume in downloads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1273">[ date ]</a>
+              <a href="thread.html#1273">[ thread ]</a>
+              <a href="subject.html#1273">[ subject ]</a>
+              <a href="author.html#1273">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In defaults.aut, the word before the = is your username, and the word after 
+the = is your password. For example, this will let you log in to 
+<A HREF="http://127.0.0.1/admin">http://127.0.0.1/admin</A> as a user &quot;eviloverlord&quot; with password &quot;topsecret&quot;:
+
+[/Admin]
+    eviloverlord=topsecret
+
+If you have admin=xxx and SecureName=xxx lines, you can log in as either of 
+the users &quot;admin&quot; or &quot;SecureName&quot;, with password &quot;xxx&quot; in either case. I 
+assume you don't want this.
+
+The one exception to this is &quot;webmask=something&quot;, which sets which 
+computers can access the admin screen (webmask=local will restrict it to 
+the computer the server is actually running on).
+
+If you're using Netscape 6 or Mozilla, you may need to edit defaults.cfg 
+and add this:
+
+[Console]
+    Javascript = &quot;0&quot;
+
+(if the [Console] section is already there, either add the Javascript key 
+or edit it to switch it to 0). I couldn't use the Javascript admin 
+interface with Mozilla 0.94, but it works now (in Mozilla 0.95), so your 
+mileage may vary. I actually considered sending iMatix a patch to use 
+different Javascript function names to avoid this problem, but the names 
+are hard-coded into their form generating tool :-(
+I might still try adapting it so the Javascript isn't critical: if I do, 
+I'll definitely let iMatix know so they can merge it into some future 
+version.
+
+If you have a really screwed config, adding this to defaults.cfg may help:
+
+[Wsx]
+    admin=xiadmin
+
+although this shouldn't be necessary.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001272.html">[Xitami] basic questions
+</A></li>
+	<LI> Next message: <A HREF="001274.html">[Xitami] Re: No resume in downloads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1273">[ date ]</a>
+              <a href="thread.html#1273">[ thread ]</a>
+              <a href="subject.html#1273">[ subject ]</a>
+              <a href="author.html#1273">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

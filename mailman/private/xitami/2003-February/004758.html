@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problems running phpadsnew under Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004753.html">
+   <LINK REL="Next"  HREF="004755.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problems running phpadsnew under Xitami
+   </H1>
+    <B>TW
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problems running phpadsnew under Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Feb 2003 13:01:12 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004753.html">[Xitami] Problems running phpadsnew under Xitami
+</A></li>
+        <LI> Next message: <A HREF="004755.html">[Xitami] CGI using basic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4758">[ date ]</a>
+              <a href="thread.html#4758">[ thread ]</a>
+              <a href="subject.html#4758">[ subject ]</a>
+              <a href="author.html#4758">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_6821178==_.ALT
+Content-Type: text/plain; charset=&quot;iso-8859-1&quot;; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+At 19:13 23.02.2003 -0800, you wrote:
+&gt;<i>So how would I go about changing the relative URL to an absolute URL?
+</I>
+???
+Okay, here we go:
+
+1) Load the file in question into your favourite text editor (e.g. Notepad,=
+=20
+Textpad, vi, MS Word, ...)
+
+2) locate the occurences of relative URIs in header(&quot;Location:=20
+blablablah.xyz&quot;) where blahblahblah.xyz _IS_ the relative URI
+
+3) find out the the name of your webserver and the path to your script=20
+(blahblahblah.xyz) relative to the document root of your webserver (you=20
+probably have some knowledge of the hostname where you want to deploy your=
+=20
+application to, if not, ask someone next to you; when you try to deploy=20
+your app, you probably already found out where your webserver's document=20
+root is - otherwise you couldn't deploy it all)
+
+3 a) (altenative to 3) ) learn some php, it provides you with variables &amp;=20
+functions, finding out your hostname and the path to your script, in case=20
+3) didn't give you the desired results or in case you think of a more=20
+generic approach to our task in question
+
+4) from step 3 or 3a we get something like=20
+<A HREF="http://www.myhost.org/nested/path/to/my/script/called/blahblahblahblah.xyz=">http://www.myhost.org/nested/path/to/my/script/called/blahblahblahblah.xyz=</A>
+=20
+. In your editor move the cursor in front of blahblahblah.xyz and type=20
+<A HREF="http://www.myhost.org/nested/path/to/my/script/called/">http://www.myhost.org/nested/path/to/my/script/called/</A> .
+
+5) Save your file in question.
+
+6) Reload it in the browser.
+
+7) Voil=E1
+
+Actually, it is less difficult than it looks at first sight. Give it a try=
+=20
+and'you're on your way to a cool IT expert.
+
+Regards,
+tony
+--=====================_6821178==_.ALT
+Content-Type: text/html; charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;html&gt;
+At 19:13 23.02.2003 -0800, you wrote:&lt;br&gt;
+&lt;blockquote type=3Dcite class=3Dcite cite&gt;&lt;font face=3D&quot;arial&quot; size=3D2 colo=
+r=3D&quot;#0000FF&quot;&gt;So
+how would I go about changing the relative URL to an absolute
+URL?&lt;/font&gt;&lt;/blockquote&gt;&lt;font size=3D2&gt;&lt;br&gt;
+???&lt;br&gt;
+Okay, here we go:&lt;br&gt;&lt;br&gt;
+1) Load the file in question into your favourite text editor (e.g.
+Notepad, Textpad, vi, MS Word, ...)&lt;br&gt;&lt;br&gt;
+2) locate the occurences of relative URIs in header(&amp;quot;Location:
+blablablah.xyz&amp;quot;) where blahblahblah.xyz _IS_ the relative
+URI&lt;br&gt;&lt;br&gt;
+3) find out the the name of your webserver and the path to your script
+(blahblahblah.xyz) relative to the document root of your webserver (you
+probably have some knowledge of the hostname where you want to deploy
+your application to, if not, ask someone next to you; when you try to
+deploy your app, you probably already found out where your webserver's
+document root is - otherwise you couldn't deploy it all)&lt;br&gt;&lt;br&gt;
+3 a) (altenative to 3) ) learn some php, it provides you with variables
+&amp;amp; functions, finding out your hostname and the path to your script,
+in case 3) didn't give you the desired results or in case you think of a
+more generic approach to our task in question&lt;br&gt;&lt;br&gt;
+4) from step 3 or 3a we get something like
+&lt;a=
+ href=3D&quot;<A HREF="http://www.myhost.org/nested/path/to/my/script/called/blahblahblahb=">http://www.myhost.org/nested/path/to/my/script/called/blahblahblahb=</A>
+lah.xyz&quot; eudora=3D&quot;autourl&quot;&gt;<A HREF="http://www.myhost.org/nested/path/to/my/script/c=">http://www.myhost.org/nested/path/to/my/script/c=</A>
+alled/blahblahblahblah.xyz&lt;/a&gt;
+. In your editor move the cursor in front of blahblahblah.xyz and type &lt;a=
+ href=3D&quot;<A HREF="http://www.myhost.org/nested/path/to/my/script/called/"=">http://www.myhost.org/nested/path/to/my/script/called/&quot;=</A>
+ eudora=3D&quot;autourl&quot;&gt;<A HREF="http://www.myhost.org/nested/path/to/my/script/called/</=">http://www.myhost.org/nested/path/to/my/script/called/&lt;/=</A>
+a&gt; .&lt;br&gt;&lt;br&gt;
+5) Save your file in question.&lt;br&gt;&lt;br&gt;
+6) Reload it in the browser.&lt;br&gt;&lt;br&gt;
+7) Voil=E1&lt;br&gt;&lt;br&gt;
+Actually, it is less difficult than it looks at first sight. Give it a try=
+ and'you're on your way to a cool IT expert.&lt;br&gt;&lt;br&gt;
+Regards,&lt;br&gt;
+tony&lt;/font&gt;&lt;/html&gt;
+
+--=====================_6821178==_.ALT--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004753.html">[Xitami] Problems running phpadsnew under Xitami
+</A></li>
+	<LI> Next message: <A HREF="004755.html">[Xitami] CGI using basic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4758">[ date ]</a>
+              <a href="thread.html#4758">[ thread ]</a>
+              <a href="subject.html#4758">[ subject ]</a>
+              <a href="author.html#4758">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

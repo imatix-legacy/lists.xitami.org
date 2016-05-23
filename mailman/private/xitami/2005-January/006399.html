@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Firewall/Routers &amp; UDP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006398.html">
+   <LINK REL="Next"  HREF="006400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Firewall/Routers &amp; UDP
+   </H1>
+    <B>Admin (MRJ)
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Firewall/Routers &amp; UDP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 22 Jan 2005 11:24:47 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006398.html">[Xitami] Firewall/Routers &amp; UDP
+</A></li>
+        <LI> Next message: <A HREF="006400.html">[Xitami] Firewall/Routers &amp; UDP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6399">[ date ]</a>
+              <a href="thread.html#6399">[ thread ]</a>
+              <a href="subject.html#6399">[ subject ]</a>
+              <a href="author.html#6399">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The only time I have had to allow anything special on any firewall setting
+was for the DNS servers to open and they should be the only part that
+requires both TCP and UDP ports to work. Thus port 53 must remain open.
+
+A word of caution is that if you don't know what you're doing on DNS you may
+allow recursive searches which can pose a security issue in BIND dns
+versions below 4.9.10 and it is by default set to allow recursion on all
+versions.
+
+For Windows DNS this should not be a problem but it gives you less control.
+
+They also specify that Zone alarm standard version is not a good alternative
+for a firewall on a server however, I have had people run nessus scans of
+servers with only ZoneAlarm Personal edition installed and in the regular
+mode they cannot break through it and get kicked all the time. Besides, a
+proper nessus scan will take several hours to perform so the likelyhood of
+remaining undetected is limited, as ZA also logs every IP hitting anything
+and anywhere.
+
+If you use DNS, Xitami and SMTP/POP3 server on machines with ZA you should
+specify &quot;allow unusual servers to run under high security&quot; in the advanced
+properties but nothing else than this.
+
+Unless you're doing p2p systems for Extranet services or something, there
+should be no reason to allow UDP, but I could be wrong on this.
+
+    MRJ
+
+
+
+----- Original Message -----
+From: &quot;Rick Headly&quot; &lt;<A HREF="mailto:rickhead@gmail.com">rickhead@gmail.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Saturday, January 22, 2005 10:24
+Subject: [Xitami] Firewall/Routers &amp; UDP
+
+
+&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i> I've been using Xitami for the past three or four years, both for FTP
+</I>&gt;<i> and HTTP purposes.  Throughout this time, I've achieved satisfactory
+</I>&gt;<i> results, simply by forwarding ports 21 and 80 [TCP only] from the
+</I>&gt;<i> router to the applicable PC, and opening TCP ports 21 and 80 on the
+</I>&gt;<i> software-firewall installed to that machine.
+</I>&gt;<i>
+</I>&gt;<i> What troubles me however, is that I constantly find myself reading
+</I>&gt;<i> posts on various message-boards which have been written by people of
+</I>&gt;<i> questionable knowledge, and with unknown skill and experience, about
+</I>&gt;<i> the set-up and configuration of Xitami and similar web-servers in
+</I>&gt;<i> general.  Quite often, they specifically instruct the user to open
+</I>&gt;<i> incoming TCP **AND** UDP ports 20 (???), 21, and 80... but ALWAYS fail
+</I>&gt;<i> to explain why.
+</I>&gt;<i>
+</I>&gt;<i> I admit having very little understanding of UDP protocol... and
+</I>&gt;<i> because I have very little trust for my information sources, I've
+</I>&gt;<i> refused to open any incoming UDP ports (or port 20) for Xitami's use.
+</I>&gt;<i>
+</I>&gt;<i> Is it wise of me to keep unnecessary ports closed, or am I just being
+</I>&gt;<i> paranoid, and robbing myself of true optimization and efficiency?
+</I>&gt;<i>
+</I>&gt;<i>    Rick
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006398.html">[Xitami] Firewall/Routers &amp; UDP
+</A></li>
+	<LI> Next message: <A HREF="006400.html">[Xitami] Firewall/Routers &amp; UDP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6399">[ date ]</a>
+              <a href="thread.html#6399">[ thread ]</a>
+              <a href="subject.html#6399">[ subject ]</a>
+              <a href="author.html#6399">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

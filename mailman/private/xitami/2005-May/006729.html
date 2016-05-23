@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006728.html">
+   <LINK REL="Next"  HREF="006730.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Maurilio Longo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 18:12:45 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006728.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006730.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6729">[ date ]</a>
+              <a href="thread.html#6729">[ thread ]</a>
+              <a href="subject.html#6729">[ subject ]</a>
+              <a href="author.html#6729">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Pieter,
+
+sorry, it still does not work, right now a request for
+
+<A HREF="http://localhost/schede/pmwiki.php">http://localhost/schede/pmwiki.php</A>
+
+becomes a path_translated like &quot;/schede/pmwiki.php&quot;
+
+but the .php file is inside w:\wiki\ as per [Alias] section of defaults.cfg (so it
+should become /wiki/pmwiki.php, I think, to become reachable by php.exe - or even
+more a w:/wiki/pmwiki.php to take into account the possibility of an alias that
+points to a different volume)
+
+I'm still looking at cgi_main.c code of php to understand what it really uses to
+find the .php file.
+
+Thanks!
+
+Maurilio.
+
+Pieter Hintjens ha scritto:
+
+&gt;<i> On 12/05/2005 04:52 pm, Maurilio Longo wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; So, the problem seems not to be in the code that spawns the .php
+</I>&gt;<i> &gt; interpreter but in the code that creates the cgi environment before
+</I>&gt;<i> &gt; spawning the cgi executable.
+</I>&gt;<i>
+</I>&gt;<i> Yes, this makes sense.  I vaguely remember this being reported as a problem in
+</I>&gt;<i> the past.
+</I>&gt;<i>
+</I>&gt;<i> I've taken a look.  I don't have time to set-up a test environment so this is
+</I>&gt;<i> speculative, but the problem appears to be in smthttpl.c where it formats the
+</I>&gt;<i> path_translated variable, wrongly sticking the rootdir before the path name.
+</I>&gt;<i> Try this patch (smthttpl.c, line 2656):
+</I>&gt;<i>
+</I>&gt;<i>     if (filter)
+</I>&gt;<i>         path_translated = xstrcpy (NULL, p_http-&gt; url, NULL);
+</I>&gt;<i>     else
+</I>&gt;<i>         path_translated = xstrcpy (NULL, full_rootdir, p_http-&gt; path_info,
+</I>&gt;<i> NULL);
+</I>&gt;<i>
+</I>&gt;<i> No guarantee this works but if it does I'll patch the source code.
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Pieter Hintjens
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--
+ __________
+|<i>  |  | |__| Maurilio Longo
+</I>|<i>_|_|_|____| farmaconsult s.r.l.
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006728.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006730.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6729">[ date ]</a>
+              <a href="thread.html#6729">[ thread ]</a>
+              <a href="subject.html#6729">[ subject ]</a>
+              <a href="author.html#6729">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

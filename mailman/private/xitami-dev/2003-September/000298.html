@@ -1,0 +1,256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Re: using sfl xml library support makes problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000297.html">
+   <LINK REL="Next"  HREF="000299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Re: using sfl xml library support makes problem
+   </H1>
+    <B>Shivakumar Gopalakrishnan
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Re: using sfl xml library support makes problem">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Fri, 12 Sep 2003 10:49:17 -0700 (PDT)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000297.html">[Xitami-Dev] Delphi 6.0 LRWP component
+</A></li>
+        <LI> Next message: <A HREF="000299.html">[Xitami-Dev] Re: using sfl xml library support makes problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--0-2040404336-1063388957=:96547
+Content-Type: text/plain; charset=us-ascii
+Content-Id: 
+Content-Disposition: inline
+
+Hi
+
+I did not look into the xml file in detail. So yes
+xml_get_attr_ic will not work as the file has items
+not attributes. Anyway you should use the macro 
+
+FORVALUES
+
+to get the item values.
+
+Here is a complete command line program which reads
+from C:\userfile.xml. Everything is hardcoded and
+reads only one level of the xml tree. Should not be
+hard to extend it. I have also attached the file in
+case it is hard to copy.
+
+// xmlreader.cpp : Simple xml reader
+//
+// By Shivakumar Gopalakrishnan
+
+
+#include &quot;stdafx.h&quot;
+#include &quot;sfl.h&quot;
+
+int main(int argc, char* argv[])
+{
+    int rc;
+	XML_ITEM    *xml_root,
+		*xml_source, * xml_domain_item, * xml_child, *
+xml_value_child;
+
+	char * name, * value;
+
+	
+    xml_root = xml_create (NULL, NULL);
+    rc = xml_load_file (&amp; xml_root, &quot;C:&quot;,
+&quot;userfile.xml&quot;, FALSE);
+    if (rc == XML_NOERROR)
+	{
+		// gets the root
+		xml_source = xml_first_child (xml_root);
+		char * item_name = xml_item_name(xml_source);
+		printf(&quot;item name = %s\n&quot;, item_name);
+
+		// now get the &quot;Domain&quot; item
+		xml_domain_item = xml_first_child (xml_source);
+		item_name = xml_item_name(xml_domain_item);
+		printf(&quot;\titem name = %s\n&quot;, item_name);
+
+		FORCHILDREN (xml_child, xml_domain_item)
+		{
+			name = xml_item_name  (xml_child);
+			printf(&quot;\t\titem name = %s\n&quot;, name);
+	
+			FORVALUES (xml_value_child, xml_child) {
+				value = xml_item_value (xml_value_child);
+				printf(&quot;\t\t\titem value = %s\n&quot;, value);
+
+			}
+		}
+        xml_free (xml_root);
+	}
+    else
+	{
+        fprintf (stderr, &quot;xmlreader E: Error
+processing C:\\userfile.xml...\n&quot;);
+        fprintf (stderr, xml_error ());
+	}
+	return 0;
+}
+
+
+
+&gt;<i> Today's Topics:
+</I>&gt;<i> 
+</I>&gt;<i>    1. using sfl xml library support makes problem
+</I>&gt;<i> (Thomas Burghardt)
+</I>&gt;<i>    2. Delphi 6.0 LRWP component (Travis)
+</I>&gt;<i> 
+</I>&gt;<i> --__--__--
+</I>&gt;<i> 
+</I>&gt;<i> Message: 1
+</I>&gt;<i> From: &quot;Thomas Burghardt&quot;
+</I>&gt;<i> &lt;<A HREF="mailto:thomas.burghardt@onlinehome.de">thomas.burghardt@onlinehome.de</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>&gt;
+</I>&gt;<i> Date: Thu, 11 Sep 2003 09:07:19 +0200
+</I>&gt;<i> Organization: Worms &amp; Partner
+</I>&gt;<i> Subject: [Xitami-Dev] using sfl xml library support
+</I>&gt;<i> makes problem
+</I>&gt;<i> Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i> 
+</I>&gt;<i> This is a multi-part message in MIME format.
+</I>&gt;<i> 
+</I>&gt;<i> ------=_NextPart_000_0086_01C37844.1A4BCB70
+</I>&gt;<i> Content-Type: text/plain;
+</I>&gt;<i> 	charset=&quot;iso-8859-1&quot;
+</I>&gt;<i> Content-Transfer-Encoding: quoted-printable
+</I>&gt;<i> 
+</I>&gt;<i> Dear programmers,
+</I>&gt;<i> I try it again, because the question is really
+</I>&gt;<i> important for us. We =
+</I>&gt;<i> would like to use the SFL
+</I>&gt;<i> library, but the XML support of the library did not
+</I>&gt;<i> really work. A user =
+</I>&gt;<i> of the xitami mailing list told me, i should take
+</I>&gt;<i> the function =
+</I>&gt;<i> xml_get_attr_ic, but this did not work again.=20
+</I>&gt;<i> Please tell me if i can read the value
+</I>&gt;<i> 'UNEMPLOYMENT' in my xml file =
+</I>&gt;<i> (see the following section) with the sfl xml
+</I>&gt;<i> functions or not (and how)?
+</I>&gt;<i> Thank you very much. =20
+</I>&gt;<i> 
+</I>&gt;<i> The xml files looks like this short example:
+</I>&gt;<i> &lt;Statistical_Metadata&gt;=20
+</I>&gt;<i>   &lt;Domain&gt;
+</I>&gt;<i>   &lt;name&gt;UNEMPLOYMENT&lt;/name&gt;=20
+</I>&gt;<i>   &lt;label&gt;VABOIUS INDICATORS CONCERNING THE
+</I>&gt;<i> UNEMPLOYMENT AND WORKING =
+</I>&gt;<i> POPULATION IN EU&lt;/label&gt;=20
+</I>&gt;<i> &lt;/Domain&gt;
+</I>&gt;<i> &lt;/Statistical_Metadata&gt;
+</I>&gt;<i> 
+</I>--0-2040404336-1063388957=:96547
+Content-Type: application/octet-stream; name=&quot;StdAfx.cpp&quot;
+Content-Transfer-Encoding: base64
+Content-Description: StdAfx.cpp
+Content-Disposition: attachment; filename=&quot;StdAfx.cpp&quot;
+
+Ly8gc3RkYWZ4LmNwcCA6IHNvdXJjZSBmaWxlIHRoYXQgaW5jbHVkZXMganVz
+dCB0aGUgc3RhbmRhcmQgaW5jbHVkZXMNCi8vCXhtbHJlYWRlci5wY2ggd2ls
+bCBiZSB0aGUgcHJlLWNvbXBpbGVkIGhlYWRlcg0KLy8Jc3RkYWZ4Lm9iaiB3
+aWxsIGNvbnRhaW4gdGhlIHByZS1jb21waWxlZCB0eXBlIGluZm9ybWF0aW9u
+DQoNCiNpbmNsdWRlICJzdGRhZnguaCINCg0KLy8gVE9ETzogcmVmZXJlbmNl
+IGFueSBhZGRpdGlvbmFsIGhlYWRlcnMgeW91IG5lZWQgaW4gU1REQUZYLkgN
+Ci8vIGFuZCBub3QgaW4gdGhpcyBmaWxlDQo=
+
+--0-2040404336-1063388957=:96547
+Content-Type: application/octet-stream; name=&quot;StdAfx.h&quot;
+Content-Transfer-Encoding: base64
+Content-Description: StdAfx.h
+Content-Disposition: attachment; filename=&quot;StdAfx.h&quot;
+
+Ly8gc3RkYWZ4LmggOiBpbmNsdWRlIGZpbGUgZm9yIHN0YW5kYXJkIHN5c3Rl
+bSBpbmNsdWRlIGZpbGVzLA0KLy8gIG9yIHByb2plY3Qgc3BlY2lmaWMgaW5j
+bHVkZSBmaWxlcyB0aGF0IGFyZSB1c2VkIGZyZXF1ZW50bHksIGJ1dA0KLy8g
+ICAgICBhcmUgY2hhbmdlZCBpbmZyZXF1ZW50bHkNCi8vDQoNCiNpZiAhZGVm
+aW5lZChBRlhfU1REQUZYX0hfXzhEOUI2NzQyX0U1NDNfMTFEN19CMkNBXzAw
+QzBGMDVCMjJEQ19fSU5DTFVERURfKQ0KI2RlZmluZSBBRlhfU1REQUZYX0hf
+XzhEOUI2NzQyX0U1NDNfMTFEN19CMkNBXzAwQzBGMDVCMjJEQ19fSU5DTFVE
+RURfDQoNCiNpZiBfTVNDX1ZFUiA+IDEwMDANCiNwcmFnbWEgb25jZQ0KI2Vu
+ZGlmIC8vIF9NU0NfVkVSID4gMTAwMA0KDQojZGVmaW5lIFdJTjMyX0xFQU5f
+QU5EX01FQU4JCS8vIEV4Y2x1ZGUgcmFyZWx5LXVzZWQgc3R1ZmYgZnJvbSBX
+aW5kb3dzIGhlYWRlcnMNCg0KI2luY2x1ZGUgPHN0ZGlvLmg+DQoNCi8vIFRP
+RE86IHJlZmVyZW5jZSBhZGRpdGlvbmFsIGhlYWRlcnMgeW91ciBwcm9ncmFt
+IHJlcXVpcmVzIGhlcmUNCg0KLy97e0FGWF9JTlNFUlRfTE9DQVRJT059fQ0K
+Ly8gTWljcm9zb2Z0IFZpc3VhbCBDKysgd2lsbCBpbnNlcnQgYWRkaXRpb25h
+bCBkZWNsYXJhdGlvbnMgaW1tZWRpYXRlbHkgYmVmb3JlIHRoZSBwcmV2aW91
+cyBsaW5lLg0KDQojZW5kaWYgLy8gIWRlZmluZWQoQUZYX1NUREFGWF9IX184
+RDlCNjc0Ml9FNTQzXzExRDdfQjJDQV8wMEMwRjA1QjIyRENfX0lOQ0xVREVE
+XykNCg==
+
+--0-2040404336-1063388957=:96547
+Content-Type: application/octet-stream; name=&quot;xmlreader.cpp&quot;
+Content-Transfer-Encoding: base64
+Content-Description: xmlreader.cpp
+Content-Disposition: attachment; filename=&quot;xmlreader.cpp&quot;
+
+Ly8geG1scmVhZGVyLmNwcCA6IFNpbXBsZSB4bWwgcmVhZGVyDQovLw0KLy8g
+QnkgU2hpdmFrdW1hciBHb3BhbGFrcmlzaG5hbg0KDQoNCiNpbmNsdWRlICJz
+dGRhZnguaCINCiNpbmNsdWRlICJzZmwuaCINCg0KaW50IG1haW4oaW50IGFy
+Z2MsIGNoYXIqIGFyZ3ZbXSkNCnsNCiAgICBpbnQgcmM7DQoJWE1MX0lURU0g
+ICAgKnhtbF9yb290LA0KCQkqeG1sX3NvdXJjZSwgKiB4bWxfZG9tYWluX2l0
+ZW0sICogeG1sX2NoaWxkLCAqIHhtbF92YWx1ZV9jaGlsZDsNCg0KCWNoYXIg
+KiBuYW1lLCAqIHZhbHVlOw0KDQoJDQogICAgeG1sX3Jvb3QgPSB4bWxfY3Jl
+YXRlIChOVUxMLCBOVUxMKTsNCiAgICByYyA9IHhtbF9sb2FkX2ZpbGUgKCYg
+eG1sX3Jvb3QsICJDOiIsICJ1c2VyZmlsZS54bWwiLCBGQUxTRSk7DQogICAg
+aWYgKHJjID09IFhNTF9OT0VSUk9SKQ0KCXsNCgkJLy8gZ2V0cyB0aGUgcm9v
+dA0KCQl4bWxfc291cmNlID0geG1sX2ZpcnN0X2NoaWxkICh4bWxfcm9vdCk7
+DQoJCWNoYXIgKiBpdGVtX25hbWUgPSB4bWxfaXRlbV9uYW1lKHhtbF9zb3Vy
+Y2UpOw0KCQlwcmludGYoIml0ZW0gbmFtZSA9ICVzXG4iLCBpdGVtX25hbWUp
+Ow0KDQoJCS8vIG5vdyBnZXQgdGhlICJEb21haW4iIGl0ZW0NCgkJeG1sX2Rv
+bWFpbl9pdGVtID0geG1sX2ZpcnN0X2NoaWxkICh4bWxfc291cmNlKTsNCgkJ
+aXRlbV9uYW1lID0geG1sX2l0ZW1fbmFtZSh4bWxfZG9tYWluX2l0ZW0pOw0K
+CQlwcmludGYoIlx0aXRlbSBuYW1lID0gJXNcbiIsIGl0ZW1fbmFtZSk7DQoN
+CgkJRk9SQ0hJTERSRU4gKHhtbF9jaGlsZCwgeG1sX2RvbWFpbl9pdGVtKQ0K
+CQl7DQoJCQluYW1lID0geG1sX2l0ZW1fbmFtZSAgKHhtbF9jaGlsZCk7DQoJ
+CQlwcmludGYoIlx0XHRpdGVtIG5hbWUgPSAlc1xuIiwgbmFtZSk7DQoJDQoJ
+CQlGT1JWQUxVRVMgKHhtbF92YWx1ZV9jaGlsZCwgeG1sX2NoaWxkKSB7DQoJ
+CQkJdmFsdWUgPSB4bWxfaXRlbV92YWx1ZSAoeG1sX3ZhbHVlX2NoaWxkKTsN
+CgkJCQlwcmludGYoIlx0XHRcdGl0ZW0gdmFsdWUgPSAlc1xuIiwgdmFsdWUp
+Ow0KDQoJCQl9DQoJCX0NCiAgICAgICAgeG1sX2ZyZWUgKHhtbF9yb290KTsN
+Cgl9DQogICAgZWxzZQ0KCXsNCiAgICAgICAgZnByaW50ZiAoc3RkZXJyLCAi
+eG1scmVhZGVyIEU6IEVycm9yIHByb2Nlc3NpbmcgQzpcXHVzZXJmaWxlLnht
+bC4uLlxuIik7DQogICAgICAgIGZwcmludGYgKHN0ZGVyciwgeG1sX2Vycm9y
+ICgpKTsNCgl9DQoJcmV0dXJuIDA7DQp9DQoNCg==
+
+--0-2040404336-1063388957=:96547--
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000297.html">[Xitami-Dev] Delphi 6.0 LRWP component
+</A></li>
+	<LI> Next message: <A HREF="000299.html">[Xitami-Dev] Re: using sfl xml library support makes problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#298">[ date ]</a>
+              <a href="thread.html#298">[ thread ]</a>
+              <a href="subject.html#298">[ subject ]</a>
+              <a href="author.html#298">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

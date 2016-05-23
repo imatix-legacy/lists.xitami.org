@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] bat file
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003790.html">
+   <LINK REL="Next"  HREF="004165.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] bat file
+   </H1>
+    <B>miplanet
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] bat file">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 5 Aug 2002 19:48:58 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003790.html">[Xitami] (no subject)
+</A></li>
+        <LI> Next message: <A HREF="004165.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3791">[ date ]</a>
+              <a href="thread.html#3791">[ thread ]</a>
+              <a href="subject.html#3791">[ subject ]</a>
+              <a href="author.html#3791">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01C23CB9.23812E00
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: 7bit
+
+Here is my donation, Hope it comes over alright. I'm sure I don't have my
+Xitami set up like most people but it is working flawlessly for me. When you
+take a look at this create.bat file you will see that my Xitami runs on F:
+and all my sites are in a sub-directory called websites. Also I'm probably
+putting in extra stuff in my defaults.cfg file that isn't needed but again
+it works for me. You do need to have QBasic in your path. I ended up just
+putting it in the Xitami directory because that's the only place I'm using
+it. This creates the xxxx.com directory or xxxx.net directory in the
+websites directory, and 2 sub-directories (control and cgi-bin) in that
+directory. It creates a new xxxx.cfg directory and copies a blank xxxx.aut
+file. And I update the defaults.cfg file for the redirects to the xxxx.cfg,
+which is the last thing in my defaults.cfg file.
+
+If this works for anyone fine if not then don't use it. Of course feel free
+to modify it to suit your needs then send me 1 million dollars. (JUST
+KIDDING)
+
+My last jab.
+You guys need to light up. You are so hard on some of these folks to the
+point of being down right mean. (just my two cents) Otherwise this is a very
+good forum and I find most of the information I see very useful.
+
+Ron Ackerman
+Loyal Xitami User
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of bernd hohmann
+Sent: Monday, August 05, 2002 8:13 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] (no subject)
+
+
+On Tue, 06 Aug 2002 00:52:34 +0200, TW wrote:
+
+&gt;<i>Has anyone ever created a script of batch file to automagically creat a
+</I>site
+&gt;&gt;<i>rather than go through the GUI?
+</I>&gt;<i>
+</I>&gt;<i>huh? what? Very magic. No clue what this question is all about.
+</I>
+it is about generating a script which generates a config file for this
+new virtual host and adds this host to the default.cfg
+
+not a serious job for a programmer, especially when you shrinked down
+the config files for each VHost.
+
+i'm only using a small rexx file to create the directory structure
+which our system needs and copy, paste &amp; change the few lines needed
+for each new domain with an editor.
+
+the xitami admin console is a masterpiece of work but since i worked
+with xitami before thit feature existed there are a lot of thinks in
+the files which aren't compatible to the Admin console.
+
+bernd
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+------=_NextPart_000_0000_01C23CB9.23812E00
+Content-Type: application/octet-stream;
+	name=&quot;create.bat&quot;
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename=&quot;create.bat&quot;
+
+
+
+
+@echo off=20
+
+rem --- QBasic is required for this batch file to work. I put it in my =
+Xitami directory. ---
+rem --- I'm sure that this can be done better but it works for me. ----
+
+rem --- This area sets up the user input variables, IP, Site name and =
+domain extension. ----
+
+echo OPEN &quot;~usrin.bat&quot; FOR OUTPUT AS #1&gt; ~usrin.bas
+echo OPEN &quot;~tcpip.bat&quot; FOR OUTPUT AS #2&gt; ~tcpip.bas
+echo OPEN &quot;~ext.bat&quot; FOR OUTPUT AS #3&gt; ~ext.bas
+echo INPUT &quot;Enter website  &quot;, sUsrin$&gt;&gt; ~usrin.bas
+echo INPUT &quot;Enter TCPIP for this site  &quot;, sTcpip$&gt;&gt; ~tcpip.bas
+echo INPUT &quot;Is this a com or a net  &quot;, sExt$&gt;&gt; ~ext.bas
+echo PRINT #1, &quot;set usrin=3D&quot;; sUsrin$&gt;&gt; ~usrin.bas=20
+echo PRINT #2, &quot;set tcpip=3D&quot;; sTcpip$&gt;&gt; ~tcpip.bas
+echo PRINT #3, &quot;set ext=3D&quot;; sExt$&gt;&gt; ~ext.bas
+echo CLOSE #1&gt;&gt; ~usrin.bas=20
+echo CLOSE #2&gt;&gt; ~tcpip.bas
+echo CLOSE #3&gt;&gt; ~ext.bas
+echo SYSTEM&gt;&gt; ~usrin.bas=20
+echo SYSTEM&gt;&gt; ~tcpip.bas
+echo SYSTEM&gt;&gt; ~ext.bas
+qbasic /run ~usrin.bas=20
+qbasic /run ~tcpip.bas
+qbasic /run ~ext.bas
+call ~usrin.bat=20
+call ~tcpip.bat
+call ~ext.bat
+del ~usrin.bat=20
+del ~usrin.bas=20
+del ~tcpip.bat
+del ~tcpip.bas
+del ~ext.bat
+del ~ext.bas
+echo Creating website %usrin%.%ext on IP %tcpip%=20
+
+rem ----This opens up defaults.cfg and updates IP and cfg area. ----
+
+echo open &quot;defaults.cfg
+echo     %tcpip% =3D &quot;%usrin%.cfg&quot;&gt;&gt; defaults.cfg
+echo     %usrin%.%ext% =3D &quot;%usrin%.cfg&quot;&gt;&gt; defaults.cfg
+echo     www.%usrin%.%ext% =3D &quot;%usrin%.cfg&quot;&gt;&gt; defaults.cfg
+
+rem --- This copies a new .cfg file and updates it with the new =
+information. ----
+rem --- Change the path as required.
+
+copy f:\xitami\new.cfg f:\xitami\%usrin%.cfg=20
+echo open &quot;%usrin%.cfg
+echo #*END&gt;&gt; %usrin%.cfg
+echo [Accesslog]&gt;&gt; %usrin%.cfg
+echo    Filename =3D &quot;%usrin%.log&quot;&gt;&gt; %usrin%.cfg
+echo [Ftp]&gt;&gt; %usrin%.cfg
+echo    Root =3D &quot;websites/%usrin%.%ext%/&quot;&gt;&gt; %usrin%.cfg
+echo [Security]&gt;&gt; %usrin%.cfg
+echo    Filename =3D &quot;%usrin%.aut&quot;&gt;&gt; %usrin%.cfg
+echo    Superuser =3D &quot;&quot;&gt;&gt; %usrin%.cfg
+echo [Server]&gt;&gt; %usrin%.cfg
+echo    Default2 =3D &quot;index.html&quot;&gt;&gt; %usrin%.cfg
+echo    Default3 =3D &quot;default.htm&quot;&gt;&gt; %usrin%.cfg
+echo    Webpages =3D &quot;websites/%usrin%.%ext%/&quot;&gt;&gt; %usrin%.cfg
+echo    Cgi-bin =3D &quot;websites/%usrin%.%ext%/cgi-bin&quot;&gt;&gt; %usrin%.cfg
+echo [Wsx]&gt;&gt; %usrin%.cfg
+echo    Admin =3D &quot;&quot;&gt;&gt; %usrin%.cfg
+
+rem --- This creates the new directories ----
+rem --- Change the paths as required. ---
+
+
+md f:\xitami\websites\%usrin%.%ext%
+md f:\xitami\websites\%usrin%.%ext%\cgi-bin
+md f:\xitami\websites\%usrin%.%ext%\control
+
+rem --- This copies over a new aut file for the site. ----
+
+copy f:\xitami\new.aut f:\xitami\%usrin%.aut
+
+
+:<i>end
+</I>
+------=_NextPart_000_0000_01C23CB9.23812E00--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003790.html">[Xitami] (no subject)
+</A></li>
+	<LI> Next message: <A HREF="004165.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3791">[ date ]</a>
+              <a href="thread.html#3791">[ thread ]</a>
+              <a href="subject.html#3791">[ subject ]</a>
+              <a href="author.html#3791">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

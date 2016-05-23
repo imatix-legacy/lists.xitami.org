@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Lack of SSI, shtml support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000210.html">
+   <LINK REL="Next"  HREF="000213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Lack of SSI, shtml support
+   </H1>
+    <B>Roberto R. Morelli
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Lack of SSI, shtml support">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 20 Jun 2001 14:02:51 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000210.html">[Xitami] Lack of SSI, shtml support
+</A></li>
+        <LI> Next message: <A HREF="000213.html">[Xitami] Lack of SSI, shtml support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Folks,
+
+There is another way, I think better. I have a site
+<A HREF="http://www.altair7.com/index.html">http://www.altair7.com/index.html</A> that uses a perl script for opening page,
+see for your self.
+
+I do not have the SSI_INSECURE set.  I do have MIME types defined as following
+for the master config:
+
+	 .pl = c:\perl\bin\perlis.dll
+	.cgi = c:\perl\bin\perlis.dll
+
+This solved all my problems.
+
+Steps:
+
+1. <A HREF="http://127.0.0.1/admin">http://127.0.0.1/admin</A>
+2. configuration -&gt; mime
+3. enter the above values
+4. save
+5. click on restart from the main page
+
+Done.
+
+With that done, then this works:
+
+	<A HREF="http://www.altair7.com/cgi-bin/od.pl">http://www.altair7.com/cgi-bin/od.pl</A>
+
+This works with xitami 2.4d1 through 7 and xitami pro versions.
+
+Hope that helps, always make sure that you protect your perl scripts.
+
+Cheers,
+-Roberto
+
+Patrick Olson wrote:
+&gt;<i> 
+</I>&gt;<i> This is how I got Perl running in Xitami
+</I>&gt;<i> it allows me to use,
+</I>&gt;<i> 
+</I>&gt;<i> &lt;!--#exec cgi=&quot;/cgi-bin/test.pl&quot; --&gt;
+</I>&gt;<i> 
+</I>&gt;<i> This SSI command
+</I>&gt;<i> which is a potential security risk for your system
+</I>&gt;<i> is only accepted if the environment variable
+</I>&gt;<i> SSI_INSECURE is set to 'yes'
+</I>&gt;<i> Under Windows NT
+</I>&gt;<i> in the System Control Panel
+</I>&gt;<i> under 'Environment
+</I>&gt;<i> -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+</I>&gt;<i> Start-&gt;Settings-&gt;Control Panel
+</I>&gt;<i> 
+</I>&gt;<i> Double click on System
+</I>&gt;<i> 
+</I>&gt;<i> From the pop-up box select the Environment tab
+</I>&gt;<i> 
+</I>&gt;<i>  In the Variable entry field type SSI_INSECURE
+</I>&gt;<i>  In the Value entry field type YES
+</I>&gt;<i>  (Make sure it goes where you want it,
+</I>&gt;<i>   System Variables probably.)
+</I>&gt;<i> 
+</I>&gt;<i> Click OK
+</I>&gt;<i> 
+</I>&gt;<i> Reboot?  (I don't know if this is required.)
+</I>&gt;<i> -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+</I>&gt;<i> 
+</I>&gt;<i> under Windows 95/98 by adding
+</I>&gt;<i> SET SSI_INSECURE=yes to the autoexec.bat.
+</I>&gt;<i> to run SSI.
+</I>&gt;<i> If Perl is installed correctly?
+</I>&gt;<i> On a windows system,
+</I>&gt;<i> You then should be able to call
+</I>&gt;<i> Perl from anywhere in your system.
+</I>&gt;<i> This allows the shebang to be #! perl -w
+</I>&gt;<i> and does not need to be like this
+</I>&gt;<i> #! c:\perl\bin\perl.exe
+</I>&gt;<i> this also allows the use of
+</I>&gt;<i> #! /usr/bin/perl
+</I>&gt;<i> for the shebang. so as long
+</I>&gt;<i> as we don't use win32 specific modules
+</I>&gt;<i> or system calls we can keep our programs
+</I>&gt;<i> cross platform Compatible.
+</I>&gt;<i> 
+</I>&gt;<i> Running Windows98
+</I>&gt;<i> Xitami v2.4d6
+</I>&gt;<i> 
+</I>&gt;<i> in your
+</I>&gt;<i> autoexec.bat
+</I>&gt;<i> 
+</I>&gt;<i> SET PATH=C:\PERL\BIN;%PATH%
+</I>&gt;<i> SET SSI_INSECURE=YES
+</I>&gt;<i> 
+</I>&gt;<i> defaults.cfg
+</I>&gt;<i> [Filter]
+</I>&gt;<i>     .shtm=perlssi
+</I>&gt;<i>     .shtml=perlssi
+</I>&gt;<i>     .ssi=perlssi
+</I>&gt;<i> [Ssi]
+</I>&gt;<i>     Enabled=1
+</I>&gt;<i>     Exec=1
+</I>&gt;<i> 
+</I>&gt;<i> hope this helps
+</I>&gt;<i> <A HREF="http://www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html">http://www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html</A>
+</I>&gt;<i> <A HREF="http://127.0.0.1/xitami/index5.htm">http://127.0.0.1/xitami/index5.htm</A>
+</I>&gt;<i> <A HREF="http://127.0.0.1/xitami/index6.htm">http://127.0.0.1/xitami/index6.htm</A>
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000210.html">[Xitami] Lack of SSI, shtml support
+</A></li>
+	<LI> Next message: <A HREF="000213.html">[Xitami] Lack of SSI, shtml support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

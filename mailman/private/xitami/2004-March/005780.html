@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FW: [SA11139] OpenSSL SSL/TLS Handshake Denial of Service Vulnerabilities
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005779.html">
+   <LINK REL="Next"  HREF="005781.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FW: [SA11139] OpenSSL SSL/TLS Handshake Denial of Service Vulnerabilities
+   </H1>
+    <B>Bowden, Zeb
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FW: [SA11139] OpenSSL SSL/TLS Handshake Denial of Service Vulnerabilities">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 17 Mar 2004 10:05:57 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005779.html">[Xitami] possible   HTTP PUT
+</A></li>
+        <LI> Next message: <A HREF="005781.html">[Xitami] sending a domain name locally
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5780">[ date ]</a>
+              <a href="thread.html#5780">[ thread ]</a>
+              <a href="subject.html#5780">[ subject ]</a>
+              <a href="author.html#5780">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Anyone think Xitami Pro is vulnerable here?
+
+
+-----Original Message-----
+From: Secunia Security Advisories [mailto:<A HREF="mailto:sec-adv@secunia.com">sec-adv@secunia.com</A>]=20
+Sent: Wednesday, March 17, 2004 8:49 AM
+To: Bowden, Zeb
+Subject: [SA11139] OpenSSL SSL/TLS Handshake Denial of Service
+Vulnerabilities
+
+
+TITLE:
+OpenSSL SSL/TLS Handshake Denial of Service Vulnerabilities
+
+SECUNIA ADVISORY ID:
+SA11139
+
+VERIFY ADVISORY:
+<A HREF="http://secunia.com/advisories/11139/">http://secunia.com/advisories/11139/</A>
+
+CRITICAL:
+Moderately critical
+
+IMPACT:
+DoS
+
+WHERE:
+&gt;<i>From remote
+</I>
+SOFTWARE:
+OpenSSL 0.9.x
+
+DESCRIPTION:
+Three vulnerabilities have been discovered in OpenSSL, which can be
+exploited by malicious people to cause a DoS (Denial-of-Service).
+
+1) A NULL-pointer assignment in the &quot;do_change_cipher_spec()&quot;
+function used during the SSL/TLS handshake can be exploited to cause
+OpenSSL to crash via a specially crafted SSL/TLS handshake.
+
+This vulnerability affects all versions of OpenSSL 0.9.6c through
+0.9.6k and 0.9.7a through 0.9.7c.
+
+2) An unspecified error in a fix added to OpenSSL 0.9.6d some time
+ago can result in a DoS caused by an infinite loop.
+
+This vulnerability only affects older 0.9.6 versions with backported
+security patches.
+
+3) An out-of-bounds read error exists in a routine used during the
+SSL/TLS handshake when using Kerberos ciphersuites. This can be
+exploited to crash OpenSSL via a specially crafted SSL/TLS
+handshake.
+
+This vulnerability affects versions 0.9.7a, 0.9.7b, and 0.9.7c.
+
+SOLUTION:
+Update to version 0.9.7d or 0.9.6m. Recompile any OpenSSL
+applications statically linked to OpenSSL libraries.
+
+OpenSSL 0.9.7d:
+<A HREF="ftp://ftp.openssl.org/source/openssl-0.9.7d.tar.gz">ftp://ftp.openssl.org/source/openssl-0.9.7d.tar.gz</A>
+<A HREF="ftp://ftp.openssl.org/source/openssl-0.9.7d.tar.gz.asc">ftp://ftp.openssl.org/source/openssl-0.9.7d.tar.gz.asc</A>
+
+OpenSSL 0.9.6m:
+<A HREF="ftp://ftp.openssl.org/source/openssl-0.9.6m.tar.gz">ftp://ftp.openssl.org/source/openssl-0.9.6m.tar.gz</A>
+<A HREF="ftp://ftp.openssl.org/source/openssl-0.9.6m.tar.gz.asc">ftp://ftp.openssl.org/source/openssl-0.9.6m.tar.gz.asc</A>
+
+OpenSSL Engine 0.9.6m:
+<A HREF="ftp://ftp.openssl.org/source/openssl-engine-0.9.6m.tar.gz">ftp://ftp.openssl.org/source/openssl-engine-0.9.6m.tar.gz</A>
+<A HREF="ftp://ftp.openssl.org/source/openssl-engine-0.9.6m.tar.gz.asc">ftp://ftp.openssl.org/source/openssl-engine-0.9.6m.tar.gz.asc</A>
+
+PROVIDED AND/OR DISCOVERED BY:
+1) Discovered by vendor using the Codenomicon TLS Test Tool.
+2) Discovered by vendor using the Codenomicon TLS Test Tool.
+3) Dr. Stephen Henson
+
+ORIGINAL ADVISORY:
+<A HREF="http://www.openssl.org/news/secadv_20040317.txt">http://www.openssl.org/news/secadv_20040317.txt</A>
+
+OTHER REFERENCES:
+NISCC:
+<A HREF="http://www.uniras.gov.uk/vuls/2004/224012/index.htm">http://www.uniras.gov.uk/vuls/2004/224012/index.htm</A>
+
+----------------------------------------------------------------------
+
+About:
+This Advisory was delivered by Secunia as a free service to help
+everybody keeping their systems up to date against the latest
+vulnerabilities.
+
+Subscribe:
+<A HREF="http://secunia.com/secunia_security_advisories/">http://secunia.com/secunia_security_advisories/</A>
+
+Definitions: (Criticality, Where etc.)
+<A HREF="http://secunia.com/about_secunia_advisories/">http://secunia.com/about_secunia_advisories/</A>
+
+
+Please Note:
+Secunia recommends that you verify all advisories you receive by
+clicking the link.
+Secunia NEVER sends attached files with advisories.
+Secunia does not advise people to install third party patches, only
+use those supplied by the vendor.
+
+----------------------------------------------------------------------
+
+Unsubscribe: Secunia Security Advisories
+<A HREF="http://secunia.com/sec_adv_unsubscribe/?email=3Dzbowden@vt.edu">http://secunia.com/sec_adv_unsubscribe/?email=3Dzbowden@vt.edu</A>
+
+----------------------------------------------------------------------
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005779.html">[Xitami] possible   HTTP PUT
+</A></li>
+	<LI> Next message: <A HREF="005781.html">[Xitami] sending a domain name locally
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5780">[ date ]</a>
+              <a href="thread.html#5780">[ thread ]</a>
+              <a href="subject.html#5780">[ subject ]</a>
+              <a href="author.html#5780">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

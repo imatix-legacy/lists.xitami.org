@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Upload scripts on Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001290.html">
+   <LINK REL="Next"  HREF="001292.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Upload scripts on Xitami
+   </H1>
+    <B>rob tromp
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Upload scripts on Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 31 Oct 2001 20:34:37 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001290.html">[Xitami] Upload scripts on Xitami
+</A></li>
+        <LI> Next message: <A HREF="001292.html">[Xitami] Does xitami feature a proxy server?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1291">[ date ]</a>
+              <a href="thread.html#1291">[ thread ]</a>
+              <a href="subject.html#1291">[ subject ]</a>
+              <a href="author.html#1291">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0008_01C1624B.75529460
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: 7bit
+
+Yes....
+
+Her it is, it is rather basic, but it will work. You can modify and give it
+a cosmetic facelift.
+After sending the file, the file is diplayed. If you don't want this to
+happen, modify the .class
+
+Regards,
+Rob
+
+
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;title&gt;Upload&lt;/title&gt;
+	&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?
+require(&quot;fileupload.class&quot;);
+
+#--------------------------------#
+# Variables
+#--------------------------------#
+
+// The path to the directory where you want the
+// uploaded files to be saved. This MUST end with a
+// trailing slash unless you use $PATH = &quot;&quot;; to
+// upload to the current directory. Whatever directory
+// you choose, please chmod 777 that directory.
+
+	$PATH = &quot;./images/&quot;;
+
+// The name of the file field in your form.
+
+	$FILENAME = &quot;userfile&quot;;
+
+// ACCEPT mode - if you only want to accept
+// a certain type of file.
+// possible file types that PHP recognizes includes:
+//
+// OPTIONS INCLUDE:
+//  text/plain
+//  image/gif
+//  image/jpeg
+//  image/png
+
+	$ACCEPT = &quot;&quot;;
+
+// If no extension is supplied, and the browser or PHP
+// can not figure out what type of file it is, you can
+// add a default extension - like &quot;.jpg&quot; or &quot;.txt&quot;
+
+	$EXTENSION = &quot;&quot;;
+
+// SAVE_MODE: if your are attempting to upload
+// a file with the same name as another file in the
+// $PATH directory
+//
+// OPTIONS:
+//   1 = overwrite mode
+//   2 = create new with incremental extention
+//   3= do nothing if exists, highest protection
+
+	$SAVE_MODE = 1;
+
+
+#--------------------------------#
+# PHP
+#--------------------------------#
+
+function print_file($file, $type, $mode) {
+	if($file) {
+		if(ereg(&quot;image&quot;, $type)) {
+			echo &quot;&lt;img src=\&quot;&quot; . $file . &quot;\&quot; border=\&quot;0\&quot; alt=\&quot;\&quot;&gt;&quot;;
+		}
+		else {
+			$userfile = fopen($file, &quot;r&quot;);
+			while(!feof($userfile)) {
+				$line = fgets($userfile, 255);
+				switch($mode){
+					case 1:
+						echo $line;
+						break;
+					case 2:
+						echo nl2br(ereg_replace(&quot;\t&quot;,
+&quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;, htmlentities($line)));
+						break;
+				}
+			}
+		}
+	}
+}
+
+$upload = new uploader;
+$upload-&gt;max_filesize(500000);
+
+if($upload-&gt;upload(&quot;$FILENAME&quot;, &quot;$ACCEPT&quot;, &quot;$EXTENSION&quot;)) {
+	while(list($key, $var) = each($upload-&gt;file)){
+		echo $key . &quot; = &quot; . $var . &quot;&lt;br&gt;&quot;;
+	}
+	if($upload-&gt;save_file(&quot;$PATH&quot;, $SAVE_MODE)) {
+		print(&quot;&lt;p&gt;Saved as: &quot; . $upload-&gt;new_file . &quot;&lt;p&gt;&quot;);
+		print_file($upload-&gt;new_file, $upload-&gt;file[&quot;type&quot;], 2);
+	}
+}
+
+if($upload-&gt;errors) {
+	while(list($key, $var) = each($upload-&gt;errors)){
+		echo &quot;&lt;p&gt;&quot; . $var . &quot;&lt;br&gt;&quot;;
+	}
+}
+
+if ($NEW_NAME) {
+	print(&quot;&lt;p&gt;Name of sent file: &lt;b&gt;$NEW_NAME&lt;/b&gt;&lt;/p&gt;&quot;);
+}
+
+#--------------------------------#
+# HTML FORM
+#--------------------------------#
+?&gt;
+
+	&lt;form enctype=&quot;multipart/form-data&quot; action=&quot;&lt;?print($PHP_SELF);?&gt;&quot;
+method=&quot;POST&quot;&gt;
+		&lt;input type=&quot;hidden&quot; name=&quot;MAX_FILE_SIZE&quot; value=&quot;100000&quot;&gt;Send this file:
+		&lt;input name=&quot;userfile&quot; type=&quot;file&quot;&gt;
+		&lt;input type=&quot;submit&quot; value=&quot;SEND&quot;&gt;
+	&lt;/form&gt;
+	&lt;hr&gt;
+	[ &lt;a href=&quot;../index.html&quot;&gt;Home&lt;/a&gt; ]
+&lt;?
+	if ($ACCEPT) {
+		print(&quot; [ This form only accepts &lt;b&gt;&quot; . $ACCEPT . &quot;&lt;/b&gt; files ] \n&quot;);
+	}
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+&gt;<i> -----Oorspronkelijk bericht-----
+</I>&gt;<i> Van: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]Namens Priyo Chatterjee
+</I>&gt;<i> Verzonden: woensdag 31 oktober 2001 18:32
+</I>&gt;<i> Aan: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Onderwerp: [Xitami] Upload scripts on Xitami
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Does anybody have a file upload script which will work
+</I>&gt;<i> on Xitami.
+</I>&gt;<i>
+</I>&gt;<i> Thanks much.
+</I>&gt;<i>
+</I>&gt;<i> Priyo
+</I>&gt;<i>
+</I>&gt;<i> __________________________________________________
+</I>&gt;<i> Do You Yahoo!?
+</I>&gt;<i> Make a great connection at Yahoo! Personals.
+</I>&gt;<i> <A HREF="http://personals.yahoo.com">http://personals.yahoo.com</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+------=_NextPart_000_0008_01C1624B.75529460
+Content-Type: application/octet-stream;
+	name=&quot;fileupload.class&quot;
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename=&quot;fileupload.class&quot;
+
+&lt;?
+/*
+Error codes:
+	0 - &quot;No file was uploaded&quot;
+	1 - &quot;Maximum file size exceeded&quot;
+	2 - &quot;Maximum image size exceeded&quot;
+	3 - &quot;Only specified file type may be uploaded&quot;
+	4 - &quot;File already exists&quot; (save only)
+*/
+
+class uploader {
+
+	var $file;
+	var $errors;
+	var $accepted;
+	var $new_file;
+	var $max_filesize;
+	var $max_image_width;
+	var $max_image_height;
+
+	function max_filesize($size){
+		$this-&gt;max_filesize =3D $size;
+	}
+
+	function max_image_size($width, $height){
+		$this-&gt;max_image_width =3D $width;
+		$this-&gt;max_image_height =3D $height;
+	}
+
+	function upload($filename, $accept_type, $extention) {
+		// get all the properties of the file
+		$index =3D array(&quot;file&quot;, &quot;name&quot;, &quot;size&quot;, &quot;type&quot;);
+		for($i =3D 0; $i &lt; 4; $i++) {
+			$file_var =3D '$' . $filename . (($index[$i] !=3D &quot;file&quot;) ? &quot;_&quot; . =
+$index[$i] : &quot;&quot;);
+			eval('global ' . $file_var . ';');
+			eval('$this-&gt;file[$index[$i]] =3D ' . $file_var . ';');
+		}
+=09
+		if($this-&gt;file[&quot;file&quot;] &amp;&amp; $this-&gt;file[&quot;file&quot;] !=3D &quot;none&quot;) {
+			//test max size
+			if($this-&gt;max_filesize &amp;&amp; $this-&gt;file[&quot;size&quot;] &gt; $this-&gt;max_filesize) =
+{
+				$this-&gt;errors[1] =3D &quot;Maximum file size exceeded. File may be no =
+larger than &quot; . $this-&gt;max_filesize/1000 . &quot;KB.&quot;;
+				return False;
+			}
+	 		if(ereg(&quot;image&quot;, $this-&gt;file[&quot;type&quot;])) {
+	 			$image =3D getimagesize($this-&gt;file[&quot;file&quot;]);
+	 			$this-&gt;file[&quot;width&quot;] =3D $image[0];
+	 			$this-&gt;file[&quot;height&quot;] =3D $image[1];
+		=09
+				// test max image size
+				if(($this-&gt;max_image_width || $this-&gt;max_image_height) &amp;&amp; =
+(($this-&gt;file[&quot;width&quot;] &gt; $this-&gt;max_image_width) || =
+($this-&gt;file[&quot;height&quot;] &gt; $this-&gt;max_image_height))) {
+					$this-&gt;errors[2] =3D &quot;Maximum image size exceeded. Image may be no =
+more than &quot; . $this-&gt;max_image_width . &quot; x &quot; . $this-&gt;max_image_height . =
+&quot; pixels&quot;;
+					return False;
+				}=09
+	 			switch($image[2]) {
+	 				case 1:
+	 					$this-&gt;file[&quot;extention&quot;] =3D &quot;.gif&quot;;
+	 					break;
+	 				case 2:
+	 					$this-&gt;file[&quot;extention&quot;] =3D &quot;.jpg&quot;;
+	 					break;
+	 				case 3:
+	 					$this-&gt;file[&quot;extention&quot;] =3D &quot;.png&quot;;
+	 					break;
+	 				default:
+						$this-&gt;file[&quot;extention&quot;] =3D $extention;
+	 					break;
+	 			}
+			}
+	 		else if(!ereg(&quot;(\.)([a-z0-9]{3,5})$&quot;, $this-&gt;file[&quot;name&quot;]) &amp;&amp; =
+!$extention) {
+				// add new mime types here
+				switch($this-&gt;file[&quot;type&quot;]) {
+					case &quot;text/plain&quot;:
+						$this-&gt;file[&quot;extention&quot;] =3D &quot;.txt&quot;;
+						break;
+					default:
+						break;
+				}		=09
+	 		}
+			else {
+				$this-&gt;file[&quot;extention&quot;] =3D $extention;
+			}
+	=09
+			// check to see if the file is of type specified
+			if($accept_type) {
+				if(ereg($accept_type, $this-&gt;file[&quot;type&quot;])) { $this-&gt;accepted =3D =
+True; }
+				else { $this-&gt;errors[3] =3D &quot;Only &quot; . ereg_replace(&quot;\|&quot;, &quot; or &quot;, =
+$accept_type) . &quot; files may be uploaded&quot;; }
+			}
+			else { $this-&gt;accepted =3D True; }
+		}
+		else { $this-&gt;errors[0] =3D &quot;No file was uploaded&quot;; }
+		return $this-&gt;accepted;
+	}
+
+	function save_file($path, $mode){
+		global $NEW_NAME;
+	=09
+		if($this-&gt;accepted) {
+			// very strict naming of file.. only lowercase letters, numbers and =
+underscores
+			$new_name =3D ereg_replace(&quot;[^a-z0-9._]&quot;, &quot;&quot;, ereg_replace(&quot; &quot;, &quot;_&quot;, =
+ereg_replace(&quot;%20&quot;, &quot;_&quot;, strtolower($this-&gt;file[&quot;name&quot;]))));
+
+			// check for extention and remove
+			if(ereg(&quot;(\.)([a-z0-9]{3,5})$&quot;, $new_name)) {
+				$pos =3D strrpos($new_name, &quot;.&quot;);
+				if(!$this-&gt;file[&quot;extention&quot;]) { $this-&gt;file[&quot;extention&quot;] =3D =
+substr($new_name, $pos, strlen($new_name)); }
+				$new_name =3D substr($new_name, 0, $pos);
+			=09
+			}
+			$this-&gt;new_file =3D $path . $new_name . $this-&gt;file[&quot;extention&quot;];
+			$NEW_NAME =3D $new_name . $this-&gt;file[&quot;extention&quot;];
+		=09
+			switch($mode) {
+				case 1: // overwrite mode
+					$aok =3D copy($this-&gt;file[&quot;file&quot;], $this-&gt;new_file);
+					break;
+				case 2: // create new with incremental extention
+					while(file_exists($path . $new_name . $copy . =
+$this-&gt;file[&quot;extention&quot;])) {
+						$copy =3D &quot;_copy&quot; . $n;
+						$n++;
+					}
+					$this-&gt;new_file =3D $path . $new_name . $copy . =
+$this-&gt;file[&quot;extention&quot;];
+					$aok =3D copy($this-&gt;file[&quot;file&quot;], $this-&gt;new_file);
+					break;
+				case 3: // do nothing if exists, highest protection
+					if(file_exists($this-&gt;new_file)){
+						$this-&gt;errors[4] =3D &quot;File &amp;quot&quot; . $this-&gt;new_file . &quot;&amp;quot =
+already exists&quot;;
+					}
+					else {
+						$aok =3D rename($this-&gt;file[&quot;file&quot;], $this-&gt;new_file);
+					}
+					break;
+				default:
+					break;
+			}
+			if(!$aok) { unset($this-&gt;new_file); }
+			return $aok;
+		}
+	}
+}
+?&gt;
+
+------=_NextPart_000_0008_01C1624B.75529460--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001290.html">[Xitami] Upload scripts on Xitami
+</A></li>
+	<LI> Next message: <A HREF="001292.html">[Xitami] Does xitami feature a proxy server?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1291">[ date ]</a>
+              <a href="thread.html#1291">[ thread ]</a>
+              <a href="subject.html#1291">[ subject ]</a>
+              <a href="author.html#1291">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

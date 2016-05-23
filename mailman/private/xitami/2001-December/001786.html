@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] How to protect a cgi-bin subdirectory?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001785.html">
+   <LINK REL="Next"  HREF="001779.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] How to protect a cgi-bin subdirectory?
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] How to protect a cgi-bin subdirectory?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 19 Dec 2001 13:13:18 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001785.html">[Xitami] How to protect a cgi-bin subdirectory?
+</A></li>
+        <LI> Next message: <A HREF="001779.html">[Xitami] How do you unsubscribe?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1786">[ date ]</a>
+              <a href="thread.html#1786">[ thread ]</a>
+              <a href="subject.html#1786">[ subject ]</a>
+              <a href="author.html#1786">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael Pierce wrote:
+
+&gt;<i>Version: 2.5b5
+</I>&gt;<i>
+</I>&gt;<i>I'm trying to figure our how to password protect a sub directory of cgi-bin.
+</I>&gt;<i>For example,
+</I>&gt;<i>I want &quot;/cgi-bin/music&quot; to be protected so that only trusted users can run
+</I>&gt;<i>the scripts
+</I>&gt;<i>in there.  Adding the following:
+</I>&gt;<i>   [/cgi-bin/music]
+</I>&gt;<i>         friendly = &quot;users&quot;
+</I>&gt;<i>
+</I>&gt;<i>To defaults.aut does not do it. I am not prompted for a password when runing
+</I>&gt;<i>those scripts.
+</I>&gt;<i>
+</I>
+Another of these annoying 'it works for me' people I'm afraid
+
+In my defaults.cfg I have (amongst other things)
+[Security]
+    Filename = &quot;defaults.aut&quot;
+
+And in defaults.aut I have (amongst other things)
+[/cgi-bin/exec]
+    user = &quot;password&quot;
+
+Works on 2.5b5 both as localhost and to a remote server
+
+You can even add the Webmask = &lt;ipaddresslist&gt; line if you want to only 
+let certain scripts be run by known IP addresses. One thing I have 
+noticed is that browsers often remain 'logged in' for a long time so you 
+can only retest by closing the browser and restarting then you get the 
+login prompt.
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001785.html">[Xitami] How to protect a cgi-bin subdirectory?
+</A></li>
+	<LI> Next message: <A HREF="001779.html">[Xitami] How do you unsubscribe?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1786">[ date ]</a>
+              <a href="thread.html#1786">[ thread ]</a>
+              <a href="subject.html#1786">[ subject ]</a>
+              <a href="author.html#1786">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

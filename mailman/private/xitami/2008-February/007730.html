@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Additional error handling issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Additional%20error%20handling%20issue&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007733.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Additional error handling issue</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Additional%20error%20handling%20issue&In-Reply-To="
+       TITLE="[Xitami] Additional error handling issue">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Feb 20 08:44:46 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007733.html">[Xitami] 301 error handling
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7730">[ date ]</a>
+              <a href="thread.html#7730">[ thread ]</a>
+              <a href="subject.html#7730">[ subject ]</a>
+              <a href="author.html#7730">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I wrote a perl header to handle 404 errors for pages that no longer exist.
+
+use CGI qw/header/ ;
+
+print header(-expires=&gt;'now',
+    -status=&gt;'404 Not Found',
+    -type=&gt;'text/html'); 
+print qq{ $rest_of_html } ;
+
+Using a page like <A HREF="http://web-sniffer.net,">http://web-sniffer.net,</A> the HTTP Response Header comes back as a valid 404 Not Found page, however my web log shows the GET as status code 200.
+
+In access.log
+76.173.7.200 - - [19/Feb/2008:23:03:09 -0800] &quot;GET /pshow/lax/3/26/0/19307/ HTTP/1.1&quot; 200 437 &quot;&quot; &quot;&quot;
+
+FYI: /pshow is aliased to /cgi-bin/postShow.pl - which is a successful script call.
+
+In errors.log : nothing listed.
+
+The 200 at the end of that access.log line is the status code, the 437 is the file size of the returned HTML.  But why am I getting a 200 and no recording of a 404 when in fact other Header Response analysis sites do show the page returning a valid 404? 
+
+Is it because the server is successfully calling the script so it logs a 200, but then the script fails the ID lookup, and returns a 404?  If this is the case, how do I get my access.log file or errors.log file to log the 404 error?
+
+Any insight would greatly help.
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080219/d44c8433/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080219/d44c8433/attachment.htm</A> 
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007733.html">[Xitami] 301 error handling
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7730">[ date ]</a>
+              <a href="thread.html#7730">[ thread ]</a>
+              <a href="subject.html#7730">[ subject ]</a>
+              <a href="author.html#7730">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

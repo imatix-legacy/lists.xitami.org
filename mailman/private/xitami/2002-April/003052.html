@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Xitami]Attachments to E-mail?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003048.html">
+   <LINK REL="Next"  HREF="003057.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Xitami]Attachments to E-mail?
+   </H1>
+    <B>Gregory Hart
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Xitami]Attachments to E-mail?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Apr 2002 17:35:43 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003048.html">[Xitami] [Xitami]Attachments to E-mail?
+</A></li>
+        <LI> Next message: <A HREF="003057.html">[Xitami] Missing Images in Xitami 2.5b5 ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3052">[ date ]</a>
+              <a href="thread.html#3052">[ thread ]</a>
+              <a href="subject.html#3052">[ subject ]</a>
+              <a href="author.html#3052">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I found this at <A HREF="http://www-old.ics.uci.edu/pub/websoft/libwww-perl/archive/1999h1/0053.html.">http://www-old.ics.uci.edu/pub/websoft/libwww-perl/archive/1999h1/0053.html.</A> The message is below:
+
+You might want to check out MIME::Entity and company, specifically, the
+build, attach, print, and stringify methods.
+
+For example (from MIME::Entity documentation):
+
+my $msg = MIME::Entity-&gt;build(
+ From     =&gt; '<A HREF="mailto:me@myhost.com">me@myhost.com</A>',
+ To       =&gt; '<A HREF="mailto:you@yourhost.com">you@yourhost.com</A>',
+ Subject  =&gt; &quot;Hello, nurse!&quot;,
+ Data     =&gt; [
+  'body text line 1',
+  'body text line 2',
+  'body text line 3'
+ ]
+);
+$msg-&gt;attach(
+ Path =&gt; $my_file_to_attach,
+ Type =&gt; $my_files_mime_type,
+ Encoding =&gt; '-SUGGEST'
+);
+# set up SMTP recipient, sender here
+$smtp-&gt;datasend($msg-&gt;stringify);
+
+# or possibly $msg-&gt;print $smtp (I haven't tried this)
+
+So you just use $smtp-&gt;datasend once in this case instead of multiple times. Since you have mutliple lines of data, you should be
+able to use Data =&gt; @body. Hope that works.
+-Greg
+
+----- Original Message -----
+From:
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Sent: Thursday, April 25, 2002 10:19 AM
+Subject: [Xitami] [Xitami]Attachments to E-mail?
+
+
+
+Question on Attachments to E-mail:
+
+Used Net::SMTP from ActiveState to set up sub to send mail.
+This subroutine works correctly, but doesn't provide for
+file attachments. Listed SMTP.pm and found entry points
+for mail, to, data, and quit, but none for attach.
+
+Do I need to use another module or can Net::SMTP be used?
+
+Also, is there a module available for faxing files?
+
+Listed below is the sub I'm using.
+
+sub send_mail
+{ my ($to, $from, $subject, @body, $attach)=@_;
+  use Net::SMTP;
+
+  my $relay = &quot;smtp.earthlink.net&quot;;
+  my $smtp  = Net::SMTP-&gt;new($relay);
+  die &quot;Open of mail failed&quot; if (! defined $smtp);
+  print &quot;Open of mail OK&quot;, &quot;&lt;BR&gt;&quot;;
+
+  print &quot;Mail beg&quot;, &quot;&lt;BR&gt;&quot;;
+  $smtp-&gt;mail($from);
+  $smtp-&gt;to($to);
+  $smtp-&gt;data();
+  $smtp-&gt;datasend(&quot;To: $to\n&quot;);
+  $smtp-&gt;datasend(&quot;From: $from\n&quot;);
+  $smtp-&gt;datasend(&quot;Subject: $subject\n&quot;);
+  $smtp-&gt;datasend(&quot;\n&quot;);
+  foreach(@body)
+  {
+    $smtp-&gt;datasend(&quot;$_\n&quot;);
+  }
+  $smtp-&gt;dataend(&quot;\n&quot;);
+  $smtp-&gt;quit;
+}
+
+--- Robert N Meehan 909 784 5908,  214573
+--- <A HREF="mailto:rmsoftware@earthlink.net">rmsoftware@earthlink.net</A>
+--- EarthLink: It's your Internet.
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003048.html">[Xitami] [Xitami]Attachments to E-mail?
+</A></li>
+	<LI> Next message: <A HREF="003057.html">[Xitami] Missing Images in Xitami 2.5b5 ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3052">[ date ]</a>
+              <a href="thread.html#3052">[ thread ]</a>
+              <a href="subject.html#3052">[ subject ]</a>
+              <a href="author.html#3052">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] smthttp: error on socket
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005501.html">
+   <LINK REL="Next"  HREF="005504.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] smthttp: error on socket
+   </H1>
+    <B>WhiteShepherd
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] smthttp: error on socket">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 07 Nov 2003 13:21:15 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005501.html">[Xitami] smthttp: error on socket
+</A></li>
+        <LI> Next message: <A HREF="005504.html">[Xitami] smthttp: error on socket
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5503">[ date ]</a>
+              <a href="thread.html#5503">[ thread ]</a>
+              <a href="subject.html#5503">[ subject ]</a>
+              <a href="author.html#5503">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well actualy he does know what he's talking about.  As I said 
+earlier CHMOD is a Linux/Unix command function that does not 
+exist on Win systems.  Under windows the normal settings is all 
+&quot;programs&quot; have access to read/write to all of your hard drive.  
+Thus Xitami can read/write/execute any file you have given it 
+access too.  A Unix shell account has more security so you have to 
+CHMOD or give permissions to each individual file as to what 
+access you will allow.  
+
+Most CGI writers understand this and allow for this.  They 
+recommend you to chmod on *nix systems and just install and go 
+on Win systems as the permissions already exist.  This IS the case 
+as I run a web page hosting site under Xitami and many users have 
+installed their own forums (PHPBB, Ikonboard, PHPNUKE, Xoops, 
+etc) without the need for CHMOD.
+
+If you are still having problems I would guess this to be one of two 
+issues.  The script is writen for *nix only.  Some writers only wish to 
+support free OS or have nothing to do with Windows so do not 
+support it.  The other possibility is your Xitami is not running as 
+&quot;Administrarors&quot; and your setup is blocking access to something 
+based on a security setting.  You can check these settings under 
+Control Panel-&gt;Administrative Tools-&gt;Local Security Settings.  An 
+easier way to do this may be to the the &quot;Cacls&quot; command to give 
+Admin privlidges to your Xitami directories. 
+<A HREF="http://www.networkclue.com/os/Windows/commands/cacls.php">http://www.networkclue.com/os/Windows/commands/cacls.php</A>
+
+If you have a script that wishes a file read only use Windows 
+Explorer and right-click the file, chose properties and chose read-
+only.
+
+I've installed quite a few online forums and none so far have 
+required Chmod unless they ran under unix.
+
+Gene
+
+On 7 Nov 2003 at 9:37, Michael Gibbons wrote:
+
+&gt;<i> Sorry but i don't think you know what you are talking about, to be 
+</I>able to run a forum or chat room, using a 'flat file' the user need to 
+have permission to write to a file where they messages are stored, 
+this is not done automatically, once the file have been uploaded to 
+a server the permissions need to be changed, i would love it if you 
+can prove me wrong, and direct me to an example or a 
+demonstration where this is not the case.
+&gt;<i> 
+</I>&gt;<i> Thanks
+</I>&gt;<i> 
+</I>&gt;<i> Ps What is the point of this so called forum, i thought it was to 
+</I>help with xitami so far i have not recieved any and i am about to 
+unscribe.
+&gt;<i> 
+</I>&gt;<i> I am so disapointed that you can make of my spelling what you 
+</I>will
+&gt;<i> M
+</I>&gt;<i> 
+</I>&gt;<i> &gt;&gt;&gt; <A HREF="mailto:simon@infowizard.co.uk">simon@infowizard.co.uk</A> 11/06/03 02:44pm &gt;&gt;&gt;
+</I>&gt;<i> -----BEGIN PGP SIGNED MESSAGE-----
+</I>&gt;<i> Hash: SHA1
+</I>&gt;<i> 
+</I>&gt;<i> Hello Michael,
+</I>&gt;<i> 
+</I>&gt;<i> On Thu, 06 Nov 2003 12:32:09 +0000 your time, you said:
+</I>&gt;<i> 
+</I>&gt;<i> MG&gt; Easier  said  than  done,  i  have tried using cuteftp but i get 
+</I>a
+&gt;<i> MG&gt; message  command  not  implemented....
+</I>&gt;<i> 
+</I>&gt;<i> Well  I  wouldn't  do  that  just  yet. If you are running Xitami on a
+</I>&gt;<i> Windows OS you don't do anything. CHMOD isn't supported, and 
+</I>you don't
+&gt;<i> need to set permissions, usually. It should work OK as is.
+</I>&gt;<i> 
+</I>&gt;<i> I  have  CGI forums setup under Xitami on a W2K Pro machine 
+</I>and didn't
+&gt;<i> need to set any permissions for the files, so I imagine the same 
+</I>would
+&gt;<i> apply for your script.
+</I>&gt;<i> 
+</I>&gt;<i> - --
+</I>&gt;<i> Sl=E1n,
+</I>&gt;<i> 
+</I>&gt;<i>  Simon @ i~n+f~o+w~i+z~a+r~d+.~c+o~.+u~k
+</I>&gt;<i> 
+</I>&gt;<i> *****************************************
+</I>&gt;<i> PGP Key via Web:   <A HREF="http://pgp.infowizard.co.uk/">http://pgp.infowizard.co.uk/</A> 
+</I>&gt;<i> PGP Key via Email: <A HREF="mailto:getpgpkey@infowizard.co.uk">getpgpkey@infowizard.co.uk</A> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> #664. Are Squid Sly Worm =B6
+</I>&gt;<i> 
+</I>&gt;<i> -----BEGIN PGP SIGNATURE-----
+</I>&gt;<i> Comment: Protect your Privacy with PGP.
+</I>&gt;<i> Comment: KeyID: 0xDF8062C1
+</I>&gt;<i> Comment: Fingerprint: 40DD 7908 9DF8 634F 1B98  8849 9266 
+</I>C870 DF80 62C1
+&gt;<i> 
+</I>&gt;<i> 
+</I>iQA+AwUBP6pebpJmyHDfgGLBEQIT/gCeI5E4sea9I/Ci53kDXa1W
+4Js0vn4AmLmI
+&gt;<i> 8yuPpimHbNkXG5/2IZuuzco=3D
+</I>&gt;<i> =3Dw4e7
+</I>&gt;<i> -----END PGP SIGNATURE-----
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> The information or opinions in this message (including
+</I>&gt;<i> any attachments) are those of the author and are not 
+</I>&gt;<i> necessarily those of Uxbridge College, which disclaims
+</I>&gt;<i> responsibility for loss or damage arising from its use to
+</I>&gt;<i> the maximum extent permitted by law. E-mail messages
+</I>&gt;<i> sometimes go astray. This message is sent in
+</I>&gt;<i> confidence for the addressee only. It may contain
+</I>&gt;<i> confidential or sensitive information. The contents
+</I>&gt;<i> are not to be disclosed to anyone other than the
+</I>&gt;<i> addressee. Unauthorised recipients are requested to
+</I>&gt;<i> preserve this confidentiality and to advise the originator.
+</I>&gt;<i> immediately and to delete the message without copying,
+</I>&gt;<i> altering or disclosing its contents. E-mails to or from
+</I>&gt;<i> Uxbridge College may be monitored by the College in
+</I>&gt;<i> accordance with its current policy.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005501.html">[Xitami] smthttp: error on socket
+</A></li>
+	<LI> Next message: <A HREF="005504.html">[Xitami] smthttp: error on socket
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5503">[ date ]</a>
+              <a href="thread.html#5503">[ thread ]</a>
+              <a href="subject.html#5503">[ subject ]</a>
+              <a href="author.html#5503">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

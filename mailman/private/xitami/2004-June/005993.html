@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami 2.5C1
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005991.html">
+   <LINK REL="Next"  HREF="005992.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami 2.5C1
+   </H1>
+    <B>Elliott Potter
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami 2.5C1">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 14 Jun 2004 10:46:38 -0500 (EST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005991.html">[Xitami] Xitami 2.5C1
+</A></li>
+        <LI> Next message: <A HREF="005992.html">[Xitami] lrwp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5993">[ date ]</a>
+              <a href="thread.html#5993">[ thread ]</a>
+              <a href="subject.html#5993">[ subject ]</a>
+              <a href="author.html#5993">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; I had a real bear of a time getting 2.5c1 (or 2.4d10) to build from
+</I>&gt;<i> &gt; source.  Apparently the Windows versions work just great for everybody,
+</I>&gt;<i> &gt; but when I picked up the source tree there were several problems that
+</I>&gt;<i> &gt; prevented it from compiling (at least under linux).
+</I>&gt;<i> &gt; [...]
+</I>&gt;<i> &gt; Then make the build.sh script executable (it also helps on some systems
+</I>&gt;<i> &gt; to add #!/bin/bash to the first line) and give it a run and see where
+</I>&gt;<i> &gt; you get.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Well I want to thank you for your advice.
+</I>&gt;<i>
+</I>&gt;<i> But it seems that whatever I do I cannot get xitami to compile correctly or
+</I>&gt;<i> even in fact compile at all.
+</I>&gt;<i>
+</I>&gt;<i> I had already imported the ``c'' file from the 2.5b5 version and also
+</I>&gt;<i> imported what libraries I could find although I was unable to find libstu.a
+</I>&gt;<i> and libaxc.a and additionally made the build.sh file, plus the boomake and
+</I>&gt;<i> makefiles executable. I also tried the ``c'' file that you recommended with
+</I>&gt;<i> no better results.
+</I>&gt;<i>
+</I>&gt;<i> The build script build.sh seems to go through the motions finally abandoning
+</I>&gt;<i> the attempt with ''can't find xitami'' after hundreds of warnings.
+</I>&gt;<i>
+</I>&gt;<i> I next tried modifying the build script to remove the openssl and xipro
+</I>&gt;<i> directory references and which didn't seem to be created upon untarring the
+</I>&gt;<i> tarball.  That did not correct the situation.
+</I>&gt;<i>
+</I>&gt;<i> So I tried compiling the various directories without using the build.sh
+</I>&gt;<i> file.
+</I>&gt;<i>
+</I>&gt;<i> These are my findings:
+</I>&gt;<i>
+</I>&gt;<i> In sfl, (standard function library) ./boomake build  produces a file
+</I>&gt;<i> ``-g.lst'' which simply  contains ``gcc: no input files''
+</I>&gt;<i>
+</I>&gt;<i> Having deleted ``-g.lst'', ``./c *.c'' actually produces the object files
+</I>&gt;<i> and ``./boomake build install'' appears to work and in fact sets up the
+</I>&gt;<i> /usr/local/imatix directory and transfers over some files. Whether all the
+</I>&gt;<i> requisite files are installed I do not know, but I was hopeful at this stage
+</I>&gt;<i> although there were numerous bitches as follows:
+</I>&gt;<i> egrep -g.c No such file or directory
+</I>&gt;<i> compiling -g
+</I>&gt;<i> cat: invalid option -g
+</I>&gt;<i>
+</I>&gt;<i> Anyway moving on to GSL, following the same procedure ``./c *.c'' gave a
+</I>&gt;<i> multitude of errors and I abandoned the project.
+</I>&gt;<i>
+</I>&gt;<i> I would like to run the latest version. But at least 2.5b5 runs perfectly
+</I>&gt;<i> and I can always fall back on apache/proftpd if the need should ever arise.
+</I>
+
+proftpd that comes with slackware is pretty nice; I've got FTP turned
+off on xitami and use that instead.  *shrug*
+
+Anyway, I went back to some notes I made about the build process and
+found a bunch of the changes I made.  Here they are, in a conveniently
+patchable (-p1) form:
+
+
+diff -Naur current/gsl/boomake patched/gsl/boomake
+--- current/gsl/boomake	2003-12-05 06:20:21.000000000 -0500
++++ patched/gsl/boomake	2004-03-24 16:46:27.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo &quot;Building application...&quot;
+-    COPTS=-g
++    COPTS=
+     test ! -z &quot;$INCDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -li . -li $INCDIR_ALT&quot;
+     test ! -z &quot;$LIBDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -ll $LIBDIR_ALT&quot;
+     c $COPTS gslgen
+diff -Naur current/gsl/c patched/gsl/c
+--- current/gsl/c	2004-05-01 13:03:21.000000000 -0500
++++ patched/gsl/c	2004-03-24 19:30:18.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS=&quot;-O2 -Wall -pedantic&quot;
+                         ;;
+-           production)  CCOPTS=&quot;-s -O2 -Wall -pedantic&quot;
++           production)  CCOPTS=&quot;-g -s -O2 -Wall -pedantic&quot;
+                         ;;
+         esac
+
+diff -Naur current/gsl/ggeval.c patched/gsl/ggeval.c
+--- current/gsl/ggeval.c	2002-12-22 10:01:34.000000000 -0500
++++ patched/gsl/ggeval.c	2004-03-24 18:52:57.000000000 -0500
+@@ -40,6 +40,7 @@
+ #endif
+ #include &quot;ggpars.h&quot;                     /*  Script parser header file        */
+ #include &quot;ggeval.h&quot;                     /*  Include header file              */
++#include &lt;math.h&gt;				/* needed for floor */
+
+
+ /*- Types -------------------------------------------------------------------*/
+@@ -1210,9 +1211,9 @@
+           {
+             number_result (node);
+             if ((node-&gt; result_type == TYPE_NUMBER)
+-            &amp;&amp;  (node-&gt; result_n == floor (node-&gt; result_n))
++            &amp;&amp;  (node-&gt; result_n == floor(node-&gt; result_n))
+             &amp;&amp;  (node-&gt; result_n &gt;= 0))
+-                return TRUE;
++                {return TRUE;}
+           }
+         else
+             undefined_expression_error (node);
+diff -Naur current/gsl/ggobjt.c patched/gsl/ggobjt.c
+--- current/gsl/ggobjt.c	2002-12-22 10:01:34.000000000 -0500
++++ patched/gsl/ggobjt.c	2004-03-24 17:49:06.000000000 -0500
+@@ -113,15 +113,14 @@
+ int
+ method_evaluate (SCRIPT_NODE *node)
+ {
+-    int
+-        min = 0,
+-        max,
+-        chop = 0,
+-        cmp = -1,
+-        argc,
+-        rc;
+-    char
+-        *name;
++    int min = 0;
++	 int max = 0;
++	 int chop = 0;
++	 int cmp = -1;
++	 int argc;
++	 int rc;
++    char* name;
++
+     GSL_OBJECT
+         *object;
+     GSL_FUNCTION
+diff -Naur current/gsl/ggstrn.c patched/gsl/ggstrn.c
+--- current/gsl/ggstrn.c	2002-12-22 10:01:34.000000000 -0500
++++ patched/gsl/ggstrn.c	2004-03-24 17:38:03.000000000 -0500
+@@ -39,6 +39,7 @@
+ #include &quot;ggobjt.h&quot;                     /*  Object Module Header             */
+ #include &quot;ggeval.h&quot;                     /*  Expression Evaluator Header      */
+ #include &quot;ggstrn.h&quot;                     /*  Include header file              */
++#include &lt;math.h&gt;		/* needed for floor */
+
+
+ /*- Macros ------------------------------------------------------------------*/
+diff -Naur current/sfl/boomake patched/sfl/boomake
+--- current/sfl/boomake	2003-12-05 06:20:18.000000000 -0500
++++ patched/sfl/boomake	2004-03-24 16:42:13.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo &quot;Building application...&quot;
+-    COPTS=-g
++    COPTS=
+     test ! -z &quot;$INCDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -li . -li $INCDIR_ALT&quot;
+     test ! -z &quot;$LIBDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -ll $LIBDIR_ALT&quot;
+     c $COPTS sflbits
+diff -Naur current/sfl/c patched/sfl/c
+--- current/sfl/c	2004-05-01 13:03:23.000000000 -0500
++++ patched/sfl/c	2004-03-24 16:40:33.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS=&quot;-O2 -Wall -pedantic&quot;
+                         ;;
+-           production)  CCOPTS=&quot;-s -O2 -Wall -pedantic&quot;
++           production)  CCOPTS=&quot;-g -s -O2 -Wall -pedantic&quot;
+                         ;;
+         esac
+
+diff -Naur current/smt/boomake patched/smt/boomake
+--- current/smt/boomake	2003-12-05 06:20:25.000000000 -0500
++++ patched/smt/boomake	2004-03-24 16:49:53.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo &quot;Building application...&quot;
+-    COPTS=-g
++    COPTS=
+     test ! -z &quot;$INCDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -li . -li $INCDIR_ALT&quot;
+     test ! -z &quot;$LIBDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -ll $LIBDIR_ALT&quot;
+     c $COPTS smtecho
+diff -Naur current/smt/c patched/smt/c
+--- current/smt/c	2004-05-01 13:03:24.000000000 -0500
++++ patched/smt/c	2004-03-24 16:40:35.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS=&quot;-O2 -Wall -pedantic&quot;
+                         ;;
+-           production)  CCOPTS=&quot;-s -O2 -Wall -pedantic&quot;
++           production)  CCOPTS=&quot;-g -s -O2 -Wall -pedantic&quot;
+                         ;;
+         esac
+
+diff -Naur current/smt/smthttpl.c patched/smt/smthttpl.c
+--- current/smt/smthttpl.c	2003-12-05 07:09:22.000000000 -0500
++++ patched/smt/smthttpl.c	2004-03-24 17:12:05.000000000 -0500
+@@ -1641,10 +1641,12 @@
+     switch (p_http-&gt; response)
+       {
+         case HTTP_RESPONSE_OK:
+-            if (p_http-&gt; transaction == TRANSACTION_CGI
+-            ||  p_http-&gt; transaction == TRANSACTION_WSX)
+-            ||  p_http-&gt; transaction == TRANSACTION_FILTER)
+-                put_dynamic_headers (p_http, header);
++            if (p_http-&gt; transaction == TRANSACTION_CGI
++				|| p_http-&gt; transaction == TRANSACTION_WSX
++				|| p_http-&gt; transaction == TRANSACTION_FILTER)
++					{
++					put_dynamic_headers (p_http, header);
++					}
+             else
+               {
+                 get_file_properties (p_http);
+diff -Naur current/studio/boomake patched/studio/boomake
+--- current/studio/boomake	2003-12-05 06:20:29.000000000 -0500
++++ patched/studio/boomake	2004-03-24 16:52:27.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo &quot;Building application...&quot;
+-    COPTS=-g
++    COPTS=
+     test ! -z &quot;$INCDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -li . -li $INCDIR_ALT&quot;
+     test ! -z &quot;$LIBDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -ll $LIBDIR_ALT&quot;
+     PUSHDIR=`pwd`; cd doc/
+diff -Naur current/studio/c patched/studio/c
+--- current/studio/c	2004-05-01 13:03:16.000000000 -0500
++++ patched/studio/c	2004-03-24 16:40:38.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS=&quot;-O2 -Wall -pedantic&quot;
+                         ;;
+-           production)  CCOPTS=&quot;-s -O2 -Wall -pedantic&quot;
++           production)  CCOPTS=&quot;-g -s -O2 -Wall -pedantic&quot;
+                         ;;
+         esac
+
+diff -Naur current/xiadmin/boomake patched/xiadmin/boomake
+--- current/xiadmin/boomake	2003-12-05 06:20:31.000000000 -0500
++++ patched/xiadmin/boomake	2004-03-24 16:53:45.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo &quot;Building application...&quot;
+-    COPTS=-g
++    COPTS=
+     test ! -z &quot;$INCDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -li . -li $INCDIR_ALT&quot;
+     test ! -z &quot;$LIBDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -ll $LIBDIR_ALT&quot;
+     c $COPTS xiadmin
+diff -Naur current/xiadmin/c patched/xiadmin/c
+--- current/xiadmin/c	2004-05-01 13:03:14.000000000 -0500
++++ patched/xiadmin/c	2004-03-24 16:40:25.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS=&quot;-O2 -Wall -pedantic&quot;
+                         ;;
+-           production)  CCOPTS=&quot;-s -O2 -Wall -pedantic&quot;
++           production)  CCOPTS=&quot;-g -s -O2 -Wall -pedantic&quot;
+                         ;;
+         esac
+
+diff -Naur current/xiopen/boomake patched/xiopen/boomake
+--- current/xiopen/boomake	2003-12-05 06:20:34.000000000 -0500
++++ patched/xiopen/boomake	2004-03-24 16:54:18.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo &quot;Building application...&quot;
+-    COPTS=-g
++    COPTS=
+     test ! -z &quot;$INCDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -li . -li $INCDIR_ALT&quot;
+     test ! -z &quot;$LIBDIR_ALT&quot; &amp;&amp; COPTS=&quot;$COPTS -ll $LIBDIR_ALT&quot;
+     PUSHDIR=`pwd`; cd cgi-bin/
+diff -Naur current/xiopen/c patched/xiopen/c
+--- current/xiopen/c	2004-05-01 13:03:19.000000000 -0500
++++ patched/xiopen/c	2004-03-24 16:40:29.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS=&quot;-O2 -Wall -pedantic&quot;
+                         ;;
+-           production)  CCOPTS=&quot;-s -O2 -Wall -pedantic&quot;
++           production)  CCOPTS=&quot;-g -s -O2 -Wall -pedantic&quot;
+                         ;;
+         esac
+
+
+
+
+... in a nutshell, the COPTS variable in the various boomake scripts
+doesn't get passed correctly, so you have to use the CCOPTS variable in
+the c file for that stuff and remove it from boomake.  That takes care
+of the -g.c and -g.lst issues.  Next, you've got to either use -lm or
+have included math.h for any file using floor, and I didn't have the
+patience to sort through the build system and figure out how to use -lm
+just for those files, so I added math.h to ggeval.c and ggstrn.c.
+Then in smthttpl.c there's a typo; it shouldn't compile for anyone but
+apparently it compiled for the Windows people so whatever.
+
+
+
+Assuming the patch applied correctly (it should but I didn't try it ...
+just make sure to have a clean source tree), here's what I did next:
+
+cd sfl
+CCNAME=gcc \
+CCPRODLEVEL=production \
+CCOPTS=&quot;&lt;stuff whatever you want here; don't use what's in c&gt;&quot; \
+sh boomake build install
+
+cd ../gsl
+CCNAME=gcc \
+CCPRODLEVEL=production \
+CCOPTS=&quot;&lt;your flags&gt; \
+   -I/usr/local/imatix/xitami-25/include \
+	-L/usr/local/imatix/xitami-25/lib&quot; \
+sh boomake build install
+
+
+At this point you might see some linker errors during the build process;
+just ignore them.
+
+
+cd ../smt
+&lt;repeat gsl's command line&gt;
+
+cd ../studio
+&lt;repeat&gt;
+
+cd ../xiadmin
+&lt;repeat&gt;
+
+cd ../xiopen
+&lt;repeat&gt;
+
+Now, add to the end of the end of the build line (i.e. after CCOPTS):
+
+CCLIBS=&quot;/usr/local/imatix/xitami-25/lib/libgsl.a \
+   /usr/local/imatix/xitami-25/lib/libsfl.a \
+	/usr/local/imatix/xitami-25/lib/libxac.a \
+	/usr/local/imatix/xitami-25/lib/libstu.a \
+	/usr/local/imatix/xitami-25/lib/libsmt.a&quot;
+
+
+... and repeat the process (sfl, gsl, etc.).  In these builds you should
+definitely not ignore compiler/linker errors.  But with any amount of
+luck, you won't get any.
+
+
+
+oh oh oh I almost forgot.  If you want to use php, you need to make
+another change:
+
+
+
+diff -Naur eep-smt/smthttpl.c smt/smthttpl.c
+--- eep-smt/smthttpl.c	2004-05-21 23:36:23.000000000 -0500
++++ smt/smthttpl.c	2004-05-21 23:36:42.000000000 -0500
+@@ -2787,7 +2787,6 @@
+     SET (&quot;Request-Method&quot;,    http_methods [p_http-&gt; method]);
+     SET (&quot;Script-Path&quot;,       p_http-&gt; script_path);
+     SET (&quot;Script-Name&quot;,       p_http-&gt; script_name);
+-    SET (&quot;Script-Filename&quot;,   path_translated);
+     SET (&quot;Content-Type&quot;,      http_header_value (p_http, &quot;content-type&quot;));
+     SET (&quot;Content-Length&quot;,    http_header_value (p_http, &quot;content-length&quot;));
+     SET (&quot;Remote-User&quot;,       p_http-&gt; username? p_http-&gt; username: &quot;-&quot;);
+diff -Naur eep-smt/smthttpl.h smt/smthttpl.h
+--- eep-smt/smthttpl.h	2004-05-21 23:35:39.000000000 -0500
++++ smt/smthttpl.h	2004-05-21 23:34:27.000000000 -0500
+@@ -253,7 +253,6 @@
+         *vhost,                         /*  Virtual host for request         */
+         *script_path,                   /*  Script path                      */
+         *script_name,                   /*  Name of script, without path     */
+-        *script_filename,               /*  New versions of php require this.*/
+         *path_info,                     /*  CGI path info string             */
+         *post_data,                     /*  CGI POST data string             */
+         *referrer,                      /*  Original Referer: value          */
+
+
+
+You may want to try first without this patch, since I'm apparently the
+only person in the world who had this problem, but I couldn't find any
+other way around it.
+
+
+Anyway, hope all this stuff works.
+--
+Elliott
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005991.html">[Xitami] Xitami 2.5C1
+</A></li>
+	<LI> Next message: <A HREF="005992.html">[Xitami] lrwp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5993">[ date ]</a>
+              <a href="thread.html#5993">[ thread ]</a>
+              <a href="subject.html#5993">[ subject ]</a>
+              <a href="author.html#5993">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

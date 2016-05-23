@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Plaintext passwords on Bugtraq (again)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003470.html">
+   <LINK REL="Next"  HREF="003486.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Plaintext passwords on Bugtraq (again)
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Plaintext passwords on Bugtraq (again)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 Jun 2002 16:27:55 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003470.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+        <LI> Next message: <A HREF="003486.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3471">[ date ]</a>
+              <a href="thread.html#3471">[ thread ]</a>
+              <a href="subject.html#3471">[ subject ]</a>
+              <a href="author.html#3471">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael Burns wrote:
+
+&gt;<i> The problem is not that the configuration file is in plain text.
+</I>&gt;<i>
+</I>&gt;<i> The problem is that the &quot;passwords&quot; are in &quot;plaintext&quot;, not 
+</I>&gt;<i> &quot;cyphertext&quot;. Any user with read access to the file - all users on 
+</I>&gt;<i> Windows 9X/ME and non-NTFS drives - can read those passwords. 
+</I>
+So what?
+a) The passwords will be sent over the wire as base64 encoded which is 
+essentially plaintext since it is NOT a 1-way hash. These passwords are 
+therefore nothing close to secure anyway which is why no one uses them 
+for web authentication in places where security is an issue.
+b) The problem is the lack of windows user/file ownership not the 
+plaintextness of the passwords. If you have console access to a windows 
+machine running any webserver you can do anything you want. The fact 
+that you have access to the password file is a trivial side-effect.
+
+&gt;<i>
+</I>&gt;<i> A typical solution is to place a &quot;hash&quot; of the password into the file. 
+</I>
+Encyphering these passwords would actually give a misleading sense of 
+security since it is so easy to see them over the wire.
+
+By the way
+
+If you want to have secure password access the bets way is to use a cgi 
+program to set a cookie and a GSL or similar script to read the cookie 
+and display the page if it matches that in a XML hash file. This can be 
+quite general purpose (i.e. you can do 
+<A HREF="http://server/secure.gsl?/path/file.htm">http://server/secure.gsl?/path/file.htm</A> to display arbitrary files but 
+with an initial security check to see if this should be permitted)
+
+If anyone wants the code for the above I would be happy to share it 
+somewhere once I have tidied it up a bit. It really isn't complicated 
+once you decice how to allocate the permissions.
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003470.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+	<LI> Next message: <A HREF="003486.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3471">[ date ]</a>
+              <a href="thread.html#3471">[ thread ]</a>
+              <a href="subject.html#3471">[ subject ]</a>
+              <a href="author.html#3471">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitmai restart utility/daemon
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005523.html">
+   <LINK REL="Next"  HREF="005529.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitmai restart utility/daemon
+   </H1>
+    <B>Simon
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitmai restart utility/daemon">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Nov 2003 02:15:33 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005523.html">[Xitami] Xitmai restart utility/daemon
+</A></li>
+        <LI> Next message: <A HREF="005529.html">[Xitami] Xitmai restart utility/daemon
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5524">[ date ]</a>
+              <a href="thread.html#5524">[ thread ]</a>
+              <a href="subject.html#5524">[ subject ]</a>
+              <a href="author.html#5524">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hello Tom,
+
+On Sun, 9 Nov 2003 20:19:01 -0500 your time, you said:
+
+TB&gt; I just named mine xitami.bat (irrelevant, really), and launch that
+TB&gt; INSTEAD of launching Xitami directly.
+
+Sorry,  I  misunderstood  you.  I was assuming that the process was an
+automatic one and that the batch file was called by Xitami. Thanks for
+your  suggestion  though,  but  I  really  wanted something that would
+restart Xitami without any intervention from me. However, I did manage
+to put together a rough workaround that didn't cost anything.
+
+First  of all I downloaded a free program called Active Server Watcher
+from here: <A HREF="http://www.ntutility.com/freeware_2.html.">http://www.ntutility.com/freeware_2.html.</A>
+
+Then I downloaded this free command line utility called 'process' from
+here: <A HREF="http://www.beyondlogic.org/consulting/processutil/processutil.htm">http://www.beyondlogic.org/consulting/processutil/processutil.htm</A>
+
+'Active  Server  Watcher'  monitors  web resources so I created a page
+called  poll.htm  under  Xitami  and  set  ASW  to poll that every few
+minutes. If the page becomes unavailable I have set ASW to test 5 more
+times  before  running  an external file. The file is xigui32.bat (see
+below).  However,  I didn't want to just load a new instance of Xitami
+just  because  a  page  wasn't  reachable because as it may be totally
+unrelated  to Xitami, and could after all be DNS or temp network fault
+etc. So I use the freeware commandline file 'process' to terminate any
+running instance of xigui32.exe first and then the batch reloads a new
+instance, making certain that only one instance of Xitami is running.
+
+- --- BEGIN xigui32.bat
+
+BEGIN:
+X:
+cd X:\[path]\Xitami
+goto KILL
+
+:<i>KILL
+</I>process.exe -k xigui32.exe
+goto RESTART
+
+:<i>RESTART
+</I>start xigui32.exe
+goto END
+
+:<i>END
+</I>- --- END xigui32.bat
+
+This works fine. It may not be the 'cleanest' way to do it but it is a
+workaround.
+
+- --
+Sl=E1n,
+
+ Simon @ i~n+f~o+w~i+z~a+r~d+.~c+o~.+u~k
+
+*****************************************
+PGP Key via Web:   <A HREF="http://pgp.infowizard.co.uk/">http://pgp.infowizard.co.uk/</A>
+PGP Key via Email: <A HREF="mailto:getpgpkey@infowizard.co.uk">getpgpkey@infowizard.co.uk</A>
+
+
+#1969. Arum Qed Swirl Soy =B6
+
+-----BEGIN PGP SIGNATURE-----
+Comment: Protect your Privacy with PGP.
+Comment: KeyID: 0xDF8062C1
+Comment: Fingerprint: 40DD 7908 9DF8 634F 1B98  8849 9266 C870 DF80 62C1
+
+iQA/AwUBP670yZJmyHDfgGLBEQJ6AgCggehS5BvHR+6OSWFNMy4/bzmGz6wAoKp4
+/ZajK2E64HeA68uSEbN54R9H
+=3Dqgd5
+-----END PGP SIGNATURE-----
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005523.html">[Xitami] Xitmai restart utility/daemon
+</A></li>
+	<LI> Next message: <A HREF="005529.html">[Xitami] Xitmai restart utility/daemon
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5524">[ date ]</a>
+              <a href="thread.html#5524">[ thread ]</a>
+              <a href="subject.html#5524">[ subject ]</a>
+              <a href="author.html#5524">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

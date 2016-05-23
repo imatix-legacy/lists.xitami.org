@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Logfile issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Logfile%20issues&In-Reply-To=BAY105-DAV13EB7AEBCB374E5131CCC5F8360%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007705.html">
+   <LINK REL="Next"  HREF="007704.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Logfile issues</H1>
+    <B>Rick Headly</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Logfile%20issues&In-Reply-To=BAY105-DAV13EB7AEBCB374E5131CCC5F8360%40phx.gbl"
+       TITLE="[Xitami] Logfile issues">rickhead at gmail.com
+       </A><BR>
+    <I>Wed Jan 30 17:50:41 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007705.html">[Xitami] Logfile issues
+</A></li>
+        <LI>Next message: <A HREF="007704.html">[Xitami] Logfile issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7703">[ date ]</a>
+              <a href="thread.html#7703">[ thread ]</a>
+              <a href="subject.html#7703">[ subject ]</a>
+              <a href="author.html#7703">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>i used to see the same (or similar) thing going on here russel...
+back in the days when i used a default naming system and allowed all my
+v-hosts to write to a single log-storage directory.
+
+this all seemed to correct itself once i devised a log naming system of my
+own, and instructed most of the logs to write to their own unique storage
+directories.  the cfg files for 'most' of my v-hosts, now have lines which
+look something like this:
+
+
+[Accesslog]
+    Cycle-arg = &quot;acc_domain-nickname-%yy%mm%dd.log&quot;
+    Filename = &quot;domain-nickname_access.log&quot;
+
+[Errorlog]
+    Cycle-arg = &quot;err_domain-nickname-%yy%mm%dd.log&quot;
+    Filename = &quot;domain-nickname_errors.log&quot;
+
+[Server]
+    Log-dir = &quot;./domain-directory/logs&quot;
+
+
+... and it all seems to work.
+
+my guess, is that something in your config is trying to force xitami to
+write multiple files with the same name... and those digits are being tagged
+to the tail end of the file name, in an effort to prevent new logs from
+quickly being overwritten.
+
+hope this helps...
+good luck! :)
+
+rick
+
+
+On 1/30/08, Russel Olinger &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  My logs files are set to cycle once a day and then to store then log file
+</I>&gt;<i> into the default name: ac%yy%mm%dd.log
+</I>&gt;<i>
+</I>&gt;<i> However, I almost everyday I see the following log entries:
+</I>&gt;<i> ac%yy%mm%dd.log
+</I>&gt;<i> ac%yy%mm%dd.log_000
+</I>&gt;<i> ac%yy%mm%dd.log_001
+</I>&gt;<i>
+</I>&gt;<i> the .log_000 and .log_001 files are never consistent...sometime one or
+</I>&gt;<i> both are empty, sometimes one of them has valid CLFX (extended) log entries
+</I>&gt;<i> in them.
+</I>&gt;<i>
+</I>&gt;<i> I don't know what is causing this or why its splitting out into multiple
+</I>&gt;<i> files....but its causing a problem using awstats because awstats requires
+</I>&gt;<i> files to be processed in sequential order and entries in the _000 and _001
+</I>&gt;<i> files often aren't getting processed which are skewing my actualy numbers.
+</I>&gt;<i>
+</I>&gt;<i> I don't see anything in my logging section that would cause these _00x
+</I>&gt;<i> files to be created and written to.
+</I>&gt;<i>
+</I>&gt;<i> Has anyone seen this before?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080130/777c0614/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080130/777c0614/attachment.htm</A> 
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007705.html">[Xitami] Logfile issues
+</A></li>
+	<LI>Next message: <A HREF="007704.html">[Xitami] Logfile issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7703">[ date ]</a>
+              <a href="thread.html#7703">[ thread ]</a>
+              <a href="subject.html#7703">[ subject ]</a>
+              <a href="author.html#7703">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

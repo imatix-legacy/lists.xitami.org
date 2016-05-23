@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI and site down
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001376.html">
+   <LINK REL="Next"  HREF="001378.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI and site down
+   </H1>
+    <B>Patrick
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI and site down">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 08 Nov 2001 23:17:49 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001376.html">[Xitami] SSI and site down
+</A></li>
+        <LI> Next message: <A HREF="001378.html">[Xitami] Upload scripts on Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1377">[ date ]</a>
+              <a href="thread.html#1377">[ thread ]</a>
+              <a href="subject.html#1377">[ subject ]</a>
+              <a href="author.html#1377">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>CoolAdam wrote:
+&gt;<i> 
+</I>&gt;<i> Apparently xitami.com is down.  A friend of mine confirmed this.  100% loss
+</I>&gt;<i> on ping, and I get destination host unreachable.
+</I>&gt;<i> Also, I can't get ssi to work.  I installed the lastest version of active
+</I>&gt;<i> perl from activestate.com, then renamed my index.html file to index.shtml
+</I>&gt;<i> and &lt;!--#include virtual=&quot;example.htm&quot;--&gt; didn't work.  SSI is enabled in
+</I>&gt;<i> the settings.  This is really disappointing.
+</I>&gt;<i> Also, how do I get the server to &quot;recover silently from errors&quot;???
+</I>
+
+What does your errors.log
+access.log and cgierr.log
+have in it
+in your defaults.cfg file do you have these tags
+? Does <A HREF="http://127.0.0.1/testssi.ssi">http://127.0.0.1/testssi.ssi</A>
+work?
+
+I just booted to windows to check the tag where
+I run Xitami and it worked fine
+is perl set in your path,
+I'm sure it should be I think activestate
+does this during install but wouldn't hurt
+to check the autoexec.bat file and make sure
+
+[Ssi]
+    Enabled=1
+    Exec=0
+[Cgi]
+    Debug=1   #makes files in your tmp folder
+	      #to help debug cgi problems may help
+    Exit-ok=0
+    Form-query=1
+    Full-name=1
+    Timeout=120
+    Wildcard=1
+[Filter]
+    .php=D:\php\php.exe
+    .phtml=D:\php\php.exe
+    .shtm=perlssi
+    .shtml=perlssi
+    .ssi=perlssi
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001376.html">[Xitami] SSI and site down
+</A></li>
+	<LI> Next message: <A HREF="001378.html">[Xitami] Upload scripts on Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1377">[ date ]</a>
+              <a href="thread.html#1377">[ thread ]</a>
+              <a href="subject.html#1377">[ subject ]</a>
+              <a href="author.html#1377">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

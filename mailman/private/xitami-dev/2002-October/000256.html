@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] SFL thread-safety and Java SMT
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000255.html">
+   <LINK REL="Next"  HREF="000257.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] SFL thread-safety and Java SMT
+   </H1>
+    <B>Keresztfalvi Laszlo
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] SFL thread-safety and Java SMT">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 15 Oct 2002 13:22:08 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000255.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+        <LI> Next message: <A HREF="000257.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#256">[ date ]</a>
+              <a href="thread.html#256">[ thread ]</a>
+              <a href="subject.html#256">[ subject ]</a>
+              <a href="author.html#256">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Oct 15, 2002 at 12:34:48PM +0200, Pieter Hintjens wrote:
+&gt;<i> We started on this.  This is a list of the SFL modules that have been 
+</I>&gt;<i> made thread-safe:
+</I>Good news! I hardly wait for sock :)
+
+&gt;<i> We've never found the FIFO behaviour of SMT to be problematic since 
+</I>&gt;<i> heavy work (in our business, anyhow) inevitably consists of database 
+</I>Sure. I'm a SMT lover and I use it where possible so in my work too.
+Unfortunately ;) my workpals don't want to change their mind and coding
+scheme. Biggest difficulty for them to keep in mind to unroll the long loops
+(I understand that this is uncomfortable) and to establish inter-process
+data exchange to execute a simple sql query while it is really simple in eg.
+Windows C++. This is mostly the problem. OTOH, inter-process communication
+in a server means more fd (in case of a portable solution) for the entry
+process. LB dns could be a solution but then it is not enough to buy procs
+but at least net cards and IP addresses too. Never mind, just thoughts.
+
+&gt;<i> What did you have in mind when you made this?  We built SMT mainly to 
+</I>Nothing special ;) It was a try at the company to build multi platform
+solutions in Java on Call Center or CRM fields with some inspiration from
+another Java based solution. Then, I mentioned this SMT strategy. That's
+all. We are now on M$ with C++ because of the small-medium target sector and
+promotion opportunities...
+ 
+&gt;<i> this.  But sometimes I regret not having used C++, since it would 
+</I>&gt;<i> have allowed us to make the SMT abstraction much cleaner.
+</I>.. And yes, I made this part of the development on C++ class and native win
+thread base with Libero code generation. Because of the above reasons, no
+SFL and SMT used. This is actually a framework and others code applications
+with further tools for web forms and DB handling.
+
+I would be very happy to tell more about this framework and improvments but
+you know.. it's not only my business.. :(
+
+Regards,
+Laszlo
+
+PS: I believe this FSM approach must become an industry standard to develop
+trustable, stable software. Object oriented solutions are good in design but
+lock and race conditions can mess them up. However, FSM is still a kind of
+object but always know where it is and what should come next. /Me/ ;)
+
+ 
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000255.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+	<LI> Next message: <A HREF="000257.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#256">[ date ]</a>
+              <a href="thread.html#256">[ thread ]</a>
+              <a href="subject.html#256">[ subject ]</a>
+              <a href="author.html#256">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

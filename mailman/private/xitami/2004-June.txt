@@ -1,0 +1,1838 @@
+From xitami@lists.xitami.org  Tue Jun  1 14:03:19 2004
+From: xitami@lists.xitami.org (Nick Wilsdon)
+Date: Tue, 1 Jun 2004 17:03:19 +0400
+Subject: [Xitami] setting up virtual hosts locally
+In-Reply-To: <001e01c443f9$21ccbcc0$648bfea9@desk1>
+Message-ID: <00d501c447d8$d14ba480$0c01a8c0@ws15>
+
+Hi James,
+
+Thanks for that advice - I ended up going with Apache in the end but
+Thomas' advice was very handy in setting up the hosts file and I'm
+working fine now at home. 
+
+I would like to run a local copy of Apache though at work also now I
+have this working at home so everyone can upload and view pages locally
+before syncing them with the server. I will have a go using your example
+on the peered network. We're out in Russia at the moment and the high
+bandwidth costs are making us much more careful than we were previously
+in the UK! 
+
+I don't quite understand though how a user on our network here
+'switches' between the local intranet and the internet generally. At
+home I have now configured virtual hosts so that when I type in
+domain.com I arrive at the site as per normal - would the users here
+type IP numbers instead? I know this isn't a Xitami question though so I
+would quite understand if you don't answer.
+
+
+Best regards,
+
+Nick
+
+
+James McDonald said
+
+Subject: Re: [Xitami] setting up virtual hosts locally
+
+Hi Nick
+
+Thomas gave you good advice for a lone pc. If  you are useing a peer to
+peer
+network and need the sites to be seen by all network peers. you should
+use
+the ip for your network interface card not the 127.0.0.1 loopback ip. I
+copy
+a master host file to all the pc's in our network.
+
+sample..................................................................
+....
+.......
+
+#IP Address     Name                  Comments
+
+127.0.0.1          localhost              #Loop back IP/Name
+
+192.168.0.0     desk1                    #Default IP & Names
+192.168.0.1     desk2                    #Default IP & Names
+192.168.0.2     desk3                    #Default IP & Names
+192.168.0.3     desk4                    #Default IP & Names
+192.168.0.4     desk5                    #Default IP & Names
+192.168.0.5     desk6                    #Default IP & Names
+
+192.168.0.0     company.frim       #In house IP & Names
+192.168.0.0     company.com       #In house IP & Names
+192.168.0.5     company.web       #In house IP & Names
+127.0.0.1         testthis.test           #Local test site
+
+End
+sample..................................................................
+....
+..
+Jeff
+
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.690 / Virus Database: 451 - Release Date: 22/05/2004
+ 
+
+
+From xitami@lists.xitami.org  Tue Jun  1 15:26:25 2004
+From: xitami@lists.xitami.org (James McDonald)
+Date: Tue, 1 Jun 2004 09:26:25 -0500
+Subject: [Xitami] setting up virtual hosts locally
+References: <00d501c447d8$d14ba480$0c01a8c0@ws15>
+Message-ID: <000c01c447e4$6e0bd000$648bfea9@desk1>
+
+Hi Nick
+
+The host file acts as a DNS server in that it assigns names to IP numbers.
+When you set up your network each computer was given a name in the sample i
+use desk1 thrugh desk6. In the sample both desk1 and desk6 are runnning web
+servers. To see the web site on the computer named desk6 type in any of the
+following in the address bar of your web browser, the the computer's network
+name "desk6", the site name "company.web" or the IP address. Your browser
+checks the host file of the computer it is running on befor it gose online.
+
+Jeff
+
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.692 / Virus Database: 453 - Release Date: 5/28/04
+
+
+From xitami@lists.xitami.org  Tue Jun  1 15:40:53 2004
+From: xitami@lists.xitami.org (Nick Wilsdon)
+Date: Tue, 1 Jun 2004 18:40:53 +0400
+Subject: [Xitami] setting up virtual hosts locally
+In-Reply-To: <000c01c447e4$6e0bd000$648bfea9@desk1>
+Message-ID: <00fa01c447e6$74595c00$0c01a8c0@ws15>
+
+Ah I see <light_bulb>! 
+
+Thanks James - much appreciated :)
+
+Best,
+
+Nick
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org] On Behalf Of James McDonald
+Sent: 01 June 2004 18:26
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] setting up virtual hosts locally
+
+Hi Nick
+
+The host file acts as a DNS server in that it assigns names to IP
+numbers.
+When you set up your network each computer was given a name in the
+sample i
+use desk1 thrugh desk6. In the sample both desk1 and desk6 are runnning
+web
+servers. To see the web site on the computer named desk6 type in any of
+the
+following in the address bar of your web browser, the the computer's
+network
+name "desk6", the site name "company.web" or the IP address. Your
+browser
+checks the host file of the computer it is running on befor it gose
+online.
+
+Jeff
+
+
+ 
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.690 / Virus Database: 451 - Release Date: 22/05/2004
+ 
+
+
+From xitami@lists.xitami.org  Tue Jun  1 19:53:40 2004
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Tue, 1 Jun 2004 19:53:40 +0100 (BST)
+Subject: [Xitami] setting up virtual hosts locally
+Message-ID: <56510@dsl.co.uk>
+
+In message <000c01c447e4$6e0bd000$648bfea9@desk1>
+   "James McDonald" writes:
+
+> name "desk6", the site name "company.web" or the IP address. Your browser
+> checks the host file of the computer it is running on befor it gose online.
+
+Well, that last depends upon the operating system hosting the broswer;
+for instance, under eComStation <http://www.ecomstation.com> one needs to
+tick "Use HOSTS file first" in the TCP/IP properties.  Same goes for most
+other proper operating systems.
+
+-- 
+   fix (vb.): 1. to paper over, obscure, hide from public view; 2. to
+   work around, in a way that produces unintended consequences that are
+   worse than the original problem.  Usage: "Windows ME fixes many of the
+   shortcomings of Windows 98 SE".
+
+
+From xitami@lists.xitami.org  Wed Jun  2 01:56:24 2004
+From: xitami@lists.xitami.org (Jill Douglas)
+Date: Tue, 1 Jun 2004 20:56:24 -0400
+Subject: [Xitami] Question
+References: <56510@dsl.co.uk>
+Message-ID: <018301c4483c$6dc967d0$5b257218@homestv12vfw8r>
+
+    Is it me, or is it possible that the five sites I host cancel each other
+out if one site is being visited?  Does anyone know what I mean?  I seem to
+visit one of my sites and it appears blank and I know that someone somewhere
+must be visiting one of the sites because the Xitami icon in my system tray
+is yellow.  when it turns green again, I know that I can successfully visit
+a site again.
+
+Jill
+
+
+From xitami@lists.xitami.org  Sat Jun  5 05:24:19 2004
+From: xitami@lists.xitami.org (Michael diLorenzo)
+Date: Sat, 05 Jun 2004 00:24:19 -0400
+Subject: [Xitami] Question
+In-Reply-To: <018301c4483c$6dc967d0$5b257218@homestv12vfw8r>
+References: <56510@dsl.co.uk> <018301c4483c$6dc967d0$5b257218@homestv12vfw8r>
+Message-ID: <opr83s6tvjxifng9@mail.nycap.rr.com>
+
+Hi Jill,
+
+Your sites shouldn't "cancel" each other out at all.  I host a dozen sites  
+and folks can visit any of them at any time.
+
+Are you using the virtual host capabilities of Xitami?  i.e. do you have  
+separate configuration files for each of your hosts, and these files are  
+referenced in your xitami.cfg (or better yet, a default.cfg)?
+
+If you have a VERY slow Internet connection and complicated pages, it's  
+possible that you're seeing a white page while Xitami delivers the goods  
+to you.  Do you see a progress bar or any other indication that the site  
+is still loading while you see that white page?
+
+Michael
+
+On Tue, 01 Jun 2004 20:56:24 -0400, Jill Douglas <pghand@rogers.com> wrote:
+
+>     Is it me, or is it possible that the five sites I host cancel each  
+> other
+> out if one site is being visited?  Does anyone know what I mean?  I seem  
+> to
+> visit one of my sites and it appears blank and I know that someone  
+> somewhere
+> must be visiting one of the sites because the Xitami icon in my system  
+> tray
+> is yellow.  when it turns green again, I know that I can successfully  
+> visit
+> a site again.
+>
+> Jill
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+-- 
+Using M2, Opera's revolutionary e-mail client: http://www.opera.com/m2/
+
+
+From xitami@lists.xitami.org  Sat Jun  5 18:14:50 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Sat, 05 Jun 2004 11:14:50 -0600
+Subject: [Xitami] directory listing locationbar
+Message-ID: <40C1AB2A.27819.4CB54C@localhost>
+
+Hello Members,
+
+I'm a newbie in webpage creation and it's maybe a stupid question, so forgive me.
+Xitami 2.5b6
+Is it possible to deny directory listings in the location bar ?
+Here is a bit more explanation what I try to accomplish.
+Say my site is www.domain.com and I have pictures in a folder called /photos.
+I know when the page is showing in the browser you can get the page info which is showing like
+http://www.mydomain.com/photos/special.gif
+
+I know this now,and I'm able to put this address into the locationbar of the browser and call the 
+file directly into my browser without opening the actual website where the .gif file is embedded 
+in. And this action I want to deny; to call the file directly into the browser from the locationbar 
+as described in the sentence before. 
+
+Is there any possibility in xitami to do so ? The viewer should ONLY be able to load the websites 
+in the "normal" way.
+
+Johannes
+
+
+From xitami@lists.xitami.org  Sat Jun  5 20:11:43 2004
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Sat, 05 Jun 2004 21:11:43 +0200
+Subject: [Xitami] directory listing locationbar
+In-Reply-To: <40C1AB2A.27819.4CB54C@localhost>
+Message-ID: <6.0.0.14.0.20040605204939.027e6d80@mail.verfaillie.com>
+
+At 19:14 5/06/04, you wrote:
+>Hello Members,
+>
+>I'm a newbie in webpage creation and it's maybe a stupid question, so 
+>forgive me.
+>Xitami 2.5b6
+
+
+There are no stupid questions.
+For a web server each request (main page, first gif, first jpg, first 
+javascript source, second gif, ... and so on) is a completely new one. The 
+browser has no memory of what was loaded before (except if it looks in the 
+logs).
+
+To prevent the usage of your gif, you must create it on-the-fly (using a 
+script, for instance).
+You also need some server scripts.
+This is just one example, they are probably more possibilities:
+
+<html>
+<script src=cgi-bin/create.js></script>
+<script>
+function makegif(a)
+{
+document.write("<img src=' + a + b + '.gif'>");
+}
+</script>
+<body>
+<h1>This is my protected gif:</h1>
+<script>
+makegif("photos/special");
+makegif("photos/second");
+</script></body></html>
+
+The function "makegif" in your html will create the call to the gif 
+on-the-fly, using the parameter that's provided by create.js
+
+Now the special thing resides in create.js.
+It's a script that produces a single output line (using a random generator)
+
+var b = 124582134;
+
+and renames the image to
+photos/special124582134.gif and the same with the second gif.
+
+For more help (and maybe an easier way to do it), you could ask it on the 
+webreference forum:
+http://www.webdeveloper.com/forum/
+
+
+marc
+
+
+From xitami@lists.xitami.org  Sat Jun  5 22:50:01 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Sat, 05 Jun 2004 15:50:01 -0600
+Subject: [Xitami] directory listing locationbar
+In-Reply-To: <6.0.0.14.0.20040605204939.027e6d80@mail.verfaillie.com>
+References: <40C1AB2A.27819.4CB54C@localhost>
+Message-ID: <40C1EBA9.10789.296BC3@localhost>
+
+Hello Marc,
+If I understand this correct, see more below
+
+Am 5 Jun 2004 um 21:11 hat Marc Doigny geschrieben:
+
+> >Xitami 2.5b6
+> 
+> 
+> There are no stupid questions.
+> For a web server each request (main page, first gif, first jpg, first 
+> javascript source, second gif, ... and so on) is a completely new one. The 
+> browser has no memory of what was loaded before (except if it looks in the 
+> logs).
+> 
+> To prevent the usage of your gif, you must create it on-the-fly (using a 
+> script, for instance).
+> You also need some server scripts.
+> This is just one example, they are probably more possibilities:
+> 
+> <html>
+> <script src=cgi-bin/create.js></script>
+> <script>
+> function makegif(a)
+> {
+> document.write("<img src=' + a + b + '.gif'>");
+> }
+> </script>
+> <body>
+> <h1>This is my protected gif:</h1>
+> <script>
+> makegif("photos/special");
+> makegif("photos/second");
+> </script></body></html>
+> 
+> The function "makegif" in your html will create the call to the gif 
+> on-the-fly, using the parameter that's provided by create.js
+> 
+> Now the special thing resides in create.js.
+> It's a script that produces a single output line (using a random generator)
+> 
+> var b = 124582134;
+> 
+> and renames the image to
+> photos/special124582134.gif and the same with the second gif.
+> 
+because of this randomly chosen "extended" file name the viewer actually isn't able to call the 
+file directly. 
+
+> For more help (and maybe an easier way to do it), you could ask it on the 
+> webreference forum:
+> http://www.webdeveloper.com/forum/
+> 
+will do that. 
+
+
+> marc
+> 
+> 
+Johannes
+
+
+From xitami@lists.xitami.org  Sun Jun  6 00:43:46 2004
+From: xitami@lists.xitami.org (Michael diLorenzo)
+Date: Sat, 05 Jun 2004 19:43:46 -0400
+Subject: [Xitami] directory listing locationbar
+In-Reply-To: <40C1EBA9.10789.296BC3@localhost>
+References: <40C1AB2A.27819.4CB54C@localhost> <40C1EBA9.10789.296BC3@localhost>
+Message-ID: <opr85au8b0xifng9@mail.nycap.rr.com>
+
+Being the php guy that I am, may I suggest that you write a php script  
+that takes the gif that you want to display, copies it to someting else  
+(temp.gif, perhaps), displays that, and then deletes the copy.  Since php  
+is compiled before the page is delivered, all you see for source code is a  
+reference to temp.gif, which won't exist by the time the visitor tries to  
+find it.  You won't see any php script in the final web output, and so the  
+visitor won't know the real name of the picture he's looking at.
+
+It sounds from your question that you might also be wondering about how to  
+supress directory listings in Xitami itself.  That is a setting in  
+xitami.cfg.  Set dirlist equal to zero, and directory listings won't be  
+displayed for any directory.  Or, put an index.html file in your pictures  
+directory containing a blank page.
+
+On Sat, 05 Jun 2004 15:50:01 -0600, Johannes Prost <xitami@pastryworld.ca>  
+wrote:
+
+> Hello Marc,
+> If I understand this correct, see more below
+>
+> Am 5 Jun 2004 um 21:11 hat Marc Doigny geschrieben:
+>
+>> >Xitami 2.5b6
+>>
+>>
+>> There are no stupid questions.
+>> For a web server each request (main page, first gif, first jpg, first
+>> javascript source, second gif, ... and so on) is a completely new one.  
+>> The
+>> browser has no memory of what was loaded before (except if it looks in  
+>> the
+>> logs).
+>>
+>> To prevent the usage of your gif, you must create it on-the-fly (using a
+>> script, for instance).
+>> You also need some server scripts.
+>> This is just one example, they are probably more possibilities:
+>>
+>> <html>
+>> <script src=cgi-bin/create.js></script>
+>> <script>
+>> function makegif(a)
+>> {
+>> document.write("<img src=' + a + b + '.gif'>");
+>> }
+>> </script>
+>> <body>
+>> <h1>This is my protected gif:</h1>
+>> <script>
+>> makegif("photos/special");
+>> makegif("photos/second");
+>> </script></body></html>
+>>
+>> The function "makegif" in your html will create the call to the gif
+>> on-the-fly, using the parameter that's provided by create.js
+>>
+>> Now the special thing resides in create.js.
+>> It's a script that produces a single output line (using a random  
+>> generator)
+>>
+>> var b = 124582134;
+>>
+>> and renames the image to
+>> photos/special124582134.gif and the same with the second gif.
+>>
+> because of this randomly chosen "extended" file name the viewer actually  
+> isn't able to call the
+> file directly.
+>
+>> For more help (and maybe an easier way to do it), you could ask it on  
+>> the
+>> webreference forum:
+>> http://www.webdeveloper.com/forum/
+>>
+> will do that.
+>
+>
+>> marc
+>>
+>>
+> Johannes
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+-- 
+Using M2, Opera's revolutionary e-mail client: http://www.opera.com/m2/
+
+
+From xitami@lists.xitami.org  Sun Jun  6 17:02:13 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sun, 6 Jun 2004 12:02:13 -0400
+Subject: [Xitami] directory listing location bar
+In-Reply-To: <opr85au8b0xifng9@mail.nycap.rr.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCECEGLEFAA.ron@miplanet.net>
+
+As I see it, there is no way to protect images from getting captured. If you
+have a nice image, it can be plagiarized. So here is the way I would do it
+and this by no means is perfect either.
+
+Thumbnails are usually not very good quality, and to make them even less
+quality you can save them as low as 35% and they can still be of good enough
+quality to see. Now the issue is when they click that thumbnail what do they
+see? If I wanted to protect my images but yet make them accessible then I
+would require a registration and maybe a small fee to see a quality image,
+upon registration I would make sure they they read or at least agree with a
+disclaimer that they will not plagiarize the images and the fact that they
+registered and paid a fee will usually mean I at least know where they live
+and maybe their phone number. That gives you a legal foot to stand on. For
+those who choose to remain anonymous they would maybe see an image with some
+markings or watermark ("Copyright Material" would be good). Something that
+they could not use without destroying the original. Only registered users
+would be able to view the image without the copyright. However I still would
+embed it in image in case it was downloaded. The one thing about just
+breaking up the image or changing the file name is, once it is displayed, it
+can be plagiarized with a program like Paint Shop Pro. (Screen Area Capture)
+And just doing the simple, disable right click, will stop a lot of people.
+And to protect a directory, put in a index.html.
+
+The internet opens up a whole new can of copyright worms and plagiarization
+of material is rampant. Laws in one country don't protect you in other
+countries. So the best course of action is on the server end.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Michael diLorenzo
+Sent: Saturday, June 05, 2004 7:44 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] directory listing locationbar
+
+
+Being the php guy that I am, may I suggest that you write a php script
+that takes the gif that you want to display, copies it to someting else
+(temp.gif, perhaps), displays that, and then deletes the copy.  Since php
+is compiled before the page is delivered, all you see for source code is a
+reference to temp.gif, which won't exist by the time the visitor tries to
+find it.  You won't see any php script in the final web output, and so the
+visitor won't know the real name of the picture he's looking at.
+
+It sounds from your question that you might also be wondering about how to
+supress directory listings in Xitami itself.  That is a setting in
+xitami.cfg.  Set dirlist equal to zero, and directory listings won't be
+displayed for any directory.  Or, put an index.html file in your pictures
+directory containing a blank page.
+
+On Sat, 05 Jun 2004 15:50:01 -0600, Johannes Prost <xitami@pastryworld.ca>
+wrote:
+
+> Hello Marc,
+> If I understand this correct, see more below
+>
+> Am 5 Jun 2004 um 21:11 hat Marc Doigny geschrieben:
+>
+>> >Xitami 2.5b6
+>>
+>>
+>> There are no stupid questions.
+>> For a web server each request (main page, first gif, first jpg, first
+>> javascript source, second gif, ... and so on) is a completely new one.
+>> The
+>> browser has no memory of what was loaded before (except if it looks in
+>> the
+>> logs).
+>>
+>> To prevent the usage of your gif, you must create it on-the-fly (using a
+>> script, for instance).
+>> You also need some server scripts.
+>> This is just one example, they are probably more possibilities:
+>>
+>> <html>
+>> <script src=cgi-bin/create.js></script>
+>> <script>
+>> function makegif(a)
+>> {
+>> document.write("<img src=' + a + b + '.gif'>");
+>> }
+>> </script>
+>> <body>
+>> <h1>This is my protected gif:</h1>
+>> <script>
+>> makegif("photos/special");
+>> makegif("photos/second");
+>> </script></body></html>
+>>
+>> The function "makegif" in your html will create the call to the gif
+>> on-the-fly, using the parameter that's provided by create.js
+>>
+>> Now the special thing resides in create.js.
+>> It's a script that produces a single output line (using a random
+>> generator)
+>>
+>> var b = 124582134;
+>>
+>> and renames the image to
+>> photos/special124582134.gif and the same with the second gif.
+>>
+> because of this randomly chosen "extended" file name the viewer actually
+> isn't able to call the
+> file directly.
+>
+>> For more help (and maybe an easier way to do it), you could ask it on
+>> the
+>> webreference forum:
+>> http://www.webdeveloper.com/forum/
+>>
+> will do that.
+>
+>
+>> marc
+>>
+>>
+> Johannes
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+--
+Using M2, Opera's revolutionary e-mail client: http://www.opera.com/m2/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+---
+Incoming mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.698 / Virus Database: 455 - Release Date: 6/2/2004
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.698 / Virus Database: 455 - Release Date: 6/2/2004
+
+
+From xitami@lists.xitami.org  Sun Jun  6 19:15:53 2004
+From: xitami@lists.xitami.org (Johannes Prost)
+Date: Sun, 06 Jun 2004 12:15:53 -0600
+Subject: [Xitami] directory listing locationbar
+In-Reply-To: <opr85au8b0xifng9@mail.nycap.rr.com>
+References: <40C1EBA9.10789.296BC3@localhost>
+Message-ID: <40C30AF9.23865.83CCE6@localhost>
+
+Hello Ron, Michael,
+
+thank you for your ideas and thoughts.
+Ron, your idea is good, but I don't have this kind of important images that I want to mess around 
+with "legal" stuff. Have already (C) and company name on the image.
+
+Michael, what you discribed is actually the way I would like to see this happening. Marc mentioned 
+something similar as well; a temporary file made by a script which the visitor is not able to find. 
+And what I didn't know yet, that a php script is even not visible in the output from the 
+webpage.Even better !  -:)  So even with the "view page info" you wan't be able to download the 
+file because all what one see is the temporary file name.
+regards xitami I have set directory listings = 0 in my default.cfg
+What I don't get right now is, put a blank index.htm in the directory what you want to protect.
+What should happen if I have a blank index.htm in that particular directory ? Sorry stupid 
+question, but I'm still a starter in webpage development.
+
+Johannes
+
+
+From xitami@lists.xitami.org  Mon Jun  7 07:43:26 2004
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Mon, 07 Jun 2004 08:43:26 +0200
+Subject: [Xitami] directory listing locationbar
+In-Reply-To: <40C1EBA9.10789.296BC3@localhost>
+References: <6.0.0.14.0.20040605204939.027e6d80@mail.verfaillie.com>
+ <40C1AB2A.27819.4CB54C@localhost>
+Message-ID: <5.1.0.14.2.20040607083711.02d2e1f0@verfaillie4.verfaillie.local>
+
+At 23:50 5/06/04, you wrote:
+>Hello Marc,
+>If I understand this correct, see more below
+
+[...]
+
+I once made a site for a german photographer, and we agreed to only use a 
+login/password combination for access to restricted parts. The free parts 
+are on his server, the protected parts and scripts on mine.
+It's easy to implement and provides the most secure protection in it's 
+kind. Of course we are not talking here of bank transactions protection, 
+but basic image protection.
+http://www.denis-woehler.de
+
+
+marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+
+From xitami@lists.xitami.org  Fri Jun 11 19:31:20 2004
+From: xitami@lists.xitami.org (bkowald)
+Date: Fri, 11 Jun 2004 14:31:20 -0400
+Subject: [Xitami] FW: Xitami and cookies
+Message-ID: <000701c44fe2$4d7c6e20$0200a8c0@TiltRacLaptop>
+
+Is there a way to get and set cookies in an LRWP program which runs
+alongside Xitami? I know how to use cookies from java script, but it would
+be more efficient to do it directly from the server side.
+
+Another part of this question: is it possible to set cooke values for ANY
+logged in user? Or by nature do cookies only apply to the current logged in
+user?
+
+Thanks
+Brian
+
+
+
+From xitami@lists.xitami.org  Fri Jun 11 17:32:28 2004
+From: xitami@lists.xitami.org (Brian Kowald)
+Date: Fri, 11 Jun 2004 11:32:28 -0500
+Subject: [Xitami] Xitami and cookies
+Message-ID: <5BA6EC56479B8F49AB43C808445E031E228BFD@sbsserver.tiltrac.local>
+
+Is there a way to get and set cookies in an LRWP program which runs
+alongside Xitami? I know how to use cookies from java script, but it
+would be more efficient to do it directly from the server side.
+
+Another part of this question: is it possible to set cooke values for
+ANY logged in user? Or by nature do cookies only apply to the current
+logged in user?
+
+Thanks
+Brian
+
+
+From xitami@lists.xitami.org  Sun Jun 13 15:56:46 2004
+From: xitami@lists.xitami.org (SlackRat)
+Date: 13 Jun 2004 10:56:46 -0400
+Subject: [Xitami] Xitami 2.5C1
+Message-ID: <87zn77h5g1.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+
+Has anybody managed to install the latest Xitami httpd/ftpd?
+
+I presume it also needs rbase and installed that too but have had no
+success with geting Xitami to build 
+
+Thanks in advance if anybody can put me straight.
+
+[ Running slackware-current, 2.4.26 kernel, no gnome or kde but xorg6.7 with
+CVS Fluxbox if any of those actually make any difference to the install ]
+
+--
+SlackRat
+Please address all replies to the list
+
+
+From xitami@lists.xitami.org  Sun Jun 13 17:29:12 2004
+From: xitami@lists.xitami.org (Elliott Potter)
+Date: Sun, 13 Jun 2004 11:29:12 -0500 (EST)
+Subject: [Xitami] Xitami 2.5C1
+In-Reply-To: <87zn77h5g1.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+References: <87zn77h5g1.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+Message-ID: <Pine.LNX.4.58.0406131116420.11483@trillian.uni>
+
+On Sun, 13 Jun 2004, SlackRat wrote:
+
+>
+> Has anybody managed to install the latest Xitami httpd/ftpd?
+>
+> I presume it also needs rbase and installed that too but have had no
+> success with geting Xitami to build
+>
+> Thanks in advance if anybody can put me straight.
+>
+> [ Running slackware-current, 2.4.26 kernel, no gnome or kde but xorg6.7 with
+> CVS Fluxbox if any of those actually make any difference to the install ]
+
+I had a real bear of a time getting 2.5c1 (or 2.4d10) to build from
+source.  Apparently the Windows versions work just great for everybody,
+but when I picked up the source tree there were several problems that
+prevented it from compiling (at least under linux).
+
+
+As far as I know, you shouldn't need the rbase stuff to build xitami -
+the source tree comes with the stuff that it appears to need (smt, sfl,
+etc.) ... though if you do need rbase then that would explain a little.
+There's no mention of rbase on xitami.com, but then xitami.com doesn't
+really reflect the current state of the product so it's not a good
+reference.
+
+First step, do a 'find' in the source tree to see if you have a file
+called "c" in each subdirectory ... if you don't, you can get a copy from
+http://eep.burdell.org/c which (I think) is edited a bit so that it
+actually works.
+
+Then make the build.sh script executable (it also helps on some systems
+to add #!/bin/bash to the first line) and give it a run and see where
+you get.
+
+
+HTH
+--
+Elliott
+
+
+From xitami@lists.xitami.org  Mon Jun 14 01:31:49 2004
+From: xitami@lists.xitami.org (Xitami_SlackRat)
+Date: 13 Jun 2004 20:31:49 -0400
+Subject: [Xitami] Xitami 2.5C1
+In-Reply-To: <Pine.LNX.4.58.0406131116420.11483@trillian.uni>
+References: <87zn77h5g1.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+ <Pine.LNX.4.58.0406131116420.11483@trillian.uni>
+Message-ID: <87n037q8sq.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+
+Elliott Potter <mailinglist@eep.burdell.org> writes:
+
+> On Sun, 13 Jun 2004, SlackRat wrote:
+> 
+> >
+> > Has anybody managed to install the latest Xitami httpd/ftpd?
+> >
+> > I presume it also needs rbase and installed that too but have had no
+> > success with geting Xitami to build
+> >
+> > Thanks in advance if anybody can put me straight.
+> >
+> > [ Running slackware-current, 2.4.26 kernel, no gnome or kde but xorg6.7 with
+> > CVS Fluxbox if any of those actually make any difference to the install ]
+> 
+> I had a real bear of a time getting 2.5c1 (or 2.4d10) to build from
+> source.  Apparently the Windows versions work just great for everybody,
+> but when I picked up the source tree there were several problems that
+> prevented it from compiling (at least under linux).
+> 
+> 
+> As far as I know, you shouldn't need the rbase stuff to build xitami -
+> the source tree comes with the stuff that it appears to need (smt, sfl,
+> etc.) ... though if you do need rbase then that would explain a little.
+> There's no mention of rbase on xitami.com, but then xitami.com doesn't
+> really reflect the current state of the product so it's not a good
+> reference.
+> 
+> First step, do a 'find' in the source tree to see if you have a file
+> called "c" in each subdirectory ... if you don't, you can get a copy from
+> http://eep.burdell.org/c which (I think) is edited a bit so that it
+> actually works.
+> 
+> Then make the build.sh script executable (it also helps on some systems
+> to add #!/bin/bash to the first line) and give it a run and see where
+> you get.
+> 
+> 
+
+Well I want to thank you for your advice.
+
+But it seems that whatever I do I cannot get xitami to compile correctly or
+even in fact compile at all.
+
+I had already imported the ``c'' file from the 2.5b5 version and also
+imported what libraries I could find although I was unable to find libstu.a
+and libaxc.a and additionally made the build.sh file, plus the boomake and
+makefiles executable. I also tried the ``c'' file that you recommended with
+no better results.
+
+The build script build.sh seems to go through the motions finally abandoning
+the attempt with ''can't find xitami'' after hundreds of warnings.
+
+I next tried modifying the build script to remove the openssl and xipro
+directory references and which didn't seem to be created upon untarring the
+tarball.  That did not correct the situation.
+
+So I tried compiling the various directories without using the build.sh
+file.
+
+These are my findings:
+
+In sfl, (standard function library) ./boomake build  produces a file
+``-g.lst'' which simply  contains ``gcc: no input files''
+
+Having deleted ``-g.lst'', ``./c *.c'' actually produces the object files
+and ``./boomake build install'' appears to work and in fact sets up the
+/usr/local/imatix directory and transfers over some files. Whether all the
+requisite files are installed I do not know, but I was hopeful at this stage
+although there were numerous bitches as follows:
+egrep -g.c No such file or directory
+compiling -g
+cat: invalid option -g
+
+Anyway moving on to GSL, following the same procedure ``./c *.c'' gave a
+multitude of errors and I abandoned the project.
+
+I would like to run the latest version. But at least 2.5b5 runs perfectly
+and I can always fall back on apache/proftpd if the need should ever arise.
+
+-- 
+SlackRat
+Please address all replies to the list
+
+
+From xitami@lists.xitami.org  Mon Jun 14 13:32:21 2004
+From: xitami@lists.xitami.org (Jacob Dahl Pind)
+Date: 14 Jun 2004 13:32:21 +0100
+Subject: [Xitami] lrwp
+Message-ID: <642.661T1050T8122818rachael@rachael.dyndns.org>
+
+Hello
+
+I working on a small lrwp implementation in php, dont get up of your
+chair yet, its done as a php programing which registers it self 
+with xitami to handle .php files, when it recives a request
+it runs that php file though eval(),while it seems to be working as
+it should, I`m having a few problems with GET.
+
+Seems at the infomation containt in a GET is neither in the ENV nor 
+the POST part of the LRWP request. Anyone here that have build a lrwp 
+application and have had that problem ?
+
+regards Jacob Dahl Pind
+ 
+
+--
+		CBM, Amiga,Vintage hardware collector
+		  Email: rachael@rachael.dyndns.org
+		   url: http://rachael.dyndns.org
+
+
+From xitami@lists.xitami.org  Mon Jun 14 16:46:38 2004
+From: xitami@lists.xitami.org (Elliott Potter)
+Date: Mon, 14 Jun 2004 10:46:38 -0500 (EST)
+Subject: [Xitami] Xitami 2.5C1
+In-Reply-To: <87n037q8sq.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+References: <87zn77h5g1.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+ <Pine.LNX.4.58.0406131116420.11483@trillian.uni>
+ <87n037q8sq.fsf@cpe004023176ea9-cm0f2069983361.cpe.net.cable.rogers.com>
+Message-ID: <Pine.LNX.4.58.0406141014220.27492@trillian.uni>
+
+> > I had a real bear of a time getting 2.5c1 (or 2.4d10) to build from
+> > source.  Apparently the Windows versions work just great for everybody,
+> > but when I picked up the source tree there were several problems that
+> > prevented it from compiling (at least under linux).
+> > [...]
+> > Then make the build.sh script executable (it also helps on some systems
+> > to add #!/bin/bash to the first line) and give it a run and see where
+> > you get.
+> >
+> >
+>
+> Well I want to thank you for your advice.
+>
+> But it seems that whatever I do I cannot get xitami to compile correctly or
+> even in fact compile at all.
+>
+> I had already imported the ``c'' file from the 2.5b5 version and also
+> imported what libraries I could find although I was unable to find libstu.a
+> and libaxc.a and additionally made the build.sh file, plus the boomake and
+> makefiles executable. I also tried the ``c'' file that you recommended with
+> no better results.
+>
+> The build script build.sh seems to go through the motions finally abandoning
+> the attempt with ''can't find xitami'' after hundreds of warnings.
+>
+> I next tried modifying the build script to remove the openssl and xipro
+> directory references and which didn't seem to be created upon untarring the
+> tarball.  That did not correct the situation.
+>
+> So I tried compiling the various directories without using the build.sh
+> file.
+>
+> These are my findings:
+>
+> In sfl, (standard function library) ./boomake build  produces a file
+> ``-g.lst'' which simply  contains ``gcc: no input files''
+>
+> Having deleted ``-g.lst'', ``./c *.c'' actually produces the object files
+> and ``./boomake build install'' appears to work and in fact sets up the
+> /usr/local/imatix directory and transfers over some files. Whether all the
+> requisite files are installed I do not know, but I was hopeful at this stage
+> although there were numerous bitches as follows:
+> egrep -g.c No such file or directory
+> compiling -g
+> cat: invalid option -g
+>
+> Anyway moving on to GSL, following the same procedure ``./c *.c'' gave a
+> multitude of errors and I abandoned the project.
+>
+> I would like to run the latest version. But at least 2.5b5 runs perfectly
+> and I can always fall back on apache/proftpd if the need should ever arise.
+
+
+proftpd that comes with slackware is pretty nice; I've got FTP turned
+off on xitami and use that instead.  *shrug*
+
+Anyway, I went back to some notes I made about the build process and
+found a bunch of the changes I made.  Here they are, in a conveniently
+patchable (-p1) form:
+
+
+diff -Naur current/gsl/boomake patched/gsl/boomake
+--- current/gsl/boomake	2003-12-05 06:20:21.000000000 -0500
++++ patched/gsl/boomake	2004-03-24 16:46:27.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo "Building application..."
+-    COPTS=-g
++    COPTS=
+     test ! -z "$INCDIR_ALT" && COPTS="$COPTS -li . -li $INCDIR_ALT"
+     test ! -z "$LIBDIR_ALT" && COPTS="$COPTS -ll $LIBDIR_ALT"
+     c $COPTS gslgen
+diff -Naur current/gsl/c patched/gsl/c
+--- current/gsl/c	2004-05-01 13:03:21.000000000 -0500
++++ patched/gsl/c	2004-03-24 19:30:18.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS="-O2 -Wall -pedantic"
+                         ;;
+-           production)  CCOPTS="-s -O2 -Wall -pedantic"
++           production)  CCOPTS="-g -s -O2 -Wall -pedantic"
+                         ;;
+         esac
+
+diff -Naur current/gsl/ggeval.c patched/gsl/ggeval.c
+--- current/gsl/ggeval.c	2002-12-22 10:01:34.000000000 -0500
++++ patched/gsl/ggeval.c	2004-03-24 18:52:57.000000000 -0500
+@@ -40,6 +40,7 @@
+ #endif
+ #include "ggpars.h"                     /*  Script parser header file        */
+ #include "ggeval.h"                     /*  Include header file              */
++#include <math.h>				/* needed for floor */
+
+
+ /*- Types -------------------------------------------------------------------*/
+@@ -1210,9 +1211,9 @@
+           {
+             number_result (node);
+             if ((node-> result_type == TYPE_NUMBER)
+-            &&  (node-> result_n == floor (node-> result_n))
++            &&  (node-> result_n == floor(node-> result_n))
+             &&  (node-> result_n >= 0))
+-                return TRUE;
++                {return TRUE;}
+           }
+         else
+             undefined_expression_error (node);
+diff -Naur current/gsl/ggobjt.c patched/gsl/ggobjt.c
+--- current/gsl/ggobjt.c	2002-12-22 10:01:34.000000000 -0500
++++ patched/gsl/ggobjt.c	2004-03-24 17:49:06.000000000 -0500
+@@ -113,15 +113,14 @@
+ int
+ method_evaluate (SCRIPT_NODE *node)
+ {
+-    int
+-        min = 0,
+-        max,
+-        chop = 0,
+-        cmp = -1,
+-        argc,
+-        rc;
+-    char
+-        *name;
++    int min = 0;
++	 int max = 0;
++	 int chop = 0;
++	 int cmp = -1;
++	 int argc;
++	 int rc;
++    char* name;
++
+     GSL_OBJECT
+         *object;
+     GSL_FUNCTION
+diff -Naur current/gsl/ggstrn.c patched/gsl/ggstrn.c
+--- current/gsl/ggstrn.c	2002-12-22 10:01:34.000000000 -0500
++++ patched/gsl/ggstrn.c	2004-03-24 17:38:03.000000000 -0500
+@@ -39,6 +39,7 @@
+ #include "ggobjt.h"                     /*  Object Module Header             */
+ #include "ggeval.h"                     /*  Expression Evaluator Header      */
+ #include "ggstrn.h"                     /*  Include header file              */
++#include <math.h>		/* needed for floor */
+
+
+ /*- Macros ------------------------------------------------------------------*/
+diff -Naur current/sfl/boomake patched/sfl/boomake
+--- current/sfl/boomake	2003-12-05 06:20:18.000000000 -0500
++++ patched/sfl/boomake	2004-03-24 16:42:13.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo "Building application..."
+-    COPTS=-g
++    COPTS=
+     test ! -z "$INCDIR_ALT" && COPTS="$COPTS -li . -li $INCDIR_ALT"
+     test ! -z "$LIBDIR_ALT" && COPTS="$COPTS -ll $LIBDIR_ALT"
+     c $COPTS sflbits
+diff -Naur current/sfl/c patched/sfl/c
+--- current/sfl/c	2004-05-01 13:03:23.000000000 -0500
++++ patched/sfl/c	2004-03-24 16:40:33.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS="-O2 -Wall -pedantic"
+                         ;;
+-           production)  CCOPTS="-s -O2 -Wall -pedantic"
++           production)  CCOPTS="-g -s -O2 -Wall -pedantic"
+                         ;;
+         esac
+
+diff -Naur current/smt/boomake patched/smt/boomake
+--- current/smt/boomake	2003-12-05 06:20:25.000000000 -0500
++++ patched/smt/boomake	2004-03-24 16:49:53.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo "Building application..."
+-    COPTS=-g
++    COPTS=
+     test ! -z "$INCDIR_ALT" && COPTS="$COPTS -li . -li $INCDIR_ALT"
+     test ! -z "$LIBDIR_ALT" && COPTS="$COPTS -ll $LIBDIR_ALT"
+     c $COPTS smtecho
+diff -Naur current/smt/c patched/smt/c
+--- current/smt/c	2004-05-01 13:03:24.000000000 -0500
++++ patched/smt/c	2004-03-24 16:40:35.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS="-O2 -Wall -pedantic"
+                         ;;
+-           production)  CCOPTS="-s -O2 -Wall -pedantic"
++           production)  CCOPTS="-g -s -O2 -Wall -pedantic"
+                         ;;
+         esac
+
+diff -Naur current/smt/smthttpl.c patched/smt/smthttpl.c
+--- current/smt/smthttpl.c	2003-12-05 07:09:22.000000000 -0500
++++ patched/smt/smthttpl.c	2004-03-24 17:12:05.000000000 -0500
+@@ -1641,10 +1641,12 @@
+     switch (p_http-> response)
+       {
+         case HTTP_RESPONSE_OK:
+-            if (p_http-> transaction == TRANSACTION_CGI
+-            ||  p_http-> transaction == TRANSACTION_WSX)
+-            ||  p_http-> transaction == TRANSACTION_FILTER)
+-                put_dynamic_headers (p_http, header);
++            if (p_http-> transaction == TRANSACTION_CGI
++				|| p_http-> transaction == TRANSACTION_WSX
++				|| p_http-> transaction == TRANSACTION_FILTER)
++					{
++					put_dynamic_headers (p_http, header);
++					}
+             else
+               {
+                 get_file_properties (p_http);
+diff -Naur current/studio/boomake patched/studio/boomake
+--- current/studio/boomake	2003-12-05 06:20:29.000000000 -0500
++++ patched/studio/boomake	2004-03-24 16:52:27.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo "Building application..."
+-    COPTS=-g
++    COPTS=
+     test ! -z "$INCDIR_ALT" && COPTS="$COPTS -li . -li $INCDIR_ALT"
+     test ! -z "$LIBDIR_ALT" && COPTS="$COPTS -ll $LIBDIR_ALT"
+     PUSHDIR=`pwd`; cd doc/
+diff -Naur current/studio/c patched/studio/c
+--- current/studio/c	2004-05-01 13:03:16.000000000 -0500
++++ patched/studio/c	2004-03-24 16:40:38.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS="-O2 -Wall -pedantic"
+                         ;;
+-           production)  CCOPTS="-s -O2 -Wall -pedantic"
++           production)  CCOPTS="-g -s -O2 -Wall -pedantic"
+                         ;;
+         esac
+
+diff -Naur current/xiadmin/boomake patched/xiadmin/boomake
+--- current/xiadmin/boomake	2003-12-05 06:20:31.000000000 -0500
++++ patched/xiadmin/boomake	2004-03-24 16:53:45.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo "Building application..."
+-    COPTS=-g
++    COPTS=
+     test ! -z "$INCDIR_ALT" && COPTS="$COPTS -li . -li $INCDIR_ALT"
+     test ! -z "$LIBDIR_ALT" && COPTS="$COPTS -ll $LIBDIR_ALT"
+     c $COPTS xiadmin
+diff -Naur current/xiadmin/c patched/xiadmin/c
+--- current/xiadmin/c	2004-05-01 13:03:14.000000000 -0500
++++ patched/xiadmin/c	2004-03-24 16:40:25.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS="-O2 -Wall -pedantic"
+                         ;;
+-           production)  CCOPTS="-s -O2 -Wall -pedantic"
++           production)  CCOPTS="-g -s -O2 -Wall -pedantic"
+                         ;;
+         esac
+
+diff -Naur current/xiopen/boomake patched/xiopen/boomake
+--- current/xiopen/boomake	2003-12-05 06:20:34.000000000 -0500
++++ patched/xiopen/boomake	2004-03-24 16:54:18.000000000 -0500
+@@ -33,7 +33,7 @@
+ a_build_binary_files() {
+ :
+     echo "Building application..."
+-    COPTS=-g
++    COPTS=
+     test ! -z "$INCDIR_ALT" && COPTS="$COPTS -li . -li $INCDIR_ALT"
+     test ! -z "$LIBDIR_ALT" && COPTS="$COPTS -ll $LIBDIR_ALT"
+     PUSHDIR=`pwd`; cd cgi-bin/
+diff -Naur current/xiopen/c patched/xiopen/c
+--- current/xiopen/c	2004-05-01 13:03:19.000000000 -0500
++++ patched/xiopen/c	2004-03-24 16:40:29.000000000 -0500
+@@ -205,7 +205,7 @@
+                         ;;
+            standard)    CCOPTS="-O2 -Wall -pedantic"
+                         ;;
+-           production)  CCOPTS="-s -O2 -Wall -pedantic"
++           production)  CCOPTS="-g -s -O2 -Wall -pedantic"
+                         ;;
+         esac
+
+
+
+
+... in a nutshell, the COPTS variable in the various boomake scripts
+doesn't get passed correctly, so you have to use the CCOPTS variable in
+the c file for that stuff and remove it from boomake.  That takes care
+of the -g.c and -g.lst issues.  Next, you've got to either use -lm or
+have included math.h for any file using floor, and I didn't have the
+patience to sort through the build system and figure out how to use -lm
+just for those files, so I added math.h to ggeval.c and ggstrn.c.
+Then in smthttpl.c there's a typo; it shouldn't compile for anyone but
+apparently it compiled for the Windows people so whatever.
+
+
+
+Assuming the patch applied correctly (it should but I didn't try it ...
+just make sure to have a clean source tree), here's what I did next:
+
+cd sfl
+CCNAME=gcc \
+CCPRODLEVEL=production \
+CCOPTS="<stuff whatever you want here; don't use what's in c>" \
+sh boomake build install
+
+cd ../gsl
+CCNAME=gcc \
+CCPRODLEVEL=production \
+CCOPTS="<your flags> \
+   -I/usr/local/imatix/xitami-25/include \
+	-L/usr/local/imatix/xitami-25/lib" \
+sh boomake build install
+
+
+At this point you might see some linker errors during the build process;
+just ignore them.
+
+
+cd ../smt
+<repeat gsl's command line>
+
+cd ../studio
+<repeat>
+
+cd ../xiadmin
+<repeat>
+
+cd ../xiopen
+<repeat>
+
+Now, add to the end of the end of the build line (i.e. after CCOPTS):
+
+CCLIBS="/usr/local/imatix/xitami-25/lib/libgsl.a \
+   /usr/local/imatix/xitami-25/lib/libsfl.a \
+	/usr/local/imatix/xitami-25/lib/libxac.a \
+	/usr/local/imatix/xitami-25/lib/libstu.a \
+	/usr/local/imatix/xitami-25/lib/libsmt.a"
+
+
+... and repeat the process (sfl, gsl, etc.).  In these builds you should
+definitely not ignore compiler/linker errors.  But with any amount of
+luck, you won't get any.
+
+
+
+oh oh oh I almost forgot.  If you want to use php, you need to make
+another change:
+
+
+
+diff -Naur eep-smt/smthttpl.c smt/smthttpl.c
+--- eep-smt/smthttpl.c	2004-05-21 23:36:23.000000000 -0500
++++ smt/smthttpl.c	2004-05-21 23:36:42.000000000 -0500
+@@ -2787,7 +2787,6 @@
+     SET ("Request-Method",    http_methods [p_http-> method]);
+     SET ("Script-Path",       p_http-> script_path);
+     SET ("Script-Name",       p_http-> script_name);
+-    SET ("Script-Filename",   path_translated);
+     SET ("Content-Type",      http_header_value (p_http, "content-type"));
+     SET ("Content-Length",    http_header_value (p_http, "content-length"));
+     SET ("Remote-User",       p_http-> username? p_http-> username: "-");
+diff -Naur eep-smt/smthttpl.h smt/smthttpl.h
+--- eep-smt/smthttpl.h	2004-05-21 23:35:39.000000000 -0500
++++ smt/smthttpl.h	2004-05-21 23:34:27.000000000 -0500
+@@ -253,7 +253,6 @@
+         *vhost,                         /*  Virtual host for request         */
+         *script_path,                   /*  Script path                      */
+         *script_name,                   /*  Name of script, without path     */
+-        *script_filename,               /*  New versions of php require this.*/
+         *path_info,                     /*  CGI path info string             */
+         *post_data,                     /*  CGI POST data string             */
+         *referrer,                      /*  Original Referer: value          */
+
+
+
+You may want to try first without this patch, since I'm apparently the
+only person in the world who had this problem, but I couldn't find any
+other way around it.
+
+
+Anyway, hope all this stuff works.
+--
+Elliott
+
+
+From xitami@lists.xitami.org  Fri Jun 25 17:02:43 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 25 Jun 2004 18:02:43 +0200
+Subject: [Xitami] Log Formats on Xitami
+Message-ID: <OF8A983D83.7D177726-ONC1256EBE.0057B37A-C1256EBE.005848AD@philips.com>
+
+This is a multipart message in MIME format.
+--=_alternative 005848A9C1256EBE_=
+Content-Type: text/plain; charset="us-ascii"
+
+For Acess and Error Logs the standard configuration is CLFX for the Common 
+Log File Format, and could be changed under 'format' in the respective 
+sections of the configuration file...
+As I use a log analyzer that does a more profound job using the 'Combined 
+Log Format' I wonder a) if Xitami supports this and b) what I should enter 
+under the 'format' key to obtain this layout ?
+
+Philip VERSTRAETEN
+--=_alternative 005848A9C1256EBE_=
+Content-Type: text/html; charset="us-ascii"
+
+
+<br><font size=2 face="sans-serif">For Acess and Error Logs the standard configuration is CLFX for the Common Log File Format, and could be changed under 'format' in the respective sections of the configuration file...</font>
+<br><font size=2 face="sans-serif">As I use a log analyzer that does a more profound job using the 'Combined Log Format' I wonder a) if Xitami supports this and b) what I should enter under the 'format' key to obtain this layout ?</font>
+<br>
+<br><font size=2 face="sans-serif">Philip VERSTRAETEN</font>
+--=_alternative 005848A9C1256EBE_=--
+
+
+From xitami@lists.xitami.org  Wed Jun 30 19:19:23 2004
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 30 Jun 2004 11:19:23 -0700
+Subject: [Xitami] Xitami needs more of this...
+Message-ID: <BAY13-F116TtzMYUJMS000387d8@hotmail.com>
+
+Xitami needs to post these articles on their website (or link to them) and 
+needs to perform some of these tests themselves (then post the results).  
+These results are outstanding.
+
+http://www.zdnet.com.au/news/business/0,39023166,20262449,00.htm
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+_________________________________________________________________
+>From ‘will you?’ to ‘I do,’ MSN Life Events is your resource for Getting 
+Married. http://lifeevents.msn.com/category.aspx?cid=married
+
+
+From xitami@lists.xitami.org  Wed Jun 30 19:24:11 2004
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 30 Jun 2004 11:24:11 -0700
+Subject: [Xitami] Where are the Xitami Archives???
+Message-ID: <BAY13-F109AXaRYBNS00000d873@hotmail.com>
+
+I want to browse and seach all the emails sent to the Xitami support list - 
+are these archived?  If so, how do I get access to them?  Please tell me 
+there it can be done via a website...
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+_________________________________________________________________
+MSN Toolbar provides one-click access to Hotmail from any Web page – FREE 
+download! http://toolbar.msn.click-url.com/go/onm00200413ave/direct/01/
+
+
+From xitami@lists.xitami.org  Wed Jun 30 19:30:33 2004
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 30 Jun 2004 11:30:33 -0700
+Subject: [Xitami] Wireless Xitami
+Message-ID: <BAY13-F9N8IFd7NYIDV0006bff1@hotmail.com>
+
+I have a website that I want be accessable by cell phones, pagers, etc - 
+does Xitami support this functionality?  If so, how/where can I get started 
+with docuementation?  If not, are there any third party tools I can use to 
+integrate into Xitami?  Having never done this before, what things do I need 
+to be aware of in designing a website designed for wireless devices?
+
+thanx for the assistance.
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+_________________________________________________________________
+MSN Movies - Trailers, showtimes, DVD's, and the latest news from Hollywood! 
+http://movies.msn.click-url.com/go/onm00200509ave/direct/01/
+
+
+From xitami@lists.xitami.org  Wed Jun 30 20:11:03 2004
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 01 Jul 2004 07:11:03 +1200
+Subject: [Xitami] Where are the Xitami Archives???
+In-Reply-To: Message from "R O" <rolinger1@hotmail.com>
+ of "Wed, 30 Jun 2004 11:24:11 MST." <BAY13-F109AXaRYBNS00000d873@hotmail.com>
+Message-ID: <20040630191104.1EB273C2CEE3@basilica.la.naos.co.nz>
+
+In message <BAY13-F109AXaRYBNS00000d873@hotmail.com>, "R O" writes:
+>I want to browse and seach all the emails sent to the Xitami support list - 
+>are these archived?  If so, how do I get access to them?  Please tell me 
+>there it can be done via a website...
+
+http://lists.xitami.org/pipermail/xitami/
+
+which lies behind the "Xitami Archives" link on:
+
+http://lists.xitami.org/mailman/listinfo/xitami
+
+The latter URL being listed on every single post to the mailing list.
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+
+From xitami@lists.xitami.org  Wed Jun 30 20:25:31 2004
+From: xitami@lists.xitami.org (M. Jason Smiley)
+Date: Wed, 30 Jun 2004 15:25:31 -0400
+Subject: [Xitami] Where are the Xitami Archives???
+References: <20040630191104.1EB273C2CEE3@basilica.la.naos.co.nz>
+Message-ID: <076801c45ed8$027cb290$7c28a8c0@rcolmstead.com>
+
+the link is titled "to unsubscribe:".... perhaps we could change that to
+something with a broader description than just unsubscribe....
+
+
+----- Original Message ----- 
+From: "Ewen McNeill" <ewen@imatix.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, June 30, 2004 3:11 PM
+Subject: Re: [Xitami] Where are the Xitami Archives???
+
+
+> In message <BAY13-F109AXaRYBNS00000d873@hotmail.com>, "R O" writes:
+> >I want to browse and seach all the emails sent to the Xitami support
+list -
+> >are these archived?  If so, how do I get access to them?  Please tell me
+> >there it can be done via a website...
+>
+> http://lists.xitami.org/pipermail/xitami/
+>
+> which lies behind the "Xitami Archives" link on:
+>
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+> The latter URL being listed on every single post to the mailing list.
+>
+> Ewen
+>
+> -- 
+> Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Wed Jun 30 20:56:50 2004
+From: xitami@lists.xitami.org (Matt Bugg)
+Date: Wed, 30 Jun 2004 15:56:50 -0400
+Subject: [Xitami] Wireless Xitami
+In-Reply-To: <BAY13-F9N8IFd7NYIDV0006bff1@hotmail.com>
+References: <BAY13-F9N8IFd7NYIDV0006bff1@hotmail.com>
+Message-ID: <40E31B02.4000301@jebus.ws>
+
+R O wrote:
+
+>
+> I have a website that I want be accessable by cell phones, pagers, etc 
+> - does Xitami support this functionality?  If so, how/where can I get 
+> started with docuementation?  If not, are there any third party tools 
+> I can use to integrate into Xitami?  Having never done this before, 
+> what things do I need to be aware of in designing a website designed 
+> for wireless devices?
+>
+> thanx for the assistance.
+>
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1@hotmail.com
+>
+> _________________________________________________________________
+> MSN Movies - Trailers, showtimes, DVD's, and the latest news from 
+> Hollywood! http://movies.msn.click-url.com/go/onm00200509ave/direct/01/
+>
+>
+> -- 
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+Can't you just write the WAP code?
+Xitami does suppost XML right??
+
+
+From xitami@lists.xitami.org  Wed Jun 30 22:13:50 2004
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 30 Jun 2004 14:13:50 -0700
+Subject: [Xitami] Where are the Xitami Archives???
+Message-ID: <BAY13-F10ePWghGcXEE000445ff@hotmail.com>
+
+first off, I received Jason's email about the "unsubscribe" but I didn't 
+receive Ewen's email - I was only able to read Ewens response through 
+Jason's response.  Which makes me believe I am missing Xitami list emails.  
+not good.
+
+seond off, I always thought that last link in the Xitami emails was to 
+"unsubscribe" It doesn't really indicate there are more options at that link 
+-  so I never bothered to click to it.
+
+
+>From: "M. Jason Smiley" <jsmiley@rcolmstead.com>
+>Reply-To: xitami@lists.xitami.org
+>To: <xitami@lists.xitami.org>
+>Subject: Re: [Xitami] Where are the Xitami Archives??? Date: Wed, 30 Jun 
+>2004 15:25:31 -0400
+>
+>the link is titled "to unsubscribe:".... perhaps we could change that to
+>something with a broader description than just unsubscribe....
+>
+>
+>----- Original Message -----
+>From: "Ewen McNeill" <ewen@imatix.com>
+>To: <xitami@lists.xitami.org>
+>Sent: Wednesday, June 30, 2004 3:11 PM
+>Subject: Re: [Xitami] Where are the Xitami Archives???
+>
+>
+> > In message <BAY13-F109AXaRYBNS00000d873@hotmail.com>, "R O" writes:
+> > >I want to browse and seach all the emails sent to the Xitami support
+>list -
+> > >are these archived?  If so, how do I get access to them?  Please tell 
+>me
+> > >there it can be done via a website...
+> >
+> > http://lists.xitami.org/pipermail/xitami/
+> >
+> > which lies behind the "Xitami Archives" link on:
+> >
+> > http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> > The latter URL being listed on every single post to the mailing list.
+> >
+> > Ewen
+> >
+> > --
+> > Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+Make the most of your family vacation with tips from the MSN Family Travel 
+Guide! http://dollar.msn.com
+
+
+From xitami@lists.xitami.org  Wed Jun 30 22:15:38 2004
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 30 Jun 2004 14:15:38 -0700
+Subject: [Xitami] Wireless Xitami
+Message-ID: <BAY13-F59JKYthvf43h0006cc7b@hotmail.com>
+
+Anyone recommend any good WAP resources or freeware stuff to get started 
+with.  I never programmed in WAP before but I already have a full 
+functioning website and think its a site prefectly suited for wireless 
+devices.
+
+thanx
+
+>From: Matt Bugg <matt@jebus.ws>
+>Reply-To: xitami@lists.xitami.org
+>To: xitami@lists.xitami.org
+>Subject: Re: [Xitami] Wireless Xitami
+>Date: Wed, 30 Jun 2004 15:56:50 -0400
+>
+>R O wrote:
+>
+>>
+>>I have a website that I want be accessable by cell phones, pagers, etc - 
+>>does Xitami support this functionality?  If so, how/where can I get 
+>>started with docuementation?  If not, are there any third party tools I 
+>>can use to integrate into Xitami?  Having never done this before, what 
+>>things do I need to be aware of in designing a website designed for 
+>>wireless devices?
+>>
+>>thanx for the assistance.
+>>
+>>Russel P. Olinger
+>>(310) 466-3399
+>>rolinger1@hotmail.com
+>>
+>>_________________________________________________________________
+>>MSN Movies - Trailers, showtimes, DVD's, and the latest news from 
+>>Hollywood! http://movies.msn.click-url.com/go/onm00200509ave/direct/01/
+>>
+>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>Can't you just write the WAP code?
+>Xitami does suppost XML right??
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+FREE pop-up blocking with the new MSN Toolbar – get it now! 
+http://toolbar.msn.click-url.com/go/onm00200415ave/direct/01/
+
+
+From xitami@lists.xitami.org  Wed Jun 30 21:16:54 2004
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Wed, 30 Jun 2004 21:16:54 +0100 (BST)
+Subject: [Xitami] Where are the Xitami Archives???
+Message-ID: <56808@dsl.co.uk>
+
+In message <076801c45ed8$027cb290$7c28a8c0@rcolmstead.com>
+   "M. Jason Smiley" writes:
+
+> the link is titled "to unsubscribe:".... perhaps we could change that to
+> something with a broader description than just unsubscribe....
+
+Might I suggest that you raise your eyes UPwards (not easy, I know, when
+one is "blessed" with using=20
+ X-Mailer: Microsoft Outlook Express 6.00.2800.1158
+instead of a proper Mail User Agent).  If you look amongst all the
+headers, on *every* post to this list, you will find:
+
+ Reply-To: xitami@lists.xitami.org
+ List-Help: <mailto:xitami-request@lists.xitami.org?subject=3Dhelp>
+ List-Post: <mailto:xitami@lists.xitami.org>
+ List-Subscribe: <http://lists.xitami.org/mailman/listinfo/xitami>,
+                 <mailto:xitami-request@lists.xitami.org?subject=3Dsubscrib=
+e>
+ List-Id: Xitami Users General Discussion <xitami.lists.xitami.org>
+ List-Unsubscribe: <http://lists.xitami.org/mailman/listinfo/xitami>,
+                   <mailto:xitami-request@lists.xitami.org?subject=3Dunsubs=
+cribe>
+ List-Archive: <http://lists.xitami.org/pipermail/xitami/>
+
+Such information has traditionally been included in the headers of most
+proper mailing lists for at least the 23 years I've been using them.
+Proper MUAs make it easy for the user to see such pertinent information.
+
+YMMV.
+
+--=20
+   fix (vb.): 1. to paper over, obscure, hide from public view; 2. to
+   work around, in a way that produces unintended consequences that are
+   worse than the original problem.  Usage: "Windows ME fixes many of the
+   shortcomings of Windows 98 SE".
+
+
+From xitami@lists.xitami.org  Wed Jun 30 23:59:02 2004
+From: xitami@lists.xitami.org (Chestnut)
+Date: Wed, 30 Jun 2004 15:59:02 -0700
+Subject: [Xitami] Wireless Xitami
+References: <BAY13-F9N8IFd7NYIDV0006bff1@hotmail.com>
+Message-ID: <000601c45ef5$d6a284b0$09fab1d8@2c01v01>
+
+I looked at WAP a while back and then just a month ago. Seems that the
+standard is turning toward XHTML. A source for research and tools, including
+a phone simulator to test your apps can be found at
+//developer.openwave.com.
+Patrick
+----- Original Message ----- 
+From: "R O" <rolinger1@hotmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, June 30, 2004 11:30 AM
+Subject: [Xitami] Wireless Xitami
+
+
+>
+> I have a website that I want be accessable by cell phones, pagers, etc -
+> does Xitami support this functionality?  If so, how/where can I get
+started
+> with docuementation?  If not, are there any third party tools I can use to
+> integrate into Xitami?  Having never done this before, what things do I
+need
+> to be aware of in designing a website designed for wireless devices?
+>
+> thanx for the assistance.
+>
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1@hotmail.com
+>
+> _________________________________________________________________
+> MSN Movies - Trailers, showtimes, DVD's, and the latest news from
+Hollywood!
+> http://movies.msn.click-url.com/go/onm00200509ave/direct/01/
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Wed Jun 30 20:33:06 2004
+From: xitami@lists.xitami.org (Reply_To)
+Date: Wed, 30 Jun 2004 14:33:06 -0500
+Subject: [Xitami] Wireless Xitami
+In-Reply-To: <BAY13-F9N8IFd7NYIDV0006bff1@hotmail.com>
+Message-ID: <BD087FA1.DA73%reply@qwest.net>
+
+Here is my reply from 2002:
+
+
+The original purpose was as a wml server, however with a little
+
+creativity, the possibilities are limitless. Example: a portal
+
+server:  the ability to access your customized applications through
+
+personal computers and the full range of mobile devices -including
+
+Palm, PocketPC, I-mode, WAP and other internet-enabled phones,
+
+Blackberry, and even traditional voice phones.
+
+
+One of our current projects applies this to satellite radio. But
+
+then again, you don't have to use Xitami for this. The original
+
+question was about serving wml.
+
+
+Cheers,
+
+William R. Palaia
+1=B7651=B7231=B75887 wireless
+1=B7763=B7971=B70160 corporate
+http://www.palaia.com/
+wrpalaia@palaia.com
+
+
+> What kind of application would you use this for?
+> I'm racking the ol' noggin' thinkin' about how to apply
+> this.
+>=20
+> 9/29/02 9:33:32 AM, "Reply_To" <reply@palaia.com> wrote:
+>=20
+>>=20
+>> 1) Go to Ericsson's web site and join their developer group.
+>=20
+>=20
+>=20
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+> I have a website that I want be accessable by cell phones, pagers, etc -
+> does Xitami support this functionality?  If so, how/where can I get start=
+ed
+> with docuementation?  If not, are there any third party tools I can use t=
+o
+> integrate into Xitami?  Having never done this before, what things do I n=
+eed
+> to be aware of in designing a website designed for wireless devices?
+>=20
+> thanx for the assistance.
+>=20
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1@hotmail.com
+
+

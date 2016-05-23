@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] a bit off topic
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005956.html">
+   <LINK REL="Next"  HREF="005961.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] a bit off topic
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] a bit off topic">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 26 May 2004 10:33:33 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005956.html">[Xitami] a bit off topic
+</A></li>
+        <LI> Next message: <A HREF="005961.html">[Xitami] a bit off topic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5959">[ date ]</a>
+              <a href="thread.html#5959">[ thread ]</a>
+              <a href="subject.html#5959">[ subject ]</a>
+              <a href="author.html#5959">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Michael,
+
+And I'm STARTING with web design, but that is actually all what I want to achive; not to be able to 
+save the picture in an &quot;easy&quot; way. Maybe that didn't came properly over. Sorry!
+And I don't have to force the viewer to use Jscript to be able to see the web sites. -:)
+I just have to find out how to implement that with FP.
+
+Johannes
+
+Am 25 May 2004 um 19:38 hat Michael diLorenzo geschrieben:
+
+&gt;<i> I don't know a WHOLE lot about web design, but I use Dreamweaver to do a 
+</I>&gt;<i> lot of mine.  I have found that the following code:
+</I>&gt;<i> 
+</I>&gt;<i> &lt;div id=&quot;Layer1&quot; style=&quot;position:absolute; left:8px; top:11px; 
+</I>&gt;<i> width:533px; height:146px; z-index:1&quot;&gt;&lt;img src=&quot;/global/clear.gif&quot; 
+</I>&gt;<i> width=&quot;400&quot; height=&quot;100&quot;&gt;&lt;/div&gt;
+</I>&gt;<i> 
+</I>&gt;<i> Will place a gif in on a &quot;layer&quot; overtop of my image.  This gif is just a 
+</I>&gt;<i> clear image, the same size as the picture.  I can see through this image, 
+</I>&gt;<i> but my right-clicks register on the clear image instead of the picture 
+</I>&gt;<i> behind it.  Therefore, any right (or left) click views/saves the clear 
+</I>&gt;<i> image.
+</I>&gt;<i> 
+</I>&gt;<i> I haven't played with it a lot, and it doesn't address the web cache 
+</I>&gt;<i> issue, but there ya go.  :-)
+</I>&gt;<i> 
+</I>&gt;<i> Michael
+</I>&gt;<i> 
+</I>&gt;<i> On Tue, 25 May 2004 08:40:22 -0600, Johannes Prost &lt;<A HREF="mailto:xitami@pastryworld.ca">xitami@pastryworld.ca</A>&gt; 
+</I>&gt;<i> wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Hi Jill,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; found that info on the net too, and didn't liked the idea, because of 
+</I>&gt;<i> &gt; Jscript and the way around
+</I>&gt;<i> &gt; it.
+</I>&gt;<i> &gt; But thank's for the input.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Johannes
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Am 24 May 2004 um 13:56 hat Jill Douglas geschrieben:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; Johannes,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; You can use a simple JScript code that disables the typical visitor from
+</I>&gt;<i> &gt;&gt; doing a 'right-click' to save images like this:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Paste this code into the HEAD of your HTML document
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &lt;HEAD&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &lt;SCRIPT LANGUAGE=&quot;JavaScript1.1&quot;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &lt;!-- Begin
+</I>&gt;<i> &gt;&gt; function right(e) {
+</I>&gt;<i> &gt;&gt; if (navigator.appName == 'Netscape' &amp;&amp;
+</I>&gt;<i> &gt;&gt; (e.which == 3 || e.which == 2))
+</I>&gt;<i> &gt;&gt; return false;
+</I>&gt;<i> &gt;&gt; else if (navigator.appName == 'Microsoft Internet Explorer' &amp;&amp;
+</I>&gt;<i> &gt;&gt; (event.button == 2 || event.button == 3)) {
+</I>&gt;<i> &gt;&gt; alert(&quot;Sorry, you do not have permission to right click.&quot;);
+</I>&gt;<i> &gt;&gt; return false;
+</I>&gt;<i> &gt;&gt; }
+</I>&gt;<i> &gt;&gt; return true;
+</I>&gt;<i> &gt;&gt; }
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; document.onmousedown=right;
+</I>&gt;<i> &gt;&gt; document.onmouseup=right;
+</I>&gt;<i> &gt;&gt; if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+</I>&gt;<i> &gt;&gt; if (document.layers) window.captureEvents(Event.MOUSEUP);
+</I>&gt;<i> &gt;&gt; window.onmousedown=right;
+</I>&gt;<i> &gt;&gt; window.onmouseup=right;
+</I>&gt;<i> &gt;&gt; //  End --&gt;
+</I>&gt;<i> &gt;&gt; &lt;/script&gt;
+</I>&gt;<i> &gt;&gt; &lt;/HEAD&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; BUT.... This script is *NOT* fool-proof. People can disable JavaScript
+</I>&gt;<i> &gt;&gt; support in their browser, use a browser which doesn't support 
+</I>&gt;<i> &gt;&gt; JavaScript, or
+</I>&gt;<i> &gt;&gt; use a browser to link directly to the image that you want to protect. 
+</I>&gt;<i> &gt;&gt; Also
+</I>&gt;<i> &gt;&gt; the pages and images are normally stored in the user's browser cache 
+</I>&gt;<i> &gt;&gt; (for
+</I>&gt;<i> &gt;&gt; viewing later whilst offline) - with a little bit of work, the thief 
+</I>&gt;<i> &gt;&gt; could
+</I>&gt;<i> &gt;&gt; find your image in their cache. It also doesn't stop users accessing the
+</I>&gt;<i> &gt;&gt; source of your page from the toolbar menus (View | Page Source). You 
+</I>&gt;<i> &gt;&gt; could
+</I>&gt;<i> &gt;&gt; attempt to load your page into a window without toolbars - but again 
+</I>&gt;<i> &gt;&gt; this
+</I>&gt;<i> &gt;&gt; isn't fool-proof. They can access the page directly, with toolbars, 
+</I>&gt;<i> &gt;&gt; instead
+</I>&gt;<i> &gt;&gt; of opening it without them as you intended. There is a tool for 
+</I>&gt;<i> &gt;&gt; Microsoft
+</I>&gt;<i> &gt;&gt; Internet Explorer 5 that will encrypt JScript code - but this is only
+</I>&gt;<i> &gt;&gt; supported by Microsoft Internet Explorer 5 - and will not allow the 
+</I>&gt;<i> &gt;&gt; scripts
+</I>&gt;<i> &gt;&gt; to run on any other browser.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Bearing this in mind, the above script should stop right clicks (and 
+</I>&gt;<i> &gt;&gt; left
+</I>&gt;<i> &gt;&gt; button held down, followed by a right click) in both Netscape Navigator 
+</I>&gt;<i> &gt;&gt; and
+</I>&gt;<i> &gt;&gt; Microsoft Internet Explorer. It will not stop users who use a Mac - 
+</I>&gt;<i> &gt;&gt; where
+</I>&gt;<i> &gt;&gt; the mouse only has one button.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; If this script doesn't do what you require (i.e. protect your images 
+</I>&gt;<i> &gt;&gt; and or
+</I>&gt;<i> &gt;&gt; your scripts) then don't use it and don't put your images/scripts on the
+</I>&gt;<i> &gt;&gt; net. If your livelihood relies on people not copying your images - then 
+</I>&gt;<i> &gt;&gt; add
+</I>&gt;<i> &gt;&gt; a water mark or &quot;sample&quot; stamp to your images.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Jill
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Using M2, Opera's revolutionary e-mail client: <A HREF="http://www.opera.com/m2/">http://www.opera.com/m2/</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005956.html">[Xitami] a bit off topic
+</A></li>
+	<LI> Next message: <A HREF="005961.html">[Xitami] a bit off topic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5959">[ date ]</a>
+              <a href="thread.html#5959">[ thread ]</a>
+              <a href="subject.html#5959">[ subject ]</a>
+              <a href="author.html#5959">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

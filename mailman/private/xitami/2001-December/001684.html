@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Emulating Apache directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001683.html">
+   <LINK REL="Next"  HREF="001714.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Emulating Apache directories
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Emulating Apache directories">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Dec 2001 19:24:24 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001683.html">[Xitami] Xitami Versions
+</A></li>
+        <LI> Next message: <A HREF="001714.html">[Xitami] Emulating Apache directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1684">[ date ]</a>
+              <a href="thread.html#1684">[ thread ]</a>
+              <a href="subject.html#1684">[ subject ]</a>
+              <a href="author.html#1684">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3C10A69D.20200@freesbee.fr">3C10A69D.20200@freesbee.fr</A>&gt;, Francis Turner writes:
+&gt;<i>One useful thing that you can do in Apache is display a README file at 
+</I>&gt;<i>the bottom of a directory listing. I tried to do the same thing using 
+</I>&gt;<i>GSL in xitami and it works most of the time (code below). Where it 
+</I>&gt;<i>doesn't work is where the directory is an alias to somewhere.  [Because
+</I>&gt;<i>have to guess what the directory path on disk was]
+</I>
+Well spotted.  This is a bug (as far as I'm concerned), and I've added
+it to our bug list.
+
+You are right that smthttpl.c:http_list_directory() is what is creating
+the directory (as an XML tree).  One of the things that it should also
+add to the XML is the path to the actual directory on disk, since it
+obviously needs to know this while it is preparing the list of files,
+and it would be useful to the GSL script outputting the directory.  The
+directory path is, I think, in p_http-&gt; file_name, so adding an
+attribute with that value into the top level of the XML would be useful,
+called perhaps &quot;path_on_disk&quot;.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001683.html">[Xitami] Xitami Versions
+</A></li>
+	<LI> Next message: <A HREF="001714.html">[Xitami] Emulating Apache directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1684">[ date ]</a>
+              <a href="thread.html#1684">[ thread ]</a>
+              <a href="subject.html#1684">[ subject ]</a>
+              <a href="author.html#1684">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

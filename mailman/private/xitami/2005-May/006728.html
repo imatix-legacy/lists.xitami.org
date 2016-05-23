@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006727.html">
+   <LINK REL="Next"  HREF="006729.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 17:38:03 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006727.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006729.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6728">[ date ]</a>
+              <a href="thread.html#6728">[ thread ]</a>
+              <a href="subject.html#6728">[ subject ]</a>
+              <a href="author.html#6728">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/05/2005 04:52 pm, Maurilio Longo wrote:
+
+&gt;<i> So, the problem seems not to be in the code that spawns the .php
+</I>&gt;<i> interpreter but in the code that creates the cgi environment before
+</I>&gt;<i> spawning the cgi executable.
+</I>
+Yes, this makes sense.  I vaguely remember this being reported as a problem in 
+the past.
+
+I've taken a look.  I don't have time to set-up a test environment so this is 
+speculative, but the problem appears to be in smthttpl.c where it formats the 
+path_translated variable, wrongly sticking the rootdir before the path name.  
+Try this patch (smthttpl.c, line 2656):
+
+    if (filter)
+        path_translated = xstrcpy (NULL, p_http-&gt; url, NULL);
+    else
+        path_translated = xstrcpy (NULL, full_rootdir, p_http-&gt; path_info, 
+NULL);
+
+No guarantee this works but if it does I'll patch the source code.
+
+Regards,
+Pieter Hintjens
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006727.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006729.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6728">[ date ]</a>
+              <a href="thread.html#6728">[ thread ]</a>
+              <a href="subject.html#6728">[ subject ]</a>
+              <a href="author.html#6728">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

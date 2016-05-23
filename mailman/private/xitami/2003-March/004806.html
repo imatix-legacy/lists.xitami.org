@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Upgrading Internet Circuit
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004805.html">
+   <LINK REL="Next"  HREF="004808.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Upgrading Internet Circuit
+   </H1>
+    <B>Gunnar Swan
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Upgrading Internet Circuit">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 07 Mar 2003 09:25:40 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004805.html">[Xitami] Upgrading Internet Circuit
+</A></li>
+        <LI> Next message: <A HREF="004808.html">[Xitami] vHost or Block my IP addy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4806">[ date ]</a>
+              <a href="thread.html#4806">[ thread ]</a>
+              <a href="subject.html#4806">[ subject ]</a>
+              <a href="author.html#4806">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>May I suggest you don't put the Xitami machine behind the router.
+Point it to the gateway of the isp.
+Your other machines, put these behind the router.
+You really only need a router if you want a private ip network.
+
+    ISP Gateway
+    |
+    |
+  HUB
+    |     \
+    |       \
+    |     Xitami Web Server
+    |
+    Router
+     |      \
+     |        \
+     |          \
+     |            \
+     |              \
+ Machine 1   Machine 2
+
+
+
+3/7/03 8:46:08 AM, &quot;Vince Napoli&quot; &lt;<A HREF="mailto:vnapoli@ecs.k12.ny.us">vnapoli@ecs.k12.ny.us</A>&gt; wrote:
+
+&gt;<i>most likely the lmhosts file is pointing to the wrong address:
+</I>&gt;<i>
+</I>&gt;<i>for example: 192.168.1.6 is the same as www.whatever.com, but your webserver 
+</I>&gt;<i>does not know the dns resolution. I think xitiami has this issue on their FAQ's
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I have ansimilar question? If you run a router, and your web server is
+</I>&gt;&gt;<i> running on a machine behind the router, why can only the other
+</I>&gt;&gt;<i> machines on your network see your web address... IE www.whatever.com
+</I>&gt;&gt;<i> but the machine running the web server can only access the pages from
+</I>&gt;&gt;<i> the localhost?-------Original Message------- From:
+</I>&gt;&gt;<i> <A HREF="mailto:xitami@lists.xitami.orgDate">xitami@lists.xitami.orgDate</A>: Friday, March 07, 2003 10:27:03 AMTo:
+</I>&gt;&gt;<i> <A HREF="mailto:xitami@lists.xitami.orgSubject">xitami@lists.xitami.orgSubject</A>: Re: [Xitami] Upgrading Internet
+</I>&gt;&gt;<i> CircuitWhat is the IP address of the PC that is running Xitami?
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> is your Xitami machine behind a firewall? if so, do you have port 80
+</I>&gt;&gt;<i> mapped to the machine? even if Xitami is on the same machine as your
+</I>&gt;&gt;<i> firewall solution, you still need to create the port mapping.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> &gt; Hello everyone,
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; I have been running Xitami at work connected to the internet via a 
+</I>&gt;&gt;<i> DSL
+</I>&gt;&gt;<i> &gt; circuit. We have receintly installed a T-1. I have pointed the
+</I>&gt;&gt;<i> &gt; gateway IP address of the Xitami computer to the new T-1 circuit.
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; From home (or anywhere else) when I type in the IP address of the
+</I>&gt;&gt;<i> &gt; dsl
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; circuit within my web browser, Xitami surves up my web page. When I
+</I>&gt;&gt;<i> &gt; type in the IP address of the new T-1 circuit, I get a time-out
+</I>&gt;&gt;<i> &gt; error.
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; The people who installed the T-1 circuit is telling me I need to
+</I>&gt;&gt;<i> &gt; assign a public IP address to my Xitami web server to make it work.
+</I>&gt;&gt;<i> &gt; I have always used a private address (192.168.0.xx) and it has
+</I>&gt;&gt;<i> &gt; worked for over a year.
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; What do I need to do to get Xitami to serve the IP address of the
+</I>&gt;&gt;<i> &gt; new circuit? I'm thinking that maybe they have a filter or something
+</I>&gt;&gt;<i> &gt; preventing port 80 from working...
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; Any suggestions would be greatly appreciated!
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; Kelly
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> &gt; --
+</I>&gt;&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i> &gt; 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</I>&gt;&gt;<i> Vince Napoli
+</I>&gt;&gt;<i> Director of Technology and Network Administration
+</I>&gt;&gt;<i> 845-647-0200x377
+</I>&gt;&gt;<i> Ellenville Central Schools
+</I>&gt;&gt;<i> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i> .
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> ____________________________________________________
+</I>&gt;&gt;<i>  IncrediMail - Email has finally evolved - Click Here
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</I>&gt;<i>Vince Napoli
+</I>&gt;<i>Director of Technology and Network Administration
+</I>&gt;<i>845-647-0200x377
+</I>&gt;<i>Ellenville Central Schools
+</I>&gt;<i>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+Best Regards,
+Gunnar Swan
+<A HREF="http://www.PracticeToPass.Com">http://www.PracticeToPass.Com</A>
+Software Built For Statutory Courses
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004805.html">[Xitami] Upgrading Internet Circuit
+</A></li>
+	<LI> Next message: <A HREF="004808.html">[Xitami] vHost or Block my IP addy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4806">[ date ]</a>
+              <a href="thread.html#4806">[ thread ]</a>
+              <a href="subject.html#4806">[ subject ]</a>
+              <a href="author.html#4806">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

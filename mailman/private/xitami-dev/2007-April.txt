@@ -1,0 +1,268 @@
+From g_skumar at yahoo.com  Sat Apr  7 04:15:32 2007
+From: g_skumar at yahoo.com (Shivakumar Gopalakrishnan)
+Date: Sat Apr  7 04:16:00 2007
+Subject: [Xitami-Dev] Re: XITAMI CRASH      ERROR-URGENT!
+In-Reply-To: <43789.202.63.116.234.1173955726.squirrel@mail.sirvisetti.com>
+Message-ID: <707945.77663.qm@web82306.mail.mud.yahoo.com>
+
+Other than actually fixing the code itself, other options are starting the process as a service and set the option to restart itself on failure.
+   
+  Do not know whether you are trying this already.
+   
+  Kumar
+  
+
+Vishal Kumar Nalla <vishalkumar.nalla@sirvisetti.com> wrote:
+  Hi,
+
+Xitami 2.5c is crashing at the following events,can anybody give me a resolution as why this is
+happening:
+
+Abort at xisuper:Clean-Up-Temporary-Files: (Ready-To-Go, Not-Busy-Event)
+Abort at smttran:Regenerate-Alarm-Event: (Getting-Event, Alarm-Event)
+Abort at smttime:Generate-Response-Events:set alarm request (Expect-Event, Timer-Event)
+
+At these three events Xitami is crashing on my system,the above information i have gathered from
+the crash log.This is a high priority issue for us, as we dont have options to go for other
+webservers.Kindly assist/provide a resolution for the above mentioned crash details.
+
+References to source code for the above events:
+
+smttime:
+/************************ GENERATE RESPONSE EVENTS ***********************/
+
+MODULE generate_response_events (THREAD *thread)
+{
+static long
+cur_date = 0, /* Check if clock went backwards */
+cur_time = 0;
+TIMEREQ
+*request; /* Pointer to request in list */
+long
+sig_date, /* When do we signal */
+sig_time, /* the next alarm? */
+delay_days, /* Which is in how many days */
+delay_csecs; /* and how many centiseconds */
+
+/* Handle a backwards clock adjustment by estimating the difference */
+/* and applying this to all time requests. */
+smt_set_step ("handle clock adjustment");
+if (date_is_future (cur_date, cur_time))
+{
+date_diff (cur_date, cur_time,
+date_now (), time_now (),
+&delay_days, &delay_csecs);
+for (request = requests.next;
+request != (TIMEREQ *) &requests;
+request = request-> next)
+{
+past_date (&request-> exp_date, &request-> exp_time,
+delay_days, delay_csecs);
+}
+}
+cur_time = time_now ();
+cur_date = date_now ();
+sig_date = 0; /* No alarm requests, yet */
+sig_time = 0;
+
+/* First pass - generate response events and expire old requests */
+smt_set_step ("expire old requests");
+for (request = requests.next;
+request != (TIMEREQ *) &requests;
+request = request-> next)
+{
+if (request-> exp_date < cur_date
+|| (request-> exp_date == cur_date
+&& request-> exp_time <= cur_time))
+{
+send_alarm_reply (request); /* Send back an ALARM to caller */
+if (request-> cycles == 1) /* Expire if single-shot */
+{
+request = request-> prev;
+request_destroy (request-> next);
+}
+/* Else set next expiry time to closest future point... under
+* normal circumstances we add the delay date and time. If the
+* delay is very short (too short), or the clock was moved
+* forwards, this may not be enough. We then take the current
+* date and time and add the delay to that.
+*/
+else
+{
+future_date (&request-> exp_date, &request-> exp_time,
+request-> days, request-> csecs);
+
+if (request-> exp_date < cur_date
+|| (request-> exp_date == cur_date
+&& request-> exp_time < cur_time))
+{
+request-> exp_date = cur_date;
+request-> exp_time = cur_time;
+future_date (&request-> exp_date, &request-> exp_time,
+request-> days, request-> csecs);
+}
+if (request-> cycles > 1)
+request-> cycles--;
+}
+}
+}
+/* Second pass - calculate time for next signal */
+smt_set_step ("calculate next signal");
+for (request = requests.next;
+request != (TIMEREQ *) &requests;
+request = request-> next)
+{
+/* Keep track of the oldest expiry time, for next timer signal */
+if (sig_date > request-> exp_date
+|| (sig_date == request-> exp_date
+&& sig_time > request-> exp_time)
+|| sig_date == 0)
+{
+sig_date = request-> exp_date;
+sig_time = request-> exp_time;
+}
+}
+/* If we had an alarm request, go set it off */
+smt_set_step ("set alarm request");
+if (sig_date)
+{
+date_diff (sig_date, sig_time,
+cur_date, cur_time,
+&delay_days, &delay_csecs);
+if (delay_days > 24) /* 24 days are less than 2^31 */
+delay_days = 24;
+
+/* Try to set a process alarm (SIGALRM signal) after the desired
+* delay. If this fails -- usually because we're on a crippleOS
+* -- then we substitute a real timer by a slow SMT loop. This is
+* okay on crippleOS'es since these usually don't worry too much
+* if one process hogs the CPU.
+*/
+if (!process_alarm (delay_days * 86400000L + delay_csecs * 10))
+SEND (&thread-> queue-> qid, "_TIMER", "");
+}
+}
+
+static void
+send_alarm_reply (TIMEREQ *request)
+{
+byte
+*msg_body; /* Message returned to caller */
+int
+msg_size; /* Size of formatted msg_body */
+
+/* Calculate size required for message body */
+msg_size = exdr_write (NULL, SMT_TIME_REPLY,
+request-> body_size, request-> body_data);
+
+/* Now allocate and format the buffer */
+msg_body = mem_alloc (msg_size);
+msg_size = exdr_write (msg_body, SMT_TIME_REPLY,
+request-> body_size, request-> body_data);
+event_send (
+&request-> reply_to, /* Send to specified queue */
+NULL, /* No queue for reply */
+"TIME_ALARM", /* Name of event to send */
+msg_body, /* Event body contents */
+msg_size, /* Event body size */
+NULL, NULL, NULL, /* No response events */
+0); /* No timeout */
+
+mem_free (msg_body); /* And we can free the buffer */
+}
+
+
+/* -------------------------------------------------------------------------
+* request_destroy
+*
+* Destroys the specified request.
+*/
+
+static void
+request_destroy (TIMEREQ *request)
+{
+mem_free (request-> body_data);
+node_destroy (request);
+}
+
+
+smttran:
+
+/************************* REGENERATE ALARM EVENT ************************/
+
+MODULE regenerate_alarm_event (THREAD *thread)
+{
+struct_smt_time_reply
+*reply; /* Reply from timer */
+
+tcb = thread-> tcb; /* Point to thread's context */
+get_smt_time_reply (thread-> event-> body, &reply);
+if (streq ((char *) reply-> tag_data, "COMMIT"))
+the_next_event = commit_event;
+else
+the_next_event = empty_event;
+
+free_smt_time_reply (&reply);
+
+}
+
+xisuper:
+
+/************************ CLEAN UP TEMPORARY FILES ***********************/
+
+MODULE clean_up_temporary_files (THREAD *thread)
+{
+SYMBOL
+*symbol;
+
+/* We get the list of temp file directories (potentially a different one
+* for each virtual host) from the http_dirs symbol table. We delete
+* temporary files older than one day.
+*/
+for (symbol = http_dirs-> symbols; symbol; symbol = symbol-> next)
+cleanup_directory (symbol-> name, "pipe*", 1);
+}
+
+
+/************************* TERMINATE THE THREAD **************************/
+
+MODULE terminate_the_thread (THREAD *thread)
+{
+the_next_event = terminate_event;
+}
+
+
+-- 
+Thanks
+Vishal Kumar Nalla
+
+On Sun, November 19, 2006 00:29, Roman Stepanov wrote:
+> Sorry, but i didn't receive any attachments with your mail.
+> About setting the time - works fine, without any crashes.
+> I have a fresh copy of xitami installed from http://www.xitami.com/xiopen_2_5.zip
+> If your copy has been downloaded from another source, please send me url.
+>
+>
+>
+> Saturday, November 18, 2006, 8:13:59 PM, you wrote:
+>
+>> Hi Everyone,
+>
+>> Can you please look into these log files and let me know what exactly is happening from
+>> Xitami.This is haulting our process,kindly provide a solution as soon as possible.
+>
+>
+>
+>
+>
+>
+>
+>
+
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami-dev/attachments/20070406/8b0d5ad7/attachment.htm

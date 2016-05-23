@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami 24d9 aborts right after reporting &quot;could not accept connection: Software caused connection abort&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000843.html">
+   <LINK REL="Next"  HREF="000845.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami 24d9 aborts right after reporting &quot;could not accept connection: Software caused connection abort&quot;
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami 24d9 aborts right after reporting &quot;could not accept connection: Software caused connection abort&quot;">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 03 Sep 2001 10:39:04 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000843.html">[Xitami] xitami aborts
+</A></li>
+        <LI> Next message: <A HREF="000845.html">[Xitami] PHP4 Installation Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#844">[ date ]</a>
+              <a href="thread.html#844">[ thread ]</a>
+              <a href="subject.html#844">[ subject ]</a>
+              <a href="author.html#844">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:NEBBIJGPHKNLMOCJIHFJIEHKCNAA.dmitry@transnexus.com">NEBBIJGPHKNLMOCJIHFJIEHKCNAA.dmitry@transnexus.com</A>&gt;, &quot;Dmitry Isakbayev&quot; writes:
+&gt;<i>Steps to reproduce:
+</I>&gt;<i>1) Build and run Xitami24d9 on Sun OS 5.7 or 5.8
+</I>&gt;<i>2) Point IE 5.0 browser to the default page
+</I>&gt;<i>3) Keep reloading the same page by keeping the &quot;F5&quot; key constantly pressed down.
+</I>&gt;<i>
+</I>&gt;<i>After a few seconds xitami reports &quot;smthttp: could not accept connection:
+</I>&gt;<i>Software caused connection abort&quot;, closes all connections and dumps core.
+</I>&gt;<i>[Windows Xitami 24b9 doesn't have this problem]
+</I>
+Interesting testing methadology :-)
+
+The &quot;Software caused connection abort&quot; appears to correspond to the 
+ECONNABORTED error number, which as far as I've been able to establish
+is caused by a connection being closed before it has been fully
+accepted, for some reason.
+
+Given the way that you are testing it, it's possible that what is
+happening is that the next F5 &quot;reload&quot; is processed at the webbrowser
+end, thus closing the existing (not-yet-accepted) connection, and
+opening a new one.  
+
+Xitami tries to raise an internal exception when it has network issues,
+and basically concludes things have turned to custard at that point.
+
+I suspect that ECONNABORTED may need to be handled, for the platforms
+that return it, in much the same way as EAGAIN/EWOULDBLOCK -- ie, by
+pretending we didn't see it, and simply moving on to waiting for the
+next connection.  You may or may not want to log the attempt failing.
+
+If you want to try this I'd suggest modifying smthttp.c
+accept_client_connection() to also test for ECONNABORTED, and handle it
+in a different manner from the default.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000843.html">[Xitami] xitami aborts
+</A></li>
+	<LI> Next message: <A HREF="000845.html">[Xitami] PHP4 Installation Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#844">[ date ]</a>
+              <a href="thread.html#844">[ thread ]</a>
+              <a href="subject.html#844">[ subject ]</a>
+              <a href="author.html#844">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

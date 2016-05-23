@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Setting Up Virtual Hosts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004703.html">
+   <LINK REL="Next"  HREF="004705.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Setting Up Virtual Hosts
+   </H1>
+    <B>WhiteShepherd
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Setting Up Virtual Hosts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 8 Feb 2003 17:20:27 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004703.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+        <LI> Next message: <A HREF="004705.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4704">[ date ]</a>
+              <a href="thread.html#4704">[ thread ]</a>
+              <a href="subject.html#4704">[ subject ]</a>
+              <a href="author.html#4704">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well when setting up Xitami there are a few useful tips to know.  First a very useful 
+feature is Xitami uses a hierarchy system for it's config files.  They would look like 
+this:
+
+Xitami.cfg--&gt;defaults.cfg---&gt;All vhost cfg's defined in defaults.cfg (virtual host1, 
+virtual host 2, virtual host3)
+
+So a rule defined in Xitami.cfg is overridden by the same rule in defaults.cfg.  
+Furthermore a rule in say: vhost1.cfg (one of your vhosts defined in defaults.cfg) 
+will override any setting in defaults.cfg .  However keep in mind the rules defined in 
+your vhost{xx}.cfg (basically the same as found in xitami.cfg ) only apply to the 
+virtual host they reference.  So you can have different vhosts with different rules.
+
+To set up a virtual host is very simple.  In your defaults.cfg you must create a line 
+called [Virtual Hosts].  Following this line should be your DNS name connections will 
+be coming in on then a &quot;=&quot; then the cfg with the &quot;RULES&quot; for your vhost.
+
+For example in your defaults.cfg it may look like this (note I am catching all 
+connections with and without a www.):
+
+[Virtual-Hosts]
+www.mydomain.com=vhost1.cfg
+mydomain.com=vhost1.cfg
+www.myfriendsdomain.com=vhost2.cfg
+myfriendsdomain.com=vhost2.cfg
+
+
+Your vhost{xx}.cfg (or any name you set it) can be set up with rules from Xitami.cfg.  
+Make sure you set the different web directories in you vhost{xx}.cfg files.
+
+Example of a vhost{xx}.cfg file:
+
+Filename vhost1.cfg (bellow is what is inside this text file)
+[Server]
+webpages=c:\xitami\webpages\mywebdirectory
+cgi-bin=c:\xitami\cgi-bin
+
+
+Filename vhost2.cfg (bellow is what is inside this text file)
+[Server]
+webpages=c:\xitami\webpages\myfriendswebdirectory
+cgi-bin=c:\xitami\cgi-bin
+
+
+Well that is about it.  It's really pretty simple once you got the hang of it.  Hopefully 
+did that help or did I shoot over your head? :)
+
+--  WhiteShepherd (www.whiteshepherd.furtopia.org)
+
+<A HREF="http://www.furtopia.org">http://www.furtopia.org</A> / www.dragoncity.net - Unlimited fast and completely free 
+hosting (CGI/perl/PHP/MySQL available) for ALL the furry arts.  Personalized 
+(www.&quot;yourname&quot;.*.*) subdomains available, and/or linking to existing web pages to 
+increase your traffic.  Message forums to discuss ideas and art of the week to 
+peruse.  Furry Sketch-n-Guess games held online Sundays at 8PM 
+(www.furtopia.org/sketch).
+
+On 8 Feb 2003 at 12:10, Rob @ BMM wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I have been successfully using Xitami for several months now.  Now I want to
+</I>&gt;<i> modify the system to run a second website.  I believe that I will have to
+</I>&gt;<i> begin using &quot;virtual hosts&quot;, but after reading the instructions, not quite
+</I>&gt;<i> clear how to achieve this.  I understand the concept, but lack complete
+</I>&gt;<i> documentation to move towards this.  Can someone provide me with a brief
+</I>&gt;<i> summary to which config file sections and syntax to use.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Best Regards,
+</I>&gt;<i> Rob Allen
+</I>&gt;<i> President, Blue Marble Meds LLC.  Offering 30-85% off Prescription Meds
+</I>&gt;<i> See us at <A HREF="http://www.BlueMarbleMeds.com">http://www.BlueMarbleMeds.com</A>
+</I>&gt;<i> Call us for a quote - 480-836-7232, or Toll Free 866-247-8469
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004703.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+	<LI> Next message: <A HREF="004705.html">[Xitami] Setting Up Virtual Hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4704">[ date ]</a>
+              <a href="thread.html#4704">[ thread ]</a>
+              <a href="subject.html#4704">[ subject ]</a>
+              <a href="author.html#4704">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

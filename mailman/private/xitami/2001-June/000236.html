@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Newbie can't setup virtual hosts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000234.html">
+   <LINK REL="Next"  HREF="000239.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Newbie can't setup virtual hosts
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Newbie can't setup virtual hosts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 25 Jun 2001 01:34:32 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000234.html">[Xitami] Newbie can't setup virtual hosts
+</A></li>
+        <LI> Next message: <A HREF="000239.html">[Xitami] Newbie can't setup virtual hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I then tried the DNS approach and set virtual hosting to www2.stc.com=stc.cfg but when I typed www2.stc.com in my browser's location bar, it dialed in and tried to find it on the Internet. 
+</I>
+You probably have a text file called &quot;hosts&quot;. On Windows NT it
+may be at C:\WINNT\system32\hosts, though it has been seen under
+many names. Even Lmhosts.sam (which is really for something else,
+but has been known to influence IP lookup).
+
+It looks something like this: 
+
+# This is a sample HOSTS file ...
+
+#  102.54.94.97     rhino.acme.com      # source server
+
+127.0.0.1       localhost
+
+If typing &quot;localhost&quot; at your browser opens your page at
+127.0.0.1, you have a hosts file somewhere (and that's why it
+works). Anything on a line after &quot;#&quot; is ignored. 
+
+Add some lines like 
+
+127.0.0.1 manny
+
+127.0.0.1 moe
+
+127.0.0.1 jack
+
+Save the file. 
+
+Now, typing &quot;manny&quot; at your browser should open your default
+127.0.0.1 page.
+
+Now go into Xitami's Vhost settings and tell it that &quot;manny&quot;
+points to a CFG file called &quot;manny.cfg&quot;. In manny.cfg, point to
+&quot;O:/WebSites/mndm&quot; as the root of the web pages for that host. Do
+the same for moe and jack, except point to your other web-root
+folders. 
+
+Now typing manny, moe, or jack at your browser should open three
+different web sites. 
+
+You -may- still have trouble with your TCP stack not believing
+the hosts file and going to the modem to ask a &quot;real DNS&quot;. MS TCP
+stacks can be quite dumb. 
+
+When you get past that: I've had some trouble when web folders
+are not on the same drive as Xitami. It &quot;should&quot; work, and often
+it does, but sometimes it does not. 
+
+Also: after setting or changing a Vhost, stop and restart Xitami.
+I'm not sure if it &quot;should&quot; pick up the change on the fly, but my
+habit is to force it to start anew.
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000234.html">[Xitami] Newbie can't setup virtual hosts
+</A></li>
+	<LI> Next message: <A HREF="000239.html">[Xitami] Newbie can't setup virtual hosts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#236">[ date ]</a>
+              <a href="thread.html#236">[ thread ]</a>
+              <a href="subject.html#236">[ subject ]</a>
+              <a href="author.html#236">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

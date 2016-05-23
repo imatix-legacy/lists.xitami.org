@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Folder permission issue or PERL error???
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006372.html">
+   <LINK REL="Next"  HREF="006374.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Folder permission issue or PERL error???
+   </H1>
+    <B>Ayhan Tuncer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Folder permission issue or PERL error???">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 14 Jan 2005 10:00:00 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006372.html">[Xitami] Folder permission issue or PERL error???
+</A></li>
+        <LI> Next message: <A HREF="006374.html">[Xitami] Folder permission issue or PERL error???
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6373">[ date ]</a>
+              <a href="thread.html#6373">[ thread ]</a>
+              <a href="subject.html#6373">[ subject ]</a>
+              <a href="author.html#6373">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>How is the wording of the error at line 62? Is it in the cgierr.log ?
+
+
+Ayhan Tuncer
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>] On Behalf Of Admin (MRJ)
+Sent: Friday, January 14, 2005 9:11 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: [Xitami] Folder permission issue or PERL error???
+
+I am having a bit of trouble here.
+=20
+I have ActivePerl 5.8.6 installed
+Xitami 2.5c2 installed on Win 2k
+=20
+and I'm trying to get   <A HREF="http://www.radinks.com/upload/">http://www.radinks.com/upload/</A>
+&lt;<A HREF="http://www.radinks.com/upload/">http://www.radinks.com/upload/</A>&gt;=20
+this little thing to work in the lite edition free version.
+=20
+Now everything is ok as long I try using the html-perl.htm file to do an
+upload but=20
+it fails stating there is a error on line 62 in the upload.cgi file.
+=20
+the following is the CGI file I am using.
+=20
+Any hints as to why it won't upload to my xitami box?
+I really don't know any Perl myself to debug this thing in a proper
+manner.
+=20
+Thanks for any help.
+=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+=20
+=20
+#!/usr/bin/perl -w
+=20
+#
+# Perl script to accept file uploads. This script is provided for
+demonstration=20
+# purposes only.
+# you need to have the CGI module installed.
+#
+# Copyright Rad Inks (pvt) 2003
+# <A HREF="http://www.radinks.com">http://www.radinks.com</A>
+=20
+
+use CGI;  =20
+use Carp;
+=20
+sub bye_bye {
+ $mes =3D shift;
+ print &quot;&lt;br&gt;$mes&lt;br&gt;\n&quot;;
+=20
+ exit;
+}
+=20
+=20
+=20
+print &quot;Content-type: text/html\n\n &quot;;
+my $cg =3D new CGI();
+=20
+#
+# Files will not be saved if $save_path is left undefined. Please make
+sure
+# the path you choose is writable.
+#
+=20
+my $save_path =3D &quot;D:\\tmpUL\\&quot;;
+=20
+print &lt;&lt;__TABLE__;
+&lt;html&gt;
+&lt;body  bgcolor=3D&quot;FFFFCC&quot;&gt;
+=20
+&lt;table border=3D&quot;1&quot; cellpadding=3D&quot;5&quot; width=3D&quot;100%&quot; align=3D&quot;center&quot;&gt;
+&lt;tr&gt;&lt;td colspan=3D&quot;2&quot; bgcolor=3D&quot;#0066cc&quot;&gt;&lt;font color=3D&quot;#FFFFCC&quot; =
+size=3D&quot;+1&quot;
+align=3D&quot;center&quot;&gt;Files Uploaded&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr  bgcolor=3D&quot;#ffff00&quot;&gt;&lt;td style=3D&quot;font-size: 110%;&quot;&gt;&lt;nobr&gt;File
+Name&lt;/nobr&gt;&lt;/td&gt;
+ &lt;td style=3D&quot;font-size: 110%&quot;  align=3D&quot;right&quot;&gt;&lt;nobr&gt;File
+size&lt;/nobr&gt;&lt;/td&gt;&lt;/tr&gt;
+__TABLE__
+=20
+my $size =3D $cg-&gt;param;
+for($i=3D0 ; $i &lt; $size ; $i++)
+{
+ $file_upload  =3D $cg-&gt;param(&quot;userfile[$i]&quot;);
+=20
+ if($file_upload) {
+  my $fh =3D $cg-&gt;upload(&quot;userfile[$i]&quot;);
+  my @name =3D split('/',$fh);
+  my $filename =3D $name[$#name];
+ =20
+  $fsize =3D(-s $fh);
+  print &quot;&lt;tr&gt;&lt;td&gt;$filename &lt;/td&gt;\n&quot;;
+  print &quot;&lt;td&gt;$fsize&lt;/td&gt;&lt;/tr&gt;&quot;;
+ =20
+  if(defined($save_path))
+  {
+   open (OUTFILE,&quot;&gt;&gt;$save_path/$filename&quot;);
+   while(&lt;$fh&gt;) {
+    print OUTFILE $_;
+### THIS IS WHERE THE ERROR OCCURS
+   }
+   close(OUTFILE);
+  }
+  else
+  {
+   carp 'not saving';
+  }
+ }
+}
+=20
+
+print &lt;&lt;__TABLE__;
+&lt;/table&gt;
+=20
+&lt;p style=3D&quot;text-align:center; font-size: 80%&quot;&gt;Sample  Perl Upload =
+handler
+provided by
+ &lt;a href=3D&quot;<A HREF="http://www.radinks.com/?dn"">http://www.radinks.com/?dn&quot;</A>&gt;Rad Inks&lt;/a&gt;&lt;/p&gt;
+=20
+&lt;p style=3D&quot;text-align:center; font-size: 80%&quot;&gt;have you seen our &lt;a
+href=3D&quot;<A HREF="http://www.radinks.com/sftp/?dn"">http://www.radinks.com/sftp/?dn&quot;</A>&gt;Secure FTP Applet&lt;/a&gt; or our
+&lt;a href=3D&quot;<A HREF="http://www.radinks.com/mms/?dn"">http://www.radinks.com/mms/?dn&quot;</A>&gt;Multimedia Messaging
+Solution&lt;/a&gt;?&lt;/p&gt;
+=20
+__TABLE__
+=20
+
+=20
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006372.html">[Xitami] Folder permission issue or PERL error???
+</A></li>
+	<LI> Next message: <A HREF="006374.html">[Xitami] Folder permission issue or PERL error???
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6373">[ date ]</a>
+              <a href="thread.html#6373">[ thread ]</a>
+              <a href="subject.html#6373">[ subject ]</a>
+              <a href="author.html#6373">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

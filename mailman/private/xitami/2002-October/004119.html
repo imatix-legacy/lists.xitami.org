@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP and Windows XP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004118.html">
+   <LINK REL="Next"  HREF="004120.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP and Windows XP
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP and Windows XP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 15 Oct 2002 11:47:22 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004118.html">[Xitami] FTP and Windows XP
+</A></li>
+        <LI> Next message: <A HREF="004120.html">[Xitami] PHP anyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4119">[ date ]</a>
+              <a href="thread.html#4119">[ thread ]</a>
+              <a href="subject.html#4119">[ subject ]</a>
+              <a href="author.html#4119">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The following are some cut/pasted threads that concern the Xitami FTP 
+service.....essentially, it sucks!  Very unfortunate too.  The Xitami FTP 
+service has problems with NAT, Passive Mode, Proxy and connections from 
+WinXP.  Obviously, all the development went into the kick-ass web service 
+and zero development went into the sucky-ass FTP service.
+
+The first one is my inital posting, and the rest are responses to that 
+initail posting.  Take from it what you will:
+
+===========================================================
+I am running the latest release of Xitami Win2000 Server.  I am initiating
+the FTP services with default settings, Port 21 and the same server IP.
+When I connect to the FTP server from my location, I get connected but I
+can't see any files or directories.
+
+My work location is not firewalled but NAT is being applied from my client
+side.  I see the connection, but the server isn't returning basic directory
+listings or file listings.  When I shut down the Xitami FTP service on the
+server and then initiate IIS FTP service, I can FTP just fine.
+
+For some reason it seems Xitami can't communicate back to the NAT port my
+computer is coming through.  But the IIS FTP service can.  Whats up with
+that?  Anyone have any insights?
+
+-R
+===============================================
+Don't use Xitami's FTP if it gives you any trouble. It's just a free
+bonus in a free program. It's worth more than nothing, but is just
+basic simple FTP. It hasn't been looked at since home-NAT became
+common.
+
+Don't use IIS _PERIOD_. Aside from being bug-bait, it likes to leave
+bits of itself behind even when you think you've removed it. Maybe
+it's what's blocking X's FTP.
+
+There are a zillion cheap and free FTP servers. A dozen of them are
+good. War FTP seems popular. Maybe someone will pop in with one they
+like better.
+
+-PRR
+===============================================
+I'm having ftp problems myself, but of a different nature.
+
+What I noticed on Xitami, is that you need to have 2 ports open 20 (for the
+Data Connection Port) and 21 are the default.  I switched to ports 1000 and
+1001 because i thought my ISP might have been blocking port 21.
+
+I am able to get to my ftp sites through computers on the network, but am
+having very inconsistent results from outside my network that I haven't been
+able to resolve yet.
+
+Someone earlier wisely suggested forcing the IE ftp service to passive mode
+through the tools/internet options menu.
+
+fwiw, I'm considering switching to Apache or IIS because of this and other
+issues I've had with X flaking out and crashing, but have significant
+inertia working against that move.
+
+mb
+==================================================
+Just so you do not think you are alone, I have the same problem - but
+mine started when I added a router into the mix that uses NAT.  Prior to
+that I used a software internet sharing package that worked fine.
+
+I have found no solution so far.  I think the problem may be in FTP
+wanting at least two ports, but why the software sharing handled it I do
+not know.
+
+I have been patiently (and unsuccessfully) waiting for responses to your
+submissions.  I will copy Ewen in case he has ideas or the time to
+respond.
+
+RES
+===================================================
+
+
+&gt;<i>From: &quot;John Jonas&quot; &lt;<A HREF="mailto:johnj83@arbor-freight.com">johnj83@arbor-freight.com</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Subject: Re: [Xitami] FTP and Windows XP
+</I>&gt;<i>Date: Tue, 15 Oct 2002 13:13:03 -0500
+</I>&gt;<i>
+</I>&gt;<i>I've had the reverse experience.  A user tried to connect via FTP from a 
+</I>&gt;<i>Windows
+</I>&gt;<i>XP Pro computer and no FTP client or setting tried got the connection 
+</I>&gt;<i>working.
+</I>&gt;<i>I would normally be looking at the user's ISP for FTP blocking or firewall
+</I>&gt;<i>problems, but when the user reverted to W2K FTP connected without a 
+</I>&gt;<i>problem.
+</I>&gt;<i>
+</I>&gt;<i>There are some strange things in XP.
+</I>&gt;<i>
+</I>&gt;<i>&quot;Dunstan, Sean&quot; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Has anyone out there ever run into any trouble running Xitami on a 
+</I>&gt;<i>Windows
+</I>&gt;<i> &gt; XP system? I've found that on my system, I can visit the web server, but 
+</I>&gt;<i>I
+</I>&gt;<i> &gt; can't log on to FTP. I've tried runnning Xitami on a non-XP machine with 
+</I>&gt;<i>the
+</I>&gt;<i> &gt; same config files, and everything works fine. Is there a patch or 
+</I>&gt;<i>something
+</I>&gt;<i> &gt; I'm missing?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; SMD
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+Russel P. Olinger
+Sr. Technical Consultant
+Kessel Corporation
+(310) 466-3399
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+_________________________________________________________________
+Chat with friends online, try MSN Messenger: <A HREF="http://messenger.msn.com">http://messenger.msn.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004118.html">[Xitami] FTP and Windows XP
+</A></li>
+	<LI> Next message: <A HREF="004120.html">[Xitami] PHP anyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4119">[ date ]</a>
+              <a href="thread.html#4119">[ thread ]</a>
+              <a href="subject.html#4119">[ subject ]</a>
+              <a href="author.html#4119">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

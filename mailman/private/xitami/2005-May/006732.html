@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006731.html">
+   <LINK REL="Next"  HREF="006733.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 20:20:08 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006731.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006733.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6732">[ date ]</a>
+              <a href="thread.html#6732">[ thread ]</a>
+              <a href="subject.html#6732">[ subject ]</a>
+              <a href="author.html#6732">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/05/2005 08:04 pm, Maurilio Longo wrote:
+
+&gt;<i> With this last fix I can now correctly execute <A HREF="http://localhost/wiki/">http://localhost/wiki/</A>
+</I>pmwiki.php
+
+That's nice.
+
+&gt;<i> :) _but_ I cannot execute <A HREF="http://localhost/schede/pmwiki.php">http://localhost/schede/pmwiki.php</A> since, after
+</I>&gt;<i> : the first request, all links point to /wiki/ instead of /schede/.
+</I>
+?... Ah, I understand: the generated PHP page links contains the real path 
+rather than the alias.  There must be another environment variable that is 
+being wrongly set.  If PHP is using PATH_TRANSLATED then we are stuck because 
+it means there is basically no way to run PHP scripts on an alias.
+
+&gt;<i> but it is not a big problem since it is easily fixed simply having the
+</I>&gt;<i> [Alias] equal to the folder it is aliasing...
+</I>
+Not really a good fix since it's just avoiding the problem.  We should find 
+out what variable PHP is using, and fix that.
+
+-Pieter
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006731.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006733.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6732">[ date ]</a>
+              <a href="thread.html#6732">[ thread ]</a>
+              <a href="subject.html#6732">[ subject ]</a>
+              <a href="author.html#6732">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

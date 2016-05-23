@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI header access?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20header%20access%3F&In-Reply-To=LMBBINNEFDDGLLBPAFJDMEEJPIAA.wilson%40wha.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007855.html">
+   <LINK REL="Next"  HREF="007857.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI header access?</H1>
+    <B>Francis Turner</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20header%20access%3F&In-Reply-To=LMBBINNEFDDGLLBPAFJDMEEJPIAA.wilson%40wha.com"
+       TITLE="[Xitami] CGI header access?">francis.turner at gmail.com
+       </A><BR>
+    <I>Sat Aug  9 14:24:52 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007855.html">[Xitami] CGI header access?
+</A></li>
+        <LI>Next message: <A HREF="007857.html">[Xitami]  CGI header access?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7856">[ date ]</a>
+              <a href="thread.html#7856">[ thread ]</a>
+              <a href="subject.html#7856">[ subject ]</a>
+              <a href="author.html#7856">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Quick answer: YES
+
+in fact I tested it and so long as you have not printed ANYTHING
+before the redirect it will work. i.e. starting your CGI function with
+code similar to
+if (domain == &quot;thisdomain.com&quot;) {
+print &quot;Status: 301 Moved Permanently\nLocation: <A HREF="http://otherdomain.com/\n\n&quot;;">http://otherdomain.com/\n\n&quot;;</A>
+exit;
+}
+works just fine
+
+On Sat, Aug 9, 2008 at 1:56 PM, Phillip C. Wilson &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">wilson at wha.com</A>&gt; wrote:
+&gt;<i> I've been using Xitami since 2000 and am reluctant to change web servers
+</I>&gt;<i> 'cause everything has worked perfectly.
+</I>&gt;<i>
+</I>&gt;<i> I have a CGI exe as my default &quot;page&quot; which builds dynamic pages for me,
+</I>&gt;<i> HTML only no HTTP headers.
+</I>&gt;<i>
+</I>&gt;<i> I want to make a change in that for some domains I want that same CGI to
+</I>&gt;<i> issue a 3-line redirection - just issue HTTP headers and no HTML (bringing
+</I>&gt;<i> it back to the same server but with a different name and it has to be a 301
+</I>&gt;<i> Redirection):
+</I>&gt;<i>
+</I>&gt;<i> Writeln('HTTP/1.0 301 Moved Permanently');
+</I>&gt;<i> Writeln('Location: <A HREF="http://NewDomain.com/page1.htm'">http://NewDomain.com/page1.htm'</A>);
+</I>&gt;<i> Writeln('');
+</I>&gt;<i> Question(s):  Can I simply put this code in the same default CGI?  Do CGIs
+</I>&gt;<i> handle headers?  If not, is there another way to issue a redirection? A
+</I>&gt;<i> redirection under program control?
+</I>&gt;<i>
+</I>&gt;<i> Thanks.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+<A HREF="http://www.di2.nu/blog.htm">http://www.di2.nu/blog.htm</A>
+Faber's Fourth Law:
+ Necessity is the mother of strange bedfellows.
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007855.html">[Xitami] CGI header access?
+</A></li>
+	<LI>Next message: <A HREF="007857.html">[Xitami]  CGI header access?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7856">[ date ]</a>
+              <a href="thread.html#7856">[ thread ]</a>
+              <a href="subject.html#7856">[ subject ]</a>
+              <a href="author.html#7856">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

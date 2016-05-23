@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP-passive mode
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001099.html">
+   <LINK REL="Next"  HREF="001094.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP-passive mode
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP-passive mode">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 04 Oct 2001 12:03:32 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001099.html">[Xitami] Xitami Crashing
+</A></li>
+        <LI> Next message: <A HREF="001094.html">[Xitami] FTP-passive mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1091">[ date ]</a>
+              <a href="thread.html#1091">[ thread ]</a>
+              <a href="subject.html#1091">[ subject ]</a>
+              <a href="author.html#1091">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3BBB0C12.FC98DF56@sovik.no">3BBB0C12.FC98DF56@sovik.no</A>&gt;, Andreas Zieritz writes:
+&gt;<i>We have moved our Xitami Webserver behind a firewall (see
+</I>&gt;<i>www.smoothwall.org) and we do have some troubles with the FTP part. What
+</I>&gt;<i>we have found out is that some FTP clients do have a problem in
+</I>&gt;<i>establishing a communication with the Xitami server. FTP-clients
+</I>&gt;<i>operating in passive mode are not experiencing these problems.
+</I>&gt;<i>We have opened ports 20 and 21 on the firewall. Are there any other
+</I>&gt;<i>ports that should be open?  Any hints concerning passive mode?
+</I>
+I'm a little puzzled as to what your problem is; you say &quot;FTP-clients
+operating in pasive mode are not experiencing these problems&quot;, but also
+say &quot;Any hints concerning passive mode?&quot;.
+
+The FTP protocol is _really_ not designed to go through firewalls (it
+was designed well before anyone had even thought of the need for
+firewalls, let alone actually designed a firewall).  You should probably
+seriously consider whether you can do what you want with HTTP instead of
+FTP.
+
+If you still want to use FTP you need to remember that there are two
+modes of FTP:
+1. Active FTP:  control connection open from client-&gt;server; if the client
+   wants to download something, the client picks a port number at its,
+   end and the server connects to that port, and sends the file.  If the
+   client wants to upload something the server picks a port number at
+   its end, and the client connects to that.  (Ie, the connection for
+   transfering the data always opens in the connection the data is being
+   sent.)
+
+2. Passive FTP: control connection open from client-&gt;server; if the
+   client wants to download something the server picks a port number at
+   its end, and tells the client to connect there to &quot;pull&quot; the file
+   back.  If the client wants to upload something the server picks a
+   port number at its end, and the client connects to that.  (Ie, the
+   connection for transfering data is always opened from the client to
+   the server.)
+
+Using passive mode usually gets around most problems with firewalls at
+the _client_ end.  But it causes complications if there is also a
+firewall at the _server_ end.
+
+There are two basic complications caused by passive FTP when the server
+is behind a firewall:
+1. The port that is picked by the FTP server may not be allowed through
+   the firewall.  Since the FTP server needs to allow more than one
+   connection at a time, this may mean multiple ports need to be allowed
+   through the firewall.
+
+2. If the firewall is doing NAT, the address given out to connect to by 
+   the FTP server will probaly be an internal address, not an external
+   one, and thus not usable.
+
+The main complication caused by active FTP is at the client end, where
+their firewall may not allow an incoming connection to whatever port the
+client picks; but many firewalls can handle this automatically.
+
+Debugging this sort of thing generally requires snooping on the TCP/IP
+traffic at one or both ends, and figuring out what each end is trying to
+do.
+
+Generally it's all too hard; and if you're going to have your server
+behind a firewall you probably want to avoid using FTP.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001099.html">[Xitami] Xitami Crashing
+</A></li>
+	<LI> Next message: <A HREF="001094.html">[Xitami] FTP-passive mode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1091">[ date ]</a>
+              <a href="thread.html#1091">[ thread ]</a>
+              <a href="subject.html#1091">[ subject ]</a>
+              <a href="author.html#1091">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

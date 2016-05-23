@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002455.html">
+   <LINK REL="Next"  HREF="002484.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+   </H1>
+    <B>Alan Lam
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 17 Feb 2002 18:54:43 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002455.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+        <LI> Next message: <A HREF="002484.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2456">[ date ]</a>
+              <a href="thread.html#2456">[ thread ]</a>
+              <a href="subject.html#2456">[ subject ]</a>
+              <a href="author.html#2456">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>check your error.log file, cgierr.log also your phperror.log
+</I>&gt;<i>
+</I>&gt;<i>if you eneabled it and gave it a name in the php.ini file
+</I>&gt;<i>
+</I>&gt;<i>in your AUTOEXEC.BAT add this
+</I>&gt;<i>
+</I>&gt;<i>SET PATH=f:\internet;%PATH%
+</I>&gt;<i>
+</I>&gt;<i>NOTE the use of My documents has been known to give Xitami fits it don't
+</I>&gt;<i>like spaces :)
+</I>&gt;<i>
+</I>&gt;<i>hope this helps
+</I>
+To take out spaces
+I've set up alias
+temp=c:\temp
+
+
+In autoexec.bat I've added
+set path=f:\internet\php;%path%
+
+I didn't know about the phperror.log. I downloaded the 'big' version of
+php to have a look at the php.ini file. (I initially had the windows
+installer version). I found out I can set display error!
+
+
+The php.ini in the windows directory is now
+
+; php.ini for PEAR tests
+include_path=..
+
+[mail function]
+SMTP= localhost ; for Win32 only
+sendmail_from= <A HREF="mailto:me@localhost.com">me@localhost.com</A> ; for Win32 only
+
+[Session]
+session.save_path= F:\Internet\PHP\sessiondata    ; argument passed to
+save_handler
+
+[PHP]
+error_reporting= E_ALL; display all errors, warnings and notices
+display_errors = On
+display_startup_errors = On
+log_errors = On
+
+
+
+With a test page
+<A HREF="http://localhost/temp/Test">http://localhost/temp/Test</A> Page.html
+=&gt;
+<A HREF="http://localhost/temp/Test%20Page.html">http://localhost/temp/Test%20Page.html</A>
+and pops up fine.
+
+With the php page
+
+&lt;html&gt;&lt;head&gt;&lt;title&gt;PHP Test&lt;/title&gt;&lt;/head&gt; 
+&lt;body&gt; 
+&lt;?php echo &quot;Hello World&lt;P&gt;&quot;; ?&gt; 
+&lt;/body&gt;&lt;/html&gt; 
+
+
+<A HREF="http://localhost/temp/phptest.php">http://localhost/temp/phptest.php</A>
+
+I see now see (with the help of display_error = on) :-)
+
+Fatal error: Unable to open F:/Internet/Xitami/webpages/temp/phptest2.ph
+p in Unknown on line 0
+
+
+So ... where and what do I set to get php &amp; xitami talking to each other
+about the right directory?
+
+Thanks
+-- 
+Alan YC Lam  Tonbridge, Kent, UK
+email        <A HREF="mailto:alan@alan-lam.co.uk">alan@alan-lam.co.uk</A>
+www          <A HREF="http://www.alan-lam.co.uk">http://www.alan-lam.co.uk</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002455.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+	<LI> Next message: <A HREF="002484.html">[Xitami] Installing PHP4 with Win 98SE &amp; Xitami v2.4d9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2456">[ date ]</a>
+              <a href="thread.html#2456">[ thread ]</a>
+              <a href="subject.html#2456">[ subject ]</a>
+              <a href="author.html#2456">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

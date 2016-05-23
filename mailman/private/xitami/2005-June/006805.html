@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] &quot;No input file specified&quot; (ALIAS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006803.html">
+   <LINK REL="Next"  HREF="006810.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] &quot;No input file specified&quot; (ALIAS)
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] &quot;No input file specified&quot; (ALIAS)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 10 Jun 2005 11:09:45 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006803.html">[Xitami] &quot;No input file specified&quot;
+</A></li>
+        <LI> Next message: <A HREF="006810.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6805">[ date ]</a>
+              <a href="thread.html#6805">[ thread ]</a>
+              <a href="subject.html#6805">[ subject ]</a>
+              <a href="author.html#6805">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Okay, here's a shot in the dark:
+
+I've been able to get alias to work.  My configuration:
+
+(Defaults.cfg)
+[Alias]
+photos=&quot;D:\Photos&quot;
+
+*D: is a mapped network drive, not the server.
+
+(reference)
+src=&quot;photos/skyline/album/index.html&quot;
+
+You've referenced the info.php file as a foreign file, not as a virtual
+local file.  I've seen where the reference for something
+&quot;file:/something.ext&quot; for local stuff but never can remember when to use
+what.  All I recall is that using the &quot;http&quot; sent me nowhere.
+
+Hope this will can helps your problem a bit.
+
+My only problem with the Alias call is while reviewing these photo files
+(lots) on two different computers (looking on one, moving on another), I
+appear to have blown out the NetBios connect on the &quot;D&quot; computer.  Was
+viewing a lot of pictures back and forth thru a browser, and moving files
+directly from another unit.  Both wireless, that that shouldn't matter.
+
+Got a &quot;no more connections available error&quot; on the viewing computer along
+with these console errors:
+
+2005/06/04 21:36:43: smttran: cannot open
+'D:Photos\skyline\album\Discard\slides\100_0142.JPG' for 'i'
+2005/06/04 21:36:43: Invalid argument
+
+Re-booting the &quot;D&quot; computer fixed the connection.  So, anyone know a fix for
+what appears to be a NetBios flaw (real, no editorials please).
+
+Thanks,
+Charles
+
+Usual suspects:
+Xitami Server and &quot;D&quot; computer are Win98SEs.  Viewer is an iMac Orange (OS X
+10.2.8), and manipulator is an old Toshiba laptop with a recent Win98SE
+install.  Running NetBios under TCP/IP.  Pulled NetBEUI and found I can talk
+to the Orange.
+
+
+----- Original Message -----
+From: &quot;Ghirlandaio&quot; &lt;<A HREF="mailto:ghirlandaio@cheapnet.it">ghirlandaio@cheapnet.it</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, June 10, 2005 6:50 AM
+Subject: [Xitami] &quot;No input file specified&quot;
+
+
+&gt;<i> I've a problem with Xitami aliases.
+</I>&gt;<i> For example, I have dreated an Alias named &quot;pippo&quot; for a directory
+</I>&gt;<i> &quot;C:\Server\Pippo&quot;
+</I>&gt;<i> e.g.
+</I>&gt;<i>
+</I>&gt;<i> [Alias]
+</I>&gt;<i> pippo=C:\Server\pippo
+</I>&gt;<i>
+</I>&gt;<i> The alias work, because when I navigate
+</I>&gt;<i> &quot;<A HREF="http://localhost/pippo"">http://localhost/pippo&quot;</A>
+</I>&gt;<i> the browser list the directory, but...
+</I>&gt;<i> For experimental, I put in a simple php file
+</I>&gt;<i> named &quot;index.php&quot;:
+</I>&gt;<i>
+</I>&gt;<i> &lt;?
+</I>&gt;<i> phpinfo();
+</I>&gt;<i> ?&gt;
+</I>&gt;<i>
+</I>&gt;<i> Well, when i navigate &quot;&quot;<A HREF="http://localhost/pippo/index.php"">http://localhost/pippo/index.php&quot;</A>
+</I>&gt;<i> nothing appear, but the error message
+</I>&gt;<i> &quot;No input file specified&quot;
+</I>&gt;<i> What's the solution?
+</I>&gt;<i> Help please!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006803.html">[Xitami] &quot;No input file specified&quot;
+</A></li>
+	<LI> Next message: <A HREF="006810.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6805">[ date ]</a>
+              <a href="thread.html#6805">[ thread ]</a>
+              <a href="subject.html#6805">[ subject ]</a>
+              <a href="author.html#6805">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

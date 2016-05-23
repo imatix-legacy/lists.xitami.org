@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] File upload with xitami???
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000961.html">
+   <LINK REL="Next"  HREF="000936.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] File upload with xitami???
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] File upload with xitami???">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Sep 2001 19:28:21 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000961.html">[Xitami] Nimda gets a 200?
+</A></li>
+        <LI> Next message: <A HREF="000936.html">[Xitami] &quot;GET /scripts/.......
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#974">[ date ]</a>
+              <a href="thread.html#974">[ thread ]</a>
+              <a href="subject.html#974">[ subject ]</a>
+              <a href="author.html#974">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_87370366==_.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+hello !
+
+Does file upload works with Xitami?
+
+I use this sample file as request for upload:
+
+&lt;html&gt;&lt;head&gt;&lt;/head&gt;
+&lt;body bgcolor=white&gt;
+&lt;form action=<A HREF="http://web.verfaillie.com/cgi-bin/env.exe">http://web.verfaillie.com/cgi-bin/env.exe</A> method=post&gt;
+&lt;input type=file name=&quot;123.txt&quot;&gt;&lt;br&gt;
+&lt;input type=submit value=&quot;Send&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+The scripts executes correctly (env.exe only prints the windows 
+environment) but where can i find the uploaded file???
+
+
+Thats the back-end VB program:
+
+Sub main()
+     Open &quot;c:\test.txt&quot; For Output Access Write As #1
+     Print #1, &quot;start&quot;
+     a$ = Environ$(&quot;CGI_STDOUT&quot;)
+     Open a$ For Output Access Write As #3
+     Print #3, &quot;&lt;html&gt;&lt;body&gt;&lt;pre&gt;&quot;
+     a$ = Environ$(1)
+     While a$ &lt;&gt; &quot;&quot;
+         Print #3, a$; &quot;&lt;br&gt;&quot;
+         Print #1, a$
+         i = i + 1
+         a$ = Environ$(i)
+     Wend
+     Print #3, &quot;&lt;/body&gt;&lt;/html&gt;&quot;
+     Close
+     End
+End Sub
+
+
+--=====================_87370366==_.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+&lt;html&gt;
+hello !&lt;br&gt;
+&lt;br&gt;
+Does file upload works with Xitami?&lt;br&gt;
+&lt;br&gt;
+I use this sample file as request for upload:&lt;br&gt;
+&lt;br&gt;
+&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;&lt;br&gt;
+&amp;lt;body bgcolor=white&amp;gt;&lt;br&gt;
+&amp;lt;form action=<A HREF="http://web.verfaillie.com/cgi-bin/env.exe">http://web.verfaillie.com/cgi-bin/env.exe</A>
+method=post&amp;gt;&lt;br&gt;
+&amp;lt;input type=file name=&amp;quot;123.txt&amp;quot;&amp;gt;&amp;lt;br&amp;gt;&lt;br&gt;
+&amp;lt;input type=submit value=&amp;quot;Send&amp;quot;&amp;gt;&lt;br&gt;
+&amp;lt;/form&amp;gt;&lt;br&gt;
+&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;br&gt;
+&lt;br&gt;
+The scripts executes correctly (env.exe only prints the windows
+environment) but where can i find the uploaded file???&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+Thats the back-end VB program:&lt;br&gt;
+&lt;br&gt;
+Sub main()&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Open &amp;quot;c:\test.txt&amp;quot; For Output Access Write
+As #1&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Print #1, &amp;quot;start&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; a$ = Environ$(&amp;quot;CGI_STDOUT&amp;quot;)&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Open a$ For Output Access Write As #3&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Print #3,
+&amp;quot;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;pre&amp;gt;&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; a$ = Environ$(1)&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; While a$ &amp;lt;&amp;gt; &amp;quot;&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Print #3, a$;
+&amp;quot;&amp;lt;br&amp;gt;&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Print #1, a$&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; i = i + 1&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; a$ = Environ$(i)&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Wend&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Print #3, &amp;quot;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Close&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; End&lt;br&gt;
+End Sub&lt;br&gt;
+&lt;br&gt;
+&lt;/html&gt;
+
+--=====================_87370366==_.ALT--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000961.html">[Xitami] Nimda gets a 200?
+</A></li>
+	<LI> Next message: <A HREF="000936.html">[Xitami] &quot;GET /scripts/.......
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#974">[ date ]</a>
+              <a href="thread.html#974">[ thread ]</a>
+              <a href="subject.html#974">[ subject ]</a>
+              <a href="author.html#974">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

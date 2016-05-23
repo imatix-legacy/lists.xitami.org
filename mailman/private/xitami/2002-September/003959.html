@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] lrwp test program...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003958.html">
+   <LINK REL="Next"  HREF="003960.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] lrwp test program...
+   </H1>
+    <B>Joseph Saunders
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] lrwp test program...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 13 Sep 2002 09:30:31 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003958.html">[Xitami] mp3 server
+</A></li>
+        <LI> Next message: <A HREF="003960.html">[Xitami] lrwp test program...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3959">[ date ]</a>
+              <a href="thread.html#3959">[ thread ]</a>
+              <a href="subject.html#3959">[ subject ]</a>
+              <a href="author.html#3959">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+A question about the lrwp test app.  I run xitami, everything is fine.
+
+I start 'mega' which is a compilation of the unmodified testlrwp.c.  'lcgi'
+registers with xitami and diplays:
+
+	# ./mega lcgi 10.45.55.9 81
+	Waiting for requests from 10.45.55.9:81
+	Try hitting <A HREF="http://10.45.55.9/lcgi">http://10.45.55.9/lcgi</A> with your browser...
+
+Browsing <A HREF="http://10.45.55.9/lcgi">http://10.45.55.9/lcgi</A> results in a browser generated 403 page
+(HTTP Error 403 - Forbidden)
+
+The access log contains:
+
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/xitami1.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/buttons.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/powered1.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/powered2.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/powered4.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/powered3.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/powered5.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:09 +0000] &quot;GET /images/im0096c.gif HTTP/1.1&quot; 304 0 &quot;<A HREF="http://10.45.55.9"">http://10.45.55.9&quot;</A> &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:00:49 +0000] &quot;GET /mega?aaa HTTP/1.1&quot; 403 0 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:15:00 +0000] &quot;GET /lcgi HTTP/1.1&quot; 403 0 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+10.45.55.43 - - [13/Sep/2002:16:15:17 +0000] &quot;GET /mega HTTP/1.1&quot; 200 115433 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0)&quot;
+
+
+LRWP has served us well.  We've been using the Xitami V2.4d7 release for quite awhile.
+This problem came about because we're upgrading to the V2.4d9 release.  We were going 
+through the standard compilation of Xitami on the target (QNX 6.2, it works fine on 6.0) 
+and the testlrwp.cc.
+
+Another question, in the above access.log, why is there a 304 for every HTTP request?
+Is there a configuration parameter that causes this behavior?
+
+-Thanks
+Joe
+
+Joe Saunders
+Caw Networks
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003958.html">[Xitami] mp3 server
+</A></li>
+	<LI> Next message: <A HREF="003960.html">[Xitami] lrwp test program...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3959">[ date ]</a>
+              <a href="thread.html#3959">[ thread ]</a>
+              <a href="subject.html#3959">[ subject ]</a>
+              <a href="author.html#3959">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

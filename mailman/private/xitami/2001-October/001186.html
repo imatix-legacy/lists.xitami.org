@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001182.html">
+   <LINK REL="Next"  HREF="001192.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 16 Oct 2001 07:48:57 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001182.html">[Xitami] installer
+</A></li>
+        <LI> Next message: <A HREF="001192.html">[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1186">[ date ]</a>
+              <a href="thread.html#1186">[ thread ]</a>
+              <a href="subject.html#1186">[ subject ]</a>
+              <a href="author.html#1186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;006c01c155d1$f8d810c0$<A HREF="mailto:0300a8c0@aplusnet.com">0300a8c0@aplusnet.com</A>&gt;
+   &quot;Jeff Hamblin&quot; writes:
+&gt;<i> 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The DT is sending a list request as follows:
+</I>&gt;<i> &gt; ftp&gt; ls \dtf-tests\*\*Job.type
+</I>&gt;<i> 
+</I>&gt;<i> I pasted in the wrong stuff, it should be:
+</I>&gt;<i> 
+</I>&gt;<i> The DT is sending a list request as follows:
+</I>&gt;<i> ftp&gt; ls /dtf-tests/*/*Job.type
+</I>&gt;<i> 
+</I>&gt;<i> All slashes are backslashes.
+</I>
+No; those are all SLASHES.  It is the '\' character that is the
+backslash.  Don't worry; yours is a very common error in nomenclature
+made by those with overexposure to Windoze.  (I'm not quite certain why
+this should be; I suspect that the over-use of the backslash as a path
+separator has led to many people misnaming it, thus requiring a further
+misnaming when referring to the forward slash.)  Of course, you could
+always refer to is as a &quot;solidus&quot;, which is the official designation in
+the national and international character set standards.
+
+I would guess that your problem stems from the fact that NT doesn't know
+how to perform wildcard expansion: this is a [non-]feature of the
+operating system, and not something that an application, such as an FTP
+daemon, can/should be expected to do.
+
+I expect that your Sun performs this by the simple expedient of passing
+the LIST command through to activate the standard 'ls -l' program, and
+then piping the results back.  This will apply the level of wildcard
+expansion that this program knows of.
+
+Your basic problem is that the original FTP client application is
+generating these wild-carded requests: is this something that it's
+thought of itself?  Or could you write the requests as a series of
+scripted operations (perhaps returning a full directory at the current
+level, and then working through its constituent sub-directories)?
+[That's the approach that I would use with the RxFTP facility if I needed
+to script such an FTP client-side operation.]
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001182.html">[Xitami] installer
+</A></li>
+	<LI> Next message: <A HREF="001192.html">[Xitami] FTP - LIST (ls) not returning wildcarded sub-dirs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1186">[ date ]</a>
+              <a href="thread.html#1186">[ thread ]</a>
+              <a href="subject.html#1186">[ subject ]</a>
+              <a href="author.html#1186">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

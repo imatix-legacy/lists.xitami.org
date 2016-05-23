@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Zitami ALWAYS timesout
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Zitami%20ALWAYS%20timesout&In-Reply-To=BLU121-W874614A98B5B7C128F4E78D420%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007872.html">
+   <LINK REL="Next"  HREF="007875.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Zitami ALWAYS timesout</H1>
+    <B>MRJ</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Zitami%20ALWAYS%20timesout&In-Reply-To=BLU121-W874614A98B5B7C128F4E78D420%40phx.gbl"
+       TITLE="[Xitami] Zitami ALWAYS timesout">mrj at 10e12.com
+       </A><BR>
+    <I>Wed Oct  1 22:51:49 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007872.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+        <LI>Next message: <A HREF="007875.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7873">[ date ]</a>
+              <a href="thread.html#7873">[ thread ]</a>
+              <a href="subject.html#7873">[ subject ]</a>
+              <a href="author.html#7873">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Which version of Xitami are you using.
+Sometimes yuo have to shut down and restart xitami before it picks up 
+the config files again i noticed.
+
+Uwe K wrote:
+&gt;<i> Hi first of all thank you for fast responding
+</I>&gt;<i>
+</I>&gt;<i> --Under Xitami's CGI section is the &quot; Timeout for CGI programs:&quot;...  - 
+</I>&gt;<i> I did that, with values from 90 to 6000 seconds
+</I>&gt;<i> --&quot;Server Keep Alive Connections&quot; - will try that, but since there is 
+</I>&gt;<i> only one connection...
+</I>&gt;<i>
+</I>&gt;<i> The problem is that Xitami not seemed to be interested in my settings, 
+</I>&gt;<i> the original timout is 60 seconds and I never reached that.
+</I>&gt;<i>
+</I>&gt;<i> again, thanks
+</I>&gt;<i>
+</I>&gt;<i>    Uwe
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Date: Wed, 1 Oct 2008 13:17:56 -0700
+</I>&gt;<i> Subject: Re: [Xitami] Zitami ALWAYS timesout
+</I>&gt;<i>
+</I>&gt;<i> Under Xitami's CGI section is the &quot; Timeout for CGI programs:&quot;...if 
+</I>&gt;<i> you extend that out to 60 or 90 seconds that should be sufficient for 
+</I>&gt;<i> you.  Most of scripts work in under 10 seconds from the DB query...but 
+</I>&gt;<i> I do have a few, mostly administrative, that take up to 3 minutes. 
+</I>&gt;<i>
+</I>&gt;<i> The other setting &quot;check cgi processes every&quot; : x milliseconds could 
+</I>&gt;<i> be set lower too, but that increases cpu processing.  Another place to 
+</I>&gt;<i> increase timers is with &quot;Server Keep Alive Connections&quot;...if you 
+</I>&gt;<i> increase the amount allowed and the actual timeout, it may help speed 
+</I>&gt;<i> things up for repetitive queries.  but again, anytime you increase 
+</I>&gt;<i> numbers you increase memory and cpu usage.
+</I>&gt;<i>
+</I>&gt;<i> And lastly, you can always speed Xitami up by making it &quot;Turbo&quot;...but 
+</I>&gt;<i> that doesn't necessarily mean it will speed your DB queries up on 
+</I>&gt;<i> large searches.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">uwe.k at hotmail.de</A>
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Date: Wed, 1 Oct 2008 21:54:45 +0200
+</I>&gt;<i> Subject: [Xitami] Zitami ALWAYS timesout
+</I>&gt;<i>
+</I>&gt;<i> Hi there
+</I>&gt;<i>
+</I>&gt;<i> I got a problem with a script that queryes a big database and it 
+</I>&gt;<i> seem's that the script always runs in a timeout,
+</I>&gt;<i> also I never received any msg about that.
+</I>&gt;<i>
+</I>&gt;<i> Tryed the webform the normal way and tryed AJAX -style,
+</I>&gt;<i> also tryed sleep(45) instead of the query... ( sleep(25) works, (30) 
+</I>&gt;<i> sometimes )
+</I>&gt;<i>
+</I>&gt;<i> The query needs about 40 seconds to complete in MS SQL Server Manager and
+</I>&gt;<i> Xitami always returns just the HTML-parts before that query.
+</I>&gt;<i>
+</I>&gt;<i> I set the timeout in Xitami to 6000 and that one in php.ini to the 
+</I>&gt;<i> same value, still w/o any success.
+</I>&gt;<i>
+</I>&gt;<i> working on that since days now, would be nice if someone can help me... ?
+</I>&gt;<i>
+</I>&gt;<i> Xitami 2.5 Port 88  /  IIS6 Port 80
+</I>&gt;<i> PHP 5
+</I>&gt;<i> Win IE / FireFox
+</I>&gt;<i> MSSQL Server 2005   (no timeout)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> Zeigen Sie es Ihren Freunden! Erstellen Sie kostenlos Fotoalben und 
+</I>&gt;<i> Diashows in Ihrem Space! 
+</I>&gt;<i> &lt;<A HREF="http://redirect.gimas.net/?cat=hmtl&amp;n=M0809Fotoalbum&amp;d=http://spaces.live.com/api.aspx?wx_action=addModule&amp;mkt=de-DE&amp;wx_ru=http://%7Bspacesapi:id%7D.spaces.live.com/photos/&amp;wx_targetSite=PersonalSpaces&amp;wxp_url=/photoalbum.aspx">http://redirect.gimas.net/?cat=hmtl&amp;n=M0809Fotoalbum&amp;d=http://spaces.live.com/api.aspx?wx_action=addModule&amp;mkt=de-DE&amp;wx_ru=http://%7Bspacesapi:id%7D.spaces.live.com/photos/&amp;wx_targetSite=PersonalSpaces&amp;wxp_url=/photoalbum.aspx</A>&gt; 
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> Messenger Online Treff: Spontan chatten, &#252;ber Hobbies reden, sofort 
+</I>&gt;<i> Spass haben? Jetzt klicken! 
+</I>&gt;<i> &lt;<A HREF="http://redirect.gimas.net/?cat=hmtl&amp;n=M0809MOT&amp;d=http://messenger.live.de/community/messenger-online-treff.aspx">http://redirect.gimas.net/?cat=hmtl&amp;n=M0809MOT&amp;d=http://messenger.live.de/community/messenger-online-treff.aspx</A>&gt; 
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Mob:   079 6445 0998
+  Mob:   078 5322 4841
+
+International Callers;
+  Mob:   +44 796 445 0998
+  Mob:   +44 785 322 4841
+
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007872.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+	<LI>Next message: <A HREF="007875.html">[Xitami] Zitami ALWAYS timesout
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7873">[ date ]</a>
+              <a href="thread.html#7873">[ thread ]</a>
+              <a href="subject.html#7873">[ subject ]</a>
+              <a href="author.html#7873">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

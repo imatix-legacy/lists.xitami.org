@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Help: Virutal Host !!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002905.html">
+   <LINK REL="Next"  HREF="002909.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Help: Virutal Host !!
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Help: Virutal Host !!">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 07 Apr 2002 20:19:42 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002905.html">[Xitami] Password timeout?
+</A></li>
+        <LI> Next message: <A HREF="002909.html">[Xitami] HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2906">[ date ]</a>
+              <a href="thread.html#2906">[ thread ]</a>
+              <a href="subject.html#2906">[ subject ]</a>
+              <a href="author.html#2906">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:2C61CCE8A870D211A523080009B94E43071C78F9@HQ5">2C61CCE8A870D211A523080009B94E43071C78F9@HQ5</A>&gt;, &quot;Joshi, Sunit&quot; writes:
+&gt;<i>1)Create a virtual host called PyCgi so that it points to E:\\Sunit\\XMLFiles\\
+</I>&gt;<i>PyXml\\Scripts
+</I>&gt;<i>2)Be able to point to <A HREF="http://localhost/PyCgi/PyTest.py">http://localhost/PyCgi/PyTest.py</A> and runmy python scripts
+</I>
+You want a CGI-BIN directory.  It's going to be called &quot;PyCGI&quot; in the
+URL, and have the appropriate directory as its on-disk location.  You'll
+also need to enable index-pages-in-CGI-directory.
+
+Something like:
+
+[server]
+  cgi-bin=E:/Sunit/XMLFiles/PyXml/Scripts
+  cgi-url=/PyCGI
+
+[cgi]
+  mixed-url=1
+
+You may also want to define some more default filenames to apply when
+accessing a directory.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002905.html">[Xitami] Password timeout?
+</A></li>
+	<LI> Next message: <A HREF="002909.html">[Xitami] HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2906">[ date ]</a>
+              <a href="thread.html#2906">[ thread ]</a>
+              <a href="subject.html#2906">[ subject ]</a>
+              <a href="author.html#2906">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

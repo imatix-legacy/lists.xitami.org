@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami2.4d9 and PHP4
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003091.html">
+   <LINK REL="Next"  HREF="003073.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami2.4d9 and PHP4
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami2.4d9 and PHP4">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 29 Apr 2002 14:56:44 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003091.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+        <LI> Next message: <A HREF="003073.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3071">[ date ]</a>
+              <a href="thread.html#3071">[ thread ]</a>
+              <a href="subject.html#3071">[ subject ]</a>
+              <a href="author.html#3071">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3CCCAFF7.DFAA3DE1@astcomm.net">3CCCAFF7.DFAA3DE1@astcomm.net</A>&gt;, Chris Olson writes:
+&gt;<i>Chris Olson wrote: 
+</I>&gt;<i>Is there a way to optomize php for Xitami?  Or a loadable module similar to
+</I>&gt;<i>apache's?  Xitami isn't listed in the documentation for the current release
+</I>&gt;<i>of PHP4.
+</I>
+There's no loadable module for PHP for Xitami; in fact as far as I
+recall the loadable module is only for Apache, and PHP was originally
+written to run only with Apache.  A couple of years back I ran into one
+of the authors of PHP at a conference, and we spoke briefly about the
+idea of better integration between Xitami and PHP but no one has really
+had time investigate it much further.
+
+In the case of PHP and Xitami, the real killer under load is that PHP is 
+being run as a CGI (a filter in Xitami is basically a CGI process in
+disguise).  The overhead of forking and starting up the CGI process, and
+dragging the output back in from the output files gets pretty noticable
+when things get busy.  Apache/mod-php avoids all that overhead.
+
+The obvious half way house is to turn PHP into a LRWP process attached
+to Xitami, an idea that we played around with briefly some time ago but
+never quite got completed.  If someone (who knows how to write C code)
+is interested in playing with this idea let me know, and I'll try to
+find the source code we'd thrown together.
+
+&gt;<i>From your other message:
+</I>&gt;<i>* Xitami *still* doesn't write a PID file on UNIX platforms.  
+</I>
+I actually suspect that it's still the same version of Xitami as you
+last noted this problem with.  We haven't noticed the source growing
+new functions all by itself... :-)  (Yes, alas, the release versions of
+Xitami have hardly changed in two years :-(  Even our internal versions
+have changed all that much, although some of the libraries have.)
+
+Contributions of source code to write a PID file much appreciated.  (I'd
+find it handy too...)
+
+&gt;<i>* The FTP server still won't handle hardly any load at all - I've found
+</I>&gt;<i>  I can't use it for serious FTP work.
+</I>
+This has been fairly widely noted.  We do recommend using another FTP
+server if you're doing all that much with FTP.  The one in Xitami is
+basically a very lightweight one for when you don't have/want to install
+another.  I'd like to make it more robust myself, but simply haven't had
+the time.
+
+&gt;<i>But I can't get Xitami's server restart function to work every time 
+</I>&gt;<i>when throwing in a new domain or making other config changes that 
+</I>&gt;<i>require reload of the /usr/local/bin/xitami/defaults.cfg file. 
+</I>
+A number of people have noted this too.  I suspect there's just not 
+quite enough checking of all the files going on.  But it's another
+thing that we haven't been able to make enough time to investigate.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003091.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+	<LI> Next message: <A HREF="003073.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3071">[ date ]</a>
+              <a href="thread.html#3071">[ thread ]</a>
+              <a href="subject.html#3071">[ subject ]</a>
+              <a href="author.html#3071">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

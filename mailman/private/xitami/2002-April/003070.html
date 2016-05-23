@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami2.4d9 and PHP4
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003069.html">
+   <LINK REL="Next"  HREF="003074.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami2.4d9 and PHP4
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami2.4d9 and PHP4">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 28 Apr 2002 21:29:11 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003069.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+        <LI> Next message: <A HREF="003074.html">[Xitami] Log Files For Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3070">[ date ]</a>
+              <a href="thread.html#3070">[ thread ]</a>
+              <a href="subject.html#3070">[ subject ]</a>
+              <a href="author.html#3070">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Chris Olson wrote: 
+&gt;<i> I tested Xitami for about a year and a half, then finally gave up on it and
+</I>&gt;<i> went back to Apache.  I'm back testing it again, trying to run a php4 driven
+</I>&gt;<i> MySQL database application to see if it will reduce CPU/memory load over
+</I>&gt;<i> what Apache uses.  The server is running on a twin Pentium-Pro, powered by
+</I>&gt;<i> Debian Linux/2.2.19 kernel, and 512MB RAM.  Apache version is 1.3.24 with
+</I>&gt;<i> PHP4.4.1 as loadable module for Apache, and using the php4-mysql module to
+</I>&gt;<i> drive the database.  All applications installed with Debian debs from the
+</I>&gt;<i> woody distro.
+</I>
+I answered most of my own questions &lt;g&gt;.
+
+I had to compile php4 --with-mysql to work with Xitami and this application
+- the php4 module for apache wouldn't work.  The results are somewhat
+disappointing.
+
+This was a good time of the evening to test Xitami, as the server is running
+under a fairly heavy load.  This is an online message board application
+hosted for the GWTA.  This server is running at a constant load of about
+11,500 hits per hour this time of the evening.  This would be no problem
+with static pages, but this is a totally dynamic php4/mysql database
+application which greatly increases CPU and memory load due to parsing
+scripts and database calls - the database server is running on the same
+machine.
+
+Monitoring processes and performance, using top, shows apache using
+approximately 67% of the total memory (both physical and swap) and the CPU's
+running an average of 17-21% idle.  Apache isn't using all the CPU power -
+quite a bit of it is being used by the mysql daemons, which fork like
+apache.  Running 'ps -ef|grep apache' shows an average of 190-200 seperate
+httpd processes fairly continuous.  This varies between peaks and valleys of
+load, as some of the server processes die off when load goes down, and
+apache spawns new ones as load increases.
+
+Xitami is different.  It can handle this application until a peak in the
+demand hits.  When load peaks, Xitami requires increasing memory to spawn
+new threads, but not as much as apache.  Apache is fairly constantly
+requiring 350-400 MB of memory.  The CPU power is another matter.  Xitami is
+using it all, and the server slows to a dead crawl when the load peaks.  The
+only explanation I can come up with is that the parsing of the php scripting
+is not quite as efficient as the way apache is doing it.
+
+Is there a way to optomize php for Xitami?  Or a loadable module similar to
+apache's?  Xitami isn't listed in the documentation for the current release
+of PHP4.
+
+Regards,
+--
+Chris Olson
+System Administrator
+AST Communications  <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003069.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+	<LI> Next message: <A HREF="003074.html">[Xitami] Log Files For Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3070">[ date ]</a>
+              <a href="thread.html#3070">[ thread ]</a>
+              <a href="subject.html#3070">[ subject ]</a>
+              <a href="author.html#3070">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

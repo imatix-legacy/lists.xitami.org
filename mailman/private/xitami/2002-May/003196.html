@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] VHosts Password Problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003195.html">
+   <LINK REL="Next"  HREF="003197.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] VHosts Password Problem
+   </H1>
+    <B>Steve Shervais
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] VHosts Password Problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 16 May 2002 15:01:01 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003195.html">[Xitami] local IP v. domain
+</A></li>
+        <LI> Next message: <A HREF="003197.html">[Xitami] local IP v. domain
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3196">[ date ]</a>
+              <a href="thread.html#3196">[ thread ]</a>
+              <a href="subject.html#3196">[ subject ]</a>
+              <a href="author.html#3196">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_000B_01C1FCEA.7E97A9E0
+Content-Type: text/plain;
+	charset=&quot;Windows-1252&quot;
+Content-Transfer-Encoding: quoted-printable
+
+I am using DNS virtual hosts for students in my senior projects class.
+What I want is for each team to have its own password for its own =
+directory.
+Pre-VHosts, that was no problem, I just put the directory name and =
+password into defaults.aut
+
+Now, I have a virtual hosts setup where:
+
+ProjectsTeam08.ewu.edu points to the \Webpages\Team08 directory, etc
+
+This works fine, once I solved some Win 95 network configuration =
+problems.
+
+Unfortunately, there appears to be no longer any password protection.
+My current setup looks like this:
+
+1. Each team has its own .cfg file that points to its own .aut file:
+[Server]
+    Cgi-bin =3D &quot;C:/Xitami/webpages/team08/cgi-bin&quot;
+    Hostname =3D &quot;projects.ewu.edu&quot;
+    Webpages =3D &quot;C:/Xitami/webpages/team08&quot;
+[Security]
+    Admin =3D &quot;0&quot;
+    Filename =3D &quot;team08.aut&quot;
+
+2. The team's .aut file holds the passwords
+#   Created by Virtual Host wizard
+[/Admin]
+    admin=3D-
+[/setup]
+    team08=3D&quot;Rj4Qx56M&quot;
+
+3. In defaults.cfg I reference the config files
+[Virtual-hosts]
+    ProjectsTeam08.ewu.edu =3D &quot;team08.cfg&quot;
+and the standard .aut file
+[Security]
+    Filename =3D &quot;defaults.aut&quot;
+which still holds the passwords from the pre VHosts days
+[/team08]
+    team08=3D&quot;Rj4Qx56M&quot;
+
+Presumably I am not referencing something properly somewhere.  I thought =
+it might be the [/setup] line in the team .aut file, but I have played =
+around with that ( /team08, etc) with no luck.  I have gone through the =
+help files and my archive of Xitami mailing list messages, with no luck. =
+I am going to keep the system offline until I can fix it, but the end of =
+the term is coming up.  Any idea where else I can look?
+
+Regards
+Steve Shervais
+
+------=_NextPart_000_000B_01C1FCEA.7E97A9E0
+Content-Type: text/html;
+	charset=&quot;Windows-1252&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content=3D&quot;text/html; charset=3Dwindows-1252&quot; =
+http-equiv=3DContent-Type&gt;
+&lt;META content=3D&quot;MSHTML 5.00.2614.3500&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am using DNS virtual hosts for =
+students in my=20
+senior projects class.&lt;BR&gt;What I want is for each team to have its own =
+password=20
+for its own directory.&lt;BR&gt;Pre-VHosts, that was no problem, I just put =
+the=20
+directory name and password into defaults.aut&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Now, I have a virtual hosts setup=20
+where:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;ProjectsTeam08.ewu.edu points to the=20
+\Webpages\Team08 directory, etc&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;This works fine, once I solved some Win =
+95 network=20
+configuration problems.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Unfortunately, there appears to be no =
+longer any=20
+password protection.&lt;BR&gt;My current setup looks like this:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;1. Each team has its own .cfg file that =
+points to=20
+its own .aut file:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;[Server]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Cgi-bin =
+=3D=20
+&quot;C:/Xitami/webpages/team08/cgi-bin&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Hostname =3D=20
+&quot;projects.ewu.edu&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Webpages =3D=20
+&quot;C:/Xitami/webpages/team08&quot;&lt;BR&gt;[Security]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Admin =
+=3D=20
+&quot;0&quot;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Filename =3D &quot;team08.aut&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;2. The team's .aut file holds the=20
+passwords&lt;BR&gt;#&amp;nbsp;&amp;nbsp; Created by Virtual Host=20
+wizard&lt;BR&gt;[/Admin]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+admin=3D-&lt;BR&gt;[/setup]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+team08=3D&quot;Rj4Qx56M&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;3. In defaults.cfg I reference the =
+config=20
+files&lt;BR&gt;[Virtual-hosts]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; ProjectsTeam08.ewu.edu =
+=3D=20
+&quot;team08.cfg&quot;&lt;BR&gt;and the standard .aut =
+file&lt;BR&gt;[Security]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+Filename =3D &quot;defaults.aut&quot;&lt;BR&gt;which still holds the passwords from the =
+pre VHosts=20
+days&lt;BR&gt;[/team08]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; team08=3D&quot;Rj4Qx56M&quot;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Presumably I am not referencing =
+something properly=20
+somewhere.&amp;nbsp; I thought it might be the [/setup] line in the team =
+.aut file,=20
+but I have played around with that ( /team08, etc) with no luck.&amp;nbsp; I =
+have=20
+gone through the help files and my archive of Xitami mailing list =
+messages, with=20
+no luck. I am going to keep the system offline until I can fix it, but =
+the end=20
+of the term is coming up.&amp;nbsp; Any idea where else I can =
+look?&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Regards&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Steve =
+Shervais&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_000B_01C1FCEA.7E97A9E0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003195.html">[Xitami] local IP v. domain
+</A></li>
+	<LI> Next message: <A HREF="003197.html">[Xitami] local IP v. domain
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3196">[ date ]</a>
+              <a href="thread.html#3196">[ thread ]</a>
+              <a href="subject.html#3196">[ subject ]</a>
+              <a href="author.html#3196">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

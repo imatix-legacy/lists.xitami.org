@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] filters, pdf, c
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000206.html">
+   <LINK REL="Next"  HREF="000215.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] filters, pdf, c
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] filters, pdf, c">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 21 Jun 2001 00:41:14 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000206.html">[Xitami] Cgi problems
+</A></li>
+        <LI> Next message: <A HREF="000215.html">[Xitami] Password problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#207">[ date ]</a>
+              <a href="thread.html#207">[ thread ]</a>
+              <a href="subject.html#207">[ subject ]</a>
+              <a href="author.html#207">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3ADF0299.C7BD06CA@usask.ca">3ADF0299.C7BD06CA@usask.ca</A>&gt;, Shane D Pinder writes:
+&gt;<i>Ordinarily, if a client downloads a large .pdf file, the user can see a 
+</I>&gt;<i>progress indication that reassures them that the file is being transferred.
+</I>&gt;<i>[With filter, do not]
+</I>
+The progress indication can only be displayed if the total length to be
+sent is known; for some reason it seems that this information is being
+lost/omitted with the method you are using (or being ignored).  The
+Content-Length: header usually contains this information, and Xitami
+should preserve this where possible.
+
+&gt;<i>          printf(&quot;Content-length: %u\nContent-Type: application/pdf\n\n&quot;,
+</I>&gt;<i>                 fsize);
+</I>
+Random thought: does it make any difference if you use Content-Length:
+for the header name, rather than Content-length:?  IIRC it's not
+supposed to be case sensitive, but perhaps something is treating it as
+case sensitive?
+
+If you are able to do so, you might also want to capture the headers
+sent back to the browser (eg, network traffic snooping) and see if the
+Content-Length: header is still present, and has the right value in it.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000206.html">[Xitami] Cgi problems
+</A></li>
+	<LI> Next message: <A HREF="000215.html">[Xitami] Password problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#207">[ date ]</a>
+              <a href="thread.html#207">[ thread ]</a>
+              <a href="subject.html#207">[ subject ]</a>
+              <a href="author.html#207">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

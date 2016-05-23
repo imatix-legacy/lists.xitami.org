@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI bin on vhosted site not executing -HINTS FOR NEWBIES
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006171.html">
+   <LINK REL="Next"  HREF="006182.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI bin on vhosted site not executing -HINTS FOR NEWBIES
+   </H1>
+    <B>admin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI bin on vhosted site not executing -HINTS FOR NEWBIES">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 15 Oct 2004 18:28:33 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006171.html">[Xitami] Halting/restarting the server hangs the proc.../60
+ sec. doesn't work
+</A></li>
+        <LI> Next message: <A HREF="006182.html">[Xitami] Halting/restarting the server hangs the proc...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6172">[ date ]</a>
+              <a href="thread.html#6172">[ thread ]</a>
+              <a href="subject.html#6172">[ subject ]</a>
+              <a href="author.html#6172">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_110294921==.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+
+I am back running Xitami as Admin which is bad I know.
+
+Even so, when I have defined a CGI bin folder on my VHOST site, it should 
+be able to execute the file, right?
+I keep getting one constant error and I can't find why it is giving me this.
+
+&quot;Bad request: probably tried to POST a non-executable URL.&quot;
+
+The very same CGI works just fine as long I run it on the main/default 
+domain on the same server.
+
+The config file for this domain specifies...
+and yes its linked correctly because the site works
+
+For security purposes removed the real domain name below and simply specify 
+THEDOMAINCOM in its place.
+
+[Server]
+     Cache-defaults = &quot;0&quot;
+     Cgi-bin = &quot;D:\\WWWUSR\\THEDOMAINCOM\\cgi&quot;
+     Hostname = &quot;www.THEDOMAIN.com&quot;
+     Webpages = &quot;D:\\WWWUSR\\THEDOMAINCOM\\html&quot;
+
+It is not because the propagation of the domain is not done yet and the 
+server is looking for www.THEDOMAIN.com as default dynamic re-director!
+I tried that already on a completely different and properly configured 
+domain and no CGI bin in VHosts appear to work.
+
+Nope... so I finally found it.
+
+In the default.cfg it specifies use /CGI-BIN/ before all CGI's.
+
+In other words, if you specify the exact path instead of the CGI-BIN path 
+name, you will try to execute a non executable path according to Xitami.
+However, it still does work but only on the default domain. This glitch or 
+hick-up only affects Virtually Hosted domains which do NOT allow 
+/cgi/PathTo.Exe
+
+In other word's a little twitched to get used to, however now at least 
+no-one can just by displaying your source code find your CGI bin.
+The have to execute it first so if your CGI directory was named 
+/InMommysAttic/ you would still call it by specifying /CGI-BIN/.
+
+     Just a hint if someone wonders.
+     No need to respond to me about this.
+
+     MRJ Design.
+
+--=====================_110294921==.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+&lt;html&gt;
+&lt;br&gt;
+I am back running Xitami as Admin which is bad I know.&lt;br&gt;&lt;br&gt;
+Even so, when I have defined a CGI bin folder on my VHOST site, it should
+be able to execute the file, right?&lt;br&gt;
+I keep getting one constant error and I can't find why it is giving me
+this.&lt;br&gt;&lt;br&gt;
+&amp;quot;Bad request: probably tried to POST a non-executable
+URL.&amp;quot;&lt;br&gt;&lt;br&gt;
+The very same CGI works just fine as long I run it on the main/default
+domain on the same server.&lt;br&gt;&lt;br&gt;
+The config file for this domain specifies... &lt;br&gt;
+and yes its linked correctly because the site works&lt;br&gt;&lt;br&gt;
+For security purposes removed the real domain name below and simply
+specify THEDOMAINCOM in its place.&lt;br&gt;&lt;br&gt;
+[Server]&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Cache-defaults = &amp;quot;0&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Cgi-bin =
+&amp;quot;D:\\WWWUSR\\THEDOMAINCOM\\cgi&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Hostname =
+&amp;quot;&lt;a href=&quot;<A HREF="http://www.thedomain.com/"">http://www.thedomain.com/&quot;</A> eudora=&quot;autourl&quot;&gt;www.THEDOMAIN.com&lt;/a&gt;&amp;quot;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Webpages =
+&amp;quot;D:\\WWWUSR\\THEDOMAINCOM\\html&amp;quot;&lt;br&gt;&lt;br&gt;
+It is not because the propagation of the domain is not done yet and the
+server is looking for
+&lt;a href=&quot;<A HREF="http://www.thedomain.com/"">http://www.thedomain.com/&quot;</A> eudora=&quot;autourl&quot;&gt;www.THEDOMAIN.com&lt;/a&gt;
+as default dynamic re-director!&lt;br&gt;
+I tried that already on a completely different and properly configured domain and no CGI bin in VHosts appear to work.&lt;br&gt;&lt;br&gt;
+Nope... so I finally found it.&lt;br&gt;&lt;br&gt;
+In the default.cfg it specifies use /CGI-BIN/ before all CGI's.&lt;br&gt;&lt;br&gt;
+In other words, if you specify the exact path instead of the CGI-BIN path name, you will try to execute a non executable path according to Xitami.&lt;br&gt;
+However, it still does work but only on the default domain. This glitch or hick-up only affects Virtually Hosted domains which do NOT allow /cgi/PathTo.Exe&lt;br&gt;&lt;br&gt;
+In other word's a little twitched to get used to, however now at least no-one can just by displaying your source code find your CGI bin.&lt;br&gt;
+The have to execute it first so if your CGI directory was named /InMommysAttic/ you would still call it by specifying /CGI-BIN/.&lt;br&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; Just a hint if someone wonders.&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; No need to respond to me about this.&lt;br&gt;&lt;br&gt;
+&amp;nbsp;&amp;nbsp;&amp;nbsp; MRJ Design.&lt;br&gt;
+&lt;/html&gt;
+
+--=====================_110294921==.ALT--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006171.html">[Xitami] Halting/restarting the server hangs the proc.../60
+ sec. doesn't work
+</A></li>
+	<LI> Next message: <A HREF="006182.html">[Xitami] Halting/restarting the server hangs the proc...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6172">[ date ]</a>
+              <a href="thread.html#6172">[ thread ]</a>
+              <a href="subject.html#6172">[ subject ]</a>
+              <a href="author.html#6172">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

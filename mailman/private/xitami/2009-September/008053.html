@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] So Long Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20So%20Long%20Xitami&In-Reply-To=001801ca4163%248e1096a0%24aa31c3e0%24%40net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="008052.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] So Long Xitami</H1>
+    <B>Russel Olinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20So%20Long%20Xitami&In-Reply-To=001801ca4163%248e1096a0%24aa31c3e0%24%40net"
+       TITLE="[Xitami] So Long Xitami">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Sep 30 03:20:35 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="008052.html">[Xitami] So Long Xitami
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8053">[ date ]</a>
+              <a href="thread.html#8053">[ thread ]</a>
+              <a href="subject.html#8053">[ subject ]</a>
+              <a href="author.html#8053">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+I run Xitami v2.4d9 on Windows Server 2003.  It runs stable as hell and I haven't had a crash in...well, at least a year...and I think that was hardware, not Xitami.  In fact, I have never had crash issues with Xitami....just keeps on ticking!
+
+And it still runs pretty fast to.  My site is pretty much all dynamic content site, currently pumps about 12Gb and 25,000 hits per day...it takes about 4 seconds to load the slowest page.  Now granted, i have had to some trickery to get a few things to work like modern web servers.  I don't know what the limits of the site will be, but so far its not even close to being bogged down.
+
+The biggest trick I had to do was my own version of URL rewrite.  Manually create a URL name for every category/forum title on my site, stored to a DB.  Then use CGI alias to assign names to specific scripts
+
+CGI Alias:  
+   /ads = /cgi-bin/postlist.pl
+   /ad = /cgi-bin/postShow.pl
+
+DB URL Mapping:
+   categoryID 3 = 'for-sale'
+   forumID 26 = &quot;cars'
+
+Build URL:
+   /ad/for-sale/cars/this-is-the-article-subject-line/0_12345.html
+   0_12345.html = (0=pageID, 12345= articleID)
+
+Then parse $ENV, which is the remainder of the url path after the cgi alias (&quot;/ad&quot;), to decode the incoming URL and translate it back into meaningful DB recordIDs.
+
+Fun stuff.  But it works pretty clean.    Only had to create about 16 cgi alias, everything else is in the DB.
+
+&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ronackgen01 at bellsouth.net</A>
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Date: Tue, 29 Sep 2009 20:18:36 -0400
+</I>&gt;<i> Subject: Re: [Xitami] So Long Xitami
+</I>&gt;<i> 
+</I>&gt;<i> Yeah I'm not real happy with Vista at least at work because they kept all
+</I>&gt;<i> the security crap in it. However here on my home system I turned all that
+</I>&gt;<i> crap off. Vista seems to be pretty stable but Xitami doesn't play real nice.
+</I>&gt;<i> As a matter of fact Xitami didn't play well with my XP system either. I
+</I>&gt;<i> stuck with it because I liked the simplicity and I was use to it. I'm sure
+</I>&gt;<i> it is fine with Linux though but I'm not a Linux person. 
+</I>&gt;<i> 
+</I>&gt;<i> Ron
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of YVES SUCAET
+</I>&gt;<i> Sent: Tuesday, September 29, 2009 7:55 PM
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">stuart at 7sq.co.uk</A>; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] So Long Xitami
+</I>&gt;<i> 
+</I>&gt;<i> He just did: Replacing XP by Vista: that's the downgrade! :-)
+</I>&gt;<i> 
+</I>&gt;<i> Sorry, couldn't resist...
+</I>&gt;<i> 
+</I>&gt;<i> ------ Original Message ------
+</I>&gt;<i> Received: Tue, 29 Sep 2009 06:49:09 PM CDT
+</I>&gt;<i> From: &quot;Stuart Hands&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">stuart at 7sq.co.uk</A>&gt;
+</I>&gt;<i> To: &quot;'Xitami Users General Discussion'&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i> Subject: Re: [Xitami] So Long Xitami
+</I>&gt;<i> 
+</I>&gt;<i> Wait, wait, wait! What?!?!
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> &quot;Down..  grade?&quot;
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> S
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i>   _____  
+</I>&gt;<i> 
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Russel Olinger
+</I>&gt;<i> Sent: 30 September 2009 00:40
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] So Long Xitami
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i> 
+</I>&gt;<i> Then downgrade back down to WinXP or Win2003 Server.  :-)
+</I>&gt;<i> 
+</I>&gt;<i> Whats the new webserver?
+</I>&gt;<i> 
+</I>&gt;<i> Russel P. Olinger (310) 466-3399 <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ronackgen01 at bellsouth.net</A>
+</I>&gt;<i> &gt; To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> &gt; Date: Tue, 29 Sep 2009 18:15:50 -0400
+</I>&gt;<i> &gt; Subject: [Xitami] So Long Xitami
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I've been a long time user of classic Xitami, now I must bid a fond
+</I>&gt;<i> &gt; farewell. The problems I have encountered after upgrading to MS Vista have
+</I>&gt;<i> &gt; been way too painful. My web server seemed to be down more than up. So, I
+</I>&gt;<i> &gt; have moved on to a different web server. The new web server does
+</I>&gt;<i> everything
+</I>&gt;<i> &gt; Xitami did and more (asp) and no it's not Apache.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Ron Ackerman 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I> 		 	   		  
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20090929/fad98fce/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20090929/fad98fce/attachment.htm</A> 
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="008052.html">[Xitami] So Long Xitami
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8053">[ date ]</a>
+              <a href="thread.html#8053">[ thread ]</a>
+              <a href="subject.html#8053">[ subject ]</a>
+              <a href="author.html#8053">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

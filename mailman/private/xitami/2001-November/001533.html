@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] password in clear text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001528.html">
+   <LINK REL="Next"  HREF="001534.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] password in clear text
+   </H1>
+    <B>Bernd Luevelsmeyer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] password in clear text">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 29 Nov 2001 16:52:00 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001528.html">[Xitami] password in clear text
+</A></li>
+        <LI> Next message: <A HREF="001534.html">[Xitami] FTP virtual directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1533">[ date ]</a>
+              <a href="thread.html#1533">[ thread ]</a>
+              <a href="subject.html#1533">[ subject ]</a>
+              <a href="author.html#1533">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Francis Turner wrote:
+[...]
+&gt;<i> I think your point though is excellent. I would like to see Xitami do
+</I>&gt;<i> something like a MD5 hash on the password field. An alternative which
+</I>&gt;<i> would suit me just fine would be for the authetication to be handed of
+</I>&gt;<i> to the OS...
+</I>
+Handing it off to the OS would be most helpful for the FTP part,
+where user really do log in. Xitami also should impersonate the user
+then, so the OS will check file accesses automatically.
+This is not easy, though, firstly there may be several user logged
+in but you can only impersonate one of them, and secondly this is
+highly OS specific but Xitami ought to be portable. For this reason,
+I don't recommend using the FTP part at all on FreeBSD, but instead
+use the server that comes with the OS anyway.
+
+If Xitami runs as a specific user, and only that user has read
+permission on the file, then the clear-text things are no problem
+IMHO. Just make sure Xitami as a web browser of FTP server or CGI
+owner can't be tricked to deliver the file to clients. The problem
+is, per default the file is world-readable and Xitami runs as root.
+
+On FreeBSD I made Xitami to install unconfigured and it won't start
+automatically. So I left the issue for the admin to clean up: invent
+a xitami-user, write defaults.cfg and defaults.aut, provide file
+permissions, and set up the autostart-at-boot thingy. It's perhaps
+not fair, but technically nobody is in any danger by this install
+routine. I've not made up my mind exactly how to change it, but will
+somehow do a more complete automatic install; perhaps let it run as
+user &quot;nobody&quot; and provide a very restrictive defaults.cfg (only HTTP
+and no remote administration).
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001528.html">[Xitami] password in clear text
+</A></li>
+	<LI> Next message: <A HREF="001534.html">[Xitami] FTP virtual directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1533">[ date ]</a>
+              <a href="thread.html#1533">[ thread ]</a>
+              <a href="subject.html#1533">[ subject ]</a>
+              <a href="author.html#1533">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

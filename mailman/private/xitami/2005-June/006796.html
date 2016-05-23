@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami performance regarding directory structures
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006792.html">
+   <LINK REL="Next"  HREF="006798.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami performance regarding directory structures
+   </H1>
+    <B>RPO
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami performance regarding directory structures">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 9 Jun 2005 08:42:53 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006792.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+        <LI> Next message: <A HREF="006798.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6796">[ date ]</a>
+              <a href="thread.html#6796">[ thread ]</a>
+              <a href="subject.html#6796">[ subject ]</a>
+              <a href="author.html#6796">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>To sum everyone's comments up:
+    1.  NTFS has no limits to the amount of folders and files any given
+directory can have.
+                - ???  Does XP have the 4 billion issue or is that NTFS?  If
+NTFS than W2K Server will have the problem too, correct?
+    2.  I need to worry about performance .
+    3.  I will have better performance with 8.3 formatting turned off
+                - ??? how/where do I turn 8.3 off
+    4.  Performance will still be an issue,
+                - ??? how else can I optimize performance?  more RAM?
+constant NTFS deframentation? constant HD/Volume defragmentation?
+    5.  Am I to assume that Xitami will only suffer if Windows suffers?
+There aren't any issues for Xitami handling this kind of directory
+structure?
+
+I will probably have a few more questions.  Thanks for all the comments
+folks.
+
+
+----- Original Message ----- 
+From: &quot;Michael diLorenzo&quot; &lt;<A HREF="mailto:mdilore1@nycap.rr.com">mdilore1@nycap.rr.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Wednesday, June 08, 2005 10:59 PM
+Subject: Re: [Xitami] Xitami performance regarding directory structures
+
+
+&gt;<i> To second what Gene said, NTFS can handle massive numbers of files per
+</I>&gt;<i> directory.  In fact, I'm not sure that there is a limit to the number of
+</I>&gt;<i> files per folder.  Technically, the maximum number of files on a single
+</I>&gt;<i> NTFS volume is over 16 billion billion, although WindowsXP imposes a limit
+</I>&gt;<i> of just over 4 billion.
+</I>&gt;<i>
+</I>&gt;<i> I think your issue is going to be performance of NTFS rather than quantity
+</I>&gt;<i> of files.  Microsoft recommends disabling short-file name generation if
+</I>&gt;<i> you're going to have more than 300,000 files per folder on an NTFS
+</I>&gt;<i> volume.  They provide some information and instruction for this at
+</I>&gt;<i>
+</I><A HREF="http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp">http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp</A>
+&gt;<i>
+</I>&gt;<i> I would venture to say that your Xitami performance is only going to be
+</I>&gt;<i> limited by the performance of NTFS.
+</I>&gt;<i>
+</I>&gt;<i> Michael
+</I>&gt;<i>
+</I>&gt;<i> On Wed, 08 Jun 2005 23:26:26 -0400, Gene Angel
+</I>&gt;<i> &lt;<A HREF="mailto:fuzzydog@whiteshepherd.net">fuzzydog@whiteshepherd.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; RPO wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; I am running W2K Server (NTFS) and I have done some research concerning
+</I>&gt;<i> &gt;&gt; directory limitations within the W2K environment and now I am looking
+</I>&gt;<i> &gt;&gt; for potential limitations with Xitami.  My server will host potentially
+</I>&gt;<i> &gt;&gt; 10s of thousands  of users.  Each user will have the ability to create
+</I>&gt;<i> &gt;&gt; their own photo albums and then have photo books within each album.
+</I>&gt;<i> &gt;&gt; From a storage standpoint each user will have their own user directory,
+</I>&gt;<i> &gt;&gt; that user directory will hold from 1 to 15 sub directories that will
+</I>&gt;<i> &gt;&gt; represent the photo albums.  Then each photo album directory will have
+</I>&gt;<i> &gt;&gt; from 1 to 15 photo book albums.  Sorry for the extensive path below put
+</I>&gt;<i> &gt;&gt; I wanted to give an accurate representation of what I am looking to
+</I>&gt;<i> &gt;&gt; do.  The directory tree will look like this (each numbered directory,
+</I>&gt;<i> &gt;&gt; ie: 1000, 2000 - will hold up to 1000 user directories each).  The
+</I>&gt;<i> &gt;&gt; things I am considering are sub-directory limitations per parent
+</I>&gt;<i> &gt;&gt; directory and performance issues for Windows considering the directory
+</I>&gt;<i> &gt;&gt; structure and then ultimately Xitami's performance handling the
+</I>&gt;<i> &gt;&gt; directory structure.  Comments?!
+</I>&gt;<i> &gt;&gt;  This is the only info I found pertaining to NTFS limitations:
+</I>&gt;<i> &gt;&gt;
+</I><A HREF="http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en-us/Default.asp?url=/resources/documentation/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp">http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en-us/Default.asp?url=/resources/documentation/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp</A>
+&gt;<i> &gt;&gt; but I am uncertain if I fully understand its implications.
+</I>&gt;<i> &gt;&gt;  xitami
+</I>&gt;<i> &gt;&gt;      - webpages
+</I>&gt;<i> &gt;&gt;           - albums
+</I>&gt;<i> &gt;&gt;                - 1000
+</I>&gt;<i> &gt;&gt;                     - user1
+</I>&gt;<i> &gt;&gt;                          - photoAlbum1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book2
+</I>&gt;<i> &gt;&gt;                          - photoAlbum2
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book2
+</I>&gt;<i> &gt;&gt;                     - user2
+</I>&gt;<i> &gt;&gt;                          - photoAlbum1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book2
+</I>&gt;<i> &gt;&gt;                          - photoAlbum2
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book2
+</I>&gt;<i> &gt;&gt;                     - user3
+</I>&gt;<i> &gt;&gt;                     ...
+</I>&gt;<i> &gt;&gt;                     - user1000
+</I>&gt;<i> &gt;&gt;                - 2000
+</I>&gt;<i> &gt;&gt;                     - user1001
+</I>&gt;<i> &gt;&gt;                          - photoAlbum1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book2
+</I>&gt;<i> &gt;&gt;                          - photoAlbum2
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book2
+</I>&gt;<i> &gt;&gt;                     - user1002
+</I>&gt;<i> &gt;&gt;                          - photoAlbum1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum1_book2
+</I>&gt;<i> &gt;&gt;                          - photoAlbum2
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book1
+</I>&gt;<i> &gt;&gt;                               -photoAlbum2_book2
+</I>&gt;<i> &gt;&gt;                     - user1003
+</I>&gt;<i> &gt;&gt;                     ...
+</I>&gt;<i> &gt;&gt;                     - user2000
+</I>&gt;<i> &gt;&gt;                - 3000
+</I>&gt;<i> &gt;&gt;                - 4000
+</I>&gt;<i> &gt;&gt;                - 5000 (5,000 users)
+</I>&gt;<i> &gt;&gt;                ..
+</I>&gt;<i> &gt;&gt;                ..
+</I>&gt;<i> &gt;&gt;                - 100000 (100,000 users)
+</I>&gt;<i> &gt;&gt;                ..
+</I>&gt;<i> &gt;&gt;                ..
+</I>&gt;<i> &gt;&gt;                - 1000000 (1 million users)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I hold  alot of users/folders under Win2k3 NTFS.  NTFS uses a btree (I
+</I>&gt;<i> &gt; believe) so it's pretty good on bulky directories.  You can increase
+</I>&gt;<i> &gt; performance two ways through windows.  Use a directory tree index scheme
+</I>&gt;<i> &gt; to limit your folder/files per directory or (and I think the bigest
+</I>&gt;<i> &gt; performance gain for you) would be windows disk Cache.  Windows disk
+</I>&gt;<i> &gt; cache comes from &quot;unused&quot; memory so the more free memory you got the
+</I>&gt;<i> &gt; more file/directory tables will be able to be held in memory.  This lets
+</I>&gt;<i> &gt; the system bypass hard drive tables and access directly from RAM which
+</I>&gt;<i> &gt; is much faster.  My main server has 1 gig of ram and I will upgrade it
+</I>&gt;<i> &gt; to 2 before long.  Win2k3 also has faster file access then win2k.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   Gene
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> Using M2, Opera's revolutionary e-mail client: <A HREF="http://www.opera.com/m2/">http://www.opera.com/m2/</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006792.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+	<LI> Next message: <A HREF="006798.html">[Xitami] Xitami performance regarding directory structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6796">[ date ]</a>
+              <a href="thread.html#6796">[ thread ]</a>
+              <a href="subject.html#6796">[ subject ]</a>
+              <a href="author.html#6796">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

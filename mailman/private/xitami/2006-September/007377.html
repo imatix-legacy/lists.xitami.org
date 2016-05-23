@@ -1,0 +1,1020 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: Xitami Digest, Vol 15, Issue 2
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Xitami%20Digest%2C%20Vol%2015%2C%20Issue%202&In-Reply-To=20060914232248.C445C1C10AFF%40sxpublic.imatix.net">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007373.html">
+   <LINK REL="Next"  HREF="007384.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: Xitami Digest, Vol 15, Issue 2</H1>
+    <B>Lee Albitz</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Xitami%20Digest%2C%20Vol%2015%2C%20Issue%202&In-Reply-To=20060914232248.C445C1C10AFF%40sxpublic.imatix.net"
+       TITLE="[Xitami] RE: Xitami Digest, Vol 15, Issue 2">lee_albitz at hotmail.com
+       </A><BR>
+    <I>Sat Sep 16 16:37:03 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007373.html">[Xitami] Log files not being generated with no data
+</A></li>
+        <LI>Next message: <A HREF="007384.html">[Xitami] Load Issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7377">[ date ]</a>
+              <a href="thread.html#7377">[ thread ]</a>
+              <a href="subject.html#7377">[ subject ]</a>
+              <a href="author.html#7377">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear Xiti users,
+
+I salute you one and all.
+
+This is in rewsponse to Les' request for an log configuration example:
+----------------
+[Accesslog]
+    Custom = &quot;[],,,,,,,,,,,,,,,,&quot;
+    Cycle = &quot;weekly&quot;
+    Cycle-arg = &quot;past/ac%yy%mm%dd.log&quot;
+    Cycle-day = &quot;0&quot;
+    Cycle-how = &quot;rename&quot;
+    Cycle-lines = &quot;0&quot;
+    Cycle-size = &quot;0&quot;
+    Cycle-time = &quot;00:00&quot;
+    Enabled = &quot;1&quot;
+    Filename = &quot;access.log&quot;
+    Format = &quot;XLML&quot;
+    Header = &quot;&quot;
+    Local = &quot;0&quot;
+    Translate = &quot;0&quot;
+
+[Errorlog]
+    Custom = &quot;&lt;LOG 
+&lt;EVENT&gt;&lt;DATE&gt;&lt;/DATE&gt;&lt;CLIENT&gt;&lt;/CLIENT&gt;&lt;CLIENTIP&gt;&lt;/CLIENTIP-
+ERVERIP&gt;&lt;REQUEST&gt;&lt;/REQUEST&gt;&lt;QUERRY&gt;&lt;/QUERRY&gt;&lt;METHOD&gt;&lt;/METHOD&gt;&lt;SAU&gt;/TTS&lt;EEVD&lt;-
+RECEIVED&gt;&lt;SENT&gt;&lt;/SENT&gt;&lt;DURATION&gt;&lt;/DURATION&gt;&lt;FILENAE&gt;/FLEAM&gt;&lt;SEAGNT&lt;/SEAGNT&lt;R-
+FERER&gt;&lt;/REFERER&gt;&lt;USERNAME&gt;&lt;/USERNAME&gt;SERICE&lt;/SRVIE&gt;&lt;HOS&gt;&lt;/HOS&gt;&lt;/VEN&gt; /OG&gt;&quot;
+    Cycle = &quot;weekly&quot;
+    Cycle-arg = &quot;past/er%yy%mm%dd.log&quot;
+    Cycle-day = &quot;0&quot;
+    Cycle-how = &quot;rename&quot;
+    Cycle-lines = &quot;0&quot;
+    Cycle-size = &quot;0&quot;
+    Cycle-time = &quot;00:00&quot;
+    Enabled = &quot;1&quot;
+    Filename = &quot;errors.log&quot;
+    Format = &quot;XLML&quot;
+    Header = &quot;&quot;
+    Local = &quot;1&quot;
+    Translate = &quot;0&quot;
+------------
+Oh, by the way, any one who needs certain dynamic content features
+unsupported in Xitami might want to take a look at sambar server.
+I can here you breathing easier already.
+Lee Albitz
+
+
+&gt;<i>From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-request at lists.xitami.org</A>
+</I>&gt;<i>Reply-To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i>Subject: Xitami Digest, Vol 15, Issue 2
+</I>&gt;<i>Date: Fri, 15 Sep 2006 01:22:48 +0200 (CEST)
+</I>&gt;<i>
+</I>&gt;<i>Send Xitami mailing list submissions to
+</I>&gt;<i>	<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i>
+</I>&gt;<i>To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;<i>	<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>or, via email, send a message with subject or body 'help' to
+</I>&gt;<i>	<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-request at lists.xitami.org</A>
+</I>&gt;<i>
+</I>&gt;<i>You can reach the person managing the list at
+</I>&gt;<i>	<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-owner at lists.xitami.org</A>
+</I>&gt;<i>
+</I>&gt;<i>When replying, please edit your Subject line so it is more specific
+</I>&gt;<i>than &quot;Re: Contents of Xitami digest...&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Today's Topics:
+</I>&gt;<i>
+</I>&gt;<i>    1. Re: Log files not being generated with no data (Les Nagy)
+</I>&gt;<i>    2. Re: Log files not being generated with no data (ibjr)
+</I>&gt;<i>    3. Re: Log files not being generated with no data (Postmaster1)
+</I>&gt;<i>    4. Re: Log files not being generated with no data (Alex Barna)
+</I>&gt;<i>    5. Re: Log files not being generated with no data (Les Nagy)
+</I>&gt;<i>    6. Re: Log files not being generated with no data (Jeff Hamblin)
+</I>&gt;<i>    7. Re: Log files not being generated with no data (Jeff Hamblin)
+</I>&gt;<i>    8. Re: Log files not being generated with no data (Les Nagy)
+</I>&gt;<i>    9. Re: Log files not being generated with no data (M. Jason Smiley)
+</I>&gt;<i>   10. Re: Log files not being generated with no data (Magnus Wedberg)
+</I>&gt;<i>   11. RE: Log files not being generated with no data (Ron Ackerman)
+</I>&gt;<i>   12. Re: Log files not being generated with no data (WD Terry)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>----------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 1
+</I>&gt;<i>Date: Thu, 14 Sep 2006 06:18:35 -0400
+</I>&gt;<i>From: Les Nagy &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">45092C7B.5060606 at atsi.ca</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+</I>&gt;<i>
+</I>&gt;<i>Les Nagy wrote:
+</I>&gt;<i> &gt; Les Nagy wrote:
+</I>&gt;<i> &gt;&gt; I have been trying to get my log files working, but everything except
+</I>&gt;<i> &gt;&gt; xitami.log gets generated with nothing in them. I have checked my
+</I>&gt;<i> &gt;&gt; settings and all seems fine. Deleting all the log files and then
+</I>&gt;<i> &gt;&gt; startying up Xitami causes them all to get generated, but no matter
+</I>&gt;<i> &gt;&gt; what I try they never contain data. Any ideas please?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt; The subject should have read &quot;Log files being generated with no data&quot;.
+</I>&gt;<i> &gt; Sorry
+</I>&gt;<i>Has xitami died? Is there anyone left using it? Anyone there?
+</I>&gt;<i>
+</I>&gt;<i>Les
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 2
+</I>&gt;<i>Date: Thu, 14 Sep 2006 08:05:29 -0700
+</I>&gt;<i>From: &quot;ibjr&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ibjr at ecvnet.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;001601c6d80f$38227850$<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">1401a8c0 at p4</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; format=flowed; charset=&quot;iso-8859-1&quot;;
+</I>&gt;<i>	reply-type=response
+</I>&gt;<i>
+</I>&gt;<i>Les, maybe nobody has an answer, and that is why you are not getting a
+</I>&gt;<i>response. I am using windows, and have never had any file come up empty 
+</I>&gt;<i>when
+</I>&gt;<i>writing to it. However, I used to have my websites hosted by computers that
+</I>&gt;<i>were running Linux, and I would have that problem happen from time to time,
+</I>&gt;<i>and it would not go away until I alerted their tech to the problem. More
+</I>&gt;<i>than that, I do not know.......... JR
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;Les Nagy&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Thursday, September 14, 2006 3:18 AM
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Les Nagy wrote:
+</I>&gt;<i> &gt;&gt; Les Nagy wrote:
+</I>&gt;<i> &gt;&gt;&gt; I have been trying to get my log files working, but everything except
+</I>&gt;<i> &gt;&gt;&gt; xitami.log gets generated with nothing in them. I have checked my
+</I>&gt;<i> &gt;&gt;&gt; settings and all seems fine. Deleting all the log files and then
+</I>&gt;<i> &gt;&gt;&gt; startying up Xitami causes them all to get generated, but no matter 
+</I>&gt;<i>what
+</I>&gt;<i> &gt;&gt;&gt; I try they never contain data. Any ideas please?
+</I>&gt;<i> &gt;&gt;&gt;
+</I>&gt;<i> &gt;&gt; The subject should have read &quot;Log files being generated with no data&quot;.
+</I>&gt;<i> &gt;&gt; Sorry
+</I>&gt;<i> &gt; Has xitami died? Is there anyone left using it? Anyone there?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Les
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 3
+</I>&gt;<i>Date: Thu, 14 Sep 2006 10:38:24 -0600
+</I>&gt;<i>From: &quot;Postmaster1&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">postmaster1 at cornflake.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;002201c6d81c$43ae2d10$<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">6400000a at midnight</A>&gt;
+</I>&gt;<i>Content-Type: text/plain;	charset=&quot;iso-8859-1&quot;
+</I>&gt;<i>
+</I>&gt;<i>Actually, I have had a  problem with log files for years.  I asked for help
+</I>&gt;<i>and I got the same blank response.  No one else seems to have any problems
+</I>&gt;<i>with the log files except you and me, I guess.
+</I>&gt;<i>
+</I>&gt;<i>Martin T
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;ibjr&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ibjr at ecvnet.com</A>&gt;
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Thursday, September 14, 2006 9:05
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Les, maybe nobody has an answer, and that is why you are not getting a
+</I>&gt;<i> &gt; response. I am using windows, and have never had any file come up empty
+</I>&gt;<i>when
+</I>&gt;<i> &gt; writing to it. However, I used to have my websites hosted by computers
+</I>&gt;<i>that
+</I>&gt;<i> &gt; were running Linux, and I would have that problem happen from time to
+</I>&gt;<i>time,
+</I>&gt;<i> &gt; and it would not go away until I alerted their tech to the problem. More
+</I>&gt;<i> &gt; than that, I do not know.......... JR
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ----- Original Message -----
+</I>&gt;<i> &gt; From: &quot;Les Nagy&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i> &gt; To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt; Sent: Thursday, September 14, 2006 3:18 AM
+</I>&gt;<i> &gt; Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Les Nagy wrote:
+</I>&gt;<i> &gt; &gt;&gt; Les Nagy wrote:
+</I>&gt;<i> &gt; &gt;&gt;&gt; I have been trying to get my log files working, but everything 
+</I>&gt;<i>except
+</I>&gt;<i> &gt; &gt;&gt;&gt; xitami.log gets generated with nothing in them. I have checked my
+</I>&gt;<i> &gt; &gt;&gt;&gt; settings and all seems fine. Deleting all the log files and then
+</I>&gt;<i> &gt; &gt;&gt;&gt; startying up Xitami causes them all to get generated, but no matter
+</I>&gt;<i>what
+</I>&gt;<i> &gt; &gt;&gt;&gt; I try they never contain data. Any ideas please?
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; The subject should have read &quot;Log files being generated with no 
+</I>&gt;<i>data&quot;.
+</I>&gt;<i> &gt; &gt;&gt; Sorry
+</I>&gt;<i> &gt; &gt; Has xitami died? Is there anyone left using it? Anyone there?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Les
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 4
+</I>&gt;<i>Date: Thu, 14 Sep 2006 12:50:54 -0500
+</I>&gt;<i>From: Alex Barna &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ABARNA at mn.rr.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">4509967E.3000103 at mn.rr.com</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+</I>&gt;<i>
+</I>&gt;<i>Les Nagy wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; I have been trying to get my log files working, but everything except
+</I>&gt;<i> &gt; xitami.log gets generated with nothing in them. I have checked my
+</I>&gt;<i> &gt; settings and all seems fine. Deleting all the log files and then
+</I>&gt;<i> &gt; startying up Xitami causes them all to get generated, but no matter
+</I>&gt;<i> &gt; what I try they never contain data. Any ideas please?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Les Nagy
+</I>&gt;<i>
+</I>&gt;<i>The only time I have had a blank access.log during the 6 years I've been
+</I>&gt;<i>running Xitami is when my ISP blocked port 80  or a new firewall blocked
+</I>&gt;<i>access &amp; no one could connect.
+</I>&gt;<i>
+</I>&gt;<i>It would help to know:
+</I>&gt;<i>What version you are using?
+</I>&gt;<i>What operating system is it running on?
+</I>&gt;<i>Are you running it locally or on a remote computer?
+</I>&gt;<i>
+</I>&gt;<i>If you are running locally, that is on your computer:
+</I>&gt;<i>  is a connection to 127.0.0.1 recorded?
+</I>&gt;<i>can anyone actually connect to your web site?
+</I>&gt;<i>
+</I>&gt;<i>Alex B.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 5
+</I>&gt;<i>Date: Thu, 14 Sep 2006 14:27:51 -0400
+</I>&gt;<i>From: Les Nagy &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">45099F27.1060304 at atsi.ca</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+</I>&gt;<i>
+</I>&gt;<i>Alex Barna wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The only time I have had a blank access.log during the 6 years I've
+</I>&gt;<i> &gt; been running Xitami is when my ISP blocked port 80  or a new firewall
+</I>&gt;<i> &gt; blocked access &amp; no one could connect.
+</I>&gt;<i>Thanks to all those who responded. I have emailed imatix about the
+</I>&gt;<i>future or status of xitami development and support, and have as yet
+</I>&gt;<i>received no reply. I believe nothing has happened in the way of
+</I>&gt;<i>development with xitami since late 2004. I do really wonder whether
+</I>&gt;<i>there is any point in continuing to use xitami, and as I have need for
+</I>&gt;<i>ssl, I was considering xitami pro.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; It would help to know:
+</I>&gt;<i> &gt; What version you are using?
+</I>&gt;<i>2.5, perhaps I should step back to the last 2.4 stable? Are there any
+</I>&gt;<i>security issues if I do?
+</I>&gt;<i> &gt; What operating system is it running on?
+</I>&gt;<i>Win2k
+</I>&gt;<i> &gt; Are you running it locally or on a remote computer?
+</I>&gt;<i> &gt;
+</I>&gt;<i>It is running on a co located machine.
+</I>&gt;<i> &gt; If you are running locally, that is on your computer:
+</I>&gt;<i> &gt; is a connection to 127.0.0.1 recorded?
+</I>&gt;<i> &gt; can anyone actually connect to your web site?
+</I>&gt;<i>Yes, everything works fine except for log files are always empty.
+</I>&gt;<i>
+</I>&gt;<i>Les
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 6
+</I>&gt;<i>Date: Thu, 14 Sep 2006 12:20:00 -0700
+</I>&gt;<i>From: &quot;Jeff Hamblin&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">jphamblin at qtools.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;002101c6d832$cea879f0$<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">6400a8c0 at neo64</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; format=flowed; charset=&quot;iso-8859-1&quot;;
+</I>&gt;<i>	reply-type=response
+</I>&gt;<i>
+</I>&gt;<i> &gt; Yes, everything works fine except for log files are always empty.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Les
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Why don't you post your logging config?
+</I>&gt;<i>
+</I>&gt;<i>For example, here is mine from defaults.cfg:
+</I>&gt;<i>
+</I>&gt;<i>[Accesslog]
+</I>&gt;<i>     Cycle=1
+</I>&gt;<i>     Cycle-arg=D:\logs\Xitami\access.log
+</I>&gt;<i>     Cycle-how=3
+</I>&gt;<i>     Cycle-time=00:10
+</I>&gt;<i>     Format=CLFX
+</I>&gt;<i>
+</I>&gt;<i>[Errorlog]
+</I>&gt;<i>     Cycle=1
+</I>&gt;<i>     Cycle-arg=D:\logs\Xitami\errors.log
+</I>&gt;<i>     Cycle-how=3
+</I>&gt;<i>     Cycle-time=00:15
+</I>&gt;<i>     Format=CLFX
+</I>&gt;<i>
+</I>&gt;<i>[Server]
+</I>&gt;<i>...
+</I>&gt;<i>     log-dir=D:\logs\Xitami
+</I>&gt;<i>...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 7
+</I>&gt;<i>Date: Thu, 14 Sep 2006 12:25:43 -0700
+</I>&gt;<i>From: &quot;Jeff Hamblin&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">jphamblin at qtools.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;000701c6d833$936b1cc0$<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">6400a8c0 at neo64</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; format=flowed; charset=&quot;iso-8859-1&quot;;
+</I>&gt;<i>	reply-type=response
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt; everything works fine except for log files are always empty.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Les
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Why don't you post your logging config?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; For example, here is mine from defaults.cfg:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Accesslog]
+</I>&gt;<i> &gt;    Cycle=1
+</I>&gt;<i> &gt;    Cycle-arg=D:\logs\Xitami\access.log
+</I>&gt;<i>
+</I>&gt;<i>  Cycle-arg=D:\logs\Xitami\access-old.log
+</I>&gt;<i>
+</I>&gt;<i> &gt;    Cycle-how=3
+</I>&gt;<i> &gt;    Cycle-time=00:10
+</I>&gt;<i> &gt;    Format=CLFX
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Errorlog]
+</I>&gt;<i> &gt;    Cycle=1
+</I>&gt;<i> &gt;    Cycle-arg=D:\logs\Xitami\errors.log
+</I>&gt;<i>
+</I>&gt;<i>Cycle-arg=D:\logs\Xitami\errors-old.log
+</I>&gt;<i>
+</I>&gt;<i> &gt;    Cycle-how=3
+</I>&gt;<i> &gt;    Cycle-time=00:15
+</I>&gt;<i> &gt;    Format=CLFX
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Server]
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;    log-dir=D:\logs\Xitami
+</I>&gt;<i> &gt; ...
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Oops. Over-edited for posting -- see corrections above.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 8
+</I>&gt;<i>Date: Thu, 14 Sep 2006 15:30:23 -0400
+</I>&gt;<i>From: Les Nagy &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">4509ADCF.7090302 at atsi.ca</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+</I>&gt;<i>
+</I>&gt;<i>Jeff Hamblin wrote:
+</I>&gt;<i> &gt;&gt; Yes, everything works fine except for log files are always empty.
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Les
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Why don't you post your logging config?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; For example, here is mine from defaults.cfg:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Accesslog]
+</I>&gt;<i> &gt;    Cycle=1
+</I>&gt;<i> &gt;    Cycle-arg=D:\logs\Xitami\access.log
+</I>&gt;<i> &gt;    Cycle-how=3
+</I>&gt;<i> &gt;    Cycle-time=00:10
+</I>&gt;<i> &gt;    Format=CLFX
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Errorlog]
+</I>&gt;<i> &gt;    Cycle=1
+</I>&gt;<i> &gt;    Cycle-arg=D:\logs\Xitami\errors.log
+</I>&gt;<i> &gt;    Cycle-how=3
+</I>&gt;<i> &gt;    Cycle-time=00:15
+</I>&gt;<i> &gt;    Format=CLFX
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [Server]
+</I>&gt;<i> &gt; ...
+</I>&gt;<i> &gt;    log-dir=D:\logs\Xitami
+</I>&gt;<i> &gt; ...
+</I>&gt;<i>Interestingly enough, those entries do not exist in any form in my
+</I>&gt;<i>defaults.cfg, nor in the cfgs for each of the virtual hosts. I know that
+</I>&gt;<i>I have made the entries in the web based admin to enable and format the
+</I>&gt;<i>logs. So the root might be somethign to do with how xitami is writing to
+</I>&gt;<i>the defaults.cfg file?
+</I>&gt;<i>
+</I>&gt;<i>Les
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 9
+</I>&gt;<i>Date: Thu, 14 Sep 2006 15:36:59 -0400
+</I>&gt;<i>From: &quot;M. Jason Smiley&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">jsmiley at rcolmstead.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;528f01c6d835$2511fd00$<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">c128a8c0 at rcolmstead.com</A>&gt;
+</I>&gt;<i>Content-Type: text/plain;	charset=&quot;iso-8859-1&quot;
+</I>&gt;<i>
+</I>&gt;<i>i have never like the web based interface and have read about people having
+</I>&gt;<i>trouble with it many times over the years that i've been on this list.
+</I>&gt;<i>
+</I>&gt;<i>manually editing the cfg files it quick and simple. that is how i have
+</I>&gt;<i>always done my confguring.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;Les Nagy&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Thursday, September 14, 2006 3:30 PM
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Jeff Hamblin wrote:
+</I>&gt;<i> &gt; &gt;&gt; Yes, everything works fine except for log files are always empty.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; Les
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Why don't you post your logging config?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; For example, here is mine from defaults.cfg:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [Accesslog]
+</I>&gt;<i> &gt; &gt;    Cycle=1
+</I>&gt;<i> &gt; &gt;    Cycle-arg=D:\logs\Xitami\access.log
+</I>&gt;<i> &gt; &gt;    Cycle-how=3
+</I>&gt;<i> &gt; &gt;    Cycle-time=00:10
+</I>&gt;<i> &gt; &gt;    Format=CLFX
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [Errorlog]
+</I>&gt;<i> &gt; &gt;    Cycle=1
+</I>&gt;<i> &gt; &gt;    Cycle-arg=D:\logs\Xitami\errors.log
+</I>&gt;<i> &gt; &gt;    Cycle-how=3
+</I>&gt;<i> &gt; &gt;    Cycle-time=00:15
+</I>&gt;<i> &gt; &gt;    Format=CLFX
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [Server]
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; &gt;    log-dir=D:\logs\Xitami
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; Interestingly enough, those entries do not exist in any form in my
+</I>&gt;<i> &gt; defaults.cfg, nor in the cfgs for each of the virtual hosts. I know that
+</I>&gt;<i> &gt; I have made the entries in the web based admin to enable and format the
+</I>&gt;<i> &gt; logs. So the root might be somethign to do with how xitami is writing to
+</I>&gt;<i> &gt; the defaults.cfg file?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Les
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 10
+</I>&gt;<i>Date: Thu, 14 Sep 2006 21:49:35 +0200
+</I>&gt;<i>From: &quot;Magnus Wedberg&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">mw at 9000.org</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">4509CE6F.26003.2E524BA at mw.9000.org</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; charset=US-ASCII
+</I>&gt;<i>
+</I>&gt;<i> &gt; Thanks to all those who responded. I have emailed imatix about the
+</I>&gt;<i> &gt; future or status of xitami development and support, and have as yet
+</I>&gt;<i> &gt; received no reply. I believe nothing has happened in the way of
+</I>&gt;<i> &gt; development with xitami since late 2004. I do really wonder whether
+</I>&gt;<i> &gt; there is any point in continuing to use xitami, and as I have need for
+</I>&gt;<i> &gt; ssl, I was considering xitami pro.
+</I>&gt;<i>
+</I>&gt;<i>The answer to this was posted way back in 2004 by Pieter Hintjens
+</I>&gt;<i>(see large quote below). Xitami is since long obsoleted for
+</I>&gt;<i>production environments BUT for one task: serving up static content,
+</I>&gt;<i>where it's still a very good choice thanks to its blazing speed (even
+</I>&gt;<i>on low-end systems). I think Zeus is faster still, but Zeus costs
+</I>&gt;<i>money. Xitami easily outperforms Apache in a smaller footprint, but
+</I>&gt;<i>Apache easily outperforms Xitami on dynamic content as Xitami needs
+</I>&gt;<i>to run everything as CGI processes.
+</I>&gt;<i>
+</I>&gt;<i>Of course, in specific cases (low powered memory-starved systems)
+</I>&gt;<i>Xitami may still be a top choice. As usual for complex questions, the
+</I>&gt;<i>answer is &quot;it depends&quot;. I'm still running Xitami on my own box for
+</I>&gt;<i>development purposes, but might switch to Apache, haven't decided
+</I>&gt;<i>yet. My live server runs Apache since a year or so.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>***** BEGIN QUOTE *****
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Hello, we are here.  Busy, but here.
+</I>&gt;<i>
+</I>&gt;<i>I'm sorry we don't spend more time reading and replying to the Xitami
+</I>&gt;<i>list.  It's one of many things we have to spend time on, and
+</I>&gt;<i>inevitably gets less attention that it deserves.
+</I>&gt;<i>
+</I>&gt;<i>Xitami is, obviously, a project that is fairly static.  We make
+</I>&gt;<i>patches now and then, especially when there are security issues.  The
+</I>&gt;<i>server solves a problem for many people but we cannot compete with
+</I>&gt;<i>the huge resources put behind products like Apache, and we would be
+</I>&gt;<i>foolish to try.
+</I>&gt;<i>
+</I>&gt;<i>Allow me to explain briefly where we are and how we got here...
+</I>&gt;<i>
+</I>&gt;<i>When we started Xitami in 1996 the goal was not to develop a web
+</I>&gt;<i>server so much as to demonstrate a way of building servers.  That's
+</I>&gt;<i>why it was open source from day 1.  Unfortunately (for our spare time
+</I>&gt;<i>and personal lives), we were dragged kicking and screaming into
+</I>&gt;<i>developing our prototype into a real working server.  I can speak for
+</I>&gt;<i>most of the Xitami team when I say that it has always been a real
+</I>&gt;<i>pleasure to see our work used by so many enthusiastic people, but
+</I>&gt;<i>that the flip side has been a support burden that rapidly became
+</I>&gt;<i>impossible.
+</I>&gt;<i>
+</I>&gt;<i>In 2000-01 or so, we were forced to concentrate on earning money:
+</I>&gt;<i>this was banal and much less satisfying than making Xitami better but
+</I>&gt;<i>the few licenses we sold for Xitami/Pro did not start to cover even
+</I>&gt;<i>our network costs, let alone work on the product.
+</I>&gt;<i>
+</I>&gt;<i>I've been asked by members of our team to &quot;officially declare Xitami
+</I>&gt;<i>dead&quot; several times.  I've resisted.  We use the software ourselves.
+</I>&gt;<i>We use it on websites and in products like smt@ (www.sms-at.com),
+</I>&gt;<i>which is one of the ways we make a living.
+</I>&gt;<i>
+</I>&gt;<i>We spoke to the Apache team in 1999 and were happy to see that they
+</I>&gt;<i>were heading towards an architecture like ours: a portability layer,
+</I>&gt;<i>a bunch of protocol handlers, a fully portable server.  Today Apache
+</I>&gt;<i>2 is a fast, portable server and seriously: you should be using
+</I>&gt;<i>Apache 2 instead of Xitami unless there are specific things Xitami
+</I>&gt;<i>does better for you.
+</I>&gt;<i>
+</I>&gt;<i>At iMatix we're going through the same boom/bust/boom cycles as
+</I>&gt;<i>everyone else in the industry.  We made some money in 1999-2001, we
+</I>&gt;<i>lost most of it in 2002-2003, and we're now growing again with some
+</I>&gt;<i>interesting projects.  So iMatix is definitely here, and will be for
+</I>&gt;<i>a long time.
+</I>&gt;<i>
+</I>&gt;<i>But... Xitami as a living product... it's clearly something who's
+</I>&gt;<i>time has come and gone.  The need for a small, fast, portable web
+</I>&gt;<i>server was painfully obvious in 1997-2000, and we are proud to have
+</I>&gt;<i>achieved what we did.  But today it's a niche product.
+</I>&gt;<i>
+</I>&gt;<i>We will continue to provide updates of Xitami, we will continue to
+</I>&gt;<i>publish the source code.  Other people may spend the time building
+</I>&gt;<i>binaries and nice installers - this is no longer our job.
+</I>&gt;<i>
+</I>&gt;<i>I hope this is a satisfactory answer.
+</I>&gt;<i>
+</I>&gt;<i>On behalf of the Xitami team, which has included myself, Ewen
+</I>&gt;<i>McNeill, Jonathan Schultz, Julie Pesesse, and numerous other people
+</I>&gt;<i>in various roles over the years, I'd like to thank our users, friends
+</I>&gt;<i>and contributers for their patience and good will.  It has not been
+</I>&gt;<i>easy to spend such a huge effort in writing what we consider to be an
+</I>&gt;<i>excellent server, and to see it become almost totally irrelevant, but
+</I>&gt;<i>your feedback and support over the years has made it worthwhile.
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Pieter Hintjens
+</I>&gt;<i>iMatix
+</I>&gt;<i>
+</I>&gt;<i>***** END QUOTE *****
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Magnus Wedberg
+</I>&gt;<i><A HREF="http://www.magnuswedberg.com/">http://www.magnuswedberg.com/</A>
+</I>&gt;<i>mw AT 9000.org
+</I>&gt;<i>Warning! Objects in viewfinder may be closer than they appear.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 11
+</I>&gt;<i>Date: Thu, 14 Sep 2006 18:08:42 -0400
+</I>&gt;<i>From: &quot;Ron Ackerman&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ronackgen01 at bellsouth.net</A>&gt;
+</I>&gt;<i>Subject: RE: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: &quot;'Xitami Users General Discussion'&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID:
+</I>&gt;<i>	&lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">20060914220325.HOFK23960.ibm61aec.bellsouth.net at ronscomputer</A>&gt;
+</I>&gt;<i>Content-Type: text/plain;	charset=&quot;windows-1250&quot;
+</I>&gt;<i>
+</I>&gt;<i>I used the web based interface for about a week. Now I have some dos 
+</I>&gt;<i>scripts
+</I>&gt;<i>that do the work for me. Sure it means I have to be sitting at the server. 
+</I>&gt;<i>I
+</I>&gt;<i>could probably do the same with PHP but I'm too lazy to do it.
+</I>&gt;<i>
+</I>&gt;<i>As far as the log files goes.
+</I>&gt;<i>
+</I>&gt;<i>In the config for each site I have this
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>[Accesslog]
+</I>&gt;<i>    Filename = &quot;mysitename.log&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>In the xitami.cfg I have this
+</I>&gt;<i>
+</I>&gt;<i>#
+</I>&gt;<i>-------------------------------------------------------------------------
+</I>&gt;<i>#   ACCESSLOG configuration section
+</I>&gt;<i>#
+</I>&gt;<i>#   This section controls the server access log, recording HTTP hits.
+</I>&gt;<i>
+</I>&gt;<i>[Accesslog]
+</I>&gt;<i>#   Specifies whether logging is enabled or not.
+</I>&gt;<i>
+</I>&gt;<i>     enabled=1
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the name of the log file.
+</I>&gt;<i>
+</I>&gt;<i>     filename=access.log
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies whether to include local addresses or not.
+</I>&gt;<i>
+</I>&gt;<i>     local=1
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the log file format. The log file format you use needs
+</I>&gt;<i>#   to be compatible with whatever tool you use to analyze log files
+</I>&gt;<i>#   and build statistics. The most common tools work with an extended
+</I>&gt;<i>#   form of the NCSA log file format, also called 'common log file
+</I>&gt;<i>#   format'. We call this &quot;CLFX&quot;. An other commonly-used format is
+</I>&gt;<i>#   that produced by Microsoft web servers. Xitami also creates log
+</I>&gt;<i>#   files in two XML formats, which you can easily process using
+</I>&gt;<i>#   GSLgen to you create arbitrary reports, statistics, and HTML
+</I>&gt;<i>#   analyses. Lastly, you can create your own format, for specific
+</I>&gt;<i>#   purposes. Impressed? We are... :-)
+</I>&gt;<i>
+</I>&gt;<i>     format=CLF
+</I>&gt;<i>
+</I>&gt;<i>#   Custom log file format. This is an arbitrary text string that
+</I>&gt;<i>#   contains symbols as listed below. Symbols are enclosed by $\( and
+</I>&gt;<i>#   ) in the string.
+</I>&gt;<i>
+</I>&gt;<i>     custom=
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies whether to do reverse-DNS translations of the logged IP
+</I>&gt;<i>#   addresses, or not. Reverse-DNS translation can take some time, and
+</I>&gt;<i>#   if you need log file data quickly, leave this disabled. Enabling
+</I>&gt;<i>#   reverse-DNS translations will not slow- down Xitami.
+</I>&gt;<i>
+</I>&gt;<i>     translate=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies when to cycle the log file. When Xitami cycles a log
+</I>&gt;<i>#   file, it first moves or copies the existing data to another file,
+</I>&gt;<i>#   then creates a new, empty log file.
+</I>&gt;<i>
+</I>&gt;<i>     cycle=daily
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies how to cycle the log file.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-how=rename
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the time of day, or minute past the hour, that the log
+</I>&gt;<i>#   file is cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-time=00:00
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the day of the week or month that the log file is
+</I>&gt;<i>#   cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-day=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the maximum size in Kbytes for the log file; after that
+</I>&gt;<i>#   it is cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-size=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the maximum size in lines for the log file; after that
+</I>&gt;<i>#   it is cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-lines=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies an argument used for the various cycle-how options. When
+</I>&gt;<i>#   renaming a file or concatenating it onto another, Xitami uses the
+</I>&gt;<i>#   argument as a time-stamped filename. When moving the file, Xitami
+</I>&gt;<i>#   uses the argument as a time-stamped directory name. When
+</I>&gt;<i>#   processing the file through an arbitrary command, it uses the
+</I>&gt;<i>#   argument as a time-stamped command string. Xitami does not use the
+</I>&gt;<i>#   argument when deleting log files. Format this argument from any of
+</I>&gt;<i>#   the following timestamp fiels, mixed with other text.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-arg=ac%yy%mm%dd.log
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>#
+</I>&gt;<i>-------------------------------------------------------------------------
+</I>&gt;<i>#   ERRORLOG configuration section
+</I>&gt;<i>#
+</I>&gt;<i>#   This section controls the server error log, recording HTTP errors.
+</I>&gt;<i>
+</I>&gt;<i>[Errorlog]
+</I>&gt;<i>#   Specifies whether logging is enabled or not.
+</I>&gt;<i>
+</I>&gt;<i>     enabled=1
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the name of the log file.
+</I>&gt;<i>
+</I>&gt;<i>     filename=errors.log
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies whether to include local addresses or not.
+</I>&gt;<i>
+</I>&gt;<i>     local=1
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the log file format. The log file format you use needs
+</I>&gt;<i>#   to be compatible with whatever tool you use to analyze log files
+</I>&gt;<i>#   and build statistics. The most common tools work with an extended
+</I>&gt;<i>#   form of the NCSA log file format, also called 'common log file
+</I>&gt;<i>#   format'. We call this &quot;CLFX&quot;. An other commonly-used format is
+</I>&gt;<i>#   that produced by Microsoft web servers. Xitami also creates log
+</I>&gt;<i>#   files in two XML formats, which you can easily process using
+</I>&gt;<i>#   GSLgen to you create arbitrary reports, statistics, and HTML
+</I>&gt;<i>#   analyses. Lastly, you can create your own format, for specific
+</I>&gt;<i>#   purposes. Impressed? We are... :-)
+</I>&gt;<i>
+</I>&gt;<i>     format=CLFX
+</I>&gt;<i>
+</I>&gt;<i>#   Custom log file format. This is an arbitrary text string that
+</I>&gt;<i>#   contains symbols as listed below. Symbols are enclosed by $\( and
+</I>&gt;<i>#   ) in the string.
+</I>&gt;<i>
+</I>&gt;<i>     custom=
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies whether to do reverse-DNS translations of the logged IP
+</I>&gt;<i>#   addresses, or not. Reverse-DNS translation can take some time, and
+</I>&gt;<i>#   if you need log file data quickly, leave this disabled. Enabling
+</I>&gt;<i>#   reverse-DNS translations will not slow- down Xitami.
+</I>&gt;<i>
+</I>&gt;<i>     translate=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies when to cycle the log file. When Xitami cycles a log
+</I>&gt;<i>#   file, it first moves or copies the existing data to another file,
+</I>&gt;<i>#   then creates a new, empty log file.
+</I>&gt;<i>
+</I>&gt;<i>     cycle=daily
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies how to cycle the log file.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-how=rename
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the time of day, or minute past the hour, that the log
+</I>&gt;<i>#   file is cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-time=00:00
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the day of the week or month that the log file is
+</I>&gt;<i>#   cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-day=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the maximum size in Kbytes for the log file; after that
+</I>&gt;<i>#   it is cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-size=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies the maximum size in lines for the log file; after that
+</I>&gt;<i>#   it is cycled.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-lines=0
+</I>&gt;<i>
+</I>&gt;<i>#   Specifies an argument used for the various cycle-how options. When
+</I>&gt;<i>#   renaming a file or concatenating it onto another, Xitami uses the
+</I>&gt;<i>#   argument as a time-stamped filename. When moving the file, Xitami
+</I>&gt;<i>#   uses the argument as a time-stamped directory name. When
+</I>&gt;<i>#   processing the file through an arbitrary command, it uses the
+</I>&gt;<i>#   argument as a time-stamped command string. Xitami does not use the
+</I>&gt;<i>#   argument when deleting log files. Format this argument from any of
+</I>&gt;<i>#   the following timestamp fiels, mixed with other text.
+</I>&gt;<i>
+</I>&gt;<i>     cycle-arg=er%yy%mm%dd.log
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>-----Original Message-----
+</I>&gt;<i>From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i>[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of M. Jason Smiley
+</I>&gt;<i>Sent: Thursday, September 14, 2006 3:37 PM
+</I>&gt;<i>To: Xitami Users General Discussion
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>
+</I>&gt;<i>i have never like the web based interface and have read about people having
+</I>&gt;<i>trouble with it many times over the years that i've been on this list.
+</I>&gt;<i>
+</I>&gt;<i>manually editing the cfg files it quick and simple. that is how i have
+</I>&gt;<i>always done my confguring.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;Les Nagy&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">info at atsi.ca</A>&gt;
+</I>&gt;<i>To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Thursday, September 14, 2006 3:30 PM
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Jeff Hamblin wrote:
+</I>&gt;<i> &gt; &gt;&gt; Yes, everything works fine except for log files are always empty.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; Les
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Why don't you post your logging config?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; For example, here is mine from defaults.cfg:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [Accesslog]
+</I>&gt;<i> &gt; &gt;    Cycle=1
+</I>&gt;<i> &gt; &gt;    Cycle-arg=D:\logs\Xitami\access.log
+</I>&gt;<i> &gt; &gt;    Cycle-how=3
+</I>&gt;<i> &gt; &gt;    Cycle-time=00:10
+</I>&gt;<i> &gt; &gt;    Format=CLFX
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [Errorlog]
+</I>&gt;<i> &gt; &gt;    Cycle=1
+</I>&gt;<i> &gt; &gt;    Cycle-arg=D:\logs\Xitami\errors.log
+</I>&gt;<i> &gt; &gt;    Cycle-how=3
+</I>&gt;<i> &gt; &gt;    Cycle-time=00:15
+</I>&gt;<i> &gt; &gt;    Format=CLFX
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; [Server]
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; &gt;    log-dir=D:\logs\Xitami
+</I>&gt;<i> &gt; &gt; ...
+</I>&gt;<i> &gt; Interestingly enough, those entries do not exist in any form in my
+</I>&gt;<i> &gt; defaults.cfg, nor in the cfgs for each of the virtual hosts. I know that
+</I>&gt;<i> &gt; I have made the entries in the web based admin to enable and format the
+</I>&gt;<i> &gt; logs. So the root might be somethign to do with how xitami is writing to
+</I>&gt;<i> &gt; the defaults.cfg file?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Les
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>No virus found in this incoming message.
+</I>&gt;<i>Checked by AVG Free Edition.
+</I>&gt;<i>Version: 7.1.405 / Virus Database: 268.12.3/447 - Release Date: 9/13/2006
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>No virus found in this outgoing message.
+</I>&gt;<i>Checked by AVG Free Edition.
+</I>&gt;<i>Version: 7.1.405 / Virus Database: 268.12.3/447 - Release Date: 9/13/2006
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>Message: 12
+</I>&gt;<i>Date: Thu, 14 Sep 2006 19:21:58 -0400
+</I>&gt;<i>From: WD Terry &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">wdterry at rogers.com</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Log files not being generated with no data
+</I>&gt;<i>To: Postmaster1 &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">postmaster1 at cornflake.com</A>&gt;,	Xitami Users General
+</I>&gt;<i>	Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i>Message-ID: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">4509E416.5070309 at rogers.com</A>&gt;
+</I>&gt;<i>Content-Type: text/plain; charset=&quot;us-ascii&quot;
+</I>&gt;<i>
+</I>&gt;<i>An HTML attachment was scrubbed...
+</I>&gt;<i>URL: 
+</I>&gt;<i><A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060914/574ee34e/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20060914/574ee34e/attachment.htm</A>
+</I>&gt;<i>
+</I>&gt;<i>------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- Digest Version
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>End of Xitami Digest, Vol 15, Issue 2
+</I>&gt;<i>*************************************
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007373.html">[Xitami] Log files not being generated with no data
+</A></li>
+	<LI>Next message: <A HREF="007384.html">[Xitami] Load Issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7377">[ date ]</a>
+              <a href="thread.html#7377">[ thread ]</a>
+              <a href="subject.html#7377">[ subject ]</a>
+              <a href="author.html#7377">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

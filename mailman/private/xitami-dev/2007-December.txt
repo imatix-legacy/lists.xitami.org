@@ -1,0 +1,71 @@
+From bogus@does.not.exist.com  Thu Dec 27 22:14:07 2007
+From: bogus@does.not.exist.com ()
+Date: Thu, 27 Dec 2007 21:14:07 -0000
+Subject: No subject
+Message-ID: <mailman.0.1201931401.5945.xitami-dev@lists.xitami.org>
+
+questions [regarding iMatix Technology Packages], find and use the
+xitami-dev list, which is the most likely place to find people with a
+similar interest in these technologies. "
+
+What's the problem?
+
+My script works fine for Gsl version 2 and 3, but now breaks at version 4. Here is the stripped test case:
+
+Test case works fine with gsl3:
+
+  $ gsl -script:template2.gsl template.xml
+  2008/02/01 18:32:46: GSL/3.1 Copyright (c) 1991-2003 iMatix Corporation
+  2008/02/01 18:32:46: gsl3 I: Processing template.xml...
+  rem run 'template2.gsl' using 'gsl3'
+   gsl3
+   gsl3
+
+Test case works fine with gsl2 that comes with iMatix Technology Packages CVS Uploaded on Tue Sep 4 14:35:21 CEST 2007:
+
+  $ /pkg/iMatix/bin/gslgen -script:template2.gsl template.xml
+  GSLgen/2.01 Copyright (c) 1991-2003 iMatix Corporation
+  gslgen I: Processing template.xml...
+  rem run 'template2.gsl' using 'gslgen'
+   gslgen
+   gslgen
+
+Test case breaks with gsl4 that comes with iMatix Technology Packages CVS Uploaded on Tue Sep 4 14:35:21 CEST 2007:
+
+  $ /pkg/iMatix/bin/gsl -script:template2.gsl template.xml
+  2008/02/01 18:33:27: GSL/4.0c19 Copyright (c) 1996-2007 iMatix Corporation
+  2008/02/01 18:33:27: gsl/4 I: Processing template.xml...
+  2008/02/01 18:33:27: (template2.gsl 4)  > $(me)
+  2008/02/01 18:33:27: (template2.gsl 4) ^
+  2008/02/01 18:33:27: (template2.gsl 4) Unexpected token.
+
+Here is the actual template2.gsl file:
+
+  $ cat -n template2.gsl
+     1  rem run '$(script)' using '$(me)'
+     2  .template 0
+     3          > $(me)
+     4          > $(me)
+     5  endtemplate
+
+Line 3 & 4's only difference is that line 4 uses tab instead of space.
+
+The template.xml is a dummy file, without which the script won't run:
+
+ echo '<t></t>' > template.xml
+
+please CC me when reply. I'm not on the mlist. 
+
+Thanks
+
+Tong
+
+
+
+
+
+
+      ____________________________________________________________________________________
+Looking for last minute shopping deals?  
+Find them fast with Yahoo! Search.  http://tools.search.yahoo.com/newsearch/category.php?category=shopping
+

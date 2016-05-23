@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI program can't call FindWindow() ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000810.html">
+   <LINK REL="Next"  HREF="000812.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI program can't call FindWindow() ?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI program can't call FindWindow() ?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 27 Aug 2001 21:41:26 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000810.html">[Xitami] Bad termination..
+</A></li>
+        <LI> Next message: <A HREF="000812.html">Re[4]: [Xitami] Not seeing FORM POST fields
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#811">[ date ]</a>
+              <a href="thread.html#811">[ thread ]</a>
+              <a href="subject.html#811">[ subject ]</a>
+              <a href="author.html#811">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:BHEDLLPJFABBFBAIOHGOMEFOCJAA.LeeStewart@bigfoot.com">BHEDLLPJFABBFBAIOHGOMEFOCJAA.LeeStewart@bigfoot.com</A>&gt;, &quot;Lee Stewart&quot; writes:
+&gt;<i>I have a CGI program that needs to query another program that's running on
+</I>&gt;<i>the server.  I'm trying to get the title of the app using FindWindow() and
+</I>&gt;<i>GetWindowText().  My program works fine, but fails when running as a CGI
+</I>&gt;<i>program (&quot;The specified module could not be found&quot;).
+</I>&gt;<i>
+</I>&gt;<i>Is there something weird about the way that Xitami calls a CGI program?
+</I>
+Possibly.  Xitami calls the program as, IIRC, a console program.  If
+Windows is anything like OS/2 in terms of calling API, this will mean
+that it can't call &quot;windows&quot; like functions -- such as
+FindWindow()/GetWindowText().  
+
+One thing you might want to try is having a small batch file that Xitami
+can run as the CGI which then runs your program.  That way
+command.com/cmd.exe will be involved, which does some hunting around to
+figure out what type of program to run, and starting it the right way.
+
+&gt;<i>I'm new to the mailing list - is there a searchable archive?
+</I>
+There's a mailing list archive at:
+
+<A HREF="http://lists.xitami.org/pipermail/xitami/">http://lists.xitami.org/pipermail/xitami/</A>
+
+but alas it isn't searchable at the moment.  (It's on our list of things
+to do, along with getting the old archives and the new archives merged
+together.)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000810.html">[Xitami] Bad termination..
+</A></li>
+	<LI> Next message: <A HREF="000812.html">Re[4]: [Xitami] Not seeing FORM POST fields
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#811">[ date ]</a>
+              <a href="thread.html#811">[ thread ]</a>
+              <a href="subject.html#811">[ subject ]</a>
+              <a href="author.html#811">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

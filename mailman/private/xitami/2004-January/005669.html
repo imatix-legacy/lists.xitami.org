@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Setting FTP Data Port to 20
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005666.html">
+   <LINK REL="Next"  HREF="005670.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Setting FTP Data Port to 20
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Setting FTP Data Port to 20">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 29 Jan 2004 18:29:25 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005666.html">[Xitami] Setting FTP Data Port to 20
+</A></li>
+        <LI> Next message: <A HREF="005670.html">[Xitami] Setting FTP Data Port to 20
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5669">[ date ]</a>
+              <a href="thread.html#5669">[ thread ]</a>
+              <a href="subject.html#5669">[ subject ]</a>
+              <a href="author.html#5669">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sorry, my bad, misread your note.
+Didn't know it scanned.  When I ran the FTP service, it was shifted to port
+1916.  Maybe directly setting the port might help.  I had download issues
+with the FTP service (premature completeness) so switched to another.
+
+[cut another faux pas]
+
+I did find this in Xitami.cfg (for use in defaults.cfg):
+
+#   Specifies the port at which data connections will be made. Xitami
+#   scans for free ports, so this is simply the start of a range of
+#   ports. The port is shifted by whatever value was used for the
+#   server portbase.
+
+[ftp]
+    data-port=200
+
+Whatever that means.  It may either allow you to shift the starting scan
+point or set the starting scan point (say at 20) and it might stop there.
+
+Don't know.  Worth a shot.
+
+Much luck,
+Charles
+
+----- Original Message -----
+From: &quot;John Stuppi&quot; &lt;<A HREF="mailto:jstuppi@cisco.com">jstuppi@cisco.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, January 29, 2004 2:15 PM
+Subject: RE: [Xitami] Setting FTP Data Port to 20
+
+
+&gt;<i> Thanks Charles but I think you missed my point.  I still want to use the
+</I>&gt;<i> FTP Server - what I want to prevent is Xitami &quot;scanning for free ports&quot;:
+</I>&gt;<i>
+</I>&gt;<i> &quot;data-port
+</I>&gt;<i> Specifies the port at which data connections will be made. Xitami scans
+</I>&gt;<i> for free ports, so this is simply the start of a range of ports. The
+</I>&gt;<i> port is shifted by whatever value was used for the server portbase.
+</I>&gt;<i> Default: 200. &quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i> John
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> John Stuppi, CISSP
+</I>&gt;<i> CCIE #11154, Security
+</I>&gt;<i> Network Consulting Engineer
+</I>&gt;<i>
+</I>&gt;<i> Cisco Systems, Inc.
+</I>&gt;<i> 1325 Campus Parkway
+</I>&gt;<i> Wall Township, NJ 07753
+</I>&gt;<i> Office: (732) 751-6184
+</I>&gt;<i> Mobile: (732) 319-3886
+</I>&gt;<i> Fax: (732) 751-6002
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>] On Behalf Of Charles Schmidling
+</I>&gt;<i> Sent: Thursday, January 29, 2004 3:12 PM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Setting FTP Data Port to 20
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Turn it off.
+</I>&gt;<i>
+</I>&gt;<i> In defaults.cfg:
+</I>&gt;<i> [Ftp]
+</I>&gt;<i> Enabled=&quot;0&quot;
+</I>&gt;<i>
+</I>&gt;<i> Done deal.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;John Stuppi&quot; &lt;<A HREF="mailto:jstuppi@cisco.com">jstuppi@cisco.com</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Thursday, January 29, 2004 9:30 AM
+</I>&gt;<i> Subject: [Xitami] Setting FTP Data Port to 20
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Is there a way to prevent the Xitami FTP server from trying other
+</I>&gt;<i> &gt; ports for the FTP Data Port (default = 20) when using Active FTP?  I
+</I>&gt;<i> &gt; need the server to only use TCP 20 for troubleshooting purposes.
+</I>&gt;<i> &gt; Thanks in advance.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks,
+</I>&gt;<i> &gt; John
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; John Stuppi, CISSP
+</I>&gt;<i> &gt; CCIE #11154, Security
+</I>&gt;<i> &gt; Network Consulting Engineer
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Cisco Systems, Inc.
+</I>&gt;<i> &gt; 1325 Campus Parkway
+</I>&gt;<i> &gt; Wall Township, NJ 07753
+</I>&gt;<i> &gt; Office: (732) 751-6184
+</I>&gt;<i> &gt; Mobile: (732) 319-3886
+</I>&gt;<i> &gt; Fax: (732) 751-6002
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005666.html">[Xitami] Setting FTP Data Port to 20
+</A></li>
+	<LI> Next message: <A HREF="005670.html">[Xitami] Setting FTP Data Port to 20
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5669">[ date ]</a>
+              <a href="thread.html#5669">[ thread ]</a>
+              <a href="subject.html#5669">[ subject ]</a>
+              <a href="author.html#5669">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

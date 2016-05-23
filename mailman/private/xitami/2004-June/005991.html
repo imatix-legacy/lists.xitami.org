@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami 2.5C1
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005990.html">
+   <LINK REL="Next"  HREF="005993.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami 2.5C1
+   </H1>
+    <B>Xitami_SlackRat
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami 2.5C1">xitami@lists.xitami.org
+       </A><BR>
+    <I>13 Jun 2004 20:31:49 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005990.html">[Xitami] Xitami 2.5C1
+</A></li>
+        <LI> Next message: <A HREF="005993.html">[Xitami] Xitami 2.5C1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5991">[ date ]</a>
+              <a href="thread.html#5991">[ thread ]</a>
+              <a href="subject.html#5991">[ subject ]</a>
+              <a href="author.html#5991">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Elliott Potter &lt;<A HREF="mailto:mailinglist@eep.burdell.org">mailinglist@eep.burdell.org</A>&gt; writes:
+
+&gt;<i> On Sun, 13 Jun 2004, SlackRat wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Has anybody managed to install the latest Xitami httpd/ftpd?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I presume it also needs rbase and installed that too but have had no
+</I>&gt;<i> &gt; success with geting Xitami to build
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks in advance if anybody can put me straight.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [ Running slackware-current, 2.4.26 kernel, no gnome or kde but xorg6.7 with
+</I>&gt;<i> &gt; CVS Fluxbox if any of those actually make any difference to the install ]
+</I>&gt;<i> 
+</I>&gt;<i> I had a real bear of a time getting 2.5c1 (or 2.4d10) to build from
+</I>&gt;<i> source.  Apparently the Windows versions work just great for everybody,
+</I>&gt;<i> but when I picked up the source tree there were several problems that
+</I>&gt;<i> prevented it from compiling (at least under linux).
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> As far as I know, you shouldn't need the rbase stuff to build xitami -
+</I>&gt;<i> the source tree comes with the stuff that it appears to need (smt, sfl,
+</I>&gt;<i> etc.) ... though if you do need rbase then that would explain a little.
+</I>&gt;<i> There's no mention of rbase on xitami.com, but then xitami.com doesn't
+</I>&gt;<i> really reflect the current state of the product so it's not a good
+</I>&gt;<i> reference.
+</I>&gt;<i> 
+</I>&gt;<i> First step, do a 'find' in the source tree to see if you have a file
+</I>&gt;<i> called &quot;c&quot; in each subdirectory ... if you don't, you can get a copy from
+</I>&gt;<i> <A HREF="http://eep.burdell.org/c">http://eep.burdell.org/c</A> which (I think) is edited a bit so that it
+</I>&gt;<i> actually works.
+</I>&gt;<i> 
+</I>&gt;<i> Then make the build.sh script executable (it also helps on some systems
+</I>&gt;<i> to add #!/bin/bash to the first line) and give it a run and see where
+</I>&gt;<i> you get.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+Well I want to thank you for your advice.
+
+But it seems that whatever I do I cannot get xitami to compile correctly or
+even in fact compile at all.
+
+I had already imported the ``c'' file from the 2.5b5 version and also
+imported what libraries I could find although I was unable to find libstu.a
+and libaxc.a and additionally made the build.sh file, plus the boomake and
+makefiles executable. I also tried the ``c'' file that you recommended with
+no better results.
+
+The build script build.sh seems to go through the motions finally abandoning
+the attempt with ''can't find xitami'' after hundreds of warnings.
+
+I next tried modifying the build script to remove the openssl and xipro
+directory references and which didn't seem to be created upon untarring the
+tarball.  That did not correct the situation.
+
+So I tried compiling the various directories without using the build.sh
+file.
+
+These are my findings:
+
+In sfl, (standard function library) ./boomake build  produces a file
+``-g.lst'' which simply  contains ``gcc: no input files''
+
+Having deleted ``-g.lst'', ``./c *.c'' actually produces the object files
+and ``./boomake build install'' appears to work and in fact sets up the
+/usr/local/imatix directory and transfers over some files. Whether all the
+requisite files are installed I do not know, but I was hopeful at this stage
+although there were numerous bitches as follows:
+egrep -g.c No such file or directory
+compiling -g
+cat: invalid option -g
+
+Anyway moving on to GSL, following the same procedure ``./c *.c'' gave a
+multitude of errors and I abandoned the project.
+
+I would like to run the latest version. But at least 2.5b5 runs perfectly
+and I can always fall back on apache/proftpd if the need should ever arise.
+
+-- 
+SlackRat
+Please address all replies to the list
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005990.html">[Xitami] Xitami 2.5C1
+</A></li>
+	<LI> Next message: <A HREF="005993.html">[Xitami] Xitami 2.5C1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5991">[ date ]</a>
+              <a href="thread.html#5991">[ thread ]</a>
+              <a href="subject.html#5991">[ subject ]</a>
+              <a href="author.html#5991">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

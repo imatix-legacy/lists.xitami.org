@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E8A3E7.8040708%409000.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007757.html">
+   <LINK REL="Next"  HREF="007759.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>General</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E8A3E7.8040708%409000.org"
+       TITLE="[Xitami] Multi server issue">ronackgen01 at bellsouth.net
+       </A><BR>
+    <I>Tue Mar 25 23:41:41 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007757.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007759.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7758">[ date ]</a>
+              <a href="thread.html#7758">[ thread ]</a>
+              <a href="subject.html#7758">[ subject ]</a>
+              <a href="author.html#7758">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Show me some documentation that says you can have more than one port 80
+listening then try running 2 instances of Xitami. I tried it and it didn't
+work. 
+
+Port 80 is set in the header of the TCP packet that's true. 
+
+Here
+<A HREF="http://www.techweb.com/encyclopedia/defineterm.jhtml?term=tcp%2Fipport">http://www.techweb.com/encyclopedia/defineterm.jhtml?term=tcp%2Fipport</A>
+
+
+It says &quot;A number assigned to user sessions and server applications in an IP
+network.&quot; It doesn't say that each IP address has a port 80 only that is
+uses port 80 to communicate with the server software. 
+
+If you have documentation that states otherwise please show me.
+
+Ron
+
+
+
+-----Original Message-----
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Magnus Wedberg
+Sent: Tuesday, March 25, 2008 3:04 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Multi server issue
+
+General wrote, On 2008-03-25 02:06:
+&gt;<i> Ok let's analyze this a little. Your PC gets an IP address either static
+</I>or
+&gt;<i> dynamic. If you don't have a router then all traffic to that IP address
+</I>&gt;<i> whether it is Http (port 80), HTTPS (port 443), FTP (port 21) or eMail
+</I>(port
+&gt;<i> 25) ***if memory serves me on my ports*** is sent to your PC. (well even
+</I>if
+&gt;<i> you do have a router)
+</I>
+Oh boy, where to begin. Firstly, if you have a router, you must forward 
+a port in said router to your computer, and /forward it to an IP 
+address/. I'm sure you have done this. This should serve as an 
+indication that ports are specified /per IP interface/; else, you could 
+as well forward it to the adapter's MAC address.
+
+&gt;<i>  You have one port 80, so any traffic is routed to that
+</I>&gt;<i> port.
+</I>
+No, you &quot;have&quot; as many ports as you have IP adresses, including the 
+several million addresses in the loopback range (127.x.x.x). In fact, 
+you better learn that you don't actually &quot;have&quot; ports; don't think of it 
+as a &quot;resource&quot;, rather, a way to address a specific software that has 
+registered to be the recipient of traffic tagged that way.
+
+&gt;<i>  Even if you set up many IP Addresses bound to that one NIC card you
+</I>&gt;<i> still only have one Port
+</I>
+No, you &quot;have&quot; one port per IP address, including the several million IP 
+addresses in the loopback range (which you don't have to specify).
+
+&gt;<i>  which is why with one click of a button you can
+</I>&gt;<i> shut down all web traffic with your firewall software. I have 28 virtual
+</I>IP
+&gt;<i> Address on my server however if I shut down port 80 all sites are shut
+</I>down.
+
+That is, of course, because your firewall works that way, and has 
+nothing to do with how TCP/IP works.
+
+&gt;<i> The only
+</I>&gt;<i> way I could see more than one port 80 is by having more than one NIC card
+</I>&gt;<i> and more than one PUBLIC IP Address. Multiple NIC cards Multiple Port
+</I>80's. 
+
+No, you could configure your web server to listen to a specific IP 
+address. I don't know how to do that in Xitami (it's probably possible 
+but I can't be bothered to look it up right now), but here's how to do 
+it in Apache (including the comment):
+
+**********begin quote**********
+# Listen: Allows you to bind Apache to specific IP addresses and/or
+# ports, instead of the default. See also the &lt;VirtualHost&gt;
+# directive.
+#
+# Change this to Listen on specific IP addresses as shown below to
+# prevent Apache from glomming onto all bound IP addresses (0.0.0.0)
+#
+#Listen 12.34.56.78:80
+Listen 80
+**********begin end**********
+
+Now, the commented line &quot;Listen 12.34.56.78:80&quot; will bind the Apache 
+process to a specific address. If you don't bind it to an address, 
+however, and use the &quot;Listen 80&quot; line, then it will indeed listen to 
+port 80 on all IP addresses bound to the computer, including the 
+loopback range. But you have the option to run 28 separate processes 
+listening to port 80 on your 28 IP addresses.
+
+Nearly all server level software has the option to bind to a specific IP 
+address.
+
+&gt;<i> Now am I missing something?
+</I>
+Actually, without being too blunt, you should really read up on TCP/IP 
+on the most basic level before posting more in this thread.
+
+-- 
+Magnus Wedberg
+<A HREF="http://www.magnuswedberg.com/">http://www.magnuswedberg.com/</A>
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG. 
+Version: 7.5.519 / Virus Database: 269.22.0/1341 - Release Date: 3/24/2008
+3:03 PM
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007757.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007759.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7758">[ date ]</a>
+              <a href="thread.html#7758">[ thread ]</a>
+              <a href="subject.html#7758">[ subject ]</a>
+              <a href="author.html#7758">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

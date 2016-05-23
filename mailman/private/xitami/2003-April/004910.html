@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] log file
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004909.html">
+   <LINK REL="Next"  HREF="004912.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] log file
+   </H1>
+    <B>Ingo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] log file">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 3 Apr 2003 19:36:39 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004909.html">[Xitami] New IP Address / can't find page!
+</A></li>
+        <LI> Next message: <A HREF="004912.html">[Xitami] log file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4910">[ date ]</a>
+              <a href="thread.html#4910">[ thread ]</a>
+              <a href="subject.html#4910">[ subject ]</a>
+              <a href="author.html#4910">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here is a thought. The log file works with Omni httpd, however Omni is a
+little slower with virtual hosts running and it only has one log file. I'm
+using forwarding not DMZ.
+
+-----------------------Original Message-----------------------
+From:  Charles Schmidling
+To:  <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Date:  4/3/2003 2:37:00 PM
+Subject:  Re: [Xitami] log file
+
+Hmmm...
+
+Our only differerence is:
+        ISP --- Router --- Hub --- everybody else
+                                     |
+                                 Server
+
+Router gateway = ISP
+Server gateway = Router
+I only have 1 assigned IP
+
+Where does the router point to?  I see a possible conflict between your
+router and the server:  unless you have multiple assigned IPs, they're both
+using the same one IP, which may be possible if you are MAC cloning the
+server's network card.
+
+If using a single IP, then the server is receiving it's traffic thru NAT
+services performed by the router, making the topology difference moot.
+
+As an afterthough, this may not help.  Does DSL make you use the &quot;hosts&quot;
+file?  Or is what you refer to &quot;hosts&quot; is the basehost.cfg file that is part
+of Virtual domaining?
+
+Wondering,
+Charles
+
+
+
+----- Original Message -----
+From: &quot;Gunnar Swan&quot; &lt;<A HREF="mailto:GunnarSwan@PracticeToPass.com">GunnarSwan@PracticeToPass.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, April 04, 2003 9:08 AM
+Subject: Re: [Xitami] log file
+
+
+&gt;<i>
+</I>&gt;<i> I use a hub and a router.
+</I>&gt;<i>
+</I>&gt;<i>    ISP  ------- HUB ----- Router --- Internal PC's
+</I>&gt;<i>                      |
+</I>&gt;<i>                      |
+</I>&gt;<i>                  Server
+</I>&gt;<i>
+</I>&gt;<i> The gateway on my server points to the ISP
+</I>&gt;<i> The gateway on the interal PC's points to the Router.
+</I>&gt;<i> Even though the machines are in the same building, they
+</I>&gt;<i> are on completely different networks.
+</I>&gt;<i>
+</I>&gt;<i> Therefore, I always see the router ip when accessing the server
+</I>&gt;<i> from internal PC's.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 4/3/03 8:35:25 AM, Charles Schmidling &lt;<A HREF="mailto:dscontroller@comcast.net">dscontroller@comcast.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt;Just a thought...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;If you are directly accessing your web site from an internal workstation
+</I>(ie
+&gt;<i> &gt;another computer on your internal network), all you log is the IP of the
+</I>&gt;<i> &gt;workstation.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;If you are accessing your web site internally via your domain name or the
+</I>&gt;<i> &gt;WAN IP address that is mapped (Linksys calls it DMZ) to your server, all
+</I>&gt;<i> &gt;you'll get is your routers gateway IP.  Not sure why.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;To get a visitor's IP loggged, you need to go outside.  A dialup
+</I>connection
+&gt;<i> &gt;works well.  A friends house is just as good.  There's always the
+</I>library.
+&gt;<i> &gt;Does make testing cumbersome.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Much luck,
+</I>&gt;<i> &gt;Charles
+</I>&gt;<i> &gt;my app: Win98SE, Xitami 2.5b4, Linksys router on cable
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;----- Original Message -----
+</I>&gt;<i> &gt;From: &quot;Ingo&quot; &lt;<A HREF="mailto:haasi@earthlink.net">haasi@earthlink.net</A>&gt;
+</I>&gt;<i> &gt;To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt;Sent: Wednesday, April 02, 2003 5:39 PM
+</I>&gt;<i> &gt;Subject: [Xitami] log file
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;&gt; My log file does not show the visitor IP address or the server address.
+</I>I
+&gt;<i> &gt;&gt; have tried $(client) and $(ipcli) but all I get is my domain name/IP
+</I>&gt;<i> &gt;&gt; address as identified from the host file. I'm using Xitami 2.5b5 /DSL
+</I>and
+&gt;<i> &gt;&gt; Linksys router. What am I doing wrong?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; --
+</I>&gt;<i> &gt;&gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;--
+</I>&gt;<i> &gt;Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Best Regards,
+</I>&gt;<i> Gunnar Swan
+</I>&gt;<i> <A HREF="http://www.PracticeToPass.Com">http://www.PracticeToPass.Com</A>
+</I>&gt;<i> Software Built For Statutory Courses
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004909.html">[Xitami] New IP Address / can't find page!
+</A></li>
+	<LI> Next message: <A HREF="004912.html">[Xitami] log file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4910">[ date ]</a>
+              <a href="thread.html#4910">[ thread ]</a>
+              <a href="subject.html#4910">[ subject ]</a>
+              <a href="author.html#4910">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

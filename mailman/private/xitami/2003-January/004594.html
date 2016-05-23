@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami Pro and CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004593.html">
+   <LINK REL="Next"  HREF="004590.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami Pro and CGI
+   </H1>
+    <B>Neil Finlayson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami Pro and CGI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 7 Jan 2003 21:18:52 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004593.html">[Xitami] Xitami Pro and CGI
+</A></li>
+        <LI> Next message: <A HREF="004590.html">[Xitami] Xitami Pro and CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4594">[ date ]</a>
+              <a href="thread.html#4594">[ thread ]</a>
+              <a href="subject.html#4594">[ subject ]</a>
+              <a href="author.html#4594">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The file is in the same directory.
+I also tried changing the wildcard setting and i need it to be set to 1.
+
+I believe it is something todo with the CGI_ROOT variable as it always looks
+in the C:/xitami/cgi-bin instead of like
+C:/xitami/webpages/username/cgi-bin/
+
+----- Original Message -----
+From: &quot;Ayhan Tuncer&quot; &lt;<A HREF="mailto:tuncer@dalan.com.tr">tuncer@dalan.com.tr</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, January 07, 2003 6:32 AM
+Subject: Re: [Xitami] Xitami Pro and CGI
+
+
+&gt;<i> &gt; Neil Finlayson wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hey,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have just move to Xitami Pro and when i run my CGI scripts i get the
+</I>&gt;<i> &gt; error:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Can't locate sub.txt in @INC (@INC contains: c:/Perl1/lib
+</I>&gt;<i> &gt; c:/Perl1/site/lib .) at webpages/cgi-bin/2.cgi line 2.
+</I>&gt;<i> &gt; I have tried reinstalling Perl, ant nothing else has changed apart
+</I>&gt;<i> &gt; from moving to Xitami Pro.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Here is my system config:
+</I>&gt;<i> &gt; Windows 2000 server
+</I>&gt;<i> &gt; Xitami Pro
+</I>&gt;<i> &gt; 1.4Ghz Duron
+</I>&gt;<i> &gt; Activeperl
+</I>&gt;<i> &gt; PHP
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; thanks.
+</I>&gt;<i>
+</I>&gt;<i> This looks like a Perl cgi error if you found the error in cgierr.log
+</I>&gt;<i> located in the main Xitami directory. It means your browser's request
+</I>&gt;<i> managed both to find the url and to execute the cgi script, however
+</I>&gt;<i> there is an error in the cgi script at line 2 .
+</I>&gt;<i>
+</I>&gt;<i> The Perl interpreter stops execution of the program and issues a warning
+</I>&gt;<i> which is written to the standard error, the cgierr.log.
+</I>&gt;<i>
+</I>&gt;<i> Open with a text editor your script file located at:
+</I>&gt;<i> webpages/cgi-bin/2.cgi
+</I>&gt;<i> at line 2 of this 2.cgi there should be some code which the perl
+</I>&gt;<i> interpreter
+</I>&gt;<i> can not execute.
+</I>&gt;<i>
+</I>&gt;<i> What does it say at line 2?  If it says something like this:
+</I>&gt;<i>
+</I>&gt;<i> require 'sub.txt';
+</I>&gt;<i>
+</I>&gt;<i> this means that you have neglected to copy over from your old
+</I>&gt;<i> directories
+</I>&gt;<i> an individual file by the name of  sub.txt  which your cgi program has
+</I>&gt;<i> to
+</I>&gt;<i> find and read before it can go any further. You should find this sub.txt
+</I>&gt;<i> file and copy it over to the same directory that 2.cgi is in.
+</I>&gt;<i>
+</I>&gt;<i> Ayhan Tuncer
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004593.html">[Xitami] Xitami Pro and CGI
+</A></li>
+	<LI> Next message: <A HREF="004590.html">[Xitami] Xitami Pro and CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4594">[ date ]</a>
+              <a href="thread.html#4594">[ thread ]</a>
+              <a href="subject.html#4594">[ subject ]</a>
+              <a href="author.html#4594">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

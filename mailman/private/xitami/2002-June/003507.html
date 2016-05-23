@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Plaintext passwords on Bugtraq (again)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003490.html">
+   <LINK REL="Next"  HREF="003508.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Plaintext passwords on Bugtraq (again)
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Plaintext passwords on Bugtraq (again)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Jun 2002 10:58:38 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003490.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+        <LI> Next message: <A HREF="003508.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3507">[ date ]</a>
+              <a href="thread.html#3507">[ thread ]</a>
+              <a href="subject.html#3507">[ subject ]</a>
+              <a href="author.html#3507">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael Burns &lt;<A HREF="mailto:mburns83@directvinternet.com">mburns83@directvinternet.com</A>&gt; wrote:
+
+&gt;<i> Imatix,
+</I>&gt;<i> 
+</I>&gt;<i> Why were the passwords in the configuration files (default.aut, 
+</I>&gt;<i> ftpusers.aut, etc.) left in plaintext? Is there any plan to change
+</I>&gt;<i> that?
+</I>
+I think the FAQ answers the 'why', and I don't see any flaws in the 
+original reasoning: if someone can read your password files, then (a) 
+they can use dictionary-based attacks, and (b) your general security 
+has been compromised and that is much more serious than whether the 
+passwords are hashed or not (and the extra hour or two that takes for 
+someone to crack enough of them to get into your server).
+
+My personal opinion is that flagrantly unsecured password files are 
+actually a 'feature' since they oblige the system administrator to 
+think seriously about security issues (such as running NTFS vs. 
+FAT32).
+
+But that may just be laziness.  We've always planned to implement 
+password hashing at some stage.  Given that this issue keeps coming 
+back, we'll look at this for the next release.
+
+The planned design is this: we will keep the existing file 
+structures, and put the hashing logic inside Xitami.  When it reads a 
+password file, it will hash any (new) unhashed passwords.  We don't 
+want to break scripts that create password files.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003490.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+	<LI> Next message: <A HREF="003508.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3507">[ date ]</a>
+              <a href="thread.html#3507">[ thread ]</a>
+              <a href="subject.html#3507">[ subject ]</a>
+              <a href="author.html#3507">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HTTP Publishing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002893.html">
+   <LINK REL="Next"  HREF="002894.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HTTP Publishing
+   </H1>
+    <B>Paul Claessen
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HTTP Publishing">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 5 Apr 2002 18:32:24 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002893.html">[Xitami] HTTP Publishing
+</A></li>
+        <LI> Next message: <A HREF="002894.html">[Xitami] HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2895">[ date ]</a>
+              <a href="thread.html#2895">[ thread ]</a>
+              <a href="subject.html#2895">[ subject ]</a>
+              <a href="author.html#2895">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0010_01C1DCD0.3ADC29E0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Just tried this and it works!
+Despite my earlier response, you don't need a special script=20
+for it at the server.
+
+Just had the following in my .aut file:
+
+[/]
+    all=3D*
+    webmask=3D*
+    http-update=3D1
+    http-put=3D1
+
+Let me know if that works for you too!
+
+Kind Regards,
+Paul
+  ----- Original Message -----=20
+  From: Sean Brennan=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Friday, April 05, 2002 4:42 PM
+  Subject: Re: [Xitami] HTTP Publishing
+
+
+
+  I believe my problem is that HTTP update method on a resource which =
+has not been authorized for this. I think it's authentication. I'm =
+trying to figure out the correct way to configure the xitami.aut allow =
+an HTTP put. I've added http-update=3D1 to the xitami.aut file but it's =
+not accepting it for my user I configured. Maybe someone has a =
+xitami.aut file I can see who's using HTTP puts to the server.
+
+  Thanks,
+
+  Sean
+
+  At 04:08 PM 4/5/2002 -0600, you wrote:
+
+    Sean,
+    =20
+    Maybe this quote from the FAQ helps...:
+    =20
+    &quot;
+
+    15: I get 'Not authorized to access this resource' on other URLs=20
+
+    There are a number of specific reasons why Xitami may return this:=20
+      1.. The resource you are accessing is protected by a 'webmask' =
+definition which excludes your PC.=20
+      2.. You are trying to browse a directory, but directory listings =
+have not been enabled.=20
+      3.. You are trying to use an HTTP update method (PUT, DELETE, =
+MOVE, or COPY) on a resource which has not been authorised for this.=20
+      4.. You are trying to run the WBA, but this has been disabled by =
+the security:admin option.=20
+      5.. The URL refers to a Windows short filename when a long =
+filename also exists. Xitami rejects this as being a potential security =
+violation. You can switch this behaviour off by setting =
+security:safepaths to 0.=20
+      6.. You're trying to do a HTTP PUT, DELETE, MOVE, or COPY =
+operation, and specified an absolute Content-Location: or Destination: =
+URI which did not have the same path as the request URI. Xitami rejects =
+this because the authorisation was carried-out on the request URL, and =
+using a different path for the Content-Location: or Destination: URL =
+would violate this.=20
+      7.. A HTTP PUT, DELETE, MOVE, or COPY operation failed because of =
+an access violation at the operating system level - for instance Xitami =
+tried to write to a file which was marked as read-only.=20
+    In most of these cases, the reason for the error will be logged when =
+you enable server debugging.=20
+    &quot;
+    =20
+    Kind Regards,
+    Paul Claessen
+     =20
+      ----- Original Message -----=20
+      From: Sean Brennan=20
+      To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> ; <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+      Sent: Friday, April 05, 2002 3:44 PM=20
+      Subject: Re: [Xitami] HTTP Publishing
+
+
+
+
+      Thanks for the responses. Paul is correct, I'm just trying to =
+update a web page via an HTTP PUT using Netscape's Composer. My =
+understanding is that this &quot;Publish&quot; feature I'm referring to uses an =
+HTTP Put to update the html pages to servers. I hit the server, but it =
+returns an &quot;the server responded: You are not authorized to access this =
+resource&quot;.
+
+
+      The page Xitami I'm referring that states it supports HTTP is =
+under the User Authentication section=20
+
+
+      at: <A HREF="http://www.imatix.com/html/xitami/index3.htm#TOC18">http://www.imatix.com/html/xitami/index3.htm#TOC18</A>
+
+
+      Thanks for all the responses.
+
+
+      Regards,
+
+
+      Sean=20
+
+
+
+      At 01:28 PM 4/5/2002 -0600, Paul Claessen wrote:
+        Ervin,=20
+        =20
+        No, I don't think he's referring to Frontpage. Just to HTTP's=20
+        'put' request. (See RFC 2068, under 9.6).=20
+        =20
+        Xitami indeed states somewhere that they have no intention=20
+        to support Frontpage and gives as reason that it is not properly =
+
+        documented and that they're not in the business of reverse=20
+        engineering Microsoft software.=20
+        =20
+        So, since you claim FP to be a documented protocol, I would=20
+        be very interested in obtaining a link to that document!=20
+        Could you supply that to us?=20
+        =20
+        Kind Regards,=20
+        Paul Claessen=20
+        What your trying to do id use FrontPage extensions.  Xitami =
+doesn't support=20
+        that protocal.  FP extensions is a special way to change files =
+on a web=20
+        server.  I would recomend that you publish your pages with an =
+FTP program.
+
+
+        Xitami does not now, nor will in the future support Front Page =
+extensions.=20
+        This has been a hot topic in the past.  If you're a savy enough =
+programmer=20
+        Xitami is open source.  And the FrontPage is actually a =
+documented protocal=20
+        so you could in theory build FP compatibility into Xitami.=20
+        --------- Original message --------=20
+        From: &quot;Sean Brennan&quot; &lt;<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&gt;=20
+        To: &quot;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;=20
+        Subject: [Xitami] HTTP Publishing=20
+        Date: 04-05-02 05:52
+
+
+
+
+
+
+        I'm trying to &quot;publish&quot; web pages to the Xitami server via HTTP =
+put. I found=20
+        some real generic information, but I cannot get this =
+functionality=20
+        working. Can anyone help?
+
+
+        Thanks and best regards,
+
+
+        Sean Brennan
+
+
+
+
+
+
+        --=20
+        Xitami Users Mailing List -- For Xitami support=20
+        To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami=20">http://lists.xitami.org/mailman/listinfo/xitami=20</A>
+
+------=_NextPart_000_0010_01C1DCD0.3ADC29E0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2713.1100&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;Just tried =
+this and it=20
+works!&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;Despite my =
+earlier=20
+response, you don't need a special script &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;for it at the =
+
+server.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;Just had the =
+following in=20
+my .aut file:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;[/]&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+all=3D*&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; webmask=3D*&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+http-update=3D1&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; http-put=3D1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;Let me know =
+if that works=20
+for you too!&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;Kind =
+Regards,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;Paul&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #800000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dsean.brennan@wincomsystems.com">3Dsean.brennan@wincomsystems.com</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&quot;&gt;Sean Brennan&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Friday, April 05, 2002 =
+4:42=20
+PM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] HTTP=20
+  Publishing&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;&lt;BR&gt;I believe my problem is that HTTP update method on =
+a=20
+  resource which has not been authorized for this. I think it's =
+authentication.=20
+  I'm trying to figure out the correct way to configure the xitami.aut =
+allow an=20
+  HTTP put. I've added http-update=3D1 to the xitami.aut file but it's =
+not=20
+  accepting it for my user I configured. Maybe someone has a xitami.aut =
+file I=20
+  can see who's using HTTP puts to the=20
+  server.&lt;BR&gt;&lt;BR&gt;Thanks,&lt;BR&gt;&lt;BR&gt;Sean&lt;BR&gt;&lt;BR&gt;At 04:08 PM 4/5/2002 -0600, =
+you=20
+  wrote:&lt;BR&gt;
+  &lt;BLOCKQUOTE class=3Dcite cite=3D&quot;&quot; type=3D&quot;cite&quot;&gt;&lt;FONT face=3D&quot;Comic =
+Sans MS&quot;=20
+    color=3D#800000 size=3D2&gt;Sean,&lt;/FONT&gt;&lt;BR&gt;&amp;nbsp;&lt;BR&gt;&lt;FONT =
+face=3D&quot;Comic Sans MS&quot;=20
+    color=3D#800000 size=3D2&gt;Maybe this quote from the FAQ=20
+    helps...:&lt;/FONT&gt;&lt;BR&gt;&amp;nbsp;&lt;BR&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; =
+color=3D#800000=20
+    size=3D2&gt;&quot;&lt;/FONT&gt;&lt;BR&gt;&lt;BR&gt;&lt;B&gt;15: I get 'Not authorized to access this =
+resource'=20
+    on other URLs&lt;/B&gt;&lt;A name=3Dw_15&gt;&lt;/A&gt; &lt;BR&gt;&lt;BR&gt;There are a number of =
+specific=20
+    reasons why Xitami may return this:=20
+    &lt;OL&gt;
+      &lt;LI&gt;The resource you are accessing is protected by a 'webmask' =
+definition=20
+      which excludes your PC.=20
+      &lt;LI&gt;You are trying to browse a directory, but directory listings =
+have not=20
+      been enabled.=20
+      &lt;LI&gt;You are trying to use an HTTP update method (PUT, DELETE, =
+MOVE, or=20
+      COPY) on a resource which has not been authorised for this.=20
+      &lt;LI&gt;You are trying to run the WBA, but this has been disabled by =
+the=20
+      security:admin option.=20
+      &lt;LI&gt;The URL refers to a Windows short filename when a long =
+filename also=20
+      exists. Xitami rejects this as being a potential security =
+violation. You=20
+      can switch this behaviour off by setting security:safepaths to 0.=20
+      &lt;LI&gt;You're trying to do a HTTP PUT, DELETE, MOVE, or COPY =
+operation, and=20
+      specified an absolute Content-Location: or Destination: URI which =
+did not=20
+      have the same path as the request URI. Xitami rejects this because =
+the=20
+      authorisation was carried-out on the request URL, and using a =
+different=20
+      path for the Content-Location: or Destination: URL would violate =
+this.=20
+      &lt;LI&gt;A HTTP PUT, DELETE, MOVE, or COPY operation failed because of =
+an=20
+      access violation at the operating system level - for instance =
+Xitami tried=20
+      to write to a file which was marked as read-only. &lt;/LI&gt;&lt;/OL&gt;In =
+most of these=20
+    cases, the reason for the error will be logged when you enable =
+server=20
+    debugging. &lt;BR&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000=20
+    size=3D2&gt;&quot;&lt;/FONT&gt;&lt;BR&gt;&amp;nbsp;&lt;BR&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; =
+color=3D#800000=20
+    size=3D2&gt;Kind Regards,&lt;/FONT&gt;&lt;BR&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; =
+color=3D#800000=20
+    size=3D2&gt;Paul Claessen&lt;/FONT&gt;&lt;BR&gt;&amp;nbsp;=20
+    &lt;DL&gt;
+      &lt;DD&gt;----- Original Message -----=20
+      &lt;DD&gt;From:&lt;/B&gt; &lt;A =
+href=3D&quot;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&quot;&gt;Sean=20
+      Brennan&lt;/A&gt;=20
+      &lt;DD&gt;To:&lt;/B&gt; &lt;A=20
+      =
+href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; ; &lt;A =
+
+      =
+href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt;=20
+      &lt;DD&gt;Sent:&lt;/B&gt; Friday, April 05, 2002 3:44 PM=20
+      &lt;DD&gt;Subject:&lt;/B&gt; Re: [Xitami] HTTP Publishing&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+      &lt;DD&gt;Thanks for the responses. Paul is correct, I'm just trying to =
+update a=20
+      web page via an HTTP PUT using Netscape's Composer. My =
+understanding is=20
+      that this &quot;Publish&quot; feature I'm referring to uses an HTTP Put to =
+update=20
+      the html pages to servers. I hit the server, but it returns an =
+&quot;the server=20
+      responded: You are not authorized to access this =
+resource&quot;.&lt;BR&gt;&lt;BR&gt;
+      &lt;DD&gt;The page Xitami I'm referring that states it supports HTTP is =
+under=20
+      the User Authentication section &lt;BR&gt;&lt;BR&gt;
+      &lt;DD&gt;at: &lt;A =
+href=3D&quot;<A HREF="http://www.imatix.com/html/xitami/index3.htm#TOC18"=20">http://www.imatix.com/html/xitami/index3.htm#TOC18&quot;=20</A>
+      =
+eudora=3D&quot;autourl&quot;&gt;<A HREF="http://www.imatix.com/html/xitami/index3.htm#TOC18</A">http://www.imatix.com/html/xitami/index3.htm#TOC18&lt;/A</A>&gt;=
+&lt;BR&gt;&lt;BR&gt;
+      &lt;DD&gt;Thanks for all the responses.&lt;BR&gt;&lt;BR&gt;
+      &lt;DD&gt;Regards,&lt;BR&gt;&lt;BR&gt;
+      &lt;DD&gt;Sean=20
+      &lt;DD&gt;&lt;BR&gt;&lt;BR&gt;&amp;nbsp;
+      &lt;DD&gt;At 01:28 PM 4/5/2002 -0600, Paul Claessen wrote:
+      &lt;BLOCKQUOTE class=3Dcite cite=3D&quot;&quot; type=3D&quot;cite&quot;&gt;&lt;FONT =
+face=3D&quot;Comic Sans MS&quot;=20
+        color=3D#800000 size=3D2&gt;
+        &lt;DD&gt;Ervin,&lt;/FONT&gt;=20
+        &lt;DD&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;=20
+        &lt;DD&gt;No, I don't think he's referring to Frontpage. Just to=20
+        HTTP's&lt;/FONT&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;=20
+        &lt;DD&gt;'put' request. (See RFC 2068, under 9.6).&lt;/FONT&gt;=20
+        &lt;DD&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;=20
+        &lt;DD&gt;Xitami indeed states somewhere that they have no=20
+        intention&lt;/FONT&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;=20
+        &lt;DD&gt;to support Frontpage and gives as reason that it is not=20
+        properly&lt;/FONT&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;=20
+        &lt;DD&gt;documented and that they're not in the business of=20
+        reverse&lt;/FONT&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;=20
+        &lt;DD&gt;engineering Microsoft software.&lt;/FONT&gt;=20
+        &lt;DD&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;=20
+        &lt;DD&gt;So, since you claim FP to be a documented protocol, I=20
+        would&lt;/FONT&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 =
+size=3D2&gt;=20
+        &lt;DD&gt;be very interested in obtaining a link to that =
+document!&lt;/FONT&gt;&lt;FONT=20
+        face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;=20
+        &lt;DD&gt;Could you supply that to us?&lt;/FONT&gt;=20
+        &lt;DD&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; color=3D#800000 size=3D2&gt;=20
+        &lt;DD&gt;Kind Regards,&lt;/FONT&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; =
+color=3D#800000 size=3D2&gt;=20
+
+        &lt;DD&gt;Paul Claessen&lt;/FONT&gt;=20
+        &lt;DD&gt;What your trying to do id use FrontPage extensions.&amp;nbsp; =
+Xitami=20
+        doesn't support=20
+        &lt;DD&gt;that protocal.&amp;nbsp; FP extensions is a special way to =
+change files=20
+        on a web=20
+        &lt;DD&gt;server.&amp;nbsp; I would recomend that you publish your pages =
+with an=20
+        FTP program.&lt;BR&gt;&lt;BR&gt;
+        &lt;DD&gt;Xitami does not now, nor will in the future support Front =
+Page=20
+        extensions.=20
+        &lt;DD&gt;This has been a hot topic in the past.&amp;nbsp; If you're a =
+savy enough=20
+        programmer=20
+        &lt;DD&gt;Xitami is open source.&amp;nbsp; And the FrontPage is actually a =
+
+        documented protocal=20
+        &lt;DD&gt;so you could in theory build FP compatibility into Xitami.=20
+        &lt;DD&gt;--------- Original message --------=20
+        &lt;DD&gt;From: &quot;Sean Brennan&quot; &amp;lt;&lt;A=20
+        =
+href=3D&quot;mailto:<A HREF="mailto:sean.brennan@wincomsystems.com">sean.brennan@wincomsystems.com</A>&quot;&gt;<A HREF="mailto:sean.brennan@wincomsystems">sean.brennan@wincomsystems</A>=
+.com&lt;/A&gt;&amp;gt;=20
+
+        &lt;DD&gt;To: &quot;&lt;A=20
+        =
+href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt;&quot;=20
+        &amp;lt;&lt;A=20
+        =
+href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt;&amp;gt;=20
+        &lt;DD&gt;Subject: [Xitami] HTTP Publishing=20
+        &lt;DD&gt;Date: 04-05-02 05:52&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+        &lt;DD&gt;I'm trying to &quot;publish&quot; web pages to the Xitami server via =
+HTTP put.=20
+        I found=20
+        &lt;DD&gt;some real generic information, but I cannot get this =
+functionality=20
+        &lt;DD&gt;working. Can anyone help?&lt;BR&gt;&lt;BR&gt;
+        &lt;DD&gt;Thanks and best regards,&lt;BR&gt;&lt;BR&gt;
+        &lt;DD&gt;Sean Brennan&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;
+        &lt;DD&gt;--=20
+        &lt;DD&gt;Xitami Users Mailing List -- For Xitami support=20
+        &lt;DD&gt;To unsubscribe: &lt;A=20
+        =
+href=3D&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;<A HREF="http://lists.xit=">http://lists.xit=</A>
+ami.org/mailman/listinfo/xitami&lt;/A&gt;=20
+        &lt;/DD&gt;&lt;/BLOCKQUOTE&gt;&lt;/DD&gt;&lt;/DL&gt;&lt;/BLOCKQUOTE&gt;
+  &lt;BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0010_01C1DCD0.3ADC29E0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002893.html">[Xitami] HTTP Publishing
+</A></li>
+	<LI> Next message: <A HREF="002894.html">[Xitami] HTTP Publishing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2895">[ date ]</a>
+              <a href="thread.html#2895">[ thread ]</a>
+              <a href="subject.html#2895">[ subject ]</a>
+              <a href="author.html#2895">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

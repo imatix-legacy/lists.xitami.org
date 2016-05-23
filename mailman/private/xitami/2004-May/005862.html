@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Building Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005858.html">
+   <LINK REL="Next"  HREF="005863.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Building Xitami
+   </H1>
+    <B>Elliott Potter
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Building Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 3 May 2004 13:23:29 -0500 (EST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005858.html">[Xitami] Building Xitami
+</A></li>
+        <LI> Next message: <A HREF="005863.html">[Xitami] Use of Xitami FTP in a Browser.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5862">[ date ]</a>
+              <a href="thread.html#5862">[ thread ]</a>
+              <a href="subject.html#5862">[ subject ]</a>
+              <a href="author.html#5862">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; &gt; &gt; I found an old c.cmd for OS/2 but when using that I get:-
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; [C:\ux2bs\workdir\xiopen]sh boomake build
+</I>&gt;<i> &gt; &gt; &gt; Building application...
+</I>&gt;<i> &gt; &gt; &gt; Compiling -g.c...
+</I>&gt;<i> &gt; &gt; &gt; Incorrect function
+</I>&gt;<i> &gt; &gt; &gt; [...]
+</I>&gt;<i> &gt; &gt; &gt; A file called -g.lst containing:-
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; gcc: No input files
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; also gets created so I suspect parameters are not getting passed properly
+</I>&gt;<i> &gt; &gt; &gt; or something else is missing.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Do I need something called c.conf? If so where do I find an example of
+</I>&gt;<i> &gt; &gt; &gt; that?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; In each subdirectory, edit the boomake file and where it says &quot;COPTS=-g&quot;
+</I>&gt;<i> &gt; &gt; remove the &quot;-g&quot; so it just says &quot;COPTS=&quot; ... this also happened on my
+</I>&gt;<i> &gt; &gt; system (bash).
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'll also note that if you want to add compiler flags you can edit the
+</I>&gt;<i> &gt; &quot;c&quot; file in each directory and put them in the &quot;CCOPTS&quot; field ... it
+</I>&gt;<i> &gt; seems to work OK there.
+</I>&gt;<i>
+</I>&gt;<i> I have v2.5c1 now. There is only a boomake in the top level directory.
+</I>&gt;<i> When I use it I get:-
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> [C:\ux2bs\workdir\xiopen]sh boomake build
+</I>
+I got the source tarball from xitami.com; it includes a boomake file in
+each subdirectory:
+xiopen/boomake
+gsl/boomake
+smt/boomake
+studio/boomake
+xiadmin/boomake
+sfl/boomake
+
+... then in the top level directory there are those 6 directories plus a
+build.sh and a build.bat.  Running build.sh just enters each
+subdirectory and runs &quot;sh boomake build install.&quot;
+
+
+
+I've found some notes that I wrote down when building xitami 2.5c1;
+here's the process I used:
+
+1) get &quot;c&quot; from xitami-2.4d9 and put a copy in each subdirectory
+2) in each subdirectory, edit boomake and remove &quot;-g&quot; from the COPTS
+line
+3) Apply patch [posted a couple of days ago]
+4) add &quot;#include &lt;math.h&gt;&quot; to gsl/ggeval.c and gsl/ggstrn.c or gcc fails
+on the floor() function
+5) cd &lt;path&gt;/sfl
+   CCNAME=gcc CCPRODLEVEL=production CCOPTS=&quot;&lt;CFLAGS&gt;&quot; sh boomake build
+	install
+6) cd ../gsl
+   CCNAME=gcc CCPRODLEVEL=production CCOPTS=&quot;&lt;CFLAGS&gt;
+	-I&lt;installpath&gt;/include -L&lt;installpath&gt;/lib -lm&quot; sh boomake build
+	install
+7) cd ../smt
+   &lt;repeat&gt;
+	cd ../studio
+	&lt;repeat&gt;
+	cd ../xiadmin
+	&lt;repeat&gt;
+	cd ../xiopen
+	&lt;repeat&gt;
+
+If there were errors in steps 5, 6, or 7, add
+CCLIBS=&quot;&lt;installpath&gt;/lib/libgsl.a \
+   &lt;installpath&gt;/lib/libsfl.a \
+   &lt;installpath&gt;/lib/libxac.a \
+   &lt;installpath&gt;/lib/libstu.a \
+   &lt;installpath&gt;/lib/libsmt.a&quot;
+to your big command line (CCNAME, CCPRODLEVEL, CCOPTS, etc) and try again.
+
+
+
+... of course it's worth noting that the resulting server served static
+pages but wouldn't serve php.  Don't know if that's related or not.
+--
+Elliott
+
+&gt;<i> It seems as though the headers are missing.
+</I>&gt;<i>
+</I>&gt;<i> I'm obviously using the wrong file. Can you give me a URL for the archive
+</I>&gt;<i> you think works?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Elliott
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> John
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005858.html">[Xitami] Building Xitami
+</A></li>
+	<LI> Next message: <A HREF="005863.html">[Xitami] Use of Xitami FTP in a Browser.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5862">[ date ]</a>
+              <a href="thread.html#5862">[ thread ]</a>
+              <a href="subject.html#5862">[ subject ]</a>
+              <a href="author.html#5862">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

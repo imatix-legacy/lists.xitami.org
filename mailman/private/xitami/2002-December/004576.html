@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] want virtual host to point to an executable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004575.html">
+   <LINK REL="Next"  HREF="004577.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] want virtual host to point to an executable
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] want virtual host to point to an executable">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 30 Dec 2002 13:36:11 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004575.html">[Xitami] want virtual host to point to an executable
+</A></li>
+        <LI> Next message: <A HREF="004577.html">[Xitami] want virtual host to point to an executable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4576">[ date ]</a>
+              <a href="thread.html#4576">[ thread ]</a>
+              <a href="subject.html#4576">[ subject ]</a>
+              <a href="author.html#4576">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt;
+</I>&gt;<i> &gt; It works, but i still need a method to get rid of the '?'
+</I>&gt;<i> &gt; adsl (fixed ip): &lt;<A HREF="http://web.verfaillie.com/invasion">http://web.verfaillie.com/invasion</A>&gt;
+</I>&gt;<i> &gt; cable: &lt;<A HREF="http://web.verfaillie.be/?invasion">http://web.verfaillie.be/?invasion</A>&gt;
+</I>&gt;<i> &gt; (same directory, different servers, for some sort of load balancing between
+</I>&gt;<i> &gt; adsl and cable)
+</I>&gt;<i>
+</I>&gt;<i>I'm not sure I understand you correctly. Do you wish to redirect a
+</I>&gt;<i>certain document
+</I>&gt;<i>to a certain other server/document and again other documents to other
+</I>&gt;<i>server/document123
+</I>&gt;<i>or are all the requests regardless of requested document to be
+</I>&gt;<i>redirected to the same url?
+</I>These are two servers, one connected to a adsl connection with fixed ip, 
+the other is a server connected to a cable network without fixed ip.
+Both servers are using the same directories for the files to be served (not 
+for the config of course).
+The adsl connection is always online but slow, the cable is faster but has 
+no fixed ip.
+
+
+
+&gt;<i>What does the query string parameter &quot;invasion&quot; represent? does the cgi
+</I>&gt;<i>executable
+</I>&gt;<i>have to use this parameter to put together the new url it will redirect
+</I>&gt;<i>the user to?
+</I>invasion is the name of a directory.
+The redirect executable gets the ip address of the cable server and creates 
+a page containing
+
+    STDOUT &quot;&lt;html&gt;&lt;head&gt;&lt;meta http-equiv='refresh' content='0; url=<A HREF="http://";">http://&quot;;</A>
+    STDOUT ipaddress$;
+    STDOUT &quot;:20800/&quot;;
+    STDOUT ENVIRON$(&quot;QUERY_STRING&quot;);
+    STDOUT &quot;'&gt;&lt;/head&gt;&lt;/html&gt;&quot;;
+
+The query string is what the executable gets from Xitami and is what follow 
+the question mark in a normal request. (The example given above is a 
+working one)
+
+It is possible to create one executable for each directory to be served, 
+but if there is a different way to do that, i would prefer it.
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004575.html">[Xitami] want virtual host to point to an executable
+</A></li>
+	<LI> Next message: <A HREF="004577.html">[Xitami] want virtual host to point to an executable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4576">[ date ]</a>
+              <a href="thread.html#4576">[ thread ]</a>
+              <a href="subject.html#4576">[ subject ]</a>
+              <a href="author.html#4576">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

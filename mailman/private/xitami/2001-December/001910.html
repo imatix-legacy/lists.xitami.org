@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI Perl scripts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001906.html">
+   <LINK REL="Next"  HREF="001908.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI Perl scripts
+   </H1>
+    <B>Bruce
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI Perl scripts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 31 Dec 2001 08:17:02 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001906.html">[Xitami] CGI Perl scripts
+</A></li>
+        <LI> Next message: <A HREF="001908.html">[Xitami] CGI Perl scripts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1910">[ date ]</a>
+              <a href="thread.html#1910">[ thread ]</a>
+              <a href="subject.html#1910">[ subject ]</a>
+              <a href="author.html#1910">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 30 Dec 2001 20:49:49 -0800, you wrote:
+
+&gt;<i>1.  #!  is the first line in your perl script.
+</I>&gt;<i>2.  C:\perl\bin needs to be in your PATH
+</I>&gt;<i>3.  all perl scripts need to go in your /xitami/cgi-bin directory (or what
+</I>&gt;<i>ever directory you have designated to hold your CGI files
+</I>&gt;<i>4.  The URL alias reference would be: &lt;a
+</I>&gt;<i>href=/cgi-bin/guestbook.pl&gt;Guestbook&lt;/a&gt; OR if you wanted the full path it
+</I>&gt;<i>would be: &lt;a href=<A HREF="http://208.33.152.220/cgi-bin/guestbook.pl">http://208.33.152.220/cgi-bin/guestbook.pl</A>&gt;Guestbook&lt;/a&gt;
+</I>&gt;<i>5.  Your reference below is calling an .html file (guestbook.html), not the
+</I>&gt;<i>perl .pl file
+</I>
+   It's supposed to be calling the guestbook.html file from within the
+Perl script. I'm guessing that is the reason for the dollar symbol in
+front of the URL. I'll give it a try based on what U already told me.
+I should be able to muddle through it, based upon what U have
+already said. Thanx..
+
+Bruce
+ 
+
+&gt;<i>
+</I>&gt;<i>When calling a CGI file you need to call the script itself, in this case the
+</I>&gt;<i>perl &quot;guestbook.pl&quot; file.  Xitami allows you to define where you are going
+</I>&gt;<i>to keep your CGI scripts at.  You only get one root location.  By default it
+</I>&gt;<i>provides you the /cgi-bin directory but you could modify that to
+</I>&gt;<i>/my_cgi_files or /perl_scripts or what ever you want, assuming that the
+</I>&gt;<i>directory EXISTS in c:\xitami\.  So when you are calling CGI files through a
+</I>&gt;<i>href tag the CGI directory needs to be the first directory in the reference
+</I>&gt;<i>path: &lt;a href=<A HREF="http://x.x.x.x/cgi-bin/....">http://x.x.x.x/cgi-bin/....</A>&gt;click here&lt;/a&gt;.  Xitami see's the
+</I>&gt;<i>/cgi-bin in the URL call and then goes to the /cgi-bin directory to complete
+</I>&gt;<i>the rest of the URL reference.
+</I>&gt;<i>
+</I>&gt;<i>valid calls assuming Xitami defaults (/cgi-bin must be at the beginning of
+</I>&gt;<i>the path):
+</I>&gt;<i>&lt;a href=/cgi-bin/file.pl&gt;
+</I>&gt;<i>&lt;a href=<A HREF="http://x.x.x.x/cgi-bin/file.pl">http://x.x.x.x/cgi-bin/file.pl</A>&gt;
+</I>&gt;<i>&lt;a href=/cgi-bin/perlscripts/file.pl&gt; ## /perlscripts is a subdirectory and
+</I>&gt;<i>it must exist for the URL call to work
+</I>&gt;<i>&lt;a href=/cgi-bin/blah/blah1/blah2/file.pl&gt;
+</I>&gt;<i>
+</I>&gt;<i>If Xitami is configured to accept /cgi-bin anywhere in the path:
+</I>&gt;<i>&lt;a href=/personal/cgi-bin/file.pl&gt;
+</I>&gt;<i>&lt;a href=<A HREF="http://x.x.x.x/files/yourfiles/cgi-bin/myfiles/perlscripts/file.pl">http://x.x.x.x/files/yourfiles/cgi-bin/myfiles/perlscripts/file.pl</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i>hope this helps.
+</I>&gt;<i>----- Original Message -----
+</I>&gt;<i>From: &quot;Bruce&quot; &lt;<A HREF="mailto:bd4u@earthlink.net">bd4u@earthlink.net</A>&gt;
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Sunday, December 30, 2001 12:44 PM
+</I>&gt;<i>Subject: Re: [Xitami] CGI Perl scripts
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> On Mon, 31 Dec 2001 08:46:47 +1300, you wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt;In message &lt;<A HREF="mailto:qlou2u80essafl9cjt88eov26k7h7igg4b@4ax.com">qlou2u80essafl9cjt88eov26k7h7igg4b@4ax.com</A>&gt;, Bruce writes:
+</I>&gt;&gt;<i> &gt;&gt;In the following Perl script snipet, where would the URL
+</I>&gt;&gt;<i> &gt;&gt;be fit in exactly..
+</I>&gt;&gt;<i> &gt;&gt;======================&gt;
+</I>&gt;&gt;<i> &gt;&gt;&lt;a href=\&quot;$guestbookurl\&quot;&gt;Guestbook&lt;/a&gt;
+</I>&gt;&gt;<i> &gt;&gt;======================&gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;I'd imagine that $guestbookurl is defined somewhere towards the top of
+</I>&gt;&gt;<i> &gt;the script and should be set to the URL of either the perl script or
+</I>&gt;&gt;<i> &gt;some HTML page it generates (depends on how the script works).
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>    The above HREF command is part of the Perl script. The helpfiles
+</I>&gt;&gt;<i> say to edit the href command in the Perl script to point to  the  html
+</I>&gt;&gt;<i> file. If by default it's the root, then I figure it might look
+</I>&gt;&gt;<i> something like
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &lt;a href=\&quot;$208.33.152.220\guestbook.html&quot;&gt;Guestbook&lt;/a&gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> But I have NO idea of the correct syntax for using in Perl. Does
+</I>&gt;&gt;<i> the above look right? Remember the above is supposed to be
+</I>&gt;&gt;<i> in a Perl script.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>    Also if the file resided in the CGI bin, do I add the directory
+</I>&gt;&gt;<i> structure, or will it be found by default of &quot;root&quot;, so that all I
+</I>&gt;&gt;<i> need is the filename such as 208.33.152.220\guestbook.pl
+</I>&gt;&gt;<i> for a CGI URL?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Xitami for Dummies-
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Bruce
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001906.html">[Xitami] CGI Perl scripts
+</A></li>
+	<LI> Next message: <A HREF="001908.html">[Xitami] CGI Perl scripts
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1910">[ date ]</a>
+              <a href="thread.html#1910">[ thread ]</a>
+              <a href="subject.html#1910">[ subject ]</a>
+              <a href="author.html#1910">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

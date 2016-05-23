@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with FTP &amp; Creating Directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003981.html">
+   <LINK REL="Next"  HREF="004180.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with FTP &amp; Creating Directories
+   </H1>
+    <B>sales
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problem with FTP &amp; Creating Directories">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 20 Sep 2002 21:29:11 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003981.html">[Xitami] lrwp test program and QNX
+</A></li>
+        <LI> Next message: <A HREF="004180.html">[Xitami] Xitami &amp; Active Perl on Win 2000 - CGI Script Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3983">[ date ]</a>
+              <a href="thread.html#3983">[ thread ]</a>
+              <a href="subject.html#3983">[ subject ]</a>
+              <a href="author.html#3983">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I am running unders Windows ME
+
+I have set up Xitami which seems to be running fine
+
+Have set up cute ftp to connect to 127.0.0.1 using my chosen
+username and password that I was asked to input when going into
+the admin section of Xitami for the first time
+
+Whilst I can log on to my local server I am unable to access any
+of the files that were set up automatically when I installed
+Xitami
+
+These files include
+
+private
+cgi-bin
+cgi-bin/testcgi
+
+I am connecting using HyperText transfer protocol using port 80
+
+(see error log below)
+
+Also tried running cgi-bin/testcgi no luck there either
+
+I thought maybe the directory needed chmod but it does not
+but when clicking ion the chmod it just gives you the directory
+description but no option to chmod
+
+
+No doubt I am missing something very basic here, can you please tell
+me what I am doing wrong
+
+Regards
+Mel
+
+
+
+
+Below is a copy of the ftp log file
+===============================================
+
+
+
+STATUS:&gt;  	Getting listing &quot;/private&quot;...
+STATUS:&gt;  	Connecting to http server 127.0.0.1:80 (ip = 127.0.0.1)...
+STATUS:&gt;  	Requesting server...
+		GET /private HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+		HTTP/1.0 302 Found
+		Content-Type: text/html
+		Authorization: Basic bWVsOjhyZXRyeTI0
+		Referer: /
+		Accept: *.*, */*
+		Connection: Keep-Alive
+		User-Agent: CIS TE/1.0
+		Host: 127.0.0.1
+		Content-Length: 0
+		Server: Xitami
+		Location: <A HREF="http://127.0.0.1/private/">http://127.0.0.1/private/</A>
+		
+STATUS:&gt;  	Redirecting HTTP request...
+STATUS:&gt;  	Requesting server...
+		GET /private/ HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+ERROR:&gt;   	Can't read from data socket. Socket error = #10054.
+STATUS:&gt;  	Getting listing &quot;/cgi-bin&quot;...
+STATUS:&gt;  	Connecting to http server 127.0.0.1:80 (ip = 127.0.0.1)...
+STATUS:&gt;  	Requesting server...
+		GET /cgi-bin HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+		HTTP/1.0 404 Not found
+		Server: Xitami
+		Content-Length: 117
+		Content-Type: text/html
+		
+ERROR:&gt;   	404 Not found.
+STATUS:&gt;  	Getting listing &quot;STATUS:&gt;  	Getting listing &quot;/private&quot;...
+STATUS:&gt;  	Connecting to http server 127.0.0.1:80 (ip = 127.0.0.1)...
+STATUS:&gt;  	Requesting server...
+		GET /private HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+		HTTP/1.0 302 Found
+		Content-Type: text/html
+		Authorization: Basic bWVsOjhyZXRyeTI0
+		Referer: /
+		Accept: *.*, */*
+		Connection: Keep-Alive
+		User-Agent: CIS TE/1.0
+		Host: 127.0.0.1
+		Content-Length: 0
+		Server: Xitami
+		Location: <A HREF="http://127.0.0.1/private/">http://127.0.0.1/private/</A>
+		
+STATUS:&gt;  	Redirecting HTTP request...
+STATUS:&gt;  	Requesting server...
+		GET /private/ HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+ERROR:&gt;   	Can't read from data socket. Socket error = #10054.
+STATUS:&gt;  	Getting listing &quot;/cgi-bin&quot;...
+STATUS:&gt;  	Connecting to http server 127.0.0.1:80 (ip = 127.0.0.1)...
+STATUS:&gt;  	Requesting server...
+		GET /cgi-bin HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+		HTTP/1.0 404 Not found
+		Server: Xitami
+		Content-Length: 117
+		Content-Type: text/html
+		
+ERROR:&gt;   	404 Not found.
+STATUS:&gt;  	Getting listing &quot;/cgi-bin/testcgi&quot;...
+STATUS:&gt;  	Requesting server...
+		GET /cgi-bin/testcgi HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+ERROR:&gt;   	Can't read from data socket. Socket error = #10054.&quot;...
+STATUS:&gt;  	Requesting server...
+		GET /cgi-bin/testcgi HTTP/1.1
+		Host: 127.0.0.1:80
+		User-Agent: CIS TE/1.0
+		Connection: Keep-Alive
+		Accept: *.*, */*
+		Referer: /
+		Authorization: Basic bWVsOioqKio=
+		
+STATUS:&gt;  	Receiving reply...
+ERROR:&gt;   	Can't read from data socket. Socket error = #10054.
+
+
+
+
+
+
+		
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003981.html">[Xitami] lrwp test program and QNX
+</A></li>
+	<LI> Next message: <A HREF="004180.html">[Xitami] Xitami &amp; Active Perl on Win 2000 - CGI Script Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3983">[ date ]</a>
+              <a href="thread.html#3983">[ thread ]</a>
+              <a href="subject.html#3983">[ subject ]</a>
+              <a href="author.html#3983">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

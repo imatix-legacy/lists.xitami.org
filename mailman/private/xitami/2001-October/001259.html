@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] is Xitami hack-proof?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001263.html">
+   <LINK REL="Next"  HREF="001235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] is Xitami hack-proof?
+   </H1>
+    <B>Andrew Morris
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] is Xitami hack-proof?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 24 Oct 2001 12:20:55 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001263.html">[Xitami] is Xitami hack-proof?
+</A></li>
+        <LI> Next message: <A HREF="001235.html">[Xitami] is Xitami hack-proof?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1259">[ date ]</a>
+              <a href="thread.html#1259">[ thread ]</a>
+              <a href="subject.html#1259">[ subject ]</a>
+              <a href="author.html#1259">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I read an article recently about how hackers can get into IIS systems using
+Unicode sequences (such as the %255c shown below), which IIS does not
+process correctly and causes it to allow access to areas of the hard disk
+which should be under security. Looks like a hacker is trying to view your
+root directory contents by executing the DIR command using cmd.exe...
+
+ - Excerpt from article -
+Top Vulnerabilities to Windows Systems (W)
+W1 - Unicode Vulnerability (Web Server Folder Traversal)
+W1.1 Description:
+Unicode provides a unique number for every character, no matter what the
+platform, no matter what the program, no matter what the language. The
+Unicode Standard has been adopted by most vendors, including Microsoft. By
+sending an IIS server a carefully constructed URL containing an invalid
+Unicode UTF-8 sequence an attacker can force the server to literally ‘walk
+up and out’ of a directory and execute arbitrary scripts. This type of
+attack is also known as the directory traversal attack.
+
+The Unicode equivalents of / and \ which are %2f and %5c, respectively.
+However, you can also represent these characters using so-called &quot;overlong&quot;
+sequences. Overlong sequences are technically invalid Unicode
+representations that are longer than what is actually required to represent
+the character. Both / and \ can be represented with a single byte. An
+overlong representation, such as %c0%af for / represents the character using
+two bytes. IIS was not written to perform a security check on overlong
+sequences. Thus, passing an overlong Unicode sequence in a URL, will bypass
+Microsoft’s security checks. If the request is made from a directory marked
+as &quot;executable&quot; the attacker can cause the executable files to be executed
+on the server. Additional information on the Unicode threat can be found at:
+
+<A HREF="http://www.wiretrip.net/rfp/p/doc.asp?id=57&face=2">http://www.wiretrip.net/rfp/p/doc.asp?id=57&amp;face=2</A>
+
+
+The full URL of the article is at <A HREF="http://66.129.1.101/top20.htm">http://66.129.1.101/top20.htm</A>
+
+Hope this helps...I'm not expert but your e-mail reminded me of the article.
+Looks like its only an IIS threat anyway.
+Andy
+
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Mike Shumko
+Sent: 22 October 2001 15:41
+To: '<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>'
+Subject: [Xitami] is Xitami hack-proof?
+
+
+I've been running Xitami on my NT Workstation for years. Works great, love
+it.
+
+I notice in my access logs that I have tons of requests every day for items
+such as
+
+&quot;GET
+/msadc/..%255c../..%255c../..%255c/..%c1%1c../..%c1%1c../..%c1%1c../winnt/sy
+stem32/cmd.exe?/c+dir HTTP/1.0&quot;
+
+&quot;GET /scripts/..%c1%1c../winnt/system32/cmd.exe?/c+dir HTTP/1.0&quot;
+
+My guess is that these are attempts to hack into a MS IIS web server. Are
+any of these attempts ever successful against a Xitami web server?
+
+I ask this because I had a process running on my NT Workstation this morning
+called Proxy Desktop, which I don't recognize. So I'm wondering if my
+workstation was compromised thru the web server.
+
+Mike Shumko
+Senior Manager
+Robelle Solutions Technology Inc.
+1.888.robelle
+www.robelle.com
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001263.html">[Xitami] is Xitami hack-proof?
+</A></li>
+	<LI> Next message: <A HREF="001235.html">[Xitami] is Xitami hack-proof?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1259">[ date ]</a>
+              <a href="thread.html#1259">[ thread ]</a>
+              <a href="subject.html#1259">[ subject ]</a>
+              <a href="author.html#1259">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

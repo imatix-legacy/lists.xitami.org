@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Newbie question: Xitami and php
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002843.html">
+   <LINK REL="Next"  HREF="002846.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Newbie question: Xitami and php
+   </H1>
+    <B>Marcio Marchini
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Newbie question: Xitami and php">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 29 Mar 2002 12:22:44 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002843.html">[Xitami] Newbie question: Xitami and php
+</A></li>
+        <LI> Next message: <A HREF="002846.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2844">[ date ]</a>
+              <a href="thread.html#2844">[ thread ]</a>
+              <a href="subject.html#2844">[ subject ]</a>
+              <a href="author.html#2844">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>	A fresh install of the PHP  InstallShield should configure it all right, except
+the security problem.
+
+	Then you go to c:\winnt\PHP.ini (your windows dir) and declare this:
+
+cgi.force_redirect = 0
+
+	and that should work. In fact, you must have this value already in the INI,
+commented out. In this case it is using the default value of 1, but you want 0.
+
+	From this point on, you're on your own.
+
+marcio
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Ed op Het Net
+</I>&gt;<i> Sent: March 29, 2002 11:55 AM
+</I>&gt;<i> To: <A HREF="mailto:xitami-request@lists.xitami.org">xitami-request@lists.xitami.org</A>
+</I>&gt;<i> Subject: RE: [Xitami] Newbie question: Xitami and php
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> xrlxo&gt; Marcio Marchini wrote:
+</I>&gt;<i>
+</I>&gt;<i> xrlxo&gt; go to php.ini (c:\winnt\php.ini) and add this:
+</I>&gt;<i> xrlxo&gt; force-cgi-redirect=0
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hi Marcio, this still doesn't work.
+</I>&gt;<i> After changing the cgi.force to zero, I still receive the same error.
+</I>&gt;<i> Next, I've changed the doc_root, but then I get a blank page.
+</I>&gt;<i> That is of course one step further :)
+</I>&gt;<i>
+</I>&gt;<i> I use phpinfo.php, containing the script:
+</I>&gt;<i>     &lt;?php phpinfo();?&gt;
+</I>&gt;<i>
+</I>&gt;<i> The output is a blank html-page.
+</I>&gt;<i>
+</I>&gt;<i> From the command line everything works fine, so it must be a matter of
+</I>&gt;<i> configurating the php.ini or Xitami.
+</I>&gt;<i>
+</I>&gt;<i> Do you think you can help me further?
+</I>&gt;<i>
+</I>&gt;<i> TIA, Edward
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt; -----Original Message-----
+</I>&gt;<i> &gt;&gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Ed op Het Net
+</I>&gt;<i> &gt;&gt; Subject: [Xitami] Newbie question: Xitami and php
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I have Xitami up and running on Windows 98 SE.
+</I>&gt;<i> &gt;&gt; I've installed the latest distribution of php4.
+</I>&gt;<i> &gt;&gt; Now, whenever I open a php-file (like phpinfo.php)
+</I>&gt;<i> &gt;&gt; in my browser on the localhost-adress I receive the following message:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &quot;Security Alert! PHP CGI cannot be accessed directly.
+</I>&gt;<i> &gt;&gt; This PHP CGI binary was compiled with force-cgi-redirect enabled.
+</I>&gt;<i> &gt;&gt; This means that a page will only be served up if the REDIRECT_STATUS
+</I>&gt;<i> &gt;&gt; CGI variable
+</I>&gt;<i> &gt;&gt; is set. This variable is set, for example, by Apache's Action
+</I>&gt;<i> &gt;&gt; directive redirect.
+</I>&gt;<i> &gt;&gt; You may disable this restriction by recompiling the PHP binary with
+</I>&gt;<i> &gt;&gt; the --disable-force-cgi-redirect switch. If you do this and you have your
+</I>&gt;<i> &gt;&gt; PHP CGI binary accessible somewhere in your web tree, people will
+</I>&gt;<i> be able to
+</I>&gt;<i> &gt;&gt; circumvent .htaccess security by loading files through the PHP parser.
+</I>&gt;<i> &gt;&gt; A good way around this is to define doc_root in your php.ini file to
+</I>&gt;<i> &gt;&gt; something other
+</I>&gt;<i> &gt;&gt; than your top-level DOCUMENT_ROOT. This way you can separate the part
+</I>&gt;<i> &gt;&gt; of your web space
+</I>&gt;<i> &gt;&gt; which uses PHP from the normal part using .htaccess security. If you
+</I>&gt;<i> &gt;&gt; do not have
+</I>&gt;<i> &gt;&gt; any .htaccess restrictions anywhere on your site you can leave
+</I>&gt;<i> &gt;&gt; doc_root undefined.
+</I>&gt;<i> &gt;&gt; If you are running IIS, you may safely set cgi.force_redirect=0 in
+</I>&gt;<i> &gt;&gt; php.ini.&quot;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I tried everything, but I can't get it to work, and an internet- and
+</I>&gt;<i> &gt;&gt; faq-search didn't make me any wiser.
+</I>&gt;<i> &gt;&gt; Can someone explain me in plain and simple English which steps I have
+</I>&gt;<i> &gt;&gt; to take to solve this?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Thanks in advance, Edward
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002843.html">[Xitami] Newbie question: Xitami and php
+</A></li>
+	<LI> Next message: <A HREF="002846.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2844">[ date ]</a>
+              <a href="thread.html#2844">[ thread ]</a>
+              <a href="subject.html#2844">[ subject ]</a>
+              <a href="author.html#2844">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

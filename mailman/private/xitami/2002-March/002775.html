@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Xitami, PHP and aliases
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002772.html">
+   <LINK REL="Next"  HREF="002776.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Xitami, PHP and aliases
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Xitami, PHP and aliases">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 20 Mar 2002 14:37:38 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002772.html">[Xitami] Xitami, PHP and aliases
+</A></li>
+        <LI> Next message: <A HREF="002776.html">[Xitami] survey: the machine you run xitami on
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2775">[ date ]</a>
+              <a href="thread.html#2775">[ thread ]</a>
+              <a href="subject.html#2775">[ subject ]</a>
+              <a href="author.html#2775">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Fabian,
+
+Tuesday, March 19, 2002, 11:30:41 PM, you wrote:
+
+FB&gt; The problem is that Xitami doesn't pass PHP the translated (&quot;real&quot;) path to the files in the alias-dir but the alias path. Of course this cannot work as PHP doesn't know of the servers alias
+FB&gt; handling.
+
+It not absolutely so.
+
+EXPERIMENT:
+
+1). Lets create two aliases.
+
+defaults.cfg
+
+         [Alias]
+             Alias1=%ALIAS_PATH%\page1.php
+             Alias2=%ALIAS_PATH%
+
+2). Lets make three files.
+
+ - test.php
+ - %ALIAS_PATH%\text.txt
+ - %ALIAS_PATH%\page1.php
+
+test.php
+
+         &lt;HTML&gt;
+          &lt;HEAD&gt;
+           &lt;TITLE&gt; READ FILE FROM ALIAS PATH &lt;/TITLE&gt;
+          &lt;HEAD&gt;
+          &lt;BODY&gt;
+           &lt;CENTER&gt;
+           &lt;?php
+             als_file=fopen(&quot;<A HREF="http://myhost/alias/text.txt","r"">http://myhost/alias/text.txt&quot;,&quot;r&quot;</A>);
+             fpassthru(als_file);
+             print(&quot;\n&quot;);
+           ?&gt;
+           &lt;hr&gt;
+           &lt;As you can see a path is converted correctly.&gt;
+           &lt;/CENTER&gt;
+          &lt;/BODY&gt;
+         &lt;/HTML&gt;
+
+%ALIAS_PATH%\text.text
+
+         &lt;B&gt;I am a test file with alias path.&lt;B&gt;
+
+%ALIAS_PATH%\page1.php
+
+         &lt;HTML&gt;
+          &lt;HEAD&gt;
+           &lt;TITLE&gt;PHP SCRIPT WITH ALIAS PATH&lt;/TITLE&gt;
+          &lt;HEAD&gt;
+          &lt;BODY&gt;
+           &lt;?php
+             print(&quot;&lt;CENTER&gt;&lt;B&gt;I am a php script with alias path.&lt;/B&gt;&lt;/CENTER&gt;/n&quot;);
+           ?&gt;
+          &lt;/BODY&gt;
+         &lt;/HTML&gt;
+
+3). Теперь посмотрим что мы имеем.
+
+RUN <A HREF="http://myhost/test.php">http://myhost/test.php</A>
+
+         &lt;HTML&gt;
+          &lt;HEAD&gt;
+           &lt;TITLE&gt; READ FILE FROM ALIAS PATH &lt;/TITLE&gt;
+          &lt;HEAD&gt;
+          &lt;BODY&gt;
+           &lt;CENTER&gt;
+         &lt;B&gt;I am a test file with alias path.&lt;B&gt;
+         
+           &lt;hr&gt;
+           &lt;As you can see a path is converted correctly.&gt;
+           &lt;/CENTER&gt;
+          &lt;/BODY&gt;
+         &lt;/HTML&gt;
+
+RUN <A HREF="http://myhost/alias1">http://myhost/alias1</A>
+
+         &lt;HTML&gt;
+          &lt;HEAD&gt;
+           &lt;TITLE&gt;PHP SCRIPT WITH ALIAS PATH&lt;/TITLE&gt;
+          &lt;HEAD&gt;
+          &lt;BODY&gt;
+           &lt;?php
+             print(&quot;&lt;CENTER&gt;&lt;B&gt;I am a php script with alias path.&lt;/B&gt;&lt;/CENTER&gt;/n&quot;);
+           ?&gt;
+          &lt;/BODY&gt;
+         &lt;/HTML&gt;
+
+RUN <A HREF="http://myhost/alias2/page1.php">http://myhost/alias2/page1.php</A> !!!!!!!!!!!!!
+
+         &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+         &lt;HTML&gt;&lt;HEAD&gt;
+         &lt;META content=&quot;text/html; charset=windows-1251&quot; http-equiv=Content-Type&gt;&lt;/HEAD&gt;
+         &lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+!!!!!!!!!!!!! IT'S NOT MY PAGE !!!!!!!!!!!!!
+
+ (in access.log)
+ 
+xx.xx.xx.xx  --  [19/Mar/2002:14:20:59  -0500]  &quot;GET /alias2/page1.php
+HTTP/1.0&quot; 200 __12__
+
+(like in mail from:&quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt;
+subject:[Xitami] 50+ simultaneous users...)
+
+
+CONCLUSIONS:
+
+The  server  transmits  addresses  correctly,  but  script thus is not
+invoked ( the Server expects some time (12 s.), and then returns empty page).
+
+
+-- 
+Best regards,
+ dordienko                            mailto:<A HREF="mailto:dordienko@ukr.net">dordienko@ukr.net</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002772.html">[Xitami] Xitami, PHP and aliases
+</A></li>
+	<LI> Next message: <A HREF="002776.html">[Xitami] survey: the machine you run xitami on
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2775">[ date ]</a>
+              <a href="thread.html#2775">[ thread ]</a>
+              <a href="subject.html#2775">[ subject ]</a>
+              <a href="author.html#2775">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

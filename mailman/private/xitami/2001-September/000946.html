@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP - virtual DNS hosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000944.html">
+   <LINK REL="Next"  HREF="000947.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP - virtual DNS hosting
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP - virtual DNS hosting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Sep 2001 17:35:32 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000944.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+        <LI> Next message: <A HREF="000947.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#946">[ date ]</a>
+              <a href="thread.html#946">[ thread ]</a>
+              <a href="subject.html#946">[ subject ]</a>
+              <a href="author.html#946">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I assumed you used the wizard to add the VH.  When you created:
+
+[Server]
+    Cgi-bin=e:\webhome\cgi-bin
+    Webpages=e:\webhome\audctrl
+
+Did Xitami automatically create the images, private and xitami
+subdirectories in the \webhome\audctrl directory?  And is it creating the
+necessary files that go into the directories (such as those you would find
+the /htdocs/xitami directory) I am trying to keep everything related to a VH
+consolidated to a single directory that would like this:
+
+\webserver\host-vh1
+     \cgi-bin
+     \htdocs
+          \images
+          \private
+          \xitami
+     \ftproot
+         \guests
+         \pub
+         \upload
+
+\webserver\host-vh2
+
+
+     \cgi-bin
+     \htdocs
+          \images
+          \private
+          \xitami
+     \ftproot
+         \guests
+         \pub
+         \upload
+
+Last question, do you have to create any kind of alias mapping (aside from
+the host-vhx.cfg file) using the &quot;Aliases&quot; or &quot;VHosts&quot; sections.  I would
+think you don't but then again I thought this process would be easier.
+
+----- Original Message -----
+From: John Jonas
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Sent: Thursday, September 20, 2001 4:58 PM
+Subject: Re: [Xitami] HELP - virtual DNS hosting
+
+
+Here is what works for me using 2.4d7 on W2K Pro (worked the same on NT 4.0
+Server).  Our primary site is www.arbor-freight.com with a virtual site of
+www.audctrl.com.
+The default.cfg that I believe is automatically merged with the xitami.cfg
+contains:
+#*END
+[Ftp]
+    Email-check=1
+    Root=t:\ftphome
+[Security]
+    Filename=defaults.aut
+[Server]
+    Cgi-bin=e:\webhome\cgi-bin
+    Webpages=e:\webhome\arbor
+[Virtual-hosts]
+    www.audctrl.com=audctrl.cfg
+Then there is an audctrl.cfg (as pointed to by the default.cfg) containing:
+#*END
+[Accesslog]
+    Filename=audctrl.log
+[Ftp]
+    Root=t:\ftphome
+[Security]
+    Admin=0
+    Filename=audctrl.aut
+[Server]
+    Cgi-bin=e:\webhome\cgi-bin
+    Webpages=e:\webhome\audctrl
+Note in our case we use the same ftp and cgi-bin for both the primary and
+virtual, but use separate webpage directories.
+Hope this helps!
+Russel Olinger wrote:
+Ok, I am caving in and need some help here folks.  This is driving me nuts.
+Two years ago, on a Win98 platform I was able to get virtual hosting to work
+via DNS.  But now I am running a newer Xitami version on WinNT 4.0 and can't
+seem to get anything to work.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000944.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+	<LI> Next message: <A HREF="000947.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#946">[ date ]</a>
+              <a href="thread.html#946">[ thread ]</a>
+              <a href="subject.html#946">[ subject ]</a>
+              <a href="author.html#946">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

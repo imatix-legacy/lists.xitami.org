@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Tseting CGI on localhost
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006016.html">
+   <LINK REL="Next"  HREF="006018.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Tseting CGI on localhost
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Tseting CGI on localhost">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 7 Jul 2004 08:39:58 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006016.html">[Xitami] Tseting CGI on localhost
+</A></li>
+        <LI> Next message: <A HREF="006018.html">[Xitami] Tseting CGI on localhost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6017">[ date ]</a>
+              <a href="thread.html#6017">[ thread ]</a>
+              <a href="subject.html#6017">[ subject ]</a>
+              <a href="author.html#6017">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've continued to work on this, and now have the Komodo debugger getting
+invoked, but the execution location is in an IE temp internet files
+directory, and still not getting the HTTP vars passed through.  Here's
+answers to you questions:
+
+1) This seems to be covered.  My HOSTS file (under Windows) shows 127.0.0.1
+associated with localhost. Entering <A HREF="http://127.0.0.1/">http://127.0.0.1/</A> in the browser address
+line calls up the index.html file in the web server root directory, and
+entering <A HREF="http://localhost/">http://localhost/</A> there does the same.  
+2) I use the GUI Xitami configuration utility.  Under the [CGI] section I
+have the WORKDIR variable set to &quot;-&quot; which is supposed to cause the script
+to run from the directory where the script resides. Sounds like the
+DEFAULT.CFG approach is hard wired, but I'm willing to try it if you can
+point me to some doc on it.
+3) PL files are properly alliased, as I have no problem running
+ActiveState's Komodo debugger in stand-alone mode. My PATH statement in the
+environment is also set up properly.  It starts out with C\PERL\BIN, which
+is what Xitami is supposed to discover and handle.
+
+Bottom line: it seems that Ximeta is recognizing the script as just a file
+(that it invoked the associated fil service on), and not a CGI script.  That
+would explain the script running, but un the wrong location and WITHOUT any
+of the HTTP environment passed in.  Do you think setting up DEFAULT.CFG will
+solve that?
+
+Thanks!
+ 
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]
+On Behalf Of RPO
+Sent: Wednesday, July 07, 2004 7:13 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] Tseting CGI on localhost
+
+sounds like you have 3 issues: xitami config issue, WinXP issue and Perl
+script issue:
+
+1.  is localhost aliased properly?  is 127.0.0.1 selected as an IP address
+that xitami will run on?
+2.  did you set up you cgi-bin root directory properly in defaults.cfg?
+what is the root path for you cgi-bin files?
+3.  did you alias .pl files, in WinXP, to your /perl/bin/perl program - or
+where ever you installed perl to?
+
+
+----- Original Message -----
+From: &lt;<A HREF="mailto:jgdeitz@cox.net">jgdeitz@cox.net</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, July 06, 2004 4:36 PM
+Subject: [Xitami] Tseting CGI on localhost
+
+
+&gt;<i> I'm trying to test a Perl CGI program (form processor, POST) on localhost
+</I>&gt;<i> (WinXP).  I'm experiencing a series of problems:
+</I>&gt;<i>
+</I>&gt;<i> 1)  When I invoke the pgm.pl from a form with
+</I>&gt;<i> action=&quot;<A HREF="http://localhost/cgi/alwmsg.pl"">http://localhost/cgi/alwmsg.pl&quot;</A> it fails with a &quot;Page not found&quot;
+</I>&gt;<i> error; however, if I type the same URL into a browser the program runs,
+</I>but
+&gt;<i> (see problem 2)
+</I>&gt;<i> 2)  When the program executes, it seems to be simply executing under
+</I>&gt;<i> Windows. Running the manual debugger, I see that none of the HTTP
+</I>variables
+&gt;<i> are in ENV, and none of the form fields are passed in.
+</I>&gt;<i>
+</I>&gt;<i> I've set up a CGI Alias called &quot;localalw&quot; and associated the exact
+</I>directory
+&gt;<i> where the Perl script is.
+</I>&gt;<i>
+</I>&gt;<i> I've also set two environmental variables to try to invoke the ActiveState
+</I>&gt;<i> Komodo debugger instead of the default one:
+</I>&gt;<i>
+</I>&gt;<i> PERL5LIB
+</I>&gt;<i> c:\Program Files\ActiveState Komodo 2.5
+</I>&gt;<i> PERLDB_OPTS
+</I>&gt;<i> RemotePort=localhost:9011 PrintRet=0
+</I>&gt;<i>
+</I>&gt;<i> But this does not work; default (command line) debugger still gets
+</I>invoked.
+&gt;<i>
+</I>&gt;<i> My Goal: When I invoke the Perl program from a HTML page form, I would
+</I>like
+&gt;<i> the debugger (Komodo) to be invoked for the program, normal HTTP/CGI
+</I>&gt;<i> environment variables to be set up for the program, and the output from
+</I>the
+&gt;<i> program (an HTML page) returned in the browser.
+</I>&gt;<i>
+</I>&gt;<i> Any idea why HTTP isn't handling my Perl script?
+</I>&gt;<i>
+</I>&gt;<i> Thanks for any help.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006016.html">[Xitami] Tseting CGI on localhost
+</A></li>
+	<LI> Next message: <A HREF="006018.html">[Xitami] Tseting CGI on localhost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6017">[ date ]</a>
+              <a href="thread.html#6017">[ thread ]</a>
+              <a href="subject.html#6017">[ subject ]</a>
+              <a href="author.html#6017">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

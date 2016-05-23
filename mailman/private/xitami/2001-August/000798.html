@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] still no Perl support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000802.html">
+   <LINK REL="Next"  HREF="000799.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] still no Perl support
+   </H1>
+    <B>Nathan Rimmer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] still no Perl support">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 24 Aug 2001 10:47:00 +0100 (BST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000802.html">Solved -- Re: [Xitami] Webmasks
+</A></li>
+        <LI> Next message: <A HREF="000799.html">[Xitami] still no Perl support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#798">[ date ]</a>
+              <a href="thread.html#798">[ thread ]</a>
+              <a href="subject.html#798">[ subject ]</a>
+              <a href="author.html#798">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey - thanks for all the ideas to get Perl working.
+
+Unfortunately it still doesnt seem to work.
+
+I am running the binary distribution of Perl for the
+Win32 platform (based on Perl version 5.004_02) on a
+Win98 PC.
+
+When I try to connect to
+<A HREF="http://127.0.0.1/cgi-bin/300.pl">http://127.0.0.1/cgi-bin/300.pl</A> (which has
+#!/usr/bin/perl -w as the first line), I get the
+following error from IE5.50 &quot;The page cannot be
+displayed&quot;
+
+My set up is as follows:
+
+defaults - Server Properties 
+============================
+Main CGI directory = ./cgi-bin     
+CGI URLs start with = /cgi-bin   
+
+
+defaults - CGI Properties 
+=========================
+CGI enabled? = ticked     
+Working directory = - 
+Match /cgi-bin anywhere in URL? = ticked
+Error log file (stderr) = cgierr.log (empty)    
+Full environment? = ticked 
+Pass HTTP fields? = http_       
+Pass form fields? = form_
+
+
+Specific CGI environment:  
+=========================
+Nothing defined  
+
+
+Aliases for CGI directories:  
+============================
+Nothing defined
+
+
+defaults.cfg
+============
+[Cgi]
+    Debug = &quot;1&quot;
+    Exit-ok = &quot;0&quot;
+    Form-query = &quot;1&quot;
+    Full-name = &quot;1&quot;
+    Timeout = &quot;120&quot;
+    Wildcard = &quot;1&quot;
+
+[Filter]
+    . = &quot;text/plain&quot;
+    .pl = &quot;/usr/local/bin/perl&quot;
+    .php = &quot;/usr/local/bin/php&quot;
+    .shtm = &quot;perlssi&quot;
+    .shtml = &quot;perlssi&quot;
+    .ssi = &quot;perlssi&quot;
+
+[Ssi]
+    Enabled=1
+    Exec=1
+
+
+autoexec.bat
+============
+SET PATH=C:\PERL\BIN;%PATH%
+SET SSI_INSECURE=YES
+
+
+Is there anything I am missing ?
+
+
+Cheers,
+Digsy
+
+____________________________________________________________
+Do You Yahoo!?
+Get your free @yahoo.co.uk address at <A HREF="http://mail.yahoo.co.uk">http://mail.yahoo.co.uk</A>
+or your free @yahoo.ie address at <A HREF="http://mail.yahoo.ie">http://mail.yahoo.ie</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000802.html">Solved -- Re: [Xitami] Webmasks
+</A></li>
+	<LI> Next message: <A HREF="000799.html">[Xitami] still no Perl support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#798">[ date ]</a>
+              <a href="thread.html#798">[ thread ]</a>
+              <a href="subject.html#798">[ subject ]</a>
+              <a href="author.html#798">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

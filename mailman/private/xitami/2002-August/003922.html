@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CHMOD permissions
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003921.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CHMOD permissions
+   </H1>
+    <B>TW
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CHMOD permissions">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 31 Aug 2002 12:52:02 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003921.html">[Xitami] CHMOD permissions
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3922">[ date ]</a>
+              <a href="thread.html#3922">[ thread ]</a>
+              <a href="subject.html#3922">[ subject ]</a>
+              <a href="author.html#3922">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--=====================_4569700==_.ALT
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+At 21:08 30.08.2002 +0200, you wrote:
+&gt;<i>I run xitami on my computer to test perl/cgi and php/MySQL. How can I 
+</I>&gt;<i>configure xitami to enable me to CHMOD files permissions? Any step by step 
+</I>&gt;<i>help would be very much appreciated
+</I>&gt;<i>Chris
+</I>
+
+hi,
+
+in my opinion this is none of a business to the webserver in use. It's the 
+business of your scripting language.
+
+For example with php your tasks could be done like this:
+
+&lt;?
+...
+$myCommand = exec(&quot;chmod 777 myfile&quot;);
+
+...
+?&gt;
+
+Complete synopsis of exec is exec(string command, array output, integer 
+return), latter to params being optional and useful for debugging.
+In perl its quiet similar.
+Warning; Don't directly put user supplied data into command, escape it 
+appropriately first if necessary.
+
+Of course, standard unix security applies, i.e. you can only change 
+permissions of files where the credentials/privileges of the user (php 
+process) and  the respective file match (this is certainly the case for 
+files created via php).
+
+If you try to run perl- or other shellscripts from within php and run into 
+troubles review the purpose of the safe_mode_exec_dir&quot; and &quot;safe_mode&quot; 
+directives in php.ini and check your settings.
+
+hope this serves as a starting point.
+
+tony
+
+
+--=====================_4569700==_.ALT
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+
+&lt;html&gt;
+At 21:08 30.08.2002 +0200, you wrote:&lt;br&gt;
+&lt;blockquote type=cite class=cite cite&gt;&lt;font face=&quot;arial&quot; size=2&gt;I run
+xitami on my computer to test perl/cgi and php/MySQL. How can I configure
+xitami to enable me to CHMOD files permissions? Any step by step help
+would be very much appreciated&lt;/font&gt;&lt;br&gt;
+&lt;font face=&quot;arial&quot; size=2&gt;Chris&lt;/font&gt;&lt;/blockquote&gt;&lt;br&gt;&lt;br&gt;
+hi,&lt;br&gt;&lt;br&gt;
+in my opinion this is none of a business to the webserver in use. It's
+the business of your scripting language.&lt;br&gt;&lt;br&gt;
+For example with php your tasks could be done like this:&lt;br&gt;&lt;br&gt;
+&amp;lt;?&lt;br&gt;
+...&lt;br&gt;
+$myCommand = exec(&amp;quot;chmod 777 myfile&amp;quot;);&lt;br&gt;&lt;br&gt;
+...&lt;br&gt;
+?&amp;gt;&lt;br&gt;&lt;br&gt;
+Complete synopsis of exec is exec(string command, array output, integer
+return), latter to params being optional and useful for debugging.&lt;br&gt;
+In perl its quiet similar.&lt;br&gt;
+Warning; Don't directly put user supplied data into command, escape it
+appropriately first if necessary.&lt;br&gt;&lt;br&gt;
+Of course, standard unix security applies, i.e. you can only change
+permissions of files where the credentials/privileges of the user (php
+process) and&amp;nbsp; the respective file match (this is certainly the case
+for files created via php).&lt;br&gt;&lt;br&gt;
+If you try to run perl- or other shellscripts from within php and run
+into troubles review the purpose of the
+&lt;font face=&quot;Arial, Helvetica&quot;&gt;safe_mode_exec_dir&amp;quot; and
+&amp;quot;safe_mode&amp;quot; directives in php.ini and check&lt;/font&gt; your
+settings.&lt;br&gt;&lt;br&gt;
+hope this serves as a starting point.&lt;br&gt;&lt;br&gt;
+tony&lt;br&gt;&lt;br&gt;
+&lt;/html&gt;
+
+--=====================_4569700==_.ALT--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003921.html">[Xitami] CHMOD permissions
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3922">[ date ]</a>
+              <a href="thread.html#3922">[ thread ]</a>
+              <a href="subject.html#3922">[ subject ]</a>
+              <a href="author.html#3922">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Talking about FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003337.html">
+   <LINK REL="Next"  HREF="003351.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Talking about FTP
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Talking about FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Jun 2002 19:46:36 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003337.html">[Xitami] Xitami crashes
+</A></li>
+        <LI> Next message: <A HREF="003351.html">[Xitami] DNS and VHosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3344">[ date ]</a>
+              <a href="thread.html#3344">[ thread ]</a>
+              <a href="subject.html#3344">[ subject ]</a>
+              <a href="author.html#3344">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[A somewhat belated reply, since I'm about 500 messages behind in my
+reading of e-mail]
+
+In message &lt;<A HREF="mailto:200205281603.SAA05863@sxpublic.nxrda.imatix.net">200205281603.SAA05863@sxpublic.nxrda.imatix.net</A>&gt;
+   Gunnar Swan writes:
+&gt;<i> Am I hearing you guys say that the client FTP can dictate the ports
+</I>&gt;<i> that the server uses for FTP ?
+</I>
+To some extent, yes.  Servers always listen for incoming connection
+requests on the well-known port 21.  Servers will also accept incoming
+data channel connections on well-known port 20.  However, FTP servers
+[normally] *send* data out from some arbitrary port (as determined by the
+next available socket for the create_socket primitive) to a specific data
+port on the client.
+
+Chris Olsen had already written earlier in the thread as follows:
+
+ As always, for any server administrator, whether you run a single &quot;hobby&quot;
+ server on your cable modem, or manage a WAN, a review of the appropriate
+ RFC's would be in order to make sure that you understand what you are doing,
+ and are doing it properly.  In this case, you would want to refer to RFC1579
+ and RFC959.
+
+It's advice that you, and anyone else concerned about &quot;how FTP works&quot;
+would do well to heed.  I know that some RFCs can be particularly
+difficult for the novice to understand (e.g. the one on Van Jacobson
+header compression, or that on STAC data compression), but the &quot;basic&quot;
+RFCs on &quot;basic&quot; protocols (such as SMTP, FTP, etc) are really not too
+difficult at all.  Please DO go and read those RFCs; after all, these are
+the standards that make the whole of the Internet work (despite the
+attempts of Microsoft to undermine them by adding non-compliant
+extensions to all and sundry).
+
+Anyway, the fundamental position with &quot;traditional&quot; FTP is that the
+client, upon the user asking to &quot;PUT &lt;somefile&gt;&quot; will issue the command
+&quot;STOR &lt;filename&gt;&quot; to the server over the command channel (which goes from
+some arbitrary port number on the client to port 21 on the server).
+Assuming that the server is happy with this (the client, as
+authenticated, is permitted to write into the current directory, etc),
+the server will then listen on its default data connection port (20) for
+the content of the file, which it will store away.  The essence of the
+connection is that the client pushes the file to the server.
+
+For transactions taking place in the opposite direction, Jon Postel and
+the rest elected to follow the same model: the end with the file pushes
+it to the end that's getting it.  To do this, the server needs to push
+the file to the client.  Since client systems don't usually listen for
+connections (unlike servers), the server needs to know to which port to
+send the file (remember that for many client systems with multiple users
+the &quot;ordinary&quot; unprivileged user may not create privileged ports, which
+usually means those below 1024).  The client program is expected to
+create a port on which to receive the data connection, and this will
+usually be arbitrary at the whim of the client's operating system.
+Therefore the PORT command is used to tell the server the correct port to
+which to send the file: it specifies the 32-bit IP address and the 16-bit
+port number, and the server then creates a socket connecting to that port
+to send the file.
+
+Now this works perfectly whilst the client and server are directly
+connected; however, if there's an intervening firewall, or perhaps a
+router that performs NAT (Network Address Translation), then the
+protocols break down.  The NAT process, for instance, will not be capable
+of changing the content of the PORT command to reflect the port number on
+the firewall to which the server should send traffic nor even the IP
+address of that machine; neither will it be able to forward that traffic
+to the port number on the client computer originally specified in the
+command (except with a proper ftp-proxy process running on the firewall).
+
+Therefore the PASV command is available, which is sent to the server, and
+causes it to listen for the client to initiate a data connection to a
+port on the server.  The port to be used appears in the server's response
+to the PASV command.  The process at the client end for storing the
+retrieved file away then takes data from a socket which has *initiated*
+the connection, and therefore there will be no problems with NAT or
+firewalls.
+
+One caveat: it might prove impossible to establish a data channel
+connection when both client and server are behind non-proxying firewalls.
+
+YMMV.
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We have gone from a world of concentrated knowledge and wisdom to one of
+    distributed ignorance.  And we know and understand less while being incr-
+    easingly capable.&quot;              Prof. Peter Cochrane, formerly of BT Labs
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003337.html">[Xitami] Xitami crashes
+</A></li>
+	<LI> Next message: <A HREF="003351.html">[Xitami] DNS and VHosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3344">[ date ]</a>
+              <a href="thread.html#3344">[ thread ]</a>
+              <a href="subject.html#3344">[ subject ]</a>
+              <a href="author.html#3344">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

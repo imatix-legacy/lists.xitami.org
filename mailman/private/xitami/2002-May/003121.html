@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Two VHOSTS using same configuration file?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003120.html">
+   <LINK REL="Next"  HREF="003122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Two VHOSTS using same configuration file?
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Two VHOSTS using same configuration file?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 6 May 2002 10:55:09 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003120.html">[Xitami] Two VHOSTS using same configuration file?
+</A></li>
+        <LI> Next message: <A HREF="003122.html">[Xitami] Two VHOSTS using same configuration file?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3121">[ date ]</a>
+              <a href="thread.html#3121">[ thread ]</a>
+              <a href="subject.html#3121">[ subject ]</a>
+              <a href="author.html#3121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I believe you can solve these issues with proper DNS configs.  I have three
+domains sharing the same cfg file:
+
+Xitami Defaults.cfg file:
+www.domain.com=domain.cfg
+www.domain.net=domain.cfg
+www.domain1.com=domain.cfg
+
+But from with in the Alias section for the domain.cfg file you can set
+preferences pertaining that address each domain indepently.  But it gets
+kind of tricky.
+
+In the DNS I simply have three forward records and of course, only one
+reverse record (which is the authority record).  The source/reverse record
+is the address that will respond to the clients browser and then the clients
+browser will begin talking to the new forward address that matches the
+reverse address.
+
+Forward:
+www.domain.com    A    192.168.10.10
+www.domain.net      A    192.168.10.10
+www.domain1.com  A    192.168.10.10
+
+Reverse:
+192.168.10.10    SOA    www
+
+----- Original Message -----
+From: &quot;Alasdair Macdonald&quot; &lt;<A HREF="mailto:alimac@netcomuk.co.uk">alimac@netcomuk.co.uk</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, May 06, 2002 5:55 AM
+Subject: Re: [Xitami] Two VHOSTS using same configuration file?
+
+
+&gt;<i> I had some problems with folks having difficulty establishing ftp
+</I>connection, and I
+&gt;<i> believe I traced the problems to multiple vhosts sharing the same cfg
+</I>files. I've yet
+&gt;<i> to see any other reports of this on this list.
+</I>&gt;<i>
+</I>&gt;<i> Alasdair
+</I>&gt;<i>
+</I>&gt;<i> On 6 May 2002 at 8:30, Dwaine Gonyier wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Is this allowed?
+</I>&gt;<i> &gt; I have two DNS names that I want to refer to the  same web pages, etc.
+</I>&gt;<i> &gt; I would rather have both vhosts point to the same set of cfg files
+</I>&gt;<i> &gt; rather than maintain two separate but identical cfg files. Is sharing
+</I>&gt;<i> &gt; a cfg file between two VHOSTS supported? The documentataion wasn't
+</I>&gt;<i> &gt; very clear on this.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003120.html">[Xitami] Two VHOSTS using same configuration file?
+</A></li>
+	<LI> Next message: <A HREF="003122.html">[Xitami] Two VHOSTS using same configuration file?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3121">[ date ]</a>
+              <a href="thread.html#3121">[ thread ]</a>
+              <a href="subject.html#3121">[ subject ]</a>
+              <a href="author.html#3121">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

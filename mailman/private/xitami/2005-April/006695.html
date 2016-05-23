@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] building open xitami on OS/2
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006692.html">
+   <LINK REL="Next"  HREF="006696.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] building open xitami on OS/2
+   </H1>
+    <B>Maurilio Longo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] building open xitami on OS/2">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 28 Apr 2005 09:42:16 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006692.html">[Xitami] building open xitami on OS/2
+</A></li>
+        <LI> Next message: <A HREF="006696.html">[Xitami] Assertion failed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6695">[ date ]</a>
+              <a href="thread.html#6695">[ thread ]</a>
+              <a href="subject.html#6695">[ subject ]</a>
+              <a href="author.html#6695">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Pieter,
+
+Pieter Hintjens ha scritto:
+
+&gt;<i> On 27/04/2005 11:50 am, Maurilio Longo wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; I've been able to build available sources (2.5c2) on OS/2 ...
+</I>&gt;<i> &gt; It works ok but cannot send pages bigger than 32KB, smaller pages get sent
+</I>&gt;<i> &gt; ok and even CGIs are called ok but if a cgi creates an output bigger than
+</I>&gt;<i> &gt; 32kb only the first 32kb are sent back to the client.
+</I>&gt;<i>
+</I>&gt;<i> There is a 32k buffer defined in the code which does the file transfers
+</I>&gt;<i> (smttran), so that's probably involved.  It should transfer the file in
+</I>&gt;<i> chunks until it's finished.  Only transferring the first file... I assume
+</I>&gt;<i> you're not getting any errors in the console.log?  If you are up to changing
+</I>&gt;<i> the code, you can add traces (printf) to smttran.c at various points around
+</I>&gt;<i> lines 1102-1122 to see what's going on.
+</I>
+it was defined as 32768L, I changed it to 32767L and this fixed this problem
+(don't know exactly why), now I can transfer pages of any size (even calling CGIs
+through LRWP), so now I can start testing my build again :)
+
+
+&gt;<i> You might also want to try the 2.4 package - it's unlikely to behave
+</I>&gt;<i> differently but if it does, we may get a clue as to what's happening.
+</I>&gt;<i>
+</I>&gt;<i> We don't have any OS/2 systems here (our last working OS/2 box died some years
+</I>&gt;<i> ago), so it's going to be rather hard to dig into this.
+</I>
+If you need any help setting up one, I'm here :)
+
+Thanks for your help!
+
+Maurilio.
+
+PS. If I'd want to merge changes to the source, what is the &quot;correct&quot; way? I mean,
+send a patch here, to you, or...?
+
+
+&gt;<i> --
+</I>&gt;<i> Pieter Hintjens
+</I>&gt;<i> iMatix Corporation
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--
+ __________
+|<i>  |  | |__| Maurilio Longo
+</I>|<i>_|_|_|____| farmaconsult s.r.l.
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006692.html">[Xitami] building open xitami on OS/2
+</A></li>
+	<LI> Next message: <A HREF="006696.html">[Xitami] Assertion failed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6695">[ date ]</a>
+              <a href="thread.html#6695">[ thread ]</a>
+              <a href="subject.html#6695">[ subject ]</a>
+              <a href="author.html#6695">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Getting Xitami to Mail Through A CGI Script?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005546.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Getting Xitami to Mail Through A CGI Script?
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Getting Xitami to Mail Through A CGI Script?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 25 Nov 2003 16:18:23 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005546.html">[Xitami] Getting Xitami to Mail Through A CGI Script?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5543">[ date ]</a>
+              <a href="thread.html#5543">[ thread ]</a>
+              <a href="subject.html#5543">[ subject ]</a>
+              <a href="author.html#5543">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Heres the CGI code you need for a windows machine.  For clarification, 
+Xitami doesn't actually interact with email unless you are using something 
+special I don't know about.  To use CGI you would use perl scripts designed 
+for a Unix or Windows platform....the code below is for a windows 
+environment and requires you to have loaded the Net package from the 
+activestate perl libraries, use the command line PPM program (found in 
+/perl/bin) to install additional modules and packages.  (PPM&gt;&gt; install 
+libnet).
+
+Hope it helps.
+
+#! /perl/bin/perl
+#### Needed to actually communicate with any SMTP server
+use Net::SMTP ;
+#### Needed to retrieve FORM info regardless if its a GET or POST
+use CGI ;
+$query = new CGI ;
+
+#### values passed in from any standard HTML form, either post or get
+#### These values are NOT being used in the script below
+$subject = $query-&gt;param('subject') ;
+$fromAdd = $query-&gt;param('fromAdd') ;
+$toAdd = $query-&gt;param('toAdd') ;
+
+### Get date and time if you want to include it the CONTENT BODY of the 
+email
+### very simple getDate
+   $sec = (localtime)[0] ;
+   $min = (localtime)[1] ;
+   $hour = (localtime)[2] ;
+   $day = (localtime)[3] ;
+   $mon = (localtime)[4] + 1 ;
+   $year = (localtime)[5] + 1900 ;
+
+###### OR preassemble the date.
+   $curDate = (localtime)[5] + 1900) . &quot;-&quot; . ((localtime)[4] + 1) . &quot;-&quot; . 
+(localtime)[3] ;
+   $curTime = (localtime)[2] . &quot;:&quot; . (localtime)[1] . &quot;:&quot; . (localtime)[0] ;
+
+### connect to SMTP server
+   $smtp = Net::SMTP-&gt;new(desired.mailserver.com, Debug =&gt; 1,) or die &quot;can't 
+connect to server $!&quot; ; ### specify FROM address
+   $smtp-&gt;mail(&quot;blah\@blah.com&quot;) ;
+### specify TO address
+   $smtp-&gt;to(&quot;xitami\@lists.xitami.org&quot;) ;
+### Start data string
+   $smtp-&gt;data() ;  # Start the mail
+
+### this section mimicks the header info the user actually sees. (its 
+actually just data though)
+   $smtp-&gt;datasend(&quot;To: xitami\@lists.xitami.org\n&quot;) ;
+   $smtp-&gt;datasend(&quot;From: blah\@blah.com\n&quot;) ;
+   $smtp-&gt;datasend(&quot;Subject: Xitami CGI SMTP interaction\n&quot;) ;
+
+### next section commented out but would allow you to send HTML formatted 
+emails (still just data)
+   #$smtp-&gt;datasend(&quot;\nMIME-Version: 1.0&quot;) ;
+   #$smtp-&gt;datasend(&quot;\nContent-Type: text/html\;&quot;) ;
+   #$smtp-&gt;datasend(&quot;\n	charset=\&quot;iso-8859-1\&quot;&quot;) ;
+   #$smtp-&gt;datasend(&quot;\nContent-Transfer-Encoding: quoted-printable&quot;) ;
+   #$smtp-&gt;datasend(&quot;\nX-MimeOLE: Produced By Microsoft MimeOLE 
+V5.50.4522.120&quot;) ;
+
+### here is the CONENT of your email (still just data)
+   $smtp-&gt;datasend(&quot;\nJust send info all day long&quot;) ;
+   $smtp-&gt;datasend(&quot;\nJust send info all day long&quot;) ;
+   $smtp-&gt;datasend(&quot;\nJust send info all day long&quot;) ;
+   $smtp-&gt;datasend(&quot;\nJust send info all day long&quot;) ;
+   $smtp-&gt;datasend(&quot;\nJust send info all day long&quot;) ;
+   $smtp-&gt;datasend(&quot;\nJust send info all day long&quot;) ;
+   $smtp-&gt;datasend(&quot;\n.........&quot;) ;
+
+### finish sending the DATA portion and transmit email
+   $smtp-&gt;dataend() ;
+
+### close SMTP Session
+   $smtp-&gt;quit ;
+
+#### end perl script
+
+
+Russel P. Olinger
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+&gt;<i>From: &quot;patricko&quot; &lt;<A HREF="mailto:polson1@adelphia.net">polson1@adelphia.net</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: Re: [Xitami] Getting Xitami to Mail Through A CGI Script?
+</I>&gt;<i>Date: Tue, 25 Nov 2003 16:42:43 -0700
+</I>&gt;<i>
+</I>&gt;<i>SYNOPSIS
+</I>&gt;<i>
+</I>&gt;<i>   use Mail::Sendmail;  %mail = ( To      =&gt; '<A HREF="mailto:you@there.com">you@there.com</A>',
+</I>&gt;<i>             From    =&gt; '<A HREF="mailto:me@here.com">me@here.com</A>',
+</I>&gt;<i>             Message =&gt; &quot;This is a very short message&quot;
+</I>&gt;<i>            );  sendmail(%mail) or die $Mail::Sendmail::error;  print &quot;OK.
+</I>&gt;<i>Log says:\n&quot;, $Mail::Sendmail::log;sendmail for windows I don't think is
+</I>&gt;<i>available anymore you can modify the script to use mail-sendmail tryppm
+</I>&gt;<i>install mail-sendmailsee if you can get that to work should be simple
+</I>&gt;<i>changes----- Original Message -----
+</I>&gt;<i>From: &quot;Dan Baerg&quot; &lt;<A HREF="mailto:highvelocityhosting@hotmail.com">highvelocityhosting@hotmail.com</A>&gt;
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Sent: Tuesday, November 25, 2003 3:40 PM
+</I>&gt;<i>Subject: [Xitami] Getting Xitami to Mail Through A CGI Script?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;|<i> Hello Fellow Subscribers
+</I>&gt;|<i>
+</I>&gt;|<i>     I'm using Xitami on a Windows Machine and was wondering how to get a
+</I>&gt;<i>CGI
+</I>&gt;|<i> Script that was made for Unix and used sendmail to work with Xitami?? I'd
+</I>&gt;|<i> actually like the script to mail through an SMTP Server on another 
+</I>&gt;<i>Windows
+</I>&gt;|<i> Machine. Any Suggestions out there??
+</I>&gt;|<i>
+</I>&gt;|<i> Thanks
+</I>&gt;|<i>
+</I>&gt;|<i> Dan
+</I>&gt;|<i>
+</I>&gt;|<i> _________________________________________________________________
+</I>&gt;|<i> MSN 8 helps eliminate e-mail viruses. Get 2 months FREE*.
+</I>&gt;|<i>
+</I>&gt;<i><A HREF="http://join.msn.com/?page=features/virus&pgmarket=en-ca&RU=http%3a%2f%2fjoin.msn.com%2f%3fpage%3dmisc%2fspecialoffers%26pgmarket%3den-ca">http://join.msn.com/?page=features/virus&amp;pgmarket=en-ca&amp;RU=http%3a%2f%2fjoin.msn.com%2f%3fpage%3dmisc%2fspecialoffers%26pgmarket%3den-ca</A>
+</I>&gt;|<i>
+</I>&gt;|<i>
+</I>&gt;|<i> --
+</I>&gt;|<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;|<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+_________________________________________________________________
+Set yourself up for fun at home!  Get tips on home entertainment equipment, 
+video game reviews, and more here.   
+<A HREF="http://special.msn.com/home/homeent.armx">http://special.msn.com/home/homeent.armx</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005546.html">[Xitami] Getting Xitami to Mail Through A CGI Script?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5543">[ date ]</a>
+              <a href="thread.html#5543">[ thread ]</a>
+              <a href="subject.html#5543">[ subject ]</a>
+              <a href="author.html#5543">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

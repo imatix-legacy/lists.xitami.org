@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] content/type headers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006665.html">
+   <LINK REL="Next"  HREF="006668.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] content/type headers
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] content/type headers">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 18 Apr 2005 08:50:31 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006665.html">[Xitami] content/type headers
+</A></li>
+        <LI> Next message: <A HREF="006668.html">[Xitami] content/type headers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6667">[ date ]</a>
+              <a href="thread.html#6667">[ thread ]</a>
+              <a href="subject.html#6667">[ subject ]</a>
+              <a href="author.html#6667">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks.  That tip came from 14 years as a network engineer, which is my 
+primary technical expertise.  Web Hosting and web design are side hobbies of 
+mine that keeps me somewhat current with servers, windows and other system 
+specific trends.  However, server performance is just as inportant as 
+network performance.  If you are aware of both you increase your overall 
+optimization.  No server is completely independent, nor is any network.
+
+NIC settings, duplex mismatches, L2 switch parameters, L3 switch/router 
+protocols - all affect network performance.  You can have the fastest server 
+in the world sitting on an improperly configured network (or vise versa) and 
+see the worst response times.  It would be like putting 87 octane into an 
+Ferrari that requires 103 octane.  She's gonna choke and sputter and 
+possible stall out.
+
+If I can think of any other tips, along these lines, I will put them out 
+there.  This tip just happened to be related someone elses topic.
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+
+
+
+&gt;<i>From: &quot;Johannes Prost&quot; &lt;<A HREF="mailto:xitami@pastryworld.ca">xitami@pastryworld.ca</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Subject: Re: [Xitami] content/type headers
+</I>&gt;<i>Date: Sat, 16 Apr 2005 11:49:19 -0600
+</I>&gt;<i>
+</I>&gt;<i>want to second that.
+</I>&gt;<i>
+</I>&gt;<i>Johannes
+</I>&gt;<i>
+</I>&gt;<i> &gt; Hello Russel,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; It was a great tip, how can I find more tips such as this. Thanks.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Inanc
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 4/16/05, R O &lt;<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; That would make sense. 1500 would be the max size packet anyone would 
+</I>&gt;<i>want
+</I>&gt;<i> &gt; &gt; to create. Most router circuits are set to 1545 MTU (max transmission
+</I>&gt;<i> &gt; &gt; unit). Anything larger than that requires the router to split the 
+</I>&gt;<i>packet
+</I>&gt;<i> &gt; &gt; giving the first 1500 to FRAME 1 and giving the reamainder to a new 
+</I>&gt;<i>FRAME.
+</I>&gt;<i> &gt; &gt; That new packet though can't be used by any other data. so if your 
+</I>&gt;<i>server
+</I>&gt;<i> &gt; &gt; packets are 1700, the first 1500 bytes goes to the first frame, then 
+</I>&gt;<i>200
+</I>&gt;<i> &gt; &gt; bytes goes to the second frame, but the second frame is then filled up
+</I>&gt;<i> &gt; &gt; with
+</I>&gt;<i> &gt; &gt; 1300 bytes of nothing simply to fill the frame - it has to happen this 
+</I>&gt;<i>way
+</I>&gt;<i> &gt; &gt; because a FRAME can only carry on TCP header. Larger packets causes 
+</I>&gt;<i>the
+</I>&gt;<i> &gt; &gt; router to take a heavier processing load and slightly greater 
+</I>&gt;<i>bandwidth
+</I>&gt;<i> &gt; &gt; load.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Apply that logic to smaller server packets, say 850bytes per packet. 
+</I>&gt;<i>Then
+</I>&gt;<i> &gt; &gt; every frame for that TCP transmission will be 850bits of data and 600 
+</I>&gt;<i>bits
+</I>&gt;<i> &gt; &gt; of nothing. This causes the router to waste nearly 45% of its 
+</I>&gt;<i>bandwidth
+</I>&gt;<i> &gt; &gt; (for that particular tcp session). If your packets match the MTU of 
+</I>&gt;<i>the
+</I>&gt;<i> &gt; &gt; router then no framing is wasted, the router doesn't have to parse 
+</I>&gt;<i>packets
+</I>&gt;<i> &gt; &gt; which decreases processing/reassembly time, and excess frames do not 
+</I>&gt;<i>have
+</I>&gt;<i> &gt; &gt; to
+</I>&gt;<i> &gt; &gt; be sent.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Russel P. Olinger
+</I>&gt;<i> &gt; &gt; (310) 466-3399
+</I>&gt;<i> &gt; &gt; <A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;From: Marc Doigny &lt;<A HREF="mailto:marc@verfaillie.com">marc@verfaillie.com</A>&gt;
+</I>&gt;<i> &gt; &gt; &gt;Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt; &gt; &gt;To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt; &gt; &gt;Subject: Re: [Xitami] content/type headers
+</I>&gt;<i> &gt; &gt; &gt;Date: Fri, 15 Apr 2005 18:27:59 +0200
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;At 16:46 15/04/05, you wrote:
+</I>&gt;<i> &gt; &gt; &gt;&gt;Hello Marc,
+</I>&gt;<i> &gt; &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt; &gt;&gt;very handy to control ones own server and to be able to check the 
+</I>&gt;<i>server
+</I>&gt;<i> &gt; &gt; &gt;&gt;software of a
+</I>&gt;<i> &gt; &gt; &gt;&gt;site without the need of using Netcraft. What is the reason for the
+</I>&gt;<i> &gt; &gt; limit
+</I>&gt;<i> &gt; &gt; &gt;&gt;of bytes ?
+</I>&gt;<i> &gt; &gt; &gt;&gt;Otherwise one would be able to check how the full page will look 
+</I>&gt;<i>like (
+</I>&gt;<i> &gt; &gt; &gt;&gt;development).
+</I>&gt;<i> &gt; &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt; &gt;&gt;Is there the possibilty to share this ? If so, what would be needed 
+</I>&gt;<i>?
+</I>&gt;<i> &gt; &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt; &gt;&gt;Johannes
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;I created the application just to check if my home server was 
+</I>&gt;<i>responding
+</I>&gt;<i> &gt; &gt; to
+</I>&gt;<i> &gt; &gt; &gt;internet requests, where it doesn't matter that 1500 bytes or more 
+</I>&gt;<i>are
+</I>&gt;<i> &gt; &gt; &gt;displayed.
+</I>&gt;<i> &gt; &gt; &gt;1500 bytes seemed a good compromis between speed and size; the data 
+</I>&gt;<i>must
+</I>&gt;<i> &gt; &gt; be
+</I>&gt;<i> &gt; &gt; &gt;downloaded before it can be send to the client. Xitami is set to kill
+</I>&gt;<i> &gt; &gt; &gt;applications running more than 10 seconds, and in some cases 
+</I>&gt;<i>connecting
+</I>&gt;<i> &gt; &gt; and
+</I>&gt;<i> &gt; &gt; &gt;downloading large files could not be done in 10 seconds.
+</I>&gt;<i> &gt; &gt; &gt;Two connections are open during the whole transaction.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;There are two versions available:
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;<A HREF="http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com">http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com</A> (displaying 
+</I>&gt;<i>the
+</I>&gt;<i> &gt; &gt; &gt;content as text)
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;<A HREF="http://afr_upd.verfaillie.be:20800/cgi-bin/gap?www.verfaillie.com">http://afr_upd.verfaillie.be:20800/cgi-bin/gap?www.verfaillie.com</A> 
+</I>&gt;<i>(trying
+</I>&gt;<i> &gt; &gt; &gt;to display the content as html)
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;The source and executable are disponible at
+</I>&gt;<i> &gt; &gt; &gt;<A HREF="http://web.verfaillie.com/cgi/gap.bas">http://web.verfaillie.com/cgi/gap.bas</A>
+</I>&gt;<i> &gt; &gt; &gt;<A HREF="http://web.verfaillie.com/cgi/gap.exe">http://web.verfaillie.com/cgi/gap.exe</A>
+</I>&gt;<i> &gt; &gt; &gt;It just runs as a cgi-bin executable.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt;-------------------------------------------------------------------------
+</I>&gt;<i> &gt; &gt; &gt;--::Mailserver Verfaillie Bauwens::-- contact : 
+</I>&gt;<i><A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+</I>&gt;<i> &gt; &gt; &gt;Alle mails gecontroleerd op virussen. Virusdefinities dagelijks 
+</I>&gt;<i>aangepast
+</I>&gt;<i> &gt; &gt; &gt;----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> 
+</I>&gt;<i>-----------------------
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;--
+</I>&gt;<i> &gt; &gt; &gt;Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; &gt;To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; ---
+</I>&gt;<i> &gt; life is nearly what you believe
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006665.html">[Xitami] content/type headers
+</A></li>
+	<LI> Next message: <A HREF="006668.html">[Xitami] content/type headers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6667">[ date ]</a>
+              <a href="thread.html#6667">[ thread ]</a>
+              <a href="subject.html#6667">[ subject ]</a>
+              <a href="author.html#6667">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

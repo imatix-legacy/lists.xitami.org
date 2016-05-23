@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Serious bug in my opinion
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005556.html">
+   <LINK REL="Next"  HREF="005550.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Serious bug in my opinion
+   </H1>
+    <B>Jason Ozin at Technica Solutions
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Serious bug in my opinion">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 04 Dec 2003 10:13:03 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005556.html">[Xitami] change of behaviours / bug?
+</A></li>
+        <LI> Next message: <A HREF="005550.html">[Xitami] Serious bug in my opinion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5549">[ date ]</a>
+              <a href="thread.html#5549">[ thread ]</a>
+              <a href="subject.html#5549">[ subject ]</a>
+              <a href="author.html#5549">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>further to the report below I've done some tests and here is a new full 
+report:
+
+updated two of my servers (Win 2000) a few days ago to Xitami 2.5c0 from 
+2.4.d9
+
+I didn't find any real problems (apart from the fact that the exe's had 
+changed names - including the one that runs the service).
+
+But yesterday I realised that the way it handles PHP pages has changed 
+completely. The server now sends the wrong headers as all my dynamic PHP 
+pages are being cached on all platforms and all clients!!!
+
+So I did a header check and 2.5c0 is passing the modified date of the
+actual raw php file in the Last-modified: header as if it were an html
+file.
+
+This can't be right, can it?!!!
+Presumably 2.4.d9 didn't do this?
+
+Adding a line:
+
+Last-modified: etc...
+
+to .\headers\header.php doesn't help in any way
+
+and adding:
+
+header (&quot;Last-Modified: Mon, 30 May 2003 00:00:00 GMT&quot;);
+
+to the start of a php file as a test makes no difference either. It's 
+still the modified date of the actual raw php file thats passed in the 
+header.
+
+Help!!!!
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005556.html">[Xitami] change of behaviours / bug?
+</A></li>
+	<LI> Next message: <A HREF="005550.html">[Xitami] Serious bug in my opinion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5549">[ date ]</a>
+              <a href="thread.html#5549">[ thread ]</a>
+              <a href="subject.html#5549">[ subject ]</a>
+              <a href="author.html#5549">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

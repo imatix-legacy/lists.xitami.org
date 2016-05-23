@@ -1,0 +1,1847 @@
+From preid at rci.rutgers.edu  Tue Oct  2 00:19:08 2007
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Mon, 01 Oct 2007 18:19:08 -0400
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow
+	Vulnerability
+Message-ID: <4701725C.8090406@rci.rutgers.edu>
+
+The @RISK newsletter reports that SecurityFocus is listing an Xitami 
+vulnerability:
+
+http://www.securityfocus.com/bid/25772/discuss
+
+"remote buffer-overflow vulnerability ... execute arbitrary code in the 
+context of the affected application."
+
+An exploit in Python code is posted at
+http://downloads.securityfocus.com/vulnerabilities/exploits/xitami_exp.py
+
+
+-- 
+Paul Reid
+System Administrator
+Music Department
+Mason Gross School of the Arts
+
+
+From francis.turner at gmail.com  Tue Oct  2 13:47:41 2007
+From: francis.turner at gmail.com (Francis Turner)
+Date: Tue, 2 Oct 2007 13:47:41 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow
+	Vulnerability
+In-Reply-To: <4701725C.8090406@rci.rutgers.edu>
+References: <4701725C.8090406@rci.rutgers.edu>
+Message-ID: <f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+
+FWIW I can confirm that a perl ver of the explot code does kill my xitami
+
+On 10/2/07, Paul Reid <preid at rci.rutgers.edu> wrote:
+> The @RISK newsletter reports that SecurityFocus is listing an Xitami
+> vulnerability:
+>
+> http://www.securityfocus.com/bid/25772/discuss
+>
+> "remote buffer-overflow vulnerability ... execute arbitrary code in the
+> context of the affected application."
+>
+> An exploit in Python code is posted at
+> http://downloads.securityfocus.com/vulnerabilities/exploits/xitami_exp.py
+>
+>
+> --
+> Paul Reid
+> System Administrator
+> Music Department
+> Mason Gross School of the Arts
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From ph at imatix.com  Tue Oct  2 16:26:52 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Tue, 2 Oct 2007 16:26:52 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow
+	Vulnerability
+In-Reply-To: <f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+References: <4701725C.8090406@rci.rutgers.edu>
+	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+Message-ID: <5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>
+
+On 10/2/07, Francis Turner <francis.turner at gmail.com> wrote:
+
+> FWIW I can confirm that a perl ver of the explot code does kill my xitami
+
+Sorry for not responding earlier, I missed the original exploit
+report.  Here is a patch that fixes the code (apply to sfl/sflmime.c):
+
+Index: sflmime.c
+===================================================================
+--- sflmime.c   (revision 10715)
++++ sflmime.c   (working copy)
+@@ -285,7 +285,8 @@
+         min   = 0,
+         sec   = 0;
+     char
+-        month_name [20],
++        mime_safe  [50],
++        month_name [50],
+         buffer     [50],
+         *p_char;
+
+@@ -293,9 +294,13 @@
+     ASSERT (date);
+     ASSERT (time);
+
++    /*  Copy input to safe string for security                               */
++    strncpy (mime_safe, mime_string, 49);
++    mime_safe [50] = 0;
++
+     /*  Whatever format we're looking at, it will start with weekday.        */
+     /*  Skip to first space.                                                 */
+-    if (!(p_char = strchr (mime_string, ' ')))
++    if (!(p_char = strchr (mime_safe, ' ')))
+         return FALSE;
+     else
+         while (isspace (*p_char))
+
+--
+Pieter Hintjens
+iMatix Corporation
+
+
+From francis.turner at gmail.com  Tue Oct  2 17:15:30 2007
+From: francis.turner at gmail.com (Francis Turner)
+Date: Tue, 2 Oct 2007 17:15:30 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow
+	Vulnerability
+In-Reply-To: <5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>
+References: <4701725C.8090406@rci.rutgers.edu>
+	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+	<5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>
+Message-ID: <f83609d50710020815s75684a89pa97477efa7a36f80@mail.gmail.com>
+
+Thanks. Are you going to rebuild the binaries?
+
+PS I assume you are the same Pieter Hintjens who made this award :)
+http://press.ffii.org/Press_releases/FFII_awards_Microsoft_%22Best_Campaigner_against_OOXML_Standardization%22_prize
+
+On 10/2/07, Pieter Hintjens <ph at imatix.com> wrote:
+> On 10/2/07, Francis Turner <francis.turner at gmail.com> wrote:
+>
+> > FWIW I can confirm that a perl ver of the explot code does kill my xitami
+>
+> Sorry for not responding earlier, I missed the original exploit
+> report.  Here is a patch that fixes the code (apply to sfl/sflmime.c):
+>
+> Index: sflmime.c
+> ===================================================================
+> --- sflmime.c   (revision 10715)
+> +++ sflmime.c   (working copy)
+> @@ -285,7 +285,8 @@
+>          min   = 0,
+>          sec   = 0;
+>      char
+> -        month_name [20],
+> +        mime_safe  [50],
+> +        month_name [50],
+>          buffer     [50],
+>          *p_char;
+>
+> @@ -293,9 +294,13 @@
+>      ASSERT (date);
+>      ASSERT (time);
+>
+> +    /*  Copy input to safe string for security                               */
+> +    strncpy (mime_safe, mime_string, 49);
+> +    mime_safe [50] = 0;
+> +
+>      /*  Whatever format we're looking at, it will start with weekday.        */
+>      /*  Skip to first space.                                                 */
+> -    if (!(p_char = strchr (mime_string, ' ')))
+> +    if (!(p_char = strchr (mime_safe, ' ')))
+>          return FALSE;
+>      else
+>          while (isspace (*p_char))
+>
+> --
+> Pieter Hintjens
+> iMatix Corporation
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From ph at imatix.com  Tue Oct  2 17:23:12 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Tue, 2 Oct 2007 17:23:12 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow
+	Vulnerability
+In-Reply-To: <f83609d50710020815s75684a89pa97477efa7a36f80@mail.gmail.com>
+References: <4701725C.8090406@rci.rutgers.edu>
+	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+	<5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>
+	<f83609d50710020815s75684a89pa97477efa7a36f80@mail.gmail.com>
+Message-ID: <5821ea240710020823m50e5f7abjf784ff5586456794@mail.gmail.com>
+
+On 10/2/07, Francis Turner <francis.turner at gmail.com> wrote:
+> Thanks. Are you going to rebuild the binaries?
+
+Am working on this, it'll be a while, the build system is old and creaky.
+
+> PS I assume you are the same Pieter Hintjens who made this award :)
+> http://press.ffii.org/Press_releases/FFII_awards_Microsoft_%22Best_Campaigner_against_OOXML_Standardization%22_prize
+
+Yes, that is one of my little projects...
+
+-Pieter
+
+
+From maurilio.longo at libero.it  Tue Oct  2 17:30:47 2007
+From: maurilio.longo at libero.it (Maurilio Longo)
+Date: Tue, 02 Oct 2007 17:30:47 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer
+ OverflowVulnerability
+References: <4701725C.8090406@rci.rutgers.edu>
+	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+	<5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>
+Message-ID: <47026427.FA0A944A@libero.it>
+
+Pieter,
+
+are there fully (by fully I mean with all the changes done over the years)
+updated/patched sources on xitami site?
+
+Thanks.
+
+Maurilio.
+
+
+Pieter Hintjens ha scritto:
+> 
+> On 10/2/07, Francis Turner <francis.turner at gmail.com> wrote:
+> 
+> > FWIW I can confirm that a perl ver of the explot code does kill my xitami
+> 
+> Sorry for not responding earlier, I missed the original exploit
+> report.  Here is a patch that fixes the code (apply to sfl/sflmime.c):
+> 
+> Index: sflmime.c
+> ===================================================================
+> --- sflmime.c   (revision 10715)
+> +++ sflmime.c   (working copy)
+> @@ -285,7 +285,8 @@
+>          min   = 0,
+>          sec   = 0;
+>      char
+> -        month_name [20],
+> +        mime_safe  [50],
+> +        month_name [50],
+>          buffer     [50],
+>          *p_char;
+> 
+> @@ -293,9 +294,13 @@
+>      ASSERT (date);
+>      ASSERT (time);
+> 
+> +    /*  Copy input to safe string for security                               */
+> +    strncpy (mime_safe, mime_string, 49);
+> +    mime_safe [50] = 0;
+> +
+>      /*  Whatever format we're looking at, it will start with weekday.        */
+>      /*  Skip to first space.                                                 */
+> -    if (!(p_char = strchr (mime_string, ' ')))
+> +    if (!(p_char = strchr (mime_safe, ' ')))
+>          return FALSE;
+>      else
+>          while (isspace (*p_char))
+> 
+> --
+> Pieter Hintjens
+> iMatix Corporation
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-- 
+ __________                   
+|  |  | |__| Maurilio Longo
+|_|_|_|____| farmaconsult s.r.l.
+
+
+From ph at imatix.com  Tue Oct  2 17:36:17 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Tue, 2 Oct 2007 17:36:17 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer
+	OverflowVulnerability
+In-Reply-To: <47026427.FA0A944A@libero.it>
+References: <4701725C.8090406@rci.rutgers.edu>
+	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>
+	<5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>
+	<47026427.FA0A944A@libero.it>
+Message-ID: <5821ea240710020836g6fdafaeev9b316a4096d78257@mail.gmail.com>
+
+On 10/2/07, Maurilio Longo <maurilio.longo at libero.it> wrote:
+
+> are there fully (by fully I mean with all the changes done over the years)
+> updated/patched sources on xitami site?
+
+There have been some updates over the years and we'll probably take
+this opportunity to make a new release.
+
+-Pieter
+
+
+From rolinger1 at hotmail.com  Tue Oct  2 20:07:48 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 02 Oct 2007 11:07:48 -0700
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote
+	BufferOverflowVulnerability
+In-Reply-To: <5821ea240710020836g6fdafaeev9b316a4096d78257@mail.gmail.com>
+Message-ID: <BAY105-F36915F463E209582DCDEE2F8AE0@phx.gbl>
+
+
+Wow, a new release of Xitami!  That would be exciting.  I still run Windows 
+binary v2.4d9 because in my experience it has been the most stable of the 
+follow up releases.  Anyone else comment on stability issues with the more 
+current versions?
+
+-Russel
+
+
+
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+
+
+From: "Pieter Hintjens" <ph at imatix.com>
+Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Subject: Re: [Xitami] Imatix Xitami If-Modified-Since Remote 
+BufferOverflowVulnerability
+Date: Tue, 2 Oct 2007 17:36:17 +0200
+
+On 10/2/07, Maurilio Longo <maurilio.longo at libero.it> wrote:
+
+ > are there fully (by fully I mean with all the changes done over the 
+years)
+ > updated/patched sources on xitami site?
+
+There have been some updates over the years and we'll probably take
+this opportunity to make a new release.
+
+-Pieter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From magus1011 at gmail.com  Tue Oct  2 20:16:07 2007
+From: magus1011 at gmail.com (Magus)
+Date: Tue, 02 Oct 2007 13:16:07 -0500
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote
+	Buffer	OverflowVulnerability
+In-Reply-To: <5821ea240710020836g6fdafaeev9b316a4096d78257@mail.gmail.com>
+References: <4701725C.8090406@rci.rutgers.edu>	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>	<5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>	<47026427.FA0A944A@libero.it>
+	<5821ea240710020836g6fdafaeev9b316a4096d78257@mail.gmail.com>
+Message-ID: <47028AE7.80302@gmail.com>
+
+Pieter Hintjens wrote:
+> On 10/2/07, Maurilio Longo <maurilio.longo at libero.it> wrote:
+>
+>   
+>> are there fully (by fully I mean with all the changes done over the years)
+>> updated/patched sources on xitami site?
+>>     
+>
+> There have been some updates over the years and we'll probably take
+> this opportunity to make a new release.
+>
+> -Pieter
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>   
+Horray! Yes! Thank you Pieter! Any plans to modernise the build system?
+
+-- 
+Best Regards,
+Magus
+
+
+From rolinger1 at hotmail.com  Tue Oct  2 20:33:15 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 02 Oct 2007 11:33:15 -0700
+Subject: [Xitami] Imatix Xitami If-Modified-Since RemoteBuffer
+	OverflowVulnerability
+In-Reply-To: <47028AE7.80302@gmail.com>
+Message-ID: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl>
+
+
+I know Xitami is dead in the sense that iMatix won't continue developing it 
+- beyond the occassional patch - but what kind of cost is required to put 
+life back into Xitami?
+
+Do we have a big enough support group within this forum to contribute to 
+that effort?  If every dedicated lover of Xitami gave $100 (as an example) 
+would that raise enough money for iMatix to pick up the reins again?  If it 
+was an idea worth entertaining by iMatix and everyone on this forum was 
+behind it then I would contribute several hundred $$$s.
+
+Is it worth it?  I think it is.
+
+-Russel
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+
+
+From: Magus <magus1011 at gmail.com>
+Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+To: Xitami Users General Discussion <xitami at lists.xitami.org>
+Subject: Re: [Xitami] Imatix Xitami If-Modified-Since 
+RemoteBuffer	OverflowVulnerability
+Date: Tue, 02 Oct 2007 13:16:07 -0500
+
+Pieter Hintjens wrote:
+ > On 10/2/07, Maurilio Longo <maurilio.longo at libero.it> wrote:
+ >
+ >
+ >> are there fully (by fully I mean with all the changes done over the 
+years)
+ >> updated/patched sources on xitami site?
+ >>
+ >
+ > There have been some updates over the years and we'll probably take
+ > this opportunity to make a new release.
+ >
+ > -Pieter
+ >
+ >
+ > --
+ > Xitami Users Mailing List -- For Xitami support
+ > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+ >
+ >
+Horray! Yes! Thank you Pieter! Any plans to modernise the build system?
+
+--
+Best Regards,
+Magus
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From magus1011 at gmail.com  Tue Oct  2 20:42:42 2007
+From: magus1011 at gmail.com (Magus)
+Date: Tue, 02 Oct 2007 13:42:42 -0500
+Subject: [Xitami] Imatix Xitami If-Modified-Since
+	RemoteBuffer	OverflowVulnerability
+In-Reply-To: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl>
+References: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl>
+Message-ID: <47029122.8040105@gmail.com>
+
+R O wrote:
+> I know Xitami is dead in the sense that iMatix won't continue developing it 
+> - beyond the occassional patch - but what kind of cost is required to put 
+> life back into Xitami?
+>
+> Do we have a big enough support group within this forum to contribute to 
+> that effort?  If every dedicated lover of Xitami gave $100 (as an example) 
+> would that raise enough money for iMatix to pick up the reins again?  If it 
+> was an idea worth entertaining by iMatix and everyone on this forum was 
+> behind it then I would contribute several hundred $$$s.
+>
+> Is it worth it?  I think it is.
+>
+> -Russel
+>
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1 at hotmail.com
+>
+>
+>
+>
+>
+> From: Magus <magus1011 at gmail.com>
+> Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> Subject: Re: [Xitami] Imatix Xitami If-Modified-Since 
+> RemoteBuffer	OverflowVulnerability
+> Date: Tue, 02 Oct 2007 13:16:07 -0500
+>
+> Pieter Hintjens wrote:
+>  > On 10/2/07, Maurilio Longo <maurilio.longo at libero.it> wrote:
+>  >
+>  >
+>  >> are there fully (by fully I mean with all the changes done over the 
+> years)
+>  >> updated/patched sources on xitami site?
+>  >>
+>  >
+>  > There have been some updates over the years and we'll probably take
+>  > this opportunity to make a new release.
+>  >
+>  > -Pieter
+>  >
+>  >
+>  > --
+>  > Xitami Users Mailing List -- For Xitami support
+>  > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>  >
+>  >
+> Horray! Yes! Thank you Pieter! Any plans to modernise the build system?
+>
+> --
+> Best Regards,
+> Magus
+>
+>   
+Well Russel I'm on Canadian Pension and Disability so I can't afford 
+$100, but I can afford $10. I would hate to see Xitami just sit and 
+fester since I really do think it's one of the best Web Servers around. 
+Will this help any Pieter?
+
+-- 
+Best Regards,
+Magus.
+
+
+From ronackgen01 at bellsouth.net  Tue Oct  2 23:30:56 2007
+From: ronackgen01 at bellsouth.net (General)
+Date: Tue, 2 Oct 2007 17:30:56 -0400
+Subject: [Xitami] Imatix Xitami
+	If-Modified-Since	RemoteBuffer	OverflowVulnerability
+In-Reply-To: <47029122.8040105@gmail.com>
+References: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl>
+	<47029122.8040105@gmail.com>
+Message-ID: <009701c8053b$852198c0$8f64ca40$@net>
+
+I would make a donation but not for a few months down the road when I get
+the next check from Google. Right now it takes 4-5 months because I don't
+get that much traffic.
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Magus
+Sent: Tuesday, October 02, 2007 2:43 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Imatix Xitami If-Modified-Since RemoteBuffer
+OverflowVulnerability
+
+R O wrote:
+> I know Xitami is dead in the sense that iMatix won't continue developing
+it 
+> - beyond the occassional patch - but what kind of cost is required to put 
+> life back into Xitami?
+>
+> Do we have a big enough support group within this forum to contribute to 
+> that effort?  If every dedicated lover of Xitami gave $100 (as an example)
+
+> would that raise enough money for iMatix to pick up the reins again?  If
+it 
+> was an idea worth entertaining by iMatix and everyone on this forum was 
+> behind it then I would contribute several hundred $$$s.
+>
+> Is it worth it?  I think it is.
+>
+> -Russel
+>
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1 at hotmail.com
+>
+>
+>
+>
+>
+> From: Magus <magus1011 at gmail.com>
+> Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> Subject: Re: [Xitami] Imatix Xitami If-Modified-Since 
+> RemoteBuffer	OverflowVulnerability
+> Date: Tue, 02 Oct 2007 13:16:07 -0500
+>
+> Pieter Hintjens wrote:
+>  > On 10/2/07, Maurilio Longo <maurilio.longo at libero.it> wrote:
+>  >
+>  >
+>  >> are there fully (by fully I mean with all the changes done over the 
+> years)
+>  >> updated/patched sources on xitami site?
+>  >>
+>  >
+>  > There have been some updates over the years and we'll probably take
+>  > this opportunity to make a new release.
+>  >
+>  > -Pieter
+>  >
+>  >
+>  > --
+>  > Xitami Users Mailing List -- For Xitami support
+>  > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>  >
+>  >
+> Horray! Yes! Thank you Pieter! Any plans to modernise the build system?
+>
+> --
+> Best Regards,
+> Magus
+>
+>   
+Well Russel I'm on Canadian Pension and Disability so I can't afford 
+$100, but I can afford $10. I would hate to see Xitami just sit and 
+fester since I really do think it's one of the best Web Servers around. 
+Will this help any Pieter?
+
+-- 
+Best Regards,
+Magus.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition. 
+Version: 7.5.488 / Virus Database: 269.13.37/1042 - Release Date: 10/1/2007
+6:59 PM
+
+
+From marc at verfaillie.be  Wed Oct  3 08:22:15 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Wed, 3 Oct 2007 08:22:15 +0200
+Subject: [Xitami] Imatix (was something about OverflowVulnerability)
+References: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl><47029122.8040105@gmail.com>
+	<009701c8053b$852198c0$8f64ca40$@net>
+Message-ID: <004601c80585$bde72310$1dbebebe@VERFAILLIE5>
+
+No problem to make a donation for 100 euro (not dollars).
+
+marc
+
+----- Original Message -----
+From: "General" <ronackgen01 at bellsouth.net>
+To: "'Xitami Users General Discussion'" <xitami at lists.xitami.org>
+Sent: Tuesday, October 02, 2007 11:30 PM
+Subject: Re: [Xitami] Imatix XitamiIf-Modified-Since RemoteBuffer
+OverflowVulnerability
+
+
+> I would make a donation but not for a few months down the road when I get
+> the next check from Google. Right now it takes 4-5 months because I don't
+> get that much traffic.
+>
+> Ron
+
+
+From ph at imatix.com  Wed Oct  3 09:34:06 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Wed, 3 Oct 2007 09:34:06 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since RemoteBuffer
+	OverflowVulnerability
+In-Reply-To: <47029122.8040105@gmail.com>
+References: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl>
+	<47029122.8040105@gmail.com>
+Message-ID: <5821ea240710030034s40e152faja8770c8c1e1fbbbb@mail.gmail.com>
+
+On 10/2/07, Magus <magus1011 at gmail.com> wrote:
+
+> > I know Xitami is dead in the sense that iMatix won't continue developing it
+> > - beyond the occassional patch - but what kind of cost is required to put
+> > life back into Xitami?
+
+:-/  Surely there are alternatives to Xitami?
+
+What we'll try to do is fix the build system and make a new website,
+wiki based.  Anyone who wants to will be able to contribute to the
+site, documentation, etc.  Any developers who feel like getting into
+the code will be welcome.
+
+I'll help the community, if there is one willing to spend time on the software.
+
+-Pieter
+
+
+From mw at 9000.org  Wed Oct  3 09:53:16 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Wed, 03 Oct 2007 09:53:16 +0200
+Subject: [Xitami] Imatix Xitami If-Modified-Since RemoteBuffer
+	OverflowVulnerability
+In-Reply-To: <5821ea240710030034s40e152faja8770c8c1e1fbbbb@mail.gmail.com>
+References: <BAY105-F21942975EA8DAAE0EC3324F8AE0@phx.gbl>	<47029122.8040105@gmail.com>
+	<5821ea240710030034s40e152faja8770c8c1e1fbbbb@mail.gmail.com>
+Message-ID: <47034A6C.3000708@9000.org>
+
+Pieter Hintjens wrote, On 2007-10-03 09:34:
+> On 10/2/07, Magus <magus1011 at gmail.com> wrote:
+> 
+>>> I know Xitami is dead in the sense that iMatix won't continue developing it
+>>> - beyond the occassional patch - but what kind of cost is required to put
+>>> life back into Xitami?
+> 
+> :-/  Surely there are alternatives to Xitami?
+
+Actually there is a great alternative, and that is lighttpd, which is 
+actively developed and have pretty much exactly the same design goals as 
+Xitami once had. Especially for Linux the choice is clear, the Windows 
+port isn't super hot (but works and is getting better).
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From bkowald at synergybroadcast.com  Mon Oct  8 14:15:18 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Mon, 8 Oct 2007 07:15:18 -0500
+Subject: [Xitami] Xitami still crashing
+Message-ID: <5BA6EC56479B8F49AB43C808445E031EB67D5B@sbsserver.tiltrac.local>
+
+
+Could Xitami crashing be a multi-processor issue? We have run fine for
+years before switching to faster processors which also happen to be dual
+core processors.
+
+
+From bogus@does.not.exist.com  Thu Oct  4 06:45:20 2007
+From: bogus@does.not.exist.com ()
+Date: Thu, 04 Oct 2007 04:45:20 -0000
+Subject: No subject
+Message-ID: <mailman.0.1191845741.7103.xitami@lists.xitami.org>
+
+=20
+05/Oct/2007:18:15:03 -0500 Xitami/2.4d11
+Abort at smthttp:Cancel-Wsx-Alias: (Master-Input, Wsx-Cancel-Event
+
+)07/Oct/2007:07:58:10 -0500 Xitami/2.4d11
+Abort at smtsock:Signal-Read-Closed:ESX (After-Reading, Closed-Event)
+
+07/Oct/2007:08:43:43 -0500 Xitami/2.4d11
+Abort at smthttp:Cancel-Wsx-Alias: (Master-Input, Wsx-Cancel-Event)
+=20
+=20
+This looks to be this function:
+=20
+MODULE cancel_wsx_alias (THREAD *thread)
+{
+    struct_smt_wsx_cancel
+        *request;
+    char
+        *alias_path;                    /*  vhost:path
+*/
+    SYMBOL
+        *symbol;
+=20
+    tcb =3D thread-> tcb;                 /*  Point to thread's context
+*/
+=20
+    get_smt_wsx_cancel (thread-> event-> body, (void **) &request);
+    alias_path =3D make_wsx_path (request-> virtual_host, request-> =
+path);
+    symbol =3D sym_lookup_symbol (wsx_aliases, alias_path);
+    if (symbol)
+        sym_delete_symbol (wsx_aliases, symbol);
+    mem_free (alias_path);
+    free_smt_wsx_cancel ((void **) &request);
+}
+
+The make_wsx_path function calls a function called xstrcpy()
+that concatenates multiple strings into a single result plus a function
+called
+strlwc that loops thru the entire string and converts all alphabetic
+characters in to lowercase.
+It's probably blowing in one of these functions.=20
+=20
+The exception generated was c0000005 at address 7C910F29 (ntdll!wcsncpy)
+
+
+Thanks,
+
+Brian Kowald
+Engineer
+Synergy Broadcast Systems
+
+
+From preid at rci.rutgers.edu  Tue Oct  9 04:36:07 2007
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Mon, 08 Oct 2007 22:36:07 -0400
+Subject: [Xitami] Imatix Xitami If-Modified-Since Remote Buffer Overflow
+ Vulnerability
+In-Reply-To: <5821ea240710020823m50e5f7abjf784ff5586456794@mail.gmail.com>
+References: <4701725C.8090406@rci.rutgers.edu>	<f83609d50710020447y1acb15b1o6282831735d0658d@mail.gmail.com>	<5821ea240710020726y6f6fb6c0k7dd25e3c67f79509@mail.gmail.com>	<f83609d50710020815s75684a89pa97477efa7a36f80@mail.gmail.com>
+	<5821ea240710020823m50e5f7abjf784ff5586456794@mail.gmail.com>
+Message-ID: <470AE917.1020508@rci.rutgers.edu>
+
+ >> Are you going to rebuild the binaries?
+
+ > it'll be a while, the build system is old and creaky.
+
+FWIW, the website still has a July 2004 copy of 2.4
+
+Nobody has a copy of old MSC? I used to, but I can't find it.
+
+ > :-/  Surely there are alternatives to Xitami?
+
+Nothing as clean and elegant as Xitami!!!!!
+
+Going way back to the mid 1990s.... my boss wanted a webserver. I found 
+a 386-25 w/8MB RAM. Someone said that Win NT 4 had a "free" webserver, 
+and I used it. PWS, a cut-down of IIS. But I didn't like it. It smelled 
+like hacker-bait to me (and as we now know, IIS was riddled with buffer 
+and dot-dot vulnerabilities). It didn't do CGI (without ridiculous 
+hacks), because they wanted you to use (buy) MS Studio to write MS-style 
+applications. Configuration looked easier than it really was.
+
+Someone gave me a 386 SX 16 with 2MB. It was an awful web surfer, but 
+with XITAMI it turned out to be a much better web server. The only major 
+flaw was W4WG 3.11's TCP stack falling down every week. A while later I 
+moved it to a machine which would run the fairly stable NT stack, and 
+that same day I had CGI programs working under Xitami. First raw DOS BAT 
+files, then QuickBasic for DOS. I ported a major CGI to Visual Basic 
+only for ease of large (>32KB) array handling.
+
+Xitami is fairly easy to set up, even v-hosts and FTP. The HTTP service 
+is very stable, the FTP service was reasonably stable until every ISP 
+started filtering FTP. I always felt that MS IIS was written by 
+enthusiastic children who did not understand that the internet is full 
+of hostile attacks. I feel that Xitami was written with healthy 
+skepticism, and history has shown this to be true.
+
+However... events forced me to port my CGI to PHP on someone else's 
+Apache server. Fine. Then I took over the server and tried to run Xitami 
+with PHP. That works until you need CGI Server variables. Apache returns 
+wrong (non-standard) variables. PHP has been coded to work with Apache. 
+So after a no-joy day of trying to configure Xitami and PHP to run my 
+CGI, I threw Apache on and it worked right away.
+
+Apache on NT/XP O/S is very mature and quite stable. It has a vast 
+audience and any new vulnerabilities get noticed and fixed real quick.
+
+Setup of complex Apache servers is a major headache. One little typo in 
+the conf file and you are hosed. I'd much rather play with Xitami than 
+be a slave to Apache.
+
+If not for the PHP thing, I might still be using Xitami everywhere.
+
+As Magnus says, there ARE good alternatives, even on Windows, like 
+lighttpd, Roxen, Yaws, etc.
+
+Apache has no FTP server. I'm currently using FileZilla Server, which is 
+undocumented but fairly easy to use.
+
+ > Will this help any Pieter?
+
+I think it needs more than a few $10 and 100E contributions to chain 
+someone to the project long enough to understand the code. I've looked 
+at it, and know I can't offer to maintain it, even if you paid me. I'd 
+just mess it up. I'm not hearing that anybody else has looked at it. 
+Pieter has better things to do (bravo on the MS award!).
+
+  -PRR
+
+
+From stan.laughlin at usu.edu  Thu Oct 11 04:23:52 2007
+From: stan.laughlin at usu.edu (Stan Laughlin)
+Date: Wed, 10 Oct 2007 20:23:52 -0600
+Subject: [Xitami] no msvc
+Message-ID: <620CF38E5B235B4CAEA9B26642B51B4735B503E5E9@exchg-be04.aggies.usu.edu>
+
+xitami users,
+I have successfuly used xitami for 3 years on an XP laptop.  Loaded locally.
+Worked wonderfully.  Used to test files prior to sending to production server.
+
+Recentlly migrated to newer laptop.  XP.
+Downloaded Xitami 2.5 today.
+It will not install.
+ This is the error when I run build.bat:
+C:\xitami>build.bat
+"Cannot find MSVC compiler in C:\Program Files\Microsoft Office\OFFICE11\VS Runtime."
+"Please set MSVCDir environment variable to VC98 directory."
+
+OK.  Did that via Control Panel --> system --> etc.  Log off.
+No difference.  Shut down.  No difference.  Changed paths all over the place.  Log Off, repeatedly.
+I can't make this thing work.
+
+Machine has studio pro 8 and vb.net installed.
+Uninstalled ALL net and studio stuff.
+Visual Basic 6 is left.  (I have a legacy thing on another machine.)  Earlier Xitami worked on this level of install.
+
+Searched drive for MSVC.  Huge number of path options but no VC98.
+
+I know it can't be this hard.  What the heck am i missing?
+I am not interested in doing anything exotic.  I just want to test html, perl, cgi, php things.
+
+I think Xitami is very efficient for this but what happened?
+
+What is MSVC anyway?  I Googled it and still don't understand what the heck is going on.
+
+Thanks.
+stan
+
+
+From bkowald at synergybroadcast.com  Thu Oct 11 04:27:45 2007
+From: bkowald at synergybroadcast.com (Brian Kowald)
+Date: Wed, 10 Oct 2007 21:27:45 -0500
+Subject: [Xitami] no msvc
+Message-ID: <5BA6EC56479B8F49AB43C808445E031EB67DEB@sbsserver.tiltrac.local>
+
+We have built Xitami with Visual 6. It could be looking for that
+compiler specifically. In addition to the VC compiler, you probably need
+the latest windows platform sdk.
+
+Why don't you just put on the binary and not worry about building it?
+
+Brian
+
+
+-----Original Message-----
+From: Stan Laughlin [mailto:stan.laughlin at usu.edu] 
+Sent: Wednesday, October 10, 2007 9:24 PM
+To: xitami at lists.xitami.org
+Subject: [Xitami] no msvc
+
+
+xitami users,
+I have successfuly used xitami for 3 years on an XP laptop.  Loaded
+locally. Worked wonderfully.  Used to test files prior to sending to
+production server.
+
+Recentlly migrated to newer laptop.  XP.
+Downloaded Xitami 2.5 today.
+It will not install.
+ This is the error when I run build.bat:
+C:\xitami>build.bat
+"Cannot find MSVC compiler in C:\Program Files\Microsoft
+Office\OFFICE11\VS Runtime." "Please set MSVCDir environment variable to
+VC98 directory."
+
+OK.  Did that via Control Panel --> system --> etc.  Log off. No
+difference.  Shut down.  No difference.  Changed paths all over the
+place.  Log Off, repeatedly. I can't make this thing work.
+
+Machine has studio pro 8 and vb.net installed.
+Uninstalled ALL net and studio stuff.
+Visual Basic 6 is left.  (I have a legacy thing on another machine.)
+Earlier Xitami worked on this level of install.
+
+Searched drive for MSVC.  Huge number of path options but no VC98.
+
+I know it can't be this hard.  What the heck am i missing?
+I am not interested in doing anything exotic.  I just want to test html,
+perl, cgi, php things.
+
+I think Xitami is very efficient for this but what happened?
+
+What is MSVC anyway?  I Googled it and still don't understand what the
+heck is going on.
+
+Thanks.
+stan
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From magus1011 at gmail.com  Thu Oct 11 05:24:41 2007
+From: magus1011 at gmail.com (Magus)
+Date: Wed, 10 Oct 2007 22:24:41 -0500
+Subject: [Xitami] no msvc
+In-Reply-To: <620CF38E5B235B4CAEA9B26642B51B4735B503E5E9@exchg-be04.aggies.usu.edu>
+References: <620CF38E5B235B4CAEA9B26642B51B4735B503E5E9@exchg-be04.aggies.usu.edu>
+Message-ID: <470D9779.6070101@gmail.com>
+
+Stan Laughlin typed the following on 2007/10/10 21:23:
+> xitami users,
+> I have successfuly used xitami for 3 years on an XP laptop.  Loaded locally.
+> Worked wonderfully.  Used to test files prior to sending to production server.
+> 
+> Recentlly migrated to newer laptop.  XP.
+> Downloaded Xitami 2.5 today.
+> It will not install.
+>  This is the error when I run build.bat:
+> C:\xitami>build.bat
+> "Cannot find MSVC compiler in C:\Program Files\Microsoft Office\OFFICE11\VS Runtime."
+> "Please set MSVCDir environment variable to VC98 directory."
+> 
+> OK.  Did that via Control Panel --> system --> etc.  Log off.
+> No difference.  Shut down.  No difference.  Changed paths all over the place.  Log Off, repeatedly.
+> I can't make this thing work.
+> 
+> Machine has studio pro 8 and vb.net installed.
+> Uninstalled ALL net and studio stuff.
+> Visual Basic 6 is left.  (I have a legacy thing on another machine.)  Earlier Xitami worked on this level of install.
+> 
+> Searched drive for MSVC.  Huge number of path options but no VC98.
+> 
+> I know it can't be this hard.  What the heck am i missing?
+> I am not interested in doing anything exotic.  I just want to test html, perl, cgi, php things.
+> 
+> I think Xitami is very efficient for this but what happened?
+> 
+> What is MSVC anyway?  I Googled it and still don't understand what the heck is going on.
+> 
+> Thanks.
+> stan
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+I built Xitami with M$ Visual C version 6 which _does_ have the VC98
+Complier where required. I built under Windows 2000 with no problems. I
+too tried with other versions of M$VC and ran into much the same
+problems that you have. I suggest that if you cannot get a copy of M$VC
+6 then you install the binary version of Xitami.
+
+I hope this helps.
+
+-- 
+Best Regards,
+Magus.
+
+
+From rickhead at gmail.com  Thu Oct 11 11:32:29 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Thu, 11 Oct 2007 06:32:29 -0300
+Subject: [Xitami] vista & multi-core processors
+Message-ID: <11689a700710110232l3cb38d2ct901ea78d03097c4@mail.gmail.com>
+
+hello,
+
+i know it was asked here once before, how well xitami runs under vista... as
+well as more recent questions about xitami's existence with dual and/or
+multi-core processors, but i'm yet to see any follow-up.
+
+i'm currently in a position where my main web-serving machine is
+getting rather old and ragged, and i'm seriously considering replacing it
+with something either new, or slightly pre-owned.  it seems that most of the
+newer factory built pc's these days, are rolling off the line with
+multi-core processors and win-vista pre-loaded... and though i have a
+history of avoiding factory-built pc's, it may be the most cost effective
+way at this point, to quickly get the most bang for my buck.
+
+there is a great deal of confusion as well, picking and choosing between
+vista home basic, vista home premium, vista ultimate... or the 32 vs. 64 bit
+versions thereof.
+
+i would kindly appreciate some feedback from those of you who may have
+already tested xitami in these environments, and perhaps some comments and
+suggestions on what i should be looking for to go the long-haul, trouble
+free (as possible), while keeping my costs to a minimum.
+
+thank you
+
+rick
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071011/a52085aa/attachment.htm 
+
+From marc at verfaillie.be  Thu Oct 11 11:42:09 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Thu, 11 Oct 2007 11:42:09 +0200
+Subject: [Xitami] vista & multi-core processors
+References: <11689a700710110232l3cb38d2ct901ea78d03097c4@mail.gmail.com>
+Message-ID: <002001c80bea$fe13c360$1dbebebe@VERFAILLIE5>
+
+----- Original Message -----
+From: Rick Headly
+To: Xitami Users General Discussion
+Sent: Thursday, October 11, 2007 11:32 AM
+Subject: [Xitami] vista & multi-core processors
+
+
+hello,
+
+i know it was asked here once before, how well xitami runs under vista... as
+well as more recent questions about xitami's existence with dual and/or
+multi-core processors, but i'm yet to see any follow-up.
+
+i'm currently in a position where my main web-serving machine is getting
+rather old and ragged, and i'm seriously considering replacing it with
+something either new, or slightly pre-owned.  it seems that most of the
+newer factory built pc's these days, are rolling off the line with
+multi-core processors and win-vista pre-loaded... and though i have a
+history of avoiding factory-built pc's, it may be the most cost effective
+way at this point, to quickly get the most bang for my buck.
+
+there is a great deal of confusion as well, picking and choosing between
+vista home basic, vista home premium, vista ultimate... or the 32 vs. 64 bit
+versions thereof.
+
+i would kindly appreciate some feedback from those of you who may have
+already tested xitami in these environments, and perhaps some comments and
+suggestions on what i should be looking for to go the long-haul, trouble
+free (as possible), while keeping my costs to a minimum.
+
+thank you
+
+rick
+
+
+I've worked with Vista, and my comments are:
+BUY A XP MACHINE AS SOON AS POSSIBLE (WHILE STOCKS LAST);
+It can be a Dell or a HP (business PC)
+
+Just plugging a scanner in the usb port can crash Vista.
+Printing a simple page takes 4 minutes.
+and so on...
+For a webserver a 32 bit version is enough. I run my servers on old PIII
+600MHz systems (win 98SE to XP pro).
+
+
+From rickhead at gmail.com  Thu Oct 11 12:54:01 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Thu, 11 Oct 2007 07:54:01 -0300
+Subject: [Xitami] vista & multi-core processors
+In-Reply-To: <002001c80bea$fe13c360$1dbebebe@VERFAILLIE5>
+References: <11689a700710110232l3cb38d2ct901ea78d03097c4@mail.gmail.com>
+	<002001c80bea$fe13c360$1dbebebe@VERFAILLIE5>
+Message-ID: <11689a700710110354n7494ed5cr2ab9cb203bece077@mail.gmail.com>
+
+thank you marc!
+
+with this in mind, i will probably go with something slightly used, and
+simply load  my own 32-bit version of xp-pro sp2.
+
+i currently run xitami under xp-pro on two older machines (an amd 500, and
+celeron 600), both with 512 mb of ram... and thought it seems to
+work alright overall, i figure things could be a lot more efficient with
+larger, faster sata drives.
+
+one of my xitami boxes has a strange hardware related issue, periodically
+causing the ide drives to "not be found".  this can happen both when the
+machine is left completely undisturbed, or most often when i walk too
+heavily on the floor as i'm passing by... as if something is getting knocked
+loose inside the chassis.  jiggling the ide cables just 'the right way'
+seems to correct this problem... but replacing the cables does not.
+regardless, it is an issue that seems to cause me unexpected down-time grief
+every 3 or 4 months or so, and something i'd rather just replace and put
+behind me.
+
+i'm sure a faster processor (with more ram) as well, would help make general
+maintenance a lot less painful, and possibly even encourage me to add more
+dynamic content to my sites.
+
+thanks again
+
+rick
+
+
+On 10/11/07, Marc Doigny <marc at verfaillie.be> wrote:
+>
+> > ----- Original Message -----
+> > Sent: Thursday, October 11, 2007 11:32 AM
+> > Subject: [Xitami] vista & multi-core processors
+> >
+> >
+> > I've worked with Vista, and my comments are:
+> > BUY A XP MACHINE AS SOON AS POSSIBLE (WHILE STOCKS LAST);
+> > It can be a Dell or a HP (business PC)
+> >
+> > Just plugging a scanner in the usb port can crash Vista.
+> > Printing a simple page takes 4 minutes.
+> > and so on...
+> > For a webserver a 32 bit version is enough. I run my servers on old PIII
+> > 600MHz systems (win 98SE to XP pro).
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071011/90e6c919/attachment.htm 
+
+From stan.laughlin at usu.edu  Thu Oct 11 15:48:11 2007
+From: stan.laughlin at usu.edu (Stan Laughlin)
+Date: Thu, 11 Oct 2007 07:48:11 -0600
+Subject: [Xitami] no msvc
+In-Reply-To: <5BA6EC56479B8F49AB43C808445E031EB67DEB@sbsserver.tiltrac.local>
+Message-ID: <620CF38E5B235B4CAEA9B26642B51B4735B4F12511@exchg-be04.aggies.usu.edu>
+
+Binary works. I don't know why I didn't just do that.
+Thanks.
+stan
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org [mailto:xitami-bounces at lists.xitami.org] On Behalf Of Brian Kowald
+Sent: Wednesday, October 10, 2007 8:28 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] no msvc
+
+We have built Xitami with Visual 6. It could be looking for that compiler specifically. In addition to the VC compiler, you probably need the latest windows platform sdk.
+
+Why don't you just put on the binary and not worry about building it?
+
+Brian
+
+
+-----Original Message-----
+From: Stan Laughlin [mailto:stan.laughlin at usu.edu]
+Sent: Wednesday, October 10, 2007 9:24 PM
+To: xitami at lists.xitami.org
+Subject: [Xitami] no msvc
+
+
+xitami users,
+I have successfuly used xitami for 3 years on an XP laptop.  Loaded locally. Worked wonderfully.  Used to test files prior to sending to production server.
+
+Recentlly migrated to newer laptop.  XP.
+Downloaded Xitami 2.5 today.
+It will not install.
+ This is the error when I run build.bat:
+C:\xitami>build.bat
+"Cannot find MSVC compiler in C:\Program Files\Microsoft Office\OFFICE11\VS Runtime." "Please set MSVCDir environment variable to
+VC98 directory."
+
+OK.  Did that via Control Panel --> system --> etc.  Log off. No difference.  Shut down.  No difference.  Changed paths all over the place.  Log Off, repeatedly. I can't make this thing work.
+
+Machine has studio pro 8 and vb.net installed.
+Uninstalled ALL net and studio stuff.
+Visual Basic 6 is left.  (I have a legacy thing on another machine.) Earlier Xitami worked on this level of install.
+
+Searched drive for MSVC.  Huge number of path options but no VC98.
+
+I know it can't be this hard.  What the heck am i missing?
+I am not interested in doing anything exotic.  I just want to test html, perl, cgi, php things.
+
+I think Xitami is very efficient for this but what happened?
+
+What is MSVC anyway?  I Googled it and still don't understand what the heck is going on.
+
+Thanks.
+stan
+
+
+--
+Xitami Users Mailing List -- For Xitami support To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From stan.laughlin at usu.edu  Thu Oct 11 15:48:35 2007
+From: stan.laughlin at usu.edu (Stan Laughlin)
+Date: Thu, 11 Oct 2007 07:48:35 -0600
+Subject: [Xitami] no msvc
+In-Reply-To: <470D9779.6070101@gmail.com>
+Message-ID: <620CF38E5B235B4CAEA9B26642B51B4735B4F12512@exchg-be04.aggies.usu.edu>
+
+Binary works.
+Thanks.
+
+
+
+stan
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org [mailto:xitami-bounces at lists.xitami.org] On Behalf Of Magus
+Sent: Wednesday, October 10, 2007 9:25 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] no msvc
+
+Stan Laughlin typed the following on 2007/10/10 21:23:
+> xitami users,
+> I have successfuly used xitami for 3 years on an XP laptop.  Loaded locally.
+> Worked wonderfully.  Used to test files prior to sending to production server.
+>
+> Recentlly migrated to newer laptop.  XP.
+> Downloaded Xitami 2.5 today.
+> It will not install.
+>  This is the error when I run build.bat:
+> C:\xitami>build.bat
+> "Cannot find MSVC compiler in C:\Program Files\Microsoft Office\OFFICE11\VS Runtime."
+> "Please set MSVCDir environment variable to VC98 directory."
+>
+> OK.  Did that via Control Panel --> system --> etc.  Log off.
+> No difference.  Shut down.  No difference.  Changed paths all over the place.  Log Off, repeatedly.
+> I can't make this thing work.
+>
+> Machine has studio pro 8 and vb.net installed.
+> Uninstalled ALL net and studio stuff.
+> Visual Basic 6 is left.  (I have a legacy thing on another machine.)  Earlier Xitami worked on this level of install.
+>
+> Searched drive for MSVC.  Huge number of path options but no VC98.
+>
+> I know it can't be this hard.  What the heck am i missing?
+> I am not interested in doing anything exotic.  I just want to test html, perl, cgi, php things.
+>
+> I think Xitami is very efficient for this but what happened?
+>
+> What is MSVC anyway?  I Googled it and still don't understand what the heck is going on.
+>
+> Thanks.
+> stan
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+I built Xitami with M$ Visual C version 6 which _does_ have the VC98 Complier where required. I built under Windows 2000 with no problems. I too tried with other versions of M$VC and ran into much the same problems that you have. I suggest that if you cannot get a copy of M$VC
+6 then you install the binary version of Xitami.
+
+I hope this helps.
+
+--
+Best Regards,
+Magus.
+
+
+--
+Xitami Users Mailing List -- For Xitami support To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From rolinger1 at hotmail.com  Fri Oct 12 23:13:03 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Fri, 12 Oct 2007 14:13:03 -0700
+Subject: [Xitami] Memory allocation
+Message-ID: <BAY105-DAV677BFC8AD915E6F5D950FF8A00@phx.gbl>
+
+I know Xitami uses a small amount of memory to run, but is there anyway to provde the application more memory so that if it needs it, it is available.  I have a server with 6Gb of memory on Win2003 Server and I want to ensure Xitami has more than enough memory dedicated to it.  
+
+The biggest slow down of the server is watching cgi-bin scripts kick off.  I would like to dedicate more memory to Xitami and CGI stuff.
+
+Thoughts?
+
+-R
+
+PS:  I still really really (did I say really) like the talks about someone picking up and continuing with Xitami again.  :-)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071012/c31e6d32/attachment.htm 
+
+From preid at rci.rutgers.edu  Sat Oct 13 00:25:53 2007
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Fri, 12 Oct 2007 18:25:53 -0400
+Subject: [Xitami] Memory allocation
+In-Reply-To: <BAY105-DAV677BFC8AD915E6F5D950FF8A00@phx.gbl>
+References: <BAY105-DAV677BFC8AD915E6F5D950FF8A00@phx.gbl>
+Message-ID: <470FF471.30602@rci.rutgers.edu>
+
+ >  is there anyway to provde the application more memory so that if it 
+needs it, it is available.
+
+It's not Mac OS/6. Any 32-bit Win-app can request 2GB at any time. The 
+whole point of virtual memory is that the app does not know if the 2GB 
+is DRAM or hard drive or small angels with clay tablets.
+
+I've run Xitami and CGI in 8MB (obviously not Win2003). If a runaway 
+script asks for 6MB, so the total system demand is 12MB in 8MB RAM, the 
+request is satisfied though the system gets slow. The fix is to be sure 
+you always have that 5MB (or whatever) to spare.
+
+Use Task Manager. "PF Usage" should flutter far below the Physical 
+Memory number. Launching a CGI interpreter will spike it; VB6 runtime 
+loads over 1MB of junk into RAM, but gives it back when it exits.
+
+My Xitami on Win2003 box is idling at 173MB total. Xitami is 5th on the 
+process list with about 5MB used. Launching a small Perl script barely 
+registers.
+
+Task Manager also shows CPU Usage. When code is not waiting on disk or 
+I/O, this always spikes to 100%, but if it spikes and falls in a blink 
+then you are not really limited by CPU.
+
+ >  with 6Gb of memory
+
+I think Xitami has more than enough memory. Also VB, Perl, PHP.
+
+ > The biggest slow down of the server is watching cgi-bin scripts kick off.
+
+What interpreter, and how heavy are the scripts? Even back in 133MHz 
+128MB RAM days, we could get away with quite sloppy code. One of my 
+scripts opens and reads several text files, twice, because it was less 
+programmer work than doing it once and the result was plenty fast. 
+Another one must skim every file in a folder to get type and summary 
+info, and it runs in a blink. If you are opening gigabyte databases, you 
+probably don't want the script doing that, you want a persistent 
+database server application which is already primed when the CGI asks 
+for data.
+
+Apache has a way to keep PHP running all the time so you don't suffer a 
+PHP interpreter load on every hit. But that only helps if you have a LOT 
+of hits on scripts so easy that interpreter load-time exceeds script 
+runtime.
+
+Interpreted scripts can sometimes be compiled, and run somewhat faster, 
+if they are not disk-bound.
+
+In short: you need to know what's really taking time, and what resource 
+it is bound in. And with 6GB, it seems unlikely that RAM-cram or memory 
+allocation is the problem.
+
+-- 
+Paul Reid
+System Administrator
+Music Department
+Mason Gross School of the Arts
+
+
+From mw at 9000.org  Sat Oct 13 01:09:22 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Sat, 13 Oct 2007 01:09:22 +0200
+Subject: [Xitami] Memory allocation
+In-Reply-To: <470FF471.30602@rci.rutgers.edu>
+References: <BAY105-DAV677BFC8AD915E6F5D950FF8A00@phx.gbl>
+	<470FF471.30602@rci.rutgers.edu>
+Message-ID: <470FFEA2.6080507@9000.org>
+
+Paul Reid wrote, On 2007-10-13 00:25:
+
+> Apache has a way to keep PHP running all the time so you don't suffer a 
+> PHP interpreter load on every hit.
+
+So does IIS, and Netscape-compatible servers.
+
+>  But that only helps if you have a LOT
+> of hits on scripts so easy that interpreter load-time exceeds script 
+> runtime.
+
+Or if you have slow hardware. On my old server, a Pentium 200MMX with 
+96MB RAM, the time it took to start the command interpreter + php.exe 
+was clearly noticeable for every php page load. That meant that a very 
+fast piece of software (Xitami) turned very slow. Although Apache was 
+way slower for static content, and ate more resources, it still beat 
+Xitami with a significant margin on PHP just because it didn't have to 
+create new processes all the time.
+
+On fast hardware this won't be as noticeable, but it's still a factor, 
+and might be a problem under heavy loads as lots of processor time will 
+be spent on creating and closing processes.
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From rolinger1 at hotmail.com  Sat Oct 13 01:34:33 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Fri, 12 Oct 2007 16:34:33 -0700
+Subject: [Xitami] Memory allocation
+References: <BAY105-DAV677BFC8AD915E6F5D950FF8A00@phx.gbl>
+	<470FF471.30602@rci.rutgers.edu>
+Message-ID: <BAY105-DAV12A35B0049FDC13413F203F8A00@phx.gbl>
+
+Good info, thanks.
+
+For more specifics:
+Server: HP DL380 G2, Dual Processor, 6Gb RAM, 6 146Gb RAID-5 drives, SCSI 
+1Gb controller
+OS: Windows 2003 Enterprise Server (32Bit) with /pae boot.ini option 
+(extended memory from 4Gb to 6Gb)
+Applications: DNS, Mail, MySql, Web
+
+MySql maxes at 3.5Gb (what I have read).  I have set mysql max_connections 
+at 1000 (for now) and optimized the cache(s) at 250Mb.  MySql is configured 
+for MYISAM dbs.  Xitami > Perl > MySql will be the most intensive 
+applications.  I ultimately will be moving Web/Perl, DNS, and Mail off of 
+the above server as I expand.  However, until I expand, the 
+Xitami/Perl/Mysql trio is my biggest concern when it comes to optimization.
+
+Perl only gets executed as a result of cgi-bin files in Xitami.  And I 
+believe I have tweaked MySql as best as I can get it (for now) so my biggest 
+concern was configuring Xitami/Windows so that Xitami and OS wouldn't be a 
+bottle neck.  I know soooo many people have said on many many occassions not 
+to use Xitami for production.  But for the many years I have run I have 
+NEVER had a problem with it and its been very trustworthy, fast and 
+reliable.  I suspect though that my latest website is going to test all 
+previous limits but I still want to give Xitami the chance it deserves as my 
+production webserver.
+
+Is it best to let Windows determine its own virtual memory or should I just 
+set it 10Gb?  And I wish there was a way to completely dedicate, within 
+Windows, physical ram to specific apps.
+
+Thanks
+-R
+
+----- Original Message ----- 
+From: "Paul Reid" <preid at rci.rutgers.edu>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Friday, October 12, 2007 3:25 PM
+Subject: Re: [Xitami] Memory allocation
+
+
+> >  is there anyway to provde the application more memory so that if it
+> needs it, it is available.
+>
+> It's not Mac OS/6. Any 32-bit Win-app can request 2GB at any time. The
+> whole point of virtual memory is that the app does not know if the 2GB
+> is DRAM or hard drive or small angels with clay tablets.
+>
+> I've run Xitami and CGI in 8MB (obviously not Win2003). If a runaway
+> script asks for 6MB, so the total system demand is 12MB in 8MB RAM, the
+> request is satisfied though the system gets slow. The fix is to be sure
+> you always have that 5MB (or whatever) to spare.
+>
+> Use Task Manager. "PF Usage" should flutter far below the Physical
+> Memory number. Launching a CGI interpreter will spike it; VB6 runtime
+> loads over 1MB of junk into RAM, but gives it back when it exits.
+>
+> My Xitami on Win2003 box is idling at 173MB total. Xitami is 5th on the
+> process list with about 5MB used. Launching a small Perl script barely
+> registers.
+>
+> Task Manager also shows CPU Usage. When code is not waiting on disk or
+> I/O, this always spikes to 100%, but if it spikes and falls in a blink
+> then you are not really limited by CPU.
+>
+> >  with 6Gb of memory
+>
+> I think Xitami has more than enough memory. Also VB, Perl, PHP.
+>
+> > The biggest slow down of the server is watching cgi-bin scripts kick 
+> > off.
+>
+> What interpreter, and how heavy are the scripts? Even back in 133MHz
+> 128MB RAM days, we could get away with quite sloppy code. One of my
+> scripts opens and reads several text files, twice, because it was less
+> programmer work than doing it once and the result was plenty fast.
+> Another one must skim every file in a folder to get type and summary
+> info, and it runs in a blink. If you are opening gigabyte databases, you
+> probably don't want the script doing that, you want a persistent
+> database server application which is already primed when the CGI asks
+> for data.
+>
+> Apache has a way to keep PHP running all the time so you don't suffer a
+> PHP interpreter load on every hit. But that only helps if you have a LOT
+> of hits on scripts so easy that interpreter load-time exceeds script
+> runtime.
+>
+> Interpreted scripts can sometimes be compiled, and run somewhat faster,
+> if they are not disk-bound.
+>
+> In short: you need to know what's really taking time, and what resource
+> it is bound in. And with 6GB, it seems unlikely that RAM-cram or memory
+> allocation is the problem.
+>
+> -- 
+> Paul Reid
+> System Administrator
+> Music Department
+> Mason Gross School of the Arts
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From preid at rci.rutgers.edu  Sat Oct 13 08:04:40 2007
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Sat, 13 Oct 2007 02:04:40 -0400
+Subject: [Xitami] Memory allocation
+In-Reply-To: <BAY105-DAV12A35B0049FDC13413F203F8A00@phx.gbl>
+References: <BAY105-DAV677BFC8AD915E6F5D950FF8A00@phx.gbl>	<470FF471.30602@rci.rutgers.edu>
+	<BAY105-DAV12A35B0049FDC13413F203F8A00@phx.gbl>
+Message-ID: <47105FF8.4060609@rci.rutgers.edu>
+
+ > let Windows determine its own virtual memory or should I just
+set it 10Gb?
+
+Ideally, if speed matters, you NEVER want to swap. Physical drives are 
+1,000 times slower than DRAM. If you catch it touching the drive for 
+swap, and speed is money, buy it more RAM. So the size of the swap space 
+does not matter.
+
+You do need swap space "in case" some app goes off the rails and starts 
+allocating infinite memory. But a big swap space just leaves it swapping 
+many seconds longer before the crash. You want a small swap space so 
+that when the memory allocator sees it is in trouble, it has a little 
+headroom for its error processes. A Gig or three seems plenty. I thought 
+64MB was enough to make some RAM space for the error handlers to throw a 
+mystery message before the machine just got stuck.
+
+ > I wish there was a way to completely dedicate, within Windows, 
+physical ram to specific apps.
+
+Either it gets the memory it wants, or it doesn't. If Xitami can't get 
+its modest memory needs, then one of the monster svchost.exe processes 
+is sure to fail a malloc just about the same time, and the whole box 
+goes down. Either you have enough, or you don't.
+
+ > soooo many people have said on many many occasions not to use Xitami 
+for production.
+
+Who? Why? Anyway "they" also said that about Win-Apache for many years, 
+it was official project policy. In fact both servers seem to be more 
+stable than Windows, and a clean installation of Win Server O/S is the 
+next best thing to a stripped unix or OS/2.
+
+Are you the guy with the enormous real-estate database? Some projects 
+like eBay or Amazon or WayBack are simply too much for any one machine. 
+Distributed and cluster work is mature stuff; fortunately I never needed 
+to look into it for my modest needs. You may be near that point.
+
+  -PRR
+
+
+From rolinger1 at hotmail.com  Sat Oct 13 22:23:49 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Sat, 13 Oct 2007 13:23:49 -0700
+Subject: [Xitami] Memory allocation
+In-Reply-To: <47105FF8.4060609@rci.rutgers.edu>
+Message-ID: <BAY105-F261014D55D9D4EEA06D95EF8A10@phx.gbl>
+
+
+Again, more good info.  I just saw your email address - I almost went to 
+Rutgers, ended up going to Radford U in Virginia.  But I like the school 
+when I visited, what, 19 years ago.  Sheesh, been a long time.
+
+By trade I am a Network Engineer so systems, server applications, 
+programming etc has always been a side thing for me but has never a focus.  
+I know more than enough in the other areas to understand the big picture and 
+know more than enough to get the job done.  But when it comes system and 
+application optimization and understanding the gazillion intracies for 
+tweaking a system I have always had to rely on the subject matter experts to 
+play their role.
+
+However, I now find myself having to be the expert of everything because the 
+business I have launched is a 100% solo effort and don't have the $$$ (yet) 
+to hire/contract the right people.  My money is spent on operations 
+(bandwidth), applications and hardware and other business needs.  In short I 
+am nervous that all my preperations simply aren't enough or that I haven't 
+considered something, or optimized something properly, that will come back 
+and bite me in the ass.  But at some point you have to let your kid leave 
+the house right?
+
+As far as what I am doing, no I don't think I was that guy doing the massive 
+real estate gig though my business does have real estate in it.  My site is 
+a head to head competitor to www.craigslist.com.  The name of the site is 
+http://www.adcrow.com - I already have tons of traffic and users and 
+everything is running smoothly, but some new marketing efforts are about to 
+take place within the next two weeks that should increasing my exposure 100 
+fold.  Everything was running fine on the P-IV 2Gb RAM system but I always 
+new my hardware was a weak link in the operations so I went out go an 
+enterprise class work horse.  Everything is migrated to the new server and I 
+am taking this window of opportunity pay much closer attention to the 
+optimization of all the applications and server performance.
+
+In essence I have to hope everything I taught myself these last few years: 
+perl/php, mysql, server apps, Windows OS (intracies), server hardware etc is 
+up to par.  I know these newly acquired skills aren't up to speed as my 
+networking skills are - but I keep my fingers crossed that its good enough 
+for now.
+
+Anwyay, good repsonses and very help info.  Thanks.  If you get the 
+opportunity go check out the site: http://www.adcrow.com - I always welcome 
+comments and criticisms and feedback from my peers.
+
+-R
+
+Russel P. Olinger
+rolinger1 at hotmail.com
+
+
+
+
+
+From: Paul Reid <preid at rci.rutgers.edu>
+Reply-To: Xitami Users General Discussion <xitami at lists.xitami.org>
+To: Xitami Users General Discussion <xitami at lists.xitami.org>
+Subject: Re: [Xitami] Memory allocation
+Date: Sat, 13 Oct 2007 02:04:40 -0400
+
+  > let Windows determine its own virtual memory or should I just
+set it 10Gb?
+
+Ideally, if speed matters, you NEVER want to swap. Physical drives are
+1,000 times slower than DRAM. If you catch it touching the drive for
+swap, and speed is money, buy it more RAM. So the size of the swap space
+does not matter.
+
+You do need swap space "in case" some app goes off the rails and starts
+allocating infinite memory. But a big swap space just leaves it swapping
+many seconds longer before the crash. You want a small swap space so
+that when the memory allocator sees it is in trouble, it has a little
+headroom for its error processes. A Gig or three seems plenty. I thought
+64MB was enough to make some RAM space for the error handlers to throw a
+mystery message before the machine just got stuck.
+
+  > I wish there was a way to completely dedicate, within Windows,
+physical ram to specific apps.
+
+Either it gets the memory it wants, or it doesn't. If Xitami can't get
+its modest memory needs, then one of the monster svchost.exe processes
+is sure to fail a malloc just about the same time, and the whole box
+goes down. Either you have enough, or you don't.
+
+  > soooo many people have said on many many occasions not to use Xitami
+for production.
+
+Who? Why? Anyway "they" also said that about Win-Apache for many years,
+it was official project policy. In fact both servers seem to be more
+stable than Windows, and a clean installation of Win Server O/S is the
+next best thing to a stripped unix or OS/2.
+
+Are you the guy with the enormous real-estate database? Some projects
+like eBay or Amazon or WayBack are simply too much for any one machine.
+Distributed and cluster work is mature stuff; fortunately I never needed
+to look into it for my modest needs. You may be near that point.
+
+   -PRR
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From rolinger1 at hotmail.com  Fri Oct 26 17:59:06 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Fri, 26 Oct 2007 08:59:06 -0700
+Subject: [Xitami] root URL
+Message-ID: <BAY105-DAV130A62C77B16A0645D5F68F8960@phx.gbl>
+
+I recall having done this before but for the life of me can't recall how to do it again.  Xitami gives you two options for the base URL.  Usually admins make it index.html or default.html or something like that.   
+ 
+However, I want mine to be a specific cgi file.  Currently I have an index.html doing a redirect to /cgi-bin/thispage.pl - but utlimately I want the default page to be /cgi-bin/thispage.pl and then the second option default page to be index.html.
+
+Is there anyway to do this?
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071026/3717b104/attachment.htm 
+
+From preid at rci.rutgers.edu  Fri Oct 26 18:28:36 2007
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Fri, 26 Oct 2007 12:28:36 -0400
+Subject: [Xitami] root URL
+In-Reply-To: <BAY105-DAV130A62C77B16A0645D5F68F8960@phx.gbl>
+References: <BAY105-DAV130A62C77B16A0645D5F68F8960@phx.gbl>
+Message-ID: <472215B4.70109@rci.rutgers.edu>
+
+
+Online Admin pages:
+Configuration
+defaults - Server Properties
+Default HTML page: [thispage.pl]     Then [index.html default.html]
+
+You get four total entries in the online boxes. I suspect hacking the 
+config file directly will do more, though they may be lost if you touch 
+it with the online tool.
+
+ > I want the default page to be /cgi-bin/thispage.pl
+
+I have no idea if it will follow a path, and cgi-bin is normally a 
+virtual path not a filesystem path.
+
+However, if you just say "thispage.pl" sitting IN the public folder and 
+have your Filters set for ".pl=/foo/bar/perl/perl.exe", it should work. 
+There is a considerable security risk: if the filter setting is lost, it 
+will display the contents of the .pl file to the world and expose your 
+code and techniques.
+
+There is also SSI which, if you get it working, lets you embed a call to 
+a Perl script in HTML and Xitami will call the script and put the output 
+where the SSI tag was.
+
+Good luck.
+
+-- 
+Paul Reid
+System Administrator
+Music Department
+Mason Gross School of the Arts
+
+
+From jsmiley at rcolmstead.com  Fri Oct 26 18:50:44 2007
+From: jsmiley at rcolmstead.com (M. Jason Smiley)
+Date: Fri, 26 Oct 2007 12:50:44 -0400
+Subject: [Xitami] root URL
+In-Reply-To: <BAY105-DAV130A62C77B16A0645D5F68F8960@phx.gbl>
+References: <BAY105-DAV130A62C77B16A0645D5F68F8960@phx.gbl>
+Message-ID: <68BEC76F23C54ED9B7D50D680400B208@rcolmstead.com>
+
+you can add other file name (ie.thispage.pl) but i don't think you would 
+want to set your cgi-bin to the root directory...
+
+you could just set the default index.htm page to immediatly redirect people 
+to the cgi script....
+
+
+----- Original Message ----- 
+From: "Russel Olinger" <rolinger1 at hotmail.com>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Friday, October 26, 2007 11:59 AM
+Subject: [Xitami] root URL
+
+
+I recall having done this before but for the life of me can't recall how to 
+do it again.  Xitami gives you two options for the base URL.  Usually admins 
+make it index.html or default.html or something like that.
+
+However, I want mine to be a specific cgi file.  Currently I have an 
+index.html doing a redirect to /cgi-bin/thispage.pl - but utlimately I want 
+the default page to be /cgi-bin/thispage.pl and then the second option 
+default page to be index.html.
+
+Is there anyway to do this?
+
+Thanks
+
+
+--------------------------------------------------------------------------------
+
+
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+

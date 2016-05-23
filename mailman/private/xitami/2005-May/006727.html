@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006725.html">
+   <LINK REL="Next"  HREF="006728.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Maurilio Longo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 16:52:15 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006725.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006728.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6727">[ date ]</a>
+              <a href="thread.html#6727">[ thread ]</a>
+              <a href="subject.html#6727">[ subject ]</a>
+              <a href="author.html#6727">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Pieter,
+
+after further testings I've found out that xitami calls the php interpreter
+passing to it the correct script file name (that is, the correct full path from
+volume name to script name - w:\wiki\pmwiki.php in my case).
+
+But, php.exe does not use it's arguments to find the script but some environment
+variable (like PATH_TRANSLATED and/or - I'm still investigating - SCRIPT_FILENAME)
+and, for sure, PATH_TRANSLATED does not point to the right path (relative to
+yesterday defaults.cfg) but to a subdir of webpages configuration.
+
+I mean, path_translated becomes w:\web\schede\wiki\pmwiki.php and not
+w:\wiki\pmwiki.php.
+
+So, the problem seems not to be in the code that spawns the .php interpreter but
+in the code that creates the cgi environment before spawning the cgi executable.
+
+Does this help you in any way?
+
+Maurilio.
+
+
+
+Pieter Hintjens ha scritto:
+
+&gt;<i> On 11/05/2005 07:21 pm, Maurilio Longo wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; could you please point me in the right direction, I mean, which source file
+</I>&gt;<i> &gt; handles this? (then I'll try to understand what happens exactly).
+</I>&gt;<i>
+</I>&gt;<i> OK.  It's smthttp.c, and smthttpl.c.  smthttp.c is built using Libero and has
+</I>&gt;<i> an animation ability (you need Libero installed):
+</I>&gt;<i>
+</I>&gt;<i>  - lr -animate smthttp.l
+</I>&gt;<i>  - rebuild
+</I>&gt;<i>
+</I>&gt;<i> This shows what the HTTP agent in the server does when the request comes in.
+</I>&gt;<i> You can test with a local (working) filtered file and an aliased (failing)
+</I>&gt;<i> filtered file.  If there's a difference in the animation trace, that makes
+</I>&gt;<i> the problem easy to find.
+</I>&gt;<i>
+</I>&gt;<i> Next, smthttpl.c does most of the hard work of handling a HTTP request.  There
+</I>&gt;<i> are two or three main functions that check the type of file, resolve aliases,
+</I>&gt;<i> etc.  You'd have to start with the code in smthttp.c and follow it as it
+</I>&gt;<i> calls these functions (you can see which ones, they are printing the debug
+</I>&gt;<i> statements you reported in your email).
+</I>&gt;<i>
+</I>&gt;<i> -Pieter
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--
+ __________
+|<i>  |  | |__| Maurilio Longo
+</I>|<i>_|_|_|____| farmaconsult s.r.l.
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006725.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006728.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6727">[ date ]</a>
+              <a href="thread.html#6727">[ thread ]</a>
+              <a href="subject.html#6727">[ subject ]</a>
+              <a href="author.html#6727">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

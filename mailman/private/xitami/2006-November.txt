@@ -1,0 +1,2155 @@
+From bkowald at mchsi.com  Tue Nov  7 00:45:44 2006
+From: bkowald at mchsi.com (Brian Kowald)
+Date: Tue Nov  7 00:46:03 2006
+Subject: [Xitami] Xitami crashing
+Message-ID: <001101c701fd$b009bb90$0200a8c0@TILTRACLAPTOP>
+
+My Ximtami service stopped. This was in my crash.log:
+
+-------------------------------------
+26/Oct/2006:11:58:33 -0800 Xitami v2.4d9
+
+Abort at smttran:Get-Buffer-From-Socket: (File-Buffer-In,
+Read-Ok-Event)06/Nov/2006:18:19:22 -0800 Xitami v2.4d9
+
+Abort at smtftpc:Write-User-Logged-In: (Have-Password, Ok-Event)
+----------------------------------------------------------------
+
+This was while running the ftp server and transferring serveral files at the
+same time.
+
+Any ideas?
+Brian
+	
+
+From mw at 9000.org  Tue Nov  7 01:10:34 2006
+From: mw at 9000.org (Magnus Wedberg)
+Date: Tue Nov  7 01:10:50 2006
+Subject: [Xitami] Xitami crashing
+In-Reply-To: <001101c701fd$b009bb90$0200a8c0@TILTRACLAPTOP>
+References: <001101c701fd$b009bb90$0200a8c0@TILTRACLAPTOP>
+Message-ID: <454FDD0A.13857.3B1E2E9@mw.9000.org>
+
+> Any ideas?
+
+Yes. Don't use the built-in FTP server. There are many great full-
+featured free FTP servers out there for every platform you can think 
+of, and Xitami's FTP server never were meant for anything other than 
+very light-duty work anyway (even Imatix people have said this). It 
+can, and eventually will, crash.
+
+On Windows, GuildFTPd or WarFTPd are some excellent choices. 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From mbeisert at hotmail.com  Wed Nov  8 20:20:03 2006
+From: mbeisert at hotmail.com (Michael Beisert)
+Date: Wed Nov  8 20:20:20 2006
+Subject: [Xitami] PHP/Xitami Installation
+Message-ID: <BAY118-DAV25C34C7277856DF952E4BDCF10@phx.gbl>
+
+I have successfully installed PHP/Xitami in a stand alone desktop and I am trying to do the same in a laptop. I have checked the xitami configuration and it is the same for the desktop and laptop. In the laptop the test.php page opens blank and the source page also opens blank. I have tried reinstalling php but with no success. Could someone pls help me? Tks. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061108/3db29261/attachment.htm
+From ronackgen01 at bellsouth.net  Tue Nov 14 02:36:59 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Tue Nov 14 02:37:12 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061031002344.GIDU23490.ibm59aec.bellsouth.net@ronscomputer>
+Message-ID: <20061114013654.KJHR27114.ibm65aec.bellsouth.net@ronscomputer>
+
+I want to revisit this, I must not have something set up properly. When I
+run xigui32 everything is fine. When I run xiwinnt it doesn't seem to pick
+up my config files. Anyone have any idea?
+
+ 
+
+Ron
+
+ 
+
+  _____  
+
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Ron Ackerman
+Sent: Monday, October 30, 2006 7:30 PM
+To: 'Xitami Users General Discussion'
+Subject: [Xitami] Xitami Service
+
+ 
+
+Okay something else strange.
+
+I decided to try loading Xitami as a service on a server where I have been
+running xigui32.exe. Once started now I get different pages, I'm not sure
+what yet but I'm investigating. Shouldn''t I get the same pages?
+
+Ron
+
+ 
+
+ 
+
+
+--
+No virus found in this outgoing message.
+Checked by AVG Free Edition.
+Version: 7.1.408 / Virus Database: 268.13.17/505 - Release Date: 10/27/2006
+
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.1.408 / Virus Database: 268.13.17/505 - Release Date: 10/27/2006
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061113/6d57a714/attachment.html
+From paulpp at iname.com  Tue Nov 14 16:18:09 2006
+From: paulpp at iname.com (Pavel Podvoiski)
+Date: Tue Nov 14 16:19:41 2006
+Subject: [Xitami] Re: Xitami Service
+Message-ID: <20061114151811.0B0F8478081@ws1-5.us4.outblaze.com>
+
+
+> I want to revisit this, I must not have something set up properly. When I
+> run xigui32 everything is fine. When I run xiwinnt it doesn't seem to pick
+> up my config files. Anyone have any idea?
+
+xitami looking for config files in directory where executable is.
+
+
+-- 
+
+Search for products and services at: 
+http://search.mail.com
+
+From jamesamc at bellsouth.net  Tue Nov 14 17:07:40 2006
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Tue Nov 14 17:07:41 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061114013654.KJHR27114.ibm65aec.bellsouth.net@ronscomputer>
+References: <20061114013654.KJHR27114.ibm65aec.bellsouth.net@ronscomputer>
+Message-ID: <4559E9CC.1040209@bellsouth.net>
+
+Here is the only thing i can think of that could cause this.
+
+1:)Do you have 2 or more copys of Xitami installed?
+2:)If so are you starting xigui32.exe and xiwinnt from the same folder?
+
+If this is not the cause it. Then I'm very interested in what caused this.
+
+Jeff
+
+From francis.turner at gmail.com  Tue Nov 14 17:14:00 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Tue Nov 14 17:14:06 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <4559E9CC.1040209@bellsouth.net>
+References: <20061114013654.KJHR27114.ibm65aec.bellsouth.net@ronscomputer>
+	<4559E9CC.1040209@bellsouth.net>
+Message-ID: <f83609d50611140814j7c3b8b3bub3639b064b5c7c2b@mail.gmail.com>
+
+2 is the most likely problem I think
+
+IIRC there are some start up options that can allow you to specify the
+base directory but you'll have to RTM to get them right.
+
+On 11/14/06, Jeff McDonald <jamesamc@bellsouth.net> wrote:
+> Here is the only thing i can think of that could cause this.
+>
+> 1:)Do you have 2 or more copys of Xitami installed?
+> 2:)If so are you starting xigui32.exe and xiwinnt from the same folder?
+>
+> If this is not the cause it. Then I'm very interested in what caused this.
+>
+> Jeff
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From ronackgen01 at bellsouth.net  Tue Nov 14 23:22:39 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Tue Nov 14 23:22:34 2006
+Subject: [Xitami] Re: Xitami Service
+In-Reply-To: <20061114151811.0B0F8478081@ws1-5.us4.outblaze.com>
+Message-ID: <20061114222218.FDNC14520.ibm68aec.bellsouth.net@ronscomputer>
+
+Yeah and?
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Pavel Podvoiski
+Sent: Tuesday, November 14, 2006 10:18 AM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Re: Xitami Service
+
+
+> I want to revisit this, I must not have something set up properly. When I
+> run xigui32 everything is fine. When I run xiwinnt it doesn't seem to pick
+> up my config files. Anyone have any idea?
+
+xitami looking for config files in directory where executable is.
+
+
+-- 
+
+Search for products and services at: 
+http://search.mail.com
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.5/533 - Release Date: 11/13/2006
+8:56 PM
+
+
+From ronackgen01 at bellsouth.net  Tue Nov 14 23:23:18 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Tue Nov 14 23:23:01 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <4559E9CC.1040209@bellsouth.net>
+Message-ID: <20061114222258.FDXP14520.ibm68aec.bellsouth.net@ronscomputer>
+
+1) no
+2) Yes
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jeff McDonald
+Sent: Tuesday, November 14, 2006 11:08 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+Here is the only thing i can think of that could cause this.
+
+1:)Do you have 2 or more copys of Xitami installed?
+2:)If so are you starting xigui32.exe and xiwinnt from the same folder?
+
+If this is not the cause it. Then I'm very interested in what caused this.
+
+Jeff
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.5/533 - Release Date: 11/13/2006
+8:56 PM
+
+
+From ronackgen01 at bellsouth.net  Tue Nov 14 23:27:41 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Tue Nov 14 23:27:29 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <f83609d50611140814j7c3b8b3bub3639b064b5c7c2b@mail.gmail.com>
+Message-ID: <20061114222719.FGQE14520.ibm68aec.bellsouth.net@ronscomputer>
+
+Huh? What IIRC and RTM? 
+
+Are you talking about the setting in the Xitami.cfg? If so it should be the
+same no matter which one I run, right?
+
+And like you, it doesn't make since to me why its not working right. One
+installation of Xitami. 
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+Sent: Tuesday, November 14, 2006 11:14 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+2 is the most likely problem I think
+
+IIRC there are some start up options that can allow you to specify the
+base directory but you'll have to RTM to get them right.
+
+On 11/14/06, Jeff McDonald <jamesamc@bellsouth.net> wrote:
+> Here is the only thing i can think of that could cause this.
+>
+> 1:)Do you have 2 or more copys of Xitami installed?
+> 2:)If so are you starting xigui32.exe and xiwinnt from the same folder?
+>
+> If this is not the cause it. Then I'm very interested in what caused this.
+>
+> Jeff
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.5/533 - Release Date: 11/13/2006
+8:56 PM
+
+
+From francis.turner at gmail.com  Tue Nov 14 23:32:48 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Tue Nov 14 23:32:52 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061114222719.FGQE14520.ibm68aec.bellsouth.net@ronscomputer>
+References: <f83609d50611140814j7c3b8b3bub3639b064b5c7c2b@mail.gmail.com>
+	<20061114222719.FGQE14520.ibm68aec.bellsouth.net@ronscomputer>
+Message-ID: <f83609d50611141432me0a4dedpdcadaaa57870e03f@mail.gmail.com>
+
+On 11/14/06, General <ronackgen01@bellsouth.net> wrote:
+> Huh? What IIRC and RTM?
+If I recall correctly. (But you'll have to) Read The Manual
+
+You need to make sure that the service version is finding the
+xitami.cfg in the first place and I think you can do that by
+specifying a command line option. Unfortunately I forget which as I
+haven't bothered with the service version for years
+
+>
+> Are you talking about the setting in the Xitami.cfg? If so it should be the
+> same no matter which one I run, right?
+>
+> And like you, it doesn't make since to me why its not working right. One
+> installation of Xitami.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+> Sent: Tuesday, November 14, 2006 11:14 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Service
+>
+> 2 is the most likely problem I think
+>
+> IIRC there are some start up options that can allow you to specify the
+> base directory but you'll have to RTM to get them right.
+>
+> On 11/14/06, Jeff McDonald <jamesamc@bellsouth.net> wrote:
+> > Here is the only thing i can think of that could cause this.
+> >
+> > 1:)Do you have 2 or more copys of Xitami installed?
+> > 2:)If so are you starting xigui32.exe and xiwinnt from the same folder?
+> >
+> > If this is not the cause it. Then I'm very interested in what caused this.
+> >
+> > Jeff
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> No virus found in this incoming message.
+> Checked by AVG Free Edition.
+> Version: 7.5.430 / Virus Database: 268.14.5/533 - Release Date: 11/13/2006
+> 8:56 PM
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From ronackgen01 at bellsouth.net  Wed Nov 15 01:16:15 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Wed Nov 15 01:15:28 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <f83609d50611141432me0a4dedpdcadaaa57870e03f@mail.gmail.com>
+Message-ID: <20061115001518.BGOU16402.ibm57aec.bellsouth.net@ronscomputer>
+
+I guess I'm getting old. I figured RTM was Read the Manual of course I
+remember it as RTFM. Goes back to my military days. But I never saw IIRC I
+guess because I don't do chat. So you'll have to teach us old farts. I'll
+check the documentation and see if I can find something. 
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+Sent: Tuesday, November 14, 2006 5:33 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+On 11/14/06, General <ronackgen01@bellsouth.net> wrote:
+> Huh? What IIRC and RTM?
+If I recall correctly. (But you'll have to) Read The Manual
+
+You need to make sure that the service version is finding the
+xitami.cfg in the first place and I think you can do that by
+specifying a command line option. Unfortunately I forget which as I
+haven't bothered with the service version for years
+
+>
+> Are you talking about the setting in the Xitami.cfg? If so it should be
+the
+> same no matter which one I run, right?
+>
+> And like you, it doesn't make since to me why its not working right. One
+> installation of Xitami.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Francis Turner
+> Sent: Tuesday, November 14, 2006 11:14 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Service
+>
+> 2 is the most likely problem I think
+>
+> IIRC there are some start up options that can allow you to specify the
+> base directory but you'll have to RTM to get them right.
+>
+> On 11/14/06, Jeff McDonald <jamesamc@bellsouth.net> wrote:
+> > Here is the only thing i can think of that could cause this.
+> >
+> > 1:)Do you have 2 or more copys of Xitami installed?
+> > 2:)If so are you starting xigui32.exe and xiwinnt from the same folder?
+> >
+> > If this is not the cause it. Then I'm very interested in what caused
+this.
+> >
+> > Jeff
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> http://www.di2.nu/blog.htm
+> Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> No virus found in this incoming message.
+> Checked by AVG Free Edition.
+> Version: 7.5.430 / Virus Database: 268.14.5/533 - Release Date: 11/13/2006
+> 8:56 PM
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.5/533 - Release Date: 11/13/2006
+8:56 PM
+
+
+From apbarna at comcast.net  Wed Nov 15 02:02:51 2006
+From: apbarna at comcast.net (Alex Barna)
+Date: Wed Nov 15 08:03:39 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061115001518.BGOU16402.ibm57aec.bellsouth.net@ronscomputer>
+References: <20061115001518.BGOU16402.ibm57aec.bellsouth.net@ronscomputer>
+Message-ID: <455A673B.3070802@comcast.net>
+
+General wrote:
+
+>  I want to revisit this, I must not have something set up properly.
+>  When I run xigui32 everything is fine. When I run xiwinnt it doesn?t
+>  seem to pick up my config files. Anyone have any idea?
+>
+>  Ron
+
+I'm no expert but,
+
+Are xigui32.exe & xiwinnt.exe in the same folder/directory as xitami.cfg?
+If not do you have the same xitami.cfg in both folder/directories?
+
+C:\xitami-25\app\xigui32.exe
+C:\xitami-25\app\xitami.cfg
+
+C:\xitami\app\xiwinnt.exe
+C:\xitami\app\xitami.cfg
+
+Did you uninstall the service by running "xisrv32.exe -u" before running 
+xiwinnt.exe?
+
+Alex, B.,
+
+From nonlin at erols.com  Wed Nov 15 12:23:38 2006
+From: nonlin at erols.com (nonlin)
+Date: Wed Nov 15 09:23:49 2006
+Subject: [Xitami] Fw: Posible Conflit with Tor's Proxy
+Message-ID: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>
+
+Dear Friends,
+
+    I asked this this question a few weeks ago but no one ansered back. So let me try again.
+
+----- Original Message ----- 
+From: nonlin 
+To: Xitami Users General Discussion 
+Sent: Tuesday, October 31, 2006 12:35 AM
+Subject: Posible Conflit with Tor's Proxy
+
+
+Dear Friends,
+
+    I have a grayhat situation:
+
+    I have a Cobut Server that a hacker has found a way to use to send out his spam though. I have finger out most of what I need to do to stop him. But I believe that it will only make him more persistent to find another way to use my server. So I need to take this opportunity to learn how to make my server more secure. One of the thing that I have learned is that most hackers use  a system to "Tor" to Protect there identity. So I need to install a copy of Tor on my Local computer (which also had Xitami) so I can learn how it works, what the effects on my Cobut Server are so I can learn how to identity its use, and if there is a way I can defeat it.
+
+    HEAR IS MY PROBLEM.
+
+    I was just about to install Tor on my Computer When I noticed that there Privoxy 3.0.3 (witch is part of the Tor packeg) Happen to work like a server and used Localhost, and the ip 127.0.0.1, the same address my Xitami uses, (See instructions for yourself http://tor.eff.org/docs/tor-doc-web.html.en) . Now my question. Will there be a conflict between Xitami and the Provoxy, and if so dos anyone know how to move the Provoxy out of the way, Since Xitami if Primary on my machine and I have written dozens of script referring to Xitami as the Localhost.
+
+
+Sincerely,
+
+Stefan 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061115/e0f4ec98/attachment.htm
+From francis.turner at gmail.com  Wed Nov 15 10:34:18 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed Nov 15 10:34:22 2006
+Subject: [Xitami] Fw: Posible Conflit with Tor's Proxy
+In-Reply-To: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>
+References: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>
+Message-ID: <f83609d50611150134p77934444w52fd4bcbd0f4a5e8@mail.gmail.com>
+
+>From wahat I'm reading of Privoxy it uses port 8118 - see
+http://www.privoxy.org/user-manual/quickstart.html
+and
+http://www.privoxy.org/user-manual/startup.html
+
+No conflict at all that I see
+
+On 11/15/06, nonlin <nonlin@erols.com> wrote:
+>
+>
+> Dear Friends,
+>
+>     I asked this this question a few weeks ago but no one ansered back. So
+> let me try again.
+>
+> ----- Original Message -----
+> From: nonlin
+> To: Xitami Users General Discussion
+> Sent: Tuesday, October 31, 2006 12:35 AM
+> Subject: Posible Conflit with Tor's Proxy
+>
+>
+> Dear Friends,
+>
+>     I have a grayhat situation:
+>
+>     I have a Cobut Server that a hacker has found a way to use to send out
+> his spam though. I have finger out most of what I need to do to stop him.
+> But I believe that it will only make him more persistent to find another way
+> to use my server. So I need to take this opportunity to learn how to make my
+> server more secure. One of the thing that I have learned is that most
+> hackers use  a system to "Tor" to Protect there identity. So I need to
+> install a copy of Tor on my Local computer (which also had Xitami) so I can
+> learn how it works, what the effects on my Cobut Server are so I can learn
+> how to identity its use, and if there is a way I can defeat it.
+>
+>     HEAR IS MY PROBLEM.
+>
+>     I was just about to install Tor on my Computer When I noticed that there
+> Privoxy 3.0.3 (witch is part of the Tor packeg) Happen to work like a server
+> and used Localhost, and the ip 127.0.0.1, the same address my Xitami uses,
+> (See instructions for yourself
+> http://tor.eff.org/docs/tor-doc-web.html.en) . Now my
+> question. Will there be a conflict between Xitami and the Provoxy, and if so
+> dos anyone know how to move the Provoxy out of the way, Since Xitami if
+> Primary on my machine and I have written dozens of script referring to
+> Xitami as the Localhost.
+>
+>
+> Sincerely,
+>
+> Stefan
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From fuzzydog at whiteshepherd.net  Wed Nov 15 20:33:40 2006
+From: fuzzydog at whiteshepherd.net (Gene)
+Date: Wed Nov 15 20:34:26 2006
+Subject: [Xitami] Fw: Posible Conflit with Tor's Proxy
+In-Reply-To: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>
+References: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>
+Message-ID: <455B6B94.2040102@whiteshepherd.net>
+
+Have you thought of setting port 85 as the standard connect port for 
+Xitami?  As far as Tor our web and IRC servers ban Tor on connect.  
+We've had to many problems with spammers using it for abuse.
+
+nonlin wrote:
+> Dear Friends,
+>  
+>     I asked this this question a few weeks ago but no one ansered 
+> back. So let me try again.
+>  
+> ----- Original Message -----
+> *From:* nonlin <mailto:nonlin@erols.com>
+> *To:* Xitami Users General Discussion <mailto:xitami@lists.xitami.org>
+> *Sent:* Tuesday, October 31, 2006 12:35 AM
+> *Subject:* Posible Conflit with Tor's Proxy
+>
+> Dear Friends,
+>  
+>     *I have a grayhat situation:*
+>  
+>     I have a Cobut Server that a hacker has found a way to use to send 
+> out his spam though. I have finger out most of what I need to do to 
+> stop him. But I believe that it will only make him more persistent to 
+> find another way to use my server. So I need to take this opportunity 
+> to learn how to make my server more secure. One of the thing that I 
+> have learned is that most hackers use  a system to "Tor" to Protect 
+> there identity. So I need to install a copy of Tor on my Local 
+> computer (which also had Xitami) so I can learn how it works, what the 
+> effects on my Cobut Server are so I can learn how to identity its use, 
+> and if there is a way I can defeat it.
+>  
+>     *HEAR IS MY PROBLEM.*
+>  
+>     I was just about to install Tor on my Computer When I noticed that 
+> there Privoxy 3.0.3 (witch is part of the Tor packeg) Happen to work 
+> like a server and used Localhost, and the ip 127.0.0.1, the same 
+> address my Xitami uses, (See instructions for yourself 
+> http://tor.eff.org/docs/tor-doc-web.html.en) . _*Now my question*_. 
+> Will there be a conflict between Xitami and the Provoxy, and if so dos 
+> anyone know how to move the Provoxy out of the way, Since Xitami if 
+> Primary on my machine and I have written dozens of script referring to 
+> Xitami as the Localhost.
+>  
+>  
+> Sincerely,
+>  
+> Stefan 
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From ronackgen01 at bellsouth.net  Wed Nov 15 22:56:11 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Wed Nov 15 22:56:14 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <455A673B.3070802@comcast.net>
+Message-ID: <20061115215555.JUEX15332.ibm58aec.bellsouth.net@ronscomputer>
+
+Yeah that's the odd part. I will try your suggestion of uninstalling,
+Correct me if I'm wrong but xiwinnt IS the service version right?
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+Sent: Tuesday, November 14, 2006 8:03 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+General wrote:
+
+>  I want to revisit this, I must not have something set up properly.
+>  When I run xigui32 everything is fine. When I run xiwinnt it doesn't
+>  seem to pick up my config files. Anyone have any idea?
+>
+>  Ron
+
+I'm no expert but,
+
+Are xigui32.exe & xiwinnt.exe in the same folder/directory as xitami.cfg?
+If not do you have the same xitami.cfg in both folder/directories?
+
+C:\xitami-25\app\xigui32.exe
+C:\xitami-25\app\xitami.cfg
+
+C:\xitami\app\xiwinnt.exe
+C:\xitami\app\xitami.cfg
+
+Did you uninstall the service by running "xisrv32.exe -u" before running 
+xiwinnt.exe?
+
+Alex, B.,
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.5/534 - Release Date: 11/14/2006
+3:58 PM
+
+
+From apbarna at comcast.net  Wed Nov 15 23:23:17 2006
+From: apbarna at comcast.net (Alex Barna)
+Date: Wed Nov 15 23:24:02 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061115215555.JUEX15332.ibm58aec.bellsouth.net@ronscomputer>
+References: <20061115215555.JUEX15332.ibm58aec.bellsouth.net@ronscomputer>
+Message-ID: <455B9355.90900@comcast.net>
+
+General wrote:
+>  Yeah that's the odd part. I will try your suggestion of uninstalling,
+>  Correct me if I'm wrong but xiwinnt IS the service version right?
+
+According to 
+http://lists.xitami.org/pipermail/xitami/2003-February/004729.html
+in some versions of xitami "xiwinnt.exe" IS the server version.
+
+What version are you running?
+
+I'm running v2.5b4 & v2.5c2 & neither has "xiwinnt.exe".
+
+Alex B.,
+
+>  General wrote:
+>
+> > I want to revisit this, I must not have something set up properly.
+> > When I run xigui32 everything is fine. When I run xiwinnt it
+> > doesn't seem to pick up my config files. Anyone have any idea?
+> >
+> > Ron
+>
+>  I'm no expert but,
+>
+>  Are xigui32.exe & xiwinnt.exe in the same folder/directory as
+>  xitami.cfg? If not do you have the same xitami.cfg in both
+>  folder/directories?
+>
+>  C:\xitami-25\app\xigui32.exe C:\xitami-25\app\xitami.cfg
+>
+>  C:\xitami\app\xiwinnt.exe C:\xitami\app\xitami.cfg
+>
+>  Did you uninstall the service by running "xisrv32.exe -u" before
+>  running xiwinnt.exe?
+>
+>  Alex, B.,
+
+
+From nonlin at erols.com  Thu Nov 16 03:43:37 2006
+From: nonlin at erols.com (nonlin)
+Date: Thu Nov 16 00:44:03 2006
+Subject: [Xitami] Fw: Posible Conflit with Tor's Proxy
+References: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>
+	<455B6B94.2040102@whiteshepherd.net>
+Message-ID: <00b401c70929$0472f3e0$6801a8c0@earthlink.net>
+
+Thank you all for your feedback.
+
+Yes, Spamming is the problem, The Hacker had been using tor (or something
+Like it) to get my Cobult server to send out his spam. So that why I'm
+trying to learn about it. So I can find a way to Identify an attack and stop
+it.
+
+Thanks again and I will let you know if I have more questions.
+
+----- Original Message ----- 
+From: "Gene" <fuzzydog@whiteshepherd.net>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Wednesday, November 15, 2006 11:33 AM
+Subject: Re: [Xitami] Fw: Posible Conflit with Tor's Proxy
+
+
+> Have you thought of setting port 85 as the standard connect port for
+> Xitami?  As far as Tor our web and IRC servers ban Tor on connect.
+> We've had to many problems with spammers using it for abuse.
+>
+> nonlin wrote:
+> > Dear Friends,
+> >
+> >     I asked this this question a few weeks ago but no one ansered
+> > back. So let me try again.
+> >
+> > ----- Original Message -----
+> > *From:* nonlin <mailto:nonlin@erols.com>
+> > *To:* Xitami Users General Discussion <mailto:xitami@lists.xitami.org>
+> > *Sent:* Tuesday, October 31, 2006 12:35 AM
+> > *Subject:* Posible Conflit with Tor's Proxy
+> >
+> > Dear Friends,
+> >
+> >     *I have a grayhat situation:*
+> >
+> >     I have a Cobut Server that a hacker has found a way to use to send
+> > out his spam though. I have finger out most of what I need to do to
+> > stop him. But I believe that it will only make him more persistent to
+> > find another way to use my server. So I need to take this opportunity
+> > to learn how to make my server more secure. One of the thing that I
+> > have learned is that most hackers use  a system to "Tor" to Protect
+> > there identity. So I need to install a copy of Tor on my Local
+> > computer (which also had Xitami) so I can learn how it works, what the
+> > effects on my Cobut Server are so I can learn how to identity its use,
+> > and if there is a way I can defeat it.
+> >
+> >     *HEAR IS MY PROBLEM.*
+> >
+> >     I was just about to install Tor on my Computer When I noticed that
+> > there Privoxy 3.0.3 (witch is part of the Tor packeg) Happen to work
+> > like a server and used Localhost, and the ip 127.0.0.1, the same
+> > address my Xitami uses, (See instructions for yourself
+> > http://tor.eff.org/docs/tor-doc-web.html.en) . _*Now my question*_.
+> > Will there be a conflict between Xitami and the Provoxy, and if so dos
+> > anyone know how to move the Provoxy out of the way, Since Xitami if
+> > Primary on my machine and I have written dozens of script referring to
+> > Xitami as the Localhost.
+> >
+> >
+> > Sincerely,
+> >
+> > Stefan
+> > ------------------------------------------------------------------------
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From ronackgen01 at bellsouth.net  Thu Nov 16 02:02:12 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Thu Nov 16 02:01:06 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <455B9355.90900@comcast.net>
+Message-ID: <20061116010057.FKVG17034.ibm56aec.bellsouth.net@ronscomputer>
+
+
+I have v2.5c2 but I think I upgraded at some point in time from v2.4
+something or other. So I should be installing xisvr32 instead?
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+Sent: Wednesday, November 15, 2006 5:23 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+General wrote:
+>  Yeah that's the odd part. I will try your suggestion of uninstalling,
+>  Correct me if I'm wrong but xiwinnt IS the service version right?
+
+According to 
+http://lists.xitami.org/pipermail/xitami/2003-February/004729.html
+in some versions of xitami "xiwinnt.exe" IS the server version.
+
+What version are you running?
+
+I'm running v2.5b4 & v2.5c2 & neither has "xiwinnt.exe".
+
+Alex B.,
+
+>  General wrote:
+>
+> > I want to revisit this, I must not have something set up properly.
+> > When I run xigui32 everything is fine. When I run xiwinnt it
+> > doesn't seem to pick up my config files. Anyone have any idea?
+> >
+> > Ron
+>
+>  I'm no expert but,
+>
+>  Are xigui32.exe & xiwinnt.exe in the same folder/directory as
+>  xitami.cfg? If not do you have the same xitami.cfg in both
+>  folder/directories?
+>
+>  C:\xitami-25\app\xigui32.exe C:\xitami-25\app\xitami.cfg
+>
+>  C:\xitami\app\xiwinnt.exe C:\xitami\app\xitami.cfg
+>
+>  Did you uninstall the service by running "xisrv32.exe -u" before
+>  running xiwinnt.exe?
+>
+>  Alex, B.,
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.5/534 - Release Date: 11/14/2006
+3:58 PM
+
+
+From apbarna at comcast.net  Thu Nov 16 03:35:05 2006
+From: apbarna at comcast.net (Alex Barna)
+Date: Thu Nov 16 03:35:32 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061116010057.FKVG17034.ibm56aec.bellsouth.net@ronscomputer>
+References: <20061116010057.FKVG17034.ibm56aec.bellsouth.net@ronscomputer>
+Message-ID: <455BCE59.5010409@comcast.net>
+
+General wrote:
+>  I have v2.5c2 but I think I upgraded at some point in time from v2.4
+>  something or other. So I should be installing xisvr32 instead?
+
+Before my ISP was switched to Comcast & port 80 was blocked, with 
+xicpl32.cpl  in the
+C:\windows\system32 directory I ran xisrv32.exe -i to start xitami as a 
+service & xisrv32.exe -u to stop the service.
+
+To just run it as a test server I just run xigui32.exe
+
+
+
+>  -----Original Message----- From: xitami-bounces@lists.xitami.org
+>  [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+>  Sent: Wednesday, November 15, 2006 5:23 PM To: Xitami Users General
+>  Discussion Subject: Re: [Xitami] Xitami Service
+>
+>  General wrote:
+> > Yeah that's the odd part. I will try your suggestion of
+> > uninstalling, Correct me if I'm wrong but xiwinnt IS the service
+> > version right?
+>
+>  According to
+>  http://lists.xitami.org/pipermail/xitami/2003-February/004729.html in
+>  some versions of xitami "xiwinnt.exe" IS the server version.
+>
+>  What version are you running?
+>
+>  I'm running v2.5b4 & v2.5c2 & neither has "xiwinnt.exe".
+>
+>  Alex B.,
+>
+> > General wrote:
+> >
+> >> I want to revisit this, I must not have something set up
+> >> properly. When I run xigui32 everything is fine. When I run
+> >> xiwinnt it doesn't seem to pick up my config files. Anyone have
+> >> any idea?
+> >>
+> >> Ron
+> > I'm no expert but,
+> >
+> > Are xigui32.exe & xiwinnt.exe in the same folder/directory as
+> > xitami.cfg? If not do you have the same xitami.cfg in both
+> > folder/directories?
+> >
+> > C:\xitami-25\app\xigui32.exe C:\xitami-25\app\xitami.cfg
+> >
+> > C:\xitami\app\xiwinnt.exe C:\xitami\app\xitami.cfg
+> >
+> > Did you uninstall the service by running "xisrv32.exe -u" before
+> > running xiwinnt.exe?
+> >
+> > Alex, B.,
+
+
+
+From fuzzydog at whiteshepherd.net  Thu Nov 16 11:00:48 2006
+From: fuzzydog at whiteshepherd.net (Gene)
+Date: Thu Nov 16 11:03:02 2006
+Subject: [Xitami] Fw: Posible Conflit with Tor's Proxy
+In-Reply-To: <00b401c70929$0472f3e0$6801a8c0@earthlink.net>
+References: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>	<455B6B94.2040102@whiteshepherd.net>
+	<00b401c70929$0472f3e0$6801a8c0@earthlink.net>
+Message-ID: <455C36D0.1010007@whiteshepherd.net>
+
+There are DNSBLs for the detection of Tor proxies and well as published 
+IP lists.  If you are being hacked it's not just a Tor problem though.  
+It sounds like he has found a security hole in your system he could 
+access just as easily from another proxy (exploited machine, worm, 
+etc).  How is he sending out spam?
+
+nonlin wrote:
+> Thank you all for your feedback.
+>
+> Yes, Spamming is the problem, The Hacker had been using tor (or something
+> Like it) to get my Cobult server to send out his spam. So that why I'm
+> trying to learn about it. So I can find a way to Identify an attack and stop
+> it.
+>
+> Thanks again and I will let you know if I have more questions.
+>
+> ----- Original Message ----- 
+> From: "Gene" <fuzzydog@whiteshepherd.net>
+> To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+> Sent: Wednesday, November 15, 2006 11:33 AM
+> Subject: Re: [Xitami] Fw: Posible Conflit with Tor's Proxy
+>
+>
+>   
+>> Have you thought of setting port 85 as the standard connect port for
+>> Xitami?  As far as Tor our web and IRC servers ban Tor on connect.
+>> We've had to many problems with spammers using it for abuse.
+>>
+>> nonlin wrote:
+>>     
+>>> Dear Friends,
+>>>
+>>>     I asked this this question a few weeks ago but no one ansered
+>>> back. So let me try again.
+>>>
+>>> ----- Original Message -----
+>>> *From:* nonlin <mailto:nonlin@erols.com>
+>>> *To:* Xitami Users General Discussion <mailto:xitami@lists.xitami.org>
+>>> *Sent:* Tuesday, October 31, 2006 12:35 AM
+>>> *Subject:* Posible Conflit with Tor's Proxy
+>>>
+>>> Dear Friends,
+>>>
+>>>     *I have a grayhat situation:*
+>>>
+>>>     I have a Cobut Server that a hacker has found a way to use to send
+>>> out his spam though. I have finger out most of what I need to do to
+>>> stop him. But I believe that it will only make him more persistent to
+>>> find another way to use my server. So I need to take this opportunity
+>>> to learn how to make my server more secure. One of the thing that I
+>>> have learned is that most hackers use  a system to "Tor" to Protect
+>>> there identity. So I need to install a copy of Tor on my Local
+>>> computer (which also had Xitami) so I can learn how it works, what the
+>>> effects on my Cobut Server are so I can learn how to identity its use,
+>>> and if there is a way I can defeat it.
+>>>
+>>>     *HEAR IS MY PROBLEM.*
+>>>
+>>>     I was just about to install Tor on my Computer When I noticed that
+>>> there Privoxy 3.0.3 (witch is part of the Tor packeg) Happen to work
+>>> like a server and used Localhost, and the ip 127.0.0.1, the same
+>>> address my Xitami uses, (See instructions for yourself
+>>> http://tor.eff.org/docs/tor-doc-web.html.en) . _*Now my question*_.
+>>> Will there be a conflict between Xitami and the Provoxy, and if so dos
+>>> anyone know how to move the Provoxy out of the way, Since Xitami if
+>>> Primary on my machine and I have written dozens of script referring to
+>>> Xitami as the Localhost.
+>>>
+>>>
+>>> Sincerely,
+>>>
+>>> Stefan
+>>> ------------------------------------------------------------------------
+>>>
+>>>
+>>> --
+>>> Xitami Users Mailing List -- For Xitami support
+>>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>       
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>     
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>   
+
+From nonlin at erols.com  Thu Nov 16 16:00:56 2006
+From: nonlin at erols.com (nonlin)
+Date: Thu Nov 16 13:01:10 2006
+Subject: [Xitami] Fw: Posible Conflit with Tor's Proxy
+References: <009201c708a8$7f8810a0$6801a8c0@earthlink.net>	<455B6B94.2040102@whiteshepherd.net><00b401c70929$0472f3e0$6801a8c0@earthlink.net>
+	<455C36D0.1010007@whiteshepherd.net>
+Message-ID: <00b901c70990$05745880$6801a8c0@earthlink.net>
+
+There are 2 ways that this has happened. One is a real hack, and the other
+is simple hole in a program I wrote.
+1) I discovered programs that allow telnet access though http, database
+manipulation, and email management. that were not put on the server Not by
+me. I have removed these programs, changed the passwords. So far they have
+not returned, but that my be because of #2.
+2) The hacker had figured out how to use one of my programs to send out his
+mail. Since I wrote it. I was able to modify it to recorded his actions,
+store the %ENV's. (I'm still trying to finger out how you are able to
+acquire a visitors email address). that's when I noticed the his IPs were
+never the same twice, plus no response from cookies, no calling for images
+from the web page the script creates, and that's what lead me to tor.
+I don't see any other actions they have taken when they were on my server,
+and since they think there getting one over on me by using one of my own
+scripts (which is accessible though http, so they don't require full
+accesses to my box), I've got the advantage, so far. As long as they keep
+trying to submit enters to my script, I still have the opportunity to track
+them down.
+
+Can you tell me more about DNSBL?
+
+Stefan.
+
+----- Original Message ----- 
+From: "Gene" <fuzzydog@whiteshepherd.net>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Thursday, November 16, 2006 2:00 AM
+Subject: Re: [Xitami] Fw: Posible Conflit with Tor's Proxy
+
+
+> There are DNSBLs for the detection of Tor proxies and well as published
+> IP lists.  If you are being hacked it's not just a Tor problem though.
+> It sounds like he has found a security hole in your system he could
+> access just as easily from another proxy (exploited machine, worm,
+> etc).  How is he sending out spam?
+>
+> nonlin wrote:
+> > Thank you all for your feedback.
+> >
+> > Yes, Spamming is the problem, The Hacker had been using tor (or
+something
+> > Like it) to get my Cobult server to send out his spam. So that why I'm
+> > trying to learn about it. So I can find a way to Identify an attack and
+stop
+> > it.
+> >
+> > Thanks again and I will let you know if I have more questions.
+> >
+> > ----- Original Message ----- 
+> > From: "Gene" <fuzzydog@whiteshepherd.net>
+> > To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+> > Sent: Wednesday, November 15, 2006 11:33 AM
+> > Subject: Re: [Xitami] Fw: Posible Conflit with Tor's Proxy
+> >
+> >
+> >
+> >> Have you thought of setting port 85 as the standard connect port for
+> >> Xitami?  As far as Tor our web and IRC servers ban Tor on connect.
+> >> We've had to many problems with spammers using it for abuse.
+> >>
+> >> nonlin wrote:
+> >>
+> >>> Dear Friends,
+> >>>
+> >>>     I asked this this question a few weeks ago but no one ansered
+> >>> back. So let me try again.
+> >>>
+> >>> ----- Original Message -----
+> >>> *From:* nonlin <mailto:nonlin@erols.com>
+> >>> *To:* Xitami Users General Discussion <mailto:xitami@lists.xitami.org>
+> >>> *Sent:* Tuesday, October 31, 2006 12:35 AM
+> >>> *Subject:* Posible Conflit with Tor's Proxy
+> >>>
+> >>> Dear Friends,
+> >>>
+> >>>     *I have a grayhat situation:*
+> >>>
+> >>>     I have a Cobut Server that a hacker has found a way to use to send
+> >>> out his spam though. I have finger out most of what I need to do to
+> >>> stop him. But I believe that it will only make him more persistent to
+> >>> find another way to use my server. So I need to take this opportunity
+> >>> to learn how to make my server more secure. One of the thing that I
+> >>> have learned is that most hackers use  a system to "Tor" to Protect
+> >>> there identity. So I need to install a copy of Tor on my Local
+> >>> computer (which also had Xitami) so I can learn how it works, what the
+> >>> effects on my Cobut Server are so I can learn how to identity its use,
+> >>> and if there is a way I can defeat it.
+> >>>
+> >>>     *HEAR IS MY PROBLEM.*
+> >>>
+> >>>     I was just about to install Tor on my Computer When I noticed that
+> >>> there Privoxy 3.0.3 (witch is part of the Tor packeg) Happen to work
+> >>> like a server and used Localhost, and the ip 127.0.0.1, the same
+> >>> address my Xitami uses, (See instructions for yourself
+> >>> http://tor.eff.org/docs/tor-doc-web.html.en) . _*Now my question*_.
+> >>> Will there be a conflict between Xitami and the Provoxy, and if so dos
+> >>> anyone know how to move the Provoxy out of the way, Since Xitami if
+> >>> Primary on my machine and I have written dozens of script referring to
+> >>> Xitami as the Localhost.
+> >>>
+> >>>
+> >>> Sincerely,
+> >>>
+> >>> Stefan
+>
+>>> ------------------------------------------------------------------------
+> >>>
+> >>>
+> >>> --
+> >>> Xitami Users Mailing List -- For Xitami support
+> >>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>>
+> >> --
+> >> Xitami Users Mailing List -- For Xitami support
+> >> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From pcfretz at shalomca.com  Thu Nov 16 17:15:48 2006
+From: pcfretz at shalomca.com (Paul C. Fretz)
+Date: Thu Nov 16 17:16:11 2006
+Subject: [Xitami] Block Multiple Failed FTP Passwords
+Message-ID: <3.0.6.32.20061116111548.008313b0@mail.shalomca.com>
+
+Is there a way to automatically block (either temporarily or permanently)
+an IP address after multiple FTP password errors? We are running Xitami
+Version 2.4b2 on Windows 95. Our FTP logs show that sometimes we get
+thousands of FTP password attempts from the same IP. I would like to
+automatically restrict or block this kind of attack. In other words after
+several failed password attempts from the same IP I would like Xitami to
+block further connections from that IP either permanently or for 10-20
+minutes.
+
+-Paul
+
+From ronackgen01 at bellsouth.net  Thu Nov 16 23:19:28 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Thu Nov 16 23:19:06 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <455BCE59.5010409@comcast.net>
+Message-ID: <20061116221858.TOBU16402.ibm57aec.bellsouth.net@ronscomputer>
+
+Reason why I want to run as a service, if the server reboots because of a
+power outage or something like that when I'm not home, then Xitami will
+start as long as the PC is running even if it's not logged in. 
+
+By the way, I don't know why I came up as General.
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+Sent: Wednesday, November 15, 2006 9:35 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+General wrote:
+>  I have v2.5c2 but I think I upgraded at some point in time from v2.4
+>  something or other. So I should be installing xisvr32 instead?
+
+Before my ISP was switched to Comcast & port 80 was blocked, with 
+xicpl32.cpl  in the
+C:\windows\system32 directory I ran xisrv32.exe -i to start xitami as a 
+service & xisrv32.exe -u to stop the service.
+
+To just run it as a test server I just run xigui32.exe
+
+
+
+>  -----Original Message----- From: xitami-bounces@lists.xitami.org
+>  [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+>  Sent: Wednesday, November 15, 2006 5:23 PM To: Xitami Users General
+>  Discussion Subject: Re: [Xitami] Xitami Service
+>
+>  General wrote:
+> > Yeah that's the odd part. I will try your suggestion of
+> > uninstalling, Correct me if I'm wrong but xiwinnt IS the service
+> > version right?
+>
+>  According to
+>  http://lists.xitami.org/pipermail/xitami/2003-February/004729.html in
+>  some versions of xitami "xiwinnt.exe" IS the server version.
+>
+>  What version are you running?
+>
+>  I'm running v2.5b4 & v2.5c2 & neither has "xiwinnt.exe".
+>
+>  Alex B.,
+>
+> > General wrote:
+> >
+> >> I want to revisit this, I must not have something set up
+> >> properly. When I run xigui32 everything is fine. When I run
+> >> xiwinnt it doesn't seem to pick up my config files. Anyone have
+> >> any idea?
+> >>
+> >> Ron
+> > I'm no expert but,
+> >
+> > Are xigui32.exe & xiwinnt.exe in the same folder/directory as
+> > xitami.cfg? If not do you have the same xitami.cfg in both
+> > folder/directories?
+> >
+> > C:\xitami-25\app\xigui32.exe C:\xitami-25\app\xitami.cfg
+> >
+> > C:\xitami\app\xiwinnt.exe C:\xitami\app\xitami.cfg
+> >
+> > Did you uninstall the service by running "xisrv32.exe -u" before
+> > running xiwinnt.exe?
+> >
+> > Alex, B.,
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.6/535 - Release Date: 11/15/2006
+3:47 PM
+
+
+From graeme at arcturusadvisors.com  Thu Nov 16 23:29:19 2006
+From: graeme at arcturusadvisors.com (Graeme Nichol)
+Date: Thu Nov 16 23:29:43 2006
+Subject: [Xitami] Xitami Service
+References: <20061116221858.TOBU16402.ibm57aec.bellsouth.net@ronscomputer>
+Message-ID: <01a301c709ce$aac1d090$6402a8c0@graemee40b7ed4>
+
+"By the way, I don't know why I came up as General."
+
+If the hat fits - keep it!
+
+Graeme
+
+----- Original Message ----- 
+From: "General" <ronackgen01@bellsouth.net>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: 11/16/2006 5:19 PM
+Subject: RE: [Xitami] Xitami Service
+
+
+> Reason why I want to run as a service, if the server reboots because of a
+> power outage or something like that when I'm not home, then Xitami will
+> start as long as the PC is running even if it's not logged in.
+>
+> By the way, I don't know why I came up as General.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+> Sent: Wednesday, November 15, 2006 9:35 PM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Service
+>
+> General wrote:
+>>  I have v2.5c2 but I think I upgraded at some point in time from v2.4
+>>  something or other. So I should be installing xisvr32 instead?
+>
+> Before my ISP was switched to Comcast & port 80 was blocked, with
+> xicpl32.cpl  in the
+> C:\windows\system32 directory I ran xisrv32.exe -i to start xitami as a
+> service & xisrv32.exe -u to stop the service.
+>
+> To just run it as a test server I just run xigui32.exe
+>
+>
+>
+>>  -----Original Message----- From: xitami-bounces@lists.xitami.org
+>>  [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+>>  Sent: Wednesday, November 15, 2006 5:23 PM To: Xitami Users General
+>>  Discussion Subject: Re: [Xitami] Xitami Service
+>>
+>>  General wrote:
+>> > Yeah that's the odd part. I will try your suggestion of
+>> > uninstalling, Correct me if I'm wrong but xiwinnt IS the service
+>> > version right?
+>>
+>>  According to
+>>  http://lists.xitami.org/pipermail/xitami/2003-February/004729.html in
+>>  some versions of xitami "xiwinnt.exe" IS the server version.
+>>
+>>  What version are you running?
+>>
+>>  I'm running v2.5b4 & v2.5c2 & neither has "xiwinnt.exe".
+>>
+>>  Alex B.,
+>>
+>> > General wrote:
+>> >
+>> >> I want to revisit this, I must not have something set up
+>> >> properly. When I run xigui32 everything is fine. When I run
+>> >> xiwinnt it doesn't seem to pick up my config files. Anyone have
+>> >> any idea?
+>> >>
+>> >> Ron
+>> > I'm no expert but,
+>> >
+>> > Are xigui32.exe & xiwinnt.exe in the same folder/directory as
+>> > xitami.cfg? If not do you have the same xitami.cfg in both
+>> > folder/directories?
+>> >
+>> > C:\xitami-25\app\xigui32.exe C:\xitami-25\app\xitami.cfg
+>> >
+>> > C:\xitami\app\xiwinnt.exe C:\xitami\app\xitami.cfg
+>> >
+>> > Did you uninstall the service by running "xisrv32.exe -u" before
+>> > running xiwinnt.exe?
+>> >
+>> > Alex, B.,
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Free Edition.
+> Version: 7.5.430 / Virus Database: 268.14.6/535 - Release Date: 11/15/2006
+> 3:47 PM
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+From ronackgen01 at bellsouth.net  Fri Nov 17 22:55:20 2006
+From: ronackgen01 at bellsouth.net (General)
+Date: Fri Nov 17 22:55:04 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <01a301c709ce$aac1d090$6402a8c0@graemee40b7ed4>
+Message-ID: <20061117215453.CUXT25413.ibm62aec.bellsouth.net@ronscomputer>
+
+General purpose, General screw up, General Lee Stupid, General Electric,
+General Discussion, I could go on and on.
+
+Generally I don't go for nicknames but I could keep it. Besides I had a
+career in the military and still work with them today.  
+
+Oh Well!
+
+Thanks,
+
+General
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Graeme Nichol
+Sent: Thursday, November 16, 2006 5:29 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Xitami Service
+
+"By the way, I don't know why I came up as General."
+
+If the hat fits - keep it!
+
+Graeme
+
+----- Original Message ----- 
+From: "General" <ronackgen01@bellsouth.net>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: 11/16/2006 5:19 PM
+Subject: RE: [Xitami] Xitami Service
+
+
+> Reason why I want to run as a service, if the server reboots because of a
+> power outage or something like that when I'm not home, then Xitami will
+> start as long as the PC is running even if it's not logged in.
+>
+> By the way, I don't know why I came up as General.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+> Sent: Wednesday, November 15, 2006 9:35 PM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Xitami Service
+>
+> General wrote:
+>>  I have v2.5c2 but I think I upgraded at some point in time from v2.4
+>>  something or other. So I should be installing xisvr32 instead?
+>
+> Before my ISP was switched to Comcast & port 80 was blocked, with
+> xicpl32.cpl  in the
+> C:\windows\system32 directory I ran xisrv32.exe -i to start xitami as a
+> service & xisrv32.exe -u to stop the service.
+>
+> To just run it as a test server I just run xigui32.exe
+>
+>
+>
+>>  -----Original Message----- From: xitami-bounces@lists.xitami.org
+>>  [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Alex Barna
+>>  Sent: Wednesday, November 15, 2006 5:23 PM To: Xitami Users General
+>>  Discussion Subject: Re: [Xitami] Xitami Service
+>>
+>>  General wrote:
+>> > Yeah that's the odd part. I will try your suggestion of
+>> > uninstalling, Correct me if I'm wrong but xiwinnt IS the service
+>> > version right?
+>>
+>>  According to
+>>  http://lists.xitami.org/pipermail/xitami/2003-February/004729.html in
+>>  some versions of xitami "xiwinnt.exe" IS the server version.
+>>
+>>  What version are you running?
+>>
+>>  I'm running v2.5b4 & v2.5c2 & neither has "xiwinnt.exe".
+>>
+>>  Alex B.,
+>>
+>> > General wrote:
+>> >
+>> >> I want to revisit this, I must not have something set up
+>> >> properly. When I run xigui32 everything is fine. When I run
+>> >> xiwinnt it doesn't seem to pick up my config files. Anyone have
+>> >> any idea?
+>> >>
+>> >> Ron
+>> > I'm no expert but,
+>> >
+>> > Are xigui32.exe & xiwinnt.exe in the same folder/directory as
+>> > xitami.cfg? If not do you have the same xitami.cfg in both
+>> > folder/directories?
+>> >
+>> > C:\xitami-25\app\xigui32.exe C:\xitami-25\app\xitami.cfg
+>> >
+>> > C:\xitami\app\xiwinnt.exe C:\xitami\app\xitami.cfg
+>> >
+>> > Did you uninstall the service by running "xisrv32.exe -u" before
+>> > running xiwinnt.exe?
+>> >
+>> > Alex, B.,
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Free Edition.
+> Version: 7.5.430 / Virus Database: 268.14.6/535 - Release Date: 11/15/2006
+> 3:47 PM
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition.
+Version: 7.5.430 / Virus Database: 268.14.6/535 - Release Date: 11/15/2006
+3:47 PM
+
+
+From rickhead at gmail.com  Sat Nov 18 03:25:24 2006
+From: rickhead at gmail.com (Rick Headly)
+Date: Sat Nov 18 03:25:26 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061031002344.GIDU23490.ibm59aec.bellsouth.net@ronscomputer>
+References: <20061003133147.SWRM15461.ibm59aec.bellsouth.net@ronscomputer>
+	<20061031002344.GIDU23490.ibm59aec.bellsouth.net@ronscomputer>
+Message-ID: <11689a700611171825wed6b731scb043b82a4f83fc8@mail.gmail.com>
+
+Skipped content of type multipart/alternative-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061117/a6643629/run_xitami_as_a_service.html
+From paulpp at hotmail.com  Sat Nov 18 09:42:45 2006
+From: paulpp at hotmail.com (Pavel Podvoiski)
+Date: Sat Nov 18 09:42:51 2006
+Subject: [Xitami] Xitami Service
+In-Reply-To: <20061117215453.CUXT25413.ibm62aec.bellsouth.net@ronscomputer>
+Message-ID: <BAY105-F4432302B49D10BF8A68F4C7EF0@phx.gbl>
+
+>Generally I don't go for nicknames but I could keep it. Besides I had a
+>career in the military and still work with them today.
+
+That's explains a lot...  Cheers! :D
+
+_________________________________________________________________
+Buy, Load, Play. The new Sympatico / MSN Music Store works seamlessly with 
+Windows Media Player. Just Click PLAY. 
+http://musicstore.sympatico.msn.ca/content/viewer.aspx?cid=SMS_Sept192006
+
+From rickhead at gmail.com  Sat Nov 25 09:50:03 2006
+From: rickhead at gmail.com (Rick Headly)
+Date: Sat Nov 25 09:50:06 2006
+Subject: [Xitami] disabling ftp-root
+Message-ID: <11689a700611250050y6a7869bcy837c27eddb072cb9@mail.gmail.com>
+
+hi,
+
+i've been using xitami for a few years, to host a number of
+independently-owned sites and domains for others, in various locations
+around the globe.  each web-masters on the service, simply supplies their
+user-name/password combo to log directly into their designated web-directory
+(via xitami's ftp) to edit or make changes to their site.  this all seems to
+work very well.
+
+my problem, is that some of these web-masters (upon supplying an incorrect
+password) report finding themselves logged into the ftp-root...
+anonymously... and get confused because they can't find their files.
+
+i would like to completely disable anonymous logins (and the ftp
+root) altogether, as i'm only interested in supplying ftp-service to my
+authorized web-masters... and only if they've supplied a valid user-name and
+password.
+
+i simply don't want to be providing bandwidth or resources, or handling
+ftp-connections for just any tom, dick, or harry-bot, who happens to hit me
+on port-21.  i see it as a security threat.  i would prefer if xitami-ftp
+simply did not respond to anyone without a user-name and password... because
+they aren't supposed to be there to begin with.
+
+is it possible to 'disable' the ftp-root in such a manner?
+
+if so, i'd really appreciate a few pointers in tweaking up my config.
+
+thanks!
+
+rick
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061125/f88b8a85/attachment.htm
+From francis.turner at gmail.com  Sun Nov 26 16:42:54 2006
+From: francis.turner at gmail.com (Francis Turner)
+Date: Sun Nov 26 16:43:03 2006
+Subject: [Xitami] disabling ftp-root
+In-Reply-To: <11689a700611250050y6a7869bcy837c27eddb072cb9@mail.gmail.com>
+References: <11689a700611250050y6a7869bcy837c27eddb072cb9@mail.gmail.com>
+Message-ID: <f83609d50611260742r2de53d18kbff5262113412b15@mail.gmail.com>
+
+You ought to disable Xitami's FTP completely. Its a pretty unreliable
+implementation. If you replace it with some other ftpd you can then
+make sure that only non-anonymous users have access
+
+On 11/25/06, Rick Headly <rickhead@gmail.com> wrote:
+> hi,
+>
+> i've been using xitami for a few years, to host a number of
+> independently-owned sites and domains for others, in various locations
+> around the globe.  each web-masters on the service, simply supplies their
+> user-name/password combo to log directly into their designated web-directory
+> (via xitami's ftp) to edit or make changes to their site.  this all seems to
+> work very well.
+>
+> my problem, is that some of these web-masters (upon supplying an incorrect
+> password) report finding themselves logged into the ftp-root...
+> anonymously... and get confused because they can't find their files.
+>
+> i would like to completely disable anonymous logins (and the ftp root)
+> altogether, as i'm only interested in supplying ftp-service to my authorized
+> web-masters... and only if they've supplied a valid user-name and password.
+>
+> i simply don't want to be providing bandwidth or resources, or handling
+> ftp-connections for just any tom, dick, or harry-bot, who happens to hit me
+> on port-21.  i see it as a security threat.  i would prefer if xitami-ftp
+> simply did not respond to anyone without a user-name and password... because
+> they aren't supposed to be there to begin with.
+>
+> is it possible to 'disable' the ftp-root in such a manner?
+>
+> if so, i'd really appreciate a few pointers in tweaking up my config.
+>
+> thanks!
+>
+> rick
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From rickhead at gmail.com  Mon Nov 27 17:17:53 2006
+From: rickhead at gmail.com (Rick Headly)
+Date: Mon Nov 27 17:18:02 2006
+Subject: [Xitami] disabling ftp-root
+In-Reply-To: <f83609d50611260742r2de53d18kbff5262113412b15@mail.gmail.com>
+References: <11689a700611250050y6a7869bcy837c27eddb072cb9@mail.gmail.com>
+	<f83609d50611260742r2de53d18kbff5262113412b15@mail.gmail.com>
+Message-ID: <11689a700611270817g4599fdceu872fae83598abe76@mail.gmail.com>
+
+thank you francis,
+
+on a recent recommendation from someone here on the list, i decided to take
+a quick look at guild-ftp.  it's a very impressive looking piece of software
+indeed, but i eventually decided to abort that idea, due to my lack of
+understanding how 'normal' ftp services function.  though i've been using
+ftp regularly for the past 10 or 11 years, i've never actually belonged to
+an ftp file-share 'group' as such... and just don't get the whole concept of
+the 'normal' format.  the virtual directories (pub, guest, upload, etc.)
+really confuse me, as i fail to understand their unique purpose from a
+user's point if view.  previously, whether i've been hosting or being
+hosted, ftp has served strictly as a tool for the manipulation of password
+protected web-content.  because i consider my ftp requirements to be
+somewhat 'light duty', i decided to scrap the whole guild-ftp idea, and not
+try to fix something that wasn't necessarily broken.
+
+if any of you run a 'fully functional' ftp service, or know of any such
+public services that i could test-drive (as a user), i would kindly
+appreciate an invite :).  i'm sure i could learn a lot from a little
+hands-on experience.
+
+thanks!
+
+rick
+
+
+On 11/26/06, Francis Turner <francis.turner@gmail.com> wrote:
+>
+> You ought to disable Xitami's FTP completely. Its a pretty unreliable
+> implementation. If you replace it with some other ftpd you can then
+> make sure that only non-anonymous users have access
+>
+> On 11/25/06, Rick Headly <rickhead@gmail.com> wrote:
+> > hi,
+> >
+> > i've been using xitami for a few years, to host a number of
+> > independently-owned sites and domains for others, in various locations
+> > around the globe.  each web-masters on the service, simply supplies
+> their
+> > user-name/password combo to log directly into their designated
+> web-directory
+> > (via xitami's ftp) to edit or make changes to their site.  this all
+> seems to
+> > work very well.
+> >
+> > my problem, is that some of these web-masters (upon supplying an
+> incorrect
+> > password) report finding themselves logged into the ftp-root...
+> > anonymously... and get confused because they can't find their files.
+> >
+> > i would like to completely disable anonymous logins (and the ftp root)
+> > altogether, as i'm only interested in supplying ftp-service to my
+> authorized
+> > web-masters... and only if they've supplied a valid user-name and
+> password.
+> >
+> > i simply don't want to be providing bandwidth or resources, or handling
+> > ftp-connections for just any tom, dick, or harry-bot, who happens to hit
+> me
+> > on port-21.  i see it as a security threat.  i would prefer if
+> xitami-ftp
+> > simply did not respond to anyone without a user-name and password...
+> because
+> > they aren't supposed to be there to begin with.
+> >
+> > is it possible to 'disable' the ftp-root in such a manner?
+> >
+> > if so, i'd really appreciate a few pointers in tweaking up my config.
+> >
+> > thanks!
+> >
+> > rick
+> >
+> > --
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061127/a1809a3f/attachment.html
+From mw at 9000.org  Mon Nov 27 17:39:41 2006
+From: mw at 9000.org (Magnus Wedberg)
+Date: Mon Nov 27 17:40:03 2006
+Subject: [Xitami] disabling ftp-root
+In-Reply-To: <11689a700611270817g4599fdceu872fae83598abe76@mail.gmail.com>
+References: <11689a700611250050y6a7869bcy837c27eddb072cb9@mail.gmail.com>,
+	<f83609d50611260742r2de53d18kbff5262113412b15@mail.gmail.com>,
+	<11689a700611270817g4599fdceu872fae83598abe76@mail.gmail.com>
+Message-ID: <456B22DD.8147.1E45AB0@mw.9000.org>
+
+> just don't get the whole concept of the 'normal' format.  the virtual
+> directories (pub, guest, upload, etc.) really confuse me, as i fail to
+> understand their unique purpose from a user's point if view. 
+
+Guild is pretty easy to understand and once you get past the initial 
+setup woes, which are easy to overcome, it's maintenance-free.
+
+Think of the virtual directories as links... you can tie together 
+many different directories, from different drives, with differing 
+connectivity, to one document root (as far as the user is concerned). 
+For a FTP site that's crucial. 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From xitami at pastryworld.ca  Mon Nov 27 17:39:33 2006
+From: xitami at pastryworld.ca (Johannes Prost)
+Date: Mon Nov 27 17:40:16 2006
+Subject: [nonspam] Re: [Xitami] disabling ftp-root
+In-Reply-To: <11689a700611270817g4599fdceu872fae83598abe76@mail.gmail.com>
+References: <f83609d50611260742r2de53d18kbff5262113412b15@mail.gmail.com>
+Message-ID: <456AC065.7268.6FB645@localhost>
+
+Rick,
+
+I am using FileZilla server and client and it is pretty straight forward. I am not an ftp guru 
+either, but it works pretty well. The nice thing which I like with file zilla server, you can set 
+the IP's you want to connect to the server, if this is desired and possible (dyn IP customers ?)
+
+I would have to dig up my notes as I had it installed, and didn't look into it anymore. It is here 
+with a few users like running: Start it up > forget it as it is running just fine. I am maybe not 
+running the actual version, but....
+
+http://filezilla.sourceforge.net/
+
+Johannes
+
+> thank you francis,
+> 
+> on a recent recommendation from someone here on the list, i decided to take
+> a quick look at guild-ftp.  it's a very impressive looking piece of software
+> indeed, but i eventually decided to abort that idea, due to my lack of
+> understanding how 'normal' ftp services function.  though i've been using
+> ftp regularly for the past 10 or 11 years, i've never actually belonged to
+> an ftp file-share 'group' as such... and just don't get the whole concept of
+> the 'normal' format.  the virtual directories (pub, guest, upload, etc.)
+> really confuse me, as i fail to understand their unique purpose from a
+> user's point if view.  previously, whether i've been hosting or being
+> hosted, ftp has served strictly as a tool for the manipulation of password
+> protected web-content.  because i consider my ftp requirements to be
+> somewhat 'light duty', i decided to scrap the whole guild-ftp idea, and not
+> try to fix something that wasn't necessarily broken.
+> 
+> if any of you run a 'fully functional' ftp service, or know of any such
+> public services that i could test-drive (as a user), i would kindly
+> appreciate an invite :).  i'm sure i could learn a lot from a little
+> hands-on experience.
+> 
+> thanks!
+> 
+> rick
+> 
+> 
+> On 11/26/06, Francis Turner <francis.turner@gmail.com> wrote:
+> >
+> > You ought to disable Xitami's FTP completely. Its a pretty unreliable
+> > implementation. If you replace it with some other ftpd you can then
+> > make sure that only non-anonymous users have access
+> >
+> > On 11/25/06, Rick Headly <rickhead@gmail.com> wrote:
+> > > hi,
+> > >
+> > > i've been using xitami for a few years, to host a number of
+> > > independently-owned sites and domains for others, in various locations
+> > > around the globe.  each web-masters on the service, simply supplies
+> > their
+> > > user-name/password combo to log directly into their designated
+> > web-directory
+> > > (via xitami's ftp) to edit or make changes to their site.  this all
+> > seems to
+> > > work very well.
+> > >
+> > > my problem, is that some of these web-masters (upon supplying an
+> > incorrect
+> > > password) report finding themselves logged into the ftp-root...
+> > > anonymously... and get confused because they can't find their files.
+> > >
+> > > i would like to completely disable anonymous logins (and the ftp root)
+> > > altogether, as i'm only interested in supplying ftp-service to my
+> > authorized
+> > > web-masters... and only if they've supplied a valid user-name and
+> > password.
+> > >
+> > > i simply don't want to be providing bandwidth or resources, or handling
+> > > ftp-connections for just any tom, dick, or harry-bot, who happens to hit
+> > me
+> > > on port-21.  i see it as a security threat.  i would prefer if
+> > xitami-ftp
+> > > simply did not respond to anyone without a user-name and password...
+> > because
+> > > they aren't supposed to be there to begin with.
+> > >
+> > > is it possible to 'disable' the ftp-root in such a manner?
+> > >
+> > > if so, i'd really appreciate a few pointers in tweaking up my config.
+> > >
+> > > thanks!
+> > >
+> > > rick
+> > >
+> > > --
+> >
+> >
+> 
+
+Johannes
+
+
+
+From rickhead at gmail.com  Tue Nov 28 12:29:16 2006
+From: rickhead at gmail.com (Rick Headly)
+Date: Tue Nov 28 12:29:23 2006
+Subject: [nonspam] Re: [Xitami] disabling ftp-root
+In-Reply-To: <456AC065.7268.6FB645@localhost>
+References: <f83609d50611260742r2de53d18kbff5262113412b15@mail.gmail.com>
+	<11689a700611270817g4599fdceu872fae83598abe76@mail.gmail.com>
+	<456AC065.7268.6FB645@localhost>
+Message-ID: <11689a700611280329k657b8e29o2e19d199c6364b1@mail.gmail.com>
+
+thank you kindly johannes (and magnus),
+
+for all the great information and words of encouragement ;)
+
+i believe another question of mine was addressed here as well, and that's my
+concerns about the stability of these applications, and their ability to run
+unattended for extended periods of time on older hardware, without chewing
+up a lot of resources and bogging down.
+
+i will most likely install these on a test-system first, and play around a
+bit... until i finally get a good feel for what's going on, and what they're
+all about... and go from there.
+
+thanks again!  :)
+
+rick
+
+
+On 11/27/06, Johannes Prost <xitami@pastryworld.ca> wrote:
+>
+> Rick,
+>
+> I am using FileZilla server and client and it is pretty straight forward.
+> I am not an ftp guru
+> either, but it works pretty well. The nice thing which I like with file
+> zilla server, you can set
+> the IP's you want to connect to the server, if this is desired and
+> possible (dyn IP customers ?)
+>
+> I would have to dig up my notes as I had it installed, and didn't look
+> into it anymore. It is here
+> with a few users like running: Start it up > forget it as it is running
+> just fine. I am maybe not
+> running the actual version, but....
+>
+> http://filezilla.sourceforge.net/
+>
+> Johannes
+>
+> > thank you francis,
+> >
+> > on a recent recommendation from someone here on the list, i decided to
+> take
+> > a quick look at guild-ftp.  it's a very impressive looking piece of
+> software
+> > indeed, but i eventually decided to abort that idea, due to my lack of
+> > understanding how 'normal' ftp services function.  though i've been
+> using
+> > ftp regularly for the past 10 or 11 years, i've never actually belonged
+> to
+> > an ftp file-share 'group' as such... and just don't get the whole
+> concept of
+> > the 'normal' format.  the virtual directories (pub, guest, upload, etc.)
+> > really confuse me, as i fail to understand their unique purpose from a
+> > user's point if view.  previously, whether i've been hosting or being
+> > hosted, ftp has served strictly as a tool for the manipulation of
+> password
+> > protected web-content.  because i consider my ftp requirements to be
+> > somewhat 'light duty', i decided to scrap the whole guild-ftp idea, and
+> not
+> > try to fix something that wasn't necessarily broken.
+> >
+> > if any of you run a 'fully functional' ftp service, or know of any such
+> > public services that i could test-drive (as a user), i would kindly
+> > appreciate an invite :).  i'm sure i could learn a lot from a little
+> > hands-on experience.
+> >
+> > thanks!
+> >
+> > rick
+> >
+> >
+> > On 11/26/06, Francis Turner <francis.turner@gmail.com> wrote:
+> > >
+> > > You ought to disable Xitami's FTP completely. Its a pretty unreliable
+> > > implementation. If you replace it with some other ftpd you can then
+> > > make sure that only non-anonymous users have access
+> > >
+> > > On 11/25/06, Rick Headly <rickhead@gmail.com> wrote:
+> > > > hi,
+> > > >
+> > > > i've been using xitami for a few years, to host a number of
+> > > > independently-owned sites and domains for others, in various
+> locations
+> > > > around the globe.  each web-masters on the service, simply supplies
+> > > their
+> > > > user-name/password combo to log directly into their designated
+> > > web-directory
+> > > > (via xitami's ftp) to edit or make changes to their site.  this all
+> > > seems to
+> > > > work very well.
+> > > >
+> > > > my problem, is that some of these web-masters (upon supplying an
+> > > incorrect
+> > > > password) report finding themselves logged into the ftp-root...
+> > > > anonymously... and get confused because they can't find their files.
+> > > >
+> > > > i would like to completely disable anonymous logins (and the ftp
+> root)
+> > > > altogether, as i'm only interested in supplying ftp-service to my
+> > > authorized
+> > > > web-masters... and only if they've supplied a valid user-name and
+> > > password.
+> > > >
+> > > > i simply don't want to be providing bandwidth or resources, or
+> handling
+> > > > ftp-connections for just any tom, dick, or harry-bot, who happens to
+> hit
+> > > me
+> > > > on port-21.  i see it as a security threat.  i would prefer if
+> > > xitami-ftp
+> > > > simply did not respond to anyone without a user-name and password...
+> > > because
+> > > > they aren't supposed to be there to begin with.
+> > > >
+> > > > is it possible to 'disable' the ftp-root in such a manner?
+> > > >
+> > > > if so, i'd really appreciate a few pointers in tweaking up my
+> config.
+> > > >
+> > > > thanks!
+> > > >
+> > > > rick
+> > > >
+> > > > --
+> > >
+> > >
+> >
+>
+> Johannes
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20061128/1247c87b/attachment.htm

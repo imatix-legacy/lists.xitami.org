@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Associating .cgi with python
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002225.html">
+   <LINK REL="Next"  HREF="002224.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Associating .cgi with python
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Associating .cgi with python">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 31 Jan 2002 09:40:07 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002225.html">[Xitami] Re: Sign-in error : &quot;Error processing failed - problem with schema&quot;
+</A></li>
+        <LI> Next message: <A HREF="002224.html">[Xitami] Associating .cgi with python
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2217">[ date ]</a>
+              <a href="thread.html#2217">[ thread ]</a>
+              <a href="subject.html#2217">[ subject ]</a>
+              <a href="author.html#2217">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3C582EB7.C7593916@rci.rutgers.edu">3C582EB7.C7593916@rci.rutgers.edu</A>&gt;, Paul Reid writes:
+&gt;<i>Alternatively: hack the open-source code for Xitami, find the special-case
+</I>&gt;<i>where Xitami/Win looks for &quot;#!....perl&quot; as the first line of a file and
+</I>&gt;<i>searches PATH for a copy of perl.exe, 
+</I>
+What special case would this be?
+
+The code in sflproc*.* looks for a #! line that is something like:
+
+#! /path/path/executablename flags
+
+and if it can't find the literal /path/path/executablename, it then
+takes just the executablename and tries to find that on the path.
+
+It should work fine with Python.
+
+&gt;<i>and add similar lines to look for &quot;#!...python&quot; and search PATH for 
+</I>&gt;<i>python.exe. But recompiling Xitami on Windows seems to want an MS C 
+</I>&gt;<i>compiler, and IIRC the GUI version needs a commercial package so isn't 
+</I>&gt;<i>totally &quot;free&quot;. 
+</I>
+You can rebuild the GUI version from source with MSVC.  I guess that
+counts as needing a &quot;commercial package&quot;, but it's a reasonably widely
+available one.  (The source to the GUI was merged into the open source
+version with 2.4b9/2.5b5.)
+
+In theory it should be possible to compile it with other compilers, but
+particularly the GUI version would take a bit of work to get the
+resources compiled properly and linked in.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002225.html">[Xitami] Re: Sign-in error : &quot;Error processing failed - problem with schema&quot;
+</A></li>
+	<LI> Next message: <A HREF="002224.html">[Xitami] Associating .cgi with python
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2217">[ date ]</a>
+              <a href="thread.html#2217">[ thread ]</a>
+              <a href="subject.html#2217">[ subject ]</a>
+              <a href="author.html#2217">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

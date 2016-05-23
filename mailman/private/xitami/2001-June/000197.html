@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Password problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000195.html">
+   <LINK REL="Next"  HREF="000199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Password problems
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Password problems">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 19 Jun 2001 22:01:50 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000195.html">[Xitami] Xitami on FreeBSD
+</A></li>
+        <LI> Next message: <A HREF="000199.html">[Xitami] Password problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;000c01c0f85a$99d9b260$<A HREF="mailto:830a5f82@hm.uwa.edu.au">830a5f82@hm.uwa.edu.au</A>&gt;, &quot;Don Gordon&quot; writes:
+&gt;<i>Using Xitami v2.4d9 on Windows 98. Have set up directory password list in
+</I>&gt;<i>defaults.aut. This setup works fine except with IE when it encounters a web
+</I>&gt;<i>page that contains 2 Real Audio files. The page loads ok but when you click
+</I>&gt;<i>on the play button IE requests the Username &amp; Password again before it will
+</I>&gt;<i>play the file. The problem does not occur if password restrictions are
+</I>&gt;<i>removed.
+</I>
+Is it IE requesting the username/password again?  Or real player?
+
+There's two things I can think of which might be going on here: 
+(a) the files are in different directories, and you've got two sets of
+    protections being applied, with different realms.  You can work 
+    around this problem by setting the realm name in the .aut file
+    for both protected directories to be the same (and making sure the
+    same usernames/passwords apply to both).
+
+(b) IE (which gets the authentication for the HTML page) and real player
+    (which gets the authentication for the audio) do not talk to each
+    other to exchange authentication information.  Which mean that both
+    have to ask for that information.  This is certainly the case when
+    real player is used externally, but I'm not sure if it is the case
+    when it is embedded in a webpage.
+
+Basically if you are going to password protect both HTML and audio, and
+use two applications which don't talk to each other to exchange password
+information, then both will have to ask the user for the password
+information.
+
+There are ways to design a system that protects the HTML and audio
+without requiring the password to be entered twice, but it requires
+server-side code (CGIs, LRWP, servlets, etc), and doing much of the
+server-side authentication handling yourself, rather than relying on the
+webservers build in basic authentication.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000195.html">[Xitami] Xitami on FreeBSD
+</A></li>
+	<LI> Next message: <A HREF="000199.html">[Xitami] Password problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

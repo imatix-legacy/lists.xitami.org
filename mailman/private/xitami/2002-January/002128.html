@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] problems with xibuild under OpenBSD
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002126.html">
+   <LINK REL="Next"  HREF="002129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] problems with xibuild under OpenBSD
+   </H1>
+    <B>Greg Stienstra
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] problems with xibuild under OpenBSD">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 21 Jan 2002 22:42:06 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002126.html">[Xitami] I'm to stupid: Virtual Hosts
+</A></li>
+        <LI> Next message: <A HREF="002129.html">[Xitami] problems with xibuild under OpenBSD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2128">[ date ]</a>
+              <a href="thread.html#2128">[ thread ]</a>
+              <a href="subject.html#2128">[ subject ]</a>
+              <a href="author.html#2128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am unable to get xibuild to work under OpenBSD, it appears OpenBSD makes use
+of an &quot;ar&quot; (object librarian) program of a different lineage than do linux, and
+freebsd, and refuses to do its job if the 's' switch is used.
+
+The man page leads me to believe that ranlib can do the job of a reluctant ar
+program. My question is what is the right way to modify your build setups to
+accomodate this?
+
+Here is a screen copy.
+
+$ ./xibuild
+chmod: /home/greg/xitami-25b5/src/sfl/c: Operation not permitted
+--------------------------------------------------------------------
+Welcome to the Xitami web server, copyright (c) 1991-99 iMatix.
+This script will compile and link XITAMI, ready for use on this
+OpenBSD system.  Nothing is installed in any system directories.
+Please confirm this information:
+    System . . . . . .: OpenBSD
+    ANSI C compiler. .: cc -c  -DDEBUG
+
+If the ANSI C compile command is wrong, you will have to modify the
+'c' scripts in these directories:
+
+    /home/greg/xitami-25b5/src/sfl, /home/greg/xitami-25b5/src/smt
+
+If this information looks okay, press [Enter] to build Xitami.
+--------------------------------------------------------------------
+
+xibuild: Rebuilding the SFL package...
+chmod: c: Operation not permitted
+Building the iMatix Standard Function Library
+Press [Enter] to continue, or Ctrl-C to abort.
+Checking for required files...
+Compiling sflbits...
+ar: illegal option -- s
+usage:  ar -d [-Tv] archive file ...
+        ar -m [-Tv] archive file ...
+        ar -m [-abiTv] position archive file ...
+        ar -p [-Tv] archive [file ...]
+        ar -q [-cTv] archive file ...
+        ar -r [-cuTv] archive file ...
+        ar -r [-abciuTv] position archive file ...
+        ar -t [-Tv] archive [file ...]
+        ar -x [-CouTv] archive [file ...]
+Compiling sflhttp...
+
+
+It goes on and on like this for each source file.
+
+Thanks in advance for your help.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002126.html">[Xitami] I'm to stupid: Virtual Hosts
+</A></li>
+	<LI> Next message: <A HREF="002129.html">[Xitami] problems with xibuild under OpenBSD
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2128">[ date ]</a>
+              <a href="thread.html#2128">[ thread ]</a>
+              <a href="subject.html#2128">[ subject ]</a>
+              <a href="author.html#2128">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,578 @@
+From xitami@lists.xitami.org  Tue May 22 16:05:10 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 23 May 2001 03:05:10 +1200
+Subject: [Xitami] Test of new Mailman mailing list
+Message-ID: <200105221505.DAA28906@pagoda.wgtn.cat-it.co.nz>
+
+This is a test of the new Mailman mailing list configuration.
+
+Ewen
+
+From xitami@lists.xitami.org  Tue May 29 12:29:12 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Tue, 29 May 2001 23:29:12 +1200
+Subject: [Xitami] Final pre-users test
+Message-ID: <200105291129.XAA25670@pagoda.wgtn.cat-it.co.nz>
+
+Hi,
+
+This is a final test of the Mailman set of the Xitami list prior to
+adding all the current Xitami list users.
+
+Ewen
+
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 04:28:35 2001
+From: xitami@lists.xitami.org (Dennis G. Wicks)
+Date: Tue, 29 May 2001 22:28:35 -0500
+Subject: [Xitami] Can't connect to port 80
+Message-ID: <3B142293.17543.335605@localhost>
+
+Greetings;
+
+This is my first post, and I hope someone has some help for me.
+
+I am running Xitami on NT 4.0 SP 6. Once in a great while Xitami 
+crashes and when I tell it to restart I get a message back that says it 
+can't access port 80 because some other server is using it.(?)
+
+So far the only solution I have found is to bounce NT, and that is a 
+royal PITA!
+
+Is there an alternate way out of this?
+
+TIA,
+Dennis
+
+From xitami@lists.xitami.org  Wed May 30 04:57:36 2001
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Wed, 30 May 2001 05:57:36 +0200
+Subject: [Xitami] FTP uploads only in lowercase!
+Message-ID: <05256A5C.0015B655.00@notes.delphiauto.com>
+
+Hi!
+
+I'm using Xitami 2.5b4.  When I upload a file thru FTP, the file is
+automatically converted to all lowercase.  How can I turn this off?
+
+Thanks,
+
+Alexander Skwar
+
+
+
+From xitami@lists.xitami.org  Wed May 30 06:30:31 2001
+From: xitami@lists.xitami.org (Paul Reid)
+Date: Wed, 30 May 2001 01:30:31 -0400
+Subject: [Xitami] Can't connect to port 80
+References: <3B142293.17543.335605@localhost>
+Message-ID: <3B148577.3F6EA080@rci.rutgers.edu>
+
+> can't access port 80 because some other server is using it.(?)
+
+When that happens, open the site in a browser and see what server
+is sitting on port 80. I'd guess PWS, the mini-IIS webserver form
+MS.
+
+What version of Xitami, as a service or started manually?
+
+ -PRR
+
+From xitami@lists.xitami.org  Wed May 30 06:55:57 2001
+From: xitami@lists.xitami.org (garry)
+Date: Wed, 30 May 2001 17:55:57 +1200
+Subject: [Xitami] Can't connect to port 80
+References: <3B142293.17543.335605@localhost>
+Message-ID: <000401c0e8cd$3281f010$123d60cb@cable.net.nz>
+
+Hi dennis go to taks manager and find the xitami process and shut it down
+then restart
+
+this should save you having to restart windows all the time
+
+Garry Stanley
+
+Cable.net.nz
+
+Beta Data Solutions Ltd.
+
+
+
+From xitami@lists.xitami.org  Wed May 30 09:41:13 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 30 May 2001 20:41:13 +1200
+Subject: [Xitami] Can't connect to port 80
+In-Reply-To: Message from "Dennis G. Wicks" <wix@eskimo.com>
+ of "Tue, 29 May 2001 22:28:35 EST." <3B142293.17543.335605@localhost>
+Message-ID: <200105300841.UAA02856@pagoda.wgtn.cat-it.co.nz>
+
+In message <3B142293.17543.335605@localhost>, "Dennis G. Wicks" writes:
+>I am running Xitami on NT 4.0 SP 6. Once in a great while Xitami 
+>crashes and when I tell it to restart I get a message back that says it 
+>can't access port 80 because some other server is using it.(?)
+
+With some TCP/IP stacks (I don't know if it applies to NT 4), if a
+server is stopped "suddenly", then it can't be restarted for a few
+minutes after it has been stopped (to allow all the old connections to
+die off).
+
+One way to check for this is to run:
+
+netstat -na | more
+
+and look for entries with port 80 (".80" or ":80" at the end).  If there
+are entries like that and it is telling you that you cannot restart
+Xitami, then try waiting a few minutes until they go away, and see if
+you can restart Xitami then.
+
+If that works (ie, if it's the cause of the problem) we'll see if NT has
+any equivilent of the Unix "this is a server, let it restart and use the
+same port again immediately" option.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 10:06:54 2001
+From: xitami@lists.xitami.org (Michael S. Kazarin)
+Date: Wed, 30 May 2001 13:06:54 +0400
+Subject: [Xitami] port 81
+References: <200105300841.UAA02856@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <008b01c0e8e7$e47583d0$659305c3@futures>
+
+I have set
+
+lrwp:enabled=0
+
+in xitami config file, but still see the server listening to port 81 and
+accepting telnet, for example. And of course visible to port scanners. Why?
+It can be a security hole in this case, I guess.
+
+Mike
+
+
+From xitami@lists.xitami.org  Wed May 30 10:38:16 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 30 May 2001 21:38:16 +1200
+Subject: [Xitami] New mailing list system
+Message-ID: <200105300938.VAA03799@pagoda.wgtn.cat-it.co.nz>
+
+As you will have seen by now, the Xitami mailing list has been moved
+from its old home at ec-computers.net (run by Scott Drake) to a mailing
+list server at iMatix HQ (lists.xitami.org).  (The Xitami-Dev mailing
+list has also been moved to lists.xitami.org; it was moved late last
+week.)
+
+We'd like to thank Scott Drake a great deal for hosting all of the
+Xitami lists so well for so many years; it has been a great service.
+
+The new mailing list system is running Mailman which provides a web
+interface for subscribing/unsubscribing/changing your preferences at:
+
+http://lists.xitami.org./mailman/listinfo/xitami
+
+We have tried to ensure that all users who were getting the "digest"
+form of the mailing list are getting the digest form again; and all
+those getting the standard form are getting the standard form.  The user
+list was transfered over yesterday so should be basically up to date.
+In addition Scott Drake has agreed to forward the old ec-computers.net
+addresses to the new server for a little while to help with transition
+-- thanks Scott.
+
+If you'd like to change your preferences, subscribe or unsubscribe,
+please visit the webpage listed above.  You'll need your passsword to
+access it: you can ask Mailman to mail this out to you by entering your
+email address.  If you have any problems get in touch with me directly
+(<ewen@imatix.com>).
+
+You can also access the archives of the "new" list from that webpage.
+We'll see if something can be done to make sure the old archives are
+also available at least for a while.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 11:10:44 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 30 May 2001 22:10:44 +1200
+Subject: [Xitami] port 81
+In-Reply-To: Message from "Michael S. Kazarin" <kazarin@eltra.metrocom.ru>
+ of "Wed, 30 May 2001 13:06:54 +0400." <008b01c0e8e7$e47583d0$659305c3@futures>
+Message-ID: <200105301010.WAA04336@pagoda.wgtn.cat-it.co.nz>
+
+In message <008b01c0e8e7$e47583d0$659305c3@futures>, "Michael S. Kazarin" writes
+:
+>I have set
+>
+>lrwp:enabled=0
+>
+>in xitami config file, but still see the server listening to port 81 and
+>accepting telnet, for example. And of course visible to port scanners. Why?
+>It can be a security hole in this case, I guess.
+
+For some reason Xitami is not recognising your option, and is starting
+the LRWP module anyway.  Check that you have set it in defaults.cfg as
+
+[LRWP]
+  enabled = "0"
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 11:11:36 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 30 May 2001 22:11:36 +1200
+Subject: [Xitami] FTP uploads only in lowercase!
+In-Reply-To: Message from alexander.skwar@delphiauto.com
+ of "Wed, 30 May 2001 05:57:36 +0200." <05256A5C.0015B655.00@notes.delphiauto.com>
+Message-ID: <200105301011.WAA04360@pagoda.wgtn.cat-it.co.nz>
+
+In message <05256A5C.0015B655.00@notes.delphiauto.com>, alexander.skwar@delphiau
+to.com writes:
+>I'm using Xitami 2.5b4.  When I upload a file thru FTP, the file is
+>automatically converted to all lowercase.  How can I turn this off?
+
+Which version of xitami 2.5b4 are you using (ie, which OS, and if
+Windows which of the builds)?
+
+Ewen
+
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 14:06:30 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 31 May 2001 01:06:30 +1200
+Subject: [Xitami] gnujsp setup with xitami
+In-Reply-To: Message from schneider.alexandre@free.fr
+ of "Mon, 21 May 2001 15:40:41 +0200." <990452441.3b091ad9f1870@imp.free.fr>
+Message-ID: <200105301306.BAA06166@pagoda.wgtn.cat-it.co.nz>
+
+In message <990452441.3b091ad9f1870@imp.free.fr>, schneider.alexandre@free.fr writes:
+>I've tried to install gnujsp with xitami and servletrunner module, and I can 
+>find the way to tell to xitami to use gnujsp servlet with *.jsp files
+
+Unfortunately there is no easy way to do this, because the ServletRunner
+doesn't currently have a way to say "all files with this extension" to
+Xitami, and hence GNUJSP cannot get its hands on them.  (The [filter]
+section is for CGI-like programs, such as PHP, PerlSSI, etc)
+
+The closest thing you can do that I can think of is put all your JSP
+pages in one directory (or under one virtual host), and then tell the
+Servlet Runner to ask to handle all files in that directory.
+
+The "can't specify by extension" is on our list of known issues.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 14:12:45 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 31 May 2001 01:12:45 +1200
+Subject: [Xitami] Fix to httpdir.gsl directory order bug
+In-Reply-To: Message from Francis Turner <francis.turner@freesbee.fr>
+ of "Wed, 23 May 2001 23:14:39 -0400." <3B0C7C9F.2070509@freesbee.fr>
+Message-ID: <200105301312.BAA06340@pagoda.wgtn.cat-it.co.nz>
+
+In message <3B0C7C9F.2070509@freesbee.fr>, Francis Turner writes:
+>It works fine for the basic http://host/directory/ but the URLs provided 
+>to create views sorted in a non-default manner were not working 
+>completely right - that is to sat you could by standard order but you 
+>could never reverse the order. 
+
+Thanks for the bug report.  I've put it onto our bug list.  I suspect
+that the problem may have been fixed from within Xitami by now, but
+we'll try to check on this before releasing a new major version.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 14:21:57 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 31 May 2001 01:21:57 +1200
+Subject: [Xitami] Linux-Mandrake8.0 and Xitami ? help plz
+In-Reply-To: Message from "RDWest Sr." <ricky500r@home.com>
+ of "Thu, 17 May 2001 14:29:02 -0400." <001001c0deff$3f294570$23730618@ci83514a>
+Message-ID: <200105301321.BAA06614@pagoda.wgtn.cat-it.co.nz>
+
+In message <001001c0deff$3f294570$23730618@ci83514a>, "RDWest Sr." writes:
+>   i've switched over to a real os as everyone says-(linux-Mandrake)    i've
+>read all through the archives and can't seem to get a build...[...]
+>
+>./xibuild it aborts says slm isn't a file or folder
+
+Can you give the exact error message that is reported?  "slm isn't a
+file or folder" is not one that I recognise, nor can I think why it
+might be reported.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 14:24:59 2001
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 31 May 2001 01:24:59 +1200
+Subject: [Xitami] Specifying log-dir
+In-Reply-To: Message from John Poltorak <jp@eyup.org>
+ of "Fri, 18 May 2001 01:39:16 +0100." <20010518013916.E107@eyup.org>
+Message-ID: <200105301324.BAA06705@pagoda.wgtn.cat-it.co.nz>
+
+In message <20010518013916.E107@eyup.org>, John Poltorak writes:
+>log-dir=$(logs)
+>
+>but it didn't work. Also tried %logs% as I'm running under OS/2 and that
+>didn't work either. is there a way. I do have such an envar, before anyone
+>asks...
+
+If this is in the config file, then for many of the variables Xitami
+tries the value as an environment variable name before trying it as a
+filename (that's how TEMP works :-) ).  So you could try just:
+
+  variable = LOGS
+
+And see if that will work for you.  (Since I'm not sure which option it
+is you're trying to set, I can't check for you whether this "try as an
+environment name" will apply.)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed May 30 15:40:49 2001
+From: xitami@lists.xitami.org (Michael Lerner)
+Date: Wed, 30 May 2001 10:40:49 -0400
+Subject: [Xitami] PHP Troubles
+Message-ID: <003301c0e916$85789b40$0100000a@server>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0030_01C0E8F4.FE130EE0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi Everyone,
+
+I'm trying to get php in Xitami and I get errors like
+
+ Warning: Undefined variable: name in =
+C:/XITAMI/webpages/php/bb/chat.php3 on
+line 15
+
+I have tried adding filters and mimes as previously suggested in the =
+archives. thanks in
+advance.
+
+
+------=_NextPart_000_0030_01C0E8F4.FE130EE0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2462.0" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Hi Everyone,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2><FONT face=3DArial =
+size=3D2></FONT></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2><FONT face=3D"Times New Roman" =
+size=3D3>I'm trying to=20
+get php in&nbsp;Xitami and I get errors like<BR><BR>&nbsp;Warning: =
+Undefined=20
+variable: name in C:/XITAMI/webpages/php/bb/chat.php3 on<BR>line =
+15<BR><BR>I=20
+have tried adding filters and mimes as previously suggested in the =
+archives.=20
+thanks in<BR>advance.</FONT><BR></DIV></FONT></BODY></HTML>
+
+------=_NextPart_000_0030_01C0E8F4.FE130EE0--
+
+
+From xitami@lists.xitami.org  Wed May 30 15:48:23 2001
+From: xitami@lists.xitami.org (Craig Morrison)
+Date: Wed, 30 May 2001 09:48:23 -0500
+Subject: [Xitami] PHP Troubles
+References: <003301c0e916$85789b40$0100000a@server>
+Message-ID: <3B150837.40720726@2cah.com>
+
+This is not a Xitami issue, so I'll be brief with a suggestion from the
+PHP-Windows list:
+
+> You have error_reporting set to E_ALL in your php.ini - which is probably a
+> good thing, because it's telling you that these variables have not been
+> defined. You could set error_reporting to a lower setting like E_ALL &
+> ~E_NOTICE instead, but the preferably fix would be to define these variables
+> first.
+
+
+> Michael Lerner wrote:
+> 
+> Hi Everyone,
+> 
+> I'm trying to get php in Xitami and I get errors like
+> 
+>  Warning: Undefined variable: name in C:/XITAMI/webpages/php/bb/chat.php3 on
+> line 15
+> 
+> I have tried adding filters and mimes as previously suggested in the
+> archives. thanks in
+> advance.
+
+-- 
+
+Craig Morrison
+  MTS Professional @ http://www.2cah.com/
+  A Win32 Email server that works for _you_.
+EzMTS - A _free_ Win32 EMail Server
+  http://www.ezmts.org/
+  Anonymous FTP at ftp://2cah.com
+
+From xitami@lists.xitami.org  Wed May 30 16:08:06 2001
+From: xitami@lists.xitami.org (Rod B. Nussbaumer)
+Date: Wed, 30 May 2001 08:08:06 -0700
+Subject: [Xitami] Xitami 2.5b4 sends periods as '%2E' in filenames
+Message-ID: <3B150CD6.A420E427@trmail.triumf.ca>
+
+I've recently upgraded to 2.5b4 on Win95 (!), and now whenever 
+I try to download files from it using either the FTP server or 
+using an http: URL, the FTP client or browser sees the download 
+filename as one long name with the period(s) represented as %2E, 
+or in the case of Netscape on Linux, the percent sign is converted 
+to an underscore.  This behavior did not appear in my prior 
+installation (2.4d2?), and I can't seem to find any configuration 
+item to unset the behavior.
+
+I haven't noticed anyone else describe this bahavior on this list,
+so I'm assuming it is some peculiar setup I'm using, but I can't
+see anything I can do to fix it.  Please help.
+
+	---   rod.
+
+-- 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Rod Nussbaumer, Programmer/Technologist       E-mail: bomr@triumf.ca  
+ TRIUMF --- University of British Columbia,     Phone: (604)222-7449
+ Vancouver, BC, Canada.                           FAX: (604)222-7307
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+From xitami@lists.xitami.org  Wed May 30 16:07:23 2001
+From: xitami@lists.xitami.org (Pctel)
+Date: Wed, 30 May 2001 12:07:23 -0300
+Subject: [Xitami] MySQL and Xitami
+Message-ID: <000201c0e91a$5c64b820$0100a8c0@mail>
+
+Hi+ACE-
+I have some problems in installing MySQL in XITAMI. Anyone knows where could
+I find an +ACI-step by step+ACI- MySQL installation procedure in XITAMI? I will
+really appreciate it. Thank You+ACE-
+Alberto Vazquez
+PCtel
+Argentina
+info+AEA-pctel.com.ar
+
+
+
+
+
+From xitami@lists.xitami.org  Wed May 30 16:34:24 2001
+From: xitami@lists.xitami.org (garry)
+Date: Thu, 31 May 2001 03:34:24 +1200
+Subject: [Xitami] Xitami 2.5b4 sends periods as '%2E' in filenames
+References: <3B150CD6.A420E427@trmail.triumf.ca>
+Message-ID: <002e01c0e91e$011d1df0$123d60cb@cable.net.nz>
+
+Rob just a guess here but is xitami in the program files dir on your system
+...some programs have trouble with the dir having a space in it ?
+
+Garry Stanley
+
+Cable.net.nz
+
+Beta Data Solutions Ltd.
+
+
+
+From xitami@lists.xitami.org  Wed May 30 17:23:15 2001
+From: xitami@lists.xitami.org (Rod B. Nussbaumer)
+Date: Wed, 30 May 2001 09:23:15 -0700
+Subject: [Xitami] Xitami 2.5b4 sends periods as '%2E' in filenames
+References: <3B150CD6.A420E427@trmail.triumf.ca> <002e01c0e91e$011d1df0$123d60cb@cable.net.nz>
+Message-ID: <3B151E73.DA5C5E22@trmail.triumf.ca>
+
+garry wrote:
+> 
+> Rob just a guess here but is xitami in the program files dir on your system
+> ...some programs have trouble with the dir having a space in it ?
+> 
+
+Yes, it is.  So was the prior version.  I understand where the spaces can
+be a problem for some clients whose filenames can't have spaces in them,
+but this seems to be a different twist on a similar issue.  I failed to
+mention in my original post that I understand that the %2E syntax is a hex representation of the the ASCII '.' character.  Interestingly, the ASCII
+' ' (space, %20) character does not come through similarly encoded.
+
+Thanks for the suggestion.  If push comes to shove, I will try de-installing
+and re-installing Xitami in a root directory.  Incidently, this raises one
+other thing; Xitami is installed on my D: drive, not the C: (boot) drive.
+Anyone know whether this could be a problem?  Again, this is the same setup
+as the previous version, which worked fine.
+
+	---   rod.
+
+From xitami@lists.xitami.org  Sat May  5 17:28:33 2001
+From: xitami@lists.xitami.org (Dan)
+Date: Sun, 6 May 2001 02:28:33 +1000
+Subject: [Xitami] Xitami 2.4d9/Xitami 2.5b5
+References: <200106051523.DAA21341@pagoda.wgtn.cat-it.co.nz>
+Message-ID: <000a01c0d580$6d9f9900$0c02a8c0@dan>
+
+HUMM bug allreaddy ;)
+
+Webadmin says 
+06 May, 2001 02:26 
+ Xitami v2.5b4
+NOT
+ Xitami v2.5b5
+
+
+
+
+
+ERROR: .sig file not found. Go blue screen (Y/N)?
+  Long Live Xitami!
+> --------------------------------
+> 
+> Rumours of Xitami's demise have been greatly exaggerated.  "It's just
+> been sleeping" said iMatix CEO, Pieter Hintjens.  When questioned he
+> admited that Xitami was a rather deep sleeper.
+> 
+> Yes folks, it's Xitami release time again.
+> i 2.4d9/Xitami 2.
+> <music type="cheesy"/>
+> 
+> 
+> Xitami 2.4d9 production version and Xitami 2.5b5 beta version
+> -------------------------------------------------------------
+
+
+

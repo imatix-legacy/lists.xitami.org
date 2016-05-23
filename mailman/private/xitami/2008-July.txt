@@ -1,0 +1,1031 @@
+From dave at maax.net  Thu Jul  3 00:20:47 2008
+From: dave at maax.net (Dave Cole)
+Date: Wed, 2 Jul 2008 17:20:47 -0500
+Subject: [Xitami] XITAMI, multiple domains and SSL
+Message-ID: <017a01c8dc91$e0b5d240$8200a8c0@coleskingdom.com>
+
+As I long time Xitami user I consider myself well versed in configuring
+Xitami. However today I ran into a problem and have yet to figure out a
+solution.
+
+ 
+
+I have using XITAMI PRO running on a server serving web pages to multiple
+domains for several years. Until today only one of the domains needed SSL.
+I have been running the SSL for that domain for some time with no problems,
+Today I purchased a separate second certificate for the new domain, however
+today try as I could  I could not get XITAMI configured for SSL on multiple
+domains. The instructions state that SSL is only supported for multiple
+domains when using IP based domains I have tried to do this to no avail.
+
+ 
+
+My configuration is as follows;
+
+First IP ADDRESS XXX.XXX.XXX.251 handles ****a.com, ****b.com and ****c.com.
+
+
+****a.com has its own certificate and key referenced in sslhttp.cfs (This
+Works)
+
+Second IP ADDRESS xxx.xxx.xxx.225  handles ****d.com and I have a
+certificate and key for that domain already purchased  
+
+I tested the certificate and key globally and they work so that is not the
+problem.
+
+Try as I might I could not get the correct configuration for domain
+****d.com to reference the second certificate and key. Is there anyone on
+the list that can help me with the correct configuration to make this work?
+The SSL instructions included with even with the PRO version of XITAMI is
+not very detailed.
+
+ 
+
+Sorry for the obfuscated IPs and domains but we are a medical company and I
+need to comply with HIPPA.
+
+ 
+
+ 
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080702/62b874c0/attachment.htm 
+
+From dmacias at mail.udg.mx  Thu Jul  3 12:42:21 2008
+From: dmacias at mail.udg.mx (David Arturo Macias Corona)
+Date: Thu, 03 Jul 2008 05:42:21 -0500
+Subject: [Xitami] HTTP_COOKIE empty in Linux
+In-Reply-To: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+References: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+Message-ID: <486CAD0D.304@mail.udg.mx>
+
+I am using Xitami Web Server v2.4d9 under Win32 and Linux
+
+In Win32 everything work fine including cookies
+In Linux HTTP_COOKIE are allways empty so cookies can not be used
+
+Any hints to solve this problem ?
+
+David Macias
+
+
+From runner_one at blomand.net  Thu Jul  3 15:07:23 2008
+From: runner_one at blomand.net (Dave Cole)
+Date: Thu, 3 Jul 2008 08:07:23 -0500
+Subject: [Xitami] XITAMI, multiple domains and SSL
+Message-ID: <020701c8dd0d$bd4be480$fcfea8c0@runner>
+
+As I long time Xitami user I consider myself well versed in configuring
+Xitami. However today I ran into a problem and have yet to figure out a
+solution.
+
+ 
+
+I have using XITAMI PRO running on a server serving web pages to multiple
+domains for several years. Until today only one of the domains needed SSL.
+I have been running the SSL for that domain for some time with no problems,
+Today I purchased a separate second certificate for the new domain, however
+today try as I could  I could not get XITAMI configured for SSL on multiple
+domains. The instructions state that SSL is only supported for multiple
+domains when using IP based domains I have tried to do this to no avail.
+
+ 
+
+My configuration is as follows;
+
+First IP ADDRESS XXX.XXX.XXX.251 handles ****a.com, ****b.com and ****c.com.
+
+
+****a.com has its own certificate and key referenced in sslhttp.cfs (This
+Works)
+
+Second IP ADDRESS xxx.xxx.xxx.225  handles ****d.com and I have a
+certificate and key for that domain already purchased  
+
+I tested the certificate and key globally and they work so that is not the
+problem.
+
+Try as I might I could not get the correct configuration for domain
+****d.com to reference the second certificate and key. Is there anyone on
+the list that can help me with the correct configuration to make this work?
+The SSL instructions included with even with the PRO version of XITAMI is
+not very detailed.
+
+ 
+
+Sorry for the obfuscated IPs and domains but we are a medical company and I
+need to comply with HIPPA.
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080703/604da168/attachment.htm 
+
+From rolinger1 at hotmail.com  Thu Jul  3 17:27:26 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu, 3 Jul 2008 08:27:26 -0700
+Subject: [Xitami] HTTP_COOKIE empty in Linux
+References: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+	<486CAD0D.304@mail.udg.mx>
+Message-ID: <BAY127-DAV695D699FC322F21840EFDF8980@phx.gbl>
+
+I am using the same version on Windows, but never have on Linux....if you 
+are using PHP/Perl you can retrieve the cookies that way too and avoid 
+depending on the server giving you the data.  In Perl, lookup the $ENV 
+variable.
+
+
+----- Original Message ----- 
+From: "David Arturo Macias Corona" <dmacias at mail.udg.mx>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Thursday, July 03, 2008 3:42 AM
+Subject: [Xitami] HTTP_COOKIE empty in Linux
+
+
+>I am using Xitami Web Server v2.4d9 under Win32 and Linux
+>
+> In Win32 everything work fine including cookies
+> In Linux HTTP_COOKIE are allways empty so cookies can not be used
+>
+> Any hints to solve this problem ?
+>
+> David Macias
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From rolinger1 at hotmail.com  Thu Jul  3 17:47:24 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu, 3 Jul 2008 08:47:24 -0700
+Subject: [Xitami] XITAMI, multiple domains and SSL
+References: <020701c8dd0d$bd4be480$fcfea8c0@runner>
+Message-ID: <BAY127-DAV74899307A8B62ED229CB5F8980@phx.gbl>
+
+I believe Xitami Pro only allows you to have SSL running on the primary/real domain bound to the primary IP of the server and it won't work on virtual 'named' domains.  How exactly are you binding Xitami's multiple IPs to specific domains?  Are you depending solely on DNS - it won't work using DNS based hosting?
+
+Read this info on Virtual Hosts: http://legacy.imatix.com/html/xitami/index8.htm#vhosts
+
+1.  Physical server must have multiple IPs
+2.  Xitami must be specifically bound to the desired IPs
+3.  The virtual hosts section in the .cfg file must have IP to vhost associations
+        ie: x.x.x.255 = d_domain.cfg
+4.  You cannot bind named domains to SSL vhosts
+        ie: www.***d.com = d_domain.cfg
+5. Make certain your [Server] global configurations are not conflicting your vhost configurations
+6. Use DNS to make certain www.d_domian.com points to x.x.x.225 IP address and that Reverse DNS is properly working, SSL uses Reverse DNS to verify authenticity.
+
+Make certain the above is all in order and let us know if works out or not.
+-Russel
+
+----- Original Message ----- 
+  From: Dave Cole 
+  To: xitami at lists.xitami.org 
+  Sent: Thursday, July 03, 2008 6:07 AM
+  Subject: [Xitami] XITAMI, multiple domains and SSL
+
+
+  As I long time Xitami user I consider myself well versed in configuring Xitami. However today I ran into a problem and have yet to figure out a solution.
+
+   
+
+  I have using XITAMI PRO running on a server serving web pages to multiple domains for several years. Until today only one of the domains needed SSL.  I have been running the SSL for that domain for some time with no problems, Today I purchased a separate second certificate for the new domain, however today try as I could  I could not get XITAMI configured for SSL on multiple domains. The instructions state that SSL is only supported for multiple domains when using IP based domains I have tried to do this to no avail.
+
+   
+
+  My configuration is as follows;
+
+  First IP ADDRESS XXX.XXX.XXX.251 handles ****a.com, ****b.com and ****c.com.  
+
+  ****a.com has its own certificate and key referenced in sslhttp.cfs (This Works)
+
+  Second IP ADDRESS xxx.xxx.xxx.225  handles ****d.com and I have a certificate and key for that domain already purchased  
+
+  I tested the certificate and key globally and they work so that is not the problem.
+
+  Try as I might I could not get the correct configuration for domain ****d.com to reference the second certificate and key. Is there anyone on the list that can help me with the correct configuration to make this work? The SSL instructions included with even with the PRO version of XITAMI is not very detailed.
+
+   
+
+  Sorry for the obfuscated IPs and domains but we are a medical company and I need to comply with HIPPA.
+
+   
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080703/3037db22/attachment.htm 
+
+From dmacias at mail.udg.mx  Fri Jul  4 22:31:28 2008
+From: dmacias at mail.udg.mx (David Arturo Macias Corona)
+Date: Fri, 04 Jul 2008 15:31:28 -0500
+Subject: [Xitami] HTTP_COOKIE empty in Linux
+In-Reply-To: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+References: <20070304160715.C41882572F8@antivirus.noc.udg.mx>
+Message-ID: <486E88A0.3000302@mail.udg.mx>
+
+>I am using the same version on Windows, but never have on Linux....if
+>you are using PHP/Perl you can retrieve the cookies that way too and
+> avoid depending on the server giving you the data.  In Perl, lookup the
+> $ENV variable.
+
+I use Xitami under Win32, OS/2 and Linux with Harbour compiler (Clliper
+code) and my own model for scripts ( Clipxnet )
+Values are retrieved with GETENV( "var" ), and for example GETENV(
+"HTTP_COOKIE" ) return right content in Win32, OS/2 and empty with Linux
+
+David Macias
+
+
+
+
+From runner_one at blomand.net  Thu Jul  3 19:12:44 2008
+From: runner_one at blomand.net (Dave Cole)
+Date: Thu, 3 Jul 2008 12:12:44 -0500
+Subject: [Xitami] XITAMI, multiple domains and SSL
+In-Reply-To: <BAY127-DAV74899307A8B62ED229CB5F8980@phx.gbl>
+Message-ID: <000901c8dd30$04c7c9b0$fcfea8c0@runner>
+
+Have done all this 
+
+and set the Virtual Host IP in the Virtual Hosts section of the config but
+ssl never loads on the second IP.
+
+ 
+
+  _____  
+
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Russel Olinger
+Sent: Thursday, July 03, 2008 10:47 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] XITAMI, multiple domains and SSL
+
+ 
+
+I believe Xitami Pro only allows you to have SSL running on the primary/real
+domain bound to the primary IP of the server and it won't work on virtual
+'named' domains.  How exactly are you binding Xitami's multiple IPs to
+specific domains?  Are you depending solely on DNS - it won't work using DNS
+based hosting?
+
+ 
+
+Read this info on Virtual Hosts:
+http://legacy.imatix.com/html/xitami/index8.htm#vhosts
+
+ 
+
+1.  Physical server must have multiple IPs
+
+2.  Xitami must be specifically bound to the desired IPs
+
+3.  The virtual hosts section in the .cfg file must have IP to vhost
+associations
+
+        ie: x.x.x.255 = d_domain.cfg
+
+4.  You cannot bind named domains to SSL vhosts
+
+        ie: www.***d.com = d_domain.cfg
+
+5. Make certain your [Server] global configurations are not conflicting your
+vhost configurations
+
+6. Use DNS to make certain www.d_domian.com points to x.x.x.225 IP address
+and that Reverse DNS is properly working, SSL uses Reverse DNS to verify
+authenticity.
+
+ 
+
+Make certain the above is all in order and let us know if works out or not.
+
+-Russel
+
+ 
+
+----- Original Message ----- 
+
+From: Dave Cole <mailto:runner_one at blomand.net>  
+
+To: xitami at lists.xitami.org 
+
+Sent: Thursday, July 03, 2008 6:07 AM
+
+Subject: [Xitami] XITAMI, multiple domains and SSL
+
+ 
+
+As I long time Xitami user I consider myself well versed in configuring
+Xitami. However today I ran into a problem and have yet to figure out a
+solution.
+
+ 
+
+I have using XITAMI PRO running on a server serving web pages to multiple
+domains for several years. Until today only one of the domains needed SSL.
+I have been running the SSL for that domain for some time with no problems,
+Today I purchased a separate second certificate for the new domain, however
+today try as I could  I could not get XITAMI configured for SSL on multiple
+domains. The instructions state that SSL is only supported for multiple
+domains when using IP based domains I have tried to do this to no avail.
+
+ 
+
+My configuration is as follows;
+
+First IP ADDRESS XXX.XXX.XXX.251 handles ****a.com, ****b.com and ****c.com.
+
+
+****a.com has its own certificate and key referenced in sslhttp.cfs (This
+Works)
+
+Second IP ADDRESS xxx.xxx.xxx.225  handles ****d.com and I have a
+certificate and key for that domain already purchased  
+
+I tested the certificate and key globally and they work so that is not the
+problem.
+
+Try as I might I could not get the correct configuration for domain
+****d.com to reference the second certificate and key. Is there anyone on
+the list that can help me with the correct configuration to make this work?
+The SSL instructions included with even with the PRO version of XITAMI is
+not very detailed.
+
+ 
+
+Sorry for the obfuscated IPs and domains but we are a medical company and I
+need to comply with HIPPA.
+
+ 
+
+
+  _____  
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080703/ec46d426/attachment.htm 
+
+From stilman.davis at heuristika.uklinux.net  Wed Jul  9 20:31:12 2008
+From: stilman.davis at heuristika.uklinux.net (Stilman Davis)
+Date: Wed, 09 Jul 2008 19:31:12 +0100
+Subject: [Xitami] php and xitami
+Message-ID: <487503F0.1080000@heuristika.uklinux.net>
+
+How do you set up xitami to enable php? I haven't seen it on any of the 
+documents I have found.
+
+Regards,
+Stilman Davis
+
+From rolinger1 at hotmail.com  Wed Jul  9 21:13:14 2008
+From: rolinger1 at hotmail.com (R O)
+Date: Wed, 9 Jul 2008 12:13:14 -0700
+Subject: [Xitami] php and xitami
+In-Reply-To: <487503F0.1080000@heuristika.uklinux.net>
+References: <487503F0.1080000@heuristika.uklinux.net>
+Message-ID: <BAY127-W1206D9D7660225EB58213AF8960@phx.gbl>
+
+
+When you install php, the windows version at least, it asks you for which webserver you are using - Xitami is one of the options and it should auto-config the Xitami .cfg file for you.  Otherwise, you will need to do it manually, which is pretty simple.
+
+In the Xitami .cfg file, add the following lines in each of the stated sections:
+
+[Filter]
+    .php=c:\php\php.exe
+
+[Mime]
+    Php=application/x-httpd-php
+
+
+Restart Xitami process and test a simple php script.  There are one or two security issues with the php configuration, in php itself, that you must fix to prevent your system from being left wide open.
+
+
+From bogus@does.not.exist.com  Mon Jul  7 02:11:05 2008
+From: bogus@does.not.exist.com ()
+Date: Mon, 07 Jul 2008 00:11:05 -0000
+Subject: No subject
+Message-ID: <mailman.0.1215630804.6381.xitami@lists.xitami.org>
+
+   Xitami on Windows.
+
+     Important for CGI users: Read the faq on cgi.force_redirect for
+     important details. This directive needs to be set to 0. If you want
+     to use $_SERVER['PHP_SELF'] you have to enable the cgi.fix_pathinfo
+     directive.
+
+Its pretty simple stuff though.
+-R
+
+> Date: Wed=2C 9 Jul 2008 19:31:12 +0100
+> From: stilman.davis at heuristika.uklinux.net
+> To: xitami at lists.xitami.org
+> Subject: [Xitami] php and xitami
+>=20
+> How do you set up xitami to enable php? I haven't seen it on any of the=20
+> documents I have found.
+>=20
+> Regards=2C
+> Stilman Davis
+>=20
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+--_7a330be1-f733-4f4f-9464-e336c998dfe2_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<style>
+.hmmessage P
+{
+margin:0px=3B
+padding:0px
+}
+body.hmmessage
+{
+FONT-SIZE: 10pt=3B
+FONT-FAMILY:Tahoma
+}
+</style>
+</head>
+<body class=3D'hmmessage'>
+When you install php=2C the windows version at least=2C it asks you for whi=
+ch webserver you are using - Xitami is one of the options and it should aut=
+o-config the Xitami .cfg file for you.&nbsp=3B Otherwise=2C you will need t=
+o do it manually=2C which is pretty simple.<br><br>In the Xitami .cfg file=
+=2C add the following lines in each of the stated sections:<br><br>[Filter]=
+<br>&nbsp=3B&nbsp=3B&nbsp=3B .php=3Dc:\php\php.exe<br><br>[Mime]<br>&nbsp=
+=3B&nbsp=3B&nbsp=3B Php=3Dapplication/x-httpd-php<br><br><br>Restart Xitami=
+ process and test a simple php script.&nbsp=3B There are one or two securit=
+y issues with the php configuration=2C in php itself=2C that you must fix t=
+o prevent your system from being left wide open.<br><br>From the PHP instal=
+l.txt file:<br><br>&nbsp=3B&nbsp=3B Xitami on Windows.<br><br>&nbsp=3B&nbsp=
+=3B&nbsp=3B&nbsp=3B Important for CGI users: Read the faq on cgi.force_redi=
+rect for<br>&nbsp=3B&nbsp=3B&nbsp=3B&nbsp=3B important details. This direct=
+ive needs to be set to 0. If you want<br>&nbsp=3B&nbsp=3B&nbsp=3B&nbsp=3B t=
+o use $_SERVER['PHP_SELF'] you have to enable the cgi.fix_pathinfo<br>&nbsp=
+=3B&nbsp=3B&nbsp=3B&nbsp=3B directive.<br><br>Its pretty simple stuff thoug=
+h.<br>-R<br><br>&gt=3B Date: Wed=2C 9 Jul 2008 19:31:12 +0100<br>&gt=3B Fro=
+m: stilman.davis at heuristika.uklinux.net<br>&gt=3B To: xitami at lists.xitami.o=
+rg<br>&gt=3B Subject: [Xitami] php and xitami<br>&gt=3B <br>&gt=3B How do y=
+ou set up xitami to enable php? I haven't seen it on any of the <br>&gt=3B =
+documents I have found.<br>&gt=3B <br>&gt=3B Regards=2C<br>&gt=3B Stilman D=
+avis<br>&gt=3B <br>&gt=3B --<br>&gt=3B Xitami Users Mailing List -- For Xit=
+ami support<br>&gt=3B To unsubscribe: http://lists.xitami.org/mailman/listi=
+nfo/xitami<br></body>
+</html>=
+
+--_7a330be1-f733-4f4f-9464-e336c998dfe2_--
+
+From hogan at geeksgalore.ca  Wed Jul  9 21:36:52 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Wed, 09 Jul 2008 15:36:52 -0400
+Subject: [Xitami] php and xitami
+In-Reply-To: <487503F0.1080000@heuristika.uklinux.net>
+References: <487503F0.1080000@heuristika.uklinux.net>
+Message-ID: <48751354.50105@geeksgalore.ca>
+
+PHP runs like crap under Xitami, do yourself a favor and install WAMP
+http://www.easywamp.com/
+
+
+Stilman Davis wrote:
+> How do you set up xitami to enable php? I haven't seen it on any of the 
+> documents I have found.
+>
+> Regards,
+> Stilman Davis
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>   
+
+
+From stilman.davis at heuristika.uklinux.net  Wed Jul  9 23:27:27 2008
+From: stilman.davis at heuristika.uklinux.net (Stilman Davis)
+Date: Wed, 09 Jul 2008 22:27:27 +0100
+Subject: [Xitami] php and xitami
+In-Reply-To: <BAY127-W1206D9D7660225EB58213AF8960@phx.gbl>
+References: <487503F0.1080000@heuristika.uklinux.net>
+	<BAY127-W1206D9D7660225EB58213AF8960@phx.gbl>
+Message-ID: <48752D3F.2030806@heuristika.uklinux.net>
+
+R,
+
+Thanks very much. I liked xitami when I had it set up on another 
+machine, then i had apache on another machine.
+
+I am trying to break in another machine and thought I would try it 
+again. I knew I had seen some details somewhere, but I could not 
+remember where.
+
+Thanks very much for your help.
+Regards,
+Stilman
+
+R O wrote:
+> When you install php, the windows version at least, it asks you for 
+> which webserver you are using - Xitami is one of the options and it 
+> should auto-config the Xitami .cfg file for you.  Otherwise, you will 
+> need to do it manually, which is pretty simple.
+>
+> In the Xitami .cfg file, add the following lines in each of the stated 
+> sections:
+>
+> [Filter]
+>     .php=c:\php\php.exe
+>
+> [Mime]
+>     Php=application/x-httpd-php
+>
+>
+> Restart Xitami process and test a simple php script.  There are one or 
+> two security issues with the php configuration, in php itself, that 
+> you must fix to prevent your system from being left wide open.
+>
+> From the PHP install.txt file:
+>
+>    Xitami on Windows.
+>
+>      Important for CGI users: Read the faq on cgi.force_redirect for
+>      important details. This directive needs to be set to 0. If you want
+>      to use $_SERVER['PHP_SELF'] you have to enable the cgi.fix_pathinfo
+>      directive.
+>
+> Its pretty simple stuff though.
+> -R
+
+From stilman.davis at heuristika.uklinux.net  Wed Jul  9 23:28:56 2008
+From: stilman.davis at heuristika.uklinux.net (Stilman Davis)
+Date: Wed, 09 Jul 2008 22:28:56 +0100
+Subject: [Xitami] php and xitami
+In-Reply-To: <48751354.50105@geeksgalore.ca>
+References: <487503F0.1080000@heuristika.uklinux.net>
+	<48751354.50105@geeksgalore.ca>
+Message-ID: <48752D98.7050003@heuristika.uklinux.net>
+
+I am just trying to get some simple php scripts going. Nothing to worry 
+about how well it runs -- at least for the moment.
+Thanks for the heads up.
+
+Regards,
+Stilman
+
+Hogan wrote:
+> PHP runs like crap under Xitami, do yourself a favor and install WAMP
+> http://www.easywamp.com/
+>   
+
+From hogan at geeksgalore.ca  Thu Jul 10 00:09:18 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Wed, 09 Jul 2008 18:09:18 -0400
+Subject: [Xitami] php and xitami
+In-Reply-To: <48752D3F.2030806@heuristika.uklinux.net>
+References: <487503F0.1080000@heuristika.uklinux.net>	<BAY127-W1206D9D7660225EB58213AF8960@phx.gbl>
+	<48752D3F.2030806@heuristika.uklinux.net>
+Message-ID: <4875370E.1010301@geeksgalore.ca>
+
+It is really simple, I have it setup on one box here, but more 
+complicated scripts require the power of Apache, it is free and 
+supported.  Do not get me wrong, I have been an avid supporter of Xitami 
+for quite sometime, 10 years or so now, and it is an excellent web 
+server package, and damn fast!  ;-)  But for the heavy stuff I rely on 
+WAMP....
+
+
+Stilman Davis wrote:
+> R,
+>
+> Thanks very much. I liked xitami when I had it set up on another 
+> machine, then i had apache on another machine.
+>
+> I am trying to break in another machine and thought I would try it 
+> again. I knew I had seen some details somewhere, but I could not 
+> remember where.
+>
+> Thanks very much for your help.
+> Regards,
+> Stilman
+>
+>   
+
+
+From hogan at geeksgalore.ca  Thu Jul 10 00:10:06 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Wed, 09 Jul 2008 18:10:06 -0400
+Subject: [Xitami] php and xitami
+In-Reply-To: <48752D98.7050003@heuristika.uklinux.net>
+References: <487503F0.1080000@heuristika.uklinux.net>	<48751354.50105@geeksgalore.ca>
+	<48752D98.7050003@heuristika.uklinux.net>
+Message-ID: <4875373E.2060803@geeksgalore.ca>
+
+absolutely!
+
+Stilman Davis wrote:
+> I am just trying to get some simple php scripts going. Nothing to worry 
+> about how well it runs -- at least for the moment.
+> Thanks for the heads up.
+>
+> Regards,
+> Stilman
+>
+>   
+
+<http://www.clixGalore.com/default.asp>
+
+
+
+From viesturs at balticom.lv  Thu Jul 10 05:06:47 2008
+From: viesturs at balticom.lv (Viesturs)
+Date: Thu, 10 Jul 2008 06:06:47 +0300
+Subject: [Xitami] php and xitami
+References: <487503F0.1080000@heuristika.uklinux.net>
+Message-ID: <000a01c8e239$fd67a320$0e956353@boxundertable>
+
+Maybe try to find some answers here - 
+http://lv.php.net/manual/en/intro-whatcando.php
+
+Viesturs. .
+
+----- Original Message ----- 
+From: "Stilman Davis" <stilman.davis at heuristika.uklinux.net>
+To: <xitami at lists.xitami.org>
+Sent: Wednesday, July 09, 2008 9:31 PM
+Subject: [Xitami] php and xitami
+
+
+> How do you set up xitami to enable php? I haven't seen it on any of the
+> documents I have found.
+>
+> Regards,
+> Stilman Davis
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: image/gif
+Size: 1766 bytes
+Desc: not available
+Url : http://lists.xitami.org/pipermail/xitami/attachments/20080710/277027fd/attachment.gif 
+
+From the5thq at netzero.net  Thu Jul 10 14:08:20 2008
+From: the5thq at netzero.net (the5thq at netzero.net)
+Date: Thu, 10 Jul 2008 12:08:20 GMT
+Subject: [Xitami] Vista
+Message-ID: <20080710.080820.20137.0@webmail01.dca.untd.com>
+
+vIsTa(TM) SHOULD HAVE BEEN PROPERLY MONIKERED: 'HASTALAVISTA'. BUT, ITS NO BIG DEAL AS FAR AS X SERVER, what you use as far as an OS goes, even SUN SOLARIS EXPRESS IS GOOD SINCE XITAMI STANDS ALONE without shared .dlls or resources. Things can and will only get worse re security while online once WinDOZE '9' becomes the OS of the day. ONE PROBLEM I USED TO HAVE WITH ANY MS OS was multi-threading while on the internet, visualise all these WinDOZE services and processes running and all these ports open while running a server as well as surfing the net, whilst checking email, ftp et al. then you have stuff running in the background-maybe some apps on the taskbar loaded but minimalized or even other windows goodies open for checking email, wheather, stock ticks or(...) So what we have here (presumabley-i am no expert) is a failure to communicate, reduce the start up programs, esp defender, ms firewall and any other googey products like AV, anti-spam or anti-malware, soft firewalls etc too are culprits-put them all in the bit bucket if you are serious about running any web server. Run only hardware firewalls/with online scans. Do a port check regularly, do online webpage checks to see what the bugs are in your pages, these are free as are online AV signature audits - check to see if your ISP allows you to have your own website, if you look at the template most ISPs use it is pretty standard that you are not allowed to use port 1080/80 for bandwidth on your own server pages(...)I wrote a E-book about Xitami once and noted that a server should be not only stand-alone but running as an exclusive app, not a service and not a start-up process. Shared resources, .dll, and other things get in the way of running a web server from within, from without, echo storms ping batch files, script kitties and a host of other exploits done by ISPs and by online users (HAX) also tend to shut X-Server down or run it off course so to speak...there are a set of basic minimalist procedures I wrote about to launch any home-built website using X; I could go on and on here but to be breif, just try to run your box with ONLY X server running, all ports closed except 31/80/1080 and go from there. Just some thoughts that you may consider, thx for asking! 
+
+____________________________________________________________
+Beauty Advice Just Got a Makeover
+Read reviews about the beauty products you have always wanted to try
+http://thirdpartyoffers.netzero.net/TGL2231/fc/JKFkuJO6pwATd3KkhRTM2CZxqcq56HBWSIvw2UfJVxvJWLsIFEkqFV/
+
+From the5thq at netzero.net  Fri Jul 11 12:50:36 2008
+From: the5thq at netzero.net (the5thq at netzero.net)
+Date: Fri, 11 Jul 2008 10:50:36 GMT
+Subject: [Xitami] VISTA
+Message-ID: <20080711.065036.22116.0@webmail02.dca.untd.com>
+
+i WOULDNT ADVISE RUNNING X SERVER AS A SERVICE. BUT THAT IS JUST, DUH-ME. I THINK DEAN MAY HAVE MISQUOTED [VIA TYPO] THE RESPONSE OF WINDOZE 'HASTALAVISTA' IN HIS POST-SCRIPT REPLY TO THE HDD ISSUE RAISED, THE ME SEQUENCE HE RECAPPED WAS: "
+
+ "Why's it bloated you ask?"  
+"...Because it's full of: 
+WINDOZE: "Do you want to do this?"  ans.: ""Yes"" 
+WINDOZE: "Do you REALLY want to do this?" ans.: ""Yes"" 
+WINDOZE: "Windows thinks this is idea and HAS stopped it anyway" OPERATER: ""Darn..""
+
+I RECALLED IT LIKE THIS: ... "Why IS HASTALA_VISTA bloated you ask?"  "...Because it's full of [THIS KIND OF TECHNOIDAL RUBBISH]: 
+
+WINDOZE: "Do you want to do this?" ans.: ""Yes"" 
+WINDOZE: ""Do you REALLY want to do this?"" ans.: ""Yes""
+WINDOZE: ""OK, STAND BY WHILE I CHECK MY DATABASE-THIS MIGHT TAKE A MINUTE OR TWO: ans.: ""snooooze"" 
+WINDOZE: ""Windows thinks this is NOT SUCH A GOOD idea and HAS STOPPED THE PROCESS(s) anyway" OPERATER: ""Darn..""
+WINDOZE: [HAL} AND FURTHERMORE... IF YOU TRY TO DO THIS AGAIN I WILL RING UP GATES, OR FOR THAT MATTER MR. BALMER DIRECTLY AND INSTRUCT HIM TO ECHOSTORM YOUR SERVER EVERYTIME YOU RUN IT AND PERHAPS EVEN GIVE YOU A MESSAGE ON YOUR DESKTOP: THIS IS NOT A REAL COPY OF VISTA AND THEN I WILL SHUT YOU DOWN FOR GOOD!" 
+ans.: ""_!_""
+END OF DIALOG
+
+____________________________________________________________
+Enter for Your Chance to WIN*
+The TotalBeauty.com Summer Spa Sweepstakes!
+http://thirdpartyoffers.netzero.net/TGL2231/fc/JKFkuJO6pbwniGlh4Gdu6URgH9AdwZyvSPEiwidbKvHGpeukq2Nqx1/
+
+From the5thq at netzero.net  Wed Jul 16 23:39:30 2008
+From: the5thq at netzero.net (the5thq at netzero.net)
+Date: Wed, 16 Jul 2008 21:39:30 GMT
+Subject: [Xitami] php and xitami
+Message-ID: <20080716.173930.853.0@webmail17.dca.untd.com>
+
+i couldnt get this thing to load, it completed the D.L.from the website your recommended ok and then when I ran it it said it could not continue...? duh, should i move this over to XP Pro or Y2K Pro and load swampwamp or whatever; it seems like a very comprehensive program...how will it work with Xitami cgi-?THX
+____________________________________________________________
+Click to create your dream New Zealand vacation now.
+http://thirdpartyoffers.netzero.net/TGL2231/fc/Ioyw6ijmCKdJXPsbmD1FBayhM6pVqcHiJfFETFK08oKhSrRsLL8pL1/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080716/4d154209/attachment.htm 
+
+From mrj at 10e12.com  Fri Jul 18 18:58:38 2008
+From: mrj at 10e12.com (MRJ)
+Date: Fri, 18 Jul 2008 17:58:38 +0100
+Subject: [Xitami] php and xitami
+In-Reply-To: <20080716.173930.853.0@webmail17.dca.untd.com>
+References: <20080716.173930.853.0@webmail17.dca.untd.com>
+Message-ID: <4880CBBE.4050708@10e12.com>
+
+Skip all they say about PHP-CGI
+
+Use this to make it work..
+
+In defaults.cfg  add the following...
+
+[Filter]
+#   
+-------------------------------------------------------------------------
+.php="c:/php/php.exe"
+
+[Mime]
+    php=application/x-httpd-php
+
+
+Change your default index settings as follows...
+
+    default1=index.php
+    default2=default.php
+    default3=index.htm
+    default4=default.htm
+    default5=index.html
+    default6=default.html
+    default7=404.htm
+
+
+In default setup of PHP 5 on Windows you should be aware of the following.
+
+a)    $_POST[$VarName] WILL NOT WORK
+       $_SESSION[$xVar]  WILL NOT WORK
+
+they are turned off by default and should be so as well since they pose 
+security risks.
+
+b) The workaround for this is included below
+
+(?2008 to myself)
+
+<?php
+/*
+==========================================================================
+A replacement function for $_REQUEST as this does not work at all out of
+the box on XITAMI web server. I was seriously thinking of making it a
+somwhat permanent fixture in my PHP arsenal by adding a $_ infront of
+the name but that would not fly to well in some languages I bet.
+==========================================================================
+Safer Networks Ltd. (c) 2008 - Major Thanks to
+lphuberdeau at phpquebec dot org (21-Aug-2004 05:55)
+for the entry that resolved all my problems in PHP man. 5 chm version
+suggestion in Chapter 4. Dealing with XForms
+==========================================================================
+*/
+function EX_REQUEST($var){
+If ($_SERVER['REQUEST_METHOD']=="GET"){
+    $qstr = $_SERVER['QUERY_STRING'];
+    If ($qstr!=""){
+        parse_str($qstr, $element);
+        $val = $element[$var];
+    }else{
+        $val = NULL;
+    }
+    unset($qstr); //free mem or data you dont want GC to keep
+}else if($_SERVER['REQUEST_METHOD']=="POST"){
+    $fp = fopen( "php://stdin", "r" );
+    $data = "";
+    while(!feof( $fp ) ){
+       $data .= fgets( $fp );
+        }
+    fclose( $fp );
+    if($data!=""){
+        parse_str($data, $element); //printf($data);
+        $val = $element[$var];
+        unset($data); //free mem or data you dont want GC to keep
+    }else{
+        $val = NULL;
+    }
+}else{
+    // DOES NOT SUPPORT PUT OR HEAD AT THIS TIME.
+    // and we cannot return Empty or 0 when nothing was recieved.
+    $val = NULL;
+}
+return $val;
+}
+?>
+SEE&nbsp;SOURCE&nbsp;FOR&nbsp;INFORMATION<HR>
+<?php
+// HOW TO USE THE FUNCTION --------------------
+/* REMOVE LINE 46 AND 66 TO SEE WORKING EXAMPLE
+
+<html><body>
+<form method=post action="x.php" 
+enctype='application/x-www-form-urlencoded'>
+<input type=hidden value=4 name='p'><input type=submit value='post 
+it'></form><br>
+
+<form method=get action="x.php" enctype='application/x-www-form-urlencoded'>
+<input type=hidden value=4 name='p'><input type=submit value='get 
+it'></form><br>
+
+<?php
+  echo "The variable p is detected as having Value: " . ParseReq('p') . 
+"<br>";
+?>
+
+</body></html>
+
+
+*/
+?>
+
+
+
+
+
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+From hogan at geeksgalore.ca  Fri Jul 18 19:14:02 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Fri, 18 Jul 2008 13:14:02 -0400
+Subject: [Xitami] php and xitami
+In-Reply-To: <20080716.173930.853.0@webmail17.dca.untd.com>
+References: <20080716.173930.853.0@webmail17.dca.untd.com>
+Message-ID: <4880CF5A.3050806@geeksgalore.ca>
+
+you want EASY-WAMP, does not require Xitami
+
+the5thq at netzero.net wrote:
+> i couldnt get this thing to load, it completed the D.L.from the 
+> website your recommended ok and then when I ran it it said it could 
+> not continue...? duh, should i move this over to XP Pro or Y2K Pro and 
+> load swampwamp or whatever; it seems like a very comprehensive 
+> program...how will it work with Xitami cgi-? 
+> <http://www.clixGalore.com/default.asp>
+
+
+From stilman.davis at heuristika.uklinux.net  Sat Jul 19 09:39:18 2008
+From: stilman.davis at heuristika.uklinux.net (Stilman Davis)
+Date: Sat, 19 Jul 2008 08:39:18 +0100
+Subject: [Xitami] php and xitami
+In-Reply-To: <4880CF5A.3050806@geeksgalore.ca>
+References: <20080716.173930.853.0@webmail17.dca.untd.com>
+	<4880CF5A.3050806@geeksgalore.ca>
+Message-ID: <48819A26.3000204@heuristika.uklinux.net>
+
+Dear Hogan,
+
+Yes, it does work "straight out of the box".
+Thank you for your recommendation earlier. Just haven't had time to get 
+back to thank you.
+
+Regards,
+Stilman Davis
+
+
+From hogan at geeksgalore.ca  Sat Jul 19 16:11:46 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Sat, 19 Jul 2008 10:11:46 -0400
+Subject: [Xitami] php and xitami
+In-Reply-To: <48819A26.3000204@heuristika.uklinux.net>
+References: <20080716.173930.853.0@webmail17.dca.untd.com>	<4880CF5A.3050806@geeksgalore.ca>
+	<48819A26.3000204@heuristika.uklinux.net>
+Message-ID: <4881F622.8000600@geeksgalore.ca>
+
+you are very welcome.  Works right out of the box so to speak.
+W.indows A.pache M.ysql P.hp
+
+Stilman Davis wrote:
+> Dear Hogan,
+>
+> Yes, it does work "straight out of the box".
+> Thank you for your recommendation earlier. Just haven't had time to get 
+> back to thank you.
+>
+> Regards,
+> Stilman Davis
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>   
+
+-- 
+-- 
+Hogan Courrier
+Geeks Galore Computer Center
+(613) 472-0005
+http://www.geeksgalore.ca
+iF YOU CANNOT SEE THIS IMAGE, IT MEANS YOU HAVE DISABLED YOUR IMAGES IN 
+YOUR EMAIL SETTINGS. GEEKS GALORE MARMORA ONTARIO CANADA 1-613-472-0005
+
+MegaToners 
+<http://www.clixGalore.com/EmailPSale.aspx?BID=19054&AfID=142655&AdID=3018>
+<http://www.clixGalore.com/default.asp>
+
+
+
+From the5thq at netzero.net  Sat Jul 19 23:49:12 2008
+From: the5thq at netzero.net (the5thq at netzero.net)
+Date: Sat, 19 Jul 2008 21:49:12 GMT
+Subject: [Xitami] php and xitami w@w
+Message-ID: <20080719.174912.8076.0@webmail20.dca.untd.com>
+
+THX MRj FOR THIS EXPLANATION AS i do need x server to keep roARRRing along...
+____________________________________________________________
+Click here for great computer networking solutions!
+http://thirdpartyoffers.netzero.net/TGL2231/fc/Ioyw6ijncccOaTH8plxsq8Wl7BX6ejMM4ZyONvV0LXgs4RhjeYJZy7/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080719/9da65d12/attachment.htm 
+
+From hogan at geeksgalore.ca  Sun Jul 20 15:22:25 2008
+From: hogan at geeksgalore.ca (Hogan Courrier)
+Date: Sun, 20 Jul 2008 06:22:25 -0700
+Subject: [Xitami] php and xitami w@w
+In-Reply-To: <20080719.174912.8076.0@webmail20.dca.untd.com>
+References: <20080719.174912.8076.0@webmail20.dca.untd.com>
+Message-ID: <48833C11.5060900@geeksgalore.ca>
+
+Networking Solutions, stay away from LogMeInRescue
+RealVNC is FREE
+
+the5thq at netzero.net wrote:
+> THX MRj FOR THIS EXPLANATION AS i do need x server to keep roARRRing 
+> along...
+>
+> ____________________________________________________________
+> Click here for great computer networking solutions! 
+> <http://thirdpartyoffers.netzero.net/TGL2232/fc/Ioyw6ijncccOaTH8plxsq8Wl7BX6ejMM4ZyONvV0LXgs4RhjeYJZy7/>
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080720/5e600069/attachment.htm 
+

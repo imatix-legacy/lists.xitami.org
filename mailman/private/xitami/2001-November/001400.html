@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] $PHP_SELF variable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001399.html">
+   <LINK REL="Next"  HREF="001402.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] $PHP_SELF variable
+   </H1>
+    <B>Fabian Bess
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] $PHP_SELF variable">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 12 Nov 2001 10:50:15 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001399.html">[Xitami] $PHP_SELF variable
+</A></li>
+        <LI> Next message: <A HREF="001402.html">[Xitami] $PHP_SELF variable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1400">[ date ]</a>
+              <a href="thread.html#1400">[ thread ]</a>
+              <a href="subject.html#1400">[ subject ]</a>
+              <a href="author.html#1400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Fabian Bess wrote:
+
+&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Ain't it PHP problem?
+</I>&gt;&gt;<i>
+</I>&gt;<i> I don't think it's only PHP's fault because running the same PHP 
+</I>&gt;<i> version with APACHE works fine _with_ $PHP_SELF
+</I>&gt;<i>
+</I>Seems like I'm the only one having this problem...
+currently this is how I'm solving this problem:
+
+$serv = $SERVER_SOFTWARE;
+function OwnName() {
+ global $serv;
+ if($serv == &quot;Xitami&quot;) return true;
+}
+
+and
+
+&lt;FORM action=&quot;&lt;?php if(OwnName()) { echo $SCRIPT_NAME; } else { echo 
+$PHP_SELF; }; ?&gt;&quot; method=&quot;POST&quot;&gt;
+
+for some reason you can't test for $SERVER_SOFTWARE directly
+
+maybe there's still another sollution out there?!
+
+-- 
+Fabian Bess (<A HREF="mailto:webmaster@tannenhof.de">webmaster@tannenhof.de</A>)
+Webmaster Drogenhilfe Tannenhof Berlin e.V. '<A HREF="http://www.tannenhof.de'">http://www.tannenhof.de'</A>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001399.html">[Xitami] $PHP_SELF variable
+</A></li>
+	<LI> Next message: <A HREF="001402.html">[Xitami] $PHP_SELF variable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1400">[ date ]</a>
+              <a href="thread.html#1400">[ thread ]</a>
+              <a href="subject.html#1400">[ subject ]</a>
+              <a href="author.html#1400">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

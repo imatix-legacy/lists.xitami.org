@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Emulating Apache directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001714.html">
+   <LINK REL="Next"  HREF="001685.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Emulating Apache directories
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Emulating Apache directories">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 12 Dec 2001 14:05:29 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001714.html">[Xitami] Emulating Apache directories
+</A></li>
+        <LI> Next message: <A HREF="001685.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1729">[ date ]</a>
+              <a href="thread.html#1729">[ thread ]</a>
+              <a href="subject.html#1729">[ subject ]</a>
+              <a href="author.html#1729">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ewen McNeill wrote:
+
+&gt;<i>You are right that smthttpl.c:http_list_directory() is what is creating
+</I>&gt;<i>the directory (as an XML tree).  One of the things that it should also
+</I>&gt;<i>add to the XML is the path to the actual directory on disk, since it
+</I>&gt;<i>obviously needs to know this while it is preparing the list of files,
+</I>&gt;<i>and it would be useful to the GSL script outputting the directory.  The
+</I>&gt;<i>directory path is, I think, in p_http-&gt; file_name, so adding an
+</I>&gt;<i>attribute with that value into the top level of the XML would be useful,
+</I>&gt;<i>called perhaps &quot;path_on_disk&quot;.
+</I>&gt;<i>
+</I>&gt;<i>Ewen
+</I>&gt;<i>
+</I>OK so I inserted 2 lines at line 2113.
+
+Old code
+    /*  Create root XML 
+item                                                 */
+    root_item = xml_new (NULL, &quot;directory&quot;, &quot;&quot;);
+   
+    /*  Now transform directory listing into an XML 
+tree                     */
+    total_files = 0;
+    total_size  = 0;
+
+New code
+    /*  Create root XML 
+item                                                 */
+    root_item = xml_new (NULL, &quot;directory&quot;, &quot;&quot;);
+    /*  Output path to directory for GSL scripts */
+    xml_put_attr (root_item, &quot;physical_path&quot;, p_http-&gt; file_name);
+   
+    /*  Now transform directory listing into an XML 
+tree                     */
+    total_files = 0;
+    total_size  = 0;
+
+This works fine and allows GSL directory scripts to search for README or 
+similar.
+
+It doesn't matter but it is important to note that you will not get the 
+absoluet path of non-aliased directories, just the directory relative to 
+the xitami base directory. I.e. you get webpage/images/ for the images 
+directory in a default config. Since GSL doesn't seem to have a command 
+to list the current working directory (e.g. /usr/local/xitami or 
+/opt/xitami) you cannot infer from this variable where the xitami server 
+is located on the file system. This seems to me to be excellent security 
+as I can't see why you would need it but it should be noted for future 
+reference.
+
+However in testing this it seems that you cannot have an alias like 
+relative = ../relative/ whereas rel = ./rel does work and the directory 
+given for GSL is rel/
+
+This could possibly be another bug?
+
+Francis
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001714.html">[Xitami] Emulating Apache directories
+</A></li>
+	<LI> Next message: <A HREF="001685.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1729">[ date ]</a>
+              <a href="thread.html#1729">[ thread ]</a>
+              <a href="subject.html#1729">[ subject ]</a>
+              <a href="author.html#1729">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,234 @@
+From xitami-dev@lists.xitami.org  Fri Dec 10 21:51:18 2004
+From: xitami-dev@lists.xitami.org (Justin Frim)
+Date: Fri, 10 Dec 2004 16:51:18 -0500
+Subject: [Xitami-Dev] Bug reports
+Message-ID: <41BA1A56.1000304@idirect.com>
+
+Ok, http://www.xitami.com has absolutely no contact information email.
+Please forward this to the appropriate location.
+
+
+Greetings!
+
+I have discovered a number of bugs in Xitami 2.5c2, some of them a 
+nuisance and some of them critical.
+As I have written a guide to help other Xitami users get around (or at 
+least understand) some of these, please see the guide at 
+http://cyberpimp.pimpdomain.com/usr/administrator/projects/Xitami%202.5c2%20report/ 
+for descriptions of bugs and quirks.
+
+Two of the bugs are web encoding issues.  (Specifically, URL-encoding 
+and HTML-encoding.)  There is another guide on HTML and URL encoding, 
+originally intended for PHP developers but applicable to almost any type 
+of internet programming.  You might find this helpful for properly 
+solving the encoding issues.  It can be found at 
+http://cyberpimp.pimpdomain.com/usr/administrator/projects/web%20encoding%20tech%20note/
+
+--
+TTYL
+
+
+
+From xitami-dev@lists.xitami.org  Sat Dec 11 08:33:45 2004
+From: xitami-dev@lists.xitami.org (Justin Frim)
+Date: Sat, 11 Dec 2004 03:33:45 -0500
+Subject: [Xitami-Dev] More bugs
+In-Reply-To: <41BA1A56.1000304@idirect.com>
+References: <41BA1A56.1000304@idirect.com>
+Message-ID: <41BAB0E9.7090308@idirect.com>
+
+Holy shit!
+Xitami 2.5 is ridden with even more problems than I first thought!
+
+http://cyberpimp.pimpdomain.com/usr/administrator/projects/Xitami%202.5c2%20report/
+
+The web-based admin is a complete total utter mess.  IMO, that entire 
+module should be re-written from scratch.
+The lack of HTML-encoding, and screwed up URL-encoding for directory 
+lists is just plain BAD!
+A couple of file I/O and memory management issues too.
+And weird oddness as to how configuration data is read and managed.
+Plus lack of documentation of all these quirks in the official release docs.
+
+Personally, I'm sticking to version 2.4 until this is cleaned up.  
+(though v2.4 also has a few URL and HTML encoding issues, and a little 
+tiny problem with the web-based admin)
+
+--
+TTYL
+
+
+
+From xitami-dev@lists.xitami.org  Tue Dec 14 07:55:26 2004
+From: xitami-dev@lists.xitami.org (xitami-dev@lists.xitami.org)
+Date: Tue, 14 Dec 2004 08:55:26 +0100
+Subject: Antwort: [Xitami-Dev] More bugs
+Message-ID: <OF5567F6E5.243999C6-ONC1256F6A.002B0E80-C1256F6A.002B878B@ivv-verbund.de>
+
+This is a multipart message in MIME format.
+--=_alternative 002B8786C1256F6A_=
+Content-Type: text/plain; charset="us-ascii"
+
+Hallo Justin,
+
+I'd been wondering now for a long time how I can get a Windows-based web 
+server working on an Xitami basis. Until now I've been working with the 
+wide-spread Apache which to my opinion is a bit oversized for 
+Windows-based web server. What I need is an means to get PHP and 
+MySQL-databases working under Xitami. could you please give me some links? 
+Those from the Xitami-homepage don't help me much.
+
+Thanx
+
+K-R Schmalhorst
+
+--=_alternative 002B8786C1256F6A_=
+Content-Type: text/html; charset="us-ascii"
+
+
+<br><font size=2 face="sans-serif">Hallo Justin,</font>
+<br>
+<br><font size=2 face="sans-serif">I'd been wondering now for a long time how I can get a Windows-based web server working on an Xitami basis. Until now I've been working with the wide-spread Apache which to my opinion is a bit oversized for Windows-based web server. What I need is an means to get PHP and MySQL-databases working under Xitami. could you please give me some links? Those from the Xitami-homepage don't help me much.</font>
+<br>
+<br><font size=2 face="sans-serif">Thanx</font>
+<br>
+<br><font size=2 face="sans-serif">K-R Schmalhorst</font>
+<br>
+--=_alternative 002B8786C1256F6A_=--
+
+From xitami-dev@lists.xitami.org  Tue Dec 14 09:07:26 2004
+From: xitami-dev@lists.xitami.org (Justin Frim)
+Date: Tue, 14 Dec 2004 04:07:26 -0500
+Subject: Antwort: [Xitami-Dev] More bugs
+In-Reply-To: <OF5567F6E5.243999C6-ONC1256F6A.002B0E80-C1256F6A.002B878B@ivv-verbund.de>
+References: <OF5567F6E5.243999C6-ONC1256F6A.002B0E80-C1256F6A.002B878B@ivv-verbund.de>
+Message-ID: <41BEAD4E.6080203@idirect.com>
+
+This is a multi-part message in MIME format.
+--------------040204080009000503020106
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Installing PHP under Xitami is quite easy.
+You have to install it as a CGI...  There's no plug-in module that can 
+be linked to Xitami.
+Personally, my suggestion is to install PHP to a directory which is NOT 
+accessible by the general public via the web server.  (ie. a directory 
+which is not in the HTTP directory tree).
+After installing it, edit PHP.INI (it will be located in the Windows 
+directory) so that the cgi.force_redirect option = 0.  (this is safe now 
+since PHP.EXE can not be accessed from the web)
+Then in the Filters section of the Xitami configuration, create a filter 
+for all files with a .PHP extension.  For the "filter command or script" 
+part, enter the full path and filename where you installed PHP.EXE.
+
+I still haven't tackled the MySQL yet, so I can't help you there.
+
+Good luck!
+
+--
+TTYL
+
+
+
+klaus-robert.schmalhorst@ivv.de wrote:
+
+>
+> Hallo Justin,
+>
+> I'd been wondering now for a long time how I can get a Windows-based 
+> web server working on an Xitami basis. Until now I've been working 
+> with the wide-spread Apache which to my opinion is a bit oversized for 
+> Windows-based web server. What I need is an means to get PHP and 
+> MySQL-databases working under Xitami. could you please give me some 
+> links? Those from the Xitami-homepage don't help me much.
+>
+> Thanx
+>
+> K-R Schmalhorst
+
+
+--------------040204080009000503020106
+Content-Type: text/html; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type">
+  <title></title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+Installing PHP under Xitami is quite easy.<br>
+You have to install it as a CGI...&nbsp; There's no plug-in module that can
+be linked to Xitami.<br>
+Personally, my suggestion is to install PHP to a directory which is NOT
+accessible by the general public via the web server.&nbsp; (ie. a directory
+which is not in the HTTP directory tree).<br>
+After installing it, edit PHP.INI (it will be located in the Windows
+directory) so that the cgi.force_redirect option = 0.&nbsp; (this is safe
+now since PHP.EXE can not be accessed from the web)<br>
+Then in the Filters section of the Xitami configuration, create a
+filter for all files with a .PHP extension.&nbsp; For the "filter command or
+script" part, enter the full path and filename where you installed
+PHP.EXE.<br>
+<br>
+I still haven't tackled the MySQL yet, so I can't help you there.<br>
+<br>
+Good luck!<br>
+<br>
+<pre class="moz-signature" cols="72">--
+TTYL
+</pre>
+<br>
+<br>
+<a class="moz-txt-link-abbreviated" href="mailto:klaus-robert.schmalhorst@ivv.de">klaus-robert.schmalhorst@ivv.de</a> wrote:
+<blockquote
+ cite="midOF5567F6E5.243999C6-ONC1256F6A.002B0E80-C1256F6A.002B878B@ivv-verbund.de"
+ type="cite"><br>
+  <font face="sans-serif" size="2">Hallo Justin,</font>
+  <br>
+  <br>
+  <font face="sans-serif" size="2">I'd been wondering now for a long
+time how I can get a Windows-based web server working on an Xitami
+basis. Until now I've been working with the wide-spread Apache which to
+my opinion is a bit oversized for Windows-based web server. What I need
+is an means to get PHP and MySQL-databases working under Xitami. could
+you please give me some links? Those from the Xitami-homepage don't
+help me much.</font>
+  <br>
+  <br>
+  <font face="sans-serif" size="2">Thanx</font>
+  <br>
+  <br>
+  <font face="sans-serif" size="2">K-R Schmalhorst</font>
+  <br>
+</blockquote>
+</body>
+</html>
+
+--------------040204080009000503020106--
+
+
+From xitami-dev@lists.xitami.org  Mon Dec 20 18:39:44 2004
+From: xitami-dev@lists.xitami.org (Info)
+Date: Mon, 20 Dec 2004 13:39:44 -0500
+Subject: [Xitami-Dev] XitamiUp
+Message-ID: <20041220183954.7DB161C109AE@sxpublic.imatix.net>
+
+I am looking for some volunteers to test a program that starts up xitami
+if a xitami crashes.
+The reason for that i run Xitami and was away from the server for a few
+days on several occasions and noticed that Xitami 2.5c2 crashes once in a
+while.
+So i made a little program that checks if Xitami is running every 5 sec.
+
+Here is the URL to download the program
+
+http://www.xitamiup.com/
+
+Thank you!
+
+
+
+

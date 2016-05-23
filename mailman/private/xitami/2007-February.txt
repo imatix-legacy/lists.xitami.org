@@ -1,0 +1,459 @@
+From marc at verfaillie.com  Thu Feb  1 10:44:17 2007
+From: marc at verfaillie.com (Marc Doigny)
+Date: Thu Feb  1 10:44:20 2007
+Subject: [Spam] [Xitami] Running two copies of xitami
+References: <45C02195.3020302@paradise.net.nz>
+Message-ID: <000701c745e5$8a4d2f50$1dbebebe@VERFAILLIE5>
+
+Why should you use two copies of Xitami and two different ports?
+Use the vhost feature of the server.
+http://web.verfaillie.com/xitami/index8.htm
+You can host any number of domains from a single server using one port, one
+ip and one server.
+
+marc
+
+
+----- Original Message -----
+From: "Linda McCullough" <ltdeditions@paradise.net.nz>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, January 31, 2007 5:56 AM
+Subject: [Spam] [Xitami] Running two copies of xitami
+
+
+> Hi everyone!
+>
+> This is from my ISP...
+>
+> "I have set the DNS records for
+> dingbattees.co.nz to point to your cable
+> IP of 203.97.121.175."
+>
+>
+> I am running
+> xitami and already have solarcharts.co.nz on
+> port 80 at the same IP. I have set up
+> another copy of xitami for the dingbat
+> tees website. Does this go on a
+> different port? If so, where do I change
+> the port number. I have tried the help
+> pages but couldn't find how to do it.
+>
+> Thanks
+> linda
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From rolinger1 at hotmail.com  Thu Feb  1 10:49:31 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu Feb  1 10:50:57 2007
+Subject: [Xitami] Running two copies of xitami
+References: <45C02195.3020302@paradise.net.nz>
+Message-ID: <BAY105-DAV33DA05DD69A1FE9CDAB21F8A40@phx.gbl>
+
+
+Linda:
+
+You don't have to run a seperate copy of Xitami.  If you aren't aware you 
+can have many virtual domains exist on a single IP address.  Each virtual 
+domain would have its own config file.  However, if you are aware of this 
+and still want a second copy of xitami running then you would need a second 
+install of xitami (in a second folder) and you would need to do a minimum of 
+two things:
+
+1.  change the service name of the second copy - by default ximati uses its 
+names as the windows process service identifier. In the defaults.cfg of the 
+second install under the [Win32] section you would need to change 
+"Service-name" to something other than "Xitami" (this is assuming you left 
+the first install copy as the default service name.).  Ideally you would 
+want to change the "Service-text" too, but that is just the service 
+description so its not truly needed.
+
+2.  for the port, in the defaults.cfg file uner [Server] you would need to 
+change the "portbase" to the appropriate number.  If you don't see it there 
+then you can add it:
+    portbase= 0        # e.g. 5000 for port 5080
+
+by the example after the #, the default port (aka: base port) is port 80 
+thats one reaons why you might not see it under the [Server] section, but if 
+it is or you have already added it then note that portbase=0 IS the HTTP 
+port 80.  So if you wanted to change your secondary Xitami install to port 
+81, then set portbase=1, to set it to 8080, portbase=8000.  Basically, what 
+ever number you want to use, subtract 80 from that number and that will be 
+your portbase.
+
+I probably did overkill on the explanation but its late my time right now 
+and I have sort of gone into zombie mode.  :-)
+
+-Russel
+
+
+
+----- Original Message ----- 
+From: "Linda McCullough" <ltdeditions@paradise.net.nz>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, January 30, 2007 8:56 PM
+Subject: [Xitami] Running two copies of xitami
+
+
+> Hi everyone!
+>
+> This is from my ISP...
+>
+> "I have set the DNS records for dingbattees.co.nz to point to your cable 
+> IP of 203.97.121.175."
+>
+>
+> I am running
+> xitami and already have solarcharts.co.nz on
+> port 80 at the same IP. I have set up another copy of xitami for the 
+> dingbat tees website. Does this go on a different port? If so, where do I 
+> change the port number. I have tried the help pages but couldn't find how 
+> to do it.
+>
+> Thanks
+> linda
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+From rolinger1 at hotmail.com  Thu Feb  1 10:48:41 2007
+From: rolinger1 at hotmail.com (RPO)
+Date: Thu Feb  1 10:54:21 2007
+Subject: [Spam] [Xitami] Running two copies of xitami
+References: <45C02195.3020302@paradise.net.nz>
+	<000701c745e5$8a4d2f50$1dbebebe@VERFAILLIE5>
+Message-ID: <BAY105-DAV134FF27EDDB92751099A2CF8A40@phx.gbl>
+
+Marc,
+
+I run 3 copies of Xitami running for 3 very specific reasons.  Two copies
+have multiple virtual domains and the third has none.  There are many
+reasons.
+
+-R
+
+----- Original Message ----- 
+From: "Marc Doigny" <marc@verfaillie.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Thursday, February 01, 2007 1:44 AM
+Subject: Re: [Spam] [Xitami] Running two copies of xitami
+
+
+> Why should you use two copies of Xitami and two different ports?
+> Use the vhost feature of the server.
+> http://web.verfaillie.com/xitami/index8.htm
+> You can host any number of domains from a single server using one port,
+one
+> ip and one server.
+>
+> marc
+>
+>
+> ----- Original Message -----
+> From: "Linda McCullough" <ltdeditions@paradise.net.nz>
+> To: <xitami@lists.xitami.org>
+> Sent: Wednesday, January 31, 2007 5:56 AM
+> Subject: [Spam] [Xitami] Running two copies of xitami
+>
+>
+> > Hi everyone!
+> >
+> > This is from my ISP...
+> >
+> > "I have set the DNS records for
+> > dingbattees.co.nz to point to your cable
+> > IP of 203.97.121.175."
+> >
+> >
+> > I am running
+> > xitami and already have solarcharts.co.nz on
+> > port 80 at the same IP. I have set up
+> > another copy of xitami for the dingbat
+> > tees website. Does this go on a
+> > different port? If so, where do I change
+> > the port number. I have tried the help
+> > pages but couldn't find how to do it.
+> >
+> > Thanks
+> > linda
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+From marc at verfaillie.com  Thu Feb  1 10:59:55 2007
+From: marc at verfaillie.com (Marc Doigny)
+Date: Thu Feb  1 10:59:58 2007
+Subject: [Xitami] Simple forum software
+References: <45C02195.3020302@paradise.net.nz>
+	<BAY105-DAV33DA05DD69A1FE9CDAB21F8A40@phx.gbl>
+Message-ID: <001701c745e7$b9b57f70$1dbebebe@VERFAILLIE5>
+
+Hello all,
+
+i'm looking for a simple forum software that could run on Xitami (or any
+other server) without much configuration. Server is windows 2000 or 2003.
+The forum is not for me, but for an organisation and they don't know
+anything about computers. I've tried a WAMP (windows-apache-mySQL-PHP)
+solution, but it's really too complicated for the users to maintain.
+A "free forum" is not really an option, since it comes with lot of
+advertising and there is nearly no control about the posts (lot of spam!).
+Freeware or shareware OK.
+
+marc
+
+From shinelight at shininglightpro.com  Thu Feb  1 16:34:44 2007
+From: shinelight at shininglightpro.com (Thomas J. Hruska)
+Date: Thu Feb  1 16:34:54 2007
+Subject: [Xitami] Simple forum software
+In-Reply-To: <001701c745e7$b9b57f70$1dbebebe@VERFAILLIE5>
+References: <45C02195.3020302@paradise.net.nz>	<BAY105-DAV33DA05DD69A1FE9CDAB21F8A40@phx.gbl>
+	<001701c745e7$b9b57f70$1dbebebe@VERFAILLIE5>
+Message-ID: <45C20894.6080409@shininglightpro.com>
+
+Marc Doigny wrote:
+> Hello all,
+> 
+> i'm looking for a simple forum software that could run on Xitami (or any
+> other server) without much configuration. Server is windows 2000 or 2003.
+> The forum is not for me, but for an organisation and they don't know
+> anything about computers. I've tried a WAMP (windows-apache-mySQL-PHP)
+> solution, but it's really too complicated for the users to maintain.
+> A "free forum" is not really an option, since it comes with lot of
+> advertising and there is nearly no control about the posts (lot of spam!).
+> Freeware or shareware OK.
+> 
+> marc
+
+There are many forums out there:
+
+http://www.forummatrix.org/
+
+There are a couple forums written in ASP, but most are written for a 
+WAMP/WIMP environment (Windows-IIS-MySQL-PHP).  A few support SQL Server 
+and a couple of them use plain ol' text files (i.e. no database).  Some 
+of the commercial solutions offer to help set up the board and upgrade 
+it on behalf of the user (for a hefty annual fee).
+
+(YahooGroups?  Not exactly a web forum, but might be worth checking out.)
+
+-- 
+Thomas Hruska
+http://www.slproweb.com/
+
+From rolinger1 at hotmail.com  Thu Feb  1 17:43:14 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Thu Feb  1 17:44:46 2007
+Subject: [Xitami] Simple forum software
+References: <45C02195.3020302@paradise.net.nz><BAY105-DAV33DA05DD69A1FE9CDAB21F8A40@phx.gbl>
+	<001701c745e7$b9b57f70$1dbebebe@VERFAILLIE5>
+Message-ID: <BAY105-DAV93085E809A6CCD40145FFF8A40@phx.gbl>
+
+I wrote my own, and it turns out it was much more simple than most of the 
+shareware/freeware out there - a pretty small and optimized database (just a 
+few tables) with just a few perl scripts.
+
+You know, I might be inclined to write a Xitami Forum that would share in 
+the mailing list.  I can write a script that parses any incoming mail that 
+had a new topic which would be the start of a new disucssion and any 
+subsequent reply "Re:" would be added to that discussion all organized by 
+timestamp.  So not only would we have the regular email list we all receive 
+but then the everything would also be captured to a usable forum.
+
+Its been a while since I wrote an email parser but it shouldn't be too 
+hard - just have to capture the headers and search/insert into the DB from 
+there.  anmyone want to join me on this one?  I imagine parseing out all the 
+reply'd to info could be a bit difficult or weeding through each Replied to 
+email to grab legitimate response lines.  Except for that part I think it 
+would be rather easy to do the whole thing.
+
+-R
+
+----- Original Message ----- 
+From: "Marc Doigny" <marc@verfaillie.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Thursday, February 01, 2007 1:59 AM
+Subject: [Xitami] Simple forum software
+
+
+> Hello all,
+>
+> i'm looking for a simple forum software that could run on Xitami (or any
+> other server) without much configuration. Server is windows 2000 or 2003.
+> The forum is not for me, but for an organisation and they don't know
+> anything about computers. I've tried a WAMP (windows-apache-mySQL-PHP)
+> solution, but it's really too complicated for the users to maintain.
+> A "free forum" is not really an option, since it comes with lot of
+> advertising and there is nearly no control about the posts (lot of spam!).
+> Freeware or shareware OK.
+>
+> marc
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+From magus1011ca at yahoo.ca  Thu Feb  1 21:52:49 2007
+From: magus1011ca at yahoo.ca (Magus)
+Date: Thu Feb  1 21:52:34 2007
+Subject: [Xitami] Running two copies of xitami
+In-Reply-To: <45C02195.3020302@paradise.net.nz>
+References: <45C02195.3020302@paradise.net.nz>
+Message-ID: <946199046.20070201145249@yahoo.ca>
+
+Hello Linda,
+
+Tuesday, January 30, 2007, 10:56:53 PM, you wrote:
+
+> Hi everyone!
+
+> This is from my ISP...
+
+> "I have set the DNS records for 
+> dingbattees.co.nz to point to your cable 
+> IP of 203.97.121.175."
+
+
+> I am running
+> xitami and already have solarcharts.co.nz on
+> port 80 at the same IP. I have set up 
+> another copy of xitami for the dingbat 
+> tees website. Does this go on a 
+> different port? If so, where do I change 
+> the port number. I have tried the help 
+> pages but couldn't find how to do it.
+
+> Thanks
+> linda
+
+
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+Take a look at the [Server] section of the "Configuration" page for
+info on the ipaddress, portbase, base-host, and hostname options as
+well as the "Virtual Hosts" section of the documentation.
+
+Since Xitami can use either IP based or name based virtual hosts, and
+since your ISP has set you up with multiple names on the same IP, I
+would skip the setting up of a separate copy of Xitami and use name
+based virtual hosts.
+
+-- 
+Best regards,
+ Magus
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+From magus1011ca at yahoo.ca  Thu Feb  1 23:45:10 2007
+From: magus1011ca at yahoo.ca (Magus)
+Date: Thu Feb  1 23:44:59 2007
+Subject: [Xitami] Yeah!
+Message-ID: <1538929512.20070201164510@yahoo.ca>
+
+Hello All,
+
+  Just a brief note that with some help I have been able to compile
+  Xitami from source code! For those of you that want to know, here's
+  how I did it:
+
+  From www.imatix.com download any one of the tools "Libero, SMT, GSL
+  or SFL" The download's page lets you download "Rbase_1_0_src.zip" or
+  "...src.tar.gz" for all of them. Then get the source for Xitami
+  or Xitami-Pro or both. The web pages and other sources of
+  information indicate that Windows 2000-Pro is the preferred platform
+  to compile on, so if you have a fast enough processor and XP then
+  download from Microsoft their free Virtual PC and set up a Windows
+  2000-Pro machine.
+
+  Next extract the rbase archive to the virtual machine's disk. Now
+  open a command prompt and change to the ".../rbase/src" directory.
+  Type build at the command prompt and watch the files get compiled.
+  You will have a new directory called imatix created for you.
+
+  Go to Control Panel | System | Environment Variables and edit the
+  path statement to include the ...\imatix\bin\. directory.
+
+  Next extract the source for Xitami into it's own directory which
+  we'll call ".../xiopen_2_5_src". In the command Prompt window change
+  to this directory and type "build". Watch the files being compiled.
+  You will have a new directory created for you called
+  ".../imatix/xitami-25" where you will find the compiled contents.
+  Simply move it to where ever you want and start it up.
+
+  Topics for my further investigation: Will they compile under XP? and
+  BSD? Once those are determined then it's time for some changes to
+  the Xitami source.
+
+  I hope this helps.
+
+-- 
+Best regards,
+ Magus
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+From marc at verfaillie.be  Thu Feb  1 19:46:54 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Fri Feb  2 09:36:12 2007
+Subject: [Xitami] Simple forum software
+In-Reply-To: <BAY105-DAV93085E809A6CCD40145FFF8A40@phx.gbl>
+Message-ID: <45C243AE.24148.279367@localhost>
+
+On 1 Feb 2007 at 8:43, Russel Olinger wrote:
+
+> I wrote my own, and it turns out it was much more simple than most of the 
+> shareware/freeware out there - a pretty small and optimized database (just a 
+> few tables) with just a few perl scripts.
+
+
+I think i will go that way too for my forum.
+I'm much more confortable in writing the whole thing in powerbasic than in 
+getting a WAMP system running, fine-tuning it... and keeping it running, and 
+that just for a forum with 10 posts a week!
+
+
+marc
+
+
+
+From gobonkers at hotmail.com  Fri Feb  2 17:44:12 2007
+From: gobonkers at hotmail.com (Go Bonkers)
+Date: Fri Feb  2 17:44:27 2007
+Subject: [Xitami] Re: Simple forum software
+Message-ID: <BAY110-F18BABC7E0BF9A7A663BFA3AB9B0@phx.gbl>
+
+A quite simple Perl chat that I've used;
+http://tesol.net/scripts/Chat-N-Time/
+
+Might look at some of her other works, might be a fancier version there too 
+- been awhile since I've snooped around there.
+
+_________________________________________________________________
+FREE online classifieds from Windows Live Expo – buy and sell with people 
+you know 
+http://clk.atdmt.com/MSN/go/msnnkwex0010000001msn/direct/01/?href=http://expo.live.com?s_cid=Hotmail_tagline_12/06
+

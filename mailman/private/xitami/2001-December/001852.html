@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001851.html">
+   <LINK REL="Next"  HREF="001854.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP problems
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP problems">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 28 Dec 2001 22:19:20 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001851.html">[Xitami] FTP problems
+</A></li>
+        <LI> Next message: <A HREF="001854.html">[Xitami] FTP problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1852">[ date ]</a>
+              <a href="thread.html#1852">[ thread ]</a>
+              <a href="subject.html#1852">[ subject ]</a>
+              <a href="author.html#1852">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:7DF4D412-FB6E-11D5-949F-0003933D8C18@mac.com">7DF4D412-FB6E-11D5-949F-0003933D8C18@mac.com</A>&gt;, Bruce Axtens writes:
+&gt;<i>On Friday, December 28, 2001, at 04:04  PM, Ewen McNeill wrote:
+</I>&gt;&gt;<i> Don't use FTP.  Use HTTP.  It's much cleaner.)
+</I>&gt;<i>
+</I>&gt;<i>Pardon my newbie-ness but, like, how?
+</I>
+HTTP uses a single connection from client-&gt;server for all transfers
+(originally one per file transfered, but HTTP/1.1 allows more than one
+file transfer per connection).  It can be easily proxied/cached, and easily
+allowed specifically through a firewall.  All meta information is passed
+in a clean, extendable, set of headers on the request and the response.
+
+FTP uses two connections, a control connection and a data connection
+(well, one data connection per file transferred).  The control
+connection is used to set up the data connections, and no much else.
+FTP has two modes: active FTP (the original) where the data connection
+goes from sender to receiver (so if the server sends you a file, it
+opens a connection back to you), and passive FTP (a later work around)
+where the data connection goes from client to server (always).  
+
+FTP picks the port numbers for the data port &quot;at random&quot; (some FTP
+clients/servers can be told to be more specific, but in general you
+can't assume what the port numbers will be).
+
+So FTP is very hard to firewall.  A firewall at the client end will
+generally break active FTP (won't allow the data connection to come
+in), unless the firewall specifically knows about FTP and takes special
+precautions.  A firewall at the server end will often break active FTP (if
+the server isn't allowed to connect back out again), and will generally
+break passive FTP as well (since it'll only allow incoming connections
+to ports it knows about, and the data connections are chosen &quot;at random&quot;).
+
+FTP is also difficult to proxy (at least in the sense of a FTP proxy
+that looks like a FTP server on one side and a FTP client on the other), 
+since the proxy has to implement pretty much all of the FTP server
+behaviour (cf a HTTP proxy which just passes the connections through
+with some extra headers).
+
+FTP has no reliable way to return date/time meta information about
+files; each FTP client &quot;guesses&quot; this information from directory
+listings, after having guessed what the directory listing format is.
+HTTP specifically includes this information in its answer.  HTTP has a
+&quot;get if modified&quot; request; the equivilent in FTP involves getting a
+directory listing, guessing the format, guessing the details of the
+file, comparing it with what you have, and hoping for the best.
+
+There's plenty more.  But basically FTP was designed by a bunch of grad
+students 20-something years ago making it up as they went along to solve
+a much more general problem than was really required, in an environment
+security and firewalls weren't an issue.  HTTP was designed more
+recently (about 10 years ago), and is much more firewall friendly.
+
+For single file transfers HTTP is more efficient (only one connection
+setup); for multiple file transfers FTP doesn't look quite so bad, but
+HTTP/1.1 keep-alive connections can give HTTP an edge even there.
+
+Use HTTP.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001851.html">[Xitami] FTP problems
+</A></li>
+	<LI> Next message: <A HREF="001854.html">[Xitami] FTP problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1852">[ date ]</a>
+              <a href="thread.html#1852">[ thread ]</a>
+              <a href="subject.html#1852">[ subject ]</a>
+              <a href="author.html#1852">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

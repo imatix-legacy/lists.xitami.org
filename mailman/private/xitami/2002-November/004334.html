@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Leaking file descriptors
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004333.html">
+   <LINK REL="Next"  HREF="004335.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Leaking file descriptors
+   </H1>
+    <B>Dmitry Isakbayev
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Leaking file descriptors">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 21 Nov 2002 16:36:17 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004333.html">[Xitami] PHP, Java ,Xitami and Windows 98
+</A></li>
+        <LI> Next message: <A HREF="004335.html">[Xitami] Leaking file descriptors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4334">[ date ]</a>
+              <a href="thread.html#4334">[ thread ]</a>
+              <a href="subject.html#4334">[ subject ]</a>
+              <a href="author.html#4334">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I am running xitami on Solaris under a constant load (about 10 connections
+from IE browser refreshing the same page every 60 seconds) and I am noticing
+that, over time, the web server consumes more and more file descriptors.
+Eventually, the web server reaches the system limit (1024 open file
+descriptors) and exits.
+
+Running utility &quot;pfiles&quot; shows the state of each file descriptor.
+
+Connected sockets look like
+ 7: S_IFSOCK mode:0666 dev:230,0 ino:28736 uid:0 gid:0 size:0
+    O_RDWR|O_NONBLOCK
+    sockname: AF_INET 172.16.4.14  port: 80
+    peername: AF_INET 192.168.1.198  port: 31602
+
+But there is also an ever increasing number of sockets like -
+ 9: S_IFSOCK mode:0666 dev:230,0 ino:29651 uid:0 gid:0 size:0
+    O_RDWR|O_NONBLOCK
+    sockname: AF_INET 0.0.0.0  port: 0
+
+Can anybody suggest what the problem might be?
+Thank You,
+
+Dmitry
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004333.html">[Xitami] PHP, Java ,Xitami and Windows 98
+</A></li>
+	<LI> Next message: <A HREF="004335.html">[Xitami] Leaking file descriptors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4334">[ date ]</a>
+              <a href="thread.html#4334">[ thread ]</a>
+              <a href="subject.html#4334">[ subject ]</a>
+              <a href="author.html#4334">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

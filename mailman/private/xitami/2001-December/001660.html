@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP/perl as non-CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001659.html">
+   <LINK REL="Next"  HREF="001661.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP/perl as non-CGI
+   </H1>
+    <B>Paul N Shortis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP/perl as non-CGI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 7 Dec 2001 10:30:46 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001659.html">[Xitami] CGI School
+</A></li>
+        <LI> Next message: <A HREF="001661.html">[Xitami] PHP/perl as non-CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1660">[ date ]</a>
+              <a href="thread.html#1660">[ thread ]</a>
+              <a href="subject.html#1660">[ subject ]</a>
+              <a href="author.html#1660">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+This happens when Xitami runs php.exe but php.exe can't locate the php4ts.dll,
+either add the path to php.exe/php4ts.dll to your system environment or move
+php4ts.dll to your system directory (e.g. c:\winnt\system32. This happens so
+often that I think it should be somewhere in the Xitami documentation.
+
+I haven't had time to investigate, however I suspect it may be because xitami
+doesn't make the directory that php.exe is in the current working directory
+before launching php.exe, apache doesn't have this problem so it isn't simply
+just a 'php issue' just the combination of the way xitami and php work.
+
+Paul
+
+
+
+
+Good thought but still nothing. I still get a blank page (source) hmmm I'll
+keep at this I know I'm missing something basic. I also tried setting the
+extention .php to c:\php\php.exe
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html;
+charset=windows-1252&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+----- Original Message -----
+From: &quot;Marcio Marchini&quot; &lt;<A HREF="mailto:mqm@magma.ca">mqm@magma.ca</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, December 06, 2001 11:31 AM
+Subject: RE: [Xitami] PHP/perl as non-CGI
+
+
+&gt;<i>
+</I>&gt;<i> If it is just serving the file instead of executing it, add this to your
+</I>&gt;<i> defaults.cfg:
+</I>&gt;<i>
+</I>&gt;<i> [Mime]
+</I>&gt;<i> .php=application/x-httpd-php
+</I>&gt;<i> .php3=application/x-httpd-php3
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I've had the same problem with regular CGI stuff.
+</I>&gt;<i>
+</I>&gt;<i> marcio
+</I>&gt;<i>
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Peter
+</I>&gt;<i> &gt; Sent: December 6, 2001 11:09 AM
+</I>&gt;<i> &gt; To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt; Subject: Re: [Xitami] PHP/perl as non-CGI
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I've spent the morning trying to get php running as ISAPI without
+</I>&gt;<i> &gt; any luck.
+</I>&gt;<i> &gt; It sure looks like it should work the set-up is very similar to another
+</I>&gt;<i> &gt; server I use. I don't seem to be getting any errors Xitami is
+</I>&gt;<i> &gt; servering the
+</I>&gt;<i> &gt; test page but it is not processing the script.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The FAQ says:
+</I>&gt;<i> &gt;   1.. First off, make sure Xitami is installed and running.
+</I>&gt;<i> &gt;   2.. Next, download and install the PHP binary distribution into some
+</I>&gt;<i> &gt; directory. We'll assume it's c:\php.
+</I>&gt;<i> &gt;   3.. Add '.php=c:\php\php.exe' to the Filter section of the Xitami
+</I>&gt;<i> &gt; confguration.
+</I>&gt;<i> &gt;   4.. Rename the PHP initialisation file, 'php3.ini-dist' to
+</I>&gt;<i> &gt; 'php3.ini' and
+</I>&gt;<i> &gt; copy it into the Windows directory. Don't bother trying to set the PHPRC
+</I>&gt;<i> &gt; environment variable, because this does not seem to work.
+</I>&gt;<i> &gt;   5.. Edit the ini file and change the 'extension_dir' setting to
+</I>c:\php.
+&gt;<i> &gt;   6.. Now test PHP by hand with a small test page, by running it in a
+</I>&gt;<i> &gt; command window, in the Xitami directory:
+</I>&gt;<i> &gt; c:\php\php webpages\test.php
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ----- Original Message -----
+</I>&gt;<i> &gt; From: &quot;Marcio Marchini&quot; &lt;<A HREF="mailto:mqm@magma.ca">mqm@magma.ca</A>&gt;
+</I>&gt;<i> &gt; To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt; Sent: Thursday, December 06, 2001 10:28 AM
+</I>&gt;<i> &gt; Subject: RE: [Xitami] PHP/perl as non-CGI
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; As far as I know Xitami has LRWP, not FastCGI. LRWP is not
+</I>&gt;<i> &gt; FastCGI, but it
+</I>&gt;<i> &gt; &gt; is very similar. &quot;The protocol between Xitami and the LRWP Peer is
+</I>much
+&gt;<i> &gt; &gt; simpler than the FastCGI protocol, and therefore less prone to
+</I>&gt;<i> &gt; &gt; implementation differences or errors. However, given the right
+</I>&gt;<i> &gt; circumstances
+</I>&gt;<i> &gt; &gt; it is possible to run the same program as both a LRWP Peer and a
+</I>FastCGI
+&gt;<i> &gt; &gt; Peer with only minor differences in the startup code. &quot;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; So, you'd have to write your own C adapter to be a LRWP/FastCGI server
+</I>&amp;
+&gt;<i> &gt; &gt; link to the PHP/Perl interpreter.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; What I've seen in PHP (and probably Perl) under Win32 is that
+</I>&gt;<i> &gt; they support
+</I>&gt;<i> &gt; &gt; the Microsoft way of doing things (ISAPI or something like
+</I>&gt;<i> &gt; that), which I
+</I>&gt;<i> &gt; &gt; don't think Xitami supports ? Anyway, under PWS (Personal Web
+</I>&gt;<i> &gt; Server) and
+</I>&gt;<i> &gt; &gt; IIS you can probably enable them in this faster mode (ISAPI).
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Again, maybe by now Xitami supports ISAPI, but I don't think so. I
+</I>think
+&gt;<i> &gt; &gt; they don't because they want to be OS-portable, and ISAPI would be
+</I>&gt;<i> &gt; &gt; Windows-specific. I could be wrong.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Zope (www.zope.org) has a regular, thin CGI which then talks to
+</I>&gt;<i> &gt; Zope on a
+</I>&gt;<i> &gt; &gt; specific port. So, if you configure Zope behind Apache, you use this
+</I>&gt;<i> &gt; &gt; small&amp;fast CGI which gets loaded/unloaded for every request, but it is
+</I>&gt;<i> &gt; &gt; fast/small. It then opens a connection to Zope on a given
+</I>&gt;<i> &gt; socket, and they
+</I>&gt;<i> &gt; &gt; exchange data, and the little CGI passes the bytes back to
+</I>&gt;<i> &gt; Apache. This is
+</I>&gt;<i> &gt; &gt; another option, but you'd have to write the little CGI yourself
+</I>&gt;<i> &gt; and leave
+</I>&gt;<i> &gt; &gt; the PHP or Perl interpreter running, listening for requests on a port
+</I>&gt;<i> &gt; (like
+</I>&gt;<i> &gt; &gt; a Java servlet engine, etc). The advantage of this compared to an
+</I>apache
+&gt;<i> &gt; MOD
+</I>&gt;<i> &gt; &gt; is that it is portable across web servers. You can run Zope
+</I>&gt;<i> &gt; behind any web
+</I>&gt;<i> &gt; &gt; server just by porting this tiny CGI to the new platform. LRWP, on the
+</I>&gt;<i> &gt; other
+</I>&gt;<i> &gt; &gt; ahnd, is Xitami-specific. MODs are Apache-specific. ISAPI is
+</I>&gt;<i> &gt; &gt; Windows-specific. The Zope solution is very portable with a small
+</I>&gt;<i> &gt; &gt; performance penalty (lightweight CGI + sockets). There's no
+</I>&gt;<i> &gt; ideal solution
+</I>&gt;<i> &gt; &gt; :-)
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; But Zope is designed to be a server &amp; listen on a port, while
+</I>&gt;<i> &gt; the PHP/Perl
+</I>&gt;<i> &gt; &gt; interpreters aren't. That's why they need more work, like a C code
+</I>that
+&gt;<i> &gt; &gt; links to teh interpreter &amp; does the glue work. It would be nice
+</I>&gt;<i> &gt; if Xitami
+</I>&gt;<i> &gt; &gt; supported ISAPI.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Sorry I don't have good news. Hope this helps a bit. Note that I may
+</I>be
+&gt;<i> &gt; &gt; wrong in some points, it's been a while since I looked into this.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; marcio
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; -----Original Message-----
+</I>&gt;<i> &gt; &gt; &gt; From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt; &gt; &gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Vardhan Varma
+</I>&gt;<i> &gt; &gt; &gt; Sent: December 5, 2001 11:04 PM
+</I>&gt;<i> &gt; &gt; &gt; To: '<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>'
+</I>&gt;<i> &gt; &gt; &gt; Subject: [Xitami] PHP/perl as non-CGI
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;  Hi,
+</I>&gt;<i> &gt; &gt; &gt;   I've searched the archive, and while the question of PHP and PERL
+</I>&gt;<i> &gt; &gt; &gt; as non-CGI (fastcgi/WSX etc and not seperate process executed
+</I>&gt;<i> &gt; everytime)
+</I>&gt;<i> &gt; &gt; &gt; has been raised many time, there has
+</I>&gt;<i> &gt; &gt; &gt; been no post telling 'yes i've done it and here is the url'.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Does anybody has PHP/perl running as non-CGI in Xitami ?
+</I>&gt;<i> &gt; &gt; &gt; If yes, are they willing to share the patch .
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; --Thanx
+</I>&gt;<i> &gt; &gt; &gt; --Vardhan
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; --
+</I>&gt;<i> &gt; &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+
+
+
+
+
+************************************************************
+Opinions contained in this e-mail do not necessarily reflect
+the opinions of the Queensland Department of Main Roads,
+Queensland Transport or National Transport Secretariat, or
+endorsed organisations utilising the same infrastructure.
+If you have received this electronic mail message in error,
+please immediately notify the sender and delete the message
+from your computer.
+************************************************************
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001659.html">[Xitami] CGI School
+</A></li>
+	<LI> Next message: <A HREF="001661.html">[Xitami] PHP/perl as non-CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1660">[ date ]</a>
+              <a href="thread.html#1660">[ thread ]</a>
+              <a href="subject.html#1660">[ subject ]</a>
+              <a href="author.html#1660">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004040.html">
+   <LINK REL="Next"  HREF="004042.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 25 Sep 2002 11:37:59 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004040.html">Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004042.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4038">[ date ]</a>
+              <a href="thread.html#4038">[ thread ]</a>
+              <a href="subject.html#4038">[ subject ]</a>
+              <a href="author.html#4038">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> There are obvious typos.
+</I>
+Mine too. (I fixed them while composing the message but failed to
+re-load the changed attachment).
+
+&gt;<i> don't know if attachments are &quot;allowed&quot; here,
+</I>
+There are &quot;issues&quot;, so we try to use them carefully or Ewen will
+turn off attachments. Such as: on another list, someone sent a SEVEN
+MEG attachment (patch file) to a list where 98% of the readers
+didn't need the patch. Nearly melted my modem. Executable
+attachments are an ongoing problem, and these modern mail-readers
+seem to know how to execute about anything without informed consent
+from the recipient. And some old grumps (I'm one) aren't real keen
+about duplicating the text as pretty-color HTML, or worse: that
+wretched encoding that some old OutLooks attached to every email.
+
+But I felt that 2K of example code wasn't too onerous even on modem,
+and I tried to make it look like Plain Text so no foolish mail
+client would &quot;helpfully&quot; try to Run it.
+
+&gt;<i> ******************* Lesson Learned! ********************
+</I>
+This bears repeating repeating repeating repeating repeating...
+
+&gt;<i> ******************* Lesson Learned! ********************
+</I>
+&gt;<i> Never, never test scripts without:
+</I>
+&gt;<i> use CGI::Carp qw(fatalsToBrowser);
+</I>
+&gt;<i> in them!!!!! (Sticks your nose right in the problem)
+</I>
+&gt;<i> ******************* Lesson Learned! ********************
+</I>
+NEVER, NEVER TEST Perl CGI SCRIPTS WITHOUT:
+ 1) use CGI::Carp qw(fatalsToBrowser);
+ 2) running with the &quot; -w&quot; option
+ 3) use Strict;
+
+I am not sure if &quot; -w&quot; (warn) can be forced in the shebang line. It
+may need to be set globally in Xitami's Filters setting. Even there,
+it may not propagate in all versions of O/S, Perl, and Xitami. So
+run the script with -w from a command-line before you finish
+testing. While there may be extra errors because it isn't called
+with all CGI parameters on hand, you should be able to account for
+them. Turning off -w &quot;usually&quot; means there is something wrong with
+the script, and any apparent success is dumb luck.
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004040.html">Re[4]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004042.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4038">[ date ]</a>
+              <a href="thread.html#4038">[ thread ]</a>
+              <a href="subject.html#4038">[ subject ]</a>
+              <a href="author.html#4038">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

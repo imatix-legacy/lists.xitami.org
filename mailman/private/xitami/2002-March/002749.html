@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] 50+ simultaneous users...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002751.html">
+   <LINK REL="Next"  HREF="002734.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] 50+ simultaneous users...
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] 50+ simultaneous users...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 16 Mar 2002 12:13:45</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002751.html">[Xitami] simultaneous frames - 50+ simultaneous users...
+</A></li>
+        <LI> Next message: <A HREF="002734.html">[Xitami] FTP help?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2749">[ date ]</a>
+              <a href="thread.html#2749">[ thread ]</a>
+              <a href="subject.html#2749">[ subject ]</a>
+              <a href="author.html#2749">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 05:20 PM 3/14/2002 +1300, Ewen McNeill writeth:
+&gt;<i>Without having run into this before myself, my hunch is that there's
+</I>&gt;<i>perhaps some race condition in Xitami between when the temporary files
+</I>&gt;<i>are read in (from the CGIs), and when the size of the file is recorded.
+</I>&gt;<i>In which case this would be most obvious when the load on the machine
+</I>&gt;<i>gets fairly high (and 50 simultaneous users all running CGIs at once
+</I>&gt;<i>would start to do that).
+</I>&gt;<i>
+</I>&gt;<i>Is it only the log entries affected?  Or are the results that are sent
+</I>&gt;<i>back wrong as well?
+</I>
+The results are incorrect as well (that is, the logs reflect what is
+returned to the client and vice versa).  Xitami isn't dropping data being
+sent back to the client.
+
+&gt;<i>These sorts of problems are very time consuming to track down (often
+</I>&gt;<i>debugging is a matter of staring at the source code to try to figure out
+</I>&gt;<i>what might be causing it, changing something &quot;likely&quot; and trying again).
+</I>
+I can modify the DAS for localhost use only and send you the DAS and DAC
+along with the CFM, PHP, and Perl scripts (Nuclear Vision scripts would be
+semi-worthless since the executable hasn't been released yet).  The DAC
+isn't 100% bug-free yet (but it is close - I just pinpointed one very
+elusive bug that took forever to figure out what was going on), but the DAS
+should be able to withstand anything thrown at it.  Ewen, let me know if
+you want a localhost version for testing Xitami.
+
+&gt;<i>If anyone else has seen anything similar and/or has any hints about what
+</I>&gt;<i>triggers it, it'd be useful to know.
+</I>
+My best guess is that there could be an OS limit on the number of processes
+Xitami is allowed to start.  If that is the case, it is somewhere around
+100 (50 * 2) processes (XiFusion creates a process for the CFML
+executable).  I'm wondering if the NT service process limit has anything to
+do with this.  I would generally think processes started by services would
+be separated from the service, but they could be counted as service
+processes (I think 128 service processes is the default limit).  If this is
+the case, a DoS/DDoS attack could easily be created to cause about 90% of
+connections to Xitami servers to fail.
+
+If a service process limit is the problem, the solution is to track if
+starting the process failed, and if it did, wait a bit (.25 seconds -
+controllable from the configuration files) and then try again.  If it can't
+create the process for 30 seconds, then kill the client connection with a
+response that the server is overloaded.
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002751.html">[Xitami] simultaneous frames - 50+ simultaneous users...
+</A></li>
+	<LI> Next message: <A HREF="002734.html">[Xitami] FTP help?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2749">[ date ]</a>
+              <a href="thread.html#2749">[ thread ]</a>
+              <a href="subject.html#2749">[ subject ]</a>
+              <a href="author.html#2749">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

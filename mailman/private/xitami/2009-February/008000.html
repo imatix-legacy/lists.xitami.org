@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Unconditional execution of a CGI in html.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Unconditional%20execution%20of%20a%20CGI%20in%20html.&In-Reply-To=BAY127-DAV128D87C5D27BF4AF42A645F8BA0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007999.html">
+   <LINK REL="Next"  HREF="008001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Unconditional execution of a CGI in html.</H1>
+    <B>jglong3 at att.net</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Unconditional%20execution%20of%20a%20CGI%20in%20html.&In-Reply-To=BAY127-DAV128D87C5D27BF4AF42A645F8BA0%40phx.gbl"
+       TITLE="[Xitami] Unconditional execution of a CGI in html.">jglong3 at att.net
+       </A><BR>
+    <I>Wed Feb 11 22:22:12 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007999.html">[Xitami] Unconditional execution of a CGI in html.
+</A></li>
+        <LI>Next message: <A HREF="008001.html">[Xitami] Unconditional execution of a CGI in html.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8000">[ date ]</a>
+              <a href="thread.html#8000">[ thread ]</a>
+              <a href="subject.html#8000">[ subject ]</a>
+              <a href="author.html#8000">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello rolinger,,,,,   :) :)
+
+Wow,,,,,THANKS for that quick reply!!!!!
+
+Here is an HTML example:
+
+ &lt;html&gt;
+ .
+ .
+ &lt;body&gt;
+ .
+ .
+ HTML1  USE AN HTML STATEMENT TO EXECUTE A CGI PROGRAM and execute it without using &lt;image,,,&gt;, 
+ HTML2  &lt;a href,,,&gt;, or any HTML that will require the user to poke on something.
+ &lt;!--  The use of &lt;image,,,,&gt; creates an undesirable graphic with no information.--&gt;
+ &lt;!--  The use of &lt;a href,,,,&gt; or &lt;form field,,,,&gt; requires the user to poke on something--&gt;
+ .
+ .
+ &lt;/body&gt;
+ &lt;/html&gt;
+
+The desire here is not to use any embedded HTML Script (i.e.) java,,,,,,
+
+
+In the mean time since my last Email ..... I found that the following use of an &lt;Iframe,,,,&gt; will do the trick:
+
+&lt;iframe style=&quot;border: none; overflow: hidden; width: 100px; height: 50px; padding: 0px; margin: 0px;&quot; src=&quot;/cgi-bin/test?Iframe,,,&quot;&gt;&lt;/iframe&gt;
+
+The above HTML1 and HTML2 lines were replaced by the above &lt;iframe,,,,,&gt; lines and this works as expected.
+
+The &quot;test&quot; cgi program gets executed, the Xitami desired variables, etc. are recorded to a file on the Xitami Server. The files expected to be written by &quot;test&quot; are created with &quot;open append&quot;  and contain the information expected. 
+
+In this case, the &lt;iframe,,,&gt; creates the standard frame graphic to the Web Page Browser with the scroll up/down plus nothing is in the iframme.
+
+In the mean time we decided to use the &lt;iframme,,,&gt; to display relative information sent to stdout by the &quot;test&quot; cgi program with print(i.e.) &quot;Date and Time of visit&quot;. The print to stdout by &quot;test&quot; of this information is displayed in that iframme graphic at the Browser.
+Now, we did find the use of &lt;image,,,,&gt; will execute the &quot;test&quot; cgi but it displays an unwnated graphic at the Web Page Browser with nothing in that graphic. 
+
+It would be nice to get the &quot;test&quot; to execute and not use any HTML that creates a graphic (&lt;image&gt; or &lt;iframme&gt;)or requires a user to poke on something (&lt;a href&gt; or &lt;form field&gt;)etc. using some other HTML.
+
+I tried the  &lt;font,,,,,,src=&quot;cgi-=bin/test,,,&quot;,,,,&gt; but the &quot;test&quot; cgi does not execute,
+also SSI &lt;!--#exec,,,,--&gt;
+
+So, with the &lt;Iframme,,,,&gt; all is now working. Your comments make sense and these will help to continue trying other HTML to find a way. 
+
+
+THANKS for your comments, help, advise, and time!!!!!!!      :) :)
+
+Jerry
+
+
+
+-------------- Original message from &quot;rolinger&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;: -------------- 
+
+
+&gt;<i> I think I get what you are referring to. You are looking to automatically 
+</I>&gt;<i> have a link/script called from within an existing web page. The 'image' 
+</I>&gt;<i> rendering example you gave below would be one way to do it. The other way 
+</I>&gt;<i> is to use javascript to execute during on &quot;onLoad&quot; in the HEAD or in the 
+</I>&gt;<i> tag itself. Though the javascript method would most likely require 
+</I>&gt;<i> sending the cgi script to a target iFrame or something. I don't think there 
+</I>&gt;<i> is a way to get javascript to render external CGI within the same page 
+</I>&gt;<i> itself. 
+</I>&gt;<i> 
+</I>&gt;<i> However, if you are calling trying to call CGI within a static page, why not 
+</I>&gt;<i> just make the whole page dynamic, so that as the page itself is rendered and 
+</I>&gt;<i> calling the page counters at the same time. 
+</I>&gt;<i> 
+</I>&gt;<i> I use image src=/cgi-bin in two locations on my site, they use perls Imager 
+</I>&gt;<i> to create/edit/output images on the fly so they don't have to be stored on 
+</I>&gt;<i> the harddrive, but realize that if you are calling an image cgi script on 
+</I>&gt;<i> the fly that it is being called and rendered while the current page is also 
+</I>&gt;<i> still being loaded. But AFTER the page if fully loaded there will be no way 
+</I>&gt;<i> to automatically call CGI scripts (unless you did a Javascript delayed timer 
+</I>&gt;<i> type function). 
+</I>&gt;<i> 
+</I>&gt;<i> Links from GETs (href) or POSTs (forms) are called upon user interaction of 
+</I>&gt;<i> some sort. Image src=/cgi-bin/etc... might be the only way to do 
+</I>&gt;<i> this...also realize that SSI is executed, just like an image src=/cgi-bin, 
+</I>&gt;<i> as the page is rendering - an not after it is rendered. 
+</I>&gt;<i> 
+</I>&gt;<i> Even after your second explanation I am still not 100% clear on what it is 
+</I>&gt;<i> you want...but I hope the above helps. 
+</I>&gt;<i> 
+</I>&gt;<i> -R 
+</I>&gt;<i> 
+</I>&gt;<i> ========= 
+</I>&gt;<i> &quot;Socialism is the philosophy of failure, the creed of ignorance, 
+</I>&gt;<i> and the gospel of envy, its inherent virtue is the equal sharing of misery.&quot; 
+</I>&gt;<i> - Sir Winston Churchill - 
+</I>&gt;<i> ========= 
+</I>&gt;<i> ----- Original Message ----- 
+</I>&gt;<i> From: 
+</I>&gt;<i> To: &quot;Xitami Users General Discussion&quot; 
+</I>&gt;<i> Sent: Wednesday, February 11, 2009 10:37 AM 
+</I>&gt;<i> Subject: Re: [Xitami] Unconditional execution of a CGI in html. 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Hello rolinger and Hogan Courrier ,,,,,, :) :) 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; THANKS for the replies,,,,, :) :) 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Hogan,,,,,, :) :) 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I'll give that link a try ----THANKS....!!! :) :) &lt;:) 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; rolinger,,,,,, :) :) 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; For a Web Page that already exists and visited (displayed) by a Browser, 
+</I>&gt;<i> &gt; it is the HTML code in that Web Page that will force the execution of a 
+</I>&gt;<i> &gt; CGI without any user action that is required such as the HTML &quot;a href,,,,&quot; 
+</I>&gt;<i> &gt; or &quot;form field&quot;. Also, even having to use the HTML &quot;image,,,,,&quot; 
+</I>&gt;<i> &gt; (i.e.)(poking on a link, or entering data to a form field, or the action 
+</I>&gt;<i> &gt; of an HTML &quot;image,,,,,URL/cgi-bin/program?argument1+Argument2,,,,&quot;). 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; It is similar to the execution of a CGI counter. Most of these counters 
+</I>&gt;<i> &gt; that I have seen use the HTML &quot;&quot; 
+</I>&gt;<i> &gt; which creates a graphic file containing the counter value where a,b,c,d,,, 
+</I>&gt;<i> &gt; control the format of how the counter will display and then outputs that 
+</I>&gt;<i> &gt; graphic file to the Web Page at the Browser. 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; In this case it is a simple CGI that records Xitami variables, etc. at the 
+</I>&gt;<i> &gt; Xitami Server. And, the user of the Browser does not have to poke on any 
+</I>&gt;<i> &gt; item (link, etc.)in the display of the Web Page for that CGI to execute. 
+</I>&gt;<i> &gt; And, the HTML does not use any &quot;Image,,,,,&quot; to execute the CGI. 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; If you want I can send you an example of what has been tried. We even 
+</I>&gt;<i> &gt; tried to see if SSI would work in the HTML of that Web Page such as: 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Thanks for your time, help, and advice!!!! :) :) 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Jerry 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; -------------- Original message from &quot;rolinger&quot; 
+</I>&gt;<i> &gt; : -------------- 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;&gt; What do you mean 'unconditionally execute a cgi program without user 
+</I>&gt;<i> &gt;&gt; interaction' ??? 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; CGI execution can only happen if someone goes to a website or clicks a 
+</I>&gt;<i> &gt;&gt; link 
+</I>&gt;<i> &gt;&gt; within a website. I suppose you could make automated calls via javascript 
+</I>&gt;<i> &gt;&gt; with onMouseOver, or onMouseOut (or even a few other ones). However, all 
+</I>&gt;<i> &gt;&gt; those techniques still require a user visiting the webpage just to 
+</I>&gt;<i> &gt;&gt; initialize those actions. 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; Please rephrase, clearly, what is you are looking to do. 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; ========= 
+</I>&gt;<i> &gt;&gt; &quot;Socialism is the philosophy of failure, the creed of ignorance, 
+</I>&gt;<i> &gt;&gt; and the gospel of envy, its inherent virtue is the equal sharing of 
+</I>&gt;<i> &gt;&gt; misery.&quot; 
+</I>&gt;<i> &gt;&gt; - Sir Winston Churchill - 
+</I>&gt;<i> &gt;&gt; ========= 
+</I>&gt;<i> &gt;&gt; ----- Original Message ----- 
+</I>&gt;<i> &gt;&gt; From: 
+</I>&gt;<i> &gt;&gt; To: 
+</I>&gt;<i> &gt;&gt; Sent: Tuesday, February 10, 2009 2:21 PM 
+</I>&gt;<i> &gt;&gt; Subject: [Xitami] Unconditional execution of a CGI in html. 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Hello,,,,, :) :) 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; I tried to find a search method to look in the Xitami Archives for the 
+</I>&gt;<i> &gt;&gt; &gt; situation described below with no luck. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; As a newbie using Xitami and Web Pages I have some experience but not a 
+</I>&gt;<i> &gt;&gt; &gt; lot of day-to-day activity working with Xitami and/or HTML to find a 
+</I>&gt;<i> &gt;&gt; &gt; solution for the following. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; I was looking for the method in HTML to unconditionally execute a cgi 
+</I>&gt;<i> &gt;&gt; &gt; program 
+</I>&gt;<i> &gt;&gt; &gt; in html without user action (i.e.) using an &quot;image&quot;, &quot;a href&quot;, &quot;form 
+</I>&gt;<i> &gt;&gt; &gt; field&quot;, etc. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; The intent is to record Xitami variables, etc. to a file on the server 
+</I>&gt;<i> &gt;&gt; &gt; when the page is accessed plus in some cases output text to the Browser 
+</I>&gt;<i> &gt;&gt; &gt; window that has accessed that Web Page . 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Several methods were found on a google search showing SSI, etc.(#exec, 
+</I>&gt;<i> &gt;&gt; &gt; etc.) and none seem to work. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; The cgi program can be executed with the entry to the Browser address 
+</I>&gt;<i> &gt;&gt; &gt; window of: 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; <A HREF="http://IP_of_Xitami/cgi-bin/TEST_CGI_PROGRAM?Argument1+Argument2,,,,,,,">http://IP_of_Xitami/cgi-bin/TEST_CGI_PROGRAM?Argument1+Argument2,,,,,,,</A> 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; And, the cgi programm runs as expected with the arguments found and 
+</I>&gt;<i> &gt;&gt; &gt; recorded as well as a display of text to the Browser window where the 
+</I>&gt;<i> &gt;&gt; &gt; above http:// is entered. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; The ADMIN of Xitami was used to review the settings for that WEB Page 
+</I>&gt;<i> &gt;&gt; &gt; CGI 
+</I>&gt;<i> &gt;&gt; &gt; and 
+</I>&gt;<i> &gt;&gt; &gt; these seem to be set to cause this to happen for that WEB Page. But, I 
+</I>&gt;<i> &gt;&gt; &gt; am 
+</I>&gt;<i> &gt;&gt; &gt; not 
+</I>&gt;<i> &gt;&gt; &gt; sure if a settings is required and has been overlooked and needs to be 
+</I>&gt;<i> &gt;&gt; &gt; set 
+</I>&gt;<i> &gt;&gt; &gt; to 
+</I>&gt;<i> &gt;&gt; &gt; cause this to happen. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Or, the HTML code to cause this to happen has not been used properly in 
+</I>&gt;<i> &gt;&gt; &gt; the HTML 
+</I>&gt;<i> &gt;&gt; &gt; code of that WEB Page. 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; THANKS for your time, help, and advice!!!! :) :) 
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Jerry 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; -- 
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support 
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support 
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007999.html">[Xitami] Unconditional execution of a CGI in html.
+</A></li>
+	<LI>Next message: <A HREF="008001.html">[Xitami] Unconditional execution of a CGI in html.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8000">[ date ]</a>
+              <a href="thread.html#8000">[ thread ]</a>
+              <a href="subject.html#8000">[ subject ]</a>
+              <a href="author.html#8000">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

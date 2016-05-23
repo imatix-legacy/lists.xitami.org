@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] content/type headers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="006663.html">
+   <LINK REL="Next"  HREF="006665.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] content/type headers
+   </H1>
+    <B>iNANÇ
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] content/type headers">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 16 Apr 2005 19:27:07 +0300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006663.html">[Xitami] content/type headers
+</A></li>
+        <LI> Next message: <A HREF="006665.html">[Xitami] content/type headers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6664">[ date ]</a>
+              <a href="thread.html#6664">[ thread ]</a>
+              <a href="subject.html#6664">[ subject ]</a>
+              <a href="author.html#6664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>------=_Part_3227_3927830.1113668827501
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Hello Russel,
+
+It was a great tip, how can I find more tips such as this. Thanks.
+
+Inanc
+
+On 4/16/05, R O &lt;<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>&gt; wrote:
+&gt;<i>=20
+</I>&gt;<i>=20
+</I>&gt;<i> That would make sense. 1500 would be the max size packet anyone would wan=
+</I>t
+&gt;<i> to create. Most router circuits are set to 1545 MTU (max transmission
+</I>&gt;<i> unit). Anything larger than that requires the router to split the packet
+</I>&gt;<i> giving the first 1500 to FRAME 1 and giving the reamainder to a new FRAME=
+</I>.
+&gt;<i> That new packet though can't be used by any other data. so if your server
+</I>&gt;<i> packets are 1700, the first 1500 bytes goes to the first frame, then 200
+</I>&gt;<i> bytes goes to the second frame, but the second frame is then filled up=20
+</I>&gt;<i> with
+</I>&gt;<i> 1300 bytes of nothing simply to fill the frame - it has to happen this wa=
+</I>y
+&gt;<i> because a FRAME can only carry on TCP header. Larger packets causes the
+</I>&gt;<i> router to take a heavier processing load and slightly greater bandwidth
+</I>&gt;<i> load.
+</I>&gt;<i>=20
+</I>&gt;<i> Apply that logic to smaller server packets, say 850bytes per packet. Then
+</I>&gt;<i> every frame for that TCP transmission will be 850bits of data and 600 bit=
+</I>s
+&gt;<i> of nothing. This causes the router to waste nearly 45% of its bandwidth
+</I>&gt;<i> (for that particular tcp session). If your packets match the MTU of the
+</I>&gt;<i> router then no framing is wasted, the router doesn't have to parse packet=
+</I>s
+&gt;<i> which decreases processing/reassembly time, and excess frames do not have=
+</I>=20
+&gt;<i> to
+</I>&gt;<i> be sent.
+</I>&gt;<i>=20
+</I>&gt;<i> Russel P. Olinger
+</I>&gt;<i> (310) 466-3399
+</I>&gt;<i> <A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+</I>&gt;<i>=20
+</I>&gt;<i> &gt;From: Marc Doigny &lt;<A HREF="mailto:marc@verfaillie.com">marc@verfaillie.com</A>&gt;
+</I>&gt;<i> &gt;Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;Subject: Re: [Xitami] content/type headers
+</I>&gt;<i> &gt;Date: Fri, 15 Apr 2005 18:27:59 +0200
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;At 16:46 15/04/05, you wrote:
+</I>&gt;<i> &gt;&gt;Hello Marc,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;very handy to control ones own server and to be able to check the serve=
+</I>r
+&gt;<i> &gt;&gt;software of a
+</I>&gt;<i> &gt;&gt;site without the need of using Netcraft. What is the reason for the=20
+</I>&gt;<i> limit
+</I>&gt;<i> &gt;&gt;of bytes ?
+</I>&gt;<i> &gt;&gt;Otherwise one would be able to check how the full page will look like (
+</I>&gt;<i> &gt;&gt;development).
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;Is there the possibilty to share this ? If so, what would be needed ?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;Johannes
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I created the application just to check if my home server was responding=
+</I>=20
+&gt;<i> to
+</I>&gt;<i> &gt;internet requests, where it doesn't matter that 1500 bytes or more are
+</I>&gt;<i> &gt;displayed.
+</I>&gt;<i> &gt;1500 bytes seemed a good compromis between speed and size; the data must=
+</I>=20
+&gt;<i> be
+</I>&gt;<i> &gt;downloaded before it can be send to the client. Xitami is set to kill
+</I>&gt;<i> &gt;applications running more than 10 seconds, and in some cases connecting=
+</I>=20
+&gt;<i> and
+</I>&gt;<i> &gt;downloading large files could not be done in 10 seconds.
+</I>&gt;<i> &gt;Two connections are open during the whole transaction.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;There are two versions available:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;<A HREF="http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com">http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com</A> (displaying the
+</I>&gt;<i> &gt;content as text)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;<A HREF="http://afr_upd.verfaillie.be:20800/cgi-bin/gap?www.verfaillie.com">http://afr_upd.verfaillie.be:20800/cgi-bin/gap?www.verfaillie.com</A> (tryin=
+</I>g
+&gt;<i> &gt;to display the content as html)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;The source and executable are disponible at
+</I>&gt;<i> &gt;<A HREF="http://web.verfaillie.com/cgi/gap.bas">http://web.verfaillie.com/cgi/gap.bas</A>
+</I>&gt;<i> &gt;<A HREF="http://web.verfaillie.com/cgi/gap.exe">http://web.verfaillie.com/cgi/gap.exe</A>
+</I>&gt;<i> &gt;It just runs as a cgi-bin executable.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;------------------------------------------------------------------------=
+</I>-
+&gt;<i> &gt;--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.co">postmaster@verfaillie.co</A>=
+</I>m
+&gt;<i> &gt;Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepas=
+</I>t
+&gt;<i> &gt;----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------=
+</I>-
+&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;--
+</I>&gt;<i> &gt;Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt;To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>=20
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>=20
+</I>
+
+
+--=20
+---
+life is nearly what you believe
+
+------=_Part_3227_3927830.1113668827501
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+Hello Russel,&lt;br&gt;
+&lt;br&gt;
+It was a great tip, how can I find more tips such as this. Thanks.&lt;br&gt;
+&lt;br&gt;
+Inanc&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;span class=3D&quot;gmail_quote&quot;&gt;On 4/16/05, &lt;b class=3D&quot;gmail=
+_sendername&quot;&gt;R O&lt;/b&gt; &amp;lt;&lt;a href=3D&quot;mailto:<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>&quot;&gt;rolinger1=
+@hotmail.com&lt;/a&gt;&amp;gt; wrote:&lt;/span&gt;&lt;blockquote class=3D&quot;gmail_quote&quot; style=
+=3D&quot;border-left: 1px solid rgb(204, 204, 204); margin: 0pt 0pt 0pt 0.8ex; p=
+adding-left: 1ex;&quot;&gt;
+&lt;br&gt;That would make sense.&amp;nbsp;&amp;nbsp;1500 would be the max size packet any=
+one would want&lt;br&gt;to create.&amp;nbsp;&amp;nbsp;Most router circuits are set to 154=
+5 MTU (max transmission&lt;br&gt;unit).&amp;nbsp;&amp;nbsp;Anything larger than that requ=
+ires the router to split the packet
+&lt;br&gt;giving the first 1500 to FRAME 1 and giving the reamainder to a new FRA=
+ME.&lt;br&gt;That new packet though can't be used by any other data.&amp;nbsp;&amp;nbsp;s=
+o if your server&lt;br&gt;packets are 1700, the first 1500 bytes goes to the firs=
+t frame, then 200
+&lt;br&gt;bytes goes to the second frame, but the second frame is then filled up =
+with&lt;br&gt;1300 bytes of nothing simply to fill the frame - it has to happen t=
+his way&lt;br&gt;because a FRAME can only carry on TCP header.&amp;nbsp;&amp;nbsp;Larger =
+packets causes the
+&lt;br&gt;router to take a heavier processing load and slightly greater bandwidth=
+&lt;br&gt;load.&lt;br&gt;&lt;br&gt;Apply that logic to smaller server packets, say 850bytes p=
+er packet.&amp;nbsp;&amp;nbsp;Then&lt;br&gt;every frame for that TCP transmission will be=
+ 850bits of data and 600 bits
+&lt;br&gt;of nothing.&amp;nbsp;&amp;nbsp;This causes the router to waste nearly 45% of it=
+s bandwidth&lt;br&gt;(for that particular tcp session).&amp;nbsp;&amp;nbsp;If your packet=
+s match the MTU of the&lt;br&gt;router then no framing is wasted, the router does=
+n't have to parse packets
+&lt;br&gt;which decreases processing/reassembly time, and excess frames do not ha=
+ve to&lt;br&gt;be sent.&lt;br&gt;&lt;br&gt;Russel P. Olinger&lt;br&gt;(310) 466-3399&lt;br&gt;&lt;a href=3D&quot;=
+mailto:<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>&quot;&gt;<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>&lt;/a&gt;&lt;br&gt;&lt;br&gt;&amp;gt;From: Ma=
+rc Doigny &amp;lt;
+&lt;a href=3D&quot;mailto:<A HREF="mailto:marc@verfaillie.com">marc@verfaillie.com</A>&quot;&gt;<A HREF="mailto:marc@verfaillie.com">marc@verfaillie.com</A>&lt;/a&gt;&amp;gt;&lt;br&gt;&amp;gt;R=
+eply-To: &lt;a href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=
+&lt;/a&gt;&lt;br&gt;&amp;gt;To: &lt;a href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xit">xitami@lists.xit</A>=
+ami.org
+&lt;/a&gt;&lt;br&gt;&amp;gt;Subject: Re: [Xitami] content/type headers&lt;br&gt;&amp;gt;Date: Fri, 15=
+ Apr 2005 18:27:59 +0200&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;At 16:46 15/04/05, you wrote:&lt;br&gt;&amp;g=
+t;&amp;gt;Hello Marc,&lt;br&gt;&amp;gt;&amp;gt;&lt;br&gt;&amp;gt;&amp;gt;very handy to control ones own ser=
+ver and to be able to check the server
+&lt;br&gt;&amp;gt;&amp;gt;software of a&lt;br&gt;&amp;gt;&amp;gt;site without the need of using Netcraf=
+t. What is the reason for the limit&lt;br&gt;&amp;gt;&amp;gt;of bytes ?&lt;br&gt;&amp;gt;&amp;gt;Otherw=
+ise one would be able to check how the full page will look like (&lt;br&gt;&amp;gt;&amp;g=
+t;development).
+&lt;br&gt;&amp;gt;&amp;gt;&lt;br&gt;&amp;gt;&amp;gt;Is there the possibilty to share this ? If so, what=
+ would be needed ?&lt;br&gt;&amp;gt;&amp;gt;&lt;br&gt;&amp;gt;&amp;gt;Johannes&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;I created=
+ the application just to check if my home server was responding to&lt;br&gt;&amp;gt;i=
+nternet requests, where it doesn't matter that 1500 bytes or more are
+&lt;br&gt;&amp;gt;displayed.&lt;br&gt;&amp;gt;1500 bytes seemed a good compromis between speed =
+and size; the data must be&lt;br&gt;&amp;gt;downloaded before it can be send to the c=
+lient. Xitami is set to kill&lt;br&gt;&amp;gt;applications running more than 10 secon=
+ds, and in some cases connecting and
+&lt;br&gt;&amp;gt;downloading large files could not be done in 10 seconds.&lt;br&gt;&amp;gt;Two=
+ connections are open during the whole transaction.&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;=
+There are two versions available:&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;&lt;a href=3D&quot;<A HREF="http://web.verf=">http://web.verf=</A>
+aillie.com/cgi-bin/gap?www.verfaillie.com&quot;&gt;
+<A HREF="http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com</a">http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com&lt;/a</A>&gt; (displaying th=
+e&lt;br&gt;&amp;gt;content as text)&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;&lt;a href=3D&quot;<A HREF="http://afr_upd.verfaill=">http://afr_upd.verfaill=</A>
+ie.be:20800/cgi-bin/gap?www.verfaillie.com&quot;&gt;<A HREF="http://afr_upd.verfaillie.be:20=">http://afr_upd.verfaillie.be:20=</A>
+800/cgi-bin/gap?www.verfaillie.com
+&lt;/a&gt; (trying&lt;br&gt;&amp;gt;to display the content as html)&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;The sour=
+ce and executable are disponible at&lt;br&gt;&amp;gt;&lt;a href=3D&quot;<A HREF="http://web.verfaillie=">http://web.verfaillie=</A>
+.com/cgi/gap.bas&quot;&gt;<A HREF="http://web.verfaillie.com/cgi/gap.bas</a">http://web.verfaillie.com/cgi/gap.bas&lt;/a</A>&gt;&lt;br&gt;&amp;gt;&lt;a href=
+=3D&quot;<A HREF="http://web.verfaillie.com/cgi/gap.exe"">http://web.verfaillie.com/cgi/gap.exe&quot;</A>&gt;
+<A HREF="http://web.verfaillie.com/cgi/gap.exe</a">http://web.verfaillie.com/cgi/gap.exe&lt;/a</A>&gt;&lt;br&gt;&amp;gt;It just runs as a cgi-bin =
+executable.&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;------------------------------------------------=
+-------------------------&lt;br&gt;&amp;gt;--::Mailserver Verfaillie Bauwens::-- cont=
+act :=20
+&lt;a href=3D&quot;mailto:<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>&quot;&gt;<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>&lt;/a&gt;&lt;=
+br&gt;&amp;gt;Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aang=
+epast&lt;br&gt;&amp;gt;----------------------- &lt;a href=3D&quot;<A HREF="http://www.verfaillie.com"">http://www.verfaillie.com&quot;</A>&gt;
+<A HREF="http://www.verfaillie.com</a">http://www.verfaillie.com&lt;/a</A>&gt; -----------------------&lt;br&gt;&amp;gt;&lt;br&gt;&amp;gt;&lt;br&gt;&amp;g=
+t;--&lt;br&gt;&amp;gt;Xitami Users Mailing List -- For Xitami support&lt;br&gt;&amp;gt;To unsub=
+scribe: &lt;a href=3D&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;<A HREF="http://=">http://=</A>
+lists.xitami.org/mailman/listinfo/xitami
+&lt;/a&gt;&lt;br&gt;&lt;br&gt;--&lt;br&gt;Xitami Users Mailing List -- For Xitami support&lt;br&gt;To uns=
+ubscribe: &lt;a href=3D&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;http:=
+//lists.xitami.org/mailman/listinfo/xitami&lt;/a&gt;&lt;br&gt;&lt;/blockquote&gt;&lt;/div&gt;&lt;br&gt;
+&lt;br&gt;&lt;br&gt;-- &lt;br&gt;---&lt;br&gt;life is nearly what you believe
+
+------=_Part_3227_3927830.1113668827501--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006663.html">[Xitami] content/type headers
+</A></li>
+	<LI> Next message: <A HREF="006665.html">[Xitami] content/type headers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6664">[ date ]</a>
+              <a href="thread.html#6664">[ thread ]</a>
+              <a href="subject.html#6664">[ subject ]</a>
+              <a href="author.html#6664">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

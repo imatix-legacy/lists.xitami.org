@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ProtoNova v1.0 Released! (And a XiFusion note)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003749.html">
+   <LINK REL="Next"  HREF="003752.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ProtoNova v1.0 Released! (And a XiFusion note)
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ProtoNova v1.0 Released! (And a XiFusion note)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 31 Jul 2002 23:54:13 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003749.html">[Xitami] Admin question
+</A></li>
+        <LI> Next message: <A HREF="003752.html">[Xitami] ProtoNova v1.0 Released! (And a XiFusion note)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3750">[ date ]</a>
+              <a href="thread.html#3750">[ thread ]</a>
+              <a href="subject.html#3750">[ subject ]</a>
+              <a href="author.html#3750">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 07:33 PM 7/31/2002 +0200, Pieter Hintjens writeth:
+&gt;<i>&quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Due to the fact that many people here using the Xitami webserver are
+</I>&gt;&gt;<i> looking for alternatives to Xitami since it no longer is a supported
+</I>&gt;&gt;<i> web server (by the parent company iMatix), Shining Light Productions
+</I>&gt;&gt;<i> has written a brand new web server called ProtoNova...
+</I>&gt;<i>
+</I>&gt;<i>Thomas is most welcome to announce ProtoNova on this list, although 
+</I>&gt;<i>any extended discussion should probably move to a dedicated list. :)
+</I>
+There is a dedicated list for ProtoNova already set up.  Further discussion
+should probably move there, if for no other reason to allow the discussions
+to be archived in one location.
+
+&gt;<i>Personally I welcome this announcement.  It offers Xitami users a 
+</I>&gt;<i>choice, which is always good, and it offers Xitami some competition, 
+</I>&gt;<i>which is good in a world where most web servers are too large and too 
+</I>&gt;<i>complex for normal people.
+</I>
+Then there are those of us who are crazy and are like me and go and write a
+web server...  However, such people are few and far between and, besides,
+being &quot;normal&quot; is relative anyway.  :P
+
+&gt;<i>I'm curious as to whether Thomas used any Xitami code in the server, 
+</I>&gt;<i>or whether 'brand new' means written from scratch.  Thomas, you might 
+</I>
+Written from scratch.  For the record, I did not use any code from Xitami
+or look at it during development.  I did use the specification on LRWP
+found in Xitami to develop the LRWP remote module.  Since only the LRWP
+specification was used and no source code, there should be no legal issues
+(just in case iMatix was considering a lawsuit).  Currently only LRWP 1.0
+is supported (via the LRWP remote module), but as I told the Sokrates team,
+LRWP 2.0 support is only 5-10 additional lines of code and LRWP 2.0 should
+be fully functional by ProtoNova v1.1.
+
+&gt;<i>want to explain your decision to start something new rather than add 
+</I>&gt;<i>or improve the existing body of code.  Just for interest.  Also, is 
+</I>&gt;<i>your server open source, or closed?
+</I>
+ProtoNova is a closed source web server designed to accomplish several goals:
+
+1)  Demonstrate that the Unified RFC Protocol is a viable communication
+protocol to the IETF (Internet Engineering Task Force) and get it accepted
+for standards track development.  This indirectly dealt with the CGI DoS
+issue found in Xitami since CGIs are a side-effect of ProtoNova rather than
+a part of it.
+2)  Provide an alternative to Xitami users (as you already pointed out).
+3)  Solidify the LibLink code base (the core library operating behind the
+scenes...all application code is 100% portable once LibLink is ported to
+another platform - LibLink is currently weighing in around 31,000+ lines of
+very stable, modular C code).
+4)  Simplify the application code base.  ProtoNova is only about 5000 lines
+of C code in one easy to maintain file (each remote module is about 1000
+lines of code).
+5)  Create several new innovations such as database logs (instead of log
+files).
+6)  Simplify server configuration (uses a tree-style INI format).
+7)  Introduce HTTP/1.1 compliance that supports chunked transfer-encoding.
+8)  Provide basic clustering, load-balancing, and server farm support while
+maintaining simplicity.
+9)  Add SSL/TLS support.
+10)  Create symbolic links for a server running in the Windows environment.
+And many more...
+
+When comparing ProtoNova to Xitami, it should be compared with Xitami/Pro.
+Both have SSL/TLS support, a pricetag, and are closed source.  Xitami is
+different in that it has none of those three major things in common with
+ProtoNova or Xitami/Pro.
+
+Basically, I performed an analysis of Xitami and determined that it would
+be better to start from scratch than to modify the source due to the fact I
+had so many changes I wanted to make.  A _VERY_ detailed Microsoft Excel
+comparison chart of several different servers can be found in the ProtoNova
+web server 'httproot\docs' directory (I can make this available if enough
+people want to see it).
+
+&gt;<i>Then, what do you mean by 'a fraction of the price'?  Xitami/Pro is 
+</I>&gt;<i>not expensive at $99.  Far too cheap, really, since it does not even 
+</I>&gt;<i>start to pay its way.  What does ProtoNova cost?
+</I>
+$35 for Standard Edition.  $75 for Enterprise Edition.  $300 for Custom
+Edition.  All three editions are described in detail on the Shining Light
+Productions website.
+
+You have probably heard that &quot;a fast nickel is better than a slow
+dime&quot;...I'm hoping to make an ultra-fast penny.
+
+As to the issue of money, I really don't like to charge money for my
+products.  However, when a product takes a long time to develop, I need to
+get something back for it...*especially* if there is to be PFR support
+(Priority Feature Requests - 24-72 hour turnaround times/product
+releases/product updates - only Custom Edition users can issue PFRs) and FR
+support (Feature Requests - usually 3-4 weeks, but can vary - owners of any
+Edition can issue FRs).  Given that information, the product is practically
+free.
+
+Basically, as you can probably tell, the cost of the product is to just
+cover support for it.  The fact it is so cheap is because of the
+distribution system used (without the distribution system, it would be too
+costly for end users for Shining Light Productions to even consider
+developing it).  I'm not sure how iMatix distributes Xitami/Pro since I
+haven't purchased it, but I would be interested in knowing how your system
+works and I might be able to provide a few pointers to allow you to reduce
+the price (or at least make it more cost-effective).
+
+Personally, I think Xitami is still a very good web server and has
+excellent potential to become really good, but as you said, time is lacking
+to develop it and I also did not want to mess around with code that has
+been in existence since 1991(? - at least iMatix has been around that
+long).  I also needed to 
+
+Also, I want you to know that you may mention/point users to the CertGen
+Project for SSL certificate generation for Xitami/Pro.  I was probably not
+very clear in my original e-mail, but certificates generated by the CertGen
+Project will work with Xitami/Pro (<A HREF="https://www.2cah.com/">https://www.2cah.com/</A> verifies this fact
+- the public root certificate can be installed from
+<A HREF="http://www.shininglightpro.com/index.php?treeloc=11">http://www.shininglightpro.com/index.php?treeloc=11</A>), Apache (mod_ssl),
+and, of course, ProtoNova.  It is a free service that I am providing
+(except for Type 1 Authentication certificates) and simplifies the SSL
+certificate generation process to filling in a form with information,
+clicking 'submit', and downloading and extracting the generated certificate
+set.  Having Xitami/Pro users use the CertGen Project will simplify both
+your life and your users' lives.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003749.html">[Xitami] Admin question
+</A></li>
+	<LI> Next message: <A HREF="003752.html">[Xitami] ProtoNova v1.0 Released! (And a XiFusion note)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3750">[ date ]</a>
+              <a href="thread.html#3750">[ thread ]</a>
+              <a href="subject.html#3750">[ subject ]</a>
+              <a href="author.html#3750">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

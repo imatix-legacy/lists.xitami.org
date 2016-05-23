@@ -1,0 +1,3543 @@
+From xitami@lists.xitami.org  Wed Dec  1 07:30:06 2004
+From: xitami@lists.xitami.org (Schmitt Scheubel)
+Date: Wed,  1 Dec 2004 08:30:06 +0100 (CET)
+Subject: [Xitami] ip blocking
+Message-ID: <656651C61A38@jean.kgw.tu-berlin.de>
+
+Hi,
+can anyone tell me what i must do to block up ip-numbers.
+Reason
+last night a computer sends requests every seconds to my server over six
+hour , and I don't know what to do.
+
+greetings
+robert
+
+
+From xitami@lists.xitami.org  Wed Dec  1 09:13:36 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Wed, 01 Dec 2004 04:13:36 -0500
+Subject: [Xitami] ip blocking
+In-Reply-To: <656651C61A38@jean.kgw.tu-berlin.de>
+Message-ID: <3.0.6.32.20041201041336.009ee780@mail.shininglightpro.com>
+
+At 08:30 AM 12/1/2004 +0100, Schmitt Scheubel writeth:
+>Hi,
+>can anyone tell me what i must do to block up ip-numbers.
+>Reason
+>last night a computer sends requests every seconds to my server over six
+>hour , and I don't know what to do.
+>
+>greetings
+>robert
+
+Hello Robert,
+
+Welcome to the wonderful world of owning a webserver.  You want to look for
+the IP netmask option in the Xitami configuration and add the offending IP
+address to the list.  Restart Xitami and cross your fingers that the
+setting takes hold.  The DoS can still carry on for a few minutes but
+should subside as they realize nothing is happening.  You might also want
+to consider turning the bandwidth restrictions on.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Wed Dec  1 14:02:59 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Wed, 1 Dec 2004 09:02:59 -0500
+Subject: [Xitami] ip blocking
+In-Reply-To: <3.0.6.32.20041201041336.009ee780@mail.shininglightpro.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEMEHGEJAA.ron@miplanet.net>
+
+What is recommended for bandwidth restriction?
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Thomas J. Hruska
+Sent: Wednesday, December 01, 2004 4:14 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] ip blocking
+
+
+At 08:30 AM 12/1/2004 +0100, Schmitt Scheubel writeth:
+>Hi,
+>can anyone tell me what i must do to block up ip-numbers.
+>Reason
+>last night a computer sends requests every seconds to my server over six
+>hour , and I don't know what to do.
+>
+>greetings
+>robert
+
+Hello Robert,
+
+Welcome to the wonderful world of owning a webserver.  You want to look for
+the IP netmask option in the Xitami configuration and add the offending IP
+address to the list.  Restart Xitami and cross your fingers that the
+setting takes hold.  The DoS can still carry on for a few minutes but
+should subside as they realize nothing is happening.  You might also want
+to consider turning the bandwidth restrictions on.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+---
+Incoming mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.802 / Virus Database: 545 - Release Date: 11/26/2004
+
+---
+Outgoing mail is certified Virus Free.
+Checked by AVG anti-virus system (http://www.grisoft.com).
+Version: 6.0.802 / Virus Database: 545 - Release Date: 11/26/2004
+
+
+From xitami@lists.xitami.org  Wed Dec  1 16:43:34 2004
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Wed, 1 Dec 2004 08:43:34 -0800
+Subject: [Xitami] ip blocking
+References: <656651C61A38@jean.kgw.tu-berlin.de>
+Message-ID: <001901c4d7c4$e677f6c0$6501a80a@comcast.net>
+
+Robert,
+
+You've been found!  Usually doesn't take long.
+
+Another trick to defeat these things is change your working HTTP port from
+80 to something other.  Since doing this, I've gotten ZERO DoS scans.  The
+trick is to set up a CNAME for your domain and forward your web page to the
+new port via this "alias".
+
+Example:
+Say I want my HTTP port to set at 450.  This is done as an offset setting in
+defaults.cfg file.  Next, I set up CNAME with my DNS service (either at my
+domain registrar (e.g.NetSol) or a DNS service (e.g. ZoneEdit)).  Last, I
+forward
+          www.mydomain.com
+to
+        ww2.mydomain.com:450/index.html.
+
+and voila, no more DoS scanners.  I now only receive "legitimate" scans from
+robot hunters and search engines.  And these folk are generally identifiable
+in the logs.
+
+The standard "48 to 72 hour" propagation delay will apply the first time you
+do this due to the new "domain."  Forwarding changes are instantaneous.
+
+If you use Virtual Domains, you will need to add the new ww2.mydomain.com to
+your domain list.  Unless you want it to go someplace different, point it to
+the same configuration file as www.mydomain.com.
+
+Happy serving,
+Charles
+
+----- Original Message -----
+From: "Schmitt Scheubel" <rss@jean.kgw.tu-berlin.de>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, November 30, 2004 11:30 PM
+Subject: [Xitami] ip blocking
+
+
+> Hi,
+> can anyone tell me what i must do to block up ip-numbers.
+> Reason
+> last night a computer sends requests every seconds to my server over six
+> hour , and I don't know what to do.
+>
+> greetings
+> robert
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Wed Dec  1 07:53:17 2004
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Wed, 01 Dec 2004 08:53:17 +0100
+Subject: [Xitami] ip blocking
+In-Reply-To: <656651C61A38@jean.kgw.tu-berlin.de>
+Message-ID: <5.1.0.14.2.20041201085206.030d0e00@verfaillie4.verfaillie.local>
+
+At 08:30 1/12/04, you wrote:
+>Hi,
+>can anyone tell me what i must do to block up ip-numbers.
+>Reason
+>last night a computer sends requests every seconds to my server over six
+>hour , and I don't know what to do.
+
+
+You can't _BLOCK_ ip ranges, you can only _ALLOW_ ranges (default=* : all 
+allowed).
+
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+
+From xitami@lists.xitami.org  Fri Dec  3 21:24:17 2004
+From: xitami@lists.xitami.org (admin)
+Date: Fri, 03 Dec 2004 14:24:17 -0700
+Subject: [Xitami] ip blocking
+In-Reply-To: <001901c4d7c4$e677f6c0$6501a80a@comcast.net>
+References: <656651C61A38@jean.kgw.tu-berlin.de>
+Message-ID: <5.1.1.6.0.20041203141029.00b3e470@mail.mrjdesign.com>
+
+Isn't this done completely internally in Xitami when you change the 
+portbase simply?
+
+In other words, chaninging the port base would simply alter the port it 
+sends the queries to,
+but in the name servers you still only specify the IP number it should 
+respond to.
+
+This would have the same effect since the server would know to open 
+everything at a certain port but not display this, doesn't it?
+
+>Another trick to defeat these things is change your working HTTP port from
+>80 to something other.  Since doing this, I've gotten ZERO DoS scans.  The
+>trick is to set up a CNAME for your domain and forward your web page to the
+>new port via this "alias".
+>
+>Example:
+>Say I want my HTTP port to set at 450.  This is done as an offset setting in
+>defaults.cfg file.  Next, I set up CNAME with my DNS service (either at my
+>domain registrar (e.g.NetSol) or a DNS service (e.g. ZoneEdit)).  Last, I
+>forward
+>           www.mydomain.com
+>to
+>         ww2.mydomain.com:450/index.html.
+>
+>and voila, no more DoS scanners.  I now only receive "legitimate" scans from
+>robot hunters and search engines.  And these folk are generally identifiable
+>in the logs.
+>
+>The standard "48 to 72 hour" propagation delay will apply the first time you
+>do this due to the new "domain."  Forwarding changes are instantaneous.
+>
+>If you use Virtual Domains, you will need to add the new ww2.mydomain.com to
+>your domain list.  Unless you want it to go someplace different, point it to
+>the same configuration file as www.mydomain.com.
+>
+>Happy serving,
+>Charles
+
+
+
+From xitami@lists.xitami.org  Sat Dec  4 15:50:09 2004
+From: xitami@lists.xitami.org (Ricketts, Layne)
+Date: Sat, 4 Dec 2004 10:50:09 -0500
+Subject: [Xitami] Installing Xitami as a service
+Message-ID: <118E64323675BE408C22470D8013D06B050C1E9B@fangorn.cc.vt.edu>
+
+This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01C4DA18.EEC8F644
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+=20
+I have been running a small web site on Xitami for a few years, first
+the console version and now the GUI. I would like to run it as a service
+if possible, but I can't get it to go that way. The documentation hasn't
+helped much. Running xisrv32.exe does not seem to do anything. I have
+placed it and the Control Panel (xicpl32.cpl) in the Windows System32
+folder, but although I can see and open the Xitami Control Panel,
+nothing happens when I try to start it. The control panel shows its
+status as suspended. I can launch any of the standard executables
+(xitami.exe, xidos32.exe, and xigui32.exe) and the web server starts
+right up. If any one out there has managed to run Xitami as a Windows
+service, can you let me know what it is I need to do? I have not been
+able to get it to work with either Windows 2000 or Windows XP. Thanks.
+=20
+=20
+=20
+Layne Ricketts - Assistant Manager
+Outreach Technical Services
+Virginia Tech
+phone: 540-231-9483  fax: 540-231-8672
+=20
+=20
+
+------_=_NextPart_001_01C4DA18.EEC8F644
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Dus-ascii">
+<META content=3D"MSHTML 6.00.2900.2523" name=3DGENERATOR></HEAD>
+<BODY>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><SPAN class=3D671524816-03122004><FONT face=3DArial size=3D2>I have =
+been running=20
+a small web site on Xitami for a few years, first the console version =
+and now=20
+the GUI. I would like to run it as a service if possible, but I can't =
+get it to=20
+go that way. The documentation hasn't helped much. Running xisrv32.exe =
+does not=20
+seem to do anything. I have placed it and the Control Panel =
+(xicpl32.cpl) in the=20
+Windows System32 folder, but although I can see and open the Xitami =
+Control=20
+Panel, nothing happens when I try to start it. The control panel shows =
+its=20
+status as suspended. I can launch any of the standard executables =
+(xitami.exe,=20
+xidos32.exe, and xigui32.exe) and the web server starts right =
+up.&nbsp;If any=20
+one out there has managed to run Xitami as a Windows service, can you =
+let me=20
+know what it is I need to do? I have not been able to get it to work =
+with either=20
+Windows 2000 or Windows XP. Thanks.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D671524816-03122004><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D671524816-03122004><FONT face=3DArial=20
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV align=3Dleft><FONT face=3DArial size=3D2>Layne Ricketts - Assistant =
+
+Manager</FONT></DIV>
+<DIV align=3Dleft><FONT face=3DArial size=3D2>Outreach&nbsp;Technical=20
+Services</FONT></DIV>
+<DIV align=3Dleft><FONT face=3DArial size=3D2>Virginia Tech</FONT></DIV>
+<DIV align=3Dleft><FONT face=3DArial size=3D2>phone: 540-231-9483&nbsp; =
+fax:=20
+540-231-8672</FONT></DIV>
+<DIV align=3Dleft>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV></BODY></HTML>
+
+------_=_NextPart_001_01C4DA18.EEC8F644--
+
+
+From xitami@lists.xitami.org  Sat Dec  4 17:42:48 2004
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Sat, 4 Dec 2004 09:42:48 -0800
+Subject: [Xitami] ip blocking
+References: <656651C61A38@jean.kgw.tu-berlin.de> <5.1.1.6.0.20041203141029.00b3e470@mail.mrjdesign.com>
+Message-ID: <000901c4da28$abe6e780$6501a80a@comcast.net>
+
+Sort of.  Name servers don't allow you to change off of the standard port
+(80).  They just point a shotgun at the IP and expect it to deal with
+whatever comes its way.  Also, when you change an IP in a name server, it
+takes the 24-72 hour propagation time to be usable.  Forwarding is instant
+(nearly).
+
+I use this analogy to get a handle on all of this.
+
+Say, you have a private post office - your IP address.
+
+As with everyone else at their own post office, you accept mail at PO Box 80
+(standard HTTP port).  All your friends and friendly strangers write you
+there.  This is also your default published address to the world (DNS
+standard).  Occassionally (actually all the time) you open your mail box
+(query) and get and process everything in it.  This, unfortunately, includes
+the bulk mailers and scammers.
+
+So you're tired of all that bulk garbage.  For that matter, it fills your
+box so you can't get things you want.  So you tell your post master (Xitami)
+to "shift" your mail box by 370.  Xitami adds 80 (the original) to this and
+starts processing  mail for you at port 450 at the next work shift (reboot
+of Xitami).  So dutifully you now query for your mail at box 450.  Box 80 is
+physically still there but the clerk doesn't put anything in it, and mail
+falls to the floor and it gets cleaned up by the bit bot (night crew).
+
+The problem is that your friends still think your address is box 80.  That's
+what your DNS server is telling them anyway and unless they know that your
+address changed, their requests will end up on the floor, too.  This can be
+handled in two ways:
+
+    1.  Send your friends a change of address card.  "Hi.  I moved.  My old
+address of www.me.com:80 (the actual default query for www.me.com) has been
+changed to www.me.com:450 (or, heaven forbid 10.999.999.001:450).
+
+    2.  Create a Canonical domain (CNAME) name say ww2.stillme.com and the
+have your DNS service forward any web queries to www.me.com to
+ww2.stillme.com:450/default.htm.  Masking optional.
+
+The second method allows you to instantly change PO boxes on a whim,
+changing the forwarding, and no one is the wiser.  I've done both and the
+second is definitely preferred.  It is akin to setting up mail.me.com or
+ftp.me.com and processing the query by content.
+
+I'm actually starting to see more web sites doing this forward trick.
+Probably to diminish/eliminate the same things you want to
+diminish/eliminate.
+
+caveat:
+1. port shifting will also shift the FTP port.  I don't use Xitami's FTP so
+I don't care.
+2. When you "open" a page in IE (and others), they don't understand a query
+that has a port number added on.  They make you address with "HTTP://"
+
+Simple is good!  Hope this has been helpful, if not amusing.
+Charles
+
+
+----- Original Message -----
+From: "admin" <admin@mrjdesign.com>
+To: <xitami@lists.xitami.org>
+Sent: Friday, December 03, 2004 1:24 PM
+Subject: Re: [Xitami] ip blocking
+
+
+> Isn't this done completely internally in Xitami when you change the
+> portbase simply?
+>
+> In other words, chaninging the port base would simply alter the port it
+> sends the queries to,
+> but in the name servers you still only specify the IP number it should
+> respond to.
+>
+> This would have the same effect since the server would know to open
+> everything at a certain port but not display this, doesn't it?
+>
+> >Another trick to defeat these things is change your working HTTP port
+from
+> >80 to something other.  Since doing this, I've gotten ZERO DoS scans.
+The
+> >trick is to set up a CNAME for your domain and forward your web page to
+the
+> >new port via this "alias".
+> >
+> >Example:
+> >Say I want my HTTP port to set at 450.  This is done as an offset setting
+in
+> >defaults.cfg file.  Next, I set up CNAME with my DNS service (either at
+my
+> >domain registrar (e.g.NetSol) or a DNS service (e.g. ZoneEdit)).  Last, I
+> >forward
+> >           www.mydomain.com
+> >to
+> >         ww2.mydomain.com:450/index.html.
+> >
+> >and voila, no more DoS scanners.  I now only receive "legitimate" scans
+from
+> >robot hunters and search engines.  And these folk are generally
+identifiable
+> >in the logs.
+> >
+> >The standard "48 to 72 hour" propagation delay will apply the first time
+you
+> >do this due to the new "domain."  Forwarding changes are instantaneous.
+> >
+> >If you use Virtual Domains, you will need to add the new ww2.mydomain.com
+to
+> >your domain list.  Unless you want it to go someplace different, point it
+to
+> >the same configuration file as www.mydomain.com.
+> >
+> >Happy serving,
+> >Charles
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sat Dec  4 17:57:21 2004
+From: xitami@lists.xitami.org (Steve Winn)
+Date: Sat, 4 Dec 2004 11:57:21 -0600
+Subject: [Xitami] Installing Xitami as a service
+In-Reply-To: <118E64323675BE408C22470D8013D06B050C1E9B@fangorn.cc.vt.edu>
+Message-ID: <000401c4da2a$b45f69d0$1601a8c0@WXPLaptop2>
+
+The older version 2.4d9 that had the installer was a lot simpler to =
+figure
+out, but the newer open source versions are just as easy once you figure =
+out
+what to do (guess that's true with anything heh).
+
+1. Unzip the xitami archive to c:\xitami
+2. In the \xitami\win32 folder, copy the xicpl32.cpl to your
+\windows\system32 directory. Copy xisrv32.exe to the \xitami directory.
+3. Goto a command prompt, type "cd\xitami" to change to the xitami
+directory. Then type "xisrv32.exe -i" to install the service. The =
+service is
+now installed.
+
+To uninstall the service you can run "xisrv32.exe -u".
+
+The service will automatically start when you reboot, or go into =
+services
+and start it manually, or open the xitami control panel and start it =
+there.
+
+If you are going to be accessing folders or files over the network, you =
+may
+need to go into services and tell the xitami service to logon with an
+account that has access.
+
+Steve
+
+
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org=20
+> [mailto:xitami-admin@lists.xitami.org] On Behalf Of Ricketts, Layne
+> Sent: Saturday, December 04, 2004 9:50 AM
+> To: Xitami@lists.xitami.org
+> Subject: [Xitami] Installing Xitami as a service
+>=20
+>=20
+> =20
+> I have been running a small web site on Xitami for a few=20
+> years, first the console version and now the GUI. I would=20
+> like to run it as a service if possible, but I can't get it=20
+> to go that way. The documentation hasn't helped much. Running=20
+> xisrv32.exe does not seem to do anything. I have placed it=20
+> and the Control Panel (xicpl32.cpl) in the Windows System32=20
+> folder, but although I can see and open the Xitami Control=20
+> Panel, nothing happens when I try to start it. The control=20
+> panel shows its status as suspended. I can launch any of the=20
+> standard executables (xitami.exe, xidos32.exe, and=20
+> xigui32.exe) and the web server starts right up. If any one=20
+> out there has managed to run Xitami as a Windows service, can=20
+> you let me know what it is I need to do? I have not been able=20
+> to get it to work with either Windows 2000 or Windows XP. Thanks.
+> =20
+> =20
+> =20
+> Layne Ricketts - Assistant Manager
+> Outreach Technical Services
+> Virginia Tech
+> phone: 540-231-9483  fax: 540-231-8672
+> =20
+> =20
+>=20
+
+
+From xitami@lists.xitami.org  Sat Dec  4 18:42:41 2004
+From: xitami@lists.xitami.org (Schmitt Scheubel)
+Date: Sat,  4 Dec 2004 19:42:41 +0100 (CET)
+Subject: [Xitami] ip blocking
+Message-ID: <7615B185FCE@jean.kgw.tu-berlin.de>
+
+Thank to all for their answers
+The idiots were in another departement of "my" university (they want to
+kickout the site..)
+the "incrimineted" site was  the site behind the graphic "Jean Louis" at
+jean.kgw.tu-berlin.de
+And in my opinion this fact (to obstruct a satire) is in summa a good
+example to the free speech in german academic world today (texts in german).
+
+Greetings robert
+
+
+>Sort of.  Name servers don't allow you to change off of the standard port
+>(80).  They just point a shotgun at the IP and expect it to deal with
+>whatever comes its way.  Also, when you change an IP in a name server, it
+>takes the 24-72 hour propagation time to be usable.  Forwarding is instant
+>(nearly).
+>
+>I use this analogy to get a handle on all of this.
+>
+>Say, you have a private post office - your IP address.
+>
+>As with everyone else at their own post office, you accept mail at PO Box 80
+>(standard HTTP port).  All your friends and friendly strangers write you
+>there.  This is also your default published address to the world (DNS
+>standard).  Occassionally (actually all the time) you open your mail box
+>(query) and get and process everything in it.  This, unfortunately, includes
+>the bulk mailers and scammers.
+>
+>So you're tired of all that bulk garbage.  For that matter, it fills your
+>box so you can't get things you want.  So you tell your post master (Xitami)
+>to "shift" your mail box by 370.  Xitami adds 80 (the original) to this and
+>starts processing  mail for you at port 450 at the next work shift (reboot
+>of Xitami).  So dutifully you now query for your mail at box 450.  Box 80 is
+>physically still there but the clerk doesn't put anything in it, and mail
+>falls to the floor and it gets cleaned up by the bit bot (night crew).
+>
+>The problem is that your friends still think your address is box 80.  That's
+>what your DNS server is telling them anyway and unless they know that your
+>address changed, their requests will end up on the floor, too.  This can be
+>handled in two ways:
+>
+>    1.  Send your friends a change of address card.  "Hi.  I moved.  My old
+>address of www.me.com:80 (the actual default query for www.me.com) has been
+>changed to www.me.com:450 (or, heaven forbid 10.999.999.001:450).
+>
+>    2.  Create a Canonical domain (CNAME) name say ww2.stillme.com and the
+>have your DNS service forward any web queries to www.me.com to
+>ww2.stillme.com:450/default.htm.  Masking optional.
+>
+>The second method allows you to instantly change PO boxes on a whim,
+>changing the forwarding, and no one is the wiser.  I've done both and the
+>second is definitely preferred.  It is akin to setting up mail.me.com or
+>ftp.me.com and processing the query by content.
+>
+>I'm actually starting to see more web sites doing this forward trick.
+>Probably to diminish/eliminate the same things you want to
+>diminish/eliminate.
+>
+>caveat:
+>1. port shifting will also shift the FTP port.  I don't use Xitami's FTP so
+>I don't care.
+>2. When you "open" a page in IE (and others), they don't understand a query
+>that has a port number added on.  They make you address with "HTTP://"
+>
+>Simple is good!  Hope this has been helpful, if not amusing.
+>Charles
+>
+>
+>----- Original Message -----
+>From: "admin" <admin@mrjdesign.com>
+>To: <xitami@lists.xitami.org>
+>Sent: Friday, December 03, 2004 1:24 PM
+>Subject: Re: [Xitami] ip blocking
+>
+>
+>> Isn't this done completely internally in Xitami when you change the
+>> portbase simply?
+>>
+>> In other words, chaninging the port base would simply alter the port it
+>> sends the queries to,
+>> but in the name servers you still only specify the IP number it should
+>> respond to.
+>>
+>> This would have the same effect since the server would know to open
+>> everything at a certain port but not display this, doesn't it?
+>>
+>> >Another trick to defeat these things is change your working HTTP port
+>from
+>> >80 to something other.  Since doing this, I've gotten ZERO DoS scans.
+>The
+>> >trick is to set up a CNAME for your domain and forward your web page to
+>the
+>> >new port via this "alias".
+>> >
+>> >Example:
+>> >Say I want my HTTP port to set at 450.  This is done as an offset setting
+>in
+>> >defaults.cfg file.  Next, I set up CNAME with my DNS service (either at
+>my
+>> >domain registrar (e.g.NetSol) or a DNS service (e.g. ZoneEdit)).  Last, I
+>> >forward
+>> >           www.mydomain.com
+>> >to
+>> >         ww2.mydomain.com:450/index.html.
+>> >
+>> >and voila, no more DoS scanners.  I now only receive "legitimate" scans
+>from
+>> >robot hunters and search engines.  And these folk are generally
+>identifiable
+>> >in the logs.
+>> >
+>> >The standard "48 to 72 hour" propagation delay will apply the first time
+>you
+>> >do this due to the new "domain."  Forwarding changes are instantaneous.
+>> >
+>> >If you use Virtual Domains, you will need to add the new ww2.mydomain.com
+>to
+>> >your domain list.  Unless you want it to go someplace different, point it
+>to
+>> >the same configuration file as www.mydomain.com.
+>> >
+>> >Happy serving,
+>> >Charles
+>>
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+
+
+From xitami@lists.xitami.org  Sat Dec  4 21:26:26 2004
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Sat, 4 Dec 2004 13:26:26 -0800
+Subject: [Xitami] Installing Xitami as a service
+References: <000401c4da2a$b45f69d0$1601a8c0@WXPLaptop2>
+Message-ID: <000d01c4da47$e9c43660$6501a80a@comcast.net>
+
+Okay, looking for the LAST word.
+
+Windows 98SE and xisrv32.exe - can it be made to work?
+
+Thanks,
+Charles
+
+config:
+Xitami 2.5c2 (xidos32.exe called in STARTUP); Win98SE on P166 old timer with
+256MB.
+Other stuff: Fictional Daemon FTP, Mercury Mail, PHP, MySQL, ZoneAlarm, AVG.
+No partridges or pears.
+All seems to play well together and its been 55 days since last reboot.
+
+BTW: latest version of Xitami has defeated a wierd "smthttp: error on socket
+160" error I kept getting previously.  Yeah!  Don't know what it means.
+Glad it's gone.  error <=> bad!
+
+
+
+----- Original Message -----
+From: "Steve Winn" <steve@at2k.org>
+To: <xitami@lists.xitami.org>
+Sent: Saturday, December 04, 2004 9:57 AM
+Subject: RE: [Xitami] Installing Xitami as a service
+
+
+The older version 2.4d9 that had the installer was a lot simpler to figure
+out, but the newer open source versions are just as easy once you figure out
+what to do (guess that's true with anything heh).
+
+1. Unzip the xitami archive to c:\xitami
+2. In the \xitami\win32 folder, copy the xicpl32.cpl to your
+\windows\system32 directory. Copy xisrv32.exe to the \xitami directory.
+3. Goto a command prompt, type "cd\xitami" to change to the xitami
+directory. Then type "xisrv32.exe -i" to install the service. The service is
+now installed.
+
+To uninstall the service you can run "xisrv32.exe -u".
+
+The service will automatically start when you reboot, or go into services
+and start it manually, or open the xitami control panel and start it there.
+
+If you are going to be accessing folders or files over the network, you may
+need to go into services and tell the xitami service to logon with an
+account that has access.
+
+Steve
+
+
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org
+> [mailto:xitami-admin@lists.xitami.org] On Behalf Of Ricketts, Layne
+> Sent: Saturday, December 04, 2004 9:50 AM
+> To: Xitami@lists.xitami.org
+> Subject: [Xitami] Installing Xitami as a service
+>
+>
+>
+> I have been running a small web site on Xitami for a few
+> years, first the console version and now the GUI. I would
+> like to run it as a service if possible, but I can't get it
+> to go that way. The documentation hasn't helped much. Running
+> xisrv32.exe does not seem to do anything. I have placed it
+> and the Control Panel (xicpl32.cpl) in the Windows System32
+> folder, but although I can see and open the Xitami Control
+> Panel, nothing happens when I try to start it. The control
+> panel shows its status as suspended. I can launch any of the
+> standard executables (xitami.exe, xidos32.exe, and
+> xigui32.exe) and the web server starts right up. If any one
+> out there has managed to run Xitami as a Windows service, can
+> you let me know what it is I need to do? I have not been able
+> to get it to work with either Windows 2000 or Windows XP. Thanks.
+>
+>
+>
+> Layne Ricketts - Assistant Manager
+> Outreach Technical Services
+> Virginia Tech
+> phone: 540-231-9483  fax: 540-231-8672
+>
+>
+>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sat Dec  4 21:38:01 2004
+From: xitami@lists.xitami.org (Steve Winn)
+Date: Sat, 4 Dec 2004 15:38:01 -0600
+Subject: [Xitami] Installing Xitami as a service
+In-Reply-To: <000d01c4da47$e9c43660$6501a80a@comcast.net>
+Message-ID: <000001c4da49$87d186e0$1601a8c0@WXPLaptop2>
+
+Natively, no. There might be some third party software out there that =
+added
+services capability to Windows 9x. If so, I'm not aware of it and it
+probably isn't very stable or resource friendly. I think apache =
+experimented
+with making a 9x service but not sure how it turned out.
+
+Steve
+
+
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org=20
+> [mailto:xitami-admin@lists.xitami.org] On Behalf Of Charles Schmidling
+> Sent: Saturday, December 04, 2004 3:26 PM
+> To: xitami@lists.xitami.org
+> Subject: Re: [Xitami] Installing Xitami as a service
+>=20
+>=20
+> Okay, looking for the LAST word.
+>=20
+> Windows 98SE and xisrv32.exe - can it be made to work?
+>=20
+> Thanks,
+> Charles
+>=20
+> config:
+> Xitami 2.5c2 (xidos32.exe called in STARTUP); Win98SE on P166=20
+> old timer with
+> 256MB.
+> Other stuff: Fictional Daemon FTP, Mercury Mail, PHP, MySQL,=20
+> ZoneAlarm, AVG.
+> No partridges or pears.
+> All seems to play well together and its been 55 days since=20
+> last reboot.
+>=20
+> BTW: latest version of Xitami has defeated a wierd "smthttp:=20
+> error on socket
+> 160" error I kept getting previously.  Yeah!  Don't know what=20
+> it means.
+> Glad it's gone.  error <=3D> bad!
+
+
+From xitami@lists.xitami.org  Mon Dec  6 14:13:45 2004
+From: xitami@lists.xitami.org (Ricketts, Layne)
+Date: Mon, 6 Dec 2004 09:13:45 -0500
+Subject: [Xitami] Installing Xitami as a service
+Message-ID: <118E64323675BE408C22470D8013D06B050C200F@fangorn.cc.vt.edu>
+
+
+That was much too easy, I should have figured it out. But that did it,
+so thanks for pointing me in the right direction.=20
+
+
+Layne Ricketts
+
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org] On Behalf Of Steve Winn
+Sent: Saturday, December 04, 2004 12:57 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Installing Xitami as a service
+
+The older version 2.4d9 that had the installer was a lot simpler to
+figure out, but the newer open source versions are just as easy once you
+figure out what to do (guess that's true with anything heh).
+
+1. Unzip the xitami archive to c:\xitami 2. In the \xitami\win32 folder,
+copy the xicpl32.cpl to your
+\windows\system32 directory. Copy xisrv32.exe to the \xitami directory.
+3. Goto a command prompt, type "cd\xitami" to change to the xitami
+directory. Then type "xisrv32.exe -i" to install the service. The
+service is now installed.
+
+To uninstall the service you can run "xisrv32.exe -u".
+
+The service will automatically start when you reboot, or go into
+services and start it manually, or open the xitami control panel and
+start it there.
+
+If you are going to be accessing folders or files over the network, you
+may need to go into services and tell the xitami service to logon with
+an account that has access.
+
+Steve
+
+
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org
+> [mailto:xitami-admin@lists.xitami.org] On Behalf Of Ricketts, Layne
+> Sent: Saturday, December 04, 2004 9:50 AM
+> To: Xitami@lists.xitami.org
+> Subject: [Xitami] Installing Xitami as a service
+>=20
+>=20
+> =20
+> I have been running a small web site on Xitami for a few years, first=20
+> the console version and now the GUI. I would like to run it as a=20
+> service if possible, but I can't get it to go that way. The=20
+> documentation hasn't helped much. Running xisrv32.exe does not seem to
+
+> do anything. I have placed it and the Control Panel (xicpl32.cpl) in=20
+> the Windows System32 folder, but although I can see and open the=20
+> Xitami Control Panel, nothing happens when I try to start it. The=20
+> control panel shows its status as suspended. I can launch any of the=20
+> standard executables (xitami.exe, xidos32.exe, and
+> xigui32.exe) and the web server starts right up. If any one out there=20
+> has managed to run Xitami as a Windows service, can you let me know=20
+> what it is I need to do? I have not been able to get it to work with=20
+> either Windows 2000 or Windows XP. Thanks.
+> =20
+> =20
+> =20
+> Layne Ricketts - Assistant Manager
+> Outreach Technical Services
+> Virginia Tech
+> phone: 540-231-9483  fax: 540-231-8672
+> =20
+> =20
+>=20
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Dec 10 16:52:15 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 10 Dec 2004 17:52:15 +0100
+Subject: [Xitami] Xitami on XP SP2
+Message-ID: <4153621200121649@ims2a.cp.tin.it>
+
+I apologize for my previous too long e-mail.
+
+I ''ve installed Xitami 2.4d10 on my Windows XP SP1 PC. Until now everyth=
+ing
+works well.
+Having upgrade XP with SP2 now I've got Xitami service failed to start.
+Did anynone have any suggestion to solve this problem ?
+To help understading the problem I've attached some log and config files
+from my Xitami
+installation.
+
+Maurizio
+
+
+
+From xitami@lists.xitami.org  Fri Dec 10 17:54:34 2004
+From: xitami@lists.xitami.org (Craig Morrison)
+Date: Fri, 10 Dec 2004 12:54:34 -0500
+Subject: [Xitami] Xitami on XP SP2
+In-Reply-To: <4153621200121649@ims2a.cp.tin.it>
+References: <4153621200121649@ims2a.cp.tin.it>
+Message-ID: <41B9E2DA.5010800@2cah.com>
+
+mauriziotorti@virgilio.it wrote:
+> Having upgrade XP with SP2 now I've got Xitami service failed to start.
+
+This says it all, make sure the XP abomination of a firewall can or will 
+allow traffic.
+
+-- 
+Craig Morrison
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+http://www.mtsprofessional.com/
+   A Win32 email server that works for You.
+
+
+From xitami@lists.xitami.org  Fri Dec 10 18:07:25 2004
+From: xitami@lists.xitami.org (Gerald M. Jones)
+Date: Fri, 10 Dec 2004 10:07:25 -0800 (Pacific Standard Time)
+Subject: [Xitami] Xitami on XP SP2
+References: <41B9E2DA.5010800@2cah.com>
+Message-ID: <41B9E5DD.000001.04016@OFFICE>
+
+--------------Boundary-00=_DCQIQL80000000000000
+Content-Type: Multipart/Alternative;
+  boundary="------------Boundary-00=_DCQILVC0000000000000"
+
+
+--------------Boundary-00=_DCQILVC0000000000000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+My suggestion is to remove XP SP2.  It is for idiots that can't protect
+themselves. Microsoft is just dummying down their product so that compute=
+r
+illiterate users won't be hurt by all of the hackers.  In doing so they a=
+re
+closing up a lot of non Microsoft holes.  Dump it [XP SP2].=0D
+=0D
+Gerald =0D
+ =0D
+-------Original Message-------=0D
+ =0D
+From: xitami@lists.xitami.org=0D
+Date: 12/10/04 09:55:10=0D
+To: xitami@lists.xitami.org=0D
+Subject: Re: [Xitami] Xitami on XP SP2=0D
+ =0D
+mauriziotorti@virgilio.it wrote:=0D
+> Having upgrade XP with SP2 now I've got Xitami service failed to start.=
+=0D
+ =0D
+This says it all, make sure the XP abomination of a firewall can or will=0D
+allow traffic.=0D
+ =0D
+--=0D
+Craig Morrison=0D
+=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D=
+-=3D-=3D-=3D=0D
+http://www.mtsprofessional.com/=0D
+   A Win32 email server that works for You.=0D
+ =0D
+ =0D
+--=0D
+Xitami Users Mailing List -- For Xitami support=0D
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--------------Boundary-00=_DCQILVC0000000000000
+Content-Type: Text/HTML;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; charset=3Diso-8859-=
+1">
+<META content=3D"IncrediMail 1.0" name=3DGENERATOR></HEAD>
+<BODY style=3D"BACKGROUND-POSITION: left 0px; FONT-SIZE: 12pt; MARGIN: 0p=
+x 10px 10px; COLOR: #00005b; BACKGROUND-REPEAT: repeat; FONT-FAMILY: Aria=
+l" text=3D#00005b bgColor=3D#eff3f7 background=3Dcid:03C3DBCB-A0F7-48E0-9=
+135-8404779386DE scroll=3Dyes SIGCOLOR=3D"0" ORGYPOS=3D"0">
+<TABLE id=3DINCREDIMAINTABLE cellSpacing=3D0 cellPadding=3D2 width=3D"100=
+%" border=3D0>
+<TBODY>
+<TR>
+<TD id=3DINCREDITEXTREGION style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 0px=
+; FONT-SIZE: 12pt; PADDING-BOTTOM: 0px; CURSOR: auto; PADDING-TOP: 0px" v=
+Align=3Dtop width=3D"100%">
+<DIV><STRONG>My suggestion is to remove XP SP2.&nbsp; It is for idiots th=
+at can't protect themselves. Microsoft is just&nbsp;dummying down their p=
+roduct so that computer illiterate users won't be hurt by all of the hack=
+ers.&nbsp; In doing so they are closing up a lot of non&nbsp;Microsoft ho=
+les.&nbsp; Dump it [XP&nbsp;SP2].</STRONG></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><STRONG>Gerald</STRONG>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV id=3DIncrediOriginalMessage><I>-------Original Message-------</I></D=
+IV>
+<DIV>&nbsp;</DIV>
+<DIV id=3Dreceivestrings>
+<DIV dir=3Dltr style=3D"FONT-SIZE: 11pt" <i><B>From:</B></I> <A href=3D"m=
+ailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A></DIV>
+<DIV dir=3Dltr style=3D"FONT-SIZE: 11pt" <i><B>Date:</B></I> 12/10/04 09:=
+55:10</DIV>
+<DIV dir=3Dltr style=3D"FONT-SIZE: 11pt" <i><B>To:</B></I> <A href=3D"mai=
+lto:xitami@lists.xitami.org">xitami@lists.xitami.org</A></DIV>
+<DIV dir=3Dltr style=3D"FONT-SIZE: 11pt" <i><B>Subject:</B></I> Re: [Xita=
+mi] Xitami on XP SP2</DIV></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><A href=3D"mailto:mauriziotorti@virgilio.it">mauriziotorti@virgilio.=
+it</A> wrote:</DIV>
+<DIV>&gt; Having upgrade XP with SP2 now I've got Xitami service failed t=
+o start.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>This says it all, make sure the XP abomination of a firewall can or =
+will</DIV>
+<DIV>allow traffic.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>--</DIV>
+<DIV>Craig Morrison</DIV>
+<DIV>=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
+=3D-=3D-=3D-=3D-=3D</DIV>
+<DIV><A href=3D"http://www.mtsprofessional.com/">http://www.mtsprofession=
+al.com/</A></DIV>
+<DIV>&nbsp;&nbsp; A Win32 email server that works for You.</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>&nbsp;</DIV>
+<DIV>--</DIV>
+<DIV>Xitami Users Mailing List -- For Xitami support</DIV>
+<DIV>To unsubscribe: <A href=3D"http://lists.xitami.org/mailman/listinfo/=
+xitami">http://lists.xitami.org/mailman/listinfo/xitami</A></DIV></TD></T=
+R>
+<TR>
+<TD id=3DINCREDIFOOTER width=3D"100%">
+<TABLE cellSpacing=3D0 cellPadding=3D0 width=3D"100%">
+<TBODY>
+<TR>
+<TD width=3D"100%"></TD>
+<TD id=3DINCREDISOUND vAlign=3Dbottom align=3Dmiddle></TD>
+<TD id=3DINCREDIANIM vAlign=3Dbottom align=3Dmiddle></TD></TR></TBODY></T=
+ABLE></TD></TR></TBODY></TABLE><SPAN id=3DIncrediStamp><SPAN dir=3Dltr><A=
+ href=3D"http://www.incredimail.com/index.asp?id=3D54475"><IMG alt=3D"Add=
+ FUN to your email - CLICK HERE!" hspace=3D0 src=3D"http://www2.incredima=
+il.com/contents/stamps/imstp_emo_en.gif" align=3Dbaseline border=3D0></A>=
+</SPAN></SPAN></BODY></HTML>
+--------------Boundary-00=_DCQILVC0000000000000--
+
+--------------Boundary-00=_DCQIQL80000000000000
+Content-Type: Image/jpeg;
+  name="BackGrnd.jpg"
+Content-ID: <03C3DBCB-A0F7-48E0-9135-8404779386DE>
+Content-Transfer-Encoding: base64
+
+/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAHgAA/+4AIUFkb2JlAGTAAAAAAQMA
+EAMCAwYAAAHbAAAC1gAABZX/2wCEABALCwsMCxAMDBAXDw0PFxsUEBAUGx8XFxcXFx8eFxoaGhoX
+Hh4jJSclIx4vLzMzLy9AQEBAQEBAQEBAQEBAQEABEQ8PERMRFRISFRQRFBEUGhQWFhQaJhoaHBoa
+JjAjHh4eHiMwKy4nJycuKzU1MDA1NUBAP0BAQEBAQEBAQEBAQP/CABEIAGUAcwMBIgACEQEDEQH/
+xACAAAEBAQEAAAAAAAAAAAAAAAAAAQIGAQEBAAAAAAAAAAAAAAAAAAAAARABAAICAwEAAgMAAAAA
+AAAAAQARIQIxQRIiQDIQMFARAAICAgIBBAIDAQEAAAAAAAERACExQVFhcYGRobECEsHhMtHxEgEA
+AAAAAAAAAAAAAAAAAABQ/9oADAMBAAIRAxEAAADtRZYE1ASghQFgUZoCkKSwLmhcllAEqkSkqFAl
+hUomoAS3IoJqFlDNpFEAQFE1AIVYAWIVKAJRNZpYCwVmmshKACA0CBAUCBYGwf/aAAgBAgABBQD8
+B/yP/9oACAEDAAEFAPz6/or8H//aAAgBAQABBQC2+ZeHjbD+saX6hwXeDW1Rg4xLLTa+m7ZiIEsI
+1MTiHP1dYpvFADiFM1/X6nq9byuwdPPz5oFofWlEMQ9ULKrWq2ppG9Y2J6INQma9lVTRdlUKgHzX
+XSEECw1SYu5WsGoJPkisZYpx31GvXZQ/JM3VwShzVTsp1EZbBI8LcaUSih86+s2Zl4Wp6+lAZnVs
+Dkjdku5m+lJTdXDG2SHM9M2wKX1YxsaZTTwmoVrYnqsMrM652yjs01K0mtbGAz6Y5dpfqNz06qpq
+5QNjiIjiZtbhtceNuf0jyeqGgu6rXMvI4omPWbPMYzEfMI+axHnFvOP4/9oACAECAgY/AGP/2gAI
+AQMCBj8AY//aAAgBAQEGPwB72Yucb1BfIhFEaeZ+xRXFQELN+HEUQdjU0Xn4g9gRCQcpw1yajGYs
+P/kFvUzvjUBWrIMFHI2OJQNEAjiEEFdTmfG/MTHq5RFOnpTV3kzCBx7x4YOD1AV5uYJvnqMA0hep
+jfwpYCwC4Bx3q55zeZRBCw9TkoIuHw78RdczSNH2mgqcLpRC+RASAkA3B13mcYd5mR84c/yOx4lW
+tRAZ6mGDhiP9WgXVyhWA+xDgMOWGMsTg/wBTz8SjjXrP8hHIlX1MZ6mDzgc/cIV/iyN1GBR0MQMK
+jnEzvvMz8mUkErKlfqU63iV+IKNH7mNZBLFQEpEDeDOV32IVn8WR4caoywqI2p695mbZzNUQIcKf
+k0bo+0NpCqn7CiQiNGXkdQen1DpjGeZ7WNw3pK+I93maCPc16+Zkf6XxMCsFwAkaiIB57vc/IAhZ
+/HqZBBbB0ZokAEOGxsYqBgPp8agQBu4VSMJdqx6SwDsGBrTmAR93uZGX6KePowEADAIjoX8gw459
+CICaW/MLGvodQfkDW71zBxRHtB3j3jC4PMIYoAgKNfPMCQNN7jCzvlzXPopzhQvNZY3CRya9ZrEF
+fRE0iCB5mscZuVYfKmAi94uE3Q8qfytQ7xD0svmFcmaxNPI8iMjh3pmF2HbzqeUi+YkiD/MrOl5L
+mbwPuWVfmXpv3hDH8qAjPpiZHXkRnSd6ZhB53mejzKV6US0K9TCCLyCeIhtETX5MsHBGJkD/ANiF
+kMCE2qGoCdZ8Q8AMGpYFqEhdhRIYH3CF3d1M/Mexma+4CwdQ2Ddcx0exAlmj04QUQd8QWLB/iB5G
+xmEg5TENVZqPYzFV8eHAy9T/AEc8a4n3Ov6g/VwvE6lpQ4VNysXzhS8esOO8w/rlF/rypjV3B5H1
+Knr8T//Z
+
+--------------Boundary-00=_DCQIQL80000000000000--
+
+
+From xitami@lists.xitami.org  Fri Dec 10 18:11:22 2004
+From: xitami@lists.xitami.org (Bennett, Craig)
+Date: Fri, 10 Dec 2004 12:11:22 -0600
+Subject: [Xitami] Xitami on XP SP2
+Message-ID: <132ABE62AF6A9045BCD3DF25BF82083EF3C919@MHMAIL03.hydro.mb.ca>
+
+> My suggestion is to remove XP SP2. =20
+> It is for idiots that can't protect themselves.=20
+
+ While I would agree that SP2 does introduce a lot of fixes so that
+people will be safe from themselves, I would not recommend dumping it.
+In addition to the point and drool enhancements, there are a lot of
+security fixes included.  If you are gonna use XP, you need to make sure
+your security patches are up to date.  Much better to either turn off
+what you don't need (does not take that long) or make sure you apply all
+the individual patches that apply.
+
+
+From xitami@lists.xitami.org  Fri Dec 10 18:13:44 2004
+From: xitami@lists.xitami.org (Peter)
+Date: Fri, 10 Dec 2004 11:13:44 -0700
+Subject: [Xitami] Xitami on XP SP2
+In-Reply-To: <FFDCB43FD58C7141BCADD4669282520F2C3B0B@gia_file_srv.GIA>
+Message-ID: <FFDCB43FD58C7141BCADD4669282520F17FBB3@gia_file_srv.GIA>
+
+Windows XP SP2 enables by default Microsoft's feeble attempt at a
+firewall.  Have you turned off Windows built in  firewall for your LAN
+connection to which Xitami is attached?
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org] On Behalf Of
+mauriziotorti@virgilio.it
+Sent: Friday, December 10, 2004 9:52 AM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Xitami on XP SP2
+
+
+I apologize for my previous too long e-mail.
+
+I ''ve installed Xitami 2.4d10 on my Windows XP SP1 PC. Until now
+everything works well. Having upgrade XP with SP2 now I've got Xitami
+service failed to start. Did anynone have any suggestion to solve this
+problem ? To help understading the problem I've attached some log and
+config files from my Xitami installation.
+
+Maurizio
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Fri Dec 10 18:41:06 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 10 Dec 2004 19:41:06 +0100
+Subject: [Xitami] Xitami on XP SP2
+In-Reply-To: <FFDCB43FD58C7141BCADD4669282520F17FBB3@gia_file_srv.GIA>
+Message-ID: <4153621200121D5A@ims2a.cp.tin.it>
+
+I have just tried to disable MS Internet firewall not only on the network=
+
+connection on
+with Xitami  is binded but for all the network and xitami does'nt work an=
+yway.
+I hope to properly have made all the needed operation for disabling the
+firewall and then 
+did you know if exist any xitami patches for bypassing this problem ?
+
+Thanks
+
+>-- Messaggio originale --
+>From: "Peter" <peterdn@telusplanet.net>
+>To: <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] Xitami on XP SP2
+>Reply-To: xitami@lists.xitami.org
+>Date: Fri, 10 Dec 2004 11:13:44 -0700
+>
+>
+>Windows XP SP2 enables by default Microsoft's feeble attempt at a
+>firewall.  Have you turned off Windows built in  firewall for your LAN
+>connection to which Xitami is attached?
+>
+>-----Original Message-----
+>From: xitami-admin@lists.xitami.org
+>[mailto:xitami-admin@lists.xitami.org] On Behalf Of
+>mauriziotorti@virgilio.it
+>Sent: Friday, December 10, 2004 9:52 AM
+>To: xitami@lists.xitami.org
+>Subject: [Xitami] Xitami on XP SP2
+>
+>
+>I apologize for my previous too long e-mail.
+>
+>I ''ve installed Xitami 2.4d10 on my Windows XP SP1 PC. Until now
+>everything works well. Having upgrade XP with SP2 now I've got Xitami
+>service failed to start. Did anynone have any suggestion to solve this
+>problem ? To help understading the problem I've attached some log and
+>config files from my Xitami installation.
+>
+>Maurizio
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Sat Dec 11 00:19:48 2004
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Sat, 11 Dec 2004 00:19:48 +0000 (GMT)
+Subject: [Xitami] Xitami on XP SP2
+Message-ID: <58780@dsl.co.uk>
+
+In message <41B9E5DD.000001.04016@OFFICE> "Gerald M. Jones" writes:
+
+> My suggestion is to remove XP SP2.  It is for idiots that can't protect
+> themselves. Microsoft is just dummying down their product so that computer
+> illiterate users won't be hurt by all of the hackers.  In doing so they are
+> closing up a lot of non Microsoft holes.  Dump it [XP SP2].
+
+Says the oh-so-savvy computer user that:
+    1) top-posts an answer above the original quoted material;
+    2) does do in both plain ASCII *and* HTML, when the original poster
+    at least had had the courtesy of eliminating *that* particular
+    Microsoft abomination;
+    3) Has the temerity to include a binary:
+> Content-Type: Image/jpeg;
+>   name="BackGrnd.jpg"
+> Content-ID: <03C3DBCB-A0F7-48E0-9135-8404779386DE>
+> Content-Transfer-Encoding: base64
+    background to the latter post.
+    
+I would suggest removing the beam from thine own eye.
+
+Moreover, with what are you suggesting that the inquirer replace XP/SP2?
+
+Surely he is unable to make the transition to a real[1] operating system
+all that easily?  Or were you suggesting removal of the SP2 fix-pack?  If
+he did this, his system would be vulnerable (read: FAR FAR MORE
+vulnerable than it is at present) to any of the many exploits
+circulating.  Are you unaware that a vanilla-installation of XP cannot be
+connected to the Internet for more than a few minutes (under ten, and a
+few seconds in some environments) without being exploited by many of the
+viral worms circulating?  At least having SP2 present avoids a lot of
+that infestation.
+
+[1] OTOH, if the original poster is prepared to ditch Windoze, then
+eComStation <http://www.ecomstation.com/> provides a viable alternative,
+that is totally unaffected by any anti-Windows malware.  Xitami runs
+under this (use the OS/2 version).
+
+-- 
+Brian {Hamilton Kelly}                                     bhk@dsl.co.uk
+   "I don't use Linux. I prefer to use an OS supported by a large multi-
+   national vendor, with a good office suite, excellent network/internet
+   software and decent hardware support."
+
+
+From xitami@lists.xitami.org  Fri Dec 10 14:42:18 2004
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 10 Dec 2004 15:42:18 +0100
+Subject: [Xitami] Xitami on XP SP2
+Message-ID: <4153621200120A7A@ims2a.cp.tin.it>
+
+--========/4153621200120A7A/ims2a.cp.tin.it
+Content-Type: text/plain; charset="ISO-8859-15"
+Content-Transfer-Encoding: quoted-printable
+
+
+This is my first time in joinig this mailing list so hi to everybody.
+Then my question.
+I ''ve installed Xitami 2.4d10 on my Windows XP SP1 PC. Until now everyth=
+ing
+works well.
+Having upgrade XP with SP2 now I've got Xitami service failed to start.
+Did anynone have any suggestion to solve this problem ?
+To help understading the problem I've attached some log and config files
+from my Xitami
+installation.
+
+Maurizio
+
+
+--========/4153621200120A7A/ims2a.cp.tin.it
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="console.log"
+
+V2FybmluZzogJ18nIGluICdhbGlhczovbWVkaWEvZGF0YS9pbWcvaF9jJyBzaG91bGQgcHJvYmFi
+bHkgJy0nDQpXYXJuaW5nOiAnXycgaW4gJ2FsaWFzOi9tZWRpYS9kYXRhL2ltZy9oX2QnIHNob3Vs
+ZCBwcm9iYWJseSAnLScNCldhcm5pbmc6ICdfJyBpbiAnYWxpYXM6L21lZGlhL2RhdGEvaW1nL2hf
+ZScgc2hvdWxkIHByb2JhYmx5ICctJw0KV2FybmluZzogJ18nIGluICdhbGlhczovbWVkaWEvZGF0
+YS9pbWcvaF9mJyBzaG91bGQgcHJvYmFibHkgJy0nDQpXYXJuaW5nOiAnXycgaW4gJ2FsaWFzOi9t
+ZWRpYS9kYXRhL2ltZy9oX2cnIHNob3VsZCBwcm9iYWJseSAnLScNCldhcm5pbmc6ICdfJyBpbiAn
+YWxpYXM6L21lZGlhL2RhdGEvaW1nL2hfaCcgc2hvdWxkIHByb2JhYmx5ICctJw0KMjAwNC8xMi8x
+MCAxNToyODoxMzogeGlscndwOiBDb3VsZCBub3Qgb3BlbiBMUldQIHBvcnQgMTAwNzQNCjIwMDQv
+MTIvMTAgMTU6Mjg6MTM6IFByb3RvY29sIG5vdCBrbm93bg0KMjAwNC8xMi8xMCAxNToyODoxMzog
+c210aHR0cDogcHJlcGFyaW5nIGZvciBjb25uZWN0aW9ucyBvbiBwb3J0IDgxODANCjIwMDQvMTIv
+MTAgMTU6Mjg6MTM6IHNtdGh0dHA6IGNvdWxkIG5vdCBvcGVuIEhUVFAgcG9ydCA4MTgwDQoyMDA0
+LzEyLzEwIDE1OjI4OjEzOiBzbXRodHRwOiBQcm90b2NvbCBub3Qga25vd24NCjIwMDQvMTIvMTAg
+MTU6Mjg6MTM6IHNtdGh0dHA6IE5vIGVycm9yDQoyMDA0LzEyLzEwIDE1OjI4OjEzOiBzbXRodHRw
+OiBjbG9zaW5nIEhUVFAgY29ubmVjdGlvbnMgb24gcG9ydCA4MTgwDQo=
+
+
+--========/4153621200120A7A/ims2a.cp.tin.it
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="xitami.cfg"
+
+IyAgIHhpdGFtaS5jZmcgLSBDb25maWd1cmF0aW9uIGZpbGUgZm9yIFhJVEFNSQ0KIyAgIFJldmlz
+ZWQ6IDk5LzA2LzIzDQojDQojICAgTm90ZSB0aGF0IHNpbmNlIDE0IEF1ZyAxOTk4LCBoeXBoZW5z
+IGFuZCB1bmRlcmxpbmVzIGluIGtleXMgYXJlIG5vDQojICAgbG9uZ2VyIGludGVyY2hhbmdlYWJs
+ZTsgWGl0YW1pIHVzZXMgaHlwaGVucyBldmVyeXdoZXJlIGV4Y2VwdCBpbg0KIyAgIHJlYWwgbmFt
+ZXMgKHZpcnR1YWwgaG9zdHMgYW5kIGFsaWFzZXMpLg0KIw0KIyAgIERPTidUIE1PRElGWSBUSElT
+IEZJTEUuLi4gaW5zdGVhZCwgY3JlYXRlIGEgZmlsZSBjYWxsZWQgJ2RlZmF1bHRzLmNmZycNCiMg
+ICB3aXRoIHRoZSBzZWN0aW9ucyBhbmQgZW50cmllcyB5b3UgbmVlZC4gIElmIHlvdSBtb2RpZnkg
+dGhpcyBmaWxlLCBhbnkNCiMgICBjaGFuZ2VzIFdPTidUIEJFIFNIT1dOIGluIHRoZSBicm93c2Vy
+LWJhc2VkIGFkbWluIHNjcmVlbnMuICBPa2F5LCB3ZQ0KIyAgIHdhcm5lZCB5b3UuDQojDQojKkVO
+RA0KDQpbU2VydmVyXQ0KICAgIGlwYWRkcmVzcz0qICAgICAgICAgICAgICAgICAgICAgICAgICMg
+ICAqID0gdXNlIGFueSBJUCBhZGRyZXNzIG9uIGhvc3QNCiAgICB3ZWJwYWdlcz13ZWJwYWdlcyAg
+ICAgICAgICAgICAgICAgICAjICAgUmVsYXRpdmUgb3IgZnVsbCBwYXRoDQogICAgZGVmYXVsdHM9
+ZGVmYXVsdHMuY2ZnICAgICAgICAgICAgICAgIyAgIExvY2FsIGNvbmZpZyBmaWxlDQogICAgYmFz
+ZS1ob3N0PWJhc2Vob3N0LmNmZyAgICAgICAgICAgICAgIyAgIEJhc2UgaG9zdCBjb25maWcgKG9w
+dGlvbmFsKQ0KICAgIHBvcnRiYXNlPTgxMDAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBl
+LmcuIDUwMDAgZm9yIHBvcnQgNTA4MA0KICAgIHByaW9yaXR5PTEgICAgICAgICAgICAgICAgICAg
+ICAgICAgICMgICAxID0gbm9ybWFsLCAyPWxvdywgMz1oaWdoDQogICAgYmFja2dyb3VuZD0wICAg
+ICAgICAgICAgICAgICAgICAgICAgIyAgIDEgPSBydW4gYXMgZGFlbW9uDQogICAgcmVmcmVzaD02
+MCAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFNlY29uZHMgYmV0d2VlbiByZWZyZXNoZXMN
+CiAgICBjZ2ktdXJsPS9jZ2ktYmluICAgICAgICAgICAgICAgICAgICAjICAgV2hhdCBkZWZpbmVz
+IGEgQ0dJIFVSTD8NCiAgICBjZ2ktYmluPWNnaS1iaW4gICAgICAgICAgICAgICAgICAgICAjICAg
+UmVsYXRpdmUgb3IgZnVsbCBwYXRoLCBvciAnKicNCiAgICBrZWVwLWFsaXZlPTEgICAgICAgICAg
+ICAgICAgICAgICAgICAjICAgMSA9IHVzZSBLZWVwLUFsaXZlIG9uIHBvcnRzDQogICAga2VlcC1h
+bGl2ZS1tYXg9MjUgICAgICAgICAgICAgICAgICAgIyAgIE1heC4gdHJhbnNmZXJzIG9uIGxpdmUg
+cG9ydA0KICAgIHRpbWVvdXQ9MzAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBNYXguIGR1
+cmF0aW9uIG9mIGxpdmUgcG9ydA0KICAgIGRlYnVnPTAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICMgICBLZWVwIGRlYnVnIGxvZ3MNCiAgICBkZWJ1Zy1kaXI9ZGVidWcgICAgICAgICAgICAg
+ICAgICAgICAjICAgTG9jYXRpb24gb2YgZGVidWcgbG9ncw0KICAgIGRpcnNvcnQ9biAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICMgICBIb3cgdG8gc29ydCBkaXJlY3RvcnkgbGlzdGluZ3MNCiAg
+ICB0ZW1wLWRpcj10ZW1wICAgICAgICAgICAgICAgICAgICAgICAjICAgV2hlcmUgdGVtcG9yYXJ5
+IGZpbGVzIGFyZSBwbGFjZWQNCiAgICBsb2ctZGlyPWxvZ3MgICAgICAgICAgICAgICAgICAgICAg
+ICAjICAgV2hlcmUgbG9nIGZpbGVzIGFyZSBwbGFjZWQNCiAgICBsaW1pdD0wICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAjICAgTWF4IGNvbm5lY3Rpb25zICgwID0gbm8gbGltaXQpDQogICAg
+YWR2ZXJ0aXplPTEgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIEFkdmVydGlzZSAnWGl0YW1p
+JyBpbiBsaXN0aW5ncw0KICAgIGRlZmF1bHQxPWluZGV4Lmh0bSAgICAgICAgICAgICAgICAgICMg
+ICBBbnkgbnVtYmVyIG9mIGRlZmF1bHQgcGFnZXMNCiAgICBkZWZhdWx0Mj1kZWZhdWx0Lmh0bSAg
+ICAgICAgICAgICAgICAjICAgICAgY2FsbGVkICdkZWZhdWx0PG4+Jw0KICAgIGNhY2hlLWRlZmF1
+bHRzPTEgICAgICAgICAgICAgICAgICAgICMgICBBbGxvdyBkYXRlLWJhc2VkIGNhY2hpbmcNCiAg
+ICBlcnJvci1oZWFkZXI9QGVycm9ycy9oZWFkZXIuaHRtICAgICAjICAgU2hvd24gYXQgc3RhcnQg
+b2YgZXJyb3Igc2NyZWVuDQogICAgdGV4dC00MDA9QGVycm9ycy90ZXh0LTQwMC5odG0gICAgICAg
+IyAgIFRleHQgZm9yIGVhY2ggc3BlY2lmaWMgZXJyb3INCiAgICB0ZXh0LTQwMT1AZXJyb3JzL3Rl
+eHQtNDAxLmh0bSAgICAgICAjDQogICAgdGV4dC00MDI9QGVycm9ycy90ZXh0LTQwMi5odG0gICAg
+ICAgIw0KICAgIHRleHQtNDAzPUBlcnJvcnMvdGV4dC00MDMuaHRtICAgICAgICMNCiAgICB0ZXh0
+LTQwND1AZXJyb3JzL3RleHQtNDA0Lmh0bSAgICAgICAjDQogICAgdGV4dC00MTI9QGVycm9ycy90
+ZXh0LTQxMi5odG0gICAgICAgIw0KICAgIHRleHQtNDEzPUBlcnJvcnMvdGV4dC00MTMuaHRtICAg
+ICAgICMNCiAgICB0ZXh0LTUwMD1AZXJyb3JzL3RleHQtNTAwLmh0bSAgICAgICAjDQogICAgdGV4
+dC01MDE9QGVycm9ycy90ZXh0LTUwMS5odG0gICAgICAgIw0KICAgIHRleHQtNTAyPUBlcnJvcnMv
+dGV4dC01MDIuaHRtICAgICAgICMNCiAgICBlcnJvci1mb290ZXI9QGVycm9ycy9mb290ZXIuaHRt
+ICAgICAjICAgU2hvd24gYXQgZW5kIG9mIGVycm9yIHNjcmVlbg0KICAgIGF1dG9zdGFydD0wICAg
+ICAgICAgICAgICAgICAgICAgICAgICMgICBSZXN0YXJ0IGlmIFRDUC9JUCBub3QgcmVhZHkNCiAg
+ICByZWNvdmVyPTAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgUmVjb3ZlciBzaWxlbnRs
+eSBhZnRlciBhIGNyYXNoPw0KDQpbV3N4XQ0KICAgIGFkbWluPXhpYWRtaW4gICAgICAgICAgICAg
+ICAgICAgICAgICMgICBBZG1pbmlzdHJhdGlvbiBhZ2VudA0KICAgIGVycm9yPXhpZXJyb3IgICAg
+ICAgICAgICAgICAgICAgICAgICMgICBFcnJvciBzaW11bGF0aW9uIGFnZW50DQoNCltG
+aWx0ZXJdDQogICAgLnNzaT1wZXJsc3NpICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFBhc3Mg
+Ki5zc2kgdG8gUGVybFNTSQ0KICAgIC5zaHRtPXBlcmxzc2kgICAgICAgICAgICAgICAgICAgICAg
+ICMgICBQYXNzICouc2h0bSB0byBQZXJsU1NJDQogICAgLnNodG1sPXBlcmxzc2kgICAgICAgICAg
+ICAgICAgICAgICAgIyAgIFBhc3MgKi5zaHRtbCB0byBQZXJsU1NJDQoNCltDb25zb2xlXQ0KICAg
+IHJlZnJlc2g9MCAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBCcm93c2VyLW1vZGUgY29u
+c29sZSByZWZyZXNoZXMNCiAgICByYXRlPTEwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAj
+ICAgICBldmVyeSAxMCBzZWNvbmRzDQogICAgY2FwdHVyZT0xICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIyAgIENhcHR1cmUgY29uc29sZSBvdXRwdXQ/DQogICAgZmlsZW5hbWU9Y29uc29sZS5s
+b2cgICAgICAgICAgICAgICAgIyAgIFRvIHRoaXMgZmlsZQ0KICAgIGFwcGVuZD0wICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICMgICBBcHBlbmQgaWYgYWxyZWFkeSBleGlzdHMNCiAgICBzdGFy
+dHVwPTEgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgU3RhcnR1cCBzY3JlZW4gKDEuLjQp
+DQogICAgamF2YXNjcmlwdD0xICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFVzZSBKYXZhU2Ny
+aXB0IGluIFdCQQ0KICAgIGxhcmdlLWljb25zPTEgICAgICAgICAgICAgICAgICAgICAgICMgICBT
+aG93IGxhcmdlIGljb25zIGluIFdCQQ0KDQpbQWxpYXNdDQovbWVkaWEvZGF0YS9pbWcvaF9jPWM6
+XA0KL21lZGlhL2RhdGEvaW1nL2hfZD1kOlwNCi9tZWRpYS9kYXRhL2ltZy9oX2U9ZTpcDQovbWVk
+aWEvZGF0YS9pbWcvaF9mPWY6XA0KL21lZGlhL2RhdGEvaW1nL2hfZz1nOlwNCi9tZWRpYS9kYXRh
+L2ltZy9oX2g9aDpcDQojICAgY2Ryb209ZjpcaHRtbCAgICAgICAgICAgICAgICAgICAgICAgIyAg
+IERpcmVjdG9yeS9kcml2ZSBhbGlhc2VzIGd1c2VsbGENCiMgICBtYW5keT1kOlx1c2Vyc1xtYW5k
+eVx3ZWJwYWdlcyAgICAgICAjICAgRS5nICJodHRwOi8veHh4eHgvbWFuZHkvIg0KDQpbVmlydHVh
+bC1Ib3N0c10NCiMgICB3d3cuc29tZWhvc3QxLmNvbT1ob3N0MS5jZmcgICAgICAgICAjICAgU3Bl
+Y2lmaWVkIGJ5IG5hbWUNCiMgICAyMjAuMTIuMjUuMjUwPWhvc3QyLmNmZyAgICAgICAgICAgICAj
+ICAgU3BlY2lmaWVkIGJ5IElQIGFkZHJlc3MNCg0KW1dpbjMyXQ0KICAgIDE2Yml0LWNnaT0xICAg
+ICAgICAgICAgICAgICAgICAgICAgICMgICBTdXBwb3J0IDE2LWJpdCBDR0lzPw0KICAgIHNlY3Vy
+ZT0wICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBTZWN1cmUgY29udHJvbCBwYW5lbD8N
+CiAgICBzZXJ2aWNlLW5hbWU9WGl0YW1pICAgICAgICAgICAgICAgICAjICAgV2luTlQgc2Vydmlj
+ZSBuYW1lDQogICAgc2VydmljZS10ZXh0PVhpdGFtaSBXZWIgU2VydmVyICAgICAgIyAgIFdpbk5U
+IHNlcnZpY2UgZGVzY3JpcHRpb24NCg0KW0NHSV0NCiAgICBlbmFibGVkPTEgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAjICAgQ0dJIHByb2dyYW1zIGVuYWJsZWQ/DQogICAgd29ya2Rpcj0tICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFdoZXJlIENHSSBzY3JpcHRzIHJ1bg0KICAgIHdp
+bGRjYXJkPTAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBBbGxvdyAvY2dpLWJpbiBhbnl3
+aGVyZSBpbiBVUkwNCiAgICBkaXJsaXN0PTAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAg
+QWxsb3cgZGlyZWN0b3J5IGxpc3RpbmdzDQogICAgcGFzc2FyZ3M9MCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIyAgIFBhc3MgYXJndW1lbnRzIG9uIGNvbW1hbmQgbGluZT8NCiAgICBkZWJ1Zz0w
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgS2VlcCBpbnB1dCBhbmQgb3V0cHV0IGZp
+bGVzDQogICAgaHR0cC1maWVsZHM9MSAgICAgICAgICAgICAgICAgICAgICAgIyAgIEFkZCBIVFRQ
+XyBoZWFkZXIgZmllbGRzPw0KICAgIGh0dHAtcHJlZml4PUhUVFBfICAgICAgICAgICAgICAgICAg
+ICMgICBJZiBzbywgd2hhdCBwcmVmaXg/DQogICAgZm9ybS1maWVsZHM9MSAgICAgICAgICAgICAg
+ICAgICAgICAgIyAgIEFkZCBmb3JtIGZpZWxkcyB0byBlbnZpcm9ubWVudD8NCiAgICBmb3JtLXBy
+ZWZpeD1GT1JNXyAgICAgICAgICAgICAgICAgICAjICAgSWYgc28sIHdoYXQgcHJlZml4Pw0KICAg
+IGZvcm0tcXVlcnk9MCAgICAgICAgICAgICAgICAgICAgICAgICMgICBQYXNzIGZvcm0gZmllbGRz
+IGFzIFFVRVJZX1NUUklORz8NCiAgICBlbnZpcm9ubWVudD0xICAgICAgICAgICAgICAgICAgICAg
+ICAjICAgQ0dJIGdldHMgc2VydmVyIGVudmlyb25tZW50Pw0KICAgIGVycmxvZz1jZ2llcnIubG9n
+ICAgICAgICAgICAgICAgICAgICMgICBDR0kgc3RkZXJyIG91dHB1dA0KICAgIGZ1bGwtbmFtZT0x
+ICAgICAgICAgICAgICAgICAgICAgICAgICMgICBGb3JtYXQgU0NSSVBUX05BTUUgd2l0aCBmdWxs
+IHBhdGg/DQogICAgZXhpdC1vaz0wICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIERvIHdl
+IHdhbnQgYW4gT2sgZXhpdCBjb2RlPw0KICAgIG1peGVkLXVybD0xICAgICAgICAgICAgICAgICAg
+ICAgICAgICMgICBOb24tQ0dJIGZpbGVzIGFsbG93ZWQ/DQogICAgdGltZW91dD02MCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIyAgIFRpbWVvdXQgKHNlY29uZHMpIGZvciBDR0lzDQogICAgbW9u
+aXRvcj0yMDAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIE1vbml0b3IgcmF0ZSwgbWlsbGlz
+ZWNvbmRzDQogICAgbXNkb3Mtc3R5bGU9MCAgICAgICAgICAgICAgICAgICAgICAgIyAgIFVzZSBi
+YWNrc2xhc2ggaW4gcGF0aG5hbWVzDQogICAgc3RkaW89MSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIyAgIFVzZSBzdGFuZGFyZCBDR0kgaW5wdXQvb3V0cHV0DQoNCltDR0ktRW52aXJvbm1l
+bnRdDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIG5hbWU9dmFs
+dWUNCltDR0ktQWxpYXNdDQojICAgZGVtb3M9ZjpcaHRtbFxkZW1vcyAgICAgICAgICAg
+ICAgICAgIyAgIGVnLiBodHRwOi8veHh4eC9kZW1vcy9zb21lcHJvZw0KDQojICAgLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLQ0KIyAgIExSV1AgY29uZmlndXJhdGlvbiBzZWN0aW9uDQojDQojICAgVGhpcyBzZWN0
+aW9uIGNvbnRyb2xzIHRoZSBMUldQIChsb25nLXJ1bm5pbmcgd2ViIHByb2Nlc3MpIA0KIyAgIHBy
+b3RvY29sLiANCg0KW0xyd3BdDQojICAgU3BlY2lmaWVzIHdoZXRoZXIgdGhlIExSV1AgYWdlbnQg
+aXMgZW5hYmxlZCBvciBub3QuIA0KDQogICAgZW5hYmxlZD0xDQoNCiMgICBTcGVjaWZpZXMgdGhl
+IHBvcnQgb24gd2hpY2ggdGhlIExSV1AgYWdlbnQgYWNjZXB0cyBjb25uZWN0aW9ucy4gDQoNCiAg
+ICBwb3J0PTE5NzQNCg0KIyAgIFNwZWNpZmllcyB0aGUgd2VibWFzayBmb3IgTFJXUCBjbGllbnRz
+LiBOb3JtYWxseSB0aGlzIGlzIA0KIyAgIHJlc3RyaWN0ZWQgdG8gbG9jYWwgTFJXUCBjbGllbnRz
+LCBidXQgeW91IGNhbiBhbHNvIGNvbnN0cnVjdCBMUldQIA0KIyAgIG5ldHdvcmtzIGZyb20gbXVs
+dGlwbGUgc2VydmVycy4gVXNlICd3ZWJtYXNrPWxvY2FsJyB0byBzcGVjaWZ5IA0KIyAgIGp1c3Qg
+bG9jYWwgYWRkcmVzc2VzLCBvciAnd2VibWFzaz1pdGVtLGl0ZW0sLi4uJyB0byBzcGVjaWZ5IG9u
+ZSBvciANCiMgICBtb3JlIHR5cGVzIG9mIGFjY2Vzcy4gRWFjaCBpdGVtIGFsbG93cyBvciBleGNs
+dWRlcyBzb21lIElQIA0KIyAgIGFkZHJlc3MoZXMpOiAnMjUwLjEyLjEzLionIGFsbG93cyBtYXRj
+aGluZyBhZGRyZXNzZXMsIA0KIyAgICchMjUwLjEyLjEzLionIGV4Y2x1ZGVzIG1hdGNoaW5nIGFk
+ZHJlc3NlcyAoYnV0IGRvZXMgbm90IGFsbG93IA0KIyAgIG90aGVycykuICchMjUwLjEyLjEzLios
+KicgZXhjbHVkZXMgb25lIHNldCBvZiBhZGRyZXNzZXMgYW5kIGFsbG93cyANCiMgICBhbGwgb3Ro
+ZXJzLiAnd2VibWFzaz1AaXBsaXN0LnR4dCcgcmVhZHMgdGhlIGxpc3Qgb2Ygd2VibWFza3MgZnJv
+bSANCiMgICBhIHRleHQgZmlsZS4gDQoNCiAgICB3ZWJtYXNrPWxvY2FsDQoNCiMgICBBbGxvd3Mg
+YWxsIExSV1AgY2xpZW50cyB0byBjb25uZWN0LiBJZiB0aGlzIGlzIHNldCB0byAxLCBhbnkgTFJX
+UCANCiMgICBhcHBsaWNhdGlvbiB3aWxsIGJlIGFsbG93ZWQgdG8gY29ubmVjdC4gT3RoZXJ3aXNl
+IHRoZSANCiMgICBMUldQLUFwcGxpY2F0aW9uIHNlY3Rpb24gbXVzdCBiZSB1c2VkIHRvIGF1dGhv
+cmlzZSBzcGVjaWZpYyANCiMgICBhcHBsaWNhdGlvbnMsIGFuZCBvcHRpb25hbGx5IHNwZWNpZnkg
+YSBwYXNzd29yZCB0byB1c2UgZHVyaW5nIHRoZSANCiMgICBhdXRoZW50aWNhdGlvbiBzdGFnZS4g
+DQoNCiAgICBhbGxvdy1hbGw9MQ0KDQojICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KIyAgIExSV1AtQVBQ
+TElDQVRJT04gY29uZmlndXJhdGlvbiBzZWN0aW9uDQojDQojICAgVGhpcyBzZWN0aW9uIGNvbnNp
+c3RzIG9mIG9uZSBlbnRyeSBwZXIgYXBwbGljYXRpb24gbmFtZSAoZWl0aGVyIA0KIyAgIFVSTCBw
+cmVmaXgsIG9yIGEgVVJMICJleHRlbnNpb24iIG5hbWUpLiBUaGUgZW50cnkgc2hvdWxkIGVpdGhl
+ciB0byANCiMgICBiZSBzZXQgdG8gIioiIHRvIGluZGljYXRlIHRoZSBhcHBsaWNhdGlvbiBpcyBh
+bGxvd2VkIHdpdGhvdXQgDQojICAgYXV0aGVudGljYXRpb24sIG9yIHRvIGEgcGFzc3dvcmQvcGhy
+YXNlIHRoYXQgaXMgdXNlZCBpbiBMUldQIDIuMCANCiMgICBhdXRoZW50aWNhdGlvbiB3aXRoIHRo
+YXQgYXBwbGljYXRpb24uIElmIGEgcGFzc3dvcmQvcGhyYXNlIGlzIA0KIyAgIHNwZWNpZmllZCwg
+dGhlbiBMUldQIDEuMCBjbGllbnRzIHdpbGwgbm90IGJlIGFsbG93ZWQgdG8gY29ubmVjdCANCiMg
+ICB3aXRoIHRoYXQgbmFtZSAoYXMgdGhleSBjYW5ub3QgcGVyZm9ybSB0aGUgcmVxdWlyZWQgDQoj
+ICAgYXV0aGVudGljYXRpb24pLiANCg0KW0xyd3AtQXBwbGljYXRpb25dDQoNCg0KW1NlY3VyaXR5
+XQ0KICAgIHBhc3N3b3JkLWNhc2U9MSAgICAgICAgICAgICAgICAgICAgICMgICBDYXNlLXNlbnNp
+dGl2ZSBwYXNzd29yZHMNCiAgICBmaWxlbmFtZT14aXRhbWkuYXV0ICAgICAgICAgICAgICAgICAj
+ICAgQXV0aG9yaXNhdGlvbiBmaWxlDQogICAgZGlybGlzdD0xICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIyAgIEFsbG93IGRpcmVjdG9yeSBsaXN0aW5ncw0KICAgIHdlYm1hc2s9KiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICMgICBNYXNrIHZhbGlkIGNsaWVudCBJUCBhZGRyZXNzZXMNCiAg
+ICBzdXBlcnVzZXI9IiIgICAgICAgICAgICAgICAgICAgICAgICAjICAgU3VwZXJ1c2VyIGFjY2Vz
+cyBwYXNzd29yZA0KICAgIGFkbWluPTEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBB
+bGxvdyBicm93c2VyLWJhc2VkIGFkbWluDQogICAgc2FmZXBhdGhzPTEgICAgICAgICAgICAgICAg
+ICAgICAgICAgIyAgIENoZWNrIGZvciB1bnNhZmUgZmlsZW5hbWVzDQogICAgc2V0dWlkPTAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFN3aXRjaCB0byBzYWZlIHVpZC9naWQNCiAgICBz
+ZXR1aWQtdXNlcj1ub2JvZHkgICAgICAgICAgICAgICAgICAjICAgVXNlciBpZCBmb3Igc2VydmVy
+IHByb2Nlc3MNCiAgICBzZXR1aWQtZ3JvdXA9bm9ncm91cCAgICAgICAgICAgICAgICAjICAgR3Jv
+dXAgaWQgZm9yIHNlcnZlciBwcm9jZXNzDQoNCltTZXJ2ZXJMb2ddDQogICAgZW5hYmxlZD0xICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIyAgIDE9b24sIDA9b2ZmDQogICAgZmlsZW5hbWU9eGl0
+YW1pLmxvZyAgICAgICAgICAgICAgICAgIyAgIFBhdGggKyBmaWxlbmFtZQ0KICAgIGN5Y2xlPWRh
+aWx5ICAgICAgICAgICAgICAgICAgICAgICAgICMgICBXaGVuIGlzIHRoZSBmaWxlIGN5Y2xlZA0K
+DQpbQWNjZXNzTG9nXQ0KICAgIGVuYWJsZWQ9MSAgICAgICAgICAgICAgICAgICAgICAgICAgICMg
+ICBFbmFibGUvZGlzYWJsZSBhY2Nlc3MgbG9nZ2luZw0KICAgIGZpbGVuYW1lPWFjY2Vz
+cy5sb2cgICAgICAgICAgICAgICAgICMgICBBY2Nlc3MgbG9nIGZpbGVuYW1lDQogICAgY3ljbGU9
+ZGFpbHkgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFdoZW4gaXMgdGhlIGZpbGUgY3ljbGVk
+DQogICAgbG9jYWw9MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIExvZyBhY2Nlc3Nl
+cyBmcm9tIGxvY2FsIGFkZHJlc3Nlcw0KIyAgIE9wdGlvbnMgZm9yIGV4dGVuZGVkIGxvZ2dpbmcs
+IHVzZWQgYnkgWGl0YW1pL1Bybw0KICAgIGV4dGVuZGVkPTEgICAgICAgICAgICAgICAgICAgICAg
+ICAgICMgICBVc2UgZXh0ZW5kZWQgbG9nZ2luZyBmYWNpbGl0aWVzDQogICAgZm9ybWF0PVhDTEYg
+ICAgICAgICAgICAgICAgICAgICAgICAgIyAgIENMRiwgWENMRiwgTVMsIExNTCwgWExNTCwgY3Vz
+dG9tDQogICAgY3ljbGUtaG93PXJlbmFtZSAgICAgICAgICAgICAgICAgICAgIyAgIEN5Y2xpbmcg
+bWV0aG9kDQogICAgY3ljbGUtdGltZT0wMDowMCAgICAgICAgICAgICAgICAgICAgIyAgIFdoYXQg
+dGltZSB0byBjeWNsZQ0KICAgIGN5Y2xlLWRheT0wICAgICAgICAgICAgICAgICAgICAgICAgICMg
+ICBXaGF0IGRheSBvZiB3ZWVrL21vbnRoIHRvIGN5Y2xlDQogICAgY3ljbGUtc2l6ZT0wICAgICAg
+ICAgICAgICAgICAgICAgICAgIyAgIE1heCBzaXplIGluIEtiIGZvciBsb2cgZmlsZQ0KICAgIGN5
+Y2xlLWxpbmVzPTAgICAgICAgICAgICAgICAgICAgICAgICMgICBNYXggc2l6ZSBpbiBsaW5lcyBm
+b3IgbG9nIGZpbGUNCiAgICBjeWNsZS1hcmc9YWMleXklbW0lZGQubG9nICAgICAgICAgICAjICAg
+QXJndW1lbnQgZm9yIGN5Y2xpbmcgbWV0aG9kDQogICAgdHJhbnNsYXRlPTAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIyAgIFVzZSBSRE5TIHRyYW5zbGF0aW9uDQoNCltFcnJvckxvZ10NCiAgICBl
+bmFibGVkPTEgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgRW5hYmxlL2Rpc2FibGUgZXJy
+b3IgbG9nZ2luZw0KICAgIGZpbGVuYW1lPWVycm9ycy5sb2cgICAgICAgICAgICAgICAgICMgICBF
+cnJvciBsb2cgZmlsZW5hbWUNCiAgICBjeWNsZT1kYWlseSAgICAgICAgICAgICAgICAgICAgICAg
+ICAjICAgV2hlbiBpcyB0aGUgZmlsZSBjeWNsZWQNCiAgICBsb2NhbD0xICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAjICAgTG9nIGFjY2Vzc2VzIGZyb20gbG9jYWwgYWRkcmVzc2VzDQojICAg
+T3B0aW9ucyBmb3IgZXh0ZW5kZWQgbG9nZ2luZywgdXNlZCBieSBYaXRhbWkvUHJvDQogICAgZXh0
+ZW5kZWQ9MSAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFVzZSBleHRlbmRlZCBsb2dnaW5n
+IGZhY2lsaXRpZXMNCiAgICBmb3JtYXQ9WENMRiAgICAgICAgICAgICAgICAgICAgICAgICAjICAg
+Q0xGLCBYQ0xGLCBNUywgTE1MLCBYTE1MLCBjdXN0b20NCiAgICBjeWNsZS1ob3c9cmVuYW1lICAg
+ICAgICAgICAgICAgICAgICAjICAgQ3ljbGluZyBtZXRob2QNCiAgICBjeWNsZS10aW1lPTAwOjAw
+ICAgICAgICAgICAgICAgICAgICAjICAgVGltZSB0byBjeWNsZSwgaGg6bW0NCiAgICBjeWNsZS1k
+YXk9MCAgICAgICAgICAgICAgICAgICAgICAgICAjICAgRGF5IG9mIHdlZWsvbW9udGggdG8gY3lj
+bGUNCiAgICBjeWNsZS1zaXplPTAgICAgICAgICAgICAgICAgICAgICAgICAjICAgTWF4IHNpemUg
+aW4gS2IgZm9yIGxvZyBmaWxlDQogICAgY3ljbGUtbGluZXM9MCAgICAgICAgICAgICAgICAgICAg
+ICAgIyAgIE1heCBzaXplIGluIGxpbmVzIGZvciBsb2cgZmlsZQ0KICAgIGN5Y2xlLWFyZz1lciV5
+eSVtbSVkZC5sb2cgICAgICAgICAgICMgICBBcmd1bWVudCBmb3IgY3ljbGluZyBtZXRob2QNCiAg
+ICB0cmFuc2xhdGU9MCAgICAgICAgICAgICAgICAgICAgICAgICAjICAgVXNlIFJETlMgdHJhbnNs
+YXRpb24NCg0KIyAgIE9wdGlvbnMgZm9yIHJldmVyc2UtRE5TIGxvb2t1cHMsIHVzZWQgYnkgWGl0
+YW1pL1Bybw0KW1JkbnNdDQogICAgcHJpbWFyeS1zZXJ2ZXI9MTI3LjAuMC4xICAgICAgICAgICAg
+IyAgIFByaW1hcnkgRE5TIG5hbWUgc2VydmVyDQogICAgc2Vjb25kYXJ5LXNlcnZlcj0iIiAgICAg
+ICAgICAgICAgICAgIyAgIFNlY29uZGFyeSBETlMgbmFtZSBzZXJ2ZXINCiAgICByZWN1cnNlLWxv
+b2t1cHM9MSAgICAgICAgICAgICAgICAgICAjICAgVXNlIHJlY3Vyc2l2ZSBsb29rdXBzDQogICAg
+ZGVidWc9MCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIERlYnVnIFJETlMgbG9va3Vw
+cw0KDQpbRnRwXQ0KICAgIGVuYWJsZWQ9MSAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICAx
+PW9uLCAwPW9mZg0KICAgIHJvb3Q9ZnRwcm9vdCAgICAgICAgICAgICAgICAgICAgICAgICMgICBE
+ZWZhdWx0IFJvb3QgZGlyZWN0b3J5DQogICAgd2VsY29tZT1AZnRwaGVsbG8udHh0ICAgICAgICAg
+ICAgICAgIyAgIHRleHQgb3IgQGZpbGVuYW1lDQogICAgc2lnbm9mZj1AZnRwYWRpb3MudHh0ICAg
+ICAgICAgICAgICAgIyAgIHRleHQgb3IgQGZpbGVuYW1lDQogICAgbG9naW4tdGV4dD1AZnRwbG9n
+aW4udHh0ICAgICAgICAgICAgIyAgIHRleHQgb3IgQGZpbGVuYW1lDQogICAgcG9ydD0yMSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIyAgIEZUUCBwb3J0ICgrIHBvcnQgYmFzZSkNCiAgICB0
+aW1lb3V0PTMwMCAgICAgICAgICAgICAgICAgICAgICAgICAjICAgTWF4LiBkdXJhdGlvbiBvZiBs
+aXZlIHBvcnQNCiAgICB1c2VyLWZpbGU9ZnRwdXNlcnMuYXV0ICAgICAgICAgICAgICAjICAgVXNl
+cnMgYXV0aG9yaXphdGlvbiBmaWxlDQogICAgZGlyZWN0b3J5LWZpbGU9ZnRwZGlycy5hdXQgICAg
+ICAgICAgIyAgIERpcmVjdG9yeSBhY2Nlc3MgZmlsZQ0KICAgIGRpcnNvcnQ9biAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICMgICBIb3cgdG8gc29ydCBkaXJlY3RvcnkgbGlzdGluZ3MNCiAgICBp
+cGFkZHJlc3M9KiAgICAgICAgICAgICAgICAgICAgICAgICAjICAgRGVmYXVsdCBwYXNzaXZlIElQ
+IGFkZHJlc3MNCiAgICBmb3JjZS1pcD0wICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgVXNl
+IG9ubHkgSVAgYWRkcmVzcyBvZiBjb25maWcgZmlsZQ0KICAgIGRhdGEtcG9ydD0yMDAg
+ICAgICAgICAgICAgICAgICAgICAgICMgICBEZWZhdWx0IGRhdGEgcG9ydA0KICAgIHdlYm1hc2s9
+KiAgICAgICAgICAgICAgICAgICAgICAgICAgICMgICBNYXNrIHZhbGlkIGNsaWVudCBJUCBhZGRy
+ZXNzZXMNCiAgICBsaW1pdD0yNSAgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgTWF4LiBG
+VFAgY29ubmVjdGlvbnMgKDA9bm8gbGltaXQpDQogICAgY2hlY2stZW1haWw9MCAgICAgICAgICAg
+ICAgICAgICAgICAgIyAgIEVuZm9yY2UgZS1tYWlsIGFkZHJlc3NlcyBmb3IgYW5vbi4NCiAgICBo
+dHRwLWFsaWFzZXM9MCAgICAgICAgICAgICAgICAgICAgICAjICAgSW5jbHVkZSBIVFRQIGFsaWFz
+ZXM/DQogICAgc29mdC1xdW90YT0yLjUgICAgICAgICAgICAgICAgICAgICAgIyAgIERlZmF1bHQg
+dXNlciBzb2Z0IHF1b3RhLCBNYg0KICAgIGhhcmQtcXVvdGE9NSAgICAgICAgICAgICAgICAgICAg
+ICAgICMgICBEZWZhdWx0IHVzZXIgaGFyZCBxdW90YSwgTWINCg0KW0Z0cC1BbGlhc10NCiMgICBy
+b290ZD1kOlwgICAgICAgICAgICAgICAgICAgICAgICAgICAjICAgRGlyZWN0b3J5L2RyaXZlIGFs
+aWFzZXMNCiMgICB1cGxvYWQ9L3RtcC91cGxvYWQgICAgICAgICAgICAgICAgICAjDQoNCltGdHBM
+b2ddDQogICAgZW5hYmxlZD0xICAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIDE9b24sIDA9
+b2ZmDQogICAgZmlsZW5hbWU9YWNjZXNzLmxvZyAgICAgICAgICAgICAgICAgIyAgIFBhdGggKyBm
+aWxlbmFtZQ0KICAgIGN5Y2xlPWRhaWx5ICAgICAgICAgICAgICAgICAgICAgICAgICMgICBXaGVu
+IGlzIHRoZSBmaWxlIGN5Y2xlZA0KICAgIGxvY2FsPTEgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICMgICBMb2cgYWNjZXNzZXMgZnJvbSBsb2NhbCBhZGRyZXNzZXMNCiMgICBPcHRpb25zIGZv
+ciBleHRlbmRlZCBsb2dnaW5nLCB1c2VkIGJ5IFhpdGFtaS9Qcm8NCiAgICBleHRlbmRlZD0xICAg
+ICAgICAgICAgICAgICAgICAgICAgICAjICAgVXNlIGV4dGVuZGVkIGxvZ2dpbmcgZmFjaWxpdGll
+cw0KICAgIGZvcm1hdD1YQ0xGICAgICAgICAgICAgICAgICAgICAgICAgICMgICBDTEYsIFhDTEYs
+IE1TLCBMTUwsIFhMTUwsIGN1c3RvbQ0KICAgIGN5Y2xlLWhvdz1yZW5hbWUgICAgICAgICAgICAg
+ICAgICAgICMgICBDeWNsaW5nIG1ldGhvZA0KICAgIGN5Y2xlLXRpbWU9MDA6MDAgICAgICAgICAg
+ICAgICAgICAgICMgICBXaGF0IHRpbWUgdG8gY3ljbGUNCiAgICBjeWNsZS1kYXk9MCAgICAgICAg
+ICAgICAgICAgICAgICAgICAjICAgV2hhdCBkYXkgb2Ygd2Vlay9tb250aCB0byBjeWNsZQ0KICAg
+IGN5Y2xlLXNpemU9MCAgICAgICAgICAgICAgICAgICAgICAgICMgICBNYXggc2l6ZSBpbiBLYiBm
+b3IgbG9nIGZpbGUNCiAgICBjeWNsZS1saW5lcz0wICAgICAgICAgICAgICAgICAgICAgICAjICAg
+TWF4IHNpemUgaW4gbGluZXMgZm9yIGxvZyBmaWxlDQogICAgY3ljbGUtYXJnPWFjJXl5JW1tJWRk
+LmxvZyAgICAgICAgICAgIyAgIEFyZ3VtZW50IGZvciBjeWNsaW5nIG1ldGhvZA0KICAgIHRyYW5z
+bGF0ZT0wICAgICAgICAgICAgICAgICAgICAgICAgICMgICBVc2UgUkROUyB0cmFuc2xhdGlvbg0K
+DQpbRnRwRXJybG9nXQ0KICAgIGVuYWJsZWQ9MSAgICAgICAgICAgICAgICAgICAgICAgICAgICMg
+ICAxPW9uLCAwPW9mZg0KICAgIGZpbGVuYW1lPWVycm9ycy5sb2cgICAgICAgICAgICAgICAgICMg
+ICBQYXRoICsgZmlsZW5hbWUNCiAgICBjeWNsZT1kYWlseSAgICAgICAgICAgICAgICAgICAgICAg
+ICAjICAgV2hlbiBpcyB0aGUgZmlsZSBjeWNsZWQNCiAgICBsb2NhbD0xICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAjICAgTG9nIGFjY2Vzc2VzIGZyb20gbG9jYWwgYWRkcmVzc2VzDQojICAg
+T3B0aW9ucyBmb3IgZXh0ZW5kZWQgbG9nZ2luZywgdXNlZCBieSBYaXRhbWkvUHJvDQogICAgZXh0
+ZW5kZWQ9MSAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFVzZSBleHRlbmRlZCBsb2dnaW5n
+IGZhY2lsaXRpZXMNCiAgICBmb3JtYXQ9WENMRiAgICAgICAgICAgICAgICAgICAgICAgICAjICAg
+Q0xGLCBYQ0xGLCBNUywgTE1MLCBYTE1MLCBjdXN0b20NCiAgICBjeWNsZS1ob3c9cmVuYW1lICAg
+ICAgICAgICAgICAgICAgICAjICAgQ3ljbGluZyBtZXRob2QNCiAgICBjeWNsZS10aW1lPTAwOjAw
+ICAgICAgICAgICAgICAgICAgICAjICAgV2hhdCB0aW1lIHRvIGN5Y2xlDQogICAgY3ljbGUtZGF5
+PTAgICAgICAgICAgICAgICAgICAgICAgICAgIyAgIFdoYXQgZGF5IG9mIHdlZWsvbW9udGggdG8g
+Y3ljbGUNCiAgICBjeWNsZS1zaXplPTAgICAgICAgICAgICAgICAgICAgICAgICAjICAgTWF4IHNp
+emUgaW4gS2IgZm9yIGxvZyBmaWxlDQogICAgY3ljbGUtbGluZXM9MCAgICAgICAgICAgICAgICAg
+ICAgICAgIyAgIE1heCBzaXplIGluIGxpbmVzIGZvciBsb2cgZmlsZQ0KICAgIGN5Y2xlLWFyZz1l
+ciV5eSVtbSVkZC5sb2cgICAgICAgICAgICMgICBBcmd1bWVudCBmb3IgY3ljbGluZyBtZXRob2QN
+CiAgICB0cmFuc2xhdGU9MCAgICAgICAgICAgICAgICAgICAgICAgICAjICAgVXNlIFJETlMgdHJh
+bnNsYXRpb24NCg0KIyAgIEhvb2tzIGZvciBzZWN1cmUgc29ja2V0IGxheWVyLCB1c2VkIGJ5IFhp
+dGFtaS9Qcm8NCltTU0wtaHR0cF0NCiAgICBlbmFibGVkPTEgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAjICAgMT1lbmFibGVkDQogICAgY29uZmlnLWZpbGU9c3NsaHR0cC5jZnMgICAgICAgICAg
+ICAgIyAgIFNTTCBjb25maWd1cmF0aW9uIGZpbGUNCg0KW01pbWVdDQogICAgZGVmYXVsdD0qLyog
+ICAgICAgICAgICAgICAgICAgICAgICAgIyAgIGd1c2VsbGEgb2NpbyBEZWZhdWx0IE1JTUUgdHlw
+ZQ0KDQogICAgIyAgVGV4dCBNSU1FIHR5cGVzDQogICAgZXR4PXRleHQveC1zZXRleHQNCiAgICBo
+dG09dGV4dC9odG1sDQogICAgaHRwPXRleHQvaHRtbA0KICAgIGh0bWw9dGV4dC9odG1sDQogICAg
+cnR4PXRleHQvcmljaHRleHQNCiAgICB0c3Y9dGV4dC90YWItc2VwYXJhdGVkLXZhbHVlcw0KICAg
+IHR4dD10ZXh0L3BsYWluDQogICAgLj10ZXh0L3BsYWluICAgICAgICAgICAgICAgICAg
+ICAgICAgIyAgIEZpbGVzIHdpdGggbm8gZXh0ZW5zaW9uDQoNCiAgICAjICBJbWFnZSBNSU1FIHR5
+cGVzDQogICAgZ2lmPWltYWdlL2dpZg0KICAgIGZoPWltYWdlL3gtZnJlZWhhbmQNCiAgICBmaDQ9
+aW1hZ2UveC1mcmVlaGFuZA0KICAgIGZoNT1pbWFnZS94LWZyZWVoYW5kDQogICAgZmg3PWltYWdl
+L3gtZnJlZWhhbmQNCiAgICBmaGM9aW1hZ2UveC1mcmVlaGFuZA0KICAgIGllZj1pbWFnZS9pZWYN
+CiAgICBqcGU9aW1hZ2UvanBlZw0KICAgIGpwZWc9aW1hZ2UvanBlZw0KICAgIGpwZz1pbWFnZS9q
+cGVnDQogICAgcGJtPWltYWdlL3gtcG9ydGFibGUtYml0bWFwDQogICAgcGdtPWltYWdlL3gtcG9y
+dGFibGUtZ3JheW1hcA0KICAgIHBuZz1pbWFnZS9wbmcNCiAgICBwbm09aW1hZ2UveC1wb3J0YWJs
+ZS1hbnltYXANCiAgICBwcG09aW1hZ2UveC1wb3J0YWJsZS1waXhtYXANCiAgICByYXM9aW1hZ2Uv
+eC1jbXUtcmFzdGVyDQogICAgcmdiPWltYWdlL3gtcmdiDQogICAgdGlmPWltYWdlL3RpZmYNCiAg
+ICB0aWZmPWltYWdlL3RpZmYNCiAgICB4Ym09aW1hZ2UveC14Yml0bWFwDQogICAgeHBtPWltYWdl
+L3gteHBpeG1hcA0KICAgIHh3ZD1pbWFnZS94LXh3aW5kb3dkdW1wDQoNCiAgICAjICBWaWRlbyBN
+SU1FIHR5cGVzDQogICAgYXZpPXZpZGVvL21zdmlkZW8NCiAgICBtb3Y9dmlkZW8vcXVpY2t0aW1l
+DQogICAgbW92aWU9dmlkZW8veC1zZ2ktbW92aWUNCiAgICBtcGU9dmlkZW8vbXBlZw0KICAgIG1w
+ZWc9dmlkZW8vbXBlZw0KICAgIG1wZz12aWRlby9tcGVnDQogICAgcXQ9dmlkZW8vcXVpY2t0aW1l
+DQoNCiAgICAjICBBdWRpbyBNSU1FIHR5cGVzDQogICAgYWlmPWF1ZGlvL3gtYWlmZg0KICAgIGFp
+ZmM9YXVkaW8veC1haWZmDQogICAgYWlmZj1hdWRpby94LWFpZmYNCiAgICBhdT1hdWRpby9iYXNp
+Yw0KICAgIHNuZD1hdWRpby9iYXNpYw0KICAgIHdhdj1hdWRpby93YXYNCiAgICBtaWQ9YXVkaW8v
+bWlkaQ0KICAgIHJtaT1hdWRpby9taWRpDQogICAgcmFtPWF1ZGlvL3gtcG4tcmVhbGF1ZGlvDQog
+ICAgcnBtPWF1ZGlvL3gtcG4tcmVhbGF1ZGlvLXBsdWdpbg0KICAgIHJhPWF1ZGlvL3gtcmVhbGF1
+ZGlvDQogICAgcm09YXVkaW8veC1wbi1yZWFsYXVkaW8NCiAgICBtcDM9YXVkaW8vbXBlZw0KICAg
+IG0zdT1hdWRpby9tcGVndXJsDQogICAgbXAzdXJsPWF1ZGlvL21wZWd1cmwNCg0KICAgICMgIEFw
+cGxpY2F0aW9uIE1JTUUgdHlwZXMNCiAgICBhYWI9YXBwbGljYXRpb24veC1hdXRob3J3YXJlLWJp
+bg0KICAgIGFhbT1hcHBsaWNhdGlvbi94LWF1dGhvcndhcmUtbWFwDQogICAgYWFzPWFwcGxpY2F0
+aW9uL3gtYXV0aG9yd2FyZS1zZWcNCiAgICBhaT1hcHBsaWNhdGlvbi9wb3N0c2NyaXB0DQogICAg
+YmNwaW89YXBwbGljYXRpb24veC1iY3Bpbw0KICAgIGJpbj1hcHBsaWNhdGlvbi9vY3RldC1zdHJl
+YW0NCiAgICBjZGY9YXBwbGljYXRpb24veC1uZXRjZGYNCiAgICBjcGlvPWFwcGxpY2F0aW9uL3gt
+Y3Bpbw0KICAgIGNzaD1hcHBsaWNhdGlvbi94LWNzaA0KICAgIGRjcj1hcHBsaWNhdGlvbi94LWRp
+cmVjdG9yDQogICAgZGlyPWFwcGxpY2F0aW9uL3gtZGlyZWN0b3INCiAgICBkb2M9YXBwbGljYXRp
+b24vbXN3b3JkDQogICAgZHZpPWFwcGxpY2F0aW9uL3gtZHZpDQogICAgZHhyPWFwcGxpY2F0aW9u
+L3gtZGlyZWN0b3INCiAgICBlcHM9YXBwbGljYXRpb24vcG9zdHNjcmlwdA0KICAgIGd0YXI9YXBw
+bGljYXRpb24veC1ndGFyDQogICAgZ3o9YXBwbGljYXRpb24veC1nemlwDQogICAgaGRmPWFwcGxp
+Y2F0aW9uL3gtaGRmDQogICAgamFyPWFwcGxpY2F0aW9uL2phdmEtYXJjaGl2ZQ0KICAgIGpzPWFw
+cGxpY2F0aW9uL3gtamF2YXNjcmlwdA0KICAgIGxhdGV4PWFwcGxpY2F0aW9uL3gtbGF0ZXgNCiAg
+ICBsdHg9YXBwbGljYXRpb24veC1sYXRleA0KICAgIGx6aD1hcHBsaWNhdGlvbi94LWx6aA0KICAg
+IG1hbj1hcHBsaWNhdGlvbi94LXRyb2ZmLW1hbg0KICAgIG1lPWFwcGxpY2F0aW9uL3gtdHJvZmYt
+bWUNCiAgICBtcz1hcHBsaWNhdGlvbi94LXRyb2ZmLW1zDQogICAgbmM9YXBwbGljYXRpb24veC1u
+ZXRjZGYNCiAgICBvZGE9YXBwbGljYXRpb24vb2RhDQogICAgcGRmPWFwcGxpY2F0aW9uL3BkZg0K
+ICAgIHBzPWFwcGxpY2F0aW9uL3Bvc3RzY3JpcHQNCiAgICByb2ZmPWFwcGxpY2F0aW9uL3gtdHJv
+ZmYNCiAgICBydGY9YXBwbGljYXRpb24vcnRmDQogICAgc2g9YXBwbGljYXRpb24veC1zaA0KICAg
+IHNoYXI9YXBwbGljYXRpb24veC1zaGFyDQogICAgc3BsPWFwcGxpY2F0aW9uL2Z1dHVyZXNwbGFz
+aA0KICAgIHNyYz1hcHBsaWNhdGlvbi94LXdhaXMtc291cmNlDQogICAgc3Y0Y3Bpbz1hcHBsaWNh
+dGlvbi94LXN2NGNwaW8NCiAgICBzdjRjcmM9YXBwbGljYXRpb24veC1zdjRjcmMNCiAgICBzd2Y9
+YXBwbGljYXRpb24veC1zaG9ja3dhdmUtZmxhc2gNCiAgICB0PWFwcGxpY2F0aW9uL3gtdHJvZmYN
+CiAgICB0YXI9YXBwbGljYXRpb24vdGFyDQogICAgdGNsPWFwcGxpY2F0aW9uL3gtdGNsDQogICAg
+dGV4PWFwcGxpY2F0aW9uL3gtdGV4DQogICAgdGV4aT1hcHBsaWNhdGlvbi94LXRleGluZm8NCiAg
+ICB0ZXhpbmZvPWFwcGxpY2F0aW9uL3gtdGV4aW5mbw0KICAgIHRnej1hcHBsaWNhdGlvbi94LWd6
+aXANCiAgICB0cj1hcHBsaWNhdGlvbi94LXRyb2ZmDQogICAgdHhpPWFwcGxpY2F0aW9uL3gtdGV4
+aW5mbw0KICAgIHVzdGFyPWFwcGxpY2F0aW9uL3gtdXN0YXINCiAgICB6aXA9YXBwbGljYXRpb24v
+emlwDQoNCiAgICAjICBWUk1MIE1JTUUgdHlwZXMNCiAgICB3cmw9eC13b3JsZC94LXZybWwNCiAg
+ICB3cno9eC13b3JsZC94LXZybWwNCg==
+
+
+--========/4153621200120A7A/ims2a.cp.tin.it
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="xitami.aut"
+
+IyAgIFRoaXMgc2VjdGlvbiBkZWZpbmVzIHRoZSBwYXNzd29yZCBmb3IgdGhlIGJyb3dzZXItYmFz
+ZWQgYWRtaW5pc3RyYXRpb24NCiMgICBzY3JlZW5zLiAgV2hlbiB5b3UgaW5zdGFsbCBYaXRhbWks
+IHRoZSBpbml0aWFsIHBhc3N3b3JkIGlzICctJywgbWVhbmluZw0KIyAgICdubyBhY2Nlc3MnLiAg
+V2UgZG9uJ3QgbGlrZSBkZWZhdWx0IHBhc3N3b3Jkcy4gIFlvdSBzaG91bGQgY2hhbmdlIGJvdGgN
+CiMgICB0aGUgdXNlciBuYW1lIGFuZCBwYXNzd29yZCB0byBzb21ldGhpbmcgc2FmZS4NCiMNCiMg
+ICBTcGVjaWFsIGVudHJpZXM6DQojICAgICAgIHdlYm1hc2sgICAgICAgaW5jbHVkZS9leGNsdWRl
+IHNwZWNpZmljIElQIGFkZHJlc3Nlcw0KIyAgICAgICByZWFsbSAgICAgICAgIHJlYWxtIGZvciBh
+dXRoZW50aWNhdGlvbg0KIyAgICAgICBodHRwLXB1dCAgICAgIGFsbG93IEhUVFAgUFVUIG1ldGhv
+ZA0KIyAgICAgICBodHRwLWRlbGV0ZSAgIGFsbG93IEhUVFAgREVMRVRFIG1ldGhvZA0KIyAgICAg
+ICBhbGw9KiAgICAgICAgIGFsbG93IGFjY2VzcyB0byBhbGwgdXNlcnMNCiMqRU5EDQpbL2FkbWlu
+XQ0KICAgIEFkbWluPS0gICAgICAgICAgICAgIyAgIEJ5IGRlZmF1bHQsIGFkbWluIGFjY2VzcyBp
+cyBkaXNhYmxlZA0KIyAgIEFkbWluPUxpblBvcFRlYQ0KIyAgIFdlYm1hc2s9bG9jYWwgICAgICAg
+IyAgIDw9PSB3aGVuICdsb2NhbCcsIHJlbW90ZSBhY2Nlc3MgaXMgbm90IGFsbG93ZWQNCg0KW1By
+aXZhdGVdDQogICAgSmFja3k9cm9idXN0YQ0KICAgIEpvbmFzPXJlYWx0aW1lDQogICAgU2FyYWg9
+YXJhYmljYQ0KDQpbRG9jdW1lbnRpb25dDQogICAgYWxsPSoNCiAgICB3ZWJtYXNrPWxvY2FsDQoN
+CltTdGF0c10NCiAgICBBZG1pbj1RemVDYXQ5Ng0KICAgIFJvb3Q9UGFrWXVwVG9uDQogICAgaHR0
+cC1wdXQ9MQ0KICAgIGh0dHAtZGVsZXRlPTENCg==
+
+--========/4153621200120A7A/ims2a.cp.tin.it--
+
+
+From xitami@lists.xitami.org  Sat Dec 11 14:50:28 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Sat, 11 Dec 2004 09:50:28 -0500
+Subject: [Xitami] Xitami on XP SP2
+In-Reply-To: <132ABE62AF6A9045BCD3DF25BF82083EF3C919@MHMAIL03.hydro.mb.c
+ a>
+Message-ID: <3.0.6.32.20041211095028.009f4520@mail.shininglightpro.com>
+
+At 12:11 PM 12/10/2004 -0600, Bennett, Craig writeth:
+>> My suggestion is to remove XP SP2.  
+>> It is for idiots that can't protect themselves. 
+>
+> While I would agree that SP2 does introduce a lot of fixes so that
+>people will be safe from themselves, I would not recommend dumping it.
+>In addition to the point and drool enhancements, there are a lot of
+>security fixes included.  If you are gonna use XP, you need to make sure
+>your security patches are up to date.  Much better to either turn off
+>what you don't need (does not take that long) or make sure you apply all
+>the individual patches that apply.
+
+I use SP2 across the board and without problems and SP2 actually has
+enhanced wireless support - my laptop runs much better with it than what it
+did with SP1.
+
+Not that I run a web server over wireless or anything :P
+
+I, of course, have turned everything "security-wise" off (firewall, some
+parts of automatic updates, auto-detection of anti-virus software, and the
+tool that annoyingly decides how to secure my own PC that resides behind
+two heavily guarded routers/firewalls).
+
+Also, between the new built-in IE6 popup blocker AND the Google toolbar, I
+don't see any more popups (Google's toy was starting to fail when the IE6
+blocker came out).  What the IE6 blocker misses, the Google toolbar
+catches.  The only thing left that unfortunately still works are the DHTML
+ads that "pop-up" on some webpages to obstruct my view.  I understand why
+they aren't caught since they are a part of the webpage and to stop those
+would also mean stopping drop-down menus from showing up.
+
+Also, as Craig mentioned, SP2 comes with a junkload of security fixes and
+rollups.  The SP2 package was delayed forever because corporate users kept
+finding problems.  The SP2 Beta was interesting because it included debug
+trace builds of core OS components - each one contained developer contact
+information (names, phone numbers, e-mail addresses).  I'm sure that during
+that time, developers got a lot of calls from outsiders when bugs were
+encountered.
+
+So, SP2 is for everyone who wants to secure their PC.  Disable the Windows
+firewall, put a real hardware firewall (e.g. a router) between you and the
+Internet and everything should work great.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Mon Dec 13 03:07:38 2004
+From: xitami@lists.xitami.org (Hotmail)
+Date: Sun, 12 Dec 2004 19:07:38 -0800
+Subject: [Xitami] Installing Xitami Pro as a service
+Message-ID: <BAY13-DAV18DAD38EB498A8964ABDEEF8AB0@phx.gbl>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_067D_01C4E07D.D8C8AB20
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+How do I get Xitami Pro installed as a service?  Xitami Standard is =
+simply from the command line: xiwinnt -i , but xipro.exe doesn't have a =
+similar option.  Xipro.exe -s installs it in the background, but not as =
+a service.  I even tried using FireDaemon Pro, an external program that =
+installs applications as Windows services - but even that program isn't =
+helping.
+
+Thanks.
+-Russel
+------=_NextPart_000_067D_01C4E07D.D8C8AB20
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1400" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>How do I get Xitami Pro installed as a=20
+service?&nbsp; Xitami Standard is simply from the command line: xiwinnt =
+-i , but=20
+xipro.exe doesn't have a similar option.&nbsp; Xipro.exe -s installs it =
+in the=20
+background, but not as a service.&nbsp; I even tried using FireDaemon =
+Pro, an=20
+external program that installs applications as Windows services - but =
+even that=20
+program isn't helping.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Thanks.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>-Russel</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_067D_01C4E07D.D8C8AB20--
+
+
+From xitami@lists.xitami.org  Mon Dec 13 13:16:06 2004
+From: xitami@lists.xitami.org (Ricketts, Layne)
+Date: Mon, 13 Dec 2004 08:16:06 -0500
+Subject: [Xitami] Installing Xitami as a service
+Message-ID: <118E64323675BE408C22470D8013D06B05217410@fangorn.cc.vt.edu>
+
+
+See my recent post below and the response from Steve Winn. It worked
+perfectly for me, although I am using the standard version, not Xitami
+Pro. Xitami 2.5c2.
+
+Layne Ricketts
+
+
+How do I get Xitami Pro installed as a service?  Xitami Standard is
+simply from the command line: xiwinnt -i , but xipro.exe doesn't have a
+similar option.  Xipro.exe -s installs it in the background, but not as
+a service.  I even tried using FireDaemon Pro, an external program that
+installs applications as Windows services - but even that program isn't
+helping.
+=20
+Thanks.
+-Russel
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org] On Behalf Of Steve Winn
+Sent: Saturday, December 04, 2004 12:57 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Installing Xitami as a service
+
+The older version 2.4d9 that had the installer was a lot simpler to
+figure out, but the newer open source versions are just as easy once you
+figure out what to do (guess that's true with anything heh).
+
+1. Unzip the xitami archive to c:\xitami 2. In the \xitami\win32 folder,
+copy the xicpl32.cpl to your
+\windows\system32 directory. Copy xisrv32.exe to the \xitami directory.
+3. Goto a command prompt, type "cd\xitami" to change to the xitami
+directory. Then type "xisrv32.exe -i" to install the service. The
+service is now installed.
+
+To uninstall the service you can run "xisrv32.exe -u".
+
+The service will automatically start when you reboot, or go into
+services and start it manually, or open the xitami control panel and
+start it there.
+
+If you are going to be accessing folders or files over the network, you
+may need to go into services and tell the xitami service to logon with
+an account that has access.
+
+Steve
+
+
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org
+> [mailto:xitami-admin@lists.xitami.org] On Behalf Of Ricketts, Layne
+> Sent: Saturday, December 04, 2004 9:50 AM
+> To: Xitami@lists.xitami.org
+> Subject: [Xitami] Installing Xitami as a service
+>=20
+>=20
+> =20
+> I have been running a small web site on Xitami for a few years, first=20
+> the console version and now the GUI. I would like to run it as a=20
+> service if possible, but I can't get it to go that way. The=20
+> documentation hasn't helped much. Running xisrv32.exe does not seem to
+
+> do anything. I have placed it and the Control Panel (xicpl32.cpl) in=20
+> the Windows System32 folder, but although I can see and open the=20
+> Xitami Control Panel, nothing happens when I try to start it. The=20
+> control panel shows its status as suspended. I can launch any of the=20
+> standard executables (xitami.exe, xidos32.exe, and
+> xigui32.exe) and the web server starts right up. If any one out there=20
+> has managed to run Xitami as a Windows service, can you let me know=20
+> what it is I need to do? I have not been able to get it to work with=20
+> either Windows 2000 or Windows XP. Thanks.
+> =20
+> =20
+> =20
+> Layne Ricketts - Assistant Manager
+> Outreach Technical Services
+> Virginia Tech
+> phone: 540-231-9483  fax: 540-231-8672
+> =20
+
+How do I get Xitami Pro installed as a service?  Xitami Standard is
+simply from the command line: xiwinnt -i , but xipro.exe doesn't have a
+similar option.  Xipro.exe -s installs it in the background, but not as
+a service.  I even tried using FireDaemon Pro, an external program that
+installs applications as Windows services - but even that program isn't
+helping.
+=20
+Thanks.
+-Russel
+
+
+From xitami@lists.xitami.org  Wed Dec 22 04:42:45 2004
+From: xitami@lists.xitami.org (Stephen S. Disbrow)
+Date: Tue, 21 Dec 2004 23:42:45 -0500
+Subject: [Xitami] SSI problem....
+Message-ID: <000601c4e7e0$ae6f3230$6401a8c0@gatekeeper>
+
+This is a multi-part message in MIME format.
+
+--Boundary_(ID_z33RHmsnCPvnh5nwWKFHnA)
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+Hello,
+
+        I changed my default1 entry to point to index.shtml which is as follows;
+<html>
+<head>
+<title>OUR FAMILY</title>
+</head>
+
+<body Text=#ffffff bgcolor="#000000">
+<CENTER>
+<BR><BR><BR>
+<H1>
+<MARQUEE>This page is under construction.</MARQUEE>
+</H1>
+<BR><BR><BR>
+<!--#INCLUDE VIRTUAL="cgi-bin/time.pl"-->
+</CENTER>
+</body>
+</HTML>
+
+
+</html>
+
+I placed my perl in cgi-bin time.pl it looks as follows;
+#! /usr/bin/perl
+
+$ENV{"TZ"} = "EST5EDT";
+($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+if ($hour >  12)
+{
+ $hour = $hour - 12;
+ $ind = "PM";
+}
+elsif ($hour == 12)
+{
+ $ind = "PM";
+}
+elsif ($hour == 0)
+{
+ $hour = 12;
+ $ind = "AM";
+}
+else
+{
+ $ind = "AM";
+}
+$day=(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday)[$wday];
+$month=(January,February,March,April,May,June,July,August,September,October,November,December)[$mon];
+print "Content-type: text/html\n\n";
+printf ("%s %s %02d %4d, %02d:%02d %2s", $day, $month, $mday, (1900+$year), $hour, $min, $ind);
+
+exit 0;
+
+The problem is when  I attempt to open the page as localhost the system seems to hang for a long period of time I don't know what is wrong if anyone could tell me what's wrong I'd really appreciate it. I run the same shtml doc and cgi on a apache web server and it works perfect. Any help would really be appreciated.
+I am running on WinXPHome  xitami-25 version as a service(xisrv32.exe);
+
+Thank You,
+
+Stephen S. Disbrow
+
+Stephen S. Disbrow
+
+--Boundary_(ID_z33RHmsnCPvnh5nwWKFHnA)
+Content-type: text/html; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="MSHTML 6.00.2900.2523" name=GENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=#ffffff>
+<DIV><FONT face=Arial size=2>Hello,</FONT></DIV>
+<DIV>
+<DIV><FONT face=Arial size=2></FONT>&nbsp;</DIV>
+<DIV>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; I changed my default1 entry to point 
+to index.shtml which is as follows;</DIV></DIV>
+<DIV><FONT face=Arial size=2>&lt;html&gt;<BR>&lt;head&gt;<BR>&lt;title&gt;OUR 
+FAMILY&lt;/title&gt;<BR>&lt;/head&gt;</FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT>&nbsp;</DIV>
+<DIV><FONT face=Arial size=2>&lt;body Text=#ffffff 
+bgcolor="#000000"&gt;<BR>&lt;CENTER&gt;<BR>&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;<BR>&lt;H1&gt;<BR>&lt;MARQUEE&gt;This 
+page is under 
+construction.&lt;/MARQUEE&gt;<BR>&lt;/H1&gt;<BR>&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;<BR>&lt;!--#INCLUDE 
+VIRTUAL="cgi-bin/time.pl"--&gt;<BR>&lt;/CENTER&gt;<BR>&lt;/body&gt;<BR>&lt;/HTML&gt;</FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT>&nbsp;</DIV><FONT face=Arial size=2>
+<DIV><BR>&lt;/html&gt;</DIV>
+<DIV>&nbsp;</DIV></FONT>
+<DIV><FONT face=Arial size=2>I placed my perl in cgi-bin time.pl it looks as 
+follows;</FONT></DIV>
+<DIV><FONT face=Arial size=2>#! /usr/bin/perl</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=Arial size=2>$ENV{"TZ"} = 
+"EST5EDT";<BR>($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = 
+localtime(time);<BR>if ($hour &gt;&nbsp; 12)<BR>{<BR>&nbsp;$hour = $hour - 
+12;<BR>&nbsp;$ind = "PM";<BR>}<BR>elsif ($hour == 12)<BR>{<BR>&nbsp;$ind = 
+"PM";<BR>}<BR>elsif ($hour == 0)<BR>{<BR>&nbsp;$hour = 12;<BR>&nbsp;$ind = 
+"AM";<BR>}<BR>else<BR>{<BR>&nbsp;$ind = 
+"AM";<BR>}<BR>$day=(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday)[$wday];<BR>$month=(January,February,March,April,May,June,July,August,September,October,November,December)[$mon];<BR>print 
+"Content-type: text/html\n\n";<BR>printf ("%s %s %02d %4d, %02d:%02d %2s", $day, 
+$month, $mday, (1900+$year), $hour, $min, $ind);</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=Arial size=2>exit 0;<BR></FONT></DIV>
+<DIV><FONT face=Arial size=2>The problem is when&nbsp; I attempt to open the 
+page as localhost the system seems to hang for a long period of time I don't 
+know what is wrong if anyone could tell me what's wrong I'd really appreciate 
+it. I run the same shtml doc and cgi on a apache web server and it works 
+perfect. Any help would really be appreciated.</FONT></DIV>
+<DIV><FONT face=Arial size=2>I am running on WinXPHome &nbsp;xitami-25 version 
+as a service(xisrv32.exe);</FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT>&nbsp;</DIV>
+<DIV><FONT face=Arial size=2>Thank You,</FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT>&nbsp;</DIV>
+<DIV><FONT face=Arial size=2>Stephen S. Disbrow</FONT></DIV>
+<DIV><FONT face=Arial size=2></FONT>&nbsp;</DIV>
+<DIV><FONT face=Arial size=2>Stephen S. Disbrow<BR></FONT></DIV></BODY></HTML>
+
+--Boundary_(ID_z33RHmsnCPvnh5nwWKFHnA)--
+
+
+From xitami@lists.xitami.org  Mon Dec 27 09:50:53 2004
+From: xitami@lists.xitami.org (Scott)
+Date: Mon, 27 Dec 2004 04:50:53 -0500 (EST)
+Subject: [Xitami] FTP and XP Pro Security Set Up
+Message-ID: <20041227095053.D6BD03DF0@xprdmailfe8.nwk.excite.com>
+
+I have been running Xitami since 1999 and I have had great success on windows 98, SE, ME, 2000, and XP pro until now.
+Currently I am running XP pro and Xitami v2.4d10 
+
+I have set up users and passwords pointing to individual directories in my ftproot. I had this running very well pre SP2 and there were no problems.  I'm not sure what happened.  I have since reinstalled XP pro with only SP1.  I am still experiencing the same problem.  My ISP (an educational institution) had poked holes in the firewall back in 1999 for http and ftp for my IP address.  I checked with them and nothing has changed.  
+FTP works in house, but not outside the LAN.
+
+So what might be at issue here?
+How do I set up security permissions in XP pro for Xitami?
+Do I have to set up set up "matching" user accounts in XP pro to allow users access to their directories?  How do I set up file permissions in XP pro folders?
+
+I had done this in the past and it worked with matching user names and passwords.  But now things are not.  Help......
+
+_______________________________________________
+Join Excite! - http://www.excite.com
+The most personalized portal on the Web!
+
+
+From xitami@lists.xitami.org  Mon Dec 27 10:25:36 2004
+From: xitami@lists.xitami.org (Admin (MRJ))
+Date: Mon, 27 Dec 2004 03:25:36 -0700
+Subject: [Xitami] FTP and XP Pro Security Set Up
+References: <20041227095053.D6BD03DF0@xprdmailfe8.nwk.excite.com>
+Message-ID: <000501c4ebfe$687f72e0$c901a8c0@mrjx>
+
+Same as previous messages have pointed out in here.
+SP 2 has the bad habbit of installing a default firewall that will decide by
+itself to close anything and everything out.
+
+I know of no sure way to uninstall SP 2 to make it work or disable it since
+I shunned the SP2 and dont use XP for server hosting.
+
+The only thing I know I had to do was to re-install my entire box and
+reinstall without SP2 to make it work with all my apps again.
+
+
+----- Original Message -----
+From: "Scott" <scdanville@excite.com>
+To: <xitami@lists.xitami.org>
+Sent: Monday, December 27, 2004 2:50
+Subject: [Xitami] FTP and XP Pro Security Set Up
+
+
+>
+> I have been running Xitami since 1999 and I have had great success on
+windows 98, SE, ME, 2000, and XP pro until now.
+> Currently I am running XP pro and Xitami v2.4d10
+>
+> I have set up users and passwords pointing to individual directories in my
+ftproot. I had this running very well pre SP2 and there were no problems.
+I'm not sure what happened.  I have since reinstalled XP pro with only SP1.
+I am still experiencing the same problem.  My ISP (an educational
+institution) had poked holes in the firewall back in 1999 for http and ftp
+for my IP address.  I checked with them and nothing has changed.
+> FTP works in house, but not outside the LAN.
+>
+> So what might be at issue here?
+> How do I set up security permissions in XP pro for Xitami?
+> Do I have to set up set up "matching" user accounts in XP pro to allow
+users access to their directories?  How do I set up file permissions in XP
+pro folders?
+>
+> I had done this in the past and it worked with matching user names and
+passwords.  But now things are not.  Help......
+>
+> _______________________________________________
+> Join Excite! - http://www.excite.com
+> The most personalized portal on the Web!
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Wed Dec 29 17:43:47 2004
+From: xitami@lists.xitami.org (Steven L. Haas)
+Date: Wed, 29 Dec 2004 11:43:47 -0600
+Subject: [Xitami] Xitami load/connect errors
+Message-ID: <41D2ECD3.9040508@gmail.com>
+
+When I boot up, Xitami tries to start but keeps failing.  If I close the 
+inetinfo process in windows XP (sometimes I have to close it once, and 
+sometimes 100 times in a row) it will eventually load.  I don't know 
+what the heck is going on here.  Can anyone help?
+
+
+From xitami@lists.xitami.org  Wed Dec 29 17:47:32 2004
+From: xitami@lists.xitami.org (Admin (MRJ))
+Date: Wed, 29 Dec 2004 10:47:32 -0700
+Subject: [Xitami] Xitami load/connect errors
+References: <41D2ECD3.9040508@gmail.com>
+Message-ID: <006501c4edce$79ba87d0$c901a8c0@mrjx>
+
+Isn't INETINFO a part of IIS?
+
+Your IIS would take over port 80 if installed and you need ot exit it before
+being able to run Xitami on port 80.
+
+Disable IIS and you should be able to run it.
+
+I may be wrong so please excuse any erroneous info.
+
+
+----- Original Message -----
+From: "Steven L. Haas" <slhaas@gmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, December 29, 2004 10:43
+Subject: [Xitami] Xitami load/connect errors
+
+
+> When I boot up, Xitami tries to start but keeps failing.  If I close the
+> inetinfo process in windows XP (sometimes I have to close it once, and
+> sometimes 100 times in a row) it will eventually load.  I don't know
+> what the heck is going on here.  Can anyone help?
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Thu Dec 30 00:00:05 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Wed, 29 Dec 2004 19:00:05 -0500
+Subject: [Xitami] Xitami load/connect errors
+In-Reply-To: <006501c4edce$79ba87d0$c901a8c0@mrjx>
+Message-ID: <NFBBKNGGELNPLMHPBOCEAEPEEJAA.ron@miplanet.net>
+
+You can run windows IIS on a different port if you need ASP. I run my Xitami
+on 80 and ISS on 85 for the same directories.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Admin (MRJ)
+Sent: Wednesday, December 29, 2004 12:48 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami load/connect errors
+
+
+Isn't INETINFO a part of IIS?
+
+Your IIS would take over port 80 if installed and you need ot exit it before
+being able to run Xitami on port 80.
+
+Disable IIS and you should be able to run it.
+
+I may be wrong so please excuse any erroneous info.
+
+
+----- Original Message -----
+From: "Steven L. Haas" <slhaas@gmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, December 29, 2004 10:43
+Subject: [Xitami] Xitami load/connect errors
+
+
+> When I boot up, Xitami tries to start but keeps failing.  If I close the
+> inetinfo process in windows XP (sometimes I have to close it once, and
+> sometimes 100 times in a row) it will eventually load.  I don't know
+> what the heck is going on here.  Can anyone help?
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.6 - Release Date: 12/28/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.6 - Release Date: 12/28/2004
+
+
+From xitami@lists.xitami.org  Thu Dec 30 08:49:18 2004
+From: xitami@lists.xitami.org (Steven L. Haas)
+Date: Thu, 30 Dec 2004 02:49:18 -0600
+Subject: [Xitami] Xitami load/connect errors
+In-Reply-To: <006501c4edce$79ba87d0$c901a8c0@mrjx>
+References: <41D2ECD3.9040508@gmail.com> <006501c4edce$79ba87d0$c901a8c0@mrjx>
+Message-ID: <41D3C10E.4070000@gmail.com>
+
+What is IIS or ISS?  I saw both of those things quoted here... how would 
+I disable it, and how would I change it's port?  Most importantly, what 
+does it do, so I know if I should disable or reroute.  Thanks for the 
+help folks!
+
+Admin (MRJ) wrote:
+
+>Isn't INETINFO a part of IIS?
+>
+>Your IIS would take over port 80 if installed and you need ot exit it before
+>being able to run Xitami on port 80.
+>
+>Disable IIS and you should be able to run it.
+>
+>I may be wrong so please excuse any erroneous info.
+>
+>
+>----- Original Message -----
+>From: "Steven L. Haas" <slhaas@gmail.com>
+>To: <xitami@lists.xitami.org>
+>Sent: Wednesday, December 29, 2004 10:43
+>Subject: [Xitami] Xitami load/connect errors
+>
+>
+>  
+>
+>>When I boot up, Xitami tries to start but keeps failing.  If I close the
+>>inetinfo process in windows XP (sometimes I have to close it once, and
+>>sometimes 100 times in a row) it will eventually load.  I don't know
+>>what the heck is going on here.  Can anyone help?
+>>
+>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>    
+>>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>  
+>
+
+
+From xitami@lists.xitami.org  Thu Dec 30 11:53:52 2004
+From: xitami@lists.xitami.org (Admin (MRJ))
+Date: Thu, 30 Dec 2004 04:53:52 -0700
+Subject: [Xitami] Xitami load/connect errors
+References: <41D2ECD3.9040508@gmail.com> <006501c4edce$79ba87d0$c901a8c0@mrjx> <41D3C10E.4070000@gmail.com>
+Message-ID: <001e01c4ee66$3bf14900$c901a8c0@mrjx>
+
+IIS is Internet Information Services
+The integrated web server that comes with XP and NT based O/S from Windows.
+The IIS verision on XP and W2K is no. 5 and W2K3 is IIS 6.
+They work slightly different.
+
+You need to
+
+right click the my computer icon on your desktop
+Select MANAGE
+Click Services And Applications
+Select the Services Icon on the left hand side..
+
+Look for the listing IIS Admin Service
+Right click it in the right hand screen.
+Select PROPERTIES
+Under startup type, select DISABLED instead of AUTOMATIC
+Click STOP
+Click OK
+
+That should do it.
+
+
+----- Original Message -----
+From: "Steven L. Haas" <slhaas@gmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, December 30, 2004 1:49
+Subject: Re: [Xitami] Xitami load/connect errors
+
+
+> What is IIS or ISS?  I saw both of those things quoted here... how would
+> I disable it, and how would I change it's port?  Most importantly, what
+> does it do, so I know if I should disable or reroute.  Thanks for the
+> help folks!
+>
+> Admin (MRJ) wrote:
+>
+> >Isn't INETINFO a part of IIS?
+> >
+> >Your IIS would take over port 80 if installed and you need ot exit it
+before
+> >being able to run Xitami on port 80.
+> >
+> >Disable IIS and you should be able to run it.
+> >
+> >I may be wrong so please excuse any erroneous info.
+> >
+> >
+> >----- Original Message -----
+> >From: "Steven L. Haas" <slhaas@gmail.com>
+> >To: <xitami@lists.xitami.org>
+> >Sent: Wednesday, December 29, 2004 10:43
+> >Subject: [Xitami] Xitami load/connect errors
+> >
+> >
+> >
+> >
+> >>When I boot up, Xitami tries to start but keeps failing.  If I close the
+> >>inetinfo process in windows XP (sometimes I have to close it once, and
+> >>sometimes 100 times in a row) it will eventually load.  I don't know
+> >>what the heck is going on here.  Can anyone help?
+> >>
+> >>
+> >>--
+> >>Xitami Users Mailing List -- For Xitami support
+> >>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >>
+> >>
+> >>
+> >
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+> >
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Thu Dec 30 12:53:16 2004
+From: xitami@lists.xitami.org (Steven L. Haas)
+Date: Thu, 30 Dec 2004 06:53:16 -0600
+Subject: [Xitami] Xitami load/connect errors
+In-Reply-To: <001e01c4ee66$3bf14900$c901a8c0@mrjx>
+References: <41D2ECD3.9040508@gmail.com> <006501c4edce$79ba87d0$c901a8c0@mrjx> <41D3C10E.4070000@gmail.com> <001e01c4ee66$3bf14900$c901a8c0@mrjx>
+Message-ID: <41D3FA3C.1070100@gmail.com>
+
+That fixed it... thanks!
+
+Admin (MRJ) wrote:
+
+>IIS is Internet Information Services
+>The integrated web server that comes with XP and NT based O/S from Windows.
+>The IIS verision on XP and W2K is no. 5 and W2K3 is IIS 6.
+>They work slightly different.
+>
+>You need to
+>
+>right click the my computer icon on your desktop
+>Select MANAGE
+>Click Services And Applications
+>Select the Services Icon on the left hand side..
+>
+>Look for the listing IIS Admin Service
+>Right click it in the right hand screen.
+>Select PROPERTIES
+>Under startup type, select DISABLED instead of AUTOMATIC
+>Click STOP
+>Click OK
+>
+>That should do it.
+>
+>
+>----- Original Message -----
+>From: "Steven L. Haas" <slhaas@gmail.com>
+>To: <xitami@lists.xitami.org>
+>Sent: Thursday, December 30, 2004 1:49
+>Subject: Re: [Xitami] Xitami load/connect errors
+>
+>
+>  
+>
+>>What is IIS or ISS?  I saw both of those things quoted here... how would
+>>I disable it, and how would I change it's port?  Most importantly, what
+>>does it do, so I know if I should disable or reroute.  Thanks for the
+>>help folks!
+>>
+>>Admin (MRJ) wrote:
+>>
+>>    
+>>
+>>>Isn't INETINFO a part of IIS?
+>>>
+>>>Your IIS would take over port 80 if installed and you need ot exit it
+>>>      
+>>>
+>before
+>  
+>
+>>>being able to run Xitami on port 80.
+>>>
+>>>Disable IIS and you should be able to run it.
+>>>
+>>>I may be wrong so please excuse any erroneous info.
+>>>
+>>>
+>>>----- Original Message -----
+>>>From: "Steven L. Haas" <slhaas@gmail.com>
+>>>To: <xitami@lists.xitami.org>
+>>>Sent: Wednesday, December 29, 2004 10:43
+>>>Subject: [Xitami] Xitami load/connect errors
+>>>
+>>>
+>>>
+>>>
+>>>      
+>>>
+>>>>When I boot up, Xitami tries to start but keeps failing.  If I close the
+>>>>inetinfo process in windows XP (sometimes I have to close it once, and
+>>>>sometimes 100 times in a row) it will eventually load.  I don't know
+>>>>what the heck is going on here.  Can anyone help?
+>>>>
+>>>>
+>>>>--
+>>>>Xitami Users Mailing List -- For Xitami support
+>>>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>
+>>>>        
+>>>>
+>>>
+>>>--
+>>>Xitami Users Mailing List -- For Xitami support
+>>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>>
+>>>      
+>>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>    
+>>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>  
+>
+
+
+From xitami@lists.xitami.org  Thu Dec 30 14:50:11 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 30 Dec 2004 09:50:11 -0500
+Subject: [Xitami] Xitami load/connect errors
+In-Reply-To: <41D3FA3C.1070100@gmail.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOEPFEJAA.ron@miplanet.net>
+
+ISS was a ytpo err typo of IIS.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Steven L. Haas
+Sent: Thursday, December 30, 2004 7:53 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami load/connect errors
+
+
+That fixed it... thanks!
+
+Admin (MRJ) wrote:
+
+>IIS is Internet Information Services
+>The integrated web server that comes with XP and NT based O/S from Windows.
+>The IIS verision on XP and W2K is no. 5 and W2K3 is IIS 6.
+>They work slightly different.
+>
+>You need to
+>
+>right click the my computer icon on your desktop
+>Select MANAGE
+>Click Services And Applications
+>Select the Services Icon on the left hand side..
+>
+>Look for the listing IIS Admin Service
+>Right click it in the right hand screen.
+>Select PROPERTIES
+>Under startup type, select DISABLED instead of AUTOMATIC
+>Click STOP
+>Click OK
+>
+>That should do it.
+>
+>
+>----- Original Message -----
+>From: "Steven L. Haas" <slhaas@gmail.com>
+>To: <xitami@lists.xitami.org>
+>Sent: Thursday, December 30, 2004 1:49
+>Subject: Re: [Xitami] Xitami load/connect errors
+>
+>
+>
+>
+>>What is IIS or ISS?  I saw both of those things quoted here... how would
+>>I disable it, and how would I change it's port?  Most importantly, what
+>>does it do, so I know if I should disable or reroute.  Thanks for the
+>>help folks!
+>>
+>>Admin (MRJ) wrote:
+>>
+>>
+>>
+>>>Isn't INETINFO a part of IIS?
+>>>
+>>>Your IIS would take over port 80 if installed and you need ot exit it
+>>>
+>>>
+>before
+>
+>
+>>>being able to run Xitami on port 80.
+>>>
+>>>Disable IIS and you should be able to run it.
+>>>
+>>>I may be wrong so please excuse any erroneous info.
+>>>
+>>>
+>>>----- Original Message -----
+>>>From: "Steven L. Haas" <slhaas@gmail.com>
+>>>To: <xitami@lists.xitami.org>
+>>>Sent: Wednesday, December 29, 2004 10:43
+>>>Subject: [Xitami] Xitami load/connect errors
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>>When I boot up, Xitami tries to start but keeps failing.  If I close the
+>>>>inetinfo process in windows XP (sometimes I have to close it once, and
+>>>>sometimes 100 times in a row) it will eventually load.  I don't know
+>>>>what the heck is going on here.  Can anyone help?
+>>>>
+>>>>
+>>>>--
+>>>>Xitami Users Mailing List -- For Xitami support
+>>>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>>
+>>>>
+>>>>
+>>>>
+>>>>
+>>>
+>>>--
+>>>Xitami Users Mailing List -- For Xitami support
+>>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>>
+>>>
+>>>
+>>>
+>>>
+>>--
+>>Xitami Users Mailing List -- For Xitami support
+>>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+>>
+>>
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.6 - Release Date: 12/28/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.6 - Release Date: 12/28/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 16:02:16 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Dec 2004 11:02:16 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEOEPFEJAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOEPIEJAA.ron@miplanet.net>
+
+Has anyone else experienced slow downs with Xitami, mine has slowed so much
+that pages will not open. I am running AVG Antivirus. Any ideas?
+
+Ron
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 16:31:25 2004
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Fri, 31 Dec 2004 11:31:25 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEOEPIEJAA.ron@miplanet.net>
+References: <NFBBKNGGELNPLMHPBOCEOEPFEJAA.ron@miplanet.net>
+Message-ID: <3.0.6.32.20041231113125.009cfbf0@mail.shininglightpro.com>
+
+At 11:02 AM 12/31/2004 -0500, Ron Ackerman writeth:
+>Has anyone else experienced slow downs with Xitami, mine has slowed so much
+>that pages will not open. I am running AVG Antivirus. Any ideas?
+
+Well, AVG scans any file that gets opened either for reading or writing for
+viruses.  I never have had a problem with Xitami slowing down.
+
+What AVG probably does is hook the CreateFile() API using a global hooking
+mechanism (DLL).  If it leaks resources while handling the hook, it could
+slow down the whole system, but not just one application.  Disabling AVG
+won't remove the hook DLL.  Those things can be difficult to downright
+impossible to remove.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+From xitami@lists.xitami.org  Fri Dec 31 16:44:28 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Dec 2004 11:44:28 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <3.0.6.32.20041231113125.009cfbf0@mail.shininglightpro.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEIEPJEJAA.ron@miplanet.net>
+
+Thomas,
+
+I've been running AVG for over a year and it is not the problem, there is
+something else going on. I'll keep stabbing away at it and see what I can
+figure out. I know that there are some new viruses out there that may not be
+in the virus definitions yet. One in particular infects phpBB and may infect
+other php sites. I'm not running phpBB though.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Thomas J. Hruska
+Sent: Friday, December 31, 2004 11:31 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami has slowed to a crawl
+
+
+At 11:02 AM 12/31/2004 -0500, Ron Ackerman writeth:
+>Has anyone else experienced slow downs with Xitami, mine has slowed so much
+>that pages will not open. I am running AVG Antivirus. Any ideas?
+
+Well, AVG scans any file that gets opened either for reading or writing for
+viruses.  I never have had a problem with Xitami slowing down.
+
+What AVG probably does is hook the CreateFile() API using a global hooking
+mechanism (DLL).  If it leaks resources while handling the hook, it could
+slow down the whole system, but not just one application.  Disabling AVG
+won't remove the hook DLL.  Those things can be difficult to downright
+impossible to remove.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 17:05:12 2004
+From: xitami@lists.xitami.org (Bill Warren)
+Date: Fri, 31 Dec 2004 12:05:12 -0500
+Subject: [Xitami] SSI problem....
+References: <000601c4e7e0$ae6f3230$6401a8c0@gatekeeper>
+Message-ID: <000e01c4ef5a$e48f7b00$6501a8c0@wgw1>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_000B_01C4EF30.FB769DA0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+i suggest using KeyFocus for a free webserver alternative.  I like it =
+better frankly.  :)
+  ----- Original Message -----=20
+  From: Stephen S. Disbrow=20
+  To: xitami@lists.xitami.org=20
+  Sent: Tuesday, December 21, 2004 11:42 PM
+  Subject: [Xitami] SSI problem....
+
+
+  Hello,
+
+          I changed my default1 entry to point to index.shtml which is =
+as follows;
+  <html>
+  <head>
+  <title>OUR FAMILY</title>
+  </head>
+
+  <body Text=3D#ffffff bgcolor=3D"#000000">
+  <CENTER>
+  <BR><BR><BR>
+  <H1>
+  <MARQUEE>This page is under construction.</MARQUEE>
+  </H1>
+  <BR><BR><BR>
+  <!--#INCLUDE VIRTUAL=3D"cgi-bin/time.pl"-->
+  </CENTER>
+  </body>
+  </HTML>
+
+
+  </html>
+
+  I placed my perl in cgi-bin time.pl it looks as follows;
+  #! /usr/bin/perl
+
+  $ENV{"TZ"} =3D "EST5EDT";
+  ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =3D =
+localtime(time);
+  if ($hour >  12)
+  {
+   $hour =3D $hour - 12;
+   $ind =3D "PM";
+  }
+  elsif ($hour =3D=3D 12)
+  {
+   $ind =3D "PM";
+  }
+  elsif ($hour =3D=3D 0)
+  {
+   $hour =3D 12;
+   $ind =3D "AM";
+  }
+  else
+  {
+   $ind =3D "AM";
+  }
+  =
+$day=3D(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday)[$wday];=
+
+  =
+$month=3D(January,February,March,April,May,June,July,August,September,Oct=
+ober,November,December)[$mon];
+  print "Content-type: text/html\n\n";
+  printf ("%s %s %02d %4d, %02d:%02d %2s", $day, $month, $mday, =
+(1900+$year), $hour, $min, $ind);
+
+  exit 0;
+
+  The problem is when  I attempt to open the page as localhost the =
+system seems to hang for a long period of time I don't know what is =
+wrong if anyone could tell me what's wrong I'd really appreciate it. I =
+run the same shtml doc and cgi on a apache web server and it works =
+perfect. Any help would really be appreciated.
+  I am running on WinXPHome  xitami-25 version as a =
+service(xisrv32.exe);
+
+  Thank You,
+
+  Stephen S. Disbrow
+
+  Stephen S. Disbrow
+
+------=_NextPart_000_000B_01C4EF30.FB769DA0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2900.2180" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>i suggest using KeyFocus for a free =
+webserver=20
+alternative.&nbsp; I like it better frankly.&nbsp; :)</FONT></DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dstevedis@optonline.net =
+href=3D"mailto:stevedis@optonline.net">Stephen=20
+  S. Disbrow</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Tuesday, December 21, =
+2004 11:42=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] SSI =
+problem....</DIV>
+  <DIV><BR></DIV>
+  <DIV><FONT face=3DArial size=3D2>Hello,</FONT></DIV>
+  <DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; I changed my default1 entry =
+to=20
+  point to index.shtml which is as follows;</DIV></DIV>
+  <DIV><FONT face=3DArial =
+size=3D2>&lt;html&gt;<BR>&lt;head&gt;<BR>&lt;title&gt;OUR=20
+  FAMILY&lt;/title&gt;<BR>&lt;/head&gt;</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>&lt;body Text=3D#ffffff=20
+  =
+bgcolor=3D"#000000"&gt;<BR>&lt;CENTER&gt;<BR>&lt;BR&gt;&lt;BR&gt;&lt;BR&g=
+t;<BR>&lt;H1&gt;<BR>&lt;MARQUEE&gt;This=20
+  page is under=20
+  =
+construction.&lt;/MARQUEE&gt;<BR>&lt;/H1&gt;<BR>&lt;BR&gt;&lt;BR&gt;&lt;B=
+R&gt;<BR>&lt;!--#INCLUDE=20
+  =
+VIRTUAL=3D"cgi-bin/time.pl"--&gt;<BR>&lt;/CENTER&gt;<BR>&lt;/body&gt;<BR>=
+&lt;/HTML&gt;</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV><FONT face=3DArial =
+size=3D2>
+  <DIV><BR>&lt;/html&gt;</DIV>
+  <DIV>&nbsp;</DIV></FONT>
+  <DIV><FONT face=3DArial size=3D2>I placed my perl in cgi-bin time.pl =
+it looks as=20
+  follows;</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>#! /usr/bin/perl</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>$ENV{"TZ"} =3D=20
+  "EST5EDT";<BR>($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) =
+=3D=20
+  localtime(time);<BR>if ($hour &gt;&nbsp; 12)<BR>{<BR>&nbsp;$hour =3D =
+$hour -=20
+  12;<BR>&nbsp;$ind =3D "PM";<BR>}<BR>elsif ($hour =3D=3D =
+12)<BR>{<BR>&nbsp;$ind =3D=20
+  "PM";<BR>}<BR>elsif ($hour =3D=3D 0)<BR>{<BR>&nbsp;$hour =3D =
+12;<BR>&nbsp;$ind =3D=20
+  "AM";<BR>}<BR>else<BR>{<BR>&nbsp;$ind =3D=20
+  =
+"AM";<BR>}<BR>$day=3D(Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Sat=
+urday)[$wday];<BR>$month=3D(January,February,March,April,May,June,July,Au=
+gust,September,October,November,December)[$mon];<BR>print=20
+  "Content-type: text/html\n\n";<BR>printf ("%s %s %02d %4d, %02d:%02d =
+%2s",=20
+  $day, $month, $mday, (1900+$year), $hour, $min, $ind);</FONT></DIV>
+  <DIV>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>exit 0;<BR></FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>The problem is when&nbsp; I attempt =
+to open the=20
+  page as localhost the system seems to hang for a long period of time I =
+don't=20
+  know what is wrong if anyone could tell me what's wrong I'd really =
+appreciate=20
+  it. I run the same shtml doc and cgi on a apache web server and it =
+works=20
+  perfect. Any help would really be appreciated.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>I am running on WinXPHome =
+&nbsp;xitami-25 version=20
+  as a service(xisrv32.exe);</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Thank You,</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Stephen S. Disbrow</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Stephen S.=20
+Disbrow<BR></FONT></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_000B_01C4EF30.FB769DA0--
+
+
+From xitami@lists.xitami.org  Fri Dec 31 17:14:54 2004
+From: xitami@lists.xitami.org (Admin (MRJ))
+Date: Fri, 31 Dec 2004 10:14:54 -0700
+Subject: [Xitami] Xitami has slowed to a crawl
+References: <NFBBKNGGELNPLMHPBOCEIEPJEJAA.ron@miplanet.net>
+Message-ID: <001301c4ef5c$3fa9d160$c901a8c0@mrjx>
+
+If you're running PHP I suggest upgrading that to latest set.
+We just had another site go offline becuase someone infected and took over
+SMTP on a server with PHP and a basic forum.
+If you run volic forum you should get their latest patch for this as well
+and upgrade your MySQL files.
+
+Apparently the system can be taken over and start running smtp bulk mailing
+from infected machines.
+Not sure if it applies to your system but worth a checkup/notice.
+
+    MRJ
+
+----- Original Message -----
+From: "Ron Ackerman" <ron@miplanet.net>
+To: <xitami@lists.xitami.org>
+Sent: Friday, December 31, 2004 9:44
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+> Thomas,
+>
+> I've been running AVG for over a year and it is not the problem, there is
+> something else going on. I'll keep stabbing away at it and see what I can
+> figure out. I know that there are some new viruses out there that may not
+be
+> in the virus definitions yet. One in particular infects phpBB and may
+infect
+> other php sites. I'm not running phpBB though.
+>
+> Ron
+>
+
+
+
+From xitami@lists.xitami.org  Fri Dec 31 17:26:54 2004
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Fri, 31 Dec 2004 09:26:54 -0800
+Subject: [Xitami] Xitami has slowed to a crawl
+References: <NFBBKNGGELNPLMHPBOCEIEPJEJAA.ron@miplanet.net>
+Message-ID: <002301c4ef5d$ec74efa0$6501a80a@comcast.net>
+
+Haven't experienced slow downs since installed latest Xitami (2.5c2 on
+dedicated Win98SE box).  Used to have problems after 6-8 weeks of up time.
+Had this strange "smthttp: error on socket160"  error that also went away
+with the update.  Re-boot, of course, fixed everything.
+
+Which version of AVG are you running?  They quit support for V 6.0 today to
+switch to version 7.  Today's V6 update requires a reboot which will mess up
+my "been up since" 10/7 record.  Oh well maybe tomorrow - New Years and all.
+
+Happy Merry,
+Charles
+
+
+----- Original Message -----
+From: "Ron Ackerman" <ron@miplanet.net>
+To: <xitami@lists.xitami.org>
+Sent: Friday, December 31, 2004 8:44 AM
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+> Thomas,
+>
+> I've been running AVG for over a year and it is not the problem, there is
+> something else going on. I'll keep stabbing away at it and see what I can
+> figure out. I know that there are some new viruses out there that may not
+be
+> in the virus definitions yet. One in particular infects phpBB and may
+infect
+> other php sites. I'm not running phpBB though.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On
+> Behalf Of Thomas J. Hruska
+> Sent: Friday, December 31, 2004 11:31 AM
+> To: xitami@lists.xitami.org
+> Subject: Re: [Xitami] Xitami has slowed to a crawl
+>
+>
+> At 11:02 AM 12/31/2004 -0500, Ron Ackerman writeth:
+> >Has anyone else experienced slow downs with Xitami, mine has slowed so
+much
+> >that pages will not open. I am running AVG Antivirus. Any ideas?
+>
+> Well, AVG scans any file that gets opened either for reading or writing
+for
+> viruses.  I never have had a problem with Xitami slowing down.
+>
+> What AVG probably does is hook the CreateFile() API using a global hooking
+> mechanism (DLL).  If it leaks resources while handling the hook, it could
+> slow down the whole system, but not just one application.  Disabling AVG
+> won't remove the hook DLL.  Those things can be difficult to downright
+> impossible to remove.
+>
+>
+> Thomas J. Hruska
+> Shining Light Productions
+> http://www.slproweb.com/
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> --
+> No virus found in this incoming message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+>
+> --
+> No virus found in this outgoing message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Dec 31 17:49:10 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Dec 2004 12:49:10 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEIEPJEJAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCECEPKEJAA.ron@miplanet.net>
+
+The problem wasn't Xitami at all, it was the drive I had Xitami on, it was
+corrupt. I did a repair of the drive and all is good now. Now the next
+question, what caused the corruption? If I figure it out I will report back
+with my findings.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Ron Ackerman
+Sent: Friday, December 31, 2004 11:44 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+Thomas,
+
+I've been running AVG for over a year and it is not the problem, there is
+something else going on. I'll keep stabbing away at it and see what I can
+figure out. I know that there are some new viruses out there that may not be
+in the virus definitions yet. One in particular infects phpBB and may infect
+other php sites. I'm not running phpBB though.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Thomas J. Hruska
+Sent: Friday, December 31, 2004 11:31 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami has slowed to a crawl
+
+
+At 11:02 AM 12/31/2004 -0500, Ron Ackerman writeth:
+>Has anyone else experienced slow downs with Xitami, mine has slowed so much
+>that pages will not open. I am running AVG Antivirus. Any ideas?
+
+Well, AVG scans any file that gets opened either for reading or writing for
+viruses.  I never have had a problem with Xitami slowing down.
+
+What AVG probably does is hook the CreateFile() API using a global hooking
+mechanism (DLL).  If it leaks resources while handling the hook, it could
+slow down the whole system, but not just one application.  Disabling AVG
+won't remove the hook DLL.  Those things can be difficult to downright
+impossible to remove.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 19:05:16 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Dec 2004 14:05:16 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <001301c4ef5c$3fa9d160$c901a8c0@mrjx>
+Message-ID: <NFBBKNGGELNPLMHPBOCEKEPKEJAA.ron@miplanet.net>
+
+Thanks I upgraded now I have 12 php sites completly down.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Admin (MRJ)
+Sent: Friday, December 31, 2004 12:15 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami has slowed to a crawl
+
+
+If you're running PHP I suggest upgrading that to latest set.
+We just had another site go offline becuase someone infected and took over
+SMTP on a server with PHP and a basic forum.
+If you run volic forum you should get their latest patch for this as well
+and upgrade your MySQL files.
+
+Apparently the system can be taken over and start running smtp bulk mailing
+from infected machines.
+Not sure if it applies to your system but worth a checkup/notice.
+
+    MRJ
+
+----- Original Message -----
+From: "Ron Ackerman" <ron@miplanet.net>
+To: <xitami@lists.xitami.org>
+Sent: Friday, December 31, 2004 9:44
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+> Thomas,
+>
+> I've been running AVG for over a year and it is not the problem, there is
+> something else going on. I'll keep stabbing away at it and see what I can
+> figure out. I know that there are some new viruses out there that may not
+be
+> in the virus definitions yet. One in particular infects phpBB and may
+infect
+> other php sites. I'm not running phpBB though.
+>
+> Ron
+>
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 19:54:17 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Dec 2004 14:54:17 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <002301c4ef5d$ec74efa0$6501a80a@comcast.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEIEPLEJAA.ron@miplanet.net>
+
+I am on ver 7.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Charles Schmidling
+Sent: Friday, December 31, 2004 12:27 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami has slowed to a crawl
+
+
+Haven't experienced slow downs since installed latest Xitami (2.5c2 on
+dedicated Win98SE box).  Used to have problems after 6-8 weeks of up time.
+Had this strange "smthttp: error on socket160"  error that also went away
+with the update.  Re-boot, of course, fixed everything.
+
+Which version of AVG are you running?  They quit support for V 6.0 today to
+switch to version 7.  Today's V6 update requires a reboot which will mess up
+my "been up since" 10/7 record.  Oh well maybe tomorrow - New Years and all.
+
+Happy Merry,
+Charles
+
+
+----- Original Message -----
+From: "Ron Ackerman" <ron@miplanet.net>
+To: <xitami@lists.xitami.org>
+Sent: Friday, December 31, 2004 8:44 AM
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+> Thomas,
+>
+> I've been running AVG for over a year and it is not the problem, there is
+> something else going on. I'll keep stabbing away at it and see what I can
+> figure out. I know that there are some new viruses out there that may not
+be
+> in the virus definitions yet. One in particular infects phpBB and may
+infect
+> other php sites. I'm not running phpBB though.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On
+> Behalf Of Thomas J. Hruska
+> Sent: Friday, December 31, 2004 11:31 AM
+> To: xitami@lists.xitami.org
+> Subject: Re: [Xitami] Xitami has slowed to a crawl
+>
+>
+> At 11:02 AM 12/31/2004 -0500, Ron Ackerman writeth:
+> >Has anyone else experienced slow downs with Xitami, mine has slowed so
+much
+> >that pages will not open. I am running AVG Antivirus. Any ideas?
+>
+> Well, AVG scans any file that gets opened either for reading or writing
+for
+> viruses.  I never have had a problem with Xitami slowing down.
+>
+> What AVG probably does is hook the CreateFile() API using a global hooking
+> mechanism (DLL).  If it leaks resources while handling the hook, it could
+> slow down the whole system, but not just one application.  Disabling AVG
+> won't remove the hook DLL.  Those things can be difficult to downright
+> impossible to remove.
+>
+>
+> Thomas J. Hruska
+> Shining Light Productions
+> http://www.slproweb.com/
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> --
+> No virus found in this incoming message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+>
+> --
+> No virus found in this outgoing message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 19:55:01 2004
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Dec 2004 14:55:01 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEKEPKEJAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEMEPLEJAA.ron@miplanet.net>
+
+Ok I had to install Zend and remark out ioncube in my php.ini. Now
+everything appears to be back to normal.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Ron Ackerman
+Sent: Friday, December 31, 2004 2:05 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+Thanks I upgraded now I have 12 php sites completly down.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Admin (MRJ)
+Sent: Friday, December 31, 2004 12:15 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami has slowed to a crawl
+
+
+If you're running PHP I suggest upgrading that to latest set.
+We just had another site go offline becuase someone infected and took over
+SMTP on a server with PHP and a basic forum.
+If you run volic forum you should get their latest patch for this as well
+and upgrade your MySQL files.
+
+Apparently the system can be taken over and start running smtp bulk mailing
+from infected machines.
+Not sure if it applies to your system but worth a checkup/notice.
+
+    MRJ
+
+----- Original Message -----
+From: "Ron Ackerman" <ron@miplanet.net>
+To: <xitami@lists.xitami.org>
+Sent: Friday, December 31, 2004 9:44
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+> Thomas,
+>
+> I've been running AVG for over a year and it is not the problem, there is
+> something else going on. I'll keep stabbing away at it and see what I can
+> figure out. I know that there are some new viruses out there that may not
+be
+> in the virus definitions yet. One in particular infects phpBB and may
+infect
+> other php sites. I'm not running phpBB though.
+>
+> Ron
+>
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+From xitami@lists.xitami.org  Fri Dec 31 20:59:20 2004
+From: xitami@lists.xitami.org (Bee Aware Computers)
+Date: Fri, 31 Dec 2004 15:59:20 -0500
+Subject: [Xitami] Xitami has slowed to a crawl
+In-Reply-To: <NFBBKNGGELNPLMHPBOCECEPKEJAA.ron@miplanet.net>
+Message-ID: <009c01c4ef7b$9dea9970$9a325a45@hblr>
+
+As a user of php I am anxiously awaiting the report on this one....
+
+ 
+Get Expert Computer Help NOW
+Click Below FOR 3 Minutes FREE
+  
+The Computer Wizard 
+Hogan Courrier 
+ICQ: 1241174 
+bee@beeawarecomputers.com
+
+ 
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org] On Behalf Of Ron Ackerman
+Sent: Friday, December 31, 2004 12:49 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+The problem wasn't Xitami at all, it was the drive I had Xitami on, it
+was
+corrupt. I did a repair of the drive and all is good now. Now the next
+question, what caused the corruption? If I figure it out I will report
+back
+with my findings.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Ron Ackerman
+Sent: Friday, December 31, 2004 11:44 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Xitami has slowed to a crawl
+
+
+Thomas,
+
+I've been running AVG for over a year and it is not the problem, there
+is
+something else going on. I'll keep stabbing away at it and see what I
+can
+figure out. I know that there are some new viruses out there that may
+not be
+in the virus definitions yet. One in particular infects phpBB and may
+infect
+other php sites. I'm not running phpBB though.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On
+Behalf Of Thomas J. Hruska
+Sent: Friday, December 31, 2004 11:31 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami has slowed to a crawl
+
+
+At 11:02 AM 12/31/2004 -0500, Ron Ackerman writeth:
+>Has anyone else experienced slow downs with Xitami, mine has slowed so
+much
+>that pages will not open. I am running AVG Antivirus. Any ideas?
+
+Well, AVG scans any file that gets opened either for reading or writing
+for
+viruses.  I never have had a problem with Xitami slowing down.
+
+What AVG probably does is hook the CreateFile() API using a global
+hooking
+mechanism (DLL).  If it leaks resources while handling the hook, it
+could
+slow down the whole system, but not just one application.  Disabling AVG
+won't remove the hook DLL.  Those things can be difficult to downright
+impossible to remove.
+
+
+Thomas J. Hruska
+Shining Light Productions
+http://www.slproweb.com/
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+--
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.296 / Virus Database: 265.6.7 - Release Date: 12/30/2004
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+===============================================
+Mail delivered through HOGANSALLEY.COM Premire Mail Server.
+http://www.hogansalley.com
+===============================================
+
+
+

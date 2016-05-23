@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitaimi Bug ?? calling URLs twice
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitaimi%20Bug%20%3F%3F%20calling%20URLs%20twice&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007350.html">
+   <LINK REL="Next"  HREF="007348.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitaimi Bug ?? calling URLs twice</H1>
+    <B>rpo</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitaimi%20Bug%20%3F%3F%20calling%20URLs%20twice&In-Reply-To="
+       TITLE="[Xitami] Xitaimi Bug ?? calling URLs twice">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Thu Aug  3 21:11:01 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007350.html">[Xitami] New Server
+</A></li>
+        <LI>Next message: <A HREF="007348.html">[Xitami] Xitami.net
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7346">[ date ]</a>
+              <a href="thread.html#7346">[ thread ]</a>
+              <a href="subject.html#7346">[ subject ]</a>
+              <a href="author.html#7346">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am not certain if this is a problem of Xitami or not, but I am beggining
+to think it is.  Here is the situation.
+
+On a Frame page labeled &quot;mainDisplay&quot; page is:
+&lt;head&gt;
+      &lt;script language=&quot;JavaScript&quot;&gt;
+         function countStat() {
+            parent.mainDisplay.statPage.location =
+&quot;/cgi-bin/countStat.pl?cid=4&amp;amp;fid=42&amp;amp;pid=6746&quot; ;
+         }
+      &lt;/script&gt;
+&lt;/head&gt;
+
+And then in the BODY i have:
+
+&lt;input type=&quot;image&quot; onClick=&quot;javascript:countStat();&quot;
+SRC=&quot;/images/gifs/playpause.gif&quot; border=&quot;0&quot; height=&quot;12&quot; title=&quot;Play/Pause&quot;&gt;
+&lt;IFRAME NAME=&quot;statPage&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; margin=&quot;0&quot; width=&quot;1&quot;
+height=&quot;1&quot; SRC=&quot;/blank.html&quot;&gt;&lt;/IFRAME&gt;
+
+When the user clicks the button, the JS functions calls the defined URL to
+the IFrame, the called URL runs a script that counts the button click to a
+DB.  Normally, the iFrame is hidden (note the iframe elements), but for
+testing I expanded the iFrame to: width=&quot;150&quot; height=&quot;25&quot; and then printed
+out the results of the mysql query and click count.  As an example, if the
+current DB.table.buttonClick = 10, then I would get the buttonClick
+variable, print it, increment it, rewrite it to the DB and then print the
+incremented variable.  So on the in the iFrame I would see: &quot;10 and 11&quot;.  I
+then go and look at the mysql table.buttonClick value, and it shows &quot;12&quot;.
+
+After many frustrating hours of troubleshooting, I found that the mysql logs
+show the &quot;increment&quot; happening twice (update table set
+buttonClick=buttonClick+1 where ...).  I then looked at the Xitami
+access.log and discovered that everytime the &quot;image&quot; is clicked, the script
+is running TWICE.  Somehow one button click using onClick is causing the
+script to be called and run twice, thus the buttonClick value is being
+incremeted by two on every click.
+
+For the life of me i can't figure out why its occuring twice.  Even more, if
+it was being called twice IN the iFrame, then the printed variables would
+be: &quot;10 and 11&quot; followed by a &quot;11 and 12&quot;...but the results are always from
+the first time its run, in this example it would always show &quot;10 and 11&quot;.
+Because I never see the results of the second run (&quot;11 and 12&quot;) it is making
+me believe the Xitami is somehow calling the script twice but only sending
+the results of the first call to the iFrame window.   I can't think of or
+see any other explanation as to why this is happening.
+
+Any insights into this problem are highly welcomed and needed.   I wonder if
+anyone else can replicate this problem....I firmly believe this is somehow
+related to Xitami handling frame URL calls.  There is nothing in my HTML
+that indicates one button click would cause the script to be called twice.
+
+Thanks everyone,
+Russel
+
+PS: Assuming I can get all this to work, this method is a neat little trick
+that replaces SSI (server side includes) and allows me to do statistical
+tracking well beyond SSI capabilities.
+
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007350.html">[Xitami] New Server
+</A></li>
+	<LI>Next message: <A HREF="007348.html">[Xitami] Xitami.net
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7346">[ date ]</a>
+              <a href="thread.html#7346">[ thread ]</a>
+              <a href="subject.html#7346">[ subject ]</a>
+              <a href="author.html#7346">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

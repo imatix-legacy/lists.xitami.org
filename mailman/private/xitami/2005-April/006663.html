@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] content/type headers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006661.html">
+   <LINK REL="Next"  HREF="006664.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] content/type headers
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] content/type headers">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 15 Apr 2005 18:11:18 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006661.html">[Xitami] content/type headers
+</A></li>
+        <LI> Next message: <A HREF="006664.html">[Xitami] content/type headers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6663">[ date ]</a>
+              <a href="thread.html#6663">[ thread ]</a>
+              <a href="subject.html#6663">[ subject ]</a>
+              <a href="author.html#6663">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>That would make sense.  1500 would be the max size packet anyone would want 
+to create.  Most router circuits are set to 1545 MTU (max transmission 
+unit).  Anything larger than that requires the router to split the packet 
+giving the first 1500 to FRAME 1 and giving the reamainder to a new FRAME.  
+That new packet though can't be used by any other data.  so if your server 
+packets are 1700, the first 1500 bytes goes to the first frame, then 200 
+bytes goes to the second frame, but the second frame is then filled up with 
+1300 bytes of nothing simply to fill the frame - it has to happen this way 
+because a FRAME can only carry on TCP header.  Larger packets causes the 
+router to take a heavier processing load and slightly greater bandwidth 
+load.
+
+Apply that logic to smaller server packets, say 850bytes per packet.  Then 
+every frame for that TCP transmission will be 850bits of data and 600 bits 
+of nothing.  This causes the router to waste nearly 45% of its bandwidth 
+(for that particular tcp session).  If your packets match the MTU of the 
+router then no framing is wasted, the router doesn't have to parse packets 
+which decreases processing/reassembly time, and excess frames do not have to 
+be sent.
+
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+
+
+
+&gt;<i>From: Marc Doigny &lt;<A HREF="mailto:marc@verfaillie.com">marc@verfaillie.com</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Subject: Re: [Xitami] content/type headers
+</I>&gt;<i>Date: Fri, 15 Apr 2005 18:27:59 +0200
+</I>&gt;<i>
+</I>&gt;<i>At 16:46 15/04/05, you wrote:
+</I>&gt;&gt;<i>Hello Marc,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>very handy to control ones own server and to be able to check the server 
+</I>&gt;&gt;<i>software of a
+</I>&gt;&gt;<i>site without the need of using Netcraft. What is the reason for the limit 
+</I>&gt;&gt;<i>of bytes ?
+</I>&gt;&gt;<i>Otherwise one would be able to check how the full page will look like ( 
+</I>&gt;&gt;<i>development).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Is there the possibilty to share this ? If so, what would be needed ?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Johannes
+</I>&gt;<i>
+</I>&gt;<i>I created the application just to check if my home server was responding to 
+</I>&gt;<i>internet requests, where it doesn't matter that 1500 bytes or more are 
+</I>&gt;<i>displayed.
+</I>&gt;<i>1500 bytes seemed a good compromis between speed and size; the data must be 
+</I>&gt;<i>downloaded before it can be send to the client. Xitami is set to kill 
+</I>&gt;<i>applications running more than 10 seconds, and in some cases connecting and 
+</I>&gt;<i>downloading large files could not be done in 10 seconds.
+</I>&gt;<i>Two connections are open during the whole transaction.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>There are two versions available:
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com">http://web.verfaillie.com/cgi-bin/gap?www.verfaillie.com</A> (displaying the 
+</I>&gt;<i>content as text)
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://afr_upd.verfaillie.be:20800/cgi-bin/gap?www.verfaillie.com">http://afr_upd.verfaillie.be:20800/cgi-bin/gap?www.verfaillie.com</A> (trying 
+</I>&gt;<i>to display the content as html)
+</I>&gt;<i>
+</I>&gt;<i>The source and executable are disponible at
+</I>&gt;<i><A HREF="http://web.verfaillie.com/cgi/gap.bas">http://web.verfaillie.com/cgi/gap.bas</A>
+</I>&gt;<i><A HREF="http://web.verfaillie.com/cgi/gap.exe">http://web.verfaillie.com/cgi/gap.exe</A>
+</I>&gt;<i>It just runs as a cgi-bin executable.
+</I>&gt;<i>
+</I>&gt;<i>-------------------------------------------------------------------------
+</I>&gt;<i>--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+</I>&gt;<i>Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+</I>&gt;<i>----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> -----------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006661.html">[Xitami] content/type headers
+</A></li>
+	<LI> Next message: <A HREF="006664.html">[Xitami] content/type headers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6663">[ date ]</a>
+              <a href="thread.html#6663">[ thread ]</a>
+              <a href="subject.html#6663">[ subject ]</a>
+              <a href="author.html#6663">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

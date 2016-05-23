@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] directory listing locationbar
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005980.html">
+   <LINK REL="Next"  HREF="005982.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] directory listing locationbar
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] directory listing locationbar">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 05 Jun 2004 21:11:43 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005980.html">[Xitami] directory listing locationbar
+</A></li>
+        <LI> Next message: <A HREF="005982.html">[Xitami] directory listing locationbar
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5981">[ date ]</a>
+              <a href="thread.html#5981">[ thread ]</a>
+              <a href="subject.html#5981">[ subject ]</a>
+              <a href="author.html#5981">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 19:14 5/06/04, you wrote:
+&gt;<i>Hello Members,
+</I>&gt;<i>
+</I>&gt;<i>I'm a newbie in webpage creation and it's maybe a stupid question, so 
+</I>&gt;<i>forgive me.
+</I>&gt;<i>Xitami 2.5b6
+</I>
+
+There are no stupid questions.
+For a web server each request (main page, first gif, first jpg, first 
+javascript source, second gif, ... and so on) is a completely new one. The 
+browser has no memory of what was loaded before (except if it looks in the 
+logs).
+
+To prevent the usage of your gif, you must create it on-the-fly (using a 
+script, for instance).
+You also need some server scripts.
+This is just one example, they are probably more possibilities:
+
+&lt;html&gt;
+&lt;script src=cgi-bin/create.js&gt;&lt;/script&gt;
+&lt;script&gt;
+function makegif(a)
+{
+document.write(&quot;&lt;img src=' + a + b + '.gif'&gt;&quot;);
+}
+&lt;/script&gt;
+&lt;body&gt;
+&lt;h1&gt;This is my protected gif:&lt;/h1&gt;
+&lt;script&gt;
+makegif(&quot;photos/special&quot;);
+makegif(&quot;photos/second&quot;);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+
+The function &quot;makegif&quot; in your html will create the call to the gif 
+on-the-fly, using the parameter that's provided by create.js
+
+Now the special thing resides in create.js.
+It's a script that produces a single output line (using a random generator)
+
+var b = 124582134;
+
+and renames the image to
+photos/special124582134.gif and the same with the second gif.
+
+For more help (and maybe an easier way to do it), you could ask it on the 
+webreference forum:
+<A HREF="http://www.webdeveloper.com/forum/">http://www.webdeveloper.com/forum/</A>
+
+
+marc
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005980.html">[Xitami] directory listing locationbar
+</A></li>
+	<LI> Next message: <A HREF="005982.html">[Xitami] directory listing locationbar
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5981">[ date ]</a>
+              <a href="thread.html#5981">[ thread ]</a>
+              <a href="subject.html#5981">[ subject ]</a>
+              <a href="author.html#5981">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

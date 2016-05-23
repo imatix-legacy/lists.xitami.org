@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000220.html">
+   <LINK REL="Next"  HREF="000223.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+   </H1>
+    <B>Fabien Royer
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 13 Jun 2002 12:42:07 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000220.html">[Xitami-Dev] Question
+</A></li>
+        <LI> Next message: <A HREF="000223.html">[Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#221">[ date ]</a>
+              <a href="thread.html#221">[ thread ]</a>
+              <a href="subject.html#221">[ subject ]</a>
+              <a href="author.html#221">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I have a client app written to POST compressed and encrypted data to a LRWP 
+process. The problem is that the LRWP process only receives a few bytes 
+instead of the whole data stream. Basically, it appears that the WSX module 
+xilrwp.c punts on the first NUL it encounters in the stream. POST'ing text 
+data works like a charm though...
+
+Looking at the source code, it would appear that this issue has been 
+resolved already (as indicated by the comments at the top of xilrwp.c). But 
+the problem still exists as of the latest 2.5 codebase...Or am I missing 
+something?
+
+Has anyone written a fix for this issue (I'd like to know before I do it).
+
+Regards,
+Fabien.
+
+/*  
+----------------------------------------------------------------&lt;Prolog&gt;-
+    Name:       xilrwp.c
+    Title:      Xitami WSX agent for long-running web process (LRWP) 
+protocol
+    Package:    Xitami
+
+    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes from
+                                Bruce Dodson &lt;<A HREF="mailto:bruce_dodson@bigfoot.com">bruce_dodson@bigfoot.com</A>&gt;
+                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+prevent
+                                         DoS issues.
+                1999/12/30    Xitami Team: Fixed issues with NULs in data 
+sent
+		2001/05/15    Xitami Team: Fixed issue with sending binary data
+
+    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+    License:    This is free software; you can redistribute it and/or modify
+                it under the terms of the SMT License Agreement as provided
+                in the file LICENSE.TXT.  This software is distributed in
+                the hope that it will be useful, but without any warranty.
+------------------------------------------------------------------&lt;/Prolog&gt;-*/
+
+_________________________________________________________________
+Send and receive Hotmail on your mobile device: <A HREF="http://mobile.msn.com">http://mobile.msn.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000220.html">[Xitami-Dev] Question
+</A></li>
+	<LI> Next message: <A HREF="000223.html">[Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#221">[ date ]</a>
+              <a href="thread.html#221">[ thread ]</a>
+              <a href="subject.html#221">[ subject ]</a>
+              <a href="author.html#221">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

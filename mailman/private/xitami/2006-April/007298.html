@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] thumbs.db
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20thumbs.db&In-Reply-To=BAY105-DAV11AA4ED5363720B6426F25F8BF0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007295.html">
+   <LINK REL="Next"  HREF="007302.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] thumbs.db</H1>
+    <B>Rick Headly</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20thumbs.db&In-Reply-To=BAY105-DAV11AA4ED5363720B6426F25F8BF0%40phx.gbl"
+       TITLE="[Xitami] thumbs.db">rickhead at gmail.com
+       </A><BR>
+    <I>Tue Apr 25 18:01:39 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007295.html">[Xitami] thumbs.db
+</A></li>
+        <LI>Next message: <A HREF="007302.html">[Xitami] thumbs.db
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7298">[ date ]</a>
+              <a href="thread.html#7298">[ thread ]</a>
+              <a href="subject.html#7298">[ subject ]</a>
+              <a href="author.html#7298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>hmmm...
+    perhaps i should explain &quot;thumbs.db&quot;, and how (and where) it's
+originating.
+
+i'm not sure what version of windows first introduced the thumbnail view of
+images within win-explorer (as an alternative to standard file icons), but
+it's this exact feature which creates and makes use of the &quot;thumbs.db&quot; files
+i describe.
+
+for example, if you're viewing the contents of a folder in explorer, then
+reach up to the &quot;view&quot; menu and select &quot;thumbnail&quot;... the icons for all
+common graphics-types, will instantly become thumbnails-images.  some
+windows users simply keep their folder-view settings adjusted this way right
+across the board...  i believe, it may actually be the default
+folder-view with fresh windows installs.  (it's something that i always turn
+off immediately)
+
+regardless...  the moment that a windows user switches to the
+thumbnail-view, &quot;thumbs.db&quot; (a hidden system file) gets created within that
+folder... and acts as a thumbnail cache of sorts, so windows doesn't have to
+keep re-building the thumbnails each time the folder is viewed.
+
+(each and every folder will have it's own &quot;thumbs.db&quot; file, if/when
+applicable.)
+
+it means that someone could easily have one folder with five jpeg images in
+it... and only be able to see a total of 5 files... but in actual fact,
+there are 6 (if you include the hidden &quot;thumbs.db&quot;).
+
+if that entire folder (or a select-all of it's contents) is uploaded to my
+(xitami-only) server via ftp, *all six files will transfer* during the
+upload session (&quot;thumbs.db&quot; included)... and not just the 5 which were
+intended by the user.  these &quot;thumbs.db&quot; files aren't even visible to the
+user until after they've been uploaded... which causes most of them a great
+deal of confusion, if and when they are found.
+
+if a folder is dragged and dropped into an ftp-session, it makes sense to me
+that all it's contents will be transferred with it, whether some of the
+file-attributes are set to &quot;hidden&quot; or not.
+
+this brings me back to my original question actually... because i feel if i
+had a way to instruct xitami-ftp to simply disallow the upload of any file
+by the name &quot;thumbs.db&quot;, my problem would instantly be solved.
+
+i clearly understand what these files are, and how they are being uploaded
+by users on my system unintentionally... i just want to firewall them, if
+that's at all possible.
+
+sorry if i've bored most of you with my lengthily description... but would
+really appreciate any advice that anyone here may be able to provide.
+
+thanks again,
+
+rick
+
+
+On 4/25/06, RPO &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i>  Interesting problem...are you using Xitami FTP or a different FTP
+</I>&gt;<i> server?  Are you certain this isn't an FTP server issue and not a windows
+</I>&gt;<i> issue?  I know that HTTP file uploading generates temp files in the windows
+</I>&gt;<i> designated temp folder (typicially: c:\temp ) What kind of files are being
+</I>&gt;<i> loaded - images? Does it matter the file type?  Can you force this &quot;
+</I>&gt;<i> thumbs.db&quot; file to a specific location.
+</I>&gt;<i>
+</I>&gt;<i> To be honest, I haven't heard of anything like this before, other than the
+</I>&gt;<i> HTTP upload temp files, thus is the reason I think that this is an ftp
+</I>&gt;<i> server issue.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  ----- Original Message -----
+</I>&gt;<i> *From:* Rick Headly &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rickhead at gmail.com</A>&gt;
+</I>&gt;<i> *To:* Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i> *Sent:* Monday, April 24, 2006 6:08 PM
+</I>&gt;<i> *Subject:* [Xitami] thumbs.db
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> i have a handful of web-masters on my xitami service (all windows users),
+</I>&gt;<i> who regularly upload entire folder-loads of web-content (drag and drop), to
+</I>&gt;<i> their own 'uniquely assigned' web-space directories, via ftp.
+</I>&gt;<i>
+</I>&gt;<i> this all seems to work well, but i'm constantly coming behind them,
+</I>&gt;<i> cleaning up and deleting useless (windows generated) &quot;thumbs.db&quot; files by
+</I>&gt;<i> the hundreds, which are strewn about the entire file-system, in scattered
+</I>&gt;<i> locations throughout.  they are a general nuisance really, and a complete
+</I>&gt;<i> waste of good resources, especially if they wind up getting indexed by
+</I>&gt;<i> search robots.  some robots will continue checking back for &quot; thumbs.db&quot;
+</I>&gt;<i> files repeatedly, even months after they've been deleted.
+</I>&gt;<i>
+</I>&gt;<i> because &quot;thumbs.db&quot; is a hidden windows file, most of my users aren't even
+</I>&gt;<i> aware they exist... which makes it extremely difficult for some of them to
+</I>&gt;<i> understand exactly what they are, where they've come from, how they've
+</I>&gt;<i> become mixed with their web-site content, or why their existence so often
+</I>&gt;<i> generates various errors as they attempt to manipulate files on the server.
+</I>&gt;<i>
+</I>&gt;<i>  - is there a way to set up a filter in xitami, which will prevent any
+</I>&gt;<i> files by the name of &quot;thumbs.db&quot; from being uploaded?
+</I>&gt;<i>
+</I>&gt;<i> and if so:
+</I>&gt;<i>
+</I>&gt;<i>  - can it be set up to function transparently, so the user is never aware
+</I>&gt;<i> that any filtering or roll-off has taken place?
+</I>&gt;<i>
+</I>&gt;<i> an example of such an edit, would be kindly appreciated,
+</I>&gt;<i> thank you.
+</I>&gt;<i>
+</I>&gt;<i> rick
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060425/be78f9d1/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20060425/be78f9d1/attachment.htm</A>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007295.html">[Xitami] thumbs.db
+</A></li>
+	<LI>Next message: <A HREF="007302.html">[Xitami] thumbs.db
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7298">[ date ]</a>
+              <a href="thread.html#7298">[ thread ]</a>
+              <a href="subject.html#7298">[ subject ]</a>
+              <a href="author.html#7298">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] &quot;No input file specified&quot; (ALIAS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006805.html">
+   <LINK REL="Next"  HREF="006813.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] &quot;No input file specified&quot; (ALIAS)
+   </H1>
+    <B>Ghirlandaio
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] &quot;No input file specified&quot; (ALIAS)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 12 Jun 2005 12:40:15 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006805.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+        <LI> Next message: <A HREF="006813.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6810">[ date ]</a>
+              <a href="thread.html#6810">[ thread ]</a>
+              <a href="subject.html#6810">[ subject ]</a>
+              <a href="author.html#6810">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta content=&quot;text/html;charset=ISO-8859-1&quot; http-equiv=&quot;Content-Type&quot;&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body bgcolor=&quot;#ffffff&quot; text=&quot;#000000&quot;&gt;
+Charles Schmidling wrote:&lt;br&gt;
+&lt;blockquote cite=&quot;mid001d01c56de7$952aa4c0$<A HREF="mailto:6401a80a@comcast.net">6401a80a@comcast.net</A>&quot;
+ type=&quot;cite&quot;&gt;
+  &lt;pre wrap=&quot;&quot;&gt;Okay, here's a shot in the dark:
+
+I've been able to get alias to work.  My configuration:
+
+(Defaults.cfg)
+[Alias]
+photos=&quot;D:\Photos&quot;
+
+*D: is a mapped network drive, not the server.
+
+(reference)
+src=&quot;photos/skyline/album/index.html&quot;
+
+You've referenced the info.php file as a foreign file, not as a virtual
+local file.  I've seen where the reference for something
+&lt;a class=&quot;moz-txt-link-rfc2396E&quot; href=&quot;file:/something.ext&quot;&gt;&quot;file:/something.ext&quot;&lt;/a&gt; for local stuff but never can remember when to use
+what.  All I recall is that using the &quot;http&quot; sent me nowhere.
+
+Hope this will can helps your problem a bit.
+
+My only problem with the Alias call is while reviewing these photo files
+(lots) on two different computers (looking on one, moving on another), I
+appear to have blown out the NetBios connect on the &quot;D&quot; computer.  Was
+viewing a lot of pictures back and forth thru a browser, and moving files
+directly from another unit.  Both wireless, that that shouldn't matter.
+
+Got a &quot;no more connections available error&quot; on the viewing computer along
+with these console errors:
+
+2005/06/04 21:36:43: smttran: cannot open
+'D:Photos\skyline\album\Discard\slides\100_0142.JPG' for 'i'
+2005/06/04 21:36:43: Invalid argument
+
+Re-booting the &quot;D&quot; computer fixed the connection.  So, anyone know a fix for
+what appears to be a NetBios flaw (real, no editorials please).
+
+Thanks,
+Charles
+
+Usual suspects:
+Xitami Server and &quot;D&quot; computer are Win98SEs.  Viewer is an iMac Orange (OS X
+10.2.8), and manipulator is an old Toshiba laptop with a recent Win98SE
+install.  Running NetBios under TCP/IP.  Pulled NetBEUI and found I can talk
+to the Orange.
+  &lt;/pre&gt;
+&lt;/blockquote&gt;
+Dear Charles, &lt;br&gt;
+I do not understand what's the solutions.&lt;br&gt;
+I tried to do exactly like you:&lt;br&gt;
+&lt;br&gt;
+(Defaults.cfg)&lt;br&gt;
+[Alias]&lt;br&gt;
+phpmyadmin=&quot;C:\phpmyadmin&quot;&lt;br&gt;
+&lt;br&gt;
+but ....always &quot;no file input received&quot; !&lt;br&gt;
+&lt;br&gt;
+what is the line below you writed?&lt;br&gt;
+&lt;br&gt;
+(reference)&lt;br&gt;
+src=&quot;photos/skyline/album/index.html&quot;&lt;br&gt;
+&lt;br&gt;
+And where I have to out it?&lt;br&gt;
+&amp;nbsp;In my php.ini I configured so:&lt;br&gt;
+&lt;br&gt;
+&lt;font color=&quot;#000000&quot;&gt;&lt;span
+ style=&quot;font-size: 10pt; font-family: Tahoma; color: red;&quot;&gt;&lt;/span&gt;&lt;/font&gt;&lt;font
+ color=&quot;#000000&quot;&gt;&lt;span
+ style=&quot;font-size: 12pt; font-family: Tahoma; color: red;&quot;&gt;&lt;/span&gt;&lt;/font&gt;cgi.force_redirect
+= 0&lt;br&gt;
+cgi.fix_pathinfo = 1&lt;br&gt;
+register_globals = On&lt;br&gt;
+&lt;br&gt;
+and I also tried to change these values alternatively, but... nothing!&lt;br&gt;
+&lt;br&gt;
+What&amp;nbsp; do you mean when you say ?&lt;br&gt;
+&lt;pre wrap=&quot;&quot;&gt;&quot;You've referenced the info.php file as a foreign file, not as a virtual
+local file. &quot;&lt;/pre&gt;
+&lt;span style=&quot;font-size: 12pt; font-family: Tahoma; color: red;&quot;&gt;Thanks
+if you will help me to solve this problem....&lt;br&gt;
+Ghirlandaio&lt;br&gt;
+&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006805.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+	<LI> Next message: <A HREF="006813.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6810">[ date ]</a>
+              <a href="thread.html#6810">[ thread ]</a>
+              <a href="subject.html#6810">[ subject ]</a>
+              <a href="author.html#6810">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

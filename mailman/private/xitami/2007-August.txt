@@ -1,0 +1,1149 @@
+From rolinger1 at hotmail.com  Wed Aug  1 02:43:44 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 31 Jul 2007 17:43:44 -0700
+Subject: [Xitami] Load/Stress Testing Xitami
+Message-ID: <BAY105-F20096741004175D597BD8DF8E80@phx.gbl>
+
+
+Has anyone done any real world simulation or testing of Xitami?  I am trying 
+to find a good load/stress testing tool (hopefully for free) that will allow 
+me to bang the hell out of my server.  Anyone have any recommendations?
+
+I would love to see users results to their stress testing by answering the 
+following questions:
+1) Hardware processor and memory:
+2) OS Level:
+3) How many users were simulated:
+4) What was the duration of the test:
+5) How many HTTP requests sent:
+6) HTTP requests, Pass/Fail/No Response:
+7) Server memory/processor utlizations during test:
+8) Peak Bandwidth usage during test:
+9) Summary and Comments about Results:
+
+My first test results, though I don't know if my client was screwing up or 
+the server or a combination of both:
+
+1) Hardware processor and memory: 3.2Ghz Pentium 4, 2Gig
+2) OS Level: Win Server 2003 - Enterprise
+3) How many users were simulated: 2000
+4) What was the duration of the test: 10 minutes
+5) How many HTTP requests sent: 200,000
+6) HTTP requests, Pass/Fail/No Response: 14,985/180,320/4722
+7) Server memory/processor utlizations during test: 100% the entire time
+8) Peak Bandwidth usage during test: 3% (total 47Mb transferred)
+9) Summary and Comments about Results:  The server was slammed, without a 
+doubt.  But it took 15,000 active sessions over 10 minutes.  So about 1500 
+sessions per minute, 25 per second.  I don't think the "single" client I ran 
+it from could produce that kind of load so the 180,000 failures could simply 
+have been a big combination client failing AND server failing....not certain 
+though.  I would imagine that the server would be able to handle a heck of 
+alot more than 25 connections per second.  I am going to try to simulate a 
+test from 5 clients spreading the load of 100,000 connections for a 10 
+minute test to see if I can get better results.
+
+My server is running Xitami and MySql and EVERY HTTP request requires a 
+MySql call to retreive data.  I would love to know how some users tested if 
+Xitami and there DB were on two seperate servers.
+
+Hopefully this will generate some discussion, so feel free to add more info 
+in beyond what I was looking for.
+
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+From shinelight at shininglightpro.com  Wed Aug  1 06:44:17 2007
+From: shinelight at shininglightpro.com (Thomas J. Hruska)
+Date: Wed, 01 Aug 2007 00:44:17 -0400
+Subject: [Xitami] Load/Stress Testing Xitami
+In-Reply-To: <BAY105-F20096741004175D597BD8DF8E80@phx.gbl>
+References: <BAY105-F20096741004175D597BD8DF8E80@phx.gbl>
+Message-ID: <46B00FA1.5070105@shininglightpro.com>
+
+R O wrote:
+> Has anyone done any real world simulation or testing of Xitami?  I am trying 
+> to find a good load/stress testing tool (hopefully for free) that will allow 
+> me to bang the hell out of my server.  Anyone have any recommendations?
+> 
+> I would love to see users results to their stress testing by answering the 
+> following questions:
+> 1) Hardware processor and memory:
+> 2) OS Level:
+> 3) How many users were simulated:
+> 4) What was the duration of the test:
+> 5) How many HTTP requests sent:
+> 6) HTTP requests, Pass/Fail/No Response:
+> 7) Server memory/processor utlizations during test:
+> 8) Peak Bandwidth usage during test:
+> 9) Summary and Comments about Results:
+> 
+> My first test results, though I don't know if my client was screwing up or 
+> the server or a combination of both:
+> 
+> 1) Hardware processor and memory: 3.2Ghz Pentium 4, 2Gig
+> 2) OS Level: Win Server 2003 - Enterprise
+> 3) How many users were simulated: 2000
+> 4) What was the duration of the test: 10 minutes
+> 5) How many HTTP requests sent: 200,000
+> 6) HTTP requests, Pass/Fail/No Response: 14,985/180,320/4722
+> 7) Server memory/processor utlizations during test: 100% the entire time
+> 8) Peak Bandwidth usage during test: 3% (total 47Mb transferred)
+> 9) Summary and Comments about Results:  The server was slammed, without a 
+> doubt.  But it took 15,000 active sessions over 10 minutes.  So about 1500 
+> sessions per minute, 25 per second.  I don't think the "single" client I ran 
+> it from could produce that kind of load so the 180,000 failures could simply 
+> have been a big combination client failing AND server failing....not certain 
+> though.  I would imagine that the server would be able to handle a heck of 
+> alot more than 25 connections per second.  I am going to try to simulate a 
+> test from 5 clients spreading the load of 100,000 connections for a 10 
+> minute test to see if I can get better results.
+> 
+> My server is running Xitami and MySql and EVERY HTTP request requires a 
+> MySql call to retreive data.  I would love to know how some users tested if 
+> Xitami and there DB were on two seperate servers.
+> 
+> Hopefully this will generate some discussion, so feel free to add more info 
+> in beyond what I was looking for.
+> 
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1 at hotmail.com
+
+Russel,
+
+You didn't mention if you are using PHP or some other scripting 
+language, but I'm not aware of any method to query a MySQL database 
+without one.  Scripting languages under Xitami typically require CGI.
+
+When CGI runs like that, the CPU gets hammered because you've got new 
+processes being created left and right.  The system is spending most of 
+its time starting up and shutting down processes.
+
+I ran a similar test spread across 15 machines on a LAN once with Xitami 
+via CGI and got similar results (I wrote my own tool).  Xitami simply 
+couldn't handle the load.  Most of the time it just returned blank 
+pages.  I don't know what tool you are using but socket code fails if 
+you mass connect to a server in rapid succession (Windows hangs onto 
+socket handles until TCP closes down cleanly or times out)...for my 
+test, I wrote a tool to manage the process and just retried the 
+connection on failure (i.e. it is almost always the client that fails to 
+connect because all sockets are in use).  Keep in mind that this test 
+was many years ago, so I've forgotten a lot of the details but from what 
+you've described, you're running into many of the same issues I ran into.
+
+I do seem to recall the web document root getting flooded with bogus 
+files from stdin/stdout.  Search the Xitami archives and there should be 
+a warning from me about a DDoS issue with CGI support in Xitami.  I 
+remember looking at the source code to CGI support to see how it would 
+need to be fixed and something about incorrect filename selection was 
+the cause of bogus files and the blank pages (i.e. too many requests in 
+too short of a time resulted in lousy/incorrect filename selection). 
+Also because the files are in the web root, it is conceivable that 
+security is drastically reduced (i.e. someone could remotely gain access 
+to passwords/credit card info/etc).
+
+In theory, if you are using PHP, you should be able to drastically 
+improve performance and security by using Xitami LRWP, multiple 
+instances of the ISAPI LRWP daemon (isapid - probably still a 'beta'), 
+and the ISAPI PHP module.  Then, in your PHP code, use persistent 
+connections to the MySQL database (i.e. mysql_pconnect()).  LRWP, IMO, 
+is a weak protocol - it can only handle one request at a time.  For the 
+load you describe, 10-12 instances of the ISAPI LRWP daemon will 
+probably be sufficient.  The server will still be hammered but should be 
+able to handle the load.
+
+-- 
+Thomas Hruska
+Shining Light Productions
+
+
+
+From marc at verfaillie.be  Wed Aug  1 08:01:01 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Wed, 1 Aug 2007 08:01:01 +0200
+Subject: [Xitami] Load/Stress Testing Xitami
+References: <BAY105-F20096741004175D597BD8DF8E80@phx.gbl>
+Message-ID: <001401c7d401$56620a30$1dbebebe@VERFAILLIE5>
+
+----- Original Message -----
+From: "R O" <rolinger1 at hotmail.com>
+To: <xitami at lists.xitami.org>
+Sent: Wednesday, August 01, 2007 2:43 AM
+Subject: [Xitami] Load/Stress Testing Xitami
+
+
+>
+> Has anyone done any real world simulation or testing of Xitami?  I am
+trying
+> to find a good load/stress testing tool (hopefully for free) that will
+allow
+> me to bang the hell out of my server.  Anyone have any recommendations?
+
+I think your server fails because of the database access. My server can
+handle a peak of 25 requests (not connections) per seconds, and it's only a
+pentium III 600MHz. 1/4 of the requests are cgi-bin requests.
+The requests are local (my router would crash well before attaining that
+number).
+
+Since the footprint of Xitami is so small, i suggest you put Xitami on the
+MySql server itself and route the requests to the server instead of using
+two servers. I don't know how much data is exchanged between sql database
+and server, but i don't think it's a good combination.
+
+marc
+
+
+From rolinger1 at hotmail.com  Wed Aug  1 10:04:13 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Wed, 1 Aug 2007 01:04:13 -0700
+Subject: [Xitami] Load/Stress Testing Xitami
+References: <BAY105-F20096741004175D597BD8DF8E80@phx.gbl>
+	<46B00FA1.5070105@shininglightpro.com>
+Message-ID: <BAY105-DAV17A4F6650270E3EF858500F8E80@phx.gbl>
+
+Thomas,
+
+Comments inserted below
+
+>
+> Russel,
+>
+> You didn't mention if you are using PHP or some other scripting
+
+I am using Win32 Perl
+
+> language, but I'm not aware of any method to query a MySQL database
+> without one.  Scripting languages under Xitami typically require CGI.
+>
+> When CGI runs like that, the CPU gets hammered because you've got new
+> processes being created left and right.  The system is spending most of
+> its time starting up and shutting down processes.
+
+Doesn't Xitami create an individual Perl process per cgi script being 
+called?  If 25 users hit the server at once then that would be 25 perl calls 
+with 25 instances Perl.exe running?  How would Apache and IIS handle a 
+similar situation?
+
+>
+> I ran a similar test spread across 15 machines on a LAN once with Xitami
+> via CGI and got similar results (I wrote my own tool).  Xitami simply
+> couldn't handle the load.  Most of the time it just returned blank
+> pages.  I don't know what tool you are using but socket code fails if
+
+Using Microsoft Web Application Stress Tool ver1.1 .  Do you recall the load 
+it was able to handle?  And is there anyway you could think of to push the 
+25 connections per second without moving to PHP?  And doesn't the Xitami PHP 
+get handled by the CGI processor so there is no real advantage to moving to 
+PHP?
+
+> you mass connect to a server in rapid succession (Windows hangs onto
+> socket handles until TCP closes down cleanly or times out)...for my
+> test, I wrote a tool to manage the process and just retried the
+> connection on failure (i.e. it is almost always the client that fails to
+> connect because all sockets are in use).  Keep in mind that this test
+
+The Client fails to connect because the client sockets are in use or the 
+Server sockets are in use?  If its the Server sockets in use, using Win2003 
+Server is there away to increase buffers specfically for more web sockets to 
+be created ?
+
+> was many years ago, so I've forgotten a lot of the details but from what
+> you've described, you're running into many of the same issues I ran into.
+>
+> I do seem to recall the web document root getting flooded with bogus
+> files from stdin/stdout.  Search the Xitami archives and there should be
+> a warning from me about a DDoS issue with CGI support in Xitami.  I
+> remember looking at the source code to CGI support to see how it would
+> need to be fixed and something about incorrect filename selection was
+> the cause of bogus files and the blank pages (i.e. too many requests in
+> too short of a time resulted in lousy/incorrect filename selection).
+> Also because the files are in the web root, it is conceivable that
+> security is drastically reduced (i.e. someone could remotely gain access
+> to passwords/credit card info/etc).
+>
+> In theory, if you are using PHP, you should be able to drastically
+> improve performance and security by using Xitami LRWP, multiple
+> instances of the ISAPI LRWP daemon (isapid - probably still a 'beta'),
+> and the ISAPI PHP module.  Then, in your PHP code, use persistent
+> connections to the MySQL database (i.e. mysql_pconnect()).  LRWP, IMO,
+> is a weak protocol - it can only handle one request at a time.  For the
+> load you describe, 10-12 instances of the ISAPI LRWP daemon will
+> probably be sufficient.  The server will still be hammered but should be
+> able to handle the load.
+>
+> -- 
+> Thomas Hruska
+> Shining Light Productions
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From shinelight at shininglightpro.com  Wed Aug  1 13:13:26 2007
+From: shinelight at shininglightpro.com (Thomas J. Hruska)
+Date: Wed, 01 Aug 2007 07:13:26 -0400
+Subject: [Xitami] Load/Stress Testing Xitami
+In-Reply-To: <BAY105-DAV17A4F6650270E3EF858500F8E80@phx.gbl>
+References: <BAY105-F20096741004175D597BD8DF8E80@phx.gbl>	<46B00FA1.5070105@shininglightpro.com>
+	<BAY105-DAV17A4F6650270E3EF858500F8E80@phx.gbl>
+Message-ID: <46B06AD6.9080502@shininglightpro.com>
+
+Russel Olinger wrote:
+> Thomas,
+> 
+> Comments inserted below
+> 
+>> Russel,
+>>
+>> You didn't mention if you are using PHP or some other scripting
+> 
+> I am using Win32 Perl
+> 
+>> language, but I'm not aware of any method to query a MySQL database
+>> without one.  Scripting languages under Xitami typically require CGI.
+>>
+>> When CGI runs like that, the CPU gets hammered because you've got new
+>> processes being created left and right.  The system is spending most of
+>> its time starting up and shutting down processes.
+> 
+> Doesn't Xitami create an individual Perl process per cgi script being 
+> called?  If 25 users hit the server at once then that would be 25 perl calls 
+> with 25 instances Perl.exe running?  How would Apache and IIS handle a 
+> similar situation?
+
+When running as a CGI, both Apache and IIS would handle it the same way. 
+  However, Perl has both mod_perl (Apache) and Perl for ISAPI (IIS) 
+modules available.
+
+
+>> I ran a similar test spread across 15 machines on a LAN once with Xitami
+>> via CGI and got similar results (I wrote my own tool).  Xitami simply
+>> couldn't handle the load.  Most of the time it just returned blank
+>> pages.  I don't know what tool you are using but socket code fails if
+> 
+> Using Microsoft Web Application Stress Tool ver1.1 .  Do you recall the load 
+> it was able to handle?  And is there anyway you could think of to push the 
+> 25 connections per second without moving to PHP?  And doesn't the Xitami PHP 
+> get handled by the CGI processor so there is no real advantage to moving to 
+> PHP?
+
+I was using PHP as an example.  And, as I said, I don't recall the load 
+but it wasn't much.  See below for improvement ideas.
+
+
+>> you mass connect to a server in rapid succession (Windows hangs onto
+>> socket handles until TCP closes down cleanly or times out)...for my
+>> test, I wrote a tool to manage the process and just retried the
+>> connection on failure (i.e. it is almost always the client that fails to
+>> connect because all sockets are in use).  Keep in mind that this test
+> 
+> The Client fails to connect because the client sockets are in use or the 
+> Server sockets are in use?  If its the Server sockets in use, using Win2003 
+> Server is there away to increase buffers specfically for more web sockets to 
+> be created ?
+
+Client sockets are in use.  Haven't run into the issue of running out of 
+server sockets before.
+
+
+>> In theory, if you are using PHP, you should be able to drastically
+>> improve performance and security by using Xitami LRWP, multiple
+>> instances of the ISAPI LRWP daemon (isapid - probably still a 'beta'),
+>> and the ISAPI PHP module.  Then, in your PHP code, use persistent
+>> connections to the MySQL database (i.e. mysql_pconnect()).  LRWP, IMO,
+>> is a weak protocol - it can only handle one request at a time.  For the
+>> load you describe, 10-12 instances of the ISAPI LRWP daemon will
+>> probably be sufficient.  The server will still be hammered but should be
+>> able to handle the load.
+
+The above applies to "Perl for ISAPI" as well.  Apparently ActiveState 
+includes a closed source ISAPI filter with their Perl distribution. 
+However, as far as I know, Perl doesn't have a mysql_pconnect() 
+equivalent - so you'll be hurting performance in the database area.
+
+-- 
+Thomas Hruska
+Shining Light Productions
+
+
+
+From rickhead at gmail.com  Sat Aug 11 02:42:52 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Fri, 10 Aug 2007 21:42:52 -0300
+Subject: [Xitami] log viewing
+Message-ID: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+
+good day :)
+
+i was wondering if one of you kind people may be able to suggest a good,
+free log-reader program... something that may be able to analyse logs over a
+period of time, and possibly attempt to tally some page-hits.
+
+thank you
+
+rick
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070810/2b504743/attachment.htm 
+
+From marc at verfaillie.be  Sat Aug 11 09:03:01 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Sat, 11 Aug 2007 09:03:01 +0200
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+Message-ID: <002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5>
+
+Webanalyzer?
+My logs: http://pics.idemdito.org/stats.htm
+(click on one of the images "usage summary"
+
+marc
+
+
+  ----- Original Message ----- 
+  From: Rick Headly 
+  To: Xitami Users General Discussion 
+  Sent: Saturday, August 11, 2007 2:42 AM
+  Subject: [Xitami] log viewing
+
+
+  good day :)
+
+  i was wondering if one of you kind people may be able to suggest a good, free log-reader program... something that may be able to analyse logs over a period of time, and possibly attempt to tally some page-hits.
+
+  thank you
+
+  rick
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070811/682024ba/attachment.htm 
+
+From mw at 9000.org  Sat Aug 11 10:21:17 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Sat, 11 Aug 2007 10:21:17 +0200
+Subject: [Xitami] log viewing
+In-Reply-To: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+Message-ID: <46BD717D.3090600@9000.org>
+
+> i was wondering if one of you kind people may be able to suggest a good, 
+> free log-reader program...
+
+http://www.mrunix.net/webalizer/
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From rolinger1 at hotmail.com  Sat Aug 11 17:48:06 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sat, 11 Aug 2007 08:48:06 -0700
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+	<002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5>
+Message-ID: <BAY105-DAV1091BB9886EDFF24DBE826F8E20@phx.gbl>
+
+Looks neat, but does it come in English?!  The charts are in English but all the descriptions and info are in german.
+
+
+----- Original Message ----- 
+  From: Marc Doigny 
+  To: Xitami Users General Discussion 
+  Sent: Saturday, August 11, 2007 12:03 AM
+  Subject: Re: [Xitami] log viewing
+
+
+  Webanalyzer?
+  My logs: http://pics.idemdito.org/stats.htm
+  (click on one of the images "usage summary"
+
+  marc
+
+
+    ----- Original Message ----- 
+    From: Rick Headly 
+    To: Xitami Users General Discussion 
+    Sent: Saturday, August 11, 2007 2:42 AM
+    Subject: [Xitami] log viewing
+
+
+    good day :)
+
+    i was wondering if one of you kind people may be able to suggest a good, free log-reader program... something that may be able to analyse logs over a period of time, and possibly attempt to tally some page-hits.
+
+    thank you
+
+    rick
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070811/538cf3e8/attachment.htm 
+
+From marc at verfaillie.be  Sat Aug 11 19:38:03 2007
+From: marc at verfaillie.be (Marc Doigny)
+Date: Sat, 11 Aug 2007 19:38:03 +0200
+Subject: [Xitami] log viewing
+In-Reply-To: <BAY105-DAV1091BB9886EDFF24DBE826F8E20@phx.gbl>
+Message-ID: <46BE101B.4752.3F144@localhost>
+
+On 11 Aug 2007 at 8:48, Russel Olinger wrote:
+
+> 
+> Looks neat, but does it come in English?! The charts are in English but all 
+> the descriptions and info are in german.
+
+Thats the homepage of webalizer (in english)
+http://www.mrunix.net/webalizer/
+
+My site is what you can do with it.
+
+marc
+
+
+From rickhead at gmail.com  Sat Aug 11 20:38:03 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Sat, 11 Aug 2007 15:38:03 -0300
+Subject: [Xitami] log viewing
+In-Reply-To: <46BD717D.3090600@9000.org>
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+	<46BD717D.3090600@9000.org>
+Message-ID: <11689a700708111138y5539b93ft795c44cdb3dc0cc7@mail.gmail.com>
+
+thank you all very kindly for suggesting the webanalizer.  this is probably
+something i'll be looking into for personal use, in the not-so-distant
+future.
+
+i was however, hoping to find something that would run on the client-side.
+i've been hosting a domain for someone who lives some 3600 miles away, who's
+recently enquired about traffic statistics pertaining to his site.  i have
+nearly two complete years worth of logs which apply to his domain alone (in
+xitami default format), and archived to a series of zip-files... each of
+which, covers a seven day span.  he currently has password-protected http
+access to his entire log archive... so i was hoping to suggest an
+application that might allow him to do all the leg-work and data-processing
+on his own time ;)
+
+as it stands, he's a great web-master... but still tends to be a bit
+horrified by the sight of a raw access log <lol>.
+
+thanks again
+
+rick
+
+On 8/11/07, Magnus Wedberg <mw at 9000.org> wrote:
+>
+> > i was wondering if one of you kind people may be able to suggest a good,
+> > free log-reader program...
+>
+> http://www.mrunix.net/webalizer/
+>
+> --
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070811/ed63550d/attachment.htm 
+
+From rolinger1 at hotmail.com  Sat Aug 11 23:18:30 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sat, 11 Aug 2007 14:18:30 -0700
+Subject: [Xitami] log viewing
+References: <46BE101B.4752.3F144@localhost>
+Message-ID: <BAY105-DAV10D0A8F9F351C2216A73E7F8E20@phx.gbl>
+
+ahhh ok...see it now.  Anyway you can put your home page up in English so I 
+can see exactly what you did with it?  :-)
+
+----- Original Message ----- 
+From: "Marc Doigny" <marc at verfaillie.be>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Saturday, August 11, 2007 10:38 AM
+Subject: Re: [Xitami] log viewing
+
+
+> On 11 Aug 2007 at 8:48, Russel Olinger wrote:
+>
+>>
+>> Looks neat, but does it come in English?! The charts are in English but 
+>> all
+>> the descriptions and info are in german.
+>
+> Thats the homepage of webalizer (in english)
+> http://www.mrunix.net/webalizer/
+>
+> My site is what you can do with it.
+>
+> marc
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From mw at 9000.org  Sun Aug 12 00:13:21 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Sun, 12 Aug 2007 00:13:21 +0200
+Subject: [Xitami] log viewing
+In-Reply-To: <11689a700708111138y5539b93ft795c44cdb3dc0cc7@mail.gmail.com>
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>	<46BD717D.3090600@9000.org>
+	<11689a700708111138y5539b93ft795c44cdb3dc0cc7@mail.gmail.com>
+Message-ID: <46BE3481.4030802@9000.org>
+
+Rick Headly wrote, On 2007-08-11 20:38:
+> thank you all very kindly for suggesting the webanalizer.  this is 
+> probably something i'll be looking into for personal use, in the 
+> not-so-distant future.
+>  
+> i was however, hoping to find something that would run on the 
+> client-side.
+
+Do you really want to say that you want a /server-side/ web analyzer? 
+Because Webalizer /is/ a client-side program. A Windows binary is 
+available on the downloads page.
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From mw at 9000.org  Sun Aug 12 00:17:00 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Sun, 12 Aug 2007 00:17:00 +0200
+Subject: [Xitami] log viewing
+In-Reply-To: <BAY105-DAV10D0A8F9F351C2216A73E7F8E20@phx.gbl>
+References: <46BE101B.4752.3F144@localhost>
+	<BAY105-DAV10D0A8F9F351C2216A73E7F8E20@phx.gbl>
+Message-ID: <46BE355C.4060204@9000.org>
+
+Russel Olinger wrote, On 2007-08-11 23:18:
+> ahhh ok...see it now.  Anyway you can put your home page up in English so I 
+> can see exactly what you did with it?  :-)
+
+Why don't you just download it and try it out? It's extremely simple to 
+use and comes compiled for any platform you can dream of, spare BeOS. In 
+any case, this is hardly a Xitami issue.
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From rolinger1 at hotmail.com  Sun Aug 12 19:38:05 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 12 Aug 2007 10:38:05 -0700
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+	<002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5>
+Message-ID: <BAY105-DAV1898A1B29A8F2BC824A2A5F8E30@phx.gbl>
+
+Marc/Mangus:
+
+I have loaded the webalizer tool and got it to work.  But even after verifying the conf file I am only getting a "usage summary" and a "summary by month" chart.  Not getting daily, hourly, top 30 or anything else I see that it can support.  
+
+1.  The default log file support is for CLF, have you gotten it to work with CLFX logs? 
+2.  Are you processing your errors.log file too?  Are you able to generate it in the same report within one CONF file?
+3.  I have months and months worth of log files....Xitami cycles log files to "acYYMMDD.log" and "erYYMMDD.log", how can I go back process all the log files from previous months?  I saw one method that required combining them all into a single log file using some 3rd party "merge log" app, but that doesn't seem like an efficient way of doing things AND allow me to keep mylogs seperate.  Have you found a way to process older log files using their native naming structure?
+
+Lastly, has anyone used or tried to use AWStats ?  Webalizer seems easier to config and I haven't been able to get it work yet.  Reviews show that AWStats provides more info, but that its also slower b/c its written in Perl vs C.  Almost 1/3 as many records can be processed per second as Webalyzer.
+
+  ----- Original Message ----- 
+  From: Marc Doigny 
+  To: Xitami Users General Discussion 
+  Sent: Saturday, August 11, 2007 12:03 AM
+  Subject: Re: [Xitami] log viewing
+
+
+  Webanalyzer?
+  My logs: http://pics.idemdito.org/stats.htm
+  (click on one of the images "usage summary"
+
+  marc
+
+
+    ----- Original Message ----- 
+    From: Rick Headly 
+    To: Xitami Users General Discussion 
+    Sent: Saturday, August 11, 2007 2:42 AM
+    Subject: [Xitami] log viewing
+
+
+    good day :)
+
+    i was wondering if one of you kind people may be able to suggest a good, free log-reader program... something that may be able to analyse logs over a period of time, and possibly attempt to tally some page-hits.
+
+    thank you
+
+    rick
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070812/833d750e/attachment.htm 
+
+From rolinger1 at hotmail.com  Sun Aug 12 19:44:29 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 12 Aug 2007 10:44:29 -0700
+Subject: [Xitami] Log types
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+	<002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5>
+Message-ID: <BAY105-DAV120910196397229D19D9C9F8E30@phx.gbl>
+
+I notice that Xitami logs ac*.log also get backed up to ac*.log_000, what are the *.log_000 files?  why are they created at all and is it duplicate info that I don't need to pay attention too?
+
+Xitami documentation under Administration indicates the both CLF and CLFX are the default log types....each section at the end says "this is the default"....I presume this can't be the case and would also assume, based on how my log files look, that they actual default is CLF.  Can anyone confirm this please.
+
+-Russel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070812/a1d0ed5f/attachment.htm 
+
+From rolinger1 at hotmail.com  Sun Aug 12 20:21:42 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 12 Aug 2007 11:21:42 -0700
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com><002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5>
+	<BAY105-DAV1898A1B29A8F2BC824A2A5F8E30@phx.gbl>
+Message-ID: <BAY105-DAV2A5B27E70484890C7ED3DF8E30@phx.gbl>
+
+sorry for asking on Xitami support...though it is "kind of" related.  But I didn't have your personal emails so it had to be here.  
+
+One last quetion, are your Xtiami logs set to hourly, daily, weekly rotation....and based on that how often do you run webalizer against the newest logs?
+
+----- Original Message ----- 
+      From: Rick Headly 
+      To: Xitami Users General Discussion 
+      Sent: Saturday, August 11, 2007 2:42 AM
+      Subject: [Xitami] log viewing
+
+
+      good day :)
+
+      i was wondering if one of you kind people may be able to suggest a good, free log-reader program... something that may be able to analyse logs over a period of time, and possibly attempt to tally some page-hits.
+
+      thank you
+
+      rick
+
+
+
+----------------------------------------------------------------------------
+
+
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070812/618a79a1/attachment.htm 
+
+From rolinger1 at hotmail.com  Mon Aug 13 00:43:50 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 12 Aug 2007 15:43:50 -0700
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com><002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5><BAY105-DAV1898A1B29A8F2BC824A2A5F8E30@phx.gbl>
+	<BAY105-DAV2A5B27E70484890C7ED3DF8E30@phx.gbl>
+Message-ID: <BAY105-DAV46C6DE4287EDEC4C69AC3F8E30@phx.gbl>
+
+Heh, forget all my previous questions...it took me a while and I finally got it all to work correctly.  
+
+However, I do have one finaly question about Webalizer/GeoWebalizer - is there anyone way to get more granular with Geo-IP, at the moment I can only see the "country" a user comes from, but 90% of my traffic comes from the US and I need a way of using GeoWebalizer to show me city origination - anyway to get that to work???  I have read all documentation and haven't found a way to do it.
+
+Thanks
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070812/563b3789/attachment.htm 
+
+From mw at 9000.org  Mon Aug 13 01:11:06 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Mon, 13 Aug 2007 01:11:06 +0200
+Subject: [Xitami] log viewing
+In-Reply-To: <BAY105-DAV46C6DE4287EDEC4C69AC3F8E30@phx.gbl>
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com><002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5><BAY105-DAV1898A1B29A8F2BC824A2A5F8E30@phx.gbl>	<BAY105-DAV2A5B27E70484890C7ED3DF8E30@phx.gbl>
+	<BAY105-DAV46C6DE4287EDEC4C69AC3F8E30@phx.gbl>
+Message-ID: <46BF938A.7010407@9000.org>
+
+Russel Olinger wrote, On 2007-08-13 00:43:
+
+> from the US and I need a way of using GeoWebalizer to show me city 
+> origination - anyway to get that to work???  I have read all 
+> documentation and haven't found a way to do it.
+
+I have no idea with that specific function, but generally, it's up to 
+the ISP to report/register an IP range -- some allow "tracing" down to 
+city level, some have only a full "country" range. For more info, muck 
+around at www.maxmind.com
+
+If an IP is registered to a smaller corporation, you might be able to 
+locate the actual street address it sits at -- www.ripe.net will give 
+you that info. That is the case for my own web/mail server, for example.
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From rolinger1 at hotmail.com  Mon Aug 13 02:44:29 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 12 Aug 2007 17:44:29 -0700
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com><002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5><BAY105-DAV1898A1B29A8F2BC824A2A5F8E30@phx.gbl>	<BAY105-DAV2A5B27E70484890C7ED3DF8E30@phx.gbl><BAY105-DAV46C6DE4287EDEC4C69AC3F8E30@phx.gbl>
+	<46BF938A.7010407@9000.org>
+Message-ID: <BAY105-DAV8E1B11A5C4D19FB1DD0A8F8DC0@phx.gbl>
+
+hhhmmm, I don't think its possible then.  I am using the patched version of 
+webalizer from "maxmind" called geowebalizer....as best I can tell the app 
+only does country coding, whch is a shame, becuase the IP database and perls 
+geo::ip and geo::ip::region provide down to the region/city level (even 
+postal code)...just can't seem to get the geowebalizer to show that detail 
+in the graphs produced from the log files.
+
+Unless you know another way?
+
+----- Original Message ----- 
+From: "Magnus Wedberg" <mw at 9000.org>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Sunday, August 12, 2007 4:11 PM
+Subject: Re: [Xitami] log viewing
+
+
+> Russel Olinger wrote, On 2007-08-13 00:43:
+>
+>> from the US and I need a way of using GeoWebalizer to show me city
+>> origination - anyway to get that to work???  I have read all
+>> documentation and haven't found a way to do it.
+>
+> I have no idea with that specific function, but generally, it's up to
+> the ISP to report/register an IP range -- some allow "tracing" down to
+> city level, some have only a full "country" range. For more info, muck
+> around at www.maxmind.com
+>
+> If an IP is registered to a smaller corporation, you might be able to
+> locate the actual street address it sits at -- www.ripe.net will give
+> you that info. That is the case for my own web/mail server, for example.
+>
+> -- 
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From rolinger1 at hotmail.com  Mon Aug 13 03:07:43 2007
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 12 Aug 2007 18:07:43 -0700
+Subject: [Xitami] log viewing
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com><002501c7dbe5$a8185870$1dbebebe@VERFAILLIE5><BAY105-DAV1898A1B29A8F2BC824A2A5F8E30@phx.gbl>	<BAY105-DAV2A5B27E70484890C7ED3DF8E30@phx.gbl><BAY105-DAV46C6DE4287EDEC4C69AC3F8E30@phx.gbl>
+	<46BF938A.7010407@9000.org>
+Message-ID: <BAY105-DAV2666B6859D3587B11D3B4F8DC0@phx.gbl>
+
+
+Also, has anyone figured out to get webalizer to display the full path 
+variables passed to a cgi script.
+
+My implementation only shows URLs but with out any of the GET variables that 
+each link uses to process the page.
+
+As in: "/cgi-bin/showPosting.pl"
+which is the root script, but I need to see the full path that called it as 
+in "/cgi-bin/showPosting.pl?catID=5&amp;forID=24"
+
+those details in the logs with webalizer will allow me to capture where my 
+users are going to the most within my site.
+
+-R
+
+----- Original Message ----- 
+From: "Magnus Wedberg" <mw at 9000.org>
+To: "Xitami Users General Discussion" <xitami at lists.xitami.org>
+Sent: Sunday, August 12, 2007 4:11 PM
+Subject: Re: [Xitami] log viewing
+
+
+> Russel Olinger wrote, On 2007-08-13 00:43:
+>
+>> from the US and I need a way of using GeoWebalizer to show me city
+>> origination - anyway to get that to work???  I have read all
+>> documentation and haven't found a way to do it.
+>
+> I have no idea with that specific function, but generally, it's up to
+> the ISP to report/register an IP range -- some allow "tracing" down to
+> city level, some have only a full "country" range. For more info, muck
+> around at www.maxmind.com
+>
+> If an IP is registered to a smaller corporation, you might be able to
+> locate the actual street address it sits at -- www.ripe.net will give
+> you that info. That is the case for my own web/mail server, for example.
+>
+> -- 
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From rolinger1 at hotmail.com  Mon Aug 13 21:02:38 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Mon, 13 Aug 2007 12:02:38 -0700
+Subject: [Xitami] Xitami Log Analysis?
+In-Reply-To: <46BE355C.4060204@9000.org>
+Message-ID: <BAY105-F24852F601CB94EBCC7CD48F8DC0@phx.gbl>
+
+
+Has anyone gotten Xitami to fully work with AWStats ?  I got it working but 
+I think the LogFile format option(s) is preventing AWStats from providing 
+all the data and charts that it can, particularly with OS,Agents and Search 
+Strings - If so, what file format is your Xitami set for and what file 
+format have you programmed AWStats to retrieve - if custom can you include 
+your custom LogFile format
+
+Xitami Log Format:
+AWStats Log Format:
+
+Thanks.
+
+
+
+From rickhead at gmail.com  Tue Aug 14 16:55:30 2007
+From: rickhead at gmail.com (Rick Headly)
+Date: Tue, 14 Aug 2007 11:55:30 -0300
+Subject: [Xitami] log viewing
+In-Reply-To: <46BE3481.4030802@9000.org>
+References: <11689a700708101742l468dc2adp143d264ba08701d9@mail.gmail.com>
+	<46BD717D.3090600@9000.org>
+	<11689a700708111138y5539b93ft795c44cdb3dc0cc7@mail.gmail.com>
+	<46BE3481.4030802@9000.org>
+Message-ID: <11689a700708140755n577fd32bhc33d2cc14c033b42@mail.gmail.com>
+
+oops...
+my mistake.
+
+i believe i misread or misunderstood the introduction on the webanalizer
+web-site, and assumed it was something written in perl... when in actual
+fact, they were stating the exact opposite.
+
+the perl assumption is basically where i lost interest... but i'm on my way
+back to take a better look right now.  thanks again.
+
+<insert sheepish-grin smiley here>
+
+rick
+
+On 8/11/07, Magnus Wedberg <mw at 9000.org> wrote:
+>
+> Rick Headly wrote, On 2007-08-11 20:38:
+> > thank you all very kindly for suggesting the webanalizer.  this is
+> > probably something i'll be looking into for personal use, in the
+> > not-so-distant future.
+> >
+> > i was however, hoping to find something that would run on the
+> > client-side.
+>
+> Do you really want to say that you want a /server-side/ web analyzer?
+> Because Webalizer /is/ a client-side program. A Windows binary is
+> available on the downloads page.
+>
+> --
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20070814/0e46ecf1/attachment.htm 
+
+From rolinger1 at hotmail.com  Fri Aug 24 23:52:38 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Fri, 24 Aug 2007 14:52:38 -0700
+Subject: [Xitami] Xitami & Win 2003 Server SP2 problems (maybe)
+Message-ID: <BAY105-F35F010C1020C827CBD729BF8D70@phx.gbl>
+
+
+Has anyone tried to run Xitami v2.4d9 on a Win2003 Server w/ the latest 
+Service Pack 2?  I am installing a new server and the only difference 
+between it and my older server is a) hardware and b) SP2.  My new server is 
+crashing about 3 times a day and requires a physical reboot.  All services 
+and remote access simply stop working and the server has to be power cycled. 
+  I have run a system level hardware diagnostics which hasn't turned up 
+anything and the only thing I can think of is that its somehow related to 
+the most recent service pack 2 microsoft release a month or two ago.
+
+But being that Xitami hasn't been supported in years the only way to find 
+out a problem is if other users have had the same or similar issues.
+
+The new server is an HP DL380, 6Gb of memory, with a 6 disk array configured 
+as a 4+1+1spare
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1 at hotmail.com
+
+
+
+From postmaster1 at cornflake.com  Sat Aug 25 04:50:50 2007
+From: postmaster1 at cornflake.com (postmaster1)
+Date: Fri, 24 Aug 2007 20:50:50 -0600
+Subject: [Xitami] Xitami & Win 2003 Server SP2 problems (maybe)
+References: <BAY105-F35F010C1020C827CBD729BF8D70@phx.gbl>
+Message-ID: <000801c7e6c2$c3273900$6400000a@midnight2>
+
+
+You may want to look at this artical....  Take it from me... server2k3sp1 
+and 2 are real trouble... for a lot of systems.
+
+http://support.microsoft.com/kb/899148
+
+
+----- Original Message ----- 
+From: "R O" <rolinger1 at hotmail.com>
+To: <xitami at lists.xitami.org>
+Sent: Friday, August 24, 2007 3:52 PM
+Subject: [Xitami] Xitami & Win 2003 Server SP2 problems (maybe)
+
+
+>
+> Has anyone tried to run Xitami v2.4d9 on a Win2003 Server w/ the latest
+> Service Pack 2?  I am installing a new server and the only difference
+> between it and my older server is a) hardware and b) SP2.  My new server 
+> is
+> crashing about 3 times a day and requires a physical reboot.  All services
+> and remote access simply stop working and the server has to be power 
+> cycled.
+>  I have run a system level hardware diagnostics which hasn't turned up
+> anything and the only thing I can think of is that its somehow related to
+> the most recent service pack 2 microsoft release a month or two ago.
+>
+> But being that Xitami hasn't been supported in years the only way to find
+> out a problem is if other users have had the same or similar issues.
+>
+> The new server is an HP DL380, 6Gb of memory, with a 6 disk array 
+> configured
+> as a 4+1+1spare
+>
+> Russel P. Olinger
+> (310) 466-3399
+> rolinger1 at hotmail.com
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+From mw at 9000.org  Sat Aug 25 14:08:32 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Sat, 25 Aug 2007 14:08:32 +0200
+Subject: [Xitami] Xitami & Win 2003 Server SP2 problems (maybe)
+In-Reply-To: <BAY105-F35F010C1020C827CBD729BF8D70@phx.gbl>
+References: <BAY105-F35F010C1020C827CBD729BF8D70@phx.gbl>
+Message-ID: <46D01BC0.1040502@9000.org>
+
+R O wrote, On 2007-08-24 23:52:
+> Has anyone tried to run Xitami v2.4d9 on a Win2003 Server w/ the latest 
+> Service Pack 2?  I am installing a new server and the only difference 
+> between it and my older server is a) hardware and b) SP2.
+
+I would seriously advise you to switch to Apache or Lighttpd -- the 
+former for its proven track record, the latter for its design goals 
+(being close to the Xitami ones). Unlike Xitami, both are current, 
+supported products still being developed.
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From ph at imatix.com  Wed Aug 29 21:33:58 2007
+From: ph at imatix.com (Pieter Hintjens)
+Date: Wed, 29 Aug 2007 21:33:58 +0200
+Subject: [Xitami] Xitami & Win 2003 Server SP2 problems (maybe
+In-Reply-To: <BAY105-F35F010C1020C827CBD729BF8D70@phx.gbl>
+References: <BAY105-F35F010C1020C827CBD729BF8D70@phx.gbl>
+Message-ID: <5821ea240708291233l5718e99etc1d2ee818aa0a124@mail.gmail.com>
+
+On 8/24/07, R O <rolinger1 at hotmail.com> wrote:
+
+>   I have run a system level hardware diagnostics which hasn't turned up
+> anything and the only thing I can think of is that its somehow related to
+> the most recent service pack 2 microsoft release a month or two ago.
+
+Overall it sounds like a pure Windows vs. your box issue.
+
+-Pieter
+
+

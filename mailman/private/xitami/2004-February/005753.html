@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] xitami and domain name
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005750.html">
+   <LINK REL="Next"  HREF="005751.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] xitami and domain name
+   </H1>
+    <B>Tom Baker
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] xitami and domain name">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 24 Feb 2004 01:53:27 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005750.html">[Xitami] xitami and domain name
+</A></li>
+        <LI> Next message: <A HREF="005751.html">[Xitami] xitami and domain name
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5753">[ date ]</a>
+              <a href="thread.html#5753">[ thread ]</a>
+              <a href="subject.html#5753">[ subject ]</a>
+              <a href="author.html#5753">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_008E_01C3FA78.FEDB4BB0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+  From: <A HREF="mailto:jglong3@att.net">jglong3@att.net</A>=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Monday, February 23, 2004 7:36 PM
+  Subject: Re: [Xitami] xitami and domain name
+
+
+  Hello Tom,,,, :)
+
+
+  OK,,,I have read the Router documetation again and I think I see the =
+light!!!
+  As you said:
+
+        &quot;You have to configure the router to pass all traffic for port =
+80 to the PC running=20
+         Xitami.&quot;
+
+
+  Once I tell the Router to pass all traffic to port 80 plus the current =
+IP of the Xitami PC then two things look promising:
+
+      1. All the unsolicited messages being recorded to the Lynksys =
+LogViewer=20
+         Incoming log file will now go to port 80 for the Xitami PC =
+IP(???).
+
+      2. This means I probably do not need a static IP for that PC as it =
+already=20
+         has a staic IP as it exists behind the Router(???)
+
+         Also, the Xitami PC will not have to be exposed via the Routers =
+DMZ to=20
+         the Internet (????)
+
+That's excatly right!
+Please keep in mind that the Xitami machine IS exposed to the internet, =
+but only Port 80. So if a hacker managed to hijack Xitami, he would have =
+control over the machine via the Port 80 hole in the firewall.
+But this is unlikely with Xitami, so I wouldn't lose to much sleep over =
+it. :-)
+
+
+
+  If this is the case what does Xitami do with a record that is not =
+meant for Xitami (i.e.) not set up in the Xitami Virtual Hosts cfg =
+files?=20
+
+        o Does it simply throw it on the &quot;FLOOR&quot; so to speak????=20
+        o Can these be recorded to a Xitami log file???
+
+It will reject the request, and record it in a logfile if you so desire. =
+I get several hundred requests a day which are trying to exploit various =
+unpatched security holes in Microsoft IIS, and lesser amounts trying to =
+exploit other webservers. Xitami refuses them and logs and error.
+
+
+  Then the IP to use to register the Domain Name will probably be the IP =
+of the Router. And, if this is the case then it appears I must work with =
+my ISP to provide a static IP for the Router which as I understand is =
+not a static IP.
+
+
+Yes, that is correct.
+But you can use a dynamic IP if you use a Dynamic DNS service. I don't =
+know much about this myself, but I'm sure a search on Google for Dynamic =
+DNS will turn up a bunch of info.
+
+
+  THANKS for your time, help, and advise!!!! :)
+
+  Jerry         =20
+
+
+
+I'm glad to help. Good luck!
+Tom
+
+
+
+-------------------------------------------------------------------------=
+-----
+
+
+    From: <A HREF="mailto:jglong3@att.net">jglong3@att.net</A>=20
+    To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+    Sent: Monday, February 23, 2004 11:41 AM
+    Subject: Re: [Xitami] xitami and domain name
+
+
+    Hello Tom, :)
+
+    Thanks for your time, help, and advise!!!!
+
+    In your Reply for &quot;xitami and domain name&quot; you mentioned the =
+following:
+
+       &quot;Depending on your network topology, have you=20
+        checked that Xitami is bound to all IP's?&quot;
+
+    I have tried to find out how to &quot;BIND Xitami to all IPs&quot; using =
+Searches on the Internet and the Xitami Document, but am not having any =
+success.
+
+  You correctly set it in your previous message. I just used general =
+terms.
+
+    Could you please give an example or point me to a link/document that =
+describes binding Xitami?
+
+
+    FYI,,,,I am a novice user of Xitami. Just loaded it last week and =
+all seems to be working as expected on a LAN using 8 PCs (W95 and =
+W98SE). Xitami is on a W98SE and I am learning and testing using the =
+HOSTS file at each PC to force Domain Names to the I
+    P address of the PC where Xitami is installed.=20
+
+    Hosts file example:
+
+
+                 xx.yy.zz.1  www.abc.com
+                 xx.yy.zz.1  www.def.com
+                        etc.
+
+    These are not registered Domain Names and are used for testing. =
+However, when Xitami is configured to depend on registerd names via =
+Virtual Hosting, I suspect that I will have the same problem as =
+described by <A HREF="mailto:shing@walla.co.il.">shing@walla.co.il.</A>=20
+
+    I thought that using a registered Domain Name should have worked =
+within shing's LAN. If the Domain Name is not in the HOSTS file I =
+thought it would be routed to the www database (HOSTS file) at the DNS =
+Server which would then route it to shing's IP wher
+    e Xitami is installed. That is what I thought(????). I have been =
+away from the net a long time (circa 1975) and there is a lot I have to =
+learn.
+  It should and does work as you described.=20
+
+    BTW,,,,, all my PCs are behind a router with the NAT firewall, so I =
+may also have to expose the Xitami PC to the Internet when Xitami is =
+configured to start using registerd Domain Names(???).
+
+    Thanks again for your time, help and advise!!!
+
+    Jerry :)
+  You can have Xitami behind the firewall. You have to configure the =
+router to pass all traffic for port 80 to the PC running Xitami.
+
+  Here's how the request process should work:
+  Someone far away requests www.yourdomain.com. The appropriate DNS =
+servers hand back www.yourdomain.com =3D 192.168.0.1 (These addresses =
+are made up for this discussion). A request to port 80 of 192.168.0.1 =
+for www.yourdomain.com is made, and Xitami returns the webpage.
+  If you are running more than one domain name on Xitami, Xitami Virtual =
+hosts will recognise which domain is being asked for, and supplies it.
+
+  So now let's say you want to access the website from inside your =
+network. You type is www.yourdomain.com. an appropriate outside DNS =
+server hands back www.yourdomain.com =3D 192.168.0.1. Your PC says &quot;Hey! =
+That's only one PC away from me!&quot; And connect directly to it.
+
+  As you can see, it's exactly the same mechanism for being inside the =
+network or outside the network.
+
+  So what we are dealing with here is some other problem. If all the =
+above works from the outside, but not the inside, it is almost certainly =
+a firewall problem.
+  If you are having problems with both the outside and the inside, it =
+could be either DNS not configured properly, firewall not configured =
+properly, or Xitami not configured properly.
+
+  Hope this helps,
+  Tom
+
+------=_NextPart_000_008E_01C3FA78.FEDB4BB0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2800.1400&quot; name=3DGENERATOR&gt;&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Djglong3@att.net">3Djglong3@att.net</A> =
+href=3D&quot;mailto:<A HREF="mailto:jglong3@att.net">jglong3@att.net</A>&quot;&gt;<A HREF="mailto:jglong3@att.net">jglong3@att.net</A>&lt;/A&gt;=20
+  &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Monday, February 23, 2004 =
+7:36=20
+  PM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] xitami =
+and domain=20
+  name&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;Hello Tom,,,, :)&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;OK,,,I have read the Router =
+documetation=20
+  again and I think I see the light!!!&lt;BR&gt;As you=20
+  said:&lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &quot;You have to configure the =
+router=20
+  to pass all traffic for port 80 to the PC running=20
+  &lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Xitami.&quot;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;Once I =
+tell the=20
+  Router to pass all traffic to port 80 plus the current IP of the =
+Xitami PC=20
+  then two things look promising:&lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; 1. All the=20
+  unsolicited messages being recorded to the Lynksys LogViewer=20
+  &lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Incoming log file will now go =
+to port=20
+  80 for the Xitami PC IP(???).&lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; 2. This means =
+I=20
+  probably do not need a static IP for that PC as it already=20
+  &lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; has a staic IP as it exists =
+behind=20
+  the Router(???)&lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Also, the =
+Xitami=20
+  PC will not have to be exposed via the Routers DMZ to=20
+  &lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; the Internet (????)&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+&lt;DIV dir=3Dltr&gt;That's excatly right!&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;Please keep in mind that the Xitami machine IS exposed to =
+the=20
+internet, but only Port 80. So if a hacker managed to hijack Xitami, he =
+would=20
+have control over the machine via the Port 80 hole in the =
+firewall.&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;But this is unlikely with Xitami, so I wouldn't lose to =
+much sleep=20
+over it. :-)&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;If this is the case what does Xitami do with a record =
+that is=20
+  not meant for Xitami (i.e.) not set up in the Xitami Virtual Hosts cfg =
+files?=20
+  &lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; o Does it simply throw it on =
+the=20
+  &quot;FLOOR&quot; so to speak???? &lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; o Can these =
+be=20
+  recorded to a Xitami log file???&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+&lt;DIV dir=3Dltr&gt;It will reject the request, and record it in a logfile if =
+you so=20
+desire. I get several hundred requests a day which are trying to exploit =
+various=20
+unpatched security holes in Microsoft IIS, and lesser amounts trying to =
+exploit=20
+other webservers. Xitami refuses them and logs and error.&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;BR&gt;Then the IP to use to register the Domain Name will =
+probably be=20
+  the IP of the Router. And, if this is the case then it appears I must =
+work=20
+  with my ISP to provide a static IP for the Router which as I =
+understand is not=20
+  a static IP.&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+&lt;DIV dir=3Dltr&gt;Yes, that is correct.&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;But you can use a dynamic IP if you use a Dynamic DNS =
+service. I=20
+don't know much about this myself, but I'm sure a search on Google for =
+Dynamic=20
+DNS will turn up a bunch of info.&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;BR&gt;THANKS for your time, help, and advise!!!!=20
+  :)&lt;BR&gt;&lt;BR&gt;Jerry&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+  &lt;BR&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+&lt;DIV dir=3Dltr&gt;I'm glad to help. Good luck!&lt;/DIV&gt;
+&lt;DIV dir=3Dltr&gt;Tom&lt;BR&gt;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;P&gt;
+  &lt;HR&gt;
+
+  &lt;P&gt;&lt;/P&gt;
+  &lt;META content=3D&quot;MSHTML 6.00.2800.1400&quot; name=3DGENERATOR&gt;
+  &lt;STYLE&gt;&lt;/STYLE&gt;
+
+  &lt;BLOCKQUOTE dir=3Dltr=20
+  style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV=20
+    style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+    &lt;A title=<A HREF="mailto:3Djglong3@att.net">3Djglong3@att.net</A> =
+href=3D&quot;mailto:<A HREF="mailto:jglong3@att.net">jglong3@att.net</A>&quot;&gt;<A HREF="mailto:jglong3@att.net">jglong3@att.net</A>&lt;/A&gt;=20
+    &lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+    href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Monday, February 23, =
+2004 11:41=20
+    AM&lt;/DIV&gt;
+    &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] xitami =
+and domain=20
+    name&lt;/DIV&gt;
+    &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+    &lt;DIV&gt;Hello Tom, :)&lt;BR&gt;&lt;BR&gt;Thanks for your time, help, and=20
+    advise!!!!&lt;BR&gt;&lt;BR&gt;In your Reply for &quot;xitami and domain name&quot; you =
+mentioned=20
+    the following:&lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp; &quot;Depending on your network =
+topology, have=20
+    you &lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; checked that Xitami is bound to all=20
+    IP's?&quot;&lt;BR&gt;&lt;BR&gt;I have tried to find out how to &quot;BIND Xitami to all =
+IPs&quot; using=20
+    Searches on the Internet and the Xitami Document, but am not having =
+any=20
+    success.&lt;BR&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+  &lt;DIV dir=3Dltr&gt;You correctly set it in your previous message. I just =
+used=20
+  general terms.&lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=3Dltr=20
+  style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV&gt;&lt;BR&gt;Could you please give an example or point me to a =
+link/document=20
+    that describes binding Xitami?&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;FYI,,,,I am a novice user =
+of=20
+    Xitami. Just loaded it last week and all seems to be working as =
+expected on=20
+    a LAN using 8 PCs (W95 and W98SE). Xitami is on a W98SE and I am =
+learning=20
+    and testing using the HOSTS file at each PC to force Domain Names to =
+the=20
+    I&lt;BR&gt;P address of the PC where Xitami is installed. &lt;BR&gt;&lt;BR&gt;Hosts =
+file=20
+    =
+example:&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+    xx.yy.zz.1&amp;nbsp;=20
+    =
+www.abc.com&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;=20
+    xx.yy.zz.1&amp;nbsp;=20
+    =
+www.def.com&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+    etc.&lt;BR&gt;&lt;BR&gt;These are not registered Domain Names and are used for =
+testing.=20
+    However, when Xitami is configured to depend on registerd names via =
+Virtual=20
+    Hosting, I suspect that I will have the same problem as described by =
+
+    <A HREF="mailto:shing@walla.co.il.">shing@walla.co.il.</A> &lt;BR&gt;&lt;BR&gt;I thought that using a registered Domain =
+Name=20
+    should have worked within shing's LAN. If the Domain Name is not in =
+the=20
+    HOSTS file I thought it would be routed to the www database (HOSTS =
+file) at=20
+    the DNS Server which would then route it to shing's IP wher&lt;BR&gt;e =
+Xitami is=20
+    installed. That is what I thought(????). I have been away from the =
+net a=20
+    long time (circa 1975) and there is a lot I have to =
+learn.&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+  &lt;DIV dir=3Dltr&gt;It should and does work as you described. &lt;/DIV&gt;
+  &lt;BLOCKQUOTE dir=3Dltr=20
+  style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+    &lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+    &lt;DIV&gt;BTW,,,,, all my PCs are behind a router with the NAT firewall, =
+so I may=20
+    also have to expose the Xitami PC to the Internet when Xitami is =
+configured=20
+    to start using registerd Domain Names(???).&lt;BR&gt;&lt;BR&gt;Thanks again for =
+your=20
+    time, help and advise!!!&lt;BR&gt;&lt;BR&gt;Jerry :)&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;
+  &lt;DIV dir=3Dltr&gt;You can have Xitami behind the firewall. You have to =
+configure=20
+  the router to pass all traffic for port 80 to the PC running =
+Xitami.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;Here's how the request process should work:&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;Someone far away requests &lt;A=20
+  href=3D&quot;<A HREF="http://www.yourdomain.com"">http://www.yourdomain.com&quot;</A>&gt;www.yourdomain.com&lt;/A&gt;. The =
+appropriate DNS=20
+  servers hand back &lt;A =
+href=3D&quot;<A HREF="http://www.yourdomain.com"">http://www.yourdomain.com&quot;</A>&gt;www.yourdomain.com&lt;/A&gt; =3D=20
+  192.168.0.1 (These addresses are made up for this discussion). A =
+request to=20
+  port 80 of 192.168.0.1 for &lt;A=20
+  href=3D&quot;<A HREF="http://www.yourdomain.com"">http://www.yourdomain.com&quot;</A>&gt;www.yourdomain.com&lt;/A&gt;&amp;nbsp;is =
+made, and=20
+  Xitami returns the webpage.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;If you are running more than one domain name on Xitami, =
+Xitami=20
+  Virtual hosts will recognise which domain is being asked for, and =
+supplies=20
+  it.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;So now let's say you want to access the website from =
+inside your=20
+  network. You type is &lt;A=20
+  href=3D&quot;<A HREF="http://www.yourdomain.com"">http://www.yourdomain.com&quot;</A>&gt;www.yourdomain.com&lt;/A&gt;. an =
+appropriate=20
+  outside DNS server hands back &lt;A=20
+  href=3D&quot;<A HREF="http://www.yourdomain.com"">http://www.yourdomain.com&quot;</A>&gt;www.yourdomain.com&lt;/A&gt; =3D =
+192.168.0.1. Your PC=20
+  says &quot;Hey! That's only one PC away from me!&quot; And connect directly to =
+it.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;As you can see, it's exactly the same mechanism for =
+being inside=20
+  the network or outside the network.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;So what we are dealing with here is some other problem. =
+If all=20
+  the above works from the outside, but not the inside, it is almost =
+certainly a=20
+  firewall problem.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;If you are having problems with both the outside and =
+the inside,=20
+  it could be either DNS not configured properly, firewall not =
+configured=20
+  properly, or Xitami not configured properly.&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;Hope this helps,&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;Tom&lt;/DIV&gt;
+  &lt;DIV dir=3Dltr&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_008E_01C3FA78.FEDB4BB0--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005750.html">[Xitami] xitami and domain name
+</A></li>
+	<LI> Next message: <A HREF="005751.html">[Xitami] xitami and domain name
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5753">[ date ]</a>
+              <a href="thread.html#5753">[ thread ]</a>
+              <a href="subject.html#5753">[ subject ]</a>
+              <a href="author.html#5753">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

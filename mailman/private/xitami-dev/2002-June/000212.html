@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] read_TCP returns 0 instead of -1
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000211.html">
+   <LINK REL="Next"  HREF="000213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] read_TCP returns 0 instead of -1
+   </H1>
+    <B>Fabien Royer
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] read_TCP returns 0 instead of -1">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Wed, 12 Jun 2002 11:37:35 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000211.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+</A></li>
+        <LI> Next message: <A HREF="000213.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a nyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+As far as I am concerned, the bug is in read_TCP(). I had reported this 
+problem to the Xitami team about 3-4 weeks ago. I guess I should have posted 
+it here as well.
+
+Regards,
+Fabien.
+
+&gt;<i>From: &quot;D'Hoye, Peter&quot; &lt;<A HREF="mailto:PDHO@esko-graphics.com">PDHO@esko-graphics.com</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i>To: &quot;'<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>'&quot; &lt;<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: RE: [Xitami-Dev] read_TCP returns 0 instead of -1
+</I>&gt;<i>Date: Wed, 12 Jun 2002 11:08:50 +0200
+</I>&gt;<i>
+</I>&gt;<i>Rafael,
+</I>&gt;<i>
+</I>&gt;<i>thanks for this obvious fix. I'm using LRWP to create
+</I>&gt;<i>a web-interface for a machine we make, and I saw the
+</I>&gt;<i>LRWP client go in a loop when Xitami was restarted.
+</I>&gt;<i>I didn't have any time to investigate, thanks to you
+</I>&gt;<i>I can scratch another bug from my to-do list :-)
+</I>&gt;<i>
+</I>&gt;<i>PS: Pieter, we all mis Liberetto !!!
+</I>&gt;<i>
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From: Rafael Cano Pérez [mailto:<A HREF="mailto:rafael.cano@o-labs.com">rafael.cano@o-labs.com</A>]
+</I>&gt;<i> &gt; Sent: vrijdag 7 juni 2002 16:40
+</I>&gt;<i> &gt; To: Xitami devel
+</I>&gt;<i> &gt; Subject: [Xitami-Dev] read_TCP returns 0 instead of -1
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Hello Imatix.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  I am using lrwplib.c for a prototype LRWP application,
+</I>&gt;<i> &gt;  wich will be later implementing the LRWP via an
+</I>&gt;<i> &gt;  SMT agent.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  In read_full_TCP() in lrwplib.c, after calling
+</I>&gt;<i> &gt;  read_TCP() reads the return code, and compares
+</I>&gt;<i> &gt;  it to SOCKET_ERROR for errors. This macro
+</I>&gt;<i> &gt;  is defined in sfl.h as -1, but when the socket is
+</I>&gt;<i> &gt;  closed, for example when xitami is closed, read_TCP
+</I>&gt;<i> &gt;  returns 0, making any application based on lrwplib.c
+</I>&gt;<i> &gt;  go into an infinite loop.
+</I>&gt;<i> &gt;  Changing the test against 0
+</I>&gt;<i> &gt;  ...
+</I>&gt;<i> &gt;  if (chunkLen == 0)
+</I>&gt;<i> &gt;   return SOCKET_ERROR;
+</I>&gt;<i> &gt;  ...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  fixes the error.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  A bug in sfl.h, lrwplib.c or read_TCP() ??
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>
+
+
+
+_________________________________________________________________
+Join the world’s largest e-mail service with MSN Hotmail. 
+<A HREF="http://www.hotmail.com">http://www.hotmail.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000211.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support anyone?
+</A></li>
+	<LI> Next message: <A HREF="000213.html">[Xitami-Dev] LRWP C++ Wrapper and multithreaded app support a nyone?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

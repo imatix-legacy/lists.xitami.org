@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Regular crash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000960.html">
+   <LINK REL="Next"  HREF="000976.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Regular crash
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Regular crash">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 22 Sep 2001 19:40:11 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000960.html">[Xitami] Virtual Host Problem
+</A></li>
+        <LI> Next message: <A HREF="000976.html">[Xitami] Regular crash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#964">[ date ]</a>
+              <a href="thread.html#964">[ thread ]</a>
+              <a href="subject.html#964">[ subject ]</a>
+              <a href="author.html#964">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:20010921010442.C77@eyup.org">20010921010442.C77@eyup.org</A>&gt;, John Poltorak writes:
+&gt;<i>I've found that Xitami crashes regularly when a particular user access it.
+</I>&gt;<i>How do I find out what is wrong?
+</I>
+If you've got a repeatable bug (and it sounds like you do), then the
+main thing to do is to try to gather as much information about the
+circumstances it occurs in as possible.  In particular turning on the
+Xitami server debugging support ([Server] debug=1) and trying again
+should give you more detail on the command(s) the user's FTP program is
+sending at the time that Xitami crashes.  It certainly sounds like it's
+choking on one of the commands being sent for some reason.
+
+The next thing I'd usually try is network traffic snooping, which is
+easy under Linux/Unix (tcpdump, ethereal, snoop, etc), but off hand I
+can't think go a way to do it under OS/2.  This gives you a
+packet-by-packet view of the data that Xitami is sending and receiving,
+which can help narrow down the troublesome cause further.
+
+&gt;<i>I'm running v2.4d6 on OS/2. I have a CORE file but have no idea how to 
+</I>&gt;<i>glean anything from it.
+</I>
+If you have the EMX development tools installed, you can try:
+
+gdb xitami.exe core
+
+And then &quot;bt&quot; (back trace) to try to find out which routine Xitami was
+running when it crashed.  This may or may not be as useful as the
+information from the debug log, depending on what type of bug it is (eg,
+some bugs corrupt things which only cause crashes later on, so what you
+want to know is where it was corrupted not where it finally crashed
+because of the corruption).
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000960.html">[Xitami] Virtual Host Problem
+</A></li>
+	<LI> Next message: <A HREF="000976.html">[Xitami] Regular crash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#964">[ date ]</a>
+              <a href="thread.html#964">[ thread ]</a>
+              <a href="subject.html#964">[ subject ]</a>
+              <a href="author.html#964">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

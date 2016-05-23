@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Help / file extension change via Xitami HTTP + IE download
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005324.html">
+   <LINK REL="Next"  HREF="005326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Help / file extension change via Xitami HTTP + IE download
+   </H1>
+    <B>Dennis Cronje (ZA)
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Help / file extension change via Xitami HTTP + IE download">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 12 Sep 2003 06:51:47 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005324.html">[Xitami] Help / file extension change via Xitami HTTP + IE download
+</A></li>
+        <LI> Next message: <A HREF="005326.html">[Xitami] Xitami and AOL Proxy-cache
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5325">[ date ]</a>
+              <a href="thread.html#5325">[ thread ]</a>
+              <a href="subject.html#5325">[ subject ]</a>
+              <a href="author.html#5325">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've figure out the problem myself. In the templates directory, you will
+find the httpdir file. In there is the text like this;
+
+&lt;A HREF=&quot;$(urlbase:)$(nameurl:)&quot;&gt;&lt;IMG SRC=&quot;$(icon)&quot;
+BORDER=0&gt;$(name:)&lt;/A&gt;&lt;/TD&gt;
+.   if defined (directory)
+
+All you need to change is $(nameurl:) to $(name:) so it lookos like
+this;
+
+
+&lt;A HREF=&quot;$(urlbase:)$(name:)&quot;&gt;&lt;IMG SRC=&quot;$(icon)&quot;
+BORDER=0&gt;$(name:)&lt;/A&gt;&lt;/TD&gt;
+.   if defined (directory)
+
+Regards
+Dennis
+
+
+
+-----Original Message-----
+From: KShaw [mailto:<A HREF="mailto:kimshawis@yahoo.com">kimshawis@yahoo.com</A>] 
+Sent: 11 September 2003 07:46 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: RE: [Xitami] Help / file extension change via Xitami HTTP + IE
+download
+
+
+hi,
+
+I'm also very interested to know how to solve this
+problem for IE, can someone in developer team help?
+
+KShaw
+
+__________________________________
+Do you Yahoo!?
+Yahoo! SiteBuilder - Free, easy-to-use web site design software
+<A HREF="http://sitebuilder.yahoo.com">http://sitebuilder.yahoo.com</A>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+This email and all contents are subject to the following disclaimer:
+
+&quot;<A HREF="http://www.didata.com/disclaimer.asp"">http://www.didata.com/disclaimer.asp&quot;</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005324.html">[Xitami] Help / file extension change via Xitami HTTP + IE download
+</A></li>
+	<LI> Next message: <A HREF="005326.html">[Xitami] Xitami and AOL Proxy-cache
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5325">[ date ]</a>
+              <a href="thread.html#5325">[ thread ]</a>
+              <a href="subject.html#5325">[ subject ]</a>
+              <a href="author.html#5325">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

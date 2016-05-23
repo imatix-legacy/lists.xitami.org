@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Why does $PHP_SELF not work?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004463.html">
+   <LINK REL="Next"  HREF="004521.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Why does $PHP_SELF not work?
+   </H1>
+    <B>Gerry Aquino
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Why does $PHP_SELF not work?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 Dec 2002 14:10:12 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004463.html">[Xitami] Why does $PHP_SELF not work?
+</A></li>
+        <LI> Next message: <A HREF="004521.html">[Xitami] W3C Log file format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4464">[ date ]</a>
+              <a href="thread.html#4464">[ thread ]</a>
+              <a href="subject.html#4464">[ subject ]</a>
+              <a href="author.html#4464">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 12 Dec 2002 19:53:39 -0000
+   &quot;Tim Brummitt&quot; &lt;<A HREF="mailto:timbrummitt@ntlworld.com">timbrummitt@ntlworld.com</A>&gt; 
+wrote:
+
+&gt;<i>I cannot get $PHP_SELF to work when running 
+</I>&gt;<i>Xitami on my PC. I have a PHP
+</I>&gt;<i>program which includes a form with the following 
+</I>&gt;<i>action: -
+</I>&gt;<i>
+</I>&gt;<i>&lt;form action= &quot;&lt;?php $PHP_SELF ?&gt;&quot; 
+</I>&gt;<i>method=&quot;post&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i>When I run the program I get a &quot;The Page Cannot 
+</I>&gt;<i>Be Found&quot; message with the
+</I>&gt;<i>address bar set to:
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://127.0.0.1:1080/<br%20/">http://127.0.0.1:1080/&lt;br%20/</A>&gt;&lt;b&gt;Notice&lt;/b&gt;:%20%20Undefined%20variable:%20%2
+</I>&gt;<i>0PHP_SELF%20in%20&lt;b&gt;C:/Xitami/webpages/search.php&lt;/b&gt;%20on%20line%20&lt;b&gt;37&lt;/b
+</I>&gt;&gt;<i>&lt;br%20/&gt;
+</I>&gt;<i>
+</I>&gt;<i>I am running Xitami v2.5b4  on a stand-alone XP 
+</I>&gt;<i>PC.  When I run the same
+</I>&gt;<i>code at an external PHP server it works and 
+</I>&gt;<i>re-opens the original page. Is
+</I>&gt;<i>there something missing from my version of PHP 
+</I>&gt;<i>or Xitami?
+</I>&gt;<i>
+</I>&gt;<i>Regards
+</I>&gt;<i>
+</I>&gt;<i>Tim Brummitt
+</I>
+I personally don't know much about PHP but this 
+is from a previous post----
+    &quot;Another known PHP/Xitami issue.
+
+A pretty simple workaround is the following 
+php-line:
+if(!isset($PHP_SELF)) $PHP_SELF = 
+$_SERVER[&quot;SCRIPT_NAME&quot;];       
+works.
+
+&quot;
+               
+--gerry
+                
+Gerald W Aquino
+Sessler Ford
+847-362-4455 x 255
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004463.html">[Xitami] Why does $PHP_SELF not work?
+</A></li>
+	<LI> Next message: <A HREF="004521.html">[Xitami] W3C Log file format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4464">[ date ]</a>
+              <a href="thread.html#4464">[ thread ]</a>
+              <a href="subject.html#4464">[ subject ]</a>
+              <a href="author.html#4464">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

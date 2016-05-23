@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] pipes0000.flt
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006285.html">
+   <LINK REL="Next"  HREF="006289.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] pipes0000.flt
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] pipes0000.flt">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 22 Nov 2004 14:19:11 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006285.html">[Xitami] pipes0000.flt
+</A></li>
+        <LI> Next message: <A HREF="006289.html">[Xitami] pipes0000.flt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6287">[ date ]</a>
+              <a href="thread.html#6287">[ thread ]</a>
+              <a href="subject.html#6287">[ subject ]</a>
+              <a href="author.html#6287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 10:54 AM 11/22/2004 -0500, Ron Ackerman writeth:
+&gt;<i>I have Xitami running on a win2kpro pc, and recently I discoverd thousands
+</I>of pipexxxx.flt files in my temp directory. Basically 1 file for each page
+visited. It appears to only happen with PHP pages and not HTML pages. Here
+is what I have ruled out.
+&gt;<i>  
+</I>&gt;<i>I haver ruled out
+</I>&gt;<i>html pages
+</I>&gt;<i>cookies
+</I>&gt;<i>MySQL
+</I>&gt;<i>anything in domain.cfg
+</I>&gt;<i>I didn't see anything in the php.ini
+</I>&gt;<i>  
+</I>&gt;<i>I creates a incremental file for each page visited. 
+</I>&gt;<i>  
+</I>&gt;<i>So does Xitami have anything to do with creating a temp file called
+</I>pipe0001.flt   that's FLT. Which looks to me to be a filter file.
+&gt;<i>At the moment I have created a batch file to delete *.flt but I would
+</I>rather whatever creates it to either not create it or remove it when it's
+done. 
+&gt;<i>  
+</I>&gt;<i>Thanks
+</I>&gt;<i>Ron
+</I>
+Yes.  Xitami uses a temporary file for the output from PHP or any other
+filter application (Nuclear Vision, Perl, ColdFusion, counter programs,
+etc.).  Here is how it works behind the scenes:
+
+1)  Create a new temporary file with a FLT extension (flt = filter - you
+should be able to see the relationship between the INI configuration
+section called [filters] and the file extension FLT).
+2)  If it is a POST request, create another temporary file that contains
+the POST request data.
+3)  Start the application (e.g. php.exe) with output piped to the temporary
+file (and an optional input file pipe).
+4)  Wait for the application to finish.  If it times out, it may not get to
+the next two steps.
+5)  Open the file and dump the contents to the web client (e.g. IE,
+Mozilla, Firefox).
+6)  Once the dump is complete, close the file and delete it.
+
+It is possible to get FLT files to stick around beyond their appropriate
+lifetime by writing scripts that timeout or during a DoS of the CGI filters
+(just sending 60 requests per second or so might be able to do that -
+Xitami gets &quot;confused&quot; with that rate of page requests).  They could be a
+security risk for SSL-enabled connections if you display the credit card
+information back to the user and other people have access to the system as
+the information will be saved to the hard drive temporarily.  This isn't
+meant to scare you - I'm just providing a few friendly heads-up tips.
+
+
+Thomas J. Hruska
+Shining Light Productions
+<A HREF="http://www.slproweb.com/">http://www.slproweb.com/</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006285.html">[Xitami] pipes0000.flt
+</A></li>
+	<LI> Next message: <A HREF="006289.html">[Xitami] pipes0000.flt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6287">[ date ]</a>
+              <a href="thread.html#6287">[ thread ]</a>
+              <a href="subject.html#6287">[ subject ]</a>
+              <a href="author.html#6287">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

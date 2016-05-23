@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami/5 - new project announcement
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami/5%20-%20new%20project%20announcement&In-Reply-To=BAY127-W3132908EFC633AE8054F7F8DD0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007934.html">
+   <LINK REL="Next"  HREF="007937.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami/5 - new project announcement</H1>
+    <B>Pieter Hintjens</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami/5%20-%20new%20project%20announcement&In-Reply-To=BAY127-W3132908EFC633AE8054F7F8DD0%40phx.gbl"
+       TITLE="[Xitami] Xitami/5 - new project announcement">ph at imatix.com
+       </A><BR>
+    <I>Fri Jan  9 19:28:00 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007934.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+        <LI>Next message: <A HREF="007937.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7935">[ date ]</a>
+              <a href="thread.html#7935">[ thread ]</a>
+              <a href="subject.html#7935">[ subject ]</a>
+              <a href="author.html#7935">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There's a good description of LRWP here:
+<A HREF="http://legacy.imatix.com/html/xitami/index12.htm">http://legacy.imatix.com/html/xitami/index12.htm</A>
+
+(I earlier said Ewen McNeill had written this but in fact it was Robin Dunn.)
+
+On Fri, Jan 9, 2009 at 7:10 PM, Russel Olinger &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i> I am curious - as I am not to familiar with LRWP - your description below
+</I>&gt;<i> gives me pause.  Does that mean that on a busy server every time a new URL
+</I>&gt;<i> is executed that a new 'instance' will be held in memory?  I completely
+</I>&gt;<i> understand the speed related to separate processes remaining in memory allow
+</I>&gt;<i> the next instance of that same url to run lightning fast - but how much
+</I>&gt;<i> memory is eaten up keeping these processes alive - and how does that affect
+</I>&gt;<i> over all system performance?  What if too many are held in memory - how does
+</I>&gt;<i> it manage new calls if memory is too full?
+</I>&gt;<i>
+</I>&gt;<i> Thanks
+</I>&gt;<i> -R
+</I>&gt;<i>
+</I>&gt;<i> Russel P. Olinger (310) 466-3399 <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> Date: Fri, 9 Jan 2009 09:18:02 +0100
+</I>&gt;&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">maurilio.longo at libero.it</A>
+</I>&gt;&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;&gt;<i> Subject: Re: [Xitami] Xitami/5 - new project announcement
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Pieter,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> LRWP has, if I'm not wrong, another advantage over fast-cgi and this is
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> ability for a LRWP process to register itself with the web-server for a
+</I>&gt;&gt;<i> particular URL so that it handles always that URL.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I mean, I use LRWP for .prg files (script files with a xbase dialect
+</I>&gt;&gt;<i> inside),
+</I>&gt;&gt;<i> I have xitami configured to execute a cgi-bin program when an URL contains
+</I>&gt;&gt;<i> .prg, when the user asks for that URL xitami executes my cgi-bin program
+</I>&gt;&gt;<i> passing to it the required URL, my program executes the script (to answer
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> request) but, before ending, it starts an istance of itself which
+</I>&gt;&gt;<i> registers
+</I>&gt;&gt;<i> back with xitami for the same url. From now on all requests for that URL
+</I>&gt;&gt;<i> will
+</I>&gt;&gt;<i> be handled by this instance of the cgi-bin executable (and this kind of
+</I>&gt;&gt;<i> 'routing' of requests is handled by xitami itself).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> In this way every URL/page/frame/etc. which is handled by a .prg files has
+</I>&gt;&gt;<i> its
+</I>&gt;&gt;<i> instance of the interpreter running (after the first request), this makes
+</I>&gt;&gt;<i> the
+</I>&gt;&gt;<i> site very robust, a problem on a page does not affect the entire site, and
+</I>&gt;&gt;<i> fast, since the script (.prg file) gets evaluated (compiled on the fly)
+</I>&gt;&gt;<i> only
+</I>&gt;&gt;<i> once (up until a certain idle time, when the LRWP process shuts itself
+</I>&gt;&gt;<i> down).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Best regards.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Maurilio.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Pieter Hintjens wrote:
+</I>&gt;&gt;<i> &gt; On Thu, Jan 8, 2009 at 2:27 PM, Hogan Courrier &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">hogan at geeksgalore.ca</A>&gt;
+</I>&gt;&gt;<i> &gt; wrote:
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;&gt; Just curious what one would use LRWP for? Does not PHP cover that?
+</I>&gt;&gt;<i> &gt;&gt;&gt; LRWP are a must :) for me as well.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; LRWP works with any language (there are examples in C and Python in
+</I>&gt;&gt;<i> &gt; the doc) and gives something that looks a lot like CGI, but is much
+</I>&gt;&gt;<i> &gt; faster (processes don't stop and start, so can remain 'hot').
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; -Pieter
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; --
+</I>&gt;&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> __________
+</I>&gt;&gt;<i> | | | |__| Maurilio Longo
+</I>&gt;&gt;<i> |_|_|_|____| farmaconsult s.r.l.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+&quot;Silence (n.) The sound of something really terrible just about to happen.&quot;
+-- Devil's Wiki - <A HREF="http://www.devilswiki.com.">http://www.devilswiki.com.</A>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007934.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+	<LI>Next message: <A HREF="007937.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7935">[ date ]</a>
+              <a href="thread.html#7935">[ thread ]</a>
+              <a href="subject.html#7935">[ subject ]</a>
+              <a href="author.html#7935">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

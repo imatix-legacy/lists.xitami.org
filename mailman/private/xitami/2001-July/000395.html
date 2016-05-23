@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Off Topic Perl Programmer
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000394.html">
+   <LINK REL="Next"  HREF="000400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Off Topic Perl Programmer
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Off Topic Perl Programmer">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 13 Jul 2001 17:22:34 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000394.html">[Xitami] Off Topic Perl Programmer
+</A></li>
+        <LI> Next message: <A HREF="000400.html">[Xitami] Off Topic Perl Programmer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#395">[ date ]</a>
+              <a href="thread.html#395">[ thread ]</a>
+              <a href="subject.html#395">[ subject ]</a>
+              <a href="author.html#395">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  &lt;Input type=&quot;Text&quot; name=&quot;Name&quot; value=&quot;David&quot;&gt;
+</I>
+&gt;<i> print &quot;$ENV{FORM_name}\n&quot;
+</I>
+Perl variable names are case sensitive. name is not the same as Name. 
+
+&gt;<i> it doesn't show me anything on the page.
+</I>
+Always have some simple literal text that &quot;must&quot; display, without any
+tricky variables or calculations: 
+
+ print &quot;Hello there! You typed: \n&quot;;
+
+Then you know if the script is sick, or you just printed an invalid
+variable. 
+
+&gt;<i> The script doesn't return any errors....
+</I>
+The script you cited will never barf-back errors (they may go out into a
+log file, but in this case probably not). 
+
+Start all your CGI Perl scripts with this: 
+
+ use strict;
+ use CGI qw(:standard);
+ use CGI::Carp qw(fatalsToBrowser);
+
+&quot;strict&quot; will catch many &quot;easy&quot; errors. 
+
+The &quot;fatalsToBrowser&quot; option of CGI Carp will send error messages to you
+(in the browser) rather than in some obscure log file. You &quot;may&quot; want to
+disable this when your script runs perfectly; but in debugging it is a
+real time saver.
+
+There is an even better version of this error catching code but I don't
+have it handy. It catches compile-time errors and lets you set a custom
+message. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000394.html">[Xitami] Off Topic Perl Programmer
+</A></li>
+	<LI> Next message: <A HREF="000400.html">[Xitami] Off Topic Perl Programmer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#395">[ date ]</a>
+              <a href="thread.html#395">[ thread ]</a>
+              <a href="subject.html#395">[ subject ]</a>
+              <a href="author.html#395">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

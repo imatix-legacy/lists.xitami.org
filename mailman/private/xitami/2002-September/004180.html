@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami &amp; Active Perl on Win 2000 - CGI Script Problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003983.html">
+   <LINK REL="Next"  HREF="003984.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami &amp; Active Perl on Win 2000 - CGI Script Problem
+   </H1>
+    <B>Peter van der Goes
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami &amp; Active Perl on Win 2000 - CGI Script Problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 20 Sep 2002 22:18:00 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003983.html">[Xitami] Problem with FTP &amp; Creating Directories
+</A></li>
+        <LI> Next message: <A HREF="003984.html">[Xitami] XItami &amp; Active Perl on Win 2000 - CGI Script Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4180">[ date ]</a>
+              <a href="thread.html#4180">[ thread ]</a>
+              <a href="subject.html#4180">[ subject ]</a>
+              <a href="author.html#4180">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_010D_01C260F3.94829360
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Beginner here! Running Win 2000 SP2.
+I've set up a local Xitami web server, then installed Active Perl (both =
+latest versions downloaded within the last week). During the Active Perl =
+installation, I selected Xitami as the web server to automatically =
+configure.
+When I tried a simple Perl script:
+
+#!F:\Perl\bin\perl.exe -wT
+
+print &quot;Content-type:text/html\n\n&quot;;
+print &quot;Show me the money! The Active PERL interpreter is working with my =
+web server!&quot;;
+
+the printed content shows up in my browser, leading me to believe that =
+Perl is working. However, when I try to use a HTML page like:
+
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Animal&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=3D&quot;animal.cgi&quot; METHOD=3DPOST&gt;
+Which animal? &lt;INPUT type=3D&quot;text&quot; name=3D&quot;animal&quot;&gt;
+&lt;P&gt;&lt;INPUT type=3D&quot;submit&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+to pass a string to a CGI script like:
+
+#!F:\Perl\bin\perl.exe -wT
+use strict;
+use CGI ':standard';
+
+my $animal;
+$animal =3D param('animal');
+
+print &quot;Content-type: text/html\n\n&quot;;
+print &quot;Show me the $animal&quot;;
+
+the result is a blank page.=20
+When I view-&gt;source for the blank page, I get:
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Dwindows-1252&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+As stated, I'm new to all this and don't know what to try next.=20
+I had a similar problem getting PHP to work which was solved by adding =
+an entry to Xitami's Defaults.cfg file under the [mime] heading. Is =
+there an entry I must add to get Perl/CGI scripts going as well?
+
+Any help gratefully accepted!
+**********************************************************************
+**  All opinions are mine alone.Do not attribute elsewhere! =20
+**********************************************************************
+** Peter van der Goes, Professor, Computers &amp; Information Technology
+**                                        Rose State College
+***********************  Contact  ************************************
+** Office e-mail:  <A HREF="mailto:pvan@rose.edu">pvan@rose.edu</A>
+** Home   e-mail:  <A HREF="mailto:pvdg@.att.net">pvdg@.att.net</A>
+** Web Page:  <A HREF="http://www.rose.edu/Faculty/pvan/index.htm">http://www.rose.edu/Faculty/pvan/index.htm</A>
+**********************************************************************
+
+
+------=_NextPart_000_010D_01C260F3.94829360
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2600.0&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;Beginner here! Running Win 2000 SP2.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;I've set up a local Xitami web server, then =
+installed Active=20
+Perl (both latest versions downloaded within the last week). During the =
+Active=20
+Perl installation, I selected Xitami as the web server to automatically=20
+configure.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;When I tried a simple Perl script:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;#!F:\Perl\bin\perl.exe -wT&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;print &quot;Content-type:text/html\n\n&quot;;&lt;BR&gt;print &quot;Show =
+me the=20
+money! The Active PERL interpreter is working with my web =
+server!&quot;;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;the printed content shows up in my browser, leading =
+me to=20
+believe that Perl is working. However, when I try to use a HTML page=20
+like:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT=20
+size=3D2&gt;&amp;lt;html&amp;gt;&lt;BR&gt;&amp;lt;head&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;lt;title&amp;gt;Animal&amp;lt;/ti=
+tle&amp;gt;&lt;BR&gt;&amp;lt;/head&amp;gt;&lt;BR&gt;&amp;lt;body&amp;gt;&lt;BR&gt;&amp;lt;form=20
+action=3D&quot;animal.cgi&quot; METHOD=3DPOST&amp;gt;&lt;BR&gt;Which animal? &amp;lt;INPUT =
+type=3D&quot;text&quot;=20
+name=3D&quot;animal&quot;&amp;gt;&lt;BR&gt;&amp;lt;P&amp;gt;&amp;lt;INPUT=20
+type=3D&quot;submit&quot;&amp;gt;&lt;BR&gt;&amp;lt;/form&amp;gt;&lt;BR&gt;&amp;lt;/body&amp;gt;&lt;BR&gt;&amp;lt;/html&amp;gt;&lt;/F=
+ONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;to pass a string to a CGI script like:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;#!F:\Perl\bin\perl.exe -wT&lt;BR&gt;use strict;&lt;BR&gt;use CGI =
+
+':standard';&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;my $animal;&lt;BR&gt;$animal =3D =
+param('animal');&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;print &quot;Content-type: text/html\n\n&quot;;&lt;BR&gt;print &quot;Show =
+me the=20
+$animal&quot;;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;the result is a blank page. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;When I view-&amp;gt;source for the blank page, I =
+get:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&amp;lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0=20
+Transitional//EN&quot;&amp;gt;&lt;BR&gt;&amp;lt;HTML&amp;gt;&amp;lt;HEAD&amp;gt;&lt;BR&gt;&amp;lt;META=20
+http-equiv=3DContent-Type content=3D&quot;text/html;=20
+charset=3Dwindows-1252&quot;&amp;gt;&amp;lt;/HEAD&amp;gt;&lt;BR&gt;&amp;lt;BODY&amp;gt;&amp;lt;/BODY&amp;gt;&amp;lt;=
+/HTML&amp;gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;As stated, I'm new to all this and don't know what =
+to try=20
+next. &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;I had a similar problem getting PHP to work which =
+was solved=20
+by adding an entry to Xitami's Defaults.cfg file under the [mime] =
+heading. Is=20
+there an entry I must add to get Perl/CGI scripts going as =
+well?&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;Any help gratefully =
+accepted!&lt;/FONT&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT=20
+size=3D2&gt;****************************************************************=
+******&lt;BR&gt;**&amp;nbsp;=20
+All opinions are mine alone.Do not attribute elsewhere!&amp;nbsp;=20
+&lt;BR&gt;*********************************************************************=
+*&lt;BR&gt;**=20
+Peter van der Goes, Professor, Computers &amp;amp; Information=20
+Technology&lt;BR&gt;**&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+Rose State College&lt;BR&gt;***********************&amp;nbsp; Contact&amp;nbsp;=20
+************************************&lt;BR&gt;** Office e-mail:&amp;nbsp; &lt;A=20
+href=3D&quot;mailto:<A HREF="mailto:pvan@rose.edu">pvan@rose.edu</A>&quot;&gt;<A HREF="mailto:pvan@rose.edu">pvan@rose.edu</A>&lt;/A&gt;&lt;BR&gt;** Home&amp;nbsp;&amp;nbsp;=20
+e-mail:&amp;nbsp; &lt;A href=3D&quot;mailto:<A HREF="mailto:pvdg@.att.net">pvdg@.att.net</A>&quot;&gt;<A HREF="mailto:pvdg@.att.net">pvdg@.att.net</A>&lt;/A&gt;&lt;BR&gt;** =
+Web=20
+Page:&amp;nbsp; &lt;A=20
+href=3D&quot;<A HREF="http://www.rose.edu/Faculty/pvan/index.htm"">http://www.rose.edu/Faculty/pvan/index.htm&quot;</A>&gt;<A HREF="http://www.rose.edu/F=">http://www.rose.edu/F=</A>
+aculty/pvan/index.htm&lt;/A&gt;&lt;BR&gt;********************************************=
+**************************&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_010D_01C260F3.94829360--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003983.html">[Xitami] Problem with FTP &amp; Creating Directories
+</A></li>
+	<LI> Next message: <A HREF="003984.html">[Xitami] XItami &amp; Active Perl on Win 2000 - CGI Script Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4180">[ date ]</a>
+              <a href="thread.html#4180">[ thread ]</a>
+              <a href="subject.html#4180">[ subject ]</a>
+              <a href="author.html#4180">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

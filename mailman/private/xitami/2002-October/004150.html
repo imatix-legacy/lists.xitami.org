@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Trouble with Filters and Aliases
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004146.html">
+   <LINK REL="Next"  HREF="004152.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Trouble with Filters and Aliases
+   </H1>
+    <B>Alex Frase
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Trouble with Filters and Aliases">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 23 Oct 2002 00:20:17 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004146.html">[Xitami] Xitami connections counter:
+</A></li>
+        <LI> Next message: <A HREF="004152.html">[Xitami] Reverse dns lookup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4150">[ date ]</a>
+              <a href="thread.html#4150">[ thread ]</a>
+              <a href="subject.html#4150">[ subject ]</a>
+              <a href="author.html#4150">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm using Xitami 2.5b5 for Windows (2000 Professional, sp2) with PHP 4.2.2, 
+and I've come across a problem combining the PHP filter with aliases:
+
+- PHP files accessible via the standard document root (in my case, 
+'d:/inet/web/server') work perfectly through the the filter ('.php = 
+d:/apps/inet/php/php.exe'); for example:
+'/index.php' -&gt; 'd:/inet/web/server/index.php' works
+'/dir/index.php' -&gt; 'd:/inet/web/server/dir/index.php' works
+
+- HTML files accessible via an alias ('private = d:/inet/web/secure') also 
+work perfectly; for example:
+'/private/index.html' -&gt; 'd:/inet/web/secure/index.html' works,
+'/private/dir/index.html' -&gt; 'd:/inet/web/secure/dir/index.html' works
+
+- PHP files accessible via an alias come back empty; for example:
+'/private/test.php' -&gt; 'd:/inet/web/secure/test.php' doesn't work, I just 
+get an empty template document.
+
+The problem appears to be related specifically to the situation in which a 
+filtered file extension is accessed after an alias translation.  I 
+downloaded the Xitami source kit and attempted to locate the bug myself, but 
+quickly discovered that it's more elusive than I expected (although there is 
+a comment which indicates that the developers are aware that filters and 
+aliases don't work together); I set some breakpoints and determined that the 
+temporary file ('pipeXXXX.flt') was, in fact, being generated in my system 
+temp folder with the correctly parsed PHP output, but somehow this file is 
+not being returned by the server; instead I only get:&lt;pre&gt;
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html; 
+charset=windows-1252&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+&lt;/pre&gt;
+I searched Googol for information and found some other people who had the 
+same trouble, but I can think of no workaround until the developers address 
+the issue specifically.
+
+Any suggestions, or should I go ahead and email the bug to iMatix?
+
+-Alex Frase
+
+
+_________________________________________________________________
+Protect your PC - get McAfee.com VirusScan Online 
+<A HREF="http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3963">http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3963</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004146.html">[Xitami] Xitami connections counter:
+</A></li>
+	<LI> Next message: <A HREF="004152.html">[Xitami] Reverse dns lookup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4150">[ date ]</a>
+              <a href="thread.html#4150">[ thread ]</a>
+              <a href="subject.html#4150">[ subject ]</a>
+              <a href="author.html#4150">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

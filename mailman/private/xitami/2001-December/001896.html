@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] devices problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001903.html">
+   <LINK REL="Next"  HREF="001900.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] devices problem
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] devices problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 30 Dec 2001 23:14:51 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001903.html">[Xitami] CGI Perl scripts
+</A></li>
+        <LI> Next message: <A HREF="001900.html">[Xitami] devices problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1896">[ date ]</a>
+              <a href="thread.html#1896">[ thread ]</a>
+              <a href="subject.html#1896">[ subject ]</a>
+              <a href="author.html#1896">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;000201c19116$3954c790$<A HREF="mailto:1564a8c0@troy.ozin.foo">1564a8c0@troy.ozin.foo</A>&gt;, &quot;Jason Ozin at Technica Solutions&quot; writes:
+&gt;<i>Ewen says:
+</I>&gt;<i> &gt; And my guess is the &quot;something changing&quot; is something like another program
+</I>&gt;<i> &gt; having the device open (blocking us out, so we assume it is not a device)
+</I>&gt;<i> &gt; when we first try to find out if it is a device, [....]
+</I>&gt;<i>
+</I>&gt;<i>I'd be surprised if this was the case as it is repeatable on every occasion
+</I>&gt;<i>and nothing else is using the device, so the &quot;other program&quot; can only be
+</I>&gt;<i>Xitami itself. 
+</I>
+I'm not so sure that nothing else is using the device; amongst other
+things Windows is able to monitor the paper status of a printer, and I'm
+guessing that involves opening the device, querying the status, and
+closing the device again.  Providing a window of opportunity for Murphy
+(of Murphy's law fame) to sneak in.
+
+Given the way that Xitami works I'd be surprised if it was Xitami itself
+that was blocking its own test out -- there's no thread switching
+between the test point and the file open point.  But the OS could switch
+to another proram/task.
+
+&gt;<i> &gt; I've got a couple of ideas to try, although as I commented, I'm somewhat
+</I>&gt;<i> &gt; hampered by the fact that I can't reproduce the problem...
+</I>&gt;<i>
+</I>&gt;<i>Happy to install debug code on my PC if it helps. I suppose your code
+</I>&gt;<i>automatically denying access to known device names is a no no?
+</I>
+We tried that before.  The problem is that there are so many,
+undocumented, special ways in which Windows can spot the device name in
+a longer path, that it rapidly becomes infeasible to properly check for
+known device names without also blocking a whole bunch of filenames
+which are otherwise valid.
+
+I'll post something here when I've got a test version with a possible
+fix/work around in it.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001903.html">[Xitami] CGI Perl scripts
+</A></li>
+	<LI> Next message: <A HREF="001900.html">[Xitami] devices problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1896">[ date ]</a>
+              <a href="thread.html#1896">[ thread ]</a>
+              <a href="subject.html#1896">[ subject ]</a>
+              <a href="author.html#1896">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

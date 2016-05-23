@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] How to build a spam filter?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="000247.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] How to build a spam filter?
+   </H1>
+    <B>Bob Paddock
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] How to build a spam filter?">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Sun, 13 Oct 2002 08:52:01 -0400</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="000247.html">[Xitami-Dev] How to build a spam filter?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#246">[ date ]</a>
+              <a href="thread.html#246">[ thread ]</a>
+              <a href="subject.html#246">[ subject ]</a>
+              <a href="author.html#246">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Long ago I asked these questions and received these answers here on the list:
+
+Fri, 11 Jan 2002 10:23:36 +0100, Pieter Hintjens wrote:
+
+&gt;&gt;<i> Before I go reinventing the wheel has any one here done any thing 
+</I>&gt;&gt;<i> with POP3 &amp; SFL/SMT?
+</I>
+&gt;<i>Yes, we have a POP3 client written with SMT/SFL.  Let me just check 
+</I>&gt;<i>that it's actually in the public CVS... okay, it's not, so we'll put 
+</I>&gt;<i>it there and you can access it later from: 
+</I>
+ &gt;   <A HREF="http://cvs.imatix.com./cgi-bin/viewcvs/">http://cvs.imatix.com./cgi-bin/viewcvs/</A>
+
+Fri, 11 Jan 2002 16:38:55 +0100, Pieter Hintjens wrote:
+
+&gt;<i>Just FYI, there are now two new agents in the SMT library: smtpop3 
+</I>&gt;<i>and smtsmtp, plus two matching test programs.  These agents provide 
+</I>&gt;<i>multithread POP3 and SMTP access.  All comments welcome!
+</I>
+I know that CVS has been turned off.
+
+I would like to procede with trying to write a spam filter with SFL/SMT.
+
+The one that diverted me for all of these months was <A HREF="http://mailfilter.sf.net/">http://mailfilter.sf.net/</A> 
+.  Which I still see as a very nice package.  However it has become so 
+intangled in the GNU way of ./configure needed things like Flex, Bison, 
+ad-infinitum to do a simple C++ compile, that it has literally become 
+impossible for it to be built on some systems (like mine).
+
+Getting 100+ spams per day is good motivation.  :-)
+
+I know there are other spam filters out there, but none that I've found that 
+will work on both Windows and Linux, with the same configuration file.   I 
+know I can run code under Cygwin to solve the problem (like Mailfilter) but 
+it is much slower than native code.
+
+My question is can I get the newer POP3 / SMTP code now?
+
+On Saturday 19 January 2002 10:27 pm, Ewen McNeill wrote:
+
+&gt;<i> Finally, yes, making this all easier to build is on our list of things
+</I>&gt;<i> to do -- pretty high on our list these days :-)
+</I>
+After 10 months has it made the top of the list yet?  The circular build 
+problems are the reason I gave up on SFL/SMT for a while.  Now I wish I had 
+stuck with my original plan for my spam filter.
+
+Unlike a web server (Xitami), or biz. apps. (STEP), every one needs a spam 
+filter these days.  Look at this project as good marketing for you and yours.  
+:<i>-)
+</I>
+This is the concept, taken largely from Mailfilter:
+
+There is a single configuration file.
+
+It contains the following sections:
+
+1) Server info (Where do I get the mail from).
+Encrypted passwords (not plan text), a frequent request on the Mailfilter 
+list.
+
+2) My address list.  If the message is not sent To/Cc: one of these addresses 
+it is deleted as spam.  Mailfilter has such a feature but it is hard to set 
+up.
+
+3) List of addresses to allow mail from unconditionally (never delete it).
+
+4) List of addresses/subjects/headers to deny mail from unconditionally 
+(delete it).  #3 over rides #4.  To save time processing stops at the first 
+matching rule.
+
+5) Some day (in other words I don't know how right now), allow AND/OR/IF type 
+logic to the rules.  Anyone here have any suggestions?
+
+#6) As much as practical keep the configuration file compatible with 
+mailfilter.
+
+Assume all of the above are using Regular Expressions for matching, unless 
+some one here has a better idea.
+
+Only the headers are read on the server (POP3: TOP x 0), never the text of the 
+message, for speed reasons.  You can not delete a message based on its 
+message content.
+
+Unlike the current version of Mailfilter this would be a two pass system, to 
+gain speed.  Normal pass, typically run in a Cron job, identifies the spams, 
+but does not delete them.  This keeps the message pointers from being 
+renumbers, so that you don't have to do a complete rescan each time.  When 
+you actually pick up the mail the messages are really deleted before 
+importing them to your mail client (different command line option)
+
+Subtitlies learned from experience:  
+ Subjects needed to be normalized before trying to match.
+   Subject: Viagra should be the same as these:
+   Subject V I A G R A
+   Subject V#$#I.A#<A HREF="mailto:G@R">G@R</A>!A
+
+ Very complex regular expressions break the standard GNU RE library randomly, 
+and unpredictably (internal stack over flow?), so don't use it.
+  
+  RE matching seems like it would be right up the ally of SMT.  Is there such 
+a SMT RE library? 
+
+ If not use this RE library:  <A HREF="http://www.ddj.com/articles/2001/0110/">http://www.ddj.com/articles/2001/0110/</A>
+
+If there is a need for I18N issues, stay away from GetText (Mailfilters 
+downfall because of all of the build issues), and use 
+<A HREF="http://www-124.ibm.com/icu/">http://www-124.ibm.com/icu/</A> .
+
+ Need to have option of case/or no case sensitivity in rule matching.
+
+Examples:
+
+  From: <A HREF="mailto:johndoe@x.com">johndoe@x.com</A>
+  To:  <A HREF="mailto:MyAddress@here.com">MyAddress@here.com</A>
+  Subject: Buy your Viagra here.
+
+ Message is deleted because subject Viagra is considered spam per #4 above.
+
+  From: <A HREF="mailto:MyWife@home.com">MyWife@home.com</A>
+  To:  <A HREF="mailto:MyAddress@here.com">MyAddress@here.com</A>
+  Subject: Bring home some Viagra tonight.
+
+  Message is kept because it is from my wife, and I won't be spending time 
+working on this spam filter code tonight.  :-) #3
+
+  From: <A HREF="mailto:johndoe@x.com">johndoe@x.com</A>
+  To:  <A HREF="mailto:IhaveNoClue@WhoThisIs.com">IhaveNoClue@WhoThisIs.com</A>
+  Subject: Bring home some Viagra tonight.
+
+ Message is deleted because it is not To/Cc: one of my addresses (#2), and not 
+#3.
+
+How do we get there?
+
+-- 
+      <A HREF="http://www.unusualresearch.com/">http://www.unusualresearch.com/</A> <A HREF="http://www.bpaddock.com/">http://www.bpaddock.com/</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="000247.html">[Xitami-Dev] How to build a spam filter?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#246">[ date ]</a>
+              <a href="thread.html#246">[ thread ]</a>
+              <a href="subject.html#246">[ subject ]</a>
+              <a href="author.html#246">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

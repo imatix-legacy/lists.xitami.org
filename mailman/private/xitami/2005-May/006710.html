@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Another Try,  (little different approach), -
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006708.html">
+   <LINK REL="Next"  HREF="006711.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Another Try,  (little different approach), -
+   </H1>
+    <B>Lois Robinson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Another Try,  (little different approach), -">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 03 May 2005 16:46:38 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006708.html">[Xitami] Another Try,  (little different approach), -
+</A></li>
+        <LI> Next message: <A HREF="006711.html">[Xitami] Another Try,  (little different approach), -
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6710">[ date ]</a>
+              <a href="thread.html#6710">[ thread ]</a>
+              <a href="subject.html#6710">[ subject ]</a>
+              <a href="author.html#6710">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I do know that for includes to work such as:  &lt;!--#include virtual=3D&quot;site=
+foot.txt&quot;--&gt; it is going to 
+look for the file you are including in the main web page directory of your=
+ server (i.e. 
+/webpages) and it will not show if you place the file within a subdirector=
+y of /webpages where 
+you may have your template.html file.
+
+If you want to include a .txt file within a scipt what I use is:
+
+sub include {
+# --------------------------------------------------------
+# This is text to include. Use like an SSI.
+
+my $file =3D shift;
+open (FILE, &quot;&lt;$file&quot;) or die &quot;Can't open $file ($!)&quot;;
+print &lt;FILE&gt;;
+close FILE;
+}
+## Then add this line wherever you want file included:
+
+ |; 
+&amp;include (&quot;dbside.txt&quot;);
+print qq|
+
+I use this for many scripts to include a footer and side menu within my di=
+splays.   Especially 
+for hosts sites which don't always allow SSI.
+
+Hope this help :)
+
+Lois
+ =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+
+On 3 May 2005 at 19:22, tom buckley wrote:
+
+&gt;<i>   At a glance, mine is surely not the dumbest question ever asked
+</I>&gt;<i>   here, so 
+</I>&gt;<i> i'm going to try this again since I've fought with it for this darn
+</I>&gt;<i> long now!
+</I>&gt;<i> 
+</I>&gt;<i>   It has got to be something I'm doing 'or not doing' here, because I
+</I>&gt;<i>   know 
+</I>&gt;<i> there is 'a way' to make an &quot;include&quot; work on my server, either with
+</I>&gt;<i> or without ssi..  Testing as free script that uses a template.html
+</I>&gt;<i> page with &quot; &lt;!--content--&gt; &quot; as it's only place-holder for the
+</I>&gt;<i> index.cgi page of the script, I have tried it both inside and outside
+</I>&gt;<i> of the cgi-bin, and with every possible cfg and place-holder I can
+</I>&gt;<i> think of, but I still cannot &quot;include&quot; the file!  Someone &quot;please&quot;
+</I>&gt;<i> steer me in the right direction here to make this work!  Anything that
+</I>&gt;<i> anyone can tell me to try, to include a file in another, I will
+</I>&gt;<i> certainly give it a shot!  Thanks ANYONE!    harthon
+</I>&gt;<i> 
+</I>&gt;<i> _________________________________________________________________ Is
+</I>&gt;<i> your PC infected? Get a FREE online computer virus scan from McAfee=AE
+</I>&gt;<i> Security. <A HREF="http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3D3963">http://clinic.mcafee.com/clinic/ibuy/campaign.asp?cid=3D3963</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006708.html">[Xitami] Another Try,  (little different approach), -
+</A></li>
+	<LI> Next message: <A HREF="006711.html">[Xitami] Another Try,  (little different approach), -
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6710">[ date ]</a>
+              <a href="thread.html#6710">[ thread ]</a>
+              <a href="subject.html#6710">[ subject ]</a>
+              <a href="author.html#6710">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

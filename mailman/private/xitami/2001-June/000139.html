@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000138.html">
+   <LINK REL="Next"  HREF="000140.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 11 Jun 2001 03:47:20 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000138.html">[Xitami] Xitami 2.5 latest beta and W2K
+</A></li>
+        <LI> Next message: <A HREF="000140.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:5.0.2.1.2.20010116193518.00aae5f0@pop-server">5.0.2.1.2.20010116193518.00aae5f0@pop-server</A>&gt;, Ben Franske writes:
+&gt;<i>I'm having a problem with SSI in Xitami. This is in a virtual host the 
+</I>&gt;<i>error message I get is &quot;The function you requested is not implemented&quot; The 
+</I>&gt;<i>SSI code is &lt;!--#include virtual=&quot;/news/news.txt&quot; --&gt; and it is on a 
+</I>&gt;<i>virtual host with a config file like this:
+</I>
+&quot;The function you requested is not implemented&quot; is usually generated
+when you refer to a WSX which is not compiled into Xitami.  In this case
+you are explicitly setting WSX references for xixssi, which shouldn't
+normally be required (they are in xitami.cfg for the versions have
+xixssi):
+
+&gt;<i>[Wsx]
+</I>&gt;<i>     .shtml=xixssi
+</I>&gt;<i>     .ssi=xixssi
+</I>
+You don't say what version of Xitami you are using.  If you are using
+Xitami 2.4 you need to use perlssi (as a filter, it should be
+preconfigured in the default configuration).  If you are using Xitami
+2.5, then xixssi should be installed and set up automatically, in which
+case you don't need those [wsx] entries.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000138.html">[Xitami] Xitami 2.5 latest beta and W2K
+</A></li>
+	<LI> Next message: <A HREF="000140.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#139">[ date ]</a>
+              <a href="thread.html#139">[ thread ]</a>
+              <a href="subject.html#139">[ subject ]</a>
+              <a href="author.html#139">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

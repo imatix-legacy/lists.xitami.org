@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Logfiles: How to use cycle-how=concat?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004409.html">
+   <LINK REL="Next"  HREF="004449.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Logfiles: How to use cycle-how=concat?
+   </H1>
+    <B>Robert M. Muench
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Logfiles: How to use cycle-how=concat?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 2 Dec 2002 10:22:58 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004409.html">[Xitami] Xitami crash report - meaning?
+</A></li>
+        <LI> Next message: <A HREF="004449.html">[Xitami] Logfiles: How to use cycle-how=concat?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4396">[ date ]</a>
+              <a href="thread.html#4396">[ thread ]</a>
+              <a href="subject.html#4396">[ subject ]</a>
+              <a href="author.html#4396">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, I'm currently using the following setup for my logfiles:
+
+[Accesslog]
+    Filename = &quot;xyz_de_access.log&quot;
+    Cycle-arg = xyz_de_access_%yy%mm%dd.log
+    Format = CLFX
+
+So that I will get a logfile for every day. That works fine but
+increases the number of files for several domains quite fast. Perhaps it
+would be better to have one logfile for each domain where new entries
+are concated too. So I tried:
+
+[Accesslog]
+    Filename = &quot;xyz_de_access.log&quot;
+    Cycle-how = concat
+    Cycle-arg = xyz_de_access.archive
+    Format = CLFX
+
+But this doesn't work. Any idea where the problem is? Robert
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004409.html">[Xitami] Xitami crash report - meaning?
+</A></li>
+	<LI> Next message: <A HREF="004449.html">[Xitami] Logfiles: How to use cycle-how=concat?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4396">[ date ]</a>
+              <a href="thread.html#4396">[ thread ]</a>
+              <a href="subject.html#4396">[ subject ]</a>
+              <a href="author.html#4396">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

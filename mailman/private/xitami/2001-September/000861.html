@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Relative redirection supported?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000856.html">
+   <LINK REL="Next"  HREF="000857.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Relative redirection supported?
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Relative redirection supported?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 04 Sep 2001 15:40:19 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000856.html">[Xitami] Relative redirection supported?
+</A></li>
+        <LI> Next message: <A HREF="000857.html">[Xitami] please cc replies to above
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#861">[ date ]</a>
+              <a href="thread.html#861">[ thread ]</a>
+              <a href="subject.html#861">[ subject ]</a>
+              <a href="author.html#861">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 02:42 PM 9/4/01 -0400, David Patte writeth:
+&gt;<i>I am using PHP on one of my servers. I am noticing problems with a
+</I>&gt;<i>script that contains relative redirection using the php instruction:
+</I>&gt;<i>
+</I>&gt;<i>Header(&quot;Location: somepage.php&quot;);
+</I>&gt;<i>
+</I>&gt;<i>When I execute this command from my php script, i get a 404 error (page
+</I>&gt;<i>not found)
+</I>&gt;<i>
+</I>&gt;<i>but if I change it to
+</I>&gt;<i>Header(&quot;Location: <A HREF="http://mydomainname.com/somepage.php"">http://mydomainname.com/somepage.php&quot;</A>);
+</I>&gt;<i>
+</I>&gt;<i>it works.
+</I>&gt;<i>
+</I>&gt;<i>Does xitami 2.4d9 support relative redirection? how do I enable it?
+</I>
+Xitami does not support server-side redirection.  However, XiFusion v2.5
+will perform the relative redirection that you need (unless you attempt to
+redirect to aliases - see the list archives for that discussion).
+Basically, a PHP 'Header' statement generates a raw HTTP header with
+whatever text you put inside it.  So, according to the HTTP standard,
+'Header(&quot;Location: /somepage.php&quot;);' should do the same thing.  The reason
+is that the 'Location' HTTP header is sent back to the browser and has to
+be an absolute URL (took me a while to figure this out for XiFusion).
+
+XiFusion is an &quot;add-on&quot; to Xitami and runs as a wrapper program for
+ColdFusion and PHP and version 2.5 can take any redirect (absolute and
+relative) and process it on the server rather than letting the client
+process it.  This not only provides better response times to the end user,
+but also provides better security since variables can be passed between PHP
+scripts unnoticed.
+
+You can obtain XiFusion v2.5 from Shining Light Productions' web site:
+
+&lt;<A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>&gt;
+
+Hope this helps!
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000856.html">[Xitami] Relative redirection supported?
+</A></li>
+	<LI> Next message: <A HREF="000857.html">[Xitami] please cc replies to above
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#861">[ date ]</a>
+              <a href="thread.html#861">[ thread ]</a>
+              <a href="subject.html#861">[ subject ]</a>
+              <a href="author.html#861">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

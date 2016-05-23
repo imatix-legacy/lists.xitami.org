@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami with php&gt;4.3.0?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005941.html">
+   <LINK REL="Next"  HREF="005937.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami with php&gt;4.3.0?
+   </H1>
+    <B>Elliott Potter
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami with php&gt;4.3.0?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 May 2004 23:50:47 -0500 (EST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005941.html">[Xitami] errors / HTTP problem in 2.5 and 2.d10
+</A></li>
+        <LI> Next message: <A HREF="005937.html">[Xitami] Xitami with php&gt;4.3.0?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5936">[ date ]</a>
+              <a href="thread.html#5936">[ thread ]</a>
+              <a href="subject.html#5936">[ subject ]</a>
+              <a href="author.html#5936">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've been trying for some time now to get Xitami-&lt;any version&gt; to work
+with a php version newer than 4.3.0 -- &quot;out of the box&quot; I get the error
+message &quot;No input file specified&quot; if I try to view a .php page.
+
+I looked around a bit and discovered that the newer versions of PHP
+require the CGI environment variable SCRIPT_FILENAME, and will not use
+the variable SCRIPT_NAME as in the past.
+(Search the page <A HREF="http://us4.php.net/features.commandline">http://us4.php.net/features.commandline</A> for
+SCRIPT_FILENAME for some more details)
+
+I checked three versions of xitami (2.4d9, 2.4d10, 2.5&lt;latest&gt;) and none
+of them appear export the SCRIPT_FILENAME variable.  I tried some other
+solutions that people had suggested on the web, such as setting
+doc_root, cgi.force_redirect, cgi.fix_pathinfo, and/or include_path in
+php.ini ... no luck.
+
+Does anyone have any comments on this?  Is anyone using Xitami with a
+relatively new version of php?  I'd like to think that I'm just missing
+some painfully obvious thing, but no snakes have jumped out and bitten
+me yet :)
+
+In the meantime, I've come up with the following patch for xitami-2.4d9
+which appears to work, but is probably not a good way of going about it:
+
+
+--- src/smt/old.smthttpl.c	2004-05-21 23:36:42.000000000 -0500
++++ src/smt/smthttpl.c	2004-05-21 23:36:23.000000000 -0500
+@@ -2787,6 +2787,7 @@
+     SET (&quot;Request-Method&quot;,    http_methods [p_http-&gt; method]);
+     SET (&quot;Script-Path&quot;,       p_http-&gt; script_path);
+     SET (&quot;Script-Name&quot;,       p_http-&gt; script_name);
++    SET (&quot;Script-Filename&quot;,   path_translated);
+     SET (&quot;Content-Type&quot;,      http_header_value (p_http, &quot;content-type&quot;));
+     SET (&quot;Content-Length&quot;,    http_header_value (p_http, &quot;content-length&quot;));
+     SET (&quot;Remote-User&quot;,       p_http-&gt; username? p_http-&gt; username: &quot;-&quot;);
+
+
+... all I did was add the Script-Filename variable to the list; I used
+path_translated because that appears to give the output I need (the full
+path of whatever php file is being served).
+
+
+Comments?  Suggestions?  Barring any better advice, I'm just going to
+keep using this, because I'm very happy with Xitami otherwise, and don't
+want to go about the baffling ordeal of choosing another web server.
+
+Thanks as usual
+--
+Elliott
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005941.html">[Xitami] errors / HTTP problem in 2.5 and 2.d10
+</A></li>
+	<LI> Next message: <A HREF="005937.html">[Xitami] Xitami with php&gt;4.3.0?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5936">[ date ]</a>
+              <a href="thread.html#5936">[ thread ]</a>
+              <a href="subject.html#5936">[ subject ]</a>
+              <a href="author.html#5936">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

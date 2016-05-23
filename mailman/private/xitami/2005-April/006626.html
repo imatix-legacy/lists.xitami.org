@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: remote startup
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006625.html">
+   <LINK REL="Next"  HREF="006627.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: remote startup
+   </H1>
+    <B>Boyan Brezinsky
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: remote startup">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri,  8 Apr 2005 08:45:58 +0300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006625.html">[Xitami] remote startup
+</A></li>
+        <LI> Next message: <A HREF="006627.html">[Xitami] Re: Xitami digest, Vol 1 #1069 - 1 msg
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6626">[ date ]</a>
+              <a href="thread.html#6626">[ thread ]</a>
+              <a href="subject.html#6626">[ subject ]</a>
+              <a href="author.html#6626">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> From: &quot;Steven L. Haas&quot; &lt;<A HREF="mailto:slhaas@gmail.com">slhaas@gmail.com</A>&gt;
+</I>&gt;<i> Subject: [Xitami] remote startup
+</I>&gt;<i>
+</I>&gt;<i> Is there a way to restart or remotely start xitami on an
+</I>&gt;<i> XP machine?  If
+</I>&gt;<i> xitami crashes when Im away for several days I'd like to
+</I>&gt;<i> be able to
+</I>&gt;<i> either remotely start it or have something that catches
+</I>&gt;<i> the crash and
+</I>&gt;<i> automatically restarts it.  I have the setting selected
+</I>&gt;<i> to silently
+</I>&gt;<i> recover from crashes, but that seems to do nothing for
+</I>&gt;<i> me.
+</I>&gt;<i>
+</I>
+Presuming you run Xitami as a service. Look in the Services
+MMC snap-in. For each service there is a Recovery tab,
+where you can tell the OS what to do when the service fails
+one way or another.
+In addition, there is the sc command-line tool that comes
+with XP and was part of the resource kits of the earlier
+NT-based Windows versions. The name comes from &quot;service
+control&quot;, I believe. The tool lets you manage services
+remotely. However, since it works via Windows networking
+(as a general term) and probably RDP as well, it is not
+well suited for running it outside a firewall.
+And there are multiple remote desktop utilities, starting
+with Windows XP built-in remote desktop. There is a free
+remote-desktop client for earlier versions of Windows, like
+W2K - you'll just have to dig it out of Microsoft's site.
+A final not-so-elegant approach. Use pslist from the free
+pstools package at www.sysinternals.com. Schedule a job
+that runs every now and then and executes &quot;pslist xitami&quot;.
+If the process is running, this will show information on
+it. If it is not running, pslist will say &quot;process xitami
+was not found on &lt;computer name&gt;&quot;. Just parse the output
+and restart Xitami, if needs be.
+
+
+
+--------------------------------------
+=D2=EE=E2=E0 =EF=E8=F1=EC=EE =E5 =E8=E7=EF=F0=E0=F2=E5=ED=EE =EE=F2  www.mai=
+l.bg
+
+=C1=E5=E7=EF=EB=E0=F2=ED=E0=F2=E0 =EF=EE=F9=E0 =E2 mail.bg =EF=F0=E5=E4=EB=
+=E0=E3=E0:
+- =D1=E8=EB=ED=E0 =E7=E0=F9=E8=F2=E0 =F1=F0=E5=F9=F3 =D1=CF=C0=CC/=F0=E5=EA=
+=EB=E0=EC=ED=E8 =EF=E8=F1=EC=E0
+- 30MB =E1=E5=E7=EF=EB=E0=F2=ED=EE (SMS =EE=F2 2=EB=E2=3D3GB!)
+- 30MB =EC=E0=EA=F1. =F0=E0=E7=EC=E5=F0 =ED=E0 =EF=F0=E8=EA=E0=F7=E5=ED =F4=
+=E0=E9=EB
+- SMS =E7=E0 =ED=EE=E2=EE =EF=E8=F1=EC=EE (=E2=F1=E8=F7=EA=E8 =EE=EF=E5=F0=
+=E0=F2=EE=F0=E8)
+- WAP =E4=EE=F1=F2=FA=EF =EE=F2 GSM =E8 =E1=E5=E7 =EA=EE=EC=EF=FE=F2=FA=F0
+- =C1=E5=E7=EF=EB=E0=F2=E5=ED POP3 =E4=EE=F1=F2=FA=EF
+- 24 =F7=E0=F1=EE=E2 =F2=E5=EB=E5=F4=EE=ED =E7=E0 =EF=EE=EC=EE=F9/=EF=EE=E4=
+=E4=F0=FA=E6=EA=E0
+______________________________________
+=C1=C5=C7 =C8=C7=CB=C8=D8=CD=C8 =C2=DA=CF=D0=CE=D1=C8 =D0=C5=C3=C8=D1=D2=D0=
+=C8=D0=C0=C9=D2=C5 =D1=C2=CE=C9
+=C1=C5=C7=CF=CB=C0=D2=C5=CD =C0=C4=D0=C5=D1 =CD=C0  <A HREF="http://www.mail.bg">http://www.mail.bg</A>
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006625.html">[Xitami] remote startup
+</A></li>
+	<LI> Next message: <A HREF="006627.html">[Xitami] Re: Xitami digest, Vol 1 #1069 - 1 msg
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6626">[ date ]</a>
+              <a href="thread.html#6626">[ thread ]</a>
+              <a href="subject.html#6626">[ subject ]</a>
+              <a href="author.html#6626">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

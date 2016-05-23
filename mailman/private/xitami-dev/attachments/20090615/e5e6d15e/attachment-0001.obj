@@ -1,0 +1,23 @@
+!
+!   Simple test for my C# schema
+!
+!   Written:    2009-06-15  Sten Hjelmqvist <sten.hjelmqvist@merdata.se>
+!
+-source=WriteSomething.cs
+-schema=lrschema.cs
+-animate=yes
+
+
+After-Init:
+    (--) Ok                          -> Write-Something
+          + Do-Nothing
+    (--) Error                       ->
+          + Terminate-The-Program
+
+Write-Something:
+    (--) Ok                          -> Write-Something
+          + Write-A-Word
+
+Defaults:
+    (--) End
+          + Terminate-The-Program

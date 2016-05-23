@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP! Upgrading to Xitami Pro
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003476.html">
+   <LINK REL="Next"  HREF="003481.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP! Upgrading to Xitami Pro
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP! Upgrading to Xitami Pro">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 Jun 2002 12:05:22 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003476.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+        <LI> Next message: <A HREF="003481.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3480">[ date ]</a>
+              <a href="thread.html#3480">[ thread ]</a>
+              <a href="subject.html#3480">[ subject ]</a>
+              <a href="author.html#3480">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>cool, your explanations helped alot...I think I can take it from here.  At
+least I have some reference points and can start my reading/research with
+somewhat of a knowledge base.  Makes it way easier to have a little
+direction.
+
+Russel
+----- Original Message -----
+From: &quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, June 21, 2002 11:33 AM
+Subject: Re: [Xitami] HELP! Upgrading to Xitami Pro
+
+
+&gt;<i> At 04:36 PM 6/20/2002 -0700, Russel Olinger writeth:
+</I>&gt;<i> &gt; Your bit below, about SSL and VHosting?  This means that b/c I have 8
+</I>&gt;<i> &gt;domains sharing one IP address that SSL will prevent my Vhosts from
+</I>working?
+&gt;<i>
+</I>&gt;<i> No, VHosting will still work, the problem is that SSL won't know which set
+</I>&gt;<i> of certificates to send for the host the user wants.  So, you have to do
+</I>&gt;<i> one of two things for the certs:
+</I>&gt;<i>
+</I>&gt;<i> 1)  Get certs. for *.somedomain.com (where somedomain.com is a domain you
+</I>&gt;<i> own).  Then, create virtual hosts called domain1.somedomain.com,
+</I>&gt;<i> domain2.somedomain.com, etc. for each domain that is on your servers.
+</I>&gt;<i> Then, require people to connect to <A HREF="https://domain1.somedomain.com/">https://domain1.somedomain.com/</A> for
+</I>&gt;<i> SSL-based stuff.  Note that this is one option that I'm not quite sure
+</I>&gt;<i> about the setup for since Craig (my web host provider) is starting to
+</I>&gt;<i> experiment with it.  Generating the certs. for this was based on the RFC
+</I>&gt;<i> for HTTPS.  I'm crossing my fingers that it will work and the browser will
+</I>&gt;<i> like it (i.e. assumes the browser is 100% HTTPS-compliant).
+</I>&gt;<i>
+</I>&gt;<i> 2)  Get certs. for www.somedomain.com (somedomain.com is your own domain
+</I>&gt;<i> still) and require your users to point to
+</I>&gt;<i> <A HREF="https://www.somedomain.com/domain1root/">https://www.somedomain.com/domain1root/</A> for SSL-based access.  This only
+</I>&gt;<i> requires setting up an alias rather than a whole sub-domain.  The
+</I>down-side
+&gt;<i> is slightly more difficult scripting on the user end of things.
+</I>&gt;<i>
+</I>&gt;<i> 3)  If only one client will be using SSL, the client can purchase the
+</I>cert.
+&gt;<i> and the others can use it, but their users will get a warning in their
+</I>&gt;<i> browser that they don't own the cert.  Note, however, this option does not
+</I>&gt;<i> easily scale.
+</I>&gt;<i>
+</I>&gt;<i> &gt;Example B: What about within a domain (aliasing SSL directories) :
+</I>&gt;<i> &gt;<A HREF="http://www.domain1.com">http://www.domain1.com</A>
+</I>&gt;<i> &gt;<A HREF="http://www.domain1.com/cgi-bin/">http://www.domain1.com/cgi-bin/</A>
+</I>&gt;<i> &gt;<A HREF="https://www.domain1.com/cgi-bin/secure">https://www.domain1.com/cgi-bin/secure</A>  (SSL secure path)
+</I>&gt;<i> &gt;<A HREF="http://www.domain1.com/pages">http://www.domain1.com/pages</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;B1: Can SSL work in this fashion?
+</I>&gt;<i> &gt;B2: Or will the whole doamin be SSL referenced by: https:// ?
+</I>&gt;<i>
+</I>&gt;<i> The whole domain is covered by SSL.  All SSL/TLS does is provide a secure
+</I>&gt;<i> transport of data without understanding of the underlying representation
+</I>of
+&gt;<i> the data it is securing.  Hence it can't know what virtual host the
+</I>browser
+&gt;<i> is going to use since it doesn't understand that level of data (the HTTP
+</I>&gt;<i> protocol).  As I said before, if you want to really understand how SSL/TLS
+</I>&gt;<i> works with HTTP, you need to read the RFCs.
+</I>&gt;<i>
+</I>&gt;<i> Hope this helps!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+</I>&gt;<i> Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+</I>&gt;<i>                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003476.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+	<LI> Next message: <A HREF="003481.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3480">[ date ]</a>
+              <a href="thread.html#3480">[ thread ]</a>
+              <a href="subject.html#3480">[ subject ]</a>
+              <a href="author.html#3480">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

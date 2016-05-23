@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami (dis)advantages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005203.html">
+   <LINK REL="Next"  HREF="005213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami (dis)advantages
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami (dis)advantages">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 02 Jul 2003 16:22:10 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005203.html">[Xitami] Xitami (dis)advantages
+</A></li>
+        <LI> Next message: <A HREF="005213.html">[Xitami] Xitami (dis)advantages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5212">[ date ]</a>
+              <a href="thread.html#5212">[ thread ]</a>
+              <a href="subject.html#5212">[ subject ]</a>
+              <a href="author.html#5212">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 07:50 AM 7/1/2003 +0200, Marc Doigny writeth:
+&gt;<i>Hello !
+</I>&gt;<i>
+</I>&gt;<i>Another &quot;missing&quot; feature in Xitami is the lack of ISAPI. This protocol 
+</I>&gt;<i>seems to be getting a standard for fast cgi.
+</I>&gt;<i>In the normal version of cgi-bin, when a user clicks on a cgi-bin page 
+</I>&gt;<i>(pointing to an executable), a complete new environment is created for this 
+</I>&gt;<i>executable.
+</I>&gt;<i>This can take some time.
+</I>&gt;<i>When using ISAPI, when a user request a dynamic page, the server calls the 
+</I>&gt;<i>adequate routine in a DLL. This is much faster: no environment to create, 
+</I>&gt;<i>and presumably the DLL is already in memory. But since the DLL resides in 
+</I>&gt;<i>the same memory space as the server, a simple error in your DLL will pull 
+</I>&gt;<i>the server down. When using normal cgi, an error in your executable is 
+</I>&gt;<i>detected by the server, and it return an error to the client.
+</I>&gt;<i>ISAPI is quite a mixed blessing.
+</I>
+Have you tried the ISAPI Beta add-on for Xitami?  It uses LRWP (can't
+remember if it uses LRWP 1.0 or 2.0 - neither version is that great in
+either security or performance, IMHO), so if the DLL crashes, only the
+connection to Xitami dies instead of the whole server.  The ProtoNova Web
+Server has full LRWP 1.0/2.0 support as well and can run the same ISAPI
+Beta Add-on module that Xitami has.  So, for all three servers (Xitami,
+ProtoNova, and Sambar), ISAPI support exists...can't say anything about
+Sambar's support for it, but it probably has &quot;mixed blessings&quot;.
+
+However, when it comes to ISAPI for Xitami (or ProtoNova), there is no
+&quot;mixed blessing&quot; unless LRWP itself dies (I have yet to hear of this
+happening...but not many people use LRWP because it takes some effort to
+set up).  (BTW, the core ProtoNova server will keep running even if the
+LRWP Remote Module dies).
+
+&gt;<i>You can password-protect directories, but it seems impossible to protect 
+</I>&gt;<i>execuables.
+</I>
+Only if you stick your executables in cgi-bin.  Granted NT security stinks,
+but if you implement it properly and you don't put executables in cgi-bin
+(or any other web server accessible location), you are fine.  Now if you
+can't trust the users on your system (assuming a VHosted type of
+situation), that's a completely different story and you have more problems
+than just protecting a directory.
+
+&gt;<i>Overal, Xitami is a simple and easy to use webserver.
+</I>&gt;<i>Sambar is more up-to-date, has more features, but is more difficult to 
+</I>&gt;<i>implement.
+</I>
+Agreed, Xitami and ProtoNova are equally simple to set up.
+Sambar isn't that tough to set up but tends to have the Apache
+&quot;look-and-feel,&quot; which I don't care for.
+
+More importantly than ease-of-installation is security.  Instead of asking,
+&quot;How easy is this to install?&quot;  The question you should be asking yourself
+is, &quot;How long does it take to secure this sucker?&quot;  IIS takes about half a
+day (IF, and that's a _BIG_ 'IF', you know what you are doing) or more (up
+to 3-4 days) to secure it and apply all of the patches.  Xitami and Sambar
+take anywhere from 1 hour to 1 day to secure.  ProtoNova comes secured
+out-of-the-box.  Obviously, features like ISAPI are important, but they
+shouldn't be the deciding factor as to the server of choice.  If security
+and server stability are concerns for you, the following information was
+compiled one year ago about various servers:
+
+<A HREF="http://12.210.108.203:83/search.nvm?searchname=Web+Server+Comparisons">http://12.210.108.203:83/search.nvm?searchname=Web+Server+Comparisons</A>
+
+Even though I wrote that document, I gave each web server a fair trial and
+did my best to be as unbiased as possible in the results.  The only bias
+was the order in which I would choose a web server - Xitami still being
+second to ProtoNova (for obvious reasons)...IIS is appropriately ranked
+just slightly above servers almost no one uses or should use.
+
+The funny thing about that document is that Ashley Brown herself (author of
+iWeb) e-mailed me about why the iWeb server was ranked the lowest server in
+that list...which says that people actually use that list to choose their
+web server based on security, stability, and important features.  I figured
+that no one would read it...guess I was wrong there!  The OP and others
+will find the aforementioned document intriguing and a good read with a
+focus on the right topics of, IMO, security and stability for side-by-side
+comparisons of web servers (most web server comparison charts focus solely
+on features - this one focuses on how the server works on the inside from a
+security and stability standpoint as well as a deep understanding of the
+Windows platform - definitely worth checking out!).
+
+Please note that while ProtoNova is my personal server of choice (I wrote
+ProtoNova and enjoy maintaining it), I highly respect the Xitami server and
+iMatix and everything they have done thus far.  I have a few complaints
+that iMatix already knows about, but even then Xitami still runs on port 80
+on my machine and I have yet to see it crash under XP.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005203.html">[Xitami] Xitami (dis)advantages
+</A></li>
+	<LI> Next message: <A HREF="005213.html">[Xitami] Xitami (dis)advantages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5212">[ date ]</a>
+              <a href="thread.html#5212">[ thread ]</a>
+              <a href="subject.html#5212">[ subject ]</a>
+              <a href="author.html#5212">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

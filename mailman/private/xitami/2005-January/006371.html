@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Folder permission issue or PERL error???
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006367.html">
+   <LINK REL="Next"  HREF="006372.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Folder permission issue or PERL error???
+   </H1>
+    <B>Admin (MRJ)
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Folder permission issue or PERL error???">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 14 Jan 2005 00:11:24 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006367.html">[Xitami] Xitami has slowed to a crawl
+</A></li>
+        <LI> Next message: <A HREF="006372.html">[Xitami] Folder permission issue or PERL error???
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6371">[ date ]</a>
+              <a href="thread.html#6371">[ thread ]</a>
+              <a href="subject.html#6371">[ subject ]</a>
+              <a href="author.html#6371">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_00A7_01C4F9CD.95BB2BA0
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+I am having a bit of trouble here.
+
+I have ActivePerl 5.8.6 installed
+Xitami 2.5c2 installed on Win 2k
+
+and I'm trying to get   <A HREF="http://www.radinks.com/upload/">http://www.radinks.com/upload/</A>
+this little thing to work in the lite edition free version.
+
+Now everything is ok as long I try using the html-perl.htm file to do an =
+upload but=20
+it fails stating there is a error on line 62 in the upload.cgi file.
+
+the following is the CGI file I am using.
+
+Any hints as to why it won't upload to my xitami box?
+I really don't know any Perl myself to debug this thing in a proper =
+manner.
+
+Thanks for any help.
+
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+#!/usr/bin/perl -w
+
+#
+# Perl script to accept file uploads. This script is provided for =
+demonstration=20
+# purposes only.
+# you need to have the CGI module installed.
+#
+# Copyright Rad Inks (pvt) 2003
+# <A HREF="http://www.radinks.com">http://www.radinks.com</A>
+
+
+use CGI;  =20
+use Carp;
+
+sub bye_bye {
+ $mes =3D shift;
+ print &quot;&lt;br&gt;$mes&lt;br&gt;\n&quot;;
+
+ exit;
+}
+
+
+
+print &quot;Content-type: text/html\n\n &quot;;
+my $cg =3D new CGI();
+
+#
+# Files will not be saved if $save_path is left undefined. Please make =
+sure
+# the path you choose is writable.
+#
+
+my $save_path =3D &quot;D:\\tmpUL\\&quot;;
+
+print &lt;&lt;__TABLE__;
+&lt;html&gt;
+&lt;body  bgcolor=3D&quot;FFFFCC&quot;&gt;
+
+&lt;table border=3D&quot;1&quot; cellpadding=3D&quot;5&quot; width=3D&quot;100%&quot; align=3D&quot;center&quot;&gt;
+&lt;tr&gt;&lt;td colspan=3D&quot;2&quot; bgcolor=3D&quot;#0066cc&quot;&gt;&lt;font color=3D&quot;#FFFFCC&quot; =
+size=3D&quot;+1&quot; align=3D&quot;center&quot;&gt;Files Uploaded&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr  bgcolor=3D&quot;#ffff00&quot;&gt;&lt;td style=3D&quot;font-size: 110%;&quot;&gt;&lt;nobr&gt;File =
+Name&lt;/nobr&gt;&lt;/td&gt;
+ &lt;td style=3D&quot;font-size: 110%&quot;  align=3D&quot;right&quot;&gt;&lt;nobr&gt;File =
+size&lt;/nobr&gt;&lt;/td&gt;&lt;/tr&gt;
+__TABLE__
+
+my $size =3D $cg-&gt;param;
+for($i=3D0 ; $i &lt; $size ; $i++)
+{
+ $file_upload  =3D $cg-&gt;param(&quot;userfile[$i]&quot;);
+
+ if($file_upload) {
+  my $fh =3D $cg-&gt;upload(&quot;userfile[$i]&quot;);
+  my @name =3D split('/',$fh);
+  my $filename =3D $name[$#name];
+ =20
+  $fsize =3D(-s $fh);
+  print &quot;&lt;tr&gt;&lt;td&gt;$filename &lt;/td&gt;\n&quot;;
+  print &quot;&lt;td&gt;$fsize&lt;/td&gt;&lt;/tr&gt;&quot;;
+ =20
+  if(defined($save_path))
+  {
+   open (OUTFILE,&quot;&gt;&gt;$save_path/$filename&quot;);
+   while(&lt;$fh&gt;) {
+    print OUTFILE $_;                                                    =
+              ### THIS IS WHERE THE ERROR OCCURS
+   }
+   close(OUTFILE);
+  }
+  else
+  {
+   carp 'not saving';
+  }
+ }
+}
+
+
+print &lt;&lt;__TABLE__;
+&lt;/table&gt;
+
+&lt;p style=3D&quot;text-align:center; font-size: 80%&quot;&gt;Sample  Perl Upload =
+handler provided by
+ &lt;a href=3D&quot;<A HREF="http://www.radinks.com/?dn"">http://www.radinks.com/?dn&quot;</A>&gt;Rad Inks&lt;/a&gt;&lt;/p&gt;
+=20
+&lt;p style=3D&quot;text-align:center; font-size: 80%&quot;&gt;have you seen our &lt;a =
+href=3D&quot;<A HREF="http://www.radinks.com/sftp/?dn"">http://www.radinks.com/sftp/?dn&quot;</A>&gt;Secure FTP Applet&lt;/a&gt; or our
+&lt;a href=3D&quot;<A HREF="http://www.radinks.com/mms/?dn"">http://www.radinks.com/mms/?dn&quot;</A>&gt;Multimedia Messaging =
+Solution&lt;/a&gt;?&lt;/p&gt;
+
+__TABLE__
+
+
+
+------=_NextPart_000_00A7_01C4F9CD.95BB2BA0
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2800.1106&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am having a bit of trouble =
+here.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I have ActivePerl 5.8.6 =
+installed&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami 2.5c2 installed on Win =
+2k&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;and I'm trying to get&amp;nbsp;&amp;nbsp; =
+&lt;/FONT&gt;&lt;A=20
+href=3D&quot;<A HREF="http://www.radinks.com/upload/"">http://www.radinks.com/upload/&quot;</A>&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;<A HREF="http://www.radinks.com/upload/</FONT">http://www.radinks.com/upload/&lt;/FONT</A>&gt;&lt;/A&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;this little thing to work in the lite =
+edition free=20
+version.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Now everything is ok as long I try =
+using the=20
+html-perl.htm file to do an upload but &lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;it fails stating there is a error on =
+line 62 in the=20
+upload.cgi file.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;the following is the CGI file I am=20
+using.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Any hints as to why it won't upload to =
+my xitami=20
+box?&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I really don't know any Perl myself to =
+debug this=20
+thing in a proper manner.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thanks for any help.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D&lt;/FONT&gt;&lt;/DIV&gt;=
+
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#!/usr/bin/perl -w&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#&lt;BR&gt;# Perl script to accept file =
+uploads. This=20
+script is provided for demonstration &lt;BR&gt;# purposes only.&lt;BR&gt;# you need =
+to have=20
+the CGI module installed.&lt;BR&gt;#&lt;BR&gt;# Copyright Rad Inks (pvt) 2003&lt;BR&gt;# =
+&lt;A=20
+href=3D&quot;<A HREF="http://www.radinks.com"">http://www.radinks.com&quot;</A>&gt;<A HREF="http://www.radinks.com</A">http://www.radinks.com&lt;/A</A>&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;
+&lt;DIV&gt;&lt;BR&gt;use CGI;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;BR&gt;use Carp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;sub bye_bye {&lt;BR&gt;&amp;nbsp;$mes =3D shift;&lt;BR&gt;&amp;nbsp;print=20
+&quot;&amp;lt;br&amp;gt;$mes&amp;lt;br&amp;gt;\n&quot;;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;exit;&lt;BR&gt;}&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;print &quot;Content-type: text/html\n\n &quot;;&lt;BR&gt;my $cg =3D new =
+CGI();&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;#&lt;BR&gt;# Files will not be saved if $save_path is left undefined. =
+Please make=20
+sure&lt;BR&gt;# the path you choose is writable.&lt;BR&gt;#&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;my $save_path =3D &quot;D:\\tmpUL\\&quot;;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;print &amp;lt;&amp;lt;__TABLE__;&lt;BR&gt;&amp;lt;html&amp;gt;&lt;BR&gt;&amp;lt;body&amp;nbsp;=20
+bgcolor=3D&quot;FFFFCC&quot;&amp;gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;lt;table border=3D&quot;1&quot; cellpadding=3D&quot;5&quot; width=3D&quot;100%&quot;=20
+align=3D&quot;center&quot;&amp;gt;&lt;BR&gt;&amp;lt;tr&amp;gt;&amp;lt;td colspan=3D&quot;2&quot; =
+bgcolor=3D&quot;#0066cc&quot;&amp;gt;&amp;lt;font=20
+color=3D&quot;#FFFFCC&quot; size=3D&quot;+1&quot; align=3D&quot;center&quot;&amp;gt;Files=20
+Uploaded&amp;lt;/font&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&lt;BR&gt;&amp;lt;tr&amp;nbsp;=20
+bgcolor=3D&quot;#ffff00&quot;&amp;gt;&amp;lt;td style=3D&quot;font-size: =
+110%;&quot;&amp;gt;&amp;lt;nobr&amp;gt;File=20
+Name&amp;lt;/nobr&amp;gt;&amp;lt;/td&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;lt;td style=3D&quot;font-size: =
+110%&quot;&amp;nbsp;=20
+align=3D&quot;right&quot;&amp;gt;&amp;lt;nobr&amp;gt;File=20
+size&amp;lt;/nobr&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&lt;BR&gt;__TABLE__&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;my $size =3D $cg-&amp;gt;param;&lt;BR&gt;for($i=3D0 ; $i &amp;lt; $size ;=20
+$i++)&lt;BR&gt;{&lt;BR&gt;&amp;nbsp;$file_upload &amp;nbsp;=3D =
+$cg-&amp;gt;param(&quot;userfile[$i]&quot;);&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;if($file_upload) {&lt;BR&gt;&amp;nbsp;&amp;nbsp;my $fh =3D=20
+$cg-&amp;gt;upload(&quot;userfile[$i]&quot;);&lt;BR&gt;&amp;nbsp;&amp;nbsp;my @name =3D=20
+split('/',$fh);&lt;BR&gt;&amp;nbsp;&amp;nbsp;my $filename =3D=20
+$name[$#name];&lt;BR&gt;&amp;nbsp;&amp;nbsp;&lt;BR&gt;&amp;nbsp;&amp;nbsp;$fsize =3D(-s=20
+$fh);&lt;BR&gt;&amp;nbsp;&amp;nbsp;print &quot;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;$filename=20
+&amp;lt;/td&amp;gt;\n&quot;;&lt;BR&gt;&amp;nbsp;&amp;nbsp;print=20
+&quot;&amp;lt;td&amp;gt;$fsize&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&quot;;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&lt;BR&gt;&amp;nbsp;&amp;nbsp;=
+if(defined($save_path))&lt;BR&gt;&amp;nbsp;&amp;nbsp;{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;open=20
+(OUTFILE,&quot;&amp;gt;&amp;gt;$save_path/$filename&quot;);&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;while(&amp;lt;=
+$fh&amp;gt;)=20
+{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;print OUTFILE=20
+$_;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;=
+nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&lt;FONT color=3D#ff0000&gt;### THIS IS WHERE THE ERROR=20
+OCCURS&lt;/FONT&gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;close(OUTFILE);=
+&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;&amp;nbsp;else&lt;BR&gt;&amp;nbsp;&amp;nbsp;{&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;carp=20
+'not saving';&lt;BR&gt;&amp;nbsp;&amp;nbsp;}&lt;BR&gt;&amp;nbsp;}&lt;BR&gt;}&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;BR&gt;print &amp;lt;&amp;lt;__TABLE__;&lt;BR&gt;&amp;lt;/table&amp;gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;lt;p style=3D&quot;text-align:center; font-size: 80%&quot;&amp;gt;Sample&amp;nbsp; =
+Perl Upload=20
+handler provided by&lt;BR&gt;&amp;nbsp;&amp;lt;a href=3D&quot;&lt;A=20
+href=3D'<A HREF="http://www.radinks.com/?dn"">http://www.radinks.com/?dn&quot;</A>&gt;Rad'&gt;<A HREF="http://www.radinks.com/?dn"&gt;R=">http://www.radinks.com/?dn&quot;&amp;gt;R=</A>
+ad&lt;/A&gt;=20
+Inks&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&lt;BR&gt;&amp;nbsp;&lt;BR&gt;&amp;lt;p style=3D&quot;text-align:center; =
+font-size:=20
+80%&quot;&amp;gt;have you seen our &amp;lt;a href=3D&quot;&lt;A=20
+href=3D'<A HREF="http://www.radinks.com/sftp/?dn"">http://www.radinks.com/sftp/?dn&quot;</A>&gt;Secure'&gt;<A HREF="http://www.radinks.com/s=">http://www.radinks.com/s=</A>
+ftp/?dn&quot;&amp;gt;Secure&lt;/A&gt;=20
+FTP Applet&amp;lt;/a&amp;gt; or our&lt;BR&gt;&amp;lt;a href=3D&quot;&lt;A=20
+href=3D'<A HREF="http://www.radinks.com/mms/?dn"">http://www.radinks.com/mms/?dn&quot;</A>&gt;Multimedia'&gt;<A HREF="http://www.radinks.co=">http://www.radinks.co=</A>
+m/mms/?dn&quot;&amp;gt;Multimedia&lt;/A&gt;=20
+Messaging Solution&amp;lt;/a&amp;gt;?&amp;lt;/p&amp;gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;__TABLE__&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;BR&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_00A7_01C4F9CD.95BB2BA0--
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006367.html">[Xitami] Xitami has slowed to a crawl
+</A></li>
+	<LI> Next message: <A HREF="006372.html">[Xitami] Folder permission issue or PERL error???
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6371">[ date ]</a>
+              <a href="thread.html#6371">[ thread ]</a>
+              <a href="subject.html#6371">[ subject ]</a>
+              <a href="author.html#6371">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

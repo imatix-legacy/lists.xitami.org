@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Logfile issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Logfile%20issues&In-Reply-To=BAY105-DAV13EB7AEBCB374E5131CCC5F8360%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007707.html">
+   <LINK REL="Next"  HREF="007708.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Logfile issues</H1>
+    <B>Paul Reid</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Logfile%20issues&In-Reply-To=BAY105-DAV13EB7AEBCB374E5131CCC5F8360%40phx.gbl"
+       TITLE="[Xitami] Logfile issues">preid at rci.rutgers.edu
+       </A><BR>
+    <I>Wed Jan 30 10:05:35 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007707.html">[Xitami] Logfile issues
+</A></li>
+        <LI>Next message: <A HREF="007708.html">[Xitami] Logfile issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7702">[ date ]</a>
+              <a href="thread.html#7702">[ thread ]</a>
+              <a href="subject.html#7702">[ subject ]</a>
+              <a href="author.html#7702">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> &gt; ac%yy%mm%dd.log_000 Has anyone seen this before?
+
+Yes, it means that a sub-process had to wait &quot;too long&quot; to get a 
+write-lock on the log file (because another sub-process(es) was writing).
+
+A faster drive or more buffering may help. However a random-request 
+server has random spikes in traffic, and will always bind-up; you can 
+only reduce the probability to very-small.
+
+I have not dug in Xitami's guts in years. Can it pipe to a process? Can 
+you write a process with far higher throughput than your O/S's 
+writefile(append)? It is dubious because all modern O/Ses basically 
+&quot;write&quot; to memory and buffer actual disk writes... they do what you want 
+and have been highly optimized for someone's notion of typical 
+transactional storage.
+
+Multiple virtual hosts can write to multiple files, which may cut the bind.
+
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007707.html">[Xitami] Logfile issues
+</A></li>
+	<LI>Next message: <A HREF="007708.html">[Xitami] Logfile issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7702">[ date ]</a>
+              <a href="thread.html#7702">[ thread ]</a>
+              <a href="subject.html#7702">[ subject ]</a>
+              <a href="author.html#7702">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

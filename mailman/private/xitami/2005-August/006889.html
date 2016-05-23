@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Developer Issue: POST STDIN vs CGI read
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Developer%20Issue%3A%20POST%20STDIN%20vs%20CGI%20read&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006888.html">
+   <LINK REL="Next"  HREF="006890.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Developer Issue: POST STDIN vs CGI read</H1>
+    <B>RPO</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Developer%20Issue%3A%20POST%20STDIN%20vs%20CGI%20read&In-Reply-To="
+       TITLE="[Xitami] Developer Issue: POST STDIN vs CGI read">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Mon Aug 29 01:13:59 CEST 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="006888.html">[Xitami] Some Help Please.
+</A></li>
+        <LI>Next message: <A HREF="006890.html">[Xitami] FrontPage Server Extensions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6889">[ date ]</a>
+              <a href="thread.html#6889">[ thread ]</a>
+              <a href="subject.html#6889">[ subject ]</a>
+              <a href="author.html#6889">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am running Xitami on W2k machine.  How does Xitami handle POST data?  I am trying to read in the raw POST data from a file upload form, and while reading in the raw data my script writes to a temp file the progress of that upload.  Every 8k of POST data the temp file gets updated.  In the script the temp file gets created before the POST STDIN occurs. However, with Xitami the temp file doesn't get created until AFTER the entire raw STDIN has been processed, thus preventing the use of any status or progess data.  
+
+Is Xitami server somehow holding onto the raw POST data, waiting for it to be completely read in, before handing it off to the CGI compiler or before handing it off to the perl script?  This same script works on Linux/apache the way its intended to, but on Windows/Xitami the temp file doesn't get written til after the raw data is completely read in.
+
+This is a serious issue because it is inteferring with the ability to create a Progress Bar that shows users the status of a multi-file upload.  With Perl, the only way to create a Progress Bar is to write updates to a temp file (bytesIN of totalBytes) while the files are being uploaded, and a popup window refreshes itself and processes the contents of that temp file to be able to provide the visual progress of the file upload.  If Xitami is somehow interferring with the raw read of POST data, then there is no effective way of creating that temp file.
+
+-Russel
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20050828/eca7a5e1/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20050828/eca7a5e1/attachment.htm</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="006888.html">[Xitami] Some Help Please.
+</A></li>
+	<LI>Next message: <A HREF="006890.html">[Xitami] FrontPage Server Extensions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6889">[ date ]</a>
+              <a href="thread.html#6889">[ thread ]</a>
+              <a href="subject.html#6889">[ subject ]</a>
+              <a href="author.html#6889">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E9E3B8.60702%40rci.rutgers.edu">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007777.html">
+   <LINK REL="Next"  HREF="007780.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>R O</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E9E3B8.60702%40rci.rutgers.edu"
+       TITLE="[Xitami] Multi server issue">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Wed Mar 26 17:29:04 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007777.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007780.html">[Xitami] Wikidot, Email, and Xitami's rebirth!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7779">[ date ]</a>
+              <a href="thread.html#7779">[ thread ]</a>
+              <a href="subject.html#7779">[ subject ]</a>
+              <a href="author.html#7779">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+After all the talk of the wikidot and the new searchable forum thing (about 
+3 or 4 months ago) I hadn't heard any more stuff.  I honestly didn't know it 
+was up and running.  I will go check it all this week and lend what little 
+relevance I have to the situation.  :-P
+
+Will try the lwrp/ftp port changing thing tomorrow and will post the 
+results.
+
+
+Russel P. Olinger 
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+
+----------------------------------------
+&gt;<i> Date: Wed, 26 Mar 2008 01:48:40 -0400
+</I>&gt;<i> From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">preid at rci.rutgers.edu</A>
+</I>&gt;<i> To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Multi server issue
+</I>&gt;<i> 
+</I>&gt;<i> Here's some sloppy thinking from someone who knew the ARPAnet, drifted 
+</I>&gt;<i> away, and on return had to learn this newfangled TCP stuff.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; You have one port 80
+</I>&gt;<i> 
+</I>&gt;<i> IP is street address.
+</I>&gt;<i> 
+</I>&gt;<i> Port is a box at that address.
+</I>&gt;<i> 
+</I>&gt;<i> Clearly you can have 1234 Oak St Box 80, and 1235 Oak St Box 80, without 
+</I>&gt;<i> mix-up. 192.168.1.100:80 and 192.168.1.101:80 are -different- logical 
+</I>&gt;<i> places, even if they are same physical card in same machine.
+</I>&gt;<i> 
+</I>&gt;<i> What RO was trying -SHOULD- work.
+</I>&gt;<i> 
+</I>&gt;<i> Well, maybe. I'm constantly getting mail for &quot;141&quot; in other 
+</I>&gt;<i> buildings/streets. My mailman does not always get it right.
+</I>&gt;<i> 
+</I>&gt;<i> Hierarchical addressing systems are easy to screw-up. Mailman sorts 
+</I>&gt;<i> right only 99% of the time. If you are building a machine, it is easy to 
+</I>&gt;<i> overlook something, get it 99% right. If it screws-up only in unusual 
+</I>&gt;<i> situations, it may go unnoticed for a decade.
+</I>&gt;<i> 
+</I>&gt;<i> If this were Mac O/S 7, or Win 311, I'd bet on the tossed-together 
+</I>&gt;<i> non-unix TCP stacks of that vintage. But W2K+ stole a unix stack and 
+</I>&gt;<i> should do the right thing.
+</I>&gt;<i> 
+</I>&gt;<i> Magnus has magnanimously traced the conflict. Xitami opens a lot more 
+</I>&gt;<i> ports than just 80. My reading is that some of these are opened without 
+</I>&gt;<i> specifying an IP. The default is &quot;all&quot;, the first copy already snagged 
+</I>&gt;<i> those ports, the request is refused, Xitami suspends itself.
+</I>&gt;<i> 
+</I>&gt;<i> Is it a bug? Since you CAN run MANY different IP addresses on a single 
+</I>&gt;<i> copy of Xitami, demanding to be able to run two copies seems greedy. 
+</I>&gt;<i> (Specially for free.)
+</I>&gt;<i> 
+</I>&gt;<i> Yet clearly there is IP:Port support; just somehow not on the LRWP 
+</I>&gt;<i> frill. Probably an oversight by the developer. Well, it IS a technology 
+</I>&gt;<i> demo, not promised to be all things to all people. And it appears the 
+</I>&gt;<i> community didn't notice this oddity for many years; how &quot;essential&quot; can 
+</I>&gt;<i> it be?
+</I>&gt;<i> 
+</I>&gt;<i> Xitami NT-Service source code IS available. And it is darn clean stuff. 
+</I>&gt;<i> Knowing the bug location, any half-fast C programmer should be able to 
+</I>&gt;<i> find the function call and the oversight. (Or, since &quot;nobody&quot; uses LRWP, 
+</I>&gt;<i> simply lose the whole LRWP call.)
+</I>&gt;<i> 
+</I>&gt;<i> Nearly a decade ago, I was able to build Xitami from source. I'm not so 
+</I>&gt;<i> clever anymore, or I've grown smart enough to have lost all my MS-C 
+</I>&gt;<i> compiler disks.  I'm a user, not a coder. Do we have any coders here, or 
+</I>&gt;<i> just users? And coders who want to spend time on this odd-horse problem?
+</I>&gt;<i> 
+</I>&gt;<i> I think the xitami.wikidot.com site says it all. There are NO edits, 
+</I>&gt;<i> ever, not even the glaring typo in Pieter's introduction (&quot;not&quot; for 
+</I>&gt;<i> &quot;now&quot;). I just fixed that, and added Magnus's comments.... but 45 days 
+</I>&gt;<i> with __NO__ community input means nobody has an oar in the water.
+</I>&gt;<i> 
+</I>&gt;<i>   -PRR
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080326/7939884c/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080326/7939884c/attachment.htm</A> 
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007777.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007780.html">[Xitami] Wikidot, Email, and Xitami's rebirth!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7779">[ date ]</a>
+              <a href="thread.html#7779">[ thread ]</a>
+              <a href="subject.html#7779">[ subject ]</a>
+              <a href="author.html#7779">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

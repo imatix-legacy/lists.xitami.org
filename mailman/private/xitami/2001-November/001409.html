@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Getting a cgi counter to work
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001408.html">
+   <LINK REL="Next"  HREF="001412.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Getting a cgi counter to work
+   </H1>
+    <B>Phillip Jones
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Getting a cgi counter to work">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 13 Nov 2001 02:14:36 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001408.html">[Xitami] Getting a cgi counter to work
+</A></li>
+        <LI> Next message: <A HREF="001412.html">[Xitami] Getting a cgi counter to work
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1409">[ date ]</a>
+              <a href="thread.html#1409">[ thread ]</a>
+              <a href="subject.html#1409">[ subject ]</a>
+              <a href="author.html#1409">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It runs fine from the command prompt, outputs exacty what it's supposed to,
+but as soon as I call it in the browser
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Patrick
+Sent: November 13, 2001 1:54 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] Getting a cgi counter to work
+
+
+Phillip Jones wrote:
+&gt;<i>
+</I>&gt;<i> I've tryed changing the extention to .cgi and it is caled as an image, but
+</I>&gt;<i> to on avail
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Patrick
+</I>&gt;<i> Sent: November 12, 2001 2:11 AM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] Getting a cgi counter to work
+</I>&gt;<i>
+</I>&gt;<i> Phillip Jones wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hi, I'm been trying to get a cgi counter to load up on my server. I keep
+</I>&gt;<i> &gt; getting this error:
+</I>&gt;<i> &gt; 127.0.0.1 - phil [12/Nov/2001:00:06:33 -0500] &quot;GET
+</I>/cgi-bin/livecnt1.pl?i
+&gt;<i> &gt; HTTP/1.1&quot; 500 0 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE 5.01; Windows 98)&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; or error 500
+</I>&gt;<i> &gt; Any ideas?
+</I>&gt;<i>
+</I>&gt;<i> Depends on how your calling it
+</I>&gt;<i> exec, include, or &lt;img src=&quot;/cgi-bin/counter4.pl&quot; ALT=&quot;counter4&quot;&gt;
+</I>&gt;<i>
+</I>&gt;<i> the &lt;!--exec=cgi will not pass params as ?i the &lt;img src should be used
+</I>&gt;<i>
+</I>&gt;<i> hope this helps
+</I>&gt;<i>
+</I>&gt;<i> ya sure the shebang is correct?
+</I>&gt;<i>
+</I>
+Ok now look at you shebang line if perl is
+set in your PATH you can use
+#! perl -Tw
+use strict;
+use CGI::Carp &quot;fatalsToBrowser&quot;;
+print &quot;Context-Type: image/\n\n&quot;; #should be the first
+#thing that gets printed
+500 is an internal server error and usually
+a syntax error is the cause see if is will run
+from the command prompt
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001408.html">[Xitami] Getting a cgi counter to work
+</A></li>
+	<LI> Next message: <A HREF="001412.html">[Xitami] Getting a cgi counter to work
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1409">[ date ]</a>
+              <a href="thread.html#1409">[ thread ]</a>
+              <a href="subject.html#1409">[ subject ]</a>
+              <a href="author.html#1409">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

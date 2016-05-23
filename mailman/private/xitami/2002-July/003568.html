@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Plaintext passwords on Bugtraq (again)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003566.html">
+   <LINK REL="Next"  HREF="003564.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Plaintext passwords on Bugtraq (again)
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Plaintext passwords on Bugtraq (again)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 04 Jul 2002 15:41:32 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003566.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+        <LI> Next message: <A HREF="003564.html">[Xitami] ftp port 21
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3568">[ date ]</a>
+              <a href="thread.html#3568">[ thread ]</a>
+              <a href="subject.html#3568">[ subject ]</a>
+              <a href="author.html#3568">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 08:14 AM 7/4/2002 +0100, Brian {Hamilton Kelly} writeth:
+&gt;<i>In message &lt;<A HREF="mailto:3.0.6.32.20020624091136.00a26550@mail.shininglightpro.com">3.0.6.32.20020624091136.00a26550@mail.shininglightpro.com</A>&gt;
+</I>&gt;<i>   &quot;Thomas J. Hruska&quot; writes:
+</I>&gt;<i>
+</I>&gt;&gt;<i> However, the problem still won't go away since anyone sniffing for packets
+</I>&gt;&gt;<i> can grab any HTTP Authorization header and store it away for a later replay
+</I>&gt;&gt;<i> attack (MD5 hashes included).  What is worse is that Xitami doesn't have
+</I>&gt;&gt;<i> DIGEST mode available which means that the username:password combination is
+</I>&gt;&gt;<i> only Base64 encoded (and makes it _VERY_ easy to obtain access to &quot;secure&quot;
+</I>&gt;&gt;<i> areas - e.g. remote /admin access).  Even with DIGEST mode, it still
+</I>&gt;&gt;<i> doesn't stop a replay attack since the HTTP protocol doesn't have any
+</I>&gt;&gt;<i> secure handshaking methods.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> So, hashing the files might help some locally, but won't stop anyone from
+</I>&gt;&gt;<i> attacking the server remotely.  The problem is not necessarily with Xitami
+</I>&gt;&gt;<i> but also has to do with the inherent weakness of the HTTP protocol.
+</I>&gt;<i>
+</I>&gt;<i>There's an easy answer to that: don't remotely administer the server via
+</I>&gt;<i>HTTP!  Either walk into the machine room (or use SSH sessions) and use a
+</I>&gt;<i>text editor.
+</I>
+Another answer would be to set up some sort of handshaking in the HTTP
+protocol (however, I don't see the IETF moving to change that very
+quickly).  It isn't that difficult to add a level of security that would
+make it much more difficult to crack.  ESMTP already does this with the
+header in the first message from the server.  You then run an MD5 hash with
+your password and the string sent in the first message and send it with the
+EHLO command.  Much more secure than even DIGEST since a replay attack
+requires cracking the username and password before a replay can occur.
+
+However, I agree with the use of SSH tunnelling for remote admin.  Yet,
+HTTP could offer a little more security than it does right now (which is
+basically squat).
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003566.html">[Xitami] Plaintext passwords on Bugtraq (again)
+</A></li>
+	<LI> Next message: <A HREF="003564.html">[Xitami] ftp port 21
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3568">[ date ]</a>
+              <a href="thread.html#3568">[ thread ]</a>
+              <a href="subject.html#3568">[ subject ]</a>
+              <a href="author.html#3568">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

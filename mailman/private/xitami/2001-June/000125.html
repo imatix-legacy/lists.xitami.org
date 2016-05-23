@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Domain Recognition
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000108.html">
+   <LINK REL="Next"  HREF="000130.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Domain Recognition
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Domain Recognition">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 08 Jun 2001 14:19:12 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000108.html">[Xitami] Domain Recognition
+</A></li>
+        <LI> Next message: <A HREF="000130.html">[Xitami] Domain Recognition
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#125">[ date ]</a>
+              <a href="thread.html#125">[ thread ]</a>
+              <a href="subject.html#125">[ subject ]</a>
+              <a href="author.html#125">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  how to have Xitami recognize my domain name. 
+</I>
+Web servers don't know their own names. (They can, but they don't have to.)
+
+And there are really no names on the Internet, only numbers.
+
+But people prefer to give machines names, because numbers are hard to
+remember.
+
+Look at what happens when you type a name like &quot;yahoo.com&quot; at your browser.
+The browser says &quot;What do I do with this? I need a number!&quot;. But it knows that
+the user probably does not know the number. 
+
+What the webserver (actually the TCP network stack) does is ask a DNS server.
+All ISPs are required to have a DNS server to serve their customers and to
+answer requests for name/number lookups from other DNS servers.
+
+I have a site <A HREF="http://summerfest.rutgers.edu">http://summerfest.rutgers.edu</A> . You are using pbi.net (PacBell?)
+as an ISP. Your browser calls pbi.net's DNS server and asks &quot;What's the number
+for summerfest.rutgers.edu?&quot; pbi.net's DNS server probably never heard of
+summerfest.rutgers.edu, but it heard of rutgers.edu (or it asks a master .EDU
+DNS system for the number of rutgers.edu's DNS server). It asks
+DNS1.rutgers.edu &quot;what is the number for summerfest.rutgers.edu?&quot; and gets the
+answer &quot;165.230.87.130&quot;. Your browser opens 165.230.87.130. The Xitami at that
+address serves you a page. 
+
+Now, how did DNS1.rutgers.edu know that summerfest.rutgers.edu is a name for
+165.230.87.130 ? I called our DNS guy and asked him to add
+&quot;summerfest.rutgers.edu&quot;, pointed to that IP number, to Rutgers' DNS system. 
+
+Since you have a Commercial ISP, there will be differences. First: is your IP
+number Static? My server's IP number has never changed. Many DSL etc accounts
+get a new IP number every few days. There are ways to handle Dynamic IP
+allocation, but it is trickier and less reliable than a Static IP. Note that
+asking your ISP for a Static IP may require that you convert to a more
+expensive &quot;business&quot; account!
+
+With a static IP, your ISP should be able to add your hostname to their DNS
+system, for all the world to lookup. But at Commercial ISP providers, this
+often costs &quot;extra&quot;.
+
+And by asking for a Static IP and a DNS entry, you are telling your ISP that
+you are running a public server. Such servers -sometimes- generate a lot of
+traffic, more than the ISP expects for a &quot;home surfer&quot; account. So they may
+bump you up to a more expensive account. 
+
+Technically you can buy DNS service from anyone. There are even &quot;Dynamic IP
+DNS&quot; servers that can change your listed IP number almost as often as your ISP
+reassigns your IP number. 
+
+You &quot;can&quot; set up your own DNS service, but: (A) this is very geeky stuff to do
+correctly (B) some -other- DNS service has to know about your DNS service or
+nobody will find your DNS server. You can register your own DNS with InterNIC
+(the people who hold your domain name registration) but they like to see two
+DNS providers, not in the same place. I don't think this is for a &quot;serious
+newbie&quot; as you describe yourself. 
+
+The &quot;right&quot; answer is &quot;Call your ISP and talk&quot;. But try to avoid saying who
+you are until you find out if this will run up your bill. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000108.html">[Xitami] Domain Recognition
+</A></li>
+	<LI> Next message: <A HREF="000130.html">[Xitami] Domain Recognition
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#125">[ date ]</a>
+              <a href="thread.html#125">[ thread ]</a>
+              <a href="subject.html#125">[ subject ]</a>
+              <a href="author.html#125">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI School
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001674.html">
+   <LINK REL="Next"  HREF="001679.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI School
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI School">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 08 Dec 2001 09:25:40 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001674.html">[Xitami] CGI School
+</A></li>
+        <LI> Next message: <A HREF="001679.html">[Xitami] CGI School
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1676">[ date ]</a>
+              <a href="thread.html#1676">[ thread ]</a>
+              <a href="subject.html#1676">[ subject ]</a>
+              <a href="author.html#1676">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+--=====================_502598235==_
+Content-Type: text/plain; charset=&quot;us-ascii&quot;; format=flowed
+
+At 08:11 8/12/01, you wrote:
+&gt;<i>Scott,
+</I>
+[...]
+
+&gt;<i>    PB comes with tools that parse form data very easily.  You basically use
+</I>&gt;<i>a string buffer to put the contents in, then strip off the variable values.
+</I>&gt;<i>To create the resulting page, you use a line similar to:
+</I>
+You normally don't need them.
+Already done by Xitami.
+Try it (source included, executable on my server).
+
+
+&gt;<i>WriteCGI &quot;&lt;b&gt;The result of your query &quot; &amp; Request$ &amp; &quot; is: &quot; &amp; ResultValue$
+</I>&gt;<i>&amp; &lt;/b&gt;&quot;
+</I>
+Better still: simply open the output file and print to it.
+
+That's all you actually need: NO SINGLE LINE MORE:
+
+FUNCTION PBMAIN()                               ' main module is always 
+named pbmain
+     i = 1                                       ' execution begins here
+                                                 ' Xitami creates a single 
+temp name for
+     OPEN ENVIRON$(&quot;CGI_STDOUT&quot;) FOR OUTPUT AS #3
+                                                 ' the output file. You 
+open it and
+     PRINT #3, &quot;&lt;html&gt;&lt;body&gt;&lt;pre&gt;&quot;               ' write your html to it.
+     a$ = ENVIRON$(i)                            ' This is a demo program. 
+We iterate
+     WHILE a$ &lt;&gt; &quot;&quot;                              ' over the complete 
+environment and
+         PRINT #3, a$; &quot;&lt;br&gt;&quot;                    ' print it out. Whenever 
+ENVIRON$(i)
+         i = i + 1                               ' gives you an empty 
+string, we're done.
+         a$ = ENVIRON$(i)                        ' You'll see all the named 
+&lt;input...&gt;
+     WEND                                        ' fields parsed in their 
+respective name
+     PRINT #3, &quot;&lt;hr&gt;&quot;
+     OPEN ENVIRON$(&quot;CGI_STDIN&quot;) FOR INPUT AS #1  ' Xitami also gives you 
+the complete
+     WHILE NOT EOF(1)                            ' query string in a temp 
+file. Here we
+         LINE INPUT #1, a$                       ' simply open that file 
+and output it
+         PRINT #3, a$; &quot;&lt;br&gt;&quot;                    ' to the output file.
+     WEND                                        ' Here we terminate the 
+html output
+     PRINT #3, &quot;&lt;/body&gt;&lt;/html&gt;&quot;                  ' and end the program.
+END FUNCTION                                    ' In this example, there is 
+no error
+                                                 ' trapping needed, the 
+best thing to do
+when an error occurs is to try to continue. The only error that can occur 
+is a disk full.
+
+Use a$ = REMAIN$(ENVIRON$(i), &quot;=&quot;) to get only the value, not the complete 
+equate.
+
+ENVIRON$ can be used with named strings (when you know what you are looking 
+for, that is when using form data or opening files provided by Xitami) or 
+with an index (when you don't know what you are looking for).
+
+This source can be optimised (using integer variables instead of floating 
+point defaults and so on).
+
+You can try this program out at &lt;<A HREF="http://web.verfaillie.com/cgi-bin/env.exe">http://web.verfaillie.com/cgi-bin/env.exe</A>&gt;
+Add query strings like you want 
+&lt;<A HREF="http://web.verfaillie.com/cgi-bin/env.exe?123ABC">http://web.verfaillie.com/cgi-bin/env.exe?123ABC</A>&gt;
+
+Or use a complete &lt;form... &gt; to call it. There is a sample one included 
+with this mail.
+
+
+
+------------------&lt;Mailserver VERFAILLIE BAUWENS&gt;------------------
+Alle uitgaande mails gecontroleerd op virussen door onze mailserver
+Virusdefinities dagelijks aangepast.  -&lt;<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>&gt;-
+--=====================_502598235==_
+Content-Type: text/html; charset=&quot;us-ascii&quot;
+Content-Disposition: attachment; filename=&quot;GUEST.HTM&quot;
+
+&lt;html&gt;&lt;body&gt;
+&lt;form ACTION=&quot;<A HREF="http://web.verfaillie.com/cgi-bin/env.exe"">http://web.verfaillie.com/cgi-bin/env.exe&quot;</A> method=&quot;POST&quot;&gt;
+&lt;p&gt;Enter your information, please:&lt;/p&gt;
+&lt;table border=1&gt;
+&lt;tr&gt;&lt;td width=50%&gt;Name:&lt;/td&gt;&lt;td width=50%&gt;&lt;input type=text size=20 maxlength=256 name=&quot;Name&quot;&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td width=50%&gt;How much do you like this web page?&lt;/td&gt;&lt;td width=50%&gt;&lt;select name=&quot;LikeFactor&quot; size=1&gt;
+&lt;option value=&quot;A whole lot &quot;&gt;A whole lot&lt;/option&gt;
+&lt;option value=&quot;Alot&quot;&gt;Alot&lt;/option&gt;
+&lt;option value=&quot;so so&quot;&gt;so so&lt;/option&gt;
+&lt;option value=&quot;no comment&quot;&gt;no comment&lt;/option&gt;
+&lt;option value=&quot;yuck&quot;&gt;yuck&lt;/option&gt;
+&lt;option value=&quot;hated it&quot;&gt;hated it&lt;/option&gt;
+&lt;/select&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;What's your browser?&lt;/td&gt;&lt;td&gt;&lt;input type=radio name=&quot;BrowserType&quot; value=&quot;IE&quot;&gt;Internet Explorer &lt;input type=radio checked name=&quot;BrowserType&quot; value=&quot;Netscape&quot;&gt;Netscape &lt;input type=radio name=&quot;BrowserType&quot; value=&quot;Other&quot;&gt;Other&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Would you like for someone to contact you?&lt;/td&gt;&lt;td&gt;&lt;input type=checkbox name=&quot;Contact&quot; value=&quot;ON&quot;&gt;Yes I do!&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Remarks:&lt;/td&gt;&lt;td&gt;&lt;textarea name=&quot;Remarks&quot; rows=2 cols=20&gt;&lt;/textarea&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;input type=submit name=&quot;Submit&quot; value=&quot;Submit Information&quot;&gt;
+&lt;input type=reset name=&quot;Reset&quot; value=&quot;Reset&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+--=====================_502598235==_--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001674.html">[Xitami] CGI School
+</A></li>
+	<LI> Next message: <A HREF="001679.html">[Xitami] CGI School
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1676">[ date ]</a>
+              <a href="thread.html#1676">[ thread ]</a>
+              <a href="subject.html#1676">[ subject ]</a>
+              <a href="author.html#1676">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] win2k directory security
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000989.html">
+   <LINK REL="Next"  HREF="000993.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] win2k directory security
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] win2k directory security">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Sep 2001 23:18:57 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000989.html">[Xitami] win2k directory security
+</A></li>
+        <LI> Next message: <A HREF="000993.html">[Xitami] win2k directory security
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#990">[ date ]</a>
+              <a href="thread.html#990">[ thread ]</a>
+              <a href="subject.html#990">[ subject ]</a>
+              <a href="author.html#990">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Xitami can serve a page for a directory that is NOT shared under Windows.
+</I>
+Xitami does not use Windows' concept of sharing.
+
+Basically: Windows, being DOS with a pretty face, has weak
+permissions. Unless you go to some trouble, any program on the
+machine can access any file on the machine. 
+
+Most Webservers, including Xitami, follow the rule of only
+serving files in or below a specific directory. On my school's
+unix box, the directory must be named &quot;public_html&quot;, which gives
+users a little warning that anything in there is &quot;public&quot;, unlike
+the rest of their directories which they may set &quot;private&quot;.
+Xitami lets you set the one specific directory that will be
+served; typically c:/Xitami/webpages. It _IS_ up to you to be
+sure that directory only has files you want &quot;everybody&quot; to see.
+
+One exception: in addition to ./webpages, Xitami will serve files
+in ./cgi-bin. By default it will only serve them by executing
+them (better know what is in there!); but it can also serve
+non-executable files (GIF images to support CGI apps, for
+instance). 
+
+In WinNT, with its OS/2 core, you actually have strong
+permissions. You can create a &quot;user&quot; that has highly limited
+access to files, and launch Xitami as that user. If you let other
+people put CGI scripts on your server, you maybe should run
+Xitami from a limited-access account. 
+
+I &quot;trust&quot; Xitami to serve ONLY from the directories I told it to
+serve from. Note that some other webservers (spelled &quot;MS&quot;) have
+been fooled by URLs with excess dots (implying parent directories
+above where the web root should be). Also until recently Xitami
+under DOS could be confused by &quot;files&quot; that were really devices
+(even DOS sometimes can't tell the difference). That was unlikely
+to spill secrets, but could lock-up the server as it waited
+(forever) for data to come out of the printer (that is fixed). 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000989.html">[Xitami] win2k directory security
+</A></li>
+	<LI> Next message: <A HREF="000993.html">[Xitami] win2k directory security
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#990">[ date ]</a>
+              <a href="thread.html#990">[ thread ]</a>
+              <a href="subject.html#990">[ subject ]</a>
+              <a href="author.html#990">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

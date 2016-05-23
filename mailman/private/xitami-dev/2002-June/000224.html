@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in
+ xilrwp.c?)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000231.html">
+   <LINK REL="Next"  HREF="000225.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in
+ xilrwp.c?)
+   </H1>
+    <B>Fabien Royer
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in
+ xilrwp.c?)">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 13 Jun 2002 14:12:02 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000231.html">[Xitami-Dev] Large Volume File Transfer
+</A></li>
+        <LI> Next message: <A HREF="000225.html">[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>George,
+
+Let me be more specific.
+
+While you are right about a LRWP process being capable of *sending* binary 
+data without any problem (I have tested that on JPEG files too), you are not 
+correct about a LRWP being capable of *receiving* binary data POST'ed to it.
+
+For instance, try to POST a JPEG image to your LRWP process rather than 
+having it uploaded over FTP. You will not get what you expect.
+
+The obvious workaround would be to UUENCODE the binary data, but I want to 
+avoid this at all cost. There's no reason why a LRWP could not handle binary 
+data.
+
+Regards,
+Fabien.
+
+
+&gt;<i>From: George Blat &lt;<A HREF="mailto:georgeb@ntrealtime.com">georgeb@ntrealtime.com</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i>To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i>Subject: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not  
+</I>&gt;<i>work (bug in xilrwp.c?)
+</I>&gt;<i>Date: Thu, 13 Jun 2002 09:58:58 -0700
+</I>&gt;<i>
+</I>&gt;<i>I use modules that process uploaded .jpg files sent to the server
+</I>&gt;<i>  and did not have any problem. I have verified that LRWP can handle binary 
+</I>&gt;<i>streams.
+</I>&gt;<i>
+</I>&gt;<i>George
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>At 12:42 PM 6/13/2002 -0400, you wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i>Hi all,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I have a client app written to POST compressed and encrypted data to a 
+</I>&gt;&gt;<i>LRWP process. The problem is that the LRWP process only receives a few 
+</I>&gt;&gt;<i>bytes instead of the whole data stream. Basically, it appears that the WSX 
+</I>&gt;&gt;<i>module xilrwp.c punts on the first NUL it encounters in the stream. 
+</I>&gt;&gt;<i>POST'ing text data works like a charm though...
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Looking at the source code, it would appear that this issue has been 
+</I>&gt;&gt;<i>resolved already (as indicated by the comments at the top of xilrwp.c). 
+</I>&gt;&gt;<i>But the problem still exists as of the latest 2.5 codebase...Or am I 
+</I>&gt;&gt;<i>missing something?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Has anyone written a fix for this issue (I'd like to know before I do it).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Regards,
+</I>&gt;&gt;<i>Fabien.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>/*
+</I>&gt;&gt;<i>----------------------------------------------------------------&lt;Prolog&gt;-
+</I>&gt;&gt;<i>    Name:       xilrwp.c
+</I>&gt;&gt;<i>    Title:      Xitami WSX agent for long-running web process (LRWP) 
+</I>&gt;&gt;<i>protocol
+</I>&gt;&gt;<i>    Package:    Xitami
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+</I>&gt;&gt;<i>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes 
+</I>&gt;&gt;<i>from
+</I>&gt;&gt;<i>                                Bruce Dodson &lt;<A HREF="mailto:bruce_dodson@bigfoot.com">bruce_dodson@bigfoot.com</A>&gt;
+</I>&gt;&gt;<i>                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+</I>&gt;&gt;<i>prevent
+</I>&gt;&gt;<i>                                         DoS issues.
+</I>&gt;&gt;<i>                1999/12/30    Xitami Team: Fixed issues with NULs in data 
+</I>&gt;&gt;<i>sent
+</I>&gt;&gt;<i>                 2001/05/15    Xitami Team: Fixed issue with sending 
+</I>&gt;&gt;<i>binary data
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+</I>&gt;&gt;<i>    License:    This is free software; you can redistribute it and/or 
+</I>&gt;&gt;<i>modify
+</I>&gt;&gt;<i>                it under the terms of the SMT License Agreement as 
+</I>&gt;&gt;<i>provided
+</I>&gt;&gt;<i>                in the file LICENSE.TXT.  This software is distributed in
+</I>&gt;&gt;<i>                the hope that it will be useful, but without any warranty.
+</I>&gt;&gt;<i>------------------------------------------------------------------&lt;/Prolog&gt;-*/
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>_________________________________________________________________
+</I>&gt;&gt;<i>Send and receive Hotmail on your mobile device: <A HREF="http://mobile.msn.com">http://mobile.msn.com</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>--
+</I>&gt;&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>
+
+
+
+_________________________________________________________________
+Get your FREE download of MSN Explorer at <A HREF="http://explorer.msn.com/intl.asp.">http://explorer.msn.com/intl.asp.</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000231.html">[Xitami-Dev] Large Volume File Transfer
+</A></li>
+	<LI> Next message: <A HREF="000225.html">[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

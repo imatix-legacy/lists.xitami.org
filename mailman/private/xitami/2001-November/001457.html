@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] GSL &amp;(symbol); expansion feature
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001456.html">
+   <LINK REL="Next"  HREF="001458.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] GSL &amp;(symbol); expansion feature
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] GSL &amp;(symbol); expansion feature">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 21 Nov 2001 16:51:21 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001456.html">[Xitami] GSL with post variables
+</A></li>
+        <LI> Next message: <A HREF="001458.html">[Xitami] Problems setting up xitami behind Roadrunner ISP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1457">[ date ]</a>
+              <a href="thread.html#1457">[ thread ]</a>
+              <a href="subject.html#1457">[ subject ]</a>
+              <a href="author.html#1457">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is more of an FYI than a bug report or question...
+
+I can't see this documented but some experiemntation and subsequent 
+source code examination (smt/formio.c - put_textual() line 850 ish) 
+shows that Xitami/GSLgen will replace &amp;(symbol); with the actual symbol 
+during its symbol expansion if symbol is gt , lt , amp or quot. So any 
+xml file with &amp;gt; , &amp;lt; , &amp;amp; or &amp;quot; will ouptut &lt;&gt;&amp;&quot; into stdout 
+(or wherevere the output is).
+
+Thus if you have a tag
+&lt;From&gt;
+Francis Turner &amp;lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+&lt;/From&gt;
+
+and the script has a line
+From: &lt;a href=&quot;mailto:$(-&gt;From:)&quot;&gt;$(-&gt;From:)&lt;/a&gt;
+
+the output text is
+From: &lt;a href=&quot;mailto:Francis Turner 
+&lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;&quot;&gt;Francis Turner 
+&lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;&lt;/a&gt;
+
+and not as I would have expected
+From: &lt;a href=&quot;mailto:Francis Turner 
+&amp;lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;&quot;&gt;Francis Turner 
+&amp;lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;&lt;/a&gt;
+
+This is good because you can embed html tags within your XML files e.g.
+&lt;Contents&gt;
+a line of text with a &amp;lt;href='/'&gt;link to the top&amp;lt;/a&gt; in an XML tag
+&lt;/Contents&gt;
+
+but leads to some interesting required gymnastics if you want to put the 
+sequence &amp;(symbol); on the page yourself to keep the users browser 
+happy. Going back to the earlier From tag example - if you want to display
+Francis Turner &amp;lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+so that the users browser actually displays the email address the tag 
+contents needs to be
+&lt;From&gt;
+Francis Turner &amp;amp;lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+&lt;/From&gt;
+
+Share and Enjoy
+
+Francis
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001456.html">[Xitami] GSL with post variables
+</A></li>
+	<LI> Next message: <A HREF="001458.html">[Xitami] Problems setting up xitami behind Roadrunner ISP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1457">[ date ]</a>
+              <a href="thread.html#1457">[ thread ]</a>
+              <a href="subject.html#1457">[ subject ]</a>
+              <a href="author.html#1457">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

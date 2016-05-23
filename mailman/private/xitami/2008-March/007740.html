@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=BAY127-W42364BEE86076746CB11F1F8000%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007739.html">
+   <LINK REL="Next"  HREF="007741.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>Magus1011</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=BAY127-W42364BEE86076746CB11F1F8000%40phx.gbl"
+       TITLE="[Xitami] Multi server issue">magus1011 at gmail.com
+       </A><BR>
+    <I>Thu Mar 20 05:49:23 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007739.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007741.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7740">[ date ]</a>
+              <a href="thread.html#7740">[ thread ]</a>
+              <a href="subject.html#7740">[ subject ]</a>
+              <a href="author.html#7740">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>R O wrote:
+&gt;<i> 
+</I>&gt;<i> I have two instances of Xitami running, one for production and the other 
+</I>&gt;<i> for testing.  Both servers are running on the same system but on 
+</I>&gt;<i> different IP addresses (on the same NIC).   However, the test server 
+</I>&gt;<i> refuses to start on port 80...any other port it works OR if I comment 
+</I>&gt;<i> out the &quot;Portbase=0&quot; the service will start up without an error but I am 
+</I>&gt;<i> not able to get to the base page.
+</I>&gt;<i> 
+</I>&gt;<i> Each server is assigned to its own IP address, but both IP addresses 
+</I>&gt;<i> reside on the same NIC of the server.  I don't recall having this 
+</I>&gt;<i> problem in the past as I have done production and test versions of 
+</I>&gt;<i> Xitami at the same time, each using different IP addresses that were on 
+</I>&gt;<i> the same NIC.
+</I>&gt;<i> 
+</I>&gt;<i> In this case though, I actually need to turn the test server into a 
+</I>&gt;<i> second production server and need it to run on port 80.
+</I>&gt;<i> 
+</I>&gt;<i> Heres the base config of each
+</I>&gt;<i> 
+</I>&gt;<i> /xitamiproduction/xiwinnt.exe
+</I>&gt;<i>      defaults.cfg
+</I>&gt;<i>           ip address: 192.168.1.10
+</I>&gt;<i>           portbase=0
+</I>&gt;<i>           service-name=Xitami Prodcution
+</I>&gt;<i> 
+</I>&gt;<i> /xitamitest/xiwinnt.exe
+</I>&gt;<i>      defaults.cfg
+</I>&gt;<i>           ip address: 192.168.1.11
+</I>&gt;<i>           portbase=0
+</I>&gt;<i>           service-name=Xitami Test
+</I>&gt;<i> 
+</I>&gt;<i> If I comment out portbase=0 on the test server the service will start up 
+</I>&gt;<i> but nothing will respond to port 80 at <A HREF="http://192.168.1.11.">http://192.168.1.11.</A>  However, if 
+</I>&gt;<i> I don't comment out portbase=0 the service won't even start up.  If I 
+</I>&gt;<i> change the portbase to &quot;portbase=2&quot; then the service will start up and 
+</I>&gt;<i> the pages are accessible on <A HREF="http://192.168.1.11:82">http://192.168.1.11:82</A> .  But I need this 
+</I>&gt;<i> test server to be up and running on port 80.
+</I>&gt;<i> 
+</I>&gt;<i> Anyone have any ideas as to what is going on?
+</I>&gt;<i> 
+</I>&gt;<i> Russel P. Olinger
+</I>&gt;<i> <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+For the moment addresses don't matter. You have one NIC. It has one Port 
+80. If one Xitami server is listening on it then the other Xitami server 
+can't listen on it. Simple?
+
+So how do you get past this? Just run one Xitami server. But that leaves 
+you with the problem of only being able to serve one web site and you 
+want to serve two web sites, a live system and a test system. What to 
+do, what to do?
+
+Enter our saviour Virtual Hosts! How to do this is detailed in the 
+configuration section of the documentation which can be reached at 
+<A HREF="http://&lt;your">http://&lt;your</A> IP address or domain name here&gt;/xitami or, if your Xitami 
+is correctly set up at <A HREF="http://127.0.0.1/">http://127.0.0.1/</A>
+
+I hope this helps. 8=))
+
+-- 
+Best regards,
+Magus1011.
+
+That's the problem with science. You've got a bunch of empiricists 
+trying to describe things of unimaginable wonder.
+  - Calvin
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007739.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007741.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7740">[ date ]</a>
+              <a href="thread.html#7740">[ thread ]</a>
+              <a href="subject.html#7740">[ subject ]</a>
+              <a href="author.html#7740">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

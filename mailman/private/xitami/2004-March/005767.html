@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] broken pages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005766.html">
+   <LINK REL="Next"  HREF="005768.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] broken pages
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] broken pages">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 04 Mar 2004 18:17:33 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005766.html">[Xitami] broken pages
+</A></li>
+        <LI> Next message: <A HREF="005768.html">[Xitami] broken pages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5767">[ date ]</a>
+              <a href="thread.html#5767">[ thread ]</a>
+              <a href="subject.html#5767">[ subject ]</a>
+              <a href="author.html#5767">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+--------------070304070705000308080209
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+RPO wrote:
+
+&gt;<i>This seems to be more of a perl problem.  Depending on how you coded your
+</I>&gt;<i>CGI, the speed of the output and when the output gets posted will vary.
+</I>&gt;<i>Look at your Perl first, Xitami is working fine, its the perl/cgi engine
+</I>&gt;<i>that is determining the rate/speed and order of your pages being served.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I don't think so
+
+I discovered a bug way back when that was that SSI scripts have a 
+maximum size of (if I recall correctly) 32Kbytes plus or minus a bit. 
+I.e If you use SSI make sure your entire page is much less than 32KB. 
+The problem page is 29379KB long which leads me to suspect that you've 
+just run out of buffer.
+
+Francis
+ (enclosed email is the bug report)
+
+-- 
+Your theory of a donut-shaped universe is intriguing, Homer.
+I may have to steal it.        -- Prof S. Hawking on the &quot;Simpsons&quot;
+
+
+--------------070304070705000308080209
+Content-Type: message/rfc822;
+ name=&quot;Attached Message&quot;
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline;
+ filename=&quot;Attached Message&quot;
+
+Message-ID: &lt;<A HREF="mailto:3BA9B55F.7000108@freesbee.fr">3BA9B55F.7000108@freesbee.fr</A>&gt;
+Date: Thu, 20 Sep 2001 11:22:39 +0200
+From: Francis Turner &lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+User-Agent: Mozilla/5.0 (Windows; U; Win98; en-US; m18) Gecko/20001108 Netscape6/6.0
+X-Accept-Language: en
+MIME-Version: 1.0
+To: Xitami list &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Subject: Bug: SSI Includes aren't recursive
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 7bit
+
+I just noticed that the SSI include tag (e.g. the one on the testssi 
+page &lt;!--#include file=&quot;testssi.inc&quot;--&gt;) cuases the rest of the 
+including document (e.g. testssi.ssi) after the tag not to get delivered 
+if the included document itself uses SSI as the example include does.
+
+SSI returns just fine if the included document itself does not try any 
+SSI calls.
+
+This is true using Xitami 2.5b5 (and 2.5b4) with NS6.1, 4.7 and IE5 and 
+appears to be a xitami thing in that the HTML is in fact completely 
+unfinished. I'm guessing that Xixssi doesn't deal well with the same 
+page requiring 2 levels of return.
+
+Also in the process of debugging and playing I noticed that Xitami has a 
+limit on files with SSI includes of about 35,000+ bytes (one file 
+displayed upto the 35922nd byte, another upto the 35553rd) and any data 
+thereafter is abruptly truncated. The limit is not there for pure HTML 
+files - I can successfully read 1Mbyte + sized .htm files but the same 
+file renamed as .SSI will be truncated around this point even if it has 
+no includes.
+
+Francis
+
+
+
+
+--------------070304070705000308080209--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005766.html">[Xitami] broken pages
+</A></li>
+	<LI> Next message: <A HREF="005768.html">[Xitami] broken pages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5767">[ date ]</a>
+              <a href="thread.html#5767">[ thread ]</a>
+              <a href="subject.html#5767">[ subject ]</a>
+              <a href="author.html#5767">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] FTP , data mode not working
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006529.html">
+   <LINK REL="Next"  HREF="006532.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] FTP , data mode not working
+   </H1>
+    <B>d calif
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] FTP , data mode not working">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 16 Feb 2005 22:17:15 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006529.html">[Xitami] Can't run Squirrelmail under Xitami
+</A></li>
+        <LI> Next message: <A HREF="006532.html">[Xitami] FTP , data mode not working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6530">[ date ]</a>
+              <a href="thread.html#6530">[ thread ]</a>
+              <a href="subject.html#6530">[ subject ]</a>
+              <a href="author.html#6530">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Newbie can't get FTP working
+* I have read through the archieves but can't see to find a conclusive 
+answer to my problem.
+Works locally, on 2nd computer through router with WAN IP.
+But remote friend can only log in, but NOT see directories/folders/files.
+
+My setup:
+Xitami:  v 2.5c2
+Win98se
+Router: Dlink DI-604 (NAT)
+DSL / Dynamic IP
+Base Port: 8000
+HTTP Port: 8080
+FTP: cmd : 8021
+Router Firewall open ports:
+Public 8021=8021 Private
+Public 8020=8020 Private
+Public 8080=8080 Private
+
+Attempted several things:  *every changed was followed by testing both local 
+and remote client.
+Both passive and active.
+Tried opening up a range of ports starting at 8020.  (My friend's FTP client
+kept try ports above 8020, i.e. 8024, 8025, 8023.
+
+ipaddress = &quot;192.168.0.102&quot; (was in the default.cfg) change it to ipaddress 
+= &quot;*&quot;
+
+Tried to force the External IP
+force-ip = &quot;1&quot;
+passiveip = &quot;main IP address&quot;  (then changed it to external IP and tested)
+
+We managed ONE successful remote complete connection.
+1st friend set his client: &quot;Force Server IP for PASV mode&quot;
+friends FTP client had a &quot;NOTE: Useful for servers with NAT/Non-Routable IP&quot;
+* We couldn't get a 2nd complete on connection, because his client kept 
+trying a different data port each time, at the time only Server Firewall 
+ports 8020 and 8021 were open.  We ran out of time and couldn't continue 
+testing.
+
+One potential problem is the following line in the his client log:
+friends client log during successful connection, including login, seeing 
+directories, and downloaded 10 files.
+..............
+227 Entering Passive Mode (192,168,0,102,38,192)
+    Opening data connection IP: 64.172.148.182 PORT: 9920.
+    LIST -aL
+150 Preparing to transfer binary file
+    128 bytes received successfully. (128 B/s) (00:00:01).
+.............
+code 227 shows the local IP, I had removed all IP's from the default.cfg.
+We saw the local IP every time there was a connection and login, but again 
+could not see directories/folders/files.
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006529.html">[Xitami] Can't run Squirrelmail under Xitami
+</A></li>
+	<LI> Next message: <A HREF="006532.html">[Xitami] FTP , data mode not working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6530">[ date ]</a>
+              <a href="thread.html#6530">[ thread ]</a>
+              <a href="subject.html#6530">[ subject ]</a>
+              <a href="author.html#6530">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

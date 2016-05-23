@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Used port 80
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004769.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Used port 80
+   </H1>
+    <B>Brian {Hamilton Kelly}
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Used port 80">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 28 Feb 2003 08:01:47 GMT</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004769.html">[Xitami] Used port 80
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4777">[ date ]</a>
+              <a href="thread.html#4777">[ thread ]</a>
+              <a href="subject.html#4777">[ subject ]</a>
+              <a href="author.html#4777">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3E5EC1F3.5020506@swbell.net">3E5EC1F3.5020506@swbell.net</A>&gt; Alex Glasgow writes:
+
+&gt;<i> Sometimes when I start my system, Xitami won't start correctly.  An 
+</I>&gt;<i> error message appears and says that something else is using port 80.  I 
+</I>&gt;<i> have tried to disable anything I think is accessing the internet during 
+</I>&gt;<i> startup.  And then I try to restart Xitami, but it will still say port 
+</I>&gt;<i> 80 is being used.  I have to restart the computer, and then Xitami 
+</I>&gt;<i> starts with no problem.  I suspect that whatever was using the port, 
+</I>&gt;<i> Xitami grabs the port before the other application can and then the 
+</I>&gt;<i> other application has to find another port.  Is there any way I can tell 
+</I>&gt;<i> what might be using port 80?  Thanks.
+</I>
+Hmm, in the first line you say &quot;when I start my system&quot;, but later say &quot;I
+have to restart the computer&quot;.  So presumably this error is NOT when you
+FIRST start your computer?
+
+Could it be that you've had Xitami running already (and binding to port
+80) and that, for some reason that you don't specify, it's been stopped
+(either deliberately or accidentally), and that this is why you're
+[re]starting Xitami?  I know that under some failure modes, if a process
+has had a port listening, and that process dies, it can be that the
+TCP/IP stack itself keeps the port noted down as being &quot;in use&quot;.  Could
+this be the case for you?
+
+Eventually, given enough time, the stack may release the number for
+reuse; I used to find with the old TCP/IP stack under OS/2 that this took
+about fifteen minutes, although the new one implements additional ioctl
+bits that allow one to specify that this shouldn't happen, so with TCP/IP
+v4.3 it no longer happens.  As you have discovered, a reboot will always
+clear this sort of problem, but is probably somewhat drastic!
+
+I know that for a long time the TCP/IP stack of Windows was based upon an
+ancient BSD implementation, although I also know that it's been improved
+considerably over the past few years.  OTOH, were this a common
+occurrence, I would have expected to see more postings to this list about
+such a problem.
+
+(Incidentally, I'm assuming throughout that the error exception that's
+being thrown is EADDRINUSE.)
+
+-- 
+Brian {Hamilton Kelly}                                          <A HREF="mailto:bhk@dsl.co.uk">bhk@dsl.co.uk</A>
+    &quot;We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them&quot;.
+                                              George Macaulay Trevelyan, 1919
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004769.html">[Xitami] Used port 80
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4777">[ date ]</a>
+              <a href="thread.html#4777">[ thread ]</a>
+              <a href="subject.html#4777">[ subject ]</a>
+              <a href="author.html#4777">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

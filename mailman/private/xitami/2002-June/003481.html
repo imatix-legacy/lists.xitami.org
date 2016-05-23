@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP! Upgrading to Xitami Pro
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003480.html">
+   <LINK REL="Next"  HREF="003483.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP! Upgrading to Xitami Pro
+   </H1>
+    <B>David Holm
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP! Upgrading to Xitami Pro">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 Jun 2002 12:45:43 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003480.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+        <LI> Next message: <A HREF="003483.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3481">[ date ]</a>
+              <a href="thread.html#3481">[ thread ]</a>
+              <a href="subject.html#3481">[ subject ]</a>
+              <a href="author.html#3481">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Actually if I remember correctly your setup would have to be like this:
+CertDomain.com
+CertDomain.com/Company1
+CertDomain.com/Company2
+CertDomain.com/Company3
+Etc.
+or:
+www.CertDomain.com
+www.CertDomain.com/Company1
+www.CertDomain.com/Company2
+www.CertDomain.com/Company3
+As to add even a www.CertDomain.com requires a new certificate I believe.
+Dave
+----- Original Message -----
+From: &quot;Russel Olinger&quot; &lt;<A HREF="mailto:rolinger@airpower.net">rolinger@airpower.net</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, June 21, 2002 12:05 PM
+Subject: Re: [Xitami] HELP! Upgrading to Xitami Pro
+
+
+&gt;<i> cool, your explanations helped alot...I think I can take it from here.  At
+</I>&gt;<i> least I have some reference points and can start my reading/research with
+</I>&gt;<i> somewhat of a knowledge base.  Makes it way easier to have a little
+</I>&gt;<i> direction.
+</I>&gt;<i>
+</I>&gt;<i> Russel
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Friday, June 21, 2002 11:33 AM
+</I>&gt;<i> Subject: Re: [Xitami] HELP! Upgrading to Xitami Pro
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; At 04:36 PM 6/20/2002 -0700, Russel Olinger writeth:
+</I>&gt;<i> &gt; &gt; Your bit below, about SSL and VHosting?  This means that b/c I have 8
+</I>&gt;<i> &gt; &gt;domains sharing one IP address that SSL will prevent my Vhosts from
+</I>&gt;<i> working?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; No, VHosting will still work, the problem is that SSL won't know which
+</I>set
+&gt;<i> &gt; of certificates to send for the host the user wants.  So, you have to do
+</I>&gt;<i> &gt; one of two things for the certs:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 1)  Get certs. for *.somedomain.com (where somedomain.com is a domain
+</I>you
+&gt;<i> &gt; own).  Then, create virtual hosts called domain1.somedomain.com,
+</I>&gt;<i> &gt; domain2.somedomain.com, etc. for each domain that is on your servers.
+</I>&gt;<i> &gt; Then, require people to connect to <A HREF="https://domain1.somedomain.com/">https://domain1.somedomain.com/</A> for
+</I>&gt;<i> &gt; SSL-based stuff.  Note that this is one option that I'm not quite sure
+</I>&gt;<i> &gt; about the setup for since Craig (my web host provider) is starting to
+</I>&gt;<i> &gt; experiment with it.  Generating the certs. for this was based on the RFC
+</I>&gt;<i> &gt; for HTTPS.  I'm crossing my fingers that it will work and the browser
+</I>will
+&gt;<i> &gt; like it (i.e. assumes the browser is 100% HTTPS-compliant).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 2)  Get certs. for www.somedomain.com (somedomain.com is your own domain
+</I>&gt;<i> &gt; still) and require your users to point to
+</I>&gt;<i> &gt; <A HREF="https://www.somedomain.com/domain1root/">https://www.somedomain.com/domain1root/</A> for SSL-based access.  This only
+</I>&gt;<i> &gt; requires setting up an alias rather than a whole sub-domain.  The
+</I>&gt;<i> down-side
+</I>&gt;<i> &gt; is slightly more difficult scripting on the user end of things.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 3)  If only one client will be using SSL, the client can purchase the
+</I>&gt;<i> cert.
+</I>&gt;<i> &gt; and the others can use it, but their users will get a warning in their
+</I>&gt;<i> &gt; browser that they don't own the cert.  Note, however, this option does
+</I>not
+&gt;<i> &gt; easily scale.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;Example B: What about within a domain (aliasing SSL directories) :
+</I>&gt;<i> &gt; &gt;<A HREF="http://www.domain1.com">http://www.domain1.com</A>
+</I>&gt;<i> &gt; &gt;<A HREF="http://www.domain1.com/cgi-bin/">http://www.domain1.com/cgi-bin/</A>
+</I>&gt;<i> &gt; &gt;<A HREF="https://www.domain1.com/cgi-bin/secure">https://www.domain1.com/cgi-bin/secure</A>  (SSL secure path)
+</I>&gt;<i> &gt; &gt;<A HREF="http://www.domain1.com/pages">http://www.domain1.com/pages</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;B1: Can SSL work in this fashion?
+</I>&gt;<i> &gt; &gt;B2: Or will the whole doamin be SSL referenced by: https:// ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The whole domain is covered by SSL.  All SSL/TLS does is provide a
+</I>secure
+&gt;<i> &gt; transport of data without understanding of the underlying representation
+</I>&gt;<i> of
+</I>&gt;<i> &gt; the data it is securing.  Hence it can't know what virtual host the
+</I>&gt;<i> browser
+</I>&gt;<i> &gt; is going to use since it doesn't understand that level of data (the HTTP
+</I>&gt;<i> &gt; protocol).  As I said before, if you want to really understand how
+</I>SSL/TLS
+&gt;<i> &gt; works with HTTP, you need to read the RFCs.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hope this helps!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;           Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+</I>&gt;<i> &gt; Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+</I>&gt;<i> &gt;                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003480.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+	<LI> Next message: <A HREF="003483.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3481">[ date ]</a>
+              <a href="thread.html#3481">[ thread ]</a>
+              <a href="subject.html#3481">[ subject ]</a>
+              <a href="author.html#3481">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

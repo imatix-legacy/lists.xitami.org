@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] chmodd's for cgi - help please
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001244.html">
+   <LINK REL="Next"  HREF="001242.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] chmodd's for cgi - help please
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] chmodd's for cgi - help please">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 23 Oct 2001 18:35:41 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001244.html">[Xitami] chmodd's for cgi - help please
+</A></li>
+        <LI> Next message: <A HREF="001242.html">[Xitami] block ip addresses?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1251">[ date ]</a>
+              <a href="thread.html#1251">[ thread ]</a>
+              <a href="subject.html#1251">[ subject ]</a>
+              <a href="author.html#1251">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ashfield Web Services Ltd wrote:
+
+&gt;<i>Thanks for reply.
+</I>&gt;<i>
+</I>&gt;<i>That is how I understood it but I have got a situation that when running a
+</I>&gt;<i>cgi script I get the error &quot;can't write to fileX.etc ....check permissions&quot;
+</I>&gt;<i>
+</I>Ummm.
+
+If you are running a perl CGI script and the perl CGI script in question 
+is trying to read or modify a file in a non-existent directory then it 
+may be returning an error that is then mangled like this.
+
+For example if you do an
+  open &lt;FILE&gt; &quot;&gt;/usr/tmp/tmpfile&quot; somewhere in your script but you have 
+no /usr/tmp directory - which is rarely the case in windows - then you 
+will get an error about the inability to open a file which may then try 
+and helpfully suggest you need permissions changed when actually what 
+you need to do is either create the directories /usr and /usr/tmp/ or 
+(better) change the path to something suitable such as /windows/TEMP/. 
+By the way it is worth noting that activestate perl is pretty relaxed 
+about / and \ as is Xitami so its better to use / unless you really have 
+to speciff C:\windows\temp\filename because zou have to pass this to a 
+command shell.
+
+Francis
+
+PS the below perl function is one I use to create paths for files that 
+may not have one. remove the print statements if you don't want to be 
+warned that this is happening
+
+# utility function to create directory tree if it doesn't exist.
+# example usage:  pavePath('/results/http/site/dir/subdir/file.htm')
+#   will create as many of
+# /results/,
+# /results/http/,
+# /results/http/site/,
+# /results/http/site/dir/
+# and /results/http/site/dir/subdir/ as required
+# arguably it may be more efficient to start from the full path and work 
+backwards?
+sub pavePath {
+    my ($fQname) = @_;
+    return if (-d(substr ($fQname,0,rindex($fQname,'/')))); # if path 
+exists quit now
+    my ($ch) = index($fQname,'/',1); # avoid trying to create the / 
+directory!
+    print 'paving...';
+    while($ch&gt;=0) {
+        mkdir(substr($fQname,0,$ch)) unless -d(substr($fQname,0,$ch));
+        print substr ($fQname,0,$ch),&quot;:\n&quot;;
+        $ch=index($fQname,'/',$ch+1);
+    }
+}
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001244.html">[Xitami] chmodd's for cgi - help please
+</A></li>
+	<LI> Next message: <A HREF="001242.html">[Xitami] block ip addresses?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1251">[ date ]</a>
+              <a href="thread.html#1251">[ thread ]</a>
+              <a href="subject.html#1251">[ subject ]</a>
+              <a href="author.html#1251">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

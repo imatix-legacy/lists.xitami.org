@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP/Alias Issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004420.html">
+   <LINK REL="Next"  HREF="004414.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP/Alias Issues
+   </H1>
+    <B>Michael Morris
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP/Alias Issues">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 3 Dec 2002 14:42:06 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004420.html">OT Re: [Xitami] PHP/Alias Issues
+</A></li>
+        <LI> Next message: <A HREF="004414.html">[Xitami] virual domain admin issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4408">[ date ]</a>
+              <a href="thread.html#4408">[ thread ]</a>
+              <a href="subject.html#4408">[ subject ]</a>
+              <a href="author.html#4408">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Paul,
+
+I looked into Apache, and there really is no good excuse for me not to run it, except that the system it is running on is actually even more low powered then your PPro 200 and multiple web servers doesn't quite bode well with me.  I am familiar with Apache 1.3 and I run it on my Linux box, but in trying to do everything from one box with as little overhead as possible - this isn't in the picture.
+
+I read about the bug in Ilohamail.  Yes, you are quite right, there is no reason some of the configs shouldn't be able to be kept elsewhere.  I do have a proper permission and security setup.  However, being the slightly paranoid admin that I am, I really don't like someone being able to call up &quot;Ilohamail/conf/*&quot; files and peek around, as benign as it may be :-).  Currently I am using the MySQL option, and yes everything except configs is stored in the database, very handy.
+
+Anyways, to all who may have been following this.  I completely gave up on the ALIAS function under Xitami.  As it seemed to mainly only work with HTML as I couldn't get any proper PHP files to load up.
+
+Here's what I did - plain and simple.  Setup a DNS entry for webmail.domainname.ca, created a virtual host with the doc root as the Ilohamail/source folder and added it as the CGI-BIN folder as well.  In this config, added the &quot;webmail.domainname.ca&quot; as the DNS reference in Xitami.  Also, created the proper Filter and MIME types for the virtual host, and moved the Ilohamail folder elsewhere on the drive away from the web server root.
+
+That's it - runs like a charm!!! Now I can login to it and it looks as if it is a server off the main domain name.  Pretty cool.
+
+Michael
+
+-----Original Message-----
+From: Paul Reid [mailto:<A HREF="mailto:preid@rci.rutgers.edu">preid@rci.rutgers.edu</A>]
+Sent: Tuesday, December 03, 2002 2:18 PM
+To: Michael Morris
+Subject: Re: [Xitami] PHP/Alias Issues
+
+
+&gt;<i> the way this thing works is there are some config folders I don't
+</I>&gt;<i> want people monkeying around with located under IlohaMail,
+</I>
+1) Use Apache. Apache's &quot;alias&quot; is -much- more powerful than
+Xitami's. Iloha took advantage of Apache's power, but that leaves
+non-Apache users in a bind. FWIW, you can run Xitami and Apache on
+the same machine, with different port or IP numbers. I have a
+PPro-200 hosting about four different web-servers as well as email
+and streaming audio.
+
+2) Wait for the &quot;configurable folders&quot; &quot;bug&quot; on IlohaMail's buglist
+to be resolved. There is no reason the app can't keep the public
+pages in the public folders and the secret files in non-public
+space. But he didn't. He should and it is on his buglist. (And his
+code is very well commented. It might be trivial to add folder-opts
+and give it to the Iloha community.)
+
+3) Leave the config files out in the open. Surely you don't give
+strangers write-permission. Reading is a modest security risk. Yes,
+it keeps passwords but not as plaintext: $passkey=&quot;6FMKHnEBylfEYg&quot;
+email_address:cKJlzWRAcmNpQnJ1cGdlcnMuZWR2 I have not studied what
+happens when you use POP Cache-- that might leave messages out in
+the open.
+
+4) use the DataBase option. If I understand that, all user-secrets
+are then held out in a SQL database with the usual protections.
+
+ -PRR
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004420.html">OT Re: [Xitami] PHP/Alias Issues
+</A></li>
+	<LI> Next message: <A HREF="004414.html">[Xitami] virual domain admin issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4408">[ date ]</a>
+              <a href="thread.html#4408">[ thread ]</a>
+              <a href="subject.html#4408">[ subject ]</a>
+              <a href="author.html#4408">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

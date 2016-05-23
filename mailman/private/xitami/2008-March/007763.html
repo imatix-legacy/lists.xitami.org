@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=BAY127-W438A19B1BD0DDCA3DE2EE8F8FC0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007762.html">
+   <LINK REL="Next"  HREF="007766.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>Hogan</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=BAY127-W438A19B1BD0DDCA3DE2EE8F8FC0%40phx.gbl"
+       TITLE="[Xitami] Multi server issue">hogan at geeksgalore.ca
+       </A><BR>
+    <I>Wed Mar 26 00:48:10 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007762.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007766.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7763">[ date ]</a>
+              <a href="thread.html#7763">[ thread ]</a>
+              <a href="subject.html#7763">[ subject ]</a>
+              <a href="author.html#7763">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>how much more simple could you make it RO, awesome, if he can't 
+understand this then it is time to google TCP/IP  hehehehe
+
+R O wrote:
+&gt;<i> Jesus Criminy - this is entertaining.  Had no idea my questions were 
+</I>&gt;<i> going to spur such passionate responses. 
+</I>&gt;<i>
+</I>&gt;<i> But, in a nutshell - Ports are IP based.  One range of ports per IP 
+</I>&gt;<i> address.  So if you have 3 IP addresses on one NIC, then theoretically 
+</I>&gt;<i> you have 3X ports available.  And I say 'theoretically' because it 
+</I>&gt;<i> depends on how the application is using the IP addresses.  I thought I 
+</I>&gt;<i> covered all this in my first response.
+</I>&gt;<i>
+</I>&gt;<i> However, for those of you who know that TCP Port 80 is per IP address, 
+</I>&gt;<i> then please help me understand what I might be doing wrong or where I 
+</I>&gt;<i> can look at that is causing a conflict.  In the past, I am pretty 
+</I>&gt;<i> confident I had two or three instances of xitami running on Port 80, 
+</I>&gt;<i> each on its own IP address (all on the SAME NIC) but can't recall 
+</I>&gt;<i> what, if anything, special I did to get it working.  Its been a while.
+</I>&gt;<i>
+</I>&gt;<i> I have come up with a solution that fixed my original issue of needing 
+</I>&gt;<i> a second production server to begin with, however I would still like 
+</I>&gt;<i> to move forward with a second server as a test server running on Port 
+</I>&gt;<i> 80.  Port 80 is important, and not using some other port, because then 
+</I>&gt;<i> my new code can be tested identically to how it would run before 
+</I>&gt;<i> making it the production code.  As well, alternate ports other than 
+</I>&gt;<i> port 80 can cause some outbound firewall issues that I would rather 
+</I>&gt;<i> not deal with.
+</I>&gt;<i>
+</I>&gt;<i> Config one:
+</I>&gt;<i> /xitami/defaults.cfg
+</I>&gt;<i>      * IP : 192.168.20.20
+</I>&gt;<i>      * Service-Name: Xitami Production Server
+</I>&gt;<i>      * port:0
+</I>&gt;<i>
+</I>&gt;<i> /xitamitest/defaults.cfg
+</I>&gt;<i>      * IP : 192.168.20.30
+</I>&gt;<i>      * Service-Name: Xitami Test Server
+</I>&gt;<i>      * port:0
+</I>&gt;<i>
+</I>&gt;<i> On the test server I even went so far as to copy the xiwinnt.exe file 
+</I>&gt;<i> to xiwintest.exe thinking that might help prevent any &quot;service&quot; based 
+</I>&gt;<i> conflicts (within Windows 2003 Server).  This did nothing, and the 
+</I>&gt;<i> test server would not initialize until I changed it to Port:5080 (or 
+</I>&gt;<i> anything other than port 80).  In addition, if I comment out (#Port:0) 
+</I>&gt;<i> in the test server, the server service will actually start but nothing 
+</I>&gt;<i> will respond on that IP port 80. 
+</I>&gt;<i>
+</I>&gt;<i> Not certain whats going on but as basic as these configs should be, I 
+</I>&gt;<i> believe I may have discovered some kind of compatibility bug between 
+</I>&gt;<i> Xitami v2.4d9 and Windows 2003 Server.  I am going to test running 
+</I>&gt;<i> multiple copies on Windows XP under the same conditions to test if its 
+</I>&gt;<i> a 2003 Server issue.
+</I>&gt;<i>
+</I>&gt;<i> Comments?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Russel P. Olinger
+</I>&gt;<i> <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>
+&lt;<A HREF="http://www.clixGalore.com/default.asp">http://www.clixGalore.com/default.asp</A>&gt;
+
+
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007762.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007766.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7763">[ date ]</a>
+              <a href="thread.html#7763">[ thread ]</a>
+              <a href="subject.html#7763">[ subject ]</a>
+              <a href="author.html#7763">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

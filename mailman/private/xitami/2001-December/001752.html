@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001750.html">
+   <LINK REL="Next"  HREF="001753.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 15 Dec 2001 14:07:53 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001750.html">script src (Was: [Xitami] SSI)
+</A></li>
+        <LI> Next message: <A HREF="001753.html">[Xitami] SSI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1752">[ date ]</a>
+              <a href="thread.html#1752">[ thread ]</a>
+              <a href="subject.html#1752">[ subject ]</a>
+              <a href="author.html#1752">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I want to create a drop down list in a form from items in a database.  I can code the CGI portion (i.e. grab the data out of the database and format the proper form code for the drop-down menu) but I can't quite make the final link to get the .SSI page to include this part.
+</I>
+SSI seems like a good idea but I notice that almost nobody uses
+it. Needs grow until you reach a point that SSI either can't do
+the job or the overhead chokes your CPU. 
+
+Don't forget you can put the cart before the horse. Instead of a
+static page that calls a program, you can call a program that
+outputs static text with dynamic inserts. A half-way trick is to
+use a Filter. 
+
+I have a filter that reads static HTML and looks for magic tags.
+When it finds a magic tag it grabs the parameter, looks for a
+matching tag in a database, and inserts the data. That lets me
+change a professor's biography and phone number one place and
+have it appear on many pages. 
+
+PHP is great for this kind of stuff (I shudda done it that way). 
+
+You can also call a program in cgi-bin that outputs the whole
+page, a mix of static and dynamic. The static can be hard-coded
+but obviously it may be easier to maintain if it pulls the static
+text from a template file (so the HTML maintainer does not step
+on any C/Perl/VB code and break it). 
+
+Most on-line ordering systems seem to directly call a cgi-bin EXE
+or equivalent. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001750.html">script src (Was: [Xitami] SSI)
+</A></li>
+	<LI> Next message: <A HREF="001753.html">[Xitami] SSI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1752">[ date ]</a>
+              <a href="thread.html#1752">[ thread ]</a>
+              <a href="subject.html#1752">[ subject ]</a>
+              <a href="author.html#1752">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

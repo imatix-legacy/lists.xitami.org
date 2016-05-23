@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Small modification to ISAPI support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To=BAY127-DAV385AEE435C0FD0C97C112F8D80%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007796.html">
+   <LINK REL="Next"  HREF="007798.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Small modification to ISAPI support</H1>
+    <B>JLIST</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Small%20modification%20to%20ISAPI%20support&In-Reply-To=BAY127-DAV385AEE435C0FD0C97C112F8D80%40phx.gbl"
+       TITLE="[Xitami] Small modification to ISAPI support">jlist9 at gmail.com
+       </A><BR>
+    <I>Wed Apr 30 22:13:06 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007796.html">[Xitami] Small modification to ISAPI support
+</A></li>
+        <LI>Next message: <A HREF="007798.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7797">[ date ]</a>
+              <a href="thread.html#7797">[ thread ]</a>
+              <a href="subject.html#7797">[ subject ]</a>
+              <a href="author.html#7797">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Russel,
+
+&gt;<i> In the defaults.cfg file add a filter extension ...
+</I>
+I'll try this and report back. Thanks for the suggestion.
+
+&gt;<i> How much faster is ISAPI versus CGI - and what language are the dll's
+</I>&gt;<i> written in?  At least for me, this method you have described is new to me.
+</I>
+ISAPI is very fast because it'll be just a function call in the same
+Win32 process. Howerver, running ISAPI on Xitami has the overhead of
+going through LRWP, which should still be fairly fast. All the
+approaches (ISAPI, apache modules, LRWP, FastCGI, SCGI, AJP13) avoid
+the overhead of starting a new process (in the CGI's case) and the
+time the process needs for initialization. I don't have the numbers
+but you should be able to find some numbers on the Net. The idea is
+the same for LWRP/FCGI/SCGI/AJP, which is to use a long running
+process.
+
+I think you can write the DLL in any language that can be used to
+write a DLL. I use VC++ or Delphi. This is another reason why ISAPI
+is faster - the DLLs are usually written in compiled languages.
+
+If xitami becomes my main server for Windows (I'm still evaluating),
+I think I'll also use Python to write some LRWP. I've verified that
+the Python module works. They'll usually still be much faster than
+CGIs because the time it takes to process the request are much
+shorter than the time for Windows to start a process. It takes time
+and it taxes the server quite a bit to start processes. That's why
+I generally stay away from CGI.
+
+But I still miss FastCGI/SCGI a lot because, other than the advantages
+that FastCGI has, I have developed some code that run as FCGI/SCGI
+and there are a lot of web development frameworks that support these protocols.
+I think it would be a great idea for xitami to support FCGI/SCGI.
+
+Jack
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007796.html">[Xitami] Small modification to ISAPI support
+</A></li>
+	<LI>Next message: <A HREF="007798.html">[Xitami] Small modification to ISAPI support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7797">[ date ]</a>
+              <a href="thread.html#7797">[ thread ]</a>
+              <a href="subject.html#7797">[ subject ]</a>
+              <a href="author.html#7797">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

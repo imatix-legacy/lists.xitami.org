@@ -1,0 +1,2406 @@
+From jim.noseworthy at rogers.com  Mon Aug  1 12:57:25 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Aug  1 12:57:40 2005
+Subject: [Xitami] Directory listing.
+Message-ID: <000e01c59687$cd7f23a0$6400a8c0@maincomputer>
+
+Hi Folks:
+
+Perhaps someone can help me with a problem.  I am able to access my FTP 
+Xitami server from two of three computers.  On the third computer, I am not 
+able to get a directory listing.  This happens whether I use FileZilla or 
+FTP Explorer.  I can, however, access the directory through Internet 
+Explorer.
+
+Can someone help me to understand why I cannot access my server with FTP 
+clients?
+
+Thanks all over the place gang. 
+
+From marc at verfaillie.com  Mon Aug  1 13:34:47 2005
+From: marc at verfaillie.com (Marc Doigny)
+Date: Mon Aug  1 13:32:38 2005
+Subject: [Xitami] Directory listing.
+In-Reply-To: <000e01c59687$cd7f23a0$6400a8c0@maincomputer>
+Message-ID: <5.1.0.14.2.20050801132824.01f66d80@verfaillie4.verfaillie.local>
+
+At 12:57 1/08/05, you wrote:
+>Hi Folks:
+>
+>Perhaps someone can help me with a problem.  I am able to access my FTP
+>Xitami server from two of three computers.  On the third computer, I am not
+>able to get a directory listing.  This happens whether I use FileZilla or
+>FTP Explorer.  I can, however, access the directory through Internet
+>Explorer.
+>
+>Can someone help me to understand why I cannot access my server with FTP
+>clients?
+>
+>Thanks all over the place gang.
+>
+
+
+The FTP protocol uses two ports.
+One is the control port (normally port 21).
+Data and the directory listing is transmitted over a second port. How this 
+happen depends on the client: normal or 'passive'.
+
+Basically, you need to switch the passive mode ON on the client (explorer 
+uses only passive transfers, other FTP clients use normal FTP, but this can 
+be changed).
+
+In normal mode the server connects to the client for data transfers and 
+most firewalls will block this on the client side. In passive mode the 
+client connects to the server (the normal way in client/server applications).
+
+See http://freedns.afraid.org/forums/viewtopic.php?t=2109 for more info.
+
+marc
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : postmaster@verfaillie.com
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- http://www.verfaillie.com ----------------------- 
+
+From jim.noseworthy at rogers.com  Mon Aug  1 14:39:33 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Aug  1 14:39:33 2005
+Subject: [Xitami] Directory listing.
+References: <5.1.0.14.2.20050801132824.01f66d80@verfaillie4.verfaillie.local>
+Message-ID: <000301c59696$11f050f0$6400a8c0@maincomputer>
+
+Hi Mark:
+
+That did the trick.
+
+Thanks all over the place.
+
+
+From marc at verfaillie.com  Sun Aug 14 10:55:40 2005
+From: marc at verfaillie.com (Marc)
+Date: Sun Aug 14 10:58:02 2005
+Subject: [Xitami] XML format not implemented?
+Message-ID: <598325d6e1df1587175625b83986a50a@verfaillie.com>
+
+Hello !
+
+When i try to deliver XML files, the brower get the message '501 - not implemented', even if i provide a mime content-type in default.cfg.
+I had to use a custom extension to force Xitami to display the page.
+
+Example, not working
+http://afr_upd.verfaillie.be:20800/sitemap.xml
+
+Example, working, using 'wrong' extension and content-type mapping
+http://afr_upd.verfaillie.be:20800/sitemap.xmt
+
+
+
+For those interested, i provide a webserver-test (to check that your server is responding to the internet):
+http://afr_upd.verfaillie.be:20800/svt/svt.htm
+Enter the domain name or ip of your server, the port number, eventually a resource file and select one of my servers.
+
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : postmaster@verfaillie.com
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- http://www.verfaillie.com ----------------------- 
+
+From wolfgang.boerner at rz.uni-regensburg.de  Sun Aug 14 10:58:43 2005
+From: wolfgang.boerner at rz.uni-regensburg.de (wolfgang.boerner@rz.uni-regensburg.de)
+Date: Sun Aug 14 10:59:07 2005
+Subject: [Xitami] XML format not implemented?
+Message-ID: <2D78B0007C@rkdvmks1.ngate.uni-regensburg.de>
+
+
+Ich bin gerade in Urlaub. Ab 29. August werde ich wieder an meinem
+Arbeitsplatz sein und kann evtl. auf Ihre Mail antworten. Bei 
+dringenden dienstlichen Angelegenheiten kontaktieren Sie bitte
+Herrn Johannes Deininger (Johannes.Deininger@rz.uni-regensburg.de) 
+
+I am on vacation right now. As from August 29th I am back here in
+my office; then I can reply to your mail if necessary. Please contact
+Johannes Deininger (Johannes.Deininger@rz.uni-regensburg.de) if time 
+is critical.
+
+
+So long
+  Wolfgang Boerner
+
+----------------------------------------------------------------------
+                      Quot capita, tot sensus.
+----------------------------------------------------------------------
+Wolfgang Boerner        |  Phone: +49 941 944 5880
+Klinik der Universitaet |  FAX:   +49 941 944 5882
+93042 Regensburg        |  SMTP: Wolfgang.Boerner@rz.uni-regensburg.de
+
+From ph at imatix.com  Sun Aug 14 11:13:29 2005
+From: ph at imatix.com (Pieter Hintjens)
+Date: Sun Aug 14 11:12:25 2005
+Subject: [Xitami] XML format not implemented?
+In-Reply-To: <598325d6e1df1587175625b83986a50a@verfaillie.com>
+References: <598325d6e1df1587175625b83986a50a@verfaillie.com>
+Message-ID: <200508141113.29008.ph@imatix.com>
+
+On 14/08/2005 10:55 am, Marc wrote:
+
+> When i try to deliver XML files, the brower get the message '501 - not
+> implemented', even if i provide a mime content-type in default.cfg. I had
+> to use a custom extension to force Xitami to display the page.
+
+This is probably because Xitami has, by default, a WSX filter defined for XML 
+files, and this filter is failing for your specific XML files.  You can 
+disable this by deleting the line ".xml=xixxml" in xitami.cfg.  It is in the 
+[Wsx] section.
+
+-- 
+Pieter Hintjens
+iMatix Corporation
+
+
+From marc at verfaillie.com  Sun Aug 14 12:44:38 2005
+From: marc at verfaillie.com (Marc Doigny)
+Date: Sun Aug 14 12:46:05 2005
+Subject: [Xitami] XML format not implemented?
+In-Reply-To: <200508141113.29008.ph@imatix.com>
+References: <598325d6e1df1587175625b83986a50a@verfaillie.com>
+Message-ID: <42FF3CB6.948.23618@localhost>
+
+On 14 Aug 2005 at 11:13, Pieter Hintjens wrote:
+
+> On 14/08/2005 10:55 am, Marc wrote:
+> 
+> > When i try to deliver XML files, the brower get the message '501 - not
+> > implemented', even if i provide a mime content-type in default.cfg. I had
+> > to use a custom extension to force Xitami to display the page.
+> 
+> This is probably because Xitami has, by default, a WSX filter defined for XML 
+> files, and this filter is failing for your specific XML files.  You can 
+> disable this by deleting the line ".xml=xixxml" in xitami.cfg.  It is in the 
+> [Wsx] section.
+
+Ok, this solved the problem, thanks!
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : postmaster@verfaillie.com
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- http://www.verfaillie.com ----------------------- 
+
+From jim.noseworthy at rogers.com  Wed Aug 17 22:38:47 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Wed Aug 17 22:38:55 2005
+Subject: [Xitami] Neaded help.
+Message-ID: <000801c5a36b$ac651120$6400a8c0@maincomputer>
+
+Hello Gang:
+
+I am having problems with my Xitami FTP server. Below is the message log 
+generated by FileZilla.
+
+I am especially interested in the lines referring to
+ftp.funkychicken-the-movie.com
+
+I've never heard of that site.
+
+Is my site being hacked?
+
+Any help would really be appreciated.
+
+Thanks all over the place gang.
+
+
+tatus: Connecting to ftp.compuconference.com ...
+Status: Connected with ftp.compuconference.com. Waiting for welcome 
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2 of 
+Xitami.
+
+Response: You are user number 1 of a permitted 5 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix <http://www.imatix.com>
+
+Command: USER admin
+
+Response: 331 Password required for user admin
+
+Command: PASS ********
+
+Response: 230- Logged in from 70.26.204.55 as admin on 2005/08/17, 17:28:38.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.funkychicken-the-movie.com, 
+hosted
+
+Response: on a Googol system running GoogOS version 6.5. Your server today 
+is
+
+Response: Xitami, the fast 'n free web/ftp server from iMatix Corporation, 
+who
+
+Response: will be happy to take your order at http://www.imatix.com. In case 
+of
+
+Response: problems please contact the webmaster 
+(joe@funkychicken-the-movie.com).
+
+Response:
+
+Response: This system is for the use of authorised users only. Individuals
+
+Response: using this computer system without authority, or in excess of 
+their
+
+Response: auhority are subject to having all their activities on this system
+
+Response: monitored and recorded by system personnel.
+
+Response:
+
+Response: In the course of monitoring individuals improperly using this 
+system,
+
+Response: or in the course of system maintenance, the activities of 
+authorised
+
+Response: users may be monitored. Anyone using this system expressly 
+consents
+
+Response: to such monitoring and is advised that if such monitoring reveals
+
+Response: possible evidence of criminal activity, system personnel may 
+provide
+
+Response: the evidence of such monitoring to law enforcement officials.
+
+Response:
+
+Response: Have a really lovely day!
+
+Response:
+
+Response: 230 User admin logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PORT 192,168,0,100,4,24
+
+Response: 200 Command okay
+
+Command: LIST
+
+Response: 150 Preparing to transfer ASCII file
+
+Response: 226 Closing data connection
+
+Status: Directory listing successful
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: REST 0
+
+Response: 350 Restarting from 0
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+From wolfgang.boerner at rz.uni-regensburg.de  Wed Aug 17 22:39:37 2005
+From: wolfgang.boerner at rz.uni-regensburg.de (wolfgang.boerner@rz.uni-regensburg.de)
+Date: Wed Aug 17 22:40:02 2005
+Subject: [Xitami] Neaded help.
+Message-ID: <81299900AE@rkdvmks1.ngate.uni-regensburg.de>
+
+
+Ich bin gerade in Urlaub. Ab 29. August werde ich wieder an meinem
+Arbeitsplatz sein und kann evtl. auf Ihre Mail antworten. Bei 
+dringenden dienstlichen Angelegenheiten kontaktieren Sie bitte
+Herrn Johannes Deininger (Johannes.Deininger@rz.uni-regensburg.de) 
+
+I am on vacation right now. As from August 29th I am back here in
+my office; then I can reply to your mail if necessary. Please contact
+Johannes Deininger (Johannes.Deininger@rz.uni-regensburg.de) if time 
+is critical.
+
+
+So long
+  Wolfgang Boerner
+
+----------------------------------------------------------------------
+                      Quot capita, tot sensus.
+----------------------------------------------------------------------
+Wolfgang Boerner        |  Phone: +49 941 944 5880
+Klinik der Universitaet |  FAX:   +49 941 944 5882
+93042 Regensburg        |  SMTP: Wolfgang.Boerner@rz.uni-regensburg.de
+
+From bkowald at mchsi.com  Wed Aug 17 23:21:50 2005
+From: bkowald at mchsi.com (Brian Kowald)
+Date: Wed Aug 17 23:22:21 2005
+Subject: [Xitami] Neaded help.
+In-Reply-To: <000801c5a36b$ac651120$6400a8c0@maincomputer>
+Message-ID: <000901c5a371$b1d44e40$0200a8c0@TiltracLaptop>
+
+That's the default ftp welcome text. Look in ftplogin.txt
+
+Brian
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Wednesday, August 17, 2005 4:39 PM
+To: Xitami
+Subject: [Xitami] Neaded help.
+
+
+Hello Gang:
+
+I am having problems with my Xitami FTP server. Below is the message log 
+generated by FileZilla.
+
+I am especially interested in the lines referring to
+ftp.funkychicken-the-movie.com
+
+I've never heard of that site.
+
+Is my site being hacked?
+
+Any help would really be appreciated.
+
+Thanks all over the place gang.
+
+
+tatus: Connecting to ftp.compuconference.com ...
+Status: Connected with ftp.compuconference.com. Waiting for welcome 
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2 of 
+Xitami.
+
+Response: You are user number 1 of a permitted 5 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix <http://www.imatix.com>
+
+Command: USER admin
+
+Response: 331 Password required for user admin
+
+Command: PASS ********
+
+Response: 230- Logged in from 70.26.204.55 as admin on 2005/08/17, 17:28:38.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.funkychicken-the-movie.com, 
+hosted
+
+Response: on a Googol system running GoogOS version 6.5. Your server today 
+is
+
+Response: Xitami, the fast 'n free web/ftp server from iMatix Corporation, 
+who
+
+Response: will be happy to take your order at http://www.imatix.com. In case
+
+of
+
+Response: problems please contact the webmaster 
+(joe@funkychicken-the-movie.com).
+
+Response:
+
+Response: This system is for the use of authorised users only. Individuals
+
+Response: using this computer system without authority, or in excess of 
+their
+
+Response: auhority are subject to having all their activities on this system
+
+Response: monitored and recorded by system personnel.
+
+Response:
+
+Response: In the course of monitoring individuals improperly using this 
+system,
+
+Response: or in the course of system maintenance, the activities of 
+authorised
+
+Response: users may be monitored. Anyone using this system expressly 
+consents
+
+Response: to such monitoring and is advised that if such monitoring reveals
+
+Response: possible evidence of criminal activity, system personnel may 
+provide
+
+Response: the evidence of such monitoring to law enforcement officials.
+
+Response:
+
+Response: Have a really lovely day!
+
+Response:
+
+Response: 230 User admin logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PORT 192,168,0,100,4,24
+
+Response: 200 Command okay
+
+Command: LIST
+
+Response: 150 Preparing to transfer ASCII file
+
+Response: 226 Closing data connection
+
+Status: Directory listing successful
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: REST 0
+
+Response: 350 Restarting from 0
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From ron at miplanet.net  Thu Aug 18 20:55:18 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Thu Aug 18 20:49:46 2005
+Subject: [Xitami] Console Error
+In-Reply-To: <42FF3CB6.948.23618@localhost>
+Message-ID: <000001c5a426$60c5b790$0201a8c0@ronscomputer>
+
+
+I'm getting this in my error log
+
+2005/08/18 09:58:03: smthttp: error on socket 856: 
+2005/08/18 09:58:11: smthttp: error on socket 840:
+
+Is this a concern? 
+
+Ron
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.338 / Virus Database: 267.10.12/75 - Release Date:
+8/17/2005
+ 
+
+From pieterh at gmail.com  Thu Aug 18 22:54:47 2005
+From: pieterh at gmail.com (Pieter Hintjens)
+Date: Thu Aug 18 22:54:50 2005
+Subject: [Xitami] Console Error
+In-Reply-To: <000001c5a426$60c5b790$0201a8c0@ronscomputer>
+References: <42FF3CB6.948.23618@localhost>
+	<000001c5a426$60c5b790$0201a8c0@ronscomputer>
+Message-ID: <5821ea2405081813542acd9282@mail.gmail.com>
+
+On 8/18/05, ron@miplanet.net <ron@miplanet.net> wrote:
+> 
+> I'm getting this in my error log
+> 
+> 2005/08/18 09:58:03: smthttp: error on socket 856:
+> 2005/08/18 09:58:11: smthttp: error on socket 840:
+> 
+> Is this a concern?
+
+No, this is most likely web browsers or spiders disconnecting abruptly.
+
+--
+Pieter Hintjens
+iMatix Corporation
+
+From mdilore1 at nycap.rr.com  Fri Aug 19 00:37:11 2005
+From: mdilore1 at nycap.rr.com (Michael diLorenzo)
+Date: Fri Aug 19 00:37:19 2005
+Subject: [Xitami] Neaded help.
+In-Reply-To: <000801c5a36b$ac651120$6400a8c0@maincomputer>
+References: <000801c5a36b$ac651120$6400a8c0@maincomputer>
+Message-ID: <opsvp6f9sxxifng9@mail.nycap.rr.com>
+
+No.  That is the "default" welcome file that comes bundles with Xitami.   
+Change it to whatever you'd like.  :-)
+
+
+On Wed, 17 Aug 2005 17:38:47 -0300, Jim Noseworthy  
+<jim.noseworthy@rogers.com> wrote:
+
+> Hello Gang:
+>
+> I am having problems with my Xitami FTP server. Below is the message log  
+> generated by FileZilla.
+>
+> I am especially interested in the lines referring to
+> ftp.funkychicken-the-movie.com
+>
+> I've never heard of that site.
+>
+> Is my site being hacked?
+>
+> Any help would really be appreciated.
+>
+> Thanks all over the place gang.
+>
+>
+> tatus: Connecting to ftp.compuconference.com ...
+> Status: Connected with ftp.compuconference.com. Waiting for welcome  
+> message...
+>
+> Response: 220- Welcome to this Xitami FTP server, running version 2.5c2  
+> of Xitami.
+>
+> Response: You are user number 1 of a permitted 5 users.
+>
+> Response:
+>
+> Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix  
+> <http://www.imatix.com>
+>
+> Command: USER admin
+>
+> Response: 331 Password required for user admin
+>
+> Command: PASS ********
+>
+> Response: 230- Logged in from 70.26.204.55 as admin on 2005/08/17,  
+> 17:28:38.
+>
+> Response:
+>
+> Response: Welcome to the FTP service of ftp.funkychicken-the-movie.com,  
+> hosted
+>
+> Response: on a Googol system running GoogOS version 6.5. Your server  
+> today is
+>
+> Response: Xitami, the fast 'n free web/ftp server from iMatix  
+> Corporation, who
+>
+> Response: will be happy to take your order at http://www.imatix.com. In  
+> case of
+>
+> Response: problems please contact the webmaster  
+> (joe@funkychicken-the-movie.com).
+>
+> Response:
+>
+> Response: This system is for the use of authorised users only.  
+> Individuals
+>
+> Response: using this computer system without authority, or in excess of  
+> their
+>
+> Response: auhority are subject to having all their activities on this  
+> system
+>
+> Response: monitored and recorded by system personnel.
+>
+> Response:
+>
+> Response: In the course of monitoring individuals improperly using this  
+> system,
+>
+> Response: or in the course of system maintenance, the activities of  
+> authorised
+>
+> Response: users may be monitored. Anyone using this system expressly  
+> consents
+>
+> Response: to such monitoring and is advised that if such monitoring  
+> reveals
+>
+> Response: possible evidence of criminal activity, system personnel may  
+> provide
+>
+> Response: the evidence of such monitoring to law enforcement officials.
+>
+> Response:
+>
+> Response: Have a really lovely day!
+>
+> Response:
+>
+> Response: 230 User admin logged-in
+>
+> Command: FEAT
+>
+> Response: 500 'FEAT' is not a valid command
+>
+> Command: SYST
+>
+> Response: 215 Windows
+>
+> Status: Connected
+>
+> Status: Retrieving directory listing...
+>
+> Command: PWD
+>
+> Response: 257 "/" is the current directory
+>
+> Command: TYPE A
+>
+> Response: 200 Command okay
+>
+> Command: PORT 192,168,0,100,4,24
+>
+> Response: 200 Command okay
+>
+> Command: LIST
+>
+> Response: 150 Preparing to transfer ASCII file
+>
+> Response: 226 Closing data connection
+>
+> Status: Directory listing successful
+>
+> Command: TYPE A
+>
+> Response: 200 Command okay
+>
+> Command: TYPE A
+>
+> Response: 200 Command okay
+>
+> Command: REST 0
+>
+> Response: 350 Restarting from 0
+>
+> Command: TYPE A
+>
+> Response: 200 Command okay
+>
+> Command: TYPE A
+>
+> Response: 200 Command okay
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+-- 
+For a list of the ways that technology has failed to improve the quality  
+of life, press 3.
+
+From jamesamc at bellsouth.net  Fri Aug 19 16:40:30 2005
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Fri Aug 19 16:40:40 2005
+Subject: [Xitami] Neaded help.
+In-Reply-To: <000801c5a36b$ac651120$6400a8c0@maincomputer>
+References: <000801c5a36b$ac651120$6400a8c0@maincomputer>
+Message-ID: <4305EF5E.3000201@bellsouth.net>
+
+Hi Jim
+
+The greeting is part of the "ftpmesg.gsl" script in the templates folder.
+
+From ian at ianchristie.info  Wed Aug 24 06:09:42 2005
+From: ian at ianchristie.info (Ian Christie)
+Date: Wed Aug 24 06:09:48 2005
+Subject: [Xitami] trouble building Xitami 2.5 on Ubuntu Hoary
+Message-ID: <1124856582.12880.4.camel@Ellipsis1>
+
+When I run build.sh I get the following output. Any idea what might be
+wrong?
+
+Building application...
+./boomake: line 45: c: command not found
+./boomake: line 51: c: command not found
+./boomake: line 57: c: command not found
+./boomake: line 63: c: command not found
+./boomake: line 69: c: command not found
+./boomake: line 75: c: command not found
+./boomake: line 81: c: command not found
+./boomake: line 87: c: command not found
+./boomake: line 93: c: command not found
+./boomake: line 99: c: command not found
+./boomake: line 105: c: command not found
+./boomake: line 111: c: command not found
+./boomake: line 117: c: command not found
+./boomake: line 123: c: command not found
+./boomake: line 129: c: command not found
+./boomake: line 135: c: command not found
+./boomake: line 141: c: command not found
+./boomake: line 147: c: command not found
+./boomake: line 153: c: command not found
+./boomake: line 159: c: command not found
+./boomake: line 165: c: command not found
+./boomake: line 171: c: command not found
+./boomake: line 177: c: command not found
+./boomake: line 183: c: command not found
+./boomake: line 189: c: command not found
+./boomake: line 195: c: command not found
+./boomake: line 201: c: command not found
+./boomake: line 207: c: command not found
+./boomake: line 213: c: command not found
+./boomake: line 219: c: command not found
+./boomake: line 225: c: command not found
+./boomake: line 231: c: command not found
+./boomake: line 237: c: command not found
+./boomake: line 243: c: command not found
+./boomake: line 249: c: command not found
+./boomake: line 255: c: command not found
+./boomake: line 261: c: command not found
+./boomake: line 267: c: command not found
+./boomake: line 273: c: command not found
+./boomake: line 279: c: command not found
+./boomake: line 285: c: command not found
+./boomake: line 291: c: command not found
+./boomake: line 297: c: command not found
+./boomake: line 303: c: command not found
+./boomake: line 309: c: command not found
+./boomake: line 315: c: command not found
+./boomake: line 321: c: command not found
+./boomake: line 327: c: command not found
+./boomake: line 333: c: command not found
+./boomake: line 339: c: command not found
+./boomake: line 345: c: command not found
+./boomake: line 351: c: command not found
+./boomake: line 357: c: command not found
+./boomake: line 363: c: command not found
+./boomake: line 369: c: command not found
+./boomake: line 375: c: command not found
+./boomake: line 381: c: command not found
+./boomake: line 387: c: command not found
+./boomake: line 393: c: command not found
+./boomake: line 399: c: command not found
+./boomake: line 405: c: command not found
+./boomake: line 411: c: command not found
+./boomake: line 417: c: command not found
+./boomake: line 423: c: command not found
+./boomake: line 429: c: command not found
+./boomake: line 435: c: command not found
+./boomake: line 441: c: command not found
+./boomake: line 447: c: command not found
+./boomake: line 453: c: command not found
+./boomake: line 459: c: command not found
+./boomake: line 465: c: command not found
+./boomake: line 471: c: command not found
+./boomake: line 477: c: command not found
+./boomake: line 483: c: command not found
+./boomake: line 489: c: command not found
+./boomake: line 495: c: command not found
+./boomake: line 501: c: command not found
+./boomake: line 507: c: command not found
+./boomake: line 513: c: command not found
+./boomake: line 519: c: command not found
+./boomake: line 525: c: command not found
+./boomake: line 531: c: command not found
+./boomake: line 537: c: command not found
+./boomake: line 543: c: command not found
+./boomake: line 549: c: command not found
+./boomake: line 555: c: command not found
+./boomake: line 561: c: command not found
+./boomake: line 567: c: command not found
+./boomake: line 573: c: command not found
+./boomake: line 579: c: command not found
+./boomake: line 585: c: command not found
+./boomake: line 591: c: command not found
+./boomake: line 597: c: command not found
+./boomake: line 603: c: command not found
+./boomake: line 609: c: command not found
+./boomake: line 615: c: command not found
+libsfl.a is missing, cannot continue
+Building application...
+./boomake: line 45: c: command not found
+./boomake: line 51: c: command not found
+./boomake: line 57: c: command not found
+./boomake: line 63: c: command not found
+./boomake: line 69: c: command not found
+./boomake: line 75: c: command not found
+./boomake: line 81: c: command not found
+./boomake: line 87: c: command not found
+./boomake: line 93: c: command not found
+./boomake: line 99: c: command not found
+./boomake: line 105: c: command not found
+./boomake: line 111: c: command not found
+./boomake: line 117: c: command not found
+./boomake: line 123: c: command not found
+./boomake: line 129: c: command not found
+./boomake: line 135: c: command not found
+./boomake: line 141: c: command not found
+./boomake: line 147: c: command not found
+libgsl.a is missing, cannot continue
+Building application...
+./boomake: line 45: c: command not found
+./boomake: line 51: c: command not found
+./boomake: line 57: c: command not found
+./boomake: line 63: c: command not found
+./boomake: line 69: c: command not found
+./boomake: line 75: c: command not found
+./boomake: line 81: c: command not found
+./boomake: line 87: c: command not found
+./boomake: line 93: c: command not found
+./boomake: line 99: c: command not found
+./boomake: line 105: c: command not found
+./boomake: line 111: c: command not found
+./boomake: line 117: c: command not found
+./boomake: line 123: c: command not found
+./boomake: line 129: c: command not found
+./boomake: line 135: c: command not found
+./boomake: line 141: c: command not found
+./boomake: line 147: c: command not found
+./boomake: line 153: c: command not found
+./boomake: line 159: c: command not found
+./boomake: line 165: c: command not found
+./boomake: line 171: c: command not found
+./boomake: line 177: c: command not found
+./boomake: line 183: c: command not found
+./boomake: line 189: c: command not found
+./boomake: line 195: c: command not found
+./boomake: line 201: c: command not found
+./boomake: line 207: c: command not found
+./boomake: line 213: c: command not found
+./boomake: line 219: c: command not found
+./boomake: line 225: c: command not found
+./boomake: line 231: c: command not found
+./boomake: line 237: c: command not found
+./boomake: line 243: c: command not found
+./boomake: line 249: c: command not found
+./boomake: line 255: c: command not found
+./boomake: line 261: c: command not found
+./boomake: line 267: c: command not found
+./boomake: line 273: c: command not found
+./boomake: line 279: c: command not found
+./boomake: line 285: c: command not found
+./boomake: line 291: c: command not found
+./boomake: line 297: c: command not found
+./boomake: line 303: c: command not found
+./boomake: line 309: c: command not found
+./boomake: line 315: c: command not found
+./boomake: line 321: c: command not found
+./boomake: line 327: c: command not found
+./boomake: line 333: c: command not found
+./boomake: line 339: c: command not found
+./boomake: line 345: c: command not found
+./boomake: line 351: c: command not found
+./boomake: line 357: c: command not found
+./boomake: line 363: c: command not found
+./boomake: line 369: c: command not found
+./boomake: line 375: c: command not found
+./boomake: line 381: c: command not found
+./boomake: line 387: c: command not found
+./boomake: line 393: c: command not found
+./boomake: line 399: c: command not found
+./boomake: line 405: c: command not found
+./boomake: line 411: c: command not found
+./boomake: line 417: c: command not found
+./boomake: line 423: c: command not found
+./boomake: line 429: c: command not found
+./boomake: line 435: c: command not found
+./boomake: line 441: c: command not found
+./boomake: line 447: c: command not found
+./boomake: line 453: c: command not found
+./boomake: line 459: c: command not found
+libsmt.a is missing, cannot continue
+Building application...
+./boomake: line 47: c: command not found
+./boomake: line 53: c: command not found
+./boomake: line 59: c: command not found
+./boomake: line 65: c: command not found
+./boomake: line 71: c: command not found
+./boomake: line 77: c: command not found
+./boomake: line 83: c: command not found
+./boomake: line 89: c: command not found
+./boomake: line 95: c: command not found
+./boomake: line 101: c: command not found
+./boomake: line 107: c: command not found
+./boomake: line 113: c: command not found
+./boomake: line 119: c: command not found
+./boomake: line 125: c: command not found
+./boomake: line 131: c: command not found
+./boomake: line 137: c: command not found
+./boomake: line 143: c: command not found
+./boomake: line 149: c: command not found
+./boomake: line 155: c: command not found
+./boomake: line 161: c: command not found
+./boomake: line 167: c: command not found
+./boomake: line 173: c: command not found
+./boomake: line 179: c: command not found
+./boomake: line 185: c: command not found
+./boomake: line 191: c: command not found
+./boomake: line 197: c: command not found
+./boomake: line 203: c: command not found
+./boomake: line 209: c: command not found
+libstu.a is missing, cannot continue
+Building application...
+./boomake: line 45: c: command not found
+./boomake: line 51: c: command not found
+libxac.a is missing, cannot continue
+Building application...
+./boomake: line 81: c: command not found
+./boomake: line 87: c: command not found
+./boomake: line 93: c: command not found
+./boomake: line 99: c: command not found
+./boomake: line 105: c: command not found
+./boomake: line 111: c: command not found
+./boomake: line 117: c: command not found
+./boomake: line 123: c: command not found
+xitami is missing, cannot continue
+
+
+From wolfgang.boerner at rz.uni-regensburg.de  Wed Aug 24 06:10:34 2005
+From: wolfgang.boerner at rz.uni-regensburg.de (wolfgang.boerner@rz.uni-regensburg.de)
+Date: Wed Aug 24 06:11:08 2005
+Subject: [Xitami] trouble building Xitami 2.5 on Ubuntu Hoary
+Message-ID: <118B1FE40CB@rkdvmks1.ngate.uni-regensburg.de>
+
+
+Ich bin gerade in Urlaub. Ab 29. August werde ich wieder an meinem
+Arbeitsplatz sein und kann evtl. auf Ihre Mail antworten. Bei 
+dringenden dienstlichen Angelegenheiten kontaktieren Sie bitte
+Herrn Johannes Deininger (Johannes.Deininger@rz.uni-regensburg.de) 
+
+I am on vacation right now. As from August 29th I am back here in
+my office; then I can reply to your mail if necessary. Please contact
+Johannes Deininger (Johannes.Deininger@rz.uni-regensburg.de) if time 
+is critical.
+
+
+So long
+  Wolfgang Boerner
+
+----------------------------------------------------------------------
+                      Quot capita, tot sensus.
+----------------------------------------------------------------------
+Wolfgang Boerner        |  Phone: +49 941 944 5880
+Klinik der Universitaet |  FAX:   +49 941 944 5882
+93042 Regensburg        |  SMTP: Wolfgang.Boerner@rz.uni-regensburg.de
+
+From wlofie.ml at gmail.com  Wed Aug 24 15:55:53 2005
+From: wlofie.ml at gmail.com (Bob Wolf)
+Date: Wed Aug 24 15:55:55 2005
+Subject: [Xitami] trouble building Xitami 2.5 on Ubuntu Hoary
+In-Reply-To: <1124856582.12880.4.camel@Ellipsis1>
+References: <1124856582.12880.4.camel@Ellipsis1>
+Message-ID: <4e44b760508240655277c2195@mail.gmail.com>
+
+i had the same problem (well slackware) and tracked it do a missing file 'c'
+
+the reply i was given from this list (and the solution did work) is just below:
+
+-----quote -----
+> Xitami uses a number of components from other iMatix packages to build.  The
+> 'c' script being the one you need to compile (others are used when modifying
+> the source code).
+> 
+> The simplest solution is to download the Base package from http://
+> www.imatix.net/pub and extract the 'c' script you'll find in base/boom.
+> Place this on the path somewhere.
+> 
+> Alternatively you can build the full Base package, after which Xitami will be
+> happy to compile.
+> 
+> I'm sorry for the broken Xitami source package.  I'll get around to fixing it,
+> one day.
+> 
+------------end quote -------
+hope that helps you some
+
+wlofie
+
+
+On 8/24/05, Ian Christie <ian@ianchristie.info> wrote:
+> When I run build.sh I get the following output. Any idea what might be
+> wrong?
+> 
+> Building application...
+> ./boomake: line 45: c: command not found
+> ./boomake: line 51: c: command not found
+---snip--
+
+From ian at ianchristie.info  Thu Aug 25 15:41:09 2005
+From: ian at ianchristie.info (Ian Christie)
+Date: Thu Aug 25 15:41:13 2005
+Subject: [Xitami] trouble building Xitami 2.5 on Ubuntu Hoary
+In-Reply-To: <4e44b760508240655277c2195@mail.gmail.com>
+References: <1124856582.12880.4.camel@Ellipsis1>
+	<4e44b760508240655277c2195@mail.gmail.com>
+Message-ID: <1124977269.8135.4.camel@Ellipsis1>
+
+Thanks, that worked perfectly
+
+--==Ian
+
+On Wed, 2005-24-08 at 09:55 -0400, Bob Wolf wrote:
+> i had the same problem (well slackware) and tracked it do a missing file 'c'
+> 
+> the reply i was given from this list (and the solution did work) is just below:
+> 
+> -----quote -----
+> > Xitami uses a number of components from other iMatix packages to build.  The
+> > 'c' script being the one you need to compile (others are used when modifying
+> > the source code).
+> > 
+> > The simplest solution is to download the Base package from http://
+> > www.imatix.net/pub and extract the 'c' script you'll find in base/boom.
+> > Place this on the path somewhere.
+> > 
+> > Alternatively you can build the full Base package, after which Xitami will be
+> > happy to compile.
+> > 
+> > I'm sorry for the broken Xitami source package.  I'll get around to fixing it,
+> > one day.
+> > 
+> ------------end quote -------
+> hope that helps you some
+> 
+> wlofie
+
+
+From rolinger1 at hotmail.com  Thu Aug 25 20:36:42 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Thu Aug 25 20:37:27 2005
+Subject: [Xitami] CGI issues
+Message-ID: <BAY103-DAV34AF10B95DE3DCEA63A8FF8AB0@phx.gbl>
+
+I am not certain if my problem is related to my script or to the Xitami CGI settings
+
+##### script
+I have written a perl script to upload files via the web.  In order to create a Progress Bar I am bypassing the CGI module in Perl and am process the raw STDIN directly and store it to a temporary file, after this code below I then use perl CGI.pm to parse the contents of that TMP file.  It all works fine however any file over 300k causes the server to return this error: "This server is currently overloaded - please try again later", here is my perl code that is getting the POST STDIN:
+
+open (TMP,">$base_dir/postdata$sessionid") ;
+while (read (STDIN ,$LINE, 2048) && $bRead < $len ) {
+ $bRead += length $LINE;
+ $size = -s "$base_dir/postdata$sessionid";
+
+ # slow things down so that the user can actually see the progress bar.
+ select(undef, undef, undef,0.35); # sleep for 0.2 of a second.
+
+ $i++;
+ print TMP $LINE;
+}
+
+##### Xitami CGI settings
+Or is this an issue with my CGI settings in Xitami:
+    Server Settings:
+        Allow Keep-Alive-Connections?   CHECKED, allow up to 25 requests, close after 30 seconds
+        Server performance: Normal
+    CGI Settings:
+        Timeout for CGI programs: 60 seconds
+        Check CGI progress every: 200 msecs
+        Support 16bit CGI: CHECKED
+        Use standard I/O: CHECKED
+        Full Environment: CHECKED
+       
+
+Anyone have any insights into why this would be occurring?  Is it script parameters or is it Xitami CGI settings?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050825/90286a36/attachment.html
+From rolinger1 at hotmail.com  Thu Aug 25 20:49:09 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Thu Aug 25 20:49:56 2005
+Subject: [Xitami] CGI issues
+References: <BAY103-DAV34AF10B95DE3DCEA63A8FF8AB0@phx.gbl>
+Message-ID: <BAY103-DAV14B33D2A8C1C0E9530040CF8AB0@phx.gbl>
+
+Ok, I found my own problem but would still like some input.
+
+The line in my perl script...
+ # slow things down so that the user can actually see the progress bar.
+ select(undef, undef, undef,0.35); # sleep for 0.2 of a second.
+
+..choked the bandwidth for the upload (really choked it, down to about 30k per second) and allowed the /postdata$sessionid file to be created.  Another script in a popup window was monitoring the status of that TMP /postdata$sessionid file to create the actual Progress Bar.  I comment out the "select(undef....) line and my script now uploads at about 250k per second and doesn't error out.  However, with that line commented out /postdata$sessionid never gets created which means the popup window script can't ever create the Progress Bar.  
+
+Any takers on this one?
+  ----- Original Message ----- 
+  From: RPO 
+  To: xitami@lists.xitami.org 
+  Sent: Thursday, August 25, 2005 11:36 AM
+  Subject: [Xitami] CGI issues
+
+
+  I am not certain if my problem is related to my script or to the Xitami CGI settings
+
+  ##### script
+  I have written a perl script to upload files via the web.  In order to create a Progress Bar I am bypassing the CGI module in Perl and am process the raw STDIN directly and store it to a temporary file, after this code below I then use perl CGI.pm to parse the contents of that TMP file.  It all works fine however any file over 300k causes the server to return this error: "This server is currently overloaded - please try again later", here is my perl code that is getting the POST STDIN:
+
+  open (TMP,">$base_dir/postdata$sessionid") ;
+  while (read (STDIN ,$LINE, 2048) && $bRead < $len ) {
+   $bRead += length $LINE;
+   $size = -s "$base_dir/postdata$sessionid";
+
+   # slow things down so that the user can actually see the progress bar.
+   select(undef, undef, undef,0.35); # sleep for 0.2 of a second.
+
+   $i++;
+   print TMP $LINE;
+  }
+
+  ##### Xitami CGI settings
+  Or is this an issue with my CGI settings in Xitami:
+      Server Settings:
+          Allow Keep-Alive-Connections?   CHECKED, allow up to 25 requests, close after 30 seconds
+          Server performance: Normal
+      CGI Settings:
+          Timeout for CGI programs: 60 seconds
+          Check CGI progress every: 200 msecs
+          Support 16bit CGI: CHECKED
+          Use standard I/O: CHECKED
+          Full Environment: CHECKED
+         
+
+  Anyone have any insights into why this would be occurring?  Is it script parameters or is it Xitami CGI settings?
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050825/0f7954a3/attachment.htm
+From rolinger1 at hotmail.com  Sat Aug 27 01:05:19 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Sat Aug 27 01:05:22 2005
+Subject: [Xitami] hiding URL paths
+Message-ID: <BAY103-DAV56F202A336A50BF219901F8AA0@phx.gbl>
+
+I have a photo site that requires ppl to login to access, however if you type in the direct URL to the photos (photo directories) themselves you can still access them directly with a http://www.blah.com/photos/foo.jpg.  Is it possible to hide the real URLs from the world, or the paths from the world so they can't access the photos directly?  My goal is to force users to login to be able to access the photos, and only be able to access the photos the rights to?
+
+Thanks,
+Russel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050826/d860fb41/attachment.html
+From rolinger1 at hotmail.com  Sat Aug 27 01:08:31 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Sat Aug 27 01:08:35 2005
+Subject: [Xitami] hiding URL paths
+References: <BAY103-DAV56F202A336A50BF219901F8AA0@phx.gbl>
+Message-ID: <BAY103-DAV176C47E2E26709F7C8F204F8AA0@phx.gbl>
+
+Or is there a way to lock down the directories so they require user/pass to gain access, and then be able to pass that user/pass to the server via a script.  The user/pass would be hidden in the script and not passed via HTTP POST?
+  ----- Original Message ----- 
+  From: RPO 
+  To: xitami@lists.xitami.org 
+  Sent: Friday, August 26, 2005 4:05 PM
+  Subject: [Xitami] hiding URL paths
+
+
+  I have a photo site that requires ppl to login to access, however if you type in the direct URL to the photos (photo directories) themselves you can still access them directly with a http://www.blah.com/photos/foo.jpg.  Is it possible to hide the real URLs from the world, or the paths from the world so they can't access the photos directly?  My goal is to force users to login to be able to access the photos, and only be able to access the photos the rights to?
+
+  Thanks,
+  Russel
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050826/dae31990/attachment.htm
+From rolinger1 at hotmail.com  Sat Aug 27 01:41:46 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Sat Aug 27 01:41:52 2005
+Subject: [Xitami] hiding URL paths
+References: <BAY103-DAV56F202A336A50BF219901F8AA0@phx.gbl>
+	<BAY103-DAV176C47E2E26709F7C8F204F8AA0@phx.gbl>
+Message-ID: <BAY103-DAV16CD06A5733E775A76DB56F8AA0@phx.gbl>
+
+It looks as if the Aliases section might be what I am looking for, but can I pass it variables?
+
+Virtual Path            Real Path
+/photos/$var            /xitami/photos
+
+and then $var would be translated to: /photos/user1/album1/foo.jpg.  But I supposed the web surferer could still type in http://www.blah.com/photos/user1/album1/foo.jpg and stil get to the photo.  I need some way of directing a virtual path to a real path, but be able to prevent the virtual path from accessed directly.  So this takes me back to my original question.
+
+-R
+
+
+  ----- Original Message ----- 
+  From: RPO 
+  To: Xitami Users General Discussion 
+  Sent: Friday, August 26, 2005 4:08 PM
+  Subject: Re: [Xitami] hiding URL paths
+
+
+  Or is there a way to lock down the directories so they require user/pass to gain access, and then be able to pass that user/pass to the server via a script.  The user/pass would be hidden in the script and not passed via HTTP POST?
+    ----- Original Message ----- 
+    From: RPO 
+    To: xitami@lists.xitami.org 
+    Sent: Friday, August 26, 2005 4:05 PM
+    Subject: [Xitami] hiding URL paths
+
+
+    I have a photo site that requires ppl to login to access, however if you type in the direct URL to the photos (photo directories) themselves you can still access them directly with a http://www.blah.com/photos/foo.jpg.  Is it possible to hide the real URLs from the world, or the paths from the world so they can't access the photos directly?  My goal is to force users to login to be able to access the photos, and only be able to access the photos the rights to?
+
+    Thanks,
+    Russel
+
+
+----------------------------------------------------------------------------
+
+
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050826/30235acb/attachment.html
+From mw at 9000.org  Sat Aug 27 01:52:09 2005
+From: mw at 9000.org (Magnus Wedberg)
+Date: Sat Aug 27 01:52:43 2005
+Subject: [Xitami] hiding URL paths
+In-Reply-To: <BAY103-DAV16CD06A5733E775A76DB56F8AA0@phx.gbl>
+Message-ID: <430FC749.8440.3EA1FB1@mw.9000.org>
+
+> But I supposed the web surferer could still type in
+> http://www.blah.com/photos/user1/album1/foo.jpg and stil get to the
+> photo.
+
+you don't /have/ to set the alias path to a subdir of the root path. 
+i.e., having root at c:\web\ and the alias /photo/ at f:\photo\ is 
+perfectly valid.
+
+ 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From marc at verfaillie.com  Sat Aug 27 01:52:50 2005
+From: marc at verfaillie.com (Marc)
+Date: Sat Aug 27 01:52:52 2005
+Subject: [Xitami] hiding URL paths
+Message-ID: <857411225@mail.verfaillie.com>
+
+Geachte Magnus Wedberg,
+
+
+This is an autoresponder message. No action is needed.
+
+Dit is een bericht van de autoresponder <postmaster@verfaillie.com>.
+
+Uw bericht met betrekking op Re: [Xitami] hiding URL paths
+verstuurd op Sat, 27 Aug 2005 01:52:50 +0200
+werd bij Marc Doigny afgeleverd.
+
+Voor zover ik weet (ik ben maar een computerprogramma) is deze persoon 
+in verlof en kan uw mail niet direkt beantwoorden.
+Marc is terug op 10 september.
+
+Gelieve een van de volgende e-mail adressen te gebruiken voor uw
+electronische communicatie met Verfaillie - Bauwens.
+
+De beschikbare e-mail adressen bij Verfaillie zijn:
+--------------------------------------------------
+(... @verfaillie.com of ... @verfaillie.be)
+
+Direktie:
+   Dominique Vanderstichele dominique@ ...
+   Ilse Verfaillie               ilse@ ...
+
+Verkoop:
+   Johan van Lyl                johan@ ...
+   Rino Minne                    rino@ ...
+   Steve Schiettecatte          steve@ ...
+   Tom Heyrick                    tom@ ...
+
+Technische dienst:
+      Verantwoordelijke:
+            Kurt Tamsin          kurt@ ...
+      Balie:
+         Nico de Ketelaere       nico@ ...
+      Techniekers:
+         Marc Doigny             marc@ ...
+         Jurgen Lammertijn     jurgen@ ...
+         Serge Caerels          serge@ ...
+         Clode                  clode@ ...
+         Dieter                dieter@ ...
+
+Boekhouding en administratie:
+Jo(ke), Ilse Sabbe        boekhouding@ ...
+                           ilse.sabbe@ ...
+                         copiemachine@ ...
+
+
+Met vriendelijke groeten vanwege Verfaillie - Bauwens.
+
+From rolinger1 at hotmail.com  Sat Aug 27 03:27:20 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Sat Aug 27 03:27:23 2005
+Subject: [Xitami] hiding URL paths
+References: <430FC749.8440.3EA1FB1@mw.9000.org>
+Message-ID: <BAY103-DAV6E22AFA09B5A1EB6484B9F8AD0@phx.gbl>
+
+Yeah, I get that:
+
+Virtual        Real
+/foo/            C:\blahdir\
+/foo/            C:\xitami\blahdir\
+/foo/            D:\something\blahdir
+
+But what I am looking for is a way to put photos in a directory that are
+unaccessable from a direct URL path.  I am trying to prevent users who are
+not logged in from getting to photos they don't have access to see.  If I
+move them to an aliased directory, then users can simply type in the alias
+path and still get to them.  If I move them non-aliased path or a non
+webroot path, then the only way I know to serve the photos is to have Perl
+serve up raw image data.  But that can take up alot of server CPU.  If the
+files are in a non-aliases or non webroot path, then a simple <img
+src=/photos/foo.jpg> won't work, the /photos/foo.jpg must be in a valid HTTP
+path for the image tag to work.
+
+----- Original Message ----- 
+From: "Magnus Wedberg" <mw@9000.org>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Friday, August 26, 2005 4:52 PM
+Subject: Re: [Xitami] hiding URL paths
+
+
+> > But I supposed the web surferer could still type in
+> > http://www.blah.com/photos/user1/album1/foo.jpg and stil get to the
+> > photo.
+>
+> you don't /have/ to set the alias path to a subdir of the root path.
+> i.e., having root at c:\web\ and the alias /photo/ at f:\photo\ is
+> perfectly valid.
+>
+>
+>
+> -- 
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+From marc at verfaillie.com  Sat Aug 27 07:40:16 2005
+From: marc at verfaillie.com (Marc Doigny)
+Date: Sat Aug 27 09:45:35 2005
+Subject: /Spam/ Re: [Xitami] hiding URL paths
+In-Reply-To: <BAY103-DAV16CD06A5733E775A76DB56F8AA0@phx.gbl>
+Message-ID: <431018E0.19306.7942FB@localhost>
+
+On 26 Aug 2005 at 16:41, RPO wrote:
+
+
+> 
+> I have a photo site that requires ppl to login to access, however if you type 
+> in the direct URL to the photos (photo directories) themselves you can still 
+> access them directly with a http://www.blah.com/photos/foo.jpg. Is it possible 
+> to hide the real URLs from the world, or the paths from the world so they can't 
+> access the photos directly? My goal is to force users to login to be able to 
+> access the photos, and only be able to access the photos the rights to?
+> 
+
+In the xitami.aut file, indicate the directories to be protected, and for each 
+section a list of 1..n user/password pairs
+
+http://afr_upd.verfaillie.be:20800/xitami/index3.htm#TOC22
+
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : postmaster@verfaillie.com
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- http://www.verfaillie.com ----------------------- 
+
+From ron at miplanet.net  Sat Aug 27 16:08:40 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Sat Aug 27 16:03:40 2005
+Subject: [Xitami] hiding URL paths
+In-Reply-To: <BAY103-DAV6E22AFA09B5A1EB6484B9F8AD0@phx.gbl>
+Message-ID: <000001c5ab10$d39bd9c0$0201a8c0@ronscomputer>
+
+There are a couple of things you can do. If you have PHP and MySQL
+installed then do it via php. You can download Coppermine or 4images and
+which will do the trick. Also I know there are simple php scripts that
+will do it for you and if you are interested I think I have one but I'll
+have to dig it up. What I do for my Gallery sites is, I run Geeklog
+www.geeklog.net and a 4images plugin. Geeklog also has it's own Gallery
+plugin that works great. 
+
+As far as doing it via Extami I'm not sure. I'm just giving you other
+options.
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of RPO
+Sent: Friday, August 26, 2005 9:27 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] hiding URL paths
+
+
+Yeah, I get that:
+
+Virtual        Real
+/foo/            C:\blahdir\
+/foo/            C:\xitami\blahdir\
+/foo/            D:\something\blahdir
+
+But what I am looking for is a way to put photos in a directory that are
+unaccessable from a direct URL path.  I am trying to prevent users who
+are not logged in from getting to photos they don't have access to see.
+If I move them to an aliased directory, then users can simply type in
+the alias path and still get to them.  If I move them non-aliased path
+or a non webroot path, then the only way I know to serve the photos is
+to have Perl serve up raw image data.  But that can take up alot of
+server CPU.  If the files are in a non-aliases or non webroot path, then
+a simple <img src=/photos/foo.jpg> won't work, the /photos/foo.jpg must
+be in a valid HTTP path for the image tag to work.
+
+----- Original Message ----- 
+From: "Magnus Wedberg" <mw@9000.org>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Friday, August 26, 2005 4:52 PM
+Subject: Re: [Xitami] hiding URL paths
+
+
+> > But I supposed the web surferer could still type in 
+> > http://www.blah.com/photos/user1/album1/foo.jpg and stil get to the 
+> > photo.
+>
+> you don't /have/ to set the alias path to a subdir of the root path. 
+> i.e., having root at c:\web\ and the alias /photo/ at f:\photo\ is 
+> perfectly valid.
+>
+>
+>
+> --
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.10.15/82 - Release Date:
+8/25/2005
+ 
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.10.16/83 - Release Date:
+8/26/2005
+ 
+
+From chestnut at willapabay.org  Sun Aug 28 01:20:21 2005
+From: chestnut at willapabay.org (Chestnut)
+Date: Sun Aug 28 01:14:58 2005
+Subject: [Xitami] hiding URL paths
+References: <430FC749.8440.3EA1FB1@mw.9000.org>
+	<BAY103-DAV6E22AFA09B5A1EB6484B9F8AD0@phx.gbl>
+Message-ID: <002101c5ab5d$e5720410$b2fab1d8@2c01v01>
+
+Has anyone suggested, simply using the private directory and user passwords
+thru xitami itself???
+Patrick
+----- Original Message ----- 
+From: "RPO" <rolinger1@hotmail.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Friday, August 26, 2005 6:27 PM
+Subject: Re: [Xitami] hiding URL paths
+
+
+> Yeah, I get that:
+>
+> Virtual        Real
+> /foo/            C:\blahdir\
+> /foo/            C:\xitami\blahdir\
+> /foo/            D:\something\blahdir
+>
+> But what I am looking for is a way to put photos in a directory that are
+> unaccessable from a direct URL path.  I am trying to prevent users who are
+> not logged in from getting to photos they don't have access to see.  If I
+> move them to an aliased directory, then users can simply type in the alias
+> path and still get to them.  If I move them non-aliased path or a non
+> webroot path, then the only way I know to serve the photos is to have Perl
+> serve up raw image data.  But that can take up alot of server CPU.  If the
+> files are in a non-aliases or non webroot path, then a simple <img
+> src=/photos/foo.jpg> won't work, the /photos/foo.jpg must be in a valid
+HTTP
+> path for the image tag to work.
+>
+> ----- Original Message ----- 
+> From: "Magnus Wedberg" <mw@9000.org>
+> To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+> Sent: Friday, August 26, 2005 4:52 PM
+> Subject: Re: [Xitami] hiding URL paths
+>
+>
+> > > But I supposed the web surferer could still type in
+> > > http://www.blah.com/photos/user1/album1/foo.jpg and stil get to the
+> > > photo.
+> >
+> > you don't /have/ to set the alias path to a subdir of the root path.
+> > i.e., having root at c:\web\ and the alias /photo/ at f:\photo\ is
+> > perfectly valid.
+> >
+> >
+> >
+> > -- 
+> > Magnus Wedberg
+> > http://www.magnuswedberg.com/
+> > mw AT 9000.org
+> > Warning! Objects in viewfinder may be closer than they appear.
+> >
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.10.16/83 - Release Date: 8/26/2005
+>
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.10.16/83 - Release Date: 8/26/2005
+
+From jim.noseworthy at rogers.com  Sun Aug 28 18:40:43 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Sun Aug 28 18:41:00 2005
+Subject: [Xitami] Some Help Please.
+Message-ID: <000501c5abef$3c087d90$6400a8c0@maincomputer>
+
+Hi Folks:
+
+There is a strange thing happening with my Xitami Server.  sometimes I can 
+connect and other times I cannot.  When I stop and restart the service, it 
+seems to work again.
+
+Is there some configuration setting that I nead to change?
+
+Thanks all over the place gnag. 
+
+From rolinger1 at hotmail.com  Mon Aug 29 01:13:59 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Mon Aug 29 01:14:05 2005
+Subject: [Xitami] Developer Issue: POST STDIN vs CGI read
+Message-ID: <BAY103-DAV1140AFCE77AAFC94F1AC97F8AC0@phx.gbl>
+
+I am running Xitami on W2k machine.  How does Xitami handle POST data?  I am trying to read in the raw POST data from a file upload form, and while reading in the raw data my script writes to a temp file the progress of that upload.  Every 8k of POST data the temp file gets updated.  In the script the temp file gets created before the POST STDIN occurs. However, with Xitami the temp file doesn't get created until AFTER the entire raw STDIN has been processed, thus preventing the use of any status or progess data.  
+
+Is Xitami server somehow holding onto the raw POST data, waiting for it to be completely read in, before handing it off to the CGI compiler or before handing it off to the perl script?  This same script works on Linux/apache the way its intended to, but on Windows/Xitami the temp file doesn't get written til after the raw data is completely read in.
+
+This is a serious issue because it is inteferring with the ability to create a Progress Bar that shows users the status of a multi-file upload.  With Perl, the only way to create a Progress Bar is to write updates to a temp file (bytesIN of totalBytes) while the files are being uploaded, and a popup window refreshes itself and processes the contents of that temp file to be able to provide the visual progress of the file upload.  If Xitami is somehow interferring with the raw read of POST data, then there is no effective way of creating that temp file.
+
+-Russel
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050828/eca7a5e1/attachment.htm
+From mdedick at yahoo.com  Mon Aug 29 01:19:50 2005
+From: mdedick at yahoo.com (David Edick)
+Date: Mon Aug 29 01:20:12 2005
+Subject: [Xitami] FrontPage Server Extensions
+In-Reply-To: <BAY103-DAV1140AFCE77AAFC94F1AC97F8AC0@phx.gbl>
+Message-ID: <20050828232010.EBD971C109BA@sxpublic.imatix.net>
+
+Does xitami have support for FrontPage Server Extensions. if not, how do I
+add FrontPage Server Extensions support for my site?
+ 
+thanks
+
+
+From rolinger1 at hotmail.com  Mon Aug 29 05:34:40 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Mon Aug 29 05:34:48 2005
+Subject: [Xitami] Developer Issue: POST STDIN vs CGI read
+References: <BAY103-DAV1140AFCE77AAFC94F1AC97F8AC0@phx.gbl>
+Message-ID: <BAY103-DAV10DE1CEBF30C734CD8C5F3F8AF0@phx.gbl>
+
+I tested Windows Apache (port 8080) and Windows Xitami (port 80), running identical upload scripts.  The upload form passes all the raw POST data to upload.pl and an onSubmit calls a popup window running progress.pl.  The upload.pl reads in all the raw POST data through a standard "while (<STDIN>)", during the while the script writes "bytesReadIn of totalBytes" to a temp file, every 8K of read in raw data the script flushes the buffer to the temp file to ensure its being written to properly.  While this the data is being read in and the temp file is being written to, the progress.pl script refreshes in the popup window every two seconds.  During each refresh it reads the last "bytesReadIn of totalBytes" entry in the temp file to create a visual progress bar, bytes counter and time elapsed.
+
+In Apache, this whole process works because the temp file gets created and is written to on every 8K buffer flush, thus allowing the Progress Bar to increment properly in the popup window.  In Xitami, the temp file creation and/or the flush is being ignored and the temp file doesn't get created until the entire STDIN done being read in, thus the progress bar popup window remains empty during the entire upload until suddenly it shows 100% completed.  This is a very fundamental difference and issue in the way the Xitami CGI engine captures the POST data and passes it a parsing script. 
+
+Can anyone elaborate on this?  This is a very critical issue for me.  I have created a photo upload site and am highly worried that without a status/progress bar users will think their browser has hung or the server has timed out. Big uploads of 5Mb to 15Mb could take 5 to 8 minutes, if users don't see a visual progress meter incrementing they will cancel the upload.  
+
+Is there some setting or switch I am not aware of that can correct this problem?  If not, I may have to consider moving to Apache and I have no desire of doing that.  I have been a devoted Xitami user for nearly 7 years now and have no desire to stop being a Xitami user.
+
+-R
+  ----- Original Message ----- 
+  From: RPO 
+  To: xitami@lists.xitami.org 
+  Sent: Sunday, August 28, 2005 4:13 PM
+  Subject: [Xitami] Developer Issue: POST STDIN vs CGI read
+
+
+  I am running Xitami on W2k machine.  How does Xitami handle POST data?  I am trying to read in the raw POST data from a file upload form, and while reading in the raw data my script writes to a temp file the progress of that upload.  Every 8k of POST data the temp file gets updated.  In the script the temp file gets created before the POST STDIN occurs. However, with Xitami the temp file doesn't get created until AFTER the entire raw STDIN has been processed, thus preventing the use of any status or progess data.  
+
+  Is Xitami server somehow holding onto the raw POST data, waiting for it to be completely read in, before handing it off to the CGI compiler or before handing it off to the perl script?  This same script works on Linux/apache the way its intended to, but on Windows/Xitami the temp file doesn't get written til after the raw data is completely read in.
+
+  This is a serious issue because it is inteferring with the ability to create a Progress Bar that shows users the status of a multi-file upload.  With Perl, the only way to create a Progress Bar is to write updates to a temp file (bytesIN of totalBytes) while the files are being uploaded, and a popup window refreshes itself and processes the contents of that temp file to be able to provide the visual progress of the file upload.  If Xitami is somehow interferring with the raw read of POST data, then there is no effective way of creating that temp file.
+
+  -Russel
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050828/5c19dc10/attachment.html
+From francis.turner at gmail.com  Mon Aug 29 14:18:21 2005
+From: francis.turner at gmail.com (Francis Turner)
+Date: Mon Aug 29 14:18:24 2005
+Subject: [Xitami] Developer Issue: POST STDIN vs CGI read
+In-Reply-To: <BAY103-DAV10DE1CEBF30C734CD8C5F3F8AF0@phx.gbl>
+References: <BAY103-DAV1140AFCE77AAFC94F1AC97F8AC0@phx.gbl>
+	<BAY103-DAV10DE1CEBF30C734CD8C5F3F8AF0@phx.gbl>
+Message-ID: <f83609d50508290518586f2cc3@mail.gmail.com>
+
+I do not believe there is anyway to get Xitami to handle posts in any
+other way than a single chunk of everything
+
+On 8/29/05, RPO <rolinger1@hotmail.com> wrote:
+>  
+> I tested Windows Apache (port 8080) and Windows Xitami (port 80), running
+> identical upload scripts.  The upload form passes all the raw POST data to
+> upload.pl and an onSubmit calls a popup window running progress.pl.  The
+> upload.pl reads in all the raw POST data through a standard "while
+> (<STDIN>)", during the while the script writes "bytesReadIn of totalBytes"
+> to a temp file, every 8K of read in raw data the script flushes the buffer
+> to the temp file to ensure its being written to properly.  While this the
+> data is being read in and the temp file is being written to, the progress.pl
+> script refreshes in the popup window every two seconds.  During each refresh
+> it reads the last "bytesReadIn of totalBytes" entry in the temp file to
+> create a visual progress bar, bytes counter and time elapsed. 
+>   
+> In Apache, this whole process works because the temp file gets created and
+> is written to on every 8K buffer flush, thus allowing the Progress Bar to
+> increment properly in the popup window.  In Xitami, the temp file creation
+> and/or the flush is being ignored and the temp file doesn't get created
+> until the entire STDIN done being read in, thus the progress bar popup
+> window remains empty during the entire upload until suddenly it shows 100%
+> completed.  This is a very fundamental difference and issue in the way the
+> Xitami CGI engine captures the POST data and passes it a parsing script. 
+>   
+> Can anyone elaborate on this?  This is a very critical issue for me.  I have
+> created a photo upload site and am highly worried that without a
+> status/progress bar users will think their browser has hung or the server
+> has timed out. Big uploads of 5Mb to 15Mb could take 5 to 8 minutes, if
+> users don't see a visual progress meter incrementing they will cancel the
+> upload.  
+>   
+> Is there some setting or switch I am not aware of that can correct this
+> problem?  If not, I may have to consider moving to Apache and I have no
+> desire of doing that.  I have been a devoted Xitami user for nearly 7 years
+> now and have no desire to stop being a Xitami user. 
+>   
+> -R 
+>  
+> ----- Original Message ----- 
+> From: RPO 
+> To: xitami@lists.xitami.org 
+> Sent: Sunday, August 28, 2005 4:13 PM 
+> Subject: [Xitami] Developer Issue: POST STDIN vs CGI read 
+> 
+>  
+> I am running Xitami on W2k machine.  How does Xitami handle POST data?  I am
+> trying to read in the raw POST data from a file upload form, and while
+> reading in the raw data my script writes to a temp file the progress of that
+> upload.  Every 8k of POST data the temp file gets updated.  In the script
+> the temp file gets created before the POST STDIN occurs. However, with
+> Xitami the temp file doesn't get created until AFTER the entire raw STDIN
+> has been processed, thus preventing the use of any status or progess data.  
+>   
+> Is Xitami server somehow holding onto the raw POST data, waiting for it to
+> be completely read in, before handing it off to the CGI compiler or before
+> handing it off to the perl script?  This same script works on Linux/apache
+> the way its intended to, but on Windows/Xitami the temp file doesn't get
+> written til after the raw data is completely read in. 
+>   
+> This is a serious issue because it is inteferring with the ability to create
+> a Progress Bar that shows users the status of a multi-file upload.  With
+> Perl, the only way to create a Progress Bar is to write updates to a temp
+> file (bytesIN of totalBytes) while the files are being uploaded, and a popup
+> window refreshes itself and processes the contents of that temp file to be
+> able to provide the visual progress of the file upload.  If Xitami is
+> somehow interferring with the raw read of POST data, then there is no
+> effective way of creating that temp file. 
+>   
+> -Russel 
+>   
+>   
+> 
+>  ________________________________
+>  
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+> 
+>  
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe:
+> http://lists.xitami.org/mailman/listinfo/xitami
+> 
+> 
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+From dba89103 at yahoo.com  Mon Aug 29 18:45:26 2005
+From: dba89103 at yahoo.com (David Arnold)
+Date: Mon Aug 29 18:45:30 2005
+Subject: [Xitami] Version Xitami 2.5c2 works with PHP,
+	but can't get Xitami Pro version 2.4c3 to work with PHP
+Message-ID: <20050829164526.45378.qmail@web52904.mail.yahoo.com>
+
+I'm new to this list, so please forgive me if this
+question has been answered before.
+
+We've been using the free version of Xitami (2.5c2) on
+our intranet for some time. I had no difficulty
+configuring PHP to work with it. We've decided that
+we'd like to purchase the Xitami Pro version to use
+SSL and restrict access with certificates, but I can't
+get Xitami Pro version 2.4c3 to work with PHP.
+
+Is this a problem with v2.4c3? Is there a different
+way to configure PHP to work with v2.4c3 than the way
+with the free version, 2.5c2?
+
+As soon as I can test Xitami Pro in our office, we
+will purchase the latest version.
+
+__________________________________________________
+Do You Yahoo!?
+Tired of spam?  Yahoo! Mail has the best spam protection around 
+http://mail.yahoo.com 
+
+From ph at imatix.com  Mon Aug 29 19:05:06 2005
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon Aug 29 19:05:12 2005
+Subject: [Xitami] Version Xitami 2.5c2 works with PHP,
+	but can't get Xitami Pro version 2.4c3 to work with PHP
+In-Reply-To: <20050829164526.45378.qmail@web52904.mail.yahoo.com>
+References: <20050829164526.45378.qmail@web52904.mail.yahoo.com>
+Message-ID: <5821ea2405082910057d3f7cb3@mail.gmail.com>
+
+On 8/29/05, David Arnold <dba89103@yahoo.com> wrote:
+
+> We've been using the free version of Xitami (2.5c2) on
+> our intranet for some time. I had no difficulty
+> configuring PHP to work with it. We've decided that
+> we'd like to purchase the Xitami Pro version to use
+> SSL and restrict access with certificates, but I can't
+> get Xitami Pro version 2.4c3 to work with PHP.
+
+Quite possibly the "free" version of Xitami/Pro that you are testing
+is so old that it won't work with PHP in the same way.  You don't
+explain what is not working, but Xitami/Pro is functionally identical
+to Xitami except for the SSL layer (which affects things like virtual
+hosting, but not PHP).
+
+
+-- 
+Pieter Hintjens
+iMatix Corporation
+
+From rolinger1 at hotmail.com  Mon Aug 29 20:21:57 2005
+From: rolinger1 at hotmail.com (R O)
+Date: Mon Aug 29 20:22:01 2005
+Subject: [Xitami] Developer Issue: POST STDIN vs CGI read
+In-Reply-To: <f83609d50508290518586f2cc3@mail.gmail.com>
+Message-ID: <BAY103-F307EEE8991617D40D23948F8AF0@phx.gbl>
+
+
+Can anyone else elaborate on this?  Is the CGI handler documented anywhere?  
+Does it work differetly between Linux Xitami and Windows Xitami?  Does 
+Xitami Pro handle it differently than Standard Xitami?  I am running Xitami 
+v 2.4d9 - does the latest version handle this issue differently?
+
+I would hope someone from iMaxtix can take the time to answer this.
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+>From: Francis Turner <francis.turner@gmail.com>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>Subject: Re: [Xitami] Developer Issue: POST STDIN vs CGI read
+>Date: Mon, 29 Aug 2005 14:18:21 +0200
+>
+>I do not believe there is anyway to get Xitami to handle posts in any
+>other way than a single chunk of everything
+>
+>On 8/29/05, RPO <rolinger1@hotmail.com> wrote:
+> >
+> > I tested Windows Apache (port 8080) and Windows Xitami (port 80), 
+>running
+> > identical upload scripts.  The upload form passes all the raw POST data 
+>to
+> > upload.pl and an onSubmit calls a popup window running progress.pl.  The
+> > upload.pl reads in all the raw POST data through a standard "while
+> > (<STDIN>)", during the while the script writes "bytesReadIn of 
+>totalBytes"
+> > to a temp file, every 8K of read in raw data the script flushes the 
+>buffer
+> > to the temp file to ensure its being written to properly.  While this 
+>the
+> > data is being read in and the temp file is being written to, the 
+>progress.pl
+> > script refreshes in the popup window every two seconds.  During each 
+>refresh
+> > it reads the last "bytesReadIn of totalBytes" entry in the temp file to
+> > create a visual progress bar, bytes counter and time elapsed.
+> >
+> > In Apache, this whole process works because the temp file gets created 
+>and
+> > is written to on every 8K buffer flush, thus allowing the Progress Bar 
+>to
+> > increment properly in the popup window.  In Xitami, the temp file 
+>creation
+> > and/or the flush is being ignored and the temp file doesn't get created
+> > until the entire STDIN done being read in, thus the progress bar popup
+> > window remains empty during the entire upload until suddenly it shows 
+>100%
+> > completed.  This is a very fundamental difference and issue in the way 
+>the
+> > Xitami CGI engine captures the POST data and passes it a parsing script.
+> >
+> > Can anyone elaborate on this?  This is a very critical issue for me.  I 
+>have
+> > created a photo upload site and am highly worried that without a
+> > status/progress bar users will think their browser has hung or the 
+>server
+> > has timed out. Big uploads of 5Mb to 15Mb could take 5 to 8 minutes, if
+> > users don't see a visual progress meter incrementing they will cancel 
+>the
+> > upload.
+> >
+> > Is there some setting or switch I am not aware of that can correct this
+> > problem?  If not, I may have to consider moving to Apache and I have no
+> > desire of doing that.  I have been a devoted Xitami user for nearly 7 
+>years
+> > now and have no desire to stop being a Xitami user.
+> >
+> > -R
+> >
+> > ----- Original Message -----
+> > From: RPO
+> > To: xitami@lists.xitami.org
+> > Sent: Sunday, August 28, 2005 4:13 PM
+> > Subject: [Xitami] Developer Issue: POST STDIN vs CGI read
+> >
+> >
+> > I am running Xitami on W2k machine.  How does Xitami handle POST data?  
+>I am
+> > trying to read in the raw POST data from a file upload form, and while
+> > reading in the raw data my script writes to a temp file the progress of 
+>that
+> > upload.  Every 8k of POST data the temp file gets updated.  In the 
+>script
+> > the temp file gets created before the POST STDIN occurs. However, with
+> > Xitami the temp file doesn't get created until AFTER the entire raw 
+>STDIN
+> > has been processed, thus preventing the use of any status or progess 
+>data.
+> >
+> > Is Xitami server somehow holding onto the raw POST data, waiting for it 
+>to
+> > be completely read in, before handing it off to the CGI compiler or 
+>before
+> > handing it off to the perl script?  This same script works on 
+>Linux/apache
+> > the way its intended to, but on Windows/Xitami the temp file doesn't get
+> > written til after the raw data is completely read in.
+> >
+> > This is a serious issue because it is inteferring with the ability to 
+>create
+> > a Progress Bar that shows users the status of a multi-file upload.  With
+> > Perl, the only way to create a Progress Bar is to write updates to a 
+>temp
+> > file (bytesIN of totalBytes) while the files are being uploaded, and a 
+>popup
+> > window refreshes itself and processes the contents of that temp file to 
+>be
+> > able to provide the visual progress of the file upload.  If Xitami is
+> > somehow interferring with the raw read of POST data, then there is no
+> > effective way of creating that temp file.
+> >
+> > -Russel
+> >
+> >
+> >
+> >  ________________________________
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe:
+> > http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe:
+> > http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+>
+>
+>--
+>http://www.di2.nu/blog.htm
+>Faber's Fourth Law:
+>   Necessity is the mother of strange bedfellows.
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From MGibbons at UxbridgeCollege.ac.uk  Tue Aug 30 10:16:40 2005
+From: MGibbons at UxbridgeCollege.ac.uk (Michael Gibbons)
+Date: Tue Aug 30 10:17:12 2005
+Subject: /Spam/ Re: [Xitami] hiding URL paths
+Message-ID: <s314240a.003@mail.uxbridgecollege.co.uk>
+
+not sure if you have had a reply to this yet, but you need to place a htaccess file in with the photos
+
+michael@freedauk.com
+
+>>> marc@verfaillie.com 08/27/05 06:40am >>>
+On 26 Aug 2005 at 16:41, RPO wrote:
+
+
+> 
+> I have a photo site that requires ppl to login to access, however if you type 
+> in the direct URL to the photos (photo directories) themselves you can still 
+> access them directly with a http://www.blah.com/photos/foo.jpg. Is it possible 
+> to hide the real URLs from the world, or the paths from the world so they can't 
+> access the photos directly? My goal is to force users to login to be able to 
+> access the photos, and only be able to access the photos the rights to?
+> 
+
+In the xitami.aut file, indicate the directories to be protected, and for each 
+section a list of 1..n user/password pairs
+
+http://afr_upd.verfaillie.be:20800/xitami/index3.htm#TOC22 
+
+
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : postmaster@verfaillie.com 
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- http://www.verfaillie.com ----------------------- 
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+Email has been scanned for viruses by Altman Technologies' email management service - www.altman.co.uk/emailsystems
+
+
+
+The information or opinions in this message (including
+any attachments) are those of the author and are not 
+necessarily those of Uxbridge College, which disclaims
+responsibility for loss or damage arising from its use to
+the maximum extent permitted by law. E-mail messages
+sometimes go astray. This message is sent in
+confidence for the addressee only. It may contain
+confidential or sensitive information. The contents
+are not to be disclosed to anyone other than the
+addressee. Unauthorised recipients are requested to
+preserve this confidentiality and to advise the originator.
+immediately and to delete the message without copying,
+altering or disclosing its contents. E-mails to or from
+Uxbridge College may be monitored by the College in
+accordance with its current policy.
+
+From marc at verfaillie.com  Tue Aug 30 10:17:20 2005
+From: marc at verfaillie.com (Marc)
+Date: Tue Aug 30 10:17:23 2005
+Subject: /Spam/ Re: [Xitami] hiding URL paths
+Message-ID: <857625130@mail.verfaillie.com>
+
+Geachte Michael Gibbons,
+
+
+This is an autoresponder message. No action is needed.
+
+Dit is een bericht van de autoresponder <postmaster@verfaillie.com>.
+
+Uw bericht met betrekking op Re: /Spam/ Re: [Xitami] hiding URL paths
+verstuurd op Tue, 30 Aug 2005 10:17:20 +0200
+werd bij Marc Doigny afgeleverd.
+
+Voor zover ik weet (ik ben maar een computerprogramma) is deze persoon 
+in verlof en kan uw mail niet direkt beantwoorden.
+Marc is terug op 10 september.
+
+Gelieve een van de volgende e-mail adressen te gebruiken voor uw
+electronische communicatie met Verfaillie - Bauwens.
+
+De beschikbare e-mail adressen bij Verfaillie zijn:
+--------------------------------------------------
+(... @verfaillie.com of ... @verfaillie.be)
+
+Direktie:
+   Dominique Vanderstichele dominique@ ...
+   Ilse Verfaillie               ilse@ ...
+
+Verkoop:
+   Johan van Lyl                johan@ ...
+   Rino Minne                    rino@ ...
+   Steve Schiettecatte          steve@ ...
+   Tom Heyrick                    tom@ ...
+
+Technische dienst:
+      Verantwoordelijke:
+            Kurt Tamsin          kurt@ ...
+      Balie:
+         Nico de Ketelaere       nico@ ...
+      Techniekers:
+         Marc Doigny             marc@ ...
+         Jurgen Lammertijn     jurgen@ ...
+         Serge Caerels          serge@ ...
+         Clode                  clode@ ...
+         Dieter                dieter@ ...
+
+Boekhouding en administratie:
+Jo(ke), Ilse Sabbe        boekhouding@ ...
+                           ilse.sabbe@ ...
+                         copiemachine@ ...
+
+
+Met vriendelijke groeten vanwege Verfaillie - Bauwens.
+
+From MGibbons at UxbridgeCollege.ac.uk  Tue Aug 30 10:21:27 2005
+From: MGibbons at UxbridgeCollege.ac.uk (Michael Gibbons)
+Date: Tue Aug 30 10:21:48 2005
+Subject: /Spam/ Re: [Xitami] hiding URL paths
+Message-ID: <s3142521.006@mail.uxbridgecollege.co.uk>
+
+hi you can find tons of info on how to set them up or contact me and i will show you.
+
+
+regards
+michael@freedauk.com
+
+>>> marc@verfaillie.com 08/30/05 09:17am >>>
+Geachte Michael Gibbons,
+
+
+This is an autoresponder message. No action is needed.
+
+Dit is een bericht van de autoresponder <postmaster@verfaillie.com>.
+
+Uw bericht met betrekking op Re: /Spam/ Re: [Xitami] hiding URL paths
+verstuurd op Tue, 30 Aug 2005 10:17:20 +0200
+werd bij Marc Doigny afgeleverd.
+
+Voor zover ik weet (ik ben maar een computerprogramma) is deze persoon 
+in verlof en kan uw mail niet direkt beantwoorden.
+Marc is terug op 10 september.
+
+Gelieve een van de volgende e-mail adressen te gebruiken voor uw
+electronische communicatie met Verfaillie - Bauwens.
+
+De beschikbare e-mail adressen bij Verfaillie zijn:
+--------------------------------------------------
+(... @verfaillie.com of ... @verfaillie.be)
+
+Direktie:
+   Dominique Vanderstichele dominique@ ...
+   Ilse Verfaillie               ilse@ ...
+
+Verkoop:
+   Johan van Lyl                johan@ ...
+   Rino Minne                    rino@ ...
+   Steve Schiettecatte          steve@ ...
+   Tom Heyrick                    tom@ ...
+
+Technische dienst:
+      Verantwoordelijke:
+            Kurt Tamsin          kurt@ ...
+      Balie:
+         Nico de Ketelaere       nico@ ...
+      Techniekers:
+         Marc Doigny             marc@ ...
+         Jurgen Lammertijn     jurgen@ ...
+         Serge Caerels          serge@ ...
+         Clode                  clode@ ...
+         Dieter                dieter@ ...
+
+Boekhouding en administratie:
+Jo(ke), Ilse Sabbe        boekhouding@ ...
+                           ilse.sabbe@ ...
+                         copiemachine@ ...
+
+
+Met vriendelijke groeten vanwege Verfaillie - Bauwens.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+Email has been scanned for viruses by Altman Technologies' email management service - www.altman.co.uk/emailsystems
+
+
+
+The information or opinions in this message (including
+any attachments) are those of the author and are not 
+necessarily those of Uxbridge College, which disclaims
+responsibility for loss or damage arising from its use to
+the maximum extent permitted by law. E-mail messages
+sometimes go astray. This message is sent in
+confidence for the addressee only. It may contain
+confidential or sensitive information. The contents
+are not to be disclosed to anyone other than the
+addressee. Unauthorised recipients are requested to
+preserve this confidentiality and to advise the originator.
+immediately and to delete the message without copying,
+altering or disclosing its contents. E-mails to or from
+Uxbridge College may be monitored by the College in
+accordance with its current policy.
+
+From rolinger1 at hotmail.com  Tue Aug 30 19:14:32 2005
+From: rolinger1 at hotmail.com (R O)
+Date: Tue Aug 30 19:14:38 2005
+Subject: /Spam/ Re: [Xitami] hiding URL paths
+In-Reply-To: <s314240a.003@mail.uxbridgecollege.co.uk>
+Message-ID: <BAY103-F19B1BE0202F95AFEE43269F8AE0@phx.gbl>
+
+
+I think I might need to clarify, my users login through a web page and 
+cookies are assigned to track their login, this is not a Xitami type login 
+with the windows style popup window.  Is it still possible to use the Xitami 
+htaccess file using cookies, or at least a way to adapt it?  And please 
+clarify what you mean by placing an htaccess within the photos directory, I 
+am not familiar with this technique.
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+
+
+
+>From: "Michael Gibbons" <MGibbons@UxbridgeCollege.ac.uk>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: <xitami@lists.xitami.org>
+>Subject: Re: /Spam/ Re: [Xitami] hiding URL paths
+>Date: Tue, 30 Aug 2005 09:16:40 +0100
+>
+>not sure if you have had a reply to this yet, but you need to place a 
+>htaccess file in with the photos
+>
+>michael@freedauk.com
+>
+> >>> marc@verfaillie.com 08/27/05 06:40am >>>
+>On 26 Aug 2005 at 16:41, RPO wrote:
+>
+>
+> >
+> > I have a photo site that requires ppl to login to access, however if you 
+>type
+> > in the direct URL to the photos (photo directories) themselves you can 
+>still
+> > access them directly with a http://www.blah.com/photos/foo.jpg. Is it 
+>possible
+> > to hide the real URLs from the world, or the paths from the world so 
+>they can't
+> > access the photos directly? My goal is to force users to login to be 
+>able to
+> > access the photos, and only be able to access the photos the rights to?
+> >
+>
+>In the xitami.aut file, indicate the directories to be protected, and for 
+>each
+>section a list of 1..n user/password pairs
+>
+>http://afr_upd.verfaillie.be:20800/xitami/index3.htm#TOC22
+>
+>
+>
+>-------------------------------------------------------------------------
+>--::Mailserver Verfaillie Bauwens::-- contact : postmaster@verfaillie.com
+>Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+>----------------------- http://www.verfaillie.com -----------------------
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>Email has been scanned for viruses by Altman Technologies' email management 
+>service - www.altman.co.uk/emailsystems
+>
+>
+>
+>The information or opinions in this message (including
+>any attachments) are those of the author and are not
+>necessarily those of Uxbridge College, which disclaims
+>responsibility for loss or damage arising from its use to
+>the maximum extent permitted by law. E-mail messages
+>sometimes go astray. This message is sent in
+>confidence for the addressee only. It may contain
+>confidential or sensitive information. The contents
+>are not to be disclosed to anyone other than the
+>addressee. Unauthorised recipients are requested to
+>preserve this confidentiality and to advise the originator.
+>immediately and to delete the message without copying,
+>altering or disclosing its contents. E-mails to or from
+>Uxbridge College may be monitored by the College in
+>accordance with its current policy.
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] why doesn't it work?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000266.html">
+   <LINK REL="Next"  HREF="000270.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] why doesn't it work?
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] why doesn't it work?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 29 Jun 2001 09:33:32 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000266.html">[Xitami] why doesn't it work?
+</A></li>
+        <LI> Next message: <A HREF="000270.html">[Xitami] Refresh/Reload doesn't work
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#268">[ date ]</a>
+              <a href="thread.html#268">[ thread ]</a>
+              <a href="subject.html#268">[ subject ]</a>
+              <a href="author.html#268">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 11:43 PM 6/28/01 -0700, you wrote:
+&gt;<i>I just bought a server and I networked them together
+</I>
+What is the &quot;them&quot; you are referring to?  If you bought a server, there is
+only a single node on the network.  If you are attempting to interface the
+server with a current lan to provide a single connection to get to the
+internet, you need to set up gateway information on the machines on the lan
+to point to the right place.
+
+&gt;<i>with two ethernet cards in the server so the other
+</I>&gt;<i>computer can use the internet. I used the same IP
+</I>&gt;<i>address only when people try to connect they don't
+</I>&gt;<i>seem able to because I think it is because that it
+</I>&gt;<i>runs two different IP's. Do you have any idea how to help?
+</I>
+If you are running Xitami on the server and the server has two network
+cards (what I suspect you are doing), the server's network cards need to
+have their own individual IP addresses or the requests coming in will get
+messed up.  To load-balance the requests, I suggest purchasing a
+load-balancing switch rather than messing with a software-based solution
+(really messy if you ask me).  That way, if you get another server later,
+you can offload some of the load onto the newer server.
+
+Also, the IP addresses of the network cards have to be real IP addresses on
+the internet (or the firewall has to forward all connections on port 80 to
+the firewall's IP to the web server).  If you want clients on the lan to
+access the internet through the server (via a proxy), you have to assign
+one network card with a LAN IP (10.x.x.x or 192.168.x.x number, depending
+on which you use) and the other with a valid internet address.  You can't
+just assign the internet address whatever you feel like using unless you
+have a static IP (in which case you have to use that IP and nothing else).
+
+Without more information on what exactly you are trying to accomplish with
+the server and how Xitami fits into this, this list can't really help you
+very much.
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000266.html">[Xitami] why doesn't it work?
+</A></li>
+	<LI> Next message: <A HREF="000270.html">[Xitami] Refresh/Reload doesn't work
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#268">[ date ]</a>
+              <a href="thread.html#268">[ thread ]</a>
+              <a href="subject.html#268">[ subject ]</a>
+              <a href="author.html#268">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

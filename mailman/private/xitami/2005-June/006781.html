@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] targeting file downloads
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006776.html">
+   <LINK REL="Next"  HREF="006782.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] targeting file downloads
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] targeting file downloads">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Jun 2005 08:34:13 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006776.html">[Xitami] targeting file downloads
+</A></li>
+        <LI> Next message: <A HREF="006782.html">[Xitami] targeting file downloads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6781">[ date ]</a>
+              <a href="thread.html#6781">[ thread ]</a>
+              <a href="subject.html#6781">[ subject ]</a>
+              <a href="author.html#6781">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 04:12 8/06/05, you wrote:
+
+&gt;<i> &gt; &quot;Marc Doigny&quot; - said:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The only way you could force the browser not trying to display the file is
+</I>&gt;<i> &gt; to change the MIME type of the file.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Change the association from &quot;video/mpeg&quot; to &quot;application/octet-stream&quot;
+</I>&gt;<i> &gt; The visitor will be prompted to &quot;run from current location&quot; or &quot;save&quot;.
+</I>&gt;<i>
+</I>&gt;<i>thank you for your interesting suggestion marc!  by this, i assume that 
+</I>&gt;<i>you are talking about editing the individual headers of each of my files 
+</I>&gt;<i>in question.  this is not something i've ever experimented with before, 
+</I>&gt;<i>but something i plan to look into more deeply in the near future. if it 
+</I>&gt;<i>works, it has the potential to fuel my imagination for other projects 
+</I>&gt;<i>which are currently on my back-burners :)
+</I>&gt;<i>
+</I>
+No, you don't have to edit each file.
+The http server adds these headers automatically, using a table located in 
+your configuration file (xitami.cfg)
+
+Example of your xitami.cfg file:
+[Mime]
+     default=*/*                         #   Default MIME type
+
+     #  Text MIME types
+     etx=text/x-setext
+     htm=text/html
+     htp=text/html
+     html=text/html
+     rtx=text/richtext
+     tsv=text/tab-separated-values
+     txt=text/plain
+     .=text/plain                        #   Files with no extension
+
+     #  Image MIME types
+     gif=image/gif
+(and so on)
+
+
+Of course, you could add individual headers to each file (that can be done 
+for cgi applications, so you can send the file in &quot;chunked&quot; mode, or gzip 
+the file or whatever that request non-standard headers) but it's easier 
+with one single configuration file.
+Don't modify the xitami.cfg file, but create (or modify) default.cfg
+
+
+marc
+
+-------------------------------------------------------------------------
+--::Mailserver Verfaillie Bauwens::-- contact : <A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast
+----------------------- <A HREF="http://www.verfaillie.com">http://www.verfaillie.com</A> ----------------------- 
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006776.html">[Xitami] targeting file downloads
+</A></li>
+	<LI> Next message: <A HREF="006782.html">[Xitami] targeting file downloads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6781">[ date ]</a>
+              <a href="thread.html#6781">[ thread ]</a>
+              <a href="subject.html#6781">[ subject ]</a>
+              <a href="author.html#6781">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

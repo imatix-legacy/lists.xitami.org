@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] percent chars in the url
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002150.html">
+   <LINK REL="Next"  HREF="002154.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] percent chars in the url
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] percent chars in the url">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 26 Jan 2002 15:03:54 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002150.html">[Xitami] percent chars in the url
+</A></li>
+        <LI> Next message: <A HREF="002154.html">[Xitami] percent chars in the url
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2194">[ date ]</a>
+              <a href="thread.html#2194">[ thread ]</a>
+              <a href="subject.html#2194">[ subject ]</a>
+              <a href="author.html#2194">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Brinkle, Jason wrote:
+
+&gt;<i>How do I get rid of those percent signs in the url?
+</I>&gt;<i>Example:  <A HREF="http://10.191.32.111/@site/irps/omniweb/005501/planmenu%2Epdf">http://10.191.32.111/@site/irps/omniweb/005501/planmenu%2Epdf</A>
+</I>&gt;<i>&lt;<A HREF="http://10.191.32.111/@site/irps/omniweb/005501/planmenu%2Epdf">http://10.191.32.111/@site/irps/omniweb/005501/planmenu%2Epdf</A>&gt; 
+</I>&gt;<i>
+</I>If you are refering to links created by Xitami when you view directories 
+on the server then the answer is to edit the file template/httpdir.gsl
+
+replace the line
+&lt;A HREF=&quot;$(urlbase:)$(nameurl:)&quot;&gt;&lt;IMG SRC=&quot;$(icon)&quot; 
+BORDER=0&gt;$(name:)&lt;/A&gt;&lt;/TD&gt;
+with the line
+&lt;A HREF=&quot;$(urlbase:)$(name:)&quot;&gt;&lt;IMG SRC=&quot;$(icon)&quot; BORDER=0&gt;$(name:)&lt;/A&gt;&lt;/TD&gt;
+
+You may also want to add the following lines near the start (before the 
+lines that say
+.-  We want the first character of the sort order
+.directory.order = substr (order,0,,1) )
+This fix allows your users to reverse sort the directory correctly
+
+.- Bug fix - remove leading '=' from directory.order if present
+.-  The attribute directory.order has a leading '=' if it is not the 
+default
+.-  order. For example:
+.-  If the order in Xitami's defaults.cfg is 'nx' then when you execute the
+.-  gsl for '<A HREF="http://localhost/directory/'">http://localhost/directory/'</A> then directory.order is 'nx'
+.-  but if you then click on the URL for Size and thus execute gsl for
+.-  '<A HREF="http://localhost/directory/?order=snx'">http://localhost/directory/?order=snx'</A> then directory.order is '=snx'
+.if substr (order,0,,1) = &quot;=&quot;
+.  order = substr (order,1,,)
+.endif
+.- End bug fix - remove leading '=' from directory.order if present
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002150.html">[Xitami] percent chars in the url
+</A></li>
+	<LI> Next message: <A HREF="002154.html">[Xitami] percent chars in the url
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2194">[ date ]</a>
+              <a href="thread.html#2194">[ thread ]</a>
+              <a href="subject.html#2194">[ subject ]</a>
+              <a href="author.html#2194">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

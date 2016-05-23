@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Yet Another VH Problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003045.html">
+   <LINK REL="Next"  HREF="003049.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Yet Another VH Problem
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Yet Another VH Problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 24 Apr 2002 23:09:46 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003045.html">[Xitami] log file renaming denied
+</A></li>
+        <LI> Next message: <A HREF="003049.html">[Xitami] Yet Another VH Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3043">[ date ]</a>
+              <a href="thread.html#3043">[ thread ]</a>
+              <a href="subject.html#3043">[ subject ]</a>
+              <a href="author.html#3043">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;007701c1eb04$d6418820$<A HREF="mailto:a419bb92@ewu.edu">a419bb92@ewu.edu</A>&gt;, Steve Shervais writes:
+&gt;<i>Recently, I tried setting up virtual hosts (using the wizard, mostly) for
+</I>&gt;<i>different teams, and trying to give each team their own logs, so they can
+</I>&gt;<i>see what their errors look like.  Xitami created the logs for me
+</I>&gt;<i>(teamXX.log, teamXXerr.log), and in the correct directory.  However, none of
+</I>&gt;<i>the logs has any entries [....]
+</I>&gt;<i>
+</I>&gt;<i>In debug I see:
+</I>&gt;<i>2002/04/23 13:12:06: Looking for VH using Host value: eaglebay.ewu.edu
+</I>&gt;<i>2002/04/23 13:12:06:  - looking for VH using IP address: 146.187.25.27
+</I>&gt;<i>2002/04/23 13:12:06: - using default virtual host values
+</I>
+For some reason it is not matching your virtual hosts -- and hence is
+returning the &quot;default&quot; webpages, and hence logging in the default logs.
+
+You'll need to make sure that the defaults.cfg file points at your
+virtual hosts with entries like:
+
+[virtual-host]
+  domainname=config
+
+and also that the domain name is being passed in with a HTTP/1.1 Host:
+header (which it appears to be from the snippet that you list).
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003045.html">[Xitami] log file renaming denied
+</A></li>
+	<LI> Next message: <A HREF="003049.html">[Xitami] Yet Another VH Problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3043">[ date ]</a>
+              <a href="thread.html#3043">[ thread ]</a>
+              <a href="subject.html#3043">[ subject ]</a>
+              <a href="author.html#3043">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

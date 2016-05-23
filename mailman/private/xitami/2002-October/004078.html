@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Another perl dummy here
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004076.html">
+   <LINK REL="Next"  HREF="004079.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Another perl dummy here
+   </H1>
+    <B>C Bass
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Another perl dummy here">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 03 Oct 2002 11:17:38 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004076.html">[Xitami] Log question
+</A></li>
+        <LI> Next message: <A HREF="004079.html">[Xitami] Another perl dummy here
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4078">[ date ]</a>
+              <a href="thread.html#4078">[ thread ]</a>
+              <a href="subject.html#4078">[ subject ]</a>
+              <a href="author.html#4078">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OK, I know that so much has been written about getting Perl to run under
+Xitami, but I still can't get anything to run.
+
+-- I installed perl in C:/perl directory.
+
+-- SSI &amp; CGI are enabled in Xitami
+
+-- I added the following to default.cfg
+[Filter]
+	.pl=C:\perl\bin\perl.exe
+
+-- The .cgi program is in the Main HTML Directory's cgi-bin directory which
+is directly under the Main HTML Directory (A.K.A. root directory)
+
+-- The calling HTML code in my page is as follows:
+&lt;FONT COLOR=&quot;#FF0000&quot;&gt;(Listings last updated on &lt;B&gt;
+&lt;!--#include virtual=&quot;/cgi-bin/lastmod.cgi&quot; --&gt;
+&lt;/B&gt;)&lt;/FONT&gt;
+
+-- The program lastmod.cgi is as follows:
+#!C:\Perl\bin\perl.exe -w
+#
+
+$date = $ENV{'LAST_MODIFIED'};
+$date = substr($date, 0, length($date) - 12);
+print &quot;Content-Type: text/html\n\n$date&quot;;
+
+-- The printed results from this call are as follows:
+(Listings last updated on #!C:\Perl\bin\perl.exe -w # $date =
+$ENV{'LAST_MODIFIED'}; $date = substr($date, 0, length($date) - 12); print
+&quot;Content-Type: text/html\n\n$date&quot;; ) 
+
+If I can get something as simple as this running, then I hope I can adapt
+what is learned to other .cgi programs I use successfully online, as I now
+do with this one.  ANY SUGGESTIONS?????  THANKS.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004076.html">[Xitami] Log question
+</A></li>
+	<LI> Next message: <A HREF="004079.html">[Xitami] Another perl dummy here
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4078">[ date ]</a>
+              <a href="thread.html#4078">[ thread ]</a>
+              <a href="subject.html#4078">[ subject ]</a>
+              <a href="author.html#4078">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

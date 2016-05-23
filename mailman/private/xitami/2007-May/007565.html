@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Alternate FTP-Port
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Alternate%20FTP-Port&In-Reply-To=003201c792c8%2446e648c0%241dbebebe%40VERFAILLIE5">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007564.html">
+   <LINK REL="Next"  HREF="007566.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Alternate FTP-Port</H1>
+    <B>navy nut</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Alternate%20FTP-Port&In-Reply-To=003201c792c8%2446e648c0%241dbebebe%40VERFAILLIE5"
+       TITLE="[Xitami] Alternate FTP-Port">navynutt2000 at yahoo.ca
+       </A><BR>
+    <I>Thu May 17 22:13:08 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007564.html">[Xitami] Annoying FTP-Bots
+</A></li>
+        <LI>Next message: <A HREF="007566.html">[Xitami] Alternate FTP-Port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7565">[ date ]</a>
+              <a href="thread.html#7565">[ thread ]</a>
+              <a href="subject.html#7565">[ subject ]</a>
+              <a href="author.html#7565">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>While running either the Xitami GUI OR Service, the edit:
+   
+  [Ftp]
+    Port = &quot;2112&quot;
+   
+  in the defaults.cfg did not prove satisfactory.
+   
+  When tested on the local network, FTP functioned flawlessly on port-2112... but I wound up having some major problems with clients attempting to connect from outside the network.
+   
+  Their access would log:
+   
+  68.111.xx.xx - dave [16/May/2007:23:13:10 -0700] &quot;<A HREF="ftp://68.111.xx.xx/&quot;">ftp://68.111.xx.xx/&quot;</A> 230 0 &quot;-&quot; &quot;&quot;
+  207.255.xx.xx - jayne [17/May/2007:03:15:14 -0700] &quot;<A HREF="ftp://207.255.xx.xx/&quot;">ftp://207.255.xx.xx/&quot;</A> 230 0 &quot;-&quot; &quot;&quot;
+   
+  ... but they'd never receive a response.  Their connection would simply time-out.
+   
+  TCP port-2112 was open, both on the router and software firewall (ZoneAlarm Pro) on my Xitami box (WinXp-Pro)... with no unusual activity reporting to the firewall logs.
+   
+  Immediately upon a clients attempt to log in, the serving PC would hang, and become extremely non-responsive until I stopped (and restarted) Xitami.  At least twice, this &quot;hanging&quot; was so extreme, that it required me to trip the power-switch in order to force a reboot.  Xitami did however, seem to continue serving web-content at a steady rate, even with the PC hanging as such.
+   
+  Since removing this line from the defaults.cfg (and reverting back to FTP port-21), clients can once again log in without any trouble... and Xitami's overall performance is UP by a very noticeable measure.
+   
+  * HTTP activity seemed to work alright after the alternate FTP-port was applied... but was far more sluggish than usual.
+   
+  Can anyone think of anything I may possibly have overlooked?
+   
+  Thanks,
+   
+  Rod
+  
+&gt;<i> Marc Doigny &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">marc at verfaillie.be</A>&gt; wrote:
+</I>  &gt; 
+&gt;<i> You can run make ftp listen on any port, just change the value
+</I>&gt;<i> 
+</I>&gt;<i> [ftp]
+</I>&gt;<i>    port=xxx
+</I>&gt;<i>
+</I>&gt;<i> in your default.cfg
+</I>&gt;<i>
+</I>&gt;<i> marc
+</I>  &gt;
+
+
+
+       
+---------------------------------
+Ask a question on any topic and get answers from real people. Go to Yahoo! Answers. 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20070517/3adc0ed7/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20070517/3adc0ed7/attachment.htm</A> 
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007564.html">[Xitami] Annoying FTP-Bots
+</A></li>
+	<LI>Next message: <A HREF="007566.html">[Xitami] Alternate FTP-Port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7565">[ date ]</a>
+              <a href="thread.html#7565">[ thread ]</a>
+              <a href="subject.html#7565">[ subject ]</a>
+              <a href="author.html#7565">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

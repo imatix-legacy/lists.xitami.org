@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP - virtual DNS hosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001020.html">
+   <LINK REL="Next"  HREF="001050.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP - virtual DNS hosting
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP - virtual DNS hosting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 25 Sep 2001 19:43:56 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001020.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+        <LI> Next message: <A HREF="001050.html">[Xitami] Xitami's Alias screen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1021">[ date ]</a>
+              <a href="thread.html#1021">[ thread ]</a>
+              <a href="subject.html#1021">[ subject ]</a>
+              <a href="author.html#1021">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>What Mr. Soulkoff is referring to:
+
+In the defaults.cfg file, under the virtual hosts section:
+
+&lt;snippit&gt;
+[Virtual-hosts]
+     www.mayanarch.com=mayanarch.cfg
+     mayanarch.com=mayanarch.cfg
+     www.thinkincircles.com=thinkincircles.cfg
+     thinkincircles.com=thinkincircles.cfg
+     www.simangroup.com=simangroup.cfg
+     simangroup.com=simangroup.cfg
+...
+...
+&lt;snippit&gt;
+
+THEN, in your DNS server you must configure, A Records only:
+     mayanarch.com    A    xxx.xxx.xxx.xxx
+     www.mayanarch.com    A    xxx.xxx.xxx.xxx
+    thinkincircles.com    A    xxx.xxx.xxx.xxx
+    www.thinkincircles.com    A    xxx.xxx.xxx.xxx
+    ...
+    ...
+
+This, of course, is assuming that xxx.xxx.xxx.xxx is the SAME IP address for
+each of your VHosts.  Once the DNS reference is made for www.domain.com AND
+domain.com then anyone who types either name into their browser will find
+your server.  Once the request gets to your server, then the Xitami config
+above will allow users, typing either name, to get to the correct site.
+
+If you only have www.domain.com configured, and someone types
+<A HREF="http://domain.com">http://domain.com</A> then that user won't ever get to your VHost because
+www.domain.com and <A HREF="http://domain.com">http://domain.com</A> are physically TWO different DNS names
+and they must each of their own DNS entry.  The same goes for Xitami.
+
+
+----- Original Message -----
+From: &quot;Soulkoff&quot; &lt;<A HREF="mailto:soulkoff@home.com">soulkoff@home.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, September 25, 2001 6:30 PM
+Subject: Re: [Xitami] HELP - virtual DNS hosting
+
+
+&gt;<i> It's in case someone types mayanarch.com, and leaves out the www. That's
+</I>all.  Just edit the .cfg file.
+&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Alvaro E. Siman&quot; &lt;<A HREF="mailto:alsiman@cofs.net">alsiman@cofs.net</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; HOW DO I DO THIS IN XITAMI????? ISNT THIS DNS's FUNCTION???
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Also add:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; mayanarch.com
+</I>&gt;<i> &gt; thinkincircles.com
+</I>&gt;<i> &gt; simangroup.com
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001020.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+	<LI> Next message: <A HREF="001050.html">[Xitami] Xitami's Alias screen
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1021">[ date ]</a>
+              <a href="thread.html#1021">[ thread ]</a>
+              <a href="subject.html#1021">[ subject ]</a>
+              <a href="author.html#1021">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Newbie question: Xitami and php
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002846.html">
+   <LINK REL="Next"  HREF="002847.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Newbie question: Xitami and php
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Newbie question: Xitami and php">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 29 Mar 2002 09:42:47 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002846.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+        <LI> Next message: <A HREF="002847.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2845">[ date ]</a>
+              <a href="thread.html#2845">[ thread ]</a>
+              <a href="subject.html#2845">[ subject ]</a>
+              <a href="author.html#2845">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ed:
+
+I got this to work but there are a few catches:
+1.  cgi.force_redirected = 0   ;;; make certain the &quot;;&quot; is removed from the
+front of the line..
+2.  All php files must go into the *./webpages directories for each of your
+domains
+3.  Pros/Cons of using the &quot;doc_root&quot; variable:
+    CONS:
+        1. #2 won't apply if you define it - ALL php files for all domains
+must go into that directory, thus your files start to get jumbled together
+and files for virtual domain &quot;blah.com&quot; will sit in the same directory for
+another virtual domain &quot;blah1.com&quot;.  There could possibly be a way around
+this if you did something along the following (I haven't tested it though):
+            PHP.INI: doc_root = /xitami/php
+            Xitami blah1.cfg: [Alias Section] *.php = /xitami/php/blah1/
+            Xitami blah2.cfg: [Alias Section] *.php = /xitami/php/blah2/
+
+            You would have to manually created each virtual domain directory
+reference in the /xitami/php directory - you would then also have to force
+FTP paths so those domain admins could upload php files for their domain,
+ONLY to their directory.  I think this might work.  You definently have to
+jump through hoops though.
+
+        2. By not defining the doc_root variable you could possibly open
+your server to security risks.  The doc_root variable is designed to work
+similar to the /cgi-bin URL call in xitami...forcing all CGIs to be in a
+certain place outside of the webpages path.
+
+    PROS:
+        1. This is a security feature in PHP that allows you to remove the
+php files from your accessable webpage tree path.  By default, an undefined
+&quot;doc_root&quot; will allow the following paths to work:: /xitami/webpages/*.php,
+or /xitami/webpages/php/*.php, OR  /xitami/domain1/webpages/*.php or
+/xitami/domain2/webpages/scripts/*.php
+
+A defined &quot;doc_root&quot; variable forces everything to that specific directory
+but will prevent users from using PHP properties to scan your entire server,
+outside of Xitami.
+
+Hope this helps.
+Russel
+
+
+----- Original Message -----
+From: &quot;Ed op Het Net&quot; &lt;<A HREF="mailto:ed.ed@hetnet.nl">ed.ed@hetnet.nl</A>&gt;
+To: &quot;<A HREF="mailto:xitami-request@lists.xitami.org">xitami-request@lists.xitami.org</A>&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, March 29, 2002 8:55 AM
+Subject: RE: [Xitami] Newbie question: Xitami and php
+
+
+&gt;<i>
+</I>&gt;<i> xrlxo&gt; Marcio Marchini wrote:
+</I>&gt;<i>
+</I>&gt;<i> xrlxo&gt; go to php.ini (c:\winnt\php.ini) and add this:
+</I>&gt;<i> xrlxo&gt; force-cgi-redirect=0
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hi Marcio, this still doesn't work.
+</I>&gt;<i> After changing the cgi.force to zero, I still receive the same error.
+</I>&gt;<i> Next, I've changed the doc_root, but then I get a blank page.
+</I>&gt;<i> That is of course one step further :)
+</I>&gt;<i>
+</I>&gt;<i> I use phpinfo.php, containing the script:
+</I>&gt;<i>     &lt;?php phpinfo();?&gt;
+</I>&gt;<i>
+</I>&gt;<i> The output is a blank html-page.
+</I>&gt;<i>
+</I>&gt;<i> &gt;From the command line everything works fine, so it must be a matter of
+</I>&gt;<i> configurating the php.ini or Xitami.
+</I>&gt;<i>
+</I>&gt;<i> Do you think you can help me further?
+</I>&gt;<i>
+</I>&gt;<i> TIA, Edward
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt; -----Original Message-----
+</I>&gt;<i> &gt;&gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Ed op Het Net
+</I>&gt;<i> &gt;&gt; Subject: [Xitami] Newbie question: Xitami and php
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I have Xitami up and running on Windows 98 SE.
+</I>&gt;<i> &gt;&gt; I've installed the latest distribution of php4.
+</I>&gt;<i> &gt;&gt; Now, whenever I open a php-file (like phpinfo.php)
+</I>&gt;<i> &gt;&gt; in my browser on the localhost-adress I receive the following message:
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; &quot;Security Alert! PHP CGI cannot be accessed directly.
+</I>&gt;<i> &gt;&gt; This PHP CGI binary was compiled with force-cgi-redirect enabled.
+</I>&gt;<i> &gt;&gt; This means that a page will only be served up if the REDIRECT_STATUS
+</I>&gt;<i> &gt;&gt; CGI variable
+</I>&gt;<i> &gt;&gt; is set. This variable is set, for example, by Apache's Action
+</I>&gt;<i> &gt;&gt; directive redirect.
+</I>&gt;<i> &gt;&gt; You may disable this restriction by recompiling the PHP binary with
+</I>&gt;<i> &gt;&gt; the --disable-force-cgi-redirect switch. If you do this and you have
+</I>your
+&gt;<i> &gt;&gt; PHP CGI binary accessible somewhere in your web tree, people will be
+</I>able to
+&gt;<i> &gt;&gt; circumvent .htaccess security by loading files through the PHP parser.
+</I>&gt;<i> &gt;&gt; A good way around this is to define doc_root in your php.ini file to
+</I>&gt;<i> &gt;&gt; something other
+</I>&gt;<i> &gt;&gt; than your top-level DOCUMENT_ROOT. This way you can separate the part
+</I>&gt;<i> &gt;&gt; of your web space
+</I>&gt;<i> &gt;&gt; which uses PHP from the normal part using .htaccess security. If you
+</I>&gt;<i> &gt;&gt; do not have
+</I>&gt;<i> &gt;&gt; any .htaccess restrictions anywhere on your site you can leave
+</I>&gt;<i> &gt;&gt; doc_root undefined.
+</I>&gt;<i> &gt;&gt; If you are running IIS, you may safely set cgi.force_redirect=0 in
+</I>&gt;<i> &gt;&gt; php.ini.&quot;
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I tried everything, but I can't get it to work, and an internet- and
+</I>&gt;<i> &gt;&gt; faq-search didn't make me any wiser.
+</I>&gt;<i> &gt;&gt; Can someone explain me in plain and simple English which steps I have
+</I>&gt;<i> &gt;&gt; to take to solve this?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Thanks in advance, Edward
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002846.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+	<LI> Next message: <A HREF="002847.html">Re[2]: [Xitami] Newbie question: Xitami and php
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2845">[ date ]</a>
+              <a href="thread.html#2845">[ thread ]</a>
+              <a href="subject.html#2845">[ subject ]</a>
+              <a href="author.html#2845">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

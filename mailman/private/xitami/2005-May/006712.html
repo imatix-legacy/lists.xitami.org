@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Another Try, (little different approach), -
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006711.html">
+   <LINK REL="Next"  HREF="006709.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Another Try, (little different approach), -
+   </H1>
+    <B>tom buckley
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Another Try, (little different approach), -">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 04 May 2005 17:54:28 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006711.html">[Xitami] Another Try,  (little different approach), -
+</A></li>
+        <LI> Next message: <A HREF="006709.html">[Xitami] FTP problem with LF versus CRLF in ASCII files
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6712">[ date ]</a>
+              <a href="thread.html#6712">[ thread ]</a>
+              <a href="subject.html#6712">[ subject ]</a>
+              <a href="author.html#6712">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>  Thanks Ron, &quot;AND Lois&quot;
+
+  I have about decided that I am also having problems with the cgi script 
+itself, for the following reasons, unless someone here might recognize 
+something else I should do.
+  I CAN make the opening page &quot;template file&quot; include the index.cgi file 
+which allows me to set that page up using html etc;  HOWEVER, the script 
+automatically builds additional pages as you go, (it's like a blog or bb 
+script), as well as it auto-prints page numbers &quot;on the fly&quot;  ie: [Page: 
+1.2.3...] into that page, BUT that first page is the ONLY page that seems to 
+be using the &lt;include&gt;!!  IOWs when you click one of the additional page #s, 
+you are sent directly to the index.cgi instead of everything remaining 
+inside of the template page....  hope @ makes sense!!   So although I AM 
+able to link to the template.shtml page where it is working correctly, and 
+the index.cgi is included into the html design etc; once you click to go to 
+another page of the script, all of this is gone!   Sorry so long and 
+confusing, but I really do appreciate all of your help and consideration.  
+Have a good day!  harthon
+
+
+
+&gt;<i>From: &quot;Ron Ackerman&quot; &lt;<A HREF="mailto:ron@miplanet.net">ron@miplanet.net</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: RE: [Xitami] Another Try,  (little different approach), -
+</I>&gt;<i>Date: Wed, 4 May 2005 09:57:04 -0400
+</I>&gt;<i>
+</I>&gt;<i>~It's been awhile since I've done any SSI, but I remember I had to call my
+</I>&gt;<i>pages shtml or shtm.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I do know that for includes to work such as:  &lt;!--#include
+</I>&gt;<i>virtual=&quot;sitefoot.txt&quot;--&gt; it is going to
+</I>&gt;<i>look for the file you are including in the main web page directory of your
+</I>&gt;<i>server (i.e.
+</I>&gt;<i>/webpages) and it will not show if you place the file within a subdirectory
+</I>&gt;<i>of /webpages where
+</I>&gt;<i>you may have your template.html file.
+</I>&gt;<i>
+</I>&gt;<i>If you want to include a .txt file within a scipt what I use is:
+</I>&gt;<i>
+</I>&gt;<i>sub include {
+</I>&gt;<i># --------------------------------------------------------
+</I>&gt;<i># This is text to include. Use like an SSI.
+</I>&gt;<i>
+</I>&gt;<i>my $file = shift;
+</I>&gt;<i>open (FILE, &quot;&lt;$file&quot;) or die &quot;Can't open $file ($!)&quot;;
+</I>&gt;<i>print &lt;FILE&gt;;
+</I>&gt;<i>close FILE;
+</I>&gt;<i>}
+</I>&gt;<i>## Then add this line wherever you want file included:
+</I>&gt;<i>
+</I>&gt;<i>  |;
+</I>&gt;<i>&amp;include (&quot;dbside.txt&quot;);
+</I>&gt;<i>print qq|
+</I>&gt;<i>
+</I>&gt;<i>I use this for many scripts to include a footer and side menu within my
+</I>&gt;<i>displays.   Especially
+</I>&gt;<i>for hosts sites which don't always allow SSI.
+</I>&gt;<i>
+</I>&gt;<i>Hope this help :)
+</I>&gt;<i>
+</I>&gt;<i>Lois
+</I>&gt;<i>  =================
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>On 3 May 2005 at 19:22, tom buckley wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt;   At a glance, mine is surely not the dumbest question ever asked
+</I>&gt;<i> &gt;   here, so
+</I>&gt;<i> &gt; i'm going to try this again since I've fought with it for this darn
+</I>&gt;<i> &gt; long now!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   It has got to be something I'm doing 'or not doing' here, because I
+</I>&gt;<i> &gt;   know
+</I>&gt;<i> &gt; there is 'a way' to make an &quot;include&quot; work on my server, either with
+</I>&gt;<i> &gt; or without ssi..  Testing as free script that uses a template.html
+</I>&gt;<i> &gt; page with &quot; &lt;!--content--&gt; &quot; as it's only place-holder for the
+</I>&gt;<i> &gt; index.cgi page of the script, I have tried it both inside and outside
+</I>&gt;<i> &gt; of the cgi-bin, and with every possible cfg and place-holder I can
+</I>&gt;<i> &gt; think of, but I still cannot &quot;include&quot; the file!  Someone &quot;please&quot;
+</I>&gt;<i> &gt; steer me in the right direction here to make this work!  Anything that
+</I>&gt;<i> &gt; anyone can tell me to try, to include a file in another, I will
+</I>&gt;<i> &gt; certainly give it a shot!  Thanks ANYONE!    harthon
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>No virus found in this outgoing message.
+</I>&gt;<i>Checked by AVG Anti-Virus.
+</I>&gt;<i>Version: 7.0.308 / Virus Database: 266.11.3 - Release Date: 05/03/2005
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+_________________________________________________________________
+Don’t just search. Find. Check out the new MSN Search! 
+<A HREF="http://search.msn.click-url.com/go/onm00200636ave/direct/01/">http://search.msn.click-url.com/go/onm00200636ave/direct/01/</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006711.html">[Xitami] Another Try,  (little different approach), -
+</A></li>
+	<LI> Next message: <A HREF="006709.html">[Xitami] FTP problem with LF versus CRLF in ASCII files
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6712">[ date ]</a>
+              <a href="thread.html#6712">[ thread ]</a>
+              <a href="subject.html#6712">[ subject ]</a>
+              <a href="author.html#6712">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

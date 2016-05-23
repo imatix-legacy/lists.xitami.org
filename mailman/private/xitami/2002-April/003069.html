@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami2.4d9 and PHP4
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003084.html">
+   <LINK REL="Next"  HREF="003070.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami2.4d9 and PHP4
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami2.4d9 and PHP4">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 28 Apr 2002 19:10:45 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003084.html">[Xitami] New version for Xitami
+</A></li>
+        <LI> Next message: <A HREF="003070.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3069">[ date ]</a>
+              <a href="thread.html#3069">[ thread ]</a>
+              <a href="subject.html#3069">[ subject ]</a>
+              <a href="author.html#3069">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I tested Xitami for about a year and a half, then finally gave up on it and
+went back to Apache.  I'm back testing it again, trying to run a php4 driven
+MySQL database application to see if it will reduce CPU/memory load over
+what Apache uses.  The server is running on a twin Pentium-Pro, powered by
+Debian Linux/2.2.19 kernel, and 512MB RAM.  Apache version is 1.3.24 with
+PHP4.4.1 as loadable module for Apache, and using the php4-mysql module to
+drive the database.  All applications installed with Debian debs from the
+woody distro.
+
+Question:
+Can Xitami be used with the PHP module for Apache, or do I have to compile a
+seperate PHP app on the server?  If I need the seperate PHP app, I'll
+compile it and drop it in.
+
+Question:
+It's been awhile, but if I remember correctly, to enable parsing of PHP you
+have to add a line for a filter like: .php=/path/to/php4/executable ???
+
+Other observations:
+* Xitami *still* doesn't write a PID file on UNIX platforms.  This was one
+of my pet peeves with the previous versions as well - it'd be nice to be
+able to run Xitami from init.d or tcpserver on UNIX hosts instead of having
+to use killall to stop the process and a script to start it when
+configurations are changed or virtual domains added or removed.
+
+* The FTP server still won't handle hardly any load at all - I've found I
+can't use it for serious FTP work.
+
+* The webbased admin panel still positively rocks - much easier than editing
+Apache's config file via ssh, and then reloading the server with
+/etc/init.d/apache reload.  But I can't get Xitami's server restart function
+to work every time when throwing in a new domain or making other config
+changes that require reload of the /usr/local/bin/xitami/defaults.cfg file. 
+I've found I still have to ssh to the box, kill xitami, then execute the
+start script to fire it back up and force the config file reload.  Others
+have this problem?
+
+Regards,
+-- 
+Chris Olson
+System Administrator
+AST Communications  <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003084.html">[Xitami] New version for Xitami
+</A></li>
+	<LI> Next message: <A HREF="003070.html">[Xitami] Xitami2.4d9 and PHP4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3069">[ date ]</a>
+              <a href="thread.html#3069">[ thread ]</a>
+              <a href="subject.html#3069">[ subject ]</a>
+              <a href="author.html#3069">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

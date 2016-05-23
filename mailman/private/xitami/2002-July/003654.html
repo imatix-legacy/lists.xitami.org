@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] OT: PHP-Nuke?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003653.html">
+   <LINK REL="Next"  HREF="003657.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] OT: PHP-Nuke?
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] OT: PHP-Nuke?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 11 Jul 2002 22:11:47 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003653.html">[Xitami] OT: PHP-Nuke?
+</A></li>
+        <LI> Next message: <A HREF="003657.html">[Xitami] OT: PHP-Nuke?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3654">[ date ]</a>
+              <a href="thread.html#3654">[ thread ]</a>
+              <a href="subject.html#3654">[ subject ]</a>
+              <a href="author.html#3654">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 01:23 AM 7/12/2002 +0200, TW writeth:
+&gt;<i>Vance,
+</I>&gt;<i>didn't mean to be mean with my comment.
+</I>&gt;<i>Over time it just got a feeling that a newbie might come to the conclusion 
+</I>&gt;<i>that xifusion is a more or less manadatory prerequisite for sucesfully 
+</I>&gt;<i>running any php-projekt together with xitami. And this is definitely not 
+</I>&gt;<i>the case. In some cases it may be a quick and welcome  workaround to some 
+</I>&gt;<i>problem, in general i think its rather a matter of misconception to wrap a 
+</I>&gt;<i>coldfusion server around a php-engine.
+</I>&gt;<i>Most of all, I believe that virtually no problem with a php-projekt has 
+</I>&gt;<i>something to do with the webserver in use.
+</I>
+Tony, the only thing XiFusion does for PHP is correct redirection and a few
+minor issues dealing with the environment.  When you use the header()
+function in PHP under Apache, Apache will automatically modify the redirect
+if it is not an absolute HTTP-compliant URL and may perform additional
+processing locally (depends on the situation).  XiFusion essentially does
+the same thing, but is actually a side-effect of ColdFusion support.  All
+XiFusion does is prepare, start an application, and process the results
+passing them back to the server for further processing.  The code base is
+something to the tune of 700 lines of C code, so it does quite a bit to fix
+Xitami.
+
+I will agree that it won't solve all of the world's problems and isn't
+always the perfect solution, but it does work well where redirection issues
+arise.  PHP will work fine until you encounter a script that uses relative
+redirects.  At that point you either have to change the script, modify
+Xitami's source, or use a wrapper like XiFusion.
+
+To test this out try the following:
+
+------index.php------
+&lt;?
+  header(&quot;Location: index2.php&quot;);
+?&gt;
+---------------------
+
+------index2.php------
+&lt;?
+  echo &quot;Hi There!\n&quot;;
+?&gt;
+---------------------
+
+During the first test don't use XiFusion.  The browser will &quot;hang&quot; because
+it does not understand the relative 'Location' header (and isn't required
+to according to the HTTP/1.1 standard):
+
+HTTP/1.1 301 Redirect
+Server: Xitami v2.4d9
+Location: index2.php
+...
+
+XiFusion v2.6 corrects this problem by making the relative URL an absolute
+URL:
+
+HTTP/1.1 301 Redirect
+Server: Xitami v2.4d9
+Location: <A HREF="http://localhost/index2.php">http://localhost/index2.php</A>
+...
+
+HTTP/1.1 200 Ok
+Server: Xitami v2.4d9
+Content-Type: text/html
+Content-Length: 10
+
+Hi There!
+
+
+As you can see, XiFusion does have use in the area of PHP redirects.
+Personally, I don't use redirects since they take too long compared to just
+include()'ing the file.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003653.html">[Xitami] OT: PHP-Nuke?
+</A></li>
+	<LI> Next message: <A HREF="003657.html">[Xitami] OT: PHP-Nuke?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3654">[ date ]</a>
+              <a href="thread.html#3654">[ thread ]</a>
+              <a href="subject.html#3654">[ subject ]</a>
+              <a href="author.html#3654">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

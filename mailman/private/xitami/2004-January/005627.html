@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running server through a router
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005624.html">
+   <LINK REL="Next"  HREF="005628.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running server through a router
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Running server through a router">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 6 Jan 2004 09:30:15 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005624.html">[Xitami] Running server through a router
+</A></li>
+        <LI> Next message: <A HREF="005628.html">[Xitami] Running server through a router
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5627">[ date ]</a>
+              <a href="thread.html#5627">[ thread ]</a>
+              <a href="subject.html#5627">[ subject ]</a>
+              <a href="author.html#5627">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0032_01C3D437.B0E82700
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Okay - reposting -=20
+
+Steven,
+
+Except for OS differences, I already do what you want to do with a =
+Linksys wireless cable router.  This is what you do.
+
+First, determine the internal IP address for the network card that is =
+attached to your router.  Each card or interface can actually have its =
+own address (used or not).  Click &quot;Networks&quot; in the system tray  and =
+choose &quot;ethernet&quot;.  In one of those tabs, it has your configurations =
+settings (don't have an XP on me right now so shooting from memory).  =
+Write down your IP address, the gateway, mask, and DNS addresses.  It is =
+possible to use that IP in your router settings, but it is technically =
+dynamic (changeable) so it would be wise to set it to a static address, =
+but you can do it later.  You can also run &quot;IPCONFIG&quot; to get this info, =
+as long as you choose the correct interface.
+
+The reason I'm suggesting using your current IP address is just to get =
+it running.  When you set your address manually, you must also set the =
+gateway (your router), mask (that 255.255.x.x number), and the Domain =
+Name lookup (DNS) addresses.  Since you set these up manually, no =
+request is made to the DHCP server for this stuff.  Also, choose an =
+address the mask likes.
+
+Now, armed with your notes, go into your router's setup.  Usually you =
+enter its IP (198.168.1.1) or whatever and password.  Choose the =
+ADVANCED tab then &quot;DMZ Host&quot;.  Enter your server's IP address here and =
+apply it.
+
+Your server is now open to the world - completely open.  As if it were =
+the only computer connected to the modem.  The DMZ Host will direct ALL =
+traffic to this machine so a firewall is REALLY important!  All your =
+peer sharing stuff should also work now for the same reason.
+
+Test that it works before setting up a manual IP address, remembering to =
+include the the gateway, mask and DNS host addresses in the server's =
+settings.  You will need to change the DMZ address before it works =
+again.  Rebooting may also help.
+
+You could have setup Port Forwarding to forward a range of ports to this =
+server, but why.  Port Forwarding will be useful if you have different =
+computer perform different tasks.  Mail here, DB there, FTP to that one, =
+etc...  Then you need to know who does what to which port.  Right now =
+its a simple application with a simple solution, mostly.
+
+Much luck,
+Charles
+
+  ----- Original Message -----=20
+  From: Steven L. Haas=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Tuesday, January 06, 2004 12:16 AM
+  Subject: Re: [Xitami] Running server through a router
+
+
+  Sorry for the repost guys...  I lost he responses I got back to this =
+query, and I was hoping that those of you that replied (or anyone with =
+the messages) would please re-send the messages.  There were 2 in =
+particular that offered me a lot of specific help in my quest to get =
+this web server &amp; other applications working.  I know they would've been =
+enough to get at least Xitami working, and Im frustrated that I lost it.
+
+  Thanks again,
+  Steve
+------=_NextPart_000_0032_01C3D437.B0E82700
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4934.1600&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;Okay - reposting - &lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;Steven,&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Except for OS differences, I already do what you want to do with a =
+Linksys=20
+wireless cable router.&amp;nbsp; This is what you do.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;First, determine&amp;nbsp;the internal IP address for the network card =
+that is=20
+attached to your router.&amp;nbsp; Each card or interface can&amp;nbsp;actually =
+have its=20
+own address (used or not).&amp;nbsp; Click &quot;Networks&quot; in the system =
+tray&amp;nbsp; and=20
+choose &quot;ethernet&quot;.&amp;nbsp; In one of those tabs, it has your=20
+configurations&amp;nbsp;settings (don't have an XP on me right now so =
+shooting from=20
+memory).&amp;nbsp; Write down your IP address, the gateway, mask, and DNS=20
+addresses.&amp;nbsp; It is possible to use that IP in your router settings, =
+but it=20
+is technically dynamic (changeable) so it would be wise to set =
+it&amp;nbsp;to a=20
+static address, but you can do it later.&amp;nbsp; You can also run =
+&quot;IPCONFIG&quot; to=20
+get this info, as long as you choose the correct interface.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;The reason I'm suggesting using your current&amp;nbsp;IP address is =
+just to get=20
+it running.&amp;nbsp; When you set your address manually,&amp;nbsp;you=20
+must&amp;nbsp;also&amp;nbsp;set the gateway (your router), mask (that =
+255.255.x.x=20
+number), and the Domain Name lookup (DNS) addresses.&amp;nbsp; Since you set =
+these=20
+up manually, no request is made to the DHCP server for this stuff.&amp;nbsp; =
+Also,=20
+choose an address the mask likes.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Now, armed with your notes,&amp;nbsp;go into&amp;nbsp;your router's =
+setup.&amp;nbsp;=20
+Usually you enter its IP (198.168.1.1) or whatever and password.&amp;nbsp; =
+Choose=20
+the ADVANCED tab then &quot;DMZ&amp;nbsp;Host&quot;.&amp;nbsp; Enter your server's IP =
+address here=20
+and apply it.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Your server is now open to the world - completely open.&amp;nbsp; As if =
+it were=20
+the only computer connected to the modem.&amp;nbsp; The DMZ Host will=20
+direct&amp;nbsp;ALL traffic&amp;nbsp;to this machine so a firewall is REALLY=20
+important!&amp;nbsp; All your peer sharing stuff should also work =
+now&amp;nbsp;for the=20
+same reason.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Test that it works before setting up a manual IP address, =
+remembering to=20
+include the the gateway, mask and DNS&amp;nbsp;host addresses in the =
+server's=20
+settings.&amp;nbsp; You will need to change the DMZ address before it works=20
+again.&amp;nbsp; Rebooting may also help.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;You could have setup Port Forwarding to forward a range of ports to =
+this=20
+server, but why.&amp;nbsp; Port Forwarding will be useful if you have =
+different=20
+computer perform different tasks.&amp;nbsp;&amp;nbsp;Mail here, DB there, FTP to =
+that=20
+one, etc...&amp;nbsp; Then you need to know who does what to which =
+port.&amp;nbsp; Right=20
+now its a simple application with a simple solution, mostly.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Much luck,&lt;/DIV&gt;
+&lt;DIV&gt;Charles&lt;/DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dslhaas99@hotmail.com">3Dslhaas99@hotmail.com</A> =
+href=3D&quot;mailto:<A HREF="mailto:slhaas99@hotmail.com">slhaas99@hotmail.com</A>&quot;&gt;Steven L.=20
+  Haas&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Tuesday, January 06, 2004 =
+12:16=20
+  AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] Running =
+server=20
+  through a router&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Sorry for the repost guys...&amp;nbsp; I =
+lost he=20
+  responses I got back to this query, and I was hoping that those of you =
+that=20
+  replied (or anyone with the messages) would please re-send the =
+messages.&amp;nbsp;=20
+  There were 2 in particular that offered me a lot of specific help in =
+my quest=20
+  to get this web server &amp;amp; other applications working.&amp;nbsp; I know =
+they=20
+  would've been enough to get at least Xitami working, and Im frustrated =
+that I=20
+  lost it.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thanks again,&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;Steve&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0032_01C3D437.B0E82700--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005624.html">[Xitami] Running server through a router
+</A></li>
+	<LI> Next message: <A HREF="005628.html">[Xitami] Running server through a router
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5627">[ date ]</a>
+              <a href="thread.html#5627">[ thread ]</a>
+              <a href="subject.html#5627">[ subject ]</a>
+              <a href="author.html#5627">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

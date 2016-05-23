@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Xitami]Attachments to E-mail?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003056.html">
+   <LINK REL="Next"  HREF="003052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Xitami]Attachments to E-mail?
+   </H1>
+    <B> 
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Xitami]Attachments to E-mail?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Apr 2002 10:19:34 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003056.html">[Xitami] Streaming Video
+</A></li>
+        <LI> Next message: <A HREF="003052.html">[Xitami] [Xitami]Attachments to E-mail?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3048">[ date ]</a>
+              <a href="thread.html#3048">[ thread ]</a>
+              <a href="subject.html#3048">[ subject ]</a>
+              <a href="author.html#3048">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>------=_NextPart_84815C5ABAF209EF376268C8
+Content-type: text/plain; charset=US-ASCII
+
+
+ 
+
+Question on Attachments to E-mail:
+
+ 
+
+Used Net::SMTP from ActiveState to set up sub to send mail.
+This 
+subroutine works correctly, but doesn't provide for
+file attachments. Listed 
+SMTP.pm and found entry points
+for mail, to, data, and quit, but none for 
+attach.
+
+ 
+
+Do I need to use another module or can Net::SMTP be 
+used?
+ 
+Also, is there a module available for faxing files?
+
+ 
+
+Listed below is the sub I'm using.
+
+ 
+
+sub send_mail
+{ my ($to, $from, $subject, @body, $attach)=@_;
+  
+use Net::SMTP;
+
+ 
+
+  my $relay = &quot;smtp.earthlink.net&quot;;
+  my $smtp  = 
+Net::SMTP- new($relay);
+  die &quot;Open of mail failed&quot; if (! defined 
+$smtp);
+  print &quot;Open of mail OK&quot;, &quot; BR &quot;;
+
+ 
+
+  print &quot;Mail beg&quot;, &quot; BR &quot;;
+  
+$smtp- mail($from);
+  $smtp- to($to);
+  
+$smtp- data();
+  $smtp- datasend(&quot;To: $to\n&quot;);
+  
+$smtp- datasend(&quot;From: $from\n&quot;);
+  $smtp- datasend(&quot;Subject: 
+$subject\n&quot;);
+  $smtp- datasend(&quot;\n&quot;);
+  
+foreach(@body)
+  {
+    
+$smtp- datasend(&quot;$_\n&quot;);
+  }
+  
+$smtp- dataend(&quot;\n&quot;);
+  $smtp- quit;
+}
+
+ 
+
+--- Robert N Meehan 909 784 5908,  214573 
+
+--- <A HREF="mailto:rmsoftware@earthlink.net">rmsoftware@earthlink.net</A> 
+
+--- EarthLink: It's your Internet.
+
+------=_NextPart_84815C5ABAF209EF376268C8
+Content-Type: text/html; charset=US-ASCII
+
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html; charset=windows-1251&quot;&gt;
+&lt;META content=&quot;MSHTML 5.50.4134.600&quot; name=GENERATOR&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P&gt;
+&lt;DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Question on Attachments to E-mail:&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Used Net::SMTP from ActiveState to set up sub to send mail.&lt;BR&gt;This subroutine works correctly, but doesn't provide for&lt;BR&gt;file attachments. Listed SMTP.pm and found entry points&lt;BR&gt;for mail, to, data, and quit, but none for attach.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Do I need to use another module or can Net::SMTP be used?&lt;BR&gt;&amp;nbsp;&lt;BR&gt;Also, is there a module available for faxing files?&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Listed below is the sub I'm using.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;sub send_mail&lt;BR&gt;{ my ($to, $from, $subject, @body, $attach)=@_;&lt;BR&gt;&amp;nbsp; use Net::SMTP;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp; my $relay = &quot;smtp.earthlink.net&quot;;&lt;BR&gt;&amp;nbsp; my $smtp&amp;nbsp; = Net::SMTP-&amp;gt;new($relay);&lt;BR&gt;&amp;nbsp; die &quot;Open of mail failed&quot; if (! defined $smtp);&lt;BR&gt;&amp;nbsp; print &quot;Open of mail OK&quot;, &quot;&amp;lt;BR&amp;gt;&quot;;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp; print &quot;Mail beg&quot;, &quot;&amp;lt;BR&amp;gt;&quot;;&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;mail($from);&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;to($to);&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;data();&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;datasend(&quot;To: $to\n&quot;);&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;datasend(&quot;From: $from\n&quot;);&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;datasend(&quot;Subject: $subject\n&quot;);&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;datasend(&quot;\n&quot;);&lt;BR&gt;&amp;nbsp; foreach(@body)&lt;BR&gt;&amp;nbsp; {&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; $smtp-&amp;gt;datasend(&quot;$_\n&quot;);&lt;BR&gt;&amp;nbsp; }&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;dataend(&quot;\n&quot;);&lt;BR&gt;&amp;nbsp; $smtp-&amp;gt;quit;&lt;BR&gt;}&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;---&amp;nbsp;Robert N Meehan 909 784 5908, &amp;nbsp;214573&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;--- &lt;A href=&quot;mailto:<A HREF="mailto:rmsoftware@earthlink.net">rmsoftware@earthlink.net</A>&quot;&gt;<A HREF="mailto:rmsoftware@earthlink.net">rmsoftware@earthlink.net</A>&lt;/A&gt;&lt;/DIV&gt;
+&lt;DIV&gt;--- EarthLink: It's your Internet.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;P&gt;&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+------=_NextPart_84815C5ABAF209EF376268C8--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003056.html">[Xitami] Streaming Video
+</A></li>
+	<LI> Next message: <A HREF="003052.html">[Xitami] [Xitami]Attachments to E-mail?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3048">[ date ]</a>
+              <a href="thread.html#3048">[ thread ]</a>
+              <a href="subject.html#3048">[ subject ]</a>
+              <a href="author.html#3048">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

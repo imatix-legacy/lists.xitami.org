@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Memory allocation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=BAY105-DAV677BFC8AD915E6F5D950FF8A00%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007657.html">
+   <LINK REL="Next"  HREF="007659.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Memory allocation</H1>
+    <B>Paul Reid</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Memory%20allocation&In-Reply-To=BAY105-DAV677BFC8AD915E6F5D950FF8A00%40phx.gbl"
+       TITLE="[Xitami] Memory allocation">preid at rci.rutgers.edu
+       </A><BR>
+    <I>Sat Oct 13 00:25:53 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007657.html">[Xitami] Memory allocation
+</A></li>
+        <LI>Next message: <A HREF="007659.html">[Xitami] Memory allocation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7658">[ date ]</a>
+              <a href="thread.html#7658">[ thread ]</a>
+              <a href="subject.html#7658">[ subject ]</a>
+              <a href="author.html#7658">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> &gt;  is there anyway to provde the application more memory so that if it 
+needs it, it is available.
+
+It's not Mac OS/6. Any 32-bit Win-app can request 2GB at any time. The 
+whole point of virtual memory is that the app does not know if the 2GB 
+is DRAM or hard drive or small angels with clay tablets.
+
+I've run Xitami and CGI in 8MB (obviously not Win2003). If a runaway 
+script asks for 6MB, so the total system demand is 12MB in 8MB RAM, the 
+request is satisfied though the system gets slow. The fix is to be sure 
+you always have that 5MB (or whatever) to spare.
+
+Use Task Manager. &quot;PF Usage&quot; should flutter far below the Physical 
+Memory number. Launching a CGI interpreter will spike it; VB6 runtime 
+loads over 1MB of junk into RAM, but gives it back when it exits.
+
+My Xitami on Win2003 box is idling at 173MB total. Xitami is 5th on the 
+process list with about 5MB used. Launching a small Perl script barely 
+registers.
+
+Task Manager also shows CPU Usage. When code is not waiting on disk or 
+I/O, this always spikes to 100%, but if it spikes and falls in a blink 
+then you are not really limited by CPU.
+
+ &gt;  with 6Gb of memory
+
+I think Xitami has more than enough memory. Also VB, Perl, PHP.
+
+ &gt; The biggest slow down of the server is watching cgi-bin scripts kick off.
+
+What interpreter, and how heavy are the scripts? Even back in 133MHz 
+128MB RAM days, we could get away with quite sloppy code. One of my 
+scripts opens and reads several text files, twice, because it was less 
+programmer work than doing it once and the result was plenty fast. 
+Another one must skim every file in a folder to get type and summary 
+info, and it runs in a blink. If you are opening gigabyte databases, you 
+probably don't want the script doing that, you want a persistent 
+database server application which is already primed when the CGI asks 
+for data.
+
+Apache has a way to keep PHP running all the time so you don't suffer a 
+PHP interpreter load on every hit. But that only helps if you have a LOT 
+of hits on scripts so easy that interpreter load-time exceeds script 
+runtime.
+
+Interpreted scripts can sometimes be compiled, and run somewhat faster, 
+if they are not disk-bound.
+
+In short: you need to know what's really taking time, and what resource 
+it is bound in. And with 6GB, it seems unlikely that RAM-cram or memory 
+allocation is the problem.
+
+-- 
+Paul Reid
+System Administrator
+Music Department
+Mason Gross School of the Arts
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007657.html">[Xitami] Memory allocation
+</A></li>
+	<LI>Next message: <A HREF="007659.html">[Xitami] Memory allocation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7658">[ date ]</a>
+              <a href="thread.html#7658">[ thread ]</a>
+              <a href="subject.html#7658">[ subject ]</a>
+              <a href="author.html#7658">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

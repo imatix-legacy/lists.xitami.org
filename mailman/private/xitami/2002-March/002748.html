@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Possible race condition in Xitami's temporary files module
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002747.html">
+   <LINK REL="Next"  HREF="002752.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Possible race condition in Xitami's temporary files module
+   </H1>
+    <B>Dmitry Isakbayev
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Possible race condition in Xitami's temporary files module">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 16 Mar 2002 11:26:19 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002747.html">[Xitami] Log Files
+</A></li>
+        <LI> Next message: <A HREF="002752.html">[Xitami] REWRITE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2748">[ date ]</a>
+              <a href="thread.html#2748">[ thread ]</a>
+              <a href="subject.html#2748">[ subject ]</a>
+              <a href="author.html#2748">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Message: 8
+From: Ewen McNeill &lt;<A HREF="mailto:ewen@imatix.com">ewen@imatix.com</A>&gt;
+Subject: Re: [Xitami] 50+ simultaneous users...
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Date: Thu, 14 Mar 2002 17:20:48 +1300
+Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+&gt;<i>Without having run into this before myself, my hunch is that there's
+</I>&gt;<i>perhaps some race condition in Xitami between when the temporary files
+</I>&gt;<i>are read in (from the CGIs), and when the size of the file is recorded.
+</I>&gt;<i>In which case this would be most obvious when the load on the machine
+</I>&gt;<i>gets fairly high (and 50 simultaneous users all running CGIs at once
+</I>&gt;<i>would start to do that).
+</I>
+Ewen,
+
+We use LRWP and sometimes experience similar problems.  I also noticed that
+sometimes Xitami leaves a temporary file behind.
+If there might be a bug in the way Xitami handles temporary files, how can
+we avoid using them?
+Perhaps by explicitly providing Content-Size using a CGI hint?
+Instead of using temporary files, can Xitami be configured to store content
+in memory?
+How can I learn more about the way Xitami uses temporary files and generates
+temporary file names?
+Thank You,
+
+Dmitry
+
+
+
+
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002747.html">[Xitami] Log Files
+</A></li>
+	<LI> Next message: <A HREF="002752.html">[Xitami] REWRITE
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2748">[ date ]</a>
+              <a href="thread.html#2748">[ thread ]</a>
+              <a href="subject.html#2748">[ subject ]</a>
+              <a href="author.html#2748">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

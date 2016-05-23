@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how to configure alias
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001337.html">
+   <LINK REL="Next"  HREF="001341.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how to configure alias
+   </H1>
+    <B>Simon McVittie
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how to configure alias">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 06 Nov 2001 17:45:23 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001337.html">[Xitami] how to configure alias
+</A></li>
+        <LI> Next message: <A HREF="001341.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1338">[ date ]</a>
+              <a href="thread.html#1338">[ thread ]</a>
+              <a href="subject.html#1338">[ subject ]</a>
+              <a href="author.html#1338">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Based on the info below is it possible for you to send me the paths that I
+</I>&gt;<i> put in both alias boxes so that when I insert an image &lt;IMG
+</I>&gt;<i> SRC=&quot;../../../images/masthead.gif&quot; BORDER=&quot;0&quot; WIDTH=&quot;600&quot; HEIGHT=&quot;100&quot;
+</I>&gt;<i> ALIGN=&quot;bottom&quot; ALT=&quot;&quot;&gt;it will work
+</I>&gt;<i> 
+</I>&gt;<i> C:\Xitami\cgi-bin\esp-pages  This is the path to the folder which holds the
+</I>&gt;<i> files
+</I>&gt;<i> 
+</I>&gt;<i> C:\images  this is the path to the images folder
+</I>
+No, not really. The best way to make this work is to change the src 
+attribute of the &lt;IMG&gt; tags to /images/whatever.gif. If you use an 
+automatic program like Frontpage or Dreamweaver or something to make your 
+HTML, either hand-edit the &lt;IMG&gt; tags or get a different automatic program.
+Relative paths (especially ones with .. in them) are generally good for 
+simple hierarchical sites where everything goes in one folder (i.e. pure 
+HTML/images sites) and bad for sites with CGI, aliases, or anything else 
+advanced.
+
+The rest of this e-mail describes a hack to make it behave like you ask for 
+- it probably isn't a good idea though, because it's a very weird 
+configuration and will break as soon as you upload it to any other server 
+(i.e. any computer not running your personal hand-configured copy of 
+Xitami) - so if you upload your pages to your ISP's web server, or a 
+commercial web host, or basically any computer you don't actually have 
+physical access to, it won't work. Consider very carefully whether this is 
+what you want...
+
+*** If you want a reasonably normal server, look away now ;-) ***
+
+
+
+
+
+
+It's _possible_ to do what you're asking by using an extra alias to 
+deliberately &quot;move&quot; ESP deeper into the site hierarchy. See the notes 
+above, and note that if you later decide you want to move your site to your 
+ISP or commercial host's server, IT WON'T WORK so don't ask me to fix it.
+
+Exactly what you do depends on the URL to your script, not the folder the 
+content is kept in. Web browsers don't know that your pages are in 
+c:\xitami\cgi-bin\esp-pages (how would they?), but they do know the URL 
+they just used to get at the script which serves the pages.
+
+If the ***URL for your script*** is currently something like
+<A HREF="http://127.0.0.1/cgi-bin/myscript?page=mypage">http://127.0.0.1/cgi-bin/myscript?page=mypage</A>
+then you could do:
+
+-- begin cfg section
+[Alias]
+images=c:\images
+
+[Cgi-Alias]
+cgi-bin/esp/esp=c:\Xitami\cgi-bin
+-- end cfg section
+
+and tell people that the new URL is:
+<A HREF="http://127.0.0.1/cgi-bin/esp/esp/myscript?page=mypage">http://127.0.0.1/cgi-bin/esp/esp/myscript?page=mypage</A>
+
+(note the two completely pointless esp &quot;folders&quot;, to make sure going up 3 
+levels gets you somewhere sensible)
+
+Or, if the ***URL for your script***  is currently something like
+<A HREF="http://127.0.0.1/cgi-bin/esp-pages/myscript?page=mypage">http://127.0.0.1/cgi-bin/esp-pages/myscript?page=mypage</A>
+then you could do:
+
+-- begin cfg section
+[Alias]
+images=c:\images
+
+[Cgi-Alias]
+cgi-bin/esp/esp-pages=c:\Xitami\cgi-bin\esp-pages
+-- end cfg section
+
+and tell people that the new URL is:
+<A HREF="http://127.0.0.1/cgi-bin/esp/esp-pages/myscript?page=mypage">http://127.0.0.1/cgi-bin/esp/esp-pages/myscript?page=mypage</A>
+
+Neither of these is a clever idea. Don't use them if you want your server 
+to be anywhere near normal.
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001337.html">[Xitami] how to configure alias
+</A></li>
+	<LI> Next message: <A HREF="001341.html">[Xitami] how to configure alias
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1338">[ date ]</a>
+              <a href="thread.html#1338">[ thread ]</a>
+              <a href="subject.html#1338">[ subject ]</a>
+              <a href="author.html#1338">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

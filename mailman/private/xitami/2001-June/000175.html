@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running Xitami as a service under Win9x
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000113.html">
+   <LINK REL="Next"  HREF="000115.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running Xitami as a service under Win9x
+   </H1>
+    <B>Michael S. Kazarin
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Running Xitami as a service under Win9x">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 14 Jun 2001 11:36:20 +0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000113.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+        <LI> Next message: <A HREF="000115.html">[Xitami] FTP server not working after installing 2.5b4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+Perhaps that info can help:
+
+Before I started exploring Xitami on w2k I used to run GUI version of Xitami
+on Win9x,ME (xiwin32.exe). There is the way to start Xitami at pre-login as
+a service.
+You simply hack a registry a bit. Go to
+HKLM\Software\Microsoft\Windows\Current Version\RunServices. Create new
+REG_SZ there. Moify it to contain C:\Xitami\xiwin32.exe (or whatever your
+path will be). Bingo. Now your Xitami will start early before anyone logs in
+and stay running after logout till you shut down.
+Limitations: you will have no tray icon, you'll have to ctrl-alt-del/end
+task the server if you wish to stop or restart (except wba) the server.
+
+Mike.
+
+
+|<i> This is largely because no one knows the answer :-)  Windows 95/98
+</I>|<i> really are not intended for running services on them; any attempts to do
+</I>|<i> otherwise are at best somewhat hopeful and as you have found.
+</I>|<i>
+</I>|<i> Basically from what I've been able to find out any &quot;services&quot; you run
+</I>|<i> under Windows 95 generally start when you log in, and stop when you log
+</I>|<i> out, and there's relatively little you can do about that.  Apparently if
+</I>|<i> you install the NT Service version (bs3224d9.exe) under Windows 95 it
+</I>|<i> will register itself in basically the way that you have found.
+</I>|<i>
+</I>|<i> Alternatively you can run the DOS console version in a minimised window
+</I>|<i> as you have done (the &quot;-s&quot; switch doesn't do anything under DOS/Windows
+</I>|<i> other than print out the message you saw; it does useful things only in
+</I>|<i> Unix and OS/2).  However as you've found, it'll be stopped when the user
+</I>|<i> logs out.
+</I>|<i>
+</I>|<i> Basically if you'll need to choose between: (a) having Xitami running
+</I>|<i> when a user is logged in, on a user workstation OS like Windows 95/98,
+</I>|<i> and (b) running Xitami on a more server oriented OS (Linux, Unix,
+</I>|<i> Windows NT/2000, even OS/2).
+</I>|<i>
+</I>|<i> Sorry about that.  But unfortunately it's inherient in the way that
+</I>|<i> Windows 95/98 works: it's not intended to run &quot;services&quot; in the way
+</I>|<i> server OSes are, and Microsoft went to some lengths to make it more
+</I>|<i> difficult.
+</I>|<i>
+</I>|<i> Ewen
+</I>|<i>
+</I>|<i> --
+</I>|<i> Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+</I>|<i>
+</I>|<i> --
+</I>|<i> Xitami Users Mailing List -- For Xitami support
+</I>|<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>|<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000113.html">[Xitami] Running Xitami as a service under Win9x
+</A></li>
+	<LI> Next message: <A HREF="000115.html">[Xitami] FTP server not working after installing 2.5b4
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

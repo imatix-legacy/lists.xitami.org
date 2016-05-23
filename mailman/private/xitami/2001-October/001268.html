@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] gslgen &amp; xitami &amp; errors
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001267.html">
+   <LINK REL="Next"  HREF="001269.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] gslgen &amp; xitami &amp; errors
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] gslgen &amp; xitami &amp; errors">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Oct 2001 17:50:59 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001267.html">[Xitami] gslgen &amp; xitami &amp; errors
+</A></li>
+        <LI> Next message: <A HREF="001269.html">[Xitami] basic questions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1268">[ date ]</a>
+              <a href="thread.html#1268">[ thread ]</a>
+              <a href="subject.html#1268">[ subject ]</a>
+              <a href="author.html#1268">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Francis Turner wrote:
+
+&gt;<i> I started playing with gslgen to auto display some XML
+</I>&gt;<i>
+</I>&gt;<i> But there are times when I'd like to abort the file and return an 
+</I>&gt;<i> error. Is it possible to return HTTP error codes? And if so is it also 
+</I>&gt;<i> possible to redirect people using a 302 return?
+</I>
+Figured it out (partly) - redirects work by doing something like
+
+.if %errorcondition%
+  &lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;XML Error&lt;/TITLE&gt;
+  &lt;meta http-equiv=&quot;Refresh&quot; content=&quot;0; 
+URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>)/page.html&quot;&gt;&lt;/HEAD&gt;
+  &lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+.  abort
+.endif
+
+ if  you replace the redirect 'URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>)/page.html' 
+with 'URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>)/error?321' you get a error 321 page
+
+ if you want a meaningful 404 error you do 
+'URL=<A HREF="http://$(HTTP_HOST:lower">http://$(HTTP_HOST:lower</A>)/$(PATH_INFO:lower)/error' which a) logs 
+the error in a form that allows you to track it in the xitami log and b) 
+gives the user something meaningful to note down when he complains
+
+Francis
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001267.html">[Xitami] gslgen &amp; xitami &amp; errors
+</A></li>
+	<LI> Next message: <A HREF="001269.html">[Xitami] basic questions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1268">[ date ]</a>
+              <a href="thread.html#1268">[ thread ]</a>
+              <a href="subject.html#1268">[ subject ]</a>
+              <a href="author.html#1268">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

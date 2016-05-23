@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Redirecting an URL to another port
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000672.html">
+   <LINK REL="Next"  HREF="000668.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Redirecting an URL to another port
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Redirecting an URL to another port">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 11 Aug 2001 13:38:22 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000672.html">[Xitami] Redirecting an URL to another port
+</A></li>
+        <LI> Next message: <A HREF="000668.html">[Xitami] Redirecting an URL to another port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#667">[ date ]</a>
+              <a href="thread.html#667">[ thread ]</a>
+              <a href="subject.html#667">[ subject ]</a>
+              <a href="author.html#667">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:FNEAKJNHKIFEIAHOLMPCOEEPCDAA.Joe@ByrneWorld.com">FNEAKJNHKIFEIAHOLMPCOEEPCDAA.Joe@ByrneWorld.com</A>&gt;, &quot;Joe Byrne&quot; writes:
+&gt;<i>   I don't know if this is Becky's reason or not, but I too have tried to do
+</I>&gt;<i>this.  I have a web based email application (rather popular one by Windows
+</I>&gt;<i>standards) that runs on port 3001.  My clients get their mail bu going to:
+</I>&gt;<i><A HREF="http://mail.domainname.com:3001.">http://mail.domainname.com:3001.</A>  Great, but most of my customer don't
+</I>&gt;<i>understand ports and I end up fielding a lot of calls because they get my
+</I>&gt;<i>home page instead of their email.  I've ended up running the email and web
+</I>&gt;<i>servers on two different machines to avoid the port problem, but I also have
+</I>&gt;<i>a calendar application that runs (by default) on port 8060.  I really don't
+</I>&gt;<i>want to license 3 copies of Windows (almost the cost of the hardware!) just
+</I>&gt;<i>to make the lives of my customers easy, but I don't have a lot of choice.
+</I>
+You don't need three copies of Windows.  You need 1 copy of NT Server
+or 2000 (assuming that you _have_ to use Windows due to the software you
+need; any modern Unix/Linux system can do this just as easily).  Then you
+bind three IP addresses to the _same_ server (NT Server and 2000 can do
+this; 95/98/ME, etc cannot).  Then you configure Xitami, and whatever
+other programs that you want to listen on _one_ of those IP addresses
+(each).  (Xitami can be configured to do this with the [server] ipaddress
+setting; by default it is &quot;*&quot; which means &quot;everything you can find&quot;.)
+
+If you have only one IP address to play with (and it sounds like you
+don't, if setting three machines up is a feasible option), then you need
+to look at doing some sort of selective request forwarding -- ie, having
+a program that handles the request, connects to the &quot;real thing&quot;, and
+then passes back the reply it gets.  With Xitami something like LRWP
+would be required for this, or if you're lucky with the URLs used a
+filter or CGI script.  (Filters are basically CGI, but run with the
+input being the original page before filtering -- you can ignore that
+and make it all up yourself if you want.)
+
+If you don't care about all your users that are behind corporate
+firewalls being blocked from accessing it, you can run your other
+servers on off-numbered ports, and send redirects.  If you need to do
+this only for a few basic URLs a CGI or filter would be sufficient for
+this; just have it return a Location: header with the new location.
+(But any user behind a corporate firewall that says port-80-outside
+only, will get redirected, but otherwise not be able to access the
+service.)
+
+As I commented in my earlier message this is not a solution to the
+codered type problem, as you'll just end up causing more work for your
+system not less.  Only by having another machine in front (eg, a
+transparent proxy or a reverse proxy) that can do that filtering off do
+you save anything.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000672.html">[Xitami] Redirecting an URL to another port
+</A></li>
+	<LI> Next message: <A HREF="000668.html">[Xitami] Redirecting an URL to another port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#667">[ date ]</a>
+              <a href="thread.html#667">[ thread ]</a>
+              <a href="subject.html#667">[ subject ]</a>
+              <a href="author.html#667">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

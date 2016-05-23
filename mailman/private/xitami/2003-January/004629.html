@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Security Issue - Disabling Script Processing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004628.html">
+   <LINK REL="Next"  HREF="004625.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Security Issue - Disabling Script Processing
+   </H1>
+    <B>Rob @ BMM
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Security Issue - Disabling Script Processing">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 15 Jan 2003 14:37:17 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004628.html">Re[2]: [Xitami] Security Issue - Disabling Script Processing
+</A></li>
+        <LI> Next message: <A HREF="004625.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4629">[ date ]</a>
+              <a href="thread.html#4629">[ thread ]</a>
+              <a href="subject.html#4629">[ subject ]</a>
+              <a href="author.html#4629">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Paul, Thx for the informative info and advice.
+
+Best Regards,
+Rob Allen
+President, Blue Marble Meds LLC.  Offering 30-75% off Prescription Meds
+See us at <A HREF="http://www.BlueMarbleMeds.com">http://www.BlueMarbleMeds.com</A>
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Paul Reid
+Sent: Wednesday, January 15, 2003 12:08 PM
+To: Rob @ BMM
+Subject: Re[2]: [Xitami] Security Issue - Disabling Script Processing
+
+
+
+&gt;<i> Xitami allows this kind of script processing to occur.
+</I>
+How do you know the scripts are actually running?
+
+The 200 response only means Xitami was happy with what it did. That
+does not prove it did what the hacker hoped.
+
+Also, isn't the response length -1 for all of these?
+
+Those requests are illegally encoded. In IIS, they invoke a bug in
+IIS's URL decoder. In Xitami they are trimmed-off at the illegal
+point and what is left is handled. For most CodeRed hacks, this is
+either the root default or a subdirectory you probably don't have.
+
+Take one of those hacks and try it yourself.
+
+<A HREF="http://myserver.edu/scripts/..%%35c../winnt/system32/cmd.exe?/c+dir">http://myserver.edu/scripts/..%%35c../winnt/system32/cmd.exe?/c+dir</A>
+
+Gives me a Not Found.
+
+
+On the tftp one, edit it to a script of your choice. Like a HIT_ME.BAT file:
+
+ echo &quot;you got me!&quot; &gt;&gt; hit_me.txt
+
+/scripts/..%%35%63../winnt/system32/cmd.exe?/c+hit_me%20-i%20208.179.58.54%2
+0G
+ET%20cool.dll%20e:\httpodbc.dll HTTP/1.0&quot;
+
+If the cmd.exe?/c+hit_me hack works, it will append to hit_me.txt.
+You will find that it does NOT work under Xitami (nor even under a
+properly patched IIS).
+
+ -PRR
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004628.html">Re[2]: [Xitami] Security Issue - Disabling Script Processing
+</A></li>
+	<LI> Next message: <A HREF="004625.html">[Xitami] Security Issue - Disabling Script Processing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4629">[ date ]</a>
+              <a href="thread.html#4629">[ thread ]</a>
+              <a href="subject.html#4629">[ subject ]</a>
+              <a href="author.html#4629">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with refresh with php and phpbb
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005314.html">
+   <LINK REL="Next"  HREF="005318.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with refresh with php and phpbb
+   </H1>
+    <B>Tom Ringate
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problem with refresh with php and phpbb">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 6 Sep 2003 20:12:24 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005314.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+        <LI> Next message: <A HREF="005318.html">[Xitami] Xitami and Quercus Systems Personal REXX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5315">[ date ]</a>
+              <a href="thread.html#5315">[ thread ]</a>
+              <a href="subject.html#5315">[ subject ]</a>
+              <a href="author.html#5315">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Alejandro,
+
+Success, it does solve the problem on the newer release of XITAMI.  I also
+discovered that release 2.4d9 does not have this problem, so it is something
+that changed when they came out with release 2.5b5.
+
+The Apache2 server also works just fine, but I did see some code in the
+PHPbb modules that looks like they are doing something a little like what
+you sent to me if the server is Apache2.
+
+Not being a programmer, I did as you said, and placed it in about five of
+the modules I could identify easily as generating some of the pages I am
+having a problem with.  It immediatly fixed those pages, however there are
+still several pages where the problem still exists.
+
+Rather than just placing this into every module, I decided to place a
+request for help on the PHPbb support forum to see if someone there knows a
+more eligent way to do this.
+
+I am a little afraid to just put it in all the modules, because I suspect
+some modules call other modules, and then I should get the error you
+mentioned about the header already being written.
+
+I'll keep my fingers crossed that someone gives me some direction on which
+modules to edit.  But for now, the main page is now refreshing, so 70% of
+the problem is solved since that was the most noticable failure.
+
+Tom R.
+
+
+----- Original Message ----- 
+From: &quot;Alejandro Martinis&quot; &lt;<A HREF="mailto:amartinis@jrwilliams.com.uy">amartinis@jrwilliams.com.uy</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;; &quot;Tom Ringate&quot; &lt;<A HREF="mailto:tringate@tampabay.rr.com">tringate@tampabay.rr.com</A>&gt;
+Sent: Saturday, September 06, 2003 5:03 PM
+Subject: RE: [Xitami] Problem with refresh with php and phpbb
+
+
+&gt;<i> Tom:
+</I>&gt;<i>
+</I>&gt;<i> For some reason your server refuses my message, so I am writing again to
+</I>the
+&gt;<i> list.
+</I>&gt;<i>
+</I>&gt;<i> Regarding the code
+</I>&gt;<i>
+</I>&gt;<i>  &lt;?php
+</I>&gt;<i>  header (&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;); // Date in the past
+</I>&gt;<i>  header (&quot;Last-Modified: &quot; . gmdate(&quot;D, d M Y H:i:s&quot;) . &quot; GMT&quot;);
+</I>&gt;<i>  header (&quot;Cache-Control: no-cache, must-revalidate&quot;); // HTTP/1.1
+</I>&gt;<i>  header (&quot;Pragma: no-cache&quot;); // HTTP/1.0
+</I>&gt;<i>
+</I>&gt;<i> It MUST be the very first thing written to the page, otherwise you will
+</I>get
+&gt;<i> a &quot;header already written&quot; error, so it is a good practice to put it right
+</I>&gt;<i> up at the beginning of the code.
+</I>&gt;<i> If you haven't written the program, (and by the way I don't know the
+</I>&gt;<i> application you mention ) you could try looking at the page name that is
+</I>&gt;<i> being cached and not refreshed, and edit the corresponding php file and
+</I>add
+&gt;<i> these lines at the very top.
+</I>&gt;<i>
+</I>&gt;<i> You would not need to add this to php files that only do internal
+</I>&gt;<i> calculations or otherwise are not involved in any html output.
+</I>&gt;<i>
+</I>&gt;<i> Now, if you suspect that there is more than one file involved in the
+</I>&gt;<i> creation of the page, I would suggest you add it to every php file that
+</I>&gt;<i> generates html content, since it should not affect the performance of the
+</I>&gt;<i> application.
+</I>&gt;<i>
+</I>&gt;<i> You're welcome to post any other question just as each of us is. Let me
+</I>know
+&gt;<i> how it went.
+</I>&gt;<i>
+</I>&gt;<i> Take care and good luck,
+</I>&gt;<i>
+</I>&gt;<i> Alejandro.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ---
+</I>&gt;<i> Outgoing mail is certified Virus Free.
+</I>&gt;<i> Checked by AVG anti-virus system (<A HREF="http://www.grisoft.com">http://www.grisoft.com</A>).
+</I>&gt;<i> Version: 6.0.515 / Virus Database: 313 - Release Date: 1/09/2003
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005314.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+	<LI> Next message: <A HREF="005318.html">[Xitami] Xitami and Quercus Systems Personal REXX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5315">[ date ]</a>
+              <a href="thread.html#5315">[ thread ]</a>
+              <a href="subject.html#5315">[ subject ]</a>
+              <a href="author.html#5315">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] DG perl module
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005607.html">
+   <LINK REL="Next"  HREF="005609.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] DG perl module
+   </H1>
+    <B>Brad Smith
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] DG perl module">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 23 Dec 2003 15:38:44 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005607.html">[Xitami] DG perl module
+</A></li>
+        <LI> Next message: <A HREF="005609.html">[Xitami] DG perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5608">[ date ]</a>
+              <a href="thread.html#5608">[ thread ]</a>
+              <a href="subject.html#5608">[ subject ]</a>
+              <a href="author.html#5608">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>If you don't mind me offering an alternative suggestion, I prefer to use 
+ImageMagick for graphic work.  You need to download the 
+ImageMagick library (available as an executable for Win32), then install 
+either imagemagick or perlmagick from PPM.  The module's name has 
+changed, and I can't remember what it is called now, but I do know it is 
+one of those.
+
+I found GD to be weak for my purposes, mainly to create graphs on 
+demand.  Now, I use ImageMagick and OLE to create the graphs.  
+
+Check out imagemagick.org.  In retrospect, I think the Win32 executable 
+also includes the perl module; so, you probably won't even need to 
+install it from PPM.
+
+Sincerely,
+Brad Smith
+
+
+
+
+On 23 Dec 2003 at 10:21, Daniel Nowlin wrote:
+
+&gt;<i> Well I uninstalled the GD package that I installed with ppm3 and installed
+</I>&gt;<i> GD with ppm2.  I get the same result.  The GD package fails at line 139.
+</I>&gt;<i> This is in the newfromjpeg subroutine on line 3.  This is the code that I am
+</I>&gt;<i> using to call GD:
+</I>&gt;<i> 
+</I>&gt;<i>    $width = '96';
+</I>&gt;<i>   $pic_tmp = newFromJpeg GD::Image(&quot;$pic_file[$count]&quot;);
+</I>&gt;<i>   ($pic_imgW, $pic_imgH) = $pic_tmp-&gt;getBounds();
+</I>&gt;<i>   $ratio = ($pic_imgW / $width);
+</I>&gt;<i>   $height  = int($pic_imgH/$ratio);
+</I>&gt;<i>   $FinalImg = new GD::Image($width,$height);
+</I>&gt;<i> 
+</I>&gt;<i> $FinalImg-&gt;copyResized($pic_tmp,0,0,0,0,$width,$height,$pic_imgW,$pic_imgH);
+</I>&gt;<i> 
+</I>&gt;<i>   binmode STDOUT;
+</I>&gt;<i> 
+</I>&gt;<i>   print &quot;Content-type: image/jpeg; name=\&quot;${file}_thumb\.jpg\&quot;\n&quot;;
+</I>&gt;<i>   print &quot;Content-Disposition: inline;
+</I>&gt;<i> filename=\&quot;thumb_$pic_file[$count]\.jpg\&quot;\n\n&quot;;
+</I>&gt;<i>   print $FinalImg-&gt;jpeg;
+</I>&gt;<i> 
+</I>&gt;<i> What I am attempting is to have GD create a thumbnail image of a jpg
+</I>&gt;<i> picture.  Any ideas will be welcomed.
+</I>&gt;<i> Dan
+</I>&gt;<i> 
+</I>&gt;<i> ----- Original Message ----- 
+</I>&gt;<i> From: &quot;Daniel Nowlin&quot; &lt;<A HREF="mailto:nowlind@missouri.edu">nowlind@missouri.edu</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Tuesday, December 23, 2003 10:04 AM
+</I>&gt;<i> Subject: Re: [Xitami] DG perl module
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; thanks for the info.  I will try to do an un-install and use ppm2.
+</I>&gt;<i> &gt; ----- Original Message ----- 
+</I>&gt;<i> &gt; From: &quot;Francis Turner&quot; &lt;<A HREF="mailto:francis.turner@freesbee.fr">francis.turner@freesbee.fr</A>&gt;
+</I>&gt;<i> &gt; To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt; Sent: Tuesday, December 23, 2003 2:32 AM
+</I>&gt;<i> &gt; Subject: Re: [Xitami] DG perl module
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Daniel Nowlin wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;Has anybody tried to install the perl module called GD?  If so how did
+</I>&gt;<i> &gt; you get it installed.  I am running ActiveState perl version 5.8 and I
+</I>&gt;<i> have
+</I>&gt;<i> &gt; tried the ppm but it does not install.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; Using Activestate perl 5.6.something I have had no problems at all with
+</I>&gt;<i> &gt; &gt; installing GD and (getting it to run with Xitami)...  I'm pretty sure I
+</I>&gt;<i> &gt; &gt; used the version 2 ppm rather than the ver 3 one that newer activestate
+</I>&gt;<i> &gt; &gt; builds tend to make the default.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Francis
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; -- 
+</I>&gt;<i> &gt; &gt; Your theory of a donut-shaped universe is intriguing, Homer.
+</I>&gt;<i> &gt; &gt; I may have to steal it.        -- Prof S. Hawking on the &quot;Simpsons&quot;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005607.html">[Xitami] DG perl module
+</A></li>
+	<LI> Next message: <A HREF="005609.html">[Xitami] DG perl module
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5608">[ date ]</a>
+              <a href="thread.html#5608">[ thread ]</a>
+              <a href="subject.html#5608">[ subject ]</a>
+              <a href="author.html#5608">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

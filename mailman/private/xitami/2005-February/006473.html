@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] ftp: revisited
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006464.html">
+   <LINK REL="Next"  HREF="006475.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] ftp: revisited
+   </H1>
+    <B>Johannes Prost
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] ftp: revisited">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 02 Feb 2005 17:39:23 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006464.html">[Xitami] ftp: revisited
+</A></li>
+        <LI> Next message: <A HREF="006475.html">[Xitami] ftp: revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6473">[ date ]</a>
+              <a href="thread.html#6473">[ thread ]</a>
+              <a href="subject.html#6473">[ subject ]</a>
+              <a href="author.html#6473">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Alex,
+
+you need to create 2 files. You can do so  through the GUI or just edit the file directly. The 
+files are ftdirs.aut  and ftpusers.aut
+In the file ftpdirs.aut you name the directories you want to be accessed by ftp or browser from the 
+users you define . 
+Here an example entry
+    [../webpages/dirname]
+        username = &quot;*&quot;
+
+    [dirname]
+        username = &quot;P&quot;
+         anonymus = &quot;G&quot;
+Between the &quot; &quot; you have to define the access right. Make sure you have a &quot;space&quot; between = and &quot;
+For anyone to download you can use anonymus = &quot;G&quot; as username and user right for this particular 
+directory.
+
+For the second file ftpusers.aut  it would look as follows. In this file you define the users right 
+to connect, the root (dir), password...
+Here the sample
+    [username]
+        Access = &quot;P&quot;
+        Aliases = &quot;0&quot;
+        Hard-quota = &quot;&quot;
+        Password = &quot;whatever-you-want&quot;
+        Pipe = &quot;&quot;
+        Root = &quot;dirname&quot;
+        Soft-quota = &quot;&quot;
+        Use-quotas = &quot;0&quot;
+
+For your example you would have to create 2 entries for the same root; one entry for the user
+( username) and one entry for the visitors (anonymus) who should be able to ONLY download, as I 
+understood correct.
+For the user  Access = &quot;P&quot;
+For the visitor Access = &quot;G&quot;
+Both entries would have the same root = &quot;dirname&quot;
+
+The directories which you want to create don't have to be in  \ftproot . I have, as example, set 
+\webpages with its directories for the virtual domains to access by ftp only for myself. 
+If I'm correct, xitami finds the way to the correct directory mainly through the username / 
+directory entries in ftpdirs.aut
+
+I hope this description is clear enough.If not, let me know and I will try to explain it better.
+
+ 2 Feb 2005 um 13:11 hat Alex Barna geschrieben:
+
+&gt;<i> Windows XP,  Xitami 2.5c1 5MBS cable connection.
+</I>&gt;<i> 
+</I>&gt;<i> I haven't used the ftp part of xitami &amp; had it set to o off.. I now have 
+</I>&gt;<i> a need to use it &amp; need to set it to allow a friend to upload a 5mb file 
+</I>&gt;<i> so others can download it.
+</I>&gt;<i> 
+</I>&gt;<i> I reset defaults.cfg to,
+</I>&gt;<i> [Ftp]
+</I>&gt;<i>     Enabled = &quot;1&quot;   &amp; can ftp to my site &amp; see this default  ftp page:
+</I>&gt;<i> 
+</I>&gt;<i>   Index of <A HREF="ftp://xx.xx.xxx.xx/">ftp://xx.xx.xxx.xx/</A>
+</I>&gt;<i> -------------------------
+</I>&gt;<i> Up to higher level directory
+</I>&gt;<i> File: index.htm      1 KB     9/16/2002     12:00:00 AM
+</I>&gt;<i> File: index.txt        1 KB     9/16/2002     12:00:00 AM
+</I>&gt;<i> 
+</I>&gt;<i> What do I need to add so:
+</I>&gt;<i> there is only one directory shown
+</I>&gt;<i> a person with a password I give them can upload to this directory with 
+</I>&gt;<i> an ftp client
+</I>&gt;<i> anyone can download from this directory with a browser?
+</I>&gt;<i> 
+</I>&gt;<i> Alex,
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+Johannes
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006464.html">[Xitami] ftp: revisited
+</A></li>
+	<LI> Next message: <A HREF="006475.html">[Xitami] ftp: revisited
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6473">[ date ]</a>
+              <a href="thread.html#6473">[ thread ]</a>
+              <a href="subject.html#6473">[ subject ]</a>
+              <a href="author.html#6473">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

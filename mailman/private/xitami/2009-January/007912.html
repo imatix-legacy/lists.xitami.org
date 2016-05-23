@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami/5 - new project announcement
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami/5%20-%20new%20project%20announcement&In-Reply-To=BAY127-DAV132E817B67B99BB521DD78F8E00%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007911.html">
+   <LINK REL="Next"  HREF="007925.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami/5 - new project announcement</H1>
+    <B>Pieter Hintjens</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Xitami/5%20-%20new%20project%20announcement&In-Reply-To=BAY127-DAV132E817B67B99BB521DD78F8E00%40phx.gbl"
+       TITLE="[Xitami] Xitami/5 - new project announcement">ph at imatix.com
+       </A><BR>
+    <I>Sun Jan  4 21:48:23 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007911.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+        <LI>Next message: <A HREF="007925.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7912">[ date ]</a>
+              <a href="thread.html#7912">[ thread ]</a>
+              <a href="subject.html#7912">[ subject ]</a>
+              <a href="author.html#7912">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Russel,
+
+A detailed set of requirements!
+
+Would you be able to write-up these on the wiki?  I guess the useful
+thing for now is just to collect ideas and requirements (things people
+use or really want) so that we don't lose them.
+
+Obviously it'll take some time to work through this list but I assume
+anyone still using Xitami has the patience of a saint to begin with.
+
+-Pieter
+
+On Sun, Jan 4, 2009 at 9:30 PM, rolinger &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i> I have been using Xtiami 2.4d9 for years...made the upgrade to 2.5 and had
+</I>&gt;<i> problems so I went back to 2.4d9.  Xitami has crashed but ONCE in 6 years
+</I>&gt;<i> (and the fix was to stop the service and restart it, but even that can be
+</I>&gt;<i> managed with Windows Services properties).  And through those 6 years I
+</I>&gt;<i> moved Xitami to NT, to W2K, and now its on W2K3.  I had more problems with
+</I>&gt;<i> windows than I ever did with Xitami.
+</I>&gt;<i>
+</I>&gt;<i> Heres a brief list of things I think should be added or considered:
+</I>&gt;<i>
+</I>&gt;<i> 1. Full PHP implementation
+</I>&gt;<i> 2. Continued CGI support
+</I>&gt;<i>        a.  Without CGI support, the bulk of current Xitami users won't have
+</I>&gt;<i> an upgrade path and may never cut over because there current websites are so
+</I>&gt;<i> heavily coded in Perl.  I have one website alone that is about 48,000 lines
+</I>&gt;<i> of perl - I sure as heck don't look forward to migrating that code.
+</I>&gt;<i>        b.  Perl is such an efficient and well documented language that
+</I>&gt;<i> allows users to interface with system commands.  My experience with PHP is
+</I>&gt;<i> that its not as easy and has less features when it comes to system
+</I>&gt;<i> interfacing.
+</I>&gt;<i>        c.  Isn't Perl the foundation of PHP anyway?  :-)
+</I>&gt;<i> 3.  Self Installing Windows version is probably a must - but GUIs aren't
+</I>&gt;<i> necessary.  The web based admin and text config editing is more than
+</I>&gt;<i> sufficient.  Obvioulsy it needs to be a service install for windows.
+</I>&gt;<i> 4.  I don't see the need to implement MySQL specific support like
+</I>&gt;<i> &quot;WAMP&quot;...in my experience users choose different DBs for various reaons,
+</I>&gt;<i> keeping it open to and versatile to other DBs is going to be a more
+</I>&gt;<i> attractive webserver and it will keep Xitami's memory and system foot print
+</I>&gt;<i> much smaller.
+</I>&gt;<i> 5. VB/ASP support is probably necessary as well.
+</I>&gt;<i>
+</I>&gt;<i> 6.  Xitamis's I/O management of file uploads needs to be fixed.  Currently
+</I>&gt;<i> Xitami locks the filehandles of standard html file uploads.  Also, Xitami
+</I>&gt;<i> treats a 20 file upload as a single transfer. And because of this you can't
+</I>&gt;<i> read the current status of the file upload (whether its one or 20 files)
+</I>&gt;<i> which prevents you from providing progress updates to the user.  A 5mg
+</I>&gt;<i> upload could take a few minutes and without a status update for the user
+</I>&gt;<i> they may think things have timed out and abort.    This same issue which
+</I>&gt;<i> prevents you from reading the status of the IO also prevents you from
+</I>&gt;<i> writing data to a temporary file during the upload, for some reason while
+</I>&gt;<i> Xitami is reading and writing the inbound data stream, it can't write to
+</I>&gt;<i> another temporary file, another method for obtaining the current upload
+</I>&gt;<i> status. AND the returning web page doesn't not appear until the upload is
+</I>&gt;<i> done.  So on big uploads, or multi-file uploads the user stares at blank
+</I>&gt;<i> page.
+</I>&gt;<i>
+</I>&gt;<i>    Example code of file upload:
+</I>&gt;<i>
+</I>&gt;<i> binmode(OUTFILE);
+</I>&gt;<i> undef $BytesRead;
+</I>&gt;<i> undef $Buffer;
+</I>&gt;<i> open(tmpFile, &quot;&gt;/temp/blahblahblah.tmp&quot;) ;
+</I>&gt;<i> while ($Bytes = read($file_handle,$Buffer,1024)) {
+</I>&gt;<i>   $BytesRead += $Bytes;
+</I>&gt;<i>   print tmpFile $
+</I>&gt;<i>   print OUTFILE $Buffer;
+</I>&gt;<i> }
+</I>&gt;<i> $confirm{$file_handle} = $BytesRead;
+</I>&gt;<i> close($file_handle);
+</I>&gt;<i> close(OUTFILE);
+</I>&gt;<i>
+</I>&gt;<i> If I were to write to a temp file in the middle of that while loop, the temp
+</I>&gt;<i> file would only be updated AFTER the while loop/upload was completed.  I
+</I>&gt;<i> have no idea why though.  I then used the same code on Apache it worked as
+</I>&gt;<i> designed.
+</I>&gt;<i>
+</I>&gt;<i> 7. I have gotten my own version of Mod Rewrite to work on Xitami, though it
+</I>&gt;<i> would be nice to see a more uniform implementation of it supported.  There
+</I>&gt;<i> is still a bit of manual configs at the server level that one has to do.
+</I>&gt;<i> URL rewrites are key for Seach Engine Optimization.  I used CGI aliases to
+</I>&gt;<i> map a keywords to specific scripts, then those scripts needed the HTML_ENV
+</I>&gt;<i> or CGI ENV variables to break up the the url path to retrieve the rest of
+</I>&gt;<i> the dynamic variables
+</I>&gt;<i>    [CGI ALIAS]
+</I>&gt;<i>    /adList/ = &quot;/cgi-bin/postList.pl&quot;
+</I>&gt;<i>
+</I>&gt;<i>    And then in postList.pl used the following to retrieve the variables:
+</I>&gt;<i>    @pathVars = split(/\//,$ENV{'PATH_INFO'}) ; ### split the URL path on
+</I>&gt;<i> '/'
+</I>&gt;<i>    @httpHost = split(/\./,$ENV{'HTTP_HOST'}) ;  ### split the full domain
+</I>&gt;<i> name on the '.'
+</I>&gt;<i>
+</I>&gt;<i>    Whats handy about the CGI Alias is that $ENV believes the url path
+</I>&gt;<i> starts AFTER the alias
+</I>&gt;<i>    So: www.blah.com/adlist/these/are/dynamic/vars - $ENV sees the URL as
+</I>&gt;<i> /these/are/dynamic/vars
+</I>&gt;<i>    I then do: /adlist/these/are/dynamic/vars/ad_12345.html , using the
+</I>&gt;<i> 'ad_12345.html' as the article ID
+</I>&gt;<i>
+</I>&gt;<i>    Each script must know whats a variable...so it does require a bit of
+</I>&gt;<i> unique coding per script, but if you design your site well enough you can
+</I>&gt;<i> basically write your own procs to do it all for you.
+</I>&gt;<i>
+</I>&gt;<i> 8.  32bit and 64bit versions should be available.
+</I>&gt;<i>
+</I>&gt;<i> 9.  Ditch the FTP stuff.  It never worked well to begin with.
+</I>&gt;<i>
+</I>&gt;<i> 10.  Fix the vitual server administration issue.  If I create a virtual
+</I>&gt;<i> domain and give administration authority to another user, that user with
+</I>&gt;<i> their own password designed to administer the virtual domain now has access
+</I>&gt;<i> to the entire server configuration.
+</I>&gt;<i>
+</I>&gt;<i> 11. Continued support for perlssi
+</I>&gt;<i>
+</I>&gt;<i> 12. Supply password encryption in the .aut files....clear text passwords is
+</I>&gt;<i> a big no-no.
+</I>&gt;<i>
+</I>&gt;<i> 13. Make Extended CLF logging the standard format
+</I>&gt;<i>
+</I>&gt;<i> 14.  Allow for better control of default Error pages, 301 redirects to
+</I>&gt;<i> failed pages, or pages not found, to a standard error page
+</I>&gt;<i>
+</I>&gt;<i> 15. Is it possible to integrate sessionID directly into the server?
+</I>&gt;<i>
+</I>&gt;<i> Thats all I can think of at the moment.  :-)
+</I>&gt;<i>
+</I>&gt;<i> -Russel
+</I>&gt;<i>
+</I>&gt;<i> =========
+</I>&gt;<i> &quot;Socialism is the philosophy of failure, the creed of ignorance,
+</I>&gt;<i> and the gospel of envy, its inherent virtue is the equal sharing of misery.&quot;
+</I>&gt;<i>     - Sir Winston Churchill -
+</I>&gt;<i> =========
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Pieter Hintjens&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ph at imatix.com</A>&gt;
+</I>&gt;<i> To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Sunday, January 04, 2009 6:37 AM
+</I>&gt;<i> Subject: Re: [Xitami] Xitami/5 - new project announcement
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hi Marc,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This feedback is great.  I'm collecting pertinent points on the wiki.
+</I>&gt;&gt;<i> Feel free to add more.  No firm promises, but it would be good to
+</I>&gt;&gt;<i> collect the strongest features of the old Xitami into the new
+</I>&gt;&gt;<i> architecture and get back to regular releases of the product.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Can I confirm that people are generally happy with a plain vanilla
+</I>&gt;&gt;<i> binary for Windows, i.e. the console version?  Making win32-specific
+</I>&gt;&gt;<i> services and GUIs is a lot of work.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> -Pieter
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+-- 
+&quot;Silence (n.) The sound of something really terrible just about to happen.&quot;
+-- Devil's Wiki - <A HREF="http://www.devilswiki.com.">http://www.devilswiki.com.</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007911.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+	<LI>Next message: <A HREF="007925.html">[Xitami] Xitami/5 - new project announcement
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7912">[ date ]</a>
+              <a href="thread.html#7912">[ thread ]</a>
+              <a href="subject.html#7912">[ subject ]</a>
+              <a href="author.html#7912">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

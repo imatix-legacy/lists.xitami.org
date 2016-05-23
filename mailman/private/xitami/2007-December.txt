@@ -1,0 +1,698 @@
+From yves.sucaet at usa.net  Mon Dec  3 18:21:30 2007
+From: yves.sucaet at usa.net (YVES SUCAET)
+Date: Mon, 03 Dec 2007 11:21:30 -0600
+Subject: [Xitami] Xitami/Vista/PHP combination
+Message-ID: <609LLcRuE4930S07.1196702490@cmsweb07.cms.usa.net>
+
+Hello,
+
+I'm running Vista Home edition and Xitami v2.5b6. I'm trying to run PHP
+5.2.5in combination with this. I've made the following alterations to
+xitami.cfg:
+
+[Filter]
+.php=c:\php\php-cgi.exe 
+[Mime]
+php=application/x-httpd-php 
+
+I've also changed php.ini:
+
+cgi.force_redirect = 0
+
+When I try running any .php-script, however, all I get is a Windows pop-up
+message appears saying "CGI/FastCGI has stopped working: A problem caused the
+program to stop working completely. Windows will close the program and notify
+you if a solution is available". Oh...kay...
+
+I don't think there's anything wrong with my configuration settings as such:
+the interpreter obviously is found and the mime-types are configured
+correctly, otherwise I wouldn't get this far. What happens is that the
+interpreter (I've tried php.exe as well; same result) is started and then
+crashes. I'm assuming this is a Vista-specific security issue, but I don't
+know how to solve it?
+
+Can anybody help me? Has anybody had similar experiences and found a fix?
+
+Much obliged,
+
+Yves Sucaet
+Iowa State University
+
+
+
+From rolinger1 at hotmail.com  Wed Dec  5 00:29:16 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 4 Dec 2007 15:29:16 -0800
+Subject: [Xitami] CGI Environment Variable problem
+Message-ID: <BAY105-W1664FB081DF5A994170AAFF86D0@phx.gbl>
+
+
+ Hey all. I am having a problem getting CGI environment variables to appear in my scripts.  Is Xitami somehow stripping the referer query from the httpReferer environment variable?  My Xitami Server is config'd as follows: Full Envionment = yesPass HTTP fields = yesPass form fields = yes Pass Query_String = yesMy weblogs show the full referer information:     ie: http://www.google.com/search?ln=en&q=2002+honda+civic However, my perl cgi-bin scripts are only able to retrieve: http://www.google.com/search The cgi perl scripts, using two different methods: $httpReferer = $ENV{HTTP_REFERER} ;and$httpReferer = $query->referer() ; Return the same info: http://www.google.com/searchIn both cases, retrieving the Query_String (ie $ENV{QUERY_STRING} and $query->query_string() ), simply returns the string from my URL, not the referring URL. For whatever reason, I am not able to retrieve the full referring URL....only the partial...has anyone else seen this or know a work around?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071204/34bfc475/attachment.html 
+
+From preid at rci.rutgers.edu  Wed Dec  5 01:10:02 2007
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Tue, 04 Dec 2007 19:10:02 -0500
+Subject: [Xitami] CGI Environment Variable problem
+In-Reply-To: <BAY105-W1664FB081DF5A994170AAFF86D0@phx.gbl>
+References: <BAY105-W1664FB081DF5A994170AAFF86D0@phx.gbl>
+Message-ID: <4755EC5A.7010806@rci.rutgers.edu>
+
+ > not able to retrieve the full referring URL....only the partial
+
+You want query_string
+
+
+From rolinger1 at hotmail.com  Wed Dec  5 01:24:55 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 4 Dec 2007 16:24:55 -0800
+Subject: [Xitami] CGI Environment Variable problem
+In-Reply-To: <4755EC5A.7010806@rci.rutgers.edu>
+References: <BAY105-W1664FB081DF5A994170AAFF86D0@phx.gbl>
+	<4755EC5A.7010806@rci.rutgers.edu>
+Message-ID: <BAY105-W8BDCDFF09B17BF2C8B86AF86E0@phx.gbl>
+
+
+Nope.
+ 
+If I go to google and search for (2001 + honda + adcrow) info on my site I get bunch of results, one of which is: 
+Ex: http://www.adcrow.com/cgi-bin/postList.pl?cityCode=san&cid=3&fid=26&sid=0 
+ 
+The referring page would be: 
+Ex: http://www.google.com/search?ln=en&q=honda+2001+adcrow
+ 
+ 
+When I click that link, I am trapping the incoming HTTP info, using perls native $ENV{HTTP_REFERER} or perl's CGI $query->referer(), and I get the same result of : 
+Ex: http://www.google.com/search
+ 
+When I grab Query_String (from either method) I get the following:
+Ex: cityCode=san&cid=3&fid=26&sid=0  - which is the query string FOR my URL, not the referring URL.
+ 
+When I do print out the full environment variables, $ENV, no where in the returned HTTP enviornment value is the entire referer URL, just the partial pre query_string URL.
+ 
+However, the full referer URL, including referer query_string, is showing up in Xitami's web logs.  
+ 
+Are you able to grab the referring URL including query_string> Date: Tue, 4 Dec 2007 19:10:02 -0500> From: preid at rci.rutgers.edu> To: xitami at lists.xitami.org> Subject: Re: [Xitami] CGI Environment Variable problem> > > not able to retrieve the full referring URL....only the partial> > You want query_string> > > --> Xitami Users Mailing List -- For Xitami support> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071204/61c929aa/attachment.htm 
+
+From francis.turner at gmail.com  Thu Dec  6 09:49:09 2007
+From: francis.turner at gmail.com (Francis Turner)
+Date: Thu, 6 Dec 2007 09:49:09 +0100
+Subject: [Xitami] CGI Environment Variable problem
+In-Reply-To: <BAY105-W8BDCDFF09B17BF2C8B86AF86E0@phx.gbl>
+References: <BAY105-W1664FB081DF5A994170AAFF86D0@phx.gbl>
+	<4755EC5A.7010806@rci.rutgers.edu>
+	<BAY105-W8BDCDFF09B17BF2C8B86AF86E0@phx.gbl>
+Message-ID: <f83609d50712060049l49251a2bl980bff34da3b169a@mail.gmail.com>
+
+This seems to be a Xitami feature (or bug). As I'm now moving stuff to
+Linux I'm also investigating lighttpd which seems to be not disimilar
+in philosphy to Xitami. I checked. Lighttpd displays the query in the
+referer environment variable as you would hope.
+
+Ubuntu server plus lighttpd (plus perl & php) seems to be a very
+stable platform and it hasn't been that hard for me to migrate a test
+Xitami server to Lighttpd. If you need this info then that looks like
+the best way to go.
+
+Interestingly the user's browser will have the correct
+document.referer including the query string. You could possibly set a
+cookie and reload if the cookie wasn't present to transfer the info to
+the server?
+
+Francis
+
+On Dec 5, 2007 1:24 AM, R O <rolinger1 at hotmail.com> wrote:
+>
+>  Nope.
+>
+>  If I go to google and search for (2001 + honda + adcrow) info on my site I
+> get bunch of results, one of which is:
+>  Ex:
+> http://www.adcrow.com/cgi-bin/postList.pl?cityCode=san&cid=3&fid=26&sid=0
+>
+>  The referring page would be:
+>  Ex: http://www.google.com/search?ln=en&q=honda+2001+adcrow
+>
+>
+>  When I click that link, I am trapping the incoming HTTP info, using perls
+> native $ENV{HTTP_REFERER} or perl's CGI $query->referer(), and I get the
+> same result of :
+>  Ex: http://www.google.com/search
+>
+>  When I grab Query_String (from either method) I get the following:
+>  Ex: cityCode=san&cid=3&fid=26&sid=0  - which is the query string FOR my
+> URL, not the referring URL.
+>
+>  When I do print out the full environment variables, $ENV, no where in the
+> returned HTTP enviornment value is the entire referer URL, just the partial
+> pre query_string URL.
+>
+>  However, the full referer URL, including referer query_string, is showing
+> up in Xitami's web logs.
+>
+>  Are you able to grab the referring URL including query_string
+>
+> > Date: Tue, 4 Dec 2007 19:10:02 -0500
+> > From: preid at rci.rutgers.edu
+> > To: xitami at lists.xitami.org
+> > Subject: Re: [Xitami] CGI Environment Variable problem
+>
+>
+> >
+> > > not able to retrieve the full referring URL....only the partial
+> >
+> > You want query_string
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From shiv.mail at gmail.com  Tue Dec 11 12:41:51 2007
+From: shiv.mail at gmail.com (Shivendra Singh)
+Date: Tue, 11 Dec 2007 17:11:51 +0530
+Subject: [Xitami] ''could not open HTTP port 80- connection failed on
+	listen() (WSAEACCES)
+Message-ID: <afc66c140712110341k1c6a28b3i194a5a826219e355@mail.gmail.com>
+
+i am not able to run  xitami on windows xp. received a message ''could not
+open HTTP port 80- connection failed on listen() (WSAEACCES). -
+
+regard
+Shivendra Singh
+Assistant Librarian
+Baba Farid University of Heath Sciences
+GGS Hospital Campus, Sadiq Road
+Faridkot- 151203, Punjab
+Contact Number: 9915023251, 9815526163
+
+E-mail: shiv.mail at gmail.com
+http://eirs.blogspot.com/
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071211/96910f00/attachment.htm 
+
+From mw at 9000.org  Tue Dec 11 14:02:05 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Tue, 11 Dec 2007 14:02:05 +0100
+Subject: [Xitami] ''could not open HTTP port 80- connection failed on
+ listen() (WSAEACCES)
+In-Reply-To: <afc66c140712110341k1c6a28b3i194a5a826219e355@mail.gmail.com>
+References: <afc66c140712110341k1c6a28b3i194a5a826219e355@mail.gmail.com>
+Message-ID: <475E8A4D.6090203@9000.org>
+
+Shivendra Singh wrote, On 2007-12-11 12:41:
+> i am not able to run  xitami on windows xp. received a message ''could 
+> not open HTTP port 80- connection failed on listen() (WSAEACCES). -
+
+You have something else running on port80, which means another web 
+server -- most likely Microsoft Personal Web Server. Uninstall it or 
+deactivate it (in Services, I think the service for PWS is called "IIS / 
+internet information server onethingortheother" or "World Wide Web 
+Publishing Service" just as the "full" IIS.
+
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From A.Drent at rug.nl  Tue Dec 11 13:21:40 2007
+From: A.Drent at rug.nl (A Drent)
+Date: Tue, 11 Dec 2007 13:21:40 +0100
+Subject: [Xitami] ''could not open HTTP port 80- connection failed
+	onlisten() (WSAEACCES)
+References: <afc66c140712110341k1c6a28b3i194a5a826219e355@mail.gmail.com>
+Message-ID: <005a01c83bf0$6286cb50$85977d81@test123>
+
+Perhaps your port 80 is in use? (Skype, IIS...)
+
+albert
+  ----- Original Message ----- 
+  From: Shivendra Singh 
+  To: xitami at lists.xitami.org 
+  Sent: Tuesday, December 11, 2007 12:41 PM
+  Subject: [Xitami] ''could not open HTTP port 80- connection failed onlisten() (WSAEACCES)
+
+
+  i am not able to run  xitami on windows xp. received a message ''could not open HTTP port 80- connection failed on listen() (WSAEACCES). - 
+
+  regard
+  Shivendra Singh
+  Assistant Librarian
+  Baba Farid University of Heath Sciences
+  GGS Hospital Campus, Sadiq Road
+  Faridkot- 151203, Punjab
+  Contact Number: 9915023251, 9815526163
+
+  E-mail: shiv.mail at gmail.com
+  http://eirs.blogspot.com/ 
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071211/a94bceef/attachment.htm 
+
+From MGibbons at uxbridgecollege.ac.uk  Wed Dec 12 11:40:21 2007
+From: MGibbons at uxbridgecollege.ac.uk (Michael Gibbons)
+Date: Wed, 12 Dec 2007 10:40:21 -0000
+Subject: [Xitami] ''could not open HTTP port 80- connection
+	failedonlisten() (WSAEACCES)
+References: <afc66c140712110341k1c6a28b3i194a5a826219e355@mail.gmail.com>
+	<005a01c83bf0$6286cb50$85977d81@test123>
+Message-ID: <569FC25C7321094C85FDA6DB1F565581CDEFB5@uxbexc01.staffmail.uxbridge.ac.uk>
+
+Try port 8080 it should not make much difference, and should be av ailble.
+?
+mike
+
+  _____  
+
+From: xitami-bounces at lists.xitami.org on behalf of A Drent
+Sent: Tue 11/12/2007 12:21
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] ''could not open HTTP port 80- connection failedonlisten() (WSAEACCES)
+
+
+Perhaps your port 80 is in use? (Skype, IIS...)
+?
+albert
+
+----- Original Message ----- 
+From: Shivendra Singh 
+To: xitami at lists.xitami.org 
+Sent: Tuesday, December 11, 2007 12:41 PM
+Subject: [Xitami] ''could not open HTTP port 80- connection failed onlisten() (WSAEACCES)
+
+i am?not able to run? xitami on windows xp. received a message ''could not open HTTP port 80- connection failed on listen() (WSAEACCES). - 
+?
+regard
+Shivendra Singh
+Assistant Librarian
+Baba Farid University of Heath Sciences
+GGS Hospital Campus, Sadiq Road
+Faridkot- 151203, Punjab
+Contact Number: 9915023251, 9815526163
+
+E-mail: shiv.mail at gmail.com
+http://eirs.blogspot.com/ 
+
+
+  _____  
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+?
+Please consider the environment before printing this E-mail. Think Before You Print!
+Disclaimer:
+"The information or opinions in this message (including any attachments) are those of the author and are not necessarily those of Uxbridge College, which disclaims responsibility for loss or damage arising from its use to the maximum extent permitted by law.?E-mail messages sometimes go astray. This message is sent in confidence for the addressee only.?It may contain confidential or sensitive information.?The contents are not to be disclosed to anyone other than the addressee.?Unauthorised recipients are requested to preserve this confidentiality and to advise the originator immediately and to delete the message without copying, altering or disclosing its contents.?E-mails to or from Uxbridge College may be monitored by the College in accordance with its current policy."
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/ms-tnef
+Size: 6472 bytes
+Desc: not available
+Url : http://lists.xitami.org/pipermail/xitami/attachments/20071212/d13f0c51/attachment.bin 
+
+From wirelesshelpers at bellsouth.net  Wed Dec 12 21:44:15 2007
+From: wirelesshelpers at bellsouth.net (wirelesshelpers)
+Date: Wed, 12 Dec 2007 15:44:15 -0500
+Subject: [Xitami] help installing xitami/pro
+Message-ID: <001301c83cff$c31094f0$3277a84a@ownera2f0c0d70>
+
+Need help installing i dont understand what this is telling me to do what is 
+a consol box sorry but iam new to this
+can someone tell me how to do this in a more domdown way? this ia what it 
+said to do
+
+Open a console box and cd to the Xitami/Pro directory.  To install the
+    Xitami/Pro service, type:
+
+        xiprosrv -i 
+
+
+From magus1011 at gmail.com  Wed Dec 12 22:43:01 2007
+From: magus1011 at gmail.com (Magus1011)
+Date: Wed, 12 Dec 2007 15:43:01 -0600
+Subject: [Xitami] help installing xitami/pro
+In-Reply-To: <001301c83cff$c31094f0$3277a84a@ownera2f0c0d70>
+References: <001301c83cff$c31094f0$3277a84a@ownera2f0c0d70>
+Message-ID: <476055E5.7010000@gmaill.com>
+
+wirelesshelpers wrote:
+> Need help installing i dont understand what this is telling me to do what is 
+> a consol box sorry but iam new to this
+> can someone tell me how to do this in a more domdown way? this ia what it 
+> said to do
+> 
+> Open a console box and cd to the Xitami/Pro directory.  To install the
+>     Xitami/Pro service, type:
+> 
+>         xiprosrv -i 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+Console Box = Command Prompt. On Windows XP, Click Start, point at All
+Programs, point at Accessories and then click Command Prompt.
+
+For help on the commands that you can use in the command prompt window
+type help at the command prompt which usually looks something like:
+C:\Documents and Settings\<your user name>\:
+
+If you want help on a specific command such as cd then type help cd at
+the command prompt.
+
+Not to worry about being new to this, I've 40+ years experience with
+computers and I can still remember how confused I was when I first started.
+
+Please forgive my oversimplification, but with the command prompt you
+are dealing with something called DOS or Disk Operating System commands.
+To understand this area of computing you might be best to get a book
+from your library on DOS. It should have explanations for the various
+commands in it. DOS is a very powerful but also primitive method of
+interacting with your computer and it is well worth learning as you can
+do things with it that you can't easily otherwise do.
+
+-- 
+Best regards,
+Magus1011.
+
+Education's purpose is to replace an empty mind with an open one.
+ - Malcolm Forbes
+
+
+From MGibbons at uxbridgecollege.ac.uk  Thu Dec 13 12:25:13 2007
+From: MGibbons at uxbridgecollege.ac.uk (Michael Gibbons)
+Date: Thu, 13 Dec 2007 11:25:13 -0000
+Subject: [Xitami]  help installing dialin server
+References: <001301c83cff$c31094f0$3277a84a@ownera2f0c0d70>
+	<476055E5.7010000@gmaill.com>
+Message-ID: <569FC25C7321094C85FDA6DB1F565581CDEFBB@uxbexc01.staffmail.uxbridge.ac.uk>
+
+Hi Can anyone help, does you know a dialin server that works on xitami, i am trying to give free broadband to a friend.
+?
+Regards
+Michael
+
+?
+Please consider the environment before printing this E-mail. Think Before You Print!
+Disclaimer:
+"The information or opinions in this message (including any attachments) are those of the author and are not necessarily those of Uxbridge College, which disclaims responsibility for loss or damage arising from its use to the maximum extent permitted by law.?E-mail messages sometimes go astray. This message is sent in confidence for the addressee only.?It may contain confidential or sensitive information.?The contents are not to be disclosed to anyone other than the addressee.?Unauthorised recipients are requested to preserve this confidentiality and to advise the originator immediately and to delete the message without copying, altering or disclosing its contents.?E-mails to or from Uxbridge College may be monitored by the College in accordance with its current policy."
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/ms-tnef
+Size: 4200 bytes
+Desc: not available
+Url : http://lists.xitami.org/pipermail/xitami/attachments/20071213/718029e7/attachment.bin 
+
+From mw at 9000.org  Thu Dec 13 12:30:40 2007
+From: mw at 9000.org (Magnus Wedberg)
+Date: Thu, 13 Dec 2007 12:30:40 +0100
+Subject: [Xitami] help installing dialin server
+In-Reply-To: <569FC25C7321094C85FDA6DB1F565581CDEFBB@uxbexc01.staffmail.uxbridge.ac.uk>
+References: <001301c83cff$c31094f0$3277a84a@ownera2f0c0d70>	<476055E5.7010000@gmaill.com>
+	<569FC25C7321094C85FDA6DB1F565581CDEFBB@uxbexc01.staffmail.uxbridge.ac.uk>
+Message-ID: <476117E0.70701@9000.org>
+
+Michael Gibbons wrote, On 2007-12-13 12:25:
+> Hi Can anyone help, does you know a dialin server that works on xitami, i am trying to give free broadband to a friend.
+
+Xitami is a web server, not an operating system, and offers no dial-in 
+services. You should ask in a group related to the operating system you 
+run on the server (Windows, Linux, etc).
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From MGibbons at uxbridgecollege.ac.uk  Thu Dec 13 12:33:30 2007
+From: MGibbons at uxbridgecollege.ac.uk (Michael Gibbons)
+Date: Thu, 13 Dec 2007 11:33:30 -0000
+Subject: [Xitami] help installing dialin server
+References: <001301c83cff$c31094f0$3277a84a@ownera2f0c0d70>	<476055E5.7010000@gmaill.com><569FC25C7321094C85FDA6DB1F565581CDEFBB@uxbexc01.staffmail.uxbridge.ac.uk>
+	<476117E0.70701@9000.org>
+Message-ID: <569FC25C7321094C85FDA6DB1F565581CDEFBC@uxbexc01.staffmail.uxbridge.ac.uk>
+
+Thanks, duh!!! how true
+M
+
+  _____  
+
+From: xitami-bounces at lists.xitami.org on behalf of Magnus Wedberg
+Sent: Thu 13/12/2007 11:30
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] help installing dialin server
+
+
+
+Michael Gibbons wrote, On 2007-12-13 12:25:
+> Hi Can anyone help, does you know a dialin server that works on xitami, i am trying to give free broadband to a friend.
+
+Xitami is a web server, not an operating system, and offers no dial-in
+services. You should ask in a group related to the operating system you
+run on the server (Windows, Linux, etc).
+
+--
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+?
+Please consider the environment before printing this E-mail. Think Before You Print!
+Disclaimer:
+"The information or opinions in this message (including any attachments) are those of the author and are not necessarily those of Uxbridge College, which disclaims responsibility for loss or damage arising from its use to the maximum extent permitted by law.?E-mail messages sometimes go astray. This message is sent in confidence for the addressee only.?It may contain confidential or sensitive information.?The contents are not to be disclosed to anyone other than the addressee.?Unauthorised recipients are requested to preserve this confidentiality and to advise the originator immediately and to delete the message without copying, altering or disclosing its contents.?E-mails to or from Uxbridge College may be monitored by the College in accordance with its current policy."
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/ms-tnef
+Size: 5267 bytes
+Desc: not available
+Url : http://lists.xitami.org/pipermail/xitami/attachments/20071213/b48c99f9/attachment.bin 
+
+From wirelesshelpers at bellsouth.net  Fri Dec 14 16:21:41 2007
+From: wirelesshelpers at bellsouth.net (wirelesshelpers)
+Date: Fri, 14 Dec 2007 10:21:41 -0500
+Subject: [Xitami] Xitami Digest, Vol 12, Issue 5
+References: <mailman.1.1197543601.14982.xitami@lists.xitami.org>
+Message-ID: <003401c83e65$084381c0$3277a84a@ownera2f0c0d70>
+
+Thank you....
+I got it
+----- Original Message ----- 
+From: <xitami-request at lists.xitami.org>
+To: <xitami at lists.xitami.org>
+Sent: Thursday, December 13, 2007 6:00 AM
+Subject: Xitami Digest, Vol 12, Issue 5
+
+
+> Send Xitami mailing list submissions to
+> xitami at lists.xitami.org
+>
+> To subscribe or unsubscribe via the World Wide Web, visit
+> http://lists.xitami.org/mailman/listinfo/xitami
+> or, via email, send a message with subject or body 'help' to
+> xitami-request at lists.xitami.org
+>
+> You can reach the person managing the list at
+> xitami-owner at lists.xitami.org
+>
+> When replying, please edit your Subject line so it is more specific
+> than "Re: Contents of Xitami digest..."
+>
+>
+> Today's Topics:
+>
+>   1. help installing xitami/pro (wirelesshelpers)
+>   2. Re: help installing xitami/pro (Magus1011)
+>
+>
+> ----------------------------------------------------------------------
+>
+> Message: 1
+> Date: Wed, 12 Dec 2007 15:44:15 -0500
+> From: "wirelesshelpers" <wirelesshelpers at bellsouth.net>
+> Subject: [Xitami] help installing xitami/pro
+> To: <xitami at lists.xitami.org>
+> Message-ID: <001301c83cff$c31094f0$3277a84a at ownera2f0c0d70>
+> Content-Type: text/plain; format=flowed; charset="iso-8859-1";
+> reply-type=original
+>
+> Need help installing i dont understand what this is telling me to do what 
+> is
+> a consol box sorry but iam new to this
+> can someone tell me how to do this in a more domdown way? this ia what it
+> said to do
+>
+> Open a console box and cd to the Xitami/Pro directory.  To install the
+>    Xitami/Pro service, type:
+>
+>        xiprosrv -i
+>
+>
+>
+> ------------------------------
+>
+> Message: 2
+> Date: Wed, 12 Dec 2007 15:43:01 -0600
+> From: Magus1011 <magus1011 at gmail.com>
+> Subject: Re: [Xitami] help installing xitami/pro
+> To: Xitami Users General Discussion <xitami at lists.xitami.org>
+> Message-ID: <476055E5.7010000 at gmaill.com>
+> Content-Type: text/plain; charset=ISO-8859-1
+>
+> wirelesshelpers wrote:
+>> Need help installing i dont understand what this is telling me to do what 
+>> is
+>> a consol box sorry but iam new to this
+>> can someone tell me how to do this in a more domdown way? this ia what it
+>> said to do
+>>
+>> Open a console box and cd to the Xitami/Pro directory.  To install the
+>>     Xitami/Pro service, type:
+>>
+>>         xiprosrv -i
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>>
+> Console Box = Command Prompt. On Windows XP, Click Start, point at All
+> Programs, point at Accessories and then click Command Prompt.
+>
+> For help on the commands that you can use in the command prompt window
+> type help at the command prompt which usually looks something like:
+> C:\Documents and Settings\<your user name>\:
+>
+> If you want help on a specific command such as cd then type help cd at
+> the command prompt.
+>
+> Not to worry about being new to this, I've 40+ years experience with
+> computers and I can still remember how confused I was when I first 
+> started.
+>
+> Please forgive my oversimplification, but with the command prompt you
+> are dealing with something called DOS or Disk Operating System commands.
+> To understand this area of computing you might be best to get a book
+> from your library on DOS. It should have explanations for the various
+> commands in it. DOS is a very powerful but also primitive method of
+> interacting with your computer and it is well worth learning as you can
+> do things with it that you can't easily otherwise do.
+>
+> -- 
+> Best regards,
+> Magus1011.
+>
+> Education's purpose is to replace an empty mind with an open one.
+> - Malcolm Forbes
+>
+>
+>
+> ------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- Digest Version
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> End of Xitami Digest, Vol 12, Issue 5
+> ************************************* 
+
+
+From rolinger1 at hotmail.com  Fri Dec 21 00:28:35 2007
+From: rolinger1 at hotmail.com (R O)
+Date: Thu, 20 Dec 2007 15:28:35 -0800
+Subject: [Xitami] Server connections
+Message-ID: <BAY105-W19572EDD09555F2F05E4BBF85D0@phx.gbl>
+
+
+ 
+Anyone know what the max tcp connections Xitami can handle is?  Certain physical servers can handle well over 10,000 tcp sessions at once, but what can the application of Xitami handle before it starts to choke up?  I presume this number is going to be significantly lower than what the physical server can handle.
+ 
+-Russel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20071220/8bcffb83/attachment.htm 
+
+From slackrat4Q at azurservers.com  Fri Dec 21 01:00:14 2007
+From: slackrat4Q at azurservers.com (Slackrat)
+Date: Fri, 21 Dec 2007 01:00:14 +0100
+Subject: [Xitami] Server connections
+In-Reply-To: <BAY105-W19572EDD09555F2F05E4BBF85D0@phx.gbl> (R. O.'s message of
+	"Thu\, 20 Dec 2007 15\:28\:35 -0800")
+References: <BAY105-W19572EDD09555F2F05E4BBF85D0@phx.gbl>
+Message-ID: <871w9gapdd.fsf@azurservers.com>
+
+R O a ?crit profondement:
+
+|  
+| Anyone know what the max tcp connections Xitami can handle is?
+| Certain physical servers can handle well over 10,000 tcp sessions at
+| once, but what can the application of Xitami handle before it starts
+| to choke up?  I presume this number is going to be significantly lower
+| than what the physical server can handle.
+|  
+| -Russel
+
+In Xitami.cnf set "limit" to "0" (zero) which is the default anyway,
+and you have no limit to the  number of connections.
+
+But the real effective limit is your upload bandwidth
+
+Just observe your system and see when it starts to slow significantly
+
+-- 
+SlackRat - 4Q to Reply
+
+

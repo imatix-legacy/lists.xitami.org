@@ -1,0 +1,3532 @@
+From xitami@lists.xitami.org  Tue Apr  1 00:14:15 2003
+From: xitami@lists.xitami.org (miplanet)
+Date: Mon, 31 Mar 2003 18:14:15 -0500
+Subject: [Xitami] Cold Fusion Server
+In-Reply-To: <NFBBKNGGELNPLMHPBOCECEKCDBAA.admin@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEKDDBAA.admin@miplanet.net>
+
+Sorry I found the answer. Xifusion
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of miplanet
+Sent: Monday, March 31, 2003 5:56 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Cold Fusion Server
+
+
+I know nothing about Cold Fusion server, does it work with Xitami?
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From xitami@lists.xitami.org  Tue Apr  1 16:27:05 2003
+From: xitami@lists.xitami.org (Vince Napoli)
+Date: Tue, 01 Apr 2003 10:27:05 -0500
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEAECCDBAA.admin@miplanet.net>
+References: <51897@dsl.co.uk>
+Message-ID: <3E896979.6288.97A504@localhost>
+
+When running Xitami Internet Explorer is not automatically refreshing the default.html 
+even though we have IE set to automatically refresh the page.
+
+Is there something in the web server that dictates this action?
+
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 12:06:54 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 01 Apr 2003 11:06:54
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <3E896979.6288.97A504@localhost>
+References: <NFBBKNGGELNPLMHPBOCEAECCDBAA.admin@miplanet.net>
+ <51897@dsl.co.uk>
+Message-ID: <3.0.6.32.20030401110654.00ad44a8@mail.shininglightpro.com>
+
+At 10:27 AM 4/1/2003 -0500, Vince Napoli writeth:
+>When running Xitami Internet Explorer is not automatically refreshing the
+default.html 
+>even though we have IE set to automatically refresh the page.
+>
+>Is there something in the web server that dictates this action?
+
+Check your server logs for HTTP '304' responses when you request the
+'default.html' page.  That response indicates to the browser that the page
+in its cache is current and to use the cached copy instead of downloading
+the page from the server.  This cuts down on bandwidth usage and increases
+the overall speed of retrieving the webpage, but does introduce fun
+problems for developers to deal with.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Tue Apr  1 17:24:38 2003
+From: xitami@lists.xitami.org (Vince Napoli)
+Date: Tue, 01 Apr 2003 11:24:38 -0500
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <3.0.6.32.20030401110654.00ad44a8@mail.shininglightpro.com>
+References: <3E896979.6288.97A504@localhost>
+Message-ID: <3E8976F6.29908.CC54ED@localhost>
+
+--Message-Boundary-29984
+Content-type: text/plain; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+Content-description: Mail message body
+
+Yes,
+
+I have them all through the log files. How do I prevent this?
+
+> At 10:27 AM 4/1/2003 -0500, Vince Napoli writeth:
+> >When running Xitami Internet Explorer is not automatically refreshing
+> >the
+> default.html 
+> >even though we have IE set to automatically refresh the page.
+> >
+> >Is there something in the web server that dictates this action?
+> 
+> Check your server logs for HTTP '304' responses when you request the
+> 'default.html' page.  That response indicates to the browser that the
+> page in its cache is current and to use the cached copy instead of
+> downloading the page from the server.  This cuts down on bandwidth
+> usage and increases the overall speed of retrieving the webpage, but
+> does introduce fun problems for developers to deal with.
+> 
+> Hope this helps!
+> 
+> 
+>           Thomas J. Hruska -- shinelight@shininglightpro.com
+> Shining Light Productions -- "Meeting the needs of fellow programmers"
+>                   http://www.shininglightpro.com/
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vince Napoli
+Director of Technology and Network Administration
+845-647-0200x377
+Ellenville Central Schools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 17:27:15 2003
+From: xitami@lists.xitami.org (Iain A Gilroy)
+Date: Tue, 1 Apr 2003 17:27:15 +0100
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+In-Reply-To: <3.0.6.32.20030401110654.00ad44a8@mail.shininglightpro.com>
+Message-ID: <HHEELOONBDBNFCMJFDMJOEDCCEAA.iain@adderdigitalcc.tv>
+
+I am running the latest version of Xitami, but it keeps on crashing with
+illegal exception errors, what am I doing wrong ?
+
+TIA
+
+Iain
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 17:34:18 2003
+From: xitami@lists.xitami.org (Andris Kluga)
+Date: Tue, 1 Apr 2003 19:34:18 +0300
+Subject: [Xitami] Browser Refresh
+Message-ID: <01BBAEECE711D6118EF200306E01872716A5E6@walker.fortech.lv>
+
+Hi!
+
+Vince Napoli writes:
+> When running Xitami Internet Explorer is not automatically 
+> refreshing the default.html 
+> even though we have IE set to automatically refresh the page.
+
+Nothing to do with browser. It only displays information received from server.
+ 
+> Is there something in the web server that dictates this action?
+
+Yep, in [Server] section parameter variable cache-defaults
+
+
+  Andris
+
+
+From xitami@lists.xitami.org  Tue Apr  1 17:48:13 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Tue, 1 Apr 2003 11:48:13 -0500
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+References: <HHEELOONBDBNFCMJFDMJOEDCCEAA.iain@adderdigitalcc.tv>
+Message-ID: <003801c2f86e$7e5adc10$0200a8c0@dsl.gtei.net>
+
+> I am running the latest version of Xitami, but it keeps on crashing with
+> illegal exception errors, what am I doing wrong ?
+>
+> TIA
+>
+> Iain
+
+I am also having this problem!! Xitami used to be as stable as a rock. I
+believe I used to run 2.4d5. I upgraded to the newest beta, had crashing
+problems. Un-installed that, and installed 2.4d9, and still have crashing
+problems.
+I am running a sever-only machine with Win2k and all the latest patches,
+behind a ZoneAlarm Pro firewall with WWW, FTP and DNS ports open.
+Xitami runs for anywhere between 2 hours, and 4 days before crashing. I have
+not been able to find anything consistent in debug logs.
+It simply dies, while leaving the tray icon, which of course disappears as
+soon as you move your mouse over it.
+Lately, it has been crashing with a C++ runtime error message window.
+
+So should I fall back to 2.4d5 and forgo the DOS patch? Is it actually that
+2.4d9 is unstable? Or did the Beta install leave behind something?
+
+Thanks for any insights you can give to this costly problem.
+
+Tom
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 19:13:19 2003
+From: xitami@lists.xitami.org (SVP)
+Date: Tue, 1 Apr 2003 10:13:19 -0800
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+In-Reply-To: <003801c2f86e$7e5adc10$0200a8c0@dsl.gtei.net>
+Message-ID: <DAECIFPNFLGIHMJEOGHMIEEACGAA.psv@telus.net>
+
+Hi,
+
+If you're on WinNT or Win2k just use the NT service version! It is much more
+stable. And there no need for logging on as a user in order to run your
+webserver. An you can choose to reboot your computer when the server service
+crashes, or use a script that boots it regularly, say once a month, and...
+and... it works much better trust me.
+
+> It simply dies, while leaving the tray icon, which of course disappears as
+> soon as you move your mouse over it.
+Well, there's not going to be a tray icon anymore. But if you want to manage
+your computer remotely, through a SSH link what is the use of a tray icon
+anyway.
+
+Good luck.
+SP
+
+
+From xitami@lists.xitami.org  Wed Apr  2 19:08:35 2003
+From: xitami@lists.xitami.org (Gunnar Swan)
+Date: Wed, 02 Apr 2003 10:08:35 -0800
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+Message-ID: <200304011809.h31I9TQp022478@sxpublic.imatix.net>
+
+Are you running as a service ?
+On Win 98, I get crashes every so often.
+But not on NT 4 sp6a as a service. There, it goes months.
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 19:24:54 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Tue, 01 Apr 2003 13:24:54 -0500
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+In-Reply-To: <DAECIFPNFLGIHMJEOGHMIEEACGAA.psv@telus.net>
+References: <003801c2f86e$7e5adc10$0200a8c0@dsl.gtei.net>
+Message-ID: <3E899326.30952.B7ABD6@localhost>
+
+I've had decent stability with the console version under win2k.  I 
+like the tray icon of the win32 version.  But it was not as stable for 
+me.
+
+On 1 Apr 2003 at 10:13, SVP wrote:
+
+> Hi,
+> 
+> If you're on WinNT or Win2k just use the NT service version! It is 
+much more
+> stable. And there no need for logging on as a user in order to run 
+your
+> webserver. An you can choose to reboot your computer when the 
+server service
+> crashes, or use a script that boots it regularly, say once a month, 
+and...
+> and... it works much better trust me.
+> 
+> > It simply dies, while leaving the tray icon, which of course 
+disappears as
+> > soon as you move your mouse over it.
+> Well, there's not going to be a tray icon anymore. But if you want 
+to manage
+> your computer remotely, through a SSH link what is the use of a 
+tray icon
+> anyway.
+> 
+> Good luck.
+> SP
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 20:01:58 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Tue, 1 Apr 2003 14:01:58 -0500
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+References: <DAECIFPNFLGIHMJEOGHMIEEACGAA.psv@telus.net>
+Message-ID: <001101c2f881$2e0d2c00$0200a8c0@dsl.gtei.net>
+
+----- Original Message -----
+From: "SVP" <psv@telus.net>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, April 01, 2003 1:13 PM
+Subject: RE: [Xitami] Why does my XITAMI keep on crashing ????
+
+
+> Hi,
+>
+> If you're on WinNT or Win2k just use the NT service version! It is much
+more
+> stable. And there no need for logging on as a user in order to run your
+> webserver. An you can choose to reboot your computer when the server
+service
+> crashes, or use a script that boots it regularly, say once a month, and...
+> and... it works much better trust me.
+
+Sounds great! Can I still have access to the control panel for settings? Or
+do I need to edit the config files directly?
+
+Thanks for the help,
+Tom
+
+
+
+From xitami@lists.xitami.org  Tue Apr  1 21:25:19 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 01 Apr 2003 20:25:19
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+In-Reply-To: <003801c2f86e$7e5adc10$0200a8c0@dsl.gtei.net>
+References: <HHEELOONBDBNFCMJFDMJOEDCCEAA.iain@adderdigitalcc.tv>
+Message-ID: <3.0.6.32.20030401202519.00aff590@mail.shininglightpro.com>
+
+At 11:48 AM 4/1/2003 -0500, Tom Baker writeth:
+>> I am running the latest version of Xitami, but it keeps on crashing with
+>> illegal exception errors, what am I doing wrong ?
+>>
+>> TIA
+>>
+>> Iain
+>
+>I am also having this problem!! Xitami used to be as stable as a rock. I
+>believe I used to run 2.4d5. I upgraded to the newest beta, had crashing
+>problems. Un-installed that, and installed 2.4d9, and still have crashing
+>problems.
+>I am running a sever-only machine with Win2k and all the latest patches,
+>behind a ZoneAlarm Pro firewall with WWW, FTP and DNS ports open.
+>Xitami runs for anywhere between 2 hours, and 4 days before crashing. I have
+>not been able to find anything consistent in debug logs.
+>It simply dies, while leaving the tray icon, which of course disappears as
+>soon as you move your mouse over it.
+>Lately, it has been crashing with a C++ runtime error message window.
+>
+>So should I fall back to 2.4d5 and forgo the DOS patch? Is it actually that
+>2.4d9 is unstable? Or did the Beta install leave behind something?
+>
+>Thanks for any insights you can give to this costly problem.
+
+Costly?  What exactly are you doing that makes Xitami crashes costly?
+
+I run Xitami v2.4d9 NT Service on WinXP and have no problems.  Shutting
+down the server and restarting is a pain.  If you want a Xitami NT Service
+monitor (something similar to ProtoNova v1.31's NT Service Monitor
+program), I can whip up a quickie program for everyone to use.  I also run
+ProtoNova on port 82 as an NT Service.  In my experience, most stuff is
+more stable when implemented as an NT service for some reason or other
+(perhaps the developers are more cautious about coding since NT services
+can be a pain to debug).
+
+Also, I notice you have an FTP server.  It is a well-known fact that
+Xitami's FTP server is really buggy.  When I had the Xitami FTP server
+enabled, the server crashed even as a NT service on a weekly basis.  Most
+people here will tell you that you are better off with a real FTP server
+unless you have a really low-load Xitami server (particularly in the FTP
+arena).  Since I turned it off, I haven't had any problems.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Tue Apr  1 21:29:31 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 01 Apr 2003 20:29:31
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <3E8976F6.29908.CC54ED@localhost>
+References: <3.0.6.32.20030401110654.00ad44a8@mail.shininglightpro.com>
+ <3E896979.6288.97A504@localhost>
+Message-ID: <3.0.6.32.20030401202931.00aff590@mail.shininglightpro.com>
+
+At 11:24 AM 4/1/2003 -0500, Vince Napoli writeth:
+>Yes,
+>
+>I have them all through the log files. How do I prevent this?
+>
+>> At 10:27 AM 4/1/2003 -0500, Vince Napoli writeth:
+>> >When running Xitami Internet Explorer is not automatically refreshing
+>> >the
+>> default.html 
+>> >even though we have IE set to automatically refresh the page.
+>> >
+>> >Is there something in the web server that dictates this action?
+>> 
+>> Check your server logs for HTTP '304' responses when you request the
+>> 'default.html' page.  That response indicates to the browser that the
+>> page in its cache is current and to use the cached copy instead of
+>> downloading the page from the server.  This cuts down on bandwidth
+>> usage and increases the overall speed of retrieving the webpage, but
+>> does introduce fun problems for developers to deal with.
+
+In your server configuration, turn off the 'cache-defaults' option by
+setting it to '0' instead of '1'.  Restart the web server.  Reload the
+page.  Check your logs and see if it refreshed properly according to the
+server.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Wed Apr  2 04:42:55 2003
+From: xitami@lists.xitami.org (Wally Nickel)
+Date: Tue, 1 Apr 2003 22:42:55 -0500
+Subject: [Xitami] Icons in Directory Lists
+Message-ID: <000001c2f8c9$f2ab9040$32d58d18@CO1000246WAN>
+
+The Xitami web server is running very well over here;  no complaints
+from me.
+However,  I think I may have butchered something,  with respect to the
+icons that should be appearing from the various types of programs that
+are displayed in the directory content lists.
+Any suggestions/tips on getting the right icons to appear for the
+directory lists?
+
+Thanks..
+
+
+From xitami@lists.xitami.org  Wed Apr  2 06:23:41 2003
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Tue, 01 Apr 2003 21:23:41 -0800
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+References: <HHEELOONBDBNFCMJFDMJOEDCCEAA.iain@adderdigitalcc.tv>
+ <003801c2f86e$7e5adc10$0200a8c0@dsl.gtei.net>
+Message-ID: <003701c2f8d8$06acaf80$6401a80a@comcast.net>
+
+----- Original Message -----
+From: "Tom Baker" <t3baker@gardenstreet.org>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, April 01, 2003 8:48 AM
+Subject: Re: [Xitami] Why does my XITAMI keep on crashing ????
+
+
+> > I am running the latest version of Xitami, but it keeps on crashing with
+> > illegal exception errors, what am I doing wrong ?
+> >
+> > TIA
+> >
+> > Iain
+>
+> I am also having this problem!! Xitami used to be as stable as a rock. I
+> believe I used to run 2.4d5. I upgraded to the newest beta, had crashing
+> problems. Un-installed that, and installed 2.4d9, and still have crashing
+> problems.
+> I am running a sever-only machine with Win2k and all the latest patches,
+> behind a ZoneAlarm Pro firewall with WWW, FTP and DNS ports open.
+> Xitami runs for anywhere between 2 hours, and 4 days before crashing. I
+have
+> not been able to find anything consistent in debug logs.
+> It simply dies, while leaving the tray icon, which of course disappears as
+> soon as you move your mouse over it.
+> Lately, it has been crashing with a C++ runtime error message window.
+>
+> So should I fall back to 2.4d5 and forgo the DOS patch? Is it actually
+that
+> 2.4d9 is unstable? Or did the Beta install leave behind something?
+>
+> Thanks for any insights you can give to this costly problem.
+>
+> Tom
+
+My personal experience:
+
+I am running Xitami v2.5b4 (Win32) on a dedicated hand-me-down P166 running
+Win98SE (fully patched) in 80mb.  Zone Alarm (free version) assists.  FTP
+and HTTP services enabled on a non-standard port-base.  The LWRP services
+also runs.  I haven't quite got the virtual domain thing going yet, but
+fooling around got me a basehost.cfg file.
+
+In this configuration, the computer has been up for 15 straight days and
+Xitami has been running for 12 days.  Except for an occassional browser
+check of a ZA alert, the machine sits in the corner and is accessed from
+other computers on the internal network (in NetBEUI and TCP/IP).
+
+Admittedly, this is a low use private server accessed by invitation only.  I
+receive anywhere from 0 to 6 individual hits per day (although AOL IPs can
+be confusing).  Most of the rest of the hits are my internal web page tests.
+
+I don't run the DOS console because it leaves a DOS box up and the Win32
+version hasn't been a real problem.  The only freeze-up was 3 weeks ago when
+I was getting probed in port 80.  The log showed a huge request string just
+before things went dark.  Moving the base-port seems to have solved
+everything.  However, not running on port 80 creates an interesting set of
+problems.
+
+>From an outside view point, it looks like a Windows support file may have
+gotten corrupted and the problem may not be in Xitami directly.  And lets
+not forget a good cleaning of the box.  I had one motherboard that if I
+didn't keep the processor heatsink fins and fan cleaned out, would overheat
+and start generating exception errors (usually around 58-60 degrees (C)).
+That was different.
+
+Much luck,
+Charles
+
+
+From xitami@lists.xitami.org  Wed Apr  2 07:22:35 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Wed, 2 Apr 2003 01:22:35 -0500
+Subject: [Xitami] Why does my XITAMI keep on crashing ????
+References: <HHEELOONBDBNFCMJFDMJOEDCCEAA.iain@adderdigitalcc.tv> <3.0.6.32.20030401202519.00aff590@mail.shininglightpro.com>
+Message-ID: <001301c2f8e0$40bd5d70$0200a8c0@dsl.gtei.net>
+
+Thanks to all for the help. I've installed the service version, and it looks
+like the way to go.
+All the best,
+Tom
+
+----- Original Message -----
+From: "Thomas J. Hruska" <shinelight@shininglightpro.com>
+To: <xitami@lists.xitami.org>
+Sent: Tuesday, April 01, 2003 8:25 PM
+Subject: Re: [Xitami] Why does my XITAMI keep on crashing ????
+
+> I run Xitami v2.4d9 NT Service on WinXP and have no problems.  Shutting
+> down the server and restarting is a pain.  If you want a Xitami NT Service
+> monitor (something similar to ProtoNova v1.31's NT Service Monitor
+> program), I can whip up a quickie program for everyone to use.  I also run
+> ProtoNova on port 82 as an NT Service.  In my experience, most stuff is
+> more stable when implemented as an NT service for some reason or other
+> (perhaps the developers are more cautious about coding since NT services
+> can be a pain to debug).
+>
+> Also, I notice you have an FTP server.  It is a well-known fact that
+> Xitami's FTP server is really buggy.  When I had the Xitami FTP server
+> enabled, the server crashed even as a NT service on a weekly basis.  Most
+> people here will tell you that you are better off with a real FTP server
+> unless you have a really low-load Xitami server (particularly in the FTP
+> arena).  Since I turned it off, I haven't had any problems.
+>
+> Hope this helps!
+>
+>
+>           Thomas J. Hruska -- shinelight@shininglightpro.com
+> Shining Light Productions -- "Meeting the needs of fellow programmers"
+>                   http://www.shininglightpro.com/
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Wed Apr  2 13:35:45 2003
+From: xitami@lists.xitami.org (Vince Napoli)
+Date: Wed, 02 Apr 2003 07:35:45 -0500
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <3.0.6.32.20030401202931.00aff590@mail.shininglightpro.com>
+References: <3E8976F6.29908.CC54ED@localhost>
+Message-ID: <3E8A92D1.17787.5212356@localhost>
+
+--Message-Boundary-8970
+Content-type: text/plain; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+Content-description: Mail message body
+
+Thanks, found that setting. Made the change and will monitor.
+
+
+> At 11:24 AM 4/1/2003 -0500, Vince Napoli writeth:
+> >Yes,
+> >
+> >I have them all through the log files. How do I prevent this?
+> >
+> >> At 10:27 AM 4/1/2003 -0500, Vince Napoli writeth:
+> >> >When running Xitami Internet Explorer is not automatically
+> >> >refreshing the
+> >> default.html 
+> >> >even though we have IE set to automatically refresh the page.
+> >> >
+> >> >Is there something in the web server that dictates this action?
+> >> 
+> >> Check your server logs for HTTP '304' responses when you request
+> >> the 'default.html' page.  That response indicates to the browser
+> >> that the page in its cache is current and to use the cached copy
+> >> instead of downloading the page from the server.  This cuts down on
+> >> bandwidth usage and increases the overall speed of retrieving the
+> >> webpage, but does introduce fun problems for developers to deal
+> >> with.
+> 
+> In your server configuration, turn off the 'cache-defaults' option by
+> setting it to '0' instead of '1'.  Restart the web server.  Reload the
+> page.  Check your logs and see if it refreshed properly according to
+> the server.
+> 
+> Hope this helps!
+> 
+> 
+>           Thomas J. Hruska -- shinelight@shininglightpro.com
+> Shining Light Productions -- "Meeting the needs of fellow programmers"
+>                   http://www.shininglightpro.com/
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vince Napoli
+Director of Technology and Network Administration
+845-647-0200x377
+Ellenville Central Schools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+From xitami@lists.xitami.org  Wed Apr  2 16:29:26 2003
+From: xitami@lists.xitami.org (Vince Napoli)
+Date: Wed, 02 Apr 2003 10:29:26 -0500
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <3.0.6.32.20030401202931.00aff590@mail.shininglightpro.com>
+References: <3E8976F6.29908.CC54ED@localhost>
+Message-ID: <3E8ABB86.9452.5C02A10@localhost>
+
+--Message-Boundary-19897
+Content-type: text/plain; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+Content-description: Mail message body
+
+No good on the cache-defaults option. I still don't get a refresh on default.html until I 
+hit the refresh button.
+
+Where else can I look?
+
+> At 11:24 AM 4/1/2003 -0500, Vince Napoli writeth:
+> >Yes,
+> >
+> >I have them all through the log files. How do I prevent this?
+> >
+> >> At 10:27 AM 4/1/2003 -0500, Vince Napoli writeth:
+> >> >When running Xitami Internet Explorer is not automatically
+> >> >refreshing the
+> >> default.html 
+> >> >even though we have IE set to automatically refresh the page.
+> >> >
+> >> >Is there something in the web server that dictates this action?
+> >> 
+> >> Check your server logs for HTTP '304' responses when you request
+> >> the 'default.html' page.  That response indicates to the browser
+> >> that the page in its cache is current and to use the cached copy
+> >> instead of downloading the page from the server.  This cuts down on
+> >> bandwidth usage and increases the overall speed of retrieving the
+> >> webpage, but does introduce fun problems for developers to deal
+> >> with.
+> 
+> In your server configuration, turn off the 'cache-defaults' option by
+> setting it to '0' instead of '1'.  Restart the web server.  Reload the
+> page.  Check your logs and see if it refreshed properly according to
+> the server.
+> 
+> Hope this helps!
+> 
+> 
+>           Thomas J. Hruska -- shinelight@shininglightpro.com
+> Shining Light Productions -- "Meeting the needs of fellow programmers"
+>                   http://www.shininglightpro.com/
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vince Napoli
+Director of Technology and Network Administration
+845-647-0200x377
+Ellenville Central Schools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+From xitami@lists.xitami.org  Wed Apr  2 18:31:51 2003
+From: xitami@lists.xitami.org (Steve Shervais)
+Date: Wed, 02 Apr 2003 09:31:51 -0800
+Subject: [Xitami] Virtual Hosts Security Configuration Question
+Message-ID: <5.1.0.14.2.20030402085701.025a00a0@mailserver.ewu.edu>
+
+Still fighting the VHosts problem.
+I have a number of VHs, of the general form :MyClassTeam01.ewu.edu
+I have created separate .aut and .cfg files for each VH.
+
+APPROACH 1
+In the defaults.cfg file, I say this:
+[Virtual-hosts]
+MyClassTeam01.ewu.edu = "team01.cfg"
+
+In team01.cfg, I say this:
+[Security]
+     Filename = "team01.aut"
+
+in team01.aut, I say:
+[/Setup]
+     team01="password"
+
+HOWEVER,
+If you log in to MyClassTeam01.ewu.edu, Xitami ignores the security 
+settings and just lets you in.
+
+APPROACH 2
+If, in defaults.cfg I say:
+[Virtual-hosts]
+MyClassTeam01.ewu.edu = "defaults.cfg"
+
+[Security]
+     Filename = "defaults.aut"
+
+then in defaults.aut
+[Team01]
+     Team01= "password"
+
+it works.
+
+The trouble is, approach 1 is preferred because it puts user logs where the 
+student teams can get to them.
+
+Obviously a configuration problem.  I tried dropping the [Security] entry 
+in defaults.cfg, but that didn't help.
+Any idea how I can get approach 1 to work?
+
+
+
+Stephen Shervais, Ph.D.
+Assistant Professor, MIS
+College of Business and Public Administration
+Eastern Washington University
+Cheney, WA 99004
+
+509.359.4280
+
+You understand ONE, so you think you understand TWO.
+Because one and one are two.
+But you must also understand AND
+
+
+From xitami@lists.xitami.org  Wed Apr  2 15:41:17 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Wed, 02 Apr 2003 14:41:17
+Subject: [Xitami] Browser Refresh
+In-Reply-To: <3E8ABB86.9452.5C02A10@localhost>
+References: <3.0.6.32.20030401202931.00aff590@mail.shininglightpro.com>
+ <3E8976F6.29908.CC54ED@localhost>
+Message-ID: <3.0.6.32.20030402144117.00b05d28@mail.shininglightpro.com>
+
+At 10:29 AM 4/2/2003 -0500, Vince Napoli writeth:
+>No good on the cache-defaults option. I still don't get a refresh on
+default.html until I 
+>hit the refresh button.
+
+What exactly does your default.html file look like?  Perhaps that will shed
+some light on the problem.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Wed Apr  2 15:56:03 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Wed, 02 Apr 2003 14:56:03
+Subject: [Xitami] Icons in Directory Lists
+In-Reply-To: <000001c2f8c9$f2ab9040$32d58d18@CO1000246WAN>
+Message-ID: <3.0.6.32.20030402145603.00b05d28@mail.shininglightpro.com>
+
+At 10:42 PM 4/1/2003 -0500, Wally Nickel writeth:
+>The Xitami web server is running very well over here;  no complaints
+>from me.
+>However,  I think I may have butchered something,  with respect to the
+>icons that should be appearing from the various types of programs that
+>are displayed in the directory content lists.
+>Any suggestions/tips on getting the right icons to appear for the
+>directory lists?
+
+Ummm...switch to better-looking icons?
+
+http://www.shininglightpro.com/images/diricons/Image-Pack.zip
+
+I didn't make the icons, but Jeff Painter's site is down and I had them
+locally, so I decided to share :)
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Wed Apr  2 19:12:49 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Wed, 02 Apr 2003 18:12:49
+Subject: [Xitami] XiMon v1.0 Released!
+Message-ID: <3.0.6.32.20030402181249.00b05d28@mail.shininglightpro.com>
+
+During a recent discussion about Xitami crashing when run from the GUI and
+not the NT Service, I decided it was time to put together a Xitami NT
+Service Monitor/Controller program for NT Service users.  The resulting
+program, XiMon, is now available for download at:
+
+http://www.shininglightpro.com/search.php?searchname=XiMon
+
+It is a particularly useful tool for developers who constantly change the
+server configuration and don't want to keep an extra window open to
+shutdown and restart the Xitami Web Server.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Thu Apr  3 00:56:39 2003
+From: xitami@lists.xitami.org (M. Jason Smiley)
+Date: Wed, 2 Apr 2003 18:56:39 -0500
+Subject: [Xitami] XiMon v1.0 Released!
+References: <3.0.6.32.20030402181249.00b05d28@mail.shininglightpro.com>
+Message-ID: <081a01c2f973$810eeef0$2f28a8c0@rcolmstead.com>
+
+sounds good! downloading now!
+
+
+----- Original Message -----
+From: "Thomas J. Hruska" <shinelight@shininglightpro.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, April 02, 2003 6:12 PM
+Subject: [Xitami] XiMon v1.0 Released!
+
+
+> During a recent discussion about Xitami crashing when run from the GUI and
+> not the NT Service, I decided it was time to put together a Xitami NT
+> Service Monitor/Controller program for NT Service users.  The resulting
+> program, XiMon, is now available for download at:
+>
+> http://www.shininglightpro.com/search.php?searchname=XiMon
+>
+> It is a particularly useful tool for developers who constantly change the
+> server configuration and don't want to keep an extra window open to
+> shutdown and restart the Xitami Web Server.
+>
+> Hope this helps!
+>
+>
+>           Thomas J. Hruska -- shinelight@shininglightpro.com
+> Shining Light Productions -- "Meeting the needs of fellow programmers"
+>                   http://www.shininglightpro.com/
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Thu Apr  3 02:39:11 2003
+From: xitami@lists.xitami.org (Ingo)
+Date: Wed, 2 Apr 2003 20:39:11 -0500
+Subject: [Xitami] log file
+Message-ID: <91792-2200344313911694@earthlink.net>
+
+My log file does not show the visitor IP address or the server address. I
+have tried $(client) and $(ipcli) but all I get is my domain name/IP
+address as identified from the host file. I'm using Xitami 2.5b5 /DSL and
+Linksys router. What am I doing wrong?
+
+
+From xitami@lists.xitami.org  Thu Apr  3 12:06:25 2003
+From: xitami@lists.xitami.org (tom buckley)
+Date: Thu, 03 Apr 2003 06:06:25 -0500
+Subject: [Xitami] New IP Address / can't find page!
+Message-ID: <BAY1-F14nghNPxyrGnW0005f96c@hotmail.com>
+
+  Hey all,
+
+  My isp recently changed servers or something, which caused the static ip 
+address I had to change as well.  I finally got the DNS configured to point 
+to the domain, but I'm having another problem.  I was going to try to build 
+a new members area  for the group and wanted the url to be: 
+www.sorcep.com/members/EachPage.html  etc..  For some reason, I can get 
+there by using my ip addy, but NOT by using my domain name!  IOW's if I 
+point to: http://65.68.25.113/members/  I can access it, but if I point to: 
+http://www.sorcep.com/members/  I can NOT!  I'm sure it's something simple 
+because http://www.sorcep.com and http://65.68.25.113/ both lead to the 
+site.. ANY help or ideas on where to look and what to look for, would sure 
+be appreciated! Thank you.
+
+  John
+
+_________________________________________________________________
+Tired of spam? Get advanced junk mail protection with MSN 8. 
+http://join.msn.com/?page=features/junkmail
+
+
+From xitami@lists.xitami.org  Thu Apr  3 15:43:17 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Thu, 03 Apr 2003 09:43:17 -0500
+Subject: [Xitami] New IP Address / can't find page!
+In-Reply-To: <BAY1-F14nghNPxyrGnW0005f96c@hotmail.com>
+Message-ID: <3E8C0235.23493.4FA4273@localhost>
+
+I pinged www.sorcep.com and DNS reports back 216.204.150.251
+
+It's possible your DNS has not propogated yet.  Depending on your server the time 
+to live sets how fast the updates happen.  If you are running your own DNS if you 
+forget to change your serial nothing will update.
+
+  Gene
+
+On 3 Apr 2003 at 6:06, tom buckley wrote:
+
+> 
+>   Hey all,
+> 
+>   My isp recently changed servers or something, which caused the static ip 
+> address I had to change as well.  I finally got the DNS configured to point 
+> to the domain, but I'm having another problem.  I was going to try to build 
+> a new members area  for the group and wanted the url to be: 
+> www.sorcep.com/members/EachPage.html  etc..  For some reason, I can get 
+> there by using my ip addy, but NOT by using my domain name!  IOW's if I 
+> point to: http://65.68.25.113/members/  I can access it, but if I point to: 
+> http://www.sorcep.com/members/  I can NOT!  I'm sure it's something simple 
+> because http://www.sorcep.com and http://65.68.25.113/ both lead to the 
+> site.. ANY help or ideas on where to look and what to look for, would sure 
+> be appreciated! Thank you.
+> 
+>   John
+> 
+> _________________________________________________________________
+> Tired of spam? Get advanced junk mail protection with MSN 8. 
+> http://join.msn.com/?page=features/junkmail
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+
+From xitami@lists.xitami.org  Thu Apr  3 17:36:54 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Thu, 3 Apr 2003 11:36:54 -0500
+Subject: [Xitami] New IP Address / can't find page!
+References: <3E8C0235.23493.4FA4273@localhost>
+Message-ID: <004401c2f9ff$3ccd4f20$0200a8c0@dsl.gtei.net>
+
+I would also iterate that DNS propagation can easily take 48 hours from time
+of change. Depending on your Time To Live, it make be a week even. Also
+note, that some places on the net will get your new DNS record before
+others.
+
+Tom
+
+----- Original Message -----
+From: "WhiteShepherd" <fuzzydog@whiteshepherd.net>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, April 03, 2003 9:43 AM
+Subject: Re: [Xitami] New IP Address / can't find page!
+
+
+> I pinged www.sorcep.com and DNS reports back 216.204.150.251
+>
+> It's possible your DNS has not propogated yet.  Depending on your server
+the time
+> to live sets how fast the updates happen.  If you are running your own DNS
+if you
+> forget to change your serial nothing will update.
+>
+>   Gene
+>
+> On 3 Apr 2003 at 6:06, tom buckley wrote:
+>
+> >
+> >   Hey all,
+> >
+> >   My isp recently changed servers or something, which caused the static
+ip
+> > address I had to change as well.  I finally got the DNS configured to
+point
+> > to the domain, but I'm having another problem.  I was going to try to
+build
+> > a new members area  for the group and wanted the url to be:
+> > www.sorcep.com/members/EachPage.html  etc..  For some reason, I can get
+> > there by using my ip addy, but NOT by using my domain name!  IOW's if I
+> > point to: http://65.68.25.113/members/  I can access it, but if I point
+to:
+> > http://www.sorcep.com/members/  I can NOT!  I'm sure it's something
+simple
+> > because http://www.sorcep.com and http://65.68.25.113/ both lead to the
+> > site.. ANY help or ideas on where to look and what to look for, would
+sure
+> > be appreciated! Thank you.
+> >
+> >   John
+> >
+> > _________________________________________________________________
+> > Tired of spam? Get advanced junk mail protection with MSN 8.
+> > http://join.msn.com/?page=features/junkmail
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Thu Apr  3 17:35:25 2003
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Thu, 03 Apr 2003 08:35:25 -0800
+Subject: [Xitami] log file
+References: <91792-2200344313911694@earthlink.net>
+Message-ID: <002701c2f9ff$085ec340$6401a80a@comcast.net>
+
+Just a thought...
+
+If you are directly accessing your web site from an internal workstation (ie
+another computer on your internal network), all you log is the IP of the
+workstation.
+
+If you are accessing your web site internally via your domain name or the
+WAN IP address that is mapped (Linksys calls it DMZ) to your server, all
+you'll get is your routers gateway IP.  Not sure why.
+
+To get a visitor's IP loggged, you need to go outside.  A dialup connection
+works well.  A friends house is just as good.  There's always the library.
+Does make testing cumbersome.
+
+Much luck,
+Charles
+my app: Win98SE, Xitami 2.5b4, Linksys router on cable
+
+
+----- Original Message -----
+From: "Ingo" <haasi@earthlink.net>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, April 02, 2003 5:39 PM
+Subject: [Xitami] log file
+
+
+> My log file does not show the visitor IP address or the server address. I
+> have tried $(client) and $(ipcli) but all I get is my domain name/IP
+> address as identified from the host file. I'm using Xitami 2.5b5 /DSL and
+> Linksys router. What am I doing wrong?
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Apr  4 18:08:49 2003
+From: xitami@lists.xitami.org (Gunnar Swan)
+Date: Fri, 04 Apr 2003 09:08:49 -0800
+Subject: [Xitami] log file
+Message-ID: <200304031709.h33H9FQp018805@sxpublic.imatix.net>
+
+I use a hub and a router.
+
+   ISP  ------- HUB ----- Router --- Internal PC's
+                     |
+                     |
+                 Server
+   
+The gateway on my server points to the ISP
+The gateway on the interal PC's points to the Router.
+Even though the machines are in the same building, they 
+are on completely different networks.
+
+Therefore, I always see the router ip when accessing the server 
+from internal PC's.
+
+
+
+4/3/03 8:35:25 AM, Charles Schmidling <dscontroller@comcast.net> wrote:
+
+>Just a thought...
+>
+>If you are directly accessing your web site from an internal workstation (ie
+>another computer on your internal network), all you log is the IP of the
+>workstation.
+>
+>If you are accessing your web site internally via your domain name or the
+>WAN IP address that is mapped (Linksys calls it DMZ) to your server, all
+>you'll get is your routers gateway IP.  Not sure why.
+>
+>To get a visitor's IP loggged, you need to go outside.  A dialup connection
+>works well.  A friends house is just as good.  There's always the library.
+>Does make testing cumbersome.
+>
+>Much luck,
+>Charles
+>my app: Win98SE, Xitami 2.5b4, Linksys router on cable
+>
+>
+>----- Original Message -----
+>From: "Ingo" <haasi@earthlink.net>
+>To: <xitami@lists.xitami.org>
+>Sent: Wednesday, April 02, 2003 5:39 PM
+>Subject: [Xitami] log file
+>
+>
+>> My log file does not show the visitor IP address or the server address. I
+>> have tried $(client) and $(ipcli) but all I get is my domain name/IP
+>> address as identified from the host file. I'm using Xitami 2.5b5 /DSL and
+>> Linksys router. What am I doing wrong?
+>>
+>>
+>> --
+>> Xitami Users Mailing List -- For Xitami support
+>> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+Best Regards,
+Gunnar Swan
+http://www.PracticeToPass.Com
+Software Built For Statutory Courses
+
+
+
+From xitami@lists.xitami.org  Thu Apr  3 20:36:29 2003
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Thu, 03 Apr 2003 11:36:29 -0800
+Subject: [Xitami] log file
+References: <200304031709.h33H9FQp018805@sxpublic.imatix.net>
+Message-ID: <000d01c2fa18$5352f560$6401a80a@comcast.net>
+
+Hmmm...
+
+Our only differerence is:
+        ISP --- Router --- Hub --- everybody else
+                                     |
+                                 Server
+
+Router gateway = ISP
+Server gateway = Router
+I only have 1 assigned IP
+
+Where does the router point to?  I see a possible conflict between your
+router and the server:  unless you have multiple assigned IPs, they're both
+using the same one IP, which may be possible if you are MAC cloning the
+server's network card.
+
+If using a single IP, then the server is receiving it's traffic thru NAT
+services performed by the router, making the topology difference moot.
+
+As an afterthough, this may not help.  Does DSL make you use the "hosts"
+file?  Or is what you refer to "hosts" is the basehost.cfg file that is part
+of Virtual domaining?
+
+Wondering,
+Charles
+
+
+
+----- Original Message -----
+From: "Gunnar Swan" <GunnarSwan@PracticeToPass.com>
+To: <xitami@lists.xitami.org>
+Sent: Friday, April 04, 2003 9:08 AM
+Subject: Re: [Xitami] log file
+
+
+>
+> I use a hub and a router.
+>
+>    ISP  ------- HUB ----- Router --- Internal PC's
+>                      |
+>                      |
+>                  Server
+>
+> The gateway on my server points to the ISP
+> The gateway on the interal PC's points to the Router.
+> Even though the machines are in the same building, they
+> are on completely different networks.
+>
+> Therefore, I always see the router ip when accessing the server
+> from internal PC's.
+>
+>
+>
+> 4/3/03 8:35:25 AM, Charles Schmidling <dscontroller@comcast.net> wrote:
+>
+> >Just a thought...
+> >
+> >If you are directly accessing your web site from an internal workstation
+(ie
+> >another computer on your internal network), all you log is the IP of the
+> >workstation.
+> >
+> >If you are accessing your web site internally via your domain name or the
+> >WAN IP address that is mapped (Linksys calls it DMZ) to your server, all
+> >you'll get is your routers gateway IP.  Not sure why.
+> >
+> >To get a visitor's IP loggged, you need to go outside.  A dialup
+connection
+> >works well.  A friends house is just as good.  There's always the
+library.
+> >Does make testing cumbersome.
+> >
+> >Much luck,
+> >Charles
+> >my app: Win98SE, Xitami 2.5b4, Linksys router on cable
+> >
+> >
+> >----- Original Message -----
+> >From: "Ingo" <haasi@earthlink.net>
+> >To: <xitami@lists.xitami.org>
+> >Sent: Wednesday, April 02, 2003 5:39 PM
+> >Subject: [Xitami] log file
+> >
+> >
+> >> My log file does not show the visitor IP address or the server address.
+I
+> >> have tried $(client) and $(ipcli) but all I get is my domain name/IP
+> >> address as identified from the host file. I'm using Xitami 2.5b5 /DSL
+and
+> >> Linksys router. What am I doing wrong?
+> >>
+> >>
+> >> --
+> >> Xitami Users Mailing List -- For Xitami support
+> >> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> Best Regards,
+> Gunnar Swan
+> http://www.PracticeToPass.Com
+> Software Built For Statutory Courses
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Thu Apr  3 23:59:30 2003
+From: xitami@lists.xitami.org (David Holm)
+Date: Thu, 3 Apr 2003 15:59:30 -0700
+Subject: [Xitami] New IP Address / can't find page!
+References: <BAY1-F14nghNPxyrGnW0005f96c@hotmail.com>
+Message-ID: <002901c2fa34$af800000$0b4b220c@rivcom.net>
+
+Actually http://www.sorcep.com/ or http://sorcep.com/ cannot be found. You
+do not have your DNS pointing correctly at this time.
+Dave ô¿ô¬
+It's a good thing we have free speech because it helps us find out who the
+real idiots are.
+----- Original Message -----
+From: "tom buckley" <jglennqualls@hotmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, April 03, 2003 4:06 AM
+Subject: [Xitami] New IP Address / can't find page!
+
+
+>
+>   Hey all,
+>
+>   My isp recently changed servers or something, which caused the static ip
+> address I had to change as well.  I finally got the DNS configured to
+point
+> to the domain, but I'm having another problem.  I was going to try to
+build
+> a new members area  for the group and wanted the url to be:
+> www.sorcep.com/members/EachPage.html  etc..  For some reason, I can get
+> there by using my ip addy, but NOT by using my domain name!  IOW's if I
+> point to: http://65.68.25.113/members/  I can access it, but if I point
+to:
+> http://www.sorcep.com/members/  I can NOT!  I'm sure it's something simple
+> because http://www.sorcep.com and http://65.68.25.113/ both lead to the
+> site.. ANY help or ideas on where to look and what to look for, would sure
+> be appreciated! Thank you.
+>
+>   John
+>
+> _________________________________________________________________
+> Tired of spam? Get advanced junk mail protection with MSN 8.
+> http://join.msn.com/?page=features/junkmail
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Fri Apr  4 01:36:39 2003
+From: xitami@lists.xitami.org (Ingo)
+Date: Thu, 3 Apr 2003 19:36:39 -0500
+Subject: [Xitami] log file
+Message-ID: <100193-2200345403639435@earthlink.net>
+
+Here is a thought. The log file works with Omni httpd, however Omni is a
+little slower with virtual hosts running and it only has one log file. I'm
+using forwarding not DMZ.
+
+-----------------------Original Message-----------------------
+From:  Charles Schmidling
+To:  xitami@lists.xitami.org
+Date:  4/3/2003 2:37:00 PM
+Subject:  Re: [Xitami] log file
+
+Hmmm...
+
+Our only differerence is:
+        ISP --- Router --- Hub --- everybody else
+                                     |
+                                 Server
+
+Router gateway = ISP
+Server gateway = Router
+I only have 1 assigned IP
+
+Where does the router point to?  I see a possible conflict between your
+router and the server:  unless you have multiple assigned IPs, they're both
+using the same one IP, which may be possible if you are MAC cloning the
+server's network card.
+
+If using a single IP, then the server is receiving it's traffic thru NAT
+services performed by the router, making the topology difference moot.
+
+As an afterthough, this may not help.  Does DSL make you use the "hosts"
+file?  Or is what you refer to "hosts" is the basehost.cfg file that is part
+of Virtual domaining?
+
+Wondering,
+Charles
+
+
+
+----- Original Message -----
+From: "Gunnar Swan" <GunnarSwan@PracticeToPass.com>
+To: <xitami@lists.xitami.org>
+Sent: Friday, April 04, 2003 9:08 AM
+Subject: Re: [Xitami] log file
+
+
+>
+> I use a hub and a router.
+>
+>    ISP  ------- HUB ----- Router --- Internal PC's
+>                      |
+>                      |
+>                  Server
+>
+> The gateway on my server points to the ISP
+> The gateway on the interal PC's points to the Router.
+> Even though the machines are in the same building, they
+> are on completely different networks.
+>
+> Therefore, I always see the router ip when accessing the server
+> from internal PC's.
+>
+>
+>
+> 4/3/03 8:35:25 AM, Charles Schmidling <dscontroller@comcast.net> wrote:
+>
+> >Just a thought...
+> >
+> >If you are directly accessing your web site from an internal workstation
+(ie
+> >another computer on your internal network), all you log is the IP of the
+> >workstation.
+> >
+> >If you are accessing your web site internally via your domain name or the
+> >WAN IP address that is mapped (Linksys calls it DMZ) to your server, all
+> >you'll get is your routers gateway IP.  Not sure why.
+> >
+> >To get a visitor's IP loggged, you need to go outside.  A dialup
+connection
+> >works well.  A friends house is just as good.  There's always the
+library.
+> >Does make testing cumbersome.
+> >
+> >Much luck,
+> >Charles
+> >my app: Win98SE, Xitami 2.5b4, Linksys router on cable
+> >
+> >
+> >----- Original Message -----
+> >From: "Ingo" <haasi@earthlink.net>
+> >To: <xitami@lists.xitami.org>
+> >Sent: Wednesday, April 02, 2003 5:39 PM
+> >Subject: [Xitami] log file
+> >
+> >
+> >> My log file does not show the visitor IP address or the server address.
+I
+> >> have tried $(client) and $(ipcli) but all I get is my domain name/IP
+> >> address as identified from the host file. I'm using Xitami 2.5b5 /DSL
+and
+> >> Linksys router. What am I doing wrong?
+> >>
+> >>
+> >> --
+> >> Xitami Users Mailing List -- For Xitami support
+> >> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> Best Regards,
+> Gunnar Swan
+> http://www.PracticeToPass.Com
+> Software Built For Statutory Courses
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+From xitami@lists.xitami.org  Sat Apr  5 02:21:46 2003
+From: xitami@lists.xitami.org (Gunnar Swan)
+Date: Fri, 04 Apr 2003 17:21:46 -0800
+Subject: [Xitami] log file
+Message-ID: <200304040122.h341MPQp029506@sxpublic.imatix.net>
+
+I two static IP's. Router and Server.
+Virtual domaining is done at the company that hosts your domain name.
+
+
+
+From xitami@lists.xitami.org  Fri Apr  4 02:47:54 2003
+From: xitami@lists.xitami.org (Ingo)
+Date: Thu, 3 Apr 2003 20:47:54 -0500
+Subject: [Xitami] log file
+Message-ID: <79714-2200345414754106@earthlink.net>
+
+Yes, sorry. Virtual Hosting is by d2g, three virtual servers on local pc
+
+-----------------------Original Message-----------------------
+From:  Gunnar Swan
+To:  xitami@lists.xitami.org
+Date:  4/3/2003 8:23:00 PM
+Subject:  Re: [Xitami] log file
+
+I two static IP's. Router and Server.
+Virtual domaining is done at the company that hosts your domain name.
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+From xitami@lists.xitami.org  Fri Apr  4 19:22:10 2003
+From: xitami@lists.xitami.org (Oliver Vecernik)
+Date: Fri, 04 Apr 2003 20:22:10 +0200
+Subject: [Xitami] Aliases and PHP
+Message-ID: <3E8DCD52.4030107@aon.at>
+
+Hi!
+
+I recently found Xitami on the web and I'm trying to define some aliases 
+for PHP.
+
+My problem is: it simply does not work.
+
+I use following versions:
+Xitami: v2.5b5
+OS: Win XP Pro
+PHP: 4.3.1
+
+If I put following file in the webpages/php directory everthing works 
+fine with <http://localhost/php/phpinfo.php>:
+<?php phpinfo() ?>
+
+But when I define aliases (and restarted the server):
+web    n:\ablage\web\php
+php1   C:\Dokumente und Einstellungen\ov\Eigene Dateien\php
+
+I receive the following error with <http://localhost/web/phpinfo.php>:
+The URL you asked for does not exist on this website
+
+This directory is on a Samba network drive and is accessable. I also 
+tested the latest stable version, but no diffrence.
+
+Even if the path is on the same drive as the webpages directory I 
+receive the same message with <http://localhost/php1/phpinfo.php>.
+
+What am I doing wrong?
+
+Regards,
+Oliver
+-- 
+VECERNIK Datenerfassungssysteme
+A-2560 Hernstein, Hofkogelgasse 17
+Tel.: +43 2633 47530, Fax: DW 50
+http://members.aon.at/vecernik
+
+
+
+From xitami@lists.xitami.org  Fri Apr  4 20:06:31 2003
+From: xitami@lists.xitami.org (Fabian Bess)
+Date: Fri, 04 Apr 2003 21:06:31 +0200
+Subject: [Xitami] Aliases and PHP
+In-Reply-To: <3E8DCD52.4030107@aon.at>
+References: <3E8DCD52.4030107@aon.at>
+Message-ID: <3E8DD7B7.7020607@gmx.net>
+
+> What am I doing wrong? 
+
+Well, it's not your fault. This is a known problem: filters won't work 
+in aliased directories. If you use VirtualHosts instead everything works 
+fine. Another way is to move your webpages directory.
+
+Regards
+
+-- 
+Fabian Bess (webmaster@tannenhof.de)
+Webmaster Drogenhilfe Tannenhof Berlin e.V. 'http://www.tannenhof.de'
+
+
+
+From xitami@lists.xitami.org  Sat Apr  5 22:13:42 2003
+From: xitami@lists.xitami.org (miplanet)
+Date: Sat, 5 Apr 2003 16:13:42 -0500
+Subject: [Xitami] SendMail
+In-Reply-To: <3E8DD7B7.7020607@gmx.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEIEAKDCAA.admin@miplanet.net>
+
+When I use SendMail the server returns a 502 "This server is currently
+overloaded - please try again later"
+
+I am using SendMail.pm ver 2.09
+
+Has anyone experience this problem or have an idea how to fix this
+
+~Ron
+
+
+From xitami@lists.xitami.org  Tue Apr  8 13:23:43 2003
+From: xitami@lists.xitami.org (Mirek Scholze jr.)
+Date: Tue, 08 Apr 2003 14:23:43 +0200
+Subject: [Xitami] ftp download vs. upload speed
+In-Reply-To: <3.0.6.32.20030402181249.00b05d28@mail.shininglightpro.com>
+Message-ID: <5.2.0.9.0.20030408140914.04d5fac0@147.32.115.33>
+
+--=======58CBCD=======
+Content-Type: text/plain; x-avg-checked=avg-ok-1BDF5EE; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Hi all,
+
+I'm running Xitami 2.5b5 on Win2k Pro, Duron 600MHz, 256+128MB RAM, 100Mbit 
+Ethernet card.
+
+Sitting on another machine (Win XP Pro, Athlon 1.2G, 256MB RAM, 100Mbit 
+Ethernet card) at our building 100Mbit intranet and accessing my Xitami ftp 
+server I get these results:
+
+download 200MB file from server:
+* speed about 250-300 kBytes per second,
+* server CPU usage below 10%, by Xitami aprox. 2-4%
+
+upload the same file to server:
+* speed about 7.5-8 MBytes per second,
+* server CPU usage about 99%, by Xitami aprox. 95%
+
+Could someone explain or give an idea to me, why there is so big diference 
+between download and upload speed?
+
+Thank you for your time.
+
+M. Scholze jr.
+
+--=======58CBCD=======
+Content-Type: text/plain; charset=us-ascii; x-avg=cert; x-avg-checked=avg-ok-1BDF5EE
+Content-Disposition: inline
+
+
+---
+Odchozí zpráva neobsahuje viry.
+Zkontrolováno antivirovým systémem AVG (http://www.grisoft.cz).
+Verze: 6.0.467 / Virová báze: 266 - datum vydání: 1.4.2003
+
+--=======58CBCD=======--
+
+
+From xitami@lists.xitami.org  Tue Apr  8 18:06:47 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Tue, 8 Apr 2003 12:06:47 -0500
+Subject: [Xitami] Xitami service
+Message-ID: <003801c2fdf1$3d42aa40$0200a8c0@dsl.gtei.net>
+
+Hey folks!
+Recently I changed to the service version of Xitami 2.4d9. I had been using
+the app version, and was having stability problems. So far (at least), the
+service version seems stable. But here's a strange catch:
+Upon system startup, the Xitami service loads, but does not accept incoming
+connection attempts. If I restart the service, everything is AOK.
+
+ System specs:
+P2-350
+Win2k with all latest patches
+Static IP business DSL
+DNS server
+Mercury/32 mail server
+ZoneAlarm Pro
+
+So here's my guess: Xitami service is loading before ZoneAlarm. When
+ZoneAlarm starts, it disrupts the port monitoring by Xitami.
+
+So... If this is true, does anybody have an idea on how to fix it?
+
+Thanks again!
+Tom
+
+
+
+From xitami@lists.xitami.org  Tue Apr  8 18:44:36 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 08 Apr 2003 17:44:36
+Subject: [Xitami] ftp download vs. upload speed
+In-Reply-To: <5.2.0.9.0.20030408140914.04d5fac0@147.32.115.33>
+References: <3.0.6.32.20030402181249.00b05d28@mail.shininglightpro.com>
+Message-ID: <3.0.6.32.20030408174436.00b14e80@mail.shininglightpro.com>
+
+At 02:23 PM 4/8/2003 +0200, Mirek Scholze jr. writeth:
+>Hi all,
+>
+>I'm running Xitami 2.5b5 on Win2k Pro, Duron 600MHz, 256+128MB RAM, 100Mbit 
+>Ethernet card.
+>
+>Sitting on another machine (Win XP Pro, Athlon 1.2G, 256MB RAM, 100Mbit 
+>Ethernet card) at our building 100Mbit intranet and accessing my Xitami ftp 
+>server I get these results:
+>
+>download 200MB file from server:
+>* speed about 250-300 kBytes per second,
+>* server CPU usage below 10%, by Xitami aprox. 2-4%
+>
+>upload the same file to server:
+>* speed about 7.5-8 MBytes per second,
+>* server CPU usage about 99%, by Xitami aprox. 95%
+>
+>Could someone explain or give an idea to me, why there is so big diference 
+>between download and upload speed?
+
+Xitami shouldn't be consuming that much CPU time.  Apparently Xitami is
+lacking some sort of throttle mechanism for uploads (seems to be doing fine
+on downloads).  The CPU usage for any webserver should be 10% at most to be
+able to handle periodic spikes up to 50%.  Anything over 50% is asking for
+trouble on a high-speed connection like yours.  If you don't want to mess
+with modifying code, you could throttle the network card back to 10Mb
+instead of the 100Mb you are currently running at (which should effectively
+slow things down).
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Tue Apr  8 18:53:19 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 08 Apr 2003 17:53:19
+Subject: [Xitami] Xitami service
+In-Reply-To: <003801c2fdf1$3d42aa40$0200a8c0@dsl.gtei.net>
+Message-ID: <3.0.6.32.20030408175319.00b14e80@mail.shininglightpro.com>
+
+At 12:06 PM 4/8/2003 -0500, Tom Baker writeth:
+>Hey folks!
+>Recently I changed to the service version of Xitami 2.4d9. I had been using
+>the app version, and was having stability problems. So far (at least), the
+>service version seems stable. But here's a strange catch:
+>Upon system startup, the Xitami service loads, but does not accept incoming
+>connection attempts. If I restart the service, everything is AOK.
+>
+> System specs:
+>P2-350
+>Win2k with all latest patches
+>Static IP business DSL
+>DNS server
+>Mercury/32 mail server
+>ZoneAlarm Pro
+>
+>So here's my guess: Xitami service is loading before ZoneAlarm. When
+>ZoneAlarm starts, it disrupts the port monitoring by Xitami.
+>
+>So... If this is true, does anybody have an idea on how to fix it?
+
+Yup.  That happens.  There's a way to fix it, but it requires writing code
+(as far as I know).
+
+Delay start Xitami by making it a dependency of ZoneAlarm in the Services
+Control Panel.  To do this, you need to write program that calls
+OpenServiceManager(), OpenService(), ChangeServiceConfig(), and
+CloseServiceHandle().  I don't have time at the moment to do this, but
+maybe someone else here will write a quick program that does that for you.
+If you want to wait a week and e-mail me to remind me about this (if no
+one's done this yet), I'll write it.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Wed Apr  9 06:51:54 2003
+From: xitami@lists.xitami.org (Go Bonkers)
+Date: Wed, 09 Apr 2003 01:51:54 -0400
+Subject: [Xitami] Xitami service
+Message-ID: <F73gGZcgr4Y36EiouWr0002461c@hotmail.com>
+
+~~
+>From: "Tom Baker" Upon system startup, the Xitami service loads, but does 
+>not accept incoming connection attempts. If I restart the service, 
+>everything is AOK.
+-
+I use a startup shortcut to a little delayer.exe(21kb)
+Freeware http://www.cottonwoodsw.com/    /D55 (seconds)
+Windows 3.x/95/98/NT , but may work with w2k too
+
+mike
+~~
+
+
+_________________________________________________________________
+Add photos to your messages with MSN 8. Get 2 months FREE*.  
+http://join.msn.com/?page=features/featuredemail
+
+
+From xitami@lists.xitami.org  Wed Apr  9 09:07:02 2003
+From: xitami@lists.xitami.org (Mirek Scholze jr.)
+Date: Wed, 09 Apr 2003 10:07:02 +0200
+Subject: [Xitami] ftp download vs. upload speed
+In-Reply-To: <3.0.6.32.20030408174436.00b14e80@mail.shininglightpro.com>
+References: <5.2.0.9.0.20030408140914.04d5fac0@147.32.115.33>
+ <3.0.6.32.20030402181249.00b05d28@mail.shininglightpro.com>
+Message-ID: <5.2.0.9.0.20030409084505.03057298@147.32.115.33>
+
+--=======42A7D3=======
+Content-Type: text/plain; x-avg-checked=avg-ok-2507352B; charset=us-ascii; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+>Xitami shouldn't be consuming that much CPU time.
+
+Thank you.
+
+CPU load is the secondary problem, it doesn't matter. Xitami manages among 
+connections well and the server (machine) is dedicated mainly for http and 
+ftp services.
+
+My problem is slow speed for downloading, which I would like increase, not 
+high speed for upload. And I have no idea how to do it :-/ Throttling is off.
+
+M. Scholze jr.
+
+
+--=======42A7D3=======
+Content-Type: text/plain; charset=us-ascii; x-avg=cert; x-avg-checked=avg-ok-2507352B
+Content-Disposition: inline
+
+
+---
+Odchozí zpráva neobsahuje viry.
+Zkontrolováno antivirovým systémem AVG (http://www.grisoft.cz).
+Verze: 6.0.470 / Virová báze: 268 - datum vydání: 8.4.2003
+
+--=======42A7D3=======--
+
+
+From xitami@lists.xitami.org  Wed Apr  9 10:20:05 2003
+From: xitami@lists.xitami.org (Boyan Brezinsky)
+Date: Wed, 09 Apr 2003 12:20:05 +0300
+Subject: [Xitami] Xitami service
+In-Reply-To: <20030409042502.19967.26253.Mailman@sxpublic.imatix.net>
+Message-ID: <RMJEDA9OKECEDGDBAHFBAFCD1XVPK.3e93e5c5@boyan>
+
+>Date: Tue, 08 Apr 2003 17:53:19
+>To: xitami@lists.xitami.org
+>From: "Thomas J. Hruska" <shinelight@shininglightpro.com>
+>Subject: Re: [Xitami] Xitami service
+>Reply-To: xitami@lists.xitami.org
+>
+>At 12:06 PM 4/8/2003 -0500, Tom Baker writeth:
+>>Hey folks!
+>>Recently I changed to the service version of Xitami 2.4d9. I had 
+been using
+>>the app version, and was having stability problems. So far (at 
+least), the
+>>service version seems stable. But here's a strange catch:
+>>Upon system startup, the Xitami service loads, but does not accept 
+incoming
+>>connection attempts. If I restart the service, everything is AOK.
+>>
+>> System specs:
+>>P2-350
+>>Win2k with all latest patches
+>>Static IP business DSL
+>>DNS server
+>>Mercury/32 mail server
+>>ZoneAlarm Pro
+>>
+>>So here's my guess: Xitami service is loading before ZoneAlarm. When
+>>ZoneAlarm starts, it disrupts the port monitoring by Xitami.
+>>
+>>So... If this is true, does anybody have an idea on how to fix it?
+>
+>Yup.  That happens.  There's a way to fix it, but it requires writing 
+code
+>(as far as I know).
+>
+>Delay start Xitami by making it a dependency of ZoneAlarm in the 
+Services
+>Control Panel.  To do this, you need to write program that calls
+>OpenServiceManager(), OpenService(), ChangeServiceConfig(), and
+>CloseServiceHandle().  I don't have time at the moment to do this, 
+but
+>maybe someone else here will write a quick program that does that for 
+you.
+>If you want to wait a week and e-mail me to remind me about this (if 
+no
+>one's done this yet), I'll write it.
+>
+>Hope this helps!
+>
+>
+>          Thomas J. Hruska -- shinelight@shininglightpro.com
+>Shining Light Productions -- "Meeting the needs of fellow 
+programmers"
+>                  http://www.shininglightpro.com/
+>
+
+Can't you just modify the registry entry for the Xitami service by 
+adding the value "DependOnService", which is to be set to whatever the 
+name of the ZoneAlarm service is?
+The only trouble I see in this approach is that the value type is 
+REG_MULTI_SZ, which, I believe, is impossible to create through 
+Regedit. But it shouldn't be much of a problem with editing an 
+exported registry key, which is actually a text file.
+
+Boyan
+
+
+
+
+From xitami@lists.xitami.org  Wed Apr  9 14:50:31 2003
+From: xitami@lists.xitami.org (Hymbaugh, Mike)
+Date: Wed, 9 Apr 2003 08:50:31 -0500
+Subject: trim replies RE: [Xitami] Xitami service
+Message-ID: <853CE5E8344DD41198B900508BD6BC90963B1F@DMNTEXCH>
+
+A little trimming/quoting goes a long way in getting you message read.
+Especially if you reply at the bottom instead of the top of a message.
+
+-----Original Message-----
+From: Boyan Brezinsky [mailto:boyan@sanbolic.com]
+Sent: Wednesday, April 09, 2003 4:20 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Xitami service
+
+
+>Date: Tue, 08 Apr 2003 17:53:19
+>To: xitami@lists.xitami.org
+>From: "Thomas J. Hruska" <shinelight@shininglightpro.com>
+>Subject: Re: [Xitami] Xitami service
+>Reply-To: xitami@lists.xitami.org
+>
+>At 12:06 PM 4/8/2003 -0500, Tom Baker writeth:
+>>Hey folks!
+>>Recently I changed to the service version of Xitami 2.4d9. I had 
+been using
+>>the app version, and was having stability problems. So far (at 
+least), the
+>>service version seems stable. But here's a strange catch:
+>>Upon system startup, the Xitami service loads, but does not accept 
+incoming
+>>connection attempts. If I restart the service, everything is AOK.
+>>
+>> System specs:
+>>P2-350
+>>Win2k with all latest patches
+>>Static IP business DSL
+>>DNS server
+>>Mercury/32 mail server
+>>ZoneAlarm Pro
+>>
+>>So here's my guess: Xitami service is loading before ZoneAlarm. When
+>>ZoneAlarm starts, it disrupts the port monitoring by Xitami.
+>>
+>>So... If this is true, does anybody have an idea on how to fix it?
+>
+>Yup.  That happens.  There's a way to fix it, but it requires writing 
+code
+>(as far as I know).
+>
+>Delay start Xitami by making it a dependency of ZoneAlarm in the 
+Services
+>Control Panel.  To do this, you need to write program that calls
+>OpenServiceManager(), OpenService(), ChangeServiceConfig(), and
+>CloseServiceHandle().  I don't have time at the moment to do this, 
+but
+>maybe someone else here will write a quick program that does that for 
+you.
+>If you want to wait a week and e-mail me to remind me about this (if 
+no
+>one's done this yet), I'll write it.
+>
+>Hope this helps!
+>
+>
+>          Thomas J. Hruska -- shinelight@shininglightpro.com
+>Shining Light Productions -- "Meeting the needs of fellow 
+programmers"
+>                  http://www.shininglightpro.com/
+>
+
+Can't you just modify the registry entry for the Xitami service by 
+adding the value "DependOnService", which is to be set to whatever the 
+name of the ZoneAlarm service is?
+The only trouble I see in this approach is that the value type is 
+REG_MULTI_SZ, which, I believe, is impossible to create through 
+Regedit. But it shouldn't be much of a problem with editing an 
+exported registry key, which is actually a text file.
+
+Boyan
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From xitami@lists.xitami.org  Wed Apr  9 15:05:23 2003
+From: xitami@lists.xitami.org (=?iso-8859-1?Q?dupont.emmanuel?=)
+Date: Wed,  9 Apr 2003 16:05:23 +0200
+Subject: [Xitami] =?iso-8859-1?Q?secure_uid_and_directory_listing_problem?=
+Message-ID: <HD2XSZ$5E3FEEDFD7BA6A78B8E1477B9E5FA8CB@laposte.net>
+
+hello,
+I use xitami on a freebsd system
+I can't get directory listing with xitami not running as root. 
+With another uid (www)  it gives "error 403"
+The rights are ok: user www can "ls" and "cd" the directory.
+Any idea? 
+
+
+Emmanuel
+
+
+
+
+Accédez au courrier électronique de La Poste : www.laposte.net ; 
+3615 LAPOSTENET (0,34€/mn) ; tél : 08 92 68 13 50 (0,34€/mn)"
+
+
+
+
+
+From xitami@lists.xitami.org  Wed Apr  9 11:58:46 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Wed, 09 Apr 2003 10:58:46
+Subject: [Xitami] Xitami service
+In-Reply-To: <RMJEDA9OKECEDGDBAHFBAFCD1XVPK.3e93e5c5@boyan>
+References: <20030409042502.19967.26253.Mailman@sxpublic.imatix.net>
+Message-ID: <3.0.6.32.20030409105846.00b05038@mail.shininglightpro.com>
+
+At 12:20 PM 4/9/2003 +0300, Boyan Brezinsky writeth:
+>Can't you just modify the registry entry for the Xitami service by 
+>adding the value "DependOnService", which is to be set to whatever the 
+>name of the ZoneAlarm service is?
+>The only trouble I see in this approach is that the value type is 
+>REG_MULTI_SZ, which, I believe, is impossible to create through 
+>Regedit. But it shouldn't be much of a problem with editing an 
+>exported registry key, which is actually a text file.
+
+That's dangerous and probably not going to work across multiple versions of
+NT.  Using the service manager is much safer.
+
+Hoep this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+From xitami@lists.xitami.org  Thu Apr 10 12:51:29 2003
+From: xitami@lists.xitami.org (Dario B.)
+Date: Thu, 10 Apr 2003 13:51:29 +0200
+Subject: [Xitami] Are there known security bugs on xitami?
+Message-ID: <001801c2ff57$87f95fe0$9e995e3e@leo>
+
+Hello
+I would like to know if there are known security bugs in xitami or where I
+could find info on that
+Thank you
+
+Leo
+
+
+
+From xitami@lists.xitami.org  Thu Apr 10 13:02:33 2003
+From: xitami@lists.xitami.org (Vince Napoli)
+Date: Thu, 10 Apr 2003 08:02:33 -0400
+Subject: [Xitami] Are there known security bugs on xitami?
+In-Reply-To: <001801c2ff57$87f95fe0$9e995e3e@leo>
+Message-ID: <3E952519.7430.330C2A@localhost>
+
+--Message-Boundary-22090
+Content-type: text/plain; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+Content-description: Mail message body
+
+I recently read an article in PC World (I think) that listed a few minor holes.
+> Hello
+> I would like to know if there are known security bugs in xitami or
+> where I could find info on that Thank you
+> 
+> Leo
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vince Napoli
+Director of Technology and Network Administration
+845-647-0200x377
+Ellenville Central Schools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+From xitami@lists.xitami.org  Thu Apr 10 15:48:17 2003
+From: xitami@lists.xitami.org (Alex Glasgow)
+Date: Thu, 10 Apr 2003 09:48:17 -0500
+Subject: [Xitami] Used port 80
+In-Reply-To: <Pine.LNX.4.53.0303031031550.458@patanjali.manpowerinc.com>
+References: <200303021818.h22II3h2032295@sxpublic.nxrda.imatix.net> <Pine.LNX.4.53.0303031031550.458@patanjali.manpowerinc.com>
+Message-ID: <3E958431.1080701@swbell.net>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+  <title></title>
+</head>
+<body>
+Thanks.&nbsp; Fport is the greatest.<br>
+<br>
+<a class="moz-txt-link-abbreviated" href="mailto:frederic.lemoine@manpowerinc.com">frederic.lemoine@manpowerinc.com</a> wrote:<br>
+<blockquote type="cite"
+ cite="midPine.LNX.4.53.0303031031550.458@patanjali.manpowerinc.com">
+  <pre wrap="">fport is also very nice for that :
+
+<a class="moz-txt-link-freetext" href="http://www.foundstone.com/knowledge/proddesc/fport.html">http://www.foundstone.com/knowledge/proddesc/fport.html</a>
+
+F.
+
+On Sun, 2 Mar 2003, Gunnar Swan wrote:
+
+  </pre>
+  <blockquote type="cite">
+    <pre wrap="">There is a utility at <a class="moz-txt-link-abbreviated" href="http://www.tnsoft.com">www.tnsoft.com</a> that will show what is listening on different ports.
+
+3/1/03 5:50:57 AM, Alex Glasgow <a class="moz-txt-link-rfc2396E" href="mailto:calego@swbell.net">&lt;calego@swbell.net&gt;</a> wrote:
+
+    </pre>
+    <blockquote type="cite">
+      <pre wrap="">I have Windows 2000.
+
+nikiboy wrote:
+
+      </pre>
+      <blockquote type="cite">
+        <pre wrap="">AG&gt; Is there any way I can tell
+AG&gt; what might be using port 80?
+
+in WindowsXP (access to shared folders over http)
+
+
+
+        </pre>
+      </blockquote>
+      <pre wrap="">
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <a class="moz-txt-link-freetext" href="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</a>
+
+      </pre>
+    </blockquote>
+    <pre wrap="">
+Best Regards,
+Gunnar Swan
+<a class="moz-txt-link-freetext" href="http://www.PracticeToPass.Com">http://www.PracticeToPass.Com</a>
+Software Built For Statutory Courses
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <a class="moz-txt-link-freetext" href="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</a>
+
+    </pre>
+  </blockquote>
+  <pre wrap=""><!---->
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <a class="moz-txt-link-freetext" href="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</a>
+
+  </pre>
+</blockquote>
+</body>
+</html>
+
+
+
+From xitami@lists.xitami.org  Fri Apr 11 05:35:34 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Thu, 10 Apr 2003 23:35:34 -0500
+Subject: [Xitami] Are there known security bugs on xitami?
+References: <3E952519.7430.330C2A@localhost>
+Message-ID: <004801c2ffe3$cafcf630$0200a8c0@dsl.gtei.net>
+
+----- Original Message -----
+From: "Vince Napoli" <vnapoli@ecs.k12.ny.us>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, April 10, 2003 7:02 AM
+Subject: Re: [Xitami] Are there known security bugs on xitami?
+
+
+> I recently read an article in PC World (I think) that listed a few minor
+holes.
+> > Hello
+> > I would like to know if there are known security bugs in xitami or
+> > where I could find info on that Thank you
+> >
+> > Leo
+
+Read the BugTraq report.
+http://www.securityfocus.com/cgi-bin/sfonline/vulns.pl
+
+It covers things pretty well.
+Tom
+
+
+
+From xitami@lists.xitami.org  Thu Apr 10 18:41:15 2003
+From: xitami@lists.xitami.org (Mark Cockrell)
+Date: Thu, 10 Apr 2003 12:41:15 -0500
+Subject: [Xitami] SSI
+Message-ID: <3E95ACBB.40801@honeygroveisd.net>
+
+I'm having trouble getting my Server-Side Includes working, and I'm 
+hoping that someone here can help.  I'm using Matt Wright's Random Text 
+script, and it works perfectly when I just run the script
+(http://www.wreckedandabandoned.com/cgi-bin/rand_text/rand_text.pl), but 
+when I try to include it in a test page 
+(http://www.wreckedandabandoned.com/cgi-bin/rand_text/test.shtml) 
+there's no output from the script.  I'm sure I've just overlooked 
+something, but I'm stumped.  I would appreciate any help.  Thanks.
+
+-- 
+C-ya,
+Mark
+____
+If you bring a raccoon's head to the Henniker, New Hampshire town hall, you are entitled to receive $.10 from the town.
+
+
+
+
+From xitami@lists.xitami.org  Thu Apr 10 00:55:37 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Wed, 09 Apr 2003 23:55:37 GMT
+Subject: [Xitami] ftp download vs. upload speed
+Message-ID: <52067@dsl.co.uk>
+
+In message <5.2.0.9.0.20030409084505.03057298@147.32.115.33>
+   "Mirek Scholze jr." writes:
+
+> My problem is slow speed for downloading, which I would like increase, not 
+> high speed for upload. And I have no idea how to do it :-/ Throttling is off.
+
+Errm, it's a stupid question but, are you on an ADSL connection?  If so,
+then it's likely that its assymetry is such that traffic TO your machine
+(which in other circumstances would be you downloading from the rest of
+the Internet, but in this instance is data being uploaded to your server)
+will have twice the bandwidth of your uplink (which is this instance will
+be carrying the traffic downloaded from your FTP server).
+
+You could talk to your ISP; AIUI, it's possible to have an ADSL line's
+assymetry reconfigured "the other way round".
+
+-- 
+Brian {Hamilton Kelly}                                          bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 1919
+
+From xitami@lists.xitami.org  Fri Apr 11 03:05:31 2003
+From: xitami@lists.xitami.org (Roberto Lito)
+Date: Thu, 10 Apr 2003 21:05:31 -0500
+Subject: [Xitami] CONFIGURING SEVERAL SITES
+Message-ID: <002b01c2ffce$d4adc8e0$bd49d2d1@rag>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0028_01C2FFA4.EB7C3360
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I have 3 sites each with its index.htm page, named index, index1, index2 =
+ each located in different directories.
+ I want to configure Xitami so that there could be access to any of =
+those index pages by typing the corresponding address according to the =
+index.=20
+Now Xitami is configured at installation to read index pages from its =
+webpages folder. How do I configure it to read from those 3 or more =
+directories, what is the full address to type in browser to get to any =
+of thos pages indistinctly ?
+Do I have to use aliases ? If so, how do I configure them ?
+Thanks
+Rolito
+
+------=_NextPart_000_0028_01C2FFA4.EB7C3360
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I have 3 sites each with its index.htm =
+page, named=20
+index, index1, index2&nbsp;&nbsp;each located in different=20
+directories.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;I want to configure Xitami so =
+that there=20
+could be access to any of those index pages by typing the corresponding =
+address=20
+according to the index. </FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Now Xitami is configured at =
+installation to read=20
+index pages from its webpages folder. How do I configure it to read from =
+those 3=20
+or more directories, what is the full address to type in browser to get =
+to any=20
+of thos pages indistinctly ?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Do I have to use aliases&nbsp;? If so, =
+how do I=20
+configure them ?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Thanks</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Rolito</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0028_01C2FFA4.EB7C3360--
+
+
+From xitami@lists.xitami.org  Fri Apr 11 05:55:12 2003
+From: xitami@lists.xitami.org (Dwaine Gonyier)
+Date: Fri, 11 Apr 2003 00:55:12 -0400
+Subject: [Xitami] Are there known security bugs on xitami?
+References: <3E952519.7430.330C2A@localhost> <004801c2ffe3$cafcf630$0200a8c0@dsl.gtei.net>
+Message-ID: <00c701c2ffe6$8a006d80$0163a8c0@panthra>
+
+Any one know what the fix for the proxy 'CONNECT' vulnerability for xitami
+2.5b5 is?
+
+Tom Baker wrote:
+> ----- Original Message -----
+> From: "Vince Napoli" <vnapoli@ecs.k12.ny.us>
+> To: <xitami@lists.xitami.org>
+> Sent: Thursday, April 10, 2003 7:02 AM
+> Subject: Re: [Xitami] Are there known security bugs on xitami?
+>
+>
+>> I recently read an article in PC World (I think) that listed a few
+>> minor
+> holes.
+>>> Hello
+>>> I would like to know if there are known security bugs in xitami or
+>>> where I could find info on that Thank you
+>>>
+>>> Leo
+>
+> Read the BugTraq report.
+> http://www.securityfocus.com/cgi-bin/sfonline/vulns.pl
+>
+> It covers things pretty well.
+> Tom
+
+-- 
+Dwaine Gonyier
+dwaine_gonyier@mindspring.com
+
+
+From xitami@lists.xitami.org  Sat Apr 12 06:35:28 2003
+From: xitami@lists.xitami.org (Utku Uzmen)
+Date: Sat, 12 Apr 2003 08:35:28 +0300
+Subject: [Xitami] Version confusion
+Message-ID: <000701c300b5$54957f30$0500a8c0@gabriel>
+
+Can anyone tell me what the latest *production* version of Xitami is?
+
+On http://www.xitami.com/download.htm, the latest production version is 2.4d9.
+
+On http://www.imatix.com/html/xitami/index2.htm#download (I got to this page
+from SecurityFocus, but apparently there's no other way to go there), both the
+latest production and beta versions are 2.5b5.
+
+I'm confused. Is this a case of web page update lack on iMatix's side?
+
+
+
+
+Utku Uzmen
+www.maddrive.com
+
+
+
+
+
+
+From xitami@lists.xitami.org  Sat Apr 12 17:28:48 2003
+From: xitami@lists.xitami.org (Chestnut)
+Date: Sat, 12 Apr 2003 09:28:48 -0700
+Subject: [Xitami] Version confusion
+References: <000701c300b5$54957f30$0500a8c0@gabriel>
+Message-ID: <002101c30110$98cb9850$bfc6ff40@2c01v01>
+
+If I'm not mistaken the 'b' in that version implies a Beta version not
+production.
+Pat
+----- Original Message -----
+From: "Utku Uzmen" <utku@maddrive.com>
+To: <xitami@lists.xitami.org>
+Sent: Friday, April 11, 2003 10:35 PM
+Subject: [Xitami] Version confusion
+
+
+> Can anyone tell me what the latest *production* version of Xitami is?
+>
+> On http://www.xitami.com/download.htm, the latest production version is
+2.4d9.
+>
+> On http://www.imatix.com/html/xitami/index2.htm#download (I got to this
+page
+> from SecurityFocus, but apparently there's no other way to go there), both
+the
+> latest production and beta versions are 2.5b5.
+>
+> I'm confused. Is this a case of web page update lack on iMatix's side?
+>
+>
+>
+>
+> Utku Uzmen
+> www.maddrive.com
+>
+>
+>
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Mon Apr 14 02:54:19 2003
+From: xitami@lists.xitami.org (Chestnut)
+Date: Sun, 13 Apr 2003 18:54:19 -0700
+Subject: [Xitami] GET
+Message-ID: <000a01c30228$c41cb930$a1c6ff40@2c01v01>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0007_01C301EE.172523A0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I've looked at some of the list archives, but I cannot find what I need.
+Installed Xitami on a Win98SE box, configured it for PHP.
+Tested the PHP and seems to function properly, however one of the
+scripts we wish to use uses a get method variable/value combination
+in the URL.  This variable is causing a variable not recognized error =
+when
+we load the page, ie...//ip_address/page.php?setcookie=3Dpassword.
+Any help would be appreciated.
+Pat
+
+------=_NextPart_000_0007_01C301EE.172523A0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 5.50.4807.2300" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I've looked at some of the list =
+archives, but I=20
+cannot find what I need.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Installed Xitami on a Win98SE box, =
+configured it=20
+for PHP.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Tested the PHP and seems to function =
+properly,=20
+however one of the</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>scripts we wish to use uses a get =
+method=20
+variable/value combination</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>in the URL.&nbsp; This variable is =
+causing a=20
+variable not recognized error when</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>we load the page,=20
+ie...//ip_address/page.php?setcookie=3Dpassword.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Any help would be =
+appreciated.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Pat</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0007_01C301EE.172523A0--
+
+
+
+From xitami@lists.xitami.org  Mon Apr 14 08:17:00 2003
+From: xitami@lists.xitami.org (Patricko)
+Date: Mon, 14 Apr 2003 01:17:00 -0600
+Subject: [Xitami] GET
+References: <000a01c30228$c41cb930$a1c6ff40@2c01v01>
+Message-ID: <0c1901c30255$d7ccba20$6401a8c0@evo4000>
+
+try turning registered globle variables on in your php.ini file see if that
+helps
+what is the name of the script, do you have a link to it so we can check the
+code? although because you have no problems running php I would think it is
+because of a setting in the php.ini file
+
+From: Chestnut
+To: xitami@lists.xitami.org
+Sent: Sunday, April 13, 2003 7:54 PM
+Subject: [Xitami] GET
+
+
+I've looked at some of the list archives, but I cannot find what I need.
+Installed Xitami on a Win98SE box, configured it for PHP.
+Tested the PHP and seems to function properly, however one of the
+scripts we wish to use uses a get method variable/value combination
+in the URL.  This variable is causing a variable not recognized error when
+we load the page, ie...//ip_address/page.php?setcookie=password.
+Any help would be appreciated.
+Pat
+
+
+From xitami@lists.xitami.org  Mon Apr 14 14:26:35 2003
+From: xitami@lists.xitami.org (Chestnut)
+Date: Mon, 14 Apr 2003 06:26:35 -0700
+Subject: [Xitami] GET
+References: <000a01c30228$c41cb930$a1c6ff40@2c01v01> <0c1901c30255$d7ccba20$6401a8c0@evo4000>
+Message-ID: <000e01c30289$797d3650$6ac6ff40@2c01v01>
+
+The script is one of the chat scripts out on the web.
+I tried this same script on an Omni box awhile ago and it worked.
+That box has php4.2 I believe, which should mean that it does not
+require globals on. I'll try it when I get to work this morning anyway.
+Cannot allow a link, however, as it is on a state agency site, behind a
+firewall.
+Pat
+----- Original Message -----
+From: "Patricko" <polson1@adelphia.net>
+To: <xitami@lists.xitami.org>
+Sent: Monday, April 14, 2003 12:17 AM
+Subject: Re: [Xitami] GET
+
+
+> try turning registered globle variables on in your php.ini file see if
+that
+> helps
+> what is the name of the script, do you have a link to it so we can check
+the
+> code? although because you have no problems running php I would think it
+is
+> because of a setting in the php.ini file
+>
+> From: Chestnut
+> To: xitami@lists.xitami.org
+> Sent: Sunday, April 13, 2003 7:54 PM
+> Subject: [Xitami] GET
+>
+>
+> I've looked at some of the list archives, but I cannot find what I need.
+> Installed Xitami on a Win98SE box, configured it for PHP.
+> Tested the PHP and seems to function properly, however one of the
+> scripts we wish to use uses a get method variable/value combination
+> in the URL.  This variable is causing a variable not recognized error when
+> we load the page, ie...//ip_address/page.php?setcookie=password.
+> Any help would be appreciated.
+> Pat
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+From xitami@lists.xitami.org  Tue Apr 15 06:27:28 2003
+From: xitami@lists.xitami.org (Tom Baker)
+Date: Tue, 15 Apr 2003 00:27:28 -0500
+Subject: [Xitami] Xitami service
+References: <F73gGZcgr4Y36EiouWr0002461c@hotmail.com>
+Message-ID: <000d01c3030f$b51bb2f0$0200a8c0@dsl.gtei.net>
+
+----- Original Message -----
+From: "Go Bonkers" <gobonkers@hotmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, April 09, 2003 12:51 AM
+Subject: re: [Xitami] Xitami service
+
+
+> ~~
+> >From: "Tom Baker" Upon system startup, the Xitami service loads, but does
+> >not accept incoming connection attempts. If I restart the service,
+> >everything is AOK.
+> -
+> I use a startup shortcut to a little delayer.exe(21kb)
+> Freeware http://www.cottonwoodsw.com/    /D55 (seconds)
+> Windows 3.x/95/98/NT , but may work with w2k too
+>
+> mike
+> ~~
+
+Thank you. The concept looks good, but how do I not see how to specificy
+this delayer launch instead Xitami as a service?
+
+Thanks!
+Tom
+
+
+
+From xitami@lists.xitami.org  Sat Apr 12 07:47:18 2003
+From: xitami@lists.xitami.org (Goetz Winkelmann)
+Date: Sat, 12 Apr 2003 08:47:18 +0200
+Subject: [Xitami] SSI
+In-Reply-To: <3E95ACBB.40801@honeygroveisd.net>
+Message-ID: <GIEIKDEMKDNMALMJJPBKIEEJCJAA.beratung@webdesign-edvservice.info>
+
+Your links are NOT really helpful to understand what script and what source
+code YOU are using!
+
+These days I was working around with SSI. The problem that I have is that
+Xitami cannot show included files in sub directories. Xitami shows ALL files
+as e.g. Dreamweaver but that is not intended n testing!
+
+
+
+CU
+<g>oetz
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+g_winkelmann@web.de Tel. +49 (711) 7547055
+
+Routenplaner:  http://mail.map24.com/winkelmann
+auf Wunsch kann mit Steganos (http://www.steganos.com) verschlusselt werden
+
+-----Ursprungliche Nachricht-----
+Von: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]Im
+Auftrag von Mark Cockrell
+Gesendet: Donnerstag, 10. April 2003 19:41
+An: xitami@lists.xitami.org
+Betreff: [Xitami] SSI
+
+I'm having trouble getting my Server-Side Includes working, and I'm
+hoping that someone here can help.  I'm using Matt Wright's Random Text
+script, and it works perfectly when I just run the script
+(http://www.wreckedandabandoned.com/cgi-bin/rand_text/rand_text.pl), but
+when I try to include it in a test page
+(http://www.wreckedandabandoned.com/cgi-bin/rand_text/test.shtml)
+there's no output from the script.  I'm sure I've just overlooked
+something, but I'm stumped.  I would appreciate any help.  Thanks.
+
+--
+C-ya,
+Mark
+____
+If you bring a raccoon's head to the Henniker, New Hampshire town hall, you
+are entitled to receive $.10 from the town.
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sat Apr 12 07:47:20 2003
+From: xitami@lists.xitami.org (Goetz Winkelmann)
+Date: Sat, 12 Apr 2003 08:47:20 +0200
+Subject: [Xitami] CONFIGURING SEVERAL SITES
+In-Reply-To: <002b01c2ffce$d4adc8e0$bd49d2d1@rag>
+Message-ID: <GIEIKDEMKDNMALMJJPBKKEEJCJAA.beratung@webdesign-edvservice.info>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_000E_01C300D0.20D47D20
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
+
+Try 3 sub directories.
+
+
+CU
+<g>oetz
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+g_winkelmann@web.de Tel. +49 (711) 7547055
+
+Routenplaner:  http://mail.map24.com/winkelmann
+auf Wunsch kann mit Steganos (http://www.steganos.com) verschlüsselt werden
+
+-----Ursprüngliche Nachricht-----
+Von: xitami-admin@lists.xitami.org [mailto:xitami-admin@lists.xitami.org]Im
+Auftrag von Roberto Lito
+Gesendet: Freitag, 11. April 2003 04:06
+An: xitami@lists.xitami.org
+Betreff: [Xitami] CONFIGURING SEVERAL SITES
+
+I have 3 sites each with its index.htm page, named index, index1, index2
+each located in different directories.
+ I want to configure Xitami so that there could be access to any of those
+index pages by typing the corresponding address according to the index.
+Now Xitami is configured at installation to read index pages from its
+webpages folder. How do I configure it to read from those 3 or more
+directories, what is the full address to type in browser to get to any of
+thos pages indistinctly ?
+Do I have to use aliases ? If so, how do I configure them ?
+Thanks
+Rolito
+
+------=_NextPart_000_000E_01C300D0.20D47D20
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" =
+xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<meta name=3DProgId content=3DWord.Document>
+<meta name=3DGenerator content=3D"Microsoft Word 9">
+<meta name=3DOriginator content=3D"Microsoft Word 9">
+<link rel=3DFile-List href=3D"cid:filelist.xml@01C300D0.19874980">
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>0</w:Zoom>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:EnvelopeVis/>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:16792199 0 0 0 65791 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoAutoSig, li.MsoAutoSig, div.MsoAutoSig
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+span.EmailFormatvorlage16
+	{mso-style-type:personal-reply;
+	mso-ansi-font-size:10.0pt;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:navy;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 2.0cm 70.85pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext=3D"edit" spidmax=3D"1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext=3D"edit">
+  <o:idmap v:ext=3D"edit" data=3D"1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=3Dwhite lang=3DDE style=3D'tab-interval:35.4pt'>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><span class=3DEmailFormatvorlage16><font size=3D2 =
+color=3Dnavy
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;mso-ansi-language:EN-GB'>Try 3 sub =
+directories.<o:p></o:p></span></font></span></p>
+
+<p class=3DMsoNormal><span class=3DEmailFormatvorlage16><font size=3D2 =
+color=3Dnavy
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;mso-ansi-language:EN-GB'><![if =
+!supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></font></span></p>
+
+<p class=3DMsoAutoSig><!--[if supportFields]><span =
+class=3DEmailFormatvorlage16><font=20
+size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><span =
+style=3D'mso-element:field-begin'></span></span></font></span><span=20
+class=3DEmailFormatvorlage16><font size=3D2 color=3Dnavy =
+face=3DArial><span lang=3DEN-GB=20
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;mso=
+-ansi-language:
+EN-GB'><span style=3D"mso-spacerun: yes">&nbsp;</span>AUTOTEXTLIST \s=20
+&quot;E-Mail-Signatur&quot; </span></font></span><span=20
+class=3DEmailFormatvorlage16><font size=3D2 color=3Dnavy =
+face=3DArial><span=20
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><s=
+pan=20
+style=3D'mso-element:field-separator'></span></span></font></span><![endi=
+f]--><font
+size=3D2 color=3Dnavy face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;color:navy;mso-color-alt:wind=
+owtext;
+mso-ansi-language:EN-GB'><o:p></o:p></span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+lang=3DEN-GB
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;col=
+or:navy;
+mso-ansi-language:EN-GB'><span style=3D"mso-spacerun: =
+yes">&nbsp;</span></span></font><font
+size=3D2 color=3Dnavy face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;color:navy;mso-color-alt:wind=
+owtext;
+mso-ansi-language:EN-GB'><o:p></o:p></span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:navy'>CU</span><=
+/font><font
+size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:navy;mso-color-alt:windowtext'><o:p></o:p>=
+</span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:navy'>&lt;g&gt;o=
+etz </span></font><font
+size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:navy;mso-color-alt:windowtext'><o:p></o:p>=
+</span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:navy'><![if =
+!supportEmptyParas]>&nbsp;<![endif]></span></font><font
+size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:navy;mso-color-alt:windowtext'><o:p></o:p>=
+</span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:navy'>~~~~~~~~~~=
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></font><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:Arial;color:navy;mso-color-alt:wind=
+owtext'><o:p></o:p></span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:navy'><span
+style=3D"mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;
+</span><span style=3D"mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>g_winkel=
+mann@web.de
+Tel. </span></font><font size=3D2 color=3Dnavy face=3DArial><span =
+lang=3DEN-GB
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;col=
+or:navy;
+mso-ansi-language:EN-GB'>+49 (711) 7547055</span></font><font size=3D2
+color=3Dnavy face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:navy;mso-color-alt:windowtext;mso-ansi-lan=
+guage:
+EN-GB'><o:p></o:p></span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+lang=3DEN-GB
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;col=
+or:navy;
+mso-ansi-language:EN-GB'><span style=3D"mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Routenplaner:<span style=3D"mso-spacerun: yes">&nbsp;
+</span>http://mail.map24.com/winkelmann </span></font><font size=3D2 =
+color=3Dnavy
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:Arial;color:navy;mso-color-alt:windowtext;mso-ansi-language:E=
+N-GB'><o:p></o:p></span></font></p>
+
+<p class=3DMsoAutoSig><font size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:
+10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial;color:navy'>auf =
+Wunsch kann
+mit Steganos (http://www.steganos.com) verschl=FCsselt =
+werden</span></font><font
+size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial;color:navy;mso-color-alt:windowtext'><o:p></o:p>=
+</span></font></p>
+
+<p class=3DMsoNormal><!--[if supportFields]><span =
+class=3DEmailFormatvorlage16><font=20
+size=3D2 color=3Dnavy face=3DArial><span =
+style=3D'font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:Arial'><span =
+style=3D'mso-element:field-end'></span></span></font></span><![endif]--><=
+span
+class=3DEmailFormatvorlage16><font size=3D2 color=3Dnavy =
+face=3DArial><span
+style=3D'font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:Arial'><!=
+[if =
+!supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></font></span></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DTahoma><span =
+style=3D'font-size:10.0pt;font-family:Tahoma;color:black'>-----Urspr=FCng=
+liche
+Nachricht-----<br>
+<b><span style=3D'font-weight:bold'>Von:</span></b> =
+xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]<b><span =
+style=3D'font-weight:bold'>Im
+Auftrag von </span></b>Roberto Lito<br>
+<b><span style=3D'font-weight:bold'>Gesendet:</span></b> Freitag, 11. =
+</span></font><font
+size=3D2 color=3Dblack face=3DTahoma><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;
+font-family:Tahoma;color:black;mso-ansi-language:EN-GB'>April 2003 =
+04:06<br>
+<b><span style=3D'font-weight:bold'>An:</span></b> =
+xitami@lists.xitami.org<br>
+<b><span style=3D'font-weight:bold'>Betreff:</span></b> [Xitami] =
+CONFIGURING
+SEVERAL SITES</span></font><font color=3Dnavy><span lang=3DEN-GB =
+style=3D'color:navy;
+mso-color-alt:windowtext;mso-ansi-language:EN-GB'><o:p></o:p></span></fon=
+t></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D3 =
+color=3Dnavy
+face=3D"Times New Roman"><span lang=3DEN-GB =
+style=3D'font-size:12.0pt;color:navy;
+mso-ansi-language:EN-GB'><![if =
+!supportEmptyParas]>&nbsp;<![endif]></span></font><font
+color=3Dnavy><span lang=3DEN-GB =
+style=3D'color:navy;mso-color-alt:windowtext;
+mso-ansi-language:EN-GB'><o:p></o:p></span></font></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;font-family:Arial;
+color:black;mso-ansi-language:EN-GB'>I have 3 sites each with its =
+index.htm
+page, named index, index1, index2&nbsp;&nbsp;each located in different
+directories.</span></font><font color=3Dnavy><span lang=3DEN-GB =
+style=3D'color:navy;
+mso-color-alt:windowtext;mso-ansi-language:EN-GB'><o:p></o:p></span></fon=
+t></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;font-family:Arial;
+color:black;mso-ansi-language:EN-GB'>&nbsp;I want to configure Xitami so =
+that
+there could be access to any of those index pages by typing the =
+corresponding
+address according to the index. </span></font><font color=3Dnavy><span
+lang=3DEN-GB =
+style=3D'color:navy;mso-color-alt:windowtext;mso-ansi-language:EN-GB'><o:=
+p></o:p></span></font></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;font-family:Arial;
+color:black;mso-ansi-language:EN-GB'>Now Xitami is configured at =
+installation
+to read index pages from its webpages folder. How do I configure it to =
+read
+from those 3 or more directories, what is the full address to type in =
+browser
+to get to any of thos pages indistinctly ?</span></font><font =
+color=3Dnavy><span
+lang=3DEN-GB =
+style=3D'color:navy;mso-color-alt:windowtext;mso-ansi-language:EN-GB'><o:=
+p></o:p></span></font></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DArial><span lang=3DEN-GB =
+style=3D'font-size:10.0pt;font-family:Arial;
+color:black;mso-ansi-language:EN-GB'>Do I have to use aliases&nbsp;? If =
+so, how
+do I configure them ?</span></font><font color=3Dnavy><span lang=3DEN-GB
+style=3D'color:navy;mso-color-alt:windowtext;mso-ansi-language:EN-GB'><o:=
+p></o:p></span></font></p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DArial><span =
+style=3D'font-size:10.0pt;font-family:Arial;color:black'>Thanks</span></f=
+ont><font
+color=3Dnavy><span =
+style=3D'color:navy;mso-color-alt:windowtext'><o:p></o:p></span></font></=
+p>
+
+<p class=3DMsoNormal style=3D'margin-left:35.4pt'><font size=3D2 =
+color=3Dblack
+face=3DArial><span =
+style=3D'font-size:10.0pt;font-family:Arial;color:black'>Rolito</span></f=
+ont><font
+color=3Dnavy><span =
+style=3D'color:navy;mso-color-alt:windowtext'><o:p></o:p></span></font></=
+p>
+
+</div>
+
+</body>
+
+</html>
+
+------=_NextPart_000_000E_01C300D0.20D47D20--
+
+
+From xitami@lists.xitami.org  Wed Apr 16 07:23:40 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Wed, 16 Apr 2003 08:23:40 +0200
+Subject: [Xitami] using xitami to serve asp
+In-Reply-To: <003601c2f2f4$270ef970$2601a8c0@SSINHA>
+Message-ID: <5.1.0.14.2.20030416082241.02360ec0@verfaillie4.verfaillie.local>
+
+Hello !
+
+I didn't post this message.
+I only work with normal cgi applications (executable files).
+See http://web.verfaillie.com/webserver
+
+
+Marc
+
+
+
+At 19:29 25/03/03, you wrote:
+>hello, i found your email at this site.. but im not sure i  understood 
+>what to do.. could you be a little more detailed please?
+><http://lists.xitami.org/pipermail/xitami/2003-January/004645.html>http://lists.xitami.org/pipermail/xitami/2003-January/004645.html
+>shampa
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+
+From xitami@lists.xitami.org  Wed Apr 16 16:40:52 2003
+From: xitami@lists.xitami.org (Paul Reid)
+Date: Wed, 16 Apr 2003 11:40:52 -0400
+Subject: [Xitami] Can I use on XP?
+In-Reply-To: <008601c2f2e1$cd58afa0$9837fea9@500computer>
+References: <008601c2f2e1$cd58afa0$9837fea9@500computer>
+Message-ID: <121353653791.20030416114052@rci.rutgers.edu>
+
+> Will Xitami run on XP ?
+
+Yes. Mostly it does not care what flavor of Windows it runs under.
+
+> Which instal version should I use ?
+
+On NT/XP, if you plan to have Xitami running all the time (as for a
+webserver), use the NT Service version. It is MUCH more stable (over
+long periods of time) than the GUI version.
+
+For Win9x, and for occasional use (like for page/script testing) in
+NT/XP, the non-service version is fine, and gives you the red/green
+light in taskbar so you know when your script is stuck.
+
+> I note that the 'hosts' file on XP appears twice on XP
+
+ C:\WINDOWS\I386\HOSTS        (there is also an encoded file LMHOST.SA_)
+ C:\WINDOWS\system32\drivers\etc\hosts    (there is also a file imhosts.sam)
+
+The "I386" folder is installation files, equivalent to the NT4
+CD-ROM. (In NT4 days I often copied the CD:\I386 folder to the hard
+drive so I didn't have to keep the CD nearby.) Windows won't look
+there except when installing.
+
+C:\WINDOWS\system32\drivers\etc\hosts is THE hosts file. Hack this
+file to over-ride DNS and point a public website to your own
+machine.
+
+LMHOSTS[.SAM] is used for Windows Networking. In theory it has the
+IP numbers of your favorite Windows-Networked machines. However I
+have seen Windows (or IE?) use LMHOSTS for InterNet (website)
+lookups, even if it has the .SAM (sample) extension. I ignore it.
+
+> lawnbowls.com
+
+Check your page on a wide monitor--- at 1152 x 864 the background
+image repeats and masks long lines of text.
+
+ -PRR
+
+
+
+From xitami@lists.xitami.org  Sat Apr 19 19:07:20 2003
+From: xitami@lists.xitami.org (Ryan Rawdon)
+Date: Sat, 19 Apr 2003 14:07:20 -0400
+Subject: [Xitami] remote linkin
+Message-ID: <Sea1-F135Jz9KeQvdzh0000113e@hotmail.com>
+
+
+
+
+does xitami allow for remote linking to images, such as a signature image 
+for a forum? if so, what am i doing wrong? my site works fine, but the 
+linked image shows up as the white square and red X deal.
+
+-Ryan
+
+_________________________________________________________________
+Help STOP SPAM with the new MSN 8 and get 2 months FREE*  
+http://join.msn.com/?page=features/junkmail
+
+
+From xitami@lists.xitami.org  Sat Apr 19 19:23:41 2003
+From: xitami@lists.xitami.org (Ryan Rawdon)
+Date: Sat, 19 Apr 2003 14:23:41 -0400
+Subject: [Xitami] Linking to images
+Message-ID: <Sea1-F49gmSknvh7wFI000011ed@hotmail.com>
+
+
+
+what do i need to chage to get xitami to allow requests for images from 
+sites.  for example, hosting an image for a forum signatire or equivalent.  
+i know it should be able to do this, but cannot find where to allow it 
+(possibly titled remote linking?)
+
+_________________________________________________________________
+The new MSN 8: advanced junk mail protection and 2 months FREE*  
+http://join.msn.com/?page=features/junkmail
+
+
+From xitami@lists.xitami.org  Mon Apr 21 14:53:19 2003
+From: xitami@lists.xitami.org (Hymbaugh, Mike)
+Date: Mon, 21 Apr 2003 08:53:19 -0500
+Subject: [Xitami] RE:  Linking to images
+Message-ID: <853CE5E8344DD41198B900508BD6BC90963BCE@DMNTEXCH>
+
+Have you tried to do it?  That is exactly what my Xitami gets used for most
+of the time.  I've never set anything different, not on purpose anyway.  :)
+
+
+-----Original Message-----
+
+what do i need to chage to get xitami to allow requests for images from 
+sites.  for example, hosting an image for a forum signatire or equivalent.  
+i know it should be able to do this, but cannot find where to allow it 
+(possibly titled remote linking?)
+
+
+From xitami@lists.xitami.org  Thu Apr 24 10:00:54 2003
+From: xitami@lists.xitami.org (Goetz Winkelmann)
+Date: Thu, 24 Apr 2003 11:00:54 +0200
+Subject: [Xitami] SSI again
+In-Reply-To: <GIEIKDEMKDNMALMJJPBKIEEJCJAA.beratung@webdesign-edvservice.info>
+Message-ID: <GIEIKDEMKDNMALMJJPBKCEGOCJAA.info@tinte-toner-web.de>
+
+I try with SSI to include files: <!--#include virtual="includes/xxx.htm" -->
+but Xitami doesn't find these files. testssi.ssi works fine the crux seems
+to be the sub directory.
+
+Ana help?
+
+
+
+best regards
+Goetz Winkelmann
+
+
+
+From xitami@lists.xitami.org  Fri Apr 25 05:47:01 2003
+From: xitami@lists.xitami.org (Go Bonkers)
+Date: Fri, 25 Apr 2003 00:47:01 -0400
+Subject: [Xitami] SSI again
+Message-ID: <Law8-F25qV0tpw4SvcD00006acb@hotmail.com>
+
+
+~~~~
+From: "Goetz Winkelmann" <info@tinte-toner-web.de>
+Date: Thu, 24 Apr 2003 11:00:54 +0200
+Subject: [Xitami] SSI again
+
+I try with SSI to include files: <!--#include virtual="includes/xxx.htm" --> 
+but Xitami doesn't find these files. testssi.ssi works fine the crux seems 
+to be the sub directory.
+~~~~
+>!--#include file="spammer.txt"-->   This works here.
+~~~~
+
+_________________________________________________________________
+Help STOP SPAM with the new MSN 8 and get 2 months FREE*  
+http://join.msn.com/?page=features/junkmail
+
+
+From xitami@lists.xitami.org  Wed Apr 30 04:42:33 2003
+From: xitami@lists.xitami.org (Dennis Rice)
+Date: Tue, 29 Apr 2003 20:42:33 -0700
+Subject: [Xitami] nocc and/or php problem
+Message-ID: <000001c30eca$88abd0d0$5f01a8c0@MAINCOMPUTER>
+
+I'm trying to configure NOCC as a webmail server.  The problem that I'm
+having is that NOCC doesn't seem to be able to share variables among its
+various parts.  I.e., it can't 'remember' the password from the index.php
+script to the action.php script:
+
+Notice: Undefined variable: passwd in
+C:\Xitami\webpages\pubhome\nocc\action.php on line 24
+  
+Another symptom is that I'm getting this notice when I load index.php:
+Notice: Undefined variable: HTTP_ACCEPT_LANGUAGE in
+C:\Xitami\webpages\pubhome\nocc\check_lang.php on line 17
+
+However, 
+if I let PHP register variables globally, it works fairly well.
+register_globals = On    in php.ini
+
+Any suggestions?
+
+Thanks,
+Dennis
+
+--
+Dennis Rice
+dennis@driceaz.us 
+
+
+
+From xitami@lists.xitami.org  Wed Apr 30 23:58:22 2003
+From: xitami@lists.xitami.org (Ricardo Zamel)
+Date: Wed, 30 Apr 2003 18:58:22 -0400
+Subject: [Xitami] multiple sites on multiple ports in XP?
+Message-ID: <000401c30f6c$005d8780$0400a8c0@homer>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0005_01C30F4A.794BE780
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+ 
+
+Is it possible to have multiple virtual sites on different ports when
+running as a service under XP Pro? The FAQ suggests this is done by running
+multiple instances of Xitami from different directories, each with its own
+default.cfg file. I'm unclear on how you would install multiple services.
+
+ 
+
+Thanks,
+
+Ric
+
+
+------=_NextPart_000_0005_01C30F4A.794BE780
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+
+<head>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+
+
+<meta name=3DGenerator content=3D"Microsoft Word 10 (filtered)">
+
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{font-family:Arial;
+	color:windowtext;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+
+</head>
+
+<body lang=3DEN-CA link=3Dblue vlink=3Dpurple>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>Hi,</span></font></p>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>&nbsp;</span></font></p>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>Is it possible to have multiple virtual sites on =
+different
+ports when running as a service under XP Pro? The FAQ suggests this is =
+done by
+running multiple instances of Xitami from different directories, each =
+with its
+own default.cfg file. I&#8217;m unclear on how you would install =
+multiple
+services&#8230;</span></font></p>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>&nbsp;</span></font></p>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>Thanks,</span></font></p>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>Ric</span></font></p>
+
+</div>
+
+</body>
+
+</html>
+
+------=_NextPart_000_0005_01C30F4A.794BE780--
+
+
+From xitami@lists.xitami.org  Sat Apr 19 18:31:11 2003
+From: xitami@lists.xitami.org (Guido.Bugmann xtn 2566)
+Date: Sat, 19 Apr 2003 18:31:11 +0100 (BST)
+Subject: [Xitami] 2.4d9 Crash
+Message-ID: <Pine.GSO.4.10.10304191825570.14734-100000@zeus.soc.plymouth.ac.uk>
+
+Hello,
+
+I also had this message that came out of the blue
+
+Assertion Failed!
+
+  Module c:\work\imatix\release\xitami-24\src\smt\smtlib.c, line 1309
+
+
+I tried to see if someone was trying to log to the 
+server, but the was no entry for the time of the crash.
+
+(on Win2K)
+
+Sometimes, I find my machine had rebooted during the 
+night. This has probably nothing to do with Xitami, 
+but I have no idea either why that happens. 
+
+regards
+Guido
+ 
+
+
+From xitami@lists.xitami.org  Wed Apr 23 19:34:52 2003
+From: xitami@lists.xitami.org (Della)
+Date: Wed, 23 Apr 2003 11:34:52 -0700 (PDT)
+Subject: [Xitami] This server is currently overloaded
+Message-ID: <20030423183452.38524.qmail@web10905.mail.yahoo.com>
+
+--0-837315598-1051122892=:37635
+Content-Type: text/plain; charset=us-ascii
+
+Please!!!! I need help. I'm running a heavy program using PHP and the web server is xitami. And then I got a message "This server is currently overloaded - please try again later". For me, it's okay if The program is taking a long time to run, cause that's heavy. But please, I dont want to get this message. What should I do???? I've changed the CGI timeout in xitami.cfg file from 60 to 300. What else I should do? My Operating system is Windows 2000. The version of my xitami is 2.4d7. 
+
+
+---------------------------------
+Do you Yahoo!?
+The New Yahoo! Search - Faster. Easier. Bingo.
+--0-837315598-1051122892=:37635
+Content-Type: text/html; charset=us-ascii
+
+<DIV>Please!!!! I need help. I'm running a heavy program using PHP and the web server is xitami. And then I got a message "<EM>This server is currently overloaded - please try again later</EM>". For me, it's okay if The program is taking a long time to run,&nbsp;cause that's heavy. But please, I dont want to get this message. What should I do???? I've changed the&nbsp;CGI timeout in <U>xitami.cfg</U> file from 60 to <STRONG>300.&nbsp;</STRONG>What else I should&nbsp;do?<STRONG>&nbsp;</STRONG>My&nbsp;Operating system is Windows 2000. The&nbsp;version of my xitami is 2.4d7.<STRONG> </STRONG></DIV><p><br><hr size=1>Do you Yahoo!?<br>
+<a href="http://us.rd.yahoo.com/search/mailsig/*http://search.yahoo.com">The New Yahoo! Search</a> - Faster. Easier. Bingo.
+--0-837315598-1051122892=:37635--
+
+From xitami@lists.xitami.org  Thu Apr 24 19:25:20 2003
+From: xitami@lists.xitami.org (Goetz Winkelmann)
+Date: Thu, 24 Apr 2003 20:25:20 +0200
+Subject: [Xitami] Re: SSI again
+In-Reply-To: <GIEIKDEMKDNMALMJJPBKCEGPCJAA.info@tinte-toner-web.de>
+Message-ID: <GIEIKDEMKDNMALMJJPBKOEGPCJAA.g_winkelmann@web.de>
+
+
+Meanwhile I get better - or let's say ANY - error message through the cgi
+script 'templates/errors.gsl':  [xitami SSI: Unrecognised #echo variable
+HTTP_REFERER]. The same error I got by testssi.ssi.
+First I supposed Zonealarm Pro 3 to block and shut down. No change. Next I
+tried to skip this error by unchecking  'Pass HTTP fields' in 'CGI'
+administration. The result was the script doesn't recognise HTTP_USER_AGENT,
+too.
+Who can help?
+
+best regards
+Goetz Winkelmann
+
+
+>I try with SSI to include files: <!--#include
+virtual="includes/xxx.htm" -->    but Xitami doesn't find these files.
+testssi.ssi works fine the crux seems to be the sub directory.
+>
+>Ana help?
+>
+>
+>
+>best regards
+>Goetz Winkelmann
+
+
+From xitami@lists.xitami.org  Sat Apr 26 10:29:17 2003
+From: xitami@lists.xitami.org (Lesley Dickinson)
+Date: Sat, 26 Apr 2003 10:29:17 +0100
+Subject: [Xitami] Thank you!
+Message-ID: <008101c30bd6$5010efe0$9837fea9@500computer>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_007E_01C30BDE.B125DE00
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+A quick thank yu to 'PRR' for the breakdown on XP hosts files also for =
+spotting and pointing out the background graphic repeat error on my =
+website in 1152 x 864 mode. I am surprised you went for a look !  I have =
+fixed that and I have Xitami running nicely now with my host toggles =
+sorted - thank you. Lesley
+=20
+http://lawnbowls.com - The A-Z of Lawn and Indoor Bowls =
+mailto:manager@lawnbowls.com
+Bowling name brooches our speciality.
+
+------=_NextPart_000_007E_01C30BDE.B125DE00
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1141" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>A quick thank yu to 'PRR' for the =
+breakdown on XP=20
+hosts files also for spotting and pointing out&nbsp;the background =
+graphic=20
+repeat error on my website in <FONT face=3D"Times New Roman" =
+size=3D3>1152 x 864=20
+mode. I am surprised you went for a look !&nbsp; I have fixed that and I =
+have=20
+Xitami running nicely now with my host toggles sorted - thank you.=20
+Lesley</FONT></FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>&nbsp;<BR><A=20
+href=3D"http://lawnbowls.com">http://lawnbowls.com</A> - The A-Z of Lawn =
+and=20
+Indoor Bowls <A=20
+href=3D"mailto:manager@lawnbowls.com">mailto:manager@lawnbowls.com</A><BR=
+>Bowling=20
+name brooches our speciality.<BR></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_007E_01C30BDE.B125DE00--
+
+

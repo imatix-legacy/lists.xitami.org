@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Password protected Perl CGI.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000698.html">
+   <LINK REL="Next"  HREF="000700.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Password protected Perl CGI.
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Password protected Perl CGI.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 13 Aug 2001 19:54:34 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000698.html">[Xitami] Password protected Perl CGI.
+</A></li>
+        <LI> Next message: <A HREF="000700.html">[Xitami] upload
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#699">[ date ]</a>
+              <a href="thread.html#699">[ thread ]</a>
+              <a href="subject.html#699">[ subject ]</a>
+              <a href="author.html#699">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 11:50 AM 8/13/01 -0400, David Michaels writeth:
+&gt;<i>
+</I>&gt;<i>First part.  I have been searching for a simple way to password protect a
+</I>Perl CGI program.  (I'm using CGI.pm and DBI.pm).  I don't need heavy
+authentication, just basic security - something to keep casual browsers
+out.  Is there a Perl module that can supply this functionality?  If so, is
+there a HOWTO?  If not, has anyone written a secure front-end (Perl or
+HTML/CGI.pm) to a Perl CGI that they are willing to share?  I can see how
+to do it without a libmod, but I think I'd just be re-inventing, and
+probably not as well as someone who does this all the time.
+
+Have you tried putting the CGI in its own directory and then modified your
+Xitami configuration to password protect the directory?  This usually stops
+most people from attempting to get it.  If someone tries to get it by brute
+force or it is obvious in the logs that someone is doing something that you
+don't want them to do, you can block the IP.
+
+&gt;<i>Second part.  At this time, a user can bookmark this CGI location,
+</I>bypassing any password protection scheme.  Is there some way around this
+using Perl and/or HTML?  I've seen this with forms using ASP or PHP but
+haven't found it with Perl.  It seems to me that the CGI is static, and I
+can't think of a way to keep it from being loaded if someone goes directly
+to the page, unless the password code is an integral part of the code
+itself - but this becomes a hassle for folks who are doing multiple entries
+(20 -30) at one session.
+
+Do some type of session-management-thingy...that way you can force people
+to log in/enter a password to get into the system between browser
+sessions/time limits (there are two types of sessions, sessions that
+persist until the browser closes, and sessions that persist until time runs
+out - some websites use both methods).
+
+Hope this helps!
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000698.html">[Xitami] Password protected Perl CGI.
+</A></li>
+	<LI> Next message: <A HREF="000700.html">[Xitami] upload
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#699">[ date ]</a>
+              <a href="thread.html#699">[ thread ]</a>
+              <a href="subject.html#699">[ subject ]</a>
+              <a href="author.html#699">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

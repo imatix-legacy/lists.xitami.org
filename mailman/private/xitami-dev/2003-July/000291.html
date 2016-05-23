@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000289.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+   </H1>
+    <B>Thomas Burghardt
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] xitami (smt) in a multi-threaded windows program">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Mon, 21 Jul 2003 07:34:31 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000289.html">[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#291">[ date ]</a>
+              <a href="thread.html#291">[ thread ]</a>
+              <a href="subject.html#291">[ subject ]</a>
+              <a href="author.html#291">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>sorry, but if you take the xitami-xinwin-project, with the changed C++
+options (now  Multithreaded
+library), the xitami will not run well. Better solution: running the xitami
+in a single-threaded dll but it will work only fine, if you  access the
+xitami only from one 'Interface-Thread'
+
+With best reagards
+&gt;<i> &gt; Institute of Regional Geography
+</I>&gt;<i> &gt; Thomas Burghardt
+</I>&gt;<i> &gt; Leipzig
+</I>&gt;<i> &gt; Germany
+</I>&gt;<i> &gt; <A HREF="mailto:t_burghardt@ifl-leipzig.de">t_burghardt@ifl-leipzig.de</A>
+</I>
+
+.
+
+
+----- Original Message -----
+From: &quot;Shivakumar Gopalakrishnan&quot; &lt;<A HREF="mailto:g_skumar@yahoo.com">g_skumar@yahoo.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>&gt;
+Sent: Friday, July 18, 2003 11:08 PM
+Subject: Re: [Xitami-Dev] xitami (smt) in a multi-threaded windows program
+
+
+&gt;<i> Hi
+</I>&gt;<i>
+</I>&gt;<i> I found this easier method but it will work ONLY IF
+</I>&gt;<i> you are not accessing smt/sfl functions simultaneously
+</I>&gt;<i> from multiple threads. Given the warning it has worked
+</I>&gt;<i> fine with my windows programs.
+</I>&gt;<i>
+</I>&gt;<i> What I do is creat another configuration in VC++
+</I>&gt;<i> called MultiThreaded Debug/Release in libsfl project
+</I>&gt;<i> and change the C++ options to use the Multithreaded
+</I>&gt;<i> library.
+</I>&gt;<i>
+</I>&gt;<i> I rebuild the project with the new configuration and
+</I>&gt;<i> use it in my windows programs without any problems.
+</I>&gt;<i>
+</I>&gt;<i> Optional Advanced Tip: I also create similarly named
+</I>&gt;<i> configurations in my windows VC++ project and make it
+</I>&gt;<i> dependent on the libsfl and libsmt project (You have
+</I>&gt;<i> to insert the libsfl and libsmt project into your
+</I>&gt;<i> windows project first) . This way the correct
+</I>&gt;<i> (debug/release) library gets automatically linked with
+</I>&gt;<i> my windows program. Also any changes in the libsfl or
+</I>&gt;<i> libsmt code would automatically force relinking in the
+</I>&gt;<i> windows program.
+</I>&gt;<i>
+</I>&gt;<i> Hope this helps.
+</I>&gt;<i>
+</I>&gt;<i> Shivakumar Gopalakrishnan
+</I>&gt;<i>
+</I>&gt;<i> --- <A HREF="mailto:xitami-dev-request@lists.xitami.org">xitami-dev-request@lists.xitami.org</A> wrote:
+</I>&gt;<i> &gt; Send Xitami-Dev mailing list submissions to
+</I>&gt;<i> &gt; <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; To subscribe or unsubscribe via the World Wide Web,
+</I>&gt;<i> &gt; visit
+</I>&gt;<i> &gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>&gt;<i> &gt; or, via email, send a message with subject or body
+</I>&gt;<i> &gt; 'help' to
+</I>&gt;<i> &gt; <A HREF="mailto:xitami-dev-request@lists.xitami.org">xitami-dev-request@lists.xitami.org</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; You can reach the person managing the list at
+</I>&gt;<i> &gt; <A HREF="mailto:xitami-dev-admin@lists.xitami.org">xitami-dev-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; When replying, please edit your Subject line so it
+</I>&gt;<i> &gt; is more specific
+</I>&gt;<i> &gt; than &quot;Re: Contents of Xitami-Dev digest...&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Today's Topics:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;    1. xitami (smt) in a multi-threaded windows
+</I>&gt;<i> &gt; program (linker option \MT) (Thomas Burghardt)
+</I>&gt;<i> &gt;    2. RE: xitami (smt) in a multi-threaded windows
+</I>&gt;<i> &gt; program (linker option \MT) (Angus Lord)
+</I>&gt;<i> &gt;    3. SMT 3.0 sockets on Windows XP fail
+</I>&gt;<i> &gt; (=?iso-8859-1?Q?Rafael_Cano_P=E9rez?=)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --__--__--
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Message: 1
+</I>&gt;<i> &gt; From: &quot;Thomas Burghardt&quot;
+</I>&gt;<i> &gt; &lt;<A HREF="mailto:thomas.burghardt@onlinehome.de">thomas.burghardt@onlinehome.de</A>&gt;
+</I>&gt;<i> &gt; To: &lt;<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt; Date: Thu, 17 Jul 2003 11:33:46 +0200
+</I>&gt;<i> &gt; Organization: Worms &amp; Partner
+</I>&gt;<i> &gt; Subject: [Xitami-Dev] xitami (smt) in a
+</I>&gt;<i> &gt; multi-threaded windows program (linker option \MT)
+</I>&gt;<i> &gt; Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This is a multi-part message in MIME format.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ------=_NextPart_000_001A_01C34C57.489E5E70
+</I>&gt;<i> &gt; Content-Type: text/plain;
+</I>&gt;<i> &gt; charset=&quot;iso-8859-1&quot;
+</I>&gt;<i> &gt; Content-Transfer-Encoding: quoted-printable
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Dear programmers,
+</I>&gt;<i> &gt; we would like to use the xitami (with smt)
+</I>&gt;<i> &gt; implementation in a =
+</I>&gt;<i> &gt; multithreading windows program (compile with VC++
+</I>&gt;<i> &gt; and the \MT option).
+</I>&gt;<i> &gt; but we still discovered, that smt only run with the
+</I>&gt;<i> &gt; singlethreaded =
+</I>&gt;<i> &gt; runtime libraries.
+</I>&gt;<i> &gt; Is there any solution to link our program with the
+</I>&gt;<i> &gt; multithreading =
+</I>&gt;<i> &gt; runtime libraries?
+</I>&gt;<i> &gt; For example build the xitami as a dynamic link
+</I>&gt;<i> &gt; library (dll) with single =
+</I>&gt;<i> &gt; threaded!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; With best regards
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Institute of Regional Geography
+</I>&gt;<i> &gt; Thomas Burghardt
+</I>&gt;<i> &gt; Leipzig
+</I>&gt;<i> &gt; Germany
+</I>&gt;<i> &gt; <A HREF="mailto:t_burghardt@ifl-leipzig.de">t_burghardt@ifl-leipzig.de</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000289.html">[Xitami-Dev] xitami (smt) in a multi-threaded windows program
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#291">[ date ]</a>
+              <a href="thread.html#291">[ thread ]</a>
+              <a href="subject.html#291">[ subject ]</a>
+              <a href="author.html#291">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

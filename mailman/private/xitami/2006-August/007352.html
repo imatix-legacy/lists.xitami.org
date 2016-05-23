@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: Xitaimi Bug ?? calling URLs twice
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Xitaimi%20Bug%20%3F%3F%20calling%20URLs%20twice&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007351.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: Xitaimi Bug ?? calling URLs twice</H1>
+    <B>RPO</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Xitaimi%20Bug%20%3F%3F%20calling%20URLs%20twice&In-Reply-To="
+       TITLE="[Xitami] RE: Xitaimi Bug ?? calling URLs twice">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Sun Aug  6 02:23:25 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007351.html">[Xitami] RE: Xitaimi Bug ?? calling URLs twice
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7352">[ date ]</a>
+              <a href="thread.html#7352">[ thread ]</a>
+              <a href="subject.html#7352">[ subject ]</a>
+              <a href="author.html#7352">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have since learned its not a Xitami issue but it is a problem related to
+the browsers.  IE/NS and FF all do the same thing and call the URL twice to
+the iFrame.  I don't know why or how though.  The best I have been able to
+research is that it has something to do with httprequest processing the URL,
+then the a second time to pass it the iFrame.  Or rather vise versa - the
+first run of the script writes the correct printed variables to the browser
+window, but then the database always shows the count one higher than it
+should be, which means the second run of the script isn't getting passed to
+the browser - but something else is calling it and causing the script to
+execute a second time.
+
+Not many documented cases (google search) of people discovering this problem
+and I haven't been able to come up with a fix.  But this problem can be
+replicated using iframes anywhere.  I have been trying to get others to
+create a test page with an iframe to replicate what I have found, and then
+check their web logs to see that one click to the iframe is calling the URL
+twice.
+
+Because I am using this method as a client side statistics counter (written
+to a db), my numbers are double what they should.  I suppose I could always
+divide by two to get the accurate number, but I don't like the fact that the
+URL (a script) is getting executed twice - processor and memory usage
+becomes a problem during heavy loads.
+
+-Russel
+
+----- Original Message ----- 
+From: &quot;Pavel Podvoiski&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">paulpp at iname.com</A>&gt;
+To: &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Saturday, August 05, 2006 4:59 PM
+Subject: [Xitami] RE: Xitaimi Bug ?? calling URLs twice
+
+
+Russel,
+Xitami does no JavaScript or Frame processing whatsoever. It's pure client
+side technology.
+Can it be that your browser so smart, that it remembers that content of
+IFRAME is no longer &quot;blank.htm&quot; and while rerendering page calls IFRAME with
+new CGI URL... again?
+
+
+-- 
+___________________________________________________
+Play 100s of games for FREE! <A HREF="http://games.mail.com/">http://games.mail.com/</A>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007351.html">[Xitami] RE: Xitaimi Bug ?? calling URLs twice
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7352">[ date ]</a>
+              <a href="thread.html#7352">[ thread ]</a>
+              <a href="subject.html#7352">[ subject ]</a>
+              <a href="author.html#7352">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

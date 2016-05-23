@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] cgi form result
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004808.html">
+   <LINK REL="Next"  HREF="004811.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] cgi form result
+   </H1>
+    <B>Leon Raymer
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] cgi form result">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 08 Mar 2003 14:44:58 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004808.html">[Xitami] vHost or Block my IP addy
+</A></li>
+        <LI> Next message: <A HREF="004811.html">[Xitami] cgi form result
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4810">[ date ]</a>
+              <a href="thread.html#4810">[ thread ]</a>
+              <a href="subject.html#4810">[ subject ]</a>
+              <a href="author.html#4810">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Okay. Another newbie query. I have the followinig simple html form 
+attempting to post to a simple cgi result page, also shown below. The html 
+form opens the cgi page in the browser but nothing is rendered and the 
+Xitami icon in the Windows task tray times out.
+
+Let me prface by declaring that I am running Xitami v2.4d9 straight out of 
+the box, on a Windows98 system, with the original .cfg file. And, the two 
+scripts below are textbook examples. All that is changed is the path to my 
+Perl and that is ActiveState version 5.8.0.
+
+All help will be greatly appreciated. I've been brickWalling this for a 
+couple of weeks and confidence in Xitami, Perl and the whole cgi process is 
+quickly waning.
+
+thanks, Leon
+
+#the animal.html form file
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Animal Form&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action = &quot;<A HREF="http://localhost/cgi-bin/animal.cgi"">http://localhost/cgi-bin/animal.cgi&quot;</A> method = &quot;post&quot;&gt;what's 
+your favorite animal?&lt;br /&gt;
+
+&lt;input type = &quot;text&quot; name = &quot;animal&quot; size = &quot;30&quot; /&gt;
+&lt;input name = &quot;submit&quot; type = &quot;submit&quot; value = &quot;submit&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+#the animal.cgi file
+
+#!C:/Perl/bin/perl -wt
+use strict;
+use cgi ':standard';
+
+my $animal;
+$animal = param('animal');
+
+print &quot;content-type: text/html\n\n&quot;;
+print &quot;Show me the $animal&quot;;
+
+
+Using M2, Opera's revolutionary e-mail client: <A HREF="http://www.opera.com/m2/">http://www.opera.com/m2/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004808.html">[Xitami] vHost or Block my IP addy
+</A></li>
+	<LI> Next message: <A HREF="004811.html">[Xitami] cgi form result
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4810">[ date ]</a>
+              <a href="thread.html#4810">[ thread ]</a>
+              <a href="subject.html#4810">[ subject ]</a>
+              <a href="author.html#4810">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

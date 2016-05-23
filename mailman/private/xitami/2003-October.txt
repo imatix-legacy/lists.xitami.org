@@ -1,0 +1,4969 @@
+From xitami@lists.xitami.org  Fri Oct  3 18:09:39 2003
+From: xitami@lists.xitami.org (Gary Chisum)
+Date: Fri, 3 Oct 2003 10:09:39 -0700
+Subject: [Xitami] how to set up and use virtual hosts
+Message-ID: <LPBBKDJEMJGLJKHLEAEOCEJOCAAA.gchisum@elite.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0004_01C38996.75240360
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+I have tried to set up virtual hosts based on the info from the TZO site.
+
+1. Can someone give me a list of setup instructions
+2. Also some instructions on how to call a virtual host from the IE address
+line
+
+I have included my two cfg files.
+
+------=_NextPart_000_0004_01C38996.75240360
+Content-Type: application/octet-stream;
+	name="defaults.cfg"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="defaults.cfg"
+
+#*END
+
+[Filter]
+    Php = "c:\\php\\php.exe"
+
+[Mime]
+    Php = "application/x-httpd-php"
+
+[Security]
+    Filename = "defaults.aut"
+
+[Server]
+    Priority = "1"
+
+[Virtual-hosts]
+    Shopadmin.com = "shopadmin.cfg"
+
+------=_NextPart_000_0004_01C38996.75240360
+Content-Type: application/octet-stream;
+	name="shopadmin.cfg"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename="shopadmin.cfg"
+
+#*END
+xxx
+[Accesslog]
+    Filename = "shopadmin.log"
+
+[Filter]
+    Php = "c:\\php\\php.exe"
+
+[Mime]
+    Php = "application/x-httpd-php"
+
+[Security]
+    Filename = "shopadmin.aut"
+    Superuser = "jake"
+
+[Server]
+    Default1 = "index.php"
+    Webpages = "./shopadmin"
+
+[Wsx]
+    Admin = ""
+
+------=_NextPart_000_0004_01C38996.75240360--
+
+
+From xitami@lists.xitami.org  Tue Oct  7 22:17:06 2003
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Tue, 7 Oct 2003 18:17:06 -0300
+Subject: [Xitami] xitami flash bug
+Message-ID: <03c101c38d18$5c6cc6b0$0200000a@mariana1>
+
+Hi all:
+
+trying the new version of xitami 2.4R10, that solves the latest issue, I
+find something rather dissapointing.
+
+When I build a page in Flash 4, 5 or MX, and make a progress bar that shows
+how much you are downloading, the counter stops always at the same place.
+And then nothing happens.
+I´m not getting any error on the local network, but from the outside it
+happens.
+All other pages without flash and with flash but without the progress
+scripts are OK.
+
+These pages where functioning before, but I made a new one anyway, and the
+result was the same.
+
+I also have a tiny script that measures bandwith from my server to the
+client and uses PHP and that one went crazy showing extrange caracters...
+
+I´m not an expert with Xitami, but I solved the problem going back to
+version 2.4 R9
+
+The error log shows these:
+
+2003/10/07 17:41:47: smthttp: error on socket 224:
+2003/10/07 17:42:43: smthttp: error on socket 232:
+2003/10/07 17:43:56: smthttp: error on socket 244:
+
+I hope someone could see at the problem, cause we know that 2.4 R9 is buggy
+too..
+
+sincerely:
+
+Carlos
+
+
+From xitami@lists.xitami.org  Wed Oct  8 16:08:13 2003
+From: xitami@lists.xitami.org (Michael Gibbons)
+Date: Wed, 08 Oct 2003 16:08:13 +0100
+Subject: [Xitami] CHmod
+Message-ID: <sf843678.005@mail.uxbridgecollege.co.uk>
+
+Hi All
+can anyone tell me how to change the mod of a file once it has been uploaded i have been trying for some time and do not want to change my server
+
+Regards
+mike
+
+
+
+The information or opinions in this message (including
+any attachments) are those of the author and are not 
+necessarily those of Uxbridge College, which disclaims
+responsibility for loss or damage arising from its use to
+the maximum extent permitted by law. E-mail messages
+sometimes go astray. This message is sent in
+confidence for the addressee only. It may contain
+confidential or sensitive information. The contents
+are not to be disclosed to anyone other than the
+addressee. Unauthorised recipients are requested to
+preserve this confidentiality and to advise the originator.
+immediately and to delete the message without copying,
+altering or disclosing its contents. E-mails to or from
+Uxbridge College may be monitored by the College in
+accordance with its current policy.
+
+
+
+From xitami@lists.xitami.org  Wed Oct  8 16:54:17 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Wed, 8 Oct 2003 10:54:17 -0500
+Subject: [Xitami] CHmod
+References: <sf843678.005@mail.uxbridgecollege.co.uk>
+Message-ID: <001e01c38db4$6e4c7500$0101a8c0@danlap>
+
+I am assuming you are talking about in the linux version.  The best way
+would be to telnet/ssh into the box, cd to the file, and do the chmod.  I
+know that some ftp programs allow you to do a chmod from them also.  If you
+are not sure what chmod does or how to do it then just telnet/ssh into the
+linux bow and do a man chmod.
+Daniel Nowlin
+IATS DataCenter
+----- Original Message ----- 
+From: "Michael Gibbons" <MGibbons@UxbridgeCollege.ac.uk>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, October 08, 2003 10:08 AM
+Subject: [Xitami] CHmod
+
+
+> Hi All
+> can anyone tell me how to change the mod of a file once it has been
+uploaded i have been trying for some time and do not want to change my
+server
+>
+> Regards
+> mike
+>
+>
+>
+> The information or opinions in this message (including
+> any attachments) are those of the author and are not
+> necessarily those of Uxbridge College, which disclaims
+> responsibility for loss or damage arising from its use to
+> the maximum extent permitted by law. E-mail messages
+> sometimes go astray. This message is sent in
+> confidence for the addressee only. It may contain
+> confidential or sensitive information. The contents
+> are not to be disclosed to anyone other than the
+> addressee. Unauthorised recipients are requested to
+> preserve this confidentiality and to advise the originator.
+> immediately and to delete the message without copying,
+> altering or disclosing its contents. E-mails to or from
+> Uxbridge College may be monitored by the College in
+> accordance with its current policy.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Wed Oct  8 23:36:50 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Wed, 08 Oct 2003 18:36:50 -0400
+Subject: [Xitami] CHmod
+In-Reply-To: <sf843678.005@mail.uxbridgecollege.co.uk>
+Message-ID: <3F845942.26560.1127FD5D@localhost>
+
+If you would like help debugging this setup you can reach me via ICQ at #: 
+23032460
+
+  WhiteShepherd
+
+On 8 Oct 2003 at 16:08, Michael Gibbons wrote:
+
+> Hi All
+> can anyone tell me how to change the mod of a file once it has been uploaded i 
+have been trying for some time and do not want to change my server
+> 
+> Regards
+> mike
+> 
+> 
+> 
+> The information or opinions in this message (including
+> any attachments) are those of the author and are not 
+> necessarily those of Uxbridge College, which disclaims
+> responsibility for loss or damage arising from its use to
+> the maximum extent permitted by law. E-mail messages
+> sometimes go astray. This message is sent in
+> confidence for the addressee only. It may contain
+> confidential or sensitive information. The contents
+> are not to be disclosed to anyone other than the
+> addressee. Unauthorised recipients are requested to
+> preserve this confidentiality and to advise the originator.
+> immediately and to delete the message without copying,
+> altering or disclosing its contents. E-mails to or from
+> Uxbridge College may be monitored by the College in
+> accordance with its current policy.
+> 
+> 
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--  WhiteShepherd (www.whiteshepherd.furtopia.org)
+
+http://www.furtopia.org / www.dragoncity.net - Unlimited fast and completely free 
+hosting (CGI/perl/PHP/MySQL available) for ALL the furry arts.  Personalized 
+(www."yourname".*.*) subdomains available, and/or linking to existing web pages to 
+increase your traffic.  Message forums to discuss ideas (http://forums.furtopia.org) 
+and art of the week to peruse.
+
+From xitami@lists.xitami.org  Thu Oct  9 03:07:41 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Wed, 08 Oct 2003 22:07:41 -0400
+Subject: [Xitami] CHmod
+In-Reply-To: <3F845942.26560.1127FD5D@localhost>
+References: <sf843678.005@mail.uxbridgecollege.co.uk>
+Message-ID: <3F848AAD.29689.11E90486@localhost>
+
+Opps.. replied to wrong message. 
+
+On 8 Oct 2003 at 18:36, WhiteShepherd wrote:
+
+> If you would like help debugging this setup you can reach me via ICQ at #: 
+> 23032460
+> 
+>   WhiteShepherd
+> 
+> On 8 Oct 2003 at 16:08, Michael Gibbons wrote:
+> 
+> > Hi All
+> > can anyone tell me how to change the mod of a file once it has 
+been uploaded i 
+> have been trying for some time and do not want to change my 
+server
+> > 
+> > Regards
+> > mike
+> > 
+> > 
+> > 
+> > The information or opinions in this message (including
+> > any attachments) are those of the author and are not 
+> > necessarily those of Uxbridge College, which disclaims
+> > responsibility for loss or damage arising from its use to
+> > the maximum extent permitted by law. E-mail messages
+> > sometimes go astray. This message is sent in
+> > confidence for the addressee only. It may contain
+> > confidential or sensitive information. The contents
+> > are not to be disclosed to anyone other than the
+> > addressee. Unauthorised recipients are requested to
+> > preserve this confidentiality and to advise the originator.
+> > immediately and to delete the message without copying,
+> > altering or disclosing its contents. E-mails to or from
+> > Uxbridge College may be monitored by the College in
+> > accordance with its current policy.
+> > 
+> > 
+> > 
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+> 
+> --  WhiteShepherd (www.whiteshepherd.furtopia.org)
+> 
+> http://www.furtopia.org / www.dragoncity.net - Unlimited fast and 
+completely free 
+> hosting (CGI/perl/PHP/MySQL available) for ALL the furry arts.  
+Personalized 
+> (www."yourname".*.*) subdomains available, and/or linking to 
+existing web pages to 
+> increase your traffic.  Message forums to discuss ideas 
+(http://forums.furtopia.org) 
+> and art of the week to peruse.
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Thu Oct  9 12:10:37 2003
+From: xitami@lists.xitami.org (Michael Gibbons)
+Date: Thu, 09 Oct 2003 12:10:37 +0100
+Subject: [Xitami] CHmod
+Message-ID: <sf85504c.079@mail.uxbridgecollege.co.uk>
+
+Thanks
+but i have no idea what you are talking about, i am a developer of php i use xitami web server on a local machine using the loop back address, it works great, but some of the files need the chmod command when i upload on the internet i can do it, but not on my machine.
+
+Cheers
+Mike
+
+>>> nowlind@missouri.edu 10/08/03 04:54pm >>>
+I am assuming you are talking about in the linux version.  The best way
+would be to telnet/ssh into the box, cd to the file, and do the chmod.  I
+know that some ftp programs allow you to do a chmod from them also.  If you
+are not sure what chmod does or how to do it then just telnet/ssh into the
+linux bow and do a man chmod.
+Daniel Nowlin
+IATS DataCenter
+----- Original Message ----- 
+From: "Michael Gibbons" <MGibbons@UxbridgeCollege.ac.uk>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, October 08, 2003 10:08 AM
+Subject: [Xitami] CHmod
+
+
+> Hi All
+> can anyone tell me how to change the mod of a file once it has been
+uploaded i have been trying for some time and do not want to change my
+server
+>
+> Regards
+> mike
+>
+>
+>
+> The information or opinions in this message (including
+> any attachments) are those of the author and are not
+> necessarily those of Uxbridge College, which disclaims
+> responsibility for loss or damage arising from its use to
+> the maximum extent permitted by law. E-mail messages
+> sometimes go astray. This message is sent in
+> confidence for the addressee only. It may contain
+> confidential or sensitive information. The contents
+> are not to be disclosed to anyone other than the
+> addressee. Unauthorised recipients are requested to
+> preserve this confidentiality and to advise the originator.
+> immediately and to delete the message without copying,
+> altering or disclosing its contents. E-mails to or from
+> Uxbridge College may be monitored by the College in
+> accordance with its current policy.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+The information or opinions in this message (including
+any attachments) are those of the author and are not 
+necessarily those of Uxbridge College, which disclaims
+responsibility for loss or damage arising from its use to
+the maximum extent permitted by law. E-mail messages
+sometimes go astray. This message is sent in
+confidence for the addressee only. It may contain
+confidential or sensitive information. The contents
+are not to be disclosed to anyone other than the
+addressee. Unauthorised recipients are requested to
+preserve this confidentiality and to advise the originator.
+immediately and to delete the message without copying,
+altering or disclosing its contents. E-mails to or from
+Uxbridge College may be monitored by the College in
+accordance with its current policy.
+
+
+
+From xitami@lists.xitami.org  Thu Oct  9 19:23:54 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 9 Oct 2003 14:23:54 -0400
+Subject: [Xitami] seperate drives
+In-Reply-To: <sf85504c.079@mail.uxbridgecollege.co.uk>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEFFDLAA.ron@miplanet.net>
+
+Right now I have 15 sites on this PC. I am running Xitami on Win2k pro and I
+have the need to add another drive or another win2k machine. Can Xitami be
+configured to point to sites on different drives or machines? And is there
+something that tells me how to do that? Suggestions.
+
+site1.com on pc1 f:/drive
+site2.com on pc1 g:/drive
+site3.com on pc2 d:/drive
+
+etc
+
+Thanks
+
+Ron
+
+
+From xitami@lists.xitami.org  Thu Oct  9 19:30:31 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Thu, 9 Oct 2003 13:30:31 -0500
+Subject: [Xitami] CHmod
+References: <sf85504c.079@mail.uxbridgecollege.co.uk>
+Message-ID: <00b401c38e93$6c38e2f0$0101a8c0@danlap>
+
+My answer works for both local and internet machines.  This chmod command is
+for linux servers.  Maybe you need to do a google search on chmod and learn
+more about what this command does.
+Daniel Nowlin
+IATS DataCenter
+----- Original Message ----- 
+From: "Michael Gibbons" <MGibbons@UxbridgeCollege.ac.uk>
+To: <xitami@lists.xitami.org>
+Sent: Thursday, October 09, 2003 6:10 AM
+Subject: Re: [Xitami] CHmod
+
+
+> Thanks
+> but i have no idea what you are talking about, i am a developer of php i
+use xitami web server on a local machine using the loop back address, it
+works great, but some of the files need the chmod command when i upload on
+the internet i can do it, but not on my machine.
+>
+> Cheers
+> Mike
+>
+> >>> nowlind@missouri.edu 10/08/03 04:54pm >>>
+> I am assuming you are talking about in the linux version.  The best way
+> would be to telnet/ssh into the box, cd to the file, and do the chmod.  I
+> know that some ftp programs allow you to do a chmod from them also.  If
+you
+> are not sure what chmod does or how to do it then just telnet/ssh into the
+> linux bow and do a man chmod.
+> Daniel Nowlin
+> IATS DataCenter
+> ----- Original Message ----- 
+> From: "Michael Gibbons" <MGibbons@UxbridgeCollege.ac.uk>
+> To: <xitami@lists.xitami.org>
+> Sent: Wednesday, October 08, 2003 10:08 AM
+> Subject: [Xitami] CHmod
+>
+>
+> > Hi All
+> > can anyone tell me how to change the mod of a file once it has been
+> uploaded i have been trying for some time and do not want to change my
+> server
+> >
+> > Regards
+> > mike
+> >
+> >
+> >
+> > The information or opinions in this message (including
+> > any attachments) are those of the author and are not
+> > necessarily those of Uxbridge College, which disclaims
+> > responsibility for loss or damage arising from its use to
+> > the maximum extent permitted by law. E-mail messages
+> > sometimes go astray. This message is sent in
+> > confidence for the addressee only. It may contain
+> > confidential or sensitive information. The contents
+> > are not to be disclosed to anyone other than the
+> > addressee. Unauthorised recipients are requested to
+> > preserve this confidentiality and to advise the originator.
+> > immediately and to delete the message without copying,
+> > altering or disclosing its contents. E-mails to or from
+> > Uxbridge College may be monitored by the College in
+> > accordance with its current policy.
+> >
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+> The information or opinions in this message (including
+> any attachments) are those of the author and are not
+> necessarily those of Uxbridge College, which disclaims
+> responsibility for loss or damage arising from its use to
+> the maximum extent permitted by law. E-mail messages
+> sometimes go astray. This message is sent in
+> confidence for the addressee only. It may contain
+> confidential or sensitive information. The contents
+> are not to be disclosed to anyone other than the
+> addressee. Unauthorised recipients are requested to
+> preserve this confidentiality and to advise the originator.
+> immediately and to delete the message without copying,
+> altering or disclosing its contents. E-mails to or from
+> Uxbridge College may be monitored by the College in
+> accordance with its current policy.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Thu Oct  9 20:14:46 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 9 Oct 2003 15:14:46 -0400
+Subject: [Xitami] seperate drives
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEEEFFDLAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOEFFDLAA.ron@miplanet.net>
+
+Okay, I was able to figure out the issue with seperate drives but haven't
+figured out seperate machines yet. I tried mapping a drive then telling
+Xitami to go to the mapped drive but that didn't seem to work.
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Ron Ackerman
+Sent: Thursday, October 09, 2003 2:24 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] seperate drives
+
+
+
+Right now I have 15 sites on this PC. I am running Xitami on Win2k pro and I
+have the need to add another drive or another win2k machine. Can Xitami be
+configured to point to sites on different drives or machines? And is there
+something that tells me how to do that? Suggestions.
+
+site1.com on pc1 f:/drive
+site2.com on pc1 g:/drive
+site3.com on pc2 d:/drive
+
+etc
+
+Thanks
+
+Ron
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 10 07:24:19 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Fri, 10 Oct 2003 08:24:19 +0200
+Subject: [Xitami] seperate drives
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEOEFFDLAA.ron@miplanet.net>
+References: <NFBBKNGGELNPLMHPBOCEEEFFDLAA.ron@miplanet.net>
+Message-ID: <5.1.0.14.2.20031010082209.0320b790@verfaillie4.verfaillie.local>
+
+At 21:14 9/10/03, "Ron Ackerman" <ron@miplanet.net> wrote:
+
+Okay, I was able to figure out the issue with seperate drives but haven't
+figured out seperate machines yet. I tried mapping a drive then telling
+Xitami to go to the mapped drive but that didn't seem to work.
+Ron
+
+
+
+Use the UNC path to the machine.
+On server2, make the directory shared as dir2
+
+Set the path to the directory as \\server2\dir2
+
+Works like a charm.
+(on a windows computer)
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Fri Oct 10 15:19:06 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 10 Oct 2003 10:19:06 -0400
+Subject: [Xitami] seperate drives
+In-Reply-To: <5.1.0.14.2.20031010082209.0320b790@verfaillie4.verfaillie.local>
+Message-ID: <NFBBKNGGELNPLMHPBOCEAEFODLAA.ron@miplanet.net>
+
+Yeah, that is what is not working. I can map to the share but the UNC isn't
+working when entered into the cfg.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+Sent: Friday, October 10, 2003 2:24 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] seperate drives
+
+
+At 21:14 9/10/03, "Ron Ackerman" <ron@miplanet.net> wrote:
+
+Okay, I was able to figure out the issue with seperate drives but haven't
+figured out seperate machines yet. I tried mapping a drive then telling
+Xitami to go to the mapped drive but that didn't seem to work.
+Ron
+
+
+
+Use the UNC path to the machine.
+On server2, make the directory shared as dir2
+
+Set the path to the directory as \\server2\dir2
+
+Works like a charm.
+(on a windows computer)
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 10 15:58:11 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 10 Oct 2003 10:58:11 -0400
+Subject: [Xitami] seperate drives
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEAEFODLAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEKEFODLAA.ron@miplanet.net>
+
+added note: I can enter the UNC into my browser and can see the index.htm
+file (not as a webpage of course) ie:
+\\server2\websites\site1\
+
+in site1.cfg I have:
+
+webpages = "\\server2\websites\site1\"
+
+and of course I restart Xitmai, Nothing (Page not found)
+Pointing it to any local drive works fine. like this webpages =
+"d:/websites/site1/"
+But the UNC for server2 just doesn't work. It's shared, I can map to it, and
+I see the files. I just can't get Xitami to use the UNC.
+
+I'm open to ideas folks.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+Sent: Friday, October 10, 2003 2:24 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] seperate drives
+
+
+At 21:14 9/10/03, "Ron Ackerman" <ron@miplanet.net> wrote:
+
+Okay, I was able to figure out the issue with seperate drives but haven't
+figured out seperate machines yet. I tried mapping a drive then telling
+Xitami to go to the mapped drive but that didn't seem to work.
+Ron
+
+
+
+Use the UNC path to the machine.
+On server2, make the directory shared as dir2
+
+Set the path to the directory as \\server2\dir2
+
+Works like a charm.
+(on a windows computer)
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 10 16:22:49 2003
+From: xitami@lists.xitami.org (M. Jason Smiley)
+Date: Fri, 10 Oct 2003 11:22:49 -0400
+Subject: [Xitami] seperate drives
+References: <NFBBKNGGELNPLMHPBOCEKEFODLAA.ron@miplanet.net>
+Message-ID: <162b01c38f42$5daf7820$2f28a8c0@rcolmstead.com>
+
+you've got the wrong syntax in your config file. i use mapped drives and it
+works fine (never tried a unc in the config file). here is an example from
+one of my config files.... you need forward slashes (/) not backslashes (\).
+
+
+    /cam=m:/xitami/webpages/cam
+
+
+----- Original Message -----
+From: "Ron Ackerman" <ron@miplanet.net>
+To: <xitami@lists.xitami.org>
+Sent: Friday, October 10, 2003 10:58 AM
+Subject: RE: [Xitami] seperate drives
+
+
+> added note: I can enter the UNC into my browser and can see the index.htm
+> file (not as a webpage of course) ie:
+> \\server2\websites\site1\
+>
+> in site1.cfg I have:
+>
+> webpages = "\\server2\websites\site1\"
+>
+> and of course I restart Xitmai, Nothing (Page not found)
+> Pointing it to any local drive works fine. like this webpages =
+> "d:/websites/site1/"
+> But the UNC for server2 just doesn't work. It's shared, I can map to it,
+and
+> I see the files. I just can't get Xitami to use the UNC.
+>
+> I'm open to ideas folks.
+>
+> Ron
+>
+> -----Original Message-----
+> From: xitami-admin@lists.xitami.org
+> [mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+> Sent: Friday, October 10, 2003 2:24 AM
+> To: xitami@lists.xitami.org
+> Subject: RE: [Xitami] seperate drives
+>
+>
+> At 21:14 9/10/03, "Ron Ackerman" <ron@miplanet.net> wrote:
+>
+> Okay, I was able to figure out the issue with seperate drives but haven't
+> figured out seperate machines yet. I tried mapping a drive then telling
+> Xitami to go to the mapped drive but that didn't seem to work.
+> Ron
+>
+>
+>
+> Use the UNC path to the machine.
+> On server2, make the directory shared as dir2
+>
+> Set the path to the directory as \\server2\dir2
+>
+> Works like a charm.
+> (on a windows computer)
+>
+>
+> --::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+> Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+> http://www.verfaillie.com
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Fri Oct 10 17:34:49 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Fri, 10 Oct 2003 18:34:49 +0200
+Subject: [Xitami] seperate drives
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEAEFODLAA.ron@miplanet.net>
+References: <5.1.0.14.2.20031010082209.0320b790@verfaillie4.verfaillie.local>
+Message-ID: <5.1.0.14.2.20031010183234.00a79ca0@verfaillie4.verfaillie.local>
+
+At 16:19 10/10/03, you wrote:
+>Yeah, that is what is not working. I can map to the share but the UNC isn't
+>working when entered into the cfg.
+
+Are you on a win NT/2k?
+Xitami runs as a LOCAL SERVICE and can't access remote drives.
+
+You should create a separate user that has access to network resources and 
+run xitami as that user.
+
+Forward and backward slashed and mapped drives work as expected.
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Fri Oct 10 17:41:52 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 10 Oct 2003 12:41:52 -0400
+Subject: [Xitami] seperate drives
+In-Reply-To: <5.1.0.14.2.20031010183234.00a79ca0@verfaillie4.verfaillie.local>
+Message-ID: <NFBBKNGGELNPLMHPBOCEAEGBDLAA.ron@miplanet.net>
+
+Yes win2k running as a service. I'm not sure I understand you second
+suggestion. I have access to all network resources. I thought your other
+message said to use UNC. What makes a diff between a user that has access to
+network resources or Administrator with access to network resources?
+
+I am a bit confused now.
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+Sent: Friday, October 10, 2003 12:35 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] seperate drives
+
+
+At 16:19 10/10/03, you wrote:
+>Yeah, that is what is not working. I can map to the share but the UNC isn't
+>working when entered into the cfg.
+
+Are you on a win NT/2k?
+Xitami runs as a LOCAL SERVICE and can't access remote drives.
+
+You should create a separate user that has access to network resources and
+run xitami as that user.
+
+Forward and backward slashed and mapped drives work as expected.
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sat Oct 11 08:32:51 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Sat, 11 Oct 2003 09:32:51 +0200
+Subject: [Xitami] seperate drives
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEAEGBDLAA.ron@miplanet.net>
+References: <5.1.0.14.2.20031010183234.00a79ca0@verfaillie4.verfaillie.local>
+Message-ID: <5.1.0.14.2.20031011092502.024de750@verfaillie4.verfaillie.local>
+
+Hello !
+
+In windows, a service runs normally as "LOCAL SERVICE".
+This default user has access to all local resources, like printers and drives.
+However, it has no access to network resources.
+
+On your w2k server, locate the Xitami service 
+(start/programs/administrative tools/services), it's at the end.
+DoubleClick on it, select the second tab ("log on"). There you have 
+probably "local system account" checked.
+Click "this account" and enter the parameters for a valid user (with password).
+Restart the service, and it will work.
+
+Marc
+
+
+
+At 18:41 10/10/03, you wrote:
+>Yes win2k running as a service. I'm not sure I understand you second
+>suggestion. I have access to all network resources. I thought your other
+>message said to use UNC. What makes a diff between a user that has access to
+>network resources or Administrator with access to network resources?
+>
+>I am a bit confused now.
+>
+>Ron
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Sat Oct 11 13:49:41 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Sat, 11 Oct 2003 14:49:41 +0200
+Subject: [Xitami] Problem with NSLOOKUP
+Message-ID: <5.1.0.14.2.20031011143528.00a74b70@verfaillie4.verfaillie.local>
+
+Hello !
+
+I have a strange problem with NSLOOKUP on a win2k server.
+
+When i call nslookup from the command prompt, it works fine.
+It works also fine when inside a batch script (writing it's output to a 
+file or to the console screen).
+
+When i call nslookup from a program that is called by Xitami (cgi-bin 
+application), i always get the error "Default Server: UnKnown".
+Same sort of error with another utility that also performs lookups ("no 
+data"), so i think the problem is Xitami-related. (Xitami has the correct 
+NT rights)
+
+Is this a known error or is there a workaround?
+I want to do a MX lookup on a domain to determine if a e-mail address is valid
+(are they other alternatives than nslookup for performing a MX lookup? 
+-could be a API call to some dll)
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Sat Oct 11 14:05:55 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Sat, 11 Oct 2003 09:05:55 -0400
+Subject: [Xitami] Problem with NSLOOKUP
+In-Reply-To: <5.1.0.14.2.20031011143528.00a74b70@verfaillie4.verfaillie.
+ local>
+Message-ID: <3.0.6.32.20031011090555.00b6f318@mail.shininglightpro.com>
+
+At 02:49 PM 10/11/2003 +0200, Marc Doigny writeth:
+>Hello !
+>
+>I have a strange problem with NSLOOKUP on a win2k server.
+>
+>When i call nslookup from the command prompt, it works fine.
+>It works also fine when inside a batch script (writing it's output to a 
+>file or to the console screen).
+>
+>When i call nslookup from a program that is called by Xitami (cgi-bin 
+>application), i always get the error "Default Server: UnKnown".
+>Same sort of error with another utility that also performs lookups ("no 
+>data"), so i think the problem is Xitami-related. (Xitami has the correct 
+>NT rights)
+>
+>Is this a known error or is there a workaround?
+>I want to do a MX lookup on a domain to determine if a e-mail address is
+valid
+>(are they other alternatives than nslookup for performing a MX lookup? 
+>-could be a API call to some dll)
+
+The environment variable "SystemRoot" has to exist (with valid information)
+during program startup in order for socket calls to work under NT/2000/XP.
+I discovered this oddity when developing the CGI Remote Module for the
+ProtoNova Web Server.
+
+This happens when programs are started from an NT service.  So, if you run
+Xitami from the console or use the GUI version, your socket-based programs
+should work just fine.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~
+  Tired of expensive $5,000+ web application servers like ColdFusion?
+  Try Nuclear Vision today!
+
+  http://internal.shininglightpro.com/search.nvm?searchname=Nuclear+Vision
+
+  Announcing Nuclear Vision v1.1, a superior scripting language with
+powerful features in a HTML-like syntax.
+
+From xitami@lists.xitami.org  Sat Oct 11 14:26:53 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sat, 11 Oct 2003 09:26:53 -0400
+Subject: [Xitami] seperate drives
+In-Reply-To: <5.1.0.14.2.20031011092502.024de750@verfaillie4.verfaillie.local>
+Message-ID: <NFBBKNGGELNPLMHPBOCEMEGLDLAA.ron@miplanet.net>
+
+That solved the problem, I have been a tech since 1993 and I think I learn
+something everyday. Thanks Marc
+
+Ron
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+Sent: Saturday, October 11, 2003 3:33 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] seperate drives
+
+
+Hello !
+
+In windows, a service runs normally as "LOCAL SERVICE".
+This default user has access to all local resources, like printers and
+drives.
+However, it has no access to network resources.
+
+On your w2k server, locate the Xitami service
+(start/programs/administrative tools/services), it's at the end.
+DoubleClick on it, select the second tab ("log on"). There you have
+probably "local system account" checked.
+Click "this account" and enter the parameters for a valid user (with
+password).
+Restart the service, and it will work.
+
+Marc
+
+
+
+At 18:41 10/10/03, you wrote:
+>Yes win2k running as a service. I'm not sure I understand you second
+>suggestion. I have access to all network resources. I thought your other
+>message said to use UNC. What makes a diff between a user that has access
+to
+>network resources or Administrator with access to network resources?
+>
+>I am a bit confused now.
+>
+>Ron
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Sat Oct 11 15:35:08 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Sat, 11 Oct 2003 16:35:08 +0200
+Subject: [Xitami] Problem with NSLOOKUP
+In-Reply-To: <3.0.6.32.20031011090555.00b6f318@mail.shininglightpro.com>
+References: <5.1.0.14.2.20031011143528.00a74b70@verfaillie4.verfaillie. local>
+Message-ID: <5.1.0.14.2.20031011162159.00a79ec0@verfaillie4.verfaillie.local>
+
+At 15:05 11/10/03, "Thomas J. Hruska" <shinelight@shininglightpro.com> wrote:
+
+>At 02:49 PM 10/11/2003 +0200, Marc Doigny writeth:
+> >Hello !
+> >
+> >I have a strange problem with NSLOOKUP on a win2k server.
+> >
+[...]
+
+Indeed a very strange problem. I was trying to solve this problem for 10 
+hours now.
+
+I have developped quite a number of applications using Xitami, and for me 
+it's the most easy method to implement a multi-user, multi-client 
+application. Basically i know what is possible, and stick to it.
+The last one is a complete POS (point-Of-Sales) application using touch 
+screens and a full screen version of internet explorer.
+Everything works fine (even with an outdated webserver).
+
+The only problem was the part involving a real-time name lookup of a email 
+address.
+When the salespeople enter a e-mail address, it is required to have a email 
+validation feature.
+The normal way involves sending a automated e-mail to the customer, but 
+when the salesperson receives the (negative) response, the customer has 
+already leaved, and we have no way of contacting him.
+
+I've tried out other webservers (Apache and Sambar), but Xitami is the most 
+easy to configure.
+btw Sambar has a very good documentation (but Xitami too)
+
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Mon Oct 13 14:57:23 2003
+From: xitami@lists.xitami.org (RPO)
+Date: Mon, 13 Oct 2003 06:57:23 -0700
+Subject: [Xitami] Upgrading 2.4 to 2.5c0
+Message-ID: <Law15-DAV39DnxY5ksq000021ff@hotmail.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0070_01C39157.40F62000
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I am upgrading from 2.4d9 to 2.5c0 and I want to ensure that I don't =
+screw anything up.  Which files do I need to move (or backup) before =
+doing a complete upgrade to 2.5c0?  Anything else I need to be aware of =
+before I do this?
+
+As well, I have read as much as the xitami.com site displays about the =
+new version, but it still didn't list the latest features and fixes.  Or =
+at least I couldn't find where it was at.  Could someone tell me the =
+latest and greatest features (not bug fixes) in 2.5c0.   The biggest =
+feature I have been looking for (or fix, depending on perspective) is =
+allowing Domain adimistrators to admin their own domains without access =
+to other domains and without access to administration of the server.  =
+For the longest time (I have been a user for nearly 5 years) when a user =
+has access to their own domain they also have access to all domains and =
+server admin access to.  Either that or I have been doing it wrong all =
+this time.
+
+Thanx.
+
+PS:  Has all development on the built in FTP server stopped?  I haven't =
+seen any improvement on that in a long time.
+
+------=_NextPart_000_0070_01C39157.40F62000
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I am upgrading from 2.4d9 to 2.5c0 and =
+I want to=20
+ensure that I don't screw anything up.&nbsp; Which files do I need to =
+move (or=20
+backup) before doing a complete upgrade to 2.5c0?&nbsp; Anything else I =
+need to=20
+be aware of before I do this?</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>As well, I have read as much as the =
+xitami.com site=20
+displays about the new version, but it still didn't list the latest =
+features and=20
+fixes.&nbsp; Or at least I couldn't find where it was at.&nbsp; Could =
+someone=20
+tell me the latest and greatest features (not bug fixes) in =
+2.5c0.&nbsp;&nbsp;=20
+The biggest feature I have been looking for (or fix, depending on =
+perspective)=20
+is allowing Domain adimistrators to admin their own domains without =
+access to=20
+other domains and without access to administration of the server.&nbsp; =
+For the=20
+longest time (I have been a user for nearly 5 years) when a user has =
+access to=20
+their own domain they also have access to all domains and server admin =
+access=20
+to.&nbsp; Either that or I have been doing it wrong all this =
+time.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Thanx.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>PS:&nbsp; Has all development on the =
+built in FTP=20
+server stopped?&nbsp; I haven't seen any improvement on that in a long=20
+time.</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0070_01C39157.40F62000--
+
+From xitami@lists.xitami.org  Mon Oct 13 20:13:47 2003
+From: xitami@lists.xitami.org (R O)
+Date: Mon, 13 Oct 2003 12:13:47 -0700
+Subject: [Xitami] Admin Problems
+Message-ID: <Law15-F58fpGtS79AX700010c28@hotmail.com>
+
+Anyone experience this problem before.  I set a Username/Password for the 
+/admin URI in the "blahdoamin.aut" file of: Username: Test    Password: 
+hello
+
+And then when I go to: "www.blahdomain.com/admin" I get the 
+Username/Password prompt for that Virtual Domain.  I enter in: Test/hello 
+and it gives me access to the FULL server.  Its only supposed to give me 
+access to the settings for virtual domain "blahdomain.com"
+
+
+Settings for "blahdomain.aut" :
+URI or partial URI:       Translated path:                           IP 
+address mask:       Auth realm:      Users:
+/admin                      /xitami/blahdomain/htdocs/admin                  
+                                             1
+
+User 1:  Username=Test        Password=hello
+
+In summary, a local Username/Password specific to a virtualdomain 
+authentication file allows access to the full server.
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+_________________________________________________________________
+Frustrated with dial-up? Get high-speed for as low as $29.95/month 
+(depending on the local service providers in your area).  
+https://broadband.msn.com
+
+
+From xitami@lists.xitami.org  Tue Oct 14 00:45:28 2003
+From: xitami@lists.xitami.org (stanley)
+Date: Mon, 13 Oct 2003 18:45:28 -0500
+Subject: [Xitami] CGI Truble
+Message-ID: <000001c391e4$15722900$6601a8c0@me>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0001_01C391BA.2C9DA7A0
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+I have Xitami 25c0 on my winxp box however my perl cgi scripts do not
+run at all. The system can access them however they do not print to
+either the screen or a file. Any one have any ideas how to fix this?
+
+------=_NextPart_000_0001_01C391BA.2C9DA7A0
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns=3D"http://www.w3.org/TR/REC-html40">
+
+<head>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+
+
+<meta name=3DProgId content=3DWord.Document>
+<meta name=3DGenerator content=3D"Microsoft Word 10">
+<meta name=3DOriginator content=3D"Microsoft Word 10">
+<link rel=3DFile-List href=3D"cid:filelist.xml@01C391BA.2B890350">
+<!--[if gte mso 9]><xml>
+ <o:OfficeDocumentSettings>
+  <o:DoNotRelyOnCSS/>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:DocumentKind>DocumentEmail</w:DocumentKind>
+  <w:EnvelopeVis/>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-alt:\5B8B\4F53;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;
+	mso-font-charset:134;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 135135232 16 0 262145 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:SimSun;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	mso-style-noshow:yes;
+	mso-ansi-font-size:10.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-ascii-font-family:Arial;
+	mso-hansi-font-family:Arial;
+	mso-bidi-font-family:Arial;
+	color:windowtext;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */=20
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+</head>
+
+<body lang=3DEN-US link=3Dblue vlink=3Dpurple =
+style=3D'tab-interval:.5in'>
+
+<div class=3DSection1>
+
+<p class=3DMsoNormal><font size=3D2 face=3DArial><span =
+style=3D'font-size:10.0pt;
+font-family:Arial'>I have <span class=3DSpellE>Xitami</span> 25c0 on my =
+<span
+class=3DSpellE>winxp</span> box however my <span =
+class=3DSpellE>perl</span> <span
+class=3DSpellE>cgi</span> scripts do not run at all. The system can =
+access them
+however they do not print to either the screen or a file. Any one have =
+any
+ideas how to fix this?<o:p></o:p></span></font></p>
+
+</div>
+
+</body>
+
+</html>
+
+------=_NextPart_000_0001_01C391BA.2C9DA7A0--
+
+
+From xitami@lists.xitami.org  Tue Oct 14 15:10:53 2003
+From: xitami@lists.xitami.org (Mecmatica - Sala Massimo)
+Date: Tue, 14 Oct 2003 16:10:53 +0200
+Subject: [Xitami] xitami: lwrp bug
+Message-ID: <01C3926D.BE85DBC0.sala.massimo@mecmatica.it>
+
+Hi
+
+I am a happy user of Xitami, under Windows 2000.
+
+Now I am trying Xitami 2.5c0, under Windows 2000 Pro Service Pack 4.
+
+In my defaults.cfg file, I set
+[Lrwp]
+enabled=0
+
+It doesn't work: Xitami starts, lwrp port (81) is still open and owned by Xitami.
+
+
+
+Best regards, Sala Massimo
+ITALY
+
+
+From xitami@lists.xitami.org  Thu Oct 16 07:59:05 2003
+From: xitami@lists.xitami.org (Adam M. Arents)
+Date: Thu, 16 Oct 2003 01:59:05 -0500
+Subject: [Xitami] Xitami Problem
+Message-ID: <5.1.1.5.2.20031016015250.00b3b468@hecky.it.northwestern.edu>
+
+Hi,
+I'm using the Stable Release 2.4d10 version of Xitami with Windows XP 
+Professional.
+The error message I get is this:
+Xitami was suspended
+Could not open HTTP port 80 - Protocol not known (No error).
+I get this message whenever I open the xigui32 application, as well as 
+whenever I click on the 'start' button in the xitami program itself.
+I got the following info from a file called 'console' in the logs folder, 
+if it helps at all:
+2003/10/16 01:48:02: xilrwp: Could not open LRWP port 81
+2003/10/16 01:48:02: Protocol not known
+2003/10/16 01:48:02: smthttp: preparing for connections on port 80
+2003/10/16 01:48:02: smthttp: could not open HTTP port 80
+2003/10/16 01:48:02: smthttp: Protocol not known
+2003/10/16 01:48:02: smthttp: No error
+2003/10/16 01:48:02: smthttp: closing HTTP connections on port 80.
+This problem also occurred with Current Release 2.5c0.
+Any suggestions for how to fix this?
+Thanks,
+Adam Arents
+
+
+From xitami@lists.xitami.org  Thu Oct 16 13:35:24 2003
+From: xitami@lists.xitami.org (=?iso-8859-15?Q?=22Robert_M._M=FCnch=22?=)
+Date: Thu, 16 Oct 2003 14:35:24 +0200
+Subject: [Xitami] Logfiles
+Message-ID: <oprw4ylauur6w2gz@mail.robertmuench.de>
+
+Hi, my Linux system is going down because I have to much log-files. Why 
+does this not work?
+
+[Accesslog]
+  Filename = "familie-ney_de_access.log"
+  Cycle-how = concat
+  Cycle-arg = familie-ney_de_access.archive
+  Format = CLFX
+
+It seems that the log-files isn't concatenated to the achive.
+
+-- 
+Robert M. Münch
+Management & IT Freelancer
+Mobile: +49 (177) 245 2802
+http://www.robertmuench.de
+
+
+From xitami@lists.xitami.org  Tue Oct 21 15:22:17 2003
+From: xitami@lists.xitami.org (Bowden, Zeb)
+Date: Tue, 21 Oct 2003 10:22:17 -0400
+Subject: [Xitami] Disabling sslv2
+Message-ID: <715379D39F6E534594B4B3182B63659004BB701C@fangorn.cc.vt.edu>
+
+This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01C397DE.BB6D21F2
+Content-Type: text/plain;
+	charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
+
+Has anyone tried to disable sslv2 in xitami pro? I'm running 2.4d10 and
+I can't seem to get it to completely disable sslv2
+I've tried setting protocol=3Dsslv3 in my sslhttp.cfs file but that
+doesn't seem to work, I can still connect using sslv2 and IE
+With sslv2 as the only protocol enabled in Opera I can't connect using
+https; however same setup and IE it will connect just fine and I see
+this in the debug.log "Connection: SSLv2: RC4-MD5, none"
+Anyone have any ideas on what I'm missing?
+
+Thanks!
+
+
+Zeb Bowden
+VT.SETI.IAD.MIG:Application Developer
+http://vtmig.w2k.vt.edu
+
+
+------_=_NextPart_001_01C397DE.BB6D21F2
+Content-Type: text/html;
+	charset="US-ASCII"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii">
+<META NAME=3D"Generator" CONTENT=3D"MS Exchange Server version =
+6.0.6249.1">
+<TITLE>Disabling sslv2</TITLE>
+</HEAD>
+<BODY>
+<!-- Converted from text/rtf format -->
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Has anyone tried to disable sslv2 in =
+xitami pro? I'm running 2.4d10 and I can't seem to get it to completely =
+disable sslv2</FONT></P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">I've tried setting protocol=3Dsslv3 in =
+my sslhttp.cfs file but that doesn't seem to work, I can still connect =
+using sslv2 and IE</FONT></P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">With sslv2 as the only protocol enabled =
+in Opera I can't connect using https; however same setup and IE it will =
+connect just fine and I see this in the debug.log &quot;Connection: =
+SSLv2: RC4-MD5, none&quot;</FONT></P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Anyone have any ideas on what I'm =
+missing?</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Thanks!</FONT>
+</P>
+<BR>
+
+<P><FONT SIZE=3D2 FACE=3D"Courier New">Zeb Bowden</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Courier New">VT.SETI.IAD.MIG:Application =
+Developer</FONT>
+
+<BR><A HREF=3D"http://vtmig.w2k.vt.edu"><U><FONT COLOR=3D"#0000FF" =
+SIZE=3D2 FACE=3D"Courier New">http://vtmig.w2k.vt.edu</FONT></U></A>
+</P>
+
+</BODY>
+</HTML>
+------_=_NextPart_001_01C397DE.BB6D21F2--
+
+From xitami@lists.xitami.org  Tue Oct 21 21:04:43 2003
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 22 Oct 2003 09:04:43 +1300
+Subject: [Xitami] Administrivia: New mail server software
+Message-ID: <20031021200443.BB0CA3C486F0@basilica.la.naos.co.nz>
+
+Hi,
+
+We have upgraded to new mail server software on the system which hosts
+the Xitami mailing list.  We believe that everything has migrated over
+correctly, and the Xitami mailing list should be working just as it was
+before.
+
+However if anyone notices any new problems with sending mail to the
+Xitami mailing list please let me know directly (<ewen@imatix.com>).
+
+Thanks,
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Tue Oct 21 21:23:03 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Tue, 21 Oct 2003 14:23:03 -0600
+Subject: [Xitami] Administrivia: New mail server software
+References: <20031021200443.BB0CA3C486F0@basilica.la.naos.co.nz>
+Message-ID: <003601c39811$21585950$6501a8c0@pressmans>
+
+got this so must be ok thanks Ewen
+
+
+
+
+From xitami@lists.xitami.org  Tue Oct 21 23:13:23 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Tue, 21 Oct 2003 18:13:23 -0400
+Subject: [Xitami] Disabling sslv2
+In-Reply-To: <715379D39F6E534594B4B3182B63659004BB701C@fangorn.cc.vt.edu
+ >
+Message-ID: <3.0.6.32.20031021181323.00b6aaa8@mail.shininglightpro.com>
+
+At 10:22 AM 10/21/2003 -0400, Bowden, Zeb writeth:
+>
+>Has anyone tried to disable sslv2 in xitami pro? I'm running 2.4d10 and I
+can't seem to get it to completely disable sslv2
+>
+>I've tried setting protocol=sslv3 in my sslhttp.cfs file but that doesn't
+seem to work, I can still connect using sslv2 and IE
+>
+>With sslv2 as the only protocol enabled in Opera I can't connect using
+https; however same setup and IE it will connect just fine and I see this
+in the debug.log "Connection: SSLv2: RC4-MD5, none"
+>
+>Anyone have any ideas on what I'm missing? 
+>
+>Thanks! 
+>
+>
+>Zeb Bowden 
+>VT.SETI.IAD.MIG:Application Developer 
+>http://vtmig.w2k.vt.edu 
+
+
+You have to disable certain cryptography options at compile-time with
+OpenSSL to disable those algorithms.  There are special sections of code in
+OpenSSL that handle IE.  You have to disable those IE options, but then IE
+may or may not work with a server not using the workarounds for bugs in IE.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~
+  Tired of expensive $5,000+ web application servers like ColdFusion?
+  Try Nuclear Vision today!
+
+  http://internal.shininglightpro.com/search.nvm?searchname=Nuclear+Vision
+
+  Announcing Nuclear Vision v1.1, a superior scripting language with
+powerful features in a HTML-like syntax.
+
+From xitami@lists.xitami.org  Wed Oct 22 00:13:37 2003
+From: xitami@lists.xitami.org (Chestnut)
+Date: Tue, 21 Oct 2003 16:13:37 -0700
+Subject: [Xitami] new mail server
+Message-ID: <003101c39828$f57364c0$ecc6ff40@2c01v01>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_002E_01C397EE.4898CD10
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Test for Ewen. If we get it, must be OK!!!
+Patrick
+------=_NextPart_000_002E_01C397EE.4898CD10
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Test for Ewen. If we get it, must be=20
+OK!!!</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>Patrick</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_002E_01C397EE.4898CD10--
+
+
+
+From xitami@lists.xitami.org  Wed Oct 22 00:17:59 2003
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 22 Oct 2003 12:17:59 +1300
+Subject: [Xitami] new mail server
+In-Reply-To: Message from "Chestnut" <chestnut@willapabay.org>
+ of "Tue, 21 Oct 2003 16:13:37 PDT." <003101c39828$f57364c0$ecc6ff40@2c01v01>
+Message-ID: <20031021231759.93ABB3C44CB2@basilica.la.naos.co.nz>
+
+In message <003101c39828$f57364c0$ecc6ff40@2c01v01>, "Chestnut" writes:
+>Test for Ewen. If we get it, must be OK!!!
+
+Okay, I think we can conclude from the several test messages that people
+have sent (including my cunningly disguised one :-) ), that it's all 
+still working.
+
+No more test messages thanks.  (But of course you're still welcome to
+let me know directly if there is some problem with on-topic messages
+you're trying to send.)
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed Oct 22 01:27:31 2003
+From: xitami@lists.xitami.org (Cristiano Quintela)
+Date: Tue, 21 Oct 2003 22:27:31 -0200
+Subject: [Xitami] I Wanna get out of the list
+Message-ID: <003a01c39833$48ad0b00$0401a8c0@info1>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0037_01C39822.8486E990
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I Wanna get out of the list, please.
+
+------=_NextPart_000_0037_01C39822.8486E990
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT size=3D1>
+<P>I Wanna get out of the list, please.</P></FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0037_01C39822.8486E990--
+
+
+From xitami@lists.xitami.org  Wed Oct 22 01:56:20 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Tue, 21 Oct 2003 18:56:20 -0600
+Subject: [Xitami] I Wanna get out of the list
+References: <003a01c39833$48ad0b00$0401a8c0@info1>
+Message-ID: <006101c39837$4ed23c90$6501a8c0@pressmans>
+
+just check out any e-mail from the list and unsubscribe link has always been
+there
+
+----- Original Message ----- 
+From: Cristiano Quintela
+To: xitami@lists.xitami.org
+Sent: Tuesday, October 21, 2003 6:27 PM
+Subject: [Xitami] I Wanna get out of the list
+
+
+I Wanna get out of the list, please.
+
+
+
+From xitami@lists.xitami.org  Wed Oct 22 04:24:00 2003
+From: xitami@lists.xitami.org (James Wong)
+Date: Wed, 22 Oct 2003 08:24:00 +0500
+Subject: [Xitami] Admin panel????????
+Message-ID: <BAY8-DAV643zkuCBeOR000081ab@hotmail.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_002D_01C39875.D8594330
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+The guides are incomprehensible!!!! How do i get into the admin =
+panel????
+
+
+------=_NextPart_000_002D_01C39875.D8594330
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2733.1800" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>The guides are incomprehensible!!!! How =
+do i get=20
+into the admin panel????</FONT></DIV>
+<DIV>&nbsp;</DIV></BODY></HTML>
+
+------=_NextPart_000_002D_01C39875.D8594330--
+
+From xitami@lists.xitami.org  Wed Oct 22 07:06:31 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Wed, 22 Oct 2003 00:06:31 -0600
+Subject: [Xitami] Admin panel????????
+References: <BAY8-DAV643zkuCBeOR000081ab@hotmail.com>
+Message-ID: <003901c39862$a3cb9130$6501a8c0@pressmans>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0036_01C39830.58DFF3F0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+http://localhost/admin
+
+  ----- Original Message -----=20
+  From: James Wong=20
+  To: xitami@lists.xitami.org=20
+  Sent: Tuesday, October 21, 2003 9:24 PM
+  Subject: [Xitami] Admin panel????????
+
+
+  The guides are incomprehensible!!!! How do i get into the admin =
+panel????
+
+------=_NextPart_000_0036_01C39830.58DFF3F0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2><A=20
+href=3D"http://localhost/admin">http://localhost/admin</A></FONT></DIV>
+<DIV>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Djaeboy17@hotmail.com =
+href=3D"mailto:jaeboy17@hotmail.com">James=20
+  Wong</A> </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Tuesday, October 21, 2003 =
+9:24=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> [Xitami] Admin=20
+  panel????????</DIV>
+  <DIV><BR></DIV>
+  <DIV><FONT face=3DArial size=3D2>The guides are incomprehensible!!!! =
+How do i get=20
+  into the admin panel????</FONT></DIV>
+  <DIV>&nbsp;</DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0036_01C39830.58DFF3F0--
+
+
+
+From xitami@lists.xitami.org  Wed Oct 22 07:22:11 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Wed, 22 Oct 2003 07:22:11 +0100 (BST)
+Subject: [Xitami] I Wanna get out of the list
+Message-ID: <53602@dsl.co.uk>
+
+In message <003a01c39833$48ad0b00$0401a8c0@info1>
+   "Cristiano Quintela" writes:
+
+> I Wanna get out of the list, please.
+
+So?  Did you ever try looking at the headers on the posts?  (For future
+reference, many list handlers put such instructions into there.)
+
+ List-Help: <mailto:xitami-request@lists.xitami.org?subject=help>
+ List-Post: <mailto:xitami@lists.xitami.org>
+ List-Subscribe: <http://lists.xitami.org/mailman/listinfo/xitami>,
+         <mailto:xitami-request@lists.xitami.org?subject=subscribe>
+ List-Id: Xitami Users General Discussion
+         <xitami.lists.xitami.org>
+ List-Unsubscribe:
+         <http://lists.xitami.org/mailman/listinfo/xitami>,
+         <mailto:xitami-request@lists.xitami.org?subject=unsubscribe>
+ List-Archive:
+         <http://lists.xitami.org/pipermail/xitami/>
+                 
+> ------=_NextPart_000_0037_01C39822.8486E990
+> Content-Type: text/html;
+> 	charset="iso-8859-1"
+> Content-Transfer-Encoding: quoted-printable
+> 
+> <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+You will not gain friends on ANY mailing list unless you configure your
+mailer so as to post to the list in /plain ASCII text/ ONLY.
+
+-- 
+Brian {Hamilton Kelly}                                          bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 1919
+
+From xitami@lists.xitami.org  Wed Oct 22 10:49:00 2003
+From: xitami@lists.xitami.org (Sebastian Paul Avarvarei)
+Date: 22 Oct 2003 11:49:00 +0200
+Subject: [Xitami] Sending POST requests to directory, not files
+Message-ID: <JA8AAAAAAQmY4gABYQABj6DB09hU@proteusworld.com>
+
+Hello,
+
+In other web servers (e.g. Apache) it is possible to have forms like:
+
+<form action="/somedir" method="post">
+
+However, Xitami doesn't seem to like this behaviour, it expects to have 
+a file in "action", even though I specified in defaults.cfg:
+
+default3=index.php
+
+Is thre any way to change this behaviour? I have a rather big PHP 
+application develop by a 3rd party and going through all the files
+to modify the <form> tags is not really something I would look
+forward.
+
+Thank you!
+
+Best regards,
+Sebastian
+
+From xitami@lists.xitami.org  Wed Oct 22 10:07:38 2003
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Wed, 22 Oct 2003 22:07:38 +1300
+Subject: [Xitami] Administrivia: pol.co.uk user
+Message-ID: <20031022090738.E74193C486F0@basilica.la.naos.co.nz>
+
+Sorry to bother everyone.
+
+Someone, who connects to pol.co.uk (an ISP in the United Kingdom), has 
+taken to bouncing all the messages from the Xitami list back to me with
+a forged bounce message claiming they are from postmaster@lists.xitami.org.
+
+Received: from modem-4025.dasyure.dialup.pol.co.uk ([81.78.63.185] helo=lists.xitami.org)
+        by tmailb1.svr.pol.co.uk with esmtp (Exim 4.14)
+        id 1ACEkX-0004J8-Kg
+        for xitami-admin@lists.xitami.org; Wed, 22 Oct 2003 09:53:49 +0100
+
+I'm assuming this means that they don't want to be on the mailing list
+any more.
+
+However the bounce messages are worse than useless as they contain no
+indication of which account the messages were delivered to, no headers
+from the original message, and there are no users on the Xitami mailing
+list using a pol.co.uk email address.
+
+Perhaps someone can help me identify what email address the mail is being
+delivered to, and then I can remove them from the mailing list, and 
+everyone can be happy.
+
+Failing that I'll have to complain to the abuse department at pol.co.uk
+and see if they can either identify the user (eg, from the IP address
+they were assigned at the time) or ask them to stop doing so.
+
+People: if you don't want to get messages on the Xitami mailing list,
+which you subscribed to, please unsubscribe.  If you can't figure out how,
+then email me directly (<ewen@imatix.com>) and I'll do it for you.
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed Oct 22 14:21:21 2003
+From: xitami@lists.xitami.org (Bowden, Zeb)
+Date: Wed, 22 Oct 2003 09:21:21 -0400
+Subject: [Xitami] Disabling sslv2
+Message-ID: <715379D39F6E534594B4B3182B63659004BB7034@fangorn.cc.vt.edu>
+
+Yeah I've seen the OpenSSL options and the one I want to implement is
+NO_SSLv2.
+But with Xitami Pro (on Windows anyway) has OpenSSL compiled into the
+executable so how would I tell it to use the NO_SSLv2 option?
+
+It looks like the appropriate place would be the sslhttp.cfs file, but
+that doesn't seem to work ... Is there another way? Or any way that I
+can do it in that file? Or maybe I'm just out of luck?
+
+Thanks!
+=20
+
+-----Original Message-----
+From: Thomas J. Hruska [mailto:shinelight@shininglightpro.com]=20
+Sent: Tuesday, October 21, 2003 6:13 PM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Disabling sslv2
+
+At 10:22 AM 10/21/2003 -0400, Bowden, Zeb writeth:
+>
+>Has anyone tried to disable sslv2 in xitami pro? I'm running 2.4d10 and
+
+>I
+can't seem to get it to completely disable sslv2
+>
+>I've tried setting protocol=3Dsslv3 in my sslhttp.cfs file but that=20
+>doesn't
+seem to work, I can still connect using sslv2 and IE
+>
+>With sslv2 as the only protocol enabled in Opera I can't connect using
+https; however same setup and IE it will connect just fine and I see
+this in the debug.log "Connection: SSLv2: RC4-MD5, none"
+>
+>Anyone have any ideas on what I'm missing?=20
+>
+>Thanks!=20
+>
+>
+>Zeb Bowden
+>VT.SETI.IAD.MIG:Application Developer
+>http://vtmig.w2k.vt.edu
+
+
+You have to disable certain cryptography options at compile-time with
+OpenSSL to disable those algorithms.  There are special sections of code
+in OpenSSL that handle IE.  You have to disable those IE options, but
+then IE may or may not work with a server not using the workarounds for
+bugs in IE.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com Shining
+Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'
+*-~
+  Tired of expensive $5,000+ web application servers like ColdFusion?
+  Try Nuclear Vision today!
+
+=20
+http://internal.shininglightpro.com/search.nvm?searchname=3DNuclear+Visio=
+n
+
+  Announcing Nuclear Vision v1.1, a superior scripting language with
+powerful features in a HTML-like syntax.
+
+--
+Xitami Users Mailing List -- For Xitami support To unsubscribe:
+http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Wed Oct 22 21:13:00 2003
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 22 Oct 2003 13:13:00 -0700
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <Law15-F52XGsYp6HWVa0002559d@hotmail.com>
+
+Would it be possible to have a Bulletin Board to post Xitami questions to?  
+It would benefit the xitami user community in three ways:  1) users wouldn't 
+continuously get emails filling up their mail boxes 2) there would be a 
+history/record of all posts so people asking questions could do a search on 
+their question before asking it and 3) responses to a question can be 
+contained within a single post so the answer(s) is part of the recorded 
+post.
+
+In a sense, Xitami be building a knowledge base built by its own user 
+community.
+
+Heck, you could even link the Xitami help files right into the site as an 
+additional reference.
+
+Comments?
+
+
+Russel P. Olinger
+rolinger1@hotmail.com
+
+
+
+
+
+>From: Ewen McNeill <ewen@imatix.com>
+>Reply-To: xitami@lists.xitami.org
+>To: xitami@lists.xitami.org
+>Subject: [Xitami] Administrivia: New mail server software
+>Date: Wed, 22 Oct 2003 09:04:43 +1300
+>
+>Hi,
+>
+>We have upgraded to new mail server software on the system which hosts
+>the Xitami mailing list.  We believe that everything has migrated over
+>correctly, and the Xitami mailing list should be working just as it was
+>before.
+>
+>However if anyone notices any new problems with sending mail to the
+>Xitami mailing list please let me know directly (<ewen@imatix.com>).
+>
+>Thanks,
+>
+>Ewen
+>
+>--
+>Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+See when your friends are online with MSN Messenger 6.0. Download it now 
+FREE! http://msnmessenger-download.com
+
+
+From xitami@lists.xitami.org  Wed Oct 22 22:52:59 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Wed, 22 Oct 2003 17:52:59 -0400
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <Law15-F52XGsYp6HWVa0002559d@hotmail.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEPNDLAA.ron@miplanet.net>
+
+I am a moderator for www.InReview.com We could set up a forum for Xitami if
+you are interested.
+
+Ron Ackerman
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of R O
+Sent: Wednesday, October 22, 2003 4:13 PM
+To: xitami@lists.xitami.org
+Cc: ewen@imatix.com
+Subject: [Xitami] Mailing List vs Bulletin Board.
+
+
+
+Would it be possible to have a Bulletin Board to post Xitami questions to?
+It would benefit the xitami user community in three ways:  1) users wouldn't
+continuously get emails filling up their mail boxes 2) there would be a
+history/record of all posts so people asking questions could do a search on
+their question before asking it and 3) responses to a question can be
+contained within a single post so the answer(s) is part of the recorded
+post.
+
+In a sense, Xitami be building a knowledge base built by its own user
+community.
+
+Heck, you could even link the Xitami help files right into the site as an
+additional reference.
+
+Comments?
+
+
+Russel P. Olinger
+rolinger1@hotmail.com
+
+
+
+
+
+>From: Ewen McNeill <ewen@imatix.com>
+>Reply-To: xitami@lists.xitami.org
+>To: xitami@lists.xitami.org
+>Subject: [Xitami] Administrivia: New mail server software
+>Date: Wed, 22 Oct 2003 09:04:43 +1300
+>
+>Hi,
+>
+>We have upgraded to new mail server software on the system which hosts
+>the Xitami mailing list.  We believe that everything has migrated over
+>correctly, and the Xitami mailing list should be working just as it was
+>before.
+>
+>However if anyone notices any new problems with sending mail to the
+>Xitami mailing list please let me know directly (<ewen@imatix.com>).
+>
+>Thanks,
+>
+>Ewen
+>
+>--
+>Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+See when your friends are online with MSN Messenger 6.0. Download it now
+FREE! http://msnmessenger-download.com
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Wed Oct 22 21:54:39 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Wed, 22 Oct 2003 21:54:39 +0100 (BST)
+Subject: [Xitami] Administrivia: pol.co.uk user
+Message-ID: <53608@dsl.co.uk>
+
+In message <20031022090738.E74193C486F0@basilica.la.naos.co.nz>
+   Ewen McNeill writes:
+> Sorry to bother everyone.
+> 
+> Someone, who connects to pol.co.uk (an ISP in the United Kingdom), has 
+> taken to bouncing all the messages from the Xitami list back to me with
+> a forged bounce message claiming they are from postmaster@lists.xitami.org.
+
+Oh dear.
+
+> However the bounce messages are worse than useless as they contain no
+> indication of which account the messages were delivered to, no headers
+> from the original message, and there are no users on the Xitami mailing
+> list using a pol.co.uk email address.
+
+pol.co.uk (Planet On-Line) are the ISP arm of Energis (who are, or were,
+a telco).  They provide the infrastructure for Freeserve (amongst others)
+in all its manifestations.  Doubtless you have subscribers with addresses
+of the form someone@somenode.freeserve.co.uk, so@sn.fsnet.co.uk, etc.
+(The full list of potential parent domains for the "somenode" is listed
+on Freeserve's sign-up web pages.)
+
+> Failing that I'll have to complain to the abuse department at pol.co.uk
+> and see if they can either identify the user (eg, from the IP address
+> they were assigned at the time) or ask them to stop doing so.
+
+It IS an abuse; moreover, such forgery is against Freeserve's AUP (as
+will be the case with most if not all ISPs).  How is it that people are
+quite so stupid about unsubscribing from mailing lists?
+
+-- 
+Brian {Hamilton Kelly}                                          bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 1919
+
+From xitami@lists.xitami.org  Wed Oct 22 23:15:57 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Wed, 22 Oct 2003 23:15:57 +0100 (BST)
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <53612@dsl.co.uk>
+
+In message <Law15-F52XGsYp6HWVa0002559d@hotmail.com> "R O" writes:
+>=20
+> Would it be possible to have a Bulletin Board to post Xitami questions to=
+? =20
+> It would benefit the xitami user community in three ways:  1) users would=
+n't=20
+> continuously get emails filling up their mail boxes 2) there would be a=20
+> history/record of all posts so people asking questions could do a search =
+on=20
+> their question before asking it and 3) responses to a question can be=20
+> contained within a single post so the answer(s) is part of the recorded=20
+> post.
+
+Your request made me realize that perhaps Usenet might be a better
+approach.  (1) it's distributed, rather than reliant upon a single server
+site; (2) the propagation mechanisms are already there; (3) DejaGoogle
+provides an archive and searching mechanism.
+
+So I hunted around to see what sort of groups already exist; I had
+expected to see, for example, groups discussing apache.  To my surprise,
+althought there were some national groups (in japan.* and dk.*), and also
+an alt group, there was nothing in the Big-8 comp.* hierarchy.
+
+ISTM that the correct place would have been in a sub-division of
+comp.infosystems.www.server.*; however, the taxonomy of that is by O/S
+platform.  Is anyone on this mailing list already active anywhere within
+that comp.i.w.s.* hierarchy?
+
+> In a sense, Xitami be building a knowledge base built by its own user=20
+> community.
+
+There IS an archive of these mailing list posts: details are in the
+headers.
+
+[BTW, _one_ of the annoying aspects of a mailing list is repeated
+regurgitation of untrimmed quoted material by those that post their
+comments at the top.  Much unnecessary volume could be cut from this
+present list if all posters learnt how to formulate replies properly.
+
+50 unnecessarily quoted lines snipped :-( ]
+
+--=20
+Brian {Hamilton Kelly}                                          bhk@dsl.co.=
+uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 19=
+19
+
+From xitami@lists.xitami.org  Wed Oct 22 23:37:56 2003
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Thu, 23 Oct 2003 11:37:56 +1300
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: Message from Brian {Hamilton Kelly} <bhk@dsl.co.uk>
+ of "Wed, 22 Oct 2003 23:15:57 BST." <53612@dsl.co.uk>
+Message-ID: <20031022223756.ED8143C486EB@basilica.la.naos.co.nz>
+
+In message <53612@dsl.co.uk>, Brian {Hamilton Kelly} writes:
+>In message <Law15-F52XGsYp6HWVa0002559d@hotmail.com> "R O" writes:
+>> Would it be possible to have a Bulletin Board to post Xitami questions to?
+>
+>Your request made me realize that perhaps Usenet might be a better approach.  
+
+I guess it's been over a year since we last went around this circle; and
+in that time there've been even fewer people using the Xitami support
+maliing list.
+
+FWIW:
+- there is some talk inside iMatix of setting up a web forum for support
+  of various products (including Xitami); I'll prod some people and see
+  if anything happens
+
+- Mailman (the mailing list software we use) includes support for gating
+  to/from Usenet; so we could do that
+
+- If we wanted a "real" Usenet group (ie, likely to be carried on lots
+  of servers around the world) someone would need to do the work to
+  persuade people it should be created -- with less than 500 subscribers
+  to the Xitami mailing list (including inactive ones) that might be
+  hard work.  We could host a imatix.* Usenet hierachy, but it wouldn't
+  get the same advantages people normally associate with Usenet.
+
+>There IS an archive of these mailing list posts: details are in the headers.
+
+You can also reach it via the URL in the footer (there's a link on that
+page).
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Wed Oct 22 23:59:41 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Wed, 22 Oct 2003 17:59:41 -0500
+Subject: [Xitami] list archive problems
+Message-ID: <006801c398f0$2dc87230$0101a8c0@danlap>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0065_01C398C6.447068F0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I have two problems with the list archive.
+1. I could not find a search feature
+2. peoples email addresses are being archived.  This just creates a =
+place for spammers to mine email addresses.  I had/have the same problem =
+with a LUG list I am on and am playing hell getting off of the spam =
+lists.
+
+Daniel Nowlin
+IATS DataCenter
+------=_NextPart_000_0065_01C398C6.447068F0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I have two problems with the list=20
+archive.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>1. I could not find a search =
+feature</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>2. peoples email addresses are being=20
+archived.&nbsp; This just creates a place for spammers to mine email=20
+addresses.&nbsp; I had/have the same problem with a LUG list I am on and =
+am=20
+playing hell getting off of the spam lists.</FONT></DIV>
+<DIV>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Daniel Nowlin<BR>IATS=20
+DataCenter</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0065_01C398C6.447068F0--
+
+
+From xitami@lists.xitami.org  Thu Oct 23 00:53:52 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Wed, 22 Oct 2003 17:53:52 -0600
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <20031022223756.ED8143C486EB@basilica.la.naos.co.nz>
+Message-ID: <025701c398f7$bf87fbd0$6501a8c0@pressmans>
+
+Yep it has been a year or so I was going to say that we have had this
+discussion on the list but hey it would be cool I think..
+
+----- Original Message ----- 
+From: "Ewen McNeill" <ewen@imatix.com>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, October 22, 2003 4:37 PM
+Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+| In message <53612@dsl.co.uk>, Brian {Hamilton Kelly} writes:
+| >In message <Law15-F52XGsYp6HWVa0002559d@hotmail.com> "R O" writes:
+| >> Would it be possible to have a Bulletin Board to post Xitami questions
+to?
+| >
+| >Your request made me realize that perhaps Usenet might be a better
+approach.
+|
+| I guess it's been over a year since we last went around this circle; and
+| in that time there've been even fewer people using the Xitami support
+| maliing list.
+
+
+
+From xitami@lists.xitami.org  Thu Oct 23 00:59:33 2003
+From: xitami@lists.xitami.org (Josh A)
+Date: Wed, 22 Oct 2003 17:59:33 -0600
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <20031022223756.ED8143C486EB@basilica.la.naos.co.nz>
+References: Message from Brian {Hamilton Kelly} <bhk@dsl.co.uk>  of "Wed, 22 Oct 2003 23:15:57 BST." <53612@dsl.co.uk>  <20031022223756.ED8143C486EB@basilica.la.naos.co.nz>
+Message-ID: <WorldClient-F200310221759.AA59330000@coaxial.ca>
+
+what software is used to create that archive ? I happen to be looking for 
+something that does exactly that for some mailing lists that I run 
+
+Thanks,
+Josh
+
+-----Original Message-----
+From: Ewen McNeill <ewen@imatix.com>
+To: xitami@lists.xitami.org
+Date: Thu, 23 Oct 2003 11:37:56 +1300
+Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+> In message <53612@dsl.co.uk>, Brian {Hamilton Kelly} writes:
+> >In message <Law15-F52XGsYp6HWVa0002559d@hotmail.com> "R O" writes:
+> >> Would it be possible to have a Bulletin Board to post Xitami
+> questions to?
+> >
+> >Your request made me realize that perhaps Usenet might be a better
+> approach.  
+> 
+> I guess it's been over a year since we last went around this circle;
+> and
+> in that time there've been even fewer people using the Xitami support
+> maliing list.
+> 
+> FWIW:
+> - there is some talk inside iMatix of setting up a web forum for
+> support
+>   of various products (including Xitami); I'll prod some people and see
+>   if anything happens
+> 
+> - Mailman (the mailing list software we use) includes support for
+> gating
+>   to/from Usenet; so we could do that
+> 
+> - If we wanted a "real" Usenet group (ie, likely to be carried on lots
+>   of servers around the world) someone would need to do the work to
+>   persuade people it should be created -- with less than 500
+> subscribers
+>   to the Xitami mailing list (including inactive ones) that might be
+>   hard work.  We could host a imatix.* Usenet hierachy, but it wouldn't
+>   get the same advantages people normally associate with Usenet.
+> 
+> >There IS an archive of these mailing list posts: details are in the
+> headers.
+> 
+> You can also reach it via the URL in the footer (there's a link on that
+> page).
+> 
+> Ewen
+> 
+> -- 
+> Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+> 
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Thu Oct 23 01:12:00 2003
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 22 Oct 2003 17:12:00 -0700
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <Law15-F4GD2LGddurRS0001b06b@hotmail.com>
+
+Well, I think it's a great idea, no matter how its done.  Though, I do have 
+one comment about Usenet: there are many users that are new to the web who 
+are trying to configure xitami for the first time, getting them to 
+understand and for them to get to Usenet could be problematic for them.   
+Keeping it to a iMatix or xitami.com site would keep it contained and easily 
+accessable by all, as well, a knowledge base owned by iMatix.  Maybe the 
+site could be mirrored to prevent single point of failure.
+
+You mentioned an archive of all emails does exist.  Where and how can I 
+access it?  Is it a seachable archive?
+
+I agree.....snip snip snip.
+
+
+Russel P. Olinger
+rolinger1@hotmail.com
+
+>Your request made me realize that perhaps Usenet might be a better
+>approach.  (1) it's distributed, rather than reliant upon a single server
+>site; (2) the propagation mechanisms are already there; (3) DejaGoogle
+>provides an archive and searching mechanism.
+>
+>So I hunted around to see what sort of groups already exist; I had
+>expected to see, for example, groups discussing apache.  To my surprise,
+>althought there were some national groups (in japan.* and dk.*), and also
+>an alt group, there was nothing in the Big-8 comp.* hierarchy.
+>
+>ISTM that the correct place would have been in a sub-division of
+>comp.infosystems.www.server.*; however, the taxonomy of that is by O/S
+>platform.  Is anyone on this mailing list already active anywhere within
+>that comp.i.w.s.* hierarchy?
+>
+>
+>There IS an archive of these mailing list posts: details are in the
+>headers.
+>
+>[BTW, _one_ of the annoying aspects of a mailing list is repeated
+>regurgitation of untrimmed quoted material by those that post their
+>comments at the top.  Much unnecessary volume could be cut from this
+>present list if all posters learnt how to formulate replies properly.
+>
+
+_________________________________________________________________
+Fretting that your Hotmail account may expire because you forgot to sign in 
+enough? Get Hotmail Extra Storage today!   
+http://join.msn.com/?PAGE=features/es
+
+
+From xitami@lists.xitami.org  Thu Oct 23 01:21:19 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Wed, 22 Oct 2003 18:21:19 -0600
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <Law15-F4GD2LGddurRS0001b06b@hotmail.com>
+Message-ID: <026c01c398fb$94f80000$6501a8c0@pressmans>
+
+| You mentioned an archive of all emails does exist.  Where and how can I 
+| access it?  Is it a seachable archive?
+| 
+| I agree.....snip snip snip.
+| 
+
+At the bottom of every email you receive form the list
+
+
+
+From xitami@lists.xitami.org  Thu Oct 23 01:32:20 2003
+From: xitami@lists.xitami.org (R O)
+Date: Wed, 22 Oct 2003 17:32:20 -0700
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <Law15-F105qwD80MQfW00025c50@hotmail.com>
+
+>At the bottom of every email you receive form the list
+>
+>
+>
+>--
+
+The only thing I see at the end of every email I receive is this:
+
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+Concerned that messages may bounce because your Hotmail account has exceeded 
+its 2MB storage limit? Get Hotmail Extra Storage!         
+http://join.msn.com/?PAGE=features/es
+
+
+From xitami@lists.xitami.org  Thu Oct 23 04:50:30 2003
+From: xitami@lists.xitami.org (Thomas J. Hruska)
+Date: Wed, 22 Oct 2003 23:50:30 -0400
+Subject: [Xitami] Disabling sslv2
+In-Reply-To: <715379D39F6E534594B4B3182B63659004BB7034@fangorn.cc.vt.edu
+ >
+Message-ID: <3.0.6.32.20031022235030.00b74430@mail.shininglightpro.com>
+
+At 09:21 AM 10/22/2003 -0400, Bowden, Zeb writeth:
+>Yeah I've seen the OpenSSL options and the one I want to implement is
+>NO_SSLv2.
+>But with Xitami Pro (on Windows anyway) has OpenSSL compiled into the
+>executable so how would I tell it to use the NO_SSLv2 option?
+>
+>It looks like the appropriate place would be the sslhttp.cfs file, but
+>that doesn't seem to work ... Is there another way? Or any way that I
+>can do it in that file? Or maybe I'm just out of luck?
+
+You are out of luck since iMatix has chosen to not dynamically link OpenSSL
+and OpenSSL options have to be specified at compile time.  If iMatix had
+dynamically linked XiPro, they could have used the Win32 OpenSSL
+Installation Project and avoided this issue altogether.
+
+You can always try asking for a special build that uses either dynamic
+linking or no SSL v2 support.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- shinelight@shininglightpro.com
+Shining Light Productions -- "Meeting the needs of fellow programmers"
+                  http://www.shininglightpro.com/
+
+`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~.,_,.~-*'`'*-~
+  Tired of expensive $5,000+ web application servers like ColdFusion?
+  Try Nuclear Vision today!
+
+  http://internal.shininglightpro.com/search.nvm?searchname=Nuclear+Vision
+
+  Announcing Nuclear Vision v1.1, a superior scripting language with
+powerful features in a HTML-like syntax.
+
+From xitami@lists.xitami.org  Thu Oct 23 06:55:20 2003
+From: xitami@lists.xitami.org (RPO)
+Date: Wed, 22 Oct 2003 22:55:20 -0700
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <20031022223756.ED8143C486EB@basilica.la.naos.co.nz> <025701c398f7$bf87fbd0$6501a8c0@pressmans>
+Message-ID: <LAW15-DAV70phwFutJL000092a8@hotmail.com>
+
+Well, Ron Ackerman has been the first volunteer to help create a bulletin
+board.  I would offer to do it but I pay to have my server online and I
+currently have zero revenue to offset that cost so I can't afford the
+additional traffic.  With only 500 users on the Xitami subscription list I
+would think getting a Usenet group started would be pointless.
+
+500 users??? thats all!!!?  Man, I have been using Xitami for years now,
+first as rolinger@spint.net, then rolinger@earthlink.net then as
+rolinger@airpower.net and now as rolinger1@hotmail.com .  I am a faithful
+and loyal user.  Always will be.  I just can't imagine the user base being
+so small - Xitami is just too good for that.
+
+Ron, you have my vote and support if its not too much trouble to get
+started.  Maybe the site could be mirrored to iMatix.
+
+anyone else?
+
+----- Original Message -----
+From: "patricko" <polson1@adelphia.net>
+To: <xitami@lists.xitami.org>
+Sent: Wednesday, October 22, 2003 4:53 PM
+Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+> Yep it has been a year or so I was going to say that we have had this
+> discussion on the list but hey it would be cool I think..
+>
+> ----- Original Message -----
+> From: "Ewen McNeill" <ewen@imatix.com>
+> To: <xitami@lists.xitami.org>
+> Sent: Wednesday, October 22, 2003 4:37 PM
+> Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+>
+>
+> | In message <53612@dsl.co.uk>, Brian {Hamilton Kelly} writes:
+> | >In message <Law15-F52XGsYp6HWVa0002559d@hotmail.com> "R O" writes:
+> | >> Would it be possible to have a Bulletin Board to post Xitami
+questions
+> to?
+> | >
+> | >Your request made me realize that perhaps Usenet might be a better
+> approach.
+> |
+> | I guess it's been over a year since we last went around this circle; and
+> | in that time there've been even fewer people using the Xitami support
+> | maliing list.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+From xitami@lists.xitami.org  Thu Oct 23 07:21:42 2003
+From: xitami@lists.xitami.org (Matt Martin)
+Date: Thu, 23 Oct 2003 02:21:42 -0400
+Subject: [Xitami] FTP permissions help!
+Message-ID: <000a01c3992d$ed620d30$0400a8c0@matt>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0007_01C3990C.6614C3C0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Hi .. I am new to Xitami and I am having FTP problems.  It seems that =
+even if I give a user full permissions, it will not let you rename files =
+or folders ... is there a resolve?
+------=_NextPart_000_0007_01C3990C.6614C3C0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Hi .. I am new to Xitami and I am =
+having FTP=20
+problems.&nbsp; It seems that even if I give a user full permissions, it =
+will=20
+not let you&nbsp;rename files or folders ... is there a=20
+resolve?</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0007_01C3990C.6614C3C0--
+
+
+From xitami@lists.xitami.org  Thu Oct 23 07:38:50 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Thu, 23 Oct 2003 08:38:50 +0200
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <Law15-F52XGsYp6HWVa0002559d@hotmail.com>
+Message-ID: <5.1.0.14.2.20031023083526.02318ec0@verfaillie4.verfaillie.local>
+
+>
+>Would it be possible to have a Bulletin Board to post Xitami questions to?
+
+I'm also in favor of a Bulletin Board system, where questions could be 
+placed in the right forum: general config, php, cgi, ...
+Maybe this would give new life to Xitami.
+phpBB seems to be a good choice compared to the more 'basic' ultimate.
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Thu Oct 23 08:56:54 2003
+From: xitami@lists.xitami.org (LibraLogic)
+Date: Thu, 23 Oct 2003 03:56:54 -0400
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <5.1.0.14.2.20031023083526.02318ec0@verfaillie4.verfaillie.local>
+Message-ID: <PNEGLKNFKKPGCFBBCPBEAENPCBAA.info@libralogic.com>
+
+Why don't we give it a shot?
+
+I set up a quick and simple phpBB.
+
+http://members.lycos.co.uk/xitami
+
+Let's see what happens.
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+Sent: Thursday, October 23, 2003 2:39 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+
+>
+>Would it be possible to have a Bulletin Board to post Xitami questions to?
+
+I'm also in favor of a Bulletin Board system, where questions could be 
+placed in the right forum: general config, php, cgi, ...
+Maybe this would give new life to Xitami.
+phpBB seems to be a good choice compared to the more 'basic' ultimate.
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+
+
+From xitami@lists.xitami.org  Thu Oct 23 10:49:52 2003
+From: xitami@lists.xitami.org (Simon B)
+Date: Thu, 23 Oct 2003 10:49:52 +0100
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <53612@dsl.co.uk>
+References: <53612@dsl.co.uk>
+Message-ID: <1568163625.20031023104952@netbanger.com>
+
+------------167911716EE5F5F
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+Hello Brian,
+
+BHK> BTW,  _one_  of  the  annoying  aspects  of  a mailing list is repeated
+BHK> regurgitation  of  untrimmed  quoted  material by those that post their
+BHK> comments  at  the  top.  Much unnecessary volume could be cut from this
+BHK> present list if all posters learnt how to formulate replies properly
+
+That's got to be a job for the moderators. Reference to posting guidelines.
+
+also
+
+I am subscribed to the list (rarely post partly because of the spam issue...
+my  email  address  being  archived)  and much prefer lists to forums on the
+whole,  even with the list quirks e.g I have a folder full of unthreaded but
+related messages simply because people won't select a message and hit reply.
+As  I  view  my  list  mail  in  threaded view it is very irritating to have
+orphans  and  broken  threads  all over the place. But you get problems with
+forums  as  well.  With forums someone might start a thread and 3 or 4 posts
+down  someone else takes the post off of the original topic. If you've got a
+thread  with  30  or  40  posts  you could have many side topics all the way
+through the one thread. In this respect it is much worse that using lists.
+
+IMO  if  the  mail  archive problem was sorted - that is, if email addresses
+were  protected  from  spammers  -  and  the  Xitami  list was promoted on a
+complimentary  web  board,  the  list  membership  would  probably gradually
+increase.  As  I  said, I prefer lists as they are less time consuming and I
+don't have to worry about pages loading and board lag etc.
+
+Thought I'd drop my 10 penneth in. Hope this is OK.
+
+--
+Sl=E1n,
+
+ Simon @ i~n+f~o+w~i+z~a+r~d+.~c+o~.+u~k
+                     =20
+*****************************************
+PGP Key: http://pgp.infowizard.co.uk/=20
+
+#2001. Warm Quid Lye Ross =B6
+
+------------167911716EE5F5F
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP MESSAGE-----
+Comment: Privacy is freedom. Protect your freedom with PGP.
+Comment: KeyID: 0xDF8062C1
+Comment: Fingerprint: 40DD 7908 9DF8 634F 1B98  8849 9266 C870 DF80 62C1
+
+iQA/AwUBP5ekQJJmyHDfgGLBEQLllgCeIlq2W+Q2S7GruPk/zW67CAEjYf8AnRZa
+O6JphFTOwI56zB2V/DTRL5rt
+=St35
+-----END PGP MESSAGE-----
+
+------------167911716EE5F5F--
+
+
+From xitami@lists.xitami.org  Thu Oct 23 13:46:39 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Thu, 23 Oct 2003 06:46:39 -0600
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <Law15-F105qwD80MQfW00025c50@hotmail.com>
+Message-ID: <003401c39963$b45c8480$6501a8c0@pressmans>
+
+Yep RO that's it did you go there it is the first link on the page
+I think
+http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+From xitami@lists.xitami.org  Thu Oct 23 16:04:28 2003
+From: xitami@lists.xitami.org (Jeff Hamblin)
+Date: Thu, 23 Oct 2003 08:04:28 -0700
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <Law15-F105qwD80MQfW00025c50@hotmail.com> <003401c39963$b45c8480$6501a8c0@pressmans>
+Message-ID: <002c01c39976$f676fe50$9f00a8c0@ziggy>
+
+I think imatix people should decide how Xitami
+support will be handled. And I trust them to ensure
+it is as simple and focused as it has been to date.
+Xitami being a small community, the last thing we
+need is multiple support group methods scattered
+among web forums, mailing lists and newsgroups.
+
+Personally, I would prefer either to stay as a mailing
+list, or switch to a single newsgroup (either imatix
+hosted or usenet). I Don't like web forums.
+
+From xitami@lists.xitami.org  Thu Oct 23 16:18:10 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Thu, 23 Oct 2003 11:18:10 -0400
+Subject: [Xitami] Xitami 5
+Message-ID: <3F97B8F2.2512.267394AA@localhost>
+
+I switched to Xitami 5 and have had loads of problems with CGI.  I 
+have had hundreds of errors reported to the console window 
+"smthttp: error on socket xxxx"  Perl pages are taking a very long 
+time to load for users.  Unless someone knows a setting that is 
+causing this I cam going to have to jump back to "4" quickly.
+
+Below is a message from one of our users since we switched to 
+Xitami 5.
+
+"
+Not one to make a fuss but I think we might have a CGI problem 
+on the board.
+
+For the past few hours every thread I open is not compleatly 
+loading..
+
+The last post or two are missing.. or they half load.. see this image 
+for more information.. look at the bottom post, this is after waiting 
+for 5 min to make sure the page has finished loading..
+
+You can see the code brake after your signiture WS..
+
+http://www.pilot.furtopia.org/temp/cgi_problem.jpg
+
+any ideas?
+"
+
+From xitami@lists.xitami.org  Thu Oct 23 16:29:18 2003
+From: xitami@lists.xitami.org (Paulo Silva)
+Date: Thu, 23 Oct 2003 16:29:18 +0100
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <012401c3997a$6d44ef80$0302a8c0@infpacs>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0121_01C39982.CEB236D0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+I do prefer the Forums. I am a regular user of the Icewarp Mail Server =
+forum (http://forum.icewarp.com/bb2/index.php) and i do prefer it
+to mailing lists.
+
+Paulo Silva
+
+------=_NextPart_000_0121_01C39982.CEB236D0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>I do prefer the Forums. I am a regular =
+user of the=20
+Icewarp Mail Server forum (<A=20
+href=3D"http://forum.icewarp.com/bb2/index.php">http://forum.icewarp.com/=
+bb2/index.php</A>)=20
+and i do prefer it</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2>to mailing lists.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Paulo Silva</FONT></DIV></BODY></HTML>
+
+------=_NextPart_000_0121_01C39982.CEB236D0--
+
+
+From xitami@lists.xitami.org  Fri Oct 24 15:07:20 2003
+From: xitami@lists.xitami.org (jin Zapper)
+Date: Fri, 24 Oct 2003 22:07:20 +0800
+Subject: [Xitami] lrwp crash
+Message-ID: <Law12-OE67n1bnmFNrI00009ef4@hotmail.com>
+
+I installed xitami v2.5b4 in my pc (winxp pro) and was really
+happy after seeing the improvements from 2.4d9(my prev version).
+
+my site needs sokrates servlet runner due to its use of servlets.
+unfortunately, unlike the v2.4, this version just mysteriously disconnects
+the runner (and xitami itself gets busy and then crashes
+with an error or something after terminating it). The crash log of xitami
+gets filled up and
+even though the runner says it has reconnected to the server,
+i can't access the servlet anymore.
+
+another is that, my test servlet which loads a approx. 369 kb page (all
+text)
+which worked quite fine and dandy during my Xv2.4 days, made the same
+error and disconnected the lrwp connections too.
+
+does anyone know this lrwp problem?
+
+From xitami@lists.xitami.org  Fri Oct 24 15:13:22 2003
+From: xitami@lists.xitami.org (Stormie Parker)
+Date: Fri, 24 Oct 2003 09:13:22 -0500
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <Sea1-F6YoN3d4OMMLUD0001803f@hotmail.com>
+
+Why not create a Xitami group under MSN or Yahoo groups?
+
+Stormie
+
+_________________________________________________________________
+Surf and talk on the phone at the same time with broadband Internet access. 
+Get high-speed for as low as $29.95/month (depending on the local service 
+providers in your area).  https://broadband.msn.com
+
+
+From xitami@lists.xitami.org  Fri Oct 24 16:08:10 2003
+From: xitami@lists.xitami.org (Charles Schmidling)
+Date: Fri, 24 Oct 2003 08:08:10 -0700
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <Sea1-F6YoN3d4OMMLUD0001803f@hotmail.com>
+Message-ID: <000b01c39a40$a3dd9c60$6401a80a@comcast.net>
+
+Please, no.
+
+Because of their incessant pop-ups!!
+
+Charles
+
+
+----- Original Message -----
+From: "Stormie Parker" <stormieparker@hotmail.com>
+To: <xitami@lists.xitami.org>
+Sent: Friday, October 24, 2003 7:13 AM
+Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+> Why not create a Xitami group under MSN or Yahoo groups?
+>
+> Stormie
+>
+> _________________________________________________________________
+> Surf and talk on the phone at the same time with broadband Internet
+access.
+> Get high-speed for as low as $29.95/month (depending on the local service
+> providers in your area).  https://broadband.msn.com
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 24 16:14:07 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Fri, 24 Oct 2003 17:14:07 +0200
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <Sea1-F6YoN3d4OMMLUD0001803f@hotmail.com>
+Message-ID: <5.1.0.14.2.20031024170517.00a7cc50@verfaillie4.verfaillie.local>
+
+At 16:13 24/10/03, "Stormie Parker" <stormieparker@hotmail.com> wrote:
+
+
+>Why not create a Xitami group under MSN or Yahoo groups?
+
+For me it seems it's again the filosophy of Xitami.
+Xitami is a free webserver, much easier and stable than IIS.
+So why put a group on a Micro$soft server?
+I just don't like all the M$ stuff they put on their new XP OS: messenger, 
+spyware, ...
+Creating an account to access such group will flood your mailbox and 
+desktop with addware and pop-ups.
+
+It should be a modern BBS maintained by Imatix/Xitami.
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Fri Oct 24 16:34:10 2003
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 24 Oct 2003 11:34:10 -0400
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <5D49C3A6E87C794389526E11758976DE0B84C649@mb-bp-013.ic.gc.ca>
+
+I am of the same opinion. Xitami is an independent competing application and
+should be treated that way -- and carve out it's own "professional"
+existence in the market.
+
+Regards,
+Pat
+
+
+-----Original Message-----
+From: Marc Doigny [mailto:marc@verfaillie.be]
+Sent: October 24, 2003 11:14 AM
+To: xitami@lists.xitami.org
+Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+At 16:13 24/10/03, "Stormie Parker" <stormieparker@hotmail.com> wrote:
+
+
+>Why not create a Xitami group under MSN or Yahoo groups?
+
+For me it seems it's again the filosophy of Xitami.
+Xitami is a free webserver, much easier and stable than IIS.
+So why put a group on a Micro$soft server?
+I just don't like all the M$ stuff they put on their new XP OS: messenger, 
+spyware, ...
+Creating an account to access such group will flood your mailbox and 
+desktop with addware and pop-ups.
+
+It should be a modern BBS maintained by Imatix/Xitami.
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From xitami@lists.xitami.org  Fri Oct 24 16:51:03 2003
+From: xitami@lists.xitami.org (Stormie Parker)
+Date: Fri, 24 Oct 2003 10:51:03 -0500
+Subject: [Xitami] Mailing List vs Bulletin Board.
+Message-ID: <Sea1-F39OM2NYPocZc600018267@hotmail.com>
+
+Ok, so you have to deal with some popups! We have to deal with that crap 
+anyway, I was mainly focused on it being FREE and that you could have 
+multiple group administrators so someone wasn't having to babysit all the 
+time and messages would be searchable.
+
+Only a suggestion...
+
+
+>From: "Charles Schmidling" <dscontroller@comcast.net>
+>Reply-To: xitami@lists.xitami.org
+>To: <xitami@lists.xitami.org>
+>Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+>Date: Fri, 24 Oct 2003 08:08:10 -0700
+>
+>Please, no.
+>
+>Because of their incessant pop-ups!!
+>
+>Charles
+>
+>
+>----- Original Message -----
+>From: "Stormie Parker" <stormieparker@hotmail.com>
+>To: <xitami@lists.xitami.org>
+>Sent: Friday, October 24, 2003 7:13 AM
+>Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+>
+>
+> > Why not create a Xitami group under MSN or Yahoo groups?
+> >
+> > Stormie
+> >
+> > _________________________________________________________________
+> > Surf and talk on the phone at the same time with broadband Internet
+>access.
+> > Get high-speed for as low as $29.95/month (depending on the local 
+>service
+> > providers in your area).  https://broadband.msn.com
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+_________________________________________________________________
+Surf and talk on the phone at the same time with broadband Internet access. 
+Get high-speed for as low as $29.95/month (depending on the local service 
+providers in your area).  https://broadband.msn.com
+
+
+From xitami@lists.xitami.org  Fri Oct 24 21:04:42 2003
+From: xitami@lists.xitami.org (John Jonas)
+Date: Fri, 24 Oct 2003 15:04:42 -0500
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <5.1.0.14.2.20031024170517.00a7cc50@verfaillie4.verfaillie.local>
+References: <5.1.0.14.2.20031024170517.00a7cc50@verfaillie4.verfaillie.local>
+Message-ID: <3F9985DA.20802@arbor-freight.com>
+
+My 2 cents:  If it ain't broke don't fix it. 
+
+The mailing list has worked fine for a number of years.  Everything I 
+need to know comes to my email, which I go through at least daily.  
+There is no need to remember to go check a bulletin board, which based 
+on history, may go days or weeks without any new posts.
+
+ The advantage of Xitami is that it is simple low maintenance server, 
+which you can almost install and forget.  The mailing list is generally 
+pretty quiet (as it should be), if there were a high volume of problems 
+(where a bulletin board was required to meet the information needs) I 
+would be looking for a different Web Server.
+
+
+
+
+From xitami@lists.xitami.org  Sun Oct 26 22:53:36 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Sun, 26 Oct 2003 17:53:36 -0500
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <012401c3997a$6d44ef80$0302a8c0@infpacs>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOECCDMAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_007B_01C39BEA.144821F0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+Okay, this weekend we are in the middle of a server upgrade for InReview.
+(www.inreview.com) It should be back up tonight or first thing in the
+morning. I have checked with the administrator and we can have an Xitami
+area set up in a matter of minutes. Currently, or I should say prior to
+upgrade InReview was handeling at any given time 150 to 200+ users online at
+any given time with a registration base of over 60,000. So InReview can
+handle whatever you throw at it. InReview has 2 administrators, 4 Senior
+Moderators, and about 15 Moderators. InReview is one of the best Forums that
+I have seen.
+
+Ron Ackerman
+
+  -----Original Message-----
+  From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Paulo Silva
+  Sent: Thursday, October 23, 2003 11:29 AM
+  To: xitami@lists.xitami.org
+  Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+  I do prefer the Forums. I am a regular user of the Icewarp Mail Server
+forum (http://forum.icewarp.com/bb2/index.php) and i do prefer it
+  to mailing lists.
+
+  Paulo Silva
+
+------=_NextPart_000_007B_01C39BEA.144821F0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><SPAN class=3D427344322-26102003><FONT face=3DArial color=3D#0000ff =
+size=3D2>Okay,=20
+this weekend we are&nbsp;in the middle of a server upgrade for InReview. =
+(<A=20
+href=3D"http://www.inreview.com">www.inreview.com</A>) It should be back =
+up=20
+tonight or first thing in the morning. I have checked with the =
+administrator and=20
+we can have an Xitami area set up in a matter of minutes. Currently, or =
+I should=20
+say prior to upgrade InReview was handeling at any given time 150 to=20
+200+&nbsp;users online at any given&nbsp;time with a registration base=20
+of&nbsp;over 60,000. So InReview can handle whatever you throw at it. =
+InReview=20
+has 2 administrators, 4 Senior Moderators, and about 15&nbsp;Moderators. =
+
+InReview is one of the best Forums that I have seen.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D427344322-26102003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>&nbsp;&nbsp;&nbsp;</FONT></SPAN></DIV>
+<DIV><SPAN class=3D427344322-26102003><FONT face=3DArial color=3D#0000ff =
+size=3D2>Ron=20
+Ackerman</FONT></SPAN></DIV>
+<DIV><SPAN class=3D427344322-26102003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+  Behalf Of </B>Paulo Silva<BR><B>Sent:</B> Thursday, October 23, 2003 =
+11:29=20
+  AM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> Re: =
+[Xitami]=20
+  Mailing List vs Bulletin Board.<BR><BR></FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>I do prefer the Forums. I am a =
+regular user of=20
+  the Icewarp Mail Server forum (<A=20
+  =
+href=3D"http://forum.icewarp.com/bb2/index.php">http://forum.icewarp.com/=
+bb2/index.php</A>)=20
+  and i do prefer it</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>to mailing lists.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Paulo =
+Silva</FONT></DIV></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_007B_01C39BEA.144821F0--
+
+
+From xitami@lists.xitami.org  Mon Oct 27 14:55:32 2003
+From: xitami@lists.xitami.org (Eve Atley)
+Date: Mon, 27 Oct 2003 09:55:32 -0500
+Subject: [Xitami] equivalent to .htaccess
+Message-ID: <MOELKEOEGFBFNIEMGHEOKEBJCAAA.eatley@wow-corp.com>
+
+Hi all,
+
+Here is what I'm attempting to do. A client is running the Xitami webserver
+on an NT machine and wants password protected directories without a
+.htaccess-style popup window. Starting at the login page, they will be shown
+a form to enter username/password; a PHP file should then read existing
+authentication files and then transfer to login.php if authenticated. How
+can I, using Xitami's .aut files, set up a PHP page to read these files and
+authorize based on info?
+
+Perhaps this is not truly a Xitami issue; I, however, am not entirely
+familiar with Xitami's structure (defaults.aut is the file to access,
+perhaps?)
+
+Thanks,
+Eve
+
+
+
+From xitami@lists.xitami.org  Mon Oct 27 16:34:41 2003
+From: xitami@lists.xitami.org (RPO)
+Date: Mon, 27 Oct 2003 08:34:41 -0800
+Subject: [Xitami] Mailing List vs Bulletin Board.
+References: <NFBBKNGGELNPLMHPBOCEOECCDMAA.ron@miplanet.net>
+Message-ID: <LAW15-DAV18MFgnjXXB00001809@hotmail.com>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_045D_01C39C65.2A766CE0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Ron,
+
+Now you have to get the folks at Xitami to agree to put a link to =
+InReview on their support page.  Otherwise the user base won't consider =
+it an official support medium.  If they agree to do so then your forum =
+site could be big boost for Xitami.
+
+-R
+  ----- Original Message -----=20
+  From: Ron Ackerman=20
+  To: xitami@lists.xitami.org=20
+  Sent: Sunday, October 26, 2003 2:53 PM
+  Subject: RE: [Xitami] Mailing List vs Bulletin Board.
+
+
+  Okay, this weekend we are in the middle of a server upgrade for =
+InReview. (www.inreview.com) It should be back up tonight or first thing =
+in the morning. I have checked with the administrator and we can have an =
+Xitami area set up in a matter of minutes. Currently, or I should say =
+prior to upgrade InReview was handeling at any given time 150 to 200+ =
+users online at any given time with a registration base of over 60,000. =
+So InReview can handle whatever you throw at it. InReview has 2 =
+administrators, 4 Senior Moderators, and about 15 Moderators. InReview =
+is one of the best Forums that I have seen.
+    =20
+  Ron Ackerman
+
+    -----Original Message-----
+    From: xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Paulo Silva
+    Sent: Thursday, October 23, 2003 11:29 AM
+    To: xitami@lists.xitami.org
+    Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+    I do prefer the Forums. I am a regular user of the Icewarp Mail =
+Server forum (http://forum.icewarp.com/bb2/index.php) and i do prefer it
+    to mailing lists.
+
+    Paulo Silva
+
+------=_NextPart_000_045D_01C39C65.2A766CE0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2600.0" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><FONT face=3DArial size=3D2>Ron,</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>Now you have to get the folks at Xitami =
+to agree to=20
+put a link to InReview on their support page.&nbsp; Otherwise the user =
+base=20
+won't consider it an official support medium.&nbsp; If they agree to do =
+so then=20
+your forum site could be big boost for Xitami.</FONT></DIV>
+<DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+<DIV><FONT face=3DArial size=3D2>-R</FONT></DIV>
+<BLOCKQUOTE dir=3Dltr=20
+style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+  <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+  <DIV=20
+  style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+  <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+  </DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+  href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Sunday, October 26, 2003 =
+2:53=20
+  PM</DIV>
+  <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> RE: [Xitami] Mailing =
+List vs=20
+  Bulletin Board.</DIV>
+  <DIV><BR></DIV>
+  <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2>Okay, this weekend we are&nbsp;in the middle of a server =
+upgrade for=20
+  InReview. (<A href=3D"http://www.inreview.com">www.inreview.com</A>) =
+It should=20
+  be back up tonight or first thing in the morning. I have checked with =
+the=20
+  administrator and we can have an Xitami area set up in a matter of =
+minutes.=20
+  Currently, or I should say prior to upgrade InReview was handeling at =
+any=20
+  given time 150 to 200+&nbsp;users online at any given&nbsp;time with a =
+
+  registration base of&nbsp;over 60,000. So InReview can handle whatever =
+you=20
+  throw at it. InReview has 2 administrators, 4 Senior Moderators, and =
+about=20
+  15&nbsp;Moderators. InReview is one of the best Forums that I have=20
+  seen.</FONT></SPAN></DIV>
+  <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2>&nbsp;&nbsp;&nbsp;</FONT></SPAN></DIV>
+  <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff size=3D2>Ron=20
+  Ackerman</FONT></SPAN></DIV>
+  <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+  size=3D2></FONT></SPAN>&nbsp;</DIV>
+  <BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+    <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+    size=3D2>-----Original Message-----<BR><B>From:</B>=20
+    xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+    Behalf Of </B>Paulo Silva<BR><B>Sent:</B> Thursday, October 23, 2003 =
+11:29=20
+    AM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> Re: =
+[Xitami]=20
+    Mailing List vs Bulletin Board.<BR><BR></FONT></DIV>
+    <DIV><FONT face=3DArial size=3D2>I do prefer the Forums. I am a =
+regular user of=20
+    the Icewarp Mail Server forum (<A=20
+    =
+href=3D"http://forum.icewarp.com/bb2/index.php">http://forum.icewarp.com/=
+bb2/index.php</A>)=20
+    and i do prefer it</FONT></DIV>
+    <DIV><FONT face=3DArial size=3D2>to mailing lists.</FONT></DIV>
+    <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+    <DIV><FONT face=3DArial size=3D2>Paulo=20
+Silva</FONT></DIV></BLOCKQUOTE></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_045D_01C39C65.2A766CE0--
+
+From xitami@lists.xitami.org  Mon Oct 27 17:39:59 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Mon, 27 Oct 2003 12:39:59 -0500
+Subject: [Xitami] Mailing List vs Bulletin Board.
+In-Reply-To: <LAW15-DAV18MFgnjXXB00001809@hotmail.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCECECLDMAA.ron@miplanet.net>
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0024_01C39C87.6F1C75C0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+
+I have set up a forum for Xitami on InReview. If the Xitami/iMatix folks
+want to make it official then just provide a link to it
+http://www.inreview.com/forumdisplay.php?s=&forumid=318 otherwise it is an
+un-official forum.
+
+Cheers,
+Ron
+  -----Original Message-----
+  From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of RPO
+  Sent: Monday, October 27, 2003 11:35 AM
+  To: xitami@lists.xitami.org
+  Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+  Ron,
+
+  Now you have to get the folks at Xitami to agree to put a link to InReview
+on their support page.  Otherwise the user base won't consider it an
+official support medium.  If they agree to do so then your forum site could
+be big boost for Xitami.
+
+  -R
+    ----- Original Message -----
+    From: Ron Ackerman
+    To: xitami@lists.xitami.org
+    Sent: Sunday, October 26, 2003 2:53 PM
+    Subject: RE: [Xitami] Mailing List vs Bulletin Board.
+
+
+    Okay, this weekend we are in the middle of a server upgrade for
+InReview. (www.inreview.com) It should be back up tonight or first thing in
+the morning. I have checked with the administrator and we can have an Xitami
+area set up in a matter of minutes. Currently, or I should say prior to
+upgrade InReview was handeling at any given time 150 to 200+ users online at
+any given time with a registration base of over 60,000. So InReview can
+handle whatever you throw at it. InReview has 2 administrators, 4 Senior
+Moderators, and about 15 Moderators. InReview is one of the best Forums that
+I have seen.
+
+    Ron Ackerman
+
+      -----Original Message-----
+      From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Paulo Silva
+      Sent: Thursday, October 23, 2003 11:29 AM
+      To: xitami@lists.xitami.org
+      Subject: Re: [Xitami] Mailing List vs Bulletin Board.
+
+
+      I do prefer the Forums. I am a regular user of the Icewarp Mail Server
+forum (http://forum.icewarp.com/bb2/index.php) and i do prefer it
+      to mailing lists.
+
+      Paulo Silva
+
+------=_NextPart_000_0024_01C39C87.6F1C75C0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<META http-equiv=3DContent-Type content=3D"text/html; =
+charset=3Diso-8859-1">
+<META content=3D"MSHTML 6.00.2800.1264" name=3DGENERATOR>
+<STYLE></STYLE>
+</HEAD>
+<BODY bgColor=3D#ffffff>
+<DIV><SPAN class=3D151483617-27102003><FONT face=3DArial color=3D#0000ff =
+size=3D2>I=20
+have&nbsp;set up a forum for Xitami on InReview. If the Xitami/iMatix =
+folks want=20
+to make it&nbsp;official then just provide a link to it&nbsp; <A=20
+href=3D"http://www.inreview.com/forumdisplay.php?s=3D&amp;forumid=3D318">=
+http://www.inreview.com/forumdisplay.php?s=3D&amp;forumid=3D318</A>&nbsp;=
+otherwise=20
+it is an un-official forum.</FONT></SPAN></DIV>
+<DIV><SPAN class=3D151483617-27102003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2></FONT></SPAN>&nbsp;</DIV>
+<DIV><SPAN class=3D151483617-27102003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Cheers,</FONT></SPAN></DIV>
+<DIV><SPAN class=3D151483617-27102003><FONT face=3DArial color=3D#0000ff =
+
+size=3D2>Ron</FONT></SPAN></DIV>
+<BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+  <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+  size=3D2>-----Original Message-----<BR><B>From:</B>=20
+  xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+  Behalf Of </B>RPO<BR><B>Sent:</B> Monday, October 27, 2003 11:35=20
+  AM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> Re: =
+[Xitami]=20
+  Mailing List vs Bulletin Board.<BR><BR></FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2>Ron,</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>Now you have to get the folks at =
+Xitami to agree=20
+  to put a link to InReview on their support page.&nbsp; Otherwise the =
+user base=20
+  won't consider it an official support medium.&nbsp; If they agree to =
+do so=20
+  then your forum site could be big boost for Xitami.</FONT></DIV>
+  <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+  <DIV><FONT face=3DArial size=3D2>-R</FONT></DIV>
+  <BLOCKQUOTE dir=3Dltr=20
+  style=3D"PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px">
+    <DIV style=3D"FONT: 10pt arial">----- Original Message ----- </DIV>
+    <DIV=20
+    style=3D"BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black"><B>From:</B>=20
+    <A title=3Dron@miplanet.net href=3D"mailto:ron@miplanet.net">Ron =
+Ackerman</A>=20
+    </DIV>
+    <DIV style=3D"FONT: 10pt arial"><B>To:</B> <A =
+title=3Dxitami@lists.xitami.org=20
+    href=3D"mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> =
+</DIV>
+    <DIV style=3D"FONT: 10pt arial"><B>Sent:</B> Sunday, October 26, =
+2003 2:53=20
+    PM</DIV>
+    <DIV style=3D"FONT: 10pt arial"><B>Subject:</B> RE: [Xitami] Mailing =
+List vs=20
+    Bulletin Board.</DIV>
+    <DIV><BR></DIV>
+    <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+    size=3D2>Okay, this weekend we are&nbsp;in the middle of a server =
+upgrade for=20
+    InReview. (<A href=3D"http://www.inreview.com">www.inreview.com</A>) =
+It should=20
+    be back up tonight or first thing in the morning. I have checked =
+with the=20
+    administrator and we can have an Xitami area set up in a matter of =
+minutes.=20
+    Currently, or I should say prior to upgrade InReview was handeling =
+at any=20
+    given time 150 to 200+&nbsp;users online at any given&nbsp;time with =
+a=20
+    registration base of&nbsp;over 60,000. So InReview can handle =
+whatever you=20
+    throw at it. InReview has 2 administrators, 4 Senior Moderators, and =
+about=20
+    15&nbsp;Moderators. InReview is one of the best Forums that I have=20
+    seen.</FONT></SPAN></DIV>
+    <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+    size=3D2>&nbsp;&nbsp;&nbsp;</FONT></SPAN></DIV>
+    <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+    size=3D2>Ron Ackerman</FONT></SPAN></DIV>
+    <DIV><SPAN class=3D427344322-26102003><FONT face=3DArial =
+color=3D#0000ff=20
+    size=3D2></FONT></SPAN>&nbsp;</DIV>
+    <BLOCKQUOTE dir=3Dltr style=3D"MARGIN-RIGHT: 0px">
+      <DIV class=3DOutlookMessageHeader dir=3Dltr align=3Dleft><FONT =
+face=3DTahoma=20
+      size=3D2>-----Original Message-----<BR><B>From:</B>=20
+      xitami-admin@lists.xitami.org =
+[mailto:xitami-admin@lists.xitami.org]<B>On=20
+      Behalf Of </B>Paulo Silva<BR><B>Sent:</B> Thursday, October 23, =
+2003 11:29=20
+      AM<BR><B>To:</B> xitami@lists.xitami.org<BR><B>Subject:</B> Re: =
+[Xitami]=20
+      Mailing List vs Bulletin Board.<BR><BR></FONT></DIV>
+      <DIV><FONT face=3DArial size=3D2>I do prefer the Forums. I am a =
+regular user=20
+      of the Icewarp Mail Server forum (<A=20
+      =
+href=3D"http://forum.icewarp.com/bb2/index.php">http://forum.icewarp.com/=
+bb2/index.php</A>)=20
+      and i do prefer it</FONT></DIV>
+      <DIV><FONT face=3DArial size=3D2>to mailing lists.</FONT></DIV>
+      <DIV><FONT face=3DArial size=3D2></FONT>&nbsp;</DIV>
+      <DIV><FONT face=3DArial size=3D2>Paulo=20
+Silva</FONT></DIV></BLOCKQUOTE></BLOCKQUOTE></BLOCKQUOTE></BODY></HTML>
+
+------=_NextPart_000_0024_01C39C87.6F1C75C0--
+
+
+From xitami@lists.xitami.org  Mon Oct 27 21:54:56 2003
+From: xitami@lists.xitami.org (Todd Greene)
+Date: Mon, 27 Oct 2003 13:54:56 -0800 (PST)
+Subject: [Xitami] Bug in HTTP error msg handling? But with "root" change?
+Message-ID: <20031027215456.79065.qmail@web40601.mail.yahoo.com>
+
+Hi, fellow Xitami users.
+
+I'm a brand spankin' new user of the Xitami web server
+program. After spending about three days surfing for
+information about various HTTP server alternatives
+(and trying out, but quickly dropping, one of them
+other than Xitami), I've been playing with Xitami now
+for the last three days.
+
+I've installed the Windows version (i.e., not console,
+not NT service) on a Windows XP system, and it is
+Xitami v2.5b4 that I'm using.
+
+I will mention these items that I believe are bugs in
+the coding. I say that I believe these are bugs,
+because I've banged my head against the program quite
+a bit and not been able to get it to work the way I
+believe it is supposed to following the documentation
+- but, of course, I could be wrong and the problems
+could simply be due to my own "novicehood" with the
+program.
+
+There are three problems that I will bring up here:
+(1) Setting the "use-error-script" using the
+browser-based configuration screen (for "Errors"), (2)
+Use of the defined error messages (e.g.,
+"@errors/text-404.htm"), and (3) Changing the web
+server "root" from "webpages" to something else.
+
+Here is the problem behavior I have noted:
+
+(1) When you bring up the browser-based Xitami
+Administration screen, then click on Configuration,
+then click on Errors, there is a check box for "Use
+message template script?" I have noted that when I
+check this box, and press the save button, that act of
+saying "Xitami, I want to use the message template
+script" is NOT being saved to the defaults.cfg file.
+Of course, there is a manual work-around for this in
+that you can simply add the following line to the
+[Server] section using your text editor:
+
+   use-error-script = "1"
+
+But this seems to be a clear bug in this version of
+Xitami (v2.5b4), with respect to the browser-based
+configuration screen (but not with the server itself).
+
+Please note that when I set the use-error-script to
+"1" (i.e., turn it on), then the server DOES use the
+template file "errors.gsl", as it is supposed to.
+
+(2) The documentation (the Configuration page) states,
+and the relevent browser-based Admin screen (Errors)
+implies, that Xitami is supposed to use the files such
+as "@errors/header.htm", "@errors/text-404.htm", and
+"@errors/footer.htm" to report errors (when
+"use-error-script" is turned off), but in no case can
+I get this to work. For example, with a 404 error, I
+simply get the default IE Explorer 404 HTTP error
+page. I ever seen the message from the
+"@errors/text-404.htm" file. Again, I don't know
+whether I'm doing something wrong or if this is a bug
+in the program.
+
+(3) I played around a bit with changing the name of
+the root directory for the web server, and I
+discovered that when I did this, then the server DID
+use the specified directory BUT a directory by the
+name of "webpages" (the default) still HAD TO exist or
+the server would claim that the root directory did not
+exist. This seems to me to be a clear bug in the code.
+
+The way I discovered this problem and this behavior is
+that I had configured the server (with the "webpages"
+parameter in the [Server] section) to use a root
+directory named "webroot" and then I directly altered
+the name of the original "webpages" directory itself.
+Thus, a directory named "webpages" did not exist at
+all. The server would then keep telling me that I had
+no home page (a 404 error) even though it clearly DID
+exist (all I had done was changed the name of the
+default root directory to something else and then
+pointed to this new name in the configuration file
+(defaults.cfg). After trying out all kinds of things
+and scratching my head for over an hour I hit on the
+idea of creating a directory with the name "webpages"
+(with absolutely nothing in it), and - ta da! - the
+server worked like a charm, using the "index.html"
+file I had in my "webroot" directory.
+
+Has anyone else had these problems? Have these issues
+been addressed in a newer version of Xitami? Version
+2.5b4 was the latest version that I was able to
+download from the website. As I'm working with Xitami,
+I'm finding that I like this program, and I would like
+to work with anyone I need to to help get the errors
+that I notice fixed.
+
+(FYI, FWIW, I've been a programmer since the late
+1970s, and I've been using C++ for the last 7 years,
+and just recently I've been motivated to dig into
+doing some serious CGI programming using C++ and Perl
+(and perhaps PHP?) for web applications. I use dial-up
+from home, but I need a web server running on my home
+computer to provide myself with a test bed. I have
+also downloaded MySQL and am in the middle of setting
+this up on my home computer. My motivation for this is
+that I've been laid off from the company I worked for,
+in a serious downsizing, and job prospects have been
+bleak, so web apps are something I'm starting to work
+on as a possibility of drumming up some home business
+income.)
+
+Regards,
+Todd S. Greene
+greeneto@yahoo.com
+
+__________________________________
+Do you Yahoo!?
+Exclusive Video Premiere - Britney Spears
+http://launch.yahoo.com/promos/britneyspears/
+
+From xitami@lists.xitami.org  Mon Oct 27 22:32:07 2003
+From: xitami@lists.xitami.org (Cav22)
+Date: Mon, 27 Oct 2003 17:32:07 -0500
+Subject: [Xitami] Bug in HTTP error msg handling? But with "root" change?
+In-Reply-To: <20031027215456.79065.qmail@web40601.mail.yahoo.com>
+Message-ID: <DJEIIIHHCFLDAOAJIDBKAEJLCAAA.Cav22@cav22.net>
+
+I am currently running Xitami v2.5b4 and I have no problem with yourthird
+problem u addressed in this email.  I am also using XP mine is Pro version.
+I dont think that shoudl matter though.  I still have yet to try the error
+problems you refered to but will try to check in to those to see if the
+problems occur for me as well.  When changeing your main HTML directory you
+can either enter the complete path to the directory you would like (eg.
+c:/webroot/) or if the directoy exists within the Xitami directory you can
+directly refer to it (eg. if the desired directory is c:\Xitami\webroot the
+Main HTML directory could either be the direct path or ./webroot). I tried
+both of these methods and both worked for me.  Hope this helps somewhat.
+
+Ryan Heaton
+cav22@cav22.net
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Todd Greene
+Sent: Monday, October 27, 2003 4:55 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Bug in HTTP error msg handling? But with "root"
+change?
+
+
+Hi, fellow Xitami users.
+
+I'm a brand spankin' new user of the Xitami web server
+program. After spending about three days surfing for
+information about various HTTP server alternatives
+(and trying out, but quickly dropping, one of them
+other than Xitami), I've been playing with Xitami now
+for the last three days.
+
+I've installed the Windows version (i.e., not console,
+not NT service) on a Windows XP system, and it is
+Xitami v2.5b4 that I'm using.
+
+I will mention these items that I believe are bugs in
+the coding. I say that I believe these are bugs,
+because I've banged my head against the program quite
+a bit and not been able to get it to work the way I
+believe it is supposed to following the documentation
+- but, of course, I could be wrong and the problems
+could simply be due to my own "novicehood" with the
+program.
+
+There are three problems that I will bring up here:
+(1) Setting the "use-error-script" using the
+browser-based configuration screen (for "Errors"), (2)
+Use of the defined error messages (e.g.,
+"@errors/text-404.htm"), and (3) Changing the web
+server "root" from "webpages" to something else.
+
+Here is the problem behavior I have noted:
+
+(1) When you bring up the browser-based Xitami
+Administration screen, then click on Configuration,
+then click on Errors, there is a check box for "Use
+message template script?" I have noted that when I
+check this box, and press the save button, that act of
+saying "Xitami, I want to use the message template
+script" is NOT being saved to the defaults.cfg file.
+Of course, there is a manual work-around for this in
+that you can simply add the following line to the
+[Server] section using your text editor:
+
+   use-error-script = "1"
+
+But this seems to be a clear bug in this version of
+Xitami (v2.5b4), with respect to the browser-based
+configuration screen (but not with the server itself).
+
+Please note that when I set the use-error-script to
+"1" (i.e., turn it on), then the server DOES use the
+template file "errors.gsl", as it is supposed to.
+
+(2) The documentation (the Configuration page) states,
+and the relevent browser-based Admin screen (Errors)
+implies, that Xitami is supposed to use the files such
+as "@errors/header.htm", "@errors/text-404.htm", and
+"@errors/footer.htm" to report errors (when
+"use-error-script" is turned off), but in no case can
+I get this to work. For example, with a 404 error, I
+simply get the default IE Explorer 404 HTTP error
+page. I ever seen the message from the
+"@errors/text-404.htm" file. Again, I don't know
+whether I'm doing something wrong or if this is a bug
+in the program.
+
+(3) I played around a bit with changing the name of
+the root directory for the web server, and I
+discovered that when I did this, then the server DID
+use the specified directory BUT a directory by the
+name of "webpages" (the default) still HAD TO exist or
+the server would claim that the root directory did not
+exist. This seems to me to be a clear bug in the code.
+
+The way I discovered this problem and this behavior is
+that I had configured the server (with the "webpages"
+parameter in the [Server] section) to use a root
+directory named "webroot" and then I directly altered
+the name of the original "webpages" directory itself.
+Thus, a directory named "webpages" did not exist at
+all. The server would then keep telling me that I had
+no home page (a 404 error) even though it clearly DID
+exist (all I had done was changed the name of the
+default root directory to something else and then
+pointed to this new name in the configuration file
+(defaults.cfg). After trying out all kinds of things
+and scratching my head for over an hour I hit on the
+idea of creating a directory with the name "webpages"
+(with absolutely nothing in it), and - ta da! - the
+server worked like a charm, using the "index.html"
+file I had in my "webroot" directory.
+
+Has anyone else had these problems? Have these issues
+been addressed in a newer version of Xitami? Version
+2.5b4 was the latest version that I was able to
+download from the website. As I'm working with Xitami,
+I'm finding that I like this program, and I would like
+to work with anyone I need to to help get the errors
+that I notice fixed.
+
+(FYI, FWIW, I've been a programmer since the late
+1970s, and I've been using C++ for the last 7 years,
+and just recently I've been motivated to dig into
+doing some serious CGI programming using C++ and Perl
+(and perhaps PHP?) for web applications. I use dial-up
+from home, but I need a web server running on my home
+computer to provide myself with a test bed. I have
+also downloaded MySQL and am in the middle of setting
+this up on my home computer. My motivation for this is
+that I've been laid off from the company I worked for,
+in a serious downsizing, and job prospects have been
+bleak, so web apps are something I'm starting to work
+on as a possibility of drumming up some home business
+income.)
+
+Regards,
+Todd S. Greene
+greeneto@yahoo.com
+
+__________________________________
+Do you Yahoo!?
+Exclusive Video Premiere - Britney Spears
+http://launch.yahoo.com/promos/britneyspears/
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+
+
+From xitami@lists.xitami.org  Tue Oct 28 02:13:06 2003
+From: xitami@lists.xitami.org (Wade)
+Date: Mon, 27 Oct 2003 20:13:06 -0600
+Subject: [Xitami] PHP4 installation problems.
+Message-ID: <3F9DD0B2.8090604@wadesmart.com>
+
+10272003 2011 GMT-5
+
+Version 2.5c0
+OS = WXP-Pro
+Error Message: Internal error: your request was unsuccessful
+Cannot create CGI process - program not found
+Reproduce Problem: uncertain
+
+Im attempting to install php4 to try test pages.
+I have read and applied all on 
+http://us3.php.net/manual/en/install.xitami.php?PHPSESSID=01dde9c4c436d2dd989e9fca214c9dca
+with absolutly no luck.
+
+Any other suggestions?
+
+
+
+
+From xitami@lists.xitami.org  Tue Oct 28 14:55:00 2003
+From: xitami@lists.xitami.org (Andris Kluga)
+Date: Tue, 28 Oct 2003 16:55:00 +0200
+Subject: [Xitami] Bug in HTTP error msg handling? But with "root" change?
+Message-ID: <874ED0D1CBC5CF4C9236A4B7B6C488D0ACA75C@riga.microlink.lv>
+
+Hello!
+
+ Todd Greene wrote:
+
+> I've installed the Windows version (i.e., not console,
+> not NT service) on a Windows XP system, and it is
+> Xitami v2.5b4 that I'm using.
+
+Sorry, I don't use 2.5x and I have never used browser based
+administration anytime therefore I cannot answer your questions about
+error scripts.
+
+[...]
+
+But this one looks like a _FEATURE_ of MSIE.
+
+> For example, with a 404 error, I
+> simply get the default IE Explorer 404 HTTP error
+> page.
+
+Here is a fragment of error message source I have grabbed from one of
+akamai.net servers:
+
+<!--
+  -- Unfortunately, Microsoft has added a clever new
+  -- "feature" to Internet Explorer.  If the text in
+  -- an error's message is "too small", specifically
+  -- less than 512 bytes, Internet Explorer returns
+  -- its own error message.  Yes, you can turn that
+  -- off, but *surprise* it's pretty tricky to find
+  -- buried as a switch called "smart error
+  -- messages"  That means, of course, that many of
+  -- Resin's error messages are censored by default.
+  -- And, of course, you'll be shocked to learn that
+  -- IIS always returns error messages that are long
+  -- enough to make Internet Explorer happy.  The
+  -- workaround is pretty simple: pad the error
+  -- message with a big comment to push it over the
+  -- five hundred and twelve byte minimum.  Of course,
+  -- that's exactly what you're reading right now.
+  -->
+
+
+  A.
+
+
+From xitami@lists.xitami.org  Tue Oct 28 17:46:39 2003
+From: xitami@lists.xitami.org (patricko)
+Date: Tue, 28 Oct 2003 10:46:39 -0700
+Subject: [Xitami] Bug in HTTP error msg handling? But with "root" change?
+References: <874ED0D1CBC5CF4C9236A4B7B6C488D0ACA75C@riga.microlink.lv>
+Message-ID: <005b01c39d7c$73f27180$6501a8c0@pressmans>
+
+Thanks for that tip Andris will be using that
+
+|| <!--
+|   -- Unfortunately, Microsoft has added a clever new
+|   -- "feature" to Internet Explorer.  If the text in
+|   -- an error's message is "too small", specifically
+|   -- less than 512 bytes, Internet Explorer returns
+|   -- its own error message.  Yes, you can turn that
+|   -- off, but *surprise* it's pretty tricky to find
+|   -- buried as a switch called "smart error
+|   -- messages"  That means, of course, that many of
+|   -- Resin's error messages are censored by default.
+|   -- And, of course, you'll be shocked to learn that
+|   -- IIS always returns error messages that are long
+|   -- enough to make Internet Explorer happy.  The
+|   -- workaround is pretty simple: pad the error
+|   -- message with a big comment to push it over the
+|   -- five hundred and twelve byte minimum.  Of course,
+|   -- that's exactly what you're reading right now.
+|   -->
+|
+
+
+From xitami@lists.xitami.org  Thu Oct 30 23:46:27 2003
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 31 Oct 2003 00:46:27 +0100
+Subject: [Xitami] all about the site and application, HELP
+Message-ID: <1067557587.3fa1a2d3a6d07@imp1-l.free.fr>
+
+Hi everyone this is my first post here, and i am not sure where to begin.
+
+I have tested a couple of home servers recently looking for good reliable and 
+secure applications. I have just unistalled "602Pro LAN SUITE 2003" which is 
+excellent in its own rights and very very very easy to install and use. Even a 
+total newbie to a computor or even the net can get it up and running in less 
+than 5 minutes. 
+The main reason for the uninstall was to test others before 
+buying. xitami is one of the tests. I decided on this test because the 
+xitami.org proclaims that its easy to install, lmao. I went throught the 
+online help, faq and god only knows what else, to no avail. In fact i came 
+across 3 different explanations on the setup on one site.
+
+1st when the application installs under windows, its there you set up the 
+password. It doesnt install anything it just unzips with no sign of a password 
+setup.
+
+2nd you must change the password etc in the .aut and the.cfg files. Doesnt do 
+a thing.
+
+3rd you have to create to new files .aut and .cfg. doesnt do a thing
+
+So then, with all the different ways of doing things which is the correct way, 
+oh sorry, you cant answer that because nothing works there is no possible way 
+to logon as admin.
+
+I then went on to reading the archives a little, that is when i eventually 
+figured out how the damn thing works, to realise there is a possiblity of spam 
+mail and god only knows what else. I also read that there is only 500 active 
+members. Sorry but thats your own fault. If you get rid of this stupid mailing 
+list a put a good forum www.phpbb.com for exapmle (FREE) you will find that 
+you will have more members, that can discuss things between themselves, faster 
+and maybe help you solve the screwed help system on the site. How can you say 
+its easy to setup when you cant explain how to do it? i havent seen one single 
+helpfull answer in the archives.
+
+I am looking at testing and eventually buying because i am in the process of 
+starting up my own online 3D website creating business. Its up to you guys now 
+to get it running if you want the sale. If not dont bother answering and i 
+will go back to something that works, as ive cant afford to play around any 
+longer.
+
+Thanks in advance and i hope you understand my frustration and anger after 
+wasting many hours trying to get something (EASY) to work.
+
+Mr.peeved off
+
+
+
+
+From xitami@lists.xitami.org  Thu Oct 30 23:50:44 2003
+From: xitami@lists.xitami.org (Hymbaugh, Mike)
+Date: Thu, 30 Oct 2003 17:50:44 -0600
+Subject: [Xitami] RE:  all about the site and application, HELP
+Message-ID: <CCC7FC1A5AAEF84EB3589F74A9C9A7E702302E@hrgdmex.hrgreen.com>
+
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+-----Original Message-----
+Sorry but thats your own fault. If you get rid of this stupid mailing=20
+list a put a good forum www.phpbb.com for exapmle (FREE) you will find =
+that=20
+you will have more members, that can discuss things between themselves, =
+faster=20
+and maybe help you solve the screwed help system on the site. How can =
+you say=20
+its easy to setup when you cant explain how to do it? i havent seen one =
+single=20
+helpfull answer in the archives.
+
+
+From xitami@lists.xitami.org  Fri Oct 31 00:23:30 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 30 Oct 2003 19:23:30 -0500
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <CCC7FC1A5AAEF84EB3589F74A9C9A7E702302E@hrgdmex.hrgreen.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCEOEFJDMAA.ron@miplanet.net>
+
+I set one up, nobody seems to want to use it. All you have to do is register
+to use it.
+http://www.inreview.com/forumdisplay.php?s=&forumid=318
+
+Ron Ackerman
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Hymbaugh, Mike
+Sent: Thursday, October 30, 2003 6:51 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] RE: all about the site and application, HELP
+
+
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+-----Original Message-----
+Sorry but thats your own fault. If you get rid of this stupid mailing
+list a put a good forum www.phpbb.com for exapmle (FREE) you will find that
+you will have more members, that can discuss things between themselves,
+faster
+and maybe help you solve the screwed help system on the site. How can you
+say
+its easy to setup when you cant explain how to do it? i havent seen one
+single
+helpfull answer in the archives.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 31 01:16:47 2003
+From: xitami@lists.xitami.org (LibraLogic)
+Date: Thu, 30 Oct 2003 20:16:47 -0500
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEOEFJDMAA.ron@miplanet.net>
+Message-ID: <PNEGLKNFKKPGCFBBCPBEKEPFCBAA.info@libralogic.com>
+
+I went to the site to see how it looks and it looks good. But there is one
+problem. The site behaves as if it was in some sort of edit mode. Whichever
+element I click on it gets the selection nodes and I can move, delete and
+even resize those elements by grabbing those nodes, just like in a graphics
+application. I am using Mozilla 1.5.
+
+If my description isn't so great then I could email a screenshot to you or
+place a picture on a web somewhere
+
+
+Now, don't take me wrong. I appreciate the site and your effort and I like
+the BB. I tried starting one myself (http://members.lycos.co.uk/xitami). But
+when I go to a site that acts funny with mozilla I never come back. This is
+also true with many other people who prefer a more secure Mozilla browser
+than IE.
+
+If this issue is resolved I would send you a all xitami list messages parsed
+into a tab delimited format, unless you prefer Firebird database format. I
+think that putting the body of the existing information on a BB is critical
+to its success.
+
+Thanks.
+
+Derek
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Ron Ackerman
+Sent: Thursday, October 30, 2003 7:24 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+I set one up, nobody seems to want to use it. All you have to do is register
+to use it.
+http://www.inreview.com/forumdisplay.php?s=&forumid=318
+
+Ron Ackerman
+
+
+
+
+From xitami@lists.xitami.org  Fri Oct 31 02:09:46 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 30 Oct 2003 21:09:46 -0500
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <PNEGLKNFKKPGCFBBCPBEKEPFCBAA.info@libralogic.com>
+Message-ID: <NFBBKNGGELNPLMHPBOCECEFLDMAA.ron@miplanet.net>
+
+You are correct, InReview doesn't seem to work well with Mozilla, works
+great with Netscape and IE. I have reported it to the Administrator and will
+update you with the result.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of LibraLogic
+Sent: Thursday, October 30, 2003 8:17 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+I went to the site to see how it looks and it looks good. But there is one
+problem. The site behaves as if it was in some sort of edit mode. Whichever
+element I click on it gets the selection nodes and I can move, delete and
+even resize those elements by grabbing those nodes, just like in a graphics
+application. I am using Mozilla 1.5.
+
+If my description isn't so great then I could email a screenshot to you or
+place a picture on a web somewhere
+
+
+Now, don't take me wrong. I appreciate the site and your effort and I like
+the BB. I tried starting one myself (http://members.lycos.co.uk/xitami). But
+when I go to a site that acts funny with mozilla I never come back. This is
+also true with many other people who prefer a more secure Mozilla browser
+than IE.
+
+If this issue is resolved I would send you a all xitami list messages parsed
+into a tab delimited format, unless you prefer Firebird database format. I
+think that putting the body of the existing information on a BB is critical
+to its success.
+
+Thanks.
+
+Derek
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Ron Ackerman
+Sent: Thursday, October 30, 2003 7:24 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+I set one up, nobody seems to want to use it. All you have to do is register
+to use it.
+http://www.inreview.com/forumdisplay.php?s=&forumid=318
+
+Ron Ackerman
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 31 02:30:02 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 30 Oct 2003 21:30:02 -0500
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <NFBBKNGGELNPLMHPBOCECEFLDMAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEFMDMAA.ron@miplanet.net>
+
+To get your Mozilla to work with InReview, you need to go to ("Edit" ->
+"Preferences" -> "Advanced" -> "HTTP Networking") and click Use HTTP 1.0
+then it will work just fine. I'm not sure about Pipelining mine did not have
+it enabled.
+
+Ron Ackerman
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Ron Ackerman
+Sent: Thursday, October 30, 2003 9:10 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+You are correct, InReview doesn't seem to work well with Mozilla, works
+great with Netscape and IE. I have reported it to the Administrator and will
+update you with the result.
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of LibraLogic
+Sent: Thursday, October 30, 2003 8:17 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+I went to the site to see how it looks and it looks good. But there is one
+problem. The site behaves as if it was in some sort of edit mode. Whichever
+element I click on it gets the selection nodes and I can move, delete and
+even resize those elements by grabbing those nodes, just like in a graphics
+application. I am using Mozilla 1.5.
+
+If my description isn't so great then I could email a screenshot to you or
+place a picture on a web somewhere
+
+
+Now, don't take me wrong. I appreciate the site and your effort and I like
+the BB. I tried starting one myself (http://members.lycos.co.uk/xitami). But
+when I go to a site that acts funny with mozilla I never come back. This is
+also true with many other people who prefer a more secure Mozilla browser
+than IE.
+
+If this issue is resolved I would send you a all xitami list messages parsed
+into a tab delimited format, unless you prefer Firebird database format. I
+think that putting the body of the existing information on a BB is critical
+to its success.
+
+Thanks.
+
+Derek
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Ron Ackerman
+Sent: Thursday, October 30, 2003 7:24 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+I set one up, nobody seems to want to use it. All you have to do is register
+to use it.
+http://www.inreview.com/forumdisplay.php?s=&forumid=318
+
+Ron Ackerman
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 31 02:40:43 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Thu, 30 Oct 2003 21:40:43 -0500
+Subject: [Xitami] Out of office reply
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEEEFMDMAA.ron@miplanet.net>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEFNDMAA.ron@miplanet.net>
+
+Who is Mike Mattern and why do I continue to get an out of office reply when
+I reply to Xitami? Can you remove him from the list?
+
+
+From xitami@lists.xitami.org  Fri Oct 31 07:19:29 2003
+From: xitami@lists.xitami.org (Marc Doigny)
+Date: Fri, 31 Oct 2003 08:19:29 +0100
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <NFBBKNGGELNPLMHPBOCEOEFJDMAA.ron@miplanet.net>
+References: <CCC7FC1A5AAEF84EB3589F74A9C9A7E702302E@hrgdmex.hrgreen.com>
+Message-ID: <5.1.0.14.2.20031031081728.01d3e630@verfaillie4.verfaillie.local>
+
+At 01:23 31/10/03, you wrote:
+>I set one up, nobody seems to want to use it. All you have to do is register
+>to use it.
+>http://www.inreview.com/forumdisplay.php?s=&forumid=318
+>
+>Ron Ackerman
+
+See my other posts.
+The forum has to be supported by Imatix, with links pointing to the site.
+
+There are at least two different forums that were started some days ago.
+Everybody starting it's own forum won't attract new people.
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+From xitami@lists.xitami.org  Fri Oct 31 09:27:12 2003
+From: xitami@lists.xitami.org (Simon)
+Date: Fri, 31 Oct 2003 09:27:12 +0000
+Subject: [Xitami] Is this list finished?
+Message-ID: <524048754.20031031092712@netbanger.com>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hello Xitami,
+
+I've  been  following  the  threads  about starting new Xitami support
+forums over the last week, and have noticed an urgency by some to move
+away  completle  from  list  support.  I  don't understand the urgency
+myself,  but  there you go. So is this list going to be closed=3F If web
+based  support  is  set  up,  will this list be abandoned in favour of
+forums=3F  I know I won't be frequenting forums as lists are far quicker
+& much more effective.
+
+- --
+Sl=E1n,
+
+ Simon @ i~n+f~o+w~i+z~a+r~d+.~c+o~.+u~k
+
+*****************************************
+PGP Key: http://pgp.infowizard.co.uk/
+
+#2361. Squaw Dry O'er Slim =B6
+
+-----BEGIN PGP SIGNATURE-----
+Comment: Protect your Privacy with PGP.
+Comment: KeyID: 0xDF8062C1
+
+iQA/AwUBP6Iq9JJmyHDfgGLBEQKuAwCdGq3XrsQ2HjJnelfkbh6lKmbxI40AoJBZ
+wjTkELBezkPXATV2kKcG2LWT
+=3D9iRL
+-----END PGP SIGNATURE-----
+
+
+From xitami@lists.xitami.org  Fri Oct 31 14:42:00 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Oct 2003 09:42:00 -0500
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <5.1.0.14.2.20031031081728.01d3e630@verfaillie4.verfaillie.local>
+Message-ID: <NFBBKNGGELNPLMHPBOCECEGDDMAA.ron@miplanet.net>
+
+Let me put it another way, InReview is probably the best Board/Forum on the
+internet. If ya'll decide not to use it that's fine. I will wait until Nov
+8th before removing what's there, it's your choice. If you (Xitami) chose
+not to use it please let me know. Keep in mind, you will get a lot of
+exposure there and the good part, you don't have to maintain it.
+
+Ron Ackerman
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Marc Doigny
+Sent: Friday, October 31, 2003 2:19 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+At 01:23 31/10/03, you wrote:
+>I set one up, nobody seems to want to use it. All you have to do is
+register
+>to use it.
+>http://www.inreview.com/forumdisplay.php?s=&forumid=318
+>
+>Ron Ackerman
+
+See my other posts.
+The forum has to be supported by Imatix, with links pointing to the site.
+
+There are at least two different forums that were started some days ago.
+Everybody starting it's own forum won't attract new people.
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [postmaster@verfaillie.com]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+http://www.verfaillie.com
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 31 18:34:56 2003
+From: xitami@lists.xitami.org (John Jonas)
+Date: Fri, 31 Oct 2003 12:34:56 -0600
+Subject: [Xitami] Is this list finished?
+In-Reply-To: <524048754.20031031092712@netbanger.com>
+References: <524048754.20031031092712@netbanger.com>
+Message-ID: <3FA2AB50.8060309@arbor-freight.com>
+
+I second what Simon said. KEEP THE LIST! Forget forums.
+
+Simon wrote:
+
+>-----BEGIN PGP SIGNED MESSAGE-----
+>Hash: SHA1
+>
+>Hello Xitami,
+>
+>I've  been  following  the  threads  about starting new Xitami support
+>forums over the last week, and have noticed an urgency by some to move
+>away  completle  from  list  support.  I  don't understand the urgency
+>myself,  but  there you go. So is this list going to be closed? If web
+>based  support  is  set  up,  will this list be abandoned in favour of
+>forums?  I know I won't be frequenting forums as lists are far quicker
+>& much more effective.
+>
+>- --
+>Slán,
+>
+> Simon @ i~n+f~o+w~i+z~a+r~d+.~c+o~.+u~k
+>
+>*****************************************
+>PGP Key: http://pgp.infowizard.co.uk/
+>
+>#2361. Squaw Dry O'er Slim ¶
+>
+>-----BEGIN PGP SIGNATURE-----
+>Comment: Protect your Privacy with PGP.
+>Comment: KeyID: 0xDF8062C1
+>
+>iQA/AwUBP6Iq9JJmyHDfgGLBEQKuAwCdGq3XrsQ2HjJnelfkbh6lKmbxI40AoJBZ
+>wjTkELBezkPXATV2kKcG2LWT
+>=9iRL
+>-----END PGP SIGNATURE-----
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>  
+>
+
+
+
+From xitami@lists.xitami.org  Fri Oct 31 18:46:46 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Fri, 31 Oct 2003 12:46:46 -0600
+Subject: [Xitami] Is this list finished?
+References: <524048754.20031031092712@netbanger.com> <3FA2AB50.8060309@arbor-freight.com>
+Message-ID: <001501c39fdf$5683d6b0$0101a8c0@danlap>
+
+me too.  All I want to see is our email addresses removed from the archive.
+Daniel Nowlin
+
+----- Original Message ----- 
+From: "John Jonas" <johnj83@arbor-freight.com>
+To: <xitami@lists.xitami.org>
+Sent: Friday, October 31, 2003 12:34 PM
+Subject: Re: [Xitami] Is this list finished?
+
+
+> I second what Simon said. KEEP THE LIST! Forget forums.
+>
+> Simon wrote:
+>
+> >-----BEGIN PGP SIGNED MESSAGE-----
+> >Hash: SHA1
+> >
+> >Hello Xitami,
+> >
+> >I've  been  following  the  threads  about starting new Xitami support
+> >forums over the last week, and have noticed an urgency by some to move
+> >away  completle  from  list  support.  I  don't understand the urgency
+> >myself,  but  there you go. So is this list going to be closed? If web
+> >based  support  is  set  up,  will this list be abandoned in favour of
+> >forums?  I know I won't be frequenting forums as lists are far quicker
+> >& much more effective.
+> >
+> >- --
+> >Slán,
+> >
+> > Simon @ i~n+f~o+w~i+z~a+r~d+.~c+o~.+u~k
+> >
+> >*****************************************
+> >PGP Key: http://pgp.infowizard.co.uk/
+> >
+> >#2361. Squaw Dry O'er Slim ¶
+> >
+> >-----BEGIN PGP SIGNATURE-----
+> >Comment: Protect your Privacy with PGP.
+> >Comment: KeyID: 0xDF8062C1
+> >
+> >iQA/AwUBP6Iq9JJmyHDfgGLBEQKuAwCdGq3XrsQ2HjJnelfkbh6lKmbxI40AoJBZ
+> >wjTkELBezkPXATV2kKcG2LWT
+> >=9iRL
+> >-----END PGP SIGNATURE-----
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> >
+> >
+> >
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+From xitami@lists.xitami.org  Fri Oct 31 18:57:16 2003
+From: xitami@lists.xitami.org (xitami@lists.xitami.org)
+Date: Fri, 31 Oct 2003 13:57:16 -0500
+Subject: [Xitami] Is this list finished?
+Message-ID: <809907809c5a.809c5a809907@southeast.rr.com>
+
+Forums are nice because archived messages are so much easier to browse an=
+d search=2E Several times I have gone to the Xitami archives (when I can =
+even find them) looking for information that I know has been covered befo=
+re=2C only to have to read through tons of listings=2E And then=2C if I f=
+ind a topic of interest=2C I have to track down the replies=2C because no=
+thing is threaded=2E
+
+A forum can give you the best of both worlds=2E MUCH better organization=2C=
+ archiving=2C and searching=2E AND=2C most forum scripts let you =22subsc=
+ribe=22=2C so everything still comes in via email=2E You never have to vi=
+sit the forum=2C unless you want to make a post=2E And you can post witho=
+ut giving an email address=2E
+
+--Carl
+
+
+=3E I second what Simon said=2E KEEP THE LIST! Forget forums=2E
+=3E =
+
+=3E Simon wrote=3A
+=3E =
+
+=3E =3E-----BEGIN PGP SIGNED MESSAGE-----
+=3E =3EHash=3A SHA1
+=3E =3E
+=3E =3EHello Xitami=2C
+=3E =3E
+=3E =3EI=27ve  been  following  the  threads  about starting new Xitami =
+
+=3E support=3Eforums over the last week=2C and have noticed an urgency by=
+ =
+
+=3E some to move
+=3E =3Eaway  completle  from  list  support=2E  I  don=27t understand the=
+ =
+
+=3E urgency=3Emyself=2C  but  there you go=2E So is this list going to be=
+ =
+
+=3E closed=3F If web
+=3E =3Ebased  support  is  set  up=2C  will this list be abandoned in =
+
+=3E favour of
+=3E =3Eforums=3F  I know I won=27t be frequenting forums as lists are far=
+ =
+
+=3E quicker=3E=26 much more effective=2E
+=3E =3E
+=3E =3E- --
+=3E =3ESl=E1n=2C
+
+
+
+From xitami@lists.xitami.org  Fri Oct 31 07:51:09 2003
+From: xitami@lists.xitami.org (Brian {Hamilton Kelly})
+Date: Fri, 31 Oct 2003 07:51:09 +0000 (GMT)
+Subject: [Xitami] RE:  all about the site and application, HELP
+Message-ID: <53984@dsl.co.uk>
+
+In message <NFBBKNGGELNPLMHPBOCEEEFMDMAA.ron@miplanet.net>
+   "Ron Ackerman" writes:
+> To get your Mozilla to work with InReview, you need to go to ("Edit" ->
+> "Preferences" -> "Advanced" -> "HTTP Networking") and click Use HTTP 1.0
+> then it will work just fine. I'm not sure about Pipelining mine did not have
+> it enabled.
+
+I think you've missed the point; a user should NEVER have to change
+browser settings so as to be able to access any particular site: rather
+the site's designer has a duty to write HTML which works with any
+browser.  A browser's settings are supposed to allow the user to express
+his/her preferences about presentation[1]: they are NOT there to excuse
+the shortcomings of the web site itself.
+
+Besides, making Mozilla use HTTP/1.0 protocols will block access to the
+vast majority of other sites nowadays that host multiple virtual servers
+at one IP address.
+
+[1] E.g. some people are poorly-sighted, and hence want to override the
+site's settings and use large fonts.
+-- 
+Brian {Hamilton Kelly}                                          bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan, 1919
+
+From xitami@lists.xitami.org  Fri Oct 31 19:05:14 2003
+From: xitami@lists.xitami.org (Ron Ackerman)
+Date: Fri, 31 Oct 2003 14:05:14 -0500
+Subject: [Xitami] RE:  all about the site and application, HELP
+In-Reply-To: <53984@dsl.co.uk>
+Message-ID: <NFBBKNGGELNPLMHPBOCEEEGGDMAA.ron@miplanet.net>
+
+Don't you find it odd that the only browser that doesn't work with the site
+is Mozilla? The InReview administrator said that he would look into it but
+he is not going to jump through hoops for a few Xitami users. Maybe Mozilla
+needs to look into their program. As I said there are over 60,000 users
+registered to use that site 150 - 200 online at any given time. You do the
+math.
+
+
+
+-----Original Message-----
+From: xitami-admin@lists.xitami.org
+[mailto:xitami-admin@lists.xitami.org]On Behalf Of Brian {Hamilton
+Kelly}
+Sent: Friday, October 31, 2003 2:51 AM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] RE: all about the site and application, HELP
+
+
+In message <NFBBKNGGELNPLMHPBOCEEEFMDMAA.ron@miplanet.net>
+   "Ron Ackerman" writes:
+> To get your Mozilla to work with InReview, you need to go to ("Edit" ->
+> "Preferences" -> "Advanced" -> "HTTP Networking") and click Use HTTP 1.0
+> then it will work just fine. I'm not sure about Pipelining mine did not
+have
+> it enabled.
+
+I think you've missed the point; a user should NEVER have to change
+browser settings so as to be able to access any particular site: rather
+the site's designer has a duty to write HTML which works with any
+browser.  A browser's settings are supposed to allow the user to express
+his/her preferences about presentation[1]: they are NOT there to excuse
+the shortcomings of the web site itself.
+
+Besides, making Mozilla use HTTP/1.0 protocols will block access to the
+vast majority of other sites nowadays that host multiple virtual servers
+at one IP address.
+
+[1] E.g. some people are poorly-sighted, and hence want to override the
+site's settings and use large fonts.
+--
+Brian {Hamilton Kelly}
+bhk@dsl.co.uk
+    "We can no longer stand apart from Europe if we would.  Yet we are
+    untrained to mix with our neighbours, or even talk to them".
+                                              George Macaulay Trevelyan,
+1919
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From xitami@lists.xitami.org  Fri Oct 31 19:26:18 2003
+From: xitami@lists.xitami.org (Hymbaugh, Mike)
+Date: Fri, 31 Oct 2003 13:26:18 -0600
+Subject: [Xitami] Is this list finished?
+Message-ID: <CCC7FC1A5AAEF84EB3589F74A9C9A7E7023033@hrgdmex.hrgreen.com>
+
+Plus, for people like me who don't need 99% of the messages that come =
+through, a "forum" makes more sense.  Then again, the amount of traffic =
+on this list is a small percentage of the email I get, so the extra mail =
+I just delete isn't a big deal.
+
+-----Original Message-----
+
+
+
+Forums are nice because archived messages are so much easier to browse =
+and search. Several times I have gone to the Xitami archives (when I can =
+even find them) looking for information that I know has been covered =
+before, only to have to read through tons of listings. And then, if I =
+find a topic of interest, I have to track down the replies, because =
+nothing is threaded.
+
+A forum can give you the best of both worlds. MUCH better organization, =
+archiving, and searching. AND, most forum scripts let you "subscribe", =
+so everything still comes in via email. You never have to visit the =
+forum, unless you want to make a post. And you can post without giving =
+an email address.
+
+--Carl
+
+From xitami@lists.xitami.org  Fri Oct 31 19:47:22 2003
+From: xitami@lists.xitami.org (WhiteShepherd)
+Date: Fri, 31 Oct 2003 14:47:22 -0500
+Subject: [Xitami] smthttp: error on socket
+Message-ID: <3FA275FA.1810.8849678@localhost>
+
+Has anyone notices Xitami past 2.4d9 are giving: "smthttp: error on 
+socket 520"  or many other socket numbers?  2.4d10 and 2.5 both 
+do this to me.  I can running the console version on Win2k.  When 
+these errors hit a user is usialy loading a web page and the page 
+fails to load %100 of the way.  I see this most often on my Perl 
+Ikonboard I run under Xitami.  I have FTP disabled (running War 
+FTP for our FTP service).
+
+Any help/insight would be greatly apreciated!
+
+From xitami@lists.xitami.org  Fri Oct 31 19:52:14 2003
+From: xitami@lists.xitami.org (Ewen McNeill)
+Date: Sat, 01 Nov 2003 08:52:14 +1300
+Subject: [Xitami] Is this list finished?
+In-Reply-To: Message from cwmoreland@triad.rr.com
+ of "Fri, 31 Oct 2003 13:57:16 CDT." <809907809c5a.809c5a809907@southeast.rr.com>
+Message-ID: <20031031195214.9AC2D3C486F0@basilica.la.naos.co.nz>
+
+In message <809907809c5a.809c5a809907@southeast.rr.com>, cwmoreland@triad.rr.com
+ writes:
+>Several times I have gone to the Xitami archives (when I can even find them)
+>looking for information that I know has been covered before only to have to 
+>read through tons of listings. And then if I find a topic of interest I
+>have to track down the replies, because nothing is threaded.
+
+http://lists.xitami.org/pipermail/xitami/2003-October/thread.html
+
+(and every other month.)  The URL at the bottom of EVERY mailing list
+message points at the list general information page, from where you can
+unsubscribe, view the list archives, etc.  One of the options for
+viewing each month's archives is "threaded".
+
+I don't have any control over the display of email addresses in the
+mailing list archives.  The main place they seem to be displayed is in
+the "In message.... writes:" type lines, which were included in the
+original messages.
+
+It's not really my place to comment on a web forum (I have suggested to
+the iMatix technical staff they might wish to comment on the issue, but
+so far they haven't had time), but I will observe that having multiple
+support locations will tend to spread the "self help" support thinly.
+The most valuable part of any "user support" forum is the number of
+users who can say "I remember that issue, and I fixed it like this...".
+So one support location is probably better than lots of them.
+
+Ewen
+
+-- 
+Ewen McNeill, System Administrator, iMatix Corporation  www.imatix.com
+
+From xitami@lists.xitami.org  Fri Oct 31 20:15:21 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Fri, 31 Oct 2003 14:15:21 -0600
+Subject: [Xitami] Is this list finished?
+References: <20031031195214.9AC2D3C486F0@basilica.la.naos.co.nz>
+Message-ID: <002901c39feb$b6284810$0101a8c0@danlap>
+
+> I don't have any control over the display of email addresses in the
+> mailing list archives.  The main place they seem to be displayed is in
+> the "In message.... writes:" type lines, which were included in the
+> original messages.
+>
+
+The problem I have with this is email harvesters.  I have been a victim of
+this before on a Linux mail list.  They were just archiving the mail list
+and some harvester scanned the archive and got the email address of
+everybody on the list.  I am still battling spam from that.  The way the
+Linux group fixed it was to send the emails into a program that replaces out
+the email in the header before going to the archiving.
+
+
+From xitami@lists.xitami.org  Fri Oct 31 20:19:48 2003
+From: xitami@lists.xitami.org (Daniel Nowlin)
+Date: Fri, 31 Oct 2003 14:19:48 -0600
+Subject: [Xitami] Is this list finished?
+References: <CCC7FC1A5AAEF84EB3589F74A9C9A7E7023033@hrgdmex.hrgreen.com>
+Message-ID: <002e01c39fec$552a9c60$0101a8c0@danlap>
+
+A forum can give you the best of both worlds. MUCH better organization,
+archiving, and searching. AND, most forum scripts let you "subscribe", so
+everything still comes in via email. You never have to visit the forum,
+unless you want to make a post. And you can post without giving an email
+address.
+
+I am a member of a couple of forums and I find myself just reading the
+messages.  If I have to login to answer any questions then I usually just
+don't.  So if I have to got a webpage, then login, just to answer a question
+then the list will suffer.
+
+Just my $.02
+
+
+From xitami@lists.xitami.org  Fri Oct 31 20:30:52 2003
+From: xitami@lists.xitami.org (Hymbaugh, Mike)
+Date: Fri, 31 Oct 2003 14:30:52 -0600
+Subject: [Xitami] RE: Is this list finished?
+Message-ID: <CCC7FC1A5AAEF84EB3589F74A9C9A7E7023036@hrgdmex.hrgreen.com>
+
+ That's a very good point.  I am also a member of a bunch of automotive =
+sites, but only "surf" one of them regularly.  (Check in several times a =
+day).  The others I just pop in now and then, mainly to look through =
+classifieds. =20
+
+ So when the subject is something that people are mainly only interested =
+in when there is a problem and there isn't on going daily discussions, =
+an email list does benefit those of us who only have an occasional =
+question.
+
+-----Original Message-----
+
+I am a member of a couple of forums and I find myself just reading the
+messages.  If I have to login to answer any questions then I usually =
+just
+don't.  So if I have to got a webpage, then login, just to answer a =
+question
+then the list will suffer.
+
+Just my $.02
+

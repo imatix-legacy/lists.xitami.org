@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] How do I build SMT?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000114.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] How do I build SMT?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] How do I build SMT?">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 28 Feb 2002 00:41:25 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000114.html">[Xitami-Dev] How do I build SMT?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#115">[ date ]</a>
+              <a href="thread.html#115">[ thread ]</a>
+              <a href="subject.html#115">[ subject ]</a>
+              <a href="author.html#115">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200202270627312.SM00549@there">200202270627312.SM00549@there</A>&gt;, Bob Paddock writes:
+&gt;&gt;<i> Finally, yes, making this all easier to build is on our list of things
+</I>&gt;&gt;<i> to do -- pretty high on our list these days :-)
+</I>&gt;<i>
+</I>&gt;<i>Has it made it to the top of this list yet?
+</I>
+Not really, no.  People keep coming along and wanting to pay us money to
+do things.  How can we refuse?  :-)
+
+&gt;<i>I writing a article for Circuit Cellar Online about State Machine and I 
+</I>&gt;<i>wanted to mention OpenKerenel, Xitami, Liberao, et. al. but saying &quot;it is 
+</I>&gt;<i>impossible to build from the current cvs&quot; doesn't seem like a good thing, so 
+</I>&gt;<i>will probably just not mention them at all.
+</I>
+Libero in particular is basically stable; the version on the iMatix
+website is essentially the same as in CVS, and builds fine with just a
+compiler.  Please mention it in the stuff about state machines; it's a
+very useful tool.  (Indeed libero was what first attracted me to
+iMatix.)
+
+SFL can be built from CVS.  The rest of Open Kernel _can_ be built from
+the combination of CVS and what is on the website (someone challenged me
+to do it, and I proved it could still be done: the major trick is that
+you have to build two versions of SFL (one from the website and one from
+CVS), and two versions of GSL (again the one on the website and the one
+in CVS) to get through the process.  Once you've done it once, you've
+got all the right tools, and it's fine).
+
+&gt;<i>There needs to be some kind of boot strapping procedure when you are starting 
+</I>&gt;<i>off on a clean system (no tools other than the basics like GCC et.al.).
+</I>
+Indeed.  Alas so many things depend on GSL now (including SMT), and the
+current version of GSL depends on SMT.  So building from scratch
+directly from CVS is currently a little tricky.
+
+When ready-to-compile packages are generated for the website obviously
+they'll include all the generated files, which neatly side steps this
+problem.
+
+However the circular build dependencies are causing problems internally
+too, so they are definitely being worked on as time permits.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000114.html">[Xitami-Dev] How do I build SMT?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#115">[ date ]</a>
+              <a href="thread.html#115">[ thread ]</a>
+              <a href="subject.html#115">[ subject ]</a>
+              <a href="author.html#115">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

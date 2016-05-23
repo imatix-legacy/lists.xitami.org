@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Nimda gets a 200?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000966.html">
+   <LINK REL="Next"  HREF="000968.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Nimda gets a 200?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Nimda gets a 200?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 22 Sep 2001 20:25:06 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000966.html">[Xitami] Pro on FreeBSD
+</A></li>
+        <LI> Next message: <A HREF="000968.html">[Xitami] Webmask help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#967">[ date ]</a>
+              <a href="thread.html#967">[ thread ]</a>
+              <a href="subject.html#967">[ subject ]</a>
+              <a href="author.html#967">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;067601c142bd$887362c0$<A HREF="mailto:0a00a8c0@enigmacomputers.com">0a00a8c0@enigmacomputers.com</A>&gt;, &quot;Soulkoff&quot; writes:
+&gt;<i>This gives a 404:
+</I>&gt;<i><A HREF="http://24.12.24.86/scripts/..%c1%9c../winnt/system32/cmd.exe?/c+dir">http://24.12.24.86/scripts/..%c1%9c../winnt/system32/cmd.exe?/c+dir</A>
+</I>
+Which is to be expected, you probably don't have a scripts directory,
+and even if you do, it's unlikely to have a winnt/system32/cmd.exe file!
+
+&gt;<i>This gives a 200!?:
+</I>&gt;<i><A HREF="http://24.12.24.86/scripts/..%%35%63../winnt/system32/cmd.exe?/c+dir">http://24.12.24.86/scripts/..%%35%63../winnt/system32/cmd.exe?/c+dir</A>
+</I>&gt;<i>
+</I>&gt;<i>Do you know what this means?
+</I>
+The 200 is because Xitami finds a page to return.  Your home page.  This
+happens under Windows, Linux, etc, although the reason that it happens is
+a little bit involved.
+
+The major difference between the two URLs is that the second one has an
+illegal %-escape in the URL (the &quot;%%&quot; is illegal; it should be &quot;%nn&quot;
+where the &quot;nn&quot; is two hex digits, and &quot;%25&quot; to put a real &quot;%&quot; in).
+When Xitami encounters this illegal &quot;%%&quot; it thinks that must be the end
+of the &quot;real&quot; URL, because it's found a bit that doesn't make sense.
+(To be precise, as a result of the way the routine that decodes the hex
+digits is coded, it stores a NUL into the string at that point.)
+
+This gives a URL of: 
+
+<A HREF="http://24.12.24.86/scripts/..">http://24.12.24.86/scripts/..</A>
+
+Next Xitami's path resolution code kicks in, which resolves &quot;..&quot; by
+eliminating the previous path bit (down to leaving nothing in the URL),
+which gives:
+
+<A HREF="http://24.12.24.86/">http://24.12.24.86/</A>
+
+Hence a 200, serving the default index page.
+
+So, nothing really bad is happening (although it does mean that you'll
+send the worm a copy of your index page for each request like that it
+sends, which may be a bit more traffic than a 404).
+
+I'll add it to our bug list.  When Xitami finds an illegal escape like
+that it should reject it explicitly (with a 404 automatically, or some
+sort of malformed request message).
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000966.html">[Xitami] Pro on FreeBSD
+</A></li>
+	<LI> Next message: <A HREF="000968.html">[Xitami] Webmask help
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#967">[ date ]</a>
+              <a href="thread.html#967">[ thread ]</a>
+              <a href="subject.html#967">[ subject ]</a>
+              <a href="author.html#967">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

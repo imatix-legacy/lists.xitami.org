@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] virtual host configuration
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005645.html">
+   <LINK REL="Next"  HREF="005647.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] virtual host configuration
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] virtual host configuration">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 19 Jan 2004 23:52:46 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005645.html">[Xitami] virtual host configuration
+</A></li>
+        <LI> Next message: <A HREF="005647.html">[Xitami] virtual host configuration
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5646">[ date ]</a>
+              <a href="thread.html#5646">[ thread ]</a>
+              <a href="subject.html#5646">[ subject ]</a>
+              <a href="author.html#5646">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I finally got bold enough to set up my virtual hosting and it actually
+works.  It would be easier to at least set things up with the Web Based
+Administration screens and come in later to the different .cfg files and
+tweak them if needed.
+
+To get to the WBA screens, there is a web page shortcut in your xitami
+directory called &quot;redirect&quot; that refers to the at <A HREF="http://127.0.0.1/admin">http://127.0.0.1/admin</A> (if
+not, that's where you go).  Hopefully you set up your admin accts
+accordingly.
+
+The &quot;VHost Wizard&quot; option helps set up the cfg files for each domain.  Tell
+it where you want stuff placed and it will set it up for you.  The 8
+character filename rule would be safe (.cfg is automatic).
+
+Now, go into &quot;Virtual Hosts&quot; Configuration.  It lists all your VH configs
+set up previously.  Hit the &quot;Defaults...&quot; button to access the default
+configurations.  On the right are server options.  Choose &quot;vhost.&quot;  This is
+where you equate domain names to config files.  You can point multiple
+domain names at the same config file.
+
+examples:
+  www.thisdomain.com       thisdom.cfg
+  thisdomain.com                thisdom.cfg
+  www.thisdomain.net          thisdom.cfg
+ thatdomain.org                 thatdom.cfg
+ media.anotherone.com      media.cfg
+
+Each type of domain reference has to be defined.  Found that out the hard
+way.  Oh, this sets up the &quot;defaults.cfg&quot; entries for vhosting.  If you
+don't enter the &quot;Default configuration screen first, I'm not sure where it
+goes.  Also, the vhost screen in only so long.  You can add more or change
+entries in the defaults.cfg file directly.  A cute bonus is that the wizard
+way sorts the names for you.  Woo-hoo.
+
+Basehost.cfg can be set up similarly.  A little advice: sketch out your
+directory structure before you start; it will help continuity.  I moved my
+&quot;webpages&quot; out of the Xitami folder and reorganized in c:\public.  It has
+helped to locate stuff quicker.  The only question left is what to do with
+all the new log files.
+
+All you need now is your DNS to point your domains to your IP.  A Dynamic
+DNS would be useful and quicker to propagate changes.  And redirection to
+non-standard ports works really well too and eliminates scanners and buffer
+overloaders.  Robots still come in, though.
+
+Much Luck,
+
+Charles
+
+
+----- Original Message -----
+From: &quot;Jonathan Drew&quot; &lt;<A HREF="mailto:jonvdrew@hotmail.com">jonvdrew@hotmail.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, January 19, 2004 2:45 PM
+Subject: Re: [Xitami] virtual host configuration
+
+
+&gt;<i> my config file is &quot;defaults.cfg&quot; not &quot;default&quot; as I mistyped before and
+</I>&gt;<i> there is nothing in my log file and I restarted the web server after every
+</I>&gt;<i> change,  I am at a lost???
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Marc Doigny&quot; &lt;<A HREF="mailto:marc@verfaillie.be">marc@verfaillie.be</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Saturday, January 17, 2004 9:33 PM
+</I>&gt;<i> Subject: Re: [Xitami] virtual host configuration
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> At 03:15 18/01/04, you wrote:
+</I>&gt;<i> &gt;I have my default.cfg set to
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Are you sure it's &quot;default.cfg&quot; and not &quot;defaults.cfg&quot;?
+</I>&gt;<i> What shows up in your logfile?
+</I>&gt;<i> Is something written in it? (then the correct config file is read in but
+</I>&gt;<i> the webpages directory is not accessed)
+</I>&gt;<i> Is nothing written in it then the config file chicagoelegance was never
+</I>&gt;<i> read.
+</I>&gt;<i>
+</I>&gt;<i> Don't forget to restart the webserver after modifications so the config
+</I>&gt;<i> files are read in again.
+</I>&gt;<i>
+</I>&gt;<i> Marc
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005645.html">[Xitami] virtual host configuration
+</A></li>
+	<LI> Next message: <A HREF="005647.html">[Xitami] virtual host configuration
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5646">[ date ]</a>
+              <a href="thread.html#5646">[ thread ]</a>
+              <a href="subject.html#5646">[ subject ]</a>
+              <a href="author.html#5646">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

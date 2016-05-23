@@ -1,0 +1,352 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] SSI Help desperately needed
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000279.html">
+   <LINK REL="Next"  HREF="000294.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] SSI Help desperately needed
+   </H1>
+    <B>dimitri
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] SSI Help desperately needed">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 2 Jul 2001 09:12:25 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000279.html">[Xitami] SSI Help desperately needed
+</A></li>
+        <LI> Next message: <A HREF="000294.html">[Xitami] SSI Help desperately needed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#284">[ date ]</a>
+              <a href="thread.html#284">[ thread ]</a>
+              <a href="subject.html#284">[ subject ]</a>
+              <a href="author.html#284">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_001A_01C102D7.1C621A20
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&gt;<i>From earier thread and answer about SSi not working:
+</I>
+Folks,
+
+There is another way, I think better. I have a site
+<A HREF="http://www.altair7.com/index.html">http://www.altair7.com/index.html</A> that uses a perl script for opening =
+page,
+see for your self.
+
+I do not have the SSI_INSECURE set.  I do have MIME types defined as =
+following
+for the master config:
+
+.pl =3D c:\perl\bin\perlis.dll
+.cgi =3D c:\perl\bin\perlis.dll
+
+This solved all my problems.
+
+Steps:
+
+1. <A HREF="http://127.0.0.1/admin">http://127.0.0.1/admin</A>
+2. configuration -&gt; mime
+3. enter the above values
+4. save
+5. click on restart from the main page
+
+Done.
+
+With that done, then this works:
+
+<A HREF="http://www.altair7.com/cgi-bin/od.pl">http://www.altair7.com/cgi-bin/od.pl</A>
+
+This works with xitami 2.4d1 through 7 and xitami pro versions.
+
+Hope that helps, always make sure that you protect your perl scripts.
+
+Cheers,
+-Roberto
+
+Patrick Olson wrote:
+&gt;<i>=20
+</I>&gt;<i> This is how I got Perl running in Xitami
+</I>&gt;<i> it allows me to use,
+</I>&gt;<i>=20
+</I>&gt;<i> &lt;!--#exec cgi=3D&quot;/cgi-bin/test.pl&quot; --&gt;
+</I>&gt;<i>=20
+</I>&gt;<i> This SSI command
+</I>&gt;<i> which is a potential security risk for your system
+</I>&gt;<i> is only accepted if the environment variable
+</I>&gt;<i> SSI_INSECURE is set to 'yes'
+</I>&gt;<i> Under Windows NT
+</I>&gt;<i> in the System Control Panel
+</I>&gt;<i> under 'Environment
+</I>&gt;<i> =
+</I>-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
+=3D-
+&gt;<i> Start-&gt;Settings-&gt;Control Panel
+</I>&gt;<i>=20
+</I>&gt;<i> Double click on System
+</I>&gt;<i>=20
+</I>&gt;<i> From the pop-up box select the Environment tab
+</I>&gt;<i>=20
+</I>&gt;<i>  In the Variable entry field type SSI_INSECURE
+</I>&gt;<i>  In the Value entry field type YES
+</I>&gt;<i>  (Make sure it goes where you want it,
+</I>&gt;<i>   System Variables probably.)
+</I>&gt;<i>=20
+</I>&gt;<i> Click OK
+</I>&gt;<i>=20
+</I>&gt;<i> Reboot?  (I don't know if this is required.)
+</I>&gt;<i> =
+</I>-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
+=3D-
+&gt;<i>=20
+</I>&gt;<i> under Windows 95/98 by adding
+</I>&gt;<i> SET SSI_INSECURE=3Dyes to the autoexec.bat.
+</I>&gt;<i> to run SSI.
+</I>&gt;<i> If Perl is installed correctly?
+</I>&gt;<i> On a windows system,
+</I>&gt;<i> You then should be able to call
+</I>&gt;<i> Perl from anywhere in your system.
+</I>&gt;<i> This allows the shebang to be #! perl -w
+</I>&gt;<i> and does not need to be like this
+</I>&gt;<i> #! c:\perl\bin\perl.exe
+</I>&gt;<i> this also allows the use of
+</I>&gt;<i> #! /usr/bin/perl
+</I>&gt;<i> for the shebang. so as long
+</I>&gt;<i> as we don't use win32 specific modules
+</I>&gt;<i> or system calls we can keep our programs
+</I>&gt;<i> cross platform Compatible.
+</I>&gt;<i>=20
+</I>&gt;<i> Running Windows98
+</I>&gt;<i> Xitami v2.4d6
+</I>&gt;<i>=20
+</I>&gt;<i> in your
+</I>&gt;<i> autoexec.bat
+</I>&gt;<i>=20
+</I>&gt;<i> SET PATH=3DC:\PERL\BIN;%PATH%
+</I>&gt;<i> SET SSI_INSECURE=3DYES
+</I>&gt;<i>=20
+</I>&gt;<i> defaults.cfg
+</I>&gt;<i> [Filter]
+</I>&gt;<i>     .shtm=3Dperlssi
+</I>&gt;<i>     .shtml=3Dperlssi
+</I>&gt;<i>     .ssi=3Dperlssi
+</I>&gt;<i> [Ssi]
+</I>&gt;<i>     Enabled=3D1
+</I>&gt;<i>     Exec=3D1
+</I>&gt;<i>=20
+</I>&gt;<i> hope this helps
+</I>&gt;<i> <A HREF="http://www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html">http://www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html</A>
+</I>&gt;<i> <A HREF="http://127.0.0.1/xitami/index5.htm">http://127.0.0.1/xitami/index5.htm</A>
+</I>&gt;<i> <A HREF="http://127.0.0.1/xitami/index6.htm">http://127.0.0.1/xitami/index6.htm</A>
+</I>&gt;<i>=20
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+  ----- Original Message -----=20
+  From: <A HREF="mailto:Cwmoreland@cs.com">Cwmoreland@cs.com</A>=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Sunday, July 01, 2001 4:04 AM
+  Subject: Re: [Xitami] SSI Help desperately needed
+
+
+  Well, I downloaded 2.5b5, both for my win95 laptop and for my win2000 =
+desktop=20
+  and the SSI demo does not work for either. Other people are having =
+success,=20
+  so obviously there is something fundamental I'm doing wrong. If I =
+install=20
+  Xitami fresh on a system, what needs to be done just to get the SSI =
+demo to=20
+  run? I've added SSI_INSECURE=3Dyes to autoexec (w95) and the env =
+(w2k).=20
+  Anything else, or should it now work?=20
+
+  I'd like to stick with this until I get it fixed, and appreciate any =
+help=20
+  offered.=20
+
+  Regards,=20
+  Carl=20
+
+
+------=_NextPart_000_001A_01C102D7.1C621A20
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4134.600&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;From earier thread and answer about SSi not=20
+working:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Folks,&lt;BR&gt;&lt;BR&gt;There is another way, I think better. I have a =
+site&lt;BR&gt;&lt;A=20
+href=3D&quot;<A HREF="http://www.altair7.com/index.html"">http://www.altair7.com/index.html&quot;</A>&gt;<A HREF="http://www.altair7.com/index.h=">http://www.altair7.com/index.h=</A>
+tml&lt;/A&gt;=20
+that uses a perl script for opening page,&lt;BR&gt;see for your self.&lt;BR&gt;&lt;BR&gt;I =
+do not=20
+have the SSI_INSECURE set.&amp;nbsp; I do have MIME types defined as=20
+following&lt;BR&gt;for the master config:&lt;BR&gt;&lt;BR&gt;.pl =3D =
+c:\perl\bin\perlis.dll&lt;BR&gt;.cgi=20
+=3D c:\perl\bin\perlis.dll&lt;BR&gt;&lt;BR&gt;This solved all my=20
+problems.&lt;BR&gt;&lt;BR&gt;Steps:&lt;BR&gt;&lt;BR&gt;1. &lt;A=20
+href=3D&quot;<A HREF="http://127.0.0.1/admin"">http://127.0.0.1/admin&quot;</A>&gt;<A HREF="http://127.0.0.1/admin</A">http://127.0.0.1/admin&lt;/A</A>&gt;&lt;BR&gt;2. =
+configuration=20
+-&amp;gt; mime&lt;BR&gt;3. enter the above values&lt;BR&gt;4. save&lt;BR&gt;5. click on =
+restart from=20
+the main page&lt;BR&gt;&lt;BR&gt;Done.&lt;BR&gt;&lt;BR&gt;With that done, then this =
+works:&lt;BR&gt;&lt;BR&gt;&lt;A=20
+href=3D&quot;<A HREF="http://www.altair7.com/cgi-bin/od.pl"">http://www.altair7.com/cgi-bin/od.pl&quot;</A>&gt;<A HREF="http://www.altair7.com/cgi-=">http://www.altair7.com/cgi-=</A>
+bin/od.pl&lt;/A&gt;&lt;BR&gt;&lt;BR&gt;This=20
+works with xitami 2.4d1 through 7 and xitami pro versions.&lt;BR&gt;&lt;BR&gt;Hope =
+that=20
+helps, always make sure that you protect your perl=20
+scripts.&lt;BR&gt;&lt;BR&gt;Cheers,&lt;BR&gt;-Roberto&lt;BR&gt;&lt;BR&gt;Patrick Olson wrote:&lt;BR&gt;&amp;gt; =
+&lt;BR&gt;&amp;gt;=20
+This is how I got Perl running in Xitami&lt;BR&gt;&amp;gt; it allows me to =
+use,&lt;BR&gt;&amp;gt;=20
+&lt;BR&gt;&amp;gt; &amp;lt;!--#exec cgi=3D&quot;/cgi-bin/test.pl&quot; --&amp;gt;&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; =
+This SSI=20
+command&lt;BR&gt;&amp;gt; which is a potential security risk for your =
+system&lt;BR&gt;&amp;gt; is=20
+only accepted if the environment variable&lt;BR&gt;&amp;gt; SSI_INSECURE is set to =
+
+'yes'&lt;BR&gt;&amp;gt; Under Windows NT&lt;BR&gt;&amp;gt; in the System Control =
+Panel&lt;BR&gt;&amp;gt; under=20
+'Environment&lt;BR&gt;&amp;gt; =
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
+=3D-&lt;BR&gt;&amp;gt;=20
+Start-&amp;gt;Settings-&amp;gt;Control Panel&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; Double click on=20
+System&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; From the pop-up box select the Environment =
+tab&lt;BR&gt;&amp;gt;=20
+&lt;BR&gt;&amp;gt;&amp;nbsp; In the Variable entry field type =
+SSI_INSECURE&lt;BR&gt;&amp;gt;&amp;nbsp; In=20
+the Value entry field type YES&lt;BR&gt;&amp;gt;&amp;nbsp; (Make sure it goes where =
+you want=20
+it,&lt;BR&gt;&amp;gt;&amp;nbsp;&amp;nbsp; System Variables probably.)&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; =
+Click=20
+OK&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; Reboot?&amp;nbsp; (I don't know if this is =
+required.)&lt;BR&gt;&amp;gt;=20
+-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=
+=3D-&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; under Windows 95/98 by=20
+adding&lt;BR&gt;&amp;gt; SET SSI_INSECURE=3Dyes to the autoexec.bat.&lt;BR&gt;&amp;gt; to =
+run=20
+SSI.&lt;BR&gt;&amp;gt; If Perl is installed correctly?&lt;BR&gt;&amp;gt; On a windows=20
+system,&lt;BR&gt;&amp;gt; You then should be able to call&lt;BR&gt;&amp;gt; Perl from =
+anywhere in=20
+your system.&lt;BR&gt;&amp;gt; This allows the shebang to be #! perl -w&lt;BR&gt;&amp;gt; =
+and does=20
+not need to be like this&lt;BR&gt;&amp;gt; #! c:\perl\bin\perl.exe&lt;BR&gt;&amp;gt; this =
+also=20
+allows the use of&lt;BR&gt;&amp;gt; #! /usr/bin/perl&lt;BR&gt;&amp;gt; for the shebang. so =
+as=20
+long&lt;BR&gt;&amp;gt; as we don't use win32 specific modules&lt;BR&gt;&amp;gt; or system =
+calls we=20
+can keep our programs&lt;BR&gt;&amp;gt; cross platform Compatible.&lt;BR&gt;&amp;gt; =
+&lt;BR&gt;&amp;gt;=20
+Running Windows98&lt;BR&gt;&amp;gt; Xitami v2.4d6&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; in your&lt;BR&gt;&amp;gt; =
+
+autoexec.bat&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; SET PATH=3DC:\PERL\BIN;%PATH%&lt;BR&gt;&amp;gt; SET=20
+SSI_INSECURE=3DYES&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; defaults.cfg&lt;BR&gt;&amp;gt;=20
+[Filter]&lt;BR&gt;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+.shtm=3Dperlssi&lt;BR&gt;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+.shtml=3Dperlssi&lt;BR&gt;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; .ssi=3Dperlssi&lt;BR&gt;&amp;gt;=20
+[Ssi]&lt;BR&gt;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+Enabled=3D1&lt;BR&gt;&amp;gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+Exec=3D1&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; hope this helps&lt;BR&gt;&amp;gt; &lt;A=20
+href=3D&quot;<A HREF="http://www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html"">http://www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html&quot;</A>&gt;http:=
+//www.isonline.com/xitami/2000/Jun/Msgs/l2w81135.html&lt;/A&gt;&lt;BR&gt;&amp;gt;=20
+&lt;A=20
+href=3D&quot;<A HREF="http://127.0.0.1/xitami/index5.htm"">http://127.0.0.1/xitami/index5.htm&quot;</A>&gt;<A HREF="http://127.0.0.1/xitami/index=">http://127.0.0.1/xitami/index=</A>
+5.htm&lt;/A&gt;&lt;BR&gt;&amp;gt;=20
+&lt;A=20
+href=3D&quot;<A HREF="http://127.0.0.1/xitami/index6.htm"">http://127.0.0.1/xitami/index6.htm&quot;</A>&gt;<A HREF="http://127.0.0.1/xitami/index=">http://127.0.0.1/xitami/index=</A>
+6.htm&lt;/A&gt;&lt;BR&gt;&amp;gt;=20
+&lt;BR&gt;&amp;gt; --&lt;BR&gt;&amp;gt; Xitami Users Mailing List -- For Xitami =
+support&lt;BR&gt;&amp;gt; To=20
+unsubscribe: &lt;A=20
+href=3D&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;<A HREF="http://lists.xit=">http://lists.xit=</A>
+ami.org/mailman/listinfo/xitami&lt;/A&gt;&lt;BR&gt;&lt;BR&gt;--&lt;BR&gt;Xitami=20
+Users Mailing List -- For Xitami support&lt;BR&gt;To unsubscribe: &lt;A=20
+href=3D&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;<A HREF="http://lists.xit=">http://lists.xit=</A>
+ami.org/mailman/listinfo/xitami&lt;/A&gt;&lt;/DIV&gt;
+&lt;BLOCKQUOTE=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3DCwmoreland@cs.com">3DCwmoreland@cs.com</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:Cwmoreland@cs.com">Cwmoreland@cs.com</A>&quot;&gt;<A HREF="mailto:Cwmoreland@cs.com">Cwmoreland@cs.com</A>&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Sunday, July 01, 2001 =
+4:04 AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] SSI Help=20
+  desperately needed&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;&lt;FONT face=3Darial,helvetica&gt;&lt;FONT size=3D2&gt;Well, I =
+downloaded=20
+  2.5b5, both for my win95 laptop and for my win2000 desktop &lt;BR&gt;and the =
+SSI=20
+  demo does not work for either. Other people are having success, &lt;BR&gt;so =
+
+  obviously there is something fundamental I'm doing wrong. If I install =
+
+  &lt;BR&gt;Xitami fresh on a system, what needs to be done just to get the =
+SSI demo=20
+  to &lt;BR&gt;run? I've added SSI_INSECURE=3Dyes to autoexec (w95) and the =
+env (w2k).=20
+  &lt;BR&gt;Anything else, or should it now work? &lt;BR&gt;&lt;BR&gt;I'd like to stick =
+with this=20
+  until I get it fixed, and appreciate any help &lt;BR&gt;offered. =
+&lt;BR&gt;&lt;BR&gt;Regards,=20
+  &lt;BR&gt;Carl &lt;BR&gt;&lt;/BLOCKQUOTE&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_001A_01C102D7.1C621A20--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000279.html">[Xitami] SSI Help desperately needed
+</A></li>
+	<LI> Next message: <A HREF="000294.html">[Xitami] SSI Help desperately needed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#284">[ date ]</a>
+              <a href="thread.html#284">[ thread ]</a>
+              <a href="subject.html#284">[ subject ]</a>
+              <a href="author.html#284">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

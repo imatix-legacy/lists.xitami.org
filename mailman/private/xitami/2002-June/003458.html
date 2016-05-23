@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP! Upgrading to Xitami Pro
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003454.html">
+   <LINK REL="Next"  HREF="003476.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP! Upgrading to Xitami Pro
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP! Upgrading to Xitami Pro">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 20 Jun 2002 16:36:22 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003454.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+        <LI> Next message: <A HREF="003476.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3458">[ date ]</a>
+              <a href="thread.html#3458">[ thread ]</a>
+              <a href="subject.html#3458">[ subject ]</a>
+              <a href="author.html#3458">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Your bit below, about SSL and VHosting?  This means that b/c I have 8
+domains sharing one IP address that SSL will prevent my Vhosts from working?
+
+Example A: my example config would be: (server has ONE IP addresses,
+x.x.x.10)
+<A HREF="http://www.domain1.com">http://www.domain1.com</A> = domain1.cfg
+<A HREF="http://www.domain2.com">http://www.domain2.com</A> = domain2.cfg
+<A HREF="https://www.domain3.com">https://www.domain3.com</A> = domain3.cfg
+<A HREF="http://www.domain4.com">http://www.domain4.com</A> = domain4.cfg
+
+A1: Wlll  this not work?
+A2: Or does each domain have to have its own IP address (is this because of
+SSL and reverse DNS issues?)
+
+Example B: What about within a domain (aliasing SSL directories) :
+<A HREF="http://www.domain1.com">http://www.domain1.com</A>
+<A HREF="http://www.domain1.com/cgi-bin/">http://www.domain1.com/cgi-bin/</A>
+<A HREF="https://www.domain1.com/cgi-bin/secure">https://www.domain1.com/cgi-bin/secure</A>  (SSL secure path)
+<A HREF="http://www.domain1.com/pages">http://www.domain1.com/pages</A>
+
+B1: Can SSL work in this fashion?
+B2: Or will the whole doamin be SSL referenced by: https:// ?
+
+B3. If the answer to B1 is YES, then will A1 still work in relation to
+Example A.
+
+Thanks again guys...
+
+----- Original Message -----
+From: &quot;Thomas J. Hruska&quot; &lt;<A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, June 20, 2002 12:20 PM
+Subject: Re: [Xitami] HELP! Upgrading to Xitami Pro
+
+
+&gt;<i> At 11:31 AM 6/20/2002 -0700, Russel Olinger writeth:
+</I>&gt;<i> &gt;Ok, folks need some serious help here, i don't have a lot of time to do
+</I>&gt;<i> research on this - so I need the crash course.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I am running the normal Xitami and am upgrading to Xitami Pro.  As usual,
+</I>&gt;<i> there is hardly ANY documentation on how to do this step by step.  Do I
+</I>&gt;<i> install to same directory OR do I install to a new directory and copy my
+</I>&gt;<i> previous configs/directory structure over?  Because it is the Pro version
+</I>&gt;<i> does that mean EVERY site is going to be a secure site - or can I only
+</I>turn
+&gt;<i> the secure feature on for specific pages or links within each site?  Are
+</I>&gt;<i> there tricky configurations I need to be aware of.  I do know I am
+</I>supposed
+&gt;<i> to get a KEY from somewhere, but again, I don't understand this process.
+</I>I
+&gt;<i> don't want to disrupt my current installation.
+</I>&gt;<i>
+</I>&gt;<i> To really understand SSL, you really should read the HTTPS RFC.  However,
+</I>&gt;<i> since you are in a time crunch, let me take you quickly through what is
+</I>&gt;<i> involved.
+</I>&gt;<i>
+</I>&gt;<i> First off, your entire site can be run under SSL/TLS (if you want).  The
+</I>&gt;<i> tricky part is to remember that the SSL/TLS protocol provides no means for
+</I>&gt;<i> VHosting except by IP address under Xitami Pro.  This is due to the nature
+</I>&gt;<i> of the SSL/TLS protocols and not Xitami.  The problem is that when an
+</I>&gt;<i> SSL-capable client connects, the SSL server certificate that gets sent is
+</I>&gt;<i> the one tied to the IP address and there is no way to determine what VHost
+</I>&gt;<i> the client wants until after authentication.  This is, IMO, the biggest
+</I>&gt;<i> blunder the IETF (Internet Engineering Task Force) ever made.
+</I>&gt;<i>
+</I>&gt;<i> Second, all of your current configuration files can be the same as for
+</I>&gt;<i> Xitami.  The SSL config is located in HTTPSSL.CFS (or something like
+</I>that).
+&gt;<i>  Just edit the SSL config to point at the proper certificates needed for
+</I>&gt;<i> the server.
+</I>&gt;<i>
+</I>&gt;<i> Finally, you need a certificate chain.  This will consist of a root
+</I>&gt;<i> certificate authority encrypted private key (e.g. Verisign) and your own
+</I>&gt;<i> certificate that is signed by the owner of the private key of the root
+</I>&gt;<i> cert.  You need both the encrypted server private key and unencrypted
+</I>&gt;<i> server private key in order to get Xitami Pro to work.  Let me warn you
+</I>&gt;<i> that Verisign signed certs. are *EXTREMELY* expensive and there are
+</I>cheaper
+&gt;<i> alternatives to using their certs.
+</I>&gt;<i>
+</I>&gt;<i> &gt;I am in a bind and need to upgrade fast b/c one of my sites needs to do
+</I>&gt;<i> Credit Card transactions.  So any and all help is very appreciated.  I
+</I>have
+&gt;<i> never worked with SSL and I am worried about the time involved to get this
+</I>&gt;<i> all working.
+</I>&gt;<i>
+</I>&gt;<i> Make sure that your user has a merchant account before going to the
+</I>trouble
+&gt;<i> of setting up SSL so quickly.  If they don't have a merchant account, it
+</I>&gt;<i> will take them about 2-3 weeks (minimum) to get one.
+</I>&gt;<i>
+</I>&gt;<i> Hope this helps!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>           Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+</I>&gt;<i> Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+</I>&gt;<i>                   <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003454.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+	<LI> Next message: <A HREF="003476.html">[Xitami] HELP! Upgrading to Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3458">[ date ]</a>
+              <a href="thread.html#3458">[ thread ]</a>
+              <a href="subject.html#3458">[ subject ]</a>
+              <a href="author.html#3458">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

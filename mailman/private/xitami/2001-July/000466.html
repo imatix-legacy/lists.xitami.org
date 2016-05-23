@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how add a mail server to xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000464.html">
+   <LINK REL="Next"  HREF="000467.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how add a mail server to xitami
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how add a mail server to xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 23 Jul 2001 13:24:10 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000464.html">[Xitami] how add a mail server to xitami
+</A></li>
+        <LI> Next message: <A HREF="000467.html">[Xitami] how add a mail server to xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#466">[ date ]</a>
+              <a href="thread.html#466">[ thread ]</a>
+              <a href="subject.html#466">[ subject ]</a>
+              <a href="author.html#466">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Or does this &quot;mailserver&quot; really have nothing to do with the &quot;xitami webserver&quot; ?  
+</I>
+Nothing at all to do with the webserver, except the sendmail program
+probably should run on the same machine as your scripts. 
+
+Machines can have MANY &quot;servers&quot;. HTTP, FTP, mail, time, telnet, DNS,
+.....  Xitami combines HTTP and FTP, which is unusual (FTP is far older
+than HTTP); for it to add email service would be nice but a bit much. 
+
+The internet, email, and unix grew up together in the same time and
+places. So unix machines almost always have a suite of mail services.
+
+Windows grew up un-networked, or with MicroSoft's strange windows-only
+mail system, or with clients that did as little as possible to get/send
+mail through a real mail server. Also, Windows isn't about command-line
+work. So Windows lacks mail tools that most unix boxes have.
+
+The core mail program is a post office, a program to accept, sort,
+store, and deliver mail. This generally runs in the background and you
+do not talk to it directly. 
+
+To send mail, unix has sendmail, a very simple program to accept a
+formatted file and submit it to a post office. The docs for sendmail say
+that it isn't made for use by people, a front-end program is needed to
+get a nice user interface. But on a script that knows what sendmail
+needs, it is the standard way to send mail.
+
+Users on unix systems use mail (a very simple command-line program),
+Pine/Elm/etc which are text-mode menu-driven full-screen email managers,
+and fancier stuff. Good for people, and you could drive mail with a
+script, but overkill for most script work.
+
+There are BIG security risks in running mail services. The biggest is
+the post office: traditionally such programs accept mail from strangers
+and deliver it anywhere. Spammers love these, because &quot;you&quot; get the
+blame for their spam. I would be real wary of some post office from
+unknown authors, with mystery options and unknown bugs. Also, older
+emailers may not block newly discovered hacker tricks. Craig's program
+looks excellent, but read the docs well and be sure to talk to him or
+experienced postmasters to be sure your postoffice is secure.
+
+If you just want script-driven mail sending, you may not need your own
+post office. Your ISP surely runs a postofffice and should accept email
+from machines on internal IP numbers (or with authentication). Configure
+sendmail to submit mail through your ISP's post office. I found one for
+Windows that can do this, but it is exceptionally hard to set up, and
+the usual perl script must be hacked to feed it right. I'll probably
+move to a full mail suite the next time this one frustrates me. 
+
+(I'm shocked that there does not seem to be a &quot;universal&quot; sendmail
+written directly in Perl. The net::SMTP module has the essentials, and I
+have a rough draft working under Windows, but with hard-coded message
+headers and body, not in the way sendmail expects.)
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000464.html">[Xitami] how add a mail server to xitami
+</A></li>
+	<LI> Next message: <A HREF="000467.html">[Xitami] how add a mail server to xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#466">[ date ]</a>
+              <a href="thread.html#466">[ thread ]</a>
+              <a href="subject.html#466">[ subject ]</a>
+              <a href="author.html#466">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

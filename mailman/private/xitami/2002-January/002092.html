@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] webcam
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002089.html">
+   <LINK REL="Next"  HREF="002093.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] webcam
+   </H1>
+    <B>miplanet
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] webcam">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 17 Jan 2002 17:48:33 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002089.html">[Xitami] webcam
+</A></li>
+        <LI> Next message: <A HREF="002093.html">[Xitami] webcam
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2092">[ date ]</a>
+              <a href="thread.html#2092">[ thread ]</a>
+              <a href="subject.html#2092">[ subject ]</a>
+              <a href="author.html#2092">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think we are a little off track here. The problem is that
+webcam.ackerman-family.com points to port 80 via the DNS. The A record for
+ackerman-family.com points to internal IP 192.168.1.3, the CNAME point
+www.ackerman-famly.com to ackerman-family.com. So any subdomain that is not
+defined in the DNS will go to 192.168.1.3 port 80 (80 is opened on the
+router and is what Xitami is set for). So port 8080 will not work. I have
+even tried opening port 8080 on the router but you can't specify a port in
+dns records (that I know of). I think I can have the DNS server point
+webcam.ackerman-family.com to a different IP with an A record to that
+effect.
+
+You see why I'm so confused.
+
+Oh I can specify a different port for the webcam, I just can't specify an IP
+address.
+
+Ron Ackerman
+
+
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Craig Morrison
+Sent: Thursday, January 17, 2002 5:05 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] webcam
+
+
+
+miplanet wrote:
+&gt;<i>
+</I>&gt;<i> I guess it's time to learn PHP. I have no idea what to do with this. I'll
+</I>&gt;<i> start doing some research on this but in the mean time...
+</I>&gt;<i>
+</I>&gt;<i> Where do I need to put it to redirect webcam.domain.com to port 8080?
+</I>
+No need to learn PHP (although PHP *is* cool) as HTML already can do this
+for
+you.
+
+A standard HTML anchor will do the trick from a webpage:
+
+ Click &lt;a href=&quot;<A HREF="http://webcam.domain.com:8080/"">http://webcam.domain.com:8080/&quot;</A>&gt;here&lt;/a&gt; for the webcam.
+
+If you are wanting to redirect when someone hits a page:
+
+ &lt;META HTTP-EQUIV=Refresh CONTENT=&quot;10; URL=<A HREF="http://webcam.domain.com:8080/"">http://webcam.domain.com:8080/&quot;</A>&gt;
+
+Put the above in the &lt;head&gt;&lt;/head&gt; section and after 10 seconds most modern
+browsers will redirect users automatically.
+
+--
+
+Craig Morrison
+  <A HREF="http://www.mtsprofessional.com/">http://www.mtsprofessional.com/</A>
+  A Win32 Email server that works for you.
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002089.html">[Xitami] webcam
+</A></li>
+	<LI> Next message: <A HREF="002093.html">[Xitami] webcam
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2092">[ date ]</a>
+              <a href="thread.html#2092">[ thread ]</a>
+              <a href="subject.html#2092">[ subject ]</a>
+              <a href="author.html#2092">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

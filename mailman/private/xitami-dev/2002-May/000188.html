@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] SERVER_PORT
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000187.html">
+   <LINK REL="Next"  HREF="000190.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] SERVER_PORT
+   </H1>
+    <B>bernd hohmann
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] SERVER_PORT">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Wed, 29 May 2002 13:38:06 +0100 (MEZ)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000187.html">[Xitami-Dev] SERVER_PORT
+</A></li>
+        <LI> Next message: <A HREF="000190.html">[Xitami-Dev] Customizing Xitami Directory Listings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#188">[ date ]</a>
+              <a href="thread.html#188">[ thread ]</a>
+              <a href="subject.html#188">[ subject ]</a>
+              <a href="author.html#188">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 29 May 2002 06:48:53 EDT, <A HREF="mailto:TonicPeddler@aol.com">TonicPeddler@aol.com</A> wrote:
+
+&gt;<i> Also, could you show your code for accessing that environment variable, you 
+</I>&gt;<i> might be doing it wrong.
+</I>
+you should trust an old programmer ;-)
+
+the problem is in xitami 2.5b4 and b5 (not in d9/d10 !)
+
+smthttpl.c around line 2581 has to be patched like this:
+
+    /*  Format port number as a string                          
+            */
+    if (p_http-&gt; ssl_connection)
+//      sprintf (port_name, &quot;%d&quot;, p_http-&gt; port); 29.05.02 ho:
+        sprintf (port_name, &quot;%d&quot;, p_http-&gt; ssl_port);
+    else
+//      sprintf (port_name, &quot;%d&quot;, p_http-&gt; ssl_port); 29.05.02
+ho:
+        sprintf (port_name, &quot;%d&quot;, p_http-&gt; port);
+
+bernd
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000187.html">[Xitami-Dev] SERVER_PORT
+</A></li>
+	<LI> Next message: <A HREF="000190.html">[Xitami-Dev] Customizing Xitami Directory Listings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#188">[ date ]</a>
+              <a href="thread.html#188">[ thread ]</a>
+              <a href="subject.html#188">[ subject ]</a>
+              <a href="author.html#188">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

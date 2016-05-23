@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] File Uploads
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002084.html">
+   <LINK REL="Next"  HREF="002082.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] File Uploads
+   </H1>
+    <B>Marcio Marchini
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] File Uploads">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 17 Jan 2002 16:00:56 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002084.html">[Xitami] File Uploads
+</A></li>
+        <LI> Next message: <A HREF="002082.html">[Xitami] File Uploads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2085">[ date ]</a>
+              <a href="thread.html#2085">[ thread ]</a>
+              <a href="subject.html#2085">[ subject ]</a>
+              <a href="author.html#2085">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>	Never done this kind of stuff in Perl, sorry. Just PHP. Easier to read for me.
+
+marcio
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Peter
+</I>&gt;<i> Sent: January 17, 2002 3:42 PM
+</I>&gt;<i> To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: Re: [Xitami] File Uploads
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> hmmm...  I wonder if the move_upload_file subroutine is part of the cgi.pm
+</I>&gt;<i> module.  Do you know?
+</I>&gt;<i> 
+</I>&gt;<i> Peter
+</I>&gt;<i> 
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Marcio Marchini&quot; &lt;<A HREF="mailto:mqm@magma.ca">mqm@magma.ca</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Thursday, January 17, 2002 9:49 AM
+</I>&gt;<i> Subject: RE: [Xitami] File Uploads
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This is something in PHP
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $filepath_on_client = $HTTP_POST_FILES[&quot;filepath_posted&quot;][&quot;name&quot;];
+</I>&gt;<i> &gt; $filepath_on_server = $HTTP_POST_FILES[&quot;filepath_posted&quot;][&quot;tmp_name&quot;];
+</I>&gt;<i> &gt; $filepath_size = $HTTP_POST_FILES[&quot;filepath_posted&quot;][&quot;size&quot;];
+</I>&gt;<i> &gt; $filepath_type = $HTTP_POST_FILES[&quot;filepath_posted&quot;][&quot;type&quot;];
+</I>&gt;<i> &gt; if (move_uploaded_file($filepath_on_server, $new_location)) {
+</I>&gt;<i> &gt;  ...
+</I>&gt;<i> &gt; }
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; marcio
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; -----Original Message-----
+</I>&gt;<i> &gt; &gt; From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt; &gt; [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On Behalf Of Peter
+</I>&gt;<i> &gt; &gt; Sent: January 17, 2002 11:28 AM
+</I>&gt;<i> &gt; &gt; To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt; &gt; Subject: [Xitami] File Uploads
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Hopefully someone can help.
+</I>&gt;<i> &gt; &gt; I am having a problem with form uploads on the server side.  I am fairly
+</I>&gt;<i> &gt; &gt; confident that I have the form correct, but I cannot find where it is on
+</I>&gt;<i> the
+</I>&gt;<i> &gt; &gt; server.  I see that the CONTENT_LENGTH enviroment variable tells me that
+</I>&gt;<i> the
+</I>&gt;<i> &gt; &gt; file got to the server, but where its location remains a mystery to me.
+</I>&gt;<i> I
+</I>&gt;<i> &gt; &gt; have tried reading in the information myself using the standard in
+</I>&gt;<i> (STDIN)
+</I>&gt;<i> &gt; &gt; but that will only work if the file is all text.  I have tried load the
+</I>&gt;<i> cgi
+</I>&gt;<i> &gt; &gt; pipe files in xitami/temp but they do not seem to be there when I try to
+</I>&gt;<i> &gt; &gt; load them.  Does someone know?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Peter Netterville
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002084.html">[Xitami] File Uploads
+</A></li>
+	<LI> Next message: <A HREF="002082.html">[Xitami] File Uploads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2085">[ date ]</a>
+              <a href="thread.html#2085">[ thread ]</a>
+              <a href="subject.html#2085">[ subject ]</a>
+              <a href="author.html#2085">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

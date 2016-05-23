@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Security Alert! PHP CGI cannot be accessed
+ directly.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002139.html">
+   <LINK REL="Next"  HREF="002140.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Security Alert! PHP CGI cannot be accessed
+ directly.
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Security Alert! PHP CGI cannot be accessed
+ directly.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 24 Jan 2002 09:52:47</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002139.html">[Xitami] Security Alert! PHP CGI cannot be accessed directly.
+</A></li>
+        <LI> Next message: <A HREF="002140.html">[Xitami] How to???
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2141">[ date ]</a>
+              <a href="thread.html#2141">[ thread ]</a>
+              <a href="subject.html#2141">[ subject ]</a>
+              <a href="author.html#2141">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 07:26 AM 1/24/2002 -0500, Bob Paddock writeth:
+&gt;<i>I'm running Xitami on my Linux box, I wanted to try out some PHP scripts and 
+</I>&gt;<i>I got the following, can some one transliate what it might mean for Xitami 
+</I>&gt;<i>since it seems to be written fro Apache?:
+</I>&gt;<i>
+</I>&gt;<i>&quot;Security Alert! PHP CGI cannot be accessed directly.
+</I>&gt;<i>This PHP CGI binary was compiled with force-cgi-redirect enabled.  This
+</I>&gt;<i>means that a page will only be served up if the REDIRECT_STATUS CGI variable 
+</I>&gt;<i>is set.  This variable is set, for example, by Apache's Action directive 
+</I>&gt;<i>redirect.
+</I>
+This probably suggests that you were, at one time, running PHP from Apache.
+ Apache sets the REDIRECT_STATUS CGI variable when it executes the PHP
+binary.  You have two options:
+
+1)  Recompile the PHP binary by following the rest of the directions.  This
+may or may not be acceptable depending on whether other users on the system
+are allowed to use PHP from the command-line.
+
+2)  Create a wrapper program/Perl script for PHP that sets the
+REDIRECT_STATUS environment variable.  Then point Xitami at the wrapper
+program instead of at PHP.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002139.html">[Xitami] Security Alert! PHP CGI cannot be accessed directly.
+</A></li>
+	<LI> Next message: <A HREF="002140.html">[Xitami] How to???
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2141">[ date ]</a>
+              <a href="thread.html#2141">[ thread ]</a>
+              <a href="subject.html#2141">[ subject ]</a>
+              <a href="author.html#2141">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] bug?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000302.html">
+   <LINK REL="Next"  HREF="000304.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] bug?
+   </H1>
+    <B>Justin Frim
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] bug?">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Wed, 21 Jan 2004 13:02:27 -0500 (EST)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000302.html">[Xitami-Dev] List archive?
+</A></li>
+        <LI> Next message: <A HREF="000304.html">[Xitami-Dev] Compiling with VC 6.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#303">[ date ]</a>
+              <a href="thread.html#303">[ thread ]</a>
+              <a href="subject.html#303">[ subject ]</a>
+              <a href="author.html#303">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ok I'm new to this list, so don't jump on me if this is the wrong place to
+post.  But...
+
+critical bug with Xitami 2.5c1
+
+After saving the configuration from the web based admin, restarting the
+web server craps out.  It appears to not read the xitami.cfg file properly
+on restart (but only if you previously clicked SAVE on the web based
+admin).
+
+The error occurs around when reading the &quot;webpages=&quot; and &quot;cgi-bin=&quot;
+parameters.  It looks like arbitrary data from elsewhere in the xitami.cfg
+is being read in for those parameters, and when the webpages= does not
+match a valid path, the program terminates.  The exact point in the file
+where it reads the bogus data is not always consistent.  From my last run,
+these are the results reported in the log files:  (note that it was
+restarted from WBA @ 11:37)
+
+
+CONSOLE.LOG
+
+2004/01/21 11:36:52: xilrwp: ready for LRWP connections on port 81
+2004/01/21 11:36:52: smthttp: web server binding to address 127.0.0.1
+2004/01/21 11:36:52: smthttp: opening HTTP service on port 80...
+2004/01/21 11:36:52: smthttp: HTTP service is now running
+2004/01/21 11:36:52: smtftpc: opening FTP service on port 21...
+2004/01/21 11:36:52: smtftpc: FTP service is now running
+2004/01/21 11:37:01: smthttp: closing HTTP service on port 80
+2004/01/21 11:37:02: webpages directory 'application/octet-stream' not
+found - Permission denied
+2004/01/21 11:37:02: smtftpc: closing FTP service on port 21
+
+
+DEBUG.LOG
+
+2004/01/21 11:36:59: Looking for VH using Host value: localhost
+2004/01/21 11:36:59:  - looking for VH using IP address: 127.0.0.1
+2004/01/21 11:36:59: - using default virtual host values
+2004/01/21 11:36:59: Resolving URL request: /admin
+2004/01/21 11:36:59:  - URL refers to WSX 'xiadmin' with PATH-INFO=''
+2004/01/21 11:37:00: Looking for VH using Host value: localhost
+2004/01/21 11:37:00:  - looking for VH using IP address: 127.0.0.1
+2004/01/21 11:37:00: - using default virtual host values
+2004/01/21 11:37:00: Resolving URL request: /admin
+2004/01/21 11:37:00:  - URL refers to WSX 'xiadmin' with PATH-INFO=''
+2004/01/21 11:37:02: Loading VH data for base host
+2004/01/21 11:37:02: - loading config data from basehost.cfg
+2004/01/21 11:37:02:  - rootdir=application/octet-stream, cgi-bin=mime:gtar
+2004/01/21 11:37:02: - loading password data from: security.txt
+
+
+
+As you can see, the pointer jumped to a random spot in the xitami.cfg file
+where the MIME types were defined when Xitami was trying to read the
+webpages and cgi-bin settings.
+
+
+Also maybe related, some settings on the web based admin do not actually
+update the defaults.cfg file.  Most notably the IP addresses to which
+Xitami should bind (this setting usually used for customizing multi-homed
+servers).  The only way to set that is to manually edit the defaults.cfg
+file.  There may be other items in the web based admit that also don't
+work.
+
+
+Finally, my apologies if this was the wrong place to post.  Please forward
+this email to the appropriate people if such is the case.
+
+
+-- 
+TTYL,
+Justin
+<A HREF="mailto:jfrim@idirect.com">jfrim@idirect.com</A>
+ICQ: 24984606
+AIM: xr714
+PalTalk: shadowman714
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000302.html">[Xitami-Dev] List archive?
+</A></li>
+	<LI> Next message: <A HREF="000304.html">[Xitami-Dev] Compiling with VC 6.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#303">[ date ]</a>
+              <a href="thread.html#303">[ thread ]</a>
+              <a href="subject.html#303">[ subject ]</a>
+              <a href="author.html#303">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

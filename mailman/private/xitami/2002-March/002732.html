@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] 50+ simultaneous users...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002730.html">
+   <LINK REL="Next"  HREF="002739.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] 50+ simultaneous users...
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] 50+ simultaneous users...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 13 Mar 2002 22:56:39</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002730.html">[Xitami] Win XP compatibility
+</A></li>
+        <LI> Next message: <A HREF="002739.html">[Xitami] 50+ simultaneous users...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2732">[ date ]</a>
+              <a href="thread.html#2732">[ thread ]</a>
+              <a href="subject.html#2732">[ subject ]</a>
+              <a href="author.html#2732">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Today I have been stress testing Xitami under a very controlled environment
+with a distributed attack server (DAS) and client (DAC) set.  The DAS and
+DAC are multi-threaded applications capable of handling virtually any load
+handed to them.  The problem I'm having seems to lie in Xitami when I
+exceed 50 simulated simultaneous users (e.g. 50 users constantly hitting
+reload).  Here is a sample of the log files for about 10 simultaneous users:
+
+10.5.225.202 - - [13/Mar/2002:00:04:01 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 8
+10.5.225.202 - - [13/Mar/2002:00:04:01 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1119
+10.5.225.202 - - [13/Mar/2002:00:04:01 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1119
+10.5.225.202 - - [13/Mar/2002:00:04:03 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 8
+10.5.225.202 - - [13/Mar/2002:00:04:03 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99342
+10.5.225.202 - - [13/Mar/2002:00:04:04 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 1119
+10.5.225.202 - - [13/Mar/2002:00:04:05 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 8
+10.5.225.202 - - [13/Mar/2002:00:04:05 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 8
+10.5.225.202 - - [13/Mar/2002:00:04:05 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 8
+10.5.225.202 - - [13/Mar/2002:00:04:09 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 8
+10.5.225.202 - - [13/Mar/2002:00:04:09 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99342
+10.5.225.202 - - [13/Mar/2002:00:04:11 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 99342
+
+These are the correct file sizes for this.  Now, when I attempt to simulate
+50 simultaneous users, the log file looks like this:
+
+10.5.225.202 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 2
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 2
+10.5.225.202 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 2
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 0
+10.5.225.202 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 0
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist1.cfm
+HTTP/1.1&quot; 200 2
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 2
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 2
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist3.cfm
+HTTP/1.1&quot; 200 2
+10.5.228.37 - - [13/Mar/2002:20:49:30 -0500] &quot;GET /distattack/dist2.cfm
+HTTP/1.1&quot; 200 0
+
+
+Xitami is returning with a fairly inconsistent zero or two bytes.  Only
+once in a while is the correct webpage returned.  Note that 50 simultaneous
+users is putting a steady 75-100% CPU load on my processors (the DAS has
+only occupied 3 seconds of CPU time in the past 24 hours and the DAC only
+consumes about 5 minutes of CPU time every 24 hours).  Xitami has consumed
+1 hour of CPU time in the past 24 hours.
+
+Note that XiFusion is not the problem since if I run another scripting
+language not tied to XiFusion, I get the same sort of thing in the logs:
+
+192.195.234.26 - - [13/Mar/2002:20:29:27 -0500] &quot;GET /distattack/dist1.pl
+HTTP/1.0&quot; 200 0
+192.195.234.26 - - [13/Mar/2002:20:29:59 -0500] &quot;GET /distattack/dist2.pl
+HTTP/1.0&quot; 200 0
+192.195.234.26 - - [13/Mar/2002:20:30:26 -0500] &quot;GET /distattack/dist2.nvm
+HTTP/1.0&quot; 200 0
+192.195.234.26 - - [13/Mar/2002:20:30:07 -0500] &quot;GET /distattack/dist2.pl
+HTTP/1.0&quot; 200 0
+
+My best guess is that Xitami is either killing processes (although I have
+disabled that feature due to long-running web-based scripts I've written)
+or it has hit an OS limit (total number of CGI processes allowed by a
+single process).  Is this a known bug or what exactly is going on?  Any
+suggestions?
+
+My objective is to stress test up to 100 simultaneous users over a period
+of 24 hours for each scripting language...but it looks like I might have to
+trim back that objective unless there is another, more viable option.
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002730.html">[Xitami] Win XP compatibility
+</A></li>
+	<LI> Next message: <A HREF="002739.html">[Xitami] 50+ simultaneous users...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2732">[ date ]</a>
+              <a href="thread.html#2732">[ thread ]</a>
+              <a href="subject.html#2732">[ subject ]</a>
+              <a href="author.html#2732">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

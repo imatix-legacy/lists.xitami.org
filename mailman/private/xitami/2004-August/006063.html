@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Getting the FTP side up and running
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006067.html">
+   <LINK REL="Next"  HREF="006064.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Getting the FTP side up and running
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Getting the FTP side up and running">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 19 Aug 2004 10:34:42 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006067.html">[Xitami] Where is the list archive?
+</A></li>
+        <LI> Next message: <A HREF="006064.html">[Xitami] Getting the FTP side up and running
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6063">[ date ]</a>
+              <a href="thread.html#6063">[ thread ]</a>
+              <a href="subject.html#6063">[ subject ]</a>
+              <a href="author.html#6063">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks to all - especially Johannes - who replied with solutions from the simple to complex. The FTP service is now running fine and the solution was simple:
+
+The defaults.cfg file contained just the FTP service data wit this root:
+
+root=/xitami/ftproot
+
+The anonymous section of the ftpusers.aut was modified as follows:
+
+access=G
+password= &quot;&quot;
+root= /xitami/ftproot
+
+For whatever reason, the space after the = in the ftpusers.aut (password and root) file appear to be critical.
+
+Ralph
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006067.html">[Xitami] Where is the list archive?
+</A></li>
+	<LI> Next message: <A HREF="006064.html">[Xitami] Getting the FTP side up and running
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6063">[ date ]</a>
+              <a href="thread.html#6063">[ thread ]</a>
+              <a href="subject.html#6063">[ subject ]</a>
+              <a href="author.html#6063">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

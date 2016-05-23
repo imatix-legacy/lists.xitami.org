@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI Scripting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001274.html">
+   <LINK REL="Next"  HREF="001276.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI Scripting
+   </H1>
+    <B>David Lambert
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI Scripting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 26 Oct 2001 15:22:33 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001274.html">[Xitami] Re: No resume in downloads
+</A></li>
+        <LI> Next message: <A HREF="001276.html">[Xitami] CGI Scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1275">[ date ]</a>
+              <a href="thread.html#1275">[ thread ]</a>
+              <a href="subject.html#1275">[ subject ]</a>
+              <a href="author.html#1275">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have a Perl script in webroot/cgi-bin, which reads a text file in and
+outputs it in HTML format to the requesting browser (see smaple script
+below). Well, that's what it's supposed to do.
+
+It works at the DOS prompt, opening the file and printing output to the
+screen. However, if I try the script through a browser, the server returns
+no file contents. I assumed the problem was a permissions error, so as a
+brute force resolution, I gave Everyone, Full Permissions to the cgi-bin
+directory, which still doesn't work.
+
+The Xitami server itself is running under the NT Administrator user, so
+should definitely be included in the Everyone group and have full
+permissions to all files on the local machine. The working dir. is set to
+&quot;-&quot; as recommended, yet it manages to create temporary files in D:\Temp,
+which contain the output sent to the screen. So why can't it read in the
+files?
+-------------------------------------------------------------------------
+Sample Script:
+
+#!perl
+
+# Define Variables
+	$Script;
+	$lines;
+
+# Read Name of Script
+	$Script = $ENV{'SCRIPT_NAME'};
+	if ($Script eq &quot;&quot;) {$Script = &quot;default.txt&quot;};
+
+# Open Script
+	open(TXT, &quot;&lt;&quot;.$Script);
+	@text=&lt;TXT&gt;;
+	close(TXT);
+
+# Print Script to screen
+	&amp;Header;
+	print &quot;\nScript to be processed: &lt;b&gt;&quot;.$Script.&quot;&lt;/b&gt;&lt;hr&gt;&quot;;
+	foreach $line(@text){
+		print &quot;$line.&lt;br&gt;&quot;;
+		$lines++;
+	}
+	if($lines&lt;1){$lines=&quot;no&quot;};
+	&amp;Footer;
+
+sub Header{
+	print &quot;content-type:text/html\n\n&lt;html&gt;&quot;;
+	print &quot;&lt;title&gt;View File Script&lt;/title&gt;&quot;;
+}
+
+sub Footer{
+	print &quot;There are &lt;b&gt;&quot;.$lines.&quot;&lt;/b&gt; lines&lt;br&gt;&quot;;
+	print &quot;&lt;b&gt;The End&lt;/b&gt;&quot;;
+	print &quot;&lt;/html&gt;&quot;;
+}
+#	End viewfile.pl
+
+
+&quot;This e-mail communication may be intercepted for regulatory, quality
+control, or crime detection purposes as per the UK Government Regulation of
+Investigatory Powers (RIP) Act. This message is intended only for the use of
+person(s) (&quot;the Intended Recipient&quot;) to whom it is addressed. It may contain
+information that is privileged and confidential. Accordingly any dissemination, distribution, copying or
+other use of this message or any of its content by any other person may
+constitute a breach of civil or criminal law and is strictly prohibited. If
+you are not the Intended Recipient please contact the sender as soon as
+possible. Any views expressed in this message are those of the individual
+sender and may not necessarily reflect the views of Technical Approach.&quot;
+All enquiries should be directed to <A HREF="mailto:postmaster@tech-app.co.uk">postmaster@tech-app.co.uk</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001274.html">[Xitami] Re: No resume in downloads
+</A></li>
+	<LI> Next message: <A HREF="001276.html">[Xitami] CGI Scripting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1275">[ date ]</a>
+              <a href="thread.html#1275">[ thread ]</a>
+              <a href="subject.html#1275">[ subject ]</a>
+              <a href="author.html#1275">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

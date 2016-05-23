@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] SFL thread-safety and Java SMT
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000252.html">
+   <LINK REL="Next"  HREF="000253.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] SFL thread-safety and Java SMT
+   </H1>
+    <B>Keresztfalvi Laszlo
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] SFL thread-safety and Java SMT">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Mon, 14 Oct 2002 11:32:28 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000252.html">[Xitami-Dev] How to build a spam filter?
+</A></li>
+        <LI> Next message: <A HREF="000253.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#251">[ date ]</a>
+              <a href="thread.html#251">[ thread ]</a>
+              <a href="subject.html#251">[ subject ]</a>
+              <a href="author.html#251">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Oct 13, 2002 at 06:04:30PM +0200, Pieter Hintjens wrote:
+&gt;<i> The SFL functions did not work very well in previous releases.  We've
+</I>&gt;<i> improved them considerably, but they remain single-threaded and thus not
+</I>&gt;<i> ideal for volume use.
+</I>
+Hello,
+
+Is there any effort to make SFL thread safe? 
+
+Maybe, I'll do it sometime if no one else :) because I just love SMT but it
+cannot use the power of multi-processors which is the default way to
+increase server capacity (eg. web or other service-like). And, as one of my
+pal says, it &quot;linearizes&quot; the program which means it serves the requests in
+order of arrival but with threads requests would see an &quot;equally
+distributed&quot; ;) response delay instead of that related to actual queue
+position... OR, you (the programmer) must unroll every for() into 
+event_send(myself)..
+
+Enough comments :) Actually, I pick up with QpThread C++ lib portable to win
+and unix. It has safe queue support inside. So, I play with the thougths to
+build an SMT like AGENT set primarily with net and timer support but all
+thread being a real thread or can be a real thread, using safe queues. Oh
+yeah, I know it is lots of work.. but sometimes it may pay.. :)
+
+
+Further back, I made a Java SMT but without standard agents (I was no more
+time). Somebody interested? It works with Java 1.2 or 1.3.0 as far as I
+remember. I may provide it &quot;as is&quot; to anybody but it may require some review
+before &quot;official&quot; use (actually I have no time to do this).
+
+Regards,
+Laszlo
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000252.html">[Xitami-Dev] How to build a spam filter?
+</A></li>
+	<LI> Next message: <A HREF="000253.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#251">[ date ]</a>
+              <a href="thread.html#251">[ thread ]</a>
+              <a href="subject.html#251">[ subject ]</a>
+              <a href="author.html#251">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

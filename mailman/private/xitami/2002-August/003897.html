@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Linux 2.4.19 + Perl 5.7.0 &amp; CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003895.html">
+   <LINK REL="Next"  HREF="003899.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Linux 2.4.19 + Perl 5.7.0 &amp; CGI
+   </H1>
+    <B>Rajesh Deshpande
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Linux 2.4.19 + Perl 5.7.0 &amp; CGI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 25 Aug 2002 13:43:31 +0530</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003895.html">[Xitami] Re: V4MD : Error Handling Suggestion
+</A></li>
+        <LI> Next message: <A HREF="003899.html">[Xitami] Linux 2.4.19 + Perl 5.7.0 &amp; CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3897">[ date ]</a>
+              <a href="thread.html#3897">[ thread ]</a>
+              <a href="subject.html#3897">[ subject ]</a>
+              <a href="author.html#3897">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPartTM-000-ae8fa2b4-7418-4dd0-b80a-4e94838e2c52
+Content-Type: multipart/alternative;
+	boundary=&quot;----=_NextPart_000_0029_01C24C3D.662DF880&quot;
+
+------=_NextPart_000_0029_01C24C3D.662DF880
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Recently I downloaded &amp; installed Xitami Webserver on my Linux =
+2.4.19/KDE 3.0 (reiserFS) machine.
+I am trying out CGI scripts but always get :
+
+Error 500 : internal error=20
+can not create CGI process - program not found.
+
+My setup is as follows:
+HTML dir : /mnt/hdc1/webpages
+Cgi-bin dir : /mnt/hdc1/cgi-bin
+(Both directories on WIN95 (vfat) partitions)
+
+My web pages are getting loaded perfectly. But CGI scripts gives error =
+500.
+Xitami documentation/FAQ says that error 500 is mostly because of wrong =
+header or syntax error.
+
+Following is the script &quot;server_info.cgi&quot; in cgi-bin directory, I am =
+trying to execute:
+#----------------------------------------------
+#!/usr/bin/perl
+
+use strict;
+use CGI;
+
+print &lt;&lt;END_OF_HTML;
+Content-type: text/html
+
+&lt;HTML&gt;
+&lt;HEAD&gt;
+    &lt;TITLE&gt;About This Server&lt;/TITLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+    &lt;H1&gt;Server Information&lt;/H1&gt;
+    &lt;HR&gt;
+    &lt;PRE&gt;
+    Server Name       : $ENV{SERVER_NAME}
+    Listening on port : $ENV{SERVER_PORT}
+    Server Software   : $ENV{SERVER_SOFTWARE}
+    Server Protocol   : $ENV{SERVER_PROTOCOL}
+    CGI Version       : $ENV{GATEWAY_INTERFACE}
+    &lt;/PRE&gt;
+    &lt;HR&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+END_OF_HTML
+#-----------------------------------------------
+
+I have perl 5.7.0 (perl+base+devel+.....many more libs) installed on my =
+system and /usr/bin is where perl can be found.
+I have enabled CGI and SSI on my server and made my scripts executable =
+using chmod.
+
+I could compiled my script using
+#perl -wcT server_info.cgi
+which gave &quot;syntax OK&quot; message.
+
+The so called magic first line &quot;#!perl&quot; also does not work. It simply =
+lists the contents of the file.
+I tried to rename the script with .pl extension to overcome the problem =
+but with no result.
+Also tried to set filters for .cgi and .pl extensions with perl but that =
+too did not work.
+
+Xitami's &quot;testcgi?&quot; programs work OK, but they all seem to be C =
+programs, not perl scripts.
+
+Do I have to install any other perl libs specific to CGI on my system or =
+I have missed out any settings?
+I would appreciate If anybody can help me out in getting started with =
+CGI.
+
+Thanks &amp; Regards,
+Rajesh Deshpande.
+
+
+------=_NextPart_000_0029_01C24C3D.662DF880
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4807.2300&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Recently I downloaded &amp;amp; installed =
+Xitami=20
+Webserver on my Linux 2.4.19/KDE 3.0 (reiserFS) machine.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am trying out CGI scripts but always =
+get=20
+:<i>&lt;/FONT&gt;&lt;/DIV&gt;
+</I>&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;STRONG&gt;&lt;FONT face=3DArial size=3D2&gt;Error 500 : &lt;/FONT&gt;&lt;FONT =
+face=3DArial=20
+size=3D2&gt;internal error &lt;/FONT&gt;&lt;/STRONG&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;STRONG&gt;can not create CGI process - =
+program not=20
+found.&lt;/STRONG&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;U&gt;My&amp;nbsp;setup is as =
+follows&lt;/U&gt;:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;FONT face=3DArial size=3D2&gt;HTML dir :=20
+/mnt/hdc1/webpages&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Cgi-bin dir :=20
+/mnt/hdc1/cgi-bin&lt;/FONT&gt;&lt;/FONT&gt;&lt;/FONT&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;(Both directories&amp;nbsp;on&amp;nbsp;WIN95=20
+(vfat)&amp;nbsp;partitions)&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;My web pages are getting loaded =
+perfectly. But CGI=20
+scripts gives error 500.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami documentation/FAQ says that =
+error 500 is=20
+mostly because of wrong header or syntax error.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Following is the script =
+&quot;server_info.cgi&quot; in=20
+cgi-bin directory, I am trying to execute:&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;#----------------------------------------------&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#!/usr/bin/perl&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;use strict;&lt;BR&gt;use CGI;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;print =
+&amp;lt;&amp;lt;END_OF_HTML;&lt;BR&gt;Content-type:=20
+text/html&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;&amp;lt;HTML&amp;gt;&lt;BR&gt;&amp;lt;HEAD&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&amp;lt;TITLE&amp;gt;About This=20
+Server&amp;lt;/TITLE&amp;gt;&lt;BR&gt;&amp;lt;/HEAD&amp;gt;&lt;BR&gt;&amp;lt;BODY&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;=20
+&amp;lt;H1&amp;gt;Server Information&amp;lt;/H1&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&amp;lt;HR&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;lt;PRE&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+Server=20
+Name&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; :=20
+$ENV{SERVER_NAME}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Listening on port :=20
+$ENV{SERVER_PORT}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Server Software&amp;nbsp;&amp;nbsp; :=20
+$ENV{SERVER_SOFTWARE}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; Server Protocol&amp;nbsp;&amp;nbsp; =
+:<i>=20
+</I>$ENV{SERVER_PROTOCOL}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; CGI=20
+Version&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; :=20
+$ENV{GATEWAY_INTERFACE}&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&amp;lt;/PRE&amp;gt;&lt;BR&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&amp;lt;HR&amp;gt;&lt;BR&gt;&amp;lt;/BODY&amp;gt;&lt;BR&gt;&amp;lt;/HTML&amp;gt;&lt;BR&gt;END_OF_HTML&lt;BR&gt;#---------=
+--------------------------------------&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I have perl 5.7.0 =
+(perl+base+devel+.....many more=20
+libs) installed on my system and &lt;/FONT&gt;&lt;FONT face=3DArial =
+size=3D2&gt;/usr/bin is=20
+where&amp;nbsp;perl can be found.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I have enabled CGI and SSI on my server =
+and made my=20
+scripts executable using chmod.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I&amp;nbsp;could compiled my script =
+using&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;#perl -wcT server_info.cgi&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;which gave &quot;syntax OK&quot; =
+message.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;The so called magic&amp;nbsp;first line =
+&quot;#!perl&quot; also=20
+does not work. It simply lists the contents of the file.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;I&amp;nbsp;tried to rename the script with .pl extension to overcome =
+the=20
+problem but with no result.&lt;/FONT&gt;&lt;/DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Also tried to set filters for .cgi and =
+.pl=20
+extensions&amp;nbsp;with perl but that too did not work.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Xitami's &quot;testcgi?&quot; programs work OK, =
+but they all=20
+seem to be C programs, not perl scripts.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Do I have to install any other perl =
+libs specific=20
+to CGI on my system or I have missed out any settings?&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I would appreciate If anybody can help =
+me out in=20
+getting started with CGI.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Thanks &amp;amp; Regards,&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;Rajesh =
+Deshpande.&lt;BR&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0029_01C24C3D.662DF880--
+
+
+------=_NextPartTM-000-ae8fa2b4-7418-4dd0-b80a-4e94838e2c52--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003895.html">[Xitami] Re: V4MD : Error Handling Suggestion
+</A></li>
+	<LI> Next message: <A HREF="003899.html">[Xitami] Linux 2.4.19 + Perl 5.7.0 &amp; CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3897">[ date ]</a>
+              <a href="thread.html#3897">[ thread ]</a>
+              <a href="subject.html#3897">[ subject ]</a>
+              <a href="author.html#3897">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

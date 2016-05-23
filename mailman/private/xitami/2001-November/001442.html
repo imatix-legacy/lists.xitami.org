@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] $PHP_SELF
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001436.html">
+   <LINK REL="Next"  HREF="001441.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] $PHP_SELF
+   </H1>
+    <B>Stanislav Karchebny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] $PHP_SELF">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 18 Nov 2001 13:45:36 +0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001436.html">[Xitami] xitami needs improvement
+</A></li>
+        <LI> Next message: <A HREF="001441.html">[Xitami] Limiting number of downloads per person.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1442">[ date ]</a>
+              <a href="thread.html#1442">[ thread ]</a>
+              <a href="subject.html#1442">[ subject ]</a>
+              <a href="author.html#1442">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Use The Source, xitami!
+
+I was just... messing around with my scripts and found one thing about
+$PHP_SELF. Indeed, I encountered the problem long ago and just
+invented a fix in my header file and even forgot about it :))
+
+here's the PHP-side fix:
+
+// win32 localhost workaround  -- berkus 2001.08.02 01:26 YEKST
+if( strstr($SCRIPT_NAME, &quot;\\\\&quot;) )
+{
+   $PHP_SELF = substr($SERVER_URL,0,-1).str_replace(&quot;\\\\&quot;, &quot;/&quot;, $SCRIPT_NAME);
+}
+
+
+-- keep in touch. Stanislav Karchebny.
+* <A HREF="mailto:berkus@vismech.ru">berkus@vismech.ru</A> * <A HREF="http://ber.k45.ru">http://ber.k45.ru</A> * ICQ UIN 49516372 *
+* Odin operating system development: <A HREF="http://odin-os.sf.net">http://odin-os.sf.net</A> *
+*      Ease of use, ease of programming, joy of power      *
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001436.html">[Xitami] xitami needs improvement
+</A></li>
+	<LI> Next message: <A HREF="001441.html">[Xitami] Limiting number of downloads per person.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1442">[ date ]</a>
+              <a href="thread.html#1442">[ thread ]</a>
+              <a href="subject.html#1442">[ subject ]</a>
+              <a href="author.html#1442">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

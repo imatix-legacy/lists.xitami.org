@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000617.html">
+   <LINK REL="Next"  HREF="000622.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX
+   </H1>
+    <B>Joachim Benjamins
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Aug 2001 10:51:09 -0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000617.html">[Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX
+</A></li>
+        <LI> Next message: <A HREF="000622.html">[Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#620">[ date ]</a>
+              <a href="thread.html#620">[ thread ]</a>
+              <a href="subject.html#620">[ subject ]</a>
+              <a href="author.html#620">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 07 Aug 2001 20:28:39 -0700, <A HREF="mailto:john.uhlig@coconutcomm.com">john.uhlig@coconutcomm.com</A> wrote:
+
+&gt;<i>If there's a solution, I as well as everyone else would love to hear it. I am
+</I>&gt;<i>getting hit every 5-10 minutes, multiple times. There are a lot of hits from
+</I>&gt;<i>the 63.196.xxx.xxx class. Wish my firewall could block whole IP blocks...
+</I>
+You can set it up in your IP stack (at least on OS/2) by using the following trick:
+
+Banning certain IP addesses from your server can be usefull if some client is overloading you 
+with IP requests (certain web-indexers appear to behave like this - and Code Red apparently) 
+
+You can achieve this by adding the following statement to x:\MPTN\BIN\SETUP.CMD (on an OS/2 
+system!)
+
+route add -net 209.67.229.138 -netmask 255.255.255.255 127.0.0.1 -blackhole 
+
+This causes a request from 209.67.229.138 to be ignored by the server. Since it will not get any
+response, they may want to stop attacking... 
+The bad thing is that i don't think you can use wildcards so you may want to add a whole bunch 
+of addresses, or scan your log and automatically add the IP address of the default.ida? 
+requester.
+
+Of course it assumes the availability of a localhost (ifconfig lo 127.0.0.1) 
+It's the result of some experimenting with BSD-like commands for routing, on Warp Server for
+eBusiness.
+
+Good luck,
+
+Joachim Benjamins.
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000617.html">[Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX
+</A></li>
+	<LI> Next message: <A HREF="000622.html">[Xitami] Re: default.ida?XXXXXXXXXXXXXXXXXXX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#620">[ date ]</a>
+              <a href="thread.html#620">[ thread ]</a>
+              <a href="subject.html#620">[ subject ]</a>
+              <a href="author.html#620">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

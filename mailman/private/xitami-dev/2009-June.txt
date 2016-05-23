@@ -1,0 +1,452 @@
+From sten.hjelmqvist at merdata.se  Mon Jun  8 14:01:11 2009
+From: sten.hjelmqvist at merdata.se (Sten Hjelmqvist)
+Date: Mon, 8 Jun 2009 14:01:11 +0200
+Subject: [Xitami-Dev] GSL compile error
+Message-ID: <7A5FAD931B5FD9439CBA43F427A244E4370657@oden.MERDATA2006.local>
+
+ 
+
+Hello
+
+ 
+
+I've built "foreign-1.1d8" successfully but when I'm trying to build
+"base-1.2d8" I get the following errors:
+
+ 
+
+./libgsl3.a(ggzip.o): In function `eval_zip_open':
+ggzip.c:(.text+0xed): undefined reference to `zipOpen'
+./libgsl3.a(ggzip.o): In function `eval_zip_new':
+ggzip.c:(.text+0x1bf): undefined reference to `zipOpen'
+./libgsl3.a(ggzip.o): In function `eval_zip_load':
+ggzip.c:(.text+0x2da): undefined reference to `unzOpen'
+ggzip.c:(.text+0x55f): undefined reference to `unzGoToNextFile'
+ggzip.c:(.text+0x5b1): undefined reference to `unzGetCurrentFileInfo'
+ggzip.c:(.text+0x66c): undefined reference to `unzClose'
+./libgsl3.a(ggzip.o): In function `zip_extract_currentfile':
+boom E: [gsl]: "c -q -li /home/hjeste/iMatix/base-1.2d8/_install/include
+-ll /home/hjeste/iMatix/base-1.2d8/_install/lib -L gsl3" failed - stop
+
+
+
+ 
+
+I must have missed something  but what?
+
+
+
+------------------- 
+
+/Sten Hjelmqvist 
+
+/Stockholm , Sweden 
+
+/sten.hjelmqvist at merdata.se
+
+ 
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami-dev/attachments/20090608/f0d3620d/attachment.htm 
+
+From ph at imatix.com  Mon Jun  8 14:40:10 2009
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon, 8 Jun 2009 14:40:10 +0200
+Subject: [Xitami-Dev] GSL compile error
+In-Reply-To: <7A5FAD931B5FD9439CBA43F427A244E4370657@oden.MERDATA2006.local>
+References: <7A5FAD931B5FD9439CBA43F427A244E4370657@oden.MERDATA2006.local>
+Message-ID: <5821ea240906080540r42941c82qc6526fd70db319fc@mail.gmail.com>
+
+Please download and build OpenAMQ from www.openamq.org, this package
+contains the current GSL/4 package.  We're planning to break that up
+to make a dedicated GSL/4 package.
+
+-Pieter
+
+On Mon, Jun 8, 2009 at 2:01 PM, Sten
+Hjelmqvist<sten.hjelmqvist at merdata.se> wrote:
+>
+>
+> Hello
+>
+>
+>
+> I?ve built ?foreign-1.1d8? successfully but when I?m trying to build
+> ?base-1.2d8? I get the following errors:
+>
+>
+>
+> ./libgsl3.a(ggzip.o): In function `eval_zip_open':
+> ggzip.c:(.text+0xed): undefined reference to `zipOpen'
+> ./libgsl3.a(ggzip.o): In function `eval_zip_new':
+> ggzip.c:(.text+0x1bf): undefined reference to `zipOpen'
+> ./libgsl3.a(ggzip.o): In function `eval_zip_load':
+> ggzip.c:(.text+0x2da): undefined reference to `unzOpen'
+> ggzip.c:(.text+0x55f): undefined reference to `unzGoToNextFile'
+> ggzip.c:(.text+0x5b1): undefined reference to `unzGetCurrentFileInfo'
+> ggzip.c:(.text+0x66c): undefined reference to `unzClose'
+> ./libgsl3.a(ggzip.o): In function `zip_extract_currentfile':
+> boom E: [gsl]: "c -q -li /home/hjeste/iMatix/base-1.2d8/_install/include -ll
+> /home/hjeste/iMatix/base-1.2d8/_install/lib -L gsl3" failed - stop
+>
+>
+>
+> I must have missed something? but what?
+>
+> -------------------
+>
+> /Sten Hjelmqvist
+>
+> /Stockholm , Sweden
+>
+> /sten.hjelmqvist at merdata.se
+>
+>
+>
+>
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+
+From sten.hjelmqvist at merdata.se  Fri Jun 12 14:01:19 2009
+From: sten.hjelmqvist at merdata.se (Sten Hjelmqvist)
+Date: Fri, 12 Jun 2009 14:01:19 +0200
+Subject: [Xitami-Dev] GSL compile error
+In-Reply-To: <5821ea240906080540r42941c82qc6526fd70db319fc@mail.gmail.com>
+References: <7A5FAD931B5FD9439CBA43F427A244E4370657@oden.MERDATA2006.local>
+	<5821ea240906080540r42941c82qc6526fd70db319fc@mail.gmail.com>
+Message-ID: <7A5FAD931B5FD9439CBA43F427A244E43706BE@oden.MERDATA2006.local>
+
+Hello,
+
+It works great under Linux/Ubuntu but when I try to build under Windows/Microsoft Visual Studio 9.0 it 
+ends with an error. It's a program from vc6 called msdev that is missing.
+Can I not build the packet under .NET?
+It's a pity because I've used Libero a lot over the years and would like to continue to do so.
+Are you planning to release a schema for c#?
+
+
+/Sten Hjelmqvist
+
+
+-----Ursprungligt meddelande-----
+Fr?n: xitami-dev-bounces at lists.xitami.org [mailto:xitami-dev-bounces at lists.xitami.org] F?r Pieter Hintjens
+Skickat: den 8 juni 2009 14:40
+Till: Xitami Development Discussion
+?mne: Re: [Xitami-Dev] GSL compile error
+
+Please download and build OpenAMQ from www.openamq.org, this package
+contains the current GSL/4 package.  We're planning to break that up
+to make a dedicated GSL/4 package.
+
+-Pieter
+
+On Mon, Jun 8, 2009 at 2:01 PM, Sten
+Hjelmqvist<sten.hjelmqvist at merdata.se> wrote:
+>
+>
+> Hello
+>
+>
+>
+> I've built "foreign-1.1d8" successfully but when I'm trying to build
+> "base-1.2d8" I get the following errors:
+>
+>
+>
+> ./libgsl3.a(ggzip.o): In function `eval_zip_open':
+> ggzip.c:(.text+0xed): undefined reference to `zipOpen'
+> ./libgsl3.a(ggzip.o): In function `eval_zip_new':
+> ggzip.c:(.text+0x1bf): undefined reference to `zipOpen'
+> ./libgsl3.a(ggzip.o): In function `eval_zip_load':
+> ggzip.c:(.text+0x2da): undefined reference to `unzOpen'
+> ggzip.c:(.text+0x55f): undefined reference to `unzGoToNextFile'
+> ggzip.c:(.text+0x5b1): undefined reference to `unzGetCurrentFileInfo'
+> ggzip.c:(.text+0x66c): undefined reference to `unzClose'
+> ./libgsl3.a(ggzip.o): In function `zip_extract_currentfile':
+> boom E: [gsl]: "c -q -li /home/hjeste/iMatix/base-1.2d8/_install/include -ll
+> /home/hjeste/iMatix/base-1.2d8/_install/lib -L gsl3" failed - stop
+>
+>
+>
+> I must have missed something? but what?
+>
+> -------------------
+>
+> /Sten Hjelmqvist
+>
+> /Stockholm , Sweden
+>
+> /sten.hjelmqvist at merdata.se
+>
+>
+>
+>
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From ph at imatix.com  Fri Jun 12 14:18:02 2009
+From: ph at imatix.com (Pieter Hintjens)
+Date: Fri, 12 Jun 2009 14:18:02 +0200
+Subject: [Xitami-Dev] GSL compile error
+In-Reply-To: <7A5FAD931B5FD9439CBA43F427A244E43706BE@oden.MERDATA2006.local>
+References: <7A5FAD931B5FD9439CBA43F427A244E4370657@oden.MERDATA2006.local> 
+	<5821ea240906080540r42941c82qc6526fd70db319fc@mail.gmail.com> 
+	<7A5FAD931B5FD9439CBA43F427A244E43706BE@oden.MERDATA2006.local>
+Message-ID: <5821ea240906120518n194fa05fwe4e7e4f1e5c7433a@mail.gmail.com>
+
+Hi Sten,
+
+> It works great under Linux/Ubuntu but when I try to build under Windows/Microsoft Visual Studio 9.0 it
+> ends with an error. It's a program from vc6 called msdev that is missing.
+> Can I not build the packet under .NET?
+> It's a pity because I've used Libero a lot over the years and would like to continue to do so.
+> Are you planning to release a schema for c#?
+
+You are looking for Libero binaries, or GSL binaries?  These are not
+built as part of OpenAMQ but it's fairly simple to create solutions to
+build these, and the source kits contain projects (e.g.
+gsl4/gsl.vcproj, base1/libero/lr.vcproj) that you can use in
+solutions.
+
+Please make sure you download the OpenAMQ/1.4 release.
+
+-Pieter
+
+From sten.hjelmqvist at merdata.se  Fri Jun 12 15:22:44 2009
+From: sten.hjelmqvist at merdata.se (Sten Hjelmqvist)
+Date: Fri, 12 Jun 2009 15:22:44 +0200
+Subject: [Xitami-Dev] GSL compile error
+In-Reply-To: <5821ea240906120518n194fa05fwe4e7e4f1e5c7433a@mail.gmail.com>
+References: <7A5FAD931B5FD9439CBA43F427A244E4370657@oden.MERDATA2006.local>
+	<5821ea240906080540r42941c82qc6526fd70db319fc@mail.gmail.com>
+	<7A5FAD931B5FD9439CBA43F427A244E43706BE@oden.MERDATA2006.local>
+	<5821ea240906120518n194fa05fwe4e7e4f1e5c7433a@mail.gmail.com>
+Message-ID: <7A5FAD931B5FD9439CBA43F427A244E43706C2@oden.MERDATA2006.local>
+
+Hi,
+
+I built Libero and GSL using *.vcproj.
+Thanks.
+
+/Sten
+
+-----Ursprungligt meddelande-----
+Fr?n: xitami-dev-bounces at lists.xitami.org [mailto:xitami-dev-bounces at lists.xitami.org] F?r Pieter Hintjens
+Skickat: den 12 juni 2009 14:18
+Till: Xitami Development Discussion
+?mne: Re: [Xitami-Dev] GSL compile error
+
+Hi Sten,
+
+> It works great under Linux/Ubuntu but when I try to build under Windows/Microsoft Visual Studio 9.0 it
+> ends with an error. It's a program from vc6 called msdev that is missing.
+> Can I not build the packet under .NET?
+> It's a pity because I've used Libero a lot over the years and would like to continue to do so.
+> Are you planning to release a schema for c#?
+
+You are looking for Libero binaries, or GSL binaries?  These are not
+built as part of OpenAMQ but it's fairly simple to create solutions to
+build these, and the source kits contain projects (e.g.
+gsl4/gsl.vcproj, base1/libero/lr.vcproj) that you can use in
+solutions.
+
+Please make sure you download the OpenAMQ/1.4 release.
+
+-Pieter
+
+--
+Xitami-Dev -- Xitami Development Mailing List
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+
+From sten.hjelmqvist at merdata.se  Mon Jun 15 16:05:22 2009
+From: sten.hjelmqvist at merdata.se (Sten Hjelmqvist)
+Date: Mon, 15 Jun 2009 16:05:22 +0200
+Subject: [Xitami-Dev] Libero schema for C#
+Message-ID: <7A5FAD931B5FD9439CBA43F427A244E43706EC@oden.MERDATA2006.local>
+
+Hello,
+
+ 
+
+I've written a Libero schema for C#.
+
+The schema  is open source and provided on an "as is" basis.
+
+ 
+
+If you find any problems please let me know.
+
+The file WriteSomething.l can be used to test the schema.
+
+ 
+
+Enjoy
+
+/Sten
+
+ 
+
+---------------------------------------
+
+Sten Hjelmqvist
+
+DataKonsult
+
+MERdata AB
+
+Sveav?gen 33, 111 34 Stockholm
+
+Mobil    : 0708 305616
+
+E-mejl   : sten.hjelmqvist at merdata.se <mailto:sten.hjelmqist at merdata.se> 
+
+Webb     : www.merdata.se <http://www.main.se/> 
+
+---------------------------------------
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami-dev/attachments/20090615/e5e6d15e/attachment.htm 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lrschema.cs
+Type: application/octet-stream
+Size: 14209 bytes
+Desc: lrschema.cs
+Url : http://lists.xitami.org/pipermail/xitami-dev/attachments/20090615/e5e6d15e/attachment.obj 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: WriteSomething.l
+Type: application/octet-stream
+Size: 518 bytes
+Desc: WriteSomething.l
+Url : http://lists.xitami.org/pipermail/xitami-dev/attachments/20090615/e5e6d15e/attachment-0001.obj 
+
+From sten.hjelmqvist at merdata.se  Mon Jun 15 16:25:59 2009
+From: sten.hjelmqvist at merdata.se (Sten Hjelmqvist)
+Date: Mon, 15 Jun 2009 16:25:59 +0200
+Subject: [Xitami-Dev] Libero C# schema
+Message-ID: <7A5FAD931B5FD9439CBA43F427A244E43706ED@oden.MERDATA2006.local>
+
+I've zipped all the files so it's easier to test.
+
+Should have done that from the start.
+
+Sorry about that.
+
+ 
+
+ 
+
+---------------------------------------
+
+Sten Hjelmqvist
+
+DataKonsult
+
+MERdata AB
+
+Sveav?gen 33, 111 34 Stockholm
+
+Mobil    : 0708 305616
+
+E-mejl   : sten.hjelmqvist at merdata.se <mailto:sten.hjelmqist at merdata.se> 
+
+Webb     : www.merdata.se <http://www.main.se/> 
+
+---------------------------------------
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami-dev/attachments/20090615/dc3ab892/attachment-0001.htm 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Libero-cs.zip
+Type: application/x-zip-compressed
+Size: 9211 bytes
+Desc: Libero-cs.zip
+Url : http://lists.xitami.org/pipermail/xitami-dev/attachments/20090615/dc3ab892/attachment-0001.bin 
+
+From ph at imatix.com  Mon Jun 15 16:41:59 2009
+From: ph at imatix.com (Pieter Hintjens)
+Date: Mon, 15 Jun 2009 16:41:59 +0200
+Subject: [Xitami-Dev] Libero schema for C#
+In-Reply-To: <7A5FAD931B5FD9439CBA43F427A244E43706EC@oden.MERDATA2006.local>
+References: <7A5FAD931B5FD9439CBA43F427A244E43706EC@oden.MERDATA2006.local>
+Message-ID: <5821ea240906150741o525c5f1apfe93b0860891392d@mail.gmail.com>
+
+Sten,
+
+Thanks for this!  I'm adding it to the Libero source tree.
+
+-Pieter
+
+On Mon, Jun 15, 2009 at 4:05 PM, Sten
+Hjelmqvist<sten.hjelmqvist at merdata.se> wrote:
+> Hello,
+>
+>
+>
+> I?ve written a Libero schema for C#.
+>
+> The schema ?is open source and provided on an "as is" basis.
+>
+>
+>
+> If you find any problems please let me know.
+>
+> The file WriteSomething.l can be used to test the schema.
+>
+>
+>
+> Enjoy
+>
+> /Sten
+>
+>
+>
+> ---------------------------------------
+>
+> Sten Hjelmqvist
+>
+> DataKonsult
+>
+> MERdata AB
+>
+> Sveav?gen 33, 111 34 Stockholm
+>
+> Mobil??? : 0708 305616
+>
+> E-mejl?? : sten.hjelmqvist at merdata.se
+>
+> Webb???? : www.merdata.se
+>
+> ---------------------------------------
+>
+>
+>
+> --
+> Xitami-Dev -- Xitami Development Mailing List
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami-dev
+>
+>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP - virtual DNS hosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000992.html">
+   <LINK REL="Next"  HREF="001016.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP - virtual DNS hosting
+   </H1>
+    <B>Russel Olinger
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] HELP - virtual DNS hosting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 25 Sep 2001 11:07:57 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000992.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+        <LI> Next message: <A HREF="001016.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1004">[ date ]</a>
+              <a href="thread.html#1004">[ thread ]</a>
+              <a href="subject.html#1004">[ subject ]</a>
+              <a href="author.html#1004">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I just went through this and finally got mine to work..  Here is what I did
+and think might work for you.
+
+When using the VHost wizard you need to define the following fields as such:
+
+Create virtual host profile:      hostx.cfg (.cfg is assumed)
+Select IP address:                  All Addresses (recommended)
+Or, enter DNS host name:    www.yourdomain.com
+Web Page Root Directory:    /Xitami/hostx/webpages
+CGI-bin directory:                /Ximati/hostx/cgi-bin
+FTP root directory:              /Ximati/hostx/ftproot
+Create directories if necessary?  Checked
+
+Whats important in the above example is that you make soft references to the
+directory path using forward &quot;/&quot; slashes.  I tried using windows default
+back &quot;\&quot; slashes and had problems.  I also made a hard reference using
+&quot;c:\PATH&quot; and had problems too.  It seems Xitami even treats its configs and
+Path references like URLs using the forward &quot;/&quot; slash.  I choose to do the
+above configs because that allowed me to contain all files and
+sub-directories within a single root directory.  Others have choosen to
+create the /Xitami/hostx/webpages for their html docs but then did
+/Xitami/cgi-bin to contain ALL CGI files for all domains in a single
+directory.  For myself I like a little bit more organization.  However, some
+of my domains do share the same CGI files (most of my databasing needs all
+rely on the same database utilizing seperate tables from the same DB, the
+reason I did this is because I designed a Perl DB that allows me to create
+tables, queries, entry forms, etc on the fly)  In order to share the same DB
+across multiple domains (but make it look like each domain has a separate
+DB) I created a VHost domain simply to host the DB and nothing else.  Then
+when DomainX needs certain DB functions I will pass URL (most likely from a
+FRAME subset) from DomainX to DomainDB.  This process can be repeated across
+multiple domains allowing me to manage only one DB.  Security is not the
+greatest but is managed through a series of checks and balances using Cookie
+s.
+
+Anyway, I got off on a tanget.  Xitami only creates the directories.  It
+doesn't place any &quot;index.htm&quot; or &quot;default.htm&quot; files in the directories just
+created for &quot;hostx&quot;.  You shouldn't have to make any references any where
+else, as long as your FORWARD (A records) DNS is working correctly for that
+VHost then all should work OK.  The only PTR DNS (reverse) record for the
+Xitami server should be for the main domain on that server.  In my case, if
+someone accesses my server via the IP address then a default page (managed
+by the cgi files of DomainDB) is displayed simply showing links to all the
+domains hosted on that server.
+
+I intend on using my server as a training device, once I get everything
+completed people will be able to access my site and look at config files,
+domain references and mainly the DB I created.
+
+Hope some of this helps.
+
+
+----- Original Message -----
+From: &quot;garry&quot; &lt;<A HREF="mailto:garry@cable.net.nz">garry@cable.net.nz</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Monday, September 24, 2001 8:35 PM
+Subject: Re: [Xitami] HELP - virtual DNS hosting
+
+
+&gt;<i> Hi Alvaro
+</I>&gt;<i>
+</I>&gt;<i> first you have one too many w's in www there and while i dont know your
+</I>dns
+&gt;<i> setup you either need dynamic dns for the main domain or you need a record
+</I>&gt;<i> for each sub ...www.yourdomain.com is a sub of yourdomain.com
+</I>&gt;<i>
+</I>&gt;<i> Garry Stanley
+</I>&gt;<i>
+</I>&gt;<i> Cable.net.nz
+</I>&gt;<i>
+</I>&gt;<i> Beta Data Solutions Ltd.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000992.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+	<LI> Next message: <A HREF="001016.html">[Xitami] HELP - virtual DNS hosting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1004">[ date ]</a>
+              <a href="thread.html#1004">[ thread ]</a>
+              <a href="subject.html#1004">[ subject ]</a>
+              <a href="author.html#1004">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

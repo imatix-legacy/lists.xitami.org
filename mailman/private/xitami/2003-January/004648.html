@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] garbage characters in access logs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004647.html">
+   <LINK REL="Next"  HREF="004649.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] garbage characters in access logs
+   </H1>
+    <B>marc
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] garbage characters in access logs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 26 Jan 2003 18:29:49 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004647.html">[Xitami] garbage characters in access logs
+</A></li>
+        <LI> Next message: <A HREF="004649.html">[Xitami] garbage characters in access logs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4648">[ date ]</a>
+              <a href="thread.html#4648">[ thread ]</a>
+              <a href="subject.html#4648">[ subject ]</a>
+              <a href="author.html#4648">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I am running 8 virtual domains all with separate logs in CLFX format. The
+</I>&gt;<i> logs cycle monthly.
+</I>&gt;<i> 
+</I>&gt;<i> I recently noticed zero access reported in my log analysis software for a
+</I>&gt;<i> period of about a week. However, I know the server was up for most of this
+</I>&gt;<i> period. I checked the raw access logs and they are all full of garbage
+</I>&gt;<i> characters for this period.
+</I>&gt;<i> 
+</I>&gt;<i> Any idea what would be causing this problem with the logs?
+</I>Probably some disk access error, the garbage is the data in sectors that the computer assumed were containing access log data, while in fact there was nothing written at all.
+The computer keeps track of the position of data files and read the sectors that correspond to the file, but if some sectors were not correctly written, the read operation yelds garbage (the original content of those sectors).
+
+Marc
+
+
+--::Mailserver Verfaillie Bauwens::-- contact [<A HREF="mailto:postmaster@verfaillie.com">postmaster@verfaillie.com</A>]
+Alle mails gecontroleerd op virussen. Virusdefinities dagelijks aangepast.
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004647.html">[Xitami] garbage characters in access logs
+</A></li>
+	<LI> Next message: <A HREF="004649.html">[Xitami] garbage characters in access logs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4648">[ date ]</a>
+              <a href="thread.html#4648">[ thread ]</a>
+              <a href="subject.html#4648">[ subject ]</a>
+              <a href="author.html#4648">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

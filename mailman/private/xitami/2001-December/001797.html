@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami And PHP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001796.html">
+   <LINK REL="Next"  HREF="001795.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami And PHP
+   </H1>
+    <B>SandMan
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami And PHP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 21 Dec 2001 14:54:58 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001796.html">[Xitami] Xitami And PHP
+</A></li>
+        <LI> Next message: <A HREF="001795.html">[Xitami] Xitami And PHP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1797">[ date ]</a>
+              <a href="thread.html#1797">[ thread ]</a>
+              <a href="subject.html#1797">[ subject ]</a>
+              <a href="author.html#1797">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Just tested the header suggestion, works like a charm, thanks a million :)
+I will keep in mind the second one for future scripts, as I've already done
+it the hard way with the current ones :)
+
+~SandMan
+----- Original Message -----
+From: &quot;Marcio Marchini&quot; &lt;<A HREF="mailto:mqm@magma.ca">mqm@magma.ca</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Friday, December 21, 2001 1:03 PM
+Subject: RE: [Xitami] Xitami And PHP
+
+
+&gt;<i>
+</I>&gt;<i>     I've had a somewhat similar problem regarding caching. I fixed it in
+</I>my
+&gt;<i> case by generating an extra HTTP header, from my PHP source, like this:
+</I>&gt;<i>
+</I>&gt;<i> header (&quot;Cache-Control: no-store, no-cache, must-revalidate, post-check=0,
+</I>&gt;<i> pre-check=0&quot;);
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I've also has a similar problem regarding PHP_SELF and portability across
+</I>&gt;<i> Xitami and Apache. In my case I did this:
+</I>&gt;<i>
+</I>&gt;<i> // Under Apache $PHP_SELF is what we want, under Xitami it is $SCRIPT_NAME
+</I>&gt;<i> // We find out based on which one has &quot;.php&quot; in it.
+</I>&gt;<i> if (ereg (&quot;\.php&quot;, $SCRIPT_NAME)) $GLOBAL_SELF = $SCRIPT_NAME;
+</I>&gt;<i> else $GLOBAL_SELF = $PHP_SELF;
+</I>&gt;<i> $GLOBAL_SELF = str_replace (&quot;\\\\&quot;, &quot;/&quot;, $GLOBAL_SELF);
+</I>&gt;<i>
+</I>&gt;<i> and then I use $GLOBAL_SELF
+</I>&gt;<i>
+</I>&gt;<i> Hope it helps
+</I>&gt;<i>
+</I>&gt;<i> marcio
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]On
+&gt;<i> Behalf Of SandMan
+</I>&gt;<i> Sent: December 21, 2001 12:33 PM
+</I>&gt;<i> To: <A HREF="mailto:Xitami@lists.xitami.org">Xitami@lists.xitami.org</A>
+</I>&gt;<i> Subject: [Xitami] Xitami And PHP
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I'm having a slight problem getting this to run properly.  I've set the
+</I>&gt;<i> filter's up, .php = source of php.exe, and have the latest version of php
+</I>&gt;<i> 4.1.0
+</I>&gt;<i>
+</I>&gt;<i> My problem is this, I have a &quot;Picture Gallery&quot; page written in php that
+</I>you
+&gt;<i> can upload images to, and it is supposed to show these images in the image
+</I>&gt;<i> index upon a succesful upload.  I've tested this script on IIS 5.0 and it
+</I>&gt;<i> was working fine.  Now when I run it, after the upload, it doesn't show
+</I>the
+&gt;<i> image I just uploaded.  The only way to get the images to appear is to
+</I>open
+&gt;<i> the script, edit it, say add a comment //a or something like that, save
+</I>the
+&gt;<i> script, then refresh the browser.  It's almost as if Xitami is not
+</I>allowing
+&gt;<i> php.exe to be recalled.  It's very strange behaviour and I've found no way
+</I>&gt;<i> around it beyond my little edit the source code/refresh fixer.  Any ideas
+</I>on
+&gt;<i> why it would be doing this?   Think it could possibly be the Xitami
+</I>server?
+&gt;<i>
+</I>&gt;<i> I've also noticed that the $PHP_SELF function, doesn't call the
+</I>&gt;<i> path/filename, the whole weblink + php script, it only calls the root
+</I>&gt;<i> directory.  Here's an Example.
+</I>&gt;<i>
+</I>&gt;<i> Say:   <A HREF="http://www.someplace.com/picture.php">http://www.someplace.com/picture.php</A>  is called.   Within
+</I>picture.php
+&gt;<i> is a call to $PHP_SELF, which is just supposed to be the previous link.
+</I>&gt;<i> This is not the case tho in Xitami, it ends up being
+</I>&gt;<i> <A HREF="http://www.someplace.com/">http://www.someplace.com/</A>  without the picture.php  So I've had to edit a
+</I>&gt;<i> lot of scripts to add the actual file name.  Not sure if this would be PHP
+</I>&gt;<i> related, or Xitmai related, but I'd figured I'd mention that too.  Any
+</I>&gt;<i> idea's on either of these issues would be greatly appreciated.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for your time,
+</I>&gt;<i>
+</I>&gt;<i> ~SandMan
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+_________________________________________________________
+Do You Yahoo!?
+Get your free @yahoo.com address at <A HREF="http://mail.yahoo.com">http://mail.yahoo.com</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001796.html">[Xitami] Xitami And PHP
+</A></li>
+	<LI> Next message: <A HREF="001795.html">[Xitami] Xitami And PHP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1797">[ date ]</a>
+              <a href="thread.html#1797">[ thread ]</a>
+              <a href="subject.html#1797">[ subject ]</a>
+              <a href="author.html#1797">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

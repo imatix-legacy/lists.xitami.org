@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Server side includes and directory listing templates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001593.html">
+   <LINK REL="Next"  HREF="001595.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Server side includes and directory listing templates
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Server side includes and directory listing templates">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 04 Dec 2001 15:45:25 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001593.html">[Xitami] Server side includes and directory listing templates
+</A></li>
+        <LI> Next message: <A HREF="001595.html">[Xitami] Server side includes and directory listing templates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1594">[ date ]</a>
+              <a href="thread.html#1594">[ thread ]</a>
+              <a href="subject.html#1594">[ subject ]</a>
+              <a href="author.html#1594">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Michael Pierce wrote:
+
+&gt;<i>Hello,
+</I>&gt;<i>   In my directory listing template &quot;myhttpdir.gsl&quot; I would like to run have
+</I>&gt;<i>a server side
+</I>&gt;<i>that runs a &quot;.exe&quot; on each file with a certain extension. The following
+</I>&gt;<i>code:
+</I>&gt;<i>.    if defined (type)
+</I>&gt;<i>.       if type = &quot;lnk&quot;
+</I>&gt;<i>.           &lt;!-- #include virtual=&quot;/cgi-bin/resolvelnk.exe&quot; --&gt;
+</I>&gt;<i>.       endif
+</I>&gt;<i>.endif
+</I>&gt;<i>
+</I>&gt;<i>Does not run the &quot;resolvelnk&quot; executable.
+</I>&gt;<i>.           &lt;!-- #include virtual=&quot;/cgi-bin/resolvelnk.exe&quot; --&gt;
+</I>&gt;<i>
+</I>This line does not do what you want it to do.
+.           &lt;!-- #include virtual=&quot;/cgi-bin/resolvelnk.exe&quot; --&gt;
+
+Firstly it should give an error because &lt;!-- is not a recognised gsl command 
+
+Then if you were to remove the leading . it might at least give a page 
+with the cgi-bin line in it but I don't think it would execute it as it 
+would be treated as a static html page not a dynamic shtml one.
+
+What you need to do - which is tricky - is to use commands like .literal 
+or .xml to load the text and the mangle it but I'm not sure you can do 
+what you would want to do (assign a variable to the file contents which 
+you would then manipulate with substr)...
+
+Francis
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001593.html">[Xitami] Server side includes and directory listing templates
+</A></li>
+	<LI> Next message: <A HREF="001595.html">[Xitami] Server side includes and directory listing templates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1594">[ date ]</a>
+              <a href="thread.html#1594">[ thread ]</a>
+              <a href="subject.html#1594">[ subject ]</a>
+              <a href="author.html#1594">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] URL arg problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000614.html">
+   <LINK REL="Next"  HREF="000733.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] URL arg problems
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] URL arg problems">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Aug 2001 00:05:11 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000614.html">[Xitami] URL arg problems
+</A></li>
+        <LI> Next message: <A HREF="000733.html">[Xitami] localhost problems..
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#619">[ date ]</a>
+              <a href="thread.html#619">[ thread ]</a>
+              <a href="subject.html#619">[ subject ]</a>
+              <a href="author.html#619">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 03:31 PM 8/7/01 -0700, you wrote:
+&gt;<i>&quot;Thomas J. Hruska&quot; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> If you want to use relative 'Location:' headers like you have above, you
+</I>&gt;&gt;<i> will need to use XiFusion as Xitami (latest stable release) does not
+</I>&gt;<i>
+</I>&gt;<i>Ok, I installed XiFusion, but it still does not work. I can get
+</I>&gt;<i>phpinfo() to work, but if I try using an alias and &quot;Location&quot; or an
+</I>&gt;<i>alias/menu.php?menu=1&amp;submenu=1, I get:
+</I>&gt;<i>Error spawning child process.
+</I>&gt;<i>
+</I>&gt;<i>Maybe I cannot use aliases??  That would really suck.  The log files are
+</I>&gt;<i>pretty mute on what went wrong.  Running NT SP6.
+</I>
+The message &quot;Error spawning child process&quot; occurs when PHP fails to open
+the requested file.  PHP will return a non-zero return code, which causes
+the error.  The log files will show nothing since XiFusion handles everything.
+
+Aliases won't work.  That's an issue that I didn't think about during the
+design of XiFusion.  XiFusion puts your CGI starting point in the webpage
+root of Xitami (or whatever DOCUMENT_ROOT is set to) for security reasons.
+If you have to bypass XiFusion to get to an alias, use an absolute
+&quot;off-site&quot; Location URL:
+
+header(&quot;Location:
+<A HREF="http://www.mysubserver.myserver.com/alias/menu.php?menu=1&submenu=1"">http://www.mysubserver.myserver.com/alias/menu.php?menu=1&amp;submenu=1&quot;</A>);
+
+OR without XiFusion:
+
+header(&quot;Location: /alias/menu.php?menu=1&amp;submenu=1&quot;);
+
+Both will be passed back to the browser for processing (slower than
+server-side processing, but should work).  I still recommend using XiFusion
+even in your case as you will probably not hop all over the place too
+often.  If you will be using Aliases more often than not, then don't use
+XiFusion.
+
+The first Location URL is viewed by XiFusion to be an &quot;off-site&quot; absolute
+URL.  For these types of URLs, XiFusion will pass the Location back to the
+server and the server will pass them back to the client to process.  The
+second Location URL is viewed by XiFusion as an absolute URL on the current
+server and will do server-side redirection without regard to Aliases.
+Without XiFusion, the second method is passed back to the browser which
+will then contact Xitami.  Remember, Xitami knows about Aliases, XiFusion
+does not.  Also note that Aliases generally take more time to process.
+
+Hope this helps!
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000614.html">[Xitami] URL arg problems
+</A></li>
+	<LI> Next message: <A HREF="000733.html">[Xitami] localhost problems..
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#619">[ date ]</a>
+              <a href="thread.html#619">[ thread ]</a>
+              <a href="subject.html#619">[ subject ]</a>
+              <a href="author.html#619">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

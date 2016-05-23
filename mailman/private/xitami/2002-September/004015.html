@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] lrwp test program and QNX
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004014.html">
+   <LINK REL="Next"  HREF="004017.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] lrwp test program and QNX
+   </H1>
+    <B>Joseph Saunders
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] lrwp test program and QNX">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 23 Sep 2002 12:54:57 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004014.html">[Xitami] sub-domains
+</A></li>
+        <LI> Next message: <A HREF="004017.html">[Xitami] SSI: &quot;#include file =&quot;*.html&quot;&quot; produced errors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4015">[ date ]</a>
+              <a href="thread.html#4015">[ thread ]</a>
+              <a href="subject.html#4015">[ subject ]</a>
+              <a href="author.html#4015">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The following code:
+
+	sprintf(buf, &quot;%s\xFF%s\xFF&quot;, &quot;foo&quot;, &quot;bar&quot;);
+
+should result in the following characters in buf: 'f', 'o', 'o', 0xff, 'b', 'a', 'r', 0xff.  
+But what actually appears is: 'f', 'o', 'o', 0xff, '%', 's', 0xff.  
+
+
+The lrwplib code contains this sprintf:
+
+	sprintf(buf, &quot;%s\xFF%s\xFF%s&quot;, appname, vhost?vhost:&quot;&quot;, &quot;&quot;);
+
+which I changed to:
+
+	sprintf(buf, &quot;%s%c%s%c%s&quot;, appname, 0xff, vhost?vhost:&quot;&quot;, 0xff, &quot;&quot;);
+
+The reason the 403 was thrown is that the registration of the peer process
+name was garbled.  Xitami was doing regular GET processing on the url that
+specified the lrwp peer process.
+
+After changing the sprintf everything worked.
+
+I did not check the Xitami source for other *printf calls that use 'xFF'
+in the format specifier.
+
+
+-Joe
+
+-----Original Message-----
+From: Joseph Saunders 
+Sent: Monday, September 16, 2002 4:34 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: [Xitami] lrwp test program and QNX
+
+
+
+Hello,
+
+Having upgraded to 6.2 QNX OS, recompiled Xitami and it runs fine.
+I did not have to modify anything...  (Using 6.0 the scripts had to
+be modified to get a proper build)
+
+The next step was to compile the testlrwp.c program.  It compiled fine
+and starts fine.
+
+The problem is that I can browse webpages, cgi's everything else, but if
+I browse the lrwp get a 403.
+
+Is there anythin that needs to be done on QNX that will allow access
+to the lrwp??
+
+Thanks,
+-Joe
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004014.html">[Xitami] sub-domains
+</A></li>
+	<LI> Next message: <A HREF="004017.html">[Xitami] SSI: &quot;#include file =&quot;*.html&quot;&quot; produced errors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4015">[ date ]</a>
+              <a href="thread.html#4015">[ thread ]</a>
+              <a href="subject.html#4015">[ subject ]</a>
+              <a href="author.html#4015">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

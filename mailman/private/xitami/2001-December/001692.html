@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problems setting up xitami behind Roadrunner ISP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001690.html">
+   <LINK REL="Next"  HREF="001693.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problems setting up xitami behind Roadrunner ISP
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problems setting up xitami behind Roadrunner ISP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 10 Dec 2001 20:21:00 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001690.html">[Xitami] Upload scripts on Xitami
+</A></li>
+        <LI> Next message: <A HREF="001693.html">[Xitami] CGI won't run with Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1692">[ date ]</a>
+              <a href="thread.html#1692">[ thread ]</a>
+              <a href="subject.html#1692">[ subject ]</a>
+              <a href="author.html#1692">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;008d01c172b7$eb955aa0$<A HREF="mailto:b61e2341@concentric.net">b61e2341@concentric.net</A>&gt;, &quot;Control-Freak&quot; writes:
+&gt;<i>since Roadrunner blocks incoming port 80, I had to adust the portbase to
+</I>&gt;<i>55000 to use port 55080 with allows HTTP to work.  The problem is that I
+</I>&gt;<i>cannot get FTP to work at port 55021.
+</I>&gt;<i>So, I tried adjusting the FTP port varible to -54979 to get FTP port 21
+</I>&gt;<i>again.  But this does allow FTP to work either.  I also tried adjusting the
+</I>&gt;<i>data-port variable to -54800 to get the data port back down to 200.  
+</I>
+BTW, this data-port should probably be adjusted to be &quot;20&quot;, ie, -54980.
+(There was a typo in some versions of the configuration file that
+wrongly listed the data port as 200.)
+
+You should watch the Xitami start up messages and make sure that it is
+starting things on the ports that you expect them to be started on.
+
+Beyond that, FTP with the server behind a firewall (eg, your roadrunner
+config) can be pretty tricky to get going, especially passive FTP when
+the server is behind a firewall.  (Active FTP tends to work better when
+the server is behind a firewall, and passive FTP tends to work better
+when the client is behind a firewall -- if _both_ are behind firewalls,
+you can end up with no FTP working at all, even if both firewalls are
+trying to let FTP through :-( )
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001690.html">[Xitami] Upload scripts on Xitami
+</A></li>
+	<LI> Next message: <A HREF="001693.html">[Xitami] CGI won't run with Xitami Pro
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1692">[ date ]</a>
+              <a href="thread.html#1692">[ thread ]</a>
+              <a href="subject.html#1692">[ subject ]</a>
+              <a href="author.html#1692">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000152.html">
+   <LINK REL="Next"  HREF="000154.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami
+   </H1>
+    <B>Phillip Wee
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 7 May 2002 23:43:41 +0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000152.html">[Xitami-Dev] iMatix source archives off-line
+</A></li>
+        <LI> Next message: <A HREF="000154.html">[Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#153">[ date ]</a>
+              <a href="thread.html#153">[ thread ]</a>
+              <a href="subject.html#153">[ subject ]</a>
+              <a href="author.html#153">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: text/plain
+
+Hi!
+
+Here's my setup:
+OS:  Win98
+Xitami path:  c:\xitami
+JDK path:  c:\jdk1.3.1_02
+Conacom servlet runner path:  c:\xitami\java
+gnujsp jar path:  c:\xitami\java\gnujsp-1.0.1\lib
+
+I renamed the ff CMD files to BAT files for Windows compatibility:
+1) runner.cmd -&gt; runner.bat
+2) restart.cmd -&gt; restart.bat
+3) stop.cmd -&gt; stop.bat
+
+The servlet runner .ini and .bat files, and also servlet.properties,  are placed in c:\xitami\java.
+
+I modified runner.ini such that:
+1) sessionmanagerconfig=mem_sessionmgr.ini
+2) servlet_cfg=servlet.ini
+3) locale=en,US
+
+I created servlet.ini, which is patterned from sv_demo.ini.
+
+I created servlet.properties, patterned from sv_demo.properties.
+
+The classpath (this should all be in one line) in runner.bat and servlet.properties is:
+.;/xitami/java/runner.jar;/xitami/java/javax.jar;
+/xitami/java/gnujsp-1.0.1/lib/gnujsp10test.jar;
+/xitami/java/gnujsp-1.0.1/lib/openxml-1.2-w3c.jar;
+/xitami/java/gnujsp-1.0.1/lib/servlet-2.0-plus.jar
+
+The conacom test servlet (net.conacom.servletrunner.util.TestServlet)  runs OK.
+The gnujsp test servlet (org.gjt.jsp.test.GNUJSPTestServlet) runs OK.
+The gnujsp servlet (org.gjt.jsp.JspServlet) returned an init() error, logged in srvl_20020507.log.  It appears that the settings in servlet.properties were not read, and defaults were assumed by the gnujsp servlet.
+
+I'm attaching the config files together with this post. Please reply if you have any questions.
+
+BTW, gnujsp can be freely downloaded in
+    <A HREF="http://www.klomp.org/gnujsp/.">http://www.klomp.org/gnujsp/.</A>
+
+Thanks for your help!
+Phil
+
+
+<A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A> wrote:
+
+&gt;<i>Hi
+</I>&gt;<i>
+</I>&gt;<i>We did not test GNUJSP 1.01 with Conacom servlet runner yet.  But first
+</I>&gt;<i>thing  you need to check is whether you add required libraries to classpath
+</I>&gt;<i>in runner.cmd or not.
+</I>&gt;<i>
+</I>&gt;<i>Ender ERBEY
+</I>&gt;<i>Conacom GmbH
+</I>&gt;<i>
+</I>
+
+__________________________________
+www.edsamail.com
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name=&quot;runner.ini&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename=&quot;runner.ini&quot;
+
+Iy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0NCiMgTFJXUA0KIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0NCiMgdGhlIGRlZmF1bHQgTFJXUC1ob3N0IHRvIGNvbm5l
+Y3QNCmRlZmF1bHRfaG9zdD0xMjcuMC4wLjENCg0KIyB0aGUgZGVmYXVsdCBMUldQLXBvcnQg
+dG8gY29ubmVjdA0KZGVmYXVsdF9wb3J0PTgxDQoNCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIExPR0ZJTEUNCiMtLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+DQojIHBhdGggdG8gdGhlIGxvZ2ZpbGUgZGlyZWN0b3J5DQpsb2dmaWxlX3BhdGg9Li8NCg0K
+IyBwcmFlZml4IGZvciB0aGUgbG9nZmlsZSAoZWcuIFNSVkxfLi4uLikNCmxvZ2ZpbGVfcHJh
+ZWZpeD1zcnZsXw0KDQojIHN1ZmZpeCBmb3IgdGhlIGxvZ2ZpbGUgKGVoLiAuTE9HKQ0KbG9n
+ZmlsZV9zdWZmaXg9LmxvZw0KDQojIHdoaWNoIG91dHB1dCB0byBsb2cgPw0KIyBEID0gRGVi
+dWcNCiMgIyA9IEluZm9ybWF0aW9uYWwNCiMgISA9IFdhcm5pbmdzDQojID8gPSBFcnJvcnMN
+CiMgUyA9IGxvZ291dHB1dCBkb25lIGJ5IHRoZSBzZXJ2bGV0DQojIEMgPSBsb2dvdXRwdXQg
+ZG9uZSBieSB0aGUgY2xhc3Nsb2FkZXINCiEgbG9nZmlsZV9vcHRpb25zPUQjIT9TQw0KbG9n
+ZmlsZV9vcHRpb25zPSE/Uw0KDQojIGZvcm1hdCBvZiB0aGUgZGF0ZSBpbiB0aGUgbG9nZmls
+ZSAoc2VlOiBqYXZhLnRleHQuU2ltcGxlRGF0ZUZvcm1hdCkNCiMgZGVmYXVsdCA9IGRkLk1N
+Lnl5eXkgKGdlcm1hbiBmb3JtYXQpDQohIGxvZ2ZpbGVfZGF0ZWZvcm1hdD15eXl5L01NL2Rk
+DQoNCiMgZm9ybWF0IG9mIHRoZSB0aW1lIGluIHRoZSBsb2dmaWxlICAoc2VlOiBqYXZhLnRl
+eHQuU2ltcGxlRGF0ZUZvcm1hdCkNCiMgZGVmYXVsdCA9IEhILm1tLnNzIChnZXJtYW4gZm9y
+bWF0KQ0KISBsb2dmaWxlX2RhdGVmb3JtYXQ9SEg6bW06c3MNCg0KIy0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiMgU0VTU0lP
+Tk1BTkFHRVINCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tDQojIHRoZSBjb25maWd1cmF0aW9uLWZpbGUgZm9yIHRoZSBzZXNz
+aW9ubWFuYWdlcg0KIyBpZiBvbW1pdHRlZCwgZGVmYXVsdHMgYW5kIHRoZSBtZW1vcnktc2Vz
+c2lvbm1hbmFnZXIgaXMgdXNlZA0KISBzZXNzaW9ubWFuYWdlcmNvbmZpZz1tZW1fc2Vzc2lv
+bm1nci5pbmkNCiEgc2Vzc2lvbm1hbmFnZXJjb25maWc9ZmlsZV9zZXNzaW9ubWdyLmluaQ0K
+c2Vzc2lvbm1hbmFnZXJjb25maWc9bWVtX3Nlc3Npb25tZ3IuaW5pDQoNCiMtLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIFNF
+UlZMRVRTIEFORCBDT05GSUdVUkFUSU9ODQojLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KI3NlcnZsZXRfY2ZnPXN2X2RlbW8u
+aW5pDQohIHNlcnZsZXRfY2ZnPWFqcC5pbmkNCnNlcnZsZXRfY2ZnPXNlcnZsZXQuaW5pDQoN
+CiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tDQojIFJFTU9URSBBQ0NFU1MNCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIHRoZSBJUCB0byBiaW5kIHRoZSBz
+ZXJ2ZXIgZm9yIHJlbW90ZSBhY2Nlc3MNCiMgZGVmYXVsdCA9IDEyNy4wLjAuMQ0KIyBhbiBl
+bXB0eSBzdHJpbmcgZGVuaWVzIHRoZSBzdGFydCBvZiB0aGUgY29tbXVuaWNhdGlvbiBzZXJ2
+ZXJ0aHJlYWQNCiEgcmVtb3RlX2JpbmRfaXA9DQohIHJlbW90ZV9iaW5kX2lwPTEyNy4wLjAu
+MQ0KDQojIHRoZSBwb3J0IGZvciB0aGUgc2VydmVyDQojIGRlZmF1bHQgPSAxMzMgKHN0YXRp
+c3RpY3MgcG9ydCkNCiEgcmVtb3RlX2JpbmRfcG9ydD0xMzMNCg0KIyB0aGUgcmVtb3RlIElQ
+cyBvciBob3N0cyB3aGljaCBjYW4gY29ubmVjdA0KIyBtdWx0aXBsZSBkb21haW5zIG9yIElQ
+cyBhcmUgc2VwYXJhdGVkIGJ5IGNvbW1hDQojIGRlZmF1bHQgPSAxMjcuMC4wLjENCiNyZW1v
+dGVfaG9zdHM9MTI3LjAuMC4xLCouY29uYWNvbS5kZQ0KDQojIHRoZSB1c2VybmFtZQ0KIyBk
+ZWZhdWx0ID0gKG5vIHVzZXJuYW1lIG5lZWRlZCkNCiEgcmVtb3RlX3VzZXI9dGVzdHVzZXIN
+Cg0KIyB0aGUgYWNjZXNzIHBhc3N3b3JkDQojIGRlZmF1bHQgPSAobm8gcGFzc3dvcmQgbmVl
+ZGVkKQ0KISByZW1vdGVfcGFzcz10ZXN0cGFzc3dvcmQNCg0KIyBhbGxvdyByZW1vdGUgcmVz
+dGFydCA/DQojIGRlZmF1bHQgPSAwICg9bm90IGFsbG93ZWQsIDE9YWxsb3dlZCkNCnJlbW90
+ZV9yZXN0YXJ0PTENCg0KIyBhbGxvdyByZW1vdGUgc2h1dGRvd24gPw0KIyBkZWZhdWx0ID0g
+MCAoPW5vdCBhbGxvd2VkLCAxPWFsbG93ZWQpDQpyZW1vdGVfc2h1dGRvd249MQ0KDQojLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQ0KIyBNSVNDLg0KIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0NCiMgdGltZSBhZnRlciB3aGljaCB0aGUgcnVubmVyIHNob3Vs
+ZCBjaGVjayBpZiB0aGUgZmlsZXMNCiMgJ3Jlc3RhcnQnIG9yICdzaHV0ZG93bicgZXhpc3Rz
+Lg0KIyBkZWZhdWx0ID0gMTAwMCBtaWxpc2Vjb25kcw0KISBzZW1hcGhvcmVjaGVjaz0xMDAw
+DQoNCiMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tDQojIFRST1VCTEVTSE9PVElORyAvIERFQlVHR0lORw0KIy0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiMgc2V0
+IGFub3RoZXIgbGFuZ3VhZ2UgLyBsb2NhbGUgPw0KIyB0aGlzIHN0cmluZyBpcyBwYXNzZWQg
+dG8gJ25ldyBMb2NhbGUocGFydDEscGFydDJbLHBhcnQzXSknDQojIGRlZmF1bHQgPSAnJyAo
+c2VlIGphdmEudXRpbC5Mb2NhbGUpDQohIGxvY2FsZT1kZSxERQ0KbG9jYWxlPWVuLFVTDQoN
+CiMgcnVuIGZpbmFsaXphdGlvbiBvbiBleGl0IC8gcmVzdGFydCA/ICgwPWZhbHNlLzE9dHJ1
+ZSkNCiMgZGVmYXVsdCA9IDANCiEgZmluYWxpemF0aW9uPTENCg0KIyBydW4gZmluYWxpemVy
+cyBvbiBleGl0ID8NCiMgZGVmYXVsdCA9IDANCiEgcnVuZmluYWxpemVyc29uZXhpdD0xDQo=
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name=&quot;servlet.ini&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename=&quot;servlet.ini&quot;
+
+IyBzdGFydHN0cmluZyB3aGljaCBkZWZpbmVzIHRoZSBzZXJ2bGV0Lg0KIw0KIyBwYXR0ZXJu
+ZWQgZnJvbSBzdl9kZW1vLmluaQ0KI3NlcnZsZXRpZGVudGlmaWVyID0gL2dudWpzcA0KI2Ns
+YXNzID0gbmV0LmNvbmFjb20uc2VydmxldHJ1bm5lci51dGlsLlRlc3RTZXJ2bGV0DQojY2xh
+c3MgPSBvcmcuZ2p0LmpzcC50ZXN0LkdOVUpTUFRlc3RTZXJ2bGV0DQpjbGFzcyA9IG9yZy5n
+anQuanNwLkpzcFNlcnZsZXQNCiNjb25maWcgPSBzZXJ2bGV0LnByb3BlcnRpZXMNCg==
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name=&quot;runner.bat&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename=&quot;runner.bat&quot;
+
+QGVjaG8gb2ZmDQpqYXZhIC1jcCAuO3J1bm5lci5qYXI7amF2YXguamFyOy4vZ251anNwLTEu
+MC4xL2xpYi9nbnVqc3AxMHRlc3QuamFyOy4vZ251anNwLTEuMC4xL2xpYi9vcGVueG1sLTEu
+Mi13M2MuamFyOy4vZ251anNwLTEuMC4xL2xpYi9zZXJ2bGV0LTIuMC1wbHVzLmphciBuZXQu
+Y29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uUnVubmVyDQpleGl0DQo=
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name=&quot;servlet.properties&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename=&quot;servlet.properties&quot;
+
+IyBHTlVKU1AgDQpzZXJ2bGV0LmdudWpzcC5jb2RlPW9yZy5nanQuanNwLkpzcFNlcnZsZXQg
+DQpzZXJ2bGV0LmdudWpzcC5pbml0QXJncz1zY3JhdGNoZGlyPWpzcHJlcG9zaXRvcnkNCnNl
+cnZsZXQuZ251anNwLmluaXRBcmdzPWpzZXJ2PXRydWUNCnNlcnZsZXQuZ251anNwLmluaXRB
+cmdzPWtlZXBKYXZhPXRydWUNCnNlcnZsZXQuZ251anNwLmluaXRBcmdzPWRlYnVnPXRydWUN
+CnNlcnZsZXQuZ251anNwLmluaXRBcmdzPXBhdGhkZWJ1Zz10cnVlDQpzZXJ2bGV0LmdudWpz
+cC5pbml0QXJncz1jaGVja2NsYXNzPXRydWUNCg0Kc2VydmxldC5nbnVqc3AuaW5pdEFyZ3M9
+Y29tcGlsZXI9amF2YWMgLWNsYXNzcGF0aCAlc2NyYXRjaGRpciU7Li9nbnVqc3AtMS4wLjEv
+bGliL2dudWpzcDEwdGVzdC5qYXI7Li9nbnVqc3AtMS4wLjEvbGliL29wZW54bWwtMS4yLXcz
+Yy5qYXI7Li9nbnVqc3AtMS4wLjEvbGliL3NlcnZsZXQtMi4wLXBsdXMuamFyIC1kICVzY3Jh
+dGNoZGlyJSAtZGVwcmVjYXRpb24gJXNvdXJjZSUNCg0Kc2VydmxldC5nbnVqc3AuYWxpYXNl
+cz0qLmpzcCANCg0Kc2VydmxldC5nbnVqc3AucHJlbG9hZD10cnVlDQpzZXJ2bGV0cy5zdGFy
+dHVwPWdudWpzcCANCiMNCg0KI3NlcnZsZXQuZ251anNwdGVzdHNlcnZsZXQuY29kZT1vcmcu
+Z2p0LmpzcC50ZXN0LkdOVUpTUFRlc3RTZXJ2bGV0DQojc2VydmxldHMuc3RhcnR1cD1nbnVq
+c3B0ZXN0c2VydmxldA0KIA0K
+----=_N7RbkVloYCJPsFz4gzCw
+Content-Type: application/octet-stream;
+	name=&quot;srvl_20020507.log&quot;
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+	filename=&quot;srvl_20020507.log&quot;
+
+MDcuMDUuMjAwMiAyMy4zNy4wMC4wMzcwIFMgJy9zZXJ2bGV0WzEvMV0nIG9yZy5nanQuanNw
+LkpzcFNlcnZsZXQ6IGluaXQNCjA3LjA1LjIwMDIgMjMuMzcuMDAuMDQ4MCBTICcvc2Vydmxl
+dFsxLzFdJyBvcmcuZ2p0LmpzcC5Kc3BTZXJ2bGV0OiBHTlVKU1A6IGNvdWxkIG5vdCBjcmVh
+dGUgJ0M6XFhpdGFtaVxqYXZhJw0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2
+bGV0WzEvMV0nIFVuYWJsZSB0byBjYWxsIC5pbml0KCkgb2Ygb3JnLmdqdC5qc3AuSnNwU2Vy
+dmxldA0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0nIDo6amF2
+YXguc2VydmxldC5TZXJ2bGV0RXhjZXB0aW9uOiBHTlVKU1A6IGNvdWxkIG5vdCBjcmVhdGUg
+c2NyYXRjaERpcg0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0n
+IDo6YXQgb3JnLmdqdC5qc3AuSnNwU2VydmxldC5pbml0KEpzcFNlcnZsZXQuamF2YTozMDIp
+DQowNy4wNS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRbMS8xXScgOjphdCBuZXQu
+Y29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uU2VydmxldEluc3RhbmNlLmluaXQoU2Vydmxl
+dEluc3RhbmNlLmphdmEpDQowNy4wNS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRb
+MS8xXScgOjphdCBuZXQuY29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uU2VydmxldEluc3Rh
+bmNlLjxpbml0PihTZXJ2bGV0SW5zdGFuY2UuamF2YSkNCjA3LjA1LjIwMDIgMjMuMzcuMDAu
+MDQ4MCA/ICcvc2VydmxldFsxLzFdJyA6OmF0IG5ldC5jb25hY29tLnNlcnZsZXRydW5uZXIu
+bWFpbi5TZXJ2bGV0Q29udGFpbmVyLnN0YXJ0SW5zdGFuY2UoU2VydmxldENvbnRhaW5lci5q
+YXZhKQ0KMDcuMDUuMjAwMiAyMy4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0nIDo6YXQg
+bmV0LmNvbmFjb20uc2VydmxldHJ1bm5lci5tYWluLlNlcnZsZXRDb250YWluZXIuaW5pdChT
+ZXJ2bGV0Q29udGFpbmVyLmphdmEpDQowNy4wNS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3Nl
+cnZsZXRbMS8xXScgOjphdCBuZXQuY29uYWNvbS5zZXJ2bGV0cnVubmVyLm1haW4uU2Vydmxl
+dENvbnRhaW5lci48aW5pdD4oU2VydmxldENvbnRhaW5lci5qYXZhKQ0KMDcuMDUuMjAwMiAy
+My4zNy4wMC4wNDgwID8gJy9zZXJ2bGV0WzEvMV0nIDo6YXQgbmV0LmNvbmFjb20uc2Vydmxl
+dHJ1bm5lci5tYWluLlJ1bm5lci5jcmVhdGVDb250YWluZXIoUnVubmVyLmphdmEpDQowNy4w
+NS4yMDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRbMS8xXScgOjphdCBuZXQuY29uYWNv
+bS5zZXJ2bGV0cnVubmVyLm1haW4uUnVubmVyLmluaXQoUnVubmVyLmphdmEpDQowNy4wNS4y
+MDAyIDIzLjM3LjAwLjA0ODAgPyAnL3NlcnZsZXRbMS8xXScgOjphdCBuZXQuY29uYWNvbS5z
+ZXJ2bGV0cnVubmVyLm1haW4uUnVubmVyLjxpbml0PihSdW5uZXIuamF2YSkNCjA3LjA1LjIw
+MDIgMjMuMzcuMDAuMDQ4MCA/ICcvc2VydmxldFsxLzFdJyA6OmF0IG5ldC5jb25hY29tLnNl
+cnZsZXRydW5uZXIubWFpbi5SdW5uZXIubWFpbihSdW5uZXIuamF2YSkNCjA3LjA1LjIwMDIg
+MjMuMzcuMDAuMDY1MCBTICcvc2VydmxldFsxLzFdJyBvcmcuZ2p0LmpzcC5Kc3BTZXJ2bGV0
+OiBkZXN0cm95DQo=
+----=_N7RbkVloYCJPsFz4gzCw--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000152.html">[Xitami-Dev] iMatix source archives off-line
+</A></li>
+	<LI> Next message: <A HREF="000154.html">[Xitami-Dev] Re: Configure gnujsp with servletrunner in xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#153">[ date ]</a>
+              <a href="thread.html#153">[ thread ]</a>
+              <a href="subject.html#153">[ subject ]</a>
+              <a href="author.html#153">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

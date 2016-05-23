@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Abnormal Program Termination
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000755.html">
+   <LINK REL="Next"  HREF="000803.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Abnormal Program Termination
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Abnormal Program Termination">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 19 Aug 2001 00:43:00 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000755.html">[Xitami] Abnormal Program Termination
+</A></li>
+        <LI> Next message: <A HREF="000803.html">[Xitami] Abnormal Program Termination
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#757">[ date ]</a>
+              <a href="thread.html#757">[ thread ]</a>
+              <a href="subject.html#757">[ subject ]</a>
+              <a href="author.html#757">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 11:14 PM 8/18/01 -0500, B. Solomon writeth:
+&gt;<i> A little system information:
+</I>&gt;<i> 
+</I>&gt;<i> Pentium 233MMX
+</I>&gt;<i> 32-Megs of memory
+</I>
+Your main problem is probably right here.  Xitami has, IMO, not-so-great
+memory management since it is generally built under MSVC++ for the various
+Windows builds.  You are probably running out of memory (usually happens
+when running CGIs like PHP) and then the MSVC library fails, thus Xitami
+fails.  The library probably fails since it will generally lock itself in
+real memory (so it can't be swapped out), then when you get enough locks
+and zero memory free, bam!  Windows kills the offending application (which
+is Xitami).
+
+My suggestion in this case is to get more memory (my system has 384MB RAM -
+you probably don't need that much if you run a dedicated server - my
+machine is a high-end workstation/server) and something like MemTurbo or
+RamIdle (both utilities can free up real RAM when it gets low).
+
+&gt;<i> Windows 95 OSR2 with latest patches.
+</I>&gt;<i> Console reports nearly 9 megabytes of configuration usage (normal - system
+</I>&gt;<i>has about 200 virtual hosts).
+</I>
+I normally don't recommend RAM purchases, but if you run 200 VHosts, they
+probably need more than 32MB under any circumstance (Windows needs about
+24MB to run decently (at least 16MB to run), add 9MB to that and you have
+0MB of real RAM free and are probably doing some major hard drive
+swapping).  128MB with RamIdle set to recover RAM at 25MB free should
+provide you, your users, and more importantly the OS some breathing room.
+
+Hope this helps!
+
+
+           Thomas J. Hruska -- <A HREF="mailto:shinelight@crosswinds.net">shinelight@crosswinds.net</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000755.html">[Xitami] Abnormal Program Termination
+</A></li>
+	<LI> Next message: <A HREF="000803.html">[Xitami] Abnormal Program Termination
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#757">[ date ]</a>
+              <a href="thread.html#757">[ thread ]</a>
+              <a href="subject.html#757">[ subject ]</a>
+              <a href="author.html#757">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

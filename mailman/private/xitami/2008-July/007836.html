@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] XITAMI, multiple domains and SSL
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20XITAMI%2C%20multiple%20domains%20and%20SSL&In-Reply-To=BAY127-DAV74899307A8B62ED229CB5F8980%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007834.html">
+   <LINK REL="Next"  HREF="007835.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] XITAMI, multiple domains and SSL</H1>
+    <B>Dave Cole</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20XITAMI%2C%20multiple%20domains%20and%20SSL&In-Reply-To=BAY127-DAV74899307A8B62ED229CB5F8980%40phx.gbl"
+       TITLE="[Xitami] XITAMI, multiple domains and SSL">runner_one at blomand.net
+       </A><BR>
+    <I>Thu Jul  3 19:12:44 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007834.html">[Xitami] XITAMI, multiple domains and SSL
+</A></li>
+        <LI>Next message: <A HREF="007835.html">[Xitami] HTTP_COOKIE empty in Linux
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7836">[ date ]</a>
+              <a href="thread.html#7836">[ thread ]</a>
+              <a href="subject.html#7836">[ subject ]</a>
+              <a href="author.html#7836">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Have done all this 
+
+and set the Virtual Host IP in the Virtual Hosts section of the config but
+ssl never loads on the second IP.
+
+ 
+
+  _____  
+
+From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of Russel Olinger
+Sent: Thursday, July 03, 2008 10:47 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] XITAMI, multiple domains and SSL
+
+ 
+
+I believe Xitami Pro only allows you to have SSL running on the primary/real
+domain bound to the primary IP of the server and it won't work on virtual
+'named' domains.  How exactly are you binding Xitami's multiple IPs to
+specific domains?  Are you depending solely on DNS - it won't work using DNS
+based hosting?
+
+ 
+
+Read this info on Virtual Hosts:
+<A HREF="http://legacy.imatix.com/html/xitami/index8.htm#vhosts">http://legacy.imatix.com/html/xitami/index8.htm#vhosts</A>
+
+ 
+
+1.  Physical server must have multiple IPs
+
+2.  Xitami must be specifically bound to the desired IPs
+
+3.  The virtual hosts section in the .cfg file must have IP to vhost
+associations
+
+        ie: x.x.x.255 = d_domain.cfg
+
+4.  You cannot bind named domains to SSL vhosts
+
+        ie: www.***d.com = d_domain.cfg
+
+5. Make certain your [Server] global configurations are not conflicting your
+vhost configurations
+
+6. Use DNS to make certain www.d_domian.com points to x.x.x.225 IP address
+and that Reverse DNS is properly working, SSL uses Reverse DNS to verify
+authenticity.
+
+ 
+
+Make certain the above is all in order and let us know if works out or not.
+
+-Russel
+
+ 
+
+----- Original Message ----- 
+
+From: Dave Cole &lt;mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">runner_one at blomand.net</A>&gt;  
+
+To: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A> 
+
+Sent: Thursday, July 03, 2008 6:07 AM
+
+Subject: [Xitami] XITAMI, multiple domains and SSL
+
+ 
+
+As I long time Xitami user I consider myself well versed in configuring
+Xitami. However today I ran into a problem and have yet to figure out a
+solution.
+
+ 
+
+I have using XITAMI PRO running on a server serving web pages to multiple
+domains for several years. Until today only one of the domains needed SSL.
+I have been running the SSL for that domain for some time with no problems,
+Today I purchased a separate second certificate for the new domain, however
+today try as I could  I could not get XITAMI configured for SSL on multiple
+domains. The instructions state that SSL is only supported for multiple
+domains when using IP based domains I have tried to do this to no avail.
+
+ 
+
+My configuration is as follows;
+
+First IP ADDRESS XXX.XXX.XXX.251 handles ****a.com, ****b.com and ****c.com.
+
+
+****a.com has its own certificate and key referenced in sslhttp.cfs (This
+Works)
+
+Second IP ADDRESS xxx.xxx.xxx.225  handles ****d.com and I have a
+certificate and key for that domain already purchased  
+
+I tested the certificate and key globally and they work so that is not the
+problem.
+
+Try as I might I could not get the correct configuration for domain
+****d.com to reference the second certificate and key. Is there anyone on
+the list that can help me with the correct configuration to make this work?
+The SSL instructions included with even with the PRO version of XITAMI is
+not very detailed.
+
+ 
+
+Sorry for the obfuscated IPs and domains but we are a medical company and I
+need to comply with HIPPA.
+
+ 
+
+
+  _____  
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.xitami.org/pipermail/xitami/attachments/20080703/ec46d426/attachment.htm">http://lists.xitami.org/pipermail/xitami/attachments/20080703/ec46d426/attachment.htm</A> 
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007834.html">[Xitami] XITAMI, multiple domains and SSL
+</A></li>
+	<LI>Next message: <A HREF="007835.html">[Xitami] HTTP_COOKIE empty in Linux
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7836">[ date ]</a>
+              <a href="thread.html#7836">[ thread ]</a>
+              <a href="subject.html#7836">[ subject ]</a>
+              <a href="author.html#7836">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

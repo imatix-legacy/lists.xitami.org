@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami service
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004993.html">
+   <LINK REL="Next"  HREF="005007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami service
+   </H1>
+    <B>Tom Baker
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami service">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 10 May 2003 02:01:51 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004993.html">[Xitami] Xitami service
+</A></li>
+        <LI> Next message: <A HREF="005007.html">[Xitami] Xitami service
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4995">[ date ]</a>
+              <a href="thread.html#4995">[ thread ]</a>
+              <a href="subject.html#4995">[ subject ]</a>
+              <a href="author.html#4995">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>----- Original Message ----- 
+From: &quot;Go Bonkers&quot; &lt;<A HREF="mailto:gobonkers@hotmail.com">gobonkers@hotmail.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, May 08, 2003 12:25 AM
+Subject: Re: [Xitami] Xitami service
+
+&gt;<i> In my win98/Start/Programs/Start Up/ folder, I have a shortcut.  The
+</I>target
+&gt;<i> run line in the shortcut properties  here for example,  reads ;
+</I>&gt;<i> &quot;G:\Cwood\delayer.exe&quot; &quot;H:\Xitami\xidos32.exe&quot; /D55
+</I>&gt;<i> .....the ending   /D55 above    delays the start of   xidos32    55
+</I>seconds.
+&gt;<i>
+</I>&gt;<i> mike
+</I>&gt;<i> ~~~
+</I>
+Ok! I got it figured out.
+The way to start a service from the command line in win2k is &quot;
+net start Servicename
+Stopping is:
+net stop Servicename
+
+In this case, that is
+net start &quot;Xitami Web Server&quot;
+
+Throw the delayer in there and you have
+delayer.exe &quot;net start &quot;Xitami Web Server&quot;&quot; /D20
+
+BUT! Double quotes don't work. So I wrote a batch file called xitami.bat
+which contains
+net start &quot;Xitami Web Server&quot;
+
+So my final shortcut which I placed in Startup reads
+delayer.exe &quot;xitami.bat&quot; /D20
+
+Our course with appropriate paths.
+Finally got it!
+
+Thanks
+Tom
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004993.html">[Xitami] Xitami service
+</A></li>
+	<LI> Next message: <A HREF="005007.html">[Xitami] Xitami service
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4995">[ date ]</a>
+              <a href="thread.html#4995">[ thread ]</a>
+              <a href="subject.html#4995">[ subject ]</a>
+              <a href="author.html#4995">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

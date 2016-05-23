@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami FTP port.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005901.html">
+   <LINK REL="Next"  HREF="005903.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami FTP port.
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami FTP port.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 11 May 2004 14:48:44 +0000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005901.html">Fw: [Xitami] Re: Xitami Help - Michael
+</A></li>
+        <LI> Next message: <A HREF="005903.html">[Xitami] logs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5902">[ date ]</a>
+              <a href="thread.html#5902">[ thread ]</a>
+              <a href="subject.html#5902">[ subject ]</a>
+              <a href="author.html#5902">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Brian,
+
+
+THANKS for your reponse! :)
+
+
+&lt;.
+&gt;<i>.
+</I>&gt;<i>.
+</I>&gt;<i>.
+</I>&gt;<i> &gt;         2. If so and port 20 is used by Xitami should it 
+</I>&gt;<i> &gt;            be discussed in the documentation?
+</I>&gt;<i> 
+</I>
+OK and I apologize that I did not mention that a ROUTER with the NAT firewall is involved.
+And, you answered that issue below. 
+
+
+&gt;<i> Why should it?  Port 20/21 is part and parcel of FTP, which was
+</I>&gt;<i> standardized in RFC-765 way back in June of 1980.
+</I>&gt;<i> 
+</I>&gt;<i> It's only things like firewalls and NATted routers which cause difficulty
+</I>&gt;<i> with this standard, and it is in that area that further documentation
+</I>&gt;<i> ought to be expected.
+</I>&gt;<i> 
+</I>
+Yep,,,,,,EXACTLY!
+
+So, for those that are not completely up-to date with respect to these issues, etc. it would have been helpful if this had been discussed in the documentation along side the description of Port 21. As a result, it took some time away from others who very graciously responded to and helped solve this issue of Xitami FTP Server related to a ROUTER.
+
+
+Regards,
+
+Jerry
+
+
+
+
+&gt;<i> In message 
+</I>&gt;<i> &lt;<A HREF="mailto:051020041639.7881.409FB03C000836C600001EC92160376021FFCC9891909398@att.net">051020041639.7881.409FB03C000836C600001EC92160376021FFCC9891909398@att.net</A>&gt;
+</I>&gt;<i>    <A HREF="mailto:jglong3@att.net">jglong3@att.net</A> writes:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; The following was listed at IANA for ports 20 and 21;
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;       ftp-data         20/tcp    File Transfer [Default Data]
+</I>&gt;<i> &gt;       ftp-data         20/udp    File Transfer [Default Data]
+</I>&gt;<i> &gt;       ftp              21/tcp    File Transfer [Control]
+</I>&gt;<i> &gt;       ftp              21/udp    File Transfer [Control]
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Please forgive me, the last time I worked with any level of protocol
+</I>&gt;<i> &gt; was a long time ago (circa &quot;IBM BI-SYNC&quot; and previous).
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; It does look like port 21 is to logon with username:password control
+</I>&gt;<i> &gt; (authentication???) and that 20 would be the up/down load of files(???).
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;         1. Is this the meaning for port 20 and 21? 
+</I>&gt;<i> 
+</I>&gt;<i> Yes: port 21 is used for control connections (of course, the originating
+</I>&gt;<i> FTP client can use anything it likes).  Port 20 is used, by an FTP
+</I>&gt;<i> server, for uploaded [i.e. PUT] data; in the full protocol, downloaded
+</I>&gt;<i> [i.e. GET] data is sent TO whichever port the client has negotiated with
+</I>&gt;<i> a PORT command, from port 20 on the server.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;         2. If so and port 20 is used by Xitami should it 
+</I>&gt;<i> &gt;            be discussed in the documentation?
+</I>&gt;<i> 
+</I>&gt;<i> Why should it?  Port 20/21 is part and parcel of FTP, which was
+</I>&gt;<i> standardized in RFC-765 way back in June of 1980.
+</I>&gt;<i> 
+</I>&gt;<i> It's only things like firewalls and NATted routers which cause difficulty
+</I>&gt;<i> with this standard, and it is in that area that further documentation
+</I>&gt;<i> ought to be expected.
+</I>&gt;<i> 
+</I>&gt;<i> RFC-765 includes a rather useful bit of &quot;ASCII Art&quot;:
+</I>&gt;<i> 
+</I>&gt;<i>                                             -------------
+</I>&gt;<i>                                             |/---------\|
+</I>&gt;<i>                                             ||   User  ||    --------
+</I>&gt;<i>                                             ||Interface|&lt;---&gt;| User |
+</I>&gt;<i>                                             |\----:----/|    --------
+</I>&gt;<i>                   ----------                |     V     |
+</I>&gt;<i>                   |/------\|  FTP Commands  |/---------\|
+</I>&gt;<i>                   ||Server|&lt;----------------&gt;|   User  ||
+</I>&gt;<i>                   ||  PI  ||   FTP Replies  ||    PI   ||
+</I>&gt;<i>                   |\--:---/|                |\----:----/|
+</I>&gt;<i>                   |   V    |                |     V     |
+</I>&gt;<i>       --------    |/------\|      Data      |/---------\|    --------
+</I>&gt;<i>       | File |&lt;---&gt;|Server|&lt;----------------&gt;|  User   |&lt;---&gt;| File |
+</I>&gt;<i>       |System|    || DTP  ||   Connection   ||   DTP   ||    |System|
+</I>&gt;<i>       --------    |\------/|                |\---------/|    --------
+</I>&gt;<i>                   ----------                -------------
+</I>&gt;<i> 
+</I>&gt;<i>                   Server-FTP                   User-FTP
+</I>&gt;<i> 
+</I>&gt;<i>       NOTES: 1. The data connection may be used in either direction.
+</I>&gt;<i>              2. The data connection need not exist all of the time.
+</I>&gt;<i> 
+</I>&gt;<i>                       Figure 1  Model for FTP Use
+</I>&gt;<i> 
+</I>&gt;<i> PI = Protocol Interpreter; DTP = Data Transfer Port.
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i>    fix (vb.): 1. to paper over, obscure, hide from public view; 2. to
+</I>&gt;<i>    work around, in a way that produces unintended consequences that are
+</I>&gt;<i>    worse than the original problem.  Usage: &quot;Windows ME fixes many of the
+</I>&gt;<i>    shortcomings of Windows 98 SE&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005901.html">Fw: [Xitami] Re: Xitami Help - Michael
+</A></li>
+	<LI> Next message: <A HREF="005903.html">[Xitami] logs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5902">[ date ]</a>
+              <a href="thread.html#5902">[ thread ]</a>
+              <a href="subject.html#5902">[ subject ]</a>
+              <a href="author.html#5902">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

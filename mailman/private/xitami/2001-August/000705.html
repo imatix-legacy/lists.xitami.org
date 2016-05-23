@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] supervisor agent and logs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000704.html">
+   <LINK REL="Next"  HREF="000706.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] supervisor agent and logs
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] supervisor agent and logs">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Aug 2001 21:23:13 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000704.html">[Xitami] Password protected Perl CGI.
+</A></li>
+        <LI> Next message: <A HREF="000706.html">[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#705">[ date ]</a>
+              <a href="thread.html#705">[ thread ]</a>
+              <a href="subject.html#705">[ subject ]</a>
+              <a href="author.html#705">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;00fc01c11f12$e45bac10$<A HREF="mailto:659305c3@futeltra">659305c3@futeltra</A>&gt;, &quot;Michael S. Kazarin&quot; writes:
+&gt;<i>Ewen wrote:
+</I>&gt;|<i> You might be better working with it, to tell it not to remove log files
+</I>&gt;|<i> as often.  You can configure the log rotation and how long they're kept
+</I>&gt;|<i> in the Xitami configuration file as well.
+</I>&gt;<i>
+</I>&gt;<i>How do I actually do that? I have my logs cycled daily, so there is a file
+</I>&gt;<i>for each day.  But how can I tell it to keep more than 14 of them, 
+</I>&gt;<i>i. e. more than two weeks of logs.
+</I>
+I've just stared at the source a little, and it seems that you can't
+control what the supervisor does -- it seems to have the
+two-weeks-is-plenty setting hard coded into it :-(
+
+In which case, at present, you'll either have to disable the supervisor,
+or you'll have to change the source.
+
+According to the source the Xitami supervisor can be disabled by
+setting:
+
+[server] supervisor=0
+
+(which appears to be the default setting, in at least some versions of
+Xitami.)
+
+If it isn't the default in your version, you should set it in
+defaults.cfg; that's the only place it'll be noticed, as it's checked as
+xitami is starting up.  (If that doesn't work try changing xitami.cfg as
+well, but I suspect that won't make a difference.)
+
+Sorry for the confusion -- you were on the right track after all.  It
+_should_ be possible to configure how long the supervisor keeps things
+around though.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000704.html">[Xitami] Password protected Perl CGI.
+</A></li>
+	<LI> Next message: <A HREF="000706.html">[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#705">[ date ]</a>
+              <a href="thread.html#705">[ thread ]</a>
+              <a href="subject.html#705">[ subject ]</a>
+              <a href="author.html#705">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

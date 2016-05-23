@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] lrwp test program...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003959.html">
+   <LINK REL="Next"  HREF="003961.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] lrwp test program...
+   </H1>
+    <B>bernd hohmann
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] lrwp test program...">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 13 Sep 2002 19:07:06 +0100 (MEZ)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003959.html">[Xitami] lrwp test program...
+</A></li>
+        <LI> Next message: <A HREF="003961.html">[Xitami] Zone Alarm / Web site SECURITY!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3960">[ date ]</a>
+              <a href="thread.html#3960">[ thread ]</a>
+              <a href="subject.html#3960">[ subject ]</a>
+              <a href="author.html#3960">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 13 Sep 2002 09:30:31 -0700, Joseph Saunders wrote:
+
+&gt;<i> Browsing <A HREF="http://10.45.55.9/lcgi">http://10.45.55.9/lcgi</A> results in a browser generated 403 page
+</I>&gt;<i> (HTTP Error 403 - Forbidden)
+</I>
+[...]
+
+&gt;<i>10.45.55.43 - - [13/Sep/2002:16:15:00 +0000] &quot;GET /lcgi HTTP/1.1&quot; 403 0 &quot;&quot; 
+</I>&gt;<i>10.45.55.43 - - [13/Sep/2002:16:15:17 +0000] &quot;GET /mega HTTP/1.1&quot; 200 115433
+</I>
+/lcgi doesn't work, /mega does. hmm. don't know if there are any
+changes in the protocol syntax between 2.4d4 and d9
+
+&gt;<i>Another question, in the above access.log, why is there a 304 for every HTTP request?
+</I>&gt;<i>Is there a configuration parameter that causes this behavior?
+</I>
+304 means &quot;not modified&quot;. if your browser has the most recent copy of
+the graphics and webpages in the cache, xitami will return an 304
+instead of the requested data.
+
+you cannot switch off xitamis caching behaviour (only for the files
+configured with &quot;default1=...&quot; to disable caching of your default files
+like /index.html&quot;
+
+to disable caching try smthttpl.c line 2139 :
+
+if (p_http-&gt; default_page
+  &amp;&amp; *HCONFIG (&quot;server:cache-defaults&quot;) == '0')
+   return;
+
+bernd
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003959.html">[Xitami] lrwp test program...
+</A></li>
+	<LI> Next message: <A HREF="003961.html">[Xitami] Zone Alarm / Web site SECURITY!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3960">[ date ]</a>
+              <a href="thread.html#3960">[ thread ]</a>
+              <a href="subject.html#3960">[ subject ]</a>
+              <a href="author.html#3960">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

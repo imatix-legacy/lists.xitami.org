@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] [Alias] and [Filter] do conflict?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006730.html">
+   <LINK REL="Next"  HREF="006732.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] [Alias] and [Filter] do conflict?
+   </H1>
+    <B>Maurilio Longo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] [Alias] and [Filter] do conflict?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 12 May 2005 20:04:03 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006730.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+        <LI> Next message: <A HREF="006732.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6731">[ date ]</a>
+              <a href="thread.html#6731">[ thread ]</a>
+              <a href="subject.html#6731">[ subject ]</a>
+              <a href="author.html#6731">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Pieter,
+
+I owe you a beer :)
+
+With this last fix I can now correctly execute <A HREF="http://localhost/wiki/pmwiki.php">http://localhost/wiki/pmwiki.php</A>
+:<i>) _but_ I cannot execute <A HREF="http://localhost/schede/pmwiki.php">http://localhost/schede/pmwiki.php</A> since, after the
+</I>first request, all links point to /wiki/ instead of /schede/.
+
+I don't know if this is a &quot;problem&quot; in xitami, php.exe and/or pmwiki.php but it
+is not a big problem since it is easily fixed simply having the [Alias] equal to
+the folder it is aliasing:
+
+[Alias]
+    /wiki = &quot;w:/wiki&quot;
+
+maybe it is enough to write
+
+[Alias]
+    /wiki = &quot;/wiki&quot;
+
+if inside same volume, tomorrow I'll do some tests (and with a symlink I can have
+/wiki to point to some other volume on my system :))
+
+Thanks!
+
+Maurilio.
+
+Pieter Hintjens ha scritto:
+
+&gt;<i> On 12/05/2005 06:12 pm, Maurilio Longo wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; sorry, it still does not work...
+</I>&gt;<i>
+</I>&gt;<i> OK, my mistake.  It's that terrible time in the afternoon here in Brussels...
+</I>&gt;<i> Too late for coffee and too early for beer.  Try this:
+</I>&gt;<i>
+</I>&gt;<i>     if (filter)
+</I>&gt;<i>         path_translated = xstrcpy (NULL, p_http-&gt; file_name, NULL);
+</I>&gt;<i>     else
+</I>&gt;<i>         ...
+</I>&gt;<i>
+</I>&gt;<i> -
+</I>&gt;<i> Pieter Hintjens
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--
+ __________
+|<i>  |  | |__| Maurilio Longo
+</I>|<i>_|_|_|____| farmaconsult s.r.l.
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006730.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+	<LI> Next message: <A HREF="006732.html">[Xitami] [Alias] and [Filter] do conflict?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6731">[ date ]</a>
+              <a href="thread.html#6731">[ thread ]</a>
+              <a href="subject.html#6731">[ subject ]</a>
+              <a href="author.html#6731">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

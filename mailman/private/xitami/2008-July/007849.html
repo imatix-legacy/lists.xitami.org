@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] php and xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20php%20and%20xitami&In-Reply-To=20080716.173930.853.0%40webmail17.dca.untd.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007848.html">
+   <LINK REL="Next"  HREF="007850.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] php and xitami</H1>
+    <B>MRJ</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20php%20and%20xitami&In-Reply-To=20080716.173930.853.0%40webmail17.dca.untd.com"
+       TITLE="[Xitami] php and xitami">mrj at 10e12.com
+       </A><BR>
+    <I>Fri Jul 18 18:58:38 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007848.html">[Xitami] php and xitami
+</A></li>
+        <LI>Next message: <A HREF="007850.html">[Xitami] php and xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7849">[ date ]</a>
+              <a href="thread.html#7849">[ thread ]</a>
+              <a href="subject.html#7849">[ subject ]</a>
+              <a href="author.html#7849">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Skip all they say about PHP-CGI
+
+Use this to make it work..
+
+In defaults.cfg  add the following...
+
+[Filter]
+#   
+-------------------------------------------------------------------------
+.php=&quot;c:/php/php.exe&quot;
+
+[Mime]
+    php=application/x-httpd-php
+
+
+Change your default index settings as follows...
+
+    default1=index.php
+    default2=default.php
+    default3=index.htm
+    default4=default.htm
+    default5=index.html
+    default6=default.html
+    default7=404.htm
+
+
+In default setup of PHP 5 on Windows you should be aware of the following.
+
+a)    $_POST[$VarName] WILL NOT WORK
+       $_SESSION[$xVar]  WILL NOT WORK
+
+they are turned off by default and should be so as well since they pose 
+security risks.
+
+b) The workaround for this is included below
+
+(&#169;2008 to myself)
+
+&lt;?php
+/*
+==========================================================================
+A replacement function for $_REQUEST as this does not work at all out of
+the box on XITAMI web server. I was seriously thinking of making it a
+somwhat permanent fixture in my PHP arsenal by adding a $_ infront of
+the name but that would not fly to well in some languages I bet.
+==========================================================================
+Safer Networks Ltd. (c) 2008 - Major Thanks to
+lphuberdeau at phpquebec dot org (21-Aug-2004 05:55)
+for the entry that resolved all my problems in PHP man. 5 chm version
+suggestion in Chapter 4. Dealing with XForms
+==========================================================================
+*/
+function EX_REQUEST($var){
+If ($_SERVER['REQUEST_METHOD']==&quot;GET&quot;){
+    $qstr = $_SERVER['QUERY_STRING'];
+    If ($qstr!=&quot;&quot;){
+        parse_str($qstr, $element);
+        $val = $element[$var];
+    }else{
+        $val = NULL;
+    }
+    unset($qstr); //free mem or data you dont want GC to keep
+}else if($_SERVER['REQUEST_METHOD']==&quot;POST&quot;){
+    $fp = fopen( &quot;<A HREF="php://stdin&quot;,">php://stdin&quot;,</A> &quot;r&quot; );
+    $data = &quot;&quot;;
+    while(!feof( $fp ) ){
+       $data .= fgets( $fp );
+        }
+    fclose( $fp );
+    if($data!=&quot;&quot;){
+        parse_str($data, $element); //printf($data);
+        $val = $element[$var];
+        unset($data); //free mem or data you dont want GC to keep
+    }else{
+        $val = NULL;
+    }
+}else{
+    // DOES NOT SUPPORT PUT OR HEAD AT THIS TIME.
+    // and we cannot return Empty or 0 when nothing was recieved.
+    $val = NULL;
+}
+return $val;
+}
+?&gt;
+SEE&amp;nbsp;SOURCE&amp;nbsp;FOR&amp;nbsp;INFORMATION&lt;HR&gt;
+&lt;?php
+// HOW TO USE THE FUNCTION --------------------
+/* REMOVE LINE 46 AND 66 TO SEE WORKING EXAMPLE
+
+&lt;html&gt;&lt;body&gt;
+&lt;form method=post action=&quot;x.php&quot; 
+enctype='application/x-www-form-urlencoded'&gt;
+&lt;input type=hidden value=4 name='p'&gt;&lt;input type=submit value='post 
+it'&gt;&lt;/form&gt;&lt;br&gt;
+
+&lt;form method=get action=&quot;x.php&quot; enctype='application/x-www-form-urlencoded'&gt;
+&lt;input type=hidden value=4 name='p'&gt;&lt;input type=submit value='get 
+it'&gt;&lt;/form&gt;&lt;br&gt;
+
+&lt;?php
+  echo &quot;The variable p is detected as having Value: &quot; . ParseReq('p') . 
+&quot;&lt;br&gt;&quot;;
+?&gt;
+
+&lt;/body&gt;&lt;/html&gt;
+
+
+*/
+?&gt;
+
+
+
+
+
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007848.html">[Xitami] php and xitami
+</A></li>
+	<LI>Next message: <A HREF="007850.html">[Xitami] php and xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7849">[ date ]</a>
+              <a href="thread.html#7849">[ thread ]</a>
+              <a href="subject.html#7849">[ subject ]</a>
+              <a href="author.html#7849">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

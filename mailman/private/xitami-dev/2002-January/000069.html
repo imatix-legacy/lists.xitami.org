@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] C++/C linkage
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   
+   <LINK REL="Next"  HREF="000070.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] C++/C linkage
+   </H1>
+    <B>Angus Lord
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] C++/C linkage">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 8 Jan 2002 10:55:52 +0100</I>
+    <P><UL>
+        
+        <LI> Next message: <A HREF="000070.html">[Xitami-Dev] POP3?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#69">[ date ]</a>
+              <a href="thread.html#69">[ thread ]</a>
+              <a href="subject.html#69">[ subject ]</a>
+              <a href="author.html#69">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I encountered a couple of problems when writing my own windows front end to
+Xitami. I was using ATL - therefore C++ - for the object and when linking in
+the sfl and smt libraries I had to change the header files sfl.h smtlib.h
+and smthhtp.h to add the extern &quot;C&quot; to the declaration of the global
+variables.
+
+I also got a warning when compiling about a redefinition of FD_SETSIZE in
+sfl.h (also declared in winsock.h - included earlier in atlbase.h) so I
+added a
+
+#  ifdef FD_SETSIZE
+#   undef FD_SETSIZE
+#  endif
+
+ on line 258 in sfl.h
+
+Should these changes be included in the source?
+
+Angus Lord
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI> Next message: <A HREF="000070.html">[Xitami-Dev] POP3?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#69">[ date ]</a>
+              <a href="thread.html#69">[ thread ]</a>
+              <a href="subject.html#69">[ subject ]</a>
+              <a href="author.html#69">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

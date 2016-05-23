@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami bug with relative redirects
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002515.html">
+   <LINK REL="Next"  HREF="002519.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami bug with relative redirects
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami bug with relative redirects">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 20 Feb 2002 12:27:54 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002515.html">[Xitami] CGI Exe runs under what account ?
+</A></li>
+        <LI> Next message: <A HREF="002519.html">[Xitami] Xitami, PHP and mySQL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2518">[ date ]</a>
+              <a href="thread.html#2518">[ thread ]</a>
+              <a href="subject.html#2518">[ subject ]</a>
+              <a href="author.html#2518">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Using the standard CGI.pm you can (theoretically) redirect people to a 
+URl doing something like
+print $query-&gt;redirect(&quot;destination.url&quot;). This prints two lines to STDOUT
+
+Status: 302 Moved
+location: destination.url
+
+And normally you get a redirect from there.
+
+It works is my destination.url is a fully defined 
+<A HREF="http://host/path/file.html">http://host/path/file.html</A> or similar
+
+But I have found 2 bugs in this with Xitami when one uses a non absolute URL
+
+with a file only relative url (just file.html) it chops of the leading 
+character to produce a redirect to ile.html in the ROOT of the webserver 
+. i.e. the absolute URL is <A HREF="http://host/ile.html">http://host/ile.html</A>
+with a path and file relative url (/path/file.html) the redirect never 
+completes and xitami just sits there serving up nothing until you hit 
+cancel - conceivably there is a timeout after 120 seconds or whatever 
+but I didn't wait that long.
+
+This does not appear to occur with Apache which handles both relative 
+URLs just fine. Arguably this is a bug with the redirect generator as  
+RFC 2616 (http 1.1) section 14.30 states that only absolute URIs are 
+allowed for the location field, but it would be nice to see it 
+documented if not fixed.
+
+14.30 Location
+
+   The Location response-header field is used to redirect the recipient
+   to a location other than the Request-URI for completion of the
+   request or identification of a new resource. For 201 (Created)
+   responses, the Location is that of the new resource which was created
+   by the request. For 3xx responses, the location SHOULD indicate the
+   server's preferred URI for automatic redirection to the resource. The
+   field value consists of a single absolute URI.
+
+
+Francis
+
+-- 
+...if the US Government were ever to get really serious about Internet 
+security, the top players in Microsoft's management hierarchy would find 
+themselves handcuffed, blindfolded, led onto a tarmac within some obscure 
+Air Force base, and shot.
+-- Thomas C Greene (<A HREF="http://www.theregister.co.uk/content/55/23223.html">http://www.theregister.co.uk/content/55/23223.html</A>)
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002515.html">[Xitami] CGI Exe runs under what account ?
+</A></li>
+	<LI> Next message: <A HREF="002519.html">[Xitami] Xitami, PHP and mySQL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2518">[ date ]</a>
+              <a href="thread.html#2518">[ thread ]</a>
+              <a href="subject.html#2518">[ subject ]</a>
+              <a href="author.html#2518">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

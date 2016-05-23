@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003519.html">
+   <LINK REL="Next"  HREF="003517.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] (no subject)
+   </H1>
+    <B>cbm-net
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] (no subject)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 24 Jun 2002 19:19:51 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003519.html">[Xitami] unable to run asp files
+</A></li>
+        <LI> Next message: <A HREF="003517.html">[Xitami] xitami cgi-problem(workdir)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3516">[ date ]</a>
+              <a href="thread.html#3516">[ thread ]</a>
+              <a href="subject.html#3516">[ subject ]</a>
+              <a href="author.html#3516">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hy,
+
+we've installed Xitami 2.5b5 on a SUSE-Linux machine.
+
+The server works fine, but we have a little problem using CGI (Perl) -
+scripts.
+
+I'll try to explain the problem with a little example.
+
+A perl-script should load a file with config parameters and it's not
+possible for us to set the full and absolute path ahead the config file.
+After executing the script in a cgi directory off the webserver we got
+the message, that the script can not found this file.
+
+The reason we found is, that the execution directory of the perl script
+is: /xitami/xitami-25b5.
+Xitami executes the scripts in this directory an not in our special perl
+script dir.
+
+We found this problem with the following perl script:
+my $syst = `pwd`;
+print &quot;[$syst]&quot;;
+
+The output we got, was [/xitami/xitami-25b5], but it should be
+[/the/path/to/my/script]!
+
+How can we configure Xitami, that a cgi script gets executed in their
+own directory ?
+A modification of the perl scripts is not possible at time.
+
+Best regards and thank you for your help
+
+olaf meissner
+
+Ihr cbm-net Team
+besuchen Sie uns
+
+www.cbm-net.de
+unsere mail´s werden durch norton ativirus gescannt!!!
+
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003519.html">[Xitami] unable to run asp files
+</A></li>
+	<LI> Next message: <A HREF="003517.html">[Xitami] xitami cgi-problem(workdir)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3516">[ date ]</a>
+              <a href="thread.html#3516">[ thread ]</a>
+              <a href="subject.html#3516">[ subject ]</a>
+              <a href="author.html#3516">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

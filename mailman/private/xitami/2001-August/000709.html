@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] '&amp;' character in &lt;textarea...&gt; problem
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <LINK REL="Previous"  HREF="000708.html">
+   <LINK REL="Next"  HREF="000710.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+   </H1>
+    <B>Jürgen Rauch
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] '&amp;' character in &lt;textarea...&gt; problem">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 14 Aug 2001 20:03:37 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000708.html">[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</A></li>
+        <LI> Next message: <A HREF="000710.html">[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#709">[ date ]</a>
+              <a href="thread.html#709">[ thread ]</a>
+              <a href="subject.html#709">[ subject ]</a>
+              <a href="author.html#709">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am using plain HTML like this:
+&quot;&quot;&quot;
+&lt;form action=&quot;../myscript.py&quot; method=get&gt;
+&lt;textarea name=&quot;text&quot; rows=20 cols=60&gt;some default text&lt;/textarea&gt;
+&lt;input type=submit value=&quot;Submit&quot;&gt;&lt;/form&gt;
+&quot;&quot;&quot;
+I tried your wrap thing but it doesn't work either.
+
+-----Original Message-----
+From: Johnson, Nathan J [mailto:<A HREF="mailto:nathan.j.johnson@lmco.com">nathan.j.johnson@lmco.com</A>]
+Sent: Dienstag, 14. August 2001 19:17
+To: '<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>'
+Subject: RE: [Xitami] '&amp;' character in &lt;textarea...&gt; problem
+
+
+
+Without any real analysis, my first instinct points me toward character
+entitities as a place to start looking, I'll post again later if I have more
+time to think it through... it sounds like some code is trying to resolve a
+character entity, for instance &quot;&amp;lt&quot; resolves to &quot;&lt;&quot; in a document because
+&quot;&lt;&quot; is normally used in tags.  So, something is seeing that &quot;&amp;&quot; assuming it
+is a character entity and trying to resolve it.  
+
+Are you using XHTML or some other XML DTD or true legacy HTML?
+
+Something bizarre to try....
+
+wrap your like this....
+
+&lt;![CDATA[
+your text here
+]]&gt;
+
+
+
+&gt;<i> -----Original Message-----
+</I>&gt;<i> From:	Jürgen Rauch [SMTP:<A HREF="mailto:juergen.rauch@optimay.com">juergen.rauch@optimay.com</A>]
+</I>&gt;<i> Sent:	Tuesday, August 14, 2001 12:40 PM
+</I>&gt;<i> To:	'<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>'
+</I>&gt;<i> Subject:	[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I am using XITAMI version 2.4d9 locally on Win98 in combination with the
+</I>&gt;<i> &gt; Python cgi module and the IE5.
+</I>&gt;<i> &gt; I display an HTML  page that contains an empty textarea and a submit
+</I>&gt;<i> &gt; button.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The problem is: if I submit a text that contains somewhere the character
+</I>&gt;<i> &gt; '&amp;', it will cut off this character and all text that follows.
+</I>&gt;<i> &gt; E.g. if I enter &quot;Smith &amp; Sons&quot; into the text area, I receive only &quot;Smith
+</I>&gt;<i> &quot;
+</I>&gt;<i> &gt; in the cgi form. 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I don't think that this is a Python problem, because with the Apache
+</I>&gt;<i> &gt; Server it works fine.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Any comments will be appreciated
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Cheerio
+</I>&gt;<i> &gt; Juergen
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000708.html">[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</A></li>
+	<LI> Next message: <A HREF="000710.html">[Xitami] '&amp;' character in &lt;textarea...&gt; problem
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#709">[ date ]</a>
+              <a href="thread.html#709">[ thread ]</a>
+              <a href="subject.html#709">[ subject ]</a>
+              <a href="author.html#709">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

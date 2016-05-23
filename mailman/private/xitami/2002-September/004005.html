@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003999.html">
+   <LINK REL="Next"  HREF="004006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Magus @ Yahoo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 22 Sep 2002 15:35:42 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003999.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004006.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4005">[ date ]</a>
+              <a href="thread.html#4005">[ thread ]</a>
+              <a href="subject.html#4005">[ subject ]</a>
+              <a href="author.html#4005">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello All,
+
+ Just a couple of dumb questions. Where do you make the cgi-bin
+ directory and what goes in it to test the CGI? I have a cgi-src, but
+ no cgi-bin directory under &quot;C:\Program Files\Xitami&quot;
+
+-- 
+Best regards,
+ Magus
+
+Sunday, September 22, 2002, 3:21:19 PM, you wrote:
+
+PvdG&gt; OK, $Bill, the answers are in context. Again thank you for trying to help.
+PvdG&gt; Since I last posted, I uninstalled and reinstalled both Xitami and
+PvdG&gt; ActivePerl, just to be sure the extra settings for PHP were not the culprit.
+PvdG&gt; As the results are still the same with the default install, I guess the PHP
+PvdG&gt; settings in defaults.cfg are exonerated.
+PvdG&gt; One thing I find a bit strange about the Xitami install is that no cgi-bin
+PvdG&gt; directory is created by the install. I have to make one myself. Is this
+PvdG&gt; normal?
+
+PvdG&gt; ----- Original Message -----
+PvdG&gt; From: &quot;$Bill Luebkert&quot; &lt;<A HREF="mailto:dbe@wgn.net">dbe@wgn.net</A>&gt;
+PvdG&gt; To: &quot;Peter van der Goes&quot; &lt;<A HREF="mailto:pvdg@worldnet.att.net">pvdg@worldnet.att.net</A>&gt;
+PvdG&gt; Sent: Sunday, September 22, 2002 9:23 AM
+PvdG&gt; Subject: Re: ActivePerl &amp; Xitami - CGI problems Continued
+
+
+&gt;&gt;<i> Show your complete HTML page that calls the script and fails (strip it
+</I>&gt;&gt;<i> down to the minimal failing code).
+</I>
+PvdG&gt; From animal.html (in \xitami\webpages)
+PvdG&gt; &lt;body&gt;
+PvdG&gt; &lt;form action=&quot;/cgi-bin/animal.cgi&quot; METHOD=POST&gt;
+PvdG&gt; Which animal? &lt;INPUT type=&quot;text&quot; name=&quot;animal&quot;&gt;
+PvdG&gt; &lt;P&gt;&lt;INPUT type=&quot;submit&quot;&gt;
+PvdG&gt; &lt;/form&gt;
+PvdG&gt; &lt;/body&gt;
+&gt;&gt;<i>
+</I>&gt;&gt;<i> Show your entire minimal failing script.
+</I>PvdG&gt; From animal.cgi (in \xitami\cgi-bin)
+PvdG&gt; #!C:\perl\bin\perl.exe -w
+PvdG&gt; use strict;
+PvdG&gt; use CGI ':standard';
+
+PvdG&gt; my $animal;
+PvdG&gt; $animal = param('animal');
+
+PvdG&gt; print &quot;Content-type: text/html\n\n&quot;;
+PvdG&gt; print &quot;Show me the $animal&quot;;
+
+
+&gt;&gt;<i>
+</I>&gt;&gt;<i> Show content of cgierr.log and logs/{access,error}.log (only the last
+</I>PvdG&gt; entries
+&gt;&gt;<i> that apply to the failed script - you could either clear the logs or check
+</I>PvdG&gt; them
+&gt;&gt;<i> first to see what the last entry is).
+</I>PvdG&gt; From access.log
+PvdG&gt; No entries from displaying animal.html
+PvdG&gt; From error.log
+PvdG&gt; 127.0.0.1 - pvan [22/Sep/2002:10:07:32 -0600] &quot;GET /animal.html HTTP/1.1&quot;
+PvdG&gt; 404 0 &quot;&quot; &quot;Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; AT&amp;T CSM6.0; AT&amp;T
+PvdG&gt; CSM7.0)&quot;
+PvdG&gt; From cgierr.log
+PvdG&gt; No entries from displaying animal.html, entering text and clicking on
+PvdG&gt; Submit.
+&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> logging is turned on be default.
+</I>&gt;&gt;<i> cgierr.log should show any script failures. logs/error.log and
+</I>PvdG&gt; logs/access.log
+&gt;&gt;<i> should show all good and failed accesses.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i>    ,-/-  __      _  _         $Bill Luebkert   ICQ=162126130
+</I>&gt;&gt;<i>   (_/   /  )    // //       DBE Collectibles   Mailto:<A HREF="mailto:dbe@todbe.com">dbe@todbe.com</A>
+</I>&gt;&gt;<i>    / ) /--&lt;  o // //      <A HREF="http://dbecoll.tripod.com/">http://dbecoll.tripod.com/</A> (Free site for Perl)
+</I>&gt;&gt;<i> -/-' /___/_&lt;_&lt;/_&lt;/_     Castle of Medieval Myth &amp; Magic
+</I>PvdG&gt; <A HREF="http://www.todbe.com/">http://www.todbe.com/</A>
+&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>
+
+PvdG&gt; --
+PvdG&gt; Xitami Users Mailing List -- For Xitami support
+PvdG&gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+______________________________________________________________________ 
+Post your ad for free now! <A HREF="http://personals.yahoo.ca">http://personals.yahoo.ca</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003999.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004006.html">[Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4005">[ date ]</a>
+              <a href="thread.html#4005">[ thread ]</a>
+              <a href="subject.html#4005">[ subject ]</a>
+              <a href="author.html#4005">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

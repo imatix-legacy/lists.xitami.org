@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Problem with refresh with php and phpbb
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005308.html">
+   <LINK REL="Next"  HREF="005310.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Problem with refresh with php and phpbb
+   </H1>
+    <B>Tom Ringate
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Problem with refresh with php and phpbb">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 5 Sep 2003 18:45:53 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005308.html">[Xitami] xitami on Win XP / ME?
+</A></li>
+        <LI> Next message: <A HREF="005310.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5309">[ date ]</a>
+              <a href="thread.html#5309">[ thread ]</a>
+              <a href="subject.html#5309">[ subject ]</a>
+              <a href="author.html#5309">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have been using XITAMI for a couple of years now, and have not had any
+problems until I added PHP to run PHPbb.
+
+The PHPbb application works with a couple major problems.
+
+After trying to get help from both the PHP and the PHPBB folks with no
+success, I decided to try exchanging XITAMI with the Apache server, and the
+problems vanished.  It should be noted that no other change at all has been
+made on the system, I can select either XITAMI or APACHE as my web server,
+and I do not have to make any changes to the other software to see these
+problems.
+
+Here is the post where I describe the two problems.  I am at a loss on how
+to change the XITAMI configuration to resolve these problems.  The only
+thing I can think of to do is to uninstall XITAMI release 2.5b5 and give
+2.4d9 a try.  Before I do that, I wanted to ask here on this list if anyone
+has any ideas on what is causing these two problems.
+
+I am having two problems with phpbb since I installed it.
+
+I have not been able to figure out if they are related, or how to solve
+either of them.
+
+The first is fairly unimportant I think, but it may be the cause of my
+second problem.
+
+On some functions, like after I enter my login information, I get the
+following message:
+
+If your browser does not support meta redirection please click HERE to be
+redirected
+
+If I do nothing, I am taking to the forum. This same message shows up when
+doing some of the administrative functions as well.
+
+The other problem I am having is much more serious. For some reason once a
+page is displayed, I can never refresh it unless I clear the cache in my
+browser. For instance, If i make a mistake in a post, and do an edit, after
+I complete the edit, it takes me back to the original page with the error on
+it. If I click &quot;refresh&quot; I still get the same OLD page. If I clear the cache
+in my browser, I then will get the corrected page.
+
+Here is a copy of a previous post I made which has not received any
+responses. It has the version details of the setup I am running.
+
+--------------------------------- 
+
+I am having the following problem, and have searched for an answer in three
+different software groups and have not discovered a solution yet.
+
+When I access a page in phpbb it displays fine, but it does not update
+unless I clear the cache in my browser. (IE ver 6)
+
+My configuration is:
+
+WIN98
+XITAMI v2.5b5
+PHP 4.3.3
+PHPBB 2.0.6
+MYSQL 4.0.14
+
+I have discovered that in XITAMI there is a parameter called &quot;cache
+Defaults&quot; and if I turn this off, the codes on the requested pages change
+from &quot;304&quot; to &quot;200&quot;, but the actual text on the displayed page does not
+change. The simplest way to observe this is to do a refresh and note that
+the time never changes. However all of the icons are reloaded, you can see
+them blink as they are refreshed.
+
+I have studied the PHP.INI file, but it does not give me any positive
+indicators of what may not be configured correctly. I have tried changing a
+few of the parameters, all with no effect at all.
+
+My php.ini file has only one modification, and that is the
+cgi.force_redirect=0 needed to have XITAMI display any .php pages at all.
+
+Here is the log of sending the page after clearing the cache:
+192.168.100.1 - - [03/Sep/2003:03:45:41 -0500] &quot;GET /forum/index.php
+HTTP/1.1&quot; 200 27125
+
+Here it is after a &quot;refresh&quot; and the time displayed on the page never
+changes: (not the time in the log trace)
+192.168.100.1 - - [03/Sep/2003:03:48:32 -0500] &quot;GET /forum/index.php
+HTTP/1.1&quot; 200 25432
+
+In the above trace example, the time on the screen was 03:45 and two minutes
+later when I did the refresh, all the icons were replaced, but the actual
+page stayed the same with the 03:45 time remaining. By clearing the cache in
+the browser, a new page was retrieved, and the time was then 03:49
+
+It looks like some cache on the server is failing to send the new page to
+the browser for some reason, and the only way I can get it to work is to
+clear the cache. I do not have this problem going to any other forum, and I
+have accessed my server using several different computers, and all have this
+identical problem with any page once it has been received by the remote
+computer.
+
+Tom R.
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005308.html">[Xitami] xitami on Win XP / ME?
+</A></li>
+	<LI> Next message: <A HREF="005310.html">[Xitami] Problem with refresh with php and phpbb
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5309">[ date ]</a>
+              <a href="thread.html#5309">[ thread ]</a>
+              <a href="subject.html#5309">[ subject ]</a>
+              <a href="author.html#5309">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

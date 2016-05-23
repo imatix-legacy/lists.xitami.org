@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Talking about FTP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003253.html">
+   <LINK REL="Next"  HREF="003256.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Talking about FTP
+   </H1>
+    <B>Chris Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Talking about FTP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 27 May 2002 22:53:27 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003253.html">[Xitami] Talking about FTP
+</A></li>
+        <LI> Next message: <A HREF="003256.html">[Xitami] Talking about FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3254">[ date ]</a>
+              <a href="thread.html#3254">[ thread ]</a>
+              <a href="subject.html#3254">[ subject ]</a>
+              <a href="author.html#3254">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Gerry Aquino wrote:
+
+&gt;<i> WinSCP) as this setup only uses a single port (22) which
+</I>&gt;<i> can be opened and closed as needed. I'm no security expert
+</I>&gt;<i> but AFAIK FTP is very insecure anyway. Solved two problems
+</I>&gt;<i> doing it this way.
+</I>
+FTP is secure enough, and is one of the oldest protocols on the internet. 
+It is also one of the most efficient protocols to use for transfers of large
+amounts of data.  There are other options, such as rsync over SSH, but this
+would require a public key to be placed on the host server, and requires
+root access, or at the minimum an anonymous rsync server.  FTP happens to
+still be the most reliable and efficient client/host solution for data
+transfer.  Any security issues with FTP is based on the server setup itself,
+not with the protocol.  I consider giving a client FTP access to a server
+much safer than giving a client SSH access.  Somebody with SSH access can
+execute shell commands, while FTP clients are more limited in their
+capabilities since they are designed to only transfer data.  If packet
+snooping is a problem, use encrytped or EFTP, which is every bit as secure
+as SSL.
+
+Part of the &quot;problem&quot; with the FTP protocol and firewalls is that FTP
+servers listen on port 21 while data connections are initiated by the server
+from its port 20, to a port on the client identified in a PORT command. 
+This port will be a random port number that is probably closed by the
+firewall.  Using the PASV command is usually the way around this, but be
+aware that there are FTP servers out there, that in violation of STD 3,
+RFC1123 [2], do not properly honor the PASV command.  I do not know if
+Xitami's FTP server is one of these.
+
+As always, for any server administrator, whether you run a single &quot;hobby&quot;
+server on your cable modem, or manage a WAN, a review of the appropriate
+RFC's would be in order to make sure that you understand what you are doing,
+and are doing it properly.  In this case, you would want to refer to RFC1579
+and RFC959.
+
+Regards,
+-- 
+Chris Olson
+System Administrator
+AST Communications     <A HREF="http://www.astcomm.net">http://www.astcomm.net</A>
+Linux Support          <A HREF="http://linux.astcomm.net">http://linux.astcomm.net</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003253.html">[Xitami] Talking about FTP
+</A></li>
+	<LI> Next message: <A HREF="003256.html">[Xitami] Talking about FTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3254">[ date ]</a>
+              <a href="thread.html#3254">[ thread ]</a>
+              <a href="subject.html#3254">[ subject ]</a>
+              <a href="author.html#3254">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

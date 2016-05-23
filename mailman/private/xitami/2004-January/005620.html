@@ -1,0 +1,293 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Running server through a router
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005618.html">
+   <LINK REL="Next"  HREF="005621.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Running server through a router
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Running server through a router">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 1 Jan 2004 12:11:22 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005618.html">[Xitami] Running server through a router
+</A></li>
+        <LI> Next message: <A HREF="005621.html">[Xitami] Web Pages Password Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5620">[ date ]</a>
+              <a href="thread.html#5620">[ thread ]</a>
+              <a href="subject.html#5620">[ subject ]</a>
+              <a href="author.html#5620">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_002E_01C3D060.5F04E520
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Steven,
+
+Except for OS differences, I already do what you want to do with a =
+Linksys wireless cable router.  This is what you do.
+
+First, determine the internal IP address for the network card that is =
+attached to your router.  Each card or interface can actually have its =
+own address (used or not).  Click &quot;Networks&quot; in the system tray  and =
+choose &quot;ethernet&quot;.  In one of those tabs, it has your configurations =
+settings (don't have an XP on me right now so shooting from memory).  =
+Write down your IP address, the gateway, mask, and DNS addresses.  It is =
+possible to use that IP in your router settings, but it is technically =
+dynamic (changeable) so it would be wise to set it to a static address, =
+but you can do it later.  You can also run &quot;IPCONFIG&quot; to get this info, =
+as long as you choose the correct interface.
+
+The reason I'm suggesting using your current IP address is just to get =
+it running.  When you set your address manually, you must also set the =
+gateway (your router), mask (that 255.255.x.x number), and the Domain =
+Name lookup (DNS) addresses.  Since you set these up manually, no =
+request is made to the DHCP server for this stuff.  Also, choose an =
+address the mask likes.
+
+Now, armed with your notes, go into your router's setup.  Usually you =
+enter its IP (198.168.1.1) or whatever and password.  Choose the =
+ADVANCED tab then &quot;DMZ Host&quot;.  Enter your server's IP address here and =
+apply it.
+
+Your server is now open to the world - completely open.  As if it were =
+the only computer connected to the modem.  The DMZ Host will direct ALL =
+traffic to this machine so a firewall is REALLY important!  All your =
+peer sharing stuff should also work now for the same reason.
+
+Test that it works before setting up a manual IP address, remembering to =
+include the the gateway, mask and DNS host addresses in the server's =
+settings.  You will need to change the DMZ address before it works =
+again.  Rebooting may also help.
+
+You could have setup Port Forwarding to forward a range of ports to this =
+server, but why.  Port Forwarding will be useful if you have different =
+computer perform different tasks.  Mail here, DB there, FTP to that one, =
+etc...  Then you need to know who does what to which port.  Right now =
+its a simple application with a simple solution, mostly.
+
+Happy Multitasking,
+Charles
+
+  ----- Original Message -----=20
+  From: Steven L. Haas=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>=20
+  Sent: Wednesday, December 31, 2003 7:00 AM
+  Subject: [Xitami] Running server through a router
+
+
+  I am trying to run the Xitami web server on my WIndows XP machine that =
+is connected to the internet via a cable modem (RoadRunner/Motorola =
+Surboard).  The internet connection is split amongst 2 computers using a =
+Linksys router.  When I start the web server everything seems fine, but =
+when I try to access the web page I have loaded on the server by =
+connecting to my internet connection's (cable modem) IP address, I am =
+directed to the router's configuration page.  This also happens when the =
+server is turned off, so it's not a big suprise.  What is odd is that =
+when I try to connect to the router's config page by entering the =
+router's default IP address into IE, I am not taken to the config page =
+as usual, but I'm instead directed to the web page I have installed on =
+the Xitami web server.  When the web server is turned off I go straight =
+to the config page as expected.  It seems like somehow the router's IP =
+is bouncing me back from the router to the computer with the server =
+installed, and the cable modem's (internet connection) IP is forwarding =
+straight to the router and never reaching the computer with the server =
+installed.  I assume this is a relatively simple fix for any of you that =
+are knowledgeable with networks, but I can't figure out what to do to =
+fix this &amp; make it work with my set up.  I also cant run the server and =
+a file sharing program like KazaA or WinMX.  Is there a way to allow for =
+these programs and the server to all run together harmoniously?  Thanks =
+in advance for any help, and I apologize if this question has already =
+been beaten to death.
+
+  Steve
+------=_NextPart_000_002E_01C3D060.5F04E520
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4934.1600&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;Steven,&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Except for OS differences, I already do what you want to do with a =
+Linksys=20
+wireless cable router.&amp;nbsp; This is what you do.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;First, determine&amp;nbsp;the internal IP address for the network card =
+that is=20
+attached to your router.&amp;nbsp; Each card or interface can&amp;nbsp;actually =
+have its=20
+own address (used or not).&amp;nbsp; Click &quot;Networks&quot; in the system =
+tray&amp;nbsp; and=20
+choose &quot;ethernet&quot;.&amp;nbsp; In one of those tabs, it has your=20
+configurations&amp;nbsp;settings (don't have an XP on me right now so =
+shooting from=20
+memory).&amp;nbsp; Write down your IP address, the gateway, mask, and DNS=20
+addresses.&amp;nbsp; It is possible to use that IP in your router settings, =
+but it=20
+is technically dynamic (changeable) so it would be wise to set =
+it&amp;nbsp;to a=20
+static address, but you can do it later.&amp;nbsp; You can also run =
+&quot;IPCONFIG&quot; to=20
+get this info, as long as you choose the correct interface.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;The reason I'm suggesting using your current&amp;nbsp;IP address is =
+just to get=20
+it running.&amp;nbsp; When you set your address manually,&amp;nbsp;you=20
+must&amp;nbsp;also&amp;nbsp;set the gateway (your router), mask (that =
+255.255.x.x=20
+number), and the Domain Name lookup (DNS) addresses.&amp;nbsp; Since you set =
+these=20
+up manually, no request is made to the DHCP server for this stuff.&amp;nbsp; =
+Also,=20
+choose an address the mask likes.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Now, armed with your notes,&amp;nbsp;go into&amp;nbsp;your router's =
+setup.&amp;nbsp;=20
+Usually you enter its IP (198.168.1.1) or whatever and password.&amp;nbsp; =
+Choose=20
+the ADVANCED tab then &quot;DMZ&amp;nbsp;Host&quot;.&amp;nbsp; Enter your server's IP =
+address here=20
+and apply it.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Your server is now open to the world - completely open.&amp;nbsp; As if =
+it were=20
+the only computer connected to the modem.&amp;nbsp; The DMZ Host will=20
+direct&amp;nbsp;ALL traffic&amp;nbsp;to this machine so a firewall is REALLY=20
+important!&amp;nbsp; All your peer sharing stuff should also work =
+now&amp;nbsp;for the=20
+same reason.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Test that it works before setting up a manual IP address, =
+remembering to=20
+include the the gateway, mask and DNS&amp;nbsp;host addresses in the =
+server's=20
+settings.&amp;nbsp; You will need to change the DMZ address before it works=20
+again.&amp;nbsp; Rebooting may also help.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;You could have setup Port Forwarding to forward a range of ports to =
+this=20
+server, but why.&amp;nbsp; Port Forwarding will be useful if you have =
+different=20
+computer perform different tasks.&amp;nbsp;&amp;nbsp;Mail here, DB there, FTP to =
+that=20
+one, etc...&amp;nbsp; Then you need to know who does what to which =
+port.&amp;nbsp; Right=20
+now its a simple application with a simple solution, mostly.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Happy Multitasking,&lt;/DIV&gt;
+&lt;DIV&gt;Charles&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE dir=3Dltr=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dslhaas99@hotmail.com">3Dslhaas99@hotmail.com</A> =
+href=3D&quot;mailto:<A HREF="mailto:slhaas99@hotmail.com">slhaas99@hotmail.com</A>&quot;&gt;Steven L.=20
+  Haas&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Wednesday, December 31, =
+2003 7:00=20
+  AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; [Xitami] Running =
+server through=20
+  a router&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am trying to run the Xitami web =
+server on my=20
+  WIndows XP machine that is connected to the internet via a cable modem =
+
+  (RoadRunner/Motorola Surboard).&amp;nbsp; The internet connection is split =
+amongst=20
+  2 computers using a Linksys router.&amp;nbsp; When I start the web server=20
+  everything seems fine, but when I try to access the web page I have =
+loaded on=20
+  the server by connecting to my internet connection's (cable modem) IP =
+address,=20
+  I am directed to the router's configuration page.&amp;nbsp; This also =
+happens when=20
+  the server is turned off, so it's not a big suprise.&amp;nbsp; What is odd =
+is that=20
+  when I try to connect to the router's config page by entering the =
+router's=20
+  default IP address into IE, I am not taken to the config page as =
+usual, but=20
+  I'm instead directed to the web page I have installed on the Xitami =
+web=20
+  server.&amp;nbsp; When the web server is turned off I go straight to the =
+config=20
+  page as expected.&amp;nbsp; It seems like somehow the router's IP is =
+bouncing me=20
+  back from the router to the computer with the server installed, and =
+the cable=20
+  modem's (internet connection) IP is forwarding straight to the router =
+and=20
+  never reaching the computer with the server installed.&amp;nbsp; I assume =
+this is=20
+  a relatively&amp;nbsp;simple fix for any of you that are knowledgeable =
+with=20
+  networks, but I can't figure out what to do to fix this&amp;nbsp;&amp;amp; =
+make it=20
+  work with my set up.&amp;nbsp; I also cant run the server and a file =
+sharing=20
+  program like KazaA or WinMX.&amp;nbsp; Is there a way to allow for these =
+programs=20
+  and the server to all run together harmoniously?&amp;nbsp; Thanks in =
+advance for=20
+  any help, and I apologize if this question has already been beaten to=20
+  death.&lt;/FONT&gt;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;FONT face=3DArial =
+size=3D2&gt;Steve&lt;/FONT&gt;&lt;/DIV&gt;&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_002E_01C3D060.5F04E520--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005618.html">[Xitami] Running server through a router
+</A></li>
+	<LI> Next message: <A HREF="005621.html">[Xitami] Web Pages Password Question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5620">[ date ]</a>
+              <a href="thread.html#5620">[ thread ]</a>
+              <a href="subject.html#5620">[ subject ]</a>
+              <a href="author.html#5620">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

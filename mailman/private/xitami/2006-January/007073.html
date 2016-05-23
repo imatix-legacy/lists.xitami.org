@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Stopping%20and%20restarting%20%28or%20resetting%29%20Xitamiwithperl&In-Reply-To=BAY105-F1631906B72B5A82AE9DB4FF82F0%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007072.html">
+   <LINK REL="Next"  HREF="007075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl</H1>
+    <B>MRJ InfoTech Admin</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20RE%3A%20Stopping%20and%20restarting%20%28or%20resetting%29%20Xitamiwithperl&In-Reply-To=BAY105-F1631906B72B5A82AE9DB4FF82F0%40phx.gbl"
+       TITLE="[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl">admin at mrjdesign.net
+       </A><BR>
+    <I>Fri Jan  6 15:50:27 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007072.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+        <LI>Next message: <A HREF="007075.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7073">[ date ]</a>
+              <a href="thread.html#7073">[ thread ]</a>
+              <a href="subject.html#7073">[ subject ]</a>
+              <a href="author.html#7073">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>If and as long as you run two processes there is no problem.
+
+1) Your CGI application to execute a call to an application in your server 
+machine
+2) The Application which is invoked by the CGI.
+
+The CGI is only to send some parameters to the main Application to indicate 
+what you want it to do.
+
+A proper set of rules for this would be as follows
+
+    Halt server
+    Start Server
+    Reboot PC
+
+The fourth optional parameter I am toying with now since I keep having 
+problems keeping Xitami alive
+since FTP keep hanging up with nasty C errors is a checker that can lay 
+dormant in the background
+and run a check every 30 seconds to ensure that Xitami is actually up and 
+running.
+
+The reboot PC I made into a CGI to force a full system flush at a set time 
+every night.
+If I miss to log in and run it, It will run itself by the Scheduler to 
+force a flush of the system.
+
+Since Xitami can be set to run on boot up, this is not a problem either.
+
+Further more, if your config is ok, and you execute a cgi to reset your 
+machine, you can just as
+well do this from the cgi if you have another app restarting it again.
+
+I dont see any problems whatsoever with this and in fact wrote my solutions 
+in VB 5 to keep it simple fast and practical.
+
+MRJ
+
+
+At 18:47 04/01/2006, you wrote:
+
+&gt;<i>This all seems  a bit too complicated for a simple process.
+</I>&gt;<i>
+</I>&gt;<i>The problem with killing and restarting the service via cgi (and I think 
+</I>&gt;<i>php) is that when you kill the server you will also kill the process that 
+</I>&gt;<i>is executing the kill/restart commands.  The kill command will work and 
+</I>&gt;<i>will stop the service, but now that the service is stopped the cgi will be 
+</I>&gt;<i>terminated which means the second part of the the perl process, &quot;restart&quot;, 
+</I>&gt;<i>won't get executed simply because the CGI process has already been terminated.
+</I>&gt;<i>
+</I>&gt;<i>I know this is a fact for the CGI process but I am not certain about the 
+</I>&gt;<i>PHP.  CGI is a engine that runs and execute web based perl 
+</I>&gt;<i>scripts.  However I think the beauty of PHP is that there is no engine 
+</I>&gt;<i>managing php scripts, which means if a php script is run via a url, that 
+</I>&gt;<i>the php script will load into memory and execute even if the webserver is 
+</I>&gt;<i>killed in the middle of being executed. Someone might be able to elaborate 
+</I>&gt;<i>on the PHP process but I think thats how PHP works.
+</I>&gt;<i>
+</I>&gt;<i>Someone else suggested use the &quot;server refresh&quot; feature in the 
+</I>&gt;<i>defaults.cfg but this means its an automated thing and doesn't give you 
+</I>&gt;<i>the ability to do it remotely, quickly, etc.  when ever you want.  You 
+</I>&gt;<i>need another way of executing a perl/php script remotely that isn't done 
+</I>&gt;<i>via the URL, or via the same webserver.  Maybe run a second web service on 
+</I>&gt;<i>a different port that simply manages the kill/restart of the first service.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Russel P. Olinger
+</I>&gt;<i>(310) 466-3399
+</I>&gt;<i><A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i>From: Martin Bleisteiner &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">mail at bleisteiner.net</A>&gt;
+</I>&gt;&gt;<i>Reply-To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;&gt;<i>To: Xitami Users General Discussion &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;&gt;<i>Subject: RE: [Xitami] RE: Stopping and restarting (or resetting) 
+</I>&gt;&gt;<i>Xitamiwithperl
+</I>&gt;&gt;<i>Date: Wed, 4 Jan 2006 19:33:02 +0100
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Hello,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>There are lots of different &quot;kill&quot; tools out there. Most of them can be 
+</I>&gt;&gt;<i>set to different &quot;brutality&quot; levels. First they try to stop the running 
+</I>&gt;&gt;<i>task by sending a kind of &quot;Alt-F4&quot; command. When the task is still 
+</I>&gt;&gt;<i>running properly it will react by closing all open files and terminate 
+</I>&gt;&gt;<i>the regular way. After this, when no reaction, the running .exe can be 
+</I>&gt;&gt;<i>really &quot;killed&quot; and can be kicked out of memory.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I'm running a scheduled task that is testing the Xitami server every 
+</I>&gt;&gt;<i>minute by a simple http-Get, and if there is no answer probably Xitami 
+</I>&gt;&gt;<i>was shot by unknown reason (maybe my own PHP scripts do so by fault). 
+</I>&gt;&gt;<i>This happens 2-3 times a day to me. After a defect is recognized, Xitami 
+</I>&gt;&gt;<i>becomes killed and restarted in the way I mentioned. I never found 
+</I>&gt;&gt;<i>problems when doing so. No problems with open files, even when PHP scrips 
+</I>&gt;&gt;<i>are called.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>Martin
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>----- Original Message ---------------
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt;Yes but is it safe to kill Xitami just like that whenever you feel like
+</I>&gt;&gt;<i> &gt;it? Runing CGIs, open files and all..
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;Ayhan
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;try to download Windows Command line Tool &quot;kill.exe&quot;
+</I>&gt;&gt;<i> &gt;Then try to put two Shell Commands by PHP:
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;shell(&quot;kill xiwin32.exe&quot;);
+</I>&gt;&gt;<i> &gt;shell(&quot;xiwin32.exe&quot;);
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;- or something like this.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;First line kills all active tasks of Xitami, the second line starts new
+</I>&gt;&gt;<i> &gt;Xitami.
+</I>&gt;&gt;<i> &gt;Refer to the manual of the kill.exe tool.
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt;Martin
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>--
+</I>&gt;&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+-&#169;2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    <A HREF="http://www.mrjdesign.net">http://www.mrjdesign.net</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060106/375e4244/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20060106/375e4244/attachment.htm</A>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007072.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+	<LI>Next message: <A HREF="007075.html">[Xitami] RE: Stopping and restarting (or resetting) Xitamiwithperl
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7073">[ date ]</a>
+              <a href="thread.html#7073">[ thread ]</a>
+              <a href="subject.html#7073">[ subject ]</a>
+              <a href="author.html#7073">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

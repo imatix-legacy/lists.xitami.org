@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] hack attack or just ignorance?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002954.html">
+   <LINK REL="Next"  HREF="002958.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] hack attack or just ignorance?
+   </H1>
+    <B>WhiteShepherd
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] hack attack or just ignorance?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 12 Apr 2002 22:06:23 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002954.html">[Xitami] hack attack or just ignorance?
+</A></li>
+        <LI> Next message: <A HREF="002958.html">[Xitami] hack attack or just ignorance?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2955">[ date ]</a>
+              <a href="thread.html#2955">[ thread ]</a>
+              <a href="subject.html#2955">[ subject ]</a>
+              <a href="author.html#2955">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'd recommend a good firewall like Zona Alarm (free) or Norton 
+Personal firewall.  You can stealth all ports except those you use and if 
+any application wants to use the network you must give it permission 
+first by creating a &quot;rule&quot; to let it run in the future.  It's not perfect security 
+but better than nothing.
+
+   WhiteShepherd (Gene Angel)
+
+On 12 Apr 2002 at 21:36, Michael Bronder wrote:
+
+&gt;<i> Well... this is all pretty far out.  Thanks everyone for the comprehensive
+</I>&gt;<i> responses.
+</I>&gt;<i> 
+</I>&gt;<i> 2 questions then...
+</I>&gt;<i> 
+</I>&gt;<i> 1) It seems that all of these requests come through with a GET request.  Is
+</I>&gt;<i> there a way that Xitami can block any of those, as I don't expect anyone
+</I>&gt;<i> coming to call with that as a gift.
+</I>&gt;<i> 
+</I>&gt;<i> 2) everyone's responses essentially say &quot;don't worry, you can tell by the
+</I>&gt;<i> error code that they're not getting in&quot; which is great, but is there another
+</I>&gt;<i> alarm that will tip me off if someone has made it in?  Any decent resources
+</I>&gt;<i> for info on web server security?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks all,
+</I>&gt;<i> 
+</I>&gt;<i> mb
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;Paul Reid&quot; &lt;<A HREF="mailto:preid@rci.rutgers.edu">preid@rci.rutgers.edu</A>&gt;
+</I>&gt;<i> To: &quot;Michael Bronder&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Friday, April 12, 2002 12:15 PM
+</I>&gt;<i> Subject: Re: [Xitami] hack attack or just ignorance?
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; &gt; These aren't malicious attempts are they?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; They are, and they come from within your ISP, but probably not
+</I>&gt;<i> &gt; &quot;from&quot; your ISP. The IP number translates to a hostname that looks a
+</I>&gt;<i> &gt; lot like the one you sent this email from.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  &gt; host 24.128.72.232
+</I>&gt;<i> &gt; 232.72.128.24.IN-ADDR.ARPA domain name pointer
+</I>&gt;<i> h00c0f03820eb.ne.client2.attbi.com
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  &gt; host 24.128.19.74
+</I>&gt;<i> &gt;  74.19.128.24.IN-ADDR.ARPA domain name pointer
+</I>&gt;<i> h00a0cc58ab25.ne.client2.attbi.com
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; What are they doing?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  &quot;GET /scripts/..%c1%9c../winnt/system32/cmd.exe?/c+dir
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This requested URL is &quot;malformed&quot;. The dots and percents aren't
+</I>&gt;<i> &gt; right. Xitami properly notices that, and replies 404 or 403
+</I>&gt;<i> &gt; depending on just where it decides that this is meaningless.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; However, MS IIS webserver is tricked into navigating up out of the
+</I>&gt;<i> &gt; webpages folder, into the root, down into the windows system folder,
+</I>&gt;<i> &gt; and runs CMD, the command processor! (Some call it the &quot;DOS box&quot;.)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This involves two very stupid mistakes by MS IIS's programmers.
+</I>&gt;<i> &gt; Malformed URLs should be rejected, and files outside those folder
+</I>&gt;<i> &gt; specifically designated for web-serving should never be served. You
+</I>&gt;<i> &gt; could say that running a program not designated for CGI delivery is
+</I>&gt;<i> &gt; also a mistake, though MS IIS's notion of CGI is pretty elaborate,
+</I>&gt;<i> &gt; supporting MS-proprietary extensions that basically sell MS
+</I>&gt;<i> &gt; programming languages.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; In this case, they request a DIR from CMD. On Xitami and patched
+</I>&gt;<i> &gt; IIS, the response is &quot;error&quot;, they ignore it. If the response is a
+</I>&gt;<i> &gt; list of files, they struck gold. They can put more clever commands
+</I>&gt;<i> &gt; into CMD and do almost anything to your machine.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; You may wonder why they are trying IIS hacks on your Xitami server.
+</I>&gt;<i> &gt; Well, IIS is the second most common webserver, and THE most common
+</I>&gt;<i> &gt; inside home-ISP networks. Many folks have IIS running and don't even
+</I>&gt;<i> &gt; know it. And it is just plain easier to try a IIS-hack on every
+</I>&gt;<i> &gt; machine than to actually check which ones are IIS. Typically, the
+</I>&gt;<i> &gt; script contacts -every- IP number in a given range, whether or not
+</I>&gt;<i> &gt; there is a webserver there. If no server, it times-out. If a &quot;good&quot;
+</I>&gt;<i> &gt; webserver, it ignores these silly requests. But unpatched IIS will
+</I>&gt;<i> &gt; do the wrong thing quickly and efficiently.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This isn't a DoS attack. CMD..DIR just asks for a list of files. If
+</I>&gt;<i> &gt; they can do that, they can ask CMD to install software that could
+</I>&gt;<i> &gt; start flooding other machines to jam them. But that's not seen here.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; You could report that IP number to your ISP. It is barely possible
+</I>&gt;<i> &gt; that your ISP is doing it: my net-admins do a similar (but better!)
+</I>&gt;<i> &gt; scan every month and inform anybody hosting a vulnerable machine.
+</I>&gt;<i> &gt; More likely it is some kid reading hacker-sites and trying the most
+</I>&gt;<i> &gt; basic hack-scripts. If the ISP cares, they will warn the account
+</I>&gt;<i> &gt; holder and the kid may be sent to bed without supper. But there is
+</I>&gt;<i> &gt; always another kid.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; It does you no harm, except a slight increase in log-file size. When
+</I>&gt;<i> &gt; CodeRed was popular, my logs were 10% real hits and 90% CodeRed
+</I>&gt;<i> &gt; errors. In the peak-week, it actually was a mild problem: my slow
+</I>&gt;<i> &gt; machine was bogged on logs, and I had to take it down for 10 minutes
+</I>&gt;<i> &gt; and delete some monster files. CodeRed and Samba are different: they
+</I>&gt;<i> &gt; use a VERY long request URL (thousands of characters) to overflow
+</I>&gt;<i> &gt; IIS's request buffer and inject malicious code into IIS. Again,
+</I>&gt;<i> &gt; Xitami handles this correctly: no overflow, just an error and huge
+</I>&gt;<i> &gt; log files.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt;  Perl.exe mysteriously disappeared from my machine recently.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Odd. But not something a hacker would want to do.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  -PRR
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002954.html">[Xitami] hack attack or just ignorance?
+</A></li>
+	<LI> Next message: <A HREF="002958.html">[Xitami] hack attack or just ignorance?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2955">[ date ]</a>
+              <a href="thread.html#2955">[ thread ]</a>
+              <a href="subject.html#2955">[ subject ]</a>
+              <a href="author.html#2955">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

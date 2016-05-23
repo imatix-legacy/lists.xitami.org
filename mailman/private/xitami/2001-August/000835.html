@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] PHP4 Installation Problems
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000839.html">
+   <LINK REL="Next"  HREF="000836.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] PHP4 Installation Problems
+   </H1>
+    <B>Paul N Shortis
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] PHP4 Installation Problems">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 30 Aug 2001 18:36:41 +1000</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000839.html">[Xitami] PHP4 Installation Problems
+</A></li>
+        <LI> Next message: <A HREF="000836.html">[Xitami] PHP4 Installation Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#835">[ date ]</a>
+              <a href="thread.html#835">[ thread ]</a>
+              <a href="subject.html#835">[ subject ]</a>
+              <a href="author.html#835">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+Hi Peter,
+
+Those lines look okay IF they really do both begin with semi-colons (;) then
+they will simply be treated as comment lines.
+
+The installer must have mangled them from the default line which is ...
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+; Paths and Directories ;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+include_path   =               ; UNIX: &quot;/path1:/path2&quot;  Windows: &quot;\path1;\path2&quot;
+doc_root  =    ; the root of the php pages, used only if nonempty
+
+This is how my system is setup, because I don't use any implicit includes - this
+ explicitly sets the default include
+path to null  instead of using any compiled in default. You might try this
+syntax &amp; see how much mileage you get.
+
+As I said if the lines begin with a ; then they will be treated as comments, I
+would be likely to check the line FOLLOWING
+the line the error is reported on, i.e. Line 315
+
+Also if you set the following values On earlier in the ini file you make get
+helpful messages displayed in your
+browser, 'display_startup_errors defaults' to Off
+
+display_errors =    On
+display_startup_errors = On
+
+Also, although it appears you may already have 'log_errors' set to On (since
+you're getting server error logs) , I would
+check to make sure 'log_errors' is in fact set to On.
+
+Although I think you've almost cracked it, another thing I've found is that you
+will get the blank pages if php.exe can't locate
+php4ts.dll - it should either be in the Xitami directory along with php.exe
+(since that is Xitami's cwd when starting php) or in
+c:\winnt\system32. In fact I've found that php.exe can be left in c:\php (and
+the Xitami filter entry altered to match php.exe's
+location of course) if php4ts.dll is placed in c:\winnt\system32 .
+
+Hope that's enough to nudge you in the right direction...
+
+Regards, Paul
+
+
+
+
+<A HREF="mailto:schillerwein@salient.de">schillerwein@salient.de</A> on 30/08/2001 05:42:21 PM
+
+Please respond to <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+
+To:   <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+cc:    (bcc: Paul N Shortis/Roads/QMR/Au)
+Subject:  Re: [Xitami] PHP4 Installation Problems
+
+
+
+On 30 Aug 2001, at 9:55, Paul N Shortis wrote:
+
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hi Peter,
+</I>&gt;<i>
+</I>&gt;<i> There's no need at all to alter the extension settings in the php.ini file
+</I>&gt;<i> unless you atually move the directory the extenstions are placed in. php
+</I>parses
+&gt;<i> the php.ini file at startup and looks there expicilty to load extensions.
+</I>&gt;<i> There's also no need to place the extension directory in the path (although it
+</I>&gt;<i> shouldn't do any harm).
+</I>&gt;<i>
+</I>&gt;<i> With php.exe in the Xitami directory (eg if Xitami is installed in C:\Xitami
+</I>&gt;<i> this is where php.exe should be placed - NOT in any subdirectory such as
+</I>&gt;<i> C:\Xitami\cgi-bin etc) the filter should simply be set to
+</I>&gt;<i>
+</I>&gt;<i> .php php.exe
+</I>&gt;<i>
+</I>&gt;<i> without any paths.
+</I>&gt;<i>
+</I>&gt;<i> I was assuming from your original post that you weren't getting error
+</I>&gt;<i> messages... just blank pages, is this correct ???
+</I>&gt;<i>
+</I>&gt;<i> Regards, Paul
+</I>
+Hi Paul,
+
+you are right,  just blank pages. I reinstalled the whole thing and
+still get blank pages.
+
+On the commandline i get:
+C:\&gt;which php.exe
+D:\Programme\Xitami\php.exe
+
+It's in the right place. My ini-file is untouched;
+the permissions of php.exe are set to full access for everybody.
+
+In defaults.cfg i see:
+[Filter]
+    .php=php.exe
+
+In my cgierr.log i see:
+PHP:  Error parsing C:\WINNT\php.ini on line 314
+
+In my untouched ini these are the lines 313-314:
+
+; Windows: &quot;\path1;\path2&quot;
+;include_path = &quot;.;c:\php\includes&quot;
+
+So, i assume this is the mistake. I played around with the two
+variables with no result yet.
+
+Regards,  Peter
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+
+
+
+
+
+************************************************************
+Opinions contained in this e-mail do not necessarily reflect
+the opinions of the Queensland Department of Main Roads,
+Queensland Transport or National Transport Secretariat, or
+endorsed organisations utilising the same infrastructure.
+If you have received this electronic mail message in error,
+please immediately notify the sender and delete the message
+from your computer.
+************************************************************
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000839.html">[Xitami] PHP4 Installation Problems
+</A></li>
+	<LI> Next message: <A HREF="000836.html">[Xitami] PHP4 Installation Problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#835">[ date ]</a>
+              <a href="thread.html#835">[ thread ]</a>
+              <a href="subject.html#835">[ subject ]</a>
+              <a href="author.html#835">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

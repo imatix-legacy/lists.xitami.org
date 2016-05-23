@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] targeting file downloads
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006782.html">
+   <LINK REL="Next"  HREF="006769.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] targeting file downloads
+   </H1>
+    <B>Michael diLorenzo
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] targeting file downloads">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 08 Jun 2005 03:06:50 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006782.html">[Xitami] targeting file downloads
+</A></li>
+        <LI> Next message: <A HREF="006769.html">[Xitami] targeting file downloads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6784">[ date ]</a>
+              <a href="thread.html#6784">[ thread ]</a>
+              <a href="subject.html#6784">[ subject ]</a>
+              <a href="author.html#6784">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Rick,  this just came to me when I went to bed, and I thought I'd get  
+up and test it and type it out real quick:
+
+Changing the MIME filetype in the xitami configuration file (preferably  
+defaults.cfs) is probably your best bet.  However, this will hose the  
+ability of the server to provide streaming type media or images when you  
+do want them.
+
+A workaround for this would be to install two copies of xitami on the same  
+computer in different directories.  In the second installation, make the  
+changes to the MIME types that Marc suggested, and change the portbase  
+ from 0 to, say, 1000.  That will cause the second server to listen on port  
+1080 for web traffic.  Then, on your home page, create links to the media  
+files that include the reference to port 1080, such as  
+<A HREF="http://www.mydomain.com:1080/mymedia.wmv.">http://www.mydomain.com:1080/mymedia.wmv.</A>  This will cause the visitor to  
+hit your computer on port 1080, and the second xitami server will  
+respond.  Since the second server is programmed to confuse browsers as to  
+the type of file, they'll get the download prompt.
+
+In this way, you can have your server handle file types normally, but  
+point visitors to the second server when you want to force the download  
+prompt.  You'll have to do the obvious shuffling of your media files to a  
+place that the second server can see, but I just tested this, and it works  
+fine on my system.
+
+Now...what are you doing to do when the visitor clicks &quot;Open&quot; instead of  
+&quot;Save?&quot;  :-D
+
+Michael
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006782.html">[Xitami] targeting file downloads
+</A></li>
+	<LI> Next message: <A HREF="006769.html">[Xitami] targeting file downloads
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6784">[ date ]</a>
+              <a href="thread.html#6784">[ thread ]</a>
+              <a href="subject.html#6784">[ subject ]</a>
+              <a href="author.html#6784">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

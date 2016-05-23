@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Core Dumping?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003289.html">
+   <LINK REL="Next"  HREF="003291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Core Dumping?
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Core Dumping?">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 01 Jun 2002 07:39:24 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003289.html">[Xitami] module behaviour
+</A></li>
+        <LI> Next message: <A HREF="003291.html">[Xitami] 2.5 beta release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3287">[ date ]</a>
+              <a href="thread.html#3287">[ thread ]</a>
+              <a href="subject.html#3287">[ subject ]</a>
+              <a href="author.html#3287">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;002301c20297$beb16810$<A HREF="mailto:bab24104@jayas4t3nn91rg">bab24104@jayas4t3nn91rg</A>&gt;, &quot;Jay Moore&quot; writes:
+&gt;<i>Ax: c:\xitami\memtrace.lst was 25.7GB in size
+</I>
+memtrace.lst contains a listing of &quot;memory that was allocated but not
+freed&quot; when Xitami is exiting for some reason (normally or in a crash)
+-- typically it should either not exist at all, or if there's a small
+memory leak it should be a small (say 10KB) file.
+
+If it is being written as a very big file then that generally indicates
+that the list of &quot;memory allocated&quot; has a cycle in it, which in turn
+indicates that something very bad has gone wrong.  Possibly the code
+should try to detect this cycle, and avoid going round and round in
+circles, but with a large list that can be a bit tricky.
+
+You can safely remove the memtrace.lst file unless you're trying to
+debug what went wrong.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003289.html">[Xitami] module behaviour
+</A></li>
+	<LI> Next message: <A HREF="003291.html">[Xitami] 2.5 beta release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3287">[ date ]</a>
+              <a href="thread.html#3287">[ thread ]</a>
+              <a href="subject.html#3287">[ subject ]</a>
+              <a href="author.html#3287">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

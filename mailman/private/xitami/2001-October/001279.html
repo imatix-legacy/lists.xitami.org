@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI Scripting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001282.html">
+   <LINK REL="Next"  HREF="001278.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI Scripting
+   </H1>
+    <B>Patrick L. Olson
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] CGI Scripting">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 27 Oct 2001 06:07:43 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001282.html">OT: Re: [Xitami] CGI Scripting
+</A></li>
+        <LI> Next message: <A HREF="001278.html">[Xitami] Extended logging
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1279">[ date ]</a>
+              <a href="thread.html#1279">[ thread ]</a>
+              <a href="subject.html#1279">[ subject ]</a>
+              <a href="author.html#1279">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>David Lambert wrote:
+&gt;<i> 
+</I>&gt;<i> I have a Perl script in webroot/cgi-bin, which reads a text file in and
+</I>&gt;<i> outputs it in HTML format to the requesting browser (see smaple script
+</I>&gt;<i> below). Well, that's what it's supposed to do.
+</I>
+David check the cgierr.log in xitami root it should have
+something also
+#! perl should be fine in windows if perl is set in your path
+and always
+
+use strict;
+this will point you to most errors
+
+# Define Variables? no your not use my()
+my ($Script, $lines, @text, $line);
+
+you may also want to 
+use CGI::Carp &quot;fatalsToBrowser&quot;; #shows error in browser
+
+# Read Name of Script...
+
+        $Script = $ENV{'SCRIPT_NAME'};
+		
+       if ($Script eq &quot;&quot;) {$Script = &quot;default.txt&quot;};
+       
+	not sure if $Script here is getting set it may be empty
+and empty and &quot;&quot; are differant set $Script =&quot;&quot; 
+before the $ENV{'SCRIPT_NAME'}
+
+# Open Script....Always die with $! to let you know
+        open(TXT, &quot;&lt;&quot;.$Script)|| die &quot;Can't Open ::$Script:: $!\n&quot;;
+        @text=&lt;TXT&gt;;
+        close(TXT);
+
+read up on the doc's good stuff in there:)
+
+hope you get is going
+
+Pat...
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001282.html">OT: Re: [Xitami] CGI Scripting
+</A></li>
+	<LI> Next message: <A HREF="001278.html">[Xitami] Extended logging
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1279">[ date ]</a>
+              <a href="thread.html#1279">[ thread ]</a>
+              <a href="subject.html#1279">[ subject ]</a>
+              <a href="author.html#1279">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

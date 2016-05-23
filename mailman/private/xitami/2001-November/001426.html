@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Dynamic IP... is anyone else using it? --&gt; PASV FTP fails inbound through NAT
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001422.html">
+   <LINK REL="Next"  HREF="001413.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Dynamic IP... is anyone else using it? --&gt; PASV FTP fails inbound through NAT
+   </H1>
+    <B>Carl J. Elitz
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Dynamic IP... is anyone else using it? --&gt; PASV FTP fails inbound through NAT">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 14 Nov 2001 21:17:26 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001422.html">[Xitami] Dynamic IP... is anyone else using it?
+</A></li>
+        <LI> Next message: <A HREF="001413.html">[Xitami] Dynamic IP... is anyone else using it?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1426">[ date ]</a>
+              <a href="thread.html#1426">[ thread ]</a>
+              <a href="subject.html#1426">[ subject ]</a>
+              <a href="author.html#1426">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>PASV FTP FAILS INBOUND THROUGH NAT
+
+To those who may have been following this thread and trying to help me
+figure out why I can't get FTP to work with Xitami, thank you. I have had a
+lot of thoughtful responses. I think I may have a definitive diagnosis for
+why I can't get Xitami's FTP server working properly. As always, your
+comments are greatly appreciated...
+
+Currently, Internet Explorer and Netscape have built in FTP clients, but
+these clients do not use &quot;normal&quot; FTP. Instead, like most of the newer FTP
+clients, they use &quot;PASV FTP&quot; which appears to have become the standard FTP
+protocol. I found an article by Don Kelloway which explains the problem in
+detail better than I ever could.
+
+Don writes the following which is available at
+<A HREF="http://war.jgaa.com/ftp/?cmd=show_page&ID=ftp_pasv.">http://war.jgaa.com/ftp/?cmd=show_page&amp;ID=ftp_pasv.</A>
+
+Comments? More importantly... solutions?
+
+-Carl.
+
+---
+With regards to the difference between PASV FTP and Normal FTP:
+
+Both PASV FTP and Normal FTP work in the same manner for the initial
+&quot;Control Channel&quot; connection, which occurs as follows:
+
+The external user allocates two port numbers for the FTP session.  The first
+port number is reflected in the connection that's used to TCP port 21, on
+the FTP server.  This is referred to as the &quot;Control or Command Channel&quot;.
+The usage of the second port number allocated by the external user, as well
+as how the connection is established is where the difference occurs...
+
+If the external user sends the FTP server a PORT  (Normal FTP) command,
+which also contains the second allocated port number inside the data of the
+packet.  Then the FTP server initiates the next connection to the external
+user.  This occurs from TCP port 20 (on the FTP server) to whatever the
+allocated second port number is.  This is referred to as the &quot;Data Channel&quot;
+connection.
+
+If you've noticed, it's the FTP server which initiated the connection
+outbound, to the external user.  In the world of security and firewalls,
+this can be a very bad thing.  Hence, the reason why PASV FTP was created.
+This is also a reason why some FTP servers do not accept the PORT command.
+
+If the user sends the FTP server a PASV (PASV FTP) command, then the FTP
+server responds back to the external user with a port number that it has
+allocated.  SPECIAL NOTE:  The port number to be used, AS WELL AS the FTP
+server's IP Address is embedded inside the data of the packet sent to the
+external user.
+
+When the user receives this packet, the external user initiates the &quot;Data
+Channel&quot; connection from its second allocated port number, to the IP Address
+and port number provided from the FTP server.
+
+See the difference?  In a PASV connection, the &quot;Data Channel&quot; is
+initiated/created by the external user.  In a Normal connection, it's
+established by the FTP server.
+
+Note: All web browsers use PASV FTP as its means of FTP.  Although I have
+heard a rumor that Internet Explorer 5.0 will support both.  I have yet to
+confirm this...
+
+Now, let's look at the &quot;Special Note&quot;...
+
+To reiterate, in a PASV FTP session, the FTP server tells the external user
+what the FTP servers' IP Address is, as well as what port number to initiate
+an inbound connection to.
+
+If you're using NAT (Network Address Translation), the FTP server is
+probably going to be an IP Address within the established &quot;Private Range&quot;
+(although that really isn't the issue).  Now, say for instance the FTP
+server is 192.168.100.10 and an external user is trying to initiate a PASV
+FTP session to this FTP server.  Because the IP Address 192.168.100.10 as
+well as the port number is embedded inside the packet and because a lot of
+NAT implementations cannot &quot;rewrite&quot; this information.  The external user
+receives this information and will try to initiate the &quot;Data Channel&quot;
+connection to an IP Address (192.168.100.10) that will never leave their
+local LAN.  Hence PASV FTP fails inbound through NAT.
+---
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001422.html">[Xitami] Dynamic IP... is anyone else using it?
+</A></li>
+	<LI> Next message: <A HREF="001413.html">[Xitami] Dynamic IP... is anyone else using it?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1426">[ date ]</a>
+              <a href="thread.html#1426">[ thread ]</a>
+              <a href="subject.html#1426">[ subject ]</a>
+              <a href="author.html#1426">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami on BeOS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000367.html">
+   <LINK REL="Next"  HREF="000359.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami on BeOS
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami on BeOS">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 10 Jul 2001 07:07:44 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000367.html">[Xitami] Forcing https.
+</A></li>
+        <LI> Next message: <A HREF="000359.html">[Xitami] Max User Problem (Connections)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#358">[ date ]</a>
+              <a href="thread.html#358">[ thread ]</a>
+              <a href="subject.html#358">[ subject ]</a>
+              <a href="author.html#358">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;006801c0ffb2$87884450$<A HREF="mailto:659305c3@futeltra">659305c3@futeltra</A>&gt;, &quot;Michael S. Kazarin&quot; write
+s:
+&gt;<i>I downloaded xitami2.5b4 for beos from bebits and installed it.  [...]
+</I>&gt;<i>Anyway I encountered some problems. I belive all files included in the
+</I>&gt;<i>package are the same as for windows distributions which I use except the
+</I>&gt;<i>binary itself. Thus I guess it wasn't properly compiled, something wrong
+</I>&gt;<i>with paths. 
+</I>
+&gt;<i>From the symptoms that you describe, it does sound like that is the
+</I>case.  We don't actually produce the BeOS version ourselves, and IIRC
+the binary that is on the website is (a) an older version, and (b) was
+built by someone else.  As I understand it Xitami compiles with minor
+changes under BeOS now, so if someone is interested in recompiling it,
+please feel free.
+
+For example the images located in ./webpages/images do not load
+&gt;<i>if I type <A HREF="http://localhost/images/image_1.gif,">http://localhost/images/image_1.gif,</A> but they do if I type
+</I>&gt;<i><A HREF="http://localhost//images/image_1.gif.">http://localhost//images/image_1.gif.</A> On the other hand
+</I>&gt;<i>./webpages/xitami/images works fine and
+</I>&gt;<i><A HREF="http://localhost/xitami/images/image_1.gif">http://localhost/xitami/images/image_1.gif</A> displays as desired. 
+</I>
+This is rather puzzling.  It's almost as if the path definitions are
+wrong.  You might want to turn on server debugging mode ([Server] debug=1)
+and see what path locations it is trying with each request.  And you
+might also want to compare the configuration file in the Windows version
+(or source package) with the ones in the BeOS one, just in case they are
+wrong for some reason.
+
+&gt;<i>Another serious issue for me is that when Xitami is started, cpu load for my
+</I>&gt;<i>amd duron 750 goes up to 100% and stays there until I stop the server. I
+</I>&gt;<i>have no idea what's going wrong. 
+</I>
+It sounds like it's getting stuck in a loop for some reason.  Normally
+Xitami should &quot;go to sleep&quot; waiting for the OS to tell it that someone
+has sent it a request to deal with.  For some reason this doesn't seem
+to be happening for you.
+
+Has anyone else found this with the BeOS version?  (I don't have access
+to a BeOS version to test.)
+
+If there's anyone who's built Xitami from source under BeOS, they could
+perhaps turn on the tracing functions and try to figure out where it is
+looping.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000367.html">[Xitami] Forcing https.
+</A></li>
+	<LI> Next message: <A HREF="000359.html">[Xitami] Max User Problem (Connections)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#358">[ date ]</a>
+              <a href="thread.html#358">[ thread ]</a>
+              <a href="subject.html#358">[ subject ]</a>
+              <a href="author.html#358">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

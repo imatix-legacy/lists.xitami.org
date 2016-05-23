@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] problem with php and mySql
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006587.html">
+   <LINK REL="Next"  HREF="006598.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] problem with php and mySql
+   </H1>
+    <B>Antonio - poste.it
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] problem with php and mySql">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 16 Mar 2005 20:06:52 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006587.html">[Xitami] downloading problems with my server.
+</A></li>
+        <LI> Next message: <A HREF="006598.html">[Xitami] problem with php and mySql
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6588">[ date ]</a>
+              <a href="thread.html#6588">[ thread ]</a>
+              <a href="subject.html#6588">[ subject ]</a>
+              <a href="author.html#6588">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all!
+
+I try to connect to a mySql database with a php page, but receive a warning
+message that states:
+&quot;Client does not support authentication protocol...&quot;
+What's wrong?
+Thanks!
+
+In a different machine a similar connection (IIS; mySql 4.1.6gamma-nt; php
+5.1.2) is OK, but I need to work with xitami (or a different free server,
+running under Win-XP Home).
+
+Detailed information:
+
+My environment:
+Windows XP Home Version 5.1 (Build 2600: Service Pack 2)
+PHP Version 4.3.10
+Xitami 2.5c2
+MySQL version: 4.1.10-nt
+
+Process mysqld-nt.exe is running.
+
+&gt;<i>From phpinfo:
+</I>MySql support enabled
+Client API version  3.23.49
+
+Phpinfo runs OK, like other simple php functions.
+Mysql queries are OK for the specified user/pwd.
+
+In my php.ini, in Windows Extensions section, I read:
+;Note that MySQL and ODBC support is now built in, so no dll is needed for
+it.
+(in fact in php.ini there is no extension=php_mysql.dll, commented or not)
+
+The warning arise only when I specify a valid user and any password which
+length is greater then zero.
+
+Source testmysql.php file:
+---------------
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+&quot;<A HREF="http://www.w3.org/TR/html4/loose.dtd"">http://www.w3.org/TR/html4/loose.dtd&quot;</A>&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;TITOLO&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?php
+$link_id = mysql_connect('localhost', 'theuser', 'thepass');
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+---------------
+
+Refreshing the page, gives the following warning message:
+
+Warning: mysql_connect(): Client does not support authentication protocol
+requested by server; consider upgrading MySQL client in
+C:\xitami-25\app\webpages\memo\_testmysql.php on line 10
+
+
+Thanks!
+Antonio Angelo
+<A HREF="mailto:antonio.angelo@my-site.it">antonio.angelo@my-site.it</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006587.html">[Xitami] downloading problems with my server.
+</A></li>
+	<LI> Next message: <A HREF="006598.html">[Xitami] problem with php and mySql
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6588">[ date ]</a>
+              <a href="thread.html#6588">[ thread ]</a>
+              <a href="subject.html#6588">[ subject ]</a>
+              <a href="author.html#6588">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Emulating Apache directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001661.html">
+   <LINK REL="Next"  HREF="001670.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Emulating Apache directories
+   </H1>
+    <B>Francis Turner
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Emulating Apache directories">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 07 Dec 2001 12:23:09 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001661.html">[Xitami] PHP/perl as non-CGI
+</A></li>
+        <LI> Next message: <A HREF="001670.html">[Xitami] dir access
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1668">[ date ]</a>
+              <a href="thread.html#1668">[ thread ]</a>
+              <a href="subject.html#1668">[ subject ]</a>
+              <a href="author.html#1668">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>One useful thing that you can do in Apache is display a README file at 
+the bottom of a directory listing. I tried to do the same thing using 
+GSL in xitami and it works most of the time (code below). Where it 
+doesn't work is where the directory is an alias to somewhere.
+
+But there is one problemette. Xitami doesn't seem to give me the real 
+directory path only the url path so I'm having to hack that to try and 
+create the fully qualified filename I want to include in the listing. I 
+had a look in the source and it looks like the function in smthttpl.c 
+called http_list_directory is the what creates the xml tree for the 
+script and it unfortunately doesn't seem to put such a variable in the tree.
+
+Francis
+-------
+
+.readme = 'c:/xitami/webpages'+urlbase+'README'
+.if exists (readme)
+Readme file: 'README'
+  &lt;pre&gt;
+.  literal from readme
+  &lt;/pre&gt;&lt;hr&gt;
+.elsif exists (readme+'.txt')
+Readme file: 'README.txt'
+  &lt;pre&gt;
+.  literal from readme+'.txt'
+  &lt;/pre&gt;&lt;hr&gt;
+.endif
+
+
+Francis
+
+-- 
+&quot;Education is when you read the fine print; 
+  experience is what you get when you don't.&quot; Pete Seeger 
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001661.html">[Xitami] PHP/perl as non-CGI
+</A></li>
+	<LI> Next message: <A HREF="001670.html">[Xitami] dir access
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1668">[ date ]</a>
+              <a href="thread.html#1668">[ thread ]</a>
+              <a href="subject.html#1668">[ subject ]</a>
+              <a href="author.html#1668">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

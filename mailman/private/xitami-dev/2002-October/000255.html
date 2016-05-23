@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] SFL thread-safety and Java SMT
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000253.html">
+   <LINK REL="Next"  HREF="000256.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] SFL thread-safety and Java SMT
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] SFL thread-safety and Java SMT">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Tue, 15 Oct 2002 12:34:48 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000253.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+        <LI> Next message: <A HREF="000256.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#255">[ date ]</a>
+              <a href="thread.html#255">[ thread ]</a>
+              <a href="subject.html#255">[ subject ]</a>
+              <a href="author.html#255">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Keresztfalvi Laszlo &lt;<A HREF="mailto:kereszt@iname.com">kereszt@iname.com</A>&gt; wrote:
+
+&gt;<i> Is there any effort to make SFL thread safe? 
+</I>
+We started on this.  This is a list of the SFL modules that have been 
+made thread-safe:
+
+sflcons
+sflconv
+sflcvbs
+sflcvsb
+sflcvsd
+sflcvts
+sfldate
+sflenv 
+sflexdr
+sflhttp
+sfllang
+sfllbuf
+sfllist
+sflmail
+sflmath
+sflmem 
+sflsyst
+
+&gt;<i> Maybe, I'll do it sometime if no one else :) because I just love SMT
+</I>&gt;<i> but it cannot use the power of multi-processors which is the default
+</I>&gt;<i> way to increase server capacity (eg. web or other service-like). And,
+</I>&gt;<i> as one of my pal says, it &quot;linearizes&quot; the program which means it
+</I>&gt;<i> serves the requests in order of arrival but with threads requests
+</I>&gt;<i> would see an &quot;equally distributed&quot; ;) response delay instead of that
+</I>&gt;<i> related to actual queue position... OR, you (the programmer) must
+</I>&gt;<i> unroll every for() into event_send(myself)..
+</I>
+As soon as you use multiple processes, you can benefit from multiple 
+processors and less FIFO behaviour.  This is the idea behind WTP, the 
+web transaction protocol included in Studio (now part of Xitami).  
+We've never found the FIFO behaviour of SMT to be problematic since 
+heavy work (in our business, anyhow) inevitably consists of database 
+access, and this inevitably requires external processes managed by 
+something like WTP.
+
+&gt;<i> Further back, I made a Java SMT but without standard agents (I was no
+</I>&gt;<i> more time). Somebody interested? It works with Java 1.2 or 1.3.0 as
+</I>&gt;<i> far as I remember. I may provide it &quot;as is&quot; to anybody but it may
+</I>&gt;<i> require some review before &quot;official&quot; use (actually I have no time to
+</I>&gt;<i> do this).
+</I>
+What did you have in mind when you made this?  We built SMT mainly to 
+allow us to develop fast servers, and C was the obvious choice for 
+this.  But sometimes I regret not having used C++, since it would 
+have allowed us to make the SMT abstraction much cleaner.
+
+-
+Pieter Hintjens
+iMatix Corporation
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000253.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+	<LI> Next message: <A HREF="000256.html">[Xitami-Dev] SFL thread-safety and Java SMT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#255">[ date ]</a>
+              <a href="thread.html#255">[ thread ]</a>
+              <a href="subject.html#255">[ subject ]</a>
+              <a href="author.html#255">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

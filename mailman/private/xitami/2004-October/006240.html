@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] VHost CNAME path question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006238.html">
+   <LINK REL="Next"  HREF="006243.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] VHost CNAME path question
+   </H1>
+    <B>Scott Logan
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] VHost CNAME path question">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Oct 2004 15:53:35 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006238.html">[Xitami] VHost CNAME path question
+</A></li>
+        <LI> Next message: <A HREF="006243.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6240">[ date ]</a>
+              <a href="thread.html#6240">[ thread ]</a>
+              <a href="subject.html#6240">[ subject ]</a>
+              <a href="author.html#6240">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have set up something like you are asking about.
+
+In the defaults.cfg file, under [Virtual-hosts] I added:
+other.mydomain.com = &quot;other.cfg&quot;
+
+In the other.cfg file, under [Server] I added:
+Cgi-bin = &quot;c:/Other/cgi-bin&quot;
+Webpages = &quot;c:/Other&quot;
+
+You will have to add a zone for other.mydomain.com.
+
+
+
+----- Original Message ----- 
+From: &quot;admin&quot; &lt;<A HREF="mailto:admin@mrjdesign.com">admin@mrjdesign.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, October 26, 2004 3:23 PM
+Subject: Re: [Xitami] VHost CNAME path question
+
+
+At 09:34 AM 10/26/2004 -0500, you wrote:
+
+&gt;<i>Or just do like the big guys (&amp; the rest of us) do &amp; put each site at
+</I>&gt;<i>maindomain/~vhost for each different site. Which is a lot easier.
+</I>
+I already do this. I run 20 domains out of one box on one IP.
+
+I have different domain names specified in the Vhost section done.
+That works fine as long as the domain name is different.
+
+when I add a CNAME named OTHER to the OTHER.MYDOMAIN.COM
+
+then OTHER.MYDOMAIN.COM and MYDOMAIN.COM still go to the same site.
+They shouldn't.
+
+I already have a other.cfg, other.aut, default.cfg is made aware of them
+and it still does not work but it works if I use
+www.mynextdomain.com then it's found properly for any other domain with 
+it's own host files in DNS and so on.
+
+Of course I should not have to specify a zone file in DNS to get xitami to 
+route the traffic to the correct location path.
+
+Hence I need to get the other.mydomain.com to get a site of its own just 
+like www.mynextdomain.com right next to www.mydomain.com
+
+All you said to do I already tried and it doesn't want to get in there.
+I don't really want to start specifying port numbers to clients.
+They become easily confused as it is.
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006238.html">[Xitami] VHost CNAME path question
+</A></li>
+	<LI> Next message: <A HREF="006243.html">[Xitami] VHost CNAME path question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6240">[ date ]</a>
+              <a href="thread.html#6240">[ thread ]</a>
+              <a href="subject.html#6240">[ subject ]</a>
+              <a href="author.html#6240">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

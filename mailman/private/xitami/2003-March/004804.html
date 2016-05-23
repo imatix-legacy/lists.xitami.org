@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Upgrading Internet Circuit
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004802.html">
+   <LINK REL="Next"  HREF="004803.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Upgrading Internet Circuit
+   </H1>
+    <B>Frank Glover
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Upgrading Internet Circuit">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 07 Mar 2003 11:07:45 -0600 (Central Standard Time)</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004802.html">[Xitami] Upgrading Internet Circuit
+</A></li>
+        <LI> Next message: <A HREF="004803.html">[Xitami] Upgrading Internet Circuit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4804">[ date ]</a>
+              <a href="thread.html#4804">[ thread ]</a>
+              <a href="subject.html#4804">[ subject ]</a>
+              <a href="author.html#4804">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>--Boundary_(ID_Na1hH8LTYa3xuzRjEnTf+w)
+Content-type: multipart/alternative;
+ boundary=&quot;Boundary_(ID_ZAGFpdmOEIzL3lYayYoV/Q)&quot;
+
+
+--Boundary_(ID_ZAGFpdmOEIzL3lYayYoV/Q)
+Content-type: Text/Plain; charset=iso-8859-1
+Content-transfer-encoding: 7BIT
+
+lets see if this ascii drawing helps..
+
+
+
+                                        [Internet]
+                                               |
+                                       [my router]
+                                               |
+ ----------------------------------------------------------------------------
+
+|<i>                                   |                              |        
+</I>                     |
+[My web server]       [PC #2]                [PC #3]              [PC #4]
+
+My web server can only access my web site like this
+<A HREF="http://localhost/webpages/mypage">http://localhost/webpages/mypage</A>
+
+PC #2-4 can access it via <A HREF="http://www.mysite.com">http://www.mysite.com</A> and
+<A HREF="http://localmachinename/webpages/mypage">http://localmachinename/webpages/mypage</A>
+
+When my web server tries to access itself it times out. Someone once told me
+that it has something to do with DNS resolution of itself
+is impossible? anyone know of a fix for this or a work around?
+ 
+
+ 
+-------Original Message-------
+ 
+From: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Date: Friday, March 07, 2003 10:56:29 AM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: Re: [Xitami] Upgrading Internet Circuit
+ 
+most likely the lmhosts file is pointing to the wrong address:
+
+for example: 192.168.1.6 is the same as www.whatever.com, but your webserver
+
+does not know the dns resolution. I think xitiami has this issue on their
+FAQ's
+&gt;<i> 
+</I>&gt;<i> I have ansimilar question? If you run a router, and your web server is
+</I>&gt;<i> running on a machine behind the router, why can only the other
+</I>&gt;<i> machines on your network see your web address... IE www.whatever.com
+</I>&gt;<i> but the machine running the web server can only access the pages from
+</I>&gt;<i> the localhost?-------Original Message------- From:
+</I>&gt;<i> <A HREF="mailto:xitami@lists.xitami.orgDate">xitami@lists.xitami.orgDate</A>: Friday, March 07, 2003 10:27:03 AMTo:
+</I>&gt;<i> <A HREF="mailto:xitami@lists.xitami.orgSubject">xitami@lists.xitami.orgSubject</A>: Re: [Xitami] Upgrading Internet
+</I>&gt;<i> CircuitWhat is the IP address of the PC that is running Xitami?
+</I>&gt;<i> 
+</I>&gt;<i> is your Xitami machine behind a firewall? if so, do you have port 80
+</I>&gt;<i> mapped to the machine? even if Xitami is on the same machine as your
+</I>&gt;<i> firewall solution, you still need to create the port mapping.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Hello everyone,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I have been running Xitami at work connected to the internet via a 
+</I>&gt;<i> DSL
+</I>&gt;<i> &gt; circuit. We have receintly installed a T-1. I have pointed the
+</I>&gt;<i> &gt; gateway IP address of the Xitami computer to the new T-1 circuit.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; From home (or anywhere else) when I type in the IP address of the
+</I>&gt;<i> &gt; dsl
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; circuit within my web browser, Xitami surves up my web page. When I
+</I>&gt;<i> &gt; type in the IP address of the new T-1 circuit, I get a time-out
+</I>&gt;<i> &gt; error.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The people who installed the T-1 circuit is telling me I need to
+</I>&gt;<i> &gt; assign a public IP address to my Xitami web server to make it work.
+</I>&gt;<i> &gt; I have always used a private address (192.168.0.xx) and it has
+</I>&gt;<i> &gt; worked for over a year.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; What do I need to do to get Xitami to serve the IP address of the
+</I>&gt;<i> &gt; new circuit? I'm thinking that maybe they have a filter or something
+</I>&gt;<i> &gt; preventing port 80 from working...
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Any suggestions would be greatly appreciated!
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Kelly
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</I>&gt;<i> Vince Napoli
+</I>&gt;<i> Director of Technology and Network Administration
+</I>&gt;<i> 845-647-0200x377
+</I>&gt;<i> Ellenville Central Schools
+</I>&gt;<i> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> .
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ____________________________________________________
+</I>&gt;<i> IncrediMail - Email has finally evolved - Click Here
+</I>
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vince Napoli
+Director of Technology and Network Administration
+845-647-0200x377
+Ellenville Central Schools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+.
+
+--Boundary_(ID_ZAGFpdmOEIzL3lYayYoV/Q)
+Content-type: Text/HTML; charset=iso-8859-1
+Content-transfer-encoding: quoted-printable
+
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; charset=3Diso-8859-=
+1&quot;&gt;
+&lt;META content=3D&quot;IncrediMail 1.0&quot; name=3DGENERATOR&gt;
+&lt;!--IncrdiXMLRemarkStart&gt;
+&lt;IncrdiX-Info&gt;
+&lt;X-FID&gt;FLAVOR00-NONE-0000-0000-000000000000&lt;/X-FID&gt;
+&lt;X-FVER&gt;&lt;/X-FVER&gt;
+&lt;X-CNT&gt;;&lt;/X-CNT&gt;
+&lt;/IncrdiX-Info&gt;
+&lt;IncrdiXMLRemarkEnd--&gt;
+&lt;/HEAD&gt;
+&lt;BODY style=3D&quot;BACKGROUND-POSITION: 0px 0px; FONT-SIZE: 12pt; MARGIN: 5px=
+ 10px 10px; FONT-FAMILY: Arial&quot; bgColor=3D#ffffff background=3D&quot;&quot; scroll=3D=
+yes ORGYPOS=3D&quot;0&quot; X-FVER=3D&quot;3.0&quot;&gt;
+&lt;TABLE id=3DINCREDIMAINTABLE cellSpacing=3D0 cellPadding=3D2 width=3D&quot;100=
+%&quot; border=3D0&gt;
+&lt;TBODY&gt;
+&lt;TR&gt;
+&lt;TD id=3DINCREDITEXTREGION style=3D&quot;FONT-SIZE: 12pt; CURSOR: auto; FONT-F=
+AMILY: Arial&quot; width=3D&quot;100%&quot;&gt;
+&lt;DIV&gt;lets see if this ascii drawing helps..&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp=
+;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;n=
+bsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; [Internet]&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp=
+;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;n=
+bsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=
+&amp;nbsp;&amp;nbsp; |&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;[my router]&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; |&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;--------------------------------------------------------------=
+---------------&lt;/DIV&gt;
+&lt;DIV&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;=
+nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; |&amp;nbsp;&amp;=
+nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp; |&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; |&lt;/DIV&gt;
+&lt;DIV&gt;[My web server]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [PC #2]&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp; [PC #3]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nb=
+sp;&amp;nbsp;&amp;nbsp;&amp;nbsp; [PC #4]&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;My web server can only access my web site like this &lt;A href=3D&quot;http:=
+//localhost/webpages/mypage&quot;&gt;<A HREF="http://localhost/webpages/mypage</A">http://localhost/webpages/mypage&lt;/A</A>&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;PC #2-4 can access it via &lt;A href=3D&quot;<A HREF="http://www.mysite.com"">http://www.mysite.com&quot;</A>&gt;<A HREF="http://w=">http://w=</A>
+ww.mysite.com&lt;/A&gt; and &lt;A href=3D&quot;<A HREF="http://localmachinename/webpages/mypage"=">http://localmachinename/webpages/mypage&quot;=</A>
+&gt;<i><A HREF="http://localmachinename/webpages/mypage</A">http://localmachinename/webpages/mypage&lt;/A</A>&gt;&lt;/DIV&gt;
+</I>&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;When my web server tries to access itself it times out. Someone once=
+ told me that it has something to do with DNS resolution of itself&lt;/DIV&gt;
+&lt;DIV&gt;is impossible? anyone know of a fix for this or a work around?&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;IMG src=3D&quot;cid:083E3E88-8803-4BB4-B996-1F2C6A3465FD&quot;&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV id=3DIncrediOriginalMessage&gt;&lt;I&gt;-------Original Message-------&lt;/I&gt;&lt;/D=
+IV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV id=3Dreceivestrings&gt;
+&lt;DIV dir=3Dltr style=3D&quot;FONT-SIZE: 11pt&quot; &lt;i&gt;&lt;B&gt;From:&lt;/B&gt;&lt;/I&gt; &lt;A href=3D&quot;m=
+ailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr style=3D&quot;FONT-SIZE: 11pt&quot; &lt;i&gt;&lt;B&gt;Date:&lt;/B&gt;&lt;/I&gt; Friday, Marc=
+h 07, 2003 10:56:29 AM&lt;/DIV&gt;
+&lt;DIV dir=3Dltr style=3D&quot;FONT-SIZE: 11pt&quot; &lt;i&gt;&lt;B&gt;To:&lt;/B&gt;&lt;/I&gt; &lt;A href=3D&quot;mai=
+lto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt;&lt;/DIV&gt;
+&lt;DIV dir=3Dltr style=3D&quot;FONT-SIZE: 11pt&quot; &lt;i&gt;&lt;B&gt;Subject:&lt;/B&gt;&lt;/I&gt; Re: [Xita=
+mi] Upgrading Internet Circuit&lt;/DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;most likely the lmhosts file is pointing to the wrong ad=
+dress:&lt;BR&gt;&lt;BR&gt;for example: 192.168.1.6 is the same as &lt;A href=3D&quot;<A HREF="http://w=">http://w=</A>
+ww.whatever.com,&quot;&gt;www.whatever.com,&lt;/A&gt; but your webserver &lt;BR&gt;does not k=
+now the dns resolution. I think xitiami has this issue on their FAQ's&lt;BR&gt;=
+&amp;gt;<i> &lt;BR&gt;&amp;gt; I have ansimilar question? If you run a router, and your we=
+</I>b server is&lt;BR&gt;&amp;gt; running on a machine behind the router, why can only =
+the other&lt;BR&gt;&amp;gt; machines on your network see your web address... IE &lt;A =
+href=3D&quot;<A HREF="http://www.whatever.com"">http://www.whatever.com&quot;</A>&gt;www.whatever.com&lt;/A&gt;&lt;BR&gt;&amp;gt; but the mac=
+hine running the web server can only access the pages from&lt;BR&gt;&amp;gt; the lo=
+calhost?-------Original Message------- From:&lt;BR&gt;&amp;gt; &lt;A href=3D&quot;mailto:xi=
+<A HREF="mailto:tami@lists.xitami.orgDate">tami@lists.xitami.orgDate</A>:&quot;&gt;<A HREF="mailto:xitami@lists.xitami.orgDate">xitami@lists.xitami.orgDate</A>:&lt;/A&gt; Friday, Marc=
+h 07, 2003 10:27:03 AMTo:&lt;BR&gt;&amp;gt; &lt;A href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.o">xitami@lists.xitami.o</A>=
+rgSubject:&quot;&gt;<A HREF="mailto:xitami@lists.xitami.orgSubject">xitami@lists.xitami.orgSubject</A>:&lt;/A&gt; Re: [Xitami] Upgrading In=
+ternet&lt;BR&gt;&amp;gt; CircuitWhat is the IP address of the PC that is running Xi=
+tami?&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; is your Xitami machine behind a firewall? if so, d=
+o you have port 80&lt;BR&gt;&amp;gt; mapped to the machine? even if Xitami is on th=
+e same machine as your&lt;BR&gt;&amp;gt; firewall solution, you still need to creat=
+e the port mapping.&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; Hello everyon=
+e,&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; I have been running Xitami at work connecte=
+d to the internet via a &lt;BR&gt;&amp;gt; DSL&lt;BR&gt;&amp;gt; &amp;gt; circuit. We have recein=
+tly installed a T-1. I have pointed the&lt;BR&gt;&amp;gt; &amp;gt; gateway IP address o=
+f the Xitami computer to the new T-1 circuit.&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; =
+=46rom home (or anywhere else) when I type in the IP address of the&lt;BR&gt;&amp;g=
+t; &amp;gt; dsl&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; circuit within my web browser, Xit=
+ami surves up my web page. When I&lt;BR&gt;&amp;gt; &amp;gt; type in the IP address of =
+the new T-1 circuit, I get a time-out&lt;BR&gt;&amp;gt; &amp;gt; error.&lt;BR&gt;&amp;gt; &amp;gt; &lt;B=
+R&gt;&amp;gt; &amp;gt; The people who installed the T-1 circuit is telling me I need=
+ to&lt;BR&gt;&amp;gt; &amp;gt; assign a public IP address to my Xitami web server to ma=
+ke it work.&lt;BR&gt;&amp;gt; &amp;gt; I have always used a private address (192.168.0.=
+xx) and it has&lt;BR&gt;&amp;gt; &amp;gt; worked for over a year.&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt;=
+ &amp;gt; What do I need to do to get Xitami to serve the IP address of the&lt;B=
+R&gt;&amp;gt; &amp;gt; new circuit? I'm thinking that maybe they have a filter or so=
+mething&lt;BR&gt;&amp;gt; &amp;gt; preventing port 80 from working...&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;=
+&amp;gt;<i> &amp;gt; Any suggestions would be greatly appreciated!&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;=
+</I>&amp;gt;<i> &amp;gt; Kelly&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; &lt;B=
+</I>R&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &amp;gt; --&lt;BR&gt;&amp;gt; &amp;gt; Xitami Users Mailing List -- Fo=
+r Xitami support&lt;BR&gt;&amp;gt; &amp;gt; To unsubscribe: &lt;A href=3D&quot;<A HREF="http://lists.xit=">http://lists.xit=</A>
+ami.org/mailman/listinfo/xitami&quot;&gt;<A HREF="http://lists.xitami.org/mailman/listinfo=">http://lists.xitami.org/mailman/listinfo=</A>
+/xitami&lt;/A&gt;&lt;BR&gt;&amp;gt; &amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; ~~~~~~~~~~~~=
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&lt;BR&gt;&amp;gt; Vince Napoli&lt;BR&gt;&amp;gt; Director of Te=
+chnology and Network Administration&lt;BR&gt;&amp;gt; 845-647-0200x377&lt;BR&gt;&amp;gt; Elle=
+nville Central Schools&lt;BR&gt;&amp;gt; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&lt;=
+BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; --&lt;BR&gt;&amp;gt; Xitami Us=
+ers Mailing List -- For Xitami support&lt;BR&gt;&amp;gt; To unsubscribe: &lt;A href=3D=
+&quot;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami"">http://lists.xitami.org/mailman/listinfo/xitami&quot;</A>&gt;<A HREF="http://lists.xitami.org=">http://lists.xitami.org=</A>
+/mailman/listinfo/xitami&lt;/A&gt;&lt;BR&gt;&amp;gt; .&lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt;=
+ &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; &lt;BR&gt;&amp;gt; ___________________________=
+_________________________&lt;BR&gt;&amp;gt; IncrediMail - Email has finally evolved=
+ - Click Here&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&lt;BR=
+&gt;<i>Vince Napoli&lt;BR&gt;Director of Technology and Network Administration&lt;BR&gt;845=
+</I>-647-0200x377&lt;BR&gt;Ellenville Central Schools&lt;BR&gt;~~~~~~~~~~~~~~~~~~~~~~~~~~=
+~~~~~~~~~~~~~~~&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;&lt;BR&gt;--&lt;BR&gt;Xitami Users Mailing List --=
+ For Xitami support&lt;BR&gt;To unsubscribe: &lt;A href=3D&quot;<A HREF="http://lists.xitami.org=">http://lists.xitami.org=</A>
+/mailman/listinfo/xitami&quot;&gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami=">http://lists.xitami.org/mailman/listinfo/xitami=</A>
+&lt;/A&gt;&lt;BR&gt;.&lt;BR&gt;&lt;/TD&gt;&lt;/TR&gt;
+&lt;TR&gt;
+&lt;TD id=3DINCREDIFOOTER width=3D&quot;100%&quot;&gt;
+&lt;TABLE cellSpacing=3D0 cellPadding=3D0 width=3D&quot;100%&quot;&gt;
+&lt;TBODY&gt;
+&lt;TR&gt;
+&lt;TD width=3D&quot;100%&quot;&gt;&lt;/TD&gt;
+&lt;TD id=3DINCREDISOUND vAlign=3Dbottom align=3Dmiddle&gt;&lt;/TD&gt;
+&lt;TD id=3DINCREDIANIM vAlign=3Dbottom align=3Dmiddle&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/T=
+ABLE&gt;&lt;/TD&gt;&lt;/TR&gt;&lt;/TBODY&gt;&lt;/TABLE&gt;&lt;SPAN id=3DIncrediStamp&gt;&lt;SPAN dir=3Dltr&gt;&lt;F=
+ONT face=3D&quot;Arial, Helvetica, sans-serif&quot; size=3D2&gt;______________________=
+______________________________&lt;BR&gt;&lt;FONT face=3D&quot;Comic Sans MS&quot; size=3D2&gt;&lt;=
+A href=3D&quot;<A HREF="http://www.incredimail.com/redir.asp?ad_id=3D309&amp;lang=3D9"">http://www.incredimail.com/redir.asp?ad_id=3D309&amp;amp;lang=3D9&quot;</A>&gt;=
+&lt;IMG alt=3D&quot;&quot; hspace=3D0 src=3D&quot;cid:73756018-4071-49D6-A219-619A4A074EFE&quot;=
+ align=3Dbaseline border=3D0&gt;&lt;/A&gt;&amp;nbsp; &lt;I&gt;IncrediMail&lt;/I&gt; - &lt;B&gt;Email has=
+ finally evolved&lt;/B&gt; - &lt;/FONT&gt;&lt;A href=3D&quot;<A HREF="http://www.incredimail.com/redir=">http://www.incredimail.com/redir=</A>
+=2Easp?ad_id=3D309&amp;amp;lang=3D9&quot;&gt;&lt;FONT face=3D&quot;Times New Roman&quot; size=3D3&gt;=
+&lt;B&gt;&lt;U&gt;Click Here&lt;/U&gt;&lt;/B&gt;&lt;/FONT&gt;&lt;/A&gt;&lt;/SPAN&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;/BODY&gt;&lt;/HTML&gt;=
+
+--Boundary_(ID_ZAGFpdmOEIzL3lYayYoV/Q)--
+
+--Boundary_(ID_Na1hH8LTYa3xuzRjEnTf+w)
+Content-id: &lt;083E3E88-8803-4BB4-B996-1F2C6A3465FD&gt;
+Content-type: image/gif; name=sg-0.gif
+Content-transfer-encoding: base64
+Content-disposition: attachment; filename=sg-0.gif
+
+R0lGODlheQBAAPABAAAAAL29vSH5BAEAAAEALAAAAAB5AEAAAAL+jI+py+0Po5y02ouz3rz7D4bi
+SJbmiabqyrbuC8fyTNf2vQH4Puku4ONZgC+isGJsJY+9IGvJfBCdKiA1ygheUVasFLE9Qb0JZ9ik
+O2OhapLR2o6Zt3HR21Avwhv5Txof0Cck6DHlQ7iDmNMFSMan9BeoiDOZwVh5w+aAKXno+IU3BnYl
+eJf1GSgJMSZ6kHSZxQkZwZoKNup6GCa7wri6wKZlqzqMS2YqRdqZ2+jpWsab8posOvXsvDfqu0al
+hsw8/DeHeloGShd6HU0JvJkOrRpJTqFcXhxvuz1/sdsdqrvPjz1tAUvsKqhkIEIuCheiaejQTayI
+DClavEhrHUYfCRo3ruroMaTIkSRLmjyJMqXKlSxbunwJM6bMmRIKAAA7
+
+--Boundary_(ID_Na1hH8LTYa3xuzRjEnTf+w)
+Content-id: &lt;73756018-4071-49D6-A219-619A4A074EFE&gt;
+Content-type: image/gif; name=IMSTP.gif
+Content-transfer-encoding: base64
+Content-disposition: attachment; filename=IMSTP.gif
+
+R0lGODlhFAAPALMIAP9gAM9gAM8vAM9gL/+QL5AvAGAvAP9gL////wAAAAAAAAAAAAAAAAAAAAAA
+AAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQJFAAIACwAAAAAFAAPAAAEVRDJSaudJuudrxlEKI6B
+URlCUYyjKpgYAKSgOBSCDEuGDKgrAtC3Q/R+hkPJEDgYCjpKr5A8WK9OaPFZwHoPqm3366VKyeRt
+E30tVVRscMHDqV/u+AgAIfkEBWQACAAsAAAAABQADwAABBIQyUmrvTjrzbv/YCiOZGmeaAQAIfkE
+CRQACAAsAgABABAADQAABEoQIUOrpXIOwrsPxiQUheeRAgUA49YNhbCqK1kS9grQhXGAhsDBUJgZ
+AL2Dcqkk7ogFpvRAokSn0p4PO6UIuUsQggSmFjKXdAgRAQAh+QQFCgAIACwAAAAAFAAPAAAEEhDJ
+Sau9OOvNu/9gKI5kaZ5oBAAh+QQJFAAIACwCAAEAEAANAAAEShAhQ6ulcg7Cuw/GJBSF55ECBQDj
+1g2FsKorWRL2CtCFcYCGwMFQmBkAvYNyqSTuiAWm9ECiRKfSng87pQi5SxCCBKYWMpd0CBEBACH5
+BAVkAAgALAAAAAAUAA8AAAQSEMlJq7046827/2AojmRpnmgEADs=
+
+--Boundary_(ID_Na1hH8LTYa3xuzRjEnTf+w)--
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004802.html">[Xitami] Upgrading Internet Circuit
+</A></li>
+	<LI> Next message: <A HREF="004803.html">[Xitami] Upgrading Internet Circuit
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4804">[ date ]</a>
+              <a href="thread.html#4804">[ thread ]</a>
+              <a href="subject.html#4804">[ subject ]</a>
+              <a href="author.html#4804">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

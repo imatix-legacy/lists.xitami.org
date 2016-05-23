@@ -1,0 +1,423 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Xitami performance regarding directory structures
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006783.html">
+   <LINK REL="Next"  HREF="006785.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Xitami performance regarding directory structures
+   </H1>
+    <B>RPO
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Xitami performance regarding directory structures">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 7 Jun 2005 20:02:01 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006783.html">[Xitami] targeting file downloads
+</A></li>
+        <LI> Next message: <A HREF="006785.html">/Spam/ [Xitami] Xitami performance regarding directory
+ structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6777">[ date ]</a>
+              <a href="thread.html#6777">[ thread ]</a>
+              <a href="subject.html#6777">[ subject ]</a>
+              <a href="author.html#6777">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_004E_01C56B9B.C4A9C350
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+I am running W2K Server (NTFS) and I have done some research concerning =
+directory limitations within the W2K environment and now I am looking =
+for potential limitations with Xitami.  My server will host potentially =
+10s of thousands  of users.  Each user will have the ability to create =
+their own photo albums and then have photo books within each album.  =
+&gt;<i>From a storage standpoint each user will have their own user directory, =
+</I>that user directory will hold from 1 to 15 sub directories that will =
+represent the photo albums.  Then each photo album directory will have =
+from 1 to 15 photo book albums.  Sorry for the extensive path below put =
+I wanted to give an accurate representation of what I am looking to do.  =
+The directory tree will look like this (each numbered directory, ie: =
+1000, 2000 - will hold up to 1000 user directories each).  The things I =
+am considering are sub-directory limitations per parent directory and =
+performance issues for Windows considering the directory structure and =
+then ultimately Xitami's performance handling the directory structure.  =
+Comments?!
+
+This is the only info I found pertaining to NTFS limitations: =
+<A HREF="http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en=">http://www.microsoft.com/resources/documentation/Windows/XP/all/reskit/en=</A>
+-us/Default.asp?url=3D/resources/documentation/Windows/XP/all/reskit/en-u=
+s/prkc_fil_tdrn.asp but I am uncertain if I fully understand its =
+implications.
+
+xitami
+     - webpages
+          - albums
+               - 1000
+                    - user1
+                         - photoAlbum1
+                              -photoAlbum1_book1
+                              -photoAlbum1_book2
+                         - photoAlbum2
+                              -photoAlbum2_book1
+                              -photoAlbum2_book2
+                    - user2
+                         - photoAlbum1
+                              -photoAlbum1_book1
+                              -photoAlbum1_book2
+                         - photoAlbum2
+                              -photoAlbum2_book1
+                              -photoAlbum2_book2
+                    - user3
+                    ...
+                    - user1000
+               - 2000
+                    - user1001
+                         - photoAlbum1
+                              -photoAlbum1_book1
+                              -photoAlbum1_book2
+                         - photoAlbum2
+                              -photoAlbum2_book1
+                              -photoAlbum2_book2
+                    - user1002
+                         - photoAlbum1
+                              -photoAlbum1_book1
+                              -photoAlbum1_book2
+                         - photoAlbum2
+                              -photoAlbum2_book1
+                              -photoAlbum2_book2
+                    - user1003
+                    ...
+                    - user2000
+               - 3000
+               - 4000
+               - 5000 (5,000 users)
+               ...
+               ...
+               - 100000 (100,000 users)
+               ...
+               ...
+               - 1000000 (1 million users)
+------=_NextPart_000_004E_01C56B9B.C4A9C350
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=3DContent-Type content=3D&quot;text/html; =
+charset=3Diso-8859-1&quot;&gt;
+&lt;META content=3D&quot;MSHTML 6.00.2800.1479&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY bgColor=3D#ffffff&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;I am running W2K Server (NTFS) and I =
+have done some=20
+research concerning directory limitations within the W2K environment and =
+now I=20
+am looking for potential limitations with Xitami.&amp;nbsp; My server will =
+host=20
+potentially 10s of thousands&amp;nbsp; of users.&amp;nbsp; Each user will have =
+the=20
+ability to create their own photo albums and then have photo books =
+within each=20
+album.&amp;nbsp; From a storage standpoint each user will have their own =
+user=20
+directory, that user directory will hold from 1 to 15 sub directories =
+that will=20
+represent the photo albums.&amp;nbsp; Then each photo album directory will =
+have from=20
+1 to 15 photo book albums.&amp;nbsp; Sorry for the extensive path below put =
+I wanted=20
+to give an accurate representation of what I am looking to do.&amp;nbsp; The =
+
+directory tree will look like this (each numbered directory, ie: 1000, =
+2000 -=20
+will hold up to 1000 user directories each).&amp;nbsp; The things I am =
+considering=20
+are sub-directory limitations per parent directory and performance =
+issues for=20
+Windows considering the directory structure and then ultimately Xitami's =
+
+performance handling the directory structure.&amp;nbsp; =
+Comments?!&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;This is the only info I found =
+pertaining to NTFS=20
+limitations: &lt;A=20
+href=3D&quot;<A HREF="http://www.microsoft.com/resources/documentation/Windows/XP/all/r=">http://www.microsoft.com/resources/documentation/Windows/XP/all/r=</A>
+eskit/en-us/Default.asp?url=3D/resources/documentation/Windows/XP/all/res=
+kit/en-us/prkc_fil_tdrn.asp&quot;&gt;<A HREF="http://www.microsoft.com/resources/documenta=">http://www.microsoft.com/resources/documenta=</A>
+tion/Windows/XP/all/reskit/en-us/Default.asp?url=3D/resources/documentati=
+on/Windows/XP/all/reskit/en-us/prkc_fil_tdrn.asp&lt;/A&gt;&amp;nbsp;but=20
+I am uncertain if I fully understand its implications.&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&lt;/FONT&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;xitami&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; - =
+webpages&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; -=20
+albums&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- 1000&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user3&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&amp;nbsp;&amp;nbsp;&amp;nbsp; ...&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user1000&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- 2000&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user1001&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user1002&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum1_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;=20
+- photoAlbum2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book1&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp=
+;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-photoAlbum2_book2&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- user1003&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp; =
+&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+&amp;nbsp;&amp;nbsp;&amp;nbsp; ...&lt;/DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial size=3D2&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+-=20
+user2000&lt;/FONT&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/=
+DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- 3000&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- 4000&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+- 5000 (5,000 users)&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&lt;FONT face=3DArial=20
+size=3D2&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbs=
+p;&amp;nbsp;&amp;nbsp;&amp;nbsp;=20
+..&lt;/FONT&gt;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;=20
+..&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;=20
+- 100000 (100,000 users)&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;=20
+..&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;=20
+..&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;n=
+bsp;&amp;nbsp;&amp;nbsp;=20
+- 1000000 (1 million=20
+users)&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/FONT&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV=
+&gt;<i>&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</I>
+------=_NextPart_000_004E_01C56B9B.C4A9C350--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006783.html">[Xitami] targeting file downloads
+</A></li>
+	<LI> Next message: <A HREF="006785.html">/Spam/ [Xitami] Xitami performance regarding directory
+ structures
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6777">[ date ]</a>
+              <a href="thread.html#6777">[ thread ]</a>
+              <a href="subject.html#6777">[ subject ]</a>
+              <a href="author.html#6777">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

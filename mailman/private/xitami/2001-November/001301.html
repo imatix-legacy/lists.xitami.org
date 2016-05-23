@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] memtrace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001300.html">
+   <LINK REL="Next"  HREF="001302.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] memtrace
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] memtrace">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 02 Nov 2001 13:26:54 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001300.html">[Xitami] memtrace
+</A></li>
+        <LI> Next message: <A HREF="001302.html">[Xitami] simple cgi question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1301">[ date ]</a>
+              <a href="thread.html#1301">[ thread ]</a>
+              <a href="subject.html#1301">[ subject ]</a>
+              <a href="author.html#1301">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:E15zRVP-0002Os-00@entropy.ucam.org">E15zRVP-0002Os-00@entropy.ucam.org</A>&gt;, &quot;Simon McVittie&quot; writes:
+&gt;&gt;<i> &gt;It should never be generated; the fact that it has means something broke.
+</I>&gt;&gt;<i> &gt;I'm sure it shouldn't be as large as 8GB though... how long had Xitami been
+</I>&gt;&gt;<i> &gt;running for?
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> In fact, only 5 hours. Hard to believe such a writing rate.
+</I>&gt;<i>
+</I>&gt;<i>From more source code reading, it's actually all written on exit, but the file
+</I>&gt;<i>is a record of *all* the memory Xitami allocated and deallocated (which will 
+</I>&gt;<i>probably only be a few bytes at a time in some places). 
+</I>
+The file is written on exit, if there is any memory that was allocated
+but has not been freed.  It lists only the memory that was allocated,
+but not freed, including where it was allocated.
+
+To have written an 8GB file, the pointers through the memory allocated
+must have got themselves into a nasty loop somewhere, so you'll probably
+find the 8GB file contains a _lot_ of repeats.
+
+As to whether it should be enabled in a production version; that's a
+matter for opinion.  We generally try for &quot;zero leaks&quot; (because that's a
+whole lot better if you're leaving something running for a long time),
+and thus in theory it shouldn't matter if it's enabled in a production
+version.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001300.html">[Xitami] memtrace
+</A></li>
+	<LI> Next message: <A HREF="001302.html">[Xitami] simple cgi question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1301">[ date ]</a>
+              <a href="thread.html#1301">[ thread ]</a>
+              <a href="subject.html#1301">[ subject ]</a>
+              <a href="author.html#1301">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

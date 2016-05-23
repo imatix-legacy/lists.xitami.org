@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Shebang #! question on win98
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000242.html">
+   <LINK REL="Next"  HREF="000243.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Shebang #! question on win98
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Shebang #! question on win98">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 26 Jun 2001 12:41:26 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000242.html">[Xitami] Shebang #! question on win98
+</A></li>
+        <LI> Next message: <A HREF="000243.html">[Xitami] Shebang #! question on win98
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#245">[ date ]</a>
+              <a href="thread.html#245">[ thread ]</a>
+              <a href="subject.html#245">[ subject ]</a>
+              <a href="author.html#245">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>  #! usr/bin/perl path, ... will not work on Xitami.
+</I>
+On Xitami in DOS/Windows? Sure it does. 
+
+The average unix interpreter and webserver wants the she-bang line to be
+exact; they won't go searching for Perl.
+
+As Ewen says, Xitami (at least when compiled for DOS/Win) is &quot;Generous&quot;.
+It knows that DOS is different, and it would be awkward to re-edit
+scripts every time you move from unix to DOS. 
+
+If the folder that the she-bang line points to doesn't exist, it pulls a
+copy of PATH and starts hunting for Perl or Perl.exe. 
+
+To prove that Xitami is pretty smart, I have some scripts with #!
+/bing/bang/boom/perl , and it works. That fails, but PATH contains
+d:\perl , and Xitami quickly finds it there. 
+
+Probable problems: 
+
+Perl Install asks if you want Perl on PATH. I hope you said Yes. Also,
+you often have to shut-down and re-start Windows to get the changed
+PATH. (You can force it manually, but Win98 needs a break anyway.)
+
+Open a Command window and type PATH. If Perl's folder is on there,
+re-start Xitami and it should work. If it isn't there, re-start Windows.
+If you didn't let Perl Install modify PATH, open AUTOEXEC.BAT in notepad
+and add it, restart.
+
+Putting Perl in a path with a space in it (typically under &quot;Program
+Files&quot; can give trouble. Very long (over 62 characters) paths can also
+be iffy. I'm not sure if this is Xitami or Perl, but IAC nobody can
+exactly duplicate MS's wacky handling of long spacy filenames. K.I.S.S.:
+Keep It Short and Sweet. 
+
+There is a limit in DOS/Win9x on the size of PATH (actually the
+envoronment). If you've installed many programs that all think they
+deserve to be on PATH (most don't), you may have to trim. 
+
+In the unlikely event that you have a DOS/Win system that really does
+have a /usr/bin directory, I thought that Xitami would fail if the
+folder was valid and the program name wasn't right there. Mayeb I'm
+wrong. If I'm right, the logical thing to do is put Perl in /usr/bin. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000242.html">[Xitami] Shebang #! question on win98
+</A></li>
+	<LI> Next message: <A HREF="000243.html">[Xitami] Shebang #! question on win98
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#245">[ date ]</a>
+              <a href="thread.html#245">[ thread ]</a>
+              <a href="subject.html#245">[ subject ]</a>
+              <a href="author.html#245">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

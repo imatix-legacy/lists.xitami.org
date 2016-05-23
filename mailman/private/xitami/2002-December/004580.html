@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Reverse DNS lookup........ again
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004579.html">
+   <LINK REL="Next"  HREF="004582.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Reverse DNS lookup........ again
+   </H1>
+    <B>Espen Ruud
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Reverse DNS lookup........ again">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 31 Dec 2002 11:02:49 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004579.html">[Xitami] lrwp
+</A></li>
+        <LI> Next message: <A HREF="004582.html">[Xitami] Reverse DNS lookup........ again
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4580">[ date ]</a>
+              <a href="thread.html#4580">[ thread ]</a>
+              <a href="subject.html#4580">[ subject ]</a>
+              <a href="author.html#4580">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have asked this question a couple of times before .... But here I og
+again...
+
+
+What can I do to get the web server to list the hostnames instead of IP
+adresses in the log file??
+
+
+In my &quot;default.cfg&quot; file I have this:
+---------------
+[Accesslog]
+    Custom = &quot;$\(client) - $\(user) [$\(datetime)] \&quot;$\(request)\&quot;
+$\(status-
+ \&quot;$\(referer)\&quot; \&quot;$\(agent)\&quot;&quot;
+    Cycle = &quot;monthly&quot;
+    Local = &quot;0&quot;
+    Translate = &quot;1&quot;
+------------------
+And this:
+------------------
+[Rdns]
+    Recurse-lookups = &quot;1&quot;
+    Debug = &quot;1&quot;
+    Primary-server = &quot;DNS server1&quot;
+    Secondary-server = &quot;DNS server2&quot;
+------------------
+(DNS server1 and 2 are replaced by real servers)
+
+In my .cfg file for the spesific site i have this:
+------------------
+[Accesslog]
+    Filename = &quot;sitename.log&quot;
+    Local = &quot;0&quot;
+    Translate = &quot;1&quot;
+
+[Rdns]
+    Recurse-lookups = &quot;1&quot;
+-------------------
+
+
+But I still don't get hostnames in the log file.
+
+I run version 2.5b5 as a windows service on a w2K proffesional platform.
+
+Does anyone else have this problem ???? And does anyoune know how to solve
+it ?
+
+Yours
+Espen Ruud 
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004579.html">[Xitami] lrwp
+</A></li>
+	<LI> Next message: <A HREF="004582.html">[Xitami] Reverse DNS lookup........ again
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4580">[ date ]</a>
+              <a href="thread.html#4580">[ thread ]</a>
+              <a href="subject.html#4580">[ subject ]</a>
+              <a href="author.html#4580">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

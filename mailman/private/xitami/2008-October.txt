@@ -1,0 +1,675 @@
+From uwe.k at hotmail.de  Wed Oct  1 21:54:45 2008
+From: uwe.k at hotmail.de (Uwe K)
+Date: Wed, 1 Oct 2008 21:54:45 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+Message-ID: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+
+Hi there
+
+I got a problem with a script that queryes a big database and it seem's that the script always runs in a timeout, 
+also I never received any msg about that. 
+
+Tryed the webform the normal way and tryed AJAX -style, 
+also tryed sleep(45) instead of the query... ( sleep(25) works, (30) sometimes )
+
+The query needs about 40 seconds to complete in MS SQL Server Manager and 
+Xitami always returns just the HTML-parts before that query.
+
+I set the timeout in Xitami to 6000 and that one in php.ini to the same value, still w/o any success.
+
+working on that since days now, would be nice if someone can help me... ?
+
+Xitami 2.5 Port 88  /  IIS6 Port 80
+PHP 5
+Win IE / FireFox
+MSSQL Server 2005   (no timeout)
+
+
+
+
+_________________________________________________________________
+Messenger to go! Hol' Dir Messenger aufs Handy!
+http://windowslivemobile.msn.com/BrowserServiceMessenger.aspx?lang=DE-DE
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20081001/48b73dbb/attachment.htm 
+
+From rolinger1 at hotmail.com  Wed Oct  1 22:17:56 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Wed, 1 Oct 2008 13:17:56 -0700
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+Message-ID: <BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>
+
+
+Under Xitami's CGI section is the "
+Timeout for CGI programs:"...if you extend that out to 60 or 90 seconds that should be sufficient for you.  Most of scripts work in under 10 seconds from the DB query...but I do have a few, mostly administrative, that take up to 3 minutes.  
+
+The other setting "check cgi processes every" : x milliseconds could be set lower too, but that increases cpu processing.  Another place to increase timers is with "Server Keep Alive Connections"...if you increase the amount allowed and the actual timeout, it may help speed things up for repetitive queries.  but again, anytime you increase numbers you increase memory and cpu usage.
+
+And lastly, you can always speed Xitami up by making it "Turbo"...but that doesn't necessarily mean it will speed your DB queries up on large searches.
+
+
+From: uwe.k at hotmail.de
+To: xitami at lists.xitami.org
+Date: Wed, 1 Oct 2008 21:54:45 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+Hi there
+
+I got a problem with a script that queryes a big database and it seem's that the script always runs in a timeout, 
+also I never received any msg about that. 
+
+Tryed the webform the normal way and tryed AJAX -style, 
+also tryed sleep(45) instead of the query... ( sleep(25) works, (30) sometimes )
+
+The query needs about 40 seconds to complete in MS SQL Server Manager and 
+Xitami always returns just the HTML-parts before that query.
+
+I set the timeout in Xitami to 6000 and that one in php.ini to the same value, still w/o any success.
+
+working on that since days now, would be nice if someone can help me... ?
+
+Xitami 2.5 Port 88  /  IIS6 Port 80
+PHP 5
+Win IE / FireFox
+MSSQL Server 2005   (no timeout)
+
+
+
+
+Zeigen Sie es Ihren Freunden! Erstellen  Sie kostenlos Fotoalben und Diashows in Ihrem Space!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20081001/72eb4602/attachment.htm 
+
+From mrj at 10e12.com  Wed Oct  1 22:26:53 2008
+From: mrj at 10e12.com (MRJ)
+Date: Wed, 01 Oct 2008 21:26:53 +0100
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+Message-ID: <48E3DD0D.3080303@10e12.com>
+
+I am not sure since I dont use MS SQL but prefer MySQL.
+Many dbms have default timeout sessions that block queries running for a 
+long time.
+The problem is not Xitami since that can be 60 second time out but more 
+likely your MS SQL configuration.
+
+Uwe K wrote:
+> Hi there
+>
+> I got a problem with a script that queryes a big database and it 
+> seem's that the script always runs in a timeout,
+> also I never received any msg about that.
+>
+> Tryed the webform the normal way and tryed AJAX -style,
+> also tryed sleep(45) instead of the query... ( sleep(25) works, (30) 
+> sometimes )
+>
+> The query needs about 40 seconds to complete in MS SQL Server Manager and
+> Xitami always returns just the HTML-parts before that query.
+>
+> I set the timeout in Xitami to 6000 and that one in php.ini to the 
+> same value, still w/o any success.
+>
+> working on that since days now, would be nice if someone can help me... ?
+>
+> Xitami 2.5 Port 88  /  IIS6 Port 80
+> PHP 5
+> Win IE / FireFox
+> MSSQL Server 2005   (no timeout)
+>
+>
+>
+>
+> ------------------------------------------------------------------------
+> Zeigen Sie es Ihren Freunden! Erstellen Sie kostenlos Fotoalben und 
+> Diashows in Ihrem Space! 
+> <http://redirect.gimas.net/?cat=hmtl&n=M0809Fotoalbum&d=http://spaces.live.com/api.aspx?wx_action=addModule&mkt=de-DE&wx_ru=http%3a%2f%2f%7bspacesapi%3aid%7d.spaces.live.com%2fphotos%2f&wx_targetSite=PersonalSpaces&wxp_url=%2fphotoalbum.aspx> 
+>
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Mob:   079 6445 0998
+  Mob:   078 5322 4841
+
+International Callers;
+  Mob:   +44 796 445 0998
+  Mob:   +44 785 322 4841
+
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+
+From uwe.k at hotmail.de  Wed Oct  1 22:34:39 2008
+From: uwe.k at hotmail.de (Uwe K)
+Date: Wed, 1 Oct 2008 22:34:39 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>
+Message-ID: <BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+
+Hi first of all thank you for fast responding
+
+--Under Xitami's CGI section is the "
+Timeout for CGI programs:"...  - I did that, with values from 90 to 6000 seconds
+--"Server Keep Alive Connections" - will try that, but since there is only one connection...
+
+The problem is that Xitami not seemed to be interested in my settings, the original timout is 60 seconds and I never reached that.
+
+again, thanks
+
+   Uwe
+
+
+From: rolinger1 at hotmail.com
+To: xitami at lists.xitami.org
+Date: Wed, 1 Oct 2008 13:17:56 -0700
+Subject: Re: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+
+Under Xitami's CGI section is the "
+Timeout for CGI programs:"...if you extend that out to 60 or 90 seconds that should be sufficient for you.  Most of scripts work in under 10 seconds from the DB query...but I do have a few, mostly administrative, that take up to 3 minutes.  
+
+The other setting "check cgi processes every" : x milliseconds could be set lower too, but that increases cpu processing.  Another place to increase timers is with "Server Keep Alive Connections"...if you increase the amount allowed and the actual timeout, it may help speed things up for repetitive queries.  but again, anytime you increase numbers you increase memory and cpu usage.
+
+And lastly, you can always speed Xitami up by making it "Turbo"...but that doesn't necessarily mean it will speed your DB queries up on large searches.
+
+
+From: uwe.k at hotmail.de
+To: xitami at lists.xitami.org
+Date: Wed, 1 Oct 2008 21:54:45 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+Hi there
+
+I got a problem with a script that queryes a big database and it seem's that the script always runs in a timeout, 
+also I never received any msg about that. 
+
+Tryed the webform the normal way and tryed AJAX -style, 
+also tryed sleep(45) instead of the query... ( sleep(25) works, (30) sometimes )
+
+The query needs about 40 seconds to complete in MS SQL Server Manager and 
+Xitami always returns just the HTML-parts before that query.
+
+I set the timeout in Xitami to 6000 and that one in php.ini to the same value, still w/o any success.
+
+working on that since days now, would be nice if someone can help me... ?
+
+Xitami 2.5 Port 88  /  IIS6 Port 80
+PHP 5
+Win IE / FireFox
+MSSQL Server 2005   (no timeout)
+
+
+
+
+Zeigen Sie es Ihren Freunden! Erstellen  Sie kostenlos Fotoalben und Diashows in Ihrem Space!
+
+
+_________________________________________________________________
+Neu: Office Live Workspace, der kostenlose Online-Arbeitsbereich f?r Office. Ideal auch f?r Teams. Jetzt ausprobieren!
+http://workspace.officelive.com/?lc=1031&cloc=de-DE
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20081001/5b7e9f54/attachment.htm 
+
+From mrj at 10e12.com  Wed Oct  1 22:51:49 2008
+From: mrj at 10e12.com (MRJ)
+Date: Wed, 01 Oct 2008 21:51:49 +0100
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>
+	<BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+Message-ID: <48E3E2E5.10409@10e12.com>
+
+Which version of Xitami are you using.
+Sometimes yuo have to shut down and restart xitami before it picks up 
+the config files again i noticed.
+
+Uwe K wrote:
+> Hi first of all thank you for fast responding
+>
+> --Under Xitami's CGI section is the " Timeout for CGI programs:"...  - 
+> I did that, with values from 90 to 6000 seconds
+> --"Server Keep Alive Connections" - will try that, but since there is 
+> only one connection...
+>
+> The problem is that Xitami not seemed to be interested in my settings, 
+> the original timout is 60 seconds and I never reached that.
+>
+> again, thanks
+>
+>    Uwe
+>
+>
+> ------------------------------------------------------------------------
+> From: rolinger1 at hotmail.com
+> To: xitami at lists.xitami.org
+> Date: Wed, 1 Oct 2008 13:17:56 -0700
+> Subject: Re: [Xitami] Zitami ALWAYS timesout
+>
+> Under Xitami's CGI section is the " Timeout for CGI programs:"...if 
+> you extend that out to 60 or 90 seconds that should be sufficient for 
+> you.  Most of scripts work in under 10 seconds from the DB query...but 
+> I do have a few, mostly administrative, that take up to 3 minutes. 
+>
+> The other setting "check cgi processes every" : x milliseconds could 
+> be set lower too, but that increases cpu processing.  Another place to 
+> increase timers is with "Server Keep Alive Connections"...if you 
+> increase the amount allowed and the actual timeout, it may help speed 
+> things up for repetitive queries.  but again, anytime you increase 
+> numbers you increase memory and cpu usage.
+>
+> And lastly, you can always speed Xitami up by making it "Turbo"...but 
+> that doesn't necessarily mean it will speed your DB queries up on 
+> large searches.
+>
+>
+> ------------------------------------------------------------------------
+> From: uwe.k at hotmail.de
+> To: xitami at lists.xitami.org
+> Date: Wed, 1 Oct 2008 21:54:45 +0200
+> Subject: [Xitami] Zitami ALWAYS timesout
+>
+> Hi there
+>
+> I got a problem with a script that queryes a big database and it 
+> seem's that the script always runs in a timeout,
+> also I never received any msg about that.
+>
+> Tryed the webform the normal way and tryed AJAX -style,
+> also tryed sleep(45) instead of the query... ( sleep(25) works, (30) 
+> sometimes )
+>
+> The query needs about 40 seconds to complete in MS SQL Server Manager and
+> Xitami always returns just the HTML-parts before that query.
+>
+> I set the timeout in Xitami to 6000 and that one in php.ini to the 
+> same value, still w/o any success.
+>
+> working on that since days now, would be nice if someone can help me... ?
+>
+> Xitami 2.5 Port 88  /  IIS6 Port 80
+> PHP 5
+> Win IE / FireFox
+> MSSQL Server 2005   (no timeout)
+>
+>
+>
+>
+> ------------------------------------------------------------------------
+> Zeigen Sie es Ihren Freunden! Erstellen Sie kostenlos Fotoalben und 
+> Diashows in Ihrem Space! 
+> <http://redirect.gimas.net/?cat=hmtl&n=M0809Fotoalbum&d=http://spaces.live.com/api.aspx?wx_action=addModule&mkt=de-DE&wx_ru=http://%7Bspacesapi:id%7D.spaces.live.com/photos/&wx_targetSite=PersonalSpaces&wxp_url=/photoalbum.aspx> 
+>
+> ------------------------------------------------------------------------
+> Messenger Online Treff: Spontan chatten, ?ber Hobbies reden, sofort 
+> Spass haben? Jetzt klicken! 
+> <http://redirect.gimas.net/?cat=hmtl&n=M0809MOT&d=http://messenger.live.de/community/messenger-online-treff.aspx> 
+>
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Mob:   079 6445 0998
+  Mob:   078 5322 4841
+
+International Callers;
+  Mob:   +44 796 445 0998
+  Mob:   +44 785 322 4841
+
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+
+From rolinger1 at hotmail.com  Wed Oct  1 22:53:09 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Wed, 1 Oct 2008 13:53:09 -0700
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl> 
+	<BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+Message-ID: <BAY127-W4C4C04E85F6609BF10714F8420@phx.gbl>
+
+
+Possibly a MSSQL problem then....
+
+
+
+From: uwe.k at hotmail.de
+To: xitami at lists.xitami.org
+Date: Wed, 1 Oct 2008 22:34:39 +0200
+Subject: Re: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+Hi first of all thank you for fast responding
+
+--Under Xitami's CGI section is the "
+Timeout for CGI programs:"...  - I did that, with values from 90 to 6000 seconds
+--"Server Keep Alive Connections" - will try that, but since there is only one connection...
+
+The problem is that Xitami not seemed to be interested in my settings, the original timout is 60 seconds and I never reached that.
+
+again, thanks
+
+   Uwe
+
+
+From: rolinger1 at hotmail.com
+To: xitami at lists.xitami.org
+Date: Wed, 1 Oct 2008 13:17:56 -0700
+Subject: Re: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+
+Under Xitami's CGI section is the "
+Timeout for CGI programs:"...if you extend that out to 60 or 90 seconds that should be sufficient for you.  Most of scripts work in under 10 seconds from the DB query...but I do have a few, mostly administrative, that take up to 3 minutes.  
+
+The other setting "check cgi processes every" : x milliseconds could be set lower too, but that increases cpu processing.  Another place to increase timers is with "Server Keep Alive Connections"...if you increase the amount allowed and the actual timeout, it may help speed things up for repetitive queries.  but again, anytime you increase numbers you increase memory and cpu usage.
+
+And lastly, you can always speed Xitami up by making it "Turbo"...but that doesn't necessarily mean it will speed your DB queries up on large searches.
+
+
+From: uwe.k at hotmail.de
+To: xitami at lists.xitami.org
+Date: Wed, 1 Oct 2008 21:54:45 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+
+
+
+
+
+
+
+Hi there
+
+I got a problem with a script that queryes a big database and it seem's that the script always runs in a timeout, 
+also I never received any msg about that. 
+
+Tryed the webform the normal way and tryed AJAX -style, 
+also tryed sleep(45) instead of the query... ( sleep(25) works, (30) sometimes )
+
+The query needs about 40 seconds to complete in MS SQL Server Manager and 
+Xitami always returns just the HTML-parts before that query.
+
+I set the timeout in Xitami to 6000 and that one in php.ini to the same value, still w/o any success.
+
+working on that since days now, would be nice if someone can help me... ?
+
+Xitami 2.5 Port 88  /  IIS6 Port 80
+PHP 5
+Win IE / FireFox
+MSSQL Server 2005   (no timeout)
+
+
+
+
+Zeigen Sie es Ihren Freunden! Erstellen  Sie kostenlos Fotoalben und Diashows in Ihrem Space!
+
+
+Messenger Online Treff: Spontan chatten, ?ber Hobbies reden, sofort Spass haben? Jetzt klicken!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20081001/c6809ca9/attachment.htm 
+
+From hogan at geeksgalore.ca  Wed Oct  1 23:59:41 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Wed, 01 Oct 2008 17:59:41 -0400
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <48E3E2E5.10409@10e12.com>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>	<BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+	<48E3E2E5.10409@10e12.com>
+Message-ID: <48E3F2CD.3010002@geeksgalore.ca>
+
+well of course, no matter what web server you use you must restart the 
+Daemon to make the changes be effective.....
+
+MRJ wrote:
+> Which version of Xitami are you using.
+> Sometimes yuo have to shut down and restart xitami before it picks up 
+> the config files again i noticed.
+>   
+
+
+From hogan at geeksgalore.ca  Thu Oct  2 00:00:28 2008
+From: hogan at geeksgalore.ca (Hogan)
+Date: Wed, 01 Oct 2008 18:00:28 -0400
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BAY127-W4C4C04E85F6609BF10714F8420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>
+	<BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+	<BAY127-W4C4C04E85F6609BF10714F8420@phx.gbl>
+Message-ID: <48E3F2FC.9000801@geeksgalore.ca>
+
+Run Easy Wamp, will make life easier for you....
+
+Russel Olinger wrote:
+> Possibly a MSSQL problem then...
+
+
+From uwe.k at hotmail.de  Thu Oct  2 00:03:09 2008
+From: uwe.k at hotmail.de (Uwe K)
+Date: Thu, 2 Oct 2008 00:03:09 +0200
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <48E3F2FC.9000801@geeksgalore.ca>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>
+	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>
+	<BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>
+	<BAY127-W4C4C04E85F6609BF10714F8420@phx.gbl> 
+	<48E3F2FC.9000801@geeksgalore.ca>
+Message-ID: <BLU121-W124363B0ECB0BBB5A9A1E98D420@phx.gbl>
+
+Don't know how to tell Apache that it has to work side by side with IIS, ever try that ?> Date: Wed, 1 Oct 2008 18:00:28 -0400> From: hogan at geeksgalore.ca> To: xitami at lists.xitami.org> Subject: Re: [Xitami] Zitami ALWAYS timesout> > Run Easy Wamp, will make life easier for you....> > Russel Olinger wrote:> > Possibly a MSSQL problem then...> > > --> Xitami Users Mailing List -- For Xitami support> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+_________________________________________________________________
+MSN Toolbar: Alle Infos sehen, ohne die Website auf der Sie gerade sind zu verlassen.
+http://www.msn.de/toolbar
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20081002/5c0f4e9b/attachment-0001.htm 
+
+From mrj at 10e12.com  Thu Oct  2 00:05:30 2008
+From: mrj at 10e12.com (MRJ)
+Date: Wed, 01 Oct 2008 23:05:30 +0100
+Subject: [Xitami] Zitami ALWAYS timesout
+In-Reply-To: <BLU121-W124363B0ECB0BBB5A9A1E98D420@phx.gbl>
+References: <BLU121-W28BBDF759FDD6C802EC2878D420@phx.gbl>	<BAY127-W268F1951BC37CB0D08708F8420@phx.gbl>	<BLU121-W874614A98B5B7C128F4E78D420@phx.gbl>	<BAY127-W4C4C04E85F6609BF10714F8420@phx.gbl>
+	<48E3F2FC.9000801@geeksgalore.ca>
+	<BLU121-W124363B0ECB0BBB5A9A1E98D420@phx.gbl>
+Message-ID: <48E3F42A.9060601@10e12.com>
+
+It would, if you change port setting just like you did with Xitami.
+
+Uwe K wrote:
+> Don't know how to tell Apache that it has to work side by side with 
+> IIS, ever try that ?
+>
+>
+>
+> ------------------------------------------------------------------------
+> > Date: Wed, 1 Oct 2008 18:00:28 -0400
+> > From: hogan at geeksgalore.ca
+> > To: xitami at lists.xitami.org
+> > Subject: Re: [Xitami] Zitami ALWAYS timesout
+> >
+> > Run Easy Wamp, will make life easier for you....
+> >
+> > Russel Olinger wrote:
+> > > Possibly a MSSQL problem then...
+> >
+> >
+> > --
+> > Xitami Users Mailing List -- For Xitami support
+> > To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> ------------------------------------------------------------------------
+> Speichern Sie Ihre Daten von ?berall! Kostenlos: Die Festplatte im 
+> Netz mit 5 GB Speicher! 
+> <http://redirect.gimas.net/?cat=hmtl&n=M0809Sky&d=http://skydrive.live.com/?mkt=de-de> 
+>
+> ------------------------------------------------------------------------
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+---------------------------------------------------------------------
+Contact Details;
+
+Within the United Kingdom;
+  Mob:   079 6445 0998
+  Mob:   078 5322 4841
+
+International Callers;
+  Mob:   +44 796 445 0998
+  Mob:   +44 785 322 4841
+
+
+You can also reach us on Skype, user ID: mrj10e12
+
+DISCLAIMER===========================================================
+The information contained in this communication is confidential
+and may be legally privileged. It is intended solely for the 
+use of the individual or entity to whom it is addressed and 
+any others authorized to receive it. If you are not the intended 
+recipient, you are hereby notified that any disclosure, copying,
+distribution or taking of any action in reliance on the contents
+of this information is strictly prohibited. If you received this
+communication in error, please immediately notify the sender 
+by return message and delete this communication and any copies 
+thereof, including any electronically saved copies in your systems.
+
+NOTHING DISCLOSED BY E-MAIL, CHAT, SKYPE MESSAGE OR OTHER 
+COMMUNICATION SHOULD AT ANY TIME BE CONSTRUED OR INTERPRETED AS 
+LEGAL, INVESTMENT OR OTHER FINANCIAL ADVICE. IT IS IMPERATIVE 
+THAT YOU, THE RECIPIENT CONTACT, SEEK ADVICE, FROM A FULLY LICENSED 
+AND QUALIFIED FINANCIAL MARKET SPECIALIST BEFORE MAKING ANY DECISION 
+IN REGARDS TO INVESTMENT, FUNDING, LOANS, MORTGAGE OR OTHER SERVICES
+AS REQUIRED FROM TIME TO TIME AND AT EACH SUCH TIME.
+
+10e12 (Trillion) Ltd. is registered in 
+the United Kingdom, company #06331971.
+
+FSA Reg. No 300699 CCLic. Reg. 530996
+Also ask us about Mortgage solutions
+in cooperation with S.G.Mortgages
+=====================================================================
+
+
+
+

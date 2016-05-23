@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] using cgi with Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005685.html">
+   <LINK REL="Next"  HREF="005687.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] using cgi with Xitami
+   </H1>
+    <B>Vera Cranor
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] using cgi with Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 09 Feb 2004 01:55:09 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005685.html">[Xitami] updating to 2.4d10 from d9
+</A></li>
+        <LI> Next message: <A HREF="005687.html">[Xitami] using cgi with Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5686">[ date ]</a>
+              <a href="thread.html#5686">[ thread ]</a>
+              <a href="subject.html#5686">[ subject ]</a>
+              <a href="author.html#5686">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have xitami 2.4 and it worked great with Win 95 and 98. I use an older
+version of Perl and that worked fine with Xitami also.
+
+Now I have new puter and Win XP. The Xitami server will serve web pages
+like it did,
+but when I call a Perl script with the browser Xitami doesn't return the
+Perl output. I get a blank page.
+
+The access log shows this:
+127.0.0.1 - - [09/Feb/2004:01:15:53 -0600] &quot;GET /cgi-bin/xtest.cgi
+HTTP/1.1&quot; 200 0 &quot;&quot; &quot;&quot;
+
+The error log is empty.
+
+The script writes a file just before exiting, and that worked so I know
+the script ran.
+However, the output got lost somewhere and a blank page was returned.
+
+Here's the script (xtest.cgi):
+
+#!/usr/bin/perl
+print &quot;content-type: text/html\n\n&quot;;
+print &lt;&lt;end;
+&lt;html&gt;&lt;body&gt;&lt;center&gt;test&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
+end
+open(F, &quot;&gt;xtest.txt&quot;);
+print F &quot;okedoke&quot;;
+close F;
+exit;
+
+
+The script created the file, xtest.txt, so I know the script ran.
+
+I expected to get a page back with just the word &quot;test&quot; at the top.
+Instead, the page is blank, here is the html code for what is returned:
+Here's the page source, which did not come from the script:
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META http-equiv=Content-Type content=&quot;text/html;
+charset=windows-1252&quot;&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+As you can see, what is returned is quite different from what the script
+output.
+So it seems to me that the Perl output got lost and I don't know where
+the file
+that was returned came from.
+
+Here's what I get back when I run the script in the DOS box:
+
+content-type: text/html
+
+&lt;html&gt;&lt;body&gt;&lt;center&gt;test&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;
+
+That's what I should get when I call the script from the browser.
+
+I have tried changing the XP &quot;compatibility&quot; setting to run Xitami in 95
+&amp; 98/ME modes but that didn't help.
+
+I don't know what to do to get Xitami to capture the output of Perl and
+return it to the browser.
+
+Thanks for any help,
+Vera
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005685.html">[Xitami] updating to 2.4d10 from d9
+</A></li>
+	<LI> Next message: <A HREF="005687.html">[Xitami] using cgi with Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5686">[ date ]</a>
+              <a href="thread.html#5686">[ thread ]</a>
+              <a href="subject.html#5686">[ subject ]</a>
+              <a href="author.html#5686">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

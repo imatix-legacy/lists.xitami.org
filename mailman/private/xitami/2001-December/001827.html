@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] (no subject)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001826.html">
+   <LINK REL="Next"  HREF="001829.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] (no subject)
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] (no subject)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 25 Dec 2001 17:22:41 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001826.html">[Xitami] (no subject)
+</A></li>
+        <LI> Next message: <A HREF="001829.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1827">[ date ]</a>
+              <a href="thread.html#1827">[ thread ]</a>
+              <a href="subject.html#1827">[ subject ]</a>
+              <a href="author.html#1827">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Peter (and Bruce)
+     The thing that brought me to Xitami first was the easy way it handled
+multiple domains.  I sell DSL service and had to offer web hosting to be
+competitive.  Xitami was a perfect fit, especially for the price!  The
+easiest way to create a virtual host is by using the VHost Wizard from the
+main menu of the Web Based Administor (<A HREF="http://localhost/admin">http://localhost/admin</A>).  Looking at
+the VHost configuration page:
+
+1. Virtual host profile: (The configuration file created for all custom
+settings for this domain).  I use the top level domain name less the
+extension. (ie. for imatix.com I would use imatix).  The extension .cfg is
+automatically used.
+
+2.  Over-write existing file:  There usually isn't one, but if there is,
+check this to replace the old configuration file.
+
+3.  Select IP Address:  If you have multiple NICs and you only want one for
+Web hosting, select it here, otherwise (default) let Xitami use &quot;All&quot; IP
+addresses.
+
+4.  Or DNS Host Name.  Enter the Web address here, ie: www.yourdomain.com
+
+5.  Web Page root directory:  The location on your drive where the web site
+pages are stored.  This is the directory where your customer has FTP access
+to update page in.
+
+6.  cgi-bin directory:  I usually cut-n-paste the directory above and add
+\cgi-bin to it.  You can point this to any directory where you want where
+cgi scripts for this domain are allowed to run.
+
+7.  FTP root directory:  I don't use Xitami's FTP server, but I assume this
+is the &quot;home&quot; directory for the admin of this domain.  (same as #5 I would
+guess)
+
+The rest of the items are pretty self explanatory.  I usually let Xitami
+create the above directories for me.  Once you save it, you need to restart
+the server and your all set!  The DNS entries for the domain only needs to
+have a CNAME or A record for www.yurdoamin.com (which is normally a default)
+that points to your public IP address.  My default, xitami will try to use a
+page named 'default.htm' when no specific page name is specified on the
+address line.  If that fails, it will look for index.htm.  You can change
+and add to these in the VHost configuration screen.  If you look in the
+xitami directory, you will find configuration files (and .aut security
+files) for each host (domain).  These can be manually edited just like the
+default file, or you can do all your maintenance through the web based
+administration app.
+
+Its all very easy, even though it looks complicated at first site.  Once you
+get two domains running, you'll be off setting up web sites for all your
+friends!  (just make sure you charge them something....xitami may be free,
+but bandwidth isn't!!)
+
+--Joe
+
+----- Original Message -----
+From: &quot;Just&quot; &lt;<A HREF="mailto:Just40Fun@hotmail.com">Just40Fun@hotmail.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, December 25, 2001 3:11 PM
+Subject: Re: [Xitami] (no subject)
+
+
+&gt;<i> Hi Joe,
+</I>&gt;<i>
+</I>&gt;<i> I am aware of that, and I have tried but unsuccessful.  Trying to run
+</I>&gt;<i> multiple Xitami with different port addresses was a result of my failure
+</I>to
+&gt;<i> run a single copy of Xitami with mulitple domains.
+</I>&gt;<i>
+</I>&gt;<i> I must have been doing something wrong, are there documentations for
+</I>&gt;<i> newbies?  Would love to set it up point all my domains to the Xitami.
+</I>&gt;<i>
+</I>&gt;<i> Merry Xmas,
+</I>&gt;<i> Peter
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &lt;<A HREF="mailto:Joe@byrneworld.com">Joe@byrneworld.com</A>&gt;
+</I>&gt;<i> To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Tuesday, December 25, 2001 12:12 PM
+</I>&gt;<i> Subject: Re: [Xitami] (no subject)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; Peter,
+</I>&gt;<i> &gt;    Are you aware that 1 copy of Xitami will host many different domains
+</I>on
+&gt;<i> a
+</I>&gt;<i> &gt; single IP address?  On one server alone (with 1 copy of Xitami) I am
+</I>&gt;<i> hosting
+</I>&gt;<i> &gt; over 50 separate web sites, all completely independent of each other
+</I>&gt;<i> &gt; including separate log files.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Just an FYI in case you didn't know you could do this.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --Joe
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ----- Original Message -----
+</I>&gt;<i> &gt; From: &quot;just fun&quot; &lt;<A HREF="mailto:just40fun@yahoo.com">just40fun@yahoo.com</A>&gt;
+</I>&gt;<i> &gt; To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt; Sent: Tuesday, December 25, 2001 11:51 AM
+</I>&gt;<i> &gt; Subject: [Xitami] (no subject)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Hi All,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Merry Christmas!
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I am running Xitami under Windows 2000 server.  My
+</I>&gt;<i> &gt; &gt; Internet connection is DSL with one static IP address
+</I>&gt;<i> &gt; &gt; and Proxy by a Linksys router.  I am trying to run 2
+</I>&gt;<i> &gt; &gt; or more copies of Xitami on my PC, so each Xitami will
+</I>&gt;<i> &gt; &gt; handle a single domain.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 1.   The Xitamis are installed in 3 seperate folders
+</I>&gt;<i> &gt; &gt; (ie. C:\Xitami;  C:\Xitami1\; c:\Xitami2).
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 2.    I changed the port base in xitami.cfg to 1000,
+</I>&gt;<i> &gt; &gt; 2000 for C:\Xitami1 and  c:\Xitami2 respectively.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 3.    The port addresses are showing up as 1080 &amp; 2080
+</I>&gt;<i> &gt; &gt; on the console.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; However, do connectivity!  After the 3 copies of
+</I>&gt;<i> &gt; &gt; Xitami are switched and running!
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; when I tried localhost, Xitami under c:\Xitami
+</I>&gt;<i> &gt; &gt; connects.
+</I>&gt;<i> &gt; &gt; when I tried localhost:1080, Xitami under c:\Xitami1
+</I>&gt;<i> &gt; &gt; failed to connect.
+</I>&gt;<i> &gt; &gt; when I tried localhost:2080, Xitami under c:\Xitami2
+</I>&gt;<i> &gt; &gt; failed tp connect.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Any suggestions are welcome and appreciated.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Thanks
+</I>&gt;<i> &gt; &gt; Peter
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; __________________________________________________
+</I>&gt;<i> &gt; &gt; Do You Yahoo!?
+</I>&gt;<i> &gt; &gt; Send your FREE holiday greetings online!
+</I>&gt;<i> &gt; &gt; <A HREF="http://greetings.yahoo.com">http://greetings.yahoo.com</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> &gt; To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001826.html">[Xitami] (no subject)
+</A></li>
+	<LI> Next message: <A HREF="001829.html">[Xitami] (no subject)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1827">[ date ]</a>
+              <a href="thread.html#1827">[ thread ]</a>
+              <a href="subject.html#1827">[ subject ]</a>
+              <a href="author.html#1827">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

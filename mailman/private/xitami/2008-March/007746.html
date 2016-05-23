@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Multi server issue
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E1ECD3.403%40gmaill.com">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007749.html">
+   <LINK REL="Next"  HREF="007750.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Multi server issue</H1>
+    <B>Paul Reid</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Multi%20server%20issue&In-Reply-To=47E1ECD3.403%40gmaill.com"
+       TITLE="[Xitami] Multi server issue">preid at rci.rutgers.edu
+       </A><BR>
+    <I>Thu Mar 20 17:42:49 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007749.html">[Xitami] Multi server issue
+</A></li>
+        <LI>Next message: <A HREF="007750.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7746">[ date ]</a>
+              <a href="thread.html#7746">[ thread ]</a>
+              <a href="subject.html#7746">[ subject ]</a>
+              <a href="author.html#7746">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> &gt; You have one NIC. It has one Port 80.
+
+No. The NIC doesn't even know what an IP is, much less a port. If it 
+gets a packet it passes it to the TCP/IP service. This examines the IP 
+and port, checks a list of what programs have requested to bind to what 
+IP:port combinations, and passes the packet to the program indicated.
+
+It isn't a hardware thing. We know that multiple webservers will work 
+over one NIC. A second NIC is not the answer and sure will confuse you.
+
+It is possible you found an oversight (bug) in Xitami or your TCP/IP demon.
+
+IMHO it is far more likely a configuration error. Xitami has many ways 
+to find configuration data. The default bind is to &quot;All IPs&quot;. My 2 cents 
+says there is another .CFG file which is binding all IPs to the first 
+copy which starts, leaving the second copy stranded.
+
+Use 'netstat -an' to see what IP:ports are &quot;Listening&quot;. Since the basic 
+netstat may not indicate -which- program is listening, see what it says 
+when each server is started alone.
+
+
+-- 
+Paul Reid
+System Administrator
+
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007749.html">[Xitami] Multi server issue
+</A></li>
+	<LI>Next message: <A HREF="007750.html">[Xitami] Multi server issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7746">[ date ]</a>
+              <a href="thread.html#7746">[ thread ]</a>
+              <a href="subject.html#7746">[ subject ]</a>
+              <a href="author.html#7746">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

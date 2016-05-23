@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] password in clear text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001534.html">
+   <LINK REL="Next"  HREF="001541.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] password in clear text
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] password in clear text">xitami@lists.xitami.org
+       </A><BR>
+    <I>Fri, 30 Nov 2001 00:24:34 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001534.html">[Xitami] FTP virtual directories
+</A></li>
+        <LI> Next message: <A HREF="001541.html">[Xitami] geez; some folks are catching on
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1521">[ date ]</a>
+              <a href="thread.html#1521">[ thread ]</a>
+              <a href="subject.html#1521">[ subject ]</a>
+              <a href="author.html#1521">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:20011129041149.C2EC4B8101@christel.heitec.net">20011129041149.C2EC4B8101@christel.heitec.net</A>&gt;, Bernd Luevelsmeyer w
+rites:
+&gt;<i>on the Bugtraq mailing list, &quot;Larry W. Cashdollar&quot; raised the issue
+</I>&gt;<i>of Xitami storing the admin password in clear text in its default
+</I>&gt;<i>installation. 
+</I>
+While it is an issue (and has been in the FAQ for quite a while), the
+situation that was discussed on Bugtraq (leading to a local root
+exploit) requires:
+- the plain text password file
+- insecure permissions on the plain text password file
+- an untrusted user with local access (web admin is local only by default)
+- the webserver to be run as root
+
+Having a plain text password in the file isn't ideal, but the combination
+of untrusted local users, not checking the permissions on the file
+containing the password, and running the server as root definitely don't
+help either.
+
+Xitami can be run as a non-root user (with a slight decrease in
+functionality, or with the assistance of port redirection in the OS);
+either started as root and have Xitami change to a non-root user (the
+setuid functionality; but then the &quot;restart&quot; features in Xitami won't
+work), or run on an off-numbered port (ie not port 80).  (If the OS
+supports port redirection you can redirect port 80 to another one that
+a normal user can bind to, and run Xitami on that port.)
+
+The most direct step if you can't trust your local users is to change
+the permissions on the password file to 0400 or 0600 (with the owner
+being the user that runs Xitami), or to disable the web-based admin.
+I typically do both on systems where I'm particularly concerned about
+security.
+
+&gt;<i>On FreeBSD the program won't run automatically after installation,
+</I>&gt;<i>but I'll provide more configuration help and safer defaults anyway.
+</I>
+Thanks for this, and thanks for your post to Bugtraq.  I do plan to
+make my own post to Bugtraq -- but I'm still busy trying to catch
+up with everything that needs to be done this week.  (And this issue
+while obviously important, has a number of obvious workarounds, so is
+less urgent than some of the security issues with other (non-iMatix)
+products I've been dealing with today.)
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001534.html">[Xitami] FTP virtual directories
+</A></li>
+	<LI> Next message: <A HREF="001541.html">[Xitami] geez; some folks are catching on
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1521">[ date ]</a>
+              <a href="thread.html#1521">[ thread ]</a>
+              <a href="subject.html#1521">[ subject ]</a>
+              <a href="author.html#1521">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

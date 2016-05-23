@@ -1,0 +1,3278 @@
+From washuu_de at yahoo.com  Mon Sep  5 01:54:52 2005
+From: washuu_de at yahoo.com (washuu)
+Date: Mon Sep  5 01:55:52 2005
+Subject: [Xitami] Problem with RDNS in the logfiles
+Message-ID: <001801c5b1ac$0bed00a0$b570f353@mine.nu>
+
+Hi
+
+I have a problem with my logfiles. I set ...
+
+[Rdns]
+    Debug = "1"
+    Primary-server = "85.234.112.181"
+    Recurse-lookups = "1"
+    Secondary-server = "195.234.128.4"
+
+[Accesslog]
+    Custom = ""
+    Cycle = "daily"
+    Cycle-arg = "ac%yy%mm%dd.log"
+    Cycle-day = "0"
+    Cycle-how = "rename"
+    Cycle-lines = "0"
+    Cycle-size = "0"
+    Cycle-time = "00:00"
+    Enabled = "1"
+    Filename = "access.log"
+    Format = "XLML"
+    Header = "Configuration file was manually tweaked on 2005/04/04. Courtesy of Washuu."
+    Local = "1"
+    Translate = "1"
+
+and the other 3 log sections likewise.
+
+But the translated line always looks like this :
+
+<LOG DATE="05/Sep/2005:01:48:47 +0100" CLIENT="83.243.112.181.static.cablesurf.de" CLIENTIP="128.30.52.13" SERVERIP="83.243.112.181" REQUEST="GET /login.html HTTP/1.1" METHOD="GET" STATUS="200" RECEIVED="102" SENT="1261" DURATION="" FILENAME="webpages/login.html" USERAGENT="W3C_Validator/1.432" REFERER="" USERNAME="-" SERVICE="HTTP" VHOST="<any>"/>
+
+In the client entry it is not the resoled clientip showing up but the resolved serverip.
+
+Does anybody know how to get the correct info?
+
+Andy
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050905/3ea55115/attachment.htm
+From rolinger1 at hotmail.com  Fri Sep  9 18:04:10 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Fri Sep  9 18:04:16 2005
+Subject: [Xitami] default HTML page
+Message-ID: <BAY105-DAV8D5464ACF9C40F61CE423F8980@phx.gbl>
+
+I am trying to make my default page a script, but the reference isn't working...how can I correct this:
+
+Current Config
+============================
+Main CGI: cgi-bin
+CGI URLS: /cgi-bin
+Default HTML Page: /cgi-bin/index.pl
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050909/6c2b1fa0/attachment.html
+From tuncer at dalan.com.tr  Mon Sep 12 08:18:25 2005
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Mon Sep 12 08:11:21 2005
+Subject: [Xitami] default HTML page
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072353AD3@mailsrv.dalan.local>
+
+The following applies only if you want the /cgi-bin/ to appear in the
+url of the path to your cgi-program: 
+
+You have to name the cgi script exactly as you have set up the name of
+your default page.
+
+I.e. if default page is set as index.htm, then the script has to be
+named index.htm.  
+
+Xitami/Perl will not mind the file extension as long as 
+1) you have the shebang line at beginning of script and 
+2) the cgi-bin file-mixing is turned off. I think it's this one: 
+
+[Cgi]
+    Mixed-url=0
+
+On the other hand, if your intention is to leave out the /cgi-bin/ from
+the script's request path completely, then
+
+1) you either set your root directory as your cgi-bin
+2) or you make another alias to the full path of the cgi-program (named
+again index.htm if you want it to look like the default page of a
+directory).
+
+
+- - -
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of RPO
+Sent: Friday, September 09, 2005 7:04 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] default HTML page
+
+I am trying to make my default page a script, but the reference isn't
+working...how can I correct this:
+ 
+Current Config
+============================
+Main CGI: cgi-bin
+CGI URLS: /cgi-bin
+Default HTML Page: /cgi-bin/index.pl
+
+From xitami at pastryworld.ca  Thu Sep 15 05:18:52 2005
+From: xitami at pastryworld.ca (Johannes)
+Date: Thu Sep 15 05:18:50 2005
+Subject: [Xitami] xitami and gzip compression utility
+Message-ID: <".24.72.112.29.1126754332.squirrel"@www.pastryworld.ca>
+
+
+Hello Members,
+
+as I would like to use the option to compress some bigger websites to speed
+up the data transmission I searched the net and found a lot of info
+regards Apache  and a gzip add on tool.
+
+Does anyone here have experience with gzip and xitami ?
+What steps are needed to install this ?
+Some hints and tricks ?
+
+In the info of xitami it shows it is supported, BUT how to get working ??? :)
+
+Would someone be willing to share information and experience ?
+
+Johannes
+
+From jim.noseworthy at rogers.com  Thu Sep 15 16:50:47 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Thu Sep 15 16:50:51 2005
+Subject: [Xitami] connect and disconnect problems.
+Message-ID: <000601c5ba04$dbf020b0$7200a90a@org.cnib.ca>
+
+HI Folks:
+
+For some reason, when I log on to my FTP server, I am constantly being disconnected and reconnected.  Other programs seem to work properly on that computer.
+
+Could I have inadvertently changed something in the configuration file?
+
+Thanks gang.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050915/23c0311c/attachment.html
+From washuu_de at yahoo.com  Fri Sep 16 12:06:01 2005
+From: washuu_de at yahoo.com (washuu)
+Date: Fri Sep 16 12:06:05 2005
+Subject: [Xitami] ftp repeated disconnect problem
+Message-ID: <20050916100601.22254.qmail@web30515.mail.mud.yahoo.com>
+
+Hi Jim
+ 
+can you give more detail ? Like...
+what OS and which firewall software you are using. Do you have that problem too when you try to access your FTP server from another computer?
+ 
+I'd be glad to help you if you give more detail.
+ 
+washuu
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050916/75e4aff9/attachment.htm
+From jim.noseworthy at rogers.com  Fri Sep 16 13:47:56 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Fri Sep 16 13:48:00 2005
+Subject: [Xitami] ftp repeated disconnect problem
+References: <20050916100601.22254.qmail@web30515.mail.mud.yahoo.com>
+Message-ID: <001f01c5bab4$7ae40290$7200a90a@org.cnib.ca>
+
+Hi washuu:
+
+I am using XP pro with a D-Link router. The Windows' firewall is disabled because I am using the built-in firewall in the router.  I have enabled port 21 in the router and assigned it to my computer IP address.
+
+
+Thanks.
+
+  ----- Original Message ----- 
+  From: washuu 
+  To: xitami@lists.xitami.org 
+  Sent: Friday, September 16, 2005 7:06 AM
+  Subject: [Xitami] ftp repeated disconnect problem
+
+
+  Hi Jim
+
+  can you give more detail ? Like...
+  what OS and which firewall software you are using. Do you have that problem too when you try to access your FTP server from another computer?
+
+  I'd be glad to help you if you give more detail.
+
+  washuu
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050916/a72dbf16/attachment.html
+From rolinger1 at hotmail.com  Fri Sep 16 18:10:11 2005
+From: rolinger1 at hotmail.com (RPO)
+Date: Fri Sep 16 18:10:21 2005
+Subject: [Xitami] Fw: default HTML page
+Message-ID: <BAY105-DAV774A65B3365C8569B69EEF8910@phx.gbl>
+
+I am resubmitting this one again b/c no one responded the first time.  Any takers
+-Russel
+
+----------
+
+
+I am trying to make my default page a script, but the reference isn't working...how can I correct this:
+
+Current Config
+============================
+Main CGI: cgi-bin
+CGI URLS: /cgi-bin
+Default HTML Page: /cgi-bin/index.pl
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050916/c3bd95a5/attachment.htm
+From ron at miplanet.net  Fri Sep 16 18:39:48 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Fri Sep 16 18:34:58 2005
+Subject: [Xitami] Fw: default HTML page
+In-Reply-To: <BAY105-DAV774A65B3365C8569B69EEF8910@phx.gbl>
+Message-ID: <000e01c5badd$40ba0a00$0201a8c0@ronscomputer>
+
+I'm not quite sure exactly what you want, what's the purpose?
+ 
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of RPO
+Sent: Friday, September 16, 2005 12:10 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Fw: default HTML page
+
+
+I am resubmitting this one again b/c no one responded the first time.
+Any takers
+-Russel
+ 
+----------
+
+I am trying to make my default page a script, but the reference isn't
+working...how can I correct this:
+ 
+Current Config
+============================
+Main CGI: cgi-bin
+CGI URLS: /cgi-bin
+Default HTML Page: /cgi-bin/index.pl
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.0/103 - Release Date:
+9/15/2005
+
+
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.0/103 - Release Date:
+9/15/2005
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050916/86840b4a/attachment.html
+From ron at miplanet.net  Fri Sep 16 18:47:23 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Fri Sep 16 18:42:29 2005
+Subject: [Xitami] ftp repeated disconnect problem
+In-Reply-To: <001f01c5bab4$7ae40290$7200a90a@org.cnib.ca>
+Message-ID: <001901c5bade$500a3740$0201a8c0@ronscomputer>
+
+Could it be a time out issue? I remember seeing a fix for that a while
+back. I know I had an issue where the server would time out when someone
+tried to download a photo, especially if they were on dial up and this
+fixed it. I think it was that someone had made a change to the
+executables. 
+ 
+Ron
+ 
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Friday, September 16, 2005 7:48 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] ftp repeated disconnect problem
+
+
+Hi washuu:
+ 
+I am using XP pro with a D-Link router. The Windows' firewall is
+disabled because I am using the built-in firewall in the router.  I have
+enabled port 21 in the router and assigned it to my computer IP address.
+ 
+ 
+Thanks.
+ 
+
+----- Original Message ----- 
+From: HYPERLINK "mailto:washuu_de@yahoo.com"washuu 
+To: HYPERLINK "mailto:xitami@lists.xitami.org"xitami@lists.xitami.org 
+Sent: Friday, September 16, 2005 7:06 AM
+Subject: [Xitami] ftp repeated disconnect problem
+
+Hi Jim
+ 
+can you give more detail ? Like...
+what OS and which firewall software you are using. Do you have that
+problem too when you try to access your FTP server from another
+computer?
+ 
+I'd be glad to help you if you give more detail.
+ 
+washuu
+
+
+
+   _____  
+
+
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: HYPERLINK
+"http://lists.xitami.org/mailman/listinfo/xitami"http://lists.xitami.org
+/mailman/listinfo/xitami
+
+
+--
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.0/103 - Release Date:
+9/15/2005
+
+
+
+
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.0/103 - Release Date:
+9/15/2005
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050916/a61f3b07/attachment.htm
+From rolinger1 at hotmail.com  Fri Sep 16 20:46:03 2005
+From: rolinger1 at hotmail.com (R O)
+Date: Fri Sep 16 20:46:07 2005
+Subject: [Xitami] Fw: default HTML page
+In-Reply-To: <000e01c5badd$40ba0a00$0201a8c0@ronscomputer>
+Message-ID: <BAY105-F264D5D224DF7F28F54DAC5F8910@phx.gbl>
+
+
+I am trying to make my home page, the landing page, a script.  So instead of 
+index.html loading, I want /cgi-bin/index.cgi to load.  And I am trying to 
+set Xitami's configuration to make /cgi-bin/index.cgi the default page but 
+simply adding the following to the Xitami main configuration:
+
+Default Home Page: /cgi-bin/upload.cgi
+
+isn't working.
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+>From: <ron@miplanet.net>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] Fw: default HTML page
+>Date: Fri, 16 Sep 2005 12:39:48 -0400
+>
+>I'm not quite sure exactly what you want, what's the purpose?
+>
+>Ron
+>
+>
+>I am trying to make my default page a script, but the reference isn't
+>working...how can I correct this:
+>
+>Current Config
+>============================
+>Main CGI: cgi-bin
+>CGI URLS: /cgi-bin
+>Default HTML Page: /cgi-bin/index.pl
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From bkowald at mchsi.com  Fri Sep 16 20:59:06 2005
+From: bkowald at mchsi.com (Brian Kowald)
+Date: Fri Sep 16 20:59:35 2005
+Subject: [Xitami] Fw: default HTML page
+In-Reply-To: <BAY105-F264D5D224DF7F28F54DAC5F8910@phx.gbl>
+Message-ID: <002501c5baf0$bb045d70$0200a8c0@TiltracLaptop>
+
+You could just have index.html (the default page) forward the user to the
+script by putting 
+	<meta http-equiv="refresh" content="0; url=/cgi-bin/upload.cgi">
+in the header.
+
+Might be a work around if for some reason, the default page can't be a
+script. Maybe Xitami checks if the
+file actually exists before referring the user to it.
+
+Brian
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of R O
+Sent: Friday, September 16, 2005 2:46 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Fw: default HTML page
+
+
+
+I am trying to make my home page, the landing page, a script.  So instead of
+
+index.html loading, I want /cgi-bin/index.cgi to load.  And I am trying to 
+set Xitami's configuration to make /cgi-bin/index.cgi the default page but 
+simply adding the following to the Xitami main configuration:
+
+Default Home Page: /cgi-bin/upload.cgi
+
+isn't working.
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+>From: <ron@miplanet.net>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] Fw: default HTML page
+>Date: Fri, 16 Sep 2005 12:39:48 -0400
+>
+>I'm not quite sure exactly what you want, what's the purpose?
+>
+>Ron
+>
+>
+>I am trying to make my default page a script, but the reference isn't 
+>working...how can I correct this:
+>
+>Current Config
+>============================
+>Main CGI: cgi-bin
+>CGI URLS: /cgi-bin
+>Default HTML Page: /cgi-bin/index.pl
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From gerjones at comcast.net  Fri Sep 16 21:01:49 2005
+From: gerjones at comcast.net (Gerald Jones)
+Date: Fri Sep 16 21:02:03 2005
+Subject: [Xitami] Fw: default HTML page
+References: <BAY105-F264D5D224DF7F28F54DAC5F8910@phx.gbl>
+Message-ID: <432B169D.000001.01840@OFFICE>
+
+ 
+ Not an expert on this, but  I believe the home page has to exist in the
+HTDOCS directory or your path has to be an absolute path.
+
+The way I read your default it doesn't tell where the index.cgi
+ is located.
+ 
+Gerald M. Jones
+
+-------Original Message-------
+ 
+From: R O
+Date: 09/16/05 11:46:14
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Fw: default HTML page
+ 
+I am trying to make my home page, the landing page, a script. So instead of
+index.html loading, I want /cgi-bin/index.cgi to load. And I am trying to
+set Xitami's configuration to make /cgi-bin/index.cgi the default page but
+simply adding the following to the Xitami main configuration:
+ 
+Default Home Page: /cgi-bin/upload.cgi
+ 
+isn't working.
+ 
+ 
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+ 
+>From: <ron@miplanet.net>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] Fw: default HTML page
+>Date: Fri, 16 Sep 2005 12:39:48 -0400
+>
+>I'm not quite sure exactly what you want, what's the purpose?
+>
+>Ron
+>
+>
+>I am trying to make my default page a script, but the reference isn't
+>working...how can I correct this:
+>
+>Current Config
+>============================
+>Main CGI: cgi-bin
+>CGI URLS: /cgi-bin
+>Default HTML Page: /cgi-bin/index.pl
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+ 
+ 
+ 
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From rolinger1 at hotmail.com  Fri Sep 16 21:03:17 2005
+From: rolinger1 at hotmail.com (R O)
+Date: Fri Sep 16 21:03:24 2005
+Subject: [Xitami] Fw: default HTML page
+In-Reply-To: <002501c5baf0$bb045d70$0200a8c0@TiltracLaptop>
+Message-ID: <BAY105-F15D643F167352E863FEAFCF8910@phx.gbl>
+
+
+yeah, i have contemplated that, however I have multiple sub-directories that 
+I need /cgi-bin/upload.cgi to be the default page for that directory which 
+means each one of those directories would have an index.html page that 
+simply redirects to the /cgi-bin/upload.cgi script.
+
+Theres got to be a way to do it....I would think at least.
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+
+
+
+>From: "Brian Kowald" <bkowald@mchsi.com>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] Fw: default HTML page
+>Date: Fri, 16 Sep 2005 14:59:06 -0400
+>
+>You could just have index.html (the default page) forward the user to the
+>script by putting
+>	<meta http-equiv="refresh" content="0; url=/cgi-bin/upload.cgi">
+>in the header.
+>
+>Might be a work around if for some reason, the default page can't be a
+>script. Maybe Xitami checks if the
+>file actually exists before referring the user to it.
+>
+>Brian
+>
+>
+>-----Original Message-----
+>From: xitami-bounces@lists.xitami.org
+>[mailto:xitami-bounces@lists.xitami.org] On Behalf Of R O
+>Sent: Friday, September 16, 2005 2:46 PM
+>To: xitami@lists.xitami.org
+>Subject: RE: [Xitami] Fw: default HTML page
+>
+>
+>
+>I am trying to make my home page, the landing page, a script.  So instead 
+>of
+>
+>index.html loading, I want /cgi-bin/index.cgi to load.  And I am trying to
+>set Xitami's configuration to make /cgi-bin/index.cgi the default page but
+>simply adding the following to the Xitami main configuration:
+>
+>Default Home Page: /cgi-bin/upload.cgi
+>
+>isn't working.
+>
+>
+>Russel P. Olinger
+>(310) 466-3399
+>rolinger1@hotmail.com
+>
+> >From: <ron@miplanet.net>
+> >Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+> >To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+> >Subject: RE: [Xitami] Fw: default HTML page
+> >Date: Fri, 16 Sep 2005 12:39:48 -0400
+> >
+> >I'm not quite sure exactly what you want, what's the purpose?
+> >
+> >Ron
+> >
+> >
+> >I am trying to make my default page a script, but the reference isn't
+> >working...how can I correct this:
+> >
+> >Current Config
+> >============================
+> >Main CGI: cgi-bin
+> >CGI URLS: /cgi-bin
+> >Default HTML Page: /cgi-bin/index.pl
+> >
+> >
+> >--
+> >Xitami Users Mailing List -- For Xitami support
+> >To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From ron at miplanet.net  Fri Sep 16 22:39:06 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Fri Sep 16 22:33:55 2005
+Subject: [Xitami] Fw: default HTML page
+In-Reply-To: <BAY105-F264D5D224DF7F28F54DAC5F8910@phx.gbl>
+Message-ID: <000a01c5bafe$aeb98320$0201a8c0@ronscomputer>
+
+So what you are say is that you don't have anything below cgi-bin/ ie
+the root? You could make the site = to cgi-bin and just not have a
+cgi-bin. 
+
+Or in your site.cfg you can try this if you want to cgi executed at the
+root
+
+   Webpages = "webpages/yoursite.com/"
+   Cgi-bin = "webpages/yoursite.com"
+
+Or this,
+   Webpages = "webpages/yoursite.com/cgi-bin/"
+   Cgi-bin = "webpages/yoursite.com/cgi-bin"
+
+
+And try 
+
+Default2 = "upload.cgi"
+
+I don't know if it will work or not but it's probably worth a try.
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of R O
+Sent: Friday, September 16, 2005 2:46 PM
+To: xitami@lists.xitami.org
+Subject: RE: [Xitami] Fw: default HTML page
+
+
+
+I am trying to make my home page, the landing page, a script.  So
+instead of 
+index.html loading, I want /cgi-bin/index.cgi to load.  And I am trying
+to 
+set Xitami's configuration to make /cgi-bin/index.cgi the default page
+but 
+simply adding the following to the Xitami main configuration:
+
+Default Home Page: /cgi-bin/upload.cgi
+
+isn't working.
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+>From: <ron@miplanet.net>
+>Reply-To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+>Subject: RE: [Xitami] Fw: default HTML page
+>Date: Fri, 16 Sep 2005 12:39:48 -0400
+>
+>I'm not quite sure exactly what you want, what's the purpose?
+>
+>Ron
+>
+>
+>I am trying to make my default page a script, but the reference isn't 
+>working...how can I correct this:
+>
+>Current Config
+>============================
+>Main CGI: cgi-bin
+>CGI URLS: /cgi-bin
+>Default HTML Page: /cgi-bin/index.pl
+>
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.0/103 - Release Date:
+9/15/2005
+ 
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.0/103 - Release Date:
+9/15/2005
+ 
+
+From xitami at pastryworld.ca  Sun Sep 18 04:24:31 2005
+From: xitami at pastryworld.ca (Johannes)
+Date: Sun Sep 18 04:39:56 2005
+Subject: [Xitami] http compression
+Message-ID: <.24.72.112.29.1127010271.squirrel@www.pastryworld.ca>
+
+Does anyone of the list know if xitami can handle http compression ? I
+would like to implement this on my system.
+
+Thank's for any input.
+
+JohannesJohannes
+
+
+
+From jim.noseworthy at rogers.com  Mon Sep 19 13:19:42 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 13:19:46 2005
+Subject: [Xitami] Some help please.
+Message-ID: <000601c5bd0c$08794670$7200a90a@org.cnib.ca>
+
+Hi Folks:
+
+I am trying to access the default dirrectory on my server at:
+ftp.compuconference.com
+
+If I access the server from home using either an FTP client such as FileZilla or even Internet Explorer, I am having no problem at all.
+However, It doesn't seem to work anywhere else. I am reaching the server but cannot obtain a dirrectory listing.
+
+Any help would be appreciated all over the place.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050919/70676386/attachment.html
+From bkowald at mchsi.com  Mon Sep 19 14:46:05 2005
+From: bkowald at mchsi.com (Brian Kowald)
+Date: Mon Sep 19 14:46:23 2005
+Subject: [Xitami] Some help please.
+In-Reply-To: <000601c5bd0c$08794670$7200a90a@org.cnib.ca>
+Message-ID: <000f01c5bd18$1cdeb7b0$0200a8c0@TiltracLaptop>
+
+Works for me.  It must have been forwarding the data port of 20 though your
+router?
+
+Brian
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 7:20 AM
+To: Xitami
+Subject: [Xitami] Some help please.
+
+
+Hi Folks:
+
+I am trying to access the default dirrectory on my server at:
+ftp.compuconference.com
+
+If I access the server from home using either an FTP client such as
+FileZilla or even Internet Explorer, I am having no problem at all.
+However, It doesn't seem to work anywhere else. I am reaching the server but
+cannot obtain a dirrectory listing.
+
+Any help would be appreciated all over the place.
+
+
+From jim.noseworthy at rogers.com  Mon Sep 19 15:16:50 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 15:16:52 2005
+Subject: [Xitami] Some help please.
+References: <000f01c5bd18$1cdeb7b0$0200a8c0@TiltracLaptop>
+Message-ID: <000301c5bd1c$6542d5a0$7200a90a@org.cnib.ca>
+
+Hi Brian:
+
+Right now, my server is linked directly to a cable modem.  I bypassed the 
+router in an effort to understand just what the problem is.
+
+Thanks.
+
+
+----- Original Message ----- 
+From: "Brian Kowald" <bkowald@mchsi.com>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 9:46 AM
+Subject: RE: [Xitami] Some help please.
+
+
+Works for me.  It must have been forwarding the data port of 20 though your
+router?
+
+Brian
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 7:20 AM
+To: Xitami
+Subject: [Xitami] Some help please.
+
+
+Hi Folks:
+
+I am trying to access the default dirrectory on my server at:
+ftp.compuconference.com
+
+If I access the server from home using either an FTP client such as
+FileZilla or even Internet Explorer, I am having no problem at all.
+However, It doesn't seem to work anywhere else. I am reaching the server but
+cannot obtain a dirrectory listing.
+
+Any help would be appreciated all over the place.
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+From ron at miplanet.net  Mon Sep 19 16:17:48 2005
+From: ron at miplanet.net (ron@miplanet.net)
+Date: Mon Sep 19 16:12:58 2005
+Subject: [Xitami] Some help please.
+In-Reply-To: <000301c5bd1c$6542d5a0$7200a90a@org.cnib.ca>
+Message-ID: <000001c5bd24$e95c9bc0$0201a8c0@ronscomputer>
+
+Are you sure it's ftp.yoursite.com which comes up
+ftp://ftp.yoursite.com.
+
+or should it be ftp://yoursite.com for anonymous users. 
+Of course you would need to put the username and password there too on
+non anonymous users like ftp://username:password@yoursite.com
+
+And I think you need to open port 21 unless you have specified a
+different port. I think an SSL connection uses a different port.
+
+Ron
+
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 9:17 AM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Some help please.
+
+
+Hi Brian:
+
+Right now, my server is linked directly to a cable modem.  I bypassed
+the 
+router in an effort to understand just what the problem is.
+
+Thanks.
+
+
+----- Original Message ----- 
+From: "Brian Kowald" <bkowald@mchsi.com>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 9:46 AM
+Subject: RE: [Xitami] Some help please.
+
+
+Works for me.  It must have been forwarding the data port of 20 though
+your router?
+
+Brian
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 7:20 AM
+To: Xitami
+Subject: [Xitami] Some help please.
+
+
+Hi Folks:
+
+I am trying to access the default dirrectory on my server at:
+ftp.compuconference.com
+
+If I access the server from home using either an FTP client such as
+FileZilla or even Internet Explorer, I am having no problem at all.
+However, It doesn't seem to work anywhere else. I am reaching the server
+but cannot obtain a dirrectory listing.
+
+Any help would be appreciated all over the place.
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+9/16/2005
+ 
+
+-- 
+No virus found in this outgoing message.
+Checked by AVG Anti-Virus.
+Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+9/16/2005
+ 
+
+From jim.noseworthy at rogers.com  Mon Sep 19 18:00:02 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 18:00:07 2005
+Subject: [Xitami] Some help please.
+References: <000001c5bd24$e95c9bc0$0201a8c0@ronscomputer>
+Message-ID: <000b01c5bd33$31e57430$7200a90a@org.cnib.ca>
+
+Hi Ron:
+
+It should be:
+
+ftp.compuconference.com
+
+If successfully logged on, a file dirrectory should appear.
+
+Using the FileZilla ftp client:
+while in passive mode:
+
+Status: Connecting to ftp.compuconference.com ...
+
+Status: Connected with ftp.compuconference.com. Waiting for welcome 
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2 of 
+Xitami.
+
+Response: You are user number 1 of a permitted 10 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix <http://www.imatix.com>
+
+Command: USER anonymous
+
+Response: 331 Anonymous access ok: give e-mail address as password
+
+Command: PASS ****************
+
+Response: 230- Logged in from 142.166.106.200 as anonymous on 2005/09/19, 
+12:39:11.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.compuconference.com.
+
+Response:
+
+Response: It's great to have you with us.
+
+Response:
+
+Response: Hopefully, you will find files, scripts, and other information 
+that will help you in your computer experience.
+
+Response:
+
+Response: Enjoy.
+
+Response:
+
+Response: 230 User anonymous logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PASV
+
+Error: Disconnected from server
+
+Error: Could not retrieve directory listing
+
+Error: Timeout detected!
+
+
+While in Non-passive mode:
+
+Status: Connecting to ftp.compuconference.com ...
+
+Status: Connected with ftp.compuconference.com. Waiting for welcome 
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2 of 
+Xitami.
+
+Response: You are user number 1 of a permitted 10 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix <http://www.imatix.com>
+
+Command: USER anonymous
+
+Response: 331 Anonymous access ok: give e-mail address as password
+
+Command: PASS ****************
+
+Response: 230- Logged in from 142.166.106.200 as anonymous on 2005/09/19, 
+12:41:37.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.compuconference.com.
+
+Response:
+
+Response: It's great to have you with us.
+
+Response:
+
+Response: Hopefully, you will find files, scripts, and other information 
+that will help you in your computer experience.
+
+Response:
+
+Response: Enjoy.
+
+Response:
+
+Response: 230 User anonymous logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PORT 10,169,0,114,4,223
+
+Response: 200 Command okay
+
+Command: LIST -a
+
+Error: Timeout detected!
+
+Error: Could not retrieve directory listing
+
+
+
+
+----- Original Message ----- 
+From: <ron@miplanet.net>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 11:17 AM
+Subject: RE: [Xitami] Some help please.
+
+
+> Are you sure it's ftp.yoursite.com which comes up
+> ftp://ftp.yoursite.com.
+>
+> or should it be ftp://yoursite.com for anonymous users.
+> Of course you would need to put the username and password there too on
+> non anonymous users like ftp://username:password@yoursite.com
+>
+> And I think you need to open port 21 unless you have specified a
+> different port. I think an SSL connection uses a different port.
+>
+> Ron
+>
+>
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+> Sent: Monday, September 19, 2005 9:17 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Some help please.
+>
+>
+> Hi Brian:
+>
+> Right now, my server is linked directly to a cable modem.  I bypassed
+> the
+> router in an effort to understand just what the problem is.
+>
+> Thanks.
+>
+>
+> ----- Original Message ----- 
+> From: "Brian Kowald" <bkowald@mchsi.com>
+> To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+> Sent: Monday, September 19, 2005 9:46 AM
+> Subject: RE: [Xitami] Some help please.
+>
+>
+> Works for me.  It must have been forwarding the data port of 20 though
+> your router?
+>
+> Brian
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+> Sent: Monday, September 19, 2005 7:20 AM
+> To: Xitami
+> Subject: [Xitami] Some help please.
+>
+>
+> Hi Folks:
+>
+> I am trying to access the default dirrectory on my server at:
+> ftp.compuconference.com
+>
+> If I access the server from home using either an FTP client such as
+> FileZilla or even Internet Explorer, I am having no problem at all.
+> However, It doesn't seem to work anywhere else. I am reaching the server
+> but cannot obtain a dirrectory listing.
+>
+> Any help would be appreciated all over the place.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+> 9/16/2005
+>
+>
+> -- 
+> No virus found in this outgoing message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+> 9/16/2005
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+From layner at vt.edu  Mon Sep 19 18:02:29 2005
+From: layner at vt.edu (Ricketts, Layne)
+Date: Mon Sep 19 18:02:51 2005
+Subject: [Xitami] Some help please.
+Message-ID: <118E64323675BE408C22470D8013D06B0751C30B@fangorn.cc.vt.edu>
+
+
+
+Works for me. 
+
+
+Layne Ricketts - Assistant Manager
+Outreach Technology Services
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 12:00 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Some help please.
+
+Hi Ron:
+
+It should be:
+
+ftp.compuconference.com
+
+If successfully logged on, a file dirrectory should appear.
+
+Using the FileZilla ftp client:
+while in passive mode:
+
+Status: Connecting to ftp.compuconference.com ...
+
+Status: Connected with ftp.compuconference.com. Waiting for welcome
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2
+of Xitami.
+
+Response: You are user number 1 of a permitted 10 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix
+<http://www.imatix.com>
+
+Command: USER anonymous
+
+Response: 331 Anonymous access ok: give e-mail address as password
+
+Command: PASS ****************
+
+Response: 230- Logged in from 142.166.106.200 as anonymous on
+2005/09/19, 12:39:11.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.compuconference.com.
+
+Response:
+
+Response: It's great to have you with us.
+
+Response:
+
+Response: Hopefully, you will find files, scripts, and other information
+that will help you in your computer experience.
+
+Response:
+
+Response: Enjoy.
+
+Response:
+
+Response: 230 User anonymous logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PASV
+
+Error: Disconnected from server
+
+Error: Could not retrieve directory listing
+
+Error: Timeout detected!
+
+
+While in Non-passive mode:
+
+Status: Connecting to ftp.compuconference.com ...
+
+Status: Connected with ftp.compuconference.com. Waiting for welcome
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2
+of Xitami.
+
+Response: You are user number 1 of a permitted 10 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix
+<http://www.imatix.com>
+
+Command: USER anonymous
+
+Response: 331 Anonymous access ok: give e-mail address as password
+
+Command: PASS ****************
+
+Response: 230- Logged in from 142.166.106.200 as anonymous on
+2005/09/19, 12:41:37.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.compuconference.com.
+
+Response:
+
+Response: It's great to have you with us.
+
+Response:
+
+Response: Hopefully, you will find files, scripts, and other information
+that will help you in your computer experience.
+
+Response:
+
+Response: Enjoy.
+
+Response:
+
+Response: 230 User anonymous logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PORT 10,169,0,114,4,223
+
+Response: 200 Command okay
+
+Command: LIST -a
+
+Error: Timeout detected!
+
+Error: Could not retrieve directory listing
+
+
+
+
+----- Original Message -----
+From: <ron@miplanet.net>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 11:17 AM
+Subject: RE: [Xitami] Some help please.
+
+
+> Are you sure it's ftp.yoursite.com which comes up
+> ftp://ftp.yoursite.com.
+>
+> or should it be ftp://yoursite.com for anonymous users.
+> Of course you would need to put the username and password there too on
+> non anonymous users like ftp://username:password@yoursite.com
+>
+> And I think you need to open port 21 unless you have specified a
+> different port. I think an SSL connection uses a different port.
+>
+> Ron
+>
+>
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+> Sent: Monday, September 19, 2005 9:17 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Some help please.
+>
+>
+> Hi Brian:
+>
+> Right now, my server is linked directly to a cable modem.  I bypassed
+> the
+> router in an effort to understand just what the problem is.
+>
+> Thanks.
+>
+>
+> ----- Original Message ----- 
+> From: "Brian Kowald" <bkowald@mchsi.com>
+> To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+> Sent: Monday, September 19, 2005 9:46 AM
+> Subject: RE: [Xitami] Some help please.
+>
+>
+> Works for me.  It must have been forwarding the data port of 20 though
+> your router?
+>
+> Brian
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+> Sent: Monday, September 19, 2005 7:20 AM
+> To: Xitami
+> Subject: [Xitami] Some help please.
+>
+>
+> Hi Folks:
+>
+> I am trying to access the default dirrectory on my server at:
+> ftp.compuconference.com
+>
+> If I access the server from home using either an FTP client such as
+> FileZilla or even Internet Explorer, I am having no problem at all.
+> However, It doesn't seem to work anywhere else. I am reaching the
+server
+> but cannot obtain a dirrectory listing.
+>
+> Any help would be appreciated all over the place.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+> 9/16/2005
+>
+>
+> -- 
+> No virus found in this outgoing message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+> 9/16/2005
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From jim.noseworthy at rogers.com  Mon Sep 19 18:08:03 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 18:08:08 2005
+Subject: [Xitami] Some help please.
+References: <118E64323675BE408C22470D8013D06B0751C30B@fangorn.cc.vt.edu>
+Message-ID: <001301c5bd34$50937fc0$7200a90a@org.cnib.ca>
+
+Hi Layne:
+
+Thanks much for your response.
+
+I wish I could understand what's happening.
+
+I'm not able to access the server directory at all either in passive or 
+non-passive mode.
+
+Again, thanks.
+
+
+----- Original Message ----- 
+From: "Ricketts, Layne" <layner@vt.edu>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 1:02 PM
+Subject: RE: [Xitami] Some help please.
+
+
+
+
+Works for me.
+
+
+Layne Ricketts - Assistant Manager
+Outreach Technology Services
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 12:00 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Some help please.
+
+Hi Ron:
+
+It should be:
+
+ftp.compuconference.com
+
+If successfully logged on, a file dirrectory should appear.
+
+Using the FileZilla ftp client:
+while in passive mode:
+
+Status: Connecting to ftp.compuconference.com ...
+
+Status: Connected with ftp.compuconference.com. Waiting for welcome
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2
+of Xitami.
+
+Response: You are user number 1 of a permitted 10 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix
+<http://www.imatix.com>
+
+Command: USER anonymous
+
+Response: 331 Anonymous access ok: give e-mail address as password
+
+Command: PASS ****************
+
+Response: 230- Logged in from 142.166.106.200 as anonymous on
+2005/09/19, 12:39:11.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.compuconference.com.
+
+Response:
+
+Response: It's great to have you with us.
+
+Response:
+
+Response: Hopefully, you will find files, scripts, and other information
+that will help you in your computer experience.
+
+Response:
+
+Response: Enjoy.
+
+Response:
+
+Response: 230 User anonymous logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PASV
+
+Error: Disconnected from server
+
+Error: Could not retrieve directory listing
+
+Error: Timeout detected!
+
+
+While in Non-passive mode:
+
+Status: Connecting to ftp.compuconference.com ...
+
+Status: Connected with ftp.compuconference.com. Waiting for welcome
+message...
+
+Response: 220- Welcome to this Xitami FTP server, running version 2.5c2
+of Xitami.
+
+Response: You are user number 1 of a permitted 10 users.
+
+Response:
+
+Response: 220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix
+<http://www.imatix.com>
+
+Command: USER anonymous
+
+Response: 331 Anonymous access ok: give e-mail address as password
+
+Command: PASS ****************
+
+Response: 230- Logged in from 142.166.106.200 as anonymous on
+2005/09/19, 12:41:37.
+
+Response:
+
+Response: Welcome to the FTP service of ftp.compuconference.com.
+
+Response:
+
+Response: It's great to have you with us.
+
+Response:
+
+Response: Hopefully, you will find files, scripts, and other information
+that will help you in your computer experience.
+
+Response:
+
+Response: Enjoy.
+
+Response:
+
+Response: 230 User anonymous logged-in
+
+Command: FEAT
+
+Response: 500 'FEAT' is not a valid command
+
+Command: SYST
+
+Response: 215 Windows
+
+Status: Connected
+
+Status: Retrieving directory listing...
+
+Command: PWD
+
+Response: 257 "/" is the current directory
+
+Command: TYPE A
+
+Response: 200 Command okay
+
+Command: PORT 10,169,0,114,4,223
+
+Response: 200 Command okay
+
+Command: LIST -a
+
+Error: Timeout detected!
+
+Error: Could not retrieve directory listing
+
+
+
+
+----- Original Message -----
+From: <ron@miplanet.net>
+To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 11:17 AM
+Subject: RE: [Xitami] Some help please.
+
+
+> Are you sure it's ftp.yoursite.com which comes up
+> ftp://ftp.yoursite.com.
+>
+> or should it be ftp://yoursite.com for anonymous users.
+> Of course you would need to put the username and password there too on
+> non anonymous users like ftp://username:password@yoursite.com
+>
+> And I think you need to open port 21 unless you have specified a
+> different port. I think an SSL connection uses a different port.
+>
+> Ron
+>
+>
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+> Sent: Monday, September 19, 2005 9:17 AM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Some help please.
+>
+>
+> Hi Brian:
+>
+> Right now, my server is linked directly to a cable modem.  I bypassed
+> the
+> router in an effort to understand just what the problem is.
+>
+> Thanks.
+>
+>
+> ----- Original Message ----- 
+> From: "Brian Kowald" <bkowald@mchsi.com>
+> To: "'Xitami Users General Discussion'" <xitami@lists.xitami.org>
+> Sent: Monday, September 19, 2005 9:46 AM
+> Subject: RE: [Xitami] Some help please.
+>
+>
+> Works for me.  It must have been forwarding the data port of 20 though
+> your router?
+>
+> Brian
+>
+> -----Original Message-----
+> From: xitami-bounces@lists.xitami.org
+> [mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+> Sent: Monday, September 19, 2005 7:20 AM
+> To: Xitami
+> Subject: [Xitami] Some help please.
+>
+>
+> Hi Folks:
+>
+> I am trying to access the default dirrectory on my server at:
+> ftp.compuconference.com
+>
+> If I access the server from home using either an FTP client such as
+> FileZilla or even Internet Explorer, I am having no problem at all.
+> However, It doesn't seem to work anywhere else. I am reaching the
+server
+> but cannot obtain a dirrectory listing.
+>
+> Any help would be appreciated all over the place.
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+> 9/16/2005
+>
+>
+> -- 
+> No virus found in this outgoing message.
+> Checked by AVG Anti-Virus.
+> Version: 7.0.344 / Virus Database: 267.11.1/104 - Release Date:
+> 9/16/2005
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+From magus1011 at gmail.com  Mon Sep 19 18:22:23 2005
+From: magus1011 at gmail.com (Magus1011)
+Date: Mon Sep 19 18:22:19 2005
+Subject: [Xitami] Some help please.
+In-Reply-To: <000601c5bd0c$08794670$7200a90a@org.cnib.ca>
+References: <000601c5bd0c$08794670$7200a90a@org.cnib.ca>
+Message-ID: <818236647.20050919112223@gmail.com>
+
+Hello Jim,
+
+Monday, September 19, 2005, 6:19:42 AM, you wrote:
+
+> Hi Folks:
+
+> I am trying to access the default dirrectory on my server at:
+> ftp.compuconference.com
+
+> If I access the server from home using either an FTP client such as
+> FileZilla or even Internet Explorer, I am having no problem at all.
+> However, It doesn't seem to work anywhere else. I am reaching the
+> server but cannot obtain a dirrectory listing.
+
+> Any help would be appreciated all over the place.
+
+I've been following this discussion and decided to see if I could get
+in with FileZilla. I had no problem at all and I would like to thank
+you for the copy of "The Complete Idiots Guide to HTML". Not that I
+need it as I have the book version. I copied the log of the session
+and have attached it hereto.
+
+I hope this helps.
+
+-- 
+Best regards,
+ Magus
+-------------- next part --------------
+Status:	Connecting to ftp.compuconference.com ...
+Status:	Connected with ftp.compuconference.com. Waiting for welcome message...
+Response:	220- Welcome to this Xitami FTP server, running version 2.5c2 of Xitami. 
+Response:	 You are user number 1 of a permitted 10 users. 
+Response:	  
+Response:	220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix <http://www.imatix.com>
+Command:	USER anonymous
+Response:	331 Anonymous access ok: give e-mail address as password
+Command:	PASS *****
+Response:	230- Logged in from 206.45.183.165 as anonymous on 2005/09/19, 13:12:43. 
+Response:	  
+Response:	 Welcome to the FTP service of ftp.compuconference.com. 
+Response:	  
+Response:	 It's great to have you with us. 
+Response:	  
+Response:	 Hopefully, you will find files, scripts, and other information that will help you in your computer experience. 
+Response:	  
+Response:	 Enjoy. 
+Response:	  
+Response:	230 User anonymous logged-in
+Command:	FEAT
+Response:	500 'FEAT' is not a valid command
+Command:	SYST
+Response:	215 Windows
+Status:	Connected
+Status:	Retrieving directory listing...
+Command:	PWD
+Response:	257 "/" is the current directory
+Command:	TYPE A
+Response:	200 Command okay
+Command:	PORT 206,45,183,165,16,46
+Response:	200 Command okay
+Command:	LIST
+Response:	150 Preparing to transfer ASCII file
+Response:	226 Closing data connection
+Status:	Directory listing successful
+Command:	REST 0
+Response:	350 Restarting from 0
+Command:	PWD
+Response:	257 "/" is the current directory
+Status:	Connecting to ftp.compuconference.com ...
+Status:	Connected with ftp.compuconference.com. Waiting for welcome message...
+Response:	220- Welcome to this Xitami FTP server, running version 2.5c2 of Xitami. 
+Response:	 You are user number 2 of a permitted 10 users. 
+Response:	  
+Response:	220 Xitami FTP 2.5c2 (c) 1991-2002 iMatix <http://www.imatix.com>
+Command:	USER anonymous
+Response:	331 Anonymous access ok: give e-mail address as password
+Command:	PASS *****
+Response:	230- Logged in from 206.45.183.165 as anonymous on 2005/09/19, 13:13:55. 
+Response:	  
+Response:	 Welcome to the FTP service of ftp.compuconference.com. 
+Response:	  
+Response:	 It's great to have you with us. 
+Response:	  
+Response:	 Hopefully, you will find files, scripts, and other information that will help you in your computer experience. 
+Response:	  
+Response:	 Enjoy. 
+Response:	  
+Response:	230 User anonymous logged-in
+Command:	FEAT
+Response:	500 'FEAT' is not a valid command
+Command:	SYST
+Response:	215 Windows
+Status:	Connected
+Status:	Starting download of /CompleteIdiotsGuideToHTML.txt
+Command:	PWD
+Response:	257 "/" is the current directory
+Command:	TYPE A
+Response:	200 Command okay
+Command:	PORT 206,45,183,165,16,53
+Response:	200 Command okay
+Command:	RETR CompleteIdiotsGuideToHTML.txt
+Response:	150 Preparing to transfer ASCII file
+Command:	REST 0
+Response:	350 Restarting from 0
+Response:	226 Closing data connection
+Status:	Download successful
+Command:	PWD
+Response:	257 "/" is the current directory
+Command:	TYPE A
+Response:	200 Command okay
+Status:	Disconnected from server
+Command:	TYPE I
+Response:	200 Command okay
+Command:	TYPE I
+Response:	200 Command okay
+From jim.noseworthy at rogers.com  Mon Sep 19 18:26:17 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 18:26:23 2005
+Subject: [Xitami] Some help please.
+References: <000601c5bd0c$08794670$7200a90a@org.cnib.ca>
+	<818236647.20050919112223@gmail.com>
+Message-ID: <001001c5bd36$dce8b8d0$7200a90a@org.cnib.ca>
+
+Hi Magus:
+
+I am at a loss as to what the problem is.
+
+Thanks much for your response.
+
+
+----- Original Message ----- 
+From: "Magus1011" <magus1011@gmail.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 1:22 PM
+Subject: Re: [Xitami] Some help please.
+
+
+> Hello Jim,
+>
+> Monday, September 19, 2005, 6:19:42 AM, you wrote:
+>
+>> Hi Folks:
+>
+>> I am trying to access the default dirrectory on my server at:
+>> ftp.compuconference.com
+>
+>> If I access the server from home using either an FTP client such as
+>> FileZilla or even Internet Explorer, I am having no problem at all.
+>> However, It doesn't seem to work anywhere else. I am reaching the
+>> server but cannot obtain a dirrectory listing.
+>
+>> Any help would be appreciated all over the place.
+>
+> I've been following this discussion and decided to see if I could get
+> in with FileZilla. I had no problem at all and I would like to thank
+> you for the copy of "The Complete Idiots Guide to HTML". Not that I
+> need it as I have the book version. I copied the log of the session
+> and have attached it hereto.
+>
+> I hope this helps.
+>
+> -- 
+> Best regards,
+> Magus
+
+
+--------------------------------------------------------------------------------
+
+
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+From jim.noseworthy at rogers.com  Mon Sep 19 19:07:59 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 19:08:04 2005
+Subject: [Xitami] Some help please.
+Message-ID: <001001c5bd3c$b03c33b0$6801a8c0@org.cnib.ca>
+
+Well Folks:
+
+I guess I am having a problem with my network provider.   When I connect with a wireless connection to another provider, I am able to access the FTP server with no problem.  When, however, I use the standard ADSL connection, it doesn't work.
+
+Thanks for all the help gang.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050919/d41d5fba/attachment-0001.htm
+From bkowald at mchsi.com  Mon Sep 19 19:56:04 2005
+From: bkowald at mchsi.com (Brian Kowald)
+Date: Mon Sep 19 19:56:28 2005
+Subject: [Xitami] Some help please.
+In-Reply-To: <001001c5bd3c$b03c33b0$6801a8c0@org.cnib.ca>
+Message-ID: <000001c5bd43$6bc77760$0200a8c0@TiltracLaptop>
+
+Some providers blocks the ftp port of 21 and the http port 80 so people
+don't run servers.  You could change it to a differnt port say 7021 and it
+would probably work. You would have to tell  anybody connecting to use a
+port other than the default though.
+ 
+Brian
+ 
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 1:08 PM
+To: Xitami
+Subject: [Xitami] Some help please.
+
+
+Well Folks:
+ 
+I guess I am having a problem with my network provider.   When I connect
+with a wireless connection to another provider, I am able to access the FTP
+server with no problem.  When, however, I use the standard ADSL connection,
+it doesn't work.
+ 
+Thanks for all the help gang.
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050919/7a32b6b6/attachment.html
+From jim.noseworthy at rogers.com  Mon Sep 19 22:46:15 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Mon Sep 19 22:46:31 2005
+Subject: [Xitami] Defaults.cfg file question.
+Message-ID: <000901c5bd5b$2e353640$04cf1a46@maincomputer>
+
+Hi Folks:
+
+When using a Defaults.cfg file, does one only include the changes or the 
+entire Xitami.cfg file with the changes?
+
+Thanks gang. 
+
+From magus1011 at gmail.com  Tue Sep 20 00:59:39 2005
+From: magus1011 at gmail.com (Magus1011)
+Date: Tue Sep 20 00:59:31 2005
+Subject: [Xitami] Defaults.cfg file question.
+In-Reply-To: <000901c5bd5b$2e353640$04cf1a46@maincomputer>
+References: <000901c5bd5b$2e353640$04cf1a46@maincomputer>
+Message-ID: <175220954.20050919175939@gmail.com>
+
+Hello Jim,
+
+Monday, September 19, 2005, 3:46:15 PM, you wrote:
+
+> Hi Folks:
+
+> When using a Defaults.cfg file, does one only include the changes or the
+> entire Xitami.cfg file with the changes?
+
+> Thanks gang. 
+
+I put in just the changes, but you can include the whole thing if you want.
+
+-- 
+Best regards,
+ Magus
+
+From jim.noseworthy at rogers.com  Tue Sep 20 01:09:29 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Tue Sep 20 01:09:49 2005
+Subject: [Xitami] Defaults.cfg file question.
+References: <000901c5bd5b$2e353640$04cf1a46@maincomputer>
+	<175220954.20050919175939@gmail.com>
+Message-ID: <000501c5bd6f$30a8b730$0d00a8c0@maincomputer>
+
+Hi Magus:
+
+Thanks all over the place.
+
+
+----- Original Message ----- 
+From: "Magus1011" <magus1011@gmail.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 7:59 PM
+Subject: Re: [Xitami] Defaults.cfg file question.
+
+
+> Hello Jim,
+>
+> Monday, September 19, 2005, 3:46:15 PM, you wrote:
+>
+>> Hi Folks:
+>
+>> When using a Defaults.cfg file, does one only include the changes or the
+>> entire Xitami.cfg file with the changes?
+>
+>> Thanks gang.
+>
+> I put in just the changes, but you can include the whole thing if you 
+> want.
+>
+> -- 
+> Best regards,
+> Magus
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+From Russell.Bowden at fiserv.com  Mon Sep 19 18:39:06 2005
+From: Russell.Bowden at fiserv.com (Bowden, Russell)
+Date: Tue Sep 20 08:03:39 2005
+Subject: [Xitami] Some help please.
+Message-ID: <662979FDEB954C48972E2CC53035AF2D0149C765@fisvhou12.fiservsw.net>
+
+Jim,
+
+I tried this from my work pc and got the same problem that you did.  But
+it works fine from my home pc.  I use Filezilla on both.  My work pc is
+on the company network, firewall, etc, and I don't know how the network
+guys have it set up, but maybe there's a clue there.
+
+Russell 
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Jim Noseworthy
+Sent: Monday, September 19, 2005 11:26 AM
+To: Magus1011; Xitami Users General Discussion
+Subject: Re: [Xitami] Some help please.
+
+Hi Magus:
+
+I am at a loss as to what the problem is.
+
+Thanks much for your response.
+
+
+----- Original Message ----- 
+From: "Magus1011" <magus1011@gmail.com>
+To: "Xitami Users General Discussion" <xitami@lists.xitami.org>
+Sent: Monday, September 19, 2005 1:22 PM
+Subject: Re: [Xitami] Some help please.
+
+
+> Hello Jim,
+>
+> Monday, September 19, 2005, 6:19:42 AM, you wrote:
+>
+>> Hi Folks:
+>
+>> I am trying to access the default dirrectory on my server at:
+>> ftp.compuconference.com
+>
+>> If I access the server from home using either an FTP client such as
+>> FileZilla or even Internet Explorer, I am having no problem at all.
+>> However, It doesn't seem to work anywhere else. I am reaching the
+>> server but cannot obtain a dirrectory listing.
+>
+>> Any help would be appreciated all over the place.
+>
+> I've been following this discussion and decided to see if I could get
+> in with FileZilla. I had no problem at all and I would like to thank
+> you for the copy of "The Complete Idiots Guide to HTML". Not that I
+> need it as I have the book version. I copied the log of the session
+> and have attached it hereto.
+>
+> I hope this helps.
+>
+> -- 
+> Best regards,
+> Magus
+
+
+------------------------------------------------------------------------
+--------
+
+
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami 
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+From G.Williams at pindar.com  Fri Sep 23 14:07:41 2005
+From: G.Williams at pindar.com (George Williams)
+Date: Fri Sep 23 14:26:56 2005
+Subject: [Xitami] WebDav
+Message-ID: <OF978FDFF3.8D397E30-ON80257085.004294C2-80257085.0042C2A6@pindar.com>
+
+Is WebDav support planned for Xitami?
+
+
+***********************************************************************************
+This e-mail and attachments are intended for the above name only and may be confidential. If they have come to you in error, you must take no action based on them, nor must copy or show them to anyone; please reply to this e-mail and report the error.
+Security warning: Please note that this e-mail has been created in the knowledge that the internet is not a one hundred percent secure communication medium. We advise that you understand and observe this lack of security when e-mailing us.
+Virus: Although we have taken steps to ensure that this e-mail and attachments are free from any virus, we advise that in keeping with good practice the recipient should ensure they are actually virus free.  If you have received this e-mail in error please notify:
+postmaster@pindar.com
+
+
+
+This message has been scanned for viruses by MailControl - www.mailcontrol.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050923/dcfcbb60/attachment.htm
+From tuncer at dalan.com.tr  Mon Sep 26 15:45:30 2005
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Mon Sep 26 15:45:00 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072380919@mailsrv.dalan.local>
+
+I need to configure virtual subdomains, entirely for local use on my own
+laptop eg like this: 
+
+[Virtual-Hosts]
+john.mycomputername=/john.cfg
+jack.mycomputername=/jack.cfg
+
+or
+
+[Virtual-Hosts]
+john.locahost=/john.cfg
+jack.localhost=/jack.cfg
+
+I used the wizard and added the subdomains.mycomputername as virtual
+hosts, gave them each a home page and used the browser to requeast their
+url after resetting Xitami. 
+
+Then I changed everything and repeated for subdomains.locahost.
+
+I could not succeed connecting to any of the above 4 possibilities. XP
+brings up a dialog box with connect/work offline buttons. When I click
+on the connect button XP brings a dialup or configure network dialog
+box.
+
+This does not happen when I add localhost=localhost.cfg as a virtual
+host without any subdomains involved. The connect button brings me to
+localhost.
+
+XP does understand that the url localhost is the same thing as
+mycomputername or 127.0.0.1. But jask.localhost or jack.mycomputername
+does not receive the same treatment.
+
+Am I doing something wrong on Xitami or does this have to do with XP
+home configuration and is there a solution?
+
+Thanks for any help.
+
+
+
+From Andris.Kluga at saftehnika.com  Mon Sep 26 16:59:18 2005
+From: Andris.Kluga at saftehnika.com (Andris Kluga)
+Date: Mon Sep 26 16:59:36 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D855072380919@mailsrv.dalan.local>
+References: <EE5D17F9BCAE5645B246C3307D855072380919@mailsrv.dalan.local>
+Message-ID: <43380CC6.40107@saftehnika.com>
+
+Hi!
+
+Ayhan Tuncer writes:
+
+ > I need to configure virtual subdomains, entirely for local
+...
+
+ > XP does understand that the url localhost is the same thing as
+ > mycomputername or 127.0.0.1. But jask.localhost or jack.mycomputername
+ > does not receive the same treatment.
+
+Did you wrote your hostnames in system hosts file (located in 
+\WINDOWS\system32\drivers\etc\) to recognise hosts by the operating system?
+
+for example:
+
+127.0.0.1      localhost john.locahost jack.localhost
+
+
+   Andris
+
+From jamesamc at bellsouth.net  Mon Sep 26 17:45:10 2005
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Mon Sep 26 17:45:18 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D855072380919@mailsrv.dalan.local>
+References: <EE5D17F9BCAE5645B246C3307D855072380919@mailsrv.dalan.local>
+Message-ID: <43381786.6000609@bellsouth.net>
+
+Ayhan
+
+In all windows versions for localhost on lan base domain names use the 
+"hosts" file. The hosts file is the lookup table that each windows pc 
+uses befor it querries a dns server. Note that you might want to use the 
+ip address of your network card and not the loopback ip of 127.0.0.1 and 
+copy the setting to the hosts files of the other pc's on your lan. So 
+the can view the pages you are serving. This is all so needed if you are 
+running an e-mail server over a lan.
+
+sample of hosts file
+
+127.0.0.1  localhost
+127.0.0.1  mycomputername
+127.0.0.1  john.mycomputername
+127.0.0.1  jack.mycomputername
+
+Jeff McDonald
+
+From tuncer at dalan.com.tr  Tue Sep 27 09:17:52 2005
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Tue Sep 27 09:18:05 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072380991@mailsrv.dalan.local>
+
+
+your hostnames in system hosts file (located in 
+\WINDOWS\system32\drivers\etc\) to recognise hosts by the operating
+system?
+for example:
+127.0.0.1      localhost john.locahost jack.localhost
+
+
+In all windows versions for localhost on lan base domain names use the 
+"hosts" file. The hosts file is the lookup table that each windows pc 
+uses befor it querries a dns server. Note that you might want to use the
+
+ip address of your network card and not the loopback ip of 127.0.0.1 and
+
+copy the setting to the hosts files of the other pc's on your lan. So 
+the can view the pages you are serving. This is all so needed if you are
+
+running an e-mail server over a lan.
+sample of hosts file
+127.0.0.1  localhost
+127.0.0.1  mycomputername
+127.0.0.1  john.mycomputername
+
+
+
+Hi Jeff - Hi Andris
+
+Thank you for your help. Tried both your suggestions.
+
+C:\WINDOWS\system32\drivers\etc\hosts already had one line in it:
+
+127.0.0.1	localhost
+
+but both mycomputername and localhost were accessible via browser.
+
+Tried 
+all possible combinations/versions, 
+changing Xitami config every time, 
+restarting both computer/Xitami every time, 
+clearing browser-cache every time,
+requesting everything from browser every time.
+
+The entire test took about 2 hours.
+
+Browser did not behave per new information in the hosts file but still
+could access mycomputername and localhost everytime.
+
+Used IP 127.0.0.1 and left localhost in primary position.
+
+Tried and added :
+- subdomain.localhost
+- subdomain.mycomputername
+- subdomain  all by itself without any dots
+
+In both forms:
+- all host names accross IP separated by spaces on same line
+- host name accross IP, each on an individual line
+
+All of them seem to be ignored during browser request.
+
+Almost as if XP takes no notice of the hosts file. 
+
+Could there be some other entry on some other XP file that needs to be
+carried out? Or could two hosts files be located in different places on
+the system?
+
+I appreciate your help.
+
+Ayhan
+
+
+From jamesamc at bellsouth.net  Tue Sep 27 17:04:25 2005
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Tue Sep 27 17:04:38 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D855072380991@mailsrv.dalan.local>
+References: <EE5D17F9BCAE5645B246C3307D855072380991@mailsrv.dalan.local>
+Message-ID: <43395F79.1090900@bellsouth.net>
+
+Hi Ayhan
+
+XP also keeps a hosts file for each user of the system. you need to 
+change each user's hosts file as well. This trip me up when we add xp 
+systems to our network to.
+
+Jeff
+
+From martin at bleisteiner.net  Tue Sep 27 09:39:55 2005
+From: martin at bleisteiner.net (Martin Bleisteiner)
+Date: Wed Sep 28 08:02:35 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D855072380991@mailsrv.dalan.local>
+Message-ID: <PC17102005092709395505226773ab01@IT-LAP2>
+
+Are you sure you edit the file "hosts" and not "hosts.sam"?
+Must always be a single line for each entry.
+Maybe when Windows sees the keywords "localhost" or "mycomputername" it does not look into the hosts file at all. 
+You can try to put entries into hosts when you use a name different from your computer's name:
+127.0.0.1  anothername
+127.0.0.1  sub.anothername
+127.0.0.1  more.anothername
+
+Martin
+
+----- Original Message ---------------
+
+Subject: RE: [Xitami] Subdomain under Win XP Home localhost
+   From: "Ayhan Tuncer" <tuncer@dalan.com.tr>
+   Date: Tue, 27 Sep 2005 10:17:52 +0300
+     To: <jamesamc@bellsouth.net>,
+         "Xitami Users General Discussion" <xitami@lists.xitami.org>
+>Browser did not behave per new information in the hosts file but still
+>could access mycomputername and localhost everytime.
+>
+>Used IP 127.0.0.1 and left localhost in primary position.
+>
+>Tried and added :
+>- subdomain.localhost
+>- subdomain.mycomputername
+>- subdomain  all by itself without any dots
+>
+>In both forms:
+>- all host names accross IP separated by spaces on same line
+>- host name accross IP, each on an individual line
+>
+>All of them seem to be ignored during browser request.
+>
+>Almost as if XP takes no notice of the hosts file. 
+>
+
+From tuncer at dalan.com.tr  Wed Sep 28 08:44:11 2005
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Wed Sep 28 08:43:41 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072380AC5@mailsrv.dalan.local>
+
+Hi Martin,
+
+My file extensions and hidden + system files are all visible.
+
+It is the first time I see the contents of the drivers/etc folder.
+
+I opened and examined each file in amazement and wonder, and saw they
+look like Xitami config files.
+
+I tried to enter the new host names also into the networks file, because
+it had the IP No.s accross the names. I wanted to see if the computer
+would respond. It didn't. So I changed everything back to its original
+state. 
+
+The imhosts.sam looked like a complicated format. I decided not to
+interfere with it.
+
+I tried many many different names in the hosts file.  Nothing worked. 
+
+I remvoed the localhost entry - localhost was still accessible. I put it
+back in.
+
+I tried everything back at work next day on XP Professional. No problem
+at all - hosts file absolutely functional. 
+
+There is something wrong with the laptop's XP Home configuration. It
+does not respond to changes in the hosts file. There can be two reasons:
+
+a) It is reading the hosts from somewhere else or
+b) it is somehow configured to try the dialup first.
+
+The laptop is new and the XP Home was pre-installed together with Norton
+Internet Security. I had to turn its firewall off because I could not
+get it to peek out and register+live-update itself. It responded to no
+kind of "allow" instruction. The XP firewall is enabled in its place
+right now.
+
+"I do not have any users on the laptop yet."
+I am just beginning to move my things in. Users or passwords wait until
+after everything is installed and working.
+
+I don't want to take up much more of the Xitami group's time and
+attention with a problem which is evidently Windows-related.
+
+It would be a big help if you could point me to some basic 
+XP admin and account management 
+reference or discussion group for non-sysadmins. 
+
+I did try the MSDN but I could not find information because I do not
+know what exactly I should be looking for.
+
+Anyway - thanks for all trouble.
+
+Ayhan
+
+
+- - -
+
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Martin Bleisteiner
+Sent: Tuesday, September 27, 2005 10:40 AM
+To: Xitami Users General Discussion
+Subject: RE: [Xitami] Subdomain under Win XP Home localhost
+
+Are you sure you edit the file "hosts" and not "hosts.sam"?
+Must always be a single line for each entry.
+Maybe when Windows sees the keywords "localhost" or "mycomputername" it
+does not look into the hosts file at all. 
+You can try to put entries into hosts when you use a name different from
+your computer's name:
+127.0.0.1  anothername
+127.0.0.1  sub.anothername
+127.0.0.1  more.anothername
+
+Martin
+
+----- Original Message ---------------
+
+Subject: RE: [Xitami] Subdomain under Win XP Home localhost
+   From: "Ayhan Tuncer" <tuncer@dalan.com.tr>
+   Date: Tue, 27 Sep 2005 10:17:52 +0300
+     To: <jamesamc@bellsouth.net>,
+         "Xitami Users General Discussion" <xitami@lists.xitami.org>
+>Browser did not behave per new information in the hosts file but still
+>could access mycomputername and localhost everytime.
+>
+>Used IP 127.0.0.1 and left localhost in primary position.
+>
+>Tried and added :
+>- subdomain.localhost
+>- subdomain.mycomputername
+>- subdomain  all by itself without any dots
+>
+>In both forms:
+>- all host names accross IP separated by spaces on same line
+>- host name accross IP, each on an individual line
+>
+>All of them seem to be ignored during browser request.
+>
+>Almost as if XP takes no notice of the hosts file. 
+>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From jamesamc at bellsouth.net  Wed Sep 28 16:43:30 2005
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Wed Sep 28 16:43:39 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+In-Reply-To: <EE5D17F9BCAE5645B246C3307D855072380AC5@mailsrv.dalan.local>
+References: <EE5D17F9BCAE5645B246C3307D855072380AC5@mailsrv.dalan.local>
+Message-ID: <433AAC12.4000501@bellsouth.net>
+
+Hi Ayhan
+
+XP has 2 hosts files.
+
+C:\WINDOWS\SYSTEM32\DRIVERS\ETC\HOSTS
+and
+C:\I386\HOSTS
+
+I think that windows reads C:\WINDOWS\SYSTEM32\DRIVERS\ETC\HOSTS on 
+stratup then reads C:\I386\HOSTS for each new conection. I keep both the 
+same. Here is a sample.
+
+#------sample--------
+#local only
+127.0.0.1       localhost 
+127.0.0.1       privetpage.test
+#Default IP & Host Names for pc and laptops
+192.168.1.7     PC1              
+192.168.1.9     PC2
+192.168.1.3     Laptop1
+#Web sits on LAN
+192.168.1.3     domain.test
+192.168.1.3     john.domain.test
+192.168.1.3     jane.domaine.test
+192.168.1.9     janes.desk
+192.168.1.9     webwork.janes.desk
+#Favorites made faster
+216.109.118.71  www.yahoo.com
+#-----end sample-----
+
+Jeff
+
+From mw at 9000.org  Wed Sep 28 17:11:46 2005
+From: mw at 9000.org (Magnus Wedberg)
+Date: Wed Sep 28 17:11:55 2005
+Subject: [Xitami] Subdomain under Win XP Home localhost
+In-Reply-To: <433AAC12.4000501@bellsouth.net>
+References: <EE5D17F9BCAE5645B246C3307D855072380AC5@mailsrv.dalan.local>
+Message-ID: <433ACED2.10182.1A054A3@mw.9000.org>
+
+> C:\I386\HOSTS
+
+The i386 folder contains Windows installation files. No file in this 
+folder is used for anything during normal operation, if your system 
+isn't /really/ weirdly setup.
+ 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From a.drent at rug.nl  Thu Sep 29 08:30:28 2005
+From: a.drent at rug.nl (A Drent)
+Date: Thu Sep 29 08:30:32 2005
+Subject: [Xitami] Using Mantis
+Message-ID: <003901c5c4bf$4867ffa0$85977d81@test123>
+
+I have found some (old) threads regarding Mantis but could not find answers.
+ Installation of Mantis goes well, database is created etc. But after
+ installation you cannot login. The index.php gets redirected and Xitami
+ reacts with a 404:
+
+ 127.0.0.1 - - [28/Sep/2005:16:29:22 +0100] "GET /mantis/index.php HTTP/1.1"
+ 404 0
+ 127.0.0.1 - - [28/Sep/2005:16:29:44 +0100] "POST /mantis/login.php 
+HTTP/1.1"
+ 404 0
+
+ I install all in webpages (xitami\webpages\mantis) I verified that names 
+and
+ extensions are rigth, that the file exists. It's probabely something 
+trivial
+ within xitami.cfg, aut or php.ini. Can anybody give me a hint?
+
+ best regards, Albert
+
+
+From gobonkers at hotmail.com  Thu Sep 29 13:52:57 2005
+From: gobonkers at hotmail.com (Go Bonkers)
+Date: Thu Sep 29 13:53:04 2005
+Subject: [Xitami] Re: Subdomain under Win XP Home localhost
+In-Reply-To: <20050929100002.C9B201C109B9@sxpublic.imatix.net>
+Message-ID: <BAY101-F23BA3F5FDE8BD8EF7D2C3DAB8C0@phx.gbl>
+
+Subdomain under Win XP Home localhost...
+I just experimented with xp home and hosts entry's and xitami virtual 
+servers/folders . .. kathy.local.lan   bob.local.lan    go to their own 
+named folders fine once I from the console do the vhosts Wizard and then 
+follow it up with the domain names in Configurations/vHosts.
+
+If you're using a proxy server, and/or if aol or your isp uses proxy 
+servers, the hosts file in xp is probably  doing nothing.     Seems theres 
+also some spyware/adware & blockers that also that can trick you into an 
+unknown proxy situation in xp rendering what you see in the etc/HOSTS file 
+ineffective.
+
+If you're using IE and proxy server configs might try checking the "bypass 
+proxy server for local addresses" under connections.
+
+
+From tuncer at dalan.com.tr  Thu Sep 29 15:41:32 2005
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Thu Sep 29 15:41:17 2005
+Subject: [Xitami] Re: Subdomain under Win XP Home localhost
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072380C66@mailsrv.dalan.local>
+
+Hi Magnus - Hi Jeff - Hi Go Bonkers
+
+  If you're using IE and proxy server configs might try checking the
+  "bypass proxy server for local addresses" under connections.
+
+When I'm doing all these changes and testing them I am entirely
+off-line. There is no LAN connection. The phone jack is pulled out and
+we don't have aol. 
+
+Would I still need to try the connections/"bypass proxy server for local
+addresses" and where is it located please?
+
+You reminded me of also trying a Netscape request. I'll do that.
+
+I uninstalled Norton Internet Security to do a reinstall for the
+firewall allow problem. I tried all virtual subdomain host tests again,
+with it uninstalled. Nothing. 
+
+On my computer at work C:\I386\HOSTS does not exist but I'll see on my
+laptop. I think no one would have bothered to delete it.
+
+I think I am heading towards an XP reinstall. I hope I can manage it.
+
+Thanks again for all this help.
+
+Ayhan
+
+- - -
+
+-----Original Message-----
+From: xitami-bounces@lists.xitami.org
+[mailto:xitami-bounces@lists.xitami.org] On Behalf Of Go Bonkers
+Sent: Thursday, September 29, 2005 2:53 PM
+To: xitami@lists.xitami.org
+Subject: [Xitami] Re: Subdomain under Win XP Home localhost
+
+Subdomain under Win XP Home localhost...
+I just experimented with xp home and hosts entry's and xitami virtual 
+servers/folders . .. kathy.local.lan   bob.local.lan    go to their own 
+named folders fine once I from the console do the vhosts Wizard and then
+
+follow it up with the domain names in Configurations/vHosts.
+
+If you're using a proxy server, and/or if aol or your isp uses proxy 
+servers, the hosts file in xp is probably  doing nothing.     Seems
+theres 
+also some spyware/adware & blockers that also that can trick you into an
+
+unknown proxy situation in xp rendering what you see in the etc/HOSTS
+file 
+ineffective.
+
+If you're using IE and proxy server configs might try checking the
+"bypass 
+proxy server for local addresses" under connections.
+
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From tuncer at dalan.com.tr  Fri Sep 30 09:17:04 2005
+From: tuncer at dalan.com.tr (Ayhan Tuncer)
+Date: Fri Sep 30 09:16:38 2005
+Subject: [Xitami] Re: Subdomain under Win XP Home localhost
+Message-ID: <EE5D17F9BCAE5645B246C3307D855072380CC4@mailsrv.dalan.local>
+
+Hi Magnus - Hi Jeff - Hi Go Bonkers - Hi Andris 
+
+Go Bonkers certainly found the culprit.
+
+Two letters: IE
+
+Can you believe this? I can't, because it should have been the first
+thing to check. It's always the first thing I check for any problem I
+know about.
+
+Netscape displays any kind of host in the etc/hosts file.
+IE opens up the dialup connection dialog box.
+
+And I was about to tear down a Dell laptop operating system!
+
+  If you're using IE and proxy server configs might try checking the
+  "bypass proxy server for local addresses" under connections.
+
+Go Bonkers, I do not use an English version of XP. Can you please point
+me the way to the above? 
+
+I could not find it in the connection/proxy preferences of IE. I'd like
+to access the hosts from both browsers.
+
+I want to thank all of you for writing about the hosts file. This is
+such valuable information. 
+
+The hosts file + simplicity of Xitami's virtual hosts configuration
+gives you the opportunity to have hundreds of websites on your laptop,
+all of them perfectly functional, cgi-bin, aliases, and all, naming them
+what ever you like! 
+
+Thanks again.
+
+Ayhan
+
+
+
+
+From jim.noseworthy at rogers.com  Fri Sep 30 15:43:47 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Fri Sep 30 15:43:50 2005
+Subject: [Xitami] Router Help with Xitami.
+Message-ID: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+
+Hi Folks:
+
+Can anyone inform me why, when the wireless option is turned on on my router, I have problems staying connected from a remote connection? The FTP server itself is not running wireless but is connected directly to the router. I have opened TCP ports 21 and 22.
+
+I am using a D-Link DI624 router.
+
+Thanks all over the place gang.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050930/e2099a30/attachment.html
+From rickhead at gmail.com  Fri Sep 30 16:30:37 2005
+From: rickhead at gmail.com (Rick Headly)
+Date: Fri Sep 30 16:30:40 2005
+Subject: [Xitami] Router Help with Xitami.
+In-Reply-To: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+References: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+Message-ID: <11689a700509300730j72b4ea51w359fb4bd61d1c308@mail.gmail.com>
+
+i'm unable to offer any suggestions...
+ i am however, currently dealing with very similar problems, through the use
+of a wireless-g linksys router (wrt54gs). i'm on an dynamic 8meg ppoe
+connection, which has been constantly releasing, and refreshing with a new
+ip, several times a day (or hour). this is unusual behaviour. my isp claims
+the problem is my own, and not theirs... even though the modem is indeed
+training a bit slow.
+ it's become most annoying, trying to stream radio broadcasts over this
+connection, as the signal is constantly cutting in and out.
+ i wasn't going to bring the topic into this forum, but now that you mention
+it, you have my interest, and i'm all ears.
+ on another note, i'm unable to understand why you're leaving port 22 open.
+it looks like nothing more than a security hole to me... but then again, i'm
+no expert. i'm sure someone here will jump on me if i'm wrong though...
+that's how i learn :)
+ rick
+  On 9/30/05, Jim Noseworthy <jim.noseworthy@rogers.com> wrote:
+>
+> Hi Folks:
+>  Can anyone inform me why, when the wireless option is turned on on my
+> router, I have problems staying connected from a remote connection? The FTP
+> server itself is not running wireless but is connected directly to the
+> router. I have opened TCP ports 21 and 22.
+>  I am using a D-Link DI624 router.
+>  Thanks all over the place gang.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050930/7158ced7/attachment.htm
+From jim.noseworthy at rogers.com  Fri Sep 30 16:33:38 2005
+From: jim.noseworthy at rogers.com (Jim Noseworthy)
+Date: Fri Sep 30 16:33:42 2005
+Subject: [Xitami] Router Help with Xitami.
+References: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+	<11689a700509300730j72b4ea51w359fb4bd61d1c308@mail.gmail.com>
+Message-ID: <001001c5c5cb$f29cc340$7200a90a@org.cnib.ca>
+
+Hi Rick:
+
+Thanks for bringing the port thing to my attention.  I ment to say ports 20 and 21. 
+
+Cheers.
+
+
+  ----- Original Message ----- 
+  From: Rick Headly 
+  To: Xitami Users General Discussion 
+  Sent: Friday, September 30, 2005 11:30 AM
+  Subject: Re: [Xitami] Router Help with Xitami.
+
+
+  i'm unable to offer any suggestions...
+
+  i am however, currently dealing with very similar problems, through the use of a wireless-g linksys router (wrt54gs).  i'm on an dynamic 8meg ppoe connection, which has been constantly releasing, and refreshing with a new ip, several times a day (or hour).  this is unusual behaviour.  my isp claims the problem is my own, and not theirs... even though the modem is indeed training a bit slow. 
+
+  it's become most annoying, trying to stream radio broadcasts over this connection, as the signal is constantly cutting in and out.
+
+  i wasn't going to bring the topic into this forum, but now that you mention it, you have my interest, and i'm all ears.
+
+  on another note, i'm unable to understand why you're leaving port 22 open.  it looks like nothing more than a security hole to me... but then again, i'm no expert.  i'm sure someone here will jump on me if i'm wrong though... that's how i learn :) 
+
+  rick
+
+
+  On 9/30/05, Jim Noseworthy <jim.noseworthy@rogers.com> wrote: 
+    Hi Folks:
+
+    Can anyone inform me why, when the wireless option is turned on on my router, I have problems staying connected from a remote connection? The FTP server itself is not running wireless but is connected directly to the router. I have opened TCP ports 21 and 22. 
+
+    I am using a D-Link DI624 router.
+
+    Thanks all over the place gang.
+
+
+    --
+    Xitami Users Mailing List -- For Xitami support
+    To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+
+
+
+
+------------------------------------------------------------------------------
+
+
+
+  --
+  Xitami Users Mailing List -- For Xitami support
+  To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050930/48ad814e/attachment.html
+From mw at 9000.org  Fri Sep 30 17:02:06 2005
+From: mw at 9000.org (Magnus Wedberg)
+Date: Fri Sep 30 17:03:03 2005
+Subject: [Xitami] Router Help with Xitami.
+In-Reply-To: <11689a700509300730j72b4ea51w359fb4bd61d1c308@mail.gmail.com>
+References: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+Message-ID: <433D6F8E.8539.166F815@mw.9000.org>
+
+> of a wireless-g linksys router (wrt54gs). i'm on an dynamic 8meg ppoe
+> connection, which has been constantly releasing, and refreshing with a
+> new ip, several times a day (or hour).
+
+Sounds like an ISP problem to me, but could also be a broken router. 
+Are you sure all PPPoE fields are correct in the router (service name 
+and the like)? Tried a different router for a day or so?
+
+> >  Can anyone inform me why, when the wireless option is turned on on
+> >  my router, I have problems staying connected from a remote connection?
+
+have you updated to the latest firmware? The consumer routers are 
+strange and buggy beasts, with all sorts of weird and stupid 
+behaviour. I have had problems with the 624 before.
+
+On the other hand, sometimes it helps to /downgrade/ to a previous 
+firmware... I found a german forum once dedicated to sharing and 
+discussing D-Link router firmware versions :-P
+
+I have given up on these units and will only buy slightly more 
+expensive routers from now on (I like the Netgear Prosafe series for 
+cost/capability). 
+ 
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+
+From rickhead at gmail.com  Fri Sep 30 17:07:50 2005
+From: rickhead at gmail.com (Rick Headly)
+Date: Fri Sep 30 17:07:52 2005
+Subject: [Xitami] Router Help with Xitami.
+In-Reply-To: <001001c5c5cb$f29cc340$7200a90a@org.cnib.ca>
+References: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+	<11689a700509300730j72b4ea51w359fb4bd61d1c308@mail.gmail.com>
+	<001001c5c5cb$f29cc340$7200a90a@org.cnib.ca>
+Message-ID: <11689a700509300807n2fb3ec96g810f1e9d1d1ad63c@mail.gmail.com>
+
+hey jim:
+ my ftp service is fully functional through tcp port 21 only.
+ you may want to test drive your own ftp service with the other port(s)
+closed... i'm convinced it will still work just fine. please correct me if
+i'm wrong :)
+ rick
+
+ On 9/30/05, Jim Noseworthy <jim.noseworthy@rogers.com> wrote:
+>
+> Hi Rick:
+>  Thanks for bringing the port thing to my attention. I ment to say ports
+> 20 and 21.
+>  Cheers.
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050930/a643e743/attachment.htm
+From gobonkers at hotmail.com  Fri Sep 30 17:42:07 2005
+From: gobonkers at hotmail.com (Go Bonkers)
+Date: Fri Sep 30 17:42:12 2005
+Subject: [Xitami] Re: Subdomain under Win XP Home localhost
+In-Reply-To: <20050930100003.8AC291C109BA@sxpublic.imatix.net>
+Message-ID: <BAY101-F4276DDDFA0EA8D957318C6AB8F0@phx.gbl>
+
+
+If you're using IE and proxy server configs might try checking the
+  "bypass proxy server for local addresses" under connections.
+
+Go Bonkers, I do not use an English version of XP. Can you please point
+me the way to the above?
+
+IE Connections Image is here...
+http://img252.imageshack.us/img252/5150/ieconnections8mz.gif
+
+
+From rickhead at gmail.com  Fri Sep 30 20:36:12 2005
+From: rickhead at gmail.com (Rick Headly)
+Date: Fri Sep 30 20:36:16 2005
+Subject: [Xitami] Router Help with Xitami.
+In-Reply-To: <433D6F8E.8539.166F815@mw.9000.org>
+References: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>
+	<11689a700509300730j72b4ea51w359fb4bd61d1c308@mail.gmail.com>
+	<433D6F8E.8539.166F815@mw.9000.org>
+Message-ID: <11689a700509301136k63c1b223hcfc72bacec5990d5@mail.gmail.com>
+
+On 9/30/05, Magnus Wedberg <mw@9000.org> wrote:
+
+> > of a wireless-g linksys router (wrt54gs). i'm on an dynamic 8meg ppoe
+> > connection, which has been constantly releasing, and refreshing with a
+> > new ip, several times a day (or hour).
+>
+> Sounds like an ISP problem to me, but could also be a broken router.
+> Are you sure all PPPoE fields are correct in the router (service name
+> and the like)? Tried a different router for a day or so?
+
+  the wireless router mentioned above, is actually a brand new replacement
+for an older (linksys befsr41 ver.2 "wired") router which was previously
+assumed to be the cause of this issue. the new unit however, did not correct
+the problem, and i'm now left holding 2 fully functional routers which both
+produce the exact same results. i'm hoping i'll still be able to use the
+older unit as a switch at some point, as i've already exceeded my time-frame
+allowance for returning the new one. the only really good thing that came
+out of the purchase, was an error made by the retailer... and as it turns
+out, the new router only cost me about $35 canadian (after rebates). that,
+in my opinion, was a very cheap price to pay for a brand-name wireless-g
+upgrade.
+ my decision to purchase a new router, came after replacing all my cables,
+switching rooms, running all the usual security scans, rolling back software
+versions, and 2 visits from an isp tech. replacing the router seemed to be
+the last logical step at that point.
+ the problem first began on the evening of july 26 while a scene from a new
+tom selleck movie was being shot on my front lawn. interference from the
+film crew's equipment, is what was first assumed by my isp to be the
+problem... but it continued right through the entire month of august, long
+after the crew had packed up and moved on.
+ the problem did however, seem to stop immediately on september 1, right
+after disabling the wireless function and updating all nic-card drivers
+across the entire lan (a coincidence perhaps)... but decided to return
+again, about 4 days ago. just like before, this problem is most likely to
+get out of hand in the evenings, weekends, and late at night when the
+offices at my isp are closed, and nobody's available to observe what's going
+on. my requests for a replacement (isp provided) modem have gone ignored as
+well, as they've already given a clean bill of health to the one i currently
+have, twice (comtrend 9186).
+ pppoe and "keep alive" settings on the router seem to all check out when
+the isp's help desk walks me through. they are the same settings i've been
+using for the past 4 years.
+ i do apologise once again for bringing this into the "xitami" forum, but
+from where i sit, i clearly see the relationship between the two... as my
+server is unable to perform well as a result.
+ thank you kindly for your comments magnus... should anything else on this
+topic cross your mind, i'd be very pleased to hear from you. as the old geek
+saying goes, "i'm about ready to chuck this thing out the window" :)
+ rick
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.imatix.org/pipermail/xitami/attachments/20050930/1364dfb6/attachment.html
+From rolinger1 at hotmail.com  Fri Sep 30 21:00:11 2005
+From: rolinger1 at hotmail.com (R O)
+Date: Fri Sep 30 21:00:19 2005
+Subject: [Xitami] Router Help with Xitami.
+In-Reply-To: <11689a700509301136k63c1b223hcfc72bacec5990d5@mail.gmail.com>
+Message-ID: <BAY105-F36A6513C3DACD341D991DAF88F0@phx.gbl>
+
+
+Rick, could you recap the problem again.  I deleted the emails concerning 
+this and am not able to recover them.  I am a network engineer so I should 
+be able to assist in some capacity.  Please describe your LAN setup, your 
+gateway equipement and configuration and your connection to your ISP.  Also 
+include any pertinent info concerning your wireless configurations, DHCP 
+scope definitions, etc.
+
+-R
+
+
+Russel P. Olinger
+(310) 466-3399
+rolinger1@hotmail.com
+
+
+
+
+
+>From: Rick Headly <rickhead@gmail.com>
+>Reply-To: Rick Headly <rickhead@gmail.com>,Xitami Users General Discussion 
+><xitami@lists.xitami.org>
+>To: Xitami Users General Discussion <xitami@lists.xitami.org>
+>Subject: Re: [Xitami] Router Help with Xitami.
+>Date: Fri, 30 Sep 2005 15:36:12 -0300
+>
+>On 9/30/05, Magnus Wedberg <mw@9000.org> wrote:
+>
+> > > of a wireless-g linksys router (wrt54gs). i'm on an dynamic 8meg ppoe
+> > > connection, which has been constantly releasing, and refreshing with a
+> > > new ip, several times a day (or hour).
+> >
+> > Sounds like an ISP problem to me, but could also be a broken router.
+> > Are you sure all PPPoE fields are correct in the router (service name
+> > and the like)? Tried a different router for a day or so?
+>
+>   the wireless router mentioned above, is actually a brand new replacement
+>for an older (linksys befsr41 ver.2 "wired") router which was previously
+>assumed to be the cause of this issue. the new unit however, did not 
+>correct
+>the problem, and i'm now left holding 2 fully functional routers which both
+>produce the exact same results. i'm hoping i'll still be able to use the
+>older unit as a switch at some point, as i've already exceeded my 
+>time-frame
+>allowance for returning the new one. the only really good thing that came
+>out of the purchase, was an error made by the retailer... and as it turns
+>out, the new router only cost me about $35 canadian (after rebates). that,
+>in my opinion, was a very cheap price to pay for a brand-name wireless-g
+>upgrade.
+>  my decision to purchase a new router, came after replacing all my cables,
+>switching rooms, running all the usual security scans, rolling back 
+>software
+>versions, and 2 visits from an isp tech. replacing the router seemed to be
+>the last logical step at that point.
+>  the problem first began on the evening of july 26 while a scene from a 
+>new
+>tom selleck movie was being shot on my front lawn. interference from the
+>film crew's equipment, is what was first assumed by my isp to be the
+>problem... but it continued right through the entire month of august, long
+>after the crew had packed up and moved on.
+>  the problem did however, seem to stop immediately on september 1, right
+>after disabling the wireless function and updating all nic-card drivers
+>across the entire lan (a coincidence perhaps)... but decided to return
+>again, about 4 days ago. just like before, this problem is most likely to
+>get out of hand in the evenings, weekends, and late at night when the
+>offices at my isp are closed, and nobody's available to observe what's 
+>going
+>on. my requests for a replacement (isp provided) modem have gone ignored as
+>well, as they've already given a clean bill of health to the one i 
+>currently
+>have, twice (comtrend 9186).
+>  pppoe and "keep alive" settings on the router seem to all check out when
+>the isp's help desk walks me through. they are the same settings i've been
+>using for the past 4 years.
+>  i do apologise once again for bringing this into the "xitami" forum, but
+>from where i sit, i clearly see the relationship between the two... as my
+>server is unable to perform well as a result.
+>  thank you kindly for your comments magnus... should anything else on this
+>topic cross your mind, i'd be very pleased to hear from you. as the old 
+>geek
+>saying goes, "i'm about ready to chuck this thing out the window" :)
+>  rick
+
+
+>
+>--
+>Xitami Users Mailing List -- For Xitami support
+>To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+From shinelight at shininglightpro.com  Fri Sep 30 21:04:35 2005
+From: shinelight at shininglightpro.com (Thomas J. Hruska)
+Date: Fri Sep 30 21:04:55 2005
+Subject: [Xitami] Router Help with Xitami.
+In-Reply-To: <11689a700509301136k63c1b223hcfc72bacec5990d5@mail.gmail.com>
+References: <000601c5c5c4$fb967290$7200a90a@org.cnib.ca>	<11689a700509300730j72b4ea51w359fb4bd61d1c308@mail.gmail.com>	<433D6F8E.8539.166F815@mw.9000.org>
+	<11689a700509301136k63c1b223hcfc72bacec5990d5@mail.gmail.com>
+Message-ID: <433D8C43.6060309@shininglightpro.com>
+
+Rick Headly wrote:
+> On 9/30/05, Magnus Wedberg <mw@9000.org> wrote:
+> 
+> 
+>>>of a wireless-g linksys router (wrt54gs). i'm on an dynamic 8meg ppoe
+>>>connection, which has been constantly releasing, and refreshing with a
+>>>new ip, several times a day (or hour).
+>>
+>>Sounds like an ISP problem to me, but could also be a broken router.
+>>Are you sure all PPPoE fields are correct in the router (service name
+>>and the like)? Tried a different router for a day or so?
+> 
+> 
+>   the wireless router mentioned above, is actually a brand new replacement
+> for an older (linksys befsr41 ver.2 "wired") router which was previously
+<snip>
+>  thank you kindly for your comments magnus... should anything else on this
+> topic cross your mind, i'd be very pleased to hear from you. as the old geek
+> saying goes, "i'm about ready to chuck this thing out the window" :)
+>  rick
+
+I had a LinkSys BEFSR41 for about two days before I got fed up.  LinkSys 
+_used_ to be good at making hardware - until Cisco bought them out.  Now 
+they make junk.  Cisco makes junk too unless you shell out major cash. 
+D-Link is what I recommend to people who ask me - the routers D-Link 
+makes are quite impressive for the pricetag and I've never had a problem 
+setting up their hardware (the software can be somewhat difficult 
+depending on the complexity of the setup and whether you are running 
+WinXP or not).  My most recent D-Link wireless router purchase was $20 
+(US) (after rebate).  They have gone on sale for the past couple years 
+the day after Thanksgiving (usually OfficeMax or Best Buy).  Also, 
+D-Link has one of the niftiest wireless cards I've ever seen - a USB 
+device that is only slightly wider and barely thicker than a USB thumbdrive:
+
+http://www.dlink.com/products/?sec=1&pid=358
+
+Please excuse me while I totally geek out.
+
+--
+Thomas Hruska
+Shining Light Productions
+
+Home of BMP2AVI, Nuclear Vision, and Win32 OpenSSL.
+http://www.slproweb.com/
+
+Ask me about discounts on any Shining Light Productions product!
+

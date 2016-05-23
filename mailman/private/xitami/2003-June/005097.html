@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] New to Xitami &amp; running xbase++ CGI's
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005101.html">
+   <LINK REL="Next"  HREF="005099.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] New to Xitami &amp; running xbase++ CGI's
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] New to Xitami &amp; running xbase++ CGI's">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 2 Jun 2003 11:13:52 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005101.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+        <LI> Next message: <A HREF="005099.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5097">[ date ]</a>
+              <a href="thread.html#5097">[ thread ]</a>
+              <a href="subject.html#5097">[ subject ]</a>
+              <a href="author.html#5097">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Xitami install doesn't create a CGI-BIN directory
+</I>
+Older builds shipped with a simple CGI executable (printed
+environment values) in that folder. In today's internet, exposing
+your environment to strangers is a Poor Idea, so it was taken out of
+recent builds. The packaging tool wasn't told to pack empty folders,
+so omitted it. An oversight, but easily fixed as you did. And
+perhaps forcing you to create your own CGI-BIN is the better idea,
+so you can't have CGI without thinking first.
+
+&gt;<i> I attempted to run my dll [ which is uspposed to call the exe ].
+</I>&gt;<i> MZLOAD1.dll and I receive a windows warning 'You area attempting
+</I>&gt;<i> to open a file of type &quot;Application Extension&quot; dll 'and suggests
+</I>&gt;<i> that running a file of this type may be harmful etc. Its as if its
+</I>&gt;<i> trying to download the dll instaed of running it the same way IIS
+</I>&gt;<i> used to.
+</I>
+IIS (and PWS) may be unique in using DLL files as directly
+executable programs. This supports MS's hidden agenda: sell MS
+compilers and other programming tools, and make it difficult to
+switch off of IIS to another server if you have done any custom
+programming.
+
+Can you open a CMD window (Start, Run, &quot;cmd&quot;, Enter) and run a .DLL
+file? I'm too scared to even try that, since I don't know what any
+of my DLL files do. If you can't run a DLL from a command prompt,
+then you may not be able to run it as CGI under Xitami. Maybe it
+would work if the DLL file were rebuilt as an EXE file.
+
+&gt;<i> my dll ...is uspposed to call the exe
+</I>
+Does the DLL actually do anything, or is it just there to trick IIS
+into running the EXE (something it may not do naturally)? If the DLL
+is just a starting-stub, try calling the EXE directly.
+
+I'm no fan of IIS, but it appears as an installable option on the
+XP-Pro that I have here. You can find XP-Pro in an OEM package for
+only $90 more than XP-home.
+
+PWS (Personal Web Server) is IIS-Lite, was a free download, and
+supports much of IIS's peculiar CGI interface including using DLLs
+as CGI executables. I don't know if it is available for XP (it may
+not matter: the same PWS ran on 9x and NT4 so it may be agnostic).
+Or it may be listed in your XP-Home &quot;Add Software&quot;?
+
+You may find that Apache has something someone has written to run
+IIS-style DLL CGI. Apache is good, and free, and the current version
+will run right out of the box without tedious INI-file hacking. You
+may need a little INI editing to run CGI or DLL-CGI, and Apache does
+not have the cool web-interface for that.
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005101.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+	<LI> Next message: <A HREF="005099.html">[Xitami] New to Xitami &amp; running xbase++ CGI's
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5097">[ date ]</a>
+              <a href="thread.html#5097">[ thread ]</a>
+              <a href="subject.html#5097">[ subject ]</a>
+              <a href="author.html#5097">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

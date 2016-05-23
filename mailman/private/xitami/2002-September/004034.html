@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004024.html">
+   <LINK REL="Next"  HREF="004035.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+   </H1>
+    <B>Peter van der Goes
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 25 Sep 2002 08:29:07 -0500</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004024.html">Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+        <LI> Next message: <A HREF="004035.html">Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4034">[ date ]</a>
+              <a href="thread.html#4034">[ thread ]</a>
+              <a href="subject.html#4034">[ subject ]</a>
+              <a href="author.html#4034">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Wow! A dim light is glowing at the end of the tunnel!
+I, too, don't know if attachments are &quot;allowed&quot; here, but I'm very glad you
+sent it.
+This should take us further down the road to seeing what is wrong in my
+situation.
+I tool your script, commented out all the mail stuff and tried this:
+
+&lt;animal.html&gt;
+&lt;html&gt;
+&lt;head&gt;
+ &lt;title&gt;Animal&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;<A HREF="http://localhost/cgi-bin/animal.pl"">http://localhost/cgi-bin/animal.pl&quot;</A> METHOD=POST&gt;
+Which animal? &lt;INPUT type=&quot;text&quot; name=&quot;animal&quot;&gt;
+&lt;P&gt;&lt;INPUT type=&quot;submit&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;animal.pl&gt;
+#!C:\Perl\bin\perl.exe -w
+#
+
+use strict;
+use CGI qw(:standard);
+use CGI::Carp qw(fatalsToBrowser);
+print &quot;&lt;HTML&gt;\n&quot;;
+print &quot;&lt;head&gt;&lt;title&gt;The Animal!&lt;/title&gt;&lt;/head&gt;\n&quot;;
+print &quot;&lt;BODY&gt;\n&quot;;
+my $animal = param('animal');
+
+print &quot;hello? &lt;br&gt;\n&quot;;
+print &quot;Thank you for identifying your favorite animal!&lt;p&gt;\n&quot;;
+print &quot;Your animal is: $animal\n&quot;;
+print &quot;&lt;BR&gt;&quot;;
+
+print &quot;&lt;/BODY&gt;\n&quot;;
+print &quot;&lt;/HTML&gt;\n&quot;;
+
+This works just fine! Hurrah!! I now have a workaround.
+Compare to this version of
+&lt;animal.pl&gt;
+#!C:\perl\bin\perl.exe -w
+
+use strict;
+use CGI qw(:standard);
+use CGI::Carp qw(fayalsToBrowser);
+my $animal:
+$animal = param('animal');
+
+print &quot;Content-type:text/html\n\n&quot;;
+print &quot;Show me the $animal&quot;;
+
+Which still returns the (by now) infamous blank page.
+So, it seems to me (newbie, remember!) that the part that does not work is:
+
+print &quot;Content-type:text/html\n\n&quot;;
+
+So, is my CGI not producing the needed HTML wrapper around print &quot;Show me
+the $animal&quot;; ?
+If the .pl script supplies the tags, all is well. Or, so it appears.
+
+Again, thanks very much, Paul, and all the rest of you who have helped me
+here. I really appreciate it!
+(But, I still want to find out *why* print &quot;Content-type:text/html\n\n&quot;;
+doesn't work for me 8)).
+
+
+
+
+----- Original Message -----
+From: &quot;Paul Reid&quot; &lt;<A HREF="mailto:preid@rci.rutgers.edu">preid@rci.rutgers.edu</A>&gt;
+To: &quot;Peter van der Goes&quot; &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Tuesday, September 24, 2002 10:52 AM
+Subject: Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+
+
+&gt;<i> No, it isn't the browser. I hate to exonerate IE, and it will
+</I>&gt;<i> sometimes throw bogus error messages, but it should work.
+</I>&gt;<i>
+</I>&gt;<i> PLEASE use the &quot;Carp Fatals To Browser&quot; code Patricko posted. IMHO,
+</I>&gt;<i> you can not debug these things without it.
+</I>&gt;<i>
+</I>&gt;<i> Are we allowing file attachments on this list? If so, attached is a
+</I>&gt;<i> Perl form-handler that works for me. It is called from a form that
+</I>&gt;<i> supplies the variables &quot;$ENV{FORM_....&quot; and sends an email via the
+</I>&gt;<i> local host, then prints something for the user to see (either
+</I>&gt;<i> &quot;Thanks&quot; or &quot;error&quot;).
+</I>&gt;<i>
+</I>&gt;<i> I have clobbered the script name and the shebang so nobody's email
+</I>&gt;<i> reader tries to Run it. No matter, because I've also clobbered the
+</I>&gt;<i> mail parameters so you guys won't annoy the person who gets the real
+</I>&gt;<i> script's emails.
+</I>&gt;<i>
+</I>&gt;<i> If you fix the shebang, it should at least return a polite error
+</I>&gt;<i> message. if called from a form with &quot;name&quot; &quot;gender' and &quot;Address1&quot;
+</I>&gt;<i> fields, it should display them before erroring on the mail-call. If
+</I>&gt;<i> even that does not work, un-comment the line with &quot;Hello?&quot; and see
+</I>&gt;<i> if it runs that far.
+</I>&gt;<i>
+</I>&gt;<i>  -PRR
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004024.html">Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+	<LI> Next message: <A HREF="004035.html">Re[2]: [Xitami] Re: ActivePerl &amp; Xitami - CGI problems Continued
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4034">[ date ]</a>
+              <a href="thread.html#4034">[ thread ]</a>
+              <a href="subject.html#4034">[ subject ]</a>
+              <a href="author.html#4034">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

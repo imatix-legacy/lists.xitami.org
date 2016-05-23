@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Secure keys
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003892.html">
+   <LINK REL="Next"  HREF="003893.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Secure keys
+   </H1>
+    <B>Thomas J. Hruska
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Secure keys">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 24 Aug 2002 13:18:42 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003892.html">[Xitami] Secure keys
+</A></li>
+        <LI> Next message: <A HREF="003893.html">[Xitami] V4MD : Error Handling Suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3896">[ date ]</a>
+              <a href="thread.html#3896">[ thread ]</a>
+              <a href="subject.html#3896">[ subject ]</a>
+              <a href="author.html#3896">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 10:50 AM 8/24/2002 -0400, Brad Smith writeth:
+&gt;<i>If I want to add multiple keys to the sslhttp.cfs file, how do I list them?  
+</I>&gt;<i>We now require two certificates and two keys, but I don't know what the 
+</I>&gt;<i>syntax is for changing the [SSL] section and whether I need to make 
+</I>&gt;<i>changes to [Virtual Hosts].
+</I>
+Unfortunately, due to the way SSL works, this is practically impossible.
+VHosts are only accessible after the server certificate is sent to the
+client.  For that reason, the only way to select certs. is based on IP
+address.  You will have to get another IP address into Xitami to make it
+work.  Another solution is to get a wildcard cert.  It is less secure, but
+will allow you to make multiple VHosts under a top-level domain work with
+just one cert.
+
+To see an example of a wildcard cert., Shining Light Productions
+(www.shininglightpro.com) issues 2cah.com a wildcard cert. every 395 days.
+2cah.com is the primary host for Shining Light Productions.  A wildcard of
+*.PrimaryDomain.com will allow you to use SubDomain.PrimaryDomain.com, but
+not Whatever.Subdomain.PrimaryDomain.com.  Read up on the specifications
+for SSL and HTTPS for more details on this.
+
+You are, unfortunately, hitting one of the major limitations of the SSL/TLS
+protocols and the difficulty you are having with configuring Xitami is not
+iMatix's fault, but rather the weak protocol definition for multiple server
+certificate selection AND the generic interface that OpenSSL/SSLeay provides.
+
+Your best bet on a single IP address is to provide wildcard cert. VHosting.
+
+Hope this helps!
+
+
+          Thomas J. Hruska -- <A HREF="mailto:shinelight@shininglightpro.com">shinelight@shininglightpro.com</A>
+Shining Light Productions -- &quot;Meeting the needs of fellow programmers&quot;
+                  <A HREF="http://www.shininglightpro.com/">http://www.shininglightpro.com/</A>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003892.html">[Xitami] Secure keys
+</A></li>
+	<LI> Next message: <A HREF="003893.html">[Xitami] V4MD : Error Handling Suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3896">[ date ]</a>
+              <a href="thread.html#3896">[ thread ]</a>
+              <a href="subject.html#3896">[ subject ]</a>
+              <a href="author.html#3896">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

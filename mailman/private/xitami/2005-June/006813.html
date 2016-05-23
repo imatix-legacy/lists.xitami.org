@@ -1,0 +1,274 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] &quot;No input file specified&quot; (ALIAS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006810.html">
+   <LINK REL="Next"  HREF="006806.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] &quot;No input file specified&quot; (ALIAS)
+   </H1>
+    <B>Charles Schmidling
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] &quot;No input file specified&quot; (ALIAS)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 13 Jun 2005 01:17:09 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006810.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+        <LI> Next message: <A HREF="006806.html">[Xitami] Secondary domains hosted with xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6813">[ date ]</a>
+              <a href="thread.html#6813">[ thread ]</a>
+              <a href="subject.html#6813">[ subject ]</a>
+              <a href="author.html#6813">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a multi-part message in MIME format.
+
+------=_NextPart_000_0011_01C56FB5.9F282860
+Content-Type: text/plain;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+Sorry about the confusion,
+
+
+Your settings:
+(Defaults.cfg)
+[Alias]
+phpmyadmin=3D&quot;C:\phpmyadmin&quot;
+
+Your previous reference (where c:\pippo was the alias):
+   ...when i navigate &quot;&quot;<A HREF="http://localhost/pippo/index.php"">http://localhost/pippo/index.php&quot;</A>
+=20
+Your statement, in your web page, should have been simply =
+&quot;pippo/index.php&quot;, a simple file reference that allows the original =
+alias to substitute for &quot;pippo&quot;.
+
+     As an example: &lt;a href=3D&quot;pippo/index.php&quot;&gt; refers to a local file =
+(in your system) without having to resolve an HTTP reference to =
+wherever.  I'm not certain whether an http reference will even use the =
+alias substituition so you'll be looking for index.php in the pippo =
+folder of your default directory.
+
+SO, your current alias example would be simply referenced as =
+&quot;phpmyadmin/index.php&quot;, without no HTTP.  This, I believe, is the common =
+shorthand reference for a local file.  The long way would be something =
+like <A HREF="file://phpmyadmin/index.php.">file://phpmyadmin/index.php.</A> =20
+
+BTW,
+&gt;<i> In my php.ini I configured so:
+</I>&gt;<i>cgi.force_redirect =3D 0
+</I>&gt;<i>cgi.fix_pathinfo =3D 1
+</I>&gt;<i>register_globals =3D On
+</I>
+These settings only deal with php and have nothing to do with the alias. =
+ It could interfere with the viewing of the index.php page, if the =
+brower sees it.  The cgi.force_redirect=3D0 setting was the only =
+required I had to make for my php application work.
+
+Hope that was a little clearer,
+Charles
+
+
+  ----- Original Message -----=20
+  From: Ghirlandaio=20
+  To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A> ; <A HREF="mailto:dscontroller@comcast.net">dscontroller@comcast.net</A>=20
+  Sent: Sunday, June 12, 2005 3:40 AM
+  Subject: Re: [Xitami] &quot;No input file specified&quot; (ALIAS)
+
+
+  Charles Schmidling wrote:
+
+Okay, here's a shot in the dark:
+
+I've been able to get alias to work.  My configuration:
+
+(Defaults.cfg)
+[Alias]
+photos=3D&quot;D:\Photos&quot;
+
+*D: is a mapped network drive, not the server.
+
+(reference)
+src=3D&quot;photos/skyline/album/index.html&quot;
+
+You've referenced the info.php file as a foreign file, not as a virtual
+local file.  I've seen where the reference for something
+&quot;file:/something.ext&quot; for local stuff but never can remember when to use
+what.  All I recall is that using the &quot;http&quot; sent me nowhere.
+
+Hope this will can helps your problem a bit.
+
+[snip]Dear Charles, I do not understand what's the solutions.I tried to =
+do exactly like you:but ....always &quot;no file input received&quot; !what is the =
+line below you =
+writed?(reference)src=3D&quot;photos/skyline/album/index.html&quot;And where I =
+have to out it? In my php.ini I configured so:cgi.force_redirect =3D =
+0cgi.fix_pathinfo =3D 1register_globals =3D Onand I also tried to change =
+these values alternatively, but... nothing!What  do you mean when you =
+say ?&quot;You've referenced the info.php file as a foreign file, not as a =
+virtual
+local file. &quot;Thanks if you will help me to solve this problem....
+  Ghirlandaio
+  -- Xitami Users Mailing List -- For Xitami support To unsubscribe: =
+<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> 
+------=_NextPart_000_0011_01C56FB5.9F282860
+Content-Type: text/html;
+	charset=&quot;iso-8859-1&quot;
+Content-Transfer-Encoding: quoted-printable
+
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;&lt;/TITLE&gt;
+&lt;META http-equiv=3DContent-Type =
+content=3Dtext/html;charset=3DISO-8859-1&gt;
+&lt;META content=3D&quot;MSHTML 5.50.4937.800&quot; name=3DGENERATOR&gt;
+&lt;STYLE&gt;&lt;/STYLE&gt;
+&lt;/HEAD&gt;
+&lt;BODY text=3D#000000 bgColor=3D#ffffff&gt;
+&lt;DIV&gt;Sorry about the confusion,&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Your settings:&lt;/DIV&gt;
+&lt;DIV&gt;(Defaults.cfg)&lt;BR&gt;[Alias]&lt;BR&gt;phpmyadmin=3D&quot;C:\phpmyadmin&quot;&lt;BR&gt;&lt;/DIV&gt;
+&lt;DIV&gt;Your previous reference (where c:\pippo was the alias):&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp; ...when i navigate &quot;&quot;&lt;A=20
+href=3D&quot;<A HREF="http://localhost/pippo/index.php"">http://localhost/pippo/index.php&quot;</A>&gt;<A HREF="http://localhost/pippo/index.ph=">http://localhost/pippo/index.ph=</A>
+p&lt;/A&gt;&quot;&lt;BR&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Your statement, in your web page, should have been simply=20
+&quot;pippo/index.php&quot;, a simple file reference that allows the original =
+alias to=20
+substitute for &quot;pippo&quot;.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; As an&amp;nbsp;example: &amp;lt;a=20
+href=3D&quot;pippo/index.php&quot;&amp;gt; refers to a local file (in your system) =
+without=20
+having to resolve an HTTP reference to wherever.&amp;nbsp; I'm not certain =
+whether=20
+an&amp;nbsp;http reference will even use the alias substituition so you'll =
+be=20
+looking for index.php in the pippo folder of your default =
+directory.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;SO, your current alias example&amp;nbsp;would be simply referenced as=20
+&quot;phpmyadmin/index.php&quot;, without&amp;nbsp;no HTTP.&amp;nbsp; This, I =
+believe,&amp;nbsp;is=20
+the&amp;nbsp;common shorthand reference for a local file.&amp;nbsp; =
+The&amp;nbsp;long way=20
+would be something like &lt;A=20
+href=3D&quot;<A HREF="file://phpmyadmin/index.php"">file://phpmyadmin/index.php&quot;</A>&gt;<A HREF="file://phpmyadmin/index.php.</A">file://phpmyadmin/index.php.&lt;/A</A>&gt;&amp;nbs=
+p; &lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;BTW,&lt;/DIV&gt;
+&lt;DIV&gt;&amp;gt;&amp;nbsp;In my php.ini I configured so:&lt;BR&gt;&amp;gt;cgi.force_redirect =
+=3D=20
+0&lt;BR&gt;&amp;gt;cgi.fix_pathinfo =3D 1&lt;BR&gt;&amp;gt;register_globals =3D On&lt;BR&gt;&lt;/DIV&gt;
+&lt;DIV&gt;These settings only deal with php and have nothing to do with the=20
+alias.&amp;nbsp; It could interfere with the viewing of the index.php page, =
+if the=20
+brower sees it.&amp;nbsp; The cgi.force_redirect=3D0 setting was the only =
+required I=20
+had to&amp;nbsp;make for my php application work.&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;Hope that was a little clearer,&lt;/DIV&gt;
+&lt;DIV&gt;Charles&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;DIV&gt;&amp;nbsp;&lt;/DIV&gt;
+&lt;BLOCKQUOTE=20
+style=3D&quot;PADDING-RIGHT: 0px; PADDING-LEFT: 5px; MARGIN-LEFT: 5px; =
+BORDER-LEFT: #000000 2px solid; MARGIN-RIGHT: 0px&quot;&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;----- Original Message ----- &lt;/DIV&gt;
+  &lt;DIV=20
+  style=3D&quot;BACKGROUND: #e4e4e4; FONT: 10pt arial; font-color: =
+black&quot;&gt;&lt;B&gt;From:&lt;/B&gt;=20
+  &lt;A title=<A HREF="mailto:3Dghirlandaio@cheapnet.it">3Dghirlandaio@cheapnet.it</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:ghirlandaio@cheapnet.it">ghirlandaio@cheapnet.it</A>&quot;&gt;Ghirlandaio&lt;/A&gt; &lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;To:&lt;/B&gt; &lt;A =
+title=<A HREF="mailto:3Dxitami@lists.xitami.org">3Dxitami@lists.xitami.org</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&quot;&gt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&lt;/A&gt; ; =
+&lt;A=20
+  title=<A HREF="mailto:3Ddscontroller@comcast.net">3Ddscontroller@comcast.net</A>=20
+  href=3D&quot;mailto:<A HREF="mailto:dscontroller@comcast.net">dscontroller@comcast.net</A>&quot;&gt;<A HREF="mailto:dscontroller@comcast.net">dscontroller@comcast.net</A>&lt;/A&gt; =
+&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Sent:&lt;/B&gt; Sunday, June 12, 2005 =
+3:40 AM&lt;/DIV&gt;
+  &lt;DIV style=3D&quot;FONT: 10pt arial&quot;&gt;&lt;B&gt;Subject:&lt;/B&gt; Re: [Xitami] &quot;No input =
+file=20
+  specified&quot; (ALIAS)&lt;/DIV&gt;
+  &lt;DIV&gt;&lt;BR&gt;&lt;/DIV&gt;Charles Schmidling wrote:&lt;BR&gt;
+  &lt;BLOCKQUOTE type=3D&quot;cite&quot; =
+cite=3D&quot;mid001d01c56de7$952aa4c0$<A HREF="mailto:6401a80a@comcast.net">6401a80a@comcast.net</A>&quot;&gt;&lt;PRE =
+wrap=3D&quot;&quot;&gt;Okay, here's a shot in the dark:
+
+I've been able to get alias to work.  My configuration:
+
+(Defaults.cfg)
+[Alias]
+photos=3D&quot;D:\Photos&quot;
+
+*D: is a mapped network drive, not the server.
+
+(reference)
+src=3D&quot;photos/skyline/album/index.html&quot;
+
+You've referenced the info.php file as a foreign file, not as a virtual
+local file.  I've seen where the reference for something
+&lt;A class=3Dmoz-txt-link-rfc2396E =
+href=3D&quot;file:/something.ext&quot;&gt;&quot;file:/something.ext&quot;&lt;/A&gt; for local stuff =
+but never can remember when to use
+what.  All I recall is that using the &quot;http&quot; sent me nowhere.
+
+Hope this will can helps your problem a bit.
+
+[snip]&lt;/PRE&gt;&lt;PRE wrap=3D&quot;&quot;&gt;Dear Charles, &lt;BR&gt;I do not understand what's =
+the solutions.&lt;BR&gt;I tried to do exactly like you:&lt;BR&gt;&lt;BR&gt;but ....always =
+&quot;no file input received&quot; !&lt;BR&gt;&lt;BR&gt;what is the line below you =
+writed?&lt;BR&gt;&lt;BR&gt;(reference)&lt;BR&gt;src=3D&quot;photos/skyline/album/index.html&quot;&lt;BR&gt;=
+&lt;BR&gt;And where I have to out it?&lt;BR&gt;&amp;nbsp;In my php.ini I configured =
+so:&lt;BR&gt;&lt;BR&gt;&lt;FONT color=3D#000000&gt;&lt;SPAN style=3D&quot;FONT-SIZE: 10pt; COLOR: =
+red; FONT-FAMILY: Tahoma&quot;&gt;&lt;/SPAN&gt;&lt;/FONT&gt;&lt;FONT color=3D#000000&gt;&lt;SPAN =
+style=3D&quot;FONT-SIZE: 12pt; COLOR: red; FONT-FAMILY: =
+Tahoma&quot;&gt;&lt;/SPAN&gt;&lt;/FONT&gt;cgi.force_redirect =3D 0&lt;BR&gt;cgi.fix_pathinfo =3D =
+1&lt;BR&gt;register_globals =3D On&lt;BR&gt;&lt;BR&gt;and I also tried to change these =
+values alternatively, but... nothing!&lt;BR&gt;&lt;BR&gt;What&amp;nbsp; do you mean when =
+you say ?&lt;BR&gt;&lt;/PRE&gt;&lt;/BLOCKQUOTE&gt;&lt;PRE wrap=3D&quot;&quot;&gt;&quot;You've referenced the =
+info.php file as a foreign file, not as a virtual
+local file. &quot;&lt;/PRE&gt;&lt;SPAN=20
+  style=3D&quot;FONT-SIZE: 12pt; COLOR: red; FONT-FAMILY: Tahoma&quot;&gt;Thanks if =
+you will=20
+  help me to solve this problem....&lt;BR&gt;Ghirlandaio&lt;BR&gt;&lt;/SPAN&gt;-- Xitami =
+Users=20
+  Mailing List -- For Xitami support To unsubscribe:=20
+  <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A> =
+&lt;/BLOCKQUOTE&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+
+------=_NextPart_000_0011_01C56FB5.9F282860--
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006810.html">[Xitami] &quot;No input file specified&quot; (ALIAS)
+</A></li>
+	<LI> Next message: <A HREF="006806.html">[Xitami] Secondary domains hosted with xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6813">[ date ]</a>
+              <a href="thread.html#6813">[ thread ]</a>
+              <a href="subject.html#6813">[ subject ]</a>
+              <a href="author.html#6813">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

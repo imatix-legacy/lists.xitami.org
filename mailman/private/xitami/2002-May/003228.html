@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] VHosts Password Problem, cont.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003235.html">
+   <LINK REL="Next"  HREF="003231.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] VHosts Password Problem, cont.
+   </H1>
+    <B>Steve Shervais
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] VHosts Password Problem, cont.">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 23 May 2002 20:20:46 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003235.html">[Xitami] local IP v. domain
+</A></li>
+        <LI> Next message: <A HREF="003231.html">[Xitami] VHosts Password Problem, cont.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3228">[ date ]</a>
+              <a href="thread.html#3228">[ thread ]</a>
+              <a href="subject.html#3228">[ subject ]</a>
+              <a href="author.html#3228">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I posted this last week and didn't get a response.  Hopefully folks havn't
+gone off for Memorial Day.
+
+I am using DNS virtual hosts for students in my senior projects class.
+What I want is for each team to have its own password for its own directory.
+Pre-VHosts, that was no problem, I just put the directory name and password
+into defaults.aut
+
+Now, I have a virtual hosts setup where:
+
+ProjectsTeam08.ewu.edu points to the \Webpages\Team08 directory, etc
+
+This works fine, once the Xitamites solved some Win 95 network configuration
+problems (thanks guys)
+
+Unfortunately, there appears to be no longer any password protection.
+My current setup looks like this:
+
+1. Each team has its own .cfg file that points to its own .aut file:
+[Server]
+    Cgi-bin = &quot;C:/Xitami/webpages/team08/cgi-bin&quot;
+    Hostname = &quot;projects.ewu.edu&quot;
+    Webpages = &quot;C:/Xitami/webpages/team08&quot;
+[Security]
+    Admin = &quot;0&quot;
+    Filename = &quot;team08.aut&quot;
+
+2. The team's .aut file holds the passwords
+#   Created by Virtual Host wizard
+[/Admin]
+    admin=-
+[/setup]
+    team08=&quot;Rj4Qx56M&quot;
+
+3. In defaults.cfg I reference the config files
+[Virtual-hosts]
+    ProjectsTeam08.ewu.edu = &quot;team08.cfg&quot;
+and the standard .aut file
+[Security]
+    Filename = &quot;defaults.aut&quot;
+which still holds the passwords from the pre VHosts days
+[/team08]
+    team08=&quot;Rj4Qx56M&quot;
+
+Presumably I am not referencing something properly somewhere or havn't set a
+flag right.  I thought it might be the [/setup] line in the team .aut file,
+but I have played around with that ( /team08, etc) with no luck.  I have
+gone through the help files and my archive of Xitami mailing list messages,
+with no luck. I rolled the system back to the old setup, but I'd really like
+individual logs to be available.  Any idea where else I can look?
+
+Regards
+Steve Shervais
+Regards,
+Steve Shervais
+
+Assistant Professor, MIS              You think because you understand one
+CBPA/AIS KG 316                       you must understand two,
+Eastern Washington University      because one and one makes two.
+Cheney, Washington 99004          But you must also understand and.
+
+ (509) 359-4280 (v)                            Wheatly, quoting Meadows,
+ (509) 359-4656 (f)                              quoting old Sufi saying.
+
+ <A HREF="mailto:sshervais@mail.ewu.edu">sshervais@mail.ewu.edu</A>
+ <A HREF="mailto:shervais@acm.org">shervais@acm.org</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003235.html">[Xitami] local IP v. domain
+</A></li>
+	<LI> Next message: <A HREF="003231.html">[Xitami] VHosts Password Problem, cont.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3228">[ date ]</a>
+              <a href="thread.html#3228">[ thread ]</a>
+              <a href="subject.html#3228">[ subject ]</a>
+              <a href="author.html#3228">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] cgi-bin
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004718.html">
+   <LINK REL="Next"  HREF="004723.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] cgi-bin
+   </H1>
+    <B>R O
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] cgi-bin">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 11 Feb 2003 11:24:20 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004718.html">[Xitami] Remote Access to Webspace
+</A></li>
+        <LI> Next message: <A HREF="004723.html">[Xitami] Flash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4719">[ date ]</a>
+              <a href="thread.html#4719">[ thread ]</a>
+              <a href="subject.html#4719">[ subject ]</a>
+              <a href="author.html#4719">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is not a Xitami question, this is an HTML/PERL/Flash question.  Wrong 
+forum.....But, b/c I am such a nice guy I will answer it.  If this doesn't 
+answer it completely for you then at least it will get you on the right path 
+and you can figure it out by example.
+
+The following is a clip of code out of a cgi script I wrote.  When called it 
+simply prints the following HTML to the browser.  The browser then calls the 
+Flash functions and loads the Flash image into a normal HTML page.  Though, 
+depending on the browser, you could have errors.  I recall it not always 
+working properly because of how the CGI calls the script - something about 
+where the cgi starts in relation to how the browser calls the Flash 
+functions.  Should get you on the right path though.
+
+&lt;start&gt;
+#!/usr/local/bin/perl
+...
+...
+CGI/HTML stuff
+...
+...
+print &quot;&lt;!-- URL's used in the movie--&gt;&quot; ;
+print &quot;&lt;!-- text used in the movie--&gt;&quot; ;
+print &quot;&lt;OBJECT classid=\&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\&quot;&quot; ;
+print &quot; 
+codebase=\&quot;<A HREF="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab\#version=5,0,0,0\"";">http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab\#version=5,0,0,0\&quot;&quot;;</A>
+print &quot;WIDTH=100% HEIGHT=100%&gt;&quot; ;
+print &quot;&lt;PARAM NAME=movie VALUE=\&quot;MainSiteA.swf\&quot;&gt; &lt;PARAM NAME=loop 
+VALUE=false&gt; &lt;PARAM NAME=quality VALUE=high&gt; &lt;PARAM NAME=bgcolor 
+VALUE=\#FFFFFF&gt; &lt;EMBED src=\&quot;MainSiteA.swf\&quot; loop=false quality=high 
+bgcolor=\#FFFFFF  WIDTH=100% HEIGHT=100% 
+TYPE=\&quot;application/x-shockwave-flash\&quot; 
+PLUGINSPAGE=\&quot;<A HREF="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash\"">http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash\&quot;</A>&gt;&lt;/EMBED&gt;&quot;;
+print &quot;&lt;/OBJECT&gt;&quot; ;
+...
+...
+more CGI/HTML stuff
+...
+&lt;end&gt;
+
+Russel P. Olinger
+(310) 466-3399
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+
+
+
+&gt;<i>From: &quot;Dan Balkaran&quot; &lt;<A HREF="mailto:dan@balkaran.com">dan@balkaran.com</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: [Xitami] cgi-bin
+</I>&gt;<i>Date: Sun, 9 Feb 2003 21:04:40 -0800
+</I>&gt;<i>
+</I>&gt;<i>Does any one know how to run a flash image in a html page located in the 
+</I>&gt;<i>cgi-bin. It works in thw webpage folder , but I have create a perl script 
+</I>&gt;<i>that require a flash image in the cgi-bin folder
+</I>&gt;<i>Thanks
+</I>
+
+_________________________________________________________________
+Help STOP SPAM with the new MSN 8 and get 2 months FREE*  
+<A HREF="http://join.msn.com/?page=features/junkmail">http://join.msn.com/?page=features/junkmail</A>
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004718.html">[Xitami] Remote Access to Webspace
+</A></li>
+	<LI> Next message: <A HREF="004723.html">[Xitami] Flash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4719">[ date ]</a>
+              <a href="thread.html#4719">[ thread ]</a>
+              <a href="subject.html#4719">[ subject ]</a>
+              <a href="author.html#4719">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how add a mail server to xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000471.html">
+   <LINK REL="Next"  HREF="000477.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how add a mail server to xitami
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how add a mail server to xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Tue, 24 Jul 2001 00:37:37 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000471.html">[Xitami] how add a mail server to xitami
+</A></li>
+        <LI> Next message: <A HREF="000477.html">[Xitami] how add a mail server to xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#473">[ date ]</a>
+              <a href="thread.html#473">[ thread ]</a>
+              <a href="subject.html#473">[ subject ]</a>
+              <a href="author.html#473">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Umm - if  you are creating more than 25 line mail messages I think you'll have a stalled program waiting for someone to press
+</I>enter 
+
+Duh - I hadn't thought of that. I just was not thinking of MORE's
+main feature (the 25-line pause) at all.
+
+But it seems Owen is right. I just ran 240+ lines through my BAT
+file in a single gulp, and all the output showed as soon as I
+switched back to my editor (which told me I should reload the
+changed file). 
+
+Theory: MORE asks the terminal driver how many lines between
+Press Any Key.... 25, 43, 50 lines, it can vary. When run in a
+pipe, the answer is &quot;There is no screen size&quot;, and apparently
+MORE is smart enough (or stupid enough) to pass huge streams
+without user intervention.
+
+ ....More testing... I just fed it 34480 lines, 1.1 megabytes.
+This takes a couple seconds, and then the output shows up in the
+sentmail.txt file. 30K lines+ and a megabyte+ of characters ought
+to be enough for most purposes. 
+
+I learned something new. Thanks. 
+
+Owen &gt; if you do TYPE WHATEVER | MORE
+
+I tried TYPE, but sendmail generally expects the body of the
+message as a pipe or redirect. I could not remember the syntax to
+make TYPE eat STDIN instead of a real file. (DOS ain't unix; and
+TYPE predates the semi-unixification of DOS 2.0.) 
+
+Wolfgang, if you are still here... sendmail also generally takes
+the TO address and some arcane options on the command line. My
+trick will not pass this information. I assume that, since you
+aren't really mailing it, you don't need this info while doing
+&quot;sandbox by myself&quot; testing. You will check your TO address and
+options in the script when you really do set it up for emailing.
+
+Also: the &quot;fake&quot; sendmail dumping to a local text file is faster
+than any mail server. True, a local unloaded mailserver can be
+faster than your fingers so that may not be important, but the
+fake sendmail is probably many microseconds faster. And keeping a
+good editor open on the output file is probably faster than
+working through a mail reader. Especially on a pay-per-minute
+connection.
+
+&gt;<i>OH! &gt; Oooh, Paul!
+</I>
+Sorry. I didn't mean to startle you. But I was so excited I
+slapped my forehead and said &quot;OH! That's what he needs!&quot;
+
+I was not sure what you were doing, and you were not sure what to
+ask, so we had all that talk about mailservers. When it became
+clear that you were &quot;testing in a sandbox&quot;, and wanted to work
+off-line, and real email wasn't needed, I said &quot;OH! There has to
+be some super-simple way to do that!&quot; 
+
+You didn't need a mail server, you needed something to pretend to
+take mail (in sendmail format) and put it where you could see it.
+As long as the script can believe it is feeding to sendmail, it
+does not matter what really happens inside &quot;sendmail&quot;. DOS isn't
+unix so it isn't THAT easy, but certainly a BAT file with MORE is
+easier than building a post office. 
+
+If you ever do install a &quot;real&quot; sendmail, hide or rename your
+&quot;fake&quot; sendmail so there is no confusion. 
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000471.html">[Xitami] how add a mail server to xitami
+</A></li>
+	<LI> Next message: <A HREF="000477.html">[Xitami] how add a mail server to xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#473">[ date ]</a>
+              <a href="thread.html#473">[ thread ]</a>
+              <a href="subject.html#473">[ subject ]</a>
+              <a href="author.html#473">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

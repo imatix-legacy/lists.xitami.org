@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Load/Stress Testing Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Load/Stress%20Testing%20Xitami&In-Reply-To=BAY105-F20096741004175D597BD8DF8E80%40phx.gbl">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007585.html">
+   <LINK REL="Next"  HREF="007588.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Load/Stress Testing Xitami</H1>
+    <B>Thomas J. Hruska</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20Load/Stress%20Testing%20Xitami&In-Reply-To=BAY105-F20096741004175D597BD8DF8E80%40phx.gbl"
+       TITLE="[Xitami] Load/Stress Testing Xitami">shinelight at shininglightpro.com
+       </A><BR>
+    <I>Wed Aug  1 06:44:17 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007585.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+        <LI>Next message: <A HREF="007588.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7586">[ date ]</a>
+              <a href="thread.html#7586">[ thread ]</a>
+              <a href="subject.html#7586">[ subject ]</a>
+              <a href="author.html#7586">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>R O wrote:
+&gt;<i> Has anyone done any real world simulation or testing of Xitami?  I am trying 
+</I>&gt;<i> to find a good load/stress testing tool (hopefully for free) that will allow 
+</I>&gt;<i> me to bang the hell out of my server.  Anyone have any recommendations?
+</I>&gt;<i> 
+</I>&gt;<i> I would love to see users results to their stress testing by answering the 
+</I>&gt;<i> following questions:
+</I>&gt;<i> 1) Hardware processor and memory:
+</I>&gt;<i> 2) OS Level:
+</I>&gt;<i> 3) How many users were simulated:
+</I>&gt;<i> 4) What was the duration of the test:
+</I>&gt;<i> 5) How many HTTP requests sent:
+</I>&gt;<i> 6) HTTP requests, Pass/Fail/No Response:
+</I>&gt;<i> 7) Server memory/processor utlizations during test:
+</I>&gt;<i> 8) Peak Bandwidth usage during test:
+</I>&gt;<i> 9) Summary and Comments about Results:
+</I>&gt;<i> 
+</I>&gt;<i> My first test results, though I don't know if my client was screwing up or 
+</I>&gt;<i> the server or a combination of both:
+</I>&gt;<i> 
+</I>&gt;<i> 1) Hardware processor and memory: 3.2Ghz Pentium 4, 2Gig
+</I>&gt;<i> 2) OS Level: Win Server 2003 - Enterprise
+</I>&gt;<i> 3) How many users were simulated: 2000
+</I>&gt;<i> 4) What was the duration of the test: 10 minutes
+</I>&gt;<i> 5) How many HTTP requests sent: 200,000
+</I>&gt;<i> 6) HTTP requests, Pass/Fail/No Response: 14,985/180,320/4722
+</I>&gt;<i> 7) Server memory/processor utlizations during test: 100% the entire time
+</I>&gt;<i> 8) Peak Bandwidth usage during test: 3% (total 47Mb transferred)
+</I>&gt;<i> 9) Summary and Comments about Results:  The server was slammed, without a 
+</I>&gt;<i> doubt.  But it took 15,000 active sessions over 10 minutes.  So about 1500 
+</I>&gt;<i> sessions per minute, 25 per second.  I don't think the &quot;single&quot; client I ran 
+</I>&gt;<i> it from could produce that kind of load so the 180,000 failures could simply 
+</I>&gt;<i> have been a big combination client failing AND server failing....not certain 
+</I>&gt;<i> though.  I would imagine that the server would be able to handle a heck of 
+</I>&gt;<i> alot more than 25 connections per second.  I am going to try to simulate a 
+</I>&gt;<i> test from 5 clients spreading the load of 100,000 connections for a 10 
+</I>&gt;<i> minute test to see if I can get better results.
+</I>&gt;<i> 
+</I>&gt;<i> My server is running Xitami and MySql and EVERY HTTP request requires a 
+</I>&gt;<i> MySql call to retreive data.  I would love to know how some users tested if 
+</I>&gt;<i> Xitami and there DB were on two seperate servers.
+</I>&gt;<i> 
+</I>&gt;<i> Hopefully this will generate some discussion, so feel free to add more info 
+</I>&gt;<i> in beyond what I was looking for.
+</I>&gt;<i> 
+</I>&gt;<i> Russel P. Olinger
+</I>&gt;<i> (310) 466-3399
+</I>&gt;<i> <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>
+</I>
+Russel,
+
+You didn't mention if you are using PHP or some other scripting 
+language, but I'm not aware of any method to query a MySQL database 
+without one.  Scripting languages under Xitami typically require CGI.
+
+When CGI runs like that, the CPU gets hammered because you've got new 
+processes being created left and right.  The system is spending most of 
+its time starting up and shutting down processes.
+
+I ran a similar test spread across 15 machines on a LAN once with Xitami 
+via CGI and got similar results (I wrote my own tool).  Xitami simply 
+couldn't handle the load.  Most of the time it just returned blank 
+pages.  I don't know what tool you are using but socket code fails if 
+you mass connect to a server in rapid succession (Windows hangs onto 
+socket handles until TCP closes down cleanly or times out)...for my 
+test, I wrote a tool to manage the process and just retried the 
+connection on failure (i.e. it is almost always the client that fails to 
+connect because all sockets are in use).  Keep in mind that this test 
+was many years ago, so I've forgotten a lot of the details but from what 
+you've described, you're running into many of the same issues I ran into.
+
+I do seem to recall the web document root getting flooded with bogus 
+files from stdin/stdout.  Search the Xitami archives and there should be 
+a warning from me about a DDoS issue with CGI support in Xitami.  I 
+remember looking at the source code to CGI support to see how it would 
+need to be fixed and something about incorrect filename selection was 
+the cause of bogus files and the blank pages (i.e. too many requests in 
+too short of a time resulted in lousy/incorrect filename selection). 
+Also because the files are in the web root, it is conceivable that 
+security is drastically reduced (i.e. someone could remotely gain access 
+to passwords/credit card info/etc).
+
+In theory, if you are using PHP, you should be able to drastically 
+improve performance and security by using Xitami LRWP, multiple 
+instances of the ISAPI LRWP daemon (isapid - probably still a 'beta'), 
+and the ISAPI PHP module.  Then, in your PHP code, use persistent 
+connections to the MySQL database (i.e. mysql_pconnect()).  LRWP, IMO, 
+is a weak protocol - it can only handle one request at a time.  For the 
+load you describe, 10-12 instances of the ISAPI LRWP daemon will 
+probably be sufficient.  The server will still be hammered but should be 
+able to handle the load.
+
+-- 
+Thomas Hruska
+Shining Light Productions
+
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007585.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+	<LI>Next message: <A HREF="007588.html">[Xitami] Load/Stress Testing Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7586">[ date ]</a>
+              <a href="thread.html#7586">[ thread ]</a>
+              <a href="subject.html#7586">[ subject ]</a>
+              <a href="author.html#7586">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Serving two domain names:
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005110.html">
+   <LINK REL="Next"  HREF="005112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Serving two domain names:
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Serving two domain names:">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 4 Jun 2003 11:54:34 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005110.html">[Xitami] Serving two domain names:
+</A></li>
+        <LI> Next message: <A HREF="005112.html">[Xitami] Serving two domain names:
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5111">[ date ]</a>
+              <a href="thread.html#5111">[ thread ]</a>
+              <a href="subject.html#5111">[ subject ]</a>
+              <a href="author.html#5111">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I have Drewhoo's home page at: sorcep.com/drewhoo/Drewhoo.html and
+</I>&gt;<i> you CAN'T point drewhoo.com to that address from Domaincow's DNS
+</I>&gt;<i> management!
+</I>
+Of course not. DNS is for machine-names, not sub-folders.
+
+In DNS:
+ sorcep.com -&gt; sorcep.com
+ drewhoo.com -&gt; sorcep.com
+
+DNS gets them to your machine. Then you tell XITAMI:
+
+&quot;If they ask for sorcep.com, give them (webpages)/&quot;
+&quot;If they ask for drewhoo.com, give them (webpages)/drewhoo&quot;
+&quot;If they don't say what they want, give them (webpages)/&quot;
+
+(That last case will happen with version 1 browsers, or if someone
+types an IP number instead of a host-name. You can set IP numbered
+V-hosts but it is rarely worth the trouble.)
+
+Go into XITAMI's main Administration page, click &quot;Virtual hosts&quot;.
+Click &quot;New&quot;.
+
+Create virtual host profile:  [ drewhoo ]
+Select IP address: [ (all) ]
+Or, enter DNS host name:  [ drewhoo.com ]
+Web page root directory:  drewhoo
+Create directories if necessary?  [ ] (not checked)
+Click &quot;Create&quot;
+
+Since you already have the pages, I told you to NOT &quot;Create
+directories&quot; so if you get the syntax wrong, Xitami will complain
+and let you guess again.
+
+The way you are set up now, (webpages)/drewhoo/ will pull up a
+directory listing, unless you have an index.html in there. You
+probably want to rename Drewhoo.html to index.html, so it will pop
+up when drewhoo.com/ opens (webpages)/drewhoo/
+
+
+ -PRR
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005110.html">[Xitami] Serving two domain names:
+</A></li>
+	<LI> Next message: <A HREF="005112.html">[Xitami] Serving two domain names:
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5111">[ date ]</a>
+              <a href="thread.html#5111">[ thread ]</a>
+              <a href="subject.html#5111">[ subject ]</a>
+              <a href="author.html#5111">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

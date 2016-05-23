@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Tseting CGI on localhost
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006020.html">
+   <LINK REL="Next"  HREF="006022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Tseting CGI on localhost
+   </H1>
+    <B>John Deitz
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Tseting CGI on localhost">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 7 Jul 2004 14:07:29 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006020.html">[Xitami] Tseting CGI on localhost
+</A></li>
+        <LI> Next message: <A HREF="006022.html">[Xitami] port 80
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6021">[ date ]</a>
+              <a href="thread.html#6021">[ thread ]</a>
+              <a href="subject.html#6021">[ subject ]</a>
+              <a href="author.html#6021">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for those thoughts.  The Komodo debugger is supposed to be invokable
+(even from a remote site) through a listening ports 9000/9011.  Guess I need
+to drill down on how that really works;  I thot it would work from any web
+server - even a local one.
+Thanks again for taking the time to help!  
+
+-----Original Message-----
+From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> [mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]
+On Behalf Of R O
+Sent: Wednesday, July 07, 2004 1:02 PM
+To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+Subject: RE: [Xitami] Tseting CGI on localhost
+
+
+i am not aware of http servers allowing for native script debugging.  I
+believe there is an option in the configuration section for CGI that allows
+for CGI debugging.  But I have never used that option so I don't know what
+it will return.  but a -d in the script will hang the script at that
+instance of &quot;-d&quot; thus not completing the script.  the -d will allow the
+script, and executed at the CLI, will allow the user to step through the
+script on line at a time.  I don't believe http can interpret that process.
+
+-R
+
+Russel P. Olinger
+<A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+
+
+
+
+&gt;<i>From: &lt;<A HREF="mailto:jgdeitz@cox.net">jgdeitz@cox.net</A>&gt;
+</I>&gt;<i>Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>Subject: RE: [Xitami] Tseting CGI on localhost
+</I>&gt;<i>Date: Wed, 7 Jul 2004 12:17:38 -0700
+</I>&gt;<i>
+</I>&gt;<i>I've made some progress.  Looked through the server logs, and 
+</I>&gt;<i>discovered an error relating to Xitami trying to resolve the script 
+</I>&gt;<i>name.  The problem was that the default install puts Xitami in a 
+</I>&gt;<i>directory name containing spaces; the internal routine that resolves 
+</I>&gt;<i>the physical script name stopped at the first space it found (in the 
+</I>&gt;<i>middle of the web server directory name).  I renamed the webserver 
+</I>&gt;<i>directory name to remove spaces, and now I'm HTTPing to my script.
+</I>&gt;<i>However, debugging is now a problem.  If I have the -d directive in the 
+</I>&gt;<i>script, Xitami hangs and fails with HTTP error 503.  Not sure how to 
+</I>&gt;<i>resolve that, but at least I'm executing locally now.
+</I>&gt;<i>BTW - I'm using v2.5c1, if that helps.
+</I>&gt;<i>
+</I>&gt;<i>-----Original Message-----
+</I>&gt;<i>From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A> 
+</I>&gt;<i>[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]
+</I>&gt;<i>On Behalf Of R O
+</I>&gt;<i>Sent: Wednesday, July 07, 2004 10:36 AM
+</I>&gt;<i>To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i>Subject: RE: [Xitami] Tseting CGI on localhost
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>actually, it is the Xitami.cfg that is supposed to be hardwired and 
+</I>&gt;<i>your not supposed to edit that.  In Xitami.cfg is a line pointing to 
+</I>&gt;<i>your true config
+</I>&gt;<i>- default.cfg (or whatever name you want to change it to.).  The 
+</I>&gt;<i>default.cfg should have all your baseline configs which should override 
+</I>&gt;<i>the xitami.cfg configs.  If you edit the xitami.cfg and mess things up 
+</I>&gt;<i>then you could potentially have to reinstall everything.  I have 
+</I>&gt;<i>actually corrupted mine before b/c I kept toying with it - took me a 
+</I>&gt;<i>week to figure out it was corrupted (it was the last thing I thought of 
+</I>&gt;<i>why things weren't working).
+</I>&gt;<i>
+</I>&gt;<i>What version of xitami are you using - I recall hearing some early XP 
+</I>&gt;<i>versions of xitami that had CGI (and/or PHP) problems.  Maybe someone 
+</I>&gt;<i>else can comment on this.
+</I>&gt;<i>
+</I>&gt;<i>The cg-bin path offers two options - 1) /cgi-bin is the root path (or a 
+</I>&gt;<i>variation of it), as in <A HREF="http://blah.com/cgi-bin/test.pl">http://blah.com/cgi-bin/test.pl</A> and 2) /cgi-bin 
+</I>&gt;<i>can be anywhere in the URL as in, 
+</I>&gt;<i><A HREF="http://blah.com/site/cgi-bin/myscripts/test.pl">http://blah.com/site/cgi-bin/myscripts/test.pl</A>
+</I>&gt;<i>- but the path, obviously, must exist.  Remember that webservers need 
+</I>&gt;<i>to know where the CGI scripts reside - unlike PHP where they can be 
+</I>&gt;<i>executed from anywhere.
+</I>&gt;<i>
+</I>&gt;<i>The two MAIN cgi configure lines are:
+</I>&gt;<i>Main CGI directory:  	cgi-bin
+</I>&gt;<i>      * (or where ever you store them)
+</I>&gt;<i>      * all your scripts must be in that directory or a sub-dir of that 
+</I>&gt;<i>main directory
+</I>&gt;<i>      * it is also wise to have that directory sit at the same level as 
+</I>&gt;<i>your &quot;webpages&quot; root dir CGI URLs start with:  /cgi-bin
+</I>&gt;<i>      * As I do, this makes the full URL path to the cgi directory 
+</I>&gt;<i>start with /cgi-bin
+</I>&gt;<i>            * correct: <A HREF="http://blah.com/cgi-bin/test.pl">http://blah.com/cgi-bin/test.pl</A>
+</I>&gt;<i>             * incorrect: <A HREF="http://blah.com/scripts/cgi-bin/test.pl">http://blah.com/scripts/cgi-bin/test.pl</A>
+</I>&gt;<i>      * you can anchor it another spot, but why?  :-)
+</I>&gt;<i>
+</I>&gt;<i>There is a sub-CGI configuration too, but don't confuse that with the 
+</I>&gt;<i>root configuration
+</I>&gt;<i>Working directory:  	'-'
+</I>&gt;<i>      * '-' means use program directory, refer to main config Match 
+</I>&gt;<i>/cgi-bin anywhere in URL?
+</I>&gt;<i>       * if selected this allows you to put cgi-bin anywhere in the URL 
+</I>&gt;<i>path, but can be confusing at first
+</I>&gt;<i>        * if not selected (recommended) this anchors all URLs to 
+</I>&gt;<i><A HREF="http://blah.com/cgi-bin/test.pl">http://blah.com/cgi-bin/test.pl</A>
+</I>&gt;<i>
+</I>&gt;<i>g-luck.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Russel P. Olinger
+</I>&gt;<i><A HREF="mailto:rolinger1@hotmail.com">rolinger1@hotmail.com</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;From: &lt;<A HREF="mailto:jgdeitz@cox.net">jgdeitz@cox.net</A>&gt;
+</I>&gt;<i> &gt;Reply-To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt;Subject: RE: [Xitami] Tseting CGI on localhost
+</I>&gt;<i> &gt;Date: Wed, 7 Jul 2004 08:39:58 -0700
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;I've continued to work on this, and now have the Komodo debugger 
+</I>&gt;<i> &gt;getting invoked, but the execution location is in an IE temp internet 
+</I>&gt;<i> &gt;files directory, and still not getting the HTTP vars passed through.
+</I>&gt;<i> &gt;Here's answers to you questions:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;1) This seems to be covered.  My HOSTS file (under Windows) shows
+</I>&gt;<i> &gt;127.0.0.1 associated with localhost. Entering <A HREF="http://127.0.0.1/">http://127.0.0.1/</A> in 
+</I>&gt;<i> &gt;the browser address line calls up the index.html file in the web 
+</I>&gt;<i> &gt;server root directory, and entering <A HREF="http://localhost/">http://localhost/</A> there does the
+</I>same.
+&gt;<i> &gt;2) I use the GUI Xitami configuration utility.  Under the [CGI] 
+</I>&gt;<i> &gt;section I have the WORKDIR variable set to &quot;-&quot; which is supposed to 
+</I>&gt;<i> &gt;cause the script to run from the directory where the script resides. 
+</I>&gt;<i> &gt;Sounds like the DEFAULT.CFG approach is hard wired, but I'm willing 
+</I>&gt;<i> &gt;to try it if you can point me to some doc on it.
+</I>&gt;<i> &gt;3) PL files are properly alliased, as I have no problem running 
+</I>&gt;<i> &gt;ActiveState's Komodo debugger in stand-alone mode. My PATH statement 
+</I>&gt;<i> &gt;in the environment is also set up properly.  It starts out with 
+</I>&gt;<i> &gt;C\PERL\BIN, which is what Xitami is supposed to discover and handle.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Bottom line: it seems that Ximeta is recognizing the script as just a 
+</I>&gt;<i> &gt;file (that it invoked the associated fil service on), and not a CGI
+</I>&gt;<i>script.
+</I>&gt;<i> &gt;That
+</I>&gt;<i> &gt;would explain the script running, but un the wrong location and 
+</I>&gt;<i> &gt;WITHOUT any of the HTTP environment passed in.  Do you think setting 
+</I>&gt;<i> &gt;up DEFAULT.CFG will solve that?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Thanks!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;-----Original Message-----
+</I>&gt;<i> &gt;From: <A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>
+</I>&gt;<i> &gt;[mailto:<A HREF="mailto:xitami-admin@lists.xitami.org">xitami-admin@lists.xitami.org</A>]
+</I>&gt;<i> &gt;On Behalf Of RPO
+</I>&gt;<i> &gt;Sent: Wednesday, July 07, 2004 7:13 AM
+</I>&gt;<i> &gt;To: <A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>
+</I>&gt;<i> &gt;Subject: Re: [Xitami] Tseting CGI on localhost
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;sounds like you have 3 issues: xitami config issue, WinXP issue and 
+</I>&gt;<i> &gt;Perl script issue:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;1.  is localhost aliased properly?  is 127.0.0.1 selected as an IP 
+</I>&gt;<i> &gt;address that xitami will run on?
+</I>&gt;<i> &gt;2.  did you set up you cgi-bin root directory properly in defaults.cfg?
+</I>&gt;<i> &gt;what is the root path for you cgi-bin files?
+</I>&gt;<i> &gt;3.  did you alias .pl files, in WinXP, to your /perl/bin/perl program 
+</I>&gt;<i> &gt;- or where ever you installed perl to?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;----- Original Message -----
+</I>&gt;<i> &gt;From: &lt;<A HREF="mailto:jgdeitz@cox.net">jgdeitz@cox.net</A>&gt;
+</I>&gt;<i> &gt;To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i> &gt;Sent: Tuesday, July 06, 2004 4:36 PM
+</I>&gt;<i> &gt;Subject: [Xitami] Tseting CGI on localhost
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; I'm trying to test a Perl CGI program (form processor, POST) on
+</I>&gt;<i> &gt;localhost
+</I>&gt;<i> &gt; &gt; (WinXP).  I'm experiencing a series of problems:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 1)  When I invoke the pgm.pl from a form with 
+</I>&gt;<i> &gt; &gt; action=&quot;<A HREF="http://localhost/cgi/alwmsg.pl"">http://localhost/cgi/alwmsg.pl&quot;</A> it fails with a &quot;Page not
+</I>&gt;<i>found&quot;
+</I>&gt;<i> &gt; &gt; error; however, if I type the same URL into a browser the program 
+</I>&gt;<i> &gt; &gt; runs,
+</I>&gt;<i> &gt;but
+</I>&gt;<i> &gt; &gt; (see problem 2)
+</I>&gt;<i> &gt; &gt; 2)  When the program executes, it seems to be simply executing 
+</I>&gt;<i> &gt; &gt; under Windows. Running the manual debugger, I see that none of the 
+</I>&gt;<i> &gt; &gt; HTTP
+</I>&gt;<i> &gt;variables
+</I>&gt;<i> &gt; &gt; are in ENV, and none of the form fields are passed in.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I've set up a CGI Alias called &quot;localalw&quot; and associated the exact
+</I>&gt;<i> &gt;directory
+</I>&gt;<i> &gt; &gt; where the Perl script is.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I've also set two environmental variables to try to invoke the
+</I>&gt;<i> &gt;ActiveState
+</I>&gt;<i> &gt; &gt; Komodo debugger instead of the default one:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; PERL5LIB
+</I>&gt;<i> &gt; &gt; c:\Program Files\ActiveState Komodo 2.5 PERLDB_OPTS
+</I>&gt;<i> &gt; &gt; RemotePort=localhost:9011 PrintRet=0
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; But this does not work; default (command line) debugger still gets
+</I>&gt;<i> &gt;invoked.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; My Goal: When I invoke the Perl program from a HTML page form, I 
+</I>&gt;<i> &gt; &gt; would
+</I>&gt;<i> &gt;like
+</I>&gt;<i> &gt; &gt; the debugger (Komodo) to be invoked for the program, normal 
+</I>&gt;<i> &gt; &gt; HTTP/CGI environment variables to be set up for the program, and 
+</I>&gt;<i> &gt; &gt; the output from
+</I>&gt;<i> &gt;the
+</I>&gt;<i> &gt; &gt; program (an HTML page) returned in the browser.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Any idea why HTTP isn't handling my Perl script?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Thanks for any help.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; --
+</I>&gt;<i> &gt; &gt; Xitami Users Mailing List -- For Xitami support To unsubscribe:
+</I>&gt;<i> &gt; &gt; <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;--
+</I>&gt;<i> &gt;Xitami Users Mailing List -- For Xitami support To unsubscribe:
+</I>&gt;<i> &gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;--
+</I>&gt;<i> &gt;Xitami Users Mailing List -- For Xitami support To unsubscribe:
+</I>&gt;<i> &gt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>_________________________________________________________________
+</I>&gt;<i>Check out the latest news, polls and tools in the MSN 2004 Election Guide!
+</I>&gt;<i><A HREF="http://special.msn.com/msn/election2004.armx">http://special.msn.com/msn/election2004.armx</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support To unsubscribe:
+</I>&gt;<i><A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support To unsubscribe: 
+</I>&gt;<i><A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+_________________________________________________________________
+MSN Toolbar provides one-click access to Hotmail from any Web page - FREE
+download! <A HREF="http://toolbar.msn.click-url.com/go/onm00200413ave/direct/01/">http://toolbar.msn.click-url.com/go/onm00200413ave/direct/01/</A>
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006020.html">[Xitami] Tseting CGI on localhost
+</A></li>
+	<LI> Next message: <A HREF="006022.html">[Xitami] port 80
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6021">[ date ]</a>
+              <a href="thread.html#6021">[ thread ]</a>
+              <a href="subject.html#6021">[ subject ]</a>
+              <a href="author.html#6021">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

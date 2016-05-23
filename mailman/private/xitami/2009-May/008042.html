@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] HELP - strange error making website inoperable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20HELP%20-%20strange%20error%20making%20website%20inoperable&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="008041.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] HELP - strange error making website inoperable</H1>
+    <B>rolinger</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20HELP%20-%20strange%20error%20making%20website%20inoperable&In-Reply-To="
+       TITLE="[Xitami] HELP - strange error making website inoperable">rolinger1 at hotmail.com
+       </A><BR>
+    <I>Thu May 21 01:25:27 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="008041.html">[Xitami] HELP - strange error making website inoperable
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8042">[ date ]</a>
+              <a href="thread.html#8042">[ thread ]</a>
+              <a href="subject.html#8042">[ subject ]</a>
+              <a href="author.html#8042">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I literally just found the source of the error.  And I find it highly 
+coincidental that the error occurred at the same of the windows updates.
+
+The error is related to the Perl www::yahoo::keywordextractor module:
+
+      use WWW::Yahoo::KeywordExtractor ;
+      my $ykey = WWW::Yahoo::KeywordExtractor-&gt;new();
+      my $keywords = $ykey-&gt;extract(@keywords) ;
+
+It specicially is dying at the 3rd line, I comment out that line and 
+everything works again - granted, without the keywords.  So either the 
+module broke as a result of the windows updates or the yahoo keyword 
+application over the net suddenly died and broke around the same time.
+
+Trying to learn more about it now.  But the damn message is so cryptic, 
+combined that its only happening in certain areas of my webpages, took me 
+hours to find.
+
+=========
+&quot;Socialism is the philosophy of failure, the creed of ignorance,
+and the gospel of envy, its inherent virtue is the equal sharing of misery.&quot;
+     - Sir Winston Churchill -
+=========
+----- Original Message ----- 
+From: &quot;Pieter Hintjens&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">ph at imatix.com</A>&gt;
+To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+Sent: Wednesday, May 20, 2009 3:43 PM
+Subject: Re: [Xitami] HELP - strange error making website inoperable
+
+
+So first off, the error message is not from anything in Windows, it is
+in as Stuart suggests, in the CGI code somewhere.  Search, and you'll
+find it.
+
+Second, it may well be due to something changing after Windows Update,
+but it is impossible to know what from here.  You need to find the
+program issuing the error message, and read the code and understand
+what is happening.
+
+-Pieter
+
+
+On Wed, May 20, 2009 at 8:14 PM, rolinger &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt; wrote:
+&gt;<i> Still more info.
+</I>&gt;<i>
+</I>&gt;<i> As I investigate this more it occurs to me to me that I did a MS Update 
+</I>&gt;<i> for
+</I>&gt;<i> the server Windows 2003 server last night - it applied 13 patches. One of
+</I>&gt;<i> which was a DNS patch that now reserves about 2500 UDP ports to handle a
+</I>&gt;<i> security issue recently found with both its DNS server and client
+</I>&gt;<i> applications. This range of UDP ports goes from about 49160 to 65523 -
+</I>&gt;<i> consuming about a total 2500 UDP ports.
+</I>&gt;<i>
+</I>&gt;<i> I don't know if this is necessarily affecting the Xitami/MySQL 
+</I>&gt;<i> interaction,
+</I>&gt;<i> but it did remind of the automatic updates applied to the W2k3 server last
+</I>&gt;<i> night. I was so busy, and tired, with many migration issues last night 
+</I>&gt;<i> that
+</I>&gt;<i> I completely forgot the updates were applied.
+</I>&gt;<i>
+</I>&gt;<i> Still...anyone have any insight where I can look? Currently I am trying to
+</I>&gt;<i> find out how to uninstall those updates....the errors I am getting have to
+</I>&gt;<i> be related to the updates. I think.
+</I>&gt;<i>
+</I>&gt;<i> -R
+</I>&gt;<i>
+</I>&gt;<i> ----- Original Message -----
+</I>&gt;<i> From: &quot;rolinger&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;
+</I>&gt;<i> To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;<i> Sent: Wednesday, May 20, 2009 10:35 AM
+</I>&gt;<i> Subject: Re: [Xitami] HELP - strange error making website inoperable
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i> Well, I don't know whats going on now.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I am running a secnd TEST Xitami server, on a different IP but on the 
+</I>&gt;&gt;<i> same
+</I>&gt;&gt;<i> physical server, and it to is experiencing the same issue. However after
+</I>&gt;&gt;<i> the defrag only the production Xitami service had stopped, the test 
+</I>&gt;&gt;<i> Xitami
+</I>&gt;&gt;<i> service was still running. But its the same useless answer:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> SOFTWARE ERROR: Error getting data!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Has anyone seen this before or have any insight into what the heck is
+</I>&gt;&gt;<i> going on?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ----- Original Message -----
+</I>&gt;&gt;<i> From: &quot;rolinger&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">rolinger1 at hotmail.com</A>&gt;
+</I>&gt;&gt;<i> To: &quot;Xitami Users General Discussion&quot; &lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami at lists.xitami.org</A>&gt;
+</I>&gt;&gt;<i> Sent: Wednesday, May 20, 2009 10:18 AM
+</I>&gt;&gt;<i> Subject: [Xitami] HELP - strange error making website inoperable
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Xitami ver 2.4d9
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I did a defrag on my server last night, went to bed and when I woke up
+</I>&gt;&gt;&gt;<i> the Xitami service had stopped. I restarted the service and it seems to
+</I>&gt;&gt;&gt;<i> have come up fine. And I can get to the main pages of my website. Every
+</I>&gt;&gt;&gt;<i> page, even the landing page, requires MySQL db lookups to generate the
+</I>&gt;&gt;&gt;<i> page being viewed. However when I go deeper into the site to start
+</I>&gt;&gt;&gt;<i> looking at specific article listings and the articles themselves I get a
+</I>&gt;&gt;&gt;<i> weird:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> SOFTWARE ERROR: Error getting data!
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Thats it...nothing else. I can login manually to the server and retrieve
+</I>&gt;&gt;&gt;<i> the data sets from MySQL via a command prompt, I have run full MySQL
+</I>&gt;&gt;&gt;<i> error checking and optimization and everything in MySQL seems to check
+</I>&gt;&gt;&gt;<i> out. Perl seems to run fine...all scripts run fine from command 
+</I>&gt;&gt;&gt;<i> prompt.so
+</I>&gt;&gt;&gt;<i> the only thing left is a problem with Xitami. And now that I think about
+</I>&gt;&gt;&gt;<i> it, even before I did the defrag I was getting the same (or similar)
+</I>&gt;&gt;&gt;<i> error when the webserver was trying to call up article listings - it
+</I>&gt;&gt;&gt;<i> would run and run and then eventually I would get that error as if it
+</I>&gt;&gt;&gt;<i> were timing out. However the error happening this morning is happening
+</I>&gt;&gt;&gt;<i> immediately, click the link and no delay - just the error.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Google turns up virtually nothing on Perl/MySQL/Xitami and &quot;Error 
+</I>&gt;&gt;&gt;<i> getting
+</I>&gt;&gt;&gt;<i> data&quot;.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I have a hunch this is a Xitami CGI error, but can't be for certain.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> -Russel
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> --
+</I>&gt;&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> --
+</I>&gt;&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="008041.html">[Xitami] HELP - strange error making website inoperable
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#8042">[ date ]</a>
+              <a href="thread.html#8042">[ thread ]</a>
+              <a href="subject.html#8042">[ subject ]</a>
+              <a href="author.html#8042">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

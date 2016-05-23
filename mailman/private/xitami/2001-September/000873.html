@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Console log
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000867.html">
+   <LINK REL="Next"  HREF="000880.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Console log
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Console log">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 05 Sep 2001 23:17:55 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000867.html">[Xitami] How to deny bandwidth hogs?
+</A></li>
+        <LI> Next message: <A HREF="000880.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#873">[ date ]</a>
+              <a href="thread.html#873">[ thread ]</a>
+              <a href="subject.html#873">[ subject ]</a>
+              <a href="author.html#873">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:3B94511D.C09F5A7@rci.rutgers.edu">3B94511D.C09F5A7@rci.rutgers.edu</A>&gt;, Paul Reid writes:
+&gt;<i>My Xitami has worked fine for way over a year with little
+</I>&gt;<i>trouble. It went down yesterday and I discovered 5,000 log-files
+</I>&gt;<i>with the numeric suffix (meaning it could not write to the main
+</I>&gt;<i>logfile?) all written within a few minutes of each other
+</I>
+Numbering the suffix is Xitami's strategy for making thing unique when
+it is renaming them, or otherwise needs a unique name.  It suggests that
+possibly Xitami was resarting its logging a lot during the time period
+in question -- possibly because Xitami itself was restarting a lot
+during that period.  (Which it can be configured to do under Windows if
+it has network issues, mainly to deal with people on dialup connections.)
+
+&gt;<i>2001/09/03 13:33:12: smthttp: error on socket 216: WSAESHUTDOWN
+</I>&gt;<i>2001/09/03 13:33:12: smthttp: error on socket 196: WSAESHUTDOWN
+</I>&gt;<i>2001/09/03 13:33:12: smthttp: error on socket 164: WSAESHUTDOWN
+</I>&gt;<i>2001/09/03 13:33:12: smthttp: error on socket 132: WSAESHUTDOWN
+</I>&gt;<i>2001/09/03 13:33:12: smthttp: error on socket 72: WSAESHUTDOWN
+</I>&gt;<i>
+</I>&gt;<i>What is WSAESHUTDOWN and why am I getting bursts of them? 
+</I>
+WSAESHUTDOWN appears to be basically equivilent to the Unix EPIPE -- ie
+indicating that a connection that was open before has been closed
+(presumably by the other end) at some point between when it was last
+seen as open and when the next read/write attempt as made.
+
+In this case either someone is connecting to your webserver and
+abandoning their connections before Xitami gets a chance to answer
+(which seems unlikely given the clustering of them you got &quot;all at
+once&quot;), or something has confused Xitami or NT's networking into
+thinking they've all closed.
+
+If you haven't already tried the classic NT solution (rebooting) it's
+probably worth doing to ensure the network stack has been reinitialised.
+
+&gt;<i>(By the way: neither <A HREF="http://www.xitami.com">http://www.xitami.com</A> nor
+</I>&gt;<i><A HREF="http://www.xitami.com">http://www.xitami.com</A> seems to be working for me today: no response.) 
+</I>
+The xitami.com website is hosted for us by OpenAvenue (the Open Source
+company); it appears that they're having some sort of issue with that
+webserver.  I've sent them an email asking them to look into it.
+
+Thanks for the report.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000867.html">[Xitami] How to deny bandwidth hogs?
+</A></li>
+	<LI> Next message: <A HREF="000880.html">[Xitami] Suspend
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#873">[ date ]</a>
+              <a href="thread.html#873">[ thread ]</a>
+              <a href="subject.html#873">[ subject ]</a>
+              <a href="author.html#873">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Separate server processes for different subdomains
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="004377.html">
+   <LINK REL="Next"  HREF="004381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Separate server processes for different subdomains
+   </H1>
+    <B>Utku Uzmen
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Separate server processes for different subdomains">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 27 Nov 2002 23:33:06 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="004377.html">[Xitami] Directory structure and proxy server
+</A></li>
+        <LI> Next message: <A HREF="004381.html">[Xitami] Separate server processes for different subdomains
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4380">[ date ]</a>
+              <a href="thread.html#4380">[ thread ]</a>
+              <a href="subject.html#4380">[ subject ]</a>
+              <a href="author.html#4380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I have Xitami running on port 80. I also have a web-mail server on the
+same computer running on port 800. I'm trying to set things up in such a
+way that:
+
+- If the &quot;Host: &quot; field is mail.mydomain.com, the packets should be
+routed to the web-mail server on port 800.
+- All other &quot;Host: &quot; values should be handled by Xitami.
+
+As a diagram:
+
+
+Incoming data--&gt;Port 80|--&gt;Port 800 (webmail; Host: mail.mydomain.com)
+                                          |
+                                          |--&gt;Port 801(xitami; Host:
+&lt;anything else&gt;)
+
+
+
+Right now all requests on port 80 are handled by Xitami. I set up a
+virtual server for mail.mydomain.com, and the index page of this virtual
+server redirects the browser to <A HREF="http://mydomain.com:800.">http://mydomain.com:800.</A> But you see,
+that's not what I want. Does anybody have any suggestions, either for an
+alternative way or for a program that will do such routing?
+
+Note: www.mydomain.com, mail.mydomain.com, and mydomain.com all point to
+the same IP address.
+
+Thanks in advance,
+
+
+
+
+Utku Uzmen
+----------------------
+<A HREF="http://www.maddrive.com/">http://www.maddrive.com/</A>
+<A HREF="mailto:utku@maddrive.com">utku@maddrive.com</A>
+
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="004377.html">[Xitami] Directory structure and proxy server
+</A></li>
+	<LI> Next message: <A HREF="004381.html">[Xitami] Separate server processes for different subdomains
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4380">[ date ]</a>
+              <a href="thread.html#4380">[ thread ]</a>
+              <a href="subject.html#4380">[ subject ]</a>
+              <a href="author.html#4380">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

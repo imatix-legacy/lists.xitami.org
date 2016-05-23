@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Secondary domains hosted with xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="006809.html">
+   <LINK REL="Next"  HREF="006814.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Secondary domains hosted with xitami
+   </H1>
+    <B>Pieter Hintjens
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Secondary domains hosted with xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sun, 12 Jun 2005 10:39:25 +0200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="006809.html">[Xitami] Secondary domains hosted with xitami
+</A></li>
+        <LI> Next message: <A HREF="006814.html">[Xitami] Secondary domains hosted with xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6811">[ date ]</a>
+              <a href="thread.html#6811">[ thread ]</a>
+              <a href="subject.html#6811">[ subject ]</a>
+              <a href="author.html#6811">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>All,
+
+To configure virtual hosts, you have to know two things.  First, what
+this means and how it works technically.  For that, the Xitami manual
+is pretty detailed and I'd say, yes, RTFM.  It's the authoratitive
+explanation.  Second, how to set the server config files to actually
+make a new vhost.  Since there are several options, the advice of
+others may help.
+
+Here is what we do for virtual hosts.
+
+1. create a directory, &quot;vhost&quot;, and a subdirectory for each virtual
+host's home page.
+
+2. create a .cfg file for the virtual host with the name of the
+domain, defining:
+
+[Accesslog]
+    Filename =3D &quot;mydomain.log&quot;
+[Security]
+    Filename =3D &quot;mydomain.aut&quot;
+[Server]
+    Webpages =3D &quot;vhosts/mydomain.com&quot;
+[Wsx]
+    Admin =3D &quot;&quot;
+    Setup =3D &quot;&quot;
+
+3.disable all WBA access for this domain, in mydomain.aut:
+
+[/Admin]
+    admin=3D-
+[/Setup]
+    admin=3D-
+
+4. create an FTP user for the domain to allow uploading of web pages,
+in ftpusers.aut:
+
+[mydomain-&lt;something&gt;]
+    access=3DGPDMR
+    password=3D&lt;password&gt;
+    root=3D&lt;xitami-home&gt;/vhosts/mydomain.com
+
+5. define the virtual host in defaults.cfg:
+
+[Virtual-Hosts[
+  mydomain.com =3D &quot;mydomain.cfg&quot;
+  www.mydomain.com =3D &quot;mydomain.cfg&quot;
+
+The virtual host wizard does most of this but does not collect virtual
+hosts under a single directory, which keeps things tidy.
+
+After defining a new virtual host, stop and restart Xitami.  Make sure
+the permissions on the vhost directory are correct and upload your
+pages.
+
+-Pieter Hintjens
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="006809.html">[Xitami] Secondary domains hosted with xitami
+</A></li>
+	<LI> Next message: <A HREF="006814.html">[Xitami] Secondary domains hosted with xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6811">[ date ]</a>
+              <a href="thread.html#6811">[ thread ]</a>
+              <a href="subject.html#6811">[ subject ]</a>
+              <a href="author.html#6811">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

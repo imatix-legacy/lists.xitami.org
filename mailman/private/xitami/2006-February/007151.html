@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] CGI trouble - identical cfg - different execution
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20trouble%20-%20identical%20cfg%20-%20different%20execution&In-Reply-To=">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007150.html">
+   <LINK REL="Next"  HREF="007152.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] CGI trouble - identical cfg - different execution</H1>
+    <B>MRJ InfoTech Admin</B> 
+    <A HREF="mailto:xitami%40lists.xitami.org?Subject=%5BXitami%5D%20CGI%20trouble%20-%20identical%20cfg%20-%20different%20execution&In-Reply-To="
+       TITLE="[Xitami] CGI trouble - identical cfg - different execution">admin at mrjdesign.net
+       </A><BR>
+    <I>Tue Feb 14 15:40:28 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="007150.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+        <LI>Next message: <A HREF="007152.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7151">[ date ]</a>
+              <a href="thread.html#7151">[ thread ]</a>
+              <a href="subject.html#7151">[ subject ]</a>
+              <a href="author.html#7151">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+What I was looking more or less to do, is adding a way to monitor
+A) who the requesting IP is, and block them on 
+the fly if they hit to hard or to frequent
+B) to log the incoming IP to verify at the same 
+time if the CGI referer is local or from an
+outside source, in which case I can refuse 
+connections and send them to the primary
+access page, routing all traffic from the own web 
+site to access the page in question.
+
+The later I will likely have to do using a simple 
+JavaScript testing the referer vs. the document.domain property.
+
+Thanks for your other hints though.
+
+MRJ
+
+At 07:14 13/02/2006, you wrote:
+&gt;<i>I hope someone can remark on the real causes/solutions you are looking
+</I>&gt;<i>for.
+</I>&gt;<i>
+</I>&gt;<i>You probably knnow these already, buf if all else fails some plain old
+</I>&gt;<i>solutions:
+</I>&gt;<i>
+</I>&gt;<i>In order to restrict requests to the cgi-bin entirely,
+</I>&gt;<i>- you could password-protect the cgi-bin directory through a
+</I>&gt;<i>&quot;mywebsite.aut&quot;.
+</I>&gt;<i>
+</I>&gt;<i>To restrict access to this particular cgi program
+</I>&gt;<i>- you can put the program in an individual directory under cgi-bin and
+</I>&gt;<i>password-protect that one
+</I>&gt;<i>- you can use a cookies + login module
+</I>&gt;<i>- if all your internal IPs are known and permanent, you can use a module
+</I>&gt;<i>to disallow all other IPs.
+</I>&gt;<i>
+</I>&gt;<i>- - -
+</I>&gt;<i>
+</I>&gt;<i>-----Original Message-----
+</I>&gt;<i>From: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>
+</I>&gt;<i>[mailto:<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">xitami-bounces at lists.xitami.org</A>] On Behalf Of MRJ InfoTech Admin
+</I>&gt;<i>Sent: Sunday, February 12, 2006 1:53 PM
+</I>&gt;<i>To: Xitami Users General Discussion
+</I>&gt;<i>Subject: Re: [Xitami] CGI trouble - identical cfg - different execution
+</I>&gt;<i>
+</I>&gt;<i>Further, VERY odd behaviors are now noted in this execution.
+</I>&gt;<i>
+</I>&gt;<i>I loaded the entire load of data for testing over to the server machines
+</I>&gt;<i>root directory.
+</I>&gt;<i>Now, it is loaded in to the default directory of Xitami, bypassing any
+</I>&gt;<i>virtual host paths and so on.
+</I>&gt;<i>This in it self should not have any bearing on the serving of pages, let
+</I>&gt;<i>alone the execution of the very same code.
+</I>&gt;<i>
+</I>&gt;<i>After all I can easily pull the same information in a JS page or similar
+</I>&gt;<i>script without any issues.
+</I>&gt;<i>
+</I>&gt;<i>However, to further complicate the issue.
+</I>&gt;<i>
+</I>&gt;<i>The server box is running through dual NICs
+</I>&gt;<i>
+</I>&gt;<i>Assume for the sake of conversation that I have a
+</I>&gt;<i>
+</I>&gt;<i><A HREF="http://localhost">http://localhost</A> &lt;<A HREF="http://localhost/">http://localhost/</A>&gt;  which is 127.0.0.1
+</I>&gt;<i>
+</I>&gt;<i>Then I have two (2) IP addresses which are public (Static) to the
+</I>&gt;<i>internet
+</I>&gt;<i>
+</I>&gt;<i>10.0.0.99 and 10.0.0.98
+</I>&gt;<i>
+</I>&gt;<i>(of course these are fictitious and should be (83.###.#.##) and
+</I>&gt;<i>something else but it's an example)
+</I>&gt;<i>
+</I>&gt;<i>When I execute the CGI on 127.0.0.1/MyPage.htm and send the call by a
+</I>&gt;<i>simple GET to the CGI-BIN the code works perfectly!
+</I>&gt;<i>Not a single fault anywhere to be seen.
+</I>&gt;<i>
+</I>&gt;<i>When I execute the code on 10.0.0.99 it bumps me around saying, I
+</I>&gt;<i>executed from a non permissable CGI_Referer
+</I>&gt;<i>HA... the code actually works.
+</I>&gt;<i>
+</I>&gt;<i>I wrote a thing that disallows cross linking from other domains so you
+</I>&gt;<i>can't run the cgi embedded in an other web site and call my pages from
+</I>&gt;<i>the other site.
+</I>&gt;<i>
+</I>&gt;<i>Then, thinking logically...
+</I>&gt;<i>
+</I>&gt;<i>If the 10.0.0.99 page is disallowed, the page will thereby assume it
+</I>&gt;<i>self as running on 10.0.0.98 in this case,
+</I>&gt;<i>so the thread in Xitami actually waking up to the call to the page is
+</I>&gt;<i>located on the other IP.
+</I>&gt;<i>
+</I>&gt;<i>I opened a page in 10.0.0.98/MyPage.htm instead and executed the click
+</I>&gt;<i>by doing a Get for the page
+</I>&gt;<i>
+</I>&gt;<i>myCGI.exe?Param1=0&amp;Param2=6574&amp;Param3=9&amp;ParamText=
+</I>&gt;<i>
+</I>&gt;<i>is now returning the same goofball errors as before.
+</I>&gt;<i>
+</I>&gt;<i>Previously noted above, everything picks up correctly, and is collected
+</I>&gt;<i>as should be.
+</I>&gt;<i>In this case, when being on the correct IP and all, the cgi doesn't even
+</I>&gt;<i>allow me to get CG_Referer as a string.
+</I>&gt;<i>Nor CG_RemoteAddr or any other data.
+</I>&gt;<i>
+</I>&gt;<i>Talk about  a backwards acting resolution of the system
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>So in conclusion.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>1) I have to remove my IP blocking system and open up for cross linking
+</I>&gt;<i>or I have to find a way to allow two or more CGI_Referer values to
+</I>&gt;<i>enable this security feature when running Xitami on dual NIC's
+</I>&gt;<i>
+</I>&gt;<i>2) Has anyone else had any experience with trying to limit callers from
+</I>&gt;<i>other domains to avoid getting connections from outside URL's and IP's,
+</I>&gt;<i>and how did you solve this?
+</I>&gt;<i>
+</I>&gt;<i>Thankful for any hints and pointers as usual.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>At 07:31 12/02/2006, you wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>         Now I have spent nearly a week working out some minor issues
+</I>&gt;<i>with a CGI configuration in VB.
+</I>&gt;<i>
+</I>&gt;<i>         It is not the VB part that is causing grievances, as that I have
+</I>&gt;<i>down pat, however the problem is as follows.
+</I>&gt;<i>
+</I>&gt;<i>         My test machine is...
+</I>&gt;<i>
+</I>&gt;<i>         Win XP SP1 with Xitami 2.5 C2 running a single website in the
+</I>&gt;<i>local NAT
+</I>&gt;<i>         It has the default configuration files for the CGI environment
+</I>&gt;<i>as left intact from setup.
+</I>&gt;<i>         I have MDAC 2.8, MS Jet4.0 updates and all installed.
+</I>&gt;<i>
+</I>&gt;<i>         My server, live machine
+</I>&gt;<i>
+</I>&gt;<i>         has the indentical configuration as above, with two differences
+</I>&gt;<i>         1) it has twice as much memory and drive space
+</I>&gt;<i>         2) it also has a defaults.cfg file for defining some 10 virtual
+</I>&gt;<i>domains, each with the std. setup for each.
+</I>&gt;<i>
+</I>&gt;<i>         One further difference in this is
+</I>&gt;<i>
+</I>&gt;<i>         the workstation works fine
+</I>&gt;<i>
+</I>&gt;<i>         the server station does NOT.
+</I>&gt;<i>
+</I>&gt;<i>         The errors I am getting are almost ridiculous.
+</I>&gt;<i>
+</I>&gt;<i>         Std. windows error #13 Type error.
+</I>&gt;<i>
+</I>&gt;<i>         I pass a internal call in the cgi called CGI_UserAgent which
+</I>&gt;<i>supposedly returns the browser data.
+</I>&gt;<i>
+</I>&gt;<i>         It works just fine on the workstation, AND on the server in an
+</I>&gt;<i>other cgi I wrote using the same bas file.
+</I>&gt;<i>
+</I>&gt;<i>         It does not in this but gives me this error.
+</I>&gt;<i>
+</I>&gt;<i>         I rem the line, recompile and try again.
+</I>&gt;<i>
+</I>&gt;<i>         Then I get a problem in the very next line, saying the same
+</I>&gt;<i>thing for CGI_RemoteAddress
+</I>&gt;<i>         which is just getting the visitors IP address in a string.
+</I>&gt;<i>
+</I>&gt;<i>         This too, works in another cgi on both machines, but not in this
+</I>&gt;<i>one on the server.
+</I>&gt;<i>
+</I>&gt;<i>         For reference, the CGI's use standard I/O calls and work just ok
+</I>&gt;<i>in all other cases.
+</I>&gt;<i>         Only these bugs are about to drive me nuts.
+</I>&gt;<i>
+</I>&gt;<i>         Does anyone have any idea as to why Xitami suddenly is so
+</I>&gt;<i>unstable??
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>         --
+</I>&gt;<i>         Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>         To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>&gt;<i>&lt;<A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>-(c)2005-------------------------------
+</I>&gt;<i>MRJ Information Technology Ltd.
+</I>&gt;<i>35 Camden High St., Camden/London, NW1 7JE
+</I>&gt;<i>United Kingdom    <A HREF="http://www.mrjdesign.net">http://www.mrjdesign.net</A> &lt;<A HREF="http://www.mrjdesign.net/">http://www.mrjdesign.net/</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+-&#169;2005-------------------------------
+MRJ Information Technology Ltd.
+35 Camden High St., Camden/London, NW1 7JE
+United Kingdom    <A HREF="http://www.mrjdesign.net">http://www.mrjdesign.net</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <A HREF="http://lists.imatix.org/pipermail/xitami/attachments/20060214/8b022d81/attachment.htm">http://lists.imatix.org/pipermail/xitami/attachments/20060214/8b022d81/attachment.htm</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="007150.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+	<LI>Next message: <A HREF="007152.html">[Xitami] CGI trouble - identical cfg - different execution
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7151">[ date ]</a>
+              <a href="thread.html#7151">[ thread ]</a>
+              <a href="subject.html#7151">[ subject ]</a>
+              <a href="author.html#7151">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.xitami.org/mailman/listinfo/xitami">More information about the Xitami
+mailing list</a><br>
+</body></html>

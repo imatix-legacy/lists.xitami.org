@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] RE: POST troubles (longish)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000813.html">
+   <LINK REL="Next"  HREF="000815.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] RE: POST troubles (longish)
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] RE: POST troubles (longish)">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 27 Aug 2001 22:01:29 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000813.html">[Xitami] re: SSI setup
+</A></li>
+        <LI> Next message: <A HREF="000815.html">[Xitami] HTTP-PUT configuration under Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#814">[ date ]</a>
+              <a href="thread.html#814">[ thread ]</a>
+              <a href="subject.html#814">[ subject ]</a>
+              <a href="author.html#814">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:01C10E1F.0F9877F0.boyan@sanbolic.com">01C10E1F.0F9877F0.boyan@sanbolic.com</A>&gt;, Boyan Brezinsky writes:
+&gt;<i>In the non-working case the generated output is (from *.flt):
+</I>&gt;<i>X-Powered-By: PHP/4.0.4
+</I>&gt;<i>Location: main.php3?menuAction=boMyDCL.show
+</I>&gt;<i>Set-Cookie: DCLINFO=1/0/dfe2c07de313f0d7ca27146e068767f1/en/default
+</I>&gt;<i>Set-Cookie: DCLTYPEMENU=0
+</I>&gt;<i>Content-type: text/html
+</I>&gt;<i>[....]
+</I>&gt;<i>As you can see, the difference is in the &quot;Location:&quot; header. The obvious 
+</I>&gt;<i>reason is that Xitami can't find the file specified in the Location header 
+</I>&gt;<i>and returns 404.
+</I>
+Ah.  Xitami basically expects that there will be an absolute reference
+in the Location: line, and assumes that anything without a leading &quot;/&quot;
+is in the root directory.  Hence the behaviour your saw.  
+
+Other webservers are more forgiving (or more accurate, but AFAICT this
+is an extension) and try the referenced document in the same directory
+as the one that generated the reference.
+
+IIRC we've already got a bug against this issue, and when someone gets
+the time we'll try to make the Location: handling a little smarter.
+
+The Meta refresh works in this instance because it relies on the web
+browser to do the reloading, and the web browser has its own ideas about
+defaults.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000813.html">[Xitami] re: SSI setup
+</A></li>
+	<LI> Next message: <A HREF="000815.html">[Xitami] HTTP-PUT configuration under Windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#814">[ date ]</a>
+              <a href="thread.html#814">[ thread ]</a>
+              <a href="subject.html#814">[ subject ]</a>
+              <a href="author.html#814">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

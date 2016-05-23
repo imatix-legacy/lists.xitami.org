@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] how add a mail server to xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000467.html">
+   <LINK REL="Next"  HREF="000469.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] how add a mail server to xitami
+   </H1>
+    <B>Paul Reid
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] how add a mail server to xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Mon, 23 Jul 2001 15:58:15 -0400</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000467.html">[Xitami] how add a mail server to xitami
+</A></li>
+        <LI> Next message: <A HREF="000469.html">[Xitami] how add a mail server to xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#468">[ date ]</a>
+              <a href="thread.html#468">[ thread ]</a>
+              <a href="subject.html#468">[ subject ]</a>
+              <a href="author.html#468">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>   a program I can run on my win2k machine without being connected to the internet and for testing of certain e-mail functions in my websites which I am testing ...  
+</I>
+OH!
+
+You don't need email? You need something to catch what a script sends to
+sendmail? 
+
+Create a plain text file, named SENDMAIL.BAT , and put this line in it:
+
+ more &gt;&gt; C:\sentmail.txt
+
+Save SENDMAIL.BAT &quot;someplace&quot;. Where? Since most perl scripts using
+sendmail assume it is some place like /usr/bin , you could try making a
+folder of that name on the same drive as Xitami, and put it there. OR,
+put it some place you like and edit your perl scripts to point to it.
+Whichever is easier. 
+
+For initial testing, find or make a small text file and copy it to the
+same folder as SENDMAIL.BAT. Let's say the text file is called TEST.TXT. 
+Open a DOS window and CD to that folder. The command 
+
+  SENDMAIL &lt; TEST.TXT
+
+should run without complaint. Now look for the file C:\sentmail.txt and
+open it. Should contain the words in TEST.TXT. Each time you run
+SENDMAIL, the text sent through it will be appended to the end of
+C:\SENTMAIL.TXT
+
+Then try your scripts. 
+
+I *think* that will emulate enough of a real sendmail to do what you
+want.
+
+ -PRR
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000467.html">[Xitami] how add a mail server to xitami
+</A></li>
+	<LI> Next message: <A HREF="000469.html">[Xitami] how add a mail server to xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#468">[ date ]</a>
+              <a href="thread.html#468">[ thread ]</a>
+              <a href="subject.html#468">[ subject ]</a>
+              <a href="author.html#468">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

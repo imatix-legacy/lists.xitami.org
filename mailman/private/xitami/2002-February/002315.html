@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Linksys Router and Xitami
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="002310.html">
+   <LINK REL="Next"  HREF="002317.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Linksys Router and Xitami
+   </H1>
+    <B>xitami@lists.xitami.org
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Linksys Router and Xitami">xitami@lists.xitami.org
+       </A><BR>
+    <I>Wed, 6 Feb 2002 14:00:58 -0800</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="002310.html">[Xitami] Is this exploitable? Switch to bulletin board-mode?
+</A></li>
+        <LI> Next message: <A HREF="002317.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2315">[ date ]</a>
+              <a href="thread.html#2315">[ thread ]</a>
+              <a href="subject.html#2315">[ subject ]</a>
+              <a href="author.html#2315">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello...
+
+<A HREF="http://test.modernwonder.com">http://test.modernwonder.com</A>  &amp; www.modernwonder.com are two different
+servers one in in Oregon and the other in in Kansas. The company I
+register my domain offers free dns so I donts need to us dnstogo  but I
+may try it. The company I have my domain name registered through
+operates the DNS server, so any changes I make as in the addition of an
+alias or the location of the main web are reflected instantly. In the
+case of modernwonder.com I have that set for url forwarding to another
+domain. This is for my father in law.  Test is my server for devlopement
+purposes. I host everything of mine on a cold fusion server. I really
+want ot get into Cold fusion so I rent space out of a server in Kasas&gt; I
+host a few sites on there already. I have about 4-6 Gb worth of
+transfers per month.  This seemed to be the most ecconomical way to do
+it right now.
+
+Again when I changed the portbase it was reflected in the control panel
+and I was only able to connect using the port number I specified so I
+know the cfg is correct.
+
+Www is not needed on any domain.  Most ISP set up the dns or the
+webserver to default to www. This is called a domain alias.
+
+Talked to ATT today.  I am also having troubles sending files via icq
+too. They claim to only filter ports: 137, 138, 139, 520 and 1080.
+Wonder why... I have tried other port numbers like 6080 and higher ones
+as well. Still no effect.
+
+As for my posts that I get back form the list, all say Plain Text at the
+top.  I will send the e-mail to you with a screenshot.  I hope that this
+will end that discussion.
+
+Thanks
+-----Original Message-----
+From: Control-Freak [mailto:<A HREF="mailto:control-freak@cfl.rr.com">control-freak@cfl.rr.com</A>] 
+Sent: Wednesday, February 06, 2002 1:25 PM
+To: Many Lists
+Subject: Re: [Xitami] Linksys Router and Xitami
+
+
+MessageHello Many Lists,
+
+&gt;<i> I have the exact same setup as you but it wont work for me.
+</I>&gt;<i> <A HREF="http://test.modernwonder.com/">http://test.modernwonder.com/</A>   If I type the name in it comes up for
+</I>me,
+&gt;<i> but it does not for my wife at work. Could you please check it?
+</I>
+I was not able to connect to <A HREF="http://test.modernwonder.com">http://test.modernwonder.com</A>  but, I was
+able to connect to www.modernwonder.com .
+
+Personally, I have never tried to use subdomains in this setup yet,
+although I will soon.  But, there are a few points to look at here
+regardless.  So . . .
+
+A) if you are using dns2go to port forward for you, notice that it only
+forwards web requests with the www prefix.  So the URL
+<A HREF="http://test.modernwonder.com">http://test.modernwonder.com</A> will not port forward.  Dns2go will instead
+try to send it to your ip on port 80 regardles of what you have it set
+to in the client.
+
+B) when someone tries to connect to you from near within the Road Runner
+network, dns2go forwards them directly to your IP, so actually they end
+up contacting you from within the Road Runner network and may not
+encounter a port 80 block on their way.  We are probably far enough
+apart that I still encounter a port 80 block on my way to you - so i do
+not see your site.
+
+C) when you use vhosting on xitami, you get a separate defaults.cfg file
+for each one.  If this one is set to a portbase of 0, it is listening on
+port 80 anyway.  If it has a higher portbase, you probably wouldn't be
+able to connect to it because dns2go is not forwarding since there is no
+www prefix.
+
+Here's what I would try:
+1) Change your vhost to www.test.modernwonder.com
+2) Check the defaults.cfg in the folder that xitami creates.  Make sure
+to set the portbase to 6000 or 8000 or whatever it is that works for
+www.modernwonder.com .
+3) go ahead and register www.test.modernwonder.com at dns2go in the
+multi-domain manager section of the site, and make sure it is &quot;grouped&quot;
+with www.modernwonder.com .  I'm not sure if the www is required, but
+you should at least register test.modernwonder.com.
+4) wait about a day for things to sort themselves out . . .
+
+Hopefully that helps, if not, let me know and I will play around some
+here.
+
+Jay Steven Aldrich
+
+P.S. Thanks for the global outlook reply setting, Jeff Hamblin.  And
+sorry Many Lists, but it seems you are still sending in html.
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="002310.html">[Xitami] Is this exploitable? Switch to bulletin board-mode?
+</A></li>
+	<LI> Next message: <A HREF="002317.html">[Xitami] Linksys Router and Xitami
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2315">[ date ]</a>
+              <a href="thread.html#2315">[ thread ]</a>
+              <a href="subject.html#2315">[ subject ]</a>
+              <a href="author.html#2315">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

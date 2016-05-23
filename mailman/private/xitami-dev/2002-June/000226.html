@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami-dev%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000225.html">
+   <LINK REL="Next"  HREF="000227.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)
+   </H1>
+    <B>George Blat
+    </B> 
+    <A HREF="mailto:xitami-dev%40lists.xitami.org"
+       TITLE="[Xitami-Dev] POST'ing binary data to LRWP process does not
+ work (bug in xilrwp.c?)">xitami-dev@lists.xitami.org
+       </A><BR>
+    <I>Thu, 13 Jun 2002 13:15:06 -0700</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000225.html">[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+</A></li>
+        <LI> Next message: <A HREF="000227.html">[Xitami-Dev] Hummm...POST'ing binary data to a LRWP process *does* work after all :)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#226">[ date ]</a>
+              <a href="thread.html#226">[ thread ]</a>
+              <a href="subject.html#226">[ subject ]</a>
+              <a href="author.html#226">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I stand corrected. The data had been converted to 7 bit when I received and 
+I had to
+convert it to back  binary. I am not sure whether the HTTP spec, which is 
+based on SMTP, guarantees 8 bit transport. SMTP uses mime for that and so 
+does http.
+
+George
+
+
+
+At 02:12 PM 6/13/2002 -0400, you wrote:
+
+&gt;<i>George,
+</I>&gt;<i>
+</I>&gt;<i>Let me be more specific.
+</I>&gt;<i>
+</I>&gt;<i>While you are right about a LRWP process being capable of *sending* binary 
+</I>&gt;<i>data without any problem (I have tested that on JPEG files too), you are 
+</I>&gt;<i>not correct about a LRWP being capable of *receiving* binary data POST'ed 
+</I>&gt;<i>to it.
+</I>&gt;<i>
+</I>&gt;<i>For instance, try to POST a JPEG image to your LRWP process rather than 
+</I>&gt;<i>having it uploaded over FTP. You will not get what you expect.
+</I>&gt;<i>
+</I>&gt;<i>The obvious workaround would be to UUENCODE the binary data, but I want to 
+</I>&gt;<i>avoid this at all cost. There's no reason why a LRWP could not handle 
+</I>&gt;<i>binary data.
+</I>&gt;<i>
+</I>&gt;<i>Regards,
+</I>&gt;<i>Fabien.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;&gt;<i>From: George Blat &lt;<A HREF="mailto:georgeb@ntrealtime.com">georgeb@ntrealtime.com</A>&gt;
+</I>&gt;&gt;<i>Reply-To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;&gt;<i>To: <A HREF="mailto:xitami-dev@lists.xitami.org">xitami-dev@lists.xitami.org</A>
+</I>&gt;&gt;<i>Subject: Re: [Xitami-Dev] POST'ing binary data to LRWP process does not
+</I>&gt;&gt;<i>work (bug in xilrwp.c?)
+</I>&gt;&gt;<i>Date: Thu, 13 Jun 2002 09:58:58 -0700
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>I use modules that process uploaded .jpg files sent to the server
+</I>&gt;&gt;<i>  and did not have any problem. I have verified that LRWP can handle 
+</I>&gt;&gt;<i> binary streams.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>George
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>At 12:42 PM 6/13/2002 -0400, you wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>Hi all,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>I have a client app written to POST compressed and encrypted data to a 
+</I>&gt;&gt;&gt;<i>LRWP process. The problem is that the LRWP process only receives a few 
+</I>&gt;&gt;&gt;<i>bytes instead of the whole data stream. Basically, it appears that the 
+</I>&gt;&gt;&gt;<i>WSX module xilrwp.c punts on the first NUL it encounters in the stream. 
+</I>&gt;&gt;&gt;<i>POST'ing text data works like a charm though...
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>Looking at the source code, it would appear that this issue has been 
+</I>&gt;&gt;&gt;<i>resolved already (as indicated by the comments at the top of xilrwp.c). 
+</I>&gt;&gt;&gt;<i>But the problem still exists as of the latest 2.5 codebase...Or am I 
+</I>&gt;&gt;&gt;<i>missing something?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>Has anyone written a fix for this issue (I'd like to know before I do it).
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>Regards,
+</I>&gt;&gt;&gt;<i>Fabien.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>/*
+</I>&gt;&gt;&gt;<i>----------------------------------------------------------------&lt;Prolog&gt;-
+</I>&gt;&gt;&gt;<i>    Name:       xilrwp.c
+</I>&gt;&gt;&gt;<i>    Title:      Xitami WSX agent for long-running web process (LRWP) 
+</I>&gt;&gt;&gt;<i> protocol
+</I>&gt;&gt;&gt;<i>    Package:    Xitami
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>    Written:    1997/10/29    Robin P. Dunn  Total Control Software
+</I>&gt;&gt;&gt;<i>    Revised:    1999/09/02    Xitami Team: Updated for LRWP 2.0, fixes from
+</I>&gt;&gt;&gt;<i>                                Bruce Dodson &lt;<A HREF="mailto:bruce_dodson@bigfoot.com">bruce_dodson@bigfoot.com</A>&gt;
+</I>&gt;&gt;&gt;<i>                1999/11/11    Xitami Team: Bug fixes for cleanup code to 
+</I>&gt;&gt;&gt;<i> prevent
+</I>&gt;&gt;&gt;<i>                                         DoS issues.
+</I>&gt;&gt;&gt;<i>                1999/12/30    Xitami Team: Fixed issues with NULs in 
+</I>&gt;&gt;&gt;<i> data sent
+</I>&gt;&gt;&gt;<i>                 2001/05/15    Xitami Team: Fixed issue with sending 
+</I>&gt;&gt;&gt;<i> binary data
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>    Copyright:  Copyright (c) 1991-2000 iMatix Corporation
+</I>&gt;&gt;&gt;<i>    License:    This is free software; you can redistribute it and/or modify
+</I>&gt;&gt;&gt;<i>                it under the terms of the SMT License Agreement as provided
+</I>&gt;&gt;&gt;<i>                in the file LICENSE.TXT.  This software is distributed in
+</I>&gt;&gt;&gt;<i>                the hope that it will be useful, but without any warranty.
+</I>&gt;&gt;&gt;<i>------------------------------------------------------------------&lt;/Prolog&gt;-*/
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>_________________________________________________________________
+</I>&gt;&gt;&gt;<i>Send and receive Hotmail on your mobile device: <A HREF="http://mobile.msn.com">http://mobile.msn.com</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>--
+</I>&gt;&gt;&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;&gt;&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>--
+</I>&gt;&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>_________________________________________________________________
+</I>&gt;<i>Get your FREE download of MSN Explorer at <A HREF="http://explorer.msn.com/intl.asp.">http://explorer.msn.com/intl.asp.</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>--
+</I>&gt;<i>Xitami-Dev -- Xitami Development Mailing List
+</I>&gt;<i>To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami-dev">http://lists.xitami.org/mailman/listinfo/xitami-dev</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000225.html">[Xitami-Dev] POST'ing binary data to LRWP process does not work (bug in xilrwp.c?)
+</A></li>
+	<LI> Next message: <A HREF="000227.html">[Xitami-Dev] Hummm...POST'ing binary data to a LRWP process *does* work after all :)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#226">[ date ]</a>
+              <a href="thread.html#226">[ thread ]</a>
+              <a href="subject.html#226">[ subject ]</a>
+              <a href="author.html#226">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

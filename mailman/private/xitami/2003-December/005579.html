@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] #exec cmd= in Win XP
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="005578.html">
+   <LINK REL="Next"  HREF="005581.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] #exec cmd= in Win XP
+   </H1>
+    <B>Marc Doigny
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] #exec cmd= in Win XP">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 11 Dec 2003 21:09:09 +0100</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="005578.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+        <LI> Next message: <A HREF="005581.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5579">[ date ]</a>
+              <a href="thread.html#5579">[ thread ]</a>
+              <a href="subject.html#5579">[ subject ]</a>
+              <a href="author.html#5579">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>At 20:03 11/12/03, &quot;Charles Duval&quot; &lt;<A HREF="mailto:ch_duval@hotmail.com">ch_duval@hotmail.com</A>&gt; wrote:
+
+To begin with, just create a simple executable that displays the time.
+If it can do that, you can go further.
+
+
+
+&gt;<i>        shell &quot;c:\windows\system32\xcopy.exe d:\xitami\toramdsk\*.* r:\ /e
+</I>&gt;<i>/y /h /d&quot;
+</I>
+tmp$ = ENVIRON$(&quot;TEMP&quot;)      to locate the temp directory.
+                              You can also hard-code it.
+cmd$ = ENVIRON$(&quot;COMSPEC&quot;)   to locate the command interpreter directory
+SHELL cmd$ + &quot; /c c:\windows\system32\xcopy .... &gt;&gt;&quot; + tmp$ + &quot;\xxx.tmp&quot;
+
+Xitami evokes executables in the console subsystem (an empty space), while 
+running a program from the command prompt actually runs the program as an 
+argument of the command interpreter (that is, the command interpreter is 
+always available in command prompt mode)
+
+You have to specify where the output goes.
+Simply printing it to screen won't work - Xitami does not display a console 
+screen, it can even cause your application to fail, waiting for a screen to 
+print to that never is available.
+
+fileout$ = ENVIRON$(&quot;CGI_STDOUT&quot;) that's the file Xitami is expecting
+DIM file AS QFileStream
+File.Open(fileout$, fmOpenWrite)
+File.Write(&quot;&lt;html&gt;&lt;body&gt;Copying files to Ramdisk&lt;pre&gt;&quot;)
+
+Now add the content of tmp$ + &quot;\xxx.tmp&quot; to the output stream (don't know 
+how to do that in this dialect)
+Seems you can only have one stream open at any given moment.
+
+
+and terminate:
+File.Write(&quot;&lt;/pre&gt;FINISHED&lt;/body&gt;&lt;/html&gt;&quot;)
+File.Close
+
+Basically, Xitami is just a fileserver. Whenever a user request a page, 
+Xitami delivers it using the correct protocols. When the requested page is 
+a CGI,
+    Xitami sets some environment variables,
+    calls the application,
+    waits for it to terminate,
+    send the generated output (a file) to the user.
+
+RapidQ is an interpreted language, meaning it's not well suited for cgi 
+applications.
+Each time your application is started, it must be compiled before execution.
+Not very important for desktop applications (these applications are only 
+started once a day and the user can wait some seconds), but of great 
+importance if you have a web site that relies on cgi.
+
+
+
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="005578.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+	<LI> Next message: <A HREF="005581.html">[Xitami] #exec cmd= in Win XP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5579">[ date ]</a>
+              <a href="thread.html#5579">[ thread ]</a>
+              <a href="subject.html#5579">[ subject ]</a>
+              <a href="author.html#5579">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

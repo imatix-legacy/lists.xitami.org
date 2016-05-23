@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] Help SSI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="003719.html">
+   <LINK REL="Next"  HREF="003725.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] Help SSI
+   </H1>
+    <B>Patricko
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] Help SSI">xitami@lists.xitami.org
+       </A><BR>
+    <I>Thu, 25 Jul 2002 21:51:55 -0600</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="003719.html">[Xitami] Help SSI
+</A></li>
+        <LI> Next message: <A HREF="003725.html">[Xitami] Username/Password problems (newbie)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3720">[ date ]</a>
+              <a href="thread.html#3720">[ thread ]</a>
+              <a href="subject.html#3720">[ subject ]</a>
+              <a href="author.html#3720">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>that was the defaults.cfg and not xitami.cfg?
+is perl set in your PATH;
+check the cgierror.log and the accsess.log
+it may help to turn debuging on
+what shebang line are you using #! /usr/bin/perl
+----- Original Message -----
+From: &lt;<A HREF="mailto:john.uhlig@coconutcomm.com">john.uhlig@coconutcomm.com</A>&gt;
+To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+Sent: Thursday, July 25, 2002 9:05 PM
+Subject: Re: [Xitami] Help SSI
+
+
+&gt;<i> Yes, PERL is installed. CGI stuff works great.
+</I>&gt;<i> (<A HREF="http://www.tahoecabinrentals.com">http://www.tahoecabinrentals.com</A>)
+</I>&gt;<i> Here's a snippet from the cfg file for the SSI: (I don't know if you would
+</I>&gt;<i> need to see other parts as well)
+</I>&gt;<i>
+</I>&gt;<i> [Begin snippet]
+</I>&gt;<i>
+</I>&gt;<i> [Cgi-Alias]
+</I>&gt;<i>
+</I>&gt;<i>
+</I>  -------------------------------------------------------------------------
+&gt;<i> #   SSI configuration section
+</I>&gt;<i> #
+</I>&gt;<i> #   This section controls Xitami's built-in server-side includes (SSI)
+</I>&gt;<i> #   handling.
+</I>&gt;<i>
+</I>&gt;<i> [Ssi]
+</I>&gt;<i> #   Lets you enable/disable SSI handling.
+</I>&gt;<i>
+</I>&gt;<i>     enabled=1
+</I>&gt;<i>
+</I>&gt;<i> #   Specifies the format for times shown by SSI pages.
+</I>&gt;<i>
+</I>&gt;<i>     timefmt=%A, %d-%b-%y %H:%M:%S %Z
+</I>&gt;<i>
+</I>&gt;<i> #   Specifies whether size should be shown as bytes or as
+</I>&gt;<i> #   abbreviations (Kb, Mg). Anything other than the string &quot;bytes&quot; is
+</I>&gt;<i> #   taken to mean that sizes are shown as abbreviations.
+</I>&gt;<i>
+</I>&gt;<i>     sizefmt=bytes
+</I>&gt;<i>
+</I>&gt;<i> #   The timeout for CGI programs called from the SSI agent.
+</I>&gt;<i>
+</I>&gt;<i>     timeout=30
+</I>&gt;<i>
+</I>&gt;<i> #   Error message shown when an SSI command fails. The %s symbol is
+</I>&gt;<i> #   replaced by the cause of the problem.
+</I>&gt;<i>
+</I>&gt;<i>     errmsg=&lt;p&gt;[xitami SSI: %s]
+</I>&gt;<i>
+</I>&gt;<i> #   If 1, allows CGIs to be executed using the #exec command. Since
+</I>&gt;<i> #   this is a security weakness, this option is switched-off by
+</I>&gt;<i> #   default.
+</I>&gt;<i>
+</I>&gt;<i>     exec=1
+</I>&gt;<i>
+</I>&gt;<i> [end snippet]
+</I>&gt;<i>
+</I>&gt;<i> Thanks,
+</I>&gt;<i> -John
+</I>&gt;<i>
+</I>&gt;<i> On Jul 25, 2002 06:15pm, <A HREF="mailto:XITAMI@LISTS.XITAMI.ORG">XITAMI@LISTS.XITAMI.ORG</A> wrote to JOHN UHLIG:
+</I>&gt;<i>
+</I>&gt;<i>  &gt; Perl is installed?
+</I>&gt;<i>  &gt; what OS?
+</I>&gt;<i>  &gt; let's look at your defaults.cfg file
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>  &gt; ----- Original Message -----
+</I>&gt;<i>  &gt; From: &lt;<A HREF="mailto:john.uhlig@coconutcomm.com">john.uhlig@coconutcomm.com</A>&gt;
+</I>&gt;<i>  &gt; To: &lt;<A HREF="mailto:xitami@lists.xitami.org">xitami@lists.xitami.org</A>&gt;
+</I>&gt;<i>  &gt; Sent: Thursday, July 25, 2002 6:57 PM
+</I>&gt;<i>  &gt; Subject: [Xitami] Help SSI
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt; Hello,
+</I>&gt;<i> &gt;&gt; I am trying to implement SSI in Xitami 2.5b.
+</I>&gt;<i> &gt;&gt; I set up the config file to enable SSI, renamed the default to
+</I>&gt;<i>  &gt; default.shtm and when the default page loads I get a &quot;[Xitami SSI:]&quot;
+</I>&gt;<i> message displayed
+</I>&gt;<i>  &gt; in
+</I>&gt;<i> &gt;&gt; the very top left corner of the index page. Any idea on what that is? I
+</I>&gt;<i>  &gt; would
+</I>&gt;<i> &gt;&gt; assume that if it is error, there would be an error code associated
+</I>with
+&gt;<i>  &gt; that?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Ewen -- are you there?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Thanks,
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; -J.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Xitami Users Mailing List -- For Xitami support
+</I>&gt;<i> To unsubscribe: <A HREF="http://lists.xitami.org/mailman/listinfo/xitami">http://lists.xitami.org/mailman/listinfo/xitami</A>
+</I>
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="003719.html">[Xitami] Help SSI
+</A></li>
+	<LI> Next message: <A HREF="003725.html">[Xitami] Username/Password problems (newbie)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3720">[ date ]</a>
+              <a href="thread.html#3720">[ thread ]</a>
+              <a href="subject.html#3720">[ subject ]</a>
+              <a href="author.html#3720">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

@@ -1,0 +1,1054 @@
+From mrj at 10e12.com  Tue Jan  8 18:13:44 2008
+From: mrj at 10e12.com (MRJ)
+Date: Tue, 08 Jan 2008 17:13:44 +0000
+Subject: [Xitami] PHP and ASP inclusions for testing purposes
+Message-ID: <4783AF48.40008@10e12.com>
+
+this question has surely been posted many times before
+If someone could fill in the blanks, it would be much appreciated.
+
+
+1) PHP parsing in Xitami
+====================
+I know there is supposedly a simple setting to be added, and PHP 5 
+installer has this built into it's latest release.
+Does XITAMI have to be set up first, and if it is not what is actually 
+added and where?
+
+2) ASP parsing in Xitami with Chilisoft CASP3
+====================
+
+There is supposedly a way to make xitami use this as a filter to render 
+ASP pages under xitami.
+What settings need to be added and where?
+
+I got the one installer that came with Java's free web server, but I 
+dont like the web server itself as it does not allow
+for simple explained virtual hosting settings and fast move in any 
+interface to alter the settings. I would prefer to
+see this work in Xitami as it's a much easier to use test platform for 
+web design.
+
+Thanks in advance.
+
+
+From rolinger1 at hotmail.com  Tue Jan  8 21:14:37 2008
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 8 Jan 2008 12:14:37 -0800
+Subject: [Xitami] Dynamic URL converstion to static URLs
+Message-ID: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>
+
+
+I am getting into some rather new territory here.  My site is just about 100% dynamic and I am beginning the process of converting long, hard to read dynamic URLs to static URLs.  Static URLs,  I am learning, are much friendlier to search engines and crawlers.
+ 
+That being said, everything I see regarding the subject uses Apache based modules....has anyone here done any dyanmic URL conversions with perl on Xitami?  Have you had success and if so what methods/tips/code can you reference me to so I may learn more about this subject.
+ 
+I am asking here because thus far the conversion documentation seems to be based on webserver being used.
+ 
+ThanksRussel P. Olinger rolinger1 at hotmail.com
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080108/726ef94d/attachment.htm 
+
+From mw at 9000.org  Tue Jan  8 21:32:26 2008
+From: mw at 9000.org (Magnus Wedberg)
+Date: Tue, 08 Jan 2008 21:32:26 +0100
+Subject: [Xitami] Dynamic URL converstion to static URLs
+In-Reply-To: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>
+Message-ID: <4783DDDA.8090807@9000.org>
+
+R O wrote, On 2008-01-08 21:14:
+> I am getting into some rather new territory here.  My site is just about 
+> 100% dynamic and I am beginning the process of converting long, hard to 
+> read dynamic URLs to static URLs.  Static URLs,  I am learning, are much 
+> friendlier to search engines and crawlers.
+>  
+> That being said, everything I see regarding the subject uses Apache 
+> based modules....has anyone here done any dyanmic URL conversions with 
+> perl on Xitami?
+
+I don't think that's possible. You can make heavy use of aliasing, of 
+course, to get somewhat prettier URLs but the apache (et al) stuff is 
+being done with mod_rewrite (or equiv), and that isn't possible with 
+Xitami AFAIK. One option would be to just use the 404 page for 
+everything (don't laugh!), handling your own internal redirects, but if 
+I am not mistaken Xitami doesn't allow scripting in error pages (my 
+memory is a little sketchy here but I'm pretty sure I have tried such 
+things).
+
+-- 
+Magnus Wedberg
+http://www.magnuswedberg.com/
+mw AT 9000.org
+Warning! Objects in viewfinder may be closer than they appear.
+
+
+From rolinger1 at hotmail.com  Tue Jan  8 23:29:19 2008
+From: rolinger1 at hotmail.com (R O)
+Date: Tue, 8 Jan 2008 14:29:19 -0800
+Subject: [Xitami] Dynamic URL converstion to static URLs
+In-Reply-To: <4783DDDA.8090807@9000.org>
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>
+	<4783DDDA.8090807@9000.org>
+Message-ID: <BAY105-W339D21349DACCE350D0230F8480@phx.gbl>
+
+
+hhhmmm...heres a thought.
+ 
+Currently I have a filter processing .pl files with perl anywhere in my webpages (htdocs) directory.  Executing them just as they would be executed in the cgi-bin directory.  Create another filter for "*.ptml" files to be executed by perl.  Creating the static urls from dynamic content is easy...however its the conversion back during request processing that has to happen within the script that was executed.
+ 
+Dynamic URL: /cgi-bin/foo.pl?var1=10&var2=30&var3=30
+ 
+would be translated to the static URL in a page, this can be easily done in the script that is would have normallhy generated the dynamic URL:
+ 
+/cgi/var1_10/var2_20/var3_30/foo.phtml
+or 
+/cgi/10/20/30/foo.phtml
+ 
+A filter/alias would have to execute the *.phtml files from a base directory...cause the above static urls would break with a 404 because the actual path /cgi/10/20/30 (or whatever) doesn't actually exist.  Then foo.phtml, processed as a perl script, would take the $QUERY_STRING and parse it on the "/" thus returning the first few variables.
+ 
+I think the key here is getting xitami to see the *.ptml file extension first and look for that file in a specific directory and execute it before xitami tried to look for the file in the full path/url that doesn't actually exist.  This still might actually work using the cgi-bin directory....b/c Xitami has an option for the cgi files - execute with /cgi-bin as the root of the path or execute when /cgi-bin is anywhere in the path...though it typically still looks for an exact path doesn't it?
+ 
+Thoughts?Russel P. Olinger rolinger1 at hotmail.com> Date: Tue, 8 Jan 2008 21:32:26 +0100> From: mw at 9000.org> To: xitami at lists.xitami.org> Subject: Re: [Xitami] Dynamic URL converstion to static URLs> > R O wrote, On 2008-01-08 21:14:> > I am getting into some rather new territory here. My site is just about > > 100% dynamic and I am beginning the process of converting long, hard to > > read dynamic URLs to static URLs. Static URLs, I am learning, are much > > friendlier to search engines and crawlers.> > > > That being said, everything I see regarding the subject uses Apache > > based modules....has anyone here done any dyanmic URL conversions with > > perl on Xitami?> > I don't think that's possible. You can make heavy use of aliasing, of > course, to get somewhat prettier URLs but the apache (et al) stuff is > being done with mod_rewrite (or equiv), and that isn't possible with > Xitami AFAIK. One option would be to just use the 404 page for > everything (don't laugh!), handling your own internal redirects, but if > I am not mistaken Xitami doesn't allow scripting in error pages (my > memory is a little sketchy here but I'm pretty sure I have tried such > things).> > -- > Magnus Wedberg> http://www.magnuswedberg.com/> mw AT 9000.org> Warning! Objects in viewfinder may be closer than they appear.> > > --> Xitami Users Mailing List -- For Xitami support> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080108/2f5e028b/attachment.htm 
+
+From rolinger1 at hotmail.com  Wed Jan  9 06:22:08 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Tue, 8 Jan 2008 21:22:08 -0800
+Subject: [Xitami] Alias configs?
+Message-ID: <BAY105-DAV803E055872FAC2FBBAB12F8490@phx.gbl>
+
+Ok, the documentation is sparse at best for most of Xitami, however the "alias" sections are pretty bad.  I am trying to alias a name to a specific file or script and only see two sections to do it but both of which are referencing directory paths.
+
+What I hope to accomplish, with /foo/ anywhere in the URL path, the associated script would get executed:
+IE:  /foo/* = /cgi-bin/foo.pl
+URL: www.bar.com/foo/hello/world/good/night  would execute www.bar.com/cgi-bin/foo.pl
+
+Is this possible?  Would this kind of alias be done from the CGI alias section or from the standard server alias section?
+
+Thanks
+-Russel
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080108/c7f43346/attachment.htm 
+
+From rolinger1 at hotmail.com  Wed Jan  9 08:23:08 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Tue, 8 Jan 2008 23:23:08 -0800
+Subject: [Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!
+References: <BAY105-DAV803E055872FAC2FBBAB12F8490@phx.gbl>
+Message-ID: <BAY105-DAV54A780615DCA861863829F8490@phx.gbl>
+
+Woohooo...ok.  Apache uses mod_perl and mod_rewrite to convert dynamic URLs to static ones, but no such luck using it with Xitami.  However, you can use Xitami's CGI Alias' to do the trick.  Some of you might have known this or have figured it out previously - if so, then excuse my enthusiasm.  But if not, then read on below to learn how to do it.
+
+This is technique is very very helpful for those who are interested in making their websites as Search Enginer Crawler friendly as possible....of all the SEO reading I have done indicates that crawlers indexing sites do not look favorably on dynamic URLs and give higher priority and consideration to static URLs - thus better ranking, higher and more frequent crawl rates.
+
+I needed to do this because I have over 700,000 pages of content that fluctuates daily and Google wasn't getting past about 24,000 indexed pages while MSN and Yahoo were barely crawling/indexing my site at all.  80% of those looking at my site to help me figure out why my numbers were so low all pointed to my extensive dynamic URLs as being a big part of the problem.
+
+=========
+A typical Dynamic URL: 
+    www.example.com/cgi-bin/foo.pl?id=12345&var1=100&var2=Hello Everyone
+
+In what ever script you use to generate the above URL you can easily create that URL and then spit it out as a static URL
+
+Static URL: www.example.com/foo/12345/100/hello everyone/
+OR: Static URL: www.example.com/foo/id_12345/var1_100/var2_Hello Everyone
+
+Then using Xitami's CGI Alias section create the following kind of alias link:
+
+/foo = /xitami/cgi-bin/foo.pl
+
+Xitami requires that /foo be the beginning of the URL...and anytime it sees /foo at the beginning, regardless of what follows it, Xitami will execute the associated script...in this case: /xitami/cgi-bin/foo.pl
+
+Then in the actual foo.pl script you would simply need to grab the $ENV{'PATH_INFO'} and parse it....conveniently, PATH_INFO from the above static examples would be everything AFTER /foo/
+
+Testing a simple perl script for foo.pl
+
+#!/perl/bin/perl
+@getVars = split(/\//,$ENV{'PATH_INFO'}) ; 
+print "\n at getVars" ; 
+
+#### Example 1 Returns:
+12345 
+100 
+Hello Everyone
+
+### Example 2 Returns:
+id_12345 
+var1_100 
+var2_Hello Everyone
+
+This in example 1 you would need to know the exact order of your parsed variables, but in example 2 you can include the var names as part of the variable value...I prefer the second method because then you can order your variables in any order and add as many as you want without worry of having to always know the order or worry that you didn't account for every variable needed.
+
+Anyway...
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080108/7b84baba/attachment.htm 
+
+From francis.turner at gmail.com  Wed Jan  9 22:50:39 2008
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed, 9 Jan 2008 22:50:39 +0100
+Subject: [Xitami] Dynamic URL converstion to static URLs
+In-Reply-To: <4783DDDA.8090807@9000.org>
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>
+	<4783DDDA.8090807@9000.org>
+Message-ID: <f83609d50801091350r674b568cg4e383c6cd568be93@mail.gmail.com>
+
+Actually assuming the use of Xitami 2.5 with GSL working then the 404
+rewrite is extremely possible because - assuming there is as
+reasonable rule - then conversion of the old URL to the new one within
+the error page is quite possible This allows you to say "ooops moved
+here" and auto move it via a meta http redirect
+
+GSL is a somewhat limited scripting langauge but entirely adequate for
+this sort of job assuming the conversion rule is well known and easy
+to use. You may even be able to figure out how t make Xitami generate
+moved rather than 404 messages although I never figured that out.
+
+On Jan 8, 2008 9:32 PM, Magnus Wedberg <mw at 9000.org> wrote:
+> One option would be to just use the 404 page for
+> everything (don't laugh!), handling your own internal redirects, but if
+> I am not mistaken Xitami doesn't allow scripting in error pages (my
+> memory is a little sketchy here but I'm pretty sure I have tried such
+> things).
+>
+> --
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From francis.turner at gmail.com  Wed Jan  9 22:52:07 2008
+From: francis.turner at gmail.com (Francis Turner)
+Date: Wed, 9 Jan 2008 22:52:07 +0100
+Subject: [Xitami] CGI Alias and Dynamic URL conversion - IT WORKS!
+In-Reply-To: <BAY105-DAV54A780615DCA861863829F8490@phx.gbl>
+References: <BAY105-DAV803E055872FAC2FBBAB12F8490@phx.gbl>
+	<BAY105-DAV54A780615DCA861863829F8490@phx.gbl>
+Message-ID: <f83609d50801091352t44d194frc75579fa368c9097@mail.gmail.com>
+
+much better than the GSL I just suggested on the other post...
+
+On Jan 9, 2008 8:23 AM, Russel Olinger <rolinger1 at hotmail.com> wrote:
+>
+>
+> Woohooo...ok.  Apache uses mod_perl and mod_rewrite to convert dynamic URLs
+> to static ones, but no such luck using it with Xitami.  However, you can use
+> Xitami's CGI Alias' to do the trick.  Some of you might have known this or
+> have figured it out previously - if so, then excuse my enthusiasm.  But if
+> not, then read on below to learn how to do it.
+>
+> This is technique is very very helpful for those who are interested in
+> making their websites as Search Enginer Crawler friendly as possible....of
+> all the SEO reading I have done indicates that crawlers indexing sites do
+> not look favorably on dynamic URLs and give higher priority and
+> consideration to static URLs - thus better ranking, higher and more frequent
+> crawl rates.
+>
+> I needed to do this because I have over 700,000 pages of content that
+> fluctuates daily and Google wasn't getting past about 24,000 indexed pages
+> while MSN and Yahoo were barely crawling/indexing my site at all.  80% of
+> those looking at my site to help me figure out why my numbers were so low
+> all pointed to my extensive dynamic URLs as being a big part of the problem.
+>
+> =========
+> A typical Dynamic URL:
+>     www.example.com/cgi-bin/foo.pl?id=12345&var1=100&var2=Hello Everyone
+>
+> In what ever script you use to generate the above URL you can easily create
+> that URL and then spit it out as a static URL
+>
+> Static URL: www.example.com/foo/12345/100/hello everyone/
+> OR: Static URL: www.example.com/foo/id_12345/var1_100/var2_Hello Everyone
+>
+> Then using Xitami's CGI Alias section create the following kind of alias
+> link:
+>
+> /foo = /xitami/cgi-bin/foo.pl
+>
+> Xitami requires that /foo be the beginning of the URL...and anytime it sees
+> /foo at the beginning, regardless of what follows it, Xitami will execute
+> the associated script...in this case: /xitami/cgi-bin/foo.pl
+>
+> Then in the actual foo.pl script you would simply need to grab the
+> $ENV{'PATH_INFO'} and parse it....conveniently, PATH_INFO from the above
+> static examples would be everything AFTER /foo/
+>
+> Testing a simple perl script for foo.pl
+>
+> #!/perl/bin/perl
+> @getVars = split(/\//,$ENV{'PATH_INFO'}) ;
+> print "\n at getVars" ;
+>
+> #### Example 1 Returns:
+> 12345
+> 100
+> Hello Everyone
+>
+> ### Example 2 Returns:
+> id_12345
+> var1_100
+> var2_Hello Everyone
+>
+> This in example 1 you would need to know the exact order of your parsed
+> variables, but in example 2 you can include the var names as part of the
+> variable value...I prefer the second method because then you can order your
+> variables in any order and add as many as you want without worry of having
+> to always know the order or worry that you didn't account for every variable
+> needed.
+>
+> Anyway...
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+From ronackgen01 at bellsouth.net  Sat Jan 12 17:17:33 2008
+From: ronackgen01 at bellsouth.net (General)
+Date: Sat, 12 Jan 2008 11:17:33 -0500
+Subject: [Xitami] Dynamic URL converstion to static URLs
+In-Reply-To: <f83609d50801091350r674b568cg4e383c6cd568be93@mail.gmail.com>
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>	<4783DDDA.8090807@9000.org>
+	<f83609d50801091350r674b568cg4e383c6cd568be93@mail.gmail.com>
+Message-ID: <000601c85536$a409a6b0$ec1cf410$@net>
+
+However doing a 404 redirect may prove to be no good in terms of SEO because
+some search engines penalize for 404 redirects, especially Google. I found
+doing a simple PHP redirect to work out better for me. I use it on all my
+PHP CMS sites, use it as a sitemap and have a shorturl redirect site like
+TinyURL. 
+
+I call the script shorturl and it can be generated very easy with a PHP
+script. It can take something like 
+
+http://www.causewaylighting.com/index.php?topic=bulbs_&menu=bulbs_
+
+and rewrite it to this
+
+http://www.causewaylighting.com/surl/bulbs.php
+
+Here is the PHP script that I use
+
+<?php
+$shorturl =
+'http://www.causewaylighting.com/index.php?topic=bulbs_&menu=bulbs_';
+header("Location: $shorturl");
+?>
+
+I also have a modified version that instead of creating a specific page name
+it creates a directory with one file index.php so then the rewrite would be.
+
+http://www.causewaylighting.com/bulbs
+or 
+http://www.causewaylighting.com/bulbs/index.php
+
+Since most browsers if not all browsers assume index.php you can usually
+leave it off.
+
+Also some CMS's actually provide their own version of rewrite. I'm pretty
+sure Geeklog does and maybe NukePHP.
+
+Ron
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Francis Turner
+Sent: Wednesday, January 09, 2008 4:51 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+
+Actually assuming the use of Xitami 2.5 with GSL working then the 404
+rewrite is extremely possible because - assuming there is as
+reasonable rule - then conversion of the old URL to the new one within
+the error page is quite possible This allows you to say "ooops moved
+here" and auto move it via a meta http redirect
+
+GSL is a somewhat limited scripting langauge but entirely adequate for
+this sort of job assuming the conversion rule is well known and easy
+to use. You may even be able to figure out how t make Xitami generate
+moved rather than 404 messages although I never figured that out.
+
+On Jan 8, 2008 9:32 PM, Magnus Wedberg <mw at 9000.org> wrote:
+> One option would be to just use the 404 page for
+> everything (don't laugh!), handling your own internal redirects, but if
+> I am not mistaken Xitami doesn't allow scripting in error pages (my
+> memory is a little sketchy here but I'm pretty sure I have tried such
+> things).
+>
+> --
+> Magnus Wedberg
+> http://www.magnuswedberg.com/
+> mw AT 9000.org
+> Warning! Objects in viewfinder may be closer than they appear.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+
+
+
+-- 
+http://www.di2.nu/blog.htm
+Faber's Fourth Law:
+  Necessity is the mother of strange bedfellows.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition. 
+Version: 7.5.516 / Virus Database: 269.17.13/1214 - Release Date: 1/8/2008
+1:38 PM
+
+
+
+From preid at rci.rutgers.edu  Sun Jan 13 02:27:36 2008
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Sat, 12 Jan 2008 20:27:36 -0500
+Subject: [Xitami] Dynamic URL converstion to static URLs
+In-Reply-To: <000601c85536$a409a6b0$ec1cf410$@net>
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>	<4783DDDA.8090807@9000.org>	<f83609d50801091350r674b568cg4e383c6cd568be93@mail.gmail.com>
+	<000601c85536$a409a6b0$ec1cf410$@net>
+Message-ID: <47896908.2030704@rci.rutgers.edu>
+
+> http://www.causewaylighting.com/bulbs
+> or 
+> http://www.causewaylighting.com/bulbs/index.php
+> 
+> Since most browsers if not all browsers assume index.php you can usually
+> leave it off.
+
+The browser assumes no such thing.
+
+The web-server has a default action if a URL points to a Directory 
+instead of a File.
+
+Xitami comes pre-loaded to look for the usual default.htm and index.html.
+
+You can add index.php to that list.
+
+Then a call for "../bulbs/" (a directory) is fulfilled with
+"../bulbs/default.htm" or whatever action you have set up.
+
+
+From ronackgen01 at bellsouth.net  Sun Jan 13 17:16:28 2008
+From: ronackgen01 at bellsouth.net (General)
+Date: Sun, 13 Jan 2008 11:16:28 -0500
+Subject: [Xitami] Dynamic URL converstion to static URLs
+In-Reply-To: <47896908.2030704@rci.rutgers.edu>
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>	<4783DDDA.8090807@9000.org>	<f83609d50801091350r674b568cg4e383c6cd568be93@mail.gmail.com>	<000601c85536$a409a6b0$ec1cf410$@net>
+	<47896908.2030704@rci.rutgers.edu>
+Message-ID: <002301c855ff$a79af170$f6d0d450$@net>
+
+Yeah whatever, I misspoke! It's the Web Server that does it but the browser
+translates it. You can tell Xitami which file to use by default whether it
+be index.htm,html,php or default.htm,html,php. I expect you could even use
+start.xxx if you wanted. I haven't tried it though.
+
+Thanks for clarifying for me.
+
+Ron
+
+
+-----Original Message-----
+From: xitami-bounces at lists.xitami.org
+[mailto:xitami-bounces at lists.xitami.org] On Behalf Of Paul Reid
+Sent: Saturday, January 12, 2008 8:28 PM
+To: Xitami Users General Discussion
+Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+
+> http://www.causewaylighting.com/bulbs
+> or 
+> http://www.causewaylighting.com/bulbs/index.php
+> 
+> Since most browsers if not all browsers assume index.php you can usually
+> leave it off.
+
+The browser assumes no such thing.
+
+The web-server has a default action if a URL points to a Directory 
+instead of a File.
+
+Xitami comes pre-loaded to look for the usual default.htm and index.html.
+
+You can add index.php to that list.
+
+Then a call for "../bulbs/" (a directory) is fulfilled with
+"../bulbs/default.htm" or whatever action you have set up.
+
+
+--
+Xitami Users Mailing List -- For Xitami support
+To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+
+
+-- 
+No virus found in this incoming message.
+Checked by AVG Free Edition. 
+Version: 7.5.516 / Virus Database: 269.19.1/1220 - Release Date: 1/11/2008
+6:09 PM
+
+
+
+From rolinger1 at hotmail.com  Sun Jan 13 17:35:54 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Sun, 13 Jan 2008 08:35:54 -0800
+Subject: [Xitami] Dynamic URL converstion to static URLs
+References: <BAY105-W26221193E90310CAA64957F8480@phx.gbl>	<4783DDDA.8090807@9000.org>	<f83609d50801091350r674b568cg4e383c6cd568be93@mail.gmail.com>	<000601c85536$a409a6b0$ec1cf410$@net><47896908.2030704@rci.rutgers.edu>
+	<002301c855ff$a79af170$f6d0d450$@net>
+Message-ID: <BAY105-DAV8A4B7167BA3A26D0A4295F8450@phx.gbl>
+
+I discovered you can also set your default page to "/"
+
+And then create a cgi alias for
+     "/" = /xitami/cgi-bin/somescript.pl
+You can then use the secondary and teriary default fields for other static 
+pages such as "index.html" or "defualt.html"
+
+This will allow your landing page to a be a cgi/perl script in a central 
+directory without having to create a filter for script extensions to work 
+out side of your cgi directory.  Previously I had a "foo.pl" perl script in 
+my root htdocs directory (/xitami/htdocs) and then had "foo.pl" as my 
+default page - I needed a filter binding *.pl = /perl/bin/perl to execute my 
+landing page....this posed a few maintenance and security problems.
+
+However, the about "/" method also seems to hide directory listings of URL 
+directories that do not have a default page.  Though the files in URL 
+directories are still individually accessable, the directory is no longer 
+viewable as a file/folder listing. This is a great way to protect 
+directories from being viewed as file listings if a default page doesn't 
+exist in that folder.
+
+I have not found any downsides to this method...anyone else used/seen it 
+before to comment on it?
+
+With out any default page in the URL directories:
+IE: www.foo.com/images/bar/helloworld.jpg - would still show the image in 
+the browser
+but : www.foo.com/images or www.foo.com/images/bar  would only yeild the 
+following results
+
+File list of /images///////////////////////
+directory
+Name                Size         Last 
+Modified--------------------------------------------------------------------------------/images/////////////////////////
+and
+
+File list of /images/bar//////////////////////
+directory
+Name                Size         Last 
+Modified--------------------------------------------------------------------------------/images/bar////////////////////////
+----- Original Message ----- 
+From: "General" <ronackgen01 at bellsouth.net>
+To: "'Xitami Users General Discussion'" <xitami at lists.xitami.org>
+Sent: Sunday, January 13, 2008 8:16 AM
+Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+
+
+> Yeah whatever, I misspoke! It's the Web Server that does it but the 
+> browser
+> translates it. You can tell Xitami which file to use by default whether it
+> be index.htm,html,php or default.htm,html,php. I expect you could even use
+> start.xxx if you wanted. I haven't tried it though.
+>
+> Thanks for clarifying for me.
+>
+> Ron
+>
+>
+> -----Original Message-----
+> From: xitami-bounces at lists.xitami.org
+> [mailto:xitami-bounces at lists.xitami.org] On Behalf Of Paul Reid
+> Sent: Saturday, January 12, 2008 8:28 PM
+> To: Xitami Users General Discussion
+> Subject: Re: [Xitami] Dynamic URL converstion to static URLs
+>
+>> http://www.causewaylighting.com/bulbs
+>> or
+>> http://www.causewaylighting.com/bulbs/index.php
+>>
+>> Since most browsers if not all browsers assume index.php you can usually
+>> leave it off.
+>
+> The browser assumes no such thing.
+>
+> The web-server has a default action if a URL points to a Directory
+> instead of a File.
+>
+> Xitami comes pre-loaded to look for the usual default.htm and index.html.
+>
+> You can add index.php to that list.
+>
+> Then a call for "../bulbs/" (a directory) is fulfilled with
+> "../bulbs/default.htm" or whatever action you have set up.
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+>
+> -- 
+> No virus found in this incoming message.
+> Checked by AVG Free Edition.
+> Version: 7.5.516 / Virus Database: 269.19.1/1220 - Release Date: 1/11/2008
+> 6:09 PM
+>
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+> 
+
+
+From jamesamc at bellsouth.net  Thu Jan 24 17:43:00 2008
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Thu, 24 Jan 2008 10:43:00 -0600
+Subject: [Xitami] filters in puppylinux or any linux.
+Message-ID: <4798C014.5000003@bellsouth.net>
+
+Hi all
+
+I have used xitami in windows for years. Now I'm learning Linux using 
+puppylinux. my problem is how to set filters in xitami under Linux. I 
+have php5 running in puppy. So how do i use it with Linux.
+
+
+From preid at rci.rutgers.edu  Thu Jan 24 22:55:51 2008
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Thu, 24 Jan 2008 16:55:51 -0500
+Subject: [Xitami] filters in puppylinux or any linux.
+In-Reply-To: <4798C014.5000003@bellsouth.net>
+References: <4798C014.5000003@bellsouth.net>
+Message-ID: <47990967.3080408@rci.rutgers.edu>
+
+ > set filters in xitami under Linux
+
+What filters have you used in Windows?
+
+Xitami's filter settings simply define external programs to route output 
+through. PHP and Perl are common filters. But you can also filter with 
+BAT files or custom EXE programs.
+
+In DOS/Windows -or- in unix, set a filter command "sort". Any file which 
+is passed through that filter will come out with lines sorted in 
+alphabetical order. Both DOS/Win and unix come with a sort, they work 
+"nearly the same", and sort typically won't need any path or parameters 
+to be found or do "something". This example is not useful (alphabetized 
+HTML will be garble) but shows the concept.
+
+If you have been using BAT files, you want Shell Scripts which are 
+better but different. If you have custom EXE filters, you need to port 
+them to unix executables (or maybe Wine? never worked for me).
+
+This is basic unix, not Xitami. Pick up a UNIX for Newbies book or find 
+a tutorial on the web. There is a rich command-line environment under 
+Puppy's soft round GUI interface, just like under Windows (because 
+Gates/Allen peeped unix-like machinery while developing DOS 2).
+
+And while I am a very long-term fan of Xitami, Apache works well too. If 
+you use PHP enough, you will find some place where Apache and PHP have 
+been coded around each others' bugs; some things in PHP just DON'T work 
+under Xitami.
+
+
+
+From jamesamc at bellsouth.net  Fri Jan 25 18:34:11 2008
+From: jamesamc at bellsouth.net (Jeff McDonald)
+Date: Fri, 25 Jan 2008 11:34:11 -0600
+Subject: [Xitami] filters in puppylinux or any linux.
+In-Reply-To: <47990967.3080408@rci.rutgers.edu>
+References: <4798C014.5000003@bellsouth.net> <47990967.3080408@rci.rutgers.edu>
+Message-ID: <479A1D93.2020005@bellsouth.net>
+
+Hi Paul
+
+Thanks for the quick reply. Xitami had 2.5b5 under Linux had 2 things 
+that did not let "PHP" run.
+
+Thing 1 filter in windows looks like this.
+
+[Filter]
+    php = "c:\php\php.exe"
+
+under Linux should be.
+
+[Filter]
+    php = "/usr/local/bin/php"
+
+I had tried this and it would not work. So I though i did something 
+wrong. I had not. what was wrong was in the mime types in xitami's 
+".cfg" file. Once i added this line to the "mime" section it worked.
+
+[Mime]
+    php = "application/x-httpd-php"
+
+Now i need to fix php5 to work with Xitami. Or figure out how to put 
+php4 on puppylinux.
+
+thanks again Paul for trying to help.
+
+
+From yves.sucaet at usa.net  Fri Jan 25 20:33:20 2008
+From: yves.sucaet at usa.net (YVES SUCAET)
+Date: Fri, 25 Jan 2008 13:33:20 -0600
+Subject: [Xitami] Xitami/PHP under Windows Vista
+Message-ID: <668mayTGu5960S27.1201289600@cmsweb27.cms.usa.net>
+
+Does anybody know how to run Xitami with PHP under Windows Vista? The
+Xitami-part of the setup works fine, but when I'm trying to access any
+.php-file, I get a popup-window telling me "CGI/FastCGI has stopped working".
+
+Thanks in advance,
+
+Yves Sucaet
+Iowa State University
+
+
+
+From rolinger1 at hotmail.com  Wed Jan 30 08:54:49 2008
+From: rolinger1 at hotmail.com (Russel Olinger)
+Date: Tue, 29 Jan 2008 23:54:49 -0800
+Subject: [Xitami] Logfile issues
+Message-ID: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+
+My logs files are set to cycle once a day and then to store then log file into the default name: ac%yy%mm%dd.log
+
+However, I almost everyday I see the following log entries:
+ac%yy%mm%dd.log
+ac%yy%mm%dd.log_000
+ac%yy%mm%dd.log_001
+
+the .log_000 and .log_001 files are never consistent...sometime one or both are empty, sometimes one of them has valid CLFX (extended) log entries in them.
+
+I don't know what is causing this or why its splitting out into multiple files....but its causing a problem using awstats because awstats requires files to be processed in sequential order and entries in the _000 and _001 files often aren't getting processed which are skewing my actualy numbers.
+
+I don't see anything in my logging section that would cause these _00x files to be created and written to.
+
+Has anyone seen this before?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080129/130bd7ec/attachment.htm 
+
+From preid at rci.rutgers.edu  Wed Jan 30 10:05:35 2008
+From: preid at rci.rutgers.edu (Paul Reid)
+Date: Wed, 30 Jan 2008 04:05:35 -0500
+Subject: [Xitami] Logfile issues
+In-Reply-To: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+Message-ID: <47A03DDF.20402@rci.rutgers.edu>
+
+ > ac%yy%mm%dd.log_000 Has anyone seen this before?
+
+Yes, it means that a sub-process had to wait "too long" to get a 
+write-lock on the log file (because another sub-process(es) was writing).
+
+A faster drive or more buffering may help. However a random-request 
+server has random spikes in traffic, and will always bind-up; you can 
+only reduce the probability to very-small.
+
+I have not dug in Xitami's guts in years. Can it pipe to a process? Can 
+you write a process with far higher throughput than your O/S's 
+writefile(append)? It is dubious because all modern O/Ses basically 
+"write" to memory and buffer actual disk writes... they do what you want 
+and have been highly optimized for someone's notion of typical 
+transactional storage.
+
+Multiple virtual hosts can write to multiple files, which may cut the bind.
+
+
+From rickhead at gmail.com  Wed Jan 30 17:50:41 2008
+From: rickhead at gmail.com (Rick Headly)
+Date: Wed, 30 Jan 2008 12:50:41 -0400
+Subject: [Xitami] Logfile issues
+In-Reply-To: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+Message-ID: <11689a700801300850x14320e9t5d4755a1abf86ad9@mail.gmail.com>
+
+i used to see the same (or similar) thing going on here russel...
+back in the days when i used a default naming system and allowed all my
+v-hosts to write to a single log-storage directory.
+
+this all seemed to correct itself once i devised a log naming system of my
+own, and instructed most of the logs to write to their own unique storage
+directories.  the cfg files for 'most' of my v-hosts, now have lines which
+look something like this:
+
+
+[Accesslog]
+    Cycle-arg = "acc_domain-nickname-%yy%mm%dd.log"
+    Filename = "domain-nickname_access.log"
+
+[Errorlog]
+    Cycle-arg = "err_domain-nickname-%yy%mm%dd.log"
+    Filename = "domain-nickname_errors.log"
+
+[Server]
+    Log-dir = "./domain-directory/logs"
+
+
+... and it all seems to work.
+
+my guess, is that something in your config is trying to force xitami to
+write multiple files with the same name... and those digits are being tagged
+to the tail end of the file name, in an effort to prevent new logs from
+quickly being overwritten.
+
+hope this helps...
+good luck! :)
+
+rick
+
+
+On 1/30/08, Russel Olinger <rolinger1 at hotmail.com> wrote:
+>
+>  My logs files are set to cycle once a day and then to store then log file
+> into the default name: ac%yy%mm%dd.log
+>
+> However, I almost everyday I see the following log entries:
+> ac%yy%mm%dd.log
+> ac%yy%mm%dd.log_000
+> ac%yy%mm%dd.log_001
+>
+> the .log_000 and .log_001 files are never consistent...sometime one or
+> both are empty, sometimes one of them has valid CLFX (extended) log entries
+> in them.
+>
+> I don't know what is causing this or why its splitting out into multiple
+> files....but its causing a problem using awstats because awstats requires
+> files to be processed in sequential order and entries in the _000 and _001
+> files often aren't getting processed which are skewing my actualy numbers.
+>
+> I don't see anything in my logging section that would cause these _00x
+> files to be created and written to.
+>
+> Has anyone seen this before?
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080130/777c0614/attachment.htm 
+
+From martin at bleisteiner.net  Thu Jan 31 07:12:07 2008
+From: martin at bleisteiner.net (Martin Bleisteiner)
+Date: Thu, 31 Jan 2008 07:12:07 +0100
+Subject: [Xitami] Logfile issues
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+Message-ID: <001901c863d0$35428b40$e0d610ac@lap6a>
+
+Hello,
+  From: Russel Olinger 
+
+
+  My logs files are set to cycle once a day and then to store then log file into the default name: ac%yy%mm%dd.log
+
+  However, I almost everyday I see the following log entries:
+  ac%yy%mm%dd.log
+  ac%yy%mm%dd.log_000
+  ac%yy%mm%dd.log_001
+My server Xitami 2.4d1 does the same. Seems to be dependent on virtual hosts. For every virtual host, and for access by every IP without name, a _nnn logfile is created. Not absolutely sure but I guess because every day it's the same until log_005 and I do have 6 virtual hosts.
+
+I don't know the reason for this behavior. No idea where to turn off.
+
+Martin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080131/56e21e0a/attachment.htm 
+
+From martin at bleisteiner.net  Thu Jan 31 07:13:01 2008
+From: martin at bleisteiner.net (Martin Bleisteiner)
+Date: Thu, 31 Jan 2008 07:13:01 +0100
+Subject: [Xitami] Logfile issues
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+	<47A03DDF.20402@rci.rutgers.edu>
+Message-ID: <002d01c863d0$5574bb40$e0d610ac@lap6a>
+
+
+----- Original Message ----- 
+From: "Paul Reid" <preid at rci.rutgers.edu>
+
+
+> > ac%yy%mm%dd.log_000 Has anyone seen this before?
+>
+> Yes, it means that a sub-process had to wait "too long" to get a
+> write-lock on the log file (because another sub-process(es) was writing).
+
+I don't believe in this theory. My server is always at low load, and my 
+logfiles tell me that the time between every two page hits was at least 
+10-20 second, so a write-lock is not possible at my system.
+
+When I look at my logfiles I see they contain all access to www.domain1.de 
+at the one file and www.domain2.de at the second file and so on.
+
+For me it really looks like Virtual Host assignment.
+
+Martin 
+
+
+From rickhead at gmail.com  Thu Jan 31 10:41:23 2008
+From: rickhead at gmail.com (Rick Headly)
+Date: Thu, 31 Jan 2008 05:41:23 -0400
+Subject: [Xitami] Logfile issues
+In-Reply-To: <001901c863d0$35428b40$e0d610ac@lap6a>
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+	<001901c863d0$35428b40$e0d610ac@lap6a>
+Message-ID: <11689a700801310141w4d03f029g19dd5c27ffecfcdf@mail.gmail.com>
+
+alright..
+i will mention this again, only because i suspect that i may not have been
+clear in my explanation the first time around.
+
+i'm assuming that that you guys have a number of virtual hosts, and would
+like each of them to create their own set of logs (*without additional
+suffixed numbers being applied to the file-names*).  if so, you would
+probably want the config file of *each* virtual host to include these lines:
+
+
+[Accesslog]
+    Cycle-arg = "acc-*insert pertaining v-host name here*-%yy%mm%dd.log"
+    Filename = "*insert pertaining v-host name here-*access.log"
+
+[Errorlog]
+    Cycle-arg = "err-*insert pertaining v-host name here*-%yy%mm%dd.log"
+    Filename = "*insert pertaining v-host name here-*errors.log"
+
+
+
+i strongly believe that doing so will indeed solve your problem, as long as
+you've supplied a *unique* log-file naming-scheme for *each* of your virtual
+hosts.
+
+this will prevent xitami from attempting to create multiple logs with the
+exact same name (*a set for each virtual host*)... which is precisely where
+those extra unwanted numbers are originating.
+
+hope this helps  :)
+
+rick
+On 1/31/08, Martin Bleisteiner <martin at bleisteiner.net> wrote:
+>
+>  Hello,
+>
+> *From:* Russel Olinger <rolinger1 at hotmail.com>
+>
+>
+> My logs files are set to cycle once a day and then to store then log file
+> into the default name: ac%yy%mm%dd.log
+>
+> However, I almost everyday I see the following log entries:
+> ac%yy%mm%dd.log
+> ac%yy%mm%dd.log_000
+> ac%yy%mm%dd.log_001
+>
+>  My server Xitami 2.4d1 does the same. Seems to be dependent on virtual
+> hosts. For every virtual host, and for access by every IP without name, a
+> _nnn logfile is created. Not absolutely sure but I guess because every day
+> it's the same until log_005 and I do have 6 virtual hosts.
+>
+> I don't know the reason for this behavior. No idea where to turn off.
+>
+> Martin
+>
+>
+> --
+> Xitami Users Mailing List -- For Xitami support
+> To unsubscribe: http://lists.xitami.org/mailman/listinfo/xitami
+>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080131/93ef519f/attachment.htm 
+
+From martin at bleisteiner.net  Wed Jan 30 10:02:49 2008
+From: martin at bleisteiner.net (Martin Bleisteiner)
+Date: Wed, 30 Jan 2008 10:02:49 +0100
+Subject: [Xitami] Logfile issues
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+Message-ID: <001001c8631e$e3efc750$e0d610ac@lap6a>
+
+  From: Russel Olinger 
+
+
+  However, I almost everyday I see the following log entries:
+  ac%yy%mm%dd.log
+  ac%yy%mm%dd.log_000
+  ac%yy%mm%dd.log_001
+
+  Has anyone seen this before?
+My server Xitami 2.4d1 does the same. Seems to be dependent on virtual hosts. For every virtual host, and for access by every IP without name, a _nnn logfile is created. Not absolutely sure but I guess because every day it's the same until log_005 and I do have 6 virtual hosts.
+
+I don't know the reason for this behavior. No idea where to turn off.
+
+Martin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: http://lists.xitami.org/pipermail/xitami/attachments/20080130/68062f19/attachment.htm 
+
+From martin at bleisteiner.net  Wed Jan 30 10:16:13 2008
+From: martin at bleisteiner.net (Martin Bleisteiner)
+Date: Wed, 30 Jan 2008 10:16:13 +0100
+Subject: [Xitami] Logfile issues
+References: <BAY105-DAV13EB7AEBCB374E5131CCC5F8360@phx.gbl>
+	<47A03DDF.20402@rci.rutgers.edu>
+Message-ID: <001b01c86320$c3c107d0$e0d610ac@lap6a>
+
+
+----- Original Message ----- 
+From: "Paul Reid" <preid at rci.rutgers.edu>
+
+
+> > ac%yy%mm%dd.log_000 Has anyone seen this before?
+>
+> Yes, it means that a sub-process had to wait "too long" to get a
+> write-lock on the log file (because another sub-process(es) was writing).
+
+I don't believe in this theory. My server is always at low load, and my 
+logfiles tell me that the time between every two page hits was at least 
+10-20 second, so a write-lock is not possible at my system.
+
+When I look at my logfiles I see they contain all access to www.domain1.de 
+at the one file and www.domain2.de at the second file and so on.
+
+For me it really looks like Virtual Host assignment.
+
+Martin 
+
+

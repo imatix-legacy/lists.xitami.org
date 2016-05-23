@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] dir access
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="001670.html">
+   <LINK REL="Next"  HREF="001672.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] dir access
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] dir access">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 08 Dec 2001 11:34:09 +1300</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="001670.html">[Xitami] dir access
+</A></li>
+        <LI> Next message: <A HREF="001672.html">[Xitami] dir access
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1671">[ date ]</a>
+              <a href="thread.html#1671">[ thread ]</a>
+              <a href="subject.html#1671">[ subject ]</a>
+              <a href="author.html#1671">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;001d01c17f66$92873210$<A HREF="mailto:6401a8c0@vastdeath">6401a8c0@vastdeath</A>&gt;, &quot;Vastdeath&quot; writes:
+&gt;<i>hey, I setup an alias to another directory of my hd
+</I>
+Add:
+
+[alias]
+   aliasname=directorypath
+
+to the approriate virtual host configuration file (or defaults.cfg if
+you are not using virtual hosts), and restart Xitami.  (You can also do
+this through the web based admin.)
+
+&gt;<i>and I wanted to know if I can deny get access from it, but allow 
+</I>&gt;<i>list access? this is with the http server
+</I>
+No.
+
+You can do the reverse (allow GETs but refuse to provide a listing), but
+not allow a listing and refuse to allow GETs.
+
+If you just want people to be able to see what is there and not download
+it I suggest you:
+(a) don't use an alias
+(b) create a HTML page (or a CGI to output one) that contains (outputs) 
+    a list of files that are in that directory with whatever details
+    you want.
+
+The point of providing access to a directory is to allow people to
+retrieve (GET) things from it; so it sounds to me like you don't want to
+allow people access to the directory after all.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="001670.html">[Xitami] dir access
+</A></li>
+	<LI> Next message: <A HREF="001672.html">[Xitami] dir access
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1671">[ date ]</a>
+              <a href="thread.html#1671">[ thread ]</a>
+              <a href="subject.html#1671">[ subject ]</a>
+              <a href="author.html#1671">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>

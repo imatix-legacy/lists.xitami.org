@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Xitami] problems with vhosts
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:xitami%40lists.xitami.org">
+   <META NAME="robots" CONTENT="index,nofollow">
+   
+   <LINK REL="Previous"  HREF="000121.html">
+   <LINK REL="Next"  HREF="000122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Xitami] problems with vhosts
+   </H1>
+    <B>Ewen McNeill
+    </B> 
+    <A HREF="mailto:xitami%40lists.xitami.org"
+       TITLE="[Xitami] problems with vhosts">xitami@lists.xitami.org
+       </A><BR>
+    <I>Sat, 09 Jun 2001 02:51:12 +1200</I>
+    <P><UL>
+        <LI> Previous message: <A HREF="000121.html">[Xitami] Timestamp 1 hour off -- can anyone confirm this?
+</A></li>
+        <LI> Next message: <A HREF="000122.html">[Xitami] HTTP_REFERER(sp) and CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#123">[ date ]</a>
+              <a href="thread.html#123">[ thread ]</a>
+              <a href="subject.html#123">[ subject ]</a>
+              <a href="author.html#123">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>In message &lt;<A HREF="mailto:200009141008.5852921.6@ec-computers.net">200009141008.5852921.6@ec-computers.net</A>&gt;, &quot;bernd hohmann&quot; writes:
+&gt;<i>defined default security:
+</I>&gt;<i>   admin=0
+</I>&gt;<i>   [/admin]
+</I>&gt;<i>     {empty}
+</I>&gt;<i>
+</I>&gt;<i>BERND security
+</I>&gt;<i>   admin=1
+</I>&gt;<i>   [/admin]
+</I>&gt;<i>     berndadmin=berndadmin
+</I>&gt;<i>[....]
+</I>&gt;<i>this should disallow the admin-function when browsing the default-host but 
+</I>&gt;<i>allow it when using host BERND.
+</I>
+The issue here is that the [security] admin=N setting controls whether
+the admin section is even started up, as Xitami starts.  At this point
+only the main configuration file (xitami.cfg, defaults.cfg) is
+available, and hence the setting is a global setting.  If you disable it
+in the main file, then the admin section is never started, so will not
+be available under a virtual host or anywhere basically.
+
+As far as I can tell the [security] admin=N setting in the virtual hosts
+is never even tested.
+
+What you could possibly do (you'll need to test this with your setup),
+is use the [wsx] admin=... settings in the virtual hosts where you don't
+want the admin available, to override what the /admin path maps to.
+This should cause &quot;the function you requested is not implemented&quot; for
+thos virtual hosts.  Providing it does, you can then take the password
+section out for /admin for those virtual hosts, and anyone trying will
+immediately get that error message.  Then on the virtual host where you
+do wish to access the admin, you can use the password section, and not
+override the [wsx] admin=.... setting, and it should, in theory, work
+there.
+
+Possibly the documentation should be clearer as to what settings are
+global and what are per-virtual-host.
+
+Ewen
+
+-- 
+Ewen McNeill, Technical Consultant, iMatix Corporation  www.imatix.com
+
+</PRE>
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI> Previous message: <A HREF="000121.html">[Xitami] Timestamp 1 hour off -- can anyone confirm this?
+</A></li>
+	<LI> Next message: <A HREF="000122.html">[Xitami] HTTP_REFERER(sp) and CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#123">[ date ]</a>
+              <a href="thread.html#123">[ thread ]</a>
+              <a href="subject.html#123">[ subject ]</a>
+              <a href="author.html#123">[ author ]</a>
+         </LI>
+       </UL>
+</body></html>
