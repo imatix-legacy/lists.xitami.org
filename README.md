@@ -1,4 +1,4 @@
-# lists.imatix.org
+# lists.xitami.org
 
 This contains the list archives for the Xitami and Xitami-Dev mailing lists, archived
 from Mailman.  It is a read-only archive.
